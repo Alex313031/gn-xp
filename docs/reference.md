@@ -50,6 +50,7 @@
     *   [rebase_path: Rebase a file or directory to another location.](#rebase_path)
     *   [set_default_toolchain: Sets the default toolchain name.](#set_default_toolchain)
     *   [set_defaults: Set default values for a target type.](#set_defaults)
+    *   [set_path_map: Set a path override map.](#set_path_map)
     *   [set_sources_assignment_filter: Set a pattern to filter source files.](#set_sources_assignment_filter)
     *   [split_list: Splits a list into N different sub-lists.](#split_list)
     *   [string_replace: Replaces substring in the given string.](#string_replace)
@@ -5722,6 +5723,39 @@
 
       This is intended to be used when subprojects declare arguments with
       default values that need to be changed for whatever reason.
+
+  set_path_map [optional]
+      Function taking an array of elements lists having two subelements, an
+      absolute label prefix and an absolute label specifying the actual
+      filesystem path relative to the project's top directory that the prefix
+      is an alias for. The elements must be ordered with the most specific
+      prefixes first, preferably with the least specific "//" element last.
+      Correspondingly, the most specific actual label should be last, and the
+      least specific element first.
+
+      Example specification and label mappings:
+
+        set_path_map([
+          # Prefix, actual path
+          # Most specific prefixes first
+          [
+            "//alpha",
+            "//",
+          ],
+          [
+            "//beta",
+            "//beta",
+          ],
+          [
+            "//",
+            "//gamma",
+          ],
+        ])
+
+        Label             Actual path
+        //alpha/a/b/c     //a/b/c
+        //beta/d/e/f      //beta/d/e/f
+        //foo/g/h/i       //gamma/foo/g/h/i
 ```
 
 #### **Example .gn file contents**
