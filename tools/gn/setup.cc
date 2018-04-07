@@ -126,6 +126,39 @@ Variables
       This is intended to be used when subprojects declare arguments with
       default values that need to be changed for whatever reason.
 
+  set_path_map [optional]
+      Function taking an array of elements lists having two subelements, an
+      absolute label prefix and an absolute label specifying the actual
+      filesystem path relative to the project's top directory that the prefix
+      is an alias for. The elements must be ordered with the most specific
+      prefixes first, preferably with the least specific "//" element last.
+      Correspondingly, the most specific actual label should be last, and the
+      least specific element first.
+
+      Example specification and label mappings:
+
+        set_path_map([
+          # Prefix, actual path
+          # Most specific prefixes first
+          [
+            "//alpha",
+            "//",
+          ],
+          [
+            "//beta",
+            "//beta",
+          ],
+          [
+            "//",
+            "//gamma",
+          ],
+        ])
+
+        Label             Actual path
+        //alpha/a/b/c     //a/b/c
+        //beta/d/e/f      //beta/d/e/f
+        //foo/g/h/i       //gamma/foo/g/h/i
+
 Example .gn file contents
 
   buildconfig = "//build/config/BUILDCONFIG.gn"
@@ -707,7 +740,13 @@ bool Setup::RunConfigFile() {
 
 bool Setup::FillOtherConfig(const base::CommandLine& cmdline) {
   Err err;
-  SourceDir current_dir("//");
+
+  // May need to update the source path of the main gn file
+  root_build_file_ = SourceFile(
+          build_settings_.RemapActualToSourcePath(root_build_file_.value()),
+          root_build_file_.value());
+
+  SourceDir current_dir(build_settings_.RemapActualToSourcePath("//"));
   Label root_target_label(current_dir, "");
 
   // Secondary source path, read from the config file if present.

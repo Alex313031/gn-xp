@@ -1079,6 +1079,58 @@ Value RunSplitList(Scope* scope,
   return result;
 }
 
+// set_path_map ----------------------------------------------------------
+
+const char kSetPathMap[] = "set_path_map";
+const char kSetPathMap_HelpShort[] =
+  "set_path_map: Set a path override map.";
+const char kSetPathMap_Help[] =
+"set_path_map: Set a path override map.";
+
+Value RunSetPathMap(Scope* scope,
+    const FunctionCallNode* function,
+    const std::vector<Value>& args,
+    Err* err) {
+  if (args.size() <1) {
+    Err(Location(), "No Path Map declared").PrintToStdout();
+    return Value();
+  }
+
+  BuildSettings *build_settings =
+    (BuildSettings *) scope->settings()->build_settings();
+
+  const Value& path_map = args[0];
+  if (!path_map.VerifyTypeIs(Value::LIST, err)) {
+    return Value();
+  }
+  for (auto &&it : path_map.list_value()) {
+    if (!it.VerifyTypeIs(Value::LIST, err)) {
+      return Value();
+    }
+    if (it.list_value().size() <2) {
+      *err = Err(Location(), "Failed to set path map values");
+      return Value();
+    }
+
+    const Value &prefix = it.list_value()[0];
+    const Value &actual = it.list_value()[1];
+    if (!prefix.VerifyTypeIs(Value::STRING, err) ||
+      !actual.VerifyTypeIs(Value::STRING, err)) {
+      return Value();
+    }
+    if (!build_settings->RegisterPathMap(prefix.string_value(),
+      actual.string_value())) {
+      *err = Err(Location(), "Failed to set path map values");
+      return Value();
+    }
+  }
+  // May need to update the source path of the main gn file
+  // But we do that during the FillOtherConfig setup step
+  // scope->settings()->UpdateRootBuildFile();
+
+  return Value();
+}
+
 // -----------------------------------------------------------------------------
 
 FunctionInfo::FunctionInfo()
@@ -1191,6 +1243,7 @@ struct FunctionInfoInitializer {
     INSERT_FUNCTION(Toolchain, false)
     INSERT_FUNCTION(WriteFile, false)
 
+    INSERT_FUNCTION(SetPathMap,false)
 #undef INSERT_FUNCTION
   }
 };
