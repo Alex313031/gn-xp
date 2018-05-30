@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "eb72ad56_b4a10e13",
+        "filename": "cr-buildbucket.cfg",
+        "patchSetId": 3
+      },
+      "lineNbr": 69,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2018-05-30T22:43:53Z",
+      "side": 1,
+      "message": "do you prefer trusty over xenial? there are already two newer lts releases",
+      "parentUuid": "1b77605a_6ea28246",
+      "revId": "930d2efedef55ea88af2a3d6cc64861f09ca8b43",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "f725f253_7d7926b8",
         "filename": "cr-buildbucket.cfg",
         "patchSetId": 3
