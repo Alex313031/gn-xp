@@ -37,6 +37,24 @@
     },
     {
       "key": {
+        "uuid": "2e821e19_bdecfdba",
+        "filename": "cr-buildbucket.cfg",
+        "patchSetId": 3
+      },
+      "lineNbr": 69,
+      "author": {
+        "id": 1000005
+      },
+      "writtenOn": "2018-05-30T22:52:59Z",
+      "side": 1,
+      "message": "Trusty is also still in LTS, and most of Chrome\u0027s builders still run it, so we need to support that one. Trusty binaries will run on Xenial+ (normally), so if I was only going to do one, I\u0027d do that one.",
+      "parentUuid": "eb72ad56_b4a10e13",
+      "revId": "930d2efedef55ea88af2a3d6cc64861f09ca8b43",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "f725f253_7d7926b8",
         "filename": "cr-buildbucket.cfg",
         "patchSetId": 3
