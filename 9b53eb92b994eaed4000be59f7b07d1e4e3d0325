@@ -1,0 +1,72 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "86bba808_59a868b6",
+        "filename": "cr-buildbucket.cfg",
+        "patchSetId": 2
+      },
+      "lineNbr": 83,
+      "author": {
+        "id": 1000005
+      },
+      "writtenOn": "2018-05-30T22:25:46Z",
+      "side": 1,
+      "message": "I would just start w/ trusty and only add the other 3 if needed down the road.",
+      "revId": "9b53eb92b994eaed4000be59f7b07d1e4e3d0325",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "148101f1_a0de559e",
+        "filename": "cr-buildbucket.cfg",
+        "patchSetId": 2
+      },
+      "lineNbr": 111,
+      "author": {
+        "id": 1000005
+      },
+      "writtenOn": "2018-05-30T22:25:46Z",
+      "side": 1,
+      "message": "I would start w/ just mac-10.13; the current toolchains don\u0027t even really work \u003c 10.12.",
+      "revId": "9b53eb92b994eaed4000be59f7b07d1e4e3d0325",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "b2b77104_8692eb1f",
+        "filename": "cr-buildbucket.cfg",
+        "patchSetId": 2
+      },
+      "lineNbr": 118,
+      "author": {
+        "id": 1000005
+      },
+      "writtenOn": "2018-05-30T22:25:46Z",
+      "side": 1,
+      "message": "drop the -32 builder.",
+      "revId": "9b53eb92b994eaed4000be59f7b07d1e4e3d0325",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "125d4099_b8a3f8c9",
+        "filename": "cr-buildbucket.cfg",
+        "patchSetId": 2
+      },
+      "lineNbr": 131,
+      "author": {
+        "id": 1000005
+      },
+      "writtenOn": "2018-05-30T22:25:46Z",
+      "side": 1,
+      "message": "I would also drop -64 from all the names, since they\u0027re all only 64-bit builds now.",
+      "revId": "9b53eb92b994eaed4000be59f7b07d1e4e3d0325",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": true
+    }
+  ]
+}
