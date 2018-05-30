@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "1b77605a_6ea28246",
+        "filename": "cr-buildbucket.cfg",
+        "patchSetId": 3
+      },
+      "lineNbr": 69,
+      "author": {
+        "id": 1000005
+      },
+      "writtenOn": "2018-05-30T22:40:23Z",
+      "side": 1,
+      "message": "did you mean to delete xenial along w/ the other versions?",
+      "revId": "930d2efedef55ea88af2a3d6cc64861f09ca8b43",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "f725f253_7d7926b8",
+        "filename": "cr-buildbucket.cfg",
+        "patchSetId": 3
+      },
+      "lineNbr": 90,
+      "author": {
+        "id": 1000005
+      },
+      "writtenOn": "2018-05-30T22:40:23Z",
+      "side": 1,
+      "message": "Do we really need both win7 and win10? I\u0027d probably just keep win10.\n\nThen you can just have \"linux\", \"mac\", and \"win\".",
+      "revId": "930d2efedef55ea88af2a3d6cc64861f09ca8b43",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": true
+    }
+  ]
+}
