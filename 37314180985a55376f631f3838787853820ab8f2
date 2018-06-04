@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "860954bf_d845692e",
+        "filename": "cr-buildbucket.cfg",
+        "patchSetId": 5
+      },
+      "lineNbr": 45,
+      "author": {
+        "id": 1000006
+      },
+      "writtenOn": "2018-06-04T22:16:52Z",
+      "side": 1,
+      "message": "Also beware that this pool is not appropriate for building \u0027gn\u0027 release binaries that will be distributed EVERYWHERE. \u0027luci.flex.ci\u0027 runs not very tightly controlled code and bots there are considered not very trustworthy. luci.flex.ci is fine to use for CI purposes though (unit tests and stuff).\n\nWe may need some solution for building GN releases on our internal protected builders.",
+      "range": {
+        "startLine": 45,
+        "startChar": 18,
+        "endLine": 45,
+        "endChar": 37
+      },
+      "revId": "37314180985a55376f631f3838787853820ab8f2",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": true
+    }
+  ]
+}
