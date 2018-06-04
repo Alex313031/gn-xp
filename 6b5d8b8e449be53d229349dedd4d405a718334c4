@@ -1,0 +1,44 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "d374b964_a6545060",
+        "filename": "infra/config/recipes.cfg",
+        "patchSetId": 1
+      },
+      "lineNbr": 4,
+      "author": {
+        "id": 1000006
+      },
+      "writtenOn": "2018-06-04T22:11:37Z",
+      "side": 1,
+      "message": "Please remember to add gn.git to recipe DEPS autoroller once it is fully setup.",
+      "range": {
+        "startLine": 4,
+        "startChar": 4,
+        "endLine": 4,
+        "endChar": 22
+      },
+      "revId": "6b5d8b8e449be53d229349dedd4d405a718334c4",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ad5166e7_01177312",
+        "filename": "infra/config/refs.cfg",
+        "patchSetId": 1
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 1000006
+      },
+      "writtenOn": "2018-06-04T22:11:37Z",
+      "side": 1,
+      "message": "I think this file is not needed here. IIUC, refs.cfg is expected only \"root\" config location (\u0027infra/config\u0027 ref currently).",
+      "revId": "6b5d8b8e449be53d229349dedd4d405a718334c4",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": true
+    }
+  ]
+}
