@@ -39,6 +39,24 @@
       "revId": "6b5d8b8e449be53d229349dedd4d405a718334c4",
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "e972715e_862bc666",
+        "filename": "infra/config/refs.cfg",
+        "patchSetId": 1
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2018-06-05T03:34:04Z",
+      "side": 1,
+      "message": "Removed",
+      "parentUuid": "ad5166e7_01177312",
+      "revId": "6b5d8b8e449be53d229349dedd4d405a718334c4",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": false
     }
   ]
 }
