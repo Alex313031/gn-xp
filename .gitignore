@@ -42,6 +42,7 @@
 .metadata
 .project
 .pydevproject
+.recipe_deps
 .checkstyle
 cscope.*
 GPATH
@@ -53,7 +54,6 @@ tags
 Thumbs.db
 # Settings directories for eclipse
 /.externalToolBuilders/
-/.recipe_deps/
 /.settings/
 /.vs/
 # Visual Studio Code
