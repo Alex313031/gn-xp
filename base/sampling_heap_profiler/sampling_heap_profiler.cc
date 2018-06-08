@@ -199,13 +199,9 @@ void SamplingHeapProfiler::InstallAllocatorHooksOnce() {
 
 // static
 bool SamplingHeapProfiler::InstallAllocatorHooks() {
-#if BUILDFLAG(USE_ALLOCATOR_SHIM)
-  base::allocator::InsertAllocatorDispatch(&g_allocator_dispatch);
-#else
   ignore_result(g_allocator_dispatch);
   DLOG(WARNING)
       << "base::allocator shims are not available for memory sampling.";
-#endif  // BUILDFLAG(USE_ALLOCATOR_SHIM)
 
 #if BUILDFLAG(USE_PARTITION_ALLOC) && !defined(OS_NACL)
   base::PartitionAllocHooks::SetAllocationHook(&PartitionAllocHook);

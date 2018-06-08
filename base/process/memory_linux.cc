@@ -52,9 +52,7 @@ void EnableTerminationOnOutOfMemory() {
   // If we're using glibc's allocator, the above functions will override
   // malloc and friends and make them die on out of memory.
 
-#if BUILDFLAG(USE_ALLOCATOR_SHIM)
-  allocator::SetCallNewHandlerOnMallocFailure(true);
-#elif defined(USE_TCMALLOC)
+#if defined(USE_TCMALLOC)
   // For tcmalloc, we need to tell it to behave like new.
   tc_set_new_mode(1);
 #endif
@@ -98,9 +96,7 @@ bool AdjustOOMScore(ProcessId process, int score) {
 }
 
 bool UncheckedMalloc(size_t size, void** result) {
-#if BUILDFLAG(USE_ALLOCATOR_SHIM)
-  *result = allocator::UncheckedAlloc(size);
-#elif defined(MEMORY_TOOL_REPLACES_ALLOCATOR) || \
+#if defined(MEMORY_TOOL_REPLACES_ALLOCATOR) || \
     (!defined(LIBC_GLIBC) && !defined(USE_TCMALLOC))
   *result = malloc(size);
 #elif defined(LIBC_GLIBC) && !defined(USE_TCMALLOC)
