@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "7e1336df_db565fd3",
+        "filename": "base/metrics/field_trial.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 502,
+      "author": {
+        "id": 1000004
+      },
+      "writtenOn": "2018-06-08T22:24:44Z",
+      "side": 1,
+      "message": "This whole file will go soon enough, but it was a bit messy to remove it and all of its deps here.",
+      "revId": "a8ca95e2b6b7d64537fb3aa6c0c9b7b6425517c1",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": true
+    }
+  ]
+}
