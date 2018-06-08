@@ -1,0 +1,53 @@
+[
+  {
+    "cmd": [
+      "git",
+      "init",
+      "[START_DIR]\\gn"
+    ],
+    "name": "init"
+  },
+  {
+    "cmd": [],
+    "name": "git"
+  },
+  {
+    "cmd": [
+      "git",
+      "fetch",
+      "https://gn.googlesource.com/gn",
+      "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+    ],
+    "cwd": "[START_DIR]\\gn",
+    "name": "git.fetch",
+    "~followup_annotations": [
+      "@@@STEP_NEST_LEVEL@1@@@"
+    ]
+  },
+  {
+    "cmd": [
+      "git",
+      "checkout",
+      "FETCH_HEAD"
+    ],
+    "cwd": "[START_DIR]\\gn",
+    "name": "git.checkout",
+    "~followup_annotations": [
+      "@@@STEP_NEST_LEVEL@1@@@"
+    ]
+  },
+  {
+    "cmd": [
+      "python",
+      "-u",
+      "[START_DIR]\\gn\\tools\\gn\\bootstrap\\bootstrap.py",
+      "--no-rebuild"
+    ],
+    "name": "bootstrap"
+  },
+  {
+    "name": "$result",
+    "recipe_result": null,
+    "status_code": 0
+  }
+]
