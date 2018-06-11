@@ -47,11 +47,14 @@ def RunSteps(api):
     }
     api.cipd.ensure(cipd_dir, packages)
 
-  with api.context(env_prefixes={'PATH': [cipd_dir]}):
+  with api.context(env_prefixes={'PATH': [cipd_dir]}, cwd=src_dir):
     api.python(
-        'bootstrap',
-        src_dir.join('tools', 'gn', 'bootstrap', 'bootstrap.py'),
-        args=['--no-rebuild'])
+        'generate build files',
+        src_dir.join('build', 'gen.py'))
+
+  with api.context(env_prefixes={'PATH': [cipd_dir]}):
+    api.step('build',
+             ['ninja', '-C', src_dir.join('out')])
 
 
 def GenTests(api):
