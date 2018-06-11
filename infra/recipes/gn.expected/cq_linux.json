@@ -73,15 +73,27 @@
     "cmd": [
       "python",
       "-u",
-      "[START_DIR]/gn/tools/gn/bootstrap/bootstrap.py",
-      "--no-rebuild"
+      "[START_DIR]/gn/build/gen.py"
     ],
     "env_prefixes": {
       "PATH": [
         "[START_DIR]/cipd"
       ]
     },
-    "name": "bootstrap"
+    "name": "generate build files"
+  },
+  {
+    "cmd": [
+      "ninja",
+      "-C",
+      "[START_DIR]/gn/out"
+    ],
+    "env_prefixes": {
+      "PATH": [
+        "[START_DIR]/cipd"
+      ]
+    },
+    "name": "build"
   },
   {
     "name": "$result",
