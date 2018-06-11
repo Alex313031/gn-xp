@@ -1,0 +1,67 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "2351531a_dfd8ec41",
+        "filename": "infra/recipes/gn.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 36,
+      "author": {
+        "id": 1000007
+      },
+      "writtenOn": "2018-06-11T18:49:52Z",
+      "side": 1,
+      "message": "i\u0027m formally expressing my dislike for this, but given your prejudice against making Gerrit API calls, this is the best thing possible. Would you mind adding a comment?",
+      "range": {
+        "startLine": 34,
+        "startChar": 11,
+        "endLine": 36,
+        "endChar": 69
+      },
+      "revId": "d1d667810373541a1aebffd42238d13faef0415e",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "f71bd619_99a30879",
+        "filename": "infra/recipes/gn.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 38,
+      "author": {
+        "id": 1000007
+      },
+      "writtenOn": "2018-06-11T18:49:52Z",
+      "side": 1,
+      "message": "also consider rebasing s.t. you\u0027d have support for testing stacked CLs: https://cs.chromium.org/chromium/tools/depot_tools/recipes/recipe_modules/bot_update/resources/bot_update.py?g\u003d0\u0026l\u003d800",
+      "revId": "d1d667810373541a1aebffd42238d13faef0415e",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "4eee2a23_ccd4929a",
+        "filename": "infra/recipes/gn.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 39,
+      "author": {
+        "id": 1000007
+      },
+      "writtenOn": "2018-06-11T18:49:52Z",
+      "side": 1,
+      "message": "i suspect this may require user.email and user.name set. It\u0027s a good idea to specify them just in case: [.., \u0027-c\u0027, \u0027user.name\u003dblah\u0027, ...]",
+      "range": {
+        "startLine": 39,
+        "startChar": 17,
+        "endLine": 39,
+        "endChar": 53
+      },
+      "revId": "d1d667810373541a1aebffd42238d13faef0415e",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": true
+    }
+  ]
+}
