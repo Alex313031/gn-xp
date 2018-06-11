@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ea61d4b8_7f7831db",
+        "filename": "infra/recipes/gn.py",
+        "patchSetId": 2
+      },
+      "lineNbr": 57,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2018-06-11T18:31:52Z",
+      "side": 1,
+      "message": "Just a suggestion, you could nest these in \u0027build\u0027 step so the substeps will be something like \u0027build.generate ninja\u0027 and \u0027build.ninja\u0027?",
+      "range": {
+        "startLine": 50,
+        "startChar": 0,
+        "endLine": 57,
+        "endChar": 50
+      },
+      "revId": "8c2740f24f0d809c1e68bc3c24cbf7162ddaa3a7",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": true
+    }
+  ]
+}
