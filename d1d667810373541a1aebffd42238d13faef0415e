@@ -84,6 +84,24 @@
     },
     {
       "key": {
+        "uuid": "0928cac3_72dab3f5",
+        "filename": "infra/recipes/gn.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 38,
+      "author": {
+        "id": 1000007
+      },
+      "writtenOn": "2018-06-12T00:22:36Z",
+      "side": 1,
+      "message": "to the best of my knowledge, cherry pick works only on 1 commit (as at least the way you invoke it).",
+      "parentUuid": "76b3cbd5_38ce60df",
+      "revId": "d1d667810373541a1aebffd42238d13faef0415e",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "4eee2a23_ccd4929a",
         "filename": "infra/recipes/gn.py",
         "patchSetId": 1
@@ -119,6 +137,30 @@
       "side": 1,
       "message": "This is already set by Kitchen as part of the LUCI context setup (it\u0027ll be set to service account by default).",
       "parentUuid": "4eee2a23_ccd4929a",
+      "range": {
+        "startLine": 39,
+        "startChar": 17,
+        "endLine": 39,
+        "endChar": 53
+      },
+      "revId": "d1d667810373541a1aebffd42238d13faef0415e",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "fe3bca47_4f309d5d",
+        "filename": "infra/recipes/gn.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 39,
+      "author": {
+        "id": 1000007
+      },
+      "writtenOn": "2018-06-12T00:22:36Z",
+      "side": 1,
+      "message": "oh, that\u0027s true, on LUCI life is easier, though I\u0027m not sure it is set w/o task configured service account.",
+      "parentUuid": "8d2fab29_bf066050",
       "range": {
         "startLine": 39,
         "startChar": 17,
