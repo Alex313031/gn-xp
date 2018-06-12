@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "66787f05_d21e4998",
+        "filename": "infra/recipes/gn.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 36,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2018-06-12T00:19:11Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "2351531a_dfd8ec41",
+      "range": {
+        "startLine": 34,
+        "startChar": 11,
+        "endLine": 36,
+        "endChar": 69
+      },
+      "revId": "d1d667810373541a1aebffd42238d13faef0415e",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "f71bd619_99a30879",
         "filename": "infra/recipes/gn.py",
         "patchSetId": 1
@@ -42,6 +66,24 @@
     },
     {
       "key": {
+        "uuid": "76b3cbd5_38ce60df",
+        "filename": "infra/recipes/gn.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 38,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2018-06-12T00:19:11Z",
+      "side": 1,
+      "message": "Shouldn\u0027t cherry picking be same as rebasing? We will checkout master and than cherry pick patches on top which should be the same as fetching the change ref and then rebasing it on top of master.",
+      "parentUuid": "f71bd619_99a30879",
+      "revId": "d1d667810373541a1aebffd42238d13faef0415e",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "4eee2a23_ccd4929a",
         "filename": "infra/recipes/gn.py",
         "patchSetId": 1
@@ -53,6 +95,30 @@
       "writtenOn": "2018-06-11T18:49:52Z",
       "side": 1,
       "message": "i suspect this may require user.email and user.name set. It\u0027s a good idea to specify them just in case: [.., \u0027-c\u0027, \u0027user.name\u003dblah\u0027, ...]",
+      "range": {
+        "startLine": 39,
+        "startChar": 17,
+        "endLine": 39,
+        "endChar": 53
+      },
+      "revId": "d1d667810373541a1aebffd42238d13faef0415e",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "8d2fab29_bf066050",
+        "filename": "infra/recipes/gn.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 39,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2018-06-12T00:19:11Z",
+      "side": 1,
+      "message": "This is already set by Kitchen as part of the LUCI context setup (it\u0027ll be set to service account by default).",
+      "parentUuid": "4eee2a23_ccd4929a",
       "range": {
         "startLine": 39,
         "startChar": 17,
