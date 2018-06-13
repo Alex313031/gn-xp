@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "ae51a882_654ae9b8",
+        "filename": "infra/recipes/gn.py",
+        "patchSetId": 2
+      },
+      "lineNbr": 66,
+      "author": {
+        "id": 1000004
+      },
+      "writtenOn": "2018-06-13T03:27:52Z",
+      "side": 1,
+      "message": "Sure.",
+      "parentUuid": "f29a2173_cb4ff95c",
+      "revId": "98fc75d4751c652f23b225ebaaa6ce204b96b16e",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "0acc74fd_801041e9",
         "filename": "infra/recipes/gn.py",
         "patchSetId": 2
@@ -30,6 +48,24 @@
       "writtenOn": "2018-06-13T03:10:44Z",
       "side": 1,
       "message": "Unrelated to this change, but does the test need to be executed from the src_dir?",
+      "revId": "98fc75d4751c652f23b225ebaaa6ce204b96b16e",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "b23e9382_dbc84c4a",
+        "filename": "infra/recipes/gn.py",
+        "patchSetId": 2
+      },
+      "lineNbr": 74,
+      "author": {
+        "id": 1000004
+      },
+      "writtenOn": "2018-06-13T03:27:52Z",
+      "side": 1,
+      "message": "Yeah, there\u0027s test files it looks relative to cwd for.",
+      "parentUuid": "0acc74fd_801041e9",
       "revId": "98fc75d4751c652f23b225ebaaa6ce204b96b16e",
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
       "unresolved": true
