@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "4776a495_92672fc6",
+        "filename": "infra/recipes/gn.py",
+        "patchSetId": 4
+      },
+      "lineNbr": 75,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2018-06-13T20:32:45Z",
+      "side": 1,
+      "message": "Can you move this to GenTests to avoid mixing logic and test data? See for example https://fuchsia.googlesource.com/infra/recipes/+/master/recipes/clang_toolchain.py#288 on how to do that (use api.step_data to return data for a named step and use api.json.output to construct the test data).",
+      "range": {
+        "startLine": 60,
+        "startChar": 0,
+        "endLine": 75,
+        "endChar": 42
+      },
+      "revId": "ff20d343ca05d9b9ab9384a5a463fda77f30f403",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": true
+    }
+  ]
+}
