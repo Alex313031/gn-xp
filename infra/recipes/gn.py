@@ -63,14 +63,19 @@ def RunSteps(api):
       'win': {},
   }[api.platform.name]
 
-  with api.step.nest('build'):
-    with api.context(env=environ, cwd=src_dir):
-      api.python('generate', src_dir.join('build', 'gen.py'))
+  def do_run(name, gen_args):
+    with api.step.nest(name):
+      with api.step.nest('build'):
+        with api.context(env=environ, cwd=src_dir):
+          api.python('generate', src_dir.join('build', 'gen.py'), args=gen_args)
 
-    api.step('ninja', ['ninja', '-C', src_dir.join('out')])
+        api.step('ninja', ['ninja', '-C', src_dir.join('out')])
 
-  with api.context(cwd=src_dir):
-    api.step('test', [src_dir.join('out', 'gn_unittests')])
+      with api.context(cwd=src_dir):
+        api.step('test', [src_dir.join('out', 'gn_unittests')])
+
+  do_run('debug', ['-d'])
+  do_run('release', [])
 
 
 def GenTests(api):
