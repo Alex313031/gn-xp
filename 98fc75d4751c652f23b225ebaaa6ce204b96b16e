@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "f29a2173_cb4ff95c",
+        "filename": "infra/recipes/gn.py",
+        "patchSetId": 2
+      },
+      "lineNbr": 66,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2018-06-13T03:10:44Z",
+      "side": 1,
+      "message": "I\u0027d slightly prefer a loop over dict[name, gen_args] over nested functions.",
+      "revId": "98fc75d4751c652f23b225ebaaa6ce204b96b16e",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "0acc74fd_801041e9",
+        "filename": "infra/recipes/gn.py",
+        "patchSetId": 2
+      },
+      "lineNbr": 74,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2018-06-13T03:10:44Z",
+      "side": 1,
+      "message": "Unrelated to this change, but does the test need to be executed from the src_dir?",
+      "revId": "98fc75d4751c652f23b225ebaaa6ce204b96b16e",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": true
+    }
+  ]
+}
