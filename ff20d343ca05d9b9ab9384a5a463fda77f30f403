@@ -22,6 +22,30 @@
       "revId": "ff20d343ca05d9b9ab9384a5a463fda77f30f403",
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "dad1f049_27b220fb",
+        "filename": "infra/recipes/gn.py",
+        "patchSetId": 4
+      },
+      "lineNbr": 75,
+      "author": {
+        "id": 1000004
+      },
+      "writtenOn": "2018-06-13T20:50:40Z",
+      "side": 1,
+      "message": "I tried to do this for a while, but I can\u0027t get read_raw() to use step_data (as it always uses its 3rd argument). Is there a different way I should be reading the file so that it can get the contents from a step_data when running tests?",
+      "parentUuid": "4776a495_92672fc6",
+      "range": {
+        "startLine": 60,
+        "startChar": 0,
+        "endLine": 75,
+        "endChar": 42
+      },
+      "revId": "ff20d343ca05d9b9ab9384a5a463fda77f30f403",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": true
     }
   ]
 }
