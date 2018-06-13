@@ -48,9 +48,36 @@ def RunSteps(api):
             'fuchsia/clang/${platform}': 'goma',
         },
         'mac': {},
-        'win': {},
+        'win': {
+            'chrome_internal/third_party/sdk/windows': 'latest',
+        },
     }[api.platform.name])
     api.cipd.ensure(cipd_dir, packages)
+
+  win_env = {}
+  if api.platform.name == 'win':
+    # Load .../win_sdk/bin/SetEnv.x64.json to extract the required environment.
+    # It contains a dict that looks like this:
+    #
+    # {
+    #   "env": {
+    #     "VSINSTALLDIR": [["..", "..\\"]],
+    #     "VCINSTALLDIR": [["..", "..", "VC\\"]],
+    #     "INCLUDE": [["..", "..", "win_sdk", "Include", "10.0.17134.0", "um"], ["..", "..", "win_sdk", "Include", "10.0.17134.0", "shared"], ["..", "..", "win_sdk", "Include", "10.0.17134.0", "winrt"], ["..", "..", "win_sdk", "Include", "10.0.17134.0", "ucrt"], ["..", "..", "VC", "Tools", "MSVC", "14.14.26428", "include"], ["..", "..", "VC", "Tools", "MSVC", "14.14.26428", "atlmfc", "include"]],
+    #     "VCToolsInstallDir": [["..", "..", "VC", "Tools", "MSVC", "14.14.26428\\"]],
+    #     "PATH": [["..", "..", "win_sdk", "bin", "10.0.17134.0", "x64"], ["..", "..", "VC", "Tools", "MSVC", "14.14.26428", "bin", "HostX64", "x64"]],
+    #     "LIB": [["..", "..", "VC", "Tools", "MSVC", "14.14.26428", "lib", "x64"], ["..", "..", "win_sdk", "Lib", "10.0.17134.0", "um", "x64"], ["..", "..", "win_sdk", "Lib", "10.0.17134.0", "ucrt", "x64"], ["..", "..", "VC", "Tools", "MSVC", "14.14.26428", "atlmfc", "lib", "x64"]]
+    #   }
+    # }
+    sdk_dir = cipd_dir.join('chrome_internal', 'third_party', 'sdk', 'windows',
+                            'winsdk')
+    json_file = sdk_dir.join('bin', 'SetEnv.x64.json')
+    env = json.load(open(json_file))['env']
+    for k in env:
+      entries = [os.path.join(*([sdk_dir.join('bin')] + e))
+                 for e in env[k]]
+      env[k] = sep.join(entries)
+    win_env = env
 
   environ = {
       'linux': {
@@ -60,7 +87,7 @@ def RunSteps(api):
           'LDFLAGS': '-static-libstdc++ -ldl -lpthread',
       },
       'mac': {},
-      'win': {},
+      'win': win_env,
   }[api.platform.name]
 
   configs = [
