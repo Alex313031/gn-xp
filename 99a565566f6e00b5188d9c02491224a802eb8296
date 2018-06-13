@@ -49,6 +49,30 @@
     },
     {
       "key": {
+        "uuid": "9ff3743a_584d495f",
+        "filename": "infra/recipes/gn.expected/ci_win.json",
+        "patchSetId": 2
+      },
+      "lineNbr": 84,
+      "author": {
+        "id": 1000016
+      },
+      "writtenOn": "2018-06-13T19:56:29Z",
+      "side": 1,
+      "message": "As written cipd will unpack the contents of the package into cipd_dir directly I think.\nSo if the packages contains winsdk, then just `cipd\\winsdk` here.",
+      "parentUuid": "49feef13_52e36b93",
+      "range": {
+        "startLine": 84,
+        "startChar": 26,
+        "endLine": 84,
+        "endChar": 68
+      },
+      "revId": "99a565566f6e00b5188d9c02491224a802eb8296",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "e6fd396c_0e4f56a6",
         "filename": "infra/recipes/gn.expected/ci_win.json",
         "patchSetId": 2
@@ -84,6 +108,30 @@
       "side": 1,
       "message": "I think in reality they\u0027ll be flattened.",
       "parentUuid": "e6fd396c_0e4f56a6",
+      "range": {
+        "startLine": 110,
+        "startChar": 19,
+        "endLine": 110,
+        "endChar": 132
+      },
+      "revId": "99a565566f6e00b5188d9c02491224a802eb8296",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "d77d51bd_c02ad659",
+        "filename": "infra/recipes/gn.expected/ci_win.json",
+        "patchSetId": 2
+      },
+      "lineNbr": 110,
+      "author": {
+        "id": 1000016
+      },
+      "writtenOn": "2018-06-13T19:56:29Z",
+      "side": 1,
+      "message": "I\u0027m not at all sure about that.  I think you may need to use `\u0027%s\u0027 % cipd_dir.join(...)`.",
+      "parentUuid": "a585da9b_71f5b3bf",
       "range": {
         "startLine": 110,
         "startChar": 19,
