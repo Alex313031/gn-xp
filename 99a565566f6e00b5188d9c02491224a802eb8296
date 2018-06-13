@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "49feef13_52e36b93",
+        "filename": "infra/recipes/gn.expected/ci_win.json",
+        "patchSetId": 2
+      },
+      "lineNbr": 84,
+      "author": {
+        "id": 1000004
+      },
+      "writtenOn": "2018-06-13T19:31:37Z",
+      "side": 1,
+      "message": "Not sure if this is where cipd ensure will put this?",
+      "range": {
+        "startLine": 84,
+        "startChar": 26,
+        "endLine": 84,
+        "endChar": 68
+      },
+      "revId": "99a565566f6e00b5188d9c02491224a802eb8296",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "e6fd396c_0e4f56a6",
+        "filename": "infra/recipes/gn.expected/ci_win.json",
+        "patchSetId": 2
+      },
+      "lineNbr": 110,
+      "author": {
+        "id": 1000004
+      },
+      "writtenOn": "2018-06-13T19:31:37Z",
+      "side": 1,
+      "message": "Will these Path() get flattened to real paths, or should I be doing something in the recipe?",
+      "range": {
+        "startLine": 110,
+        "startChar": 19,
+        "endLine": 110,
+        "endChar": 132
+      },
+      "revId": "99a565566f6e00b5188d9c02491224a802eb8296",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": true
+    }
+  ]
+}
