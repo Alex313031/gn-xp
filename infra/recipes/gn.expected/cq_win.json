@@ -76,7 +76,7 @@
       "-root",
       "[START_DIR]\\cipd",
       "-ensure-file",
-      "infra/ninja/${platform} version:1.8.2",
+      "chrome_internal/third_party/sdk/windows latest\ninfra/ninja/${platform} version:1.8.2",
       "-json-output",
       "/path/to/tmp/json"
     ],
@@ -87,6 +87,10 @@
       "@@@STEP_LOG_LINE@json.output@  \"result\": {@@@",
       "@@@STEP_LOG_LINE@json.output@    \"\": [@@@",
       "@@@STEP_LOG_LINE@json.output@      {@@@",
+      "@@@STEP_LOG_LINE@json.output@        \"instance_id\": \"resolved-instance_id-of-latest----------\", @@@",
+      "@@@STEP_LOG_LINE@json.output@        \"package\": \"chrome_internal/third_party/sdk/windows\"@@@",
+      "@@@STEP_LOG_LINE@json.output@      }, @@@",
+      "@@@STEP_LOG_LINE@json.output@      {@@@",
       "@@@STEP_LOG_LINE@json.output@        \"instance_id\": \"resolved-instance_id-of-version:1.8.2---\", @@@",
       "@@@STEP_LOG_LINE@json.output@        \"package\": \"infra/ninja/${platform}\"@@@",
       "@@@STEP_LOG_LINE@json.output@      }@@@",
@@ -95,6 +99,20 @@
       "@@@STEP_LOG_LINE@json.output@}@@@",
       "@@@STEP_LOG_END@json.output@@@"
     ]
+  },
+  {
+    "cmd": [
+      "python",
+      "-u",
+      "RECIPE_MODULE[recipe_engine::file]\\resources\\fileutil.py",
+      "--json-output",
+      "/path/to/tmp/json",
+      "copy",
+      "[START_DIR]\\cipd\\winsdk\\bin\\SetEnv.x64.json",
+      "/path/to/tmp/"
+    ],
+    "infra_step": true,
+    "name": "read SetEnv.x64.json"
   },
   {
     "cmd": [],
@@ -115,6 +133,14 @@
       "-d"
     ],
     "cwd": "[START_DIR]\\gn",
+    "env": {
+      "INCLUDE": "[START_DIR]\\cipd\\win_sdk\\Include\\10.0.17134.0\\um;[START_DIR]\\cipd\\win_sdk\\Include\\10.0.17134.0\\shared;[START_DIR]\\cipd\\win_sdk\\Include\\10.0.17134.0\\winrt;[START_DIR]\\cipd\\win_sdk\\Include\\10.0.17134.0\\ucrt;[START_DIR]\\cipd\\VC\\Tools\\MSVC\\14.14.26428\\include;[START_DIR]\\cipd\\VC\\Tools\\MSVC\\14.14.26428\\atlmfc\\include",
+      "LIB": "[START_DIR]\\cipd\\VC\\Tools\\MSVC\\14.14.26428\\lib\\x64;[START_DIR]\\cipd\\win_sdk\\Lib\\10.0.17134.0\\um\\x64;[START_DIR]\\cipd\\win_sdk\\Lib\\10.0.17134.0\\ucrt\\x64;[START_DIR]\\cipd\\VC\\Tools\\MSVC\\14.14.26428\\atlmfc\\lib\\x64",
+      "PATH": "[START_DIR]\\cipd\\win_sdk\\bin\\10.0.17134.0\\x64;[START_DIR]\\cipd\\VC\\Tools\\MSVC\\14.14.26428\\bin\\HostX64\\x64",
+      "VCINSTALLDIR": "[START_DIR]\\cipd\\VC\\",
+      "VCToolsInstallDir": "[START_DIR]\\cipd\\VC\\Tools\\MSVC\\14.14.26428\\",
+      "VSINSTALLDIR": "[START_DIR]\\cipd"
+    },
     "name": "debug.build.generate",
     "~followup_annotations": [
       "@@@STEP_NEST_LEVEL@2@@@"
@@ -159,6 +185,14 @@
       "[START_DIR]\\gn\\build\\gen.py"
     ],
     "cwd": "[START_DIR]\\gn",
+    "env": {
+      "INCLUDE": "[START_DIR]\\cipd\\win_sdk\\Include\\10.0.17134.0\\um;[START_DIR]\\cipd\\win_sdk\\Include\\10.0.17134.0\\shared;[START_DIR]\\cipd\\win_sdk\\Include\\10.0.17134.0\\winrt;[START_DIR]\\cipd\\win_sdk\\Include\\10.0.17134.0\\ucrt;[START_DIR]\\cipd\\VC\\Tools\\MSVC\\14.14.26428\\include;[START_DIR]\\cipd\\VC\\Tools\\MSVC\\14.14.26428\\atlmfc\\include",
+      "LIB": "[START_DIR]\\cipd\\VC\\Tools\\MSVC\\14.14.26428\\lib\\x64;[START_DIR]\\cipd\\win_sdk\\Lib\\10.0.17134.0\\um\\x64;[START_DIR]\\cipd\\win_sdk\\Lib\\10.0.17134.0\\ucrt\\x64;[START_DIR]\\cipd\\VC\\Tools\\MSVC\\14.14.26428\\atlmfc\\lib\\x64",
+      "PATH": "[START_DIR]\\cipd\\win_sdk\\bin\\10.0.17134.0\\x64;[START_DIR]\\cipd\\VC\\Tools\\MSVC\\14.14.26428\\bin\\HostX64\\x64",
+      "VCINSTALLDIR": "[START_DIR]\\cipd\\VC\\",
+      "VCToolsInstallDir": "[START_DIR]\\cipd\\VC\\Tools\\MSVC\\14.14.26428\\",
+      "VSINSTALLDIR": "[START_DIR]\\cipd"
+    },
     "name": "release.build.generate",
     "~followup_annotations": [
       "@@@STEP_NEST_LEVEL@2@@@"
