@@ -49,7 +49,7 @@
       "-root",
       "[START_DIR]\\cipd",
       "-ensure-file",
-      "infra/ninja/${platform} version:1.8.2",
+      "chrome_internal/third_party/sdk/windows latest\ninfra/ninja/${platform} version:1.8.2",
       "-json-output",
       "/path/to/tmp/json"
     ],
@@ -60,6 +60,10 @@
       "@@@STEP_LOG_LINE@json.output@  \"result\": {@@@",
       "@@@STEP_LOG_LINE@json.output@    \"\": [@@@",
       "@@@STEP_LOG_LINE@json.output@      {@@@",
+      "@@@STEP_LOG_LINE@json.output@        \"instance_id\": \"resolved-instance_id-of-latest----------\", @@@",
+      "@@@STEP_LOG_LINE@json.output@        \"package\": \"chrome_internal/third_party/sdk/windows\"@@@",
+      "@@@STEP_LOG_LINE@json.output@      }, @@@",
+      "@@@STEP_LOG_LINE@json.output@      {@@@",
       "@@@STEP_LOG_LINE@json.output@        \"instance_id\": \"resolved-instance_id-of-version:1.8.2---\", @@@",
       "@@@STEP_LOG_LINE@json.output@        \"package\": \"infra/ninja/${platform}\"@@@",
       "@@@STEP_LOG_LINE@json.output@      }@@@",
@@ -68,6 +72,20 @@
       "@@@STEP_LOG_LINE@json.output@}@@@",
       "@@@STEP_LOG_END@json.output@@@"
     ]
+  },
+  {
+    "cmd": [
+      "python",
+      "-u",
+      "RECIPE_MODULE[recipe_engine::file]\\resources\\fileutil.py",
+      "--json-output",
+      "/path/to/tmp/json",
+      "copy",
+      "[START_DIR]\\cipd\\chrome_internal\\third_party\\sdk\\windows\\winsdk\\bin\\SetEnv.x64.json",
+      "/path/to/tmp/"
+    ],
+    "infra_step": true,
+    "name": "read SetEnv.x64.json"
   },
   {
     "cmd": [],
@@ -88,6 +106,14 @@
       "-d"
     ],
     "cwd": "[START_DIR]\\gn",
+    "env": {
+      "INCLUDE": "[Path('start_dir', 'cipd','chrome_internal','third_party','sdk','windows','win_sdk','Include','10.0.17134.0','um'), Path('start_dir', 'cipd','chrome_internal','third_party','sdk','windows','win_sdk','Include','10.0.17134.0','shared'), Path('start_dir', 'cipd','chrome_internal','third_party','sdk','windows','win_sdk','Include','10.0.17134.0','winrt'), Path('start_dir', 'cipd','chrome_internal','third_party','sdk','windows','win_sdk','Include','10.0.17134.0','ucrt'), Path('start_dir', 'cipd','chrome_internal','third_party','sdk','windows','VC','Tools','MSVC','14.14.26428','include'), Path('start_dir', 'cipd','chrome_internal','third_party','sdk','windows','VC','Tools','MSVC','14.14.26428','atlmfc','include')]",
+      "LIB": "[Path('start_dir', 'cipd','chrome_internal','third_party','sdk','windows','VC','Tools','MSVC','14.14.26428','lib','x64'), Path('start_dir', 'cipd','chrome_internal','third_party','sdk','windows','win_sdk','Lib','10.0.17134.0','um','x64'), Path('start_dir', 'cipd','chrome_internal','third_party','sdk','windows','win_sdk','Lib','10.0.17134.0','ucrt','x64'), Path('start_dir', 'cipd','chrome_internal','third_party','sdk','windows','VC','Tools','MSVC','14.14.26428','atlmfc','lib','x64')]",
+      "PATH": "[Path('start_dir', 'cipd','chrome_internal','third_party','sdk','windows','win_sdk','bin','10.0.17134.0','x64'), Path('start_dir', 'cipd','chrome_internal','third_party','sdk','windows','VC','Tools','MSVC','14.14.26428','bin','HostX64','x64')]",
+      "VCINSTALLDIR": "[Path('start_dir', 'cipd','chrome_internal','third_party','sdk','windows','VC\\\\')]",
+      "VCToolsInstallDir": "[Path('start_dir', 'cipd','chrome_internal','third_party','sdk','windows','VC','Tools','MSVC','14.14.26428\\\\')]",
+      "VSINSTALLDIR": "[Path('start_dir', 'cipd','chrome_internal','third_party','sdk','windows')]"
+    },
     "name": "debug.build.generate",
     "~followup_annotations": [
       "@@@STEP_NEST_LEVEL@2@@@"
@@ -132,6 +158,14 @@
       "[START_DIR]\\gn\\build\\gen.py"
     ],
     "cwd": "[START_DIR]\\gn",
+    "env": {
+      "INCLUDE": "[Path('start_dir', 'cipd','chrome_internal','third_party','sdk','windows','win_sdk','Include','10.0.17134.0','um'), Path('start_dir', 'cipd','chrome_internal','third_party','sdk','windows','win_sdk','Include','10.0.17134.0','shared'), Path('start_dir', 'cipd','chrome_internal','third_party','sdk','windows','win_sdk','Include','10.0.17134.0','winrt'), Path('start_dir', 'cipd','chrome_internal','third_party','sdk','windows','win_sdk','Include','10.0.17134.0','ucrt'), Path('start_dir', 'cipd','chrome_internal','third_party','sdk','windows','VC','Tools','MSVC','14.14.26428','include'), Path('start_dir', 'cipd','chrome_internal','third_party','sdk','windows','VC','Tools','MSVC','14.14.26428','atlmfc','include')]",
+      "LIB": "[Path('start_dir', 'cipd','chrome_internal','third_party','sdk','windows','VC','Tools','MSVC','14.14.26428','lib','x64'), Path('start_dir', 'cipd','chrome_internal','third_party','sdk','windows','win_sdk','Lib','10.0.17134.0','um','x64'), Path('start_dir', 'cipd','chrome_internal','third_party','sdk','windows','win_sdk','Lib','10.0.17134.0','ucrt','x64'), Path('start_dir', 'cipd','chrome_internal','third_party','sdk','windows','VC','Tools','MSVC','14.14.26428','atlmfc','lib','x64')]",
+      "PATH": "[Path('start_dir', 'cipd','chrome_internal','third_party','sdk','windows','win_sdk','bin','10.0.17134.0','x64'), Path('start_dir', 'cipd','chrome_internal','third_party','sdk','windows','VC','Tools','MSVC','14.14.26428','bin','HostX64','x64')]",
+      "VCINSTALLDIR": "[Path('start_dir', 'cipd','chrome_internal','third_party','sdk','windows','VC\\\\')]",
+      "VCToolsInstallDir": "[Path('start_dir', 'cipd','chrome_internal','third_party','sdk','windows','VC','Tools','MSVC','14.14.26428\\\\')]",
+      "VSINSTALLDIR": "[Path('start_dir', 'cipd','chrome_internal','third_party','sdk','windows')]"
+    },
     "name": "release.build.generate",
     "~followup_annotations": [
       "@@@STEP_NEST_LEVEL@2@@@"

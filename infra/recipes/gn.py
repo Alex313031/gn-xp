@@ -7,13 +7,14 @@ DEPS = [
     'recipe_engine/buildbucket',
     'recipe_engine/cipd',
     'recipe_engine/context',
+    'recipe_engine/file',
     'recipe_engine/path',
     'recipe_engine/platform',
     'recipe_engine/properties',
     'recipe_engine/python',
     'recipe_engine/step',
+    'recipe_engine/json',
 ]
-
 
 def RunSteps(api):
   src_dir = api.path['start_dir'].join('gn')
@@ -48,9 +49,46 @@ def RunSteps(api):
             'fuchsia/clang/${platform}': 'goma',
         },
         'mac': {},
-        'win': {},
+        'win': {
+            'chrome_internal/third_party/sdk/windows': 'latest',
+        },
     }[api.platform.name])
     api.cipd.ensure(cipd_dir, packages)
+
+  win_env = {}
+  if api.platform.name == 'win':
+    # Load .../win_sdk/bin/SetEnv.x64.json to extract the required environment.
+    # It contains a dict that looks like this:
+    TESTDATA = r'''
+    {
+      "env": {
+        "VSINSTALLDIR": [["..", "..\\"]],
+        "VCINSTALLDIR": [["..", "..", "VC\\"]],
+        "INCLUDE": [["..", "..", "win_sdk", "Include", "10.0.17134.0", "um"], ["..", "..", "win_sdk", "Include", "10.0.17134.0", "shared"], ["..", "..", "win_sdk", "Include", "10.0.17134.0", "winrt"], ["..", "..", "win_sdk", "Include", "10.0.17134.0", "ucrt"], ["..", "..", "VC", "Tools", "MSVC", "14.14.26428", "include"], ["..", "..", "VC", "Tools", "MSVC", "14.14.26428", "atlmfc", "include"]],
+        "VCToolsInstallDir": [["..", "..", "VC", "Tools", "MSVC", "14.14.26428\\"]],
+        "PATH": [["..", "..", "win_sdk", "bin", "10.0.17134.0", "x64"], ["..", "..", "VC", "Tools", "MSVC", "14.14.26428", "bin", "HostX64", "x64"]],
+        "LIB": [["..", "..", "VC", "Tools", "MSVC", "14.14.26428", "lib", "x64"], ["..", "..", "win_sdk", "Lib", "10.0.17134.0", "um", "x64"], ["..", "..", "win_sdk", "Lib", "10.0.17134.0", "ucrt", "x64"], ["..", "..", "VC", "Tools", "MSVC", "14.14.26428", "atlmfc", "lib", "x64"]]
+      }
+    }
+    '''
+    # All these environment variables need to be added to the environment
+    # for the compiler and linker to work.
+
+    sdk_dir = cipd_dir.join('chrome_internal', 'third_party', 'sdk', 'windows')
+    json_file = sdk_dir.join('winsdk', 'bin', 'SetEnv.x64.json')
+    env = api.json.loads(api.file.read_raw(
+      'read SetEnv.x64.json', json_file, TESTDATA))['env']
+    for k in env:
+      # recipes' Path does not like .., ., \, or /, so this is cumbersome.
+      # What we want to do is:
+      #   entries = [sdk_bin_dir.join(*e) for e in env[k]]
+      # Instead do that badly, and rely (but verify) on the fact that the paths
+      # are all specified relative to the root, but specified relative to
+      # winsdk/bin (i.e. everything starts with "../../".)
+      for data in env[k]:
+        assert data[0] == '..' and (data[1] == '..' or data[1] == '..\\')
+        root_relative = data[2:]
+        win_env.setdefault(k, []).append(sdk_dir.join(*root_relative))
 
   environ = {
       'linux': {
@@ -60,7 +98,7 @@ def RunSteps(api):
           'LDFLAGS': '-static-libstdc++ -ldl -lpthread',
       },
       'mac': {},
-      'win': {},
+      'win': win_env,
   }[api.platform.name]
 
   configs = [
