@@ -143,58 +143,6 @@ void SetPriorityRealtimeAudio() {
 
 }  // anonymous namespace
 
-// static
-bool PlatformThread::CanIncreaseCurrentThreadPriority() {
-  return true;
-}
-
-// static
-void PlatformThread::SetCurrentThreadPriority(ThreadPriority priority) {
-  // Changing the priority of the main thread causes performance regressions.
-  // https://crbug.com/601270
-  DCHECK(![[NSThread currentThread] isMainThread]);
-
-  switch (priority) {
-    case ThreadPriority::BACKGROUND:
-      [[NSThread currentThread] setThreadPriority:0];
-      break;
-    case ThreadPriority::NORMAL:
-    case ThreadPriority::DISPLAY:
-      [[NSThread currentThread] setThreadPriority:0.5];
-      break;
-    case ThreadPriority::REALTIME_AUDIO:
-      SetPriorityRealtimeAudio();
-      DCHECK_EQ([[NSThread currentThread] threadPriority], 1.0);
-      break;
-  }
-
-  [[[NSThread currentThread] threadDictionary]
-      setObject:@(static_cast<int>(priority))
-         forKey:kThreadPriorityKey];
-}
-
-// static
-ThreadPriority PlatformThread::GetCurrentThreadPriority() {
-  NSNumber* priority = base::mac::ObjCCast<NSNumber>([[[NSThread currentThread]
-      threadDictionary] objectForKey:kThreadPriorityKey]);
-
-  if (!priority)
-    return ThreadPriority::NORMAL;
-
-  ThreadPriority thread_priority =
-      static_cast<ThreadPriority>(priority.intValue);
-  switch (thread_priority) {
-    case ThreadPriority::BACKGROUND:
-    case ThreadPriority::NORMAL:
-    case ThreadPriority::DISPLAY:
-    case ThreadPriority::REALTIME_AUDIO:
-      return thread_priority;
-    default:
-      NOTREACHED() << "Unknown priority.";
-      return ThreadPriority::NORMAL;
-  }
-}
-
 size_t GetDefaultThreadStackSize(const pthread_attr_t& attributes) {
 #if defined(OS_IOS)
   return 0;
