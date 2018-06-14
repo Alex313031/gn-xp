@@ -20,10 +20,8 @@
 
 #include "base/files/file_enumerator.h"
 #include "base/files/file_path.h"
-#include "base/guid.h"
 #include "base/logging.h"
 #include "base/macros.h"
-#include "base/metrics/histogram_functions.h"
 #include "base/process/process_handle.h"
 #include "base/rand_util.h"
 #include "base/strings/string_number_conversions.h"
@@ -41,67 +39,6 @@ namespace {
 
 const DWORD kFileShareAll =
     FILE_SHARE_READ | FILE_SHARE_WRITE | FILE_SHARE_DELETE;
-
-// Records a sample in a histogram named
-// "Windows.PostOperationState.|operation|" indicating the state of |path|
-// following the named operation. If |operation_succeeded| is true, the
-// "operation succeeded" sample is recorded. Otherwise, the state of |path| is
-// queried and the most meaningful sample is recorded.
-void RecordPostOperationState(const FilePath& path,
-                              StringPiece operation,
-                              bool operation_succeeded) {
-  // The state of a filesystem item after an operation.
-  // These values are persisted to logs. Entries should not be renumbered and
-  // numeric values should never be reused.
-  enum class PostOperationState {
-    kOperationSucceeded = 0,
-    kFileNotFoundAfterFailure = 1,
-    kPathNotFoundAfterFailure = 2,
-    kAccessDeniedAfterFailure = 3,
-    kNoAttributesAfterFailure = 4,
-    kEmptyDirectoryAfterFailure = 5,
-    kNonEmptyDirectoryAfterFailure = 6,
-    kNotDirectoryAfterFailure = 7,
-    kCount
-  } metric = PostOperationState::kOperationSucceeded;
-
-  if (!operation_succeeded) {
-    const DWORD attributes = ::GetFileAttributes(path.value().c_str());
-    if (attributes == INVALID_FILE_ATTRIBUTES) {
-      // On failure to delete, one might expect the file/directory to still be
-      // in place. Slice a failure to get its attributes into a few common error
-      // buckets.
-      const DWORD error_code = ::GetLastError();
-      if (error_code == ERROR_FILE_NOT_FOUND)
-        metric = PostOperationState::kFileNotFoundAfterFailure;
-      else if (error_code == ERROR_PATH_NOT_FOUND)
-        metric = PostOperationState::kPathNotFoundAfterFailure;
-      else if (error_code == ERROR_ACCESS_DENIED)
-        metric = PostOperationState::kAccessDeniedAfterFailure;
-      else
-        metric = PostOperationState::kNoAttributesAfterFailure;
-    } else if (attributes & FILE_ATTRIBUTE_DIRECTORY) {
-      if (IsDirectoryEmpty(path))
-        metric = PostOperationState::kEmptyDirectoryAfterFailure;
-      else
-        metric = PostOperationState::kNonEmptyDirectoryAfterFailure;
-    } else {
-      metric = PostOperationState::kNotDirectoryAfterFailure;
-    }
-  }
-
-  std::string histogram_name = "Windows.PostOperationState.";
-  operation.AppendToString(&histogram_name);
-  UmaHistogramEnumeration(histogram_name, metric, PostOperationState::kCount);
-}
-
-// Records the sample |error| in a histogram named
-// "Windows.FilesystemError.|operation|".
-void RecordFilesystemError(StringPiece operation, DWORD error) {
-  std::string histogram_name = "Windows.FilesystemError.";
-  operation.AppendToString(&histogram_name);
-  UmaHistogramSparse(histogram_name, error);
-}
 
 // Deletes all files and directories in a path.
 // Returns ERROR_SUCCESS on success or the Windows error code corresponding to
@@ -344,12 +281,7 @@ bool DeleteFile(const FilePath& path, bool recursive) {
   // current code so that any improvements or regressions resulting from
   // subsequent code changes can be detected.
   const DWORD error = DoDeleteFile(path, recursive);
-  RecordPostOperationState(path, operation, error == ERROR_SUCCESS);
-  if (error == ERROR_SUCCESS)
-    return true;
-
-  RecordFilesystemError(operation, error);
-  return false;
+  return error == ERROR_SUCCESS;
 }
 
 bool DeleteFileAfterReboot(const FilePath& path) {
