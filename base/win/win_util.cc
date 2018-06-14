@@ -42,7 +42,6 @@
 #include "base/strings/string_util.h"
 #include "base/strings/stringprintf.h"
 #include "base/strings/utf_string_conversions.h"
-#include "base/threading/thread_restrictions.h"
 #include "base/win/core_winrt_util.h"
 #include "base/win/registry.h"
 #include "base/win/scoped_co_mem.h"
@@ -334,11 +333,6 @@ bool GetUserSidString(std::wstring* user_sid) {
 }
 
 bool UserAccountControlIsEnabled() {
-  // This can be slow if Windows ends up going to disk.  Should watch this key
-  // for changes and only read it once, preferably on the file thread.
-  //   http://code.google.com/p/chromium/issues/detail?id=61644
-  ThreadRestrictions::ScopedAllowIO allow_io;
-
   RegKey key(HKEY_LOCAL_MACHINE,
              L"SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Policies\\System",
              KEY_READ);

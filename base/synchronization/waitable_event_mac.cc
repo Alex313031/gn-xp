@@ -16,7 +16,6 @@
 #include "base/mac/scoped_dispatch_object.h"
 #include "base/posix/eintr_wrapper.h"
 #include "base/threading/scoped_blocking_call.h"
-#include "base/threading/thread_restrictions.h"
 #include "build_config.h"
 
 namespace base {
@@ -111,7 +110,6 @@ bool WaitableEvent::TimedWait(const TimeDelta& wait_delta) {
 }
 
 bool WaitableEvent::TimedWaitUntil(const TimeTicks& end_time) {
-  internal::AssertBaseSyncPrimitivesAllowed();
   ScopedBlockingCall scoped_blocking_call(BlockingType::MAY_BLOCK);
 
   TimeDelta wait_time = end_time - TimeTicks::Now();
@@ -164,7 +162,6 @@ bool WaitableEvent::UseSlowWatchList(ResetPolicy policy) {
 
 // static
 size_t WaitableEvent::WaitMany(WaitableEvent** raw_waitables, size_t count) {
-  internal::AssertBaseSyncPrimitivesAllowed();
   DCHECK(count) << "Cannot wait on no events";
   ScopedBlockingCall scoped_blocking_call(BlockingType::MAY_BLOCK);
 

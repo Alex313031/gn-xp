@@ -12,7 +12,6 @@
 
 #include "base/base_export.h"
 #include "base/macros.h"
-#include "base/win/object_watcher.h"
 #include "base/win/scoped_handle.h"
 
 namespace base {
@@ -29,9 +28,6 @@ namespace win {
 //    error as a (non-zero) win32 error code.
 class BASE_EXPORT RegKey {
  public:
-  // Called from the MessageLoop when the key changes.
-  typedef base::Callback<void()> ChangeCallback;
-
   RegKey();
   explicit RegKey(HKEY key);
   RegKey(HKEY rootkey, const wchar_t* subkey, REGSAM access);
@@ -124,13 +120,6 @@ class BASE_EXPORT RegKey {
                   const void* data,
                   DWORD dsize,
                   DWORD dtype);
-
-  // Starts watching the key to see if any of its values have changed.
-  // The key must have been opened with the KEY_NOTIFY access privilege.
-  // Returns true on success.
-  // To stop watching, delete this RegKey object. To continue watching the
-  // object after the callback is invoked, call StartWatching again.
-  bool StartWatching(const ChangeCallback& callback);
 
   HKEY Handle() const { return key_; }
 
