@@ -647,56 +647,6 @@ FilePath GetHomeDir() {
 }
 #endif  // !defined(OS_MACOSX)
 
-bool CreateTemporaryFile(FilePath* path) {
-  AssertBlockingAllowed();  // For call to close().
-  FilePath directory;
-  if (!GetTempDir(&directory))
-    return false;
-  int fd = CreateAndOpenFdForTemporaryFileInDir(directory, path);
-  if (fd < 0)
-    return false;
-  close(fd);
-  return true;
-}
-
-FILE* CreateAndOpenTemporaryFileInDir(const FilePath& dir, FilePath* path) {
-  int fd = CreateAndOpenFdForTemporaryFileInDir(dir, path);
-  if (fd < 0)
-    return nullptr;
-
-  FILE* file = fdopen(fd, "a+");
-  if (!file)
-    close(fd);
-  return file;
-}
-
-bool CreateTemporaryFileInDir(const FilePath& dir, FilePath* temp_file) {
-  AssertBlockingAllowed();  // For call to close().
-  int fd = CreateAndOpenFdForTemporaryFileInDir(dir, temp_file);
-  return ((fd >= 0) && !IGNORE_EINTR(close(fd)));
-}
-
-static bool CreateTemporaryDirInDirImpl(const FilePath& base_dir,
-                                        const FilePath::StringType& name_tmpl,
-                                        FilePath* new_dir) {
-  AssertBlockingAllowed();  // For call to mkdtemp().
-  DCHECK(name_tmpl.find("XXXXXX") != FilePath::StringType::npos)
-      << "Directory name template must contain \"XXXXXX\".";
-
-  FilePath sub_dir = base_dir.Append(name_tmpl);
-  std::string sub_dir_string = sub_dir.value();
-
-  // this should be OK since mkdtemp just replaces characters in place
-  char* buffer = const_cast<char*>(sub_dir_string.c_str());
-  char* dtemp = mkdtemp(buffer);
-  if (!dtemp) {
-    DPLOG(ERROR) << "mkdtemp";
-    return false;
-  }
-  *new_dir = FilePath(dtemp);
-  return true;
-}
-
 bool CreateTemporaryDirInDir(const FilePath& base_dir,
                              const FilePath::StringType& prefix,
                              FilePath* new_dir) {

@@ -256,24 +256,6 @@ BASE_EXPORT bool GetTempDir(FilePath* path);
 // Path service may also override DIR_HOME.
 BASE_EXPORT FilePath GetHomeDir();
 
-// Creates a temporary file. The full path is placed in |path|, and the
-// function returns true if was successful in creating the file. The file will
-// be empty and all handles closed after this function returns.
-BASE_EXPORT bool CreateTemporaryFile(FilePath* path);
-
-// Same as CreateTemporaryFile but the file is created in |dir|.
-BASE_EXPORT bool CreateTemporaryFileInDir(const FilePath& dir,
-                                          FilePath* temp_file);
-
-// Create and open a temporary file.  File is opened for read/write.
-// The full path is placed in |path|.
-// Returns a handle to the opened file or NULL if an error occurred.
-BASE_EXPORT FILE* CreateAndOpenTemporaryFile(FilePath* path);
-
-// Similar to CreateAndOpenTemporaryFile, but the file is created in |dir|.
-BASE_EXPORT FILE* CreateAndOpenTemporaryFileInDir(const FilePath& dir,
-                                                  FilePath* path);
-
 // Create a new directory. If prefix is provided, the new directory name is in
 // the format of prefixyyyy.
 // NOTE: prefix is ignored in the POSIX implementation.

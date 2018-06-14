@@ -20,10 +20,8 @@
 
 #include "base/files/file_enumerator.h"
 #include "base/files/file_path.h"
-#include "base/guid.h"
 #include "base/logging.h"
 #include "base/macros.h"
-#include "base/metrics/histogram_functions.h"
 #include "base/process/process_handle.h"
 #include "base/rand_util.h"
 #include "base/strings/string_number_conversions.h"
@@ -41,67 +39,6 @@ namespace {
 
 const DWORD kFileShareAll =
     FILE_SHARE_READ | FILE_SHARE_WRITE | FILE_SHARE_DELETE;
-
-// Records a sample in a histogram named
-// "Windows.PostOperationState.|operation|" indicating the state of |path|
-// following the named operation. If |operation_succeeded| is true, the
-// "operation succeeded" sample is recorded. Otherwise, the state of |path| is
-// queried and the most meaningful sample is recorded.
-void RecordPostOperationState(const FilePath& path,
-                              StringPiece operation,
-                              bool operation_succeeded) {
-  // The state of a filesystem item after an operation.
-  // These values are persisted to logs. Entries should not be renumbered and
-  // numeric values should never be reused.
-  enum class PostOperationState {
-    kOperationSucceeded = 0,
-    kFileNotFoundAfterFailure = 1,
-    kPathNotFoundAfterFailure = 2,
-    kAccessDeniedAfterFailure = 3,
-    kNoAttributesAfterFailure = 4,
-    kEmptyDirectoryAfterFailure = 5,
-    kNonEmptyDirectoryAfterFailure = 6,
-    kNotDirectoryAfterFailure = 7,
-    kCount
-  } metric = PostOperationState::kOperationSucceeded;
-
-  if (!operation_succeeded) {
-    const DWORD attributes = ::GetFileAttributes(path.value().c_str());
-    if (attributes == INVALID_FILE_ATTRIBUTES) {
-      // On failure to delete, one might expect the file/directory to still be
-      // in place. Slice a failure to get its attributes into a few common error
-      // buckets.
-      const DWORD error_code = ::GetLastError();
-      if (error_code == ERROR_FILE_NOT_FOUND)
-        metric = PostOperationState::kFileNotFoundAfterFailure;
-      else if (error_code == ERROR_PATH_NOT_FOUND)
-        metric = PostOperationState::kPathNotFoundAfterFailure;
-      else if (error_code == ERROR_ACCESS_DENIED)
-        metric = PostOperationState::kAccessDeniedAfterFailure;
-      else
-        metric = PostOperationState::kNoAttributesAfterFailure;
-    } else if (attributes & FILE_ATTRIBUTE_DIRECTORY) {
-      if (IsDirectoryEmpty(path))
-        metric = PostOperationState::kEmptyDirectoryAfterFailure;
-      else
-        metric = PostOperationState::kNonEmptyDirectoryAfterFailure;
-    } else {
-      metric = PostOperationState::kNotDirectoryAfterFailure;
-    }
-  }
-
-  std::string histogram_name = "Windows.PostOperationState.";
-  operation.AppendToString(&histogram_name);
-  UmaHistogramEnumeration(histogram_name, metric, PostOperationState::kCount);
-}
-
-// Records the sample |error| in a histogram named
-// "Windows.FilesystemError.|operation|".
-void RecordFilesystemError(StringPiece operation, DWORD error) {
-  std::string histogram_name = "Windows.FilesystemError.";
-  operation.AppendToString(&histogram_name);
-  UmaHistogramSparse(histogram_name, error);
-}
 
 // Deletes all files and directories in a path.
 // Returns ERROR_SUCCESS on success or the Windows error code corresponding to
@@ -344,12 +281,7 @@ bool DeleteFile(const FilePath& path, bool recursive) {
   // current code so that any improvements or regressions resulting from
   // subsequent code changes can be detected.
   const DWORD error = DoDeleteFile(path, recursive);
-  RecordPostOperationState(path, operation, error == ERROR_SUCCESS);
-  if (error == ERROR_SUCCESS)
-    return true;
-
-  RecordFilesystemError(operation, error);
-  return false;
+  return error == ERROR_SUCCESS;
 }
 
 bool DeleteFileAfterReboot(const FilePath& path) {
@@ -457,84 +389,6 @@ FilePath GetHomeDir() {
 
   // Last resort.
   return FilePath(L"C:\\");
-}
-
-bool CreateTemporaryFile(FilePath* path) {
-  AssertBlockingAllowed();
-
-  FilePath temp_file;
-
-  if (!GetTempDir(path))
-    return false;
-
-  if (CreateTemporaryFileInDir(*path, &temp_file)) {
-    *path = temp_file;
-    return true;
-  }
-
-  return false;
-}
-
-// On POSIX we have semantics to create and open a temporary file
-// atomically.
-// TODO(jrg): is there equivalent call to use on Windows instead of
-// going 2-step?
-FILE* CreateAndOpenTemporaryFileInDir(const FilePath& dir, FilePath* path) {
-  AssertBlockingAllowed();
-  if (!CreateTemporaryFileInDir(dir, path)) {
-    return NULL;
-  }
-  // Open file in binary mode, to avoid problems with fwrite. On Windows
-  // it replaces \n's with \r\n's, which may surprise you.
-  // Reference: http://msdn.microsoft.com/en-us/library/h9t88zwz(VS.71).aspx
-  return OpenFile(*path, "wb+");
-}
-
-bool CreateTemporaryFileInDir(const FilePath& dir, FilePath* temp_file) {
-  AssertBlockingAllowed();
-
-  // Use GUID instead of ::GetTempFileName() to generate unique file names.
-  // "Due to the algorithm used to generate file names, GetTempFileName can
-  // perform poorly when creating a large number of files with the same prefix.
-  // In such cases, it is recommended that you construct unique file names based
-  // on GUIDs."
-  // https://msdn.microsoft.com/library/windows/desktop/aa364991.aspx
-
-  FilePath temp_name;
-  bool create_file_success = false;
-
-  // Although it is nearly impossible to get a duplicate name with GUID, we
-  // still use a loop here in case it happens.
-  for (int i = 0; i < 100; ++i) {
-    temp_name = dir.Append(ASCIIToUTF16(base::GenerateGUID()) + L".tmp");
-    File file(temp_name,
-              File::FLAG_CREATE | File::FLAG_READ | File::FLAG_WRITE);
-    if (file.IsValid()) {
-      file.Close();
-      create_file_success = true;
-      break;
-    }
-  }
-
-  if (!create_file_success) {
-    DPLOG(WARNING) << "Failed to get temporary file name in "
-                   << UTF16ToUTF8(dir.value());
-    return false;
-  }
-
-  wchar_t long_temp_name[MAX_PATH + 1];
-  DWORD long_name_len =
-      GetLongPathName(temp_name.value().c_str(), long_temp_name, MAX_PATH);
-  if (long_name_len > MAX_PATH || long_name_len == 0) {
-    // GetLongPathName() failed, but we still have a temporary file.
-    *temp_file = std::move(temp_name);
-    return true;
-  }
-
-  FilePath::StringType long_temp_name_str;
-  long_temp_name_str.assign(long_temp_name, long_name_len);
-  *temp_file = FilePath(std::move(long_temp_name_str));
-  return true;
 }
 
 bool CreateTemporaryDirInDir(const FilePath& base_dir,
