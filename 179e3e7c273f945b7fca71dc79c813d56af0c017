@@ -1,0 +1,107 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "836a20b1_eb4fd61b",
+        "filename": "infra/recipes/gn.py",
+        "patchSetId": 7
+      },
+      "lineNbr": 16,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2018-06-14T08:36:57Z",
+      "side": 1,
+      "message": "Nit: sort imports alphabetically.",
+      "revId": "179e3e7c273f945b7fca71dc79c813d56af0c017",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "335aa3a9_89366239",
+        "filename": "infra/recipes/gn.py",
+        "patchSetId": 7
+      },
+      "lineNbr": 72,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2018-06-14T08:36:57Z",
+      "side": 1,
+      "message": "win_sdk",
+      "range": {
+        "startLine": 72,
+        "startChar": 31,
+        "endLine": 72,
+        "endChar": 37
+      },
+      "revId": "179e3e7c273f945b7fca71dc79c813d56af0c017",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "a94ba97c_bd342f30",
+        "filename": "infra/recipes/gn.py",
+        "patchSetId": 7
+      },
+      "lineNbr": 73,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2018-06-14T08:36:57Z",
+      "side": 1,
+      "message": "This can be just api.json.read(...).",
+      "range": {
+        "startLine": 73,
+        "startChar": 10,
+        "endLine": 73,
+        "endChar": 43
+      },
+      "revId": "179e3e7c273f945b7fca71dc79c813d56af0c017",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "eab2ee9c_8740a9fc",
+        "filename": "infra/recipes/gn.py",
+        "patchSetId": 7
+      },
+      "lineNbr": 97,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2018-06-14T08:36:57Z",
+      "side": 1,
+      "message": "We should probably use env_prefixes on Windows because we don\u0027t want to override variables like PATH (env_prefixes just prepends items).",
+      "revId": "179e3e7c273f945b7fca71dc79c813d56af0c017",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "29c3e0fd_a72ee9ed",
+        "filename": "infra/recipes/gn.py",
+        "patchSetId": 7
+      },
+      "lineNbr": 133,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2018-06-14T08:36:57Z",
+      "side": 1,
+      "message": "We may not need all of these for the test.",
+      "range": {
+        "startLine": 129,
+        "startChar": 4,
+        "endLine": 133,
+        "endChar": 145
+      },
+      "revId": "179e3e7c273f945b7fca71dc79c813d56af0c017",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": true
+    }
+  ]
+}
