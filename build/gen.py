@@ -225,7 +225,6 @@ def write_gn_ninja(path, options):
 
   static_libraries = {
       'base': {'sources': [
-        'base/callback_helpers.cc',
         'base/callback_internal.cc',
         'base/command_line.cc',
         'base/environment.cc',
