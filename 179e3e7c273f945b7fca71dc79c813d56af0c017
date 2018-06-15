@@ -184,6 +184,24 @@
     },
     {
       "key": {
+        "uuid": "2f0e3877_af3f9bb4",
+        "filename": "infra/recipes/gn.py",
+        "patchSetId": 7
+      },
+      "lineNbr": 97,
+      "author": {
+        "id": 1000004
+      },
+      "writtenOn": "2018-06-15T22:00:32Z",
+      "side": 1,
+      "message": "OK. It just seems wrong though, don\u0027t you think? (or maybe I\u0027m misunderstanding what env_prefixes does). e.g. VSINSTALLDIR isn\u0027t meant to be a list of things, in the case where some Windows image does have VS installed. I could see doing it for INCLUDE and LIB though I suppose.",
+      "parentUuid": "f0091962_b5c66ae8",
+      "revId": "179e3e7c273f945b7fca71dc79c813d56af0c017",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "29c3e0fd_a72ee9ed",
         "filename": "infra/recipes/gn.py",
         "patchSetId": 7
