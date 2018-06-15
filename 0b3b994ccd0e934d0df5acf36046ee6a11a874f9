@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "8d0635ec_23d7aeb1",
+        "filename": "src/worker_pool.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 48,
+      "author": {
+        "id": 1000004
+      },
+      "writtenOn": "2018-06-15T22:07:45Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "a78fb673_0f706777",
+      "revId": "0b3b994ccd0e934d0df5acf36046ee6a11a874f9",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "2ee67770_1f109ff1",
         "filename": "src/worker_pool.cc",
         "patchSetId": 2
@@ -33,6 +51,24 @@
       "revId": "0b3b994ccd0e934d0df5acf36046ee6a11a874f9",
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "045c88ae_7e166963",
+        "filename": "src/worker_pool.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 51,
+      "author": {
+        "id": 1000004
+      },
+      "writtenOn": "2018-06-15T22:07:45Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "2ee67770_1f109ff1",
+      "revId": "0b3b994ccd0e934d0df5acf36046ee6a11a874f9",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": false
     },
     {
       "key": {
@@ -53,6 +89,24 @@
     },
     {
       "key": {
+        "uuid": "907f05a0_666391bc",
+        "filename": "src/worker_pool.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 63,
+      "author": {
+        "id": 1000004
+      },
+      "writtenOn": "2018-06-15T22:07:45Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "7e833885_32713bad",
+      "revId": "0b3b994ccd0e934d0df5acf36046ee6a11a874f9",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "9976eda2_58fede1c",
         "filename": "src/worker_pool.cc",
         "patchSetId": 2
@@ -64,6 +118,24 @@
       "writtenOn": "2018-06-15T19:53:52Z",
       "side": 1,
       "message": "Do we need to check for joinable? I thought we should have a good idea what the status of these threads are.",
+      "revId": "0b3b994ccd0e934d0df5acf36046ee6a11a874f9",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "25bb0bbe_82dfdc2c",
+        "filename": "src/worker_pool.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 64,
+      "author": {
+        "id": 1000004
+      },
+      "writtenOn": "2018-06-15T22:07:45Z",
+      "side": 1,
+      "message": "Yeah, you\u0027re right, I had that in there when I was writing/debugging, but it\u0027s not necessary because the whole vector is just ::Worker().",
+      "parentUuid": "9976eda2_58fede1c",
       "revId": "0b3b994ccd0e934d0df5acf36046ee6a11a874f9",
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
       "unresolved": true
