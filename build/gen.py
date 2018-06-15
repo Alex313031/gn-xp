@@ -548,8 +548,6 @@ def write_gn_ninja(path, options):
         'base/time/time_win.cc',
         'base/win/core_winrt_util.cc',
         'base/win/enum_variant.cc',
-        'base/win/event_trace_controller.cc',
-        'base/win/event_trace_provider.cc',
         'base/win/iat_patch_function.cc',
         'base/win/iunknown_impl.cc',
         'base/win/pe_image.cc',
