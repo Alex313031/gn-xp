@@ -166,6 +166,24 @@
     },
     {
       "key": {
+        "uuid": "f0091962_b5c66ae8",
+        "filename": "infra/recipes/gn.py",
+        "patchSetId": 7
+      },
+      "lineNbr": 97,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2018-06-15T21:52:37Z",
+      "side": 1,
+      "message": "I dropped everything into env_prefixes on the third_party bot and it seems to be working as well since these variables aren\u0027t set by default.",
+      "parentUuid": "b9466eab_240ffcf8",
+      "revId": "179e3e7c273f945b7fca71dc79c813d56af0c017",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "29c3e0fd_a72ee9ed",
         "filename": "infra/recipes/gn.py",
         "patchSetId": 7
