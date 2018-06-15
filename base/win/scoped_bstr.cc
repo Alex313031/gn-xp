@@ -12,8 +12,7 @@ namespace base {
 namespace win {
 
 ScopedBstr::ScopedBstr(const char16* non_bstr)
-    : bstr_(SysAllocString(non_bstr)) {
-}
+    : bstr_(SysAllocString(non_bstr)) {}
 
 ScopedBstr::~ScopedBstr() {
   static_assert(sizeof(ScopedBstr) == sizeof(BSTR), "ScopedBstrSize");

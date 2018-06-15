@@ -5,9 +5,9 @@
 #ifndef BASE_WIN_SCOPED_BSTR_H_
 #define BASE_WIN_SCOPED_BSTR_H_
 
-#include <windows.h>
 #include <oleauto.h>
 #include <stddef.h>
+#include <windows.h>
 
 #include "base/logging.h"
 #include "base/macros.h"
@@ -20,8 +20,7 @@ namespace win {
 // The class interface is based on unique_ptr.
 class ScopedBstr {
  public:
-  ScopedBstr() : bstr_(NULL) {
-  }
+  ScopedBstr() : bstr_(NULL) {}
 
   // Constructor to create a new BSTR.
   //
@@ -77,9 +76,7 @@ class ScopedBstr {
   // Returns the number of bytes allocated for the BSTR.
   size_t ByteLength() const;
 
-  operator BSTR() const {
-    return bstr_;
-  }
+  operator BSTR() const { return bstr_; }
 
  protected:
   BSTR bstr_;
