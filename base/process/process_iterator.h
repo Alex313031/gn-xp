@@ -19,8 +19,8 @@
 #include "build_config.h"
 
 #if defined(OS_WIN)
-#include <windows.h>
 #include <tlhelp32.h>
+#include <windows.h>
 #elif defined(OS_MACOSX) || defined(OS_OPENBSD)
 #include <sys/sysctl.h>
 #elif defined(OS_POSIX) || defined(OS_FUCHSIA)
@@ -141,7 +141,7 @@ class NamedProcessIterator : public ProcessIterator {
 // given executable name.  If filter is non-null, then only processes selected
 // by the filter will be counted.
 int GetProcessCount(const FilePath::StringType& executable_name,
-                                const ProcessFilter* filter);
+                    const ProcessFilter* filter);
 
 }  // namespace base
 
