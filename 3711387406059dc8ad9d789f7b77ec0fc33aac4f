@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "a5d779cb_f48ce351",
+        "filename": "infra/recipes/gn.py",
+        "patchSetId": 2
+      },
+      "lineNbr": 134,
+      "author": {
+        "id": 1000006
+      },
+      "writtenOn": "2018-06-15T23:38:46Z",
+      "side": 1,
+      "message": "This will be copy-pasted everywhere where winsdk is used (as we already copy-paste SetEnv.x64.json part). I think we need to create a recipe module somewhere that hides this, e.g.\n\nwith api.winsdk():\n  ...\n(or something)\n\n(It would fetch the SDK, setup environ, and then cleanup in \u0027finally\u0027).\n\nIt\u0027s not clear where to put this recipe module though...",
+      "range": {
+        "startLine": 130,
+        "startChar": 8,
+        "endLine": 134,
+        "endChar": 71
+      },
+      "revId": "3711387406059dc8ad9d789f7b77ec0fc33aac4f",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": true
+    }
+  ]
+}
