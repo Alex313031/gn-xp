@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "5c59fc71_351e4271",
+        "filename": "infra/recipes/gn.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 129,
+      "author": {
+        "id": 1000004
+      },
+      "writtenOn": "2018-06-15T23:00:24Z",
+      "side": 0,
+      "message": "I fixed the unittests requiring the cwd to be set a couple days ago, so this one can go now.",
+      "range": {
+        "startLine": 129,
+        "startChar": 6,
+        "endLine": 129,
+        "endChar": 36
+      },
+      "revId": "233336802ddabf29e15b9c5b33305cc4f368c608",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": true
+    }
+  ]
+}
