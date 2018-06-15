@@ -5,8 +5,8 @@
 #ifndef BASE_WIN_WAIT_CHAIN_H_
 #define BASE_WIN_WAIT_CHAIN_H_
 
-#include <windows.h>
 #include <wct.h>
+#include <windows.h>
 
 #include <vector>
 
@@ -29,14 +29,13 @@ using WaitChainNodeVector = std::vector<WAITCHAIN_NODE_INFO>;
 // TODO(pmonette): Remove |failure_reason| and |last_error| when UMA is
 // supported in the watcher process and pre-rendez-vous.
 bool GetThreadWaitChain(DWORD thread_id,
-                                    WaitChainNodeVector* wait_chain,
-                                    bool* is_deadlock,
-                                    base::string16* failure_reason,
-                                    DWORD* last_error);
+                        WaitChainNodeVector* wait_chain,
+                        bool* is_deadlock,
+                        base::string16* failure_reason,
+                        DWORD* last_error);
 
 // Returns a string that represents the node for a wait chain.
-base::string16 WaitChainNodeToString(
-    const WAITCHAIN_NODE_INFO& node);
+base::string16 WaitChainNodeToString(const WAITCHAIN_NODE_INFO& node);
 
 }  // namespace win
 }  // namespace base
