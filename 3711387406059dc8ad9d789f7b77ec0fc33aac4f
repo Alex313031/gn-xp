@@ -22,6 +22,30 @@
       "revId": "3711387406059dc8ad9d789f7b77ec0fc33aac4f",
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "362b233e_c6e1da78",
+        "filename": "infra/recipes/gn.py",
+        "patchSetId": 2
+      },
+      "lineNbr": 134,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2018-06-15T23:45:01Z",
+      "side": 1,
+      "message": "That\u0027s a good point. Since this is very similar to what goma does (setup environment, start \u0026 stop some processes), wherever that goes goma should probably go there as well. Ideally we would have same place for shared recipes other than recipes-py? We could move other LUCI specific recipe modules (buildbucket, scheduler) there as well.",
+      "parentUuid": "a5d779cb_f48ce351",
+      "range": {
+        "startLine": 130,
+        "startChar": 8,
+        "endLine": 134,
+        "endChar": 71
+      },
+      "revId": "3711387406059dc8ad9d789f7b77ec0fc33aac4f",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": true
     }
   ]
 }
