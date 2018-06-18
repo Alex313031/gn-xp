@@ -263,6 +263,7 @@ def write_gn_ninja(path, options):
       'gn_lib': {'sources': [
         'src/exe_path.cc',
         'src/msg_loop.cc',
+        'src/sema.cc',
         'src/sys_info.cc',
         'src/worker_pool.cc',
         'tools/gn/action_target_generator.cc',
@@ -468,8 +469,6 @@ def write_gn_ninja(path, options):
         'base/posix/file_descriptor_shuffle.cc',
         'base/posix/safe_strerror.cc',
         'base/strings/string16.cc',
-        'base/synchronization/condition_variable_posix.cc',
-        'base/synchronization/lock_impl_posix.cc',
         'base/threading/platform_thread_posix.cc',
         'base/time/time_conversion_posix.cc',
     ])
@@ -477,8 +476,6 @@ def write_gn_ninja(path, options):
   if is_linux:
     static_libraries['base']['sources'].extend([
         'base/strings/sys_string_conversions_posix.cc',
-        'base/synchronization/waitable_event_posix.cc',
-        'base/time/time_exploded_posix.cc',
         'base/time/time_now_posix.cc',
         'base/threading/platform_thread_linux.cc',
     ])
@@ -501,8 +498,6 @@ def write_gn_ninja(path, options):
         'base/mac/scoped_mach_port.cc',
         'base/mac/scoped_nsautorelease_pool.mm',
         'base/strings/sys_string_conversions_mac.mm',
-        'base/synchronization/waitable_event_mac.cc',
-        'base/time/time_exploded_posix.cc',
         'base/time/time_mac.cc',
         'base/threading/platform_thread_mac.mm',
     ])
@@ -520,9 +515,6 @@ def write_gn_ninja(path, options):
         'base/files/file_util_win.cc',
         'base/files/file_win.cc',
         'base/strings/sys_string_conversions_win.cc',
-        'base/synchronization/condition_variable_win.cc',
-        'base/synchronization/lock_impl_win.cc',
-        'base/synchronization/waitable_event_win.cc',
         'base/threading/platform_thread_win.cc',
         'base/time/time_win.cc',
         'base/win/registry.cc',
