@@ -5,7 +5,9 @@
 #ifndef TOOLS_GN_HEADER_CHECKER_H_
 #define TOOLS_GN_HEADER_CHECKER_H_
 
+#include <condition_variable>
 #include <map>
+#include <mutex>
 #include <vector>
 
 #include "base/atomic_ref_count.h"
@@ -182,12 +184,12 @@ class HeaderChecker : public base::RefCountedThreadSafe<HeaderChecker> {
   //
   // These are mutable during runtime and require locking.
 
-  base::Lock lock_;
+  std::mutex lock_;
 
   std::vector<Err> errors_;
 
   // Signaled when |task_count_| becomes zero.
-  base::ConditionVariable task_count_cv_;
+  std::condition_variable task_count_cv_;
 
   DISALLOW_COPY_AND_ASSIGN(HeaderChecker);
 };
