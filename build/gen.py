@@ -268,6 +268,7 @@ def write_gn_ninja(path, options):
         'src/exe_path.cc',
         'src/msg_loop.cc',
         'src/sys_info.cc',
+        'src/ticks.cc',
         'src/worker_pool.cc',
         'tools/gn/action_target_generator.cc',
         'tools/gn/action_values.cc',
