@@ -11,8 +11,6 @@
 #include "base/command_line.h"
 #include "base/files/file_util.h"
 #include "base/logging.h"
-#include "base/process/kill.h"
-#include "base/process/process.h"
 #include "build_config.h"
 
 #if defined(OS_WIN)
@@ -23,6 +21,7 @@
 #else
 #include <errno.h>
 #include <fcntl.h>
+#include <sys/wait.h>
 #include <unistd.h>
 
 #include "base/posix/eintr_wrapper.h"
@@ -143,6 +142,24 @@ bool ReadFromPipe(int fd, std::string* output) {
   return true;
 }
 
+bool WaitForExit(int pid, int *exit_code) {
+  int status;
+  if (waitpid(pid, &status, 0) < 0) {
+    PLOG(ERROR) << "waitpid";
+    return false;
+  }
+
+  if (WIFEXITED(status)) {
+    *exit_code = WEXITSTATUS(status);
+    return true;
+  } else if (WIFSIGNALED(status)) {
+    if (WTERMSIG(status) == SIGINT || WTERMSIG(status) == SIGTERM
+        || WTERMSIG(status) == SIGHUP)
+      return false;
+  }
+  return false;
+}
+
 bool ExecProcess(const base::CommandLine& cmdline,
                  const base::FilePath& startup_dir,
                  std::string* std_out,
@@ -243,8 +260,7 @@ bool ExecProcess(const base::CommandLine& cmdline,
           err_open = ReadFromPipe(err_read.get(), std_err);
       }
 
-      base::Process process(pid);
-      return process.WaitForExit(exit_code);
+      return WaitForExit(pid, exit_code);
     }
   }
 
