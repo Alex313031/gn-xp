@@ -467,7 +467,7 @@ TimeTicks InitialNowFunction() {
   return g_time_ticks_now_ignoring_override_function();
 }
 
-}  // namespace base
+}  // namespace
 
 namespace subtle {
 TimeTicks TimeTicksNowIgnoringOverride() {
