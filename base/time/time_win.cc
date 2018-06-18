@@ -37,9 +37,10 @@
 #include <mmsystem.h>
 #include <stdint.h>
 
+#include <mutex>
+
 #include "base/bit_cast.h"
 #include "base/logging.h"
-#include "base/synchronization/lock.h"
 #include "base/threading/platform_thread.h"
 #include "base/time/time_override.h"
 
@@ -101,8 +102,8 @@ TimeDelta g_high_res_timer_usage;
 // is used to calculate the cumulative usage.
 TimeTicks g_high_res_timer_last_activation;
 // The lock to control access to the above two variables.
-Lock* GetHighResLock() {
-  static auto* lock = new Lock();
+std::mutex* GetHighResLock() {
+  static auto* lock = new std::mutex();
   return lock;
 }
 
@@ -190,7 +191,7 @@ FILETIME Time::ToFileTime() const {
 
 // static
 void Time::EnableHighResolutionTimer(bool enable) {
-  AutoLock lock(*GetHighResLock());
+  std::lock_guard<std::mutex> lock(*GetHighResLock());
   if (g_high_res_timer_enabled == enable)
     return;
   g_high_res_timer_enabled = enable;
@@ -217,7 +218,7 @@ bool Time::ActivateHighResolutionTimer(bool activating) {
   // called.
   const uint32_t max = std::numeric_limits<uint32_t>::max();
 
-  AutoLock lock(*GetHighResLock());
+  std::lock_guard<std::mutex> lock(*GetHighResLock());
   UINT period = g_high_res_timer_enabled ? kMinTimerIntervalHighResMs
                                          : kMinTimerIntervalLowResMs;
   if (activating) {
@@ -241,13 +242,13 @@ bool Time::ActivateHighResolutionTimer(bool activating) {
 
 // static
 bool Time::IsHighResolutionTimerInUse() {
-  AutoLock lock(*GetHighResLock());
+  std::lock_guard<std::mutex> lock(*GetHighResLock());
   return g_high_res_timer_enabled && g_high_res_timer_count > 0;
 }
 
 // static
 void Time::ResetHighResolutionTimerUsage() {
-  AutoLock lock(*GetHighResLock());
+  std::lock_guard<std::mutex> lock(*GetHighResLock());
   g_high_res_timer_usage = TimeDelta();
   g_high_res_timer_usage_start = subtle::TimeTicksNowIgnoringOverride();
   if (g_high_res_timer_count > 0)
@@ -256,7 +257,7 @@ void Time::ResetHighResolutionTimerUsage() {
 
 // static
 double Time::GetHighResolutionTimerUsage() {
-  AutoLock lock(*GetHighResLock());
+  std::lock_guard<std::mutex> lock(*GetHighResLock());
   TimeTicks now = subtle::TimeTicksNowIgnoringOverride();
   TimeDelta elapsed_time = now - g_high_res_timer_usage_start;
   if (elapsed_time.is_zero()) {
@@ -467,7 +468,7 @@ TimeTicks InitialNowFunction() {
   return g_time_ticks_now_ignoring_override_function();
 }
 
-}  // namespace base
+}  // namespace
 
 namespace subtle {
 TimeTicks TimeTicksNowIgnoringOverride() {
