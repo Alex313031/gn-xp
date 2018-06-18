@@ -6,8 +6,8 @@
 #define TOOLS_GN_TEST_WITH_SCHEDULER_H_
 
 #include "base/macros.h"
-#include "msg_loop.h"
-#include "test/test.h"
+#include "util/msg_loop.h"
+#include "util/test/test.h"
 #include "tools/gn/scheduler.h"
 
 class TestWithScheduler : public testing::Test {

@@ -3,7 +3,7 @@
 // found in the LICENSE file.
 
 #include "tools/gn/builder.h"
-#include "test/test.h"
+#include "util/test/test.h"
 #include "tools/gn/config.h"
 #include "tools/gn/loader.h"
 #include "tools/gn/target.h"

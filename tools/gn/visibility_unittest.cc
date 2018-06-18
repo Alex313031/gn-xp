@@ -3,7 +3,7 @@
 // found in the LICENSE file.
 
 #include "tools/gn/visibility.h"
-#include "test/test.h"
+#include "util/test/test.h"
 #include "tools/gn/err.h"
 #include "tools/gn/label.h"
 #include "tools/gn/scope.h"

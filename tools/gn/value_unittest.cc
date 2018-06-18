@@ -4,7 +4,7 @@
 
 #include <stdint.h>
 
-#include "test/test.h"
+#include "util/test/test.h"
 #include "tools/gn/test_with_scope.h"
 #include "tools/gn/value.h"
 

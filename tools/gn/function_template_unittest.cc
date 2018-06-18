@@ -2,7 +2,7 @@
 // Use of this source code is governed by a BSD-style license that can be
 // found in the LICENSE file.
 
-#include "test/test.h"
+#include "util/test/test.h"
 #include "tools/gn/test_with_scope.h"
 
 // Checks that variables used inside template definitions aren't reported

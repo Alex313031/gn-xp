@@ -13,8 +13,8 @@
 #include "base/strings/string_piece.h"
 #include "base/strings/string_split.h"
 #include "base/strings/string_util.h"
-#include "build_config.h"
 #include "tools/gn/switches.h"
+#include "util/build_config.h"
 
 #if defined(OS_WIN)
 #include <windows.h>

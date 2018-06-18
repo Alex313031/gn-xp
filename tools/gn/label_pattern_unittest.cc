@@ -5,7 +5,7 @@
 #include <stddef.h>
 
 #include "base/macros.h"
-#include "test/test.h"
+#include "util/test/test.h"
 #include "tools/gn/err.h"
 #include "tools/gn/label_pattern.h"
 #include "tools/gn/value.h"

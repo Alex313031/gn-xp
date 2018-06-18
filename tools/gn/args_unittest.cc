@@ -4,7 +4,7 @@
 
 #include "tools/gn/args.h"
 
-#include "test/test.h"
+#include "util/test/test.h"
 #include "tools/gn/scheduler.h"
 #include "tools/gn/test_with_scope.h"
 

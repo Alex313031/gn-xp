@@ -4,7 +4,7 @@
 
 #include <sstream>
 
-#include "test/test.h"
+#include "util/test/test.h"
 #include "tools/gn/ninja_action_target_writer.h"
 #include "tools/gn/ninja_target_writer.h"
 #include "tools/gn/target.h"

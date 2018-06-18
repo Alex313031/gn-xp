@@ -7,7 +7,7 @@
 #include <memory>
 #include <utility>
 
-#include "test/test.h"
+#include "util/test/test.h"
 #include "tools/gn/build_settings.h"
 #include "tools/gn/config.h"
 #include "tools/gn/scheduler.h"

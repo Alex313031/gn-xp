@@ -4,8 +4,8 @@
 
 #include <sstream>
 
-#include "build_config.h"
-#include "test/test.h"
+#include "util/build_config.h"
+#include "util/test/test.h"
 #include "tools/gn/err.h"
 #include "tools/gn/escape.h"
 #include "tools/gn/substitution_list.h"
