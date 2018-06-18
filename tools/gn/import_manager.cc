@@ -82,7 +82,7 @@ bool ImportManager::DoImport(const SourceFile& file,
   // copying outside of the lock.
   ImportInfo* import_info = nullptr;
   {
-    base::AutoLock lock(imports_lock_);
+    std::lock_guard<std::mutex> lock(imports_lock_);
     std::unique_ptr<ImportInfo>& info_ptr = imports_[file];
     if (!info_ptr)
       info_ptr = std::make_unique<ImportInfo>();
@@ -140,7 +140,7 @@ bool ImportManager::DoImport(const SourceFile& file,
   options.mark_dest_used = true;  // Don't require all imported values be used.
 
   {
-    base::AutoLock lock(imports_lock_);
+    std::lock_guard<std::mutex> lock(imports_lock_);
     imports_in_progress_.erase(key);
   }
 
