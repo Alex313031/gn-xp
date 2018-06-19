@@ -6,11 +6,11 @@
 
 #include <algorithm>
 
-#include "base/files/file_util.h"
 #include "base/logging.h"
 #include "base/strings/string_util.h"
 #include "base/strings/utf_string_conversions.h"
 #include "build_config.h"
+#include "file_util.h"
 #include "tools/gn/location.h"
 #include "tools/gn/settings.h"
 #include "tools/gn/source_dir.h"
@@ -869,7 +869,7 @@ SourceDir SourceDirForPath(const base::FilePath& source_root,
 
 SourceDir SourceDirForCurrentDirectory(const base::FilePath& source_root) {
   base::FilePath cd;
-  base::GetCurrentDirectory(&cd);
+  GetCurrentDirectory(&cd);
   return SourceDirForPath(source_root, cd);
 }
 
@@ -887,14 +887,14 @@ bool ContentsEqual(const base::FilePath& file_path, const std::string& data) {
   // Compare file and stream sizes first. Quick and will save us some time if
   // they are different sizes.
   int64_t file_size;
-  if (!base::GetFileSize(file_path, &file_size) ||
+  if (!GetFileSize(file_path, &file_size) ||
       static_cast<size_t>(file_size) != data.size()) {
     return false;
   }
 
   std::string file_data;
   file_data.resize(file_size);
-  if (!base::ReadFileToString(file_path, &file_data))
+  if (!ReadFileToString(file_path, &file_data))
     return false;
 
   return file_data == data;
@@ -913,7 +913,7 @@ bool WriteFile(const base::FilePath& file_path,
                const std::string& data,
                Err* err) {
   // Create the directory if necessary.
-  if (!base::CreateDirectory(file_path.DirName())) {
+  if (!CreateDirectory(file_path.DirName())) {
     if (err) {
       *err =
           Err(Location(), "Unable to create directory.",
@@ -958,7 +958,7 @@ bool WriteFile(const base::FilePath& file_path,
                 << base::UTF16ToUTF8(file_path.value());
   }
 #else
-  write_success = base::WriteFile(file_path, data.c_str(), size) == size;
+  write_success = WriteFile(file_path, data.c_str(), size) == size;
 #endif
 
   if (!write_success && err) {

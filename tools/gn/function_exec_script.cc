@@ -3,12 +3,11 @@
 // found in the LICENSE file.
 
 #include "base/command_line.h"
-#include "base/files/file_util.h"
 #include "base/logging.h"
 #include "base/strings/string_number_conversions.h"
 #include "base/strings/utf_string_conversions.h"
-#include "base/time/time.h"
 #include "build_config.h"
+#include "file_util.h"
 #include "tools/gn/err.h"
 #include "tools/gn/exec_process.h"
 #include "tools/gn/filesystem_utils.h"
@@ -142,7 +141,7 @@ Value RunExecScript(Scope* scope,
   base::FilePath script_path =
       build_settings->GetFullPath(script_source_path, true);
   if (!build_settings->secondary_source_path().empty() &&
-      !base::PathExists(script_path)) {
+      !PathExists(script_path)) {
     // Fall back to secondary source root when the file doesn't exist.
     script_path =
         build_settings->GetFullPathSecondary(script_source_path, true);
@@ -198,7 +197,7 @@ Value RunExecScript(Scope* scope,
 
   // Log command line for debugging help.
   trace.SetCommandLine(cmdline);
-  base::TimeTicks begin_exec;
+  Ticks begin_exec;
   if (g_scheduler->verbose_logging()) {
 #if defined(OS_WIN)
     g_scheduler->Log("Pythoning",
@@ -206,7 +205,7 @@ Value RunExecScript(Scope* scope,
 #else
     g_scheduler->Log("Pythoning", cmdline.GetCommandLineString());
 #endif
-    begin_exec = base::TimeTicks::Now();
+    begin_exec = TicksNow();
   }
 
   base::FilePath startup_dir =
@@ -218,7 +217,7 @@ Value RunExecScript(Scope* scope,
   //
   // If this shows up on benchmarks, we can cache whether we've done this
   // or not and skip creating the directory.
-  base::CreateDirectory(startup_dir);
+  CreateDirectory(startup_dir);
 
   // Execute the process.
   // TODO(brettw) set the environment block.
@@ -239,7 +238,7 @@ Value RunExecScript(Scope* scope,
         "Pythoning",
         script_source_path + " took " +
             base::Int64ToString(
-                (base::TimeTicks::Now() - begin_exec).InMilliseconds()) +
+                TicksDelta(TicksNow(), begin_exec).InMilliseconds()) +
             "ms");
   }
 

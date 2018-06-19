@@ -6,8 +6,8 @@
 
 #include <algorithm>
 
-#include "base/time/time.h"
 #include "test/test.h"
+#include "ticks.h"
 #include "tools/gn/unique_vector.h"
 
 TEST(UniqueVector, PushBack) {

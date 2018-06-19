@@ -8,9 +8,9 @@
 #include <set>
 
 #include "base/command_line.h"
-#include "base/files/file_util.h"
 #include "base/strings/string_split.h"
 #include "base/strings/string_util.h"
+#include "file_util.h"
 #include "tools/gn/commands.h"
 #include "tools/gn/config_values_extractors.h"
 #include "tools/gn/deps_iterator.h"
@@ -418,7 +418,7 @@ int RunRefs(const std::vector<std::string>& args) {
       // The argument is as a path to a response file.
       std::string contents;
       bool ret =
-          base::ReadFileToString(UTF8ToFilePath(args[i].substr(1)), &contents);
+          ReadFileToString(UTF8ToFilePath(args[i].substr(1)), &contents);
       if (!ret) {
         Err(Location(), "Response file " + args[i].substr(1) + " not found.")
             .PrintToStdout();

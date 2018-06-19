@@ -12,11 +12,11 @@
 #include <unordered_set>
 
 #include "base/command_line.h"
-#include "base/files/file_util.h"
 #include "base/strings/string_util.h"
 #include "base/strings/utf_string_conversions.h"
 #include "build_config.h"
 #include "exe_path.h"
+#include "file_util.h"
 #include "tools/gn/build_settings.h"
 #include "tools/gn/builder.h"
 #include "tools/gn/err.h"
@@ -232,10 +232,10 @@ bool NinjaBuildWriter::RunAndWriteFile(const BuildSettings* build_settings,
   // if the contents haven't been changed.
   base::FilePath ninja_file_name(build_settings->GetFullPath(
       SourceFile(build_settings->build_dir().value() + "build.ninja")));
-  base::CreateDirectory(ninja_file_name.DirName());
+  CreateDirectory(ninja_file_name.DirName());
   std::string ninja_contents = file.str();
-  if (base::WriteFile(ninja_file_name, ninja_contents.data(),
-                      static_cast<int>(ninja_contents.size())) !=
+  if (WriteFile(ninja_file_name, ninja_contents.data(),
+                static_cast<int>(ninja_contents.size())) !=
       static_cast<int>(ninja_contents.size()))
     return false;
 
@@ -243,8 +243,8 @@ bool NinjaBuildWriter::RunAndWriteFile(const BuildSettings* build_settings,
   base::FilePath dep_file_name(build_settings->GetFullPath(
       SourceFile(build_settings->build_dir().value() + "build.ninja.d")));
   std::string dep_contents = depfile.str();
-  if (base::WriteFile(dep_file_name, dep_contents.data(),
-                      static_cast<int>(dep_contents.size())) !=
+  if (WriteFile(dep_file_name, dep_contents.data(),
+                static_cast<int>(dep_contents.size())) !=
       static_cast<int>(dep_contents.size()))
     return false;
 

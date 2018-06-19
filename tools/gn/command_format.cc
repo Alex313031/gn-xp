@@ -9,10 +9,10 @@
 #include <sstream>
 
 #include "base/command_line.h"
-#include "base/files/file_util.h"
 #include "base/macros.h"
 #include "base/strings/string_split.h"
 #include "base/strings/string_util.h"
+#include "file_util.h"
 #include "tools/gn/commands.h"
 #include "tools/gn/filesystem_utils.h"
 #include "tools/gn/input_file.h"
@@ -1080,7 +1080,7 @@ int RunFormat(const std::vector<std::string>& args) {
       // Update the file in-place.
       base::FilePath to_write = setup.build_settings().GetFullPath(file);
       std::string original_contents;
-      if (!base::ReadFileToString(to_write, &original_contents)) {
+      if (!ReadFileToString(to_write, &original_contents)) {
         Err(Location(), std::string("Couldn't read \"") +
                             to_write.AsUTF8Unsafe() +
                             std::string("\" for comparison."))
@@ -1090,8 +1090,8 @@ int RunFormat(const std::vector<std::string>& args) {
       if (dry_run)
         return original_contents == output_string ? 0 : 2;
       if (original_contents != output_string) {
-        if (base::WriteFile(to_write, output_string.data(),
-                            static_cast<int>(output_string.size())) == -1) {
+        if (WriteFile(to_write, output_string.data(),
+                      static_cast<int>(output_string.size())) == -1) {
           Err(Location(),
               std::string("Failed to write formatted output back to \"") +
                   to_write.AsUTF8Unsafe() + std::string("\"."))

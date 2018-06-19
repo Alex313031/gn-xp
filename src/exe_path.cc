@@ -4,10 +4,10 @@
 
 #include "exe_path.h"
 
-#include "base/files/file_util.h"
 #include "base/logging.h"
 #include "base/strings/string_util.h"
 #include "build_config.h"
+#include "file_util.h"
 
 #if defined(OS_MACOSX)
 #include <mach-o/dyld.h>

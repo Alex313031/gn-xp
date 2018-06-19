@@ -6,7 +6,6 @@
 
 #include <utility>
 
-#include "base/files/file_util.h"
 #include "tools/gn/filesystem_utils.h"
 
 BuildSettings::BuildSettings() = default;

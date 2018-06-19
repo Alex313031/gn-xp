@@ -2,12 +2,11 @@
 // Use of this source code is governed by a BSD-style license that can be
 // found in the LICENSE file.
 
-#include "base/files/file_enumerator.h"
 #include "base/files/file_path.h"
-#include "base/files/file_util.h"
 #include "base/strings/string_split.h"
 #include "base/strings/string_util.h"
 #include "base/strings/stringprintf.h"
+#include "file_util.h"
 #include "tools/gn/commands.h"
 #include "tools/gn/err.h"
 #include "tools/gn/filesystem_utils.h"
@@ -24,7 +23,7 @@ namespace {
 // On error, returns the empty string.
 std::string ExtractGNBuildCommands(const base::FilePath& build_ninja_file) {
   std::string file_contents;
-  if (!base::ReadFileToString(build_ninja_file, &file_contents))
+  if (!ReadFileToString(build_ninja_file, &file_contents))
     return std::string();
 
   std::vector<base::StringPiece> lines = base::SplitStringPiece(
@@ -73,7 +72,7 @@ int RunClean(const std::vector<std::string>& args) {
   // NOTE: Not all GN builds have args.gn file hence we check here
   // if a build.ninja.d files exists instead.
   base::FilePath build_ninja_d_file = build_dir.AppendASCII("build.ninja.d");
-  if (!base::PathExists(build_ninja_d_file)) {
+  if (!PathExists(build_ninja_d_file)) {
     Err(Location(),
         base::StringPrintf(
             "%s does not look like a build directory.\n",
@@ -94,6 +93,9 @@ int RunClean(const std::vector<std::string>& args) {
     return 1;
   }
 
+  //// XXX XXX XXX
+  CHECK(false);
+#if 0
   base::FileEnumerator traversal(
       build_dir, false,
       base::FileEnumerator::FILES | base::FileEnumerator::DIRECTORIES);
@@ -104,10 +106,11 @@ int RunClean(const std::vector<std::string>& args) {
       base::DeleteFile(current, true);
     }
   }
+#endif
 
   // Write the build.ninja file sufficiently to regenerate itself.
-  if (base::WriteFile(build_ninja_file, build_commands.data(),
-                      static_cast<int>(build_commands.size())) == -1) {
+  if (WriteFile(build_ninja_file, build_commands.data(),
+                static_cast<int>(build_commands.size())) == -1) {
     Err(Location(), std::string("Failed to write build.ninja."))
         .PrintToStdout();
     return 1;
@@ -116,8 +119,8 @@ int RunClean(const std::vector<std::string>& args) {
   // Write a .d file for the build which references a nonexistant file.
   // This will make Ninja always mark the build as dirty.
   std::string dummy_content("build.ninja: nonexistant_file.gn\n");
-  if (base::WriteFile(build_ninja_d_file, dummy_content.data(),
-                      static_cast<int>(dummy_content.size())) == -1) {
+  if (WriteFile(build_ninja_d_file, dummy_content.data(),
+                static_cast<int>(dummy_content.size())) == -1) {
     Err(Location(), std::string("Failed to write build.ninja.d."))
         .PrintToStdout();
     return 1;

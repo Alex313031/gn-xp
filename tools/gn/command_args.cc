@@ -11,11 +11,11 @@
 
 #include "base/command_line.h"
 #include "base/environment.h"
-#include "base/files/file_util.h"
 #include "base/json/json_writer.h"
 #include "base/strings/string_number_conversions.h"
 #include "base/strings/string_util.h"
 #include "build_config.h"
+#include "file_util.h"
 #include "tools/gn/commands.h"
 #include "tools/gn/filesystem_utils.h"
 #include "tools/gn/input_file.h"
@@ -358,7 +358,7 @@ int EditArgsFile(const std::string& build_dir) {
     base::FilePath arg_file =
         build_settings.GetFullPath(setup.GetBuildArgFile())
             .NormalizePathSeparators();
-    if (!base::PathExists(arg_file)) {
+    if (!PathExists(arg_file)) {
       std::string argfile_default_contents =
           "# Build arguments go here.\n"
           "# See \"gn args <out_dir> --list\" for available build "
@@ -368,7 +368,7 @@ int EditArgsFile(const std::string& build_dir) {
       if (!template_path.is_null()) {
         base::FilePath full_path =
             build_settings.GetFullPath(template_path).NormalizePathSeparators();
-        if (!base::PathExists(full_path)) {
+        if (!PathExists(full_path)) {
           Err err =
               Err(Location(), std::string("Can't load arg_file_template:\n  ") +
                                   template_path.value());
@@ -378,7 +378,7 @@ int EditArgsFile(const std::string& build_dir) {
 
         // Ignore the return code; if the read fails (unlikely), we'll just
         // use the default contents.
-        base::ReadFileToString(full_path, &argfile_default_contents);
+        ReadFileToString(full_path, &argfile_default_contents);
       }
 #if defined(OS_WIN)
       // Use Windows lineendings for this file since it will often open in
@@ -386,9 +386,9 @@ int EditArgsFile(const std::string& build_dir) {
       base::ReplaceSubstringsAfterOffset(&argfile_default_contents, 0, "\n",
                                          "\r\n");
 #endif
-      base::CreateDirectory(arg_file.DirName());
-      base::WriteFile(arg_file, argfile_default_contents.c_str(),
-                      static_cast<int>(argfile_default_contents.size()));
+      CreateDirectory(arg_file.DirName());
+      WriteFile(arg_file, argfile_default_contents.c_str(),
+                static_cast<int>(argfile_default_contents.size()));
     }
 
     ScopedTrace editor_trace(TraceItem::TRACE_SETUP, "Waiting for editor");

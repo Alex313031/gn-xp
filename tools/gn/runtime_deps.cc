@@ -9,8 +9,8 @@
 #include <sstream>
 
 #include "base/command_line.h"
-#include "base/files/file_util.h"
 #include "base/strings/string_split.h"
+#include "file_util.h"
 #include "tools/gn/build_settings.h"
 #include "tools/gn/builder.h"
 #include "tools/gn/deps_iterator.h"
@@ -139,8 +139,8 @@ bool CollectRuntimeDepsFromFlag(const Builder& builder,
 
   std::string list_contents;
   ScopedTrace load_trace(TraceItem::TRACE_FILE_LOAD, deps_target_list_file);
-  if (!base::ReadFileToString(UTF8ToFilePath(deps_target_list_file),
-                              &list_contents)) {
+  if (!ReadFileToString(UTF8ToFilePath(deps_target_list_file),
+                        &list_contents)) {
     *err = Err(Location(),
                std::string("File for --") + switches::kRuntimeDepsListFile +
                    " doesn't exist.",

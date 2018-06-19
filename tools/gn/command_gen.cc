@@ -8,7 +8,7 @@
 #include "base/command_line.h"
 #include "base/strings/string_number_conversions.h"
 #include "base/strings/stringprintf.h"
-#include "base/timer/elapsed_timer.h"
+#include "ticks.h"
 #include "tools/gn/build_settings.h"
 #include "tools/gn/commands.h"
 #include "tools/gn/eclipse_writer.h"
@@ -187,7 +187,7 @@ bool RunIdeWriter(const std::string& ide,
   const base::CommandLine* command_line =
       base::CommandLine::ForCurrentProcess();
   bool quiet = command_line->HasSwitch(switches::kQuiet);
-  base::ElapsedTimer timer;
+  ElapsedTimer timer;
 
   if (ide == kSwitchIdeValueEclipse) {
     bool res = EclipseWriter::RunAndWriteFile(build_settings, builder, err);
@@ -393,7 +393,7 @@ Generic JSON Output
 )";
 
 int RunGen(const std::vector<std::string>& args) {
-  base::ElapsedTimer timer;
+  ElapsedTimer timer;
 
   if (args.size() != 1) {
     Err(Location(), "Need exactly one build directory to generate.",
@@ -455,7 +455,7 @@ int RunGen(const std::vector<std::string>& args) {
     return 1;
   }
 
-  base::TimeDelta elapsed_time = timer.Elapsed();
+  TickDelta elapsed_time = timer.Elapsed();
 
   if (!command_line->HasSwitch(switches::kQuiet)) {
     OutputString("Done. ", DECORATION_GREEN);

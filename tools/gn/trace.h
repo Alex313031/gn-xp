@@ -9,7 +9,7 @@
 #include <thread>
 
 #include "base/macros.h"
-#include "base/time/time.h"
+#include "ticks.h"
 
 class Label;
 
@@ -44,12 +44,12 @@ class TraceItem {
   const std::string& name() const { return name_; }
   std::thread::id thread_id() const { return thread_id_; }
 
-  base::TimeTicks begin() const { return begin_; }
-  void set_begin(base::TimeTicks b) { begin_ = b; }
-  base::TimeTicks end() const { return end_; }
-  void set_end(base::TimeTicks e) { end_ = e; }
+  Ticks begin() const { return begin_; }
+  void set_begin(Ticks b) { begin_ = b; }
+  Ticks end() const { return end_; }
+  void set_end(Ticks e) { end_ = e; }
 
-  base::TimeDelta delta() const { return end_ - begin_; }
+  TickDelta delta() const { return TicksDelta(end_, begin_); }
 
   // Optional toolchain label.
   const std::string& toolchain() const { return toolchain_; }
@@ -64,8 +64,8 @@ class TraceItem {
   std::string name_;
   std::thread::id thread_id_;
 
-  base::TimeTicks begin_;
-  base::TimeTicks end_;
+  Ticks begin_;
+  Ticks end_;
 
   std::string toolchain_;
   std::string cmdline_;

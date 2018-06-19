@@ -4,7 +4,7 @@
 
 #include "tools/gn/input_file.h"
 
-#include "base/files/file_util.h"
+#include "file_util.h"
 
 InputFile::InputFile(const SourceFile& name)
     : name_(name), dir_(name_.GetDir()), contents_loaded_(false) {}
@@ -17,7 +17,7 @@ void InputFile::SetContents(const std::string& c) {
 }
 
 bool InputFile::Load(const base::FilePath& system_path) {
-  if (base::ReadFileToString(system_path, &contents_)) {
+  if (ReadFileToString(system_path, &contents_)) {
     contents_loaded_ = true;
     physical_name_ = system_path;
     return true;

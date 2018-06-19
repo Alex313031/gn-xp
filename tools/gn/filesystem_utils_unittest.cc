@@ -7,11 +7,11 @@
 #include <thread>
 
 #include "base/files/file_path.h"
-#include "base/files/file_util.h"
 #include "base/files/scoped_temp_dir.h"
 #include "base/strings/string_util.h"
 #include "base/strings/utf_string_conversions.h"
 #include "build_config.h"
+#include "file_util.h"
 #include "test/test.h"
 #include "tools/gn/target.h"
 
@@ -622,7 +622,7 @@ TEST(FilesystemUtils, ContentsEqual) {
   std::string data = "foo";
 
   base::FilePath file_path = temp_dir.GetPath().AppendASCII("foo.txt");
-  base::WriteFile(file_path, data.c_str(), static_cast<int>(data.size()));
+  WriteFile(file_path, data.c_str(), static_cast<int>(data.size()));
 
   EXPECT_TRUE(ContentsEqual(file_path, data));
 
@@ -645,9 +645,8 @@ TEST(FilesystemUtils, WriteFileIfChanged) {
       temp_dir.GetPath().AppendASCII("bar").AppendASCII("foo.txt");
   EXPECT_TRUE(WriteFileIfChanged(file_path, data, nullptr));
 
-  base::File::Info file_info;
-  ASSERT_TRUE(base::GetFileInfo(file_path, &file_info));
-  base::Time last_modified = file_info.last_modified;
+  time_t mtime;
+  ASSERT_TRUE(GetLastModified(file_path, &mtime));
 
   {
     using namespace std::chrono_literals;
@@ -661,13 +660,14 @@ TEST(FilesystemUtils, WriteFileIfChanged) {
 
   // Don't write if contents is the same.
   EXPECT_TRUE(WriteFileIfChanged(file_path, data, nullptr));
-  ASSERT_TRUE(base::GetFileInfo(file_path, &file_info));
-  EXPECT_EQ(last_modified, file_info.last_modified);
+  time_t mtime2;
+  ASSERT_TRUE(GetLastModified(file_path, &mtime2));
+  EXPECT_EQ(mtime, mtime2);
 
   // Write if contents changed.
   EXPECT_TRUE(WriteFileIfChanged(file_path, "bar", nullptr));
   std::string file_data;
-  ASSERT_TRUE(base::ReadFileToString(file_path, &file_data));
+  ASSERT_TRUE(ReadFileToString(file_path, &file_data));
   EXPECT_EQ("bar", file_data);
 }
 

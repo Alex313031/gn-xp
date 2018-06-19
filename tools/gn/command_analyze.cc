@@ -8,7 +8,7 @@
 #include <vector>
 
 #include "base/files/file_path.h"
-#include "base/files/file_util.h"
+#include "file_util.h"
 #include "tools/gn/analyzer.h"
 #include "tools/gn/commands.h"
 #include "tools/gn/filesystem_utils.h"
@@ -100,7 +100,7 @@ int RunAnalyze(const std::vector<std::string>& args) {
   }
 
   std::string input;
-  bool ret = base::ReadFileToString(UTF8ToFilePath(args[1]), &input);
+  bool ret = ReadFileToString(UTF8ToFilePath(args[1]), &input);
   if (!ret) {
     Err(Location(), "Input file " + args[1] + " not found.").PrintToStdout();
     return 1;

@@ -2,7 +2,7 @@
 // Use of this source code is governed by a BSD-style license that can be
 // found in the LICENSE file.
 
-#include "base/files/file_util.h"
+#include "file_util.h"
 #include "tools/gn/err.h"
 #include "tools/gn/filesystem_utils.h"
 #include "tools/gn/functions.h"
@@ -65,7 +65,7 @@ Value RunReadFile(Scope* scope,
 
   // Read contents.
   std::string file_contents;
-  if (!base::ReadFileToString(file_path, &file_contents)) {
+  if (!ReadFileToString(file_path, &file_contents)) {
     *err = Err(args[0], "Could not read file.",
                "I resolved this to \"" + FilePathToUTF8(file_path) + "\".");
     return Value();

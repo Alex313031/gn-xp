@@ -9,9 +9,10 @@
 #include <memory>
 
 #include "base/command_line.h"
-#include "base/files/file_util.h"
+#include "base/files/scoped_file.h"
 #include "base/logging.h"
 #include "build_config.h"
+#include "file_util.h"
 
 #if defined(OS_WIN)
 #include <windows.h>
@@ -232,7 +233,7 @@ bool ExecProcess(const base::CommandLine& cmdline,
       if (!ShuffleFileDescriptors(&fd_shuffle1))
         _exit(127);
 
-      base::SetCurrentDirectory(startup_dir);
+      SetCurrentDirectory(startup_dir);
 
       // TODO(brettw) the base version GetAppOutput does a
       // CloseSuperfluousFds call here. Do we need this?

@@ -8,8 +8,8 @@
 
 #include "base/bind.h"
 #include "base/containers/queue.h"
-#include "base/files/file_util.h"
 #include "base/strings/string_util.h"
+#include "file_util.h"
 #include "tools/gn/build_settings.h"
 #include "tools/gn/builder.h"
 #include "tools/gn/c_include_iterator.h"
@@ -274,7 +274,7 @@ bool HeaderChecker::CheckFile(const Target* from_target,
 
   base::FilePath path = build_settings_->GetFullPath(file);
   std::string contents;
-  if (!base::ReadFileToString(path, &contents)) {
+  if (!ReadFileToString(path, &contents)) {
     *err =
         Err(from_target->defined_from(), "Source file not found.",
             "The target:\n  " + from_target->label().GetUserVisibleName(false) +

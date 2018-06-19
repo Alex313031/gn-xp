@@ -6,8 +6,8 @@
 
 #include <sstream>
 
-#include "base/files/file_util.h"
 #include "base/strings/string_util.h"
+#include "file_util.h"
 #include "tools/gn/config_values_extractors.h"
 #include "tools/gn/err.h"
 #include "tools/gn/escape.h"
@@ -96,7 +96,7 @@ std::string NinjaTargetWriter::RunAndWriteFile(const Target* target) {
     SourceFile ninja_file = GetNinjaFileForTarget(target);
     base::FilePath full_ninja_file =
         settings->build_settings()->GetFullPath(ninja_file);
-    base::CreateDirectory(full_ninja_file.DirName());
+    CreateDirectory(full_ninja_file.DirName());
     WriteFileIfChanged(full_ninja_file, rules.str(), nullptr);
 
     EscapeOptions options;

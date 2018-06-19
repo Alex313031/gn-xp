@@ -102,7 +102,7 @@ bool ImportManager::DoImport(const SourceFile& file,
   // is already processing the import.
   const Scope* import_scope = nullptr;
   {
-    base::TimeTicks import_block_begin = base::TimeTicks::Now();
+    Ticks import_block_begin = TicksNow();
     std::lock_guard<std::mutex> lock(import_info->load_lock);
 
     if (!import_info->scope) {
@@ -118,11 +118,11 @@ bool ImportManager::DoImport(const SourceFile& file,
     } else {
       // Add trace if this thread was blocked for a long period of time and did
       // not load the import itself.
-      base::TimeTicks import_block_end = base::TimeTicks::Now();
-      constexpr auto kImportBlockTraceThreshold =
-          base::TimeDelta::FromMilliseconds(20);
+      Ticks import_block_end = TicksNow();
+      constexpr auto kImportBlockTraceThresholdMS = 20;
       if (TracingEnabled() &&
-          import_block_end - import_block_begin > kImportBlockTraceThreshold) {
+          TicksDelta(import_block_end, import_block_begin).InMilliseconds() >
+              kImportBlockTraceThresholdMS) {
         auto* import_block_trace =
             new TraceItem(TraceItem::TRACE_IMPORT_BLOCK, file.value(),
                           std::this_thread::get_id());

@@ -6,8 +6,8 @@
 
 #include <fstream>
 
-#include "base/files/file_util.h"
 #include "base/strings/stringize_macros.h"
+#include "file_util.h"
 #include "tools/gn/build_settings.h"
 #include "tools/gn/filesystem_utils.h"
 #include "tools/gn/ninja_utils.h"
@@ -63,7 +63,7 @@ bool NinjaToolchainWriter::RunAndWriteFile(
       GetNinjaFileForToolchain(settings)));
   ScopedTrace trace(TraceItem::TRACE_FILE_WRITE, FilePathToUTF8(ninja_file));
 
-  base::CreateDirectory(ninja_file.DirName());
+  CreateDirectory(ninja_file.DirName());
 
   std::ofstream file;
   file.open(FilePathToUTF8(ninja_file).c_str(),

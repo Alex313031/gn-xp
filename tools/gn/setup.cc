@@ -14,13 +14,13 @@
 #include "base/bind.h"
 #include "base/command_line.h"
 #include "base/files/file_path.h"
-#include "base/files/file_util.h"
 #include "base/memory/ref_counted.h"
 #include "base/strings/string_split.h"
 #include "base/strings/string_util.h"
 #include "base/strings/sys_string_conversions.h"
 #include "base/strings/utf_string_conversions.h"
 #include "build_config.h"
+#include "file_util.h"
 #include "tools/gn/command_format.h"
 #include "tools/gn/commands.h"
 #include "tools/gn/exec_process.h"
@@ -152,7 +152,7 @@ const base::FilePath::CharType kGnFile[] = FILE_PATH_LITERAL(".gn");
 
 base::FilePath FindDotFile(const base::FilePath& current_dir) {
   base::FilePath try_this_file = current_dir.Append(kGnFile);
-  if (base::PathExists(try_this_file))
+  if (PathExists(try_this_file))
     return try_this_file;
 
   base::FilePath with_no_slash = current_dir.StripTrailingSeparators();
@@ -436,7 +436,7 @@ bool Setup::FillArgsFromFile() {
       build_settings_.GetFullPath(build_arg_source_file);
 
   std::string contents;
-  if (!base::ReadFileToString(build_arg_file, &contents))
+  if (!ReadFileToString(build_arg_file, &contents))
     return true;  // File doesn't exist, continue with default args.
 
   // Add a dependency on the build arguments file. If this changes, we want
@@ -499,7 +499,7 @@ bool Setup::SaveArgsToFile() {
   // when we try to write a file to it below.
   base::FilePath build_arg_file =
       build_settings_.GetFullPath(GetBuildArgFile());
-  base::CreateDirectory(build_arg_file.DirName());
+  CreateDirectory(build_arg_file.DirName());
 
   std::string contents = args_input_file_->contents();
   commands::FormatStringToString(contents, false, &contents);
@@ -508,8 +508,8 @@ bool Setup::SaveArgsToFile() {
   // Notepad which can't handle Unix ones.
   base::ReplaceSubstringsAfterOffset(&contents, 0, "\n", "\r\n");
 #endif
-  if (base::WriteFile(build_arg_file, contents.c_str(),
-                      static_cast<int>(contents.size())) == -1) {
+  if (WriteFile(build_arg_file, contents.c_str(),
+                static_cast<int>(contents.size())) == -1) {
     Err(Location(), "Args file could not be written.",
         "The file is \"" + FilePathToUTF8(build_arg_file) + "\"")
         .PrintToStdout();
@@ -531,7 +531,7 @@ bool Setup::FillSourceDir(const base::CommandLine& cmdline) {
   base::FilePath relative_root_path =
       cmdline.GetSwitchValuePath(switches::kRoot);
   if (!relative_root_path.empty()) {
-    root_path = base::MakeAbsoluteFilePath(relative_root_path);
+    root_path = MakeAbsoluteFilePath(relative_root_path);
     if (root_path.empty()) {
       Err(Location(), "Root source path not found.",
           "The path \"" + FilePathToUTF8(relative_root_path) +
@@ -548,7 +548,7 @@ bool Setup::FillSourceDir(const base::CommandLine& cmdline) {
     if (dot_file_path.empty()) {
       dotfile_name_ = root_path.Append(kGnFile);
     } else {
-      dotfile_name_ = base::MakeAbsoluteFilePath(dot_file_path);
+      dotfile_name_ = MakeAbsoluteFilePath(dot_file_path);
       if (dotfile_name_.empty()) {
         Err(Location(), "Could not load dotfile.",
             "The file \"" + FilePathToUTF8(dot_file_path) +
@@ -561,7 +561,7 @@ bool Setup::FillSourceDir(const base::CommandLine& cmdline) {
     // In the default case, look for a dotfile and that also tells us where the
     // source root is.
     base::FilePath cur_dir;
-    base::GetCurrentDirectory(&cur_dir);
+    GetCurrentDirectory(&cur_dir);
     dotfile_name_ = FindDotFile(cur_dir);
     if (dotfile_name_.empty()) {
       Err(Location(), "Can't find source root.",
@@ -573,7 +573,7 @@ bool Setup::FillSourceDir(const base::CommandLine& cmdline) {
     root_path = dotfile_name_.DirName();
   }
 
-  base::FilePath root_realpath = base::MakeAbsoluteFilePath(root_path);
+  base::FilePath root_realpath = MakeAbsoluteFilePath(root_path);
   if (root_realpath.empty()) {
     Err(Location(), "Can't get the real root path.",
         "I could not get the real path of \"" + FilePathToUTF8(root_path) +
@@ -600,15 +600,14 @@ bool Setup::FillBuildDir(const std::string& build_dir, bool require_exists) {
   }
 
   base::FilePath build_dir_path = build_settings_.GetFullPath(resolved);
-  if (!base::CreateDirectory(build_dir_path)) {
+  if (!CreateDirectory(build_dir_path)) {
     Err(Location(), "Can't create the build dir.",
         "I could not create the build dir \"" + FilePathToUTF8(build_dir_path) +
             "\".")
         .PrintToStdout();
     return false;
   }
-  base::FilePath build_dir_realpath =
-      base::MakeAbsoluteFilePath(build_dir_path);
+  base::FilePath build_dir_realpath = MakeAbsoluteFilePath(build_dir_path);
   if (build_dir_realpath.empty()) {
     Err(Location(), "Can't get the real build dir path.",
         "I could not get the real path of \"" + FilePathToUTF8(build_dir_path) +
@@ -622,8 +621,7 @@ bool Setup::FillBuildDir(const std::string& build_dir, bool require_exists) {
     scheduler_.Log("Using build dir", resolved.value());
 
   if (require_exists) {
-    if (!base::PathExists(
-            build_dir_path.Append(FILE_PATH_LITERAL("build.ninja")))) {
+    if (!PathExists(build_dir_path.Append(FILE_PATH_LITERAL("build.ninja")))) {
       Err(Location(), "Not a build directory.",
           "This command requires an existing build directory. I interpreted "
           "your input\n\"" +

@@ -4,9 +4,8 @@
 
 #include <stdint.h>
 
-#include "base/files/file.h"
-#include "base/files/file_util.h"
 #include "base/files/scoped_temp_dir.h"
+#include "file_util.h"
 #include "test/test.h"
 #include "tools/gn/functions.h"
 #include "tools/gn/scheduler.h"
@@ -58,7 +57,7 @@ TEST_F(WriteFileTest, WithData) {
                                 .Append(FILE_PATH_LITERAL("out"))
                                 .Append(FILE_PATH_LITERAL("foo.txt"));
   std::string result_contents;
-  EXPECT_TRUE(base::ReadFileToString(foo_name, &result_contents));
+  EXPECT_TRUE(ReadFileToString(foo_name, &result_contents));
   EXPECT_EQ(some_string.string_value(), result_contents);
 
   // Update the contents with a list of a string and a number.
@@ -66,9 +65,11 @@ TEST_F(WriteFileTest, WithData) {
   some_list.list_value().push_back(Value(nullptr, "line 1"));
   some_list.list_value().push_back(Value(nullptr, static_cast<int64_t>(2)));
   EXPECT_TRUE(CallWriteFile(setup.scope(), "//out/foo.txt", some_list));
-  EXPECT_TRUE(base::ReadFileToString(foo_name, &result_contents));
+  EXPECT_TRUE(ReadFileToString(foo_name, &result_contents));
   EXPECT_EQ("line 1\n2\n", result_contents);
 
+  CHECK(false);
+#if 0
   // Test that the file is not rewritten if the contents are not changed.
   // Start by setting the modified time to something old to avoid clock
   // resolution issues.
@@ -82,11 +83,15 @@ TEST_F(WriteFileTest, WithData) {
   // below.
   base::File::Info original_info;
   foo_file.GetInfo(&original_info);
+#endif
 
   EXPECT_TRUE(CallWriteFile(setup.scope(), "//out/foo.txt", some_list));
 
   // Verify that the last modified time is the same as before.
+  CHECK(false);
+#if 0
   base::File::Info new_info;
   foo_file.GetInfo(&new_info);
   EXPECT_EQ(original_info.last_modified, new_info.last_modified);
+#endif
 }

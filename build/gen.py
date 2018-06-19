@@ -228,11 +228,8 @@ def write_gn_ninja(path, options):
         'base/callback_internal.cc',
         'base/command_line.cc',
         'base/environment.cc',
-        'base/files/file.cc',
-        'base/files/file_enumerator.cc',
         'base/files/file_path.cc',
         'base/files/file_path_constants.cc',
-        'base/files/file_util.cc',
         'base/files/scoped_file.cc',
         'base/files/scoped_temp_dir.cc',
         'base/json/json_parser.cc',
@@ -254,17 +251,16 @@ def write_gn_ninja(path, options):
         'base/strings/utf_string_conversion_utils.cc',
         'base/strings/utf_string_conversions.cc',
         'base/third_party/icu/icu_utf.cc',
-        'base/time/clock.cc',
-        'base/time/time.cc',
-        'base/timer/elapsed_timer.cc',
         'base/value_iterators.cc',
         'base/values.cc',
       ], 'tool': 'cxx', 'include_dirs': []},
       'gn_lib': {'sources': [
         'src/exe_path.cc',
+        'src/file_util.cc',
         'src/msg_loop.cc',
         'src/sema.cc',
         'src/sys_info.cc',
+        'src/ticks.cc',
         'src/worker_pool.cc',
         'tools/gn/action_target_generator.cc',
         'tools/gn/action_values.cc',
@@ -463,19 +459,14 @@ def write_gn_ninja(path, options):
 
   if is_posix:
     static_libraries['base']['sources'].extend([
-        'base/files/file_enumerator_posix.cc',
-        'base/files/file_posix.cc',
-        'base/files/file_util_posix.cc',
         'base/posix/file_descriptor_shuffle.cc',
         'base/posix/safe_strerror.cc',
         'base/strings/string16.cc',
-        'base/time/time_conversion_posix.cc',
     ])
 
   if is_linux:
     static_libraries['base']['sources'].extend([
         'base/strings/sys_string_conversions_posix.cc',
-        'base/time/time_now_posix.cc',
     ])
     libs.extend([
         '-lc',
@@ -488,7 +479,6 @@ def write_gn_ninja(path, options):
 
   if is_mac:
     static_libraries['base']['sources'].extend([
-        'base/files/file_util_mac.mm',
         'base/mac/bundle_locations.mm',
         'base/mac/dispatch_source_mach.cc',
         'base/mac/foundation_util.mm',
@@ -496,7 +486,6 @@ def write_gn_ninja(path, options):
         'base/mac/scoped_mach_port.cc',
         'base/mac/scoped_nsautorelease_pool.mm',
         'base/strings/sys_string_conversions_mac.mm',
-        'base/time/time_mac.cc',
     ])
 
     libs.extend([
@@ -508,11 +497,7 @@ def write_gn_ninja(path, options):
 
   if is_win:
     static_libraries['base']['sources'].extend([
-        'base/files/file_enumerator_win.cc',
-        'base/files/file_util_win.cc',
-        'base/files/file_win.cc',
         'base/strings/sys_string_conversions_win.cc',
-        'base/time/time_win.cc',
         'base/win/registry.cc',
         'base/win/scoped_handle.cc',
         'base/win/scoped_process_information.cc',

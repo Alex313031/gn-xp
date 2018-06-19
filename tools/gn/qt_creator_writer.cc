@@ -9,9 +9,9 @@
 #include <string>
 
 #include "base/files/file_path.h"
-#include "base/files/file_util.h"
 #include "base/strings/utf_string_conversions.h"
 
+#include "file_util.h"
 #include "tools/gn/builder.h"
 #include "tools/gn/config_values_extractors.h"
 #include "tools/gn/deps_iterator.h"
@@ -38,13 +38,11 @@ bool QtCreatorWriter::RunAndWriteFile(const BuildSettings* build_settings,
   base::FilePath project_dir =
       build_settings->GetFullPath(build_settings->build_dir())
           .Append(kProjectDirName);
-  if (!base::DirectoryExists(project_dir)) {
-    base::File::Error error;
-    if (!base::CreateDirectoryAndGetError(project_dir, &error)) {
+  if (!DirectoryExists(project_dir)) {
+    if (!CreateDirectory(project_dir)) {
       *err =
           Err(Location(), "Could not create the QtCreator project directory '" +
-                              FilePathToUTF8(project_dir) +
-                              "': " + base::File::ErrorToString(error));
+                              FilePathToUTF8(project_dir));
       return false;
     }
   }
