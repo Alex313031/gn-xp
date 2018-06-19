@@ -34,6 +34,24 @@
       "revId": "5e447b58cd478e8fa5fd515f8d029a6164a8d319",
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "946275a4_426aa6f3",
+        "filename": "src/sema.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 8,
+      "author": {
+        "id": 1000004
+      },
+      "writtenOn": "2018-06-19T19:34:55Z",
+      "side": 1,
+      "message": "Yeah, it doesn\u0027t work as semaphore.h with this setup. OK, I\u0027ll move src/ to util/, remove the -Isrc (which probably shouldn\u0027t have been there in the first place), and then fix up all the includes of stuff that\u0027s in src with no prefix to be \"util/something.h\".",
+      "parentUuid": "2ed8570d_cc9c88c3",
+      "revId": "5e447b58cd478e8fa5fd515f8d029a6164a8d319",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": true
     }
   ]
 }
