@@ -169,15 +169,6 @@ bool File::SetLength(int64_t length) {
            FALSE));
 }
 
-bool File::SetTimes(Time last_access_time, Time last_modified_time) {
-  DCHECK(IsValid());
-
-  FILETIME last_access_filetime = last_access_time.ToFileTime();
-  FILETIME last_modified_filetime = last_modified_time.ToFileTime();
-  return (::SetFileTime(file_.Get(), NULL, &last_access_filetime,
-                        &last_modified_filetime) != FALSE);
-}
-
 bool File::GetInfo(Info* info) {
   DCHECK(IsValid());
 
