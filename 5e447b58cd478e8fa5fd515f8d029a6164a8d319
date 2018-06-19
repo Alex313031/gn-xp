@@ -16,6 +16,24 @@
       "revId": "5e447b58cd478e8fa5fd515f8d029a6164a8d319",
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "2ed8570d_cc9c88c3",
+        "filename": "src/sema.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 8,
+      "author": {
+        "id": 1000004
+      },
+      "writtenOn": "2018-06-19T19:27:39Z",
+      "side": 1,
+      "message": "I called it that because the system header is called \u003csemaphore.h\u003e on Linux so I thought it would like have problems.\n\nFor non top-level, you mean that the header guard should be SRC_SEMAPHORE_H_? Or the #include path? I guess I should probably put everything that\u0027s in src/ now into a subdirectory to make the includes look nicer and to avoid the \u003csemaphore.h\u003e/\"semaphore.h\" conflict.",
+      "parentUuid": "e4cc043a_ba2d6fb3",
+      "revId": "5e447b58cd478e8fa5fd515f8d029a6164a8d319",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": true
     }
   ]
 }
