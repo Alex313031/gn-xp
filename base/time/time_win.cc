@@ -41,7 +41,6 @@
 
 #include "base/bit_cast.h"
 #include "base/logging.h"
-#include "base/threading/platform_thread.h"
 #include "base/time/time_override.h"
 
 namespace base {
@@ -430,12 +429,6 @@ TimeTicks::Clock TimeTicks::GetClock() {
 }
 
 // ThreadTicks ----------------------------------------------------------------
-
-namespace subtle {
-ThreadTicks ThreadTicksNowIgnoringOverride() {
-  return ThreadTicks::GetForThread(PlatformThread::CurrentHandle());
-}
-}  // namespace subtle
 
 // static
 ThreadTicks ThreadTicks::GetForThread(
