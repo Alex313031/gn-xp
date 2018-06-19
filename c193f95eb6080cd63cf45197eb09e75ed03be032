@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "c270bc35_36138aa5",
+        "filename": "tools/gn/filesystem_utils_unittest.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 653,
+      "author": {
+        "id": 1000004
+      },
+      "writtenOn": "2018-06-19T18:48:42Z",
+      "side": 1,
+      "message": "TIL: Insane.",
+      "range": {
+        "startLine": 653,
+        "startChar": 20,
+        "endLine": 653,
+        "endChar": 40
+      },
+      "revId": "c193f95eb6080cd63cf45197eb09e75ed03be032",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": true
+    }
+  ]
+}
