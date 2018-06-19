@@ -6,9 +6,9 @@
 #define TOOLS_GN_TRACE_H_
 
 #include <string>
+#include <thread>
 
 #include "base/macros.h"
-#include "base/threading/platform_thread.h"
 #include "base/time/time.h"
 
 class Label;
@@ -37,12 +37,12 @@ class TraceItem {
 
   TraceItem(Type type,
             const std::string& name,
-            base::PlatformThreadId thread_id);
+            std::thread::id thread_id);
   ~TraceItem();
 
   Type type() const { return type_; }
   const std::string& name() const { return name_; }
-  base::PlatformThreadId thread_id() const { return thread_id_; }
+  std::thread::id thread_id() const { return thread_id_; }
 
   base::TimeTicks begin() const { return begin_; }
   void set_begin(base::TimeTicks b) { begin_ = b; }
@@ -62,7 +62,7 @@ class TraceItem {
  private:
   Type type_;
   std::string name_;
-  base::PlatformThreadId thread_id_;
+  std::thread::id thread_id_;
 
   base::TimeTicks begin_;
   base::TimeTicks end_;
