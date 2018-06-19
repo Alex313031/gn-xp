@@ -40,7 +40,6 @@
 #include "base/bit_cast.h"
 #include "base/logging.h"
 #include "base/synchronization/lock.h"
-#include "base/threading/platform_thread.h"
 #include "base/time/time_override.h"
 
 namespace base {

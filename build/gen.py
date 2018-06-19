@@ -469,7 +469,6 @@ def write_gn_ninja(path, options):
         'base/posix/file_descriptor_shuffle.cc',
         'base/posix/safe_strerror.cc',
         'base/strings/string16.cc',
-        'base/threading/platform_thread_posix.cc',
         'base/time/time_conversion_posix.cc',
     ])
 
@@ -477,7 +476,6 @@ def write_gn_ninja(path, options):
     static_libraries['base']['sources'].extend([
         'base/strings/sys_string_conversions_posix.cc',
         'base/time/time_now_posix.cc',
-        'base/threading/platform_thread_linux.cc',
     ])
     libs.extend([
         '-lc',
@@ -499,7 +497,6 @@ def write_gn_ninja(path, options):
         'base/mac/scoped_nsautorelease_pool.mm',
         'base/strings/sys_string_conversions_mac.mm',
         'base/time/time_mac.cc',
-        'base/threading/platform_thread_mac.mm',
     ])
 
     libs.extend([
@@ -515,7 +512,6 @@ def write_gn_ninja(path, options):
         'base/files/file_util_win.cc',
         'base/files/file_win.cc',
         'base/strings/sys_string_conversions_win.cc',
-        'base/threading/platform_thread_win.cc',
         'base/time/time_win.cc',
         'base/win/registry.cc',
         'base/win/scoped_handle.cc',

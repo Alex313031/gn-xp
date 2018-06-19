@@ -7,6 +7,8 @@
 #include <limits.h>
 #include <stdint.h>
 
+#include <thread>
+
 #include "base/macros.h"
 #include "build_config.h"
 
@@ -18,11 +20,12 @@
 // Windows doesn't define STDERR_FILENO.  Define it here.
 #define STDERR_FILENO 2
 
-#elif defined(OS_POSIX) || defined(OS_FUCHSIA)
+#elif defined(OS_POSIX)
+#include <sys/time.h>
 #include <time.h>
 #endif
 
-#if defined(OS_POSIX) || defined(OS_FUCHSIA)
+#if defined(OS_POSIX)
 #include <errno.h>
 #include <paths.h>
 #include <pthread.h>
@@ -49,9 +52,8 @@
 #include "base/strings/stringprintf.h"
 #include "base/strings/sys_string_conversions.h"
 #include "base/strings/utf_string_conversions.h"
-#include "base/threading/platform_thread.h"
 
-#if defined(OS_POSIX) || defined(OS_FUCHSIA)
+#if defined(OS_POSIX)
 #include "base/posix/safe_strerror.h"
 #endif
 
@@ -195,7 +197,7 @@ void LogMessage::Init(const char* file, int line) {
   // TODO(darin): It might be nice if the columns were fixed width.
 
   stream_ << '[';
-  stream_ << base::PlatformThread::CurrentId() << ':';
+  stream_ << std::this_thread::get_id() << ':';
 #if defined(OS_WIN)
   SYSTEMTIME local_time;
   GetLocalTime(&local_time);
@@ -204,7 +206,7 @@ void LogMessage::Init(const char* file, int line) {
           << local_time.wHour << std::setw(2) << local_time.wMinute
           << std::setw(2) << local_time.wSecond << '.' << std::setw(3)
           << local_time.wMilliseconds << ':';
-#elif defined(OS_POSIX) || defined(OS_FUCHSIA)
+#elif defined(OS_POSIX)
   timeval tv;
   gettimeofday(&tv, nullptr);
   time_t t = tv.tv_sec;
@@ -238,7 +240,7 @@ typedef DWORD SystemErrorCode;
 SystemErrorCode GetLastSystemErrorCode() {
 #if defined(OS_WIN)
   return ::GetLastError();
-#elif defined(OS_POSIX) || defined(OS_FUCHSIA)
+#elif defined(OS_POSIX)
   return errno;
 #endif
 }
@@ -257,7 +259,7 @@ std::string SystemErrorCodeToString(SystemErrorCode error_code) {
   }
   return base::StringPrintf("Error (0x%lX) while retrieving error. (0x%lX)",
                             GetLastError(), error_code);
-#elif defined(OS_POSIX) || defined(OS_FUCHSIA)
+#elif defined(OS_POSIX)
   return base::safe_strerror(error_code) +
          base::StringPrintf(" (%d)", error_code);
 #endif  // defined(OS_WIN)
@@ -273,7 +275,7 @@ Win32ErrorLogMessage::Win32ErrorLogMessage(const char* file,
 Win32ErrorLogMessage::~Win32ErrorLogMessage() {
   stream() << ": " << SystemErrorCodeToString(err_);
 }
-#elif defined(OS_POSIX) || defined(OS_FUCHSIA)
+#elif defined(OS_POSIX)
 ErrnoLogMessage::ErrnoLogMessage(const char* file,
                                  int line,
                                  LogSeverity severity,

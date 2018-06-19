@@ -75,8 +75,9 @@ bool ImportManager::DoImport(const SourceFile& file,
                              Scope* scope,
                              Err* err) {
   // Key for the current import on the current thread in imports_in_progress_.
-  std::string key =
-      std::to_string(base::PlatformThread::CurrentId()) + file.value();
+  std::stringstream ss;
+  ss << std::this_thread::get_id() << file.value();
+  std::string key = ss.str();
 
   // See if we have a cached import, but be careful to actually do the scope
   // copying outside of the lock.
@@ -124,7 +125,7 @@ bool ImportManager::DoImport(const SourceFile& file,
           import_block_end - import_block_begin > kImportBlockTraceThreshold) {
         auto* import_block_trace =
             new TraceItem(TraceItem::TRACE_IMPORT_BLOCK, file.value(),
-                          base::PlatformThread::CurrentId());
+                          std::this_thread::get_id());
         import_block_trace->set_begin(import_block_begin);
         import_block_trace->set_end(import_block_end);
         AddTrace(import_block_trace);

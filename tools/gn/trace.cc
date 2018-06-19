@@ -112,7 +112,7 @@ void SummarizeScriptExecs(std::vector<const TraceItem*>& execs,
 
 TraceItem::TraceItem(Type type,
                      const std::string& name,
-                     base::PlatformThreadId thread_id)
+                     std::thread::id thread_id)
     : type_(type), name_(name), thread_id_(thread_id) {}
 
 TraceItem::~TraceItem() = default;
@@ -120,7 +120,7 @@ TraceItem::~TraceItem() = default;
 ScopedTrace::ScopedTrace(TraceItem::Type t, const std::string& name)
     : item_(nullptr), done_(false) {
   if (trace_log) {
-    item_ = new TraceItem(t, name, base::PlatformThread::CurrentId());
+    item_ = new TraceItem(t, name, std::this_thread::get_id());
     item_->set_begin(base::TimeTicks::Now());
   }
 }
@@ -129,7 +129,7 @@ ScopedTrace::ScopedTrace(TraceItem::Type t, const Label& label)
     : item_(nullptr), done_(false) {
   if (trace_log) {
     item_ = new TraceItem(t, label.GetUserVisibleName(false),
-                          base::PlatformThread::CurrentId());
+                          std::this_thread::get_id());
     item_->set_begin(base::TimeTicks::Now());
   }
 }
@@ -244,7 +244,7 @@ void SaveTraces(const base::FilePath& file_name) {
 
   // Write main thread metadata (assume this is being written on the main
   // thread).
-  out << "{\"pid\":0,\"tid\":" << base::PlatformThread::CurrentId();
+  out << "{\"pid\":0,\"tid\":" << std::this_thread::get_id();
   out << ",\"ts\":0,\"ph\":\"M\",";
   out << "\"name\":\"thread_name\",\"args\":{\"name\":\"Main thread\"}},";
 
