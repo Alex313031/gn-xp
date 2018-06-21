@@ -46,7 +46,7 @@
     "cmd": [
       "git",
       "fetch",
-      "https://gn-review.googlesource.com/gn",
+      "https://gn.googlesource.com/gn",
       "refs/changes/00/1000/1"
     ],
     "cwd": "[START_DIR]/gn",
