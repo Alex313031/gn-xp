@@ -1,0 +1,96 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "af8af84b_7f258aa6",
+        "filename": "infra/recipes/gn.py",
+        "patchSetId": 3
+      },
+      "lineNbr": 108,
+      "author": {
+        "id": 1000006
+      },
+      "writtenOn": "2018-06-21T23:10:21Z",
+      "side": 1,
+      "message": "This check should be moved right before api.cipd.register",
+      "range": {
+        "startLine": 105,
+        "startChar": 2,
+        "endLine": 108,
+        "endChar": 10
+      },
+      "revId": "120c35936c75e0d783efaded10a2d8465833abe1",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "fc4e79f5_bb698aca",
+        "filename": "infra/recipes/gn.py",
+        "patchSetId": 3
+      },
+      "lineNbr": 113,
+      "author": {
+        "id": 1000006
+      },
+      "writtenOn": "2018-06-21T23:10:21Z",
+      "side": 1,
+      "message": "this is gn.exe on Windows",
+      "range": {
+        "startLine": 113,
+        "startChar": 47,
+        "endLine": 113,
+        "endChar": 51
+      },
+      "revId": "120c35936c75e0d783efaded10a2d8465833abe1",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "79319390_48cf93ec",
+        "filename": "infra/recipes/gn.py",
+        "patchSetId": 3
+      },
+      "lineNbr": 113,
+      "author": {
+        "id": 1000006
+      },
+      "writtenOn": "2018-06-21T23:10:21Z",
+      "side": 1,
+      "message": "This seems unnecessary. I think you can do:\n\npkg_def \u003d api.cipd.PackageDefinition(\n    package_name\u003dcipd_pkg_name, \n    package_root\u003dsrc_dir.join(\u0027out\u0027), \n    install_mode\u003d\u0027copy\u0027)\npkg_def.add_file(src_dir.join(\u0027out\u0027, \u0027gn\u0027))\n\nAnd it will have same effect.",
+      "range": {
+        "startLine": 110,
+        "startChar": 2,
+        "endLine": 113,
+        "endChar": 73
+      },
+      "revId": "120c35936c75e0d783efaded10a2d8465833abe1",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "e8d44288_73da9a56",
+        "filename": "infra/recipes/gn.py",
+        "patchSetId": 3
+      },
+      "lineNbr": 117,
+      "author": {
+        "id": 1000006
+      },
+      "writtenOn": "2018-06-21T23:10:21Z",
+      "side": 1,
+      "message": "please also add version file:\n\npkg_def.add_version_file(\u0027.versions/%s.cipd_version\u0027 % gn_exe)",
+      "range": {
+        "startLine": 117,
+        "startChar": 2,
+        "endLine": 117,
+        "endChar": 38
+      },
+      "revId": "120c35936c75e0d783efaded10a2d8465833abe1",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": true
+    }
+  ]
+}
