@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "645432e0_fe02ab3a",
+        "filename": "infra/recipes/gn.py",
+        "patchSetId": 2
+      },
+      "lineNbr": 83,
+      "author": {
+        "id": 1000004
+      },
+      "writtenOn": "2018-06-21T15:48:43Z",
+      "side": 1,
+      "message": "Add a comment here that the order is now important (release needs to be last) because that\u0027s what we\u0027ll end up packaging.",
+      "revId": "4dbfbd4ad2f0ef5dad9fdef02f4d6b3c91a22fd7",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": true
+    }
+  ]
+}
