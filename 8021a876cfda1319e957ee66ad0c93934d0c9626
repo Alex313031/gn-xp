@@ -96,6 +96,30 @@
     },
     {
       "key": {
+        "uuid": "103827ae_19808ceb",
+        "filename": "infra/recipes/gn.py",
+        "patchSetId": 7
+      },
+      "lineNbr": 107,
+      "author": {
+        "id": 1000006
+      },
+      "writtenOn": "2018-06-22T19:01:34Z",
+      "side": 1,
+      "message": "Big packages have CIPD_VERSION.json file in the root, though we have only 1 such package currently...\n\n.version/\u003cexe_name\u003e.cipd_version allows installing multiple binaries into single directory, where their .version files don\u0027t clobber each other. The binaries themselve also can read .version file by resolving their exename and looking into corresponding file.",
+      "parentUuid": "e28d977a_e1a8f16a",
+      "range": {
+        "startLine": 107,
+        "startChar": 38,
+        "endLine": 107,
+        "endChar": 41
+      },
+      "revId": "8021a876cfda1319e957ee66ad0c93934d0c9626",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "e8e35d6d_c05a66f6",
         "filename": "infra/recipes/gn.py",
         "patchSetId": 7
