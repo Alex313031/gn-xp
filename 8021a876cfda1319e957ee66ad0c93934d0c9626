@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "8390f772_72fa69ed",
+        "filename": "infra/recipes/gn.py",
+        "patchSetId": 7
+      },
+      "lineNbr": 107,
+      "author": {
+        "id": 1000006
+      },
+      "writtenOn": "2018-06-22T00:05:00Z",
+      "side": 1,
+      "message": "per existing conventions this should be gn.exe.cipd_version on Windows. It is always \u003cbinary-name\u003e.version.",
+      "range": {
+        "startLine": 107,
+        "startChar": 38,
+        "endLine": 107,
+        "endChar": 41
+      },
+      "revId": "8021a876cfda1319e957ee66ad0c93934d0c9626",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": true
+    }
+  ]
+}
