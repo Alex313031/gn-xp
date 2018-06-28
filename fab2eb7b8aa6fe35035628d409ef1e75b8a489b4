@@ -51,6 +51,24 @@
       "revId": "fab2eb7b8aa6fe35035628d409ef1e75b8a489b4",
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "ffe82dcc_b30995e0",
+        "filename": "build/gen.py",
+        "patchSetId": 6
+      },
+      "lineNbr": 234,
+      "author": {
+        "id": 1000004
+      },
+      "writtenOn": "2018-06-28T22:25:37Z",
+      "side": 1,
+      "message": "At the moment, none of the libc++ code is in the repo, and the gn repo doesn\u0027t currently require gclient or similar to download third_party dependencies, so I\u0027d rather avoid doing that if it\u0027s possible. Petr mentioned clang is learning a way to continue to allow linking statically against the libc++ that the toolchain binaries we\u0027re pulling include, but right now, it can\u0027t find its libc++.a when --sysroot is specified.\n\nSo, for now, I will go with statically linking libstdc++, and once upstream clang and the toolchain has that flag, we can switch to statically linking libc++ (but without building it ourselves), if that\u0027s OK.\n\nI\u0027ve done that here https://gn-review.googlesource.com/c/gn/+/1940.",
+      "parentUuid": "3e0988e1_e4d8536c",
+      "revId": "fab2eb7b8aa6fe35035628d409ef1e75b8a489b4",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": true
     }
   ]
 }
