@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "bb97279a_d9fdf695",
+        "filename": "build/gen.py",
+        "patchSetId": 6
+      },
+      "lineNbr": 47,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2018-06-28T17:12:35Z",
+      "side": 1,
+      "message": "We would ideally deploy this via CIPD but I don\u0027t know if Chromium\u0027s sysroot is in there currently?",
+      "revId": "fab2eb7b8aa6fe35035628d409ef1e75b8a489b4",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "c660efb1_357965d2",
+        "filename": "build/gen.py",
+        "patchSetId": 6
+      },
+      "lineNbr": 234,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2018-06-28T17:12:35Z",
+      "side": 1,
+      "message": "libc++ is part of the Clang that we\u0027re using so it should be possible to use that. libatomic.so dependency is coming from libgcc.",
+      "revId": "fab2eb7b8aa6fe35035628d409ef1e75b8a489b4",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": true
+    }
+  ]
+}
