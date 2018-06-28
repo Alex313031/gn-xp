@@ -33,6 +33,24 @@
       "revId": "fab2eb7b8aa6fe35035628d409ef1e75b8a489b4",
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "3e0988e1_e4d8536c",
+        "filename": "build/gen.py",
+        "patchSetId": 6
+      },
+      "lineNbr": 234,
+      "author": {
+        "id": 1000020
+      },
+      "writtenOn": "2018-06-28T18:29:19Z",
+      "side": 1,
+      "message": "Yes, please use libc++ if possible :)\n\nThis script looks pretty similar to bootstrap.py which switched to using libc++ in this cl:\nhttps://chromium-review.googlesource.com/c/chromium/src/+/895394\n\nDoes it work to just copy-paste the changes from that cl?",
+      "parentUuid": "c660efb1_357965d2",
+      "revId": "fab2eb7b8aa6fe35035628d409ef1e75b8a489b4",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": true
     }
   ]
 }
