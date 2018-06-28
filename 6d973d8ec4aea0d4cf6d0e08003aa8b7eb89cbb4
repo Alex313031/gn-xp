@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "5ca8ee34_c649a2a8",
+        "filename": "build/gen.py",
+        "patchSetId": 2
+      },
+      "lineNbr": 242,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2018-06-28T23:32:50Z",
+      "side": 1,
+      "message": "Adding this flag is the main change, right? The rest is just moving around? Does removing -rtlib do much? If so, what?",
+      "revId": "6d973d8ec4aea0d4cf6d0e08003aa8b7eb89cbb4",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "97362c06_8ca00079",
+        "filename": "build/gen.py",
+        "patchSetId": 2
+      },
+      "lineNbr": 247,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2018-06-28T23:32:50Z",
+      "side": 1,
+      "message": "If you use `clang++` as link command (and it looks like you do), that already implicitly adds -lm. I\u0027m also surprised that you need to explicitly add -lc and -lgcc_s -- what happens if you remove everything except -lpthread?",
+      "revId": "6d973d8ec4aea0d4cf6d0e08003aa8b7eb89cbb4",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": true
+    }
+  ]
+}
