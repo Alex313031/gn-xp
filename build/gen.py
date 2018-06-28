@@ -233,12 +233,10 @@ def write_gn_ninja(path, options, linux_sysroot):
       # force the used of libstdc++ for now because libc++ is not in that
       # sysroot and we don't currently have a local build of that. We should
       # probably resolve this and (re-)add a way to build against libc++.
-      cflags.extend(['--sysroot=' + linux_sysroot,
-                     '-stdlib=libstdc++'])
+      cflags.extend(['--sysroot=' + linux_sysroot])
       ldflags.extend(['--sysroot=' + linux_sysroot,
-                      '-rtlib=libgcc',
                       '-static-libstdc++',
-                      '-stdlib=libstdc++'])
+                      '-Wl,--as-needed',])
   elif is_win:
     if not options.debug:
       cflags.extend(['/Ox', '/DNDEBUG', '/GL'])
