@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "2abd2cdc_789796a3",
+        "filename": "build/gen.py",
+        "patchSetId": 2
+      },
+      "lineNbr": 242,
+      "author": {
+        "id": 1000004
+      },
+      "writtenOn": "2018-06-28T23:37:19Z",
+      "side": 1,
+      "message": "Yes, this is the most important thing. I also didn\u0027t need to explicitly link libatomic below.\n\nRemove -rtlib doesn\u0027t do anything, but I figured fewer flags was better.\n\nOtherwise, the libs are just moved up here so that they\u0027re with the ldflags.",
+      "parentUuid": "5ca8ee34_c649a2a8",
+      "revId": "6d973d8ec4aea0d4cf6d0e08003aa8b7eb89cbb4",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "97362c06_8ca00079",
         "filename": "build/gen.py",
         "patchSetId": 2
@@ -30,6 +48,24 @@
       "writtenOn": "2018-06-28T23:32:50Z",
       "side": 1,
       "message": "If you use `clang++` as link command (and it looks like you do), that already implicitly adds -lm. I\u0027m also surprised that you need to explicitly add -lc and -lgcc_s -- what happens if you remove everything except -lpthread?",
+      "revId": "6d973d8ec4aea0d4cf6d0e08003aa8b7eb89cbb4",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "9e377572_dd45ca90",
+        "filename": "build/gen.py",
+        "patchSetId": 2
+      },
+      "lineNbr": 247,
+      "author": {
+        "id": 1000004
+      },
+      "writtenOn": "2018-06-28T23:37:19Z",
+      "side": 1,
+      "message": "I can remove -lm and -lc, but without gcc_s, I get this https://gist.github.com/sgraham/722391d154500f9a04039539dc546027",
+      "parentUuid": "97362c06_8ca00079",
       "revId": "6d973d8ec4aea0d4cf6d0e08003aa8b7eb89cbb4",
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
       "unresolved": true
