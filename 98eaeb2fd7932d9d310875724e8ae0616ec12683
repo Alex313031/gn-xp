@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "b5b2aae6_adaa188e",
+        "filename": "tools/gn/functions_target_unittest.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 93,
+      "author": {
+        "id": 1000004
+      },
+      "writtenOn": "2018-06-28T20:38:30Z",
+      "side": 1,
+      "message": "I don\u0027t think this comment is helping me understand what\u0027s going on. :)",
+      "range": {
+        "startLine": 93,
+        "startChar": 9,
+        "endLine": 93,
+        "endChar": 27
+      },
+      "revId": "98eaeb2fd7932d9d310875724e8ae0616ec12683",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": true
+    }
+  ]
+}
