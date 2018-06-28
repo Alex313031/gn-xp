@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "9d082f72_80eadbf0",
+        "filename": "tools/gn/function_write_file_unittest.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 86,
+      "author": {
+        "id": 1000004
+      },
+      "writtenOn": "2018-06-28T23:02:51Z",
+      "side": 0,
+      "message": "There\u0027s no futimens until 10.13, apparently.",
+      "range": {
+        "startLine": 86,
+        "startChar": 12,
+        "endLine": 86,
+        "endChar": 20
+      },
+      "revId": "6d973d8ec4aea0d4cf6d0e08003aa8b7eb89cbb4",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": true
+    }
+  ]
+}
