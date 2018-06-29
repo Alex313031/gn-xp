@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "98a3cb5c_122a8fb1",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 1000004
+      },
+      "writtenOn": "2018-06-29T20:33:24Z",
+      "side": 1,
+      "message": "Bug: gn:1\n\n(mostly to see if that\u0027s working here)",
+      "revId": "232a7b2c42822292c224e1f4a84862cf1f57519d",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": true
+    }
+  ]
+}
