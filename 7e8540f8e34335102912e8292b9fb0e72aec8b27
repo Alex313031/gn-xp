@@ -16,6 +16,24 @@
       "revId": "7e8540f8e34335102912e8292b9fb0e72aec8b27",
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "a0953345_e6ae280d",
+        "filename": "build/gen.py",
+        "patchSetId": 3
+      },
+      "lineNbr": 245,
+      "author": {
+        "id": 1000004
+      },
+      "writtenOn": "2018-06-29T00:03:47Z",
+      "side": 1,
+      "message": "Thanks. Petr has some magicks he\u0027s adding to make static libc++ linking available, even if it\u0027s not in the sysroot (I didn\u0027t entirely get the details) so hopefully we can do that when it\u0027s available (he figured in a couple weeks).",
+      "parentUuid": "cfe3ce9f_bf303322",
+      "revId": "7e8540f8e34335102912e8292b9fb0e72aec8b27",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": true
     }
   ]
 }
