@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "cfe3ce9f_bf303322",
+        "filename": "build/gen.py",
+        "patchSetId": 3
+      },
+      "lineNbr": 245,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2018-06-29T00:00:06Z",
+      "side": 1,
+      "message": "Thanks for checking!\n\nAha, apparently clang doesn\u0027t add this if you pass -static-libstdc++: http://llvm-cs.pcc.me.uk/tools/clang/lib/Driver/ToolChains/CommonArgs.cpp#1125\n\nI wonder why. It feels like we\u0027re holding something wrong. -static-libgcc will probably also make the link go and remove the gcc_s.so dep, but I\u0027m not sure if that\u0027s better. (Since we don\u0027t link against anything that throws exceptions, it should at least be safe.)\n\nIf you remind me Tue in a week, I can look at it some more (not at a linux box before then :-/)",
+      "revId": "7e8540f8e34335102912e8292b9fb0e72aec8b27",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": true
+    }
+  ]
+}
