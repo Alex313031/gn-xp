@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "c0b71d1a_137003b0",
+        "filename": "build/gen.py",
+        "patchSetId": 3
+      },
+      "lineNbr": 50,
+      "author": {
+        "id": 1000016
+      },
+      "writtenOn": "2018-06-29T20:35:11Z",
+      "side": 1,
+      "message": "shell\u003dTrue is the devil.  use `([\u0027git\u0027, \u0027describe\u0027, \u0027HEAD\u0027, \u0027--match\u0027, \u0027initial-commit\u0027])`.",
+      "revId": "279f3f8d79565ad1e4569549bc57fb0981bc0671",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "8433d2da_632a454b",
+        "filename": "build/gen.py",
+        "patchSetId": 3
+      },
+      "lineNbr": 52,
+      "author": {
+        "id": 1000016
+      },
+      "writtenOn": "2018-06-29T20:35:11Z",
+      "side": 1,
+      "message": "Perhaps put \u0027initial-commit\u0027 in a global var at the top and use it in both places here.",
+      "revId": "279f3f8d79565ad1e4569549bc57fb0981bc0671",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": true
+    }
+  ]
+}
