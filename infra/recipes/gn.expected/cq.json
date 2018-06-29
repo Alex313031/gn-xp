@@ -20,7 +20,8 @@
       "git",
       "fetch",
       "https://gn.googlesource.com/gn",
-      "refs/heads/master"
+      "refs/heads/master",
+      "--tags"
     ],
     "cwd": "[START_DIR]\\gn",
     "infra_step": true,
