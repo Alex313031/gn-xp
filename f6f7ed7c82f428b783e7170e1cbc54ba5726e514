@@ -1,0 +1,140 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "16f3e52f_44dcade9",
+        "filename": "tools/gn/args.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 104,
+      "author": {
+        "id": 1000014
+      },
+      "writtenOn": "2018-07-03T20:35:35Z",
+      "side": 1,
+      "message": "Nit: got some end-of-line whitespace here.",
+      "revId": "f6f7ed7c82f428b783e7170e1cbc54ba5726e514",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "d3cc6560_1573f6da",
+        "filename": "tools/gn/command_gen.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 284,
+      "author": {
+        "id": 1000014
+      },
+      "writtenOn": "2018-07-03T20:35:35Z",
+      "side": 1,
+      "message": "Can you please run this through clang-format before submitting?",
+      "revId": "f6f7ed7c82f428b783e7170e1cbc54ba5726e514",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "be4f7b1b_4700b232",
+        "filename": "tools/gn/compile_commands_writer.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 8,
+      "author": {
+        "id": 1000014
+      },
+      "writtenOn": "2018-07-03T20:35:35Z",
+      "side": 1,
+      "message": "Delete this.",
+      "revId": "f6f7ed7c82f428b783e7170e1cbc54ba5726e514",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "72b410dd_413c183c",
+        "filename": "tools/gn/compile_commands_writer.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 32,
+      "author": {
+        "id": 1000014
+      },
+      "writtenOn": "2018-07-03T20:35:35Z",
+      "side": 1,
+      "message": "A lot of this file is copied from ninja_binary_target_writer.cc, and a lot of the rest is very similar. This seems like too much duplication and they\u0027ll get out of sync.\n\nI\u0027m thinking we should have a new BinaryTargetCommandWriter (or something) class that has this shared code for writing includes, defines, etc. that both classes use.",
+      "revId": "f6f7ed7c82f428b783e7170e1cbc54ba5726e514",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "a6021a1e_c17003f6",
+        "filename": "tools/gn/compile_commands_writer.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 312,
+      "author": {
+        "id": 1000014
+      },
+      "writtenOn": "2018-07-03T20:35:35Z",
+      "side": 1,
+      "message": "I\u0027m not sure how much of this can be shared with the Ninja output. Any way we can reduce duplication would be good, but I\u0027m not sure how possible that is here because the outputs are slightly different.\n\nThis is getting very long and indented. Can some of this be put into a helper function. If it needs too many args we may want to do the above setup into a struct that we pass.",
+      "revId": "f6f7ed7c82f428b783e7170e1cbc54ba5726e514",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "a55137ae_8f6a75a0",
+        "filename": "tools/gn/compile_commands_writer.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 384,
+      "author": {
+        "id": 1000014
+      },
+      "writtenOn": "2018-07-03T20:35:35Z",
+      "side": 1,
+      "message": "This should be deleted before checkin.",
+      "revId": "f6f7ed7c82f428b783e7170e1cbc54ba5726e514",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "1768c38f_b46dda8e",
+        "filename": "tools/gn/compile_commands_writer.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 400,
+      "author": {
+        "id": 1000014
+      },
+      "writtenOn": "2018-07-03T20:35:35Z",
+      "side": 1,
+      "message": "In general GN doesn\u0027t use {} for single-line blocks (as you do below). For consistency, can you remove them here too?",
+      "revId": "f6f7ed7c82f428b783e7170e1cbc54ba5726e514",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "ee0f9ac8_bf553d3d",
+        "filename": "tools/gn/compile_commands_writer.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 23,
+      "author": {
+        "id": 1000014
+      },
+      "writtenOn": "2018-07-03T20:35:35Z",
+      "side": 1,
+      "message": "Need\n  // TOOLS_GN_COMPILE_COMMANDS_WRITER_H_",
+      "revId": "f6f7ed7c82f428b783e7170e1cbc54ba5726e514",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": true
+    }
+  ]
+}
