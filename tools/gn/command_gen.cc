@@ -11,6 +11,7 @@
 #include "base/timer/elapsed_timer.h"
 #include "tools/gn/build_settings.h"
 #include "tools/gn/commands.h"
+#include "tools/gn/compile_commands_writer.h"
 #include "tools/gn/eclipse_writer.h"
 #include "tools/gn/json_project_writer.h"
 #include "tools/gn/ninja_target_writer.h"
@@ -279,6 +280,25 @@ bool RunIdeWriter(const std::string& ide,
   return false;
 }
 
+bool RunCompileCommandsWriter(const BuildSettings* build_settings,
+                  const Builder& builder, Err* err) {
+  const base::CommandLine* command_line =
+      base::CommandLine::ForCurrentProcess();
+  bool quiet = command_line->HasSwitch(switches::kQuiet);
+  base::ElapsedTimer timer;
+
+  std::string file_name = "compile_commands.json";
+
+  bool res = CompileCommandsWriter::RunAndWriteFiles(
+      build_settings, builder, file_name, quiet, err);
+  if (res && !quiet) {
+    OutputString("Generating compile_commands took " +
+                 base::Int64ToString(timer.Elapsed().InMilliseconds()) +
+                 "ms\n");
+  }
+  return res;
+}
+
 }  // namespace
 
 const char kGen[] = "gen";
@@ -453,6 +473,17 @@ int RunGen(const std::vector<std::string>& args) {
                     &setup->build_settings(), setup->builder(), &err)) {
     err.PrintToStdout();
     return 1;
+  }
+
+  if (const auto* ExportCompileCommands =
+          setup->build_settings().build_args().GetArgOverride(
+              "export_compile_commands")) {
+    if (ExportCompileCommands->boolean_value() &&
+        !RunCompileCommandsWriter(&setup->build_settings(), setup->builder(),
+                                  &err)) {
+      err.PrintToStdout();
+      return 1;
+    }
   }
 
   TickDelta elapsed_time = timer.Elapsed();

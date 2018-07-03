@@ -376,6 +376,7 @@ def WriteGNNinja(path, options, linux_sysroot):
         'tools/gn/command_path.cc',
         'tools/gn/command_refs.cc',
         'tools/gn/commands.cc',
+        'tools/gn/compile_commands_writer.cc',
         'tools/gn/config.cc',
         'tools/gn/config_values.cc',
         'tools/gn/config_values_extractors.cc',
