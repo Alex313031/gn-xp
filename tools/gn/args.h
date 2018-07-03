@@ -102,6 +102,9 @@ class Args {
   // Sets the default config based on the current system.
   void SetSystemVarsLocked(Scope* scope) const;
 
+  // Sets the default export_compile_commands to false.
+  void SetExportCompileCommandsLocked(Scope* scope) const;
+
   // Sets the given already declared vars on the given scope.
   void ApplyOverridesLocked(const Scope::KeyValueMap& values,
                             Scope* scope) const;

@@ -141,6 +141,7 @@ void Args::SetupRootScope(Scope* dest,
   std::lock_guard<std::mutex> lock(lock_);
 
   SetSystemVarsLocked(dest);
+  SetExportCompileCommandsLocked(dest);
 
   // Apply overrides for already declared args.
   // (i.e. the system vars we set above)
@@ -368,6 +369,19 @@ void Args::SetSystemVarsLocked(Scope* dest) const {
   dest->MarkUsed(variables::kHostOs);
   dest->MarkUsed(variables::kCurrentOs);
   dest->MarkUsed(variables::kTargetOs);
+}
+
+void Args::SetExportCompileCommandsLocked(Scope* dest) const {
+  Value ecc_val(nullptr, false);
+  dest->SetValue(variables::kExportCompileCommands, ecc_val, nullptr);
+
+  Scope::KeyValueMap& declared_arguments(
+      DeclaredArgumentsForToolchainLocked(dest));
+  declared_arguments[variables::kExportCompileCommands] = ecc_val;
+
+  // Mark this variable used so the build config file can override them
+  // without geting a warning about overwriting an unused variable.
+  dest->MarkUsed(variables::kExportCompileCommands);
 }
 
 void Args::ApplyOverridesLocked(const Scope::KeyValueMap& values,
