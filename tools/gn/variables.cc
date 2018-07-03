@@ -258,6 +258,18 @@ const char kDefaultToolchain_Help[] =
   necessarily be the current one (see "current_toolchain").
 )";
 
+const char kExportCompileCommands[] = "export_compile_commands";
+const char kExportCompileCommands_HelpShort[] =
+    "export_compile_commands: [boolean] Export compile_commands.json file.";
+const char kExportCompileCommands_Help[] =
+    R"(export_compile_commands: [boolean] Export compile_commands.json file.
+
+  Boolean. Defaults to false.
+
+  When the export_compile_commands arg is set to true, running gn gen will
+  update the compile_commands.json file.
+)";
+
 const char kPythonPath[] = "python_path";
 const char kPythonPath_HelpShort[] =
     "python_path: [string] Absolute path of Python.";
@@ -1984,6 +1996,7 @@ const VariableInfoMap& GetBuiltinVariables() {
     INSERT_VARIABLE(CurrentOs)
     INSERT_VARIABLE(CurrentToolchain)
     INSERT_VARIABLE(DefaultToolchain)
+    INSERT_VARIABLE(ExportCompileCommands)
     INSERT_VARIABLE(HostCpu)
     INSERT_VARIABLE(HostOs)
     INSERT_VARIABLE(Invoker)
