@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "f170f077_276e02ea",
+        "filename": "tools/gn/args.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 104,
+      "author": {
+        "id": 1000023
+      },
+      "writtenOn": "2018-07-06T17:29:52Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "16f3e52f_44dcade9",
+      "revId": "f6f7ed7c82f428b783e7170e1cbc54ba5726e514",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "d3cc6560_1573f6da",
         "filename": "tools/gn/command_gen.cc",
         "patchSetId": 2
@@ -33,6 +51,24 @@
       "revId": "f6f7ed7c82f428b783e7170e1cbc54ba5726e514",
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "5ea73c8b_8bf4d2cb",
+        "filename": "tools/gn/command_gen.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 284,
+      "author": {
+        "id": 1000023
+      },
+      "writtenOn": "2018-07-06T17:29:52Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "d3cc6560_1573f6da",
+      "revId": "f6f7ed7c82f428b783e7170e1cbc54ba5726e514",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": false
     },
     {
       "key": {
@@ -53,6 +89,24 @@
     },
     {
       "key": {
+        "uuid": "1e45daaa_1d9ea8f6",
+        "filename": "tools/gn/compile_commands_writer.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 8,
+      "author": {
+        "id": 1000023
+      },
+      "writtenOn": "2018-07-06T17:29:52Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "be4f7b1b_4700b232",
+      "revId": "f6f7ed7c82f428b783e7170e1cbc54ba5726e514",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "72b410dd_413c183c",
         "filename": "tools/gn/compile_commands_writer.cc",
         "patchSetId": 2
@@ -67,6 +121,24 @@
       "revId": "f6f7ed7c82f428b783e7170e1cbc54ba5726e514",
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "875b9987_4859d36f",
+        "filename": "tools/gn/compile_commands_writer.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 32,
+      "author": {
+        "id": 1000023
+      },
+      "writtenOn": "2018-07-06T17:29:52Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "72b410dd_413c183c",
+      "revId": "f6f7ed7c82f428b783e7170e1cbc54ba5726e514",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": false
     },
     {
       "key": {
@@ -87,6 +159,24 @@
     },
     {
       "key": {
+        "uuid": "bf2af8a5_dcbc8a13",
+        "filename": "tools/gn/compile_commands_writer.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 312,
+      "author": {
+        "id": 1000023
+      },
+      "writtenOn": "2018-07-06T17:29:52Z",
+      "side": 1,
+      "message": "Not much more can be shared -- the Ninja writer writes the flags/includes as variables to be substituted, whereas here we need them in the command.",
+      "parentUuid": "a6021a1e_c17003f6",
+      "revId": "f6f7ed7c82f428b783e7170e1cbc54ba5726e514",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "a55137ae_8f6a75a0",
         "filename": "tools/gn/compile_commands_writer.cc",
         "patchSetId": 2
@@ -101,6 +191,24 @@
       "revId": "f6f7ed7c82f428b783e7170e1cbc54ba5726e514",
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "5f2a180f_d49f34dd",
+        "filename": "tools/gn/compile_commands_writer.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 384,
+      "author": {
+        "id": 1000023
+      },
+      "writtenOn": "2018-07-06T17:29:52Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "a55137ae_8f6a75a0",
+      "revId": "f6f7ed7c82f428b783e7170e1cbc54ba5726e514",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": false
     },
     {
       "key": {
@@ -121,6 +229,24 @@
     },
     {
       "key": {
+        "uuid": "3a01ae9f_dd403206",
+        "filename": "tools/gn/compile_commands_writer.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 400,
+      "author": {
+        "id": 1000023
+      },
+      "writtenOn": "2018-07-06T17:29:52Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "1768c38f_b46dda8e",
+      "revId": "f6f7ed7c82f428b783e7170e1cbc54ba5726e514",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "ee0f9ac8_bf553d3d",
         "filename": "tools/gn/compile_commands_writer.h",
         "patchSetId": 2
@@ -135,6 +261,24 @@
       "revId": "f6f7ed7c82f428b783e7170e1cbc54ba5726e514",
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "9f576343_4478dc63",
+        "filename": "tools/gn/compile_commands_writer.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 23,
+      "author": {
+        "id": 1000023
+      },
+      "writtenOn": "2018-07-06T17:29:52Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ee0f9ac8_bf553d3d",
+      "revId": "f6f7ed7c82f428b783e7170e1cbc54ba5726e514",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": false
     }
   ]
 }
