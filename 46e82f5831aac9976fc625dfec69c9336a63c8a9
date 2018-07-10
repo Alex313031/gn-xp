@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "d54bbdcd_128b7908",
+        "filename": "tools/gn/compile_commands_writer.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 25,
+      "author": {
+        "id": 1000014
+      },
+      "writtenOn": "2018-07-10T16:56:17Z",
+      "side": 1,
+      "message": "This should go on the same line after the endif.",
+      "revId": "46e82f5831aac9976fc625dfec69c9336a63c8a9",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": true
+    }
+  ]
+}
