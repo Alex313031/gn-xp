@@ -1,0 +1,72 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "dcb39deb_53d6d39f",
+        "filename": "build/gen.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 46,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2018-07-13T17:54:26Z",
+      "side": 1,
+      "message": "This is getting long enough that I\u0027d go with\n\n  linux_sysroot \u003d None\n  if is_linux and not options.no_sysroot:\n    linux_sysroot \u003d UpdateLinuxSysroot()",
+      "revId": "7ba84b5c368d6c511c75bc0f944f59a2e1248178",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "a0816012_efaaa843",
+        "filename": "build/gen.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 48,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2018-07-13T17:54:26Z",
+      "side": 1,
+      "message": "A bit shorter:\n\n  out_dir \u003d options.out_path or os.path.join(REPO_ROOT, \u0027out\u0027)",
+      "revId": "7ba84b5c368d6c511c75bc0f944f59a2e1248178",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "e8508c58_aa77a4eb",
+        "filename": "build/gen.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 53,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2018-07-13T17:54:26Z",
+      "side": 1,
+      "message": "What will the `#include \"out/last_commit_position.h\"` in tools/gn/gn_main.cc do if this file doesn\u0027t exist? Don\u0027t you always need to generate this but set it to a dummy value else?",
+      "revId": "7ba84b5c368d6c511c75bc0f944f59a2e1248178",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "eefa298c_c0cde8c1",
+        "filename": "build/gen.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 272,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2018-07-13T17:54:26Z",
+      "side": 1,
+      "message": "if !is_linux, then linux_sysroot isn\u0027t set. So I think this can just be\n\n  if linux_sysroot:\n\nIf you think it\u0027s important that this runs for a linux_sysroot that\u0027s the empty string and you really want to compare with None, do\n\n  if linux_sysroot is not None:\n\ninstead of !\u003d (effectively the same thing, but python folks prefer \"is\" over \"\u003d\u003d\" for comparison with None for some reason)",
+      "revId": "7ba84b5c368d6c511c75bc0f944f59a2e1248178",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": true
+    }
+  ]
+}
