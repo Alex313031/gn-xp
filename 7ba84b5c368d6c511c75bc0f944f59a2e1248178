@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "29e935e8_9b7b7f01",
+        "filename": "build/gen.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 46,
+      "author": {
+        "id": 1000020
+      },
+      "writtenOn": "2018-07-13T17:59:44Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "dcb39deb_53d6d39f",
+      "revId": "7ba84b5c368d6c511c75bc0f944f59a2e1248178",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "a0816012_efaaa843",
         "filename": "build/gen.py",
         "patchSetId": 1
@@ -33,6 +51,24 @@
       "revId": "7ba84b5c368d6c511c75bc0f944f59a2e1248178",
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "be735293_40bfc90d",
+        "filename": "build/gen.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 48,
+      "author": {
+        "id": 1000020
+      },
+      "writtenOn": "2018-07-13T17:59:44Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "a0816012_efaaa843",
+      "revId": "7ba84b5c368d6c511c75bc0f944f59a2e1248178",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": false
     },
     {
       "key": {
@@ -53,6 +89,24 @@
     },
     {
       "key": {
+        "uuid": "a0f60044_7077efc4",
+        "filename": "build/gen.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 53,
+      "author": {
+        "id": 1000020
+      },
+      "writtenOn": "2018-07-13T17:59:44Z",
+      "side": 1,
+      "message": "I was planning on having publish_tarball generate the file and put it in the tarballs.   Then have bootstrap.py copy that file into the build dir before running gen.py.  I\u0027d also be OK with generating a dummy value, your call.",
+      "parentUuid": "e8508c58_aa77a4eb",
+      "revId": "7ba84b5c368d6c511c75bc0f944f59a2e1248178",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "eefa298c_c0cde8c1",
         "filename": "build/gen.py",
         "patchSetId": 1
@@ -67,6 +121,24 @@
       "revId": "7ba84b5c368d6c511c75bc0f944f59a2e1248178",
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "877a1900_2a9564ec",
+        "filename": "build/gen.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 272,
+      "author": {
+        "id": 1000020
+      },
+      "writtenOn": "2018-07-13T17:59:44Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "eefa298c_c0cde8c1",
+      "revId": "7ba84b5c368d6c511c75bc0f944f59a2e1248178",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": false
     }
   ]
 }
