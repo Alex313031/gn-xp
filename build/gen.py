@@ -258,7 +258,10 @@ def WriteGNNinja(path, options, linux_sysroot):
     if options.debug:
       cflags.extend(['-O0', '-g'])
     else:
-      cflags.extend(['-O3', '-DNDEBUG'])
+      cflags.append('-DNDEBUG')
+      cflags.extend(['-O3', '-fdata-sections', '-ffunction-sections'])
+      ldflags.extend(['-O3', '-fdata-sections', '-ffunction-sections'])
+      ldflags.append('-Wl,-dead_strip' if is_mac else '-Wl,--gc-sections')
       ldflags.append('-Wl,-S' if is_mac else '-Wl,-strip-all')
 
     cflags.extend([
