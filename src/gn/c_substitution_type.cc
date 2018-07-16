@@ -14,7 +14,7 @@ const SubstitutionTypes CSubstitutions = {
     &CSubstitutionCFlagsC,      &CSubstitutionCFlagsCc,
     &CSubstitutionCFlagsObjC,   &CSubstitutionCFlagsObjCc,
     &CSubstitutionDefines,      &CSubstitutionFrameworkDirs,
-    &CSubstitutionIncludeDirs,
+    &CSubstitutionIncludeDirs,  &CSubstitutionModuleName,
 
     &CSubstitutionLinkerInputs, &CSubstitutionLinkerInputsNewline,
     &CSubstitutionLdFlags,      &CSubstitutionLibs,
@@ -36,6 +36,7 @@ const Substitution CSubstitutionFrameworkDirs = {"{{framework_dirs}}",
                                                  "framework_dirs"};
 const Substitution CSubstitutionIncludeDirs = {"{{include_dirs}}",
                                               "include_dirs"};
+const Substitution CSubstitutionModuleName = {"{{module_name}}", "module_name"};
 
 // Valid for linker tools.
 const Substitution CSubstitutionLinkerInputs = {"{{inputs}}", "in"};
@@ -56,7 +57,17 @@ bool IsValidCompilerSubstitution(const Substitution* type) {
          type == &CSubstitutionCFlagsCc || type == &CSubstitutionCFlagsObjC ||
          type == &CSubstitutionCFlagsObjCc || type == &CSubstitutionDefines ||
          type == &CSubstitutionFrameworkDirs ||
-         type == &CSubstitutionIncludeDirs;
+         type == &CSubstitutionIncludeDirs || type == &CSubstitutionModuleName;
+}
+
+bool IsValidCompilerModuleSubstitution(const Substitution* type) {
+  return IsValidToolSubstitution(type) || IsValidSourceSubstitution(type) ||
+         type == &SubstitutionSource || type == &CSubstitutionAsmFlags ||
+         type == &CSubstitutionCFlags || type == &CSubstitutionCFlagsC ||
+         type == &CSubstitutionCFlagsCc || type == &CSubstitutionCFlagsObjC ||
+         type == &CSubstitutionCFlagsObjCc || type == &CSubstitutionDefines ||
+         type == &CSubstitutionFrameworkDirs ||
+         type == &CSubstitutionIncludeDirs || type == &CSubstitutionModuleName;
 }
 
 bool IsValidCompilerOutputsSubstitution(const Substitution* type) {

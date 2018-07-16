@@ -8,6 +8,7 @@
 #include "gn/c_substitution_type.h"
 #include "gn/escape.h"
 #include "gn/filesystem_utils.h"
+#include "gn/module_map_writer.h"
 #include "gn/output_file.h"
 #include "gn/rust_substitution_type.h"
 #include "gn/rust_tool.h"
@@ -17,6 +18,8 @@
 #include "gn/substitution_list.h"
 #include "gn/substitution_pattern.h"
 #include "gn/target.h"
+
+#include <iostream>
 
 namespace {
 
@@ -427,6 +430,24 @@ void SubstitutionWriter::ApplyListToTargetAsOutputFile(
 }
 
 // static
+std::string SubstitutionWriter::ApplyPatternToTargetAsString(
+    const Target* target,
+    const Tool* tool,
+    const SubstitutionPattern& pattern) {
+  std::string result_value;
+  for (const auto& subrange : pattern.ranges()) {
+    if (subrange.type == &SubstitutionLiteral) {
+      result_value.append(subrange.literal);
+    } else {
+      std::string subst;
+      CHECK(GetTargetSubstitution(target, subrange.type, &subst));
+      result_value.append(subst);
+    }
+  }
+  return result_value;
+}
+
+// static
 bool SubstitutionWriter::GetTargetSubstitution(const Target* target,
                                                const Substitution* type,
                                                std::string* result) {
@@ -454,6 +475,8 @@ bool SubstitutionWriter::GetTargetSubstitution(const Target* target,
         result);
   } else if (type == &SubstitutionTargetOutputName) {
     *result = target->GetComputedOutputName();
+  } else if (type == &CSubstitutionModuleName) {
+    *result = GetModuleNameForTarget(target);
   } else {
     return false;
   }

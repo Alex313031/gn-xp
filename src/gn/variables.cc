@@ -737,6 +737,11 @@ const char kCflagsObjCC_HelpShort[] =
     "cflags_objcc: [string list] Flags passed to the Objective C++ compiler.";
 const char* kCflagsObjCC_Help = kCommonCflagsHelp;
 
+const char kCflagsModule[] = "cflags_module";
+const char kCflagsModule_HelpShort[] =
+    "cflags_module: [string list] Flags passed to the Module compiler.";
+const char* kCflagsModule_Help = kCommonCflagsHelp;
+
 const char kCheckIncludes[] = "check_includes";
 const char kCheckIncludes_HelpShort[] =
     "check_includes: [boolean] Controls whether a target's files are checked.";
@@ -1218,6 +1223,12 @@ Example
   frameworks = [ "Foundation.framework", "Foo.framework" ]
 )";
 
+const char kHeaderModules[] = "header_modules";
+const char kHeaderModules_HelpShort[] =
+    "header_modules: [boolean] Use header modules for this target.";
+const char kHeaderModules_Help[] =
+    R"(header_modules: Use header modules for this target.)";
+
 const char kIncludeDirs[] = "include_dirs";
 const char kIncludeDirs_HelpShort[] =
     "include_dirs: [directory list] Additional include directories.";
@@ -1423,6 +1434,36 @@ Example
       my_files = [ "a.txt", "b.txt" ]
     }
   }
+)";
+
+const char kModuleFlags[] = "module_flags";
+const char kModuleFlags_HelpShort[] =
+    "module_flags: [file name] Module map file to use.";
+const char kModuleFlags_Help[] =
+    R"(module_flags: Module map file to use.
+
+  Module map file describes how a collection of existing headers maps on to
+  the (logical) structure of a module.
+)";
+
+const char kModuleName[] = "module_name";
+const char kModuleName_HelpShort[] =
+    "module_name: [string] Name of the module.";
+const char kModuleName_Help[] =
+    R"(module_map: Module map file to use.
+
+  Module map file describes how a collection of existing headers maps on to
+  the (logical) structure of a module.
+)";
+
+const char kModuleMap[] = "module_map";
+const char kModuleMap_HelpShort[] =
+    "module_map: [file name] Module map file to use.";
+const char kModuleMap_Help[] =
+    R"(module_map: Module map file to use.
+
+  Module map file describes how a collection of existing headers maps on to
+  the (logical) structure of a module.
 )";
 
 const char kOutputExtension[] = "output_extension";
@@ -2246,6 +2287,9 @@ const VariableInfoMap& GetTargetVariables() {
     INSERT_VARIABLE(Libs)
     INSERT_VARIABLE(LibDirs)
     INSERT_VARIABLE(Metadata)
+    INSERT_VARIABLE(ModuleFlags)
+    INSERT_VARIABLE(ModuleMap)
+    INSERT_VARIABLE(ModuleName)
     INSERT_VARIABLE(OutputDir)
     INSERT_VARIABLE(OutputExtension)
     INSERT_VARIABLE(OutputName)

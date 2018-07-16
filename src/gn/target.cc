@@ -5,6 +5,7 @@
 #include "gn/target.h"
 
 #include <stddef.h>
+#include <iostream>
 
 #include "base/stl_util.h"
 #include "base/strings/string_util.h"
@@ -14,6 +15,7 @@
 #include "gn/deps_iterator.h"
 #include "gn/filesystem_utils.h"
 #include "gn/functions.h"
+#include "gn/module_map_writer.h"
 #include "gn/scheduler.h"
 #include "gn/substitution_writer.h"
 #include "gn/tool.h"
@@ -739,6 +741,14 @@ bool Target::FillOutputFiles(Err* err) {
     case UNKNOWN:
     default:
       NOTREACHED();
+  }
+
+  if (header_modules_) {
+    if (const CTool* ctool = tool->AsC()) {
+      header_module_file_ =
+          SubstitutionWriter::ApplyPatternToCompilerAsOutputFile(
+              this, GetCppMapFileForTarget(this), ctool->outputs().list()[0]);
+    }
   }
 
   // Count anything generated from bundle_data dependencies.

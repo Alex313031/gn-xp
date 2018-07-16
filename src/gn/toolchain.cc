@@ -12,6 +12,8 @@
 #include "gn/target.h"
 #include "gn/value.h"
 
+#include <iostream>
+
 Toolchain::Toolchain(const Settings* settings,
                      const Label& label,
                      const SourceFileSet& build_dependency_files)

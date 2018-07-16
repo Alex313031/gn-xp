@@ -598,6 +598,7 @@ Tool variables
     {{cflags_cc}}
     {{cflags_objc}}
     {{cflags_objcc}}
+    {{cflags_module}}
     {{defines}}
     {{include_dirs}}
         Strings correspond that to the processed flags/defines/include

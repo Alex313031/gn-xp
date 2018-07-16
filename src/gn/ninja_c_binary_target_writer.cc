@@ -11,6 +11,7 @@
 #include <set>
 #include <sstream>
 #include <unordered_set>
+#include <iostream>
 
 #include "base/strings/string_util.h"
 #include "gn/c_substitution_type.h"
@@ -20,6 +21,7 @@
 #include "gn/escape.h"
 #include "gn/filesystem_utils.h"
 #include "gn/general_tool.h"
+#include "gn/module_map_writer.h"
 #include "gn/ninja_target_command_util.h"
 #include "gn/ninja_utils.h"
 #include "gn/scheduler.h"
@@ -49,6 +51,21 @@ const char* GetPCHLangForToolType(const char* name) {
   if (name == CTool::kCToolObjCxx)
     return "objective-c++-header";
   NOTREACHED() << "Not a valid PCH tool type: " << name;
+  return "";
+}
+
+// Returns the language-specific lang recognized by clang's -x flag for
+// precompiled header omdule files.
+const char* GetPCMLangForToolType(const char* name) {
+  if (name == CTool::kCToolCc)
+    return "c";
+  if (name == CTool::kCToolCxx)
+    return "c++";
+  if (name == CTool::kCToolObjC)
+    return "objective-c";
+  if (name == CTool::kCToolObjCxx)
+    return "objective-c++";
+  NOTREACHED() << "Not a valid PCM tool type: " << name;
   return "";
 }
 
@@ -99,6 +116,10 @@ void NinjaCBinaryTargetWriter::Run() {
   size_t num_stamp_uses = target_->sources().size();
   std::vector<OutputFile> order_only_deps = WriteInputDepsStampAndGetDep(
       std::vector<const Target*>(), num_stamp_uses);
+
+  // Write commands for precompiled header modules (aka Clang modules).
+  std::vector<OutputFile> pcm_files;
+  WritePCMCommands(input_dep, order_only_deps, &pcm_files);
 
   // For GCC builds, the .gch files are not object files, but still need to be
   // added as explicit dependencies below. The .gch output files are placed in
@@ -225,6 +246,122 @@ void NinjaCBinaryTargetWriter::WriteCompilerVars() {
   }
 
   WriteSharedVars(subst);
+}
+
+void NinjaCBinaryTargetWriter::WritePCMCommands(
+    const OutputFile& input_dep,
+    const std::vector<OutputFile>& order_only_deps,
+    std::vector<OutputFile>* pcm_files) {
+  if (!target_->header_modules())
+    return;
+
+  SourceFile source;
+  if (target_->module_map().is_null()) {
+    source = ModuleMapWriter::RunAndWriteFile(target_);
+  } else {
+    source = target_->module_map();
+  }
+
+  const CTool* tool_c = target_->toolchain()->GetToolAsC(CTool::kCToolCcModule);
+  if (tool_c && (target_->source_types_used().Get(SourceFile::SOURCE_C) ||
+                 target_->source_types_used().Get(SourceFile::SOURCE_H))) {
+    WritePCMCommand(&CSubstitutionCFlagsC, CTool::kCToolCcModule,
+                    source, input_dep, order_only_deps, pcm_files);
+  }
+  const CTool* tool_cxx = target_->toolchain()->GetToolAsC(CTool::kCToolCxxModule);
+  if (tool_cxx && (target_->source_types_used().Get(SourceFile::SOURCE_CPP) ||
+                   target_->source_types_used().Get(SourceFile::SOURCE_H))) {
+    WritePCMCommand(&CSubstitutionCFlagsCc, CTool::kCToolCxxModule,
+                    source, input_dep, order_only_deps, pcm_files);
+  }
+  const CTool* tool_objc = target_->toolchain()->GetToolAsC(CTool::kCToolObjCModule);
+  if (tool_objc && target_->source_types_used().Get(SourceFile::SOURCE_M)) {
+    WritePCMCommand(&CSubstitutionCFlagsObjC, CTool::kCToolObjCModule,
+                    source, input_dep, order_only_deps, pcm_files);
+  }
+  const CTool* tool_objcxx =
+      target_->toolchain()->GetToolAsC(CTool::kCToolObjCxxModule);
+  if (tool_objcxx && target_->source_types_used().Get(SourceFile::SOURCE_MM)) {
+    WritePCMCommand(&CSubstitutionCFlagsObjCc, CTool::kCToolObjCxxModule,
+                    source, input_dep, order_only_deps, pcm_files);
+  }
+}
+
+void NinjaCBinaryTargetWriter::WritePCMCommand(
+    const Substitution* flag_type,
+    const char* tool_name,
+    const SourceFile& source,
+    const OutputFile& input_dep,
+    const std::vector<OutputFile>& order_only_deps,
+    std::vector<OutputFile>* pcm_files) {
+  std::vector<OutputFile> outputs;
+  GetPCMOutputFiles(target_, source, tool_name, &outputs);
+  if (outputs.empty())
+    return;
+
+  pcm_files->insert(pcm_files->end(), outputs.begin(), outputs.end());
+
+  std::vector<OutputFile> extra_deps;
+  if (!input_dep.value().empty())
+    extra_deps.push_back(input_dep);
+
+  // Build line to compile the file.
+  WriteCompilerBuildLine(source, extra_deps, order_only_deps, tool_name, outputs);
+
+  const SubstitutionBits& subst = target_->toolchain()->substitution_bits();
+  if (subst.used.count(&CSubstitutionModuleName))
+    out_ << "  " << CSubstitutionModuleName.ninja_name
+         << " = " << GetModuleNameForTarget(target_) << std::endl;
+
+  // This build line needs a custom language-specific flags value. Rule-specific
+  // variables are just indented underneath the rule line.
+  EscapeOptions options;
+  options.mode = ESCAPE_NINJA_PREFORMATTED_COMMAND;
+
+  out_ << "  " << flag_type->ninja_name << " = ";
+  if (const CTool *ctool = target_->toolchain()->GetToolAsC(tool_name)) {
+    out_ << SubstitutionWriter::ApplyPatternToTargetAsString(
+        target_, ctool, ctool->module_flags());
+  }
+
+  EscapeOptions opts = GetFlagOptions();
+  if (tool_name == CTool::kCToolCcModule) {
+    RecursiveTargetConfigStringsToStream(target_, &ConfigValues::cflags_c, opts,
+                                         out_);
+  } else if (tool_name == CTool::kCToolCxxModule) {
+    RecursiveTargetConfigStringsToStream(target_, &ConfigValues::cflags_cc,
+                                         opts, out_);
+  } else if (tool_name == CTool::kCToolObjCModule) {
+    RecursiveTargetConfigStringsToStream(target_, &ConfigValues::cflags_objc,
+                                         opts, out_);
+  } else if (tool_name == CTool::kCToolObjCxxModule) {
+    RecursiveTargetConfigStringsToStream(target_, &ConfigValues::cflags_objcc,
+                                         opts, out_);
+  }
+
+  out_ << " -x " << GetPCMLangForToolType(tool_name);
+
+  out_ << " -Xclang -emit-module";
+  out_ << " -fmodules";
+  out_ << " -fmodule-name=" << GetModuleNameForTarget(target_);
+
+  // TODO: which of these should hardcoded vs specified in the build?
+  // out_ << " -fmodules-strict-decluse";
+  // out_ << " -Xclang -fmodules-embed-all-files";
+  // out_ << " -Xclang -fmodules-local-submodule-visibility";
+
+  // Generated header module files are relative to the build directory.
+  //
+  // TODO: this is currently disabled to avoid introducing additional knowledge
+  // of Clang internals to GN but could be re-enabled if producing cleaner maps
+  // is desired, see ModuleMapWriter for more.
+  //
+  // if (target_->module_map().is_null())
+  //   out_ <<  " -Xclang -fmodule-map-file-home-is-cwd";
+
+  // Write two blank lines to help separate the PCM build lines from the
+  // regular source build lines.
+  out_ << std::endl << std::endl;
 }
 
 void NinjaCBinaryTargetWriter::WritePCHCommands(
@@ -389,9 +526,11 @@ void NinjaCBinaryTargetWriter::WriteSources(
 
   std::vector<OutputFile> tool_outputs;  // Prevent reallocation in loop.
   std::vector<OutputFile> deps;
+  std::vector<OutputFile> header_module_deps;
   for (const auto& source : target_->sources()) {
     // Clear the vector but maintain the max capacity to prevent reallocations.
     deps.resize(0);
+    header_module_deps.resize(0);
     const char* tool_name = Tool::kToolNone;
     if (!target_->GetOutputFilesForSource(source, &tool_name, &tool_outputs)) {
       if (source.type() == SourceFile::SOURCE_DEF)
@@ -431,6 +570,20 @@ void NinjaCBinaryTargetWriter::WriteSources(
           }
         }
       }
+
+      if (target_->header_modules()) {
+        GetPCMOutputFiles(target_, GetCppMapFileForTarget(target_), tool_name, &header_module_deps);
+        for (const auto& pair : target_->GetDeps(Target::DEPS_LINKED)) {
+          const Target* dep = pair.ptr;
+          if (dep->header_modules()) {
+            std::vector<OutputFile> outputs;
+            GetPCMOutputFiles(dep, GetCppMapFileForTarget(dep), tool_name, &outputs);
+            header_module_deps.insert(header_module_deps.end(), outputs.begin(), outputs.end());
+          }
+        }
+        deps.insert(deps.end(), header_module_deps.begin(), header_module_deps.end());
+      }
+
       WriteCompilerBuildLine(source, deps, order_only_deps, tool_name,
                              tool_outputs);
     }

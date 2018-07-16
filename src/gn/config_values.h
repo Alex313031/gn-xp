@@ -41,6 +41,7 @@ class ConfigValues {
   STRING_VALUES_ACCESSOR(cflags_cc)
   STRING_VALUES_ACCESSOR(cflags_objc)
   STRING_VALUES_ACCESSOR(cflags_objcc)
+  STRING_VALUES_ACCESSOR(cflags_module)
   STRING_VALUES_ACCESSOR(defines)
   DIR_VALUES_ACCESSOR(framework_dirs)
   STRING_VALUES_ACCESSOR(frameworks)
@@ -84,6 +85,7 @@ class ConfigValues {
   std::vector<std::string> cflags_cc_;
   std::vector<std::string> cflags_objc_;
   std::vector<std::string> cflags_objcc_;
+  std::vector<std::string> cflags_module_;
   std::vector<std::string> defines_;
   std::vector<SourceDir> include_dirs_;
   std::vector<SourceDir> framework_dirs_;

@@ -21,9 +21,13 @@ class CTool : public Tool {
  public:
   // C compiler tools
   static const char* kCToolCc;
+  static const char* kCToolCcModule;
   static const char* kCToolCxx;
+  static const char* kCToolCxxModule;
   static const char* kCToolObjC;
+  static const char* kCToolObjCModule;
   static const char* kCToolObjCxx;
+  static const char* kCToolObjCxxModule;
   static const char* kCToolRc;
   static const char* kCToolAsm;
 
@@ -82,12 +86,28 @@ class CTool : public Tool {
     depend_output_ = std::move(dep_out);
   }
 
+  const SubstitutionPattern& module_flags() const { return module_flags_; }
+  void set_module_flags(SubstitutionPattern module_flags) {
+    DCHECK(!complete_);
+    module_flags_ = std::move(module_flags);
+  }
+
   // Other functions ----------------------------------------------------------
 
   // Returns true if this tool has separate outputs for dependency tracking
   // and linking.
   bool has_separate_solink_files() const {
     return !link_output_.empty() || !depend_output_.empty();
+  }
+
+  bool IsCompiler() const {
+    return name_ == kCToolCc || name_ == kCToolCxx ||
+           name_ == kCToolObjC || name_ == kCToolObjCxx;
+  }
+
+  bool IsLinker() const {
+    return name_ == kCToolAlink || name_ == kCToolSolink ||
+           name_ == kCToolSolinkModule || name_ == kCToolLink;
   }
 
  private:
@@ -116,6 +136,7 @@ class CTool : public Tool {
   PrecompiledHeaderType precompiled_header_type_;
   SubstitutionPattern link_output_;
   SubstitutionPattern depend_output_;
+  SubstitutionPattern module_flags_;
 
   DISALLOW_COPY_AND_ASSIGN(CTool);
 };

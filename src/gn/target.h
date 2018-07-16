@@ -184,6 +184,13 @@ class Target : public Item {
   const std::vector<std::string>& walk_keys() const { return walk_keys_; }
   std::vector<std::string>& walk_keys() { return walk_keys_; }
 
+  bool header_modules() const { return header_modules_; }
+  void set_header_modules(bool value) { header_modules_ = value; }
+  const std::string& module_name() const { return module_name_; }
+  void set_module_name(const std::string& n) { module_name_ = n; }
+  const SourceFile& module_map() const { return module_map_; }
+  void set_module_map(const SourceFile& f) { module_map_ = f; }
+
   bool testonly() const { return testonly_; }
   void set_testonly(bool value) { testonly_ = value; }
 
@@ -335,6 +342,10 @@ class Target : public Item {
     return dependency_output_file_;
   }
 
+  const OutputFile& header_module_file() const {
+    return header_module_file_;
+  }
+
   // The subset of computed_outputs that are considered runtime outputs.
   const std::vector<OutputFile>& runtime_outputs() const {
     return runtime_outputs_;
@@ -370,6 +381,8 @@ class Target : public Item {
   // values are in config_values_.
   bool ResolvePrecompiledHeaders(Err* err);
 
+  bool ResolveHeaderModules(Err* err);
+
   // Validates the given thing when a target is resolved.
   bool CheckVisibility(Err* err) const;
   bool CheckTestonly(Err* err) const;
@@ -391,6 +404,9 @@ class Target : public Item {
   bool check_includes_ = true;
   bool complete_static_lib_ = false;
   bool testonly_ = false;
+  bool header_modules_ = false;
+  std::string module_name_;
+  SourceFile module_map_;
   std::vector<std::string> data_;
   BundleData bundle_data_;
   OutputFile write_runtime_deps_output_;
@@ -445,6 +461,7 @@ class Target : public Item {
   std::vector<OutputFile> computed_outputs_;
   OutputFile link_output_file_;
   OutputFile dependency_output_file_;
+  OutputFile header_module_file_;
   std::vector<OutputFile> runtime_outputs_;
 
   Metadata metadata_;
