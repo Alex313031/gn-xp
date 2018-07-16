@@ -23,6 +23,7 @@ extern const Substitution CSubstitutionCFlagsObjCc;
 extern const Substitution CSubstitutionDefines;
 extern const Substitution CSubstitutionFrameworkDirs;
 extern const Substitution CSubstitutionIncludeDirs;
+extern const Substitution CSubstitutionModuleName;
 
 // Valid for linker tools.
 extern const Substitution CSubstitutionLinkerInputs;
@@ -38,6 +39,7 @@ extern const Substitution CSubstitutionArFlags;
 
 // Both compiler and linker tools.
 bool IsValidCompilerSubstitution(const Substitution* type);
+bool IsValidCompilerModuleSubstitution(const Substitution* type);
 bool IsValidCompilerOutputsSubstitution(const Substitution* type);
 bool IsValidLinkerSubstitution(const Substitution* type);
 bool IsValidLinkerOutputsSubstitution(const Substitution* type);

@@ -1477,3 +1477,164 @@ TEST_F(NinjaCBinaryTargetWriterTest, RustDeps) {
     EXPECT_EQ(expected, out_str) << expected << "\n" << out_str;
   }
 }
+
+TEST_F(NinjaCBinaryTargetWriterTest, HeaderModules) {
+  Err err;
+
+  // This setup's toolchain does not modules.
+  TestWithScope setup;
+
+  // A module toolchain.
+  Settings pcm_settings(setup.build_settings(), "withpcm/");
+  Toolchain pcm_toolchain(&pcm_settings,
+                          Label(SourceDir("//toolchain/"), "withpcm"));
+  pcm_settings.set_toolchain_label(pcm_toolchain.label());
+  pcm_settings.set_default_toolchain_label(setup.toolchain()->label());
+
+  // Declare a C++ compiler.
+  std::unique_ptr<Tool> cxx = std::make_unique<CTool>(CTool::kCToolCxx);
+  CTool* cxx_tool = cxx->AsC();
+  TestWithScope::SetCommandForTool(
+      "c++ {{source}} {{cflags}} {{cflags_cc}} {{defines}} {{include_dirs}} "
+      "-o {{output}}",
+      cxx_tool);
+  cxx_tool->set_outputs(SubstitutionList::MakeForTest(
+      "{{source_out_dir}}/{{target_output_name}}.{{source_name_part}}.o"));
+  pcm_toolchain.SetTool(std::move(cxx));
+
+  std::unique_ptr<Tool> cxx_module = std::make_unique<CTool>(CTool::kCToolCxxModule);
+  CTool* cxx_module_tool = cxx_module->AsC();
+  TestWithScope::SetCommandForTool(
+      "c++ {{source}} {{cflags}} {{cflags_cc}} {{defines}} {{include_dirs}} "
+      "-o {{output}}",
+      cxx_module_tool);
+  cxx_module_tool->set_outputs(SubstitutionList::MakeForTest(
+      "{{source_out_dir}}/{{target_output_name}}.{{source_name_part}}.o"));
+  pcm_toolchain.SetTool(std::move(cxx_module));
+
+  // Add a C compiler as well.
+  std::unique_ptr<Tool> cc = std::make_unique<CTool>(CTool::kCToolCc);
+  CTool* cc_tool = cc->AsC();
+  TestWithScope::SetCommandForTool(
+      "cc {{source}} {{cflags}} {{cflags_c}} {{defines}} {{include_dirs}} "
+      "-o {{output}}",
+      cc_tool);
+  cc_tool->set_outputs(SubstitutionList::MakeForTest(
+      "{{source_out_dir}}/{{target_output_name}}.{{source_name_part}}.o"));
+  pcm_toolchain.SetTool(std::move(cc));
+
+  std::unique_ptr<Tool> cc_module = std::make_unique<CTool>(CTool::kCToolCcModule);
+  CTool* cc_module_tool = cc_module->AsC();
+  TestWithScope::SetCommandForTool(
+      "cc {{source}} {{cflags}} {{cflags_c}} {{defines}} {{include_dirs}} "
+      "-o {{output}}",
+      cc_module_tool);
+  cc_module_tool->set_outputs(SubstitutionList::MakeForTest(
+      "{{source_out_dir}}/{{target_output_name}}.{{source_name_part}}.o"));
+  pcm_toolchain.SetTool(std::move(cc_module));
+
+  pcm_toolchain.ToolchainSetupComplete();
+
+  // This target doesn't enable header modules.
+  {
+    Target no_pcm_target(&pcm_settings,
+                         Label(SourceDir("//foo/"), "no_pcm_target"));
+    no_pcm_target.set_output_type(Target::SOURCE_SET);
+    no_pcm_target.visibility().SetPublic();
+    no_pcm_target.sources().push_back(SourceFile("//foo/input0.c"));
+    no_pcm_target.sources().push_back(SourceFile("//foo/input1.cc"));
+    no_pcm_target.sources().push_back(SourceFile("//foo/input2.cc"));
+    no_pcm_target.source_types_used().Set(SourceFile::SOURCE_CPP);
+    no_pcm_target.source_types_used().Set(SourceFile::SOURCE_C);
+    no_pcm_target.config_values().cflags_c().push_back("-std=c99");
+    no_pcm_target.config_values().cflags_cc().push_back("-std=c++11");
+    no_pcm_target.SetToolchain(&pcm_toolchain);
+    ASSERT_TRUE(no_pcm_target.OnResolved(&err));
+
+    std::ostringstream out;
+    NinjaBinaryTargetWriter writer(&no_pcm_target, out);
+    writer.Run();
+
+    const char no_pcm_expected[] =
+        "defines =\n"
+        "include_dirs =\n"
+        "cflags =\n"
+        "cflags_c = -std=c99\n"
+        "cflags_cc = -std=c++11\n"
+        "target_out_dir = withpcm/obj/foo\n"
+        "target_output_name = no_pcm_target\n"
+        "\n"
+        "build withpcm/obj/foo/no_pcm_target.input0.o: "
+        "withpcm_cc ../../foo/input0.c\n"
+        "build withpcm/obj/foo/no_pcm_target.input1.o: "
+        "withpcm_cxx ../../foo/input1.cc\n"
+        "build withpcm/obj/foo/no_pcm_target.input2.o: "
+        "withpcm_cxx ../../foo/input2.cc\n"
+        "\n"
+        "build withpcm/obj/foo/no_pcm_target.stamp: "
+        "withpcm_stamp withpcm/obj/foo/no_pcm_target.input0.o "
+        "withpcm/obj/foo/no_pcm_target.input1.o "
+        "withpcm/obj/foo/no_pcm_target.input2.o\n";
+    EXPECT_EQ(no_pcm_expected, out.str()) << no_pcm_expected << "\n\n" << out.str();
+  }
+
+  // This target enables header modules.
+  {
+    Target pcm_target(&pcm_settings, Label(SourceDir("//foo/"), "pcm_target"));
+    pcm_target.config_values().cflags_c().push_back("-std=c99");
+    pcm_target.config_values().cflags_cc().push_back("-std=c++11");
+    pcm_target.set_output_type(Target::SOURCE_SET);
+    pcm_target.visibility().SetPublic();
+    pcm_target.sources().push_back(SourceFile("//foo/input0.c"));
+    pcm_target.sources().push_back(SourceFile("//foo/input1.cc"));
+    pcm_target.sources().push_back(SourceFile("//foo/input2.cc"));
+    pcm_target.source_types_used().Set(SourceFile::SOURCE_CPP);
+    pcm_target.source_types_used().Set(SourceFile::SOURCE_C);
+    pcm_target.set_header_modules(true);
+    pcm_target.SetToolchain(&pcm_toolchain);
+    ASSERT_TRUE(pcm_target.OnResolved(&err));
+
+    std::ostringstream out;
+    NinjaBinaryTargetWriter writer(&pcm_target, out);
+    writer.Run();
+
+    const char pcm_expected[] =
+        "defines =\n"
+        "include_dirs =\n"
+        "cflags =\n"
+        "cflags_c = -fmodules -fmodule-name=//foo:pcm_target"
+        " -fmodules-strict-decluse"
+        " -fmodule-map-file=withpcm/obj/foo/pcm_target.cppmap"
+        " -fmodule-file=withpcm/obj/foo/pcm_target.pcm_target.pcm -std=c99\n"
+        "cflags_cc = -fmodules -fmodule-name=//foo:pcm_target"
+        " -fmodules-strict-decluse "
+        " -fmodule-map-file=withpcm/obj/foo/pcm_target.cppmap"
+        " -fmodule-file=withpcm/obj/foo/pcm_target.pcm_target.pcm -std=c++11\n"
+        "target_out_dir = withpcm/obj/foo\n"
+        "target_output_name = pcm_target\n"
+        "\n"
+        // Compile the header module.
+        "build withpcm/obj/foo/pcm_target.pcm_target.pcm: "
+        "withpcm_cxx_module withpcm/obj/foo/pcm_target.cppmap\n"
+        "  cflags_cc = -std=c++11\n"
+        "\n"
+        "build withpcm/obj/foo/pcm_target.input0.o: "
+        "withpcm_cc ../../foo/input0.c | "
+        // Explicit dependency on the PCM build step.
+        "withpcm/obj/foo/pcm_target.pcm_target.pcm\n"
+        "build withpcm/obj/foo/pcm_target.input1.o: "
+        "withpcm_cxx ../../foo/input1.cc | "
+        // Explicit dependency on the PCM build step.
+        "withpcm/obj/foo/pcm_target.pcm_target.pcm\n"
+        "build withpcm/obj/foo/pcm_target.input2.o: "
+        "withpcm_cxx ../../foo/input2.cc | "
+        // Explicit dependency on the PCM build step.
+        "withpcm/obj/foo/pcm_target.pcm_target.pcm\n"
+        "\n"
+        "build withpcm/obj/foo/pcm_target.stamp: "
+        "withpcm_stamp withpcm/obj/foo/pcm_target.input0.o "
+        "withpcm/obj/foo/pcm_target.input1.o "
+        "withpcm/obj/foo/pcm_target.input2.o\n";
+    EXPECT_EQ(pcm_expected, out.str()) << pcm_expected << "\n\n" << out.str();
+  }
+}

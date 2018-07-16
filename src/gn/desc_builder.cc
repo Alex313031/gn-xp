@@ -43,11 +43,14 @@
 //   "depfile : "file name for action input dependencies",
 //   "outputs" : [ list of target outputs ],
 //   "arflags", "asmflags", "cflags", "cflags_c",
-//   "clfags_cc", "cflags_objc", "clfags_objcc" : [ list of flags],
+//   "clfags_cc", "cflags_objc", "clfags_objcc",
+//   "cflags_module": [ list of flags],
 //   "defines" : [ list of preprocessor definitions ],
 //   "include_dirs" : [ list of include directories ],
 //   "precompiled_header" : "name of precompiled header file",
 //   "precompiled_source" : "path to precompiled source",
+//   "module_name" : "name of the module",
+//   "module_map" : "path to module map file",
 //   "deps : [ list of target dependencies ],
 //   "libs" : [ list of libraries ],
 //   "lib_dirs" : [ list of library directories ]
@@ -268,6 +271,7 @@ class ConfigDescBuilder : public BaseDescBuilder {
     CONFIG_VALUE_ARRAY_HANDLER(cflags_cc, std::string)
     CONFIG_VALUE_ARRAY_HANDLER(cflags_objc, std::string)
     CONFIG_VALUE_ARRAY_HANDLER(cflags_objcc, std::string)
+    CONFIG_VALUE_ARRAY_HANDLER(cflags_module, std::string)
     CONFIG_VALUE_ARRAY_HANDLER(defines, std::string)
     CONFIG_VALUE_ARRAY_HANDLER(frameworks, std::string)
     CONFIG_VALUE_ARRAY_HANDLER(framework_dirs, SourceDir)
@@ -486,6 +490,7 @@ class TargetDescBuilder : public BaseDescBuilder {
       CONFIG_VALUE_ARRAY_HANDLER(cflags_cc, std::string)
       CONFIG_VALUE_ARRAY_HANDLER(cflags_objc, std::string)
       CONFIG_VALUE_ARRAY_HANDLER(cflags_objcc, std::string)
+      CONFIG_VALUE_ARRAY_HANDLER(cflags_module, std::string)
       CONFIG_VALUE_ARRAY_HANDLER(rustflags, std::string)
       CONFIG_VALUE_ARRAY_HANDLER(defines, std::string)
       CONFIG_VALUE_ARRAY_HANDLER(include_dirs, SourceDir)
@@ -598,6 +603,12 @@ class TargetDescBuilder : public BaseDescBuilder {
                                      std::move(framework_dirs));
       }
     }
+
+    if (what(variables::kModuleName))
+      res->SetKey(variables::kModuleName, base::Value(target_->module_name()));
+    if (what(variables::kModuleMap))
+      res->SetWithoutPathExpansion(variables::kModuleMap,
+                                   RenderValue(target_->module_map()));
 
     return res;
   }

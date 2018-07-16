@@ -7,9 +7,13 @@
 #include "gn/target.h"
 
 const char* CTool::kCToolCc = "cc";
+const char* CTool::kCToolCcModule = "cc_module";
 const char* CTool::kCToolCxx = "cxx";
+const char* CTool::kCToolCxxModule = "cxx_module";
 const char* CTool::kCToolObjC = "objc";
+const char* CTool::kCToolObjCModule = "objc_module";
 const char* CTool::kCToolObjCxx = "objcxx";
+const char* CTool::kCToolObjCxxModule = "objcxx_module";
 const char* CTool::kCToolRc = "rc";
 const char* CTool::kCToolAsm = "asm";
 const char* CTool::kCToolAlink = "alink";
@@ -41,13 +45,15 @@ bool CTool::ValidateName(const char* name) const {
   return name == kCToolCc || name == kCToolCxx || name == kCToolObjC ||
          name == kCToolObjCxx || name == kCToolRc || name == kCToolAsm ||
          name == kCToolAlink || name == kCToolSolink ||
-         name == kCToolSolinkModule || name == kCToolLink;
+         name == kCToolSolinkModule || name == kCToolLink ||
+         name == kCToolCcModule || name == kCToolCxxModule;
 }
 
 void CTool::SetComplete() {
   SetToolComplete();
   link_output_.FillRequiredTypes(&substitution_bits_);
   depend_output_.FillRequiredTypes(&substitution_bits_);
+  module_flags_.FillRequiredTypes(&substitution_bits_);
 }
 
 bool CTool::ValidateRuntimeOutputs(Err* err) {
@@ -191,7 +197,8 @@ bool CTool::InitTool(Scope* scope, Toolchain* toolchain, Err* err) {
       !ReadString(scope, "lib_switch", &lib_switch_, err) ||
       !ReadString(scope, "lib_dir_switch", &lib_dir_switch_, err) ||
       !ReadPattern(scope, "link_output", &link_output_, err) ||
-      !ReadPattern(scope, "depend_output", &depend_output_, err)) {
+      !ReadPattern(scope, "depend_output", &depend_output_, err) ||
+      !ReadPattern(scope, "module_flags", &module_flags_, err)) {
     return false;
   }
 
@@ -220,6 +227,8 @@ bool CTool::ValidateSubstitution(const Substitution* sub_type) const {
   if (name_ == kCToolCc || name_ == kCToolCxx || name_ == kCToolObjC ||
       name_ == kCToolObjCxx || name_ == kCToolRc || name_ == kCToolAsm)
     return IsValidCompilerSubstitution(sub_type);
+  else if (name_ == kCToolCcModule || name_ == kCToolCxxModule)
+    return IsValidCompilerModuleSubstitution(sub_type);
   else if (name_ == kCToolAlink)
     return IsValidALinkSubstitution(sub_type);
   else if (name_ == kCToolSolink || name_ == kCToolSolinkModule ||
@@ -231,7 +240,8 @@ bool CTool::ValidateSubstitution(const Substitution* sub_type) const {
 
 bool CTool::ValidateOutputSubstitution(const Substitution* sub_type) const {
   if (name_ == kCToolCc || name_ == kCToolCxx || name_ == kCToolObjC ||
-      name_ == kCToolObjCxx || name_ == kCToolRc || name_ == kCToolAsm)
+      name_ == kCToolObjCxx || name_ == kCToolRc || name_ == kCToolAsm ||
+      name_ == kCToolCcModule || name_ == kCToolCxxModule)
     return IsValidCompilerOutputsSubstitution(sub_type);
   // ALink uses the standard output file patterns as other linker tools.
   else if (name_ == kCToolAlink || name_ == kCToolSolink ||

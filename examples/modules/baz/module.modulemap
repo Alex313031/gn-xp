@@ -1,0 +1,4 @@
+module "baz" {
+  export *
+  header "baz.h"
+}

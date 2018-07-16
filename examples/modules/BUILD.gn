@@ -1,0 +1,12 @@
+executable("quux") {
+  sources = [
+    "quux.cc",
+    "quux.h",
+  ]
+
+  deps = [
+    "//foo",
+    "//bar",
+    "//baz",
+  ]
+}

@@ -21,36 +21,6 @@ void AssertValueSourceFileString(const std::string& s) {
   DCHECK(!EndsWithSlash(s)) << s;
 }
 
-SourceFile::Type GetSourceFileType(const std::string& file) {
-  std::string_view extension = FindExtension(&file);
-  if (extension == "cc" || extension == "cpp" || extension == "cxx")
-    return SourceFile::SOURCE_CPP;
-  if (extension == "h" || extension == "hpp" || extension == "hxx" ||
-      extension == "hh" || extension == "inc" || extension == "ipp" ||
-      extension == "inl")
-    return SourceFile::SOURCE_H;
-  if (extension == "c")
-    return SourceFile::SOURCE_C;
-  if (extension == "m")
-    return SourceFile::SOURCE_M;
-  if (extension == "mm")
-    return SourceFile::SOURCE_MM;
-  if (extension == "rc")
-    return SourceFile::SOURCE_RC;
-  if (extension == "S" || extension == "s" || extension == "asm")
-    return SourceFile::SOURCE_S;
-  if (extension == "o" || extension == "obj")
-    return SourceFile::SOURCE_O;
-  if (extension == "def")
-    return SourceFile::SOURCE_DEF;
-  if (extension == "rs")
-    return SourceFile::SOURCE_RS;
-  if (extension == "go")
-    return SourceFile::SOURCE_GO;
-
-  return SourceFile::SOURCE_UNKNOWN;
-}
-
 std::string Normalized(std::string value) {
   DCHECK(!value.empty());
   AssertValueSourceFileString(value);
@@ -109,7 +79,7 @@ bool SourceFileTypeSet::CSourceUsed() const {
          Get(SourceFile::SOURCE_C) || Get(SourceFile::SOURCE_M) ||
          Get(SourceFile::SOURCE_MM) || Get(SourceFile::SOURCE_RC) ||
          Get(SourceFile::SOURCE_S) || Get(SourceFile::SOURCE_O) ||
-         Get(SourceFile::SOURCE_DEF);
+         Get(SourceFile::SOURCE_DEF) || Get(SourceFile::SOURCE_MODULEMAP);
 }
 
 bool SourceFileTypeSet::RustSourceUsed() const {
@@ -124,4 +94,36 @@ bool SourceFileTypeSet::MixedSourceUsed() const {
   return (1 << static_cast<int>(CSourceUsed())
             << static_cast<int>(RustSourceUsed())
             << static_cast<int>(GoSourceUsed())) > 2;
+}
+
+SourceFile::Type GetSourceFileType(const std::string& file) {
+  std::string_view extension = FindExtension(&file);
+  if (extension == "cc" || extension == "cpp" || extension == "cxx")
+    return SourceFile::SOURCE_CPP;
+  if (extension == "h" || extension == "hpp" || extension == "hxx" ||
+      extension == "hh" || extension == "inc" || extension == "ipp" ||
+      extension == "inl")
+    return SourceFile::SOURCE_H;
+  if (extension == "c")
+    return SourceFile::SOURCE_C;
+  if (extension == "m")
+    return SourceFile::SOURCE_M;
+  if (extension == "mm")
+    return SourceFile::SOURCE_MM;
+  if (extension == "rc")
+    return SourceFile::SOURCE_RC;
+  if (extension == "S" || extension == "s" || extension == "asm")
+    return SourceFile::SOURCE_S;
+  if (extension == "o" || extension == "obj")
+    return SourceFile::SOURCE_O;
+  if (extension == "def")
+    return SourceFile::SOURCE_DEF;
+  if (extension == "rs")
+    return SourceFile::SOURCE_RS;
+  if (extension == "go")
+    return SourceFile::SOURCE_GO;
+  if (extension == "modulemap")
+    return SourceFile::SOURCE_MODULEMAP;
+
+  return SourceFile::SOURCE_UNKNOWN;
 }

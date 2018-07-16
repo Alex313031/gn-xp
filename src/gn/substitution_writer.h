@@ -176,6 +176,10 @@ class SubstitutionWriter {
   //
   // Handles the target substitutions that apply to both compiler and linker
   // tools.
+  static std::string ApplyPatternToTargetAsString(
+      const Target* target,
+      const Tool* tool,
+      const SubstitutionPattern& pattern);
   static OutputFile ApplyPatternToTargetAsOutputFile(
       const Target* target,
       const Tool* tool,

@@ -5,8 +5,11 @@
 #include "gn/ninja_target_command_util.h"
 
 #include <string.h>
+#include <iostream>
 
 #include "gn/c_tool.h"
+#include "gn/deps_iterator.h"
+#include "gn/module_map_writer.h"
 #include "gn/substitution_writer.h"
 
 namespace {
@@ -22,6 +25,20 @@ const char* GetPCHLangSuffixForToolType(const char* name) {
   if (name == CTool::kCToolObjCxx)
     return "mm";
   NOTREACHED() << "Not a valid PCH tool type: " << name;
+  return "";
+}
+
+// Returns the language-specific suffix for precompiled module files.
+const char* GetPCMLangSuffixForToolType(const char* name) {
+  if (name == CTool::kCToolCc)
+    return "c";
+  if (name == CTool::kCToolCxx)
+    return "cc";
+  if (name == CTool::kCToolObjC)
+    return "m";
+  if (name == CTool::kCToolObjCxx)
+    return "mm";
+  NOTREACHED() << "Not a valid PCM tool type: " << name;
   return "";
 }
 
@@ -56,6 +73,46 @@ void WriteOneFlag(const Target* target,
 
   if (write_substitution)
     out << subst_enum->ninja_name << " =";
+
+  if (target->header_modules()) {
+    const CTool* tool = target->toolchain()->GetToolAsC(tool_name);
+    if (tool && tool->IsCompiler()) {
+      out << " -fmodules";
+      out << " -fmodule-name=" << GetModuleNameForTarget(target);
+
+      // TODO: which of these should be hardcoded vs specified in the build?
+      // out << " -fmodule-file-deps";
+      // out << " -fmodules-strict-decluse";
+      // out << " -fno-implicit-modules";
+      // out << " -fno-implicit-module-maps";
+
+      std::vector<SourceFile> module_maps;
+      module_maps.push_back(GetCppMapFileForTarget(target));
+
+      std::vector<OutputFile> modules;
+      GetPCMOutputFiles(target, GetCppMapFileForTarget(target), tool_name, &modules);
+
+      for (const auto& pair : target->GetDeps(Target::DEPS_LINKED)) {
+        const Target* dep = pair.ptr;
+        if (dep->header_modules()) {
+          module_maps.push_back(GetCppMapFileForTarget(dep));
+          std::vector<OutputFile> outputs;
+          GetPCMOutputFiles(dep, GetCppMapFileForTarget(dep), tool_name, &outputs);
+          modules.insert(modules.end(), outputs.begin(), outputs.end());
+        }
+      }
+
+      for (const auto& module_map : module_maps) {
+        out << " -fmodule-map-file=";
+        path_output.WriteFile(out, module_map);
+      }
+
+      for (const auto& module : modules) {
+        out << " -fmodule-file=";
+        path_output.WriteFile(out, module);
+      }
+    }
+  }
 
   if (has_precompiled_headers) {
     const CTool* tool = target->toolchain()->GetToolAsC(tool_name);
@@ -174,4 +231,53 @@ std::string GetWindowsPCHObjectExtension(const char* tool_name,
   result += lang_suffix;
   result += obj_extension;
   return result;
+}
+
+std::string GetPCMOutputExtension(const char* tool_name) {
+  const char* lang_suffix = GetPCMLangSuffixForToolType(tool_name);
+  std::string result = "_";
+  result += lang_suffix;
+  result += ".pcm";
+  return result;
+}
+
+void GetPCMOutputFiles(const Target* target,
+                       const SourceFile& source,
+                       const char* tool_name,
+                       std::vector<OutputFile>* outputs) {
+  outputs->clear();
+
+  if (target->module_map().is_null()) {
+    OutputFile output_file = OutputFile(
+      GetBuildDirForTargetAsOutputFile(target, BuildDirType::OBJ).value() +
+      target->label().name() + GetPCMOutputExtension(tool_name));
+    outputs->push_back(output_file);
+  } else {
+    // Compute the tool. This must use the tool type passed in rather than the
+    // detected file type of the precompiled source file since the same
+    // precompiled source file will be used for separate C/C++ compiles.
+    const CTool* tool = target->toolchain()->GetToolAsC(tool_name);
+    if (!tool)
+      return;
+
+    SubstitutionWriter::ApplyListToCompilerAsOutputFile(
+        target, source, tool->outputs(), outputs);
+
+    if (outputs->empty())
+      return;
+    if (outputs->size() > 1)
+      outputs->resize(1);  // Only link the first output from the compiler tool.
+
+    std::string& output_value = (*outputs)[0].value();
+    size_t extension_offset = FindExtensionOffset(output_value);
+    if (extension_offset == std::string::npos) {
+      // No extension found.
+      return;
+    }
+    DCHECK(extension_offset >= 1);
+    DCHECK(output_value[extension_offset - 1] == '.');
+
+    output_value.replace(extension_offset - 1, std::string::npos,
+                         GetPCMOutputExtension(tool_name));
+  }
 }

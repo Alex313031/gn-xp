@@ -63,6 +63,15 @@ void BinaryTargetGenerator::DoRun() {
   if (!FillCompleteStaticLib())
     return;
 
+  if (!FillHeaderModules())
+    return;
+
+  if (!FillModuleName())
+    return;
+
+  if (!FillModuleMap())
+    return;
+
   if (!ValidateSources())
     return;
 
@@ -95,6 +104,7 @@ bool BinaryTargetGenerator::FillSources() {
       case SourceFile::SOURCE_ASM:
       case SourceFile::SOURCE_O:
       case SourceFile::SOURCE_DEF:
+      case SourceFile::SOURCE_MODULEMAP:
       case SourceFile::SOURCE_GO:
       case SourceFile::SOURCE_RS:
       case SourceFile::SOURCE_RC:
@@ -133,6 +143,43 @@ bool BinaryTargetGenerator::FillFriends() {
     return ExtractListOfLabelPatterns(scope_->settings()->build_settings(),
                                       *value, scope_->GetSourceDir(),
                                       &target_->friends(), err_);
+  }
+  return true;
+}
+
+bool BinaryTargetGenerator::FillHeaderModules() {
+  const Value* value = scope_->GetValue(variables::kHeaderModules, true);
+  if (value) {
+    if (!value->VerifyTypeIs(Value::BOOLEAN, err_))
+      return false;
+    target_->set_header_modules(value->boolean_value());
+  }
+  return true;
+}
+
+bool BinaryTargetGenerator::FillModuleName() {
+  const Value* value = scope_->GetValue(variables::kModuleName, true);
+  if (value) {
+    if (!value->VerifyTypeIs(Value::STRING, err_))
+      return false;
+    target_->set_module_name(value->string_value());
+  }
+  return true;
+}
+
+bool BinaryTargetGenerator::FillModuleMap() {
+  const Value* value = scope_->GetValue(variables::kModuleMap, true);
+  if (value) {
+    if (!value->VerifyTypeIs(Value::STRING, err_))
+      return false;
+
+    const BuildSettings* build_settings = scope_->settings()->build_settings();
+    SourceFile file = scope_->GetSourceDir().ResolveRelativeFile(
+        *value, err_, build_settings->root_path_utf8());
+    if (err_->has_error())
+      return false;
+
+    target_->set_module_map(file);
   }
   return true;
 }

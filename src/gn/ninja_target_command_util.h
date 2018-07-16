@@ -111,4 +111,11 @@ std::string GetGCCPCHOutputExtension(const char* tool_name);
 std::string GetWindowsPCHObjectExtension(const char* tool_name,
                                          const std::string& obj_extension);
 
+std::string GetPCMOutputExtension(const char* tool_name);
+
+void GetPCMOutputFiles(const Target* target,
+                       const SourceFile& source,
+                       const char* tool_name,
+                       std::vector<OutputFile>* outputs);
+
 #endif  // TOOLS_GN_NINJA_TARGET_COMMAND_WRITER_H_

@@ -28,6 +28,20 @@ class NinjaCBinaryTargetWriter : public NinjaBinaryTargetWriter {
   // Writes all flags for the compiler: includes, defines, cflags, etc.
   void WriteCompilerVars();
 
+  // Writes build lines required for Clang modules.
+  void WritePCMCommands(
+      const std::vector<OutputFile>& input_deps,
+      const std::vector<OutputFile>& order_only_deps,
+      std::vector<OutputFile>* pcm_files);
+
+  void WritePCMCommand(
+      const Substitution* flag_type,
+      const char* tool_name,
+      const SourceFile& source,
+      const std::vector<OutputFile>& input_deps,
+      const std::vector<OutputFile>& order_only_deps,
+      std::vector<OutputFile>* pcm_files);
+
   // Writes build lines required for precompiled headers. Any generated
   // object files will be appended to the |object_files|. Any generated
   // non-object files (for instance, .gch files from a GCC toolchain, are

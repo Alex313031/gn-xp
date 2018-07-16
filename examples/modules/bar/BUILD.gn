@@ -1,0 +1,6 @@
+shared_library("bar") {
+  public = [ "bar.h" ]
+  sources = [ "bar.cc" ]
+  deps = [ "//foo" ]
+  header_modules = true
+}

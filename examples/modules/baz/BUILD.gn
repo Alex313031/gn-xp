@@ -1,0 +1,7 @@
+static_library("baz") {
+  public = [ "baz.h" ]
+  sources = [ "baz.cc" ]
+  header_modules = true
+  module_map = "module.modulemap"
+  module_name = "baz"
+}
