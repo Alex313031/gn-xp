@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "eaedbb4d_921d03bd",
+        "filename": "build/gen.py",
+        "patchSetId": 3
+      },
+      "lineNbr": 262,
+      "author": {
+        "id": 1000014
+      },
+      "writtenOn": "2018-07-16T17:16:46Z",
+      "side": 1,
+      "message": "Can you add a comment here about why we compile with function and data sections?",
+      "revId": "71a8417b900fe1d1b4499df1f1bc652d6a7a7afe",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": true
+    }
+  ]
+}
