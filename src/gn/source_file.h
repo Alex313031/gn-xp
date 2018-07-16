@@ -37,6 +37,7 @@ class SourceFile {
     SOURCE_RC,
     SOURCE_O,  // Object files can be inputs, too. Also counts .obj.
     SOURCE_DEF,
+    SOURCE_MODULEMAP,
 
     SOURCE_RS,
     SOURCE_GO,
@@ -164,5 +165,7 @@ class SourceFileTypeSet {
   bool empty_;
   bool flags_[static_cast<int>(SourceFile::SOURCE_NUMTYPES)];
 };
+
+SourceFile::Type GetSourceFileType(const std::string& file);
 
 #endif  // TOOLS_GN_SOURCE_FILE_H_

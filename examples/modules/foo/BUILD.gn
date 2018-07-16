@@ -1,0 +1,9 @@
+shared_library("foo") {
+  public = [ "foo.h" ]
+  sources = [
+    "foo.cc",
+    "foo_internal.c",
+    "foo_internal.h",
+  ]
+  header_modules = true
+}

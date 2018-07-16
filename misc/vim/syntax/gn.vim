@@ -22,6 +22,7 @@ syn keyword     gnPredefVar root_build_dir root_gen_dir root_out_dir
 syn keyword     gnPredefVar target_cpu target_gen_dir target_out_dir
 syn keyword     gnPredefVar target_os
 syn keyword     gnPredefVar true false
+syn keyword     gnPredefVar header_modules module_name module_map
 hi def link     gnPredefVar         Constant
 
 " Target declarations

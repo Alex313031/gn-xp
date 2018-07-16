@@ -113,7 +113,7 @@ bool Scheduler::IsFileGeneratedByWriteRuntimeDeps(
 
 void Scheduler::AddGeneratedFile(const SourceFile& entry) {
   std::lock_guard<std::mutex> lock(lock_);
-  generated_files_.insert(std::make_pair(entry, true));
+  generated_files_.insert(entry);
 }
 
 bool Scheduler::IsFileGeneratedByTarget(const SourceFile& file) const {

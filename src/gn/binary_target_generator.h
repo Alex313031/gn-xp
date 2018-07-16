@@ -27,6 +27,9 @@ class BinaryTargetGenerator : public TargetGenerator {
  private:
   bool FillCompleteStaticLib();
   bool FillFriends();
+  bool FillHeaderModules();
+  bool FillModuleName();
+  bool FillModuleMap();
   bool FillOutputName();
   bool FillOutputPrefixOverride();
   bool FillOutputDir();

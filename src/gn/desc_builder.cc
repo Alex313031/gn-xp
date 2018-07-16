@@ -47,6 +47,8 @@
 //   "include_dirs" : [ list of include directories ],
 //   "precompiled_header" : "name of precompiled header file",
 //   "precompiled_source" : "path to precompiled source",
+//   "module_name" : "name of the module",
+//   "module_map" : "path to module map file",
 //   "deps : [ list of target dependencies ],
 //   "libs" : [ list of libraries ],
 //   "lib_dirs" : [ list of library directories ]
@@ -574,6 +576,12 @@ class TargetDescBuilder : public BaseDescBuilder {
                                      std::move(framework_dirs));
       }
     }
+
+    if (what(variables::kModuleName))
+      res->SetKey(variables::kModuleName, base::Value(target_->module_name()));
+    if (what(variables::kModuleMap))
+      res->SetWithoutPathExpansion(variables::kModuleMap,
+                                   RenderValue(target_->module_map()));
 
     return res;
   }

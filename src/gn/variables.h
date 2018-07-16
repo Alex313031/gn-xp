@@ -210,6 +210,10 @@ extern const char kFrameworks[];
 extern const char kFrameworks_HelpShort[];
 extern const char kFrameworks_Help[];
 
+extern const char kHeaderModules[];
+extern const char kHeaderModules_HelpShort[];
+extern const char kHeaderModules_Help[];
+
 extern const char kIncludeDirs[];
 extern const char kIncludeDirs_HelpShort[];
 extern const char kIncludeDirs_Help[];
@@ -233,6 +237,18 @@ extern const char kLibs_Help[];
 extern const char kMetadata[];
 extern const char kMetadata_HelpShort[];
 extern const char kMetadata_Help[];
+
+extern const char kModuleFlags[];
+extern const char kModuleFlags_HelpShort[];
+extern const char kModuleFlags_Help[];
+
+extern const char kModuleName[];
+extern const char kModuleName_HelpShort[];
+extern const char kModuleName_Help[];
+
+extern const char kModuleMap[];
+extern const char kModuleMap_HelpShort[];
+extern const char kModuleMap_Help[];
 
 extern const char kOutputDir[];
 extern const char kOutputDir_HelpShort[];

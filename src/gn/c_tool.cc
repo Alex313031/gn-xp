@@ -47,6 +47,7 @@ void CTool::SetComplete() {
   SetToolComplete();
   link_output_.FillRequiredTypes(&substitution_bits_);
   depend_output_.FillRequiredTypes(&substitution_bits_);
+  module_flags_.FillRequiredTypes(&substitution_bits_);
 }
 
 bool CTool::ValidateRuntimeOutputs(Err* err) {
@@ -188,7 +189,8 @@ bool CTool::InitTool(Scope* scope, Toolchain* toolchain, Err* err) {
       !ReadString(scope, "lib_switch", &lib_switch_, err) ||
       !ReadString(scope, "lib_dir_switch", &lib_dir_switch_, err) ||
       !ReadPattern(scope, "link_output", &link_output_, err) ||
-      !ReadPattern(scope, "depend_output", &depend_output_, err)) {
+      !ReadPattern(scope, "depend_output", &depend_output_, err) ||
+      !ReadPattern(scope, "module_flags", &module_flags_, err)) {
     return false;
   }
 

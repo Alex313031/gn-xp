@@ -313,6 +313,7 @@ const char* Tool::GetToolTypeForSourceType(SourceFile::Type type) {
     case SourceFile::SOURCE_O:
     case SourceFile::SOURCE_DEF:
     case SourceFile::SOURCE_GO:
+    case SourceFile::SOURCE_MODULEMAP:
       return kToolNone;
     default:
       NOTREACHED();
