@@ -24,7 +24,8 @@ GN_ROOT = os.path.join(REPO_ROOT, 'tools', 'gn')
 is_win = sys.platform.startswith('win')
 is_linux = sys.platform.startswith('linux')
 is_mac = sys.platform.startswith('darwin')
-is_posix = is_linux or is_mac
+is_aix = sys.platform.startswith('aix')
+is_posix = is_linux or is_mac or is_aix
 
 
 def main(argv):
@@ -157,7 +158,8 @@ def WriteGenericNinja(path, static_libraries, executables,
   template_filename = os.path.join(SCRIPT_DIR, {
       'win32': 'build_win.ninja.template',
       'darwin': 'build_mac.ninja.template',
-      'linux2': 'build_linux.ninja.template'
+      'linux2': 'build_linux.ninja.template',
+      'aix6': 'build_aix.ninja.template'
   }[sys.platform])
 
   with open(template_filename) as f:
@@ -241,6 +243,11 @@ def WriteGNNinja(path, options, linux_sysroot):
     cxx = os.environ.get('CXX', 'cl.exe')
     ld = os.environ.get('LD', 'link.exe')
     ar = os.environ.get('AR', 'lib.exe')
+  elif is_aix:
+    cc = os.environ.get('CC', 'gcc')
+    cxx = os.environ.get('CXX', 'g++')
+    ld = os.environ.get('LD', 'g++')
+    ar = os.environ.get('AR', 'ar -X64')
   else:
     cc = os.environ.get('CC', 'clang')
     cxx = os.environ.get('CXX', 'clang++')
@@ -261,15 +268,18 @@ def WriteGNNinja(path, options, linux_sysroot):
       cflags.append('-DNDEBUG')
       cflags.append('-O3')
       ldflags.append('-O3')
-      # Use -fdata-sections and -ffunction-sections to place each function
-      # or data item into its own section so --gc-sections can eliminate any
-      # unused functions and data items.
-      cflags.extend(['-fdata-sections', '-ffunction-sections'])
-      ldflags.extend(['-fdata-sections', '-ffunction-sections'])
-      ldflags.append('-Wl,-dead_strip' if is_mac else '-Wl,--gc-sections')
-      # Omit all symbol information from the output file.
-      ldflags.append('-Wl,-S' if is_mac else '-Wl,-strip-all')
-      # Enable identical code-folding.
+      if is_aix:
+        ldflags.extend(['-maix64', '-pthread'])
+      else:
+        # Use -fdata-sections and -ffunction-sections to place each function
+        # or data item into its own section so --gc-sections can eliminate any
+        # unused functions and data items.
+        cflags.extend(['-fdata-sections', '-ffunction-sections'])
+        ldflags.extend(['-fdata-sections', '-ffunction-sections'])
+        ldflags.append('-Wl,-dead_strip' if is_mac else '-Wl,--gc-sections')
+        # Omit all symbol information from the output file.
+        ldflags.append('-Wl,-S' if is_mac else '-Wl,-strip-all')
+        # Enable identical code-folding.
       if is_linux:
         ldflags.append('-Wl,--icf=all')
 
@@ -304,6 +314,8 @@ def WriteGNNinja(path, options, linux_sysroot):
       min_mac_version_flag = '-mmacosx-version-min=10.9'
       cflags.append(min_mac_version_flag)
       ldflags.append(min_mac_version_flag)
+    elif is_aix:
+      cflags_cc.extend(['-maix64'])
 
     if options.use_lto:
       cflags.extend(['-flto', '-fwhole-program-vtables'])
@@ -592,7 +604,7 @@ def WriteGNNinja(path, options, linux_sysroot):
         'base/strings/string16.cc',
     ])
 
-  if is_linux:
+  if is_linux or is_aix:
     static_libraries['base']['sources'].extend([
         'base/strings/sys_string_conversions_posix.cc',
     ])
