@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "d4681130_bf701a23",
+        "filename": "build/gen.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 272,
+      "author": {
+        "id": 1000014
+      },
+      "writtenOn": "2018-07-18T16:51:37Z",
+      "side": 1,
+      "message": "Can you comment why the flags set in the \"else\" arm shouldn\u0027t be applied to AIX? It\u0027s not clear to me why you wouldn\u0027t want those.",
+      "revId": "5382e1de77f5a45cdf0a4b50615fb04dd362a9f2",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": true
+    }
+  ]
+}
