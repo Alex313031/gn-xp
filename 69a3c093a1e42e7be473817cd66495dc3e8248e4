@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "a49510c8_33dcdcbc",
+        "filename": "build/gen.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 294,
+      "author": {
+        "id": 1000014
+      },
+      "writtenOn": "2018-07-19T21:51:59Z",
+      "side": 1,
+      "message": "This test looks suspicious to me. Are these clang flags? If that\u0027s the case, can you invert this so these are added only for clang? I\u0027m just thinking the compiler passed in could be a lot of things. Does this really apply to all non-g++ compilers? What if I specify a custom path to my G++ binary?",
+      "revId": "69a3c093a1e42e7be473817cd66495dc3e8248e4",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": true
+    }
+  ]
+}
