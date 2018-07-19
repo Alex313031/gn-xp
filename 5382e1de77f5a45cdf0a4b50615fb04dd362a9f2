@@ -16,6 +16,24 @@
       "revId": "5382e1de77f5a45cdf0a4b50615fb04dd362a9f2",
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "e27a052e_11aa1752",
+        "filename": "build/gen.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 272,
+      "author": {
+        "id": 1000029
+      },
+      "writtenOn": "2018-07-19T03:01:24Z",
+      "side": 1,
+      "message": "I have actually submitted another patch which does include these options for AIX.\nI found alternative linker options that do the equivalent.",
+      "parentUuid": "d4681130_bf701a23",
+      "revId": "5382e1de77f5a45cdf0a4b50615fb04dd362a9f2",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": false
     }
   ]
 }
