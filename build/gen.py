@@ -270,7 +270,7 @@ def WriteGNNinja(path, options, linux_sysroot):
       # Omit all symbol information from the output file.
       ldflags.append('-Wl,-S' if is_mac else '-Wl,-strip-all')
       # Enable identical code-folding.
-      if is_linux:
+      if is_linux and not platform.machine().startswith('ppc'):
         ldflags.append('-Wl,--icf=all')
 
     cflags.extend([
@@ -291,11 +291,12 @@ def WriteGNNinja(path, options, linux_sysroot):
         # probably resolve this and (re-)add a way to build against libc++.
         cflags.append('--sysroot=' + linux_sysroot)
         ldflags.append('--sysroot=' + linux_sysroot)
-      cflags.append('-stdlib=libstdc++')
-      ldflags.extend(['-static-libstdc++',
-                      '-stdlib=libstdc++',
-                      '-Wl,--as-needed',
-                     ])
+      if cxx == 'clang++':
+        cflags.append('-stdlib=libstdc++')
+        ldflags.extend(['-static-libstdc++',
+                        '-stdlib=libstdc++',
+                       ])
+      ldflags.append('-Wl,--as-needed')
       libs.extend([
           '-lgcc_s',
           '-lpthread',
