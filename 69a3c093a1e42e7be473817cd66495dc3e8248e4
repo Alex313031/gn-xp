@@ -16,6 +16,24 @@
       "revId": "69a3c093a1e42e7be473817cd66495dc3e8248e4",
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "9b2b10f1_d9195e50",
+        "filename": "build/gen.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 294,
+      "author": {
+        "id": 1000029
+      },
+      "writtenOn": "2018-07-19T22:06:30Z",
+      "side": 1,
+      "message": "Hi Brett, yes these are clang flags. I agree that I should instead invert the test so that these flags are only applied for clang. This doesn\u0027t apply to any other non-g++ compilers I can think of so we should be okay.",
+      "parentUuid": "a49510c8_33dcdcbc",
+      "revId": "69a3c093a1e42e7be473817cd66495dc3e8248e4",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": false
     }
   ]
 }
