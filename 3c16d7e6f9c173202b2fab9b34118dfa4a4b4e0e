@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "75c77cf8_5e33ebf0",
+        "filename": "build/gen.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 263,
+      "author": {
+        "id": 1000033
+      },
+      "writtenOn": "2018-07-21T21:30:35Z",
+      "side": 1,
+      "message": "This check is a little naive. The user could be forcing GCC by setting CC/CXX in the environment.",
+      "revId": "3c16d7e6f9c173202b2fab9b34118dfa4a4b4e0e",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "799cd65d_db56969e",
+        "filename": "build/gen.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 322,
+      "author": {
+        "id": 1000033
+      },
+      "writtenOn": "2018-07-21T21:30:35Z",
+      "side": 1,
+      "message": "I think it might be nicer to have a separate option to toggle use of libstdc++ on/off. Also, linux packagers probably want to avoid the static linkage.\n\nHowever, I suppose these issues are really separate from the issue this PR addresses.",
+      "revId": "3c16d7e6f9c173202b2fab9b34118dfa4a4b4e0e",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": true
+    }
+  ]
+}
