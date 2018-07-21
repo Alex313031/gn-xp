@@ -131,12 +131,15 @@ bool ResolveFromCommandLineInput(
 // force_check, if true, will override targets opting out of header checking
 // with "check_includes = false" and will check them anyway.
 //
+// system, if true, will check for <> style includes in addition to "" style.
+//
 // On success, returns true. If the check fails, the error(s) will be printed
 // to stdout and false will be returned.
 bool CheckPublicHeaders(const BuildSettings* build_settings,
                         const std::vector<const Target*>& all_targets,
                         const std::vector<const Target*>& to_check,
-                        bool force_check);
+                        bool force_check,
+                        bool system);
 
 // Filters the given list of targets by the given pattern list.
 void FilterTargetsByPatterns(const std::vector<const Target*>& input,

@@ -72,6 +72,10 @@ class Setup {
   // headers to be checked. Defaults to false.
   void set_check_public_headers(bool s) { check_public_headers_ = s; }
 
+  // Setting this will configure the post-run public header check to also
+  // consider system style includes.
+  void set_check_system_includes(bool s) { check_system_headers_ = s; }
+
   // Read from the .gn file, these are the targets to check. If the .gn file
   // does not specify anything, this will be null. If the .gn file specifies
   // the empty list, this will be non-null but empty.
@@ -133,6 +137,7 @@ class Setup {
   SourceFile root_build_file_;
 
   bool check_public_headers_;
+  bool check_system_headers_;
 
   // See getter for info.
   std::unique_ptr<std::vector<LabelPattern>> check_patterns_;

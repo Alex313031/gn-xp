@@ -58,8 +58,11 @@ class HeaderChecker : public base::RefCountedThreadSafe<HeaderChecker> {
   //
   // force_check, if true, will override targets opting out of header checking
   // with "check_includes = false" and will check them anyway.
+  //
+  // system, if true, will examine includes that use <> in addition to "".
   bool Run(const std::vector<const Target*>& to_check,
            bool force_check,
+           bool system,
            std::vector<Err>* errors);
 
  private:
@@ -96,9 +99,9 @@ class HeaderChecker : public base::RefCountedThreadSafe<HeaderChecker> {
 
   // Backend for Run() that takes the list of files to check. The errors_ list
   // will be populate on failure.
-  void RunCheckOverFiles(const FileMap& flies, bool force_check);
+  void RunCheckOverFiles(const FileMap& flies, bool force_check, bool system);
 
-  void DoWork(const Target* target, const SourceFile& file);
+  void DoWork(const Target* target, const SourceFile& file, bool system);
 
   // Adds the sources and public files from the given target to the given map.
   static void AddTargetToFileMap(const Target* target, FileMap* dest);
@@ -117,6 +120,7 @@ class HeaderChecker : public base::RefCountedThreadSafe<HeaderChecker> {
   // error messages.
   bool CheckFile(const Target* from_target,
                  const SourceFile& file,
+                 bool system,
                  std::vector<Err>* err) const;
 
   // Checks that the given file in the given target can include the given

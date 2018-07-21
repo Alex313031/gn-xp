@@ -74,6 +74,10 @@ Command-specific switches
       Ignores specifications of "check_includes = false" and checks all
       target's files that match the target label.
 
+  --system
+      Check includes with <> quotes in addition to "" style quotes. This
+      style is sometimes referred to as 'system' includes.
+
 What gets checked
 
   The .gn file may specify a list of targets to be checked. Only these targets
@@ -91,8 +95,9 @@ What gets checked
     - Includes with a "nogncheck" annotation are skipped (see
       "gn help nogncheck").
 
-    - Only includes using "quotes" are checked. <brackets> are assumed to be
-      system includes.
+    - Only includes using "quotes" are checked by default. <brackets> are
+      assumed to be system includes. The flag "check_system_includes" enables
+      checking of system includes as well.
 
     - Include paths are assumed to be relative to any of the "include_dirs" for
       the target (including the implicit current dir).
@@ -215,9 +220,10 @@ int RunCheck(const std::vector<std::string>& args) {
 
   const base::CommandLine* cmdline = base::CommandLine::ForCurrentProcess();
   bool force = cmdline->HasSwitch("force");
+  bool system = cmdline->HasSwitch("system");
 
   if (!CheckPublicHeaders(&setup->build_settings(), all_targets,
-                          targets_to_check, force))
+                          targets_to_check, force, system))
     return 1;
 
   if (!base::CommandLine::ForCurrentProcess()->HasSwitch(switches::kQuiet)) {
@@ -237,14 +243,15 @@ int RunCheck(const std::vector<std::string>& args) {
 bool CheckPublicHeaders(const BuildSettings* build_settings,
                         const std::vector<const Target*>& all_targets,
                         const std::vector<const Target*>& to_check,
-                        bool force_check) {
+                        bool force_check,
+                        bool system) {
   ScopedTrace trace(TraceItem::TRACE_CHECK_HEADERS, "Check headers");
 
   scoped_refptr<HeaderChecker> header_checker(
       new HeaderChecker(build_settings, all_targets));
 
   std::vector<Err> header_errors;
-  header_checker->Run(to_check, force_check, &header_errors);
+  header_checker->Run(to_check, force_check, system, &header_errors);
   for (size_t i = 0; i < header_errors.size(); i++) {
     if (i > 0)
       OutputString("___________________\n", DECORATION_YELLOW);

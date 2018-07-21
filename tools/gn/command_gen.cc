@@ -432,8 +432,11 @@ int RunGen(const std::vector<std::string>& args) {
 
   const base::CommandLine* command_line =
       base::CommandLine::ForCurrentProcess();
-  if (command_line->HasSwitch(kSwitchCheck))
+  if (command_line->HasSwitch(kSwitchCheck)) {
     setup->set_check_public_headers(true);
+    if (command_line->GetSwitchValueASCII(kSwitchCheck) == "system")
+      setup->set_check_system_includes(true);
+  }
 
   // Cause the load to also generate the ninja files for each target.
   TargetWriteInfo write_info;

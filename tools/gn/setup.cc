@@ -279,6 +279,7 @@ Setup::Setup()
       builder_(loader_.get()),
       root_build_file_("//BUILD.gn"),
       check_public_headers_(false),
+      check_system_headers_(false),
       dotfile_settings_(&build_settings_, std::string()),
       dotfile_scope_(&dotfile_settings_),
       default_args_(nullptr),
@@ -392,7 +393,7 @@ bool Setup::RunPostMessageLoop() {
     }
 
     if (!commands::CheckPublicHeaders(&build_settings_, all_targets, to_check,
-                                      false)) {
+                                      false, check_system_headers_)) {
       return false;
     }
   }

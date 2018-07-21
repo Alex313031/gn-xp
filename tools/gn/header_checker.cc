@@ -129,6 +129,7 @@ HeaderChecker::~HeaderChecker() = default;
 
 bool HeaderChecker::Run(const std::vector<const Target*>& to_check,
                         bool force_check,
+                        bool system,
                         std::vector<Err>* errors) {
   FileMap files_to_check;
   for (auto* check : to_check) {
@@ -137,7 +138,7 @@ bool HeaderChecker::Run(const std::vector<const Target*>& to_check,
     if (check->IsBinary())
       AddTargetToFileMap(check, &files_to_check);
   }
-  RunCheckOverFiles(files_to_check, force_check);
+  RunCheckOverFiles(files_to_check, force_check, system);
 
   if (errors_.empty())
     return true;
@@ -145,7 +146,7 @@ bool HeaderChecker::Run(const std::vector<const Target*>& to_check,
   return false;
 }
 
-void HeaderChecker::RunCheckOverFiles(const FileMap& files, bool force_check) {
+void HeaderChecker::RunCheckOverFiles(const FileMap& files, bool force_check, bool system) {
   WorkerPool pool;
 
   for (const auto& file : files) {
@@ -168,7 +169,7 @@ void HeaderChecker::RunCheckOverFiles(const FileMap& files, bool force_check) {
       if (vect_i.target->check_includes()) {
         task_count_.Increment();
         pool.PostTask(base::BindOnce(&HeaderChecker::DoWork, this,
-                                     vect_i.target, file.first));
+                                     vect_i.target, file.first, system));
       }
     }
   }
@@ -179,9 +180,9 @@ void HeaderChecker::RunCheckOverFiles(const FileMap& files, bool force_check) {
     task_count_cv_.wait(auto_lock);
 }
 
-void HeaderChecker::DoWork(const Target* target, const SourceFile& file) {
+void HeaderChecker::DoWork(const Target* target, const SourceFile& file, bool system) {
   std::vector<Err> errors;
-  if (!CheckFile(target, file, &errors)) {
+  if (!CheckFile(target, file, system, &errors)) {
     std::lock_guard<std::mutex> lock(lock_);
     errors_.insert(errors_.end(), errors.begin(), errors.end());
   }
@@ -262,6 +263,7 @@ SourceFile HeaderChecker::SourceFileForInclude(
 
 bool HeaderChecker::CheckFile(const Target* from_target,
                               const SourceFile& file,
+                              bool system,
                               std::vector<Err>* errors) const {
   ScopedTrace trace(TraceItem::TRACE_CHECK_HEADER, file.value());
 
@@ -297,6 +299,7 @@ bool HeaderChecker::CheckFile(const Target* from_target,
 
   bool has_errors = false;
   CIncludeIterator iter(&input_file);
+  iter.set_check_system_includes(system);
   base::StringPiece current_include;
   LocationRange range;
   while (iter.GetNextIncludeString(&current_include, &range)) {
