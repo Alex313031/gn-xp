@@ -26,6 +26,22 @@ is_linux = sys.platform.startswith('linux')
 is_mac = sys.platform.startswith('darwin')
 is_posix = is_linux or is_mac
 
+# Took it from https://stackoverflow.com/questions/377017/test-if-executable-exists-in-python#
+def which(program):
+    def is_exe(fpath):
+        return os.path.isfile(fpath) and os.access(fpath, os.X_OK)
+
+    fpath, fname = os.path.split(program)
+    if fpath:
+        if is_exe(program):
+            return program
+    else:
+        for path in os.environ["PATH"].split(os.pathsep):
+            exe_file = os.path.join(path, program)
+            if is_exe(exe_file):
+                return exe_file
+
+    return None
 
 def main(argv):
   parser = optparse.OptionParser(description=sys.modules[__name__].__doc__)
@@ -244,10 +260,17 @@ def WriteGNNinja(path, options, linux_sysroot):
     ld = os.environ.get('LD', 'link.exe')
     ar = os.environ.get('AR', 'lib.exe')
   else:
-    cc = os.environ.get('CC', 'clang')
-    cxx = os.environ.get('CXX', 'clang++')
-    ld = cxx
-    ar = os.environ.get('AR', 'llvm-ar')
+    use_clang = which('clang')
+    if use_clang:
+      cc = os.environ.get('CC', 'clang')
+      cxx = os.environ.get('CXX', 'clang++')
+      ld = cxx
+      ar = os.environ.get('AR', 'llvm-ar')
+    else:
+      cc = os.environ.get('CC', 'gcc')
+      cxx = os.environ.get('CXX', 'g++')
+      ld = cxx
+      ar = os.environ.get('AR', 'ar')
 
   cflags = os.environ.get('CFLAGS', '').split()
   cflags_cc = os.environ.get('CXXFLAGS', '').split()
@@ -293,11 +316,16 @@ def WriteGNNinja(path, options, linux_sysroot):
         # probably resolve this and (re-)add a way to build against libc++.
         cflags.append('--sysroot=' + linux_sysroot)
         ldflags.append('--sysroot=' + linux_sysroot)
-      cflags.append('-stdlib=libstdc++')
-      ldflags.extend(['-static-libstdc++',
-                      '-stdlib=libstdc++',
-                      '-Wl,--as-needed',
-                     ])
+      if use_clang:
+        cflags.append('-stdlib=libstdc++')
+        ldflags.extend(['-static-libstdc++',
+                        '-stdlib=libstdc++',
+                        '-Wl,--as-needed',
+                      ])
+      else:
+        ldflags.extend(['-static-libstdc++',
+                        '-Wl,--as-needed',
+                      ])
       libs.extend([
           '-lgcc_s',
           '-lpthread',
