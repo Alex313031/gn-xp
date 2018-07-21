@@ -285,6 +285,7 @@ Target::Target(const Settings* settings,
       output_extension_set_(false),
       all_headers_public_(true),
       check_includes_(true),
+      check_system_includes_(true),
       complete_static_lib_(false),
       testonly_(false),
       toolchain_(nullptr) {}

@@ -8,6 +8,7 @@
 #include "base/strings/stringprintf.h"
 #include "tools/gn/commands.h"
 #include "tools/gn/header_checker.h"
+#include "tools/gn/label.h"
 #include "tools/gn/setup.h"
 #include "tools/gn/standard_out.h"
 #include "tools/gn/switches.h"
@@ -55,7 +56,7 @@ More information
 const char kCheck[] = "check";
 const char kCheck_HelpShort[] = "check: Check header dependencies.";
 const char kCheck_Help[] =
-    R"(gn check <out_dir> [<label_pattern>] [--force]
+    R"(gn check <out_dir> [<label_pattern>] [--force] [--system]
 
   GN's include header checker validates that the includes for C-like source
   files match the build dependency graph.
@@ -74,6 +75,11 @@ Command-specific switches
       Ignores specifications of "check_includes = false" and checks all
       target's files that match the target label.
 
+  --system
+      Check includes with <> quotes in addition to "" style quotes. This
+      style is sometimes referred to as 'system' includes. Has no effect if
+      <label_pattern> is not specified.
+
 What gets checked
 
   The .gn file may specify a list of targets to be checked. Only these targets
@@ -91,8 +97,9 @@ What gets checked
     - Includes with a "nogncheck" annotation are skipped (see
       "gn help nogncheck").
 
-    - Only includes using "quotes" are checked. <brackets> are assumed to be
-      system includes.
+    - Only includes using "quotes" are checked by default. <brackets> are
+      assumed to be system includes. The "check_system_includes" arg enables
+      checking of system includes for the specified set of targets.
 
     - Include paths are assumed to be relative to any of the "include_dirs" for
       the target (including the implicit current dir).
@@ -177,11 +184,13 @@ int RunCheck(const std::vector<std::string>& args) {
   if (!setup->Run())
     return 1;
 
+  const base::CommandLine* cmdline = base::CommandLine::ForCurrentProcess();
   std::vector<const Target*> all_targets =
       setup->builder().GetAllResolvedTargets();
 
   bool filtered_by_build_config = false;
   std::vector<const Target*> targets_to_check;
+  std::map<const Label, const Target*> targets_to_check_system;
   if (args.size() > 1) {
     // Compute the targets to check.
     std::vector<std::string> inputs(args.begin() + 1, args.end());
@@ -200,6 +209,13 @@ int RunCheck(const std::vector<std::string>& args) {
     }
     targets_to_check.insert(targets_to_check.begin(), target_matches.begin(),
                             target_matches.end());
+
+    // Check system includes of these targets if --system flag is passed.
+    if (cmdline->HasSwitch("system")) {
+      for (auto* target : targets_to_check)
+        targets_to_check_system.insert(
+            std::pair<const Label, const Target*>(target->label(), target));
+    }
   } else {
     // No argument means to check everything allowed by the filter in
     // the build config file.
@@ -211,13 +227,15 @@ int RunCheck(const std::vector<std::string>& args) {
       // No global filter, check everything.
       targets_to_check = all_targets;
     }
+    if (setup->check_system_patterns()) {
+      FilterTargetsByPatterns(all_targets, *setup->check_system_patterns(),
+                              &targets_to_check_system);
+    }
   }
 
-  const base::CommandLine* cmdline = base::CommandLine::ForCurrentProcess();
   bool force = cmdline->HasSwitch("force");
-
   if (!CheckPublicHeaders(&setup->build_settings(), all_targets,
-                          targets_to_check, force))
+                          targets_to_check, targets_to_check_system, force))
     return 1;
 
   if (!base::CommandLine::ForCurrentProcess()->HasSwitch(switches::kQuiet)) {
@@ -237,6 +255,7 @@ int RunCheck(const std::vector<std::string>& args) {
 bool CheckPublicHeaders(const BuildSettings* build_settings,
                         const std::vector<const Target*>& all_targets,
                         const std::vector<const Target*>& to_check,
+                        const std::map<const Label, const Target*>& to_check_system,
                         bool force_check) {
   ScopedTrace trace(TraceItem::TRACE_CHECK_HEADERS, "Check headers");
 
@@ -244,7 +263,7 @@ bool CheckPublicHeaders(const BuildSettings* build_settings,
       new HeaderChecker(build_settings, all_targets));
 
   std::vector<Err> header_errors;
-  header_checker->Run(to_check, force_check, &header_errors);
+  header_checker->Run(to_check, to_check_system, force_check, &header_errors);
   for (size_t i = 0; i < header_errors.size(); i++) {
     if (i > 0)
       OutputString("___________________\n", DECORATION_YELLOW);

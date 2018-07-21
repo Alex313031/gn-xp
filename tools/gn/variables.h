@@ -151,6 +151,10 @@ extern const char kCheckIncludes[];
 extern const char kCheckIncludes_HelpShort[];
 extern const char kCheckIncludes_Help[];
 
+extern const char kCheckSystemIncludes[];
+extern const char kCheckSystemIncludes_HelpShort[];
+extern const char kCheckSystemIncludes_Help[];
+
 extern const char kCodeSigningArgs[];
 extern const char kCodeSigningArgs_HelpShort[];
 extern const char kCodeSigningArgs_Help[];

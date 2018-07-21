@@ -63,6 +63,9 @@ void ActionTargetGenerator::DoRun() {
   if (!FillCheckIncludes())
     return;
 
+  if (!FillCheckSystemIncludes())
+    return;
+
   if (!CheckOutputs())
     return;
 

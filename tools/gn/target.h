@@ -137,6 +137,10 @@ class Target : public Item {
   bool check_includes() const { return check_includes_; }
   void set_check_includes(bool ci) { check_includes_ = ci; }
 
+  // Whether this target's system includes should be checked by "gn check".
+  bool check_system_includes() const { return check_system_includes_; }
+  void set_check_system_includes(bool ci) { check_system_includes_ = ci; }
+
   // Whether this static_library target should have code linked in.
   bool complete_static_lib() const { return complete_static_lib_; }
   void set_complete_static_lib(bool complete) {
@@ -338,6 +342,7 @@ class Target : public Item {
   bool all_headers_public_;
   FileList public_headers_;
   bool check_includes_;
+  bool check_system_includes_;
   bool complete_static_lib_;
   bool testonly_;
   std::vector<std::string> data_;

@@ -484,6 +484,20 @@ void FilterTargetsByPatterns(const std::vector<const Target*>& input,
   }
 }
 
+void FilterTargetsByPatterns(const std::vector<const Target*>& input,
+                             const std::vector<LabelPattern>& filter,
+                             std::map<const Label, const Target*>* output) {
+  for (auto* target : input) {
+    for (const auto& pattern : filter) {
+      if (pattern.Matches(target->label())) {
+        output->insert(
+            std::pair<const Label, const Target*>(target->label(), target));
+        break;
+      }
+    }
+  }
+}
+
 bool FilterPatternsFromString(const BuildSettings* build_settings,
                               const std::string& label_list_string,
                               std::vector<LabelPattern>* filters,

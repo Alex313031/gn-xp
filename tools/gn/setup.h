@@ -79,6 +79,15 @@ class Setup {
     return check_patterns_.get();
   }
 
+  // Read from the .gn file, these are the targets to check. If the .gn file
+  // does not specify anything, this will be null. If the .gn file specifies
+  // the empty list, this will be non-null but empty. Setting this will
+  // configure the post-run public header check to also consider system style
+  // includes.
+  const std::vector<LabelPattern>* check_system_patterns() const {
+    return check_system_patterns_.get();
+  }
+
   BuildSettings& build_settings() { return build_settings_; }
   Builder& builder() { return builder_; }
   LoaderImpl* loader() { return loader_.get(); }
@@ -136,6 +145,7 @@ class Setup {
 
   // See getter for info.
   std::unique_ptr<std::vector<LabelPattern>> check_patterns_;
+  std::unique_ptr<std::vector<LabelPattern>> check_system_patterns_;
 
   Scheduler scheduler_;
 

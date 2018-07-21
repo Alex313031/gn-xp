@@ -122,20 +122,28 @@ HeaderChecker::HeaderChecker(const BuildSettings* build_settings,
                              const std::vector<const Target*>& targets)
     : build_settings_(build_settings), lock_(), task_count_cv_() {
   for (auto* target : targets)
-    AddTargetToFileMap(target, &file_map_);
+    AddTargetToFileMap(target, &file_map_, /*system=*/false);
 }
 
 HeaderChecker::~HeaderChecker() = default;
 
-bool HeaderChecker::Run(const std::vector<const Target*>& to_check,
-                        bool force_check,
-                        std::vector<Err>* errors) {
+bool HeaderChecker::Run(
+    const std::vector<const Target*>& to_check,
+    const std::map<const Label, const Target*>& to_check_system,
+    bool force_check,
+    std::vector<Err>* errors) {
   FileMap files_to_check;
   for (auto* check : to_check) {
     // This function will get called with all target types, but check only
     // applies to binary targets.
-    if (check->IsBinary())
-      AddTargetToFileMap(check, &files_to_check);
+    if (check->IsBinary()) {
+      bool system = false;
+      auto check_sys = to_check_system.find(check->label());
+      if (check_sys != to_check_system.end()) {
+        system = true;
+      }
+      AddTargetToFileMap(check, &files_to_check, system);
+    }
   }
   RunCheckOverFiles(files_to_check, force_check);
 
@@ -165,10 +173,11 @@ void HeaderChecker::RunCheckOverFiles(const FileMap& files, bool force_check) {
       continue;
 
     for (const auto& vect_i : file.second) {
-      if (vect_i.target->check_includes()) {
+      if (force_check || vect_i.target->check_includes()) {
         task_count_.Increment();
         pool.PostTask(base::BindOnce(&HeaderChecker::DoWork, this,
-                                     vect_i.target, file.first));
+                                     vect_i.target, file.first,
+                                     vect_i.check_system_includes));
       }
     }
   }
@@ -179,9 +188,9 @@ void HeaderChecker::RunCheckOverFiles(const FileMap& files, bool force_check) {
     task_count_cv_.wait(auto_lock);
 }
 
-void HeaderChecker::DoWork(const Target* target, const SourceFile& file) {
+void HeaderChecker::DoWork(const Target* target, const SourceFile& file, bool system) {
   std::vector<Err> errors;
-  if (!CheckFile(target, file, &errors)) {
+  if (!CheckFile(target, file, system, &errors)) {
     std::lock_guard<std::mutex> lock(lock_);
     errors_.insert(errors_.end(), errors.begin(), errors.end());
   }
@@ -194,7 +203,7 @@ void HeaderChecker::DoWork(const Target* target, const SourceFile& file) {
 }
 
 // static
-void HeaderChecker::AddTargetToFileMap(const Target* target, FileMap* dest) {
+void HeaderChecker::AddTargetToFileMap(const Target* target, FileMap* dest, bool system) {
   // Files in the sources have this public bit by default.
   bool default_public = target->all_headers_public();
 
@@ -228,7 +237,7 @@ void HeaderChecker::AddTargetToFileMap(const Target* target, FileMap* dest) {
   // Add the merged list to the master list of all files.
   for (const auto& cur : files_to_public) {
     (*dest)[cur.first].push_back(
-        TargetInfo(target, cur.second.is_public, cur.second.is_generated));
+        TargetInfo(target, cur.second.is_public, cur.second.is_generated, system));
   }
 }
 
@@ -262,6 +271,7 @@ SourceFile HeaderChecker::SourceFileForInclude(
 
 bool HeaderChecker::CheckFile(const Target* from_target,
                               const SourceFile& file,
+                              bool system,
                               std::vector<Err>* errors) const {
   ScopedTrace trace(TraceItem::TRACE_CHECK_HEADER, file.value());
 
@@ -297,6 +307,7 @@ bool HeaderChecker::CheckFile(const Target* from_target,
 
   bool has_errors = false;
   CIncludeIterator iter(&input_file);
+  iter.set_check_system_includes(from_target->check_system_includes() && system);
   base::StringPiece current_include;
   LocationRange range;
   while (iter.GetNextIncludeString(&current_include, &range)) {

@@ -16,6 +16,7 @@
 #include "base/memory/ref_counted.h"
 #include "base/strings/string_piece.h"
 #include "tools/gn/err.h"
+#include "tools/gn/label.h"
 #include "tools/gn/source_dir.h"
 
 class BuildSettings;
@@ -50,7 +51,8 @@ class HeaderChecker : public base::RefCountedThreadSafe<HeaderChecker> {
   HeaderChecker(const BuildSettings* build_settings,
                 const std::vector<const Target*>& targets);
 
-  // Runs the check. The targets in to_check will be checked.
+  // Runs the check. The targets in to_check will be checked, and the targets
+  // in to_check_system will also have their system headers (<...>) checked.
   //
   // This assumes that the current thread already has a message loop. On
   // error, fills the given vector with the errors and returns false. Returns
@@ -59,6 +61,7 @@ class HeaderChecker : public base::RefCountedThreadSafe<HeaderChecker> {
   // force_check, if true, will override targets opting out of header checking
   // with "check_includes = false" and will check them anyway.
   bool Run(const std::vector<const Target*>& to_check,
+           const std::map<const Label, const Target*>& to_check_system,
            bool force_check,
            std::vector<Err>* errors);
 
@@ -76,9 +79,16 @@ class HeaderChecker : public base::RefCountedThreadSafe<HeaderChecker> {
   ~HeaderChecker();
 
   struct TargetInfo {
-    TargetInfo() : target(nullptr), is_public(false), is_generated(false) {}
-    TargetInfo(const Target* t, bool is_pub, bool is_gen)
-        : target(t), is_public(is_pub), is_generated(is_gen) {}
+    TargetInfo()
+        : target(nullptr),
+          is_public(false),
+          is_generated(false),
+          check_system_includes(false) {}
+    TargetInfo(const Target* t, bool is_pub, bool is_gen, bool check_sys)
+        : target(t),
+          is_public(is_pub),
+          is_generated(is_gen),
+          check_system_includes(check_sys) {}
 
     const Target* target;
 
@@ -87,6 +97,10 @@ class HeaderChecker : public base::RefCountedThreadSafe<HeaderChecker> {
 
     // True if this file is generated and won't actually exist on disk.
     bool is_generated;
+
+    // True the build arguement specifies this target should have system includes
+    // checked.
+    bool check_system_includes;
   };
 
   typedef std::vector<TargetInfo> TargetVector;
@@ -98,10 +112,10 @@ class HeaderChecker : public base::RefCountedThreadSafe<HeaderChecker> {
   // will be populate on failure.
   void RunCheckOverFiles(const FileMap& flies, bool force_check);
 
-  void DoWork(const Target* target, const SourceFile& file);
+  void DoWork(const Target* target, const SourceFile& file, bool system);
 
   // Adds the sources and public files from the given target to the given map.
-  static void AddTargetToFileMap(const Target* target, FileMap* dest);
+  static void AddTargetToFileMap(const Target* target, FileMap* dest, bool system);
 
   // Returns true if the given file is in the output directory.
   bool IsFileInOuputDir(const SourceFile& file) const;
@@ -117,6 +131,7 @@ class HeaderChecker : public base::RefCountedThreadSafe<HeaderChecker> {
   // error messages.
   bool CheckFile(const Target* from_target,
                  const SourceFile& file,
+                 bool system,
                  std::vector<Err>* err) const;
 
   // Checks that the given file in the given target can include the given

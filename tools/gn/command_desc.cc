@@ -191,6 +191,7 @@ bool PrintTarget(const Target* target,
   HANDLER(variables::kVisibility, VisibilityHandler);
   HANDLER(variables::kTestonly, DefaultHandler);
   HANDLER(variables::kCheckIncludes, DefaultHandler);
+  HANDLER(variables::kCheckSystemIncludes, DefaultHandler);
   HANDLER(variables::kAllowCircularIncludesFrom, DefaultHandler);
   HANDLER(variables::kSources, DefaultHandler);
   HANDLER(variables::kPublic, PublicHandler);

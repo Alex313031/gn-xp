@@ -116,10 +116,7 @@ const int CIncludeIterator::kMaxNonIncludeLines = 10;
 
 CIncludeIterator::CIncludeIterator(const InputFile* input)
     : input_file_(input),
-      file_(input->contents()),
-      offset_(0),
-      line_number_(0),
-      lines_since_last_include_(0) {}
+      file_(input->contents()) {}
 
 CIncludeIterator::~CIncludeIterator() = default;
 
@@ -132,8 +129,11 @@ bool CIncludeIterator::GetNextIncludeString(base::StringPiece* out,
     base::StringPiece include_contents;
     int begin_char;
     IncludeType type = ExtractInclude(line, &include_contents, &begin_char);
-    if (type == INCLUDE_USER && !HasNoCheckAnnotation(line)) {
-      // Only count user includes for now.
+    if (HasNoCheckAnnotation(line))
+      continue;
+    if (type == INCLUDE_USER || (type == INCLUDE_SYSTEM && check_system_includes_)) {
+      // Only count user includes for now, unless caller specifically asks for
+      // system includes
       *out = include_contents;
       *location = LocationRange(
           Location(input_file_, cur_line_number, begin_char,

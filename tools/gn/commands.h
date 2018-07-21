@@ -136,6 +136,7 @@ bool ResolveFromCommandLineInput(
 bool CheckPublicHeaders(const BuildSettings* build_settings,
                         const std::vector<const Target*>& all_targets,
                         const std::vector<const Target*>& to_check,
+                        const std::map<const Label, const Target*>& to_check_system,
                         bool force_check);
 
 // Filters the given list of targets by the given pattern list.
@@ -145,6 +146,9 @@ void FilterTargetsByPatterns(const std::vector<const Target*>& input,
 void FilterTargetsByPatterns(const std::vector<const Target*>& input,
                              const std::vector<LabelPattern>& filter,
                              UniqueVector<const Target*>* output);
+void FilterTargetsByPatterns(const std::vector<const Target*>& input,
+                             const std::vector<LabelPattern>& filter,
+                             std::map<const Label, const Target*>* output);
 
 // Builds a list of pattern from a semicolon-separated list of labels.
 bool FilterPatternsFromString(const BuildSettings* build_settings,

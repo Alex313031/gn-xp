@@ -25,6 +25,7 @@
 #include "tools/gn/exec_process.h"
 #include "tools/gn/filesystem_utils.h"
 #include "tools/gn/input_file.h"
+#include "tools/gn/label.h"
 #include "tools/gn/parse_tree.h"
 #include "tools/gn/parser.h"
 #include "tools/gn/source_dir.h"
@@ -72,6 +73,15 @@ Variables
       A list of labels and label patterns that should be checked when running
       "gn check" or "gn gen --check". If unspecified, all targets will be
       checked. If it is the empty list, no targets will be checked.
+
+      The format of this list is identical to that of "visibility" so see "gn
+      help visibility" for examples.
+
+  check_system_targets [optional]
+      A list of labels and label patterns that should have system headers
+      (#include <...>) checked checked when running "gn check" or "gn gen --check".
+      If unspecified, all targets' system headers will be checked. If it is the
+      empty list, no targets will have system headers checked.
 
       The format of this list is identical to that of "visibility" so see "gn
       help visibility" for examples.
@@ -384,6 +394,7 @@ bool Setup::RunPostMessageLoop() {
   if (check_public_headers_) {
     std::vector<const Target*> all_targets = builder_.GetAllResolvedTargets();
     std::vector<const Target*> to_check;
+    std::map<const Label, const Target*> to_check_system;
     if (check_patterns()) {
       commands::FilterTargetsByPatterns(all_targets, *check_patterns(),
                                         &to_check);
@@ -391,8 +402,13 @@ bool Setup::RunPostMessageLoop() {
       to_check = all_targets;
     }
 
+    if (check_system_patterns()) {
+      commands::FilterTargetsByPatterns(all_targets, *check_system_patterns(),
+                                        &to_check_system);
+    }
+
     if (!commands::CheckPublicHeaders(&build_settings_, all_targets, to_check,
-                                      false)) {
+                                      to_check_system, false)) {
       return false;
     }
   }
@@ -765,6 +781,19 @@ bool Setup::FillOtherConfig(const base::CommandLine& cmdline) {
     check_patterns_.reset(new std::vector<LabelPattern>);
     ExtractListOfLabelPatterns(*check_targets_value, current_dir,
                                check_patterns_.get(), &err);
+    if (err.has_error()) {
+      err.PrintToStdout();
+      return false;
+    }
+  }
+
+  // System targets to check.
+  const Value* check_system_targets_value =
+      dotfile_scope_.GetValue("check_system_targets", true);
+  if (check_system_targets_value) {
+    check_system_patterns_.reset(new std::vector<LabelPattern>);
+    ExtractListOfLabelPatterns(*check_system_targets_value, current_dir,
+                               check_system_patterns_.get(), &err);
     if (err.has_error()) {
       err.PrintToStdout();
       return false;

@@ -107,6 +107,23 @@ TEST(CIncludeIterator, DontGiveUp) {
   EXPECT_EQ("foo/bar.h", contents);
 }
 
+// Return <system-style> include lines if requested
+TEST(CIncludeIterator, CheckSystemIncludes) {
+  std::string buffer = "#include <stdio.h>\n";
+
+  InputFile file(SourceFile("//foo.cc"));
+
+  file.SetContents(buffer);
+
+  base::StringPiece contents;
+  LocationRange range;
+
+  CIncludeIterator iter(&file);
+  iter.set_check_system_includes(true);
+  EXPECT_TRUE(iter.GetNextIncludeString(&contents, &range));
+  EXPECT_EQ("stdio.h", contents);
+}
+
 // Tests that we'll tolerate some small numbers of non-includes interspersed
 // with real includes.
 TEST(CIncludeIterator, TolerateNonIncludes) {

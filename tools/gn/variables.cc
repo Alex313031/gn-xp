@@ -778,6 +778,32 @@ Example
   }
 )";
 
+const char kCheckSystemIncludes[] = "check_system_includes";
+const char kCheckSystemIncludes_HelpShort[] =
+    "check_system_includes: [boolean] Controls whether a target's system "
+    "includes are checked.";
+const char kCheckSystemIncludes_Help[] =
+    R"(check_system_includes: [boolean] Controls whether a target's system
+  includes are checked.
+
+  When true (the default), the "gn check" command (as well as "gn gen" with the
+  --check flag) will check system includes (<...>) in addition to normal
+  includes ("...") if the check_system_includes flag is set.
+
+  When false, the check will skip system includes.
+
+  The topic "gn help check" has general information on how checking works and
+  advice on how to pass a check in problematic cases.
+
+Example
+
+  source_set("busted_system_includes") {
+    # This target's system includes are messed up, exclude it from checking.
+    check_system_includes = false
+    ...
+  }
+)";
+
 const char kCodeSigningArgs[] = "code_signing_args";
 const char kCodeSigningArgs_HelpShort[] =
     "code_signing_args: [string list] Arguments passed to code signing script.";
