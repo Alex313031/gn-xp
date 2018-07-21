@@ -293,11 +293,12 @@ def WriteGNNinja(path, options, linux_sysroot):
         # probably resolve this and (re-)add a way to build against libc++.
         cflags.append('--sysroot=' + linux_sysroot)
         ldflags.append('--sysroot=' + linux_sysroot)
-      cflags.append('-stdlib=libstdc++')
-      ldflags.extend(['-static-libstdc++',
-                      '-stdlib=libstdc++',
-                      '-Wl,--as-needed',
-                     ])
+      if cxx == 'clang++':
+        cflags.append('-stdlib=libstdc++')
+        ldflags.extend(['-static-libstdc++',
+                        '-stdlib=libstdc++',
+                       ])
+      ldflags.append('-Wl,--as-needed')
       libs.extend([
           '-lgcc_s',
           '-lpthread',
