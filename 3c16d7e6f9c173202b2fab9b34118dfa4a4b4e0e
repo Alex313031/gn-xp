@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "69b51c4f_c29dacec",
+        "filename": "build/gen.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 263,
+      "author": {
+        "id": 1000031
+      },
+      "writtenOn": "2018-07-22T04:55:53Z",
+      "side": 1,
+      "message": "Well, I think isn\u0027t more naive than defaulting to an one digit user base compiler ;-). \n\nAnyway if clang is not in path, we can safely assume that we can\u0027t use it to compile GN.",
+      "parentUuid": "75c77cf8_5e33ebf0",
+      "revId": "3c16d7e6f9c173202b2fab9b34118dfa4a4b4e0e",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "799cd65d_db56969e",
         "filename": "build/gen.py",
         "patchSetId": 1
@@ -33,6 +51,24 @@
       "revId": "3c16d7e6f9c173202b2fab9b34118dfa4a4b4e0e",
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "060de116_499fa450",
+        "filename": "build/gen.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 322,
+      "author": {
+        "id": 1000031
+      },
+      "writtenOn": "2018-07-22T04:55:53Z",
+      "side": 1,
+      "message": "Here I\u0027m trying to fix compilation with gcc (which doesn\u0027t support \"-stdlib\u003dlibstdc++\"), so, IMHO it must go with gcc switch patch otherwise it won\u0027t compile with static libstdc++.",
+      "parentUuid": "799cd65d_db56969e",
+      "revId": "3c16d7e6f9c173202b2fab9b34118dfa4a4b4e0e",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": false
     }
   ]
 }
