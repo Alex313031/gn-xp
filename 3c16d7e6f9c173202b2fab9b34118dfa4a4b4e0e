@@ -37,6 +37,24 @@
     },
     {
       "key": {
+        "uuid": "954924a3_f5eaae41",
+        "filename": "build/gen.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 263,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2018-07-23T21:09:38Z",
+      "side": 1,
+      "message": "This is not going to work for us, on our bots we always point CC/CXX to the prebuilt Clang that we distribute separately which isn\u0027t in the PATH. With this change, gen.py will always fallback to GCC which is undesirable.",
+      "parentUuid": "69b51c4f_c29dacec",
+      "revId": "3c16d7e6f9c173202b2fab9b34118dfa4a4b4e0e",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "799cd65d_db56969e",
         "filename": "build/gen.py",
         "patchSetId": 1
@@ -69,6 +87,24 @@
       "revId": "3c16d7e6f9c173202b2fab9b34118dfa4a4b4e0e",
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "d68fba61_b82d1e09",
+        "filename": "build/gen.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 322,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2018-07-23T21:09:38Z",
+      "side": 1,
+      "message": "The `-static-libstdc++` switch should be added separately from `-stdlib\u003dlibstdc++` to avoid the duplication.",
+      "parentUuid": "060de116_499fa450",
+      "revId": "3c16d7e6f9c173202b2fab9b34118dfa4a4b4e0e",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": true
     }
   ]
 }
