@@ -22,6 +22,30 @@
       "revId": "98eaeb2fd7932d9d310875724e8ae0616ec12683",
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "664a3115_7b14979e",
+        "filename": "tools/gn/functions_target_unittest.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 93,
+      "author": {
+        "id": 1000005
+      },
+      "writtenOn": "2018-07-23T22:52:25Z",
+      "side": 1,
+      "message": "I would probably add a comment along the lines of \n\n# test that not_needed() propagates through templates correctly; no error should arise\n# from not using \u0027a\u0027.\n\nThat is essentially what the assertions are doing, but it can be a little hard to decode.",
+      "parentUuid": "b5b2aae6_adaa188e",
+      "range": {
+        "startLine": 93,
+        "startChar": 9,
+        "endLine": 93,
+        "endChar": 27
+      },
+      "revId": "98eaeb2fd7932d9d310875724e8ae0616ec12683",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": true
     }
   ]
 }
