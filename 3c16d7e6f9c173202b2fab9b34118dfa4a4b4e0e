@@ -55,6 +55,24 @@
     },
     {
       "key": {
+        "uuid": "e65300d3_4a97c7b4",
+        "filename": "build/gen.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 263,
+      "author": {
+        "id": 1000031
+      },
+      "writtenOn": "2018-07-27T12:31:14Z",
+      "side": 1,
+      "message": "Ah, I see now.\n\nMaybe a better fix is at least on Linux default to gcc instead of clang?",
+      "parentUuid": "954924a3_f5eaae41",
+      "revId": "3c16d7e6f9c173202b2fab9b34118dfa4a4b4e0e",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "799cd65d_db56969e",
         "filename": "build/gen.py",
         "patchSetId": 1
