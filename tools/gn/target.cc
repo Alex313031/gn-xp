@@ -228,7 +228,7 @@ Executing target definitions and templates
 
   Build files are loaded in parallel. This means it is impossible to
   interrogate a target from GN code for any information not derivable from its
-  label (see "gn help label"). The exception is the get_target_outputs()
+  label (see "gn help labels"). The exception is the get_target_outputs()
   function which requires the target being interrogated to have been defined
   previously in the same file.
 
