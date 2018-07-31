@@ -115,6 +115,11 @@ class Toolchain : public Item {
   Scope::KeyValueMap& args() { return args_; }
   const Scope::KeyValueMap& args() const { return args_; }
 
+  // Specifies whether public_configs and all_dependent_configs in this
+  // toolchain propagate to targets in other toolchains.
+  bool& propagates_configs() { return propagates_configs_; }
+  const bool& propagates_configs() const { return propagates_configs_; }
+
   // Returns the tool for compiling the given source file type.
   static ToolType GetToolTypeForSourceType(SourceFileType type);
   const Tool* GetToolForSourceType(SourceFileType type);
@@ -141,6 +146,7 @@ class Toolchain : public Item {
 
   LabelTargetVector deps_;
   Scope::KeyValueMap args_;
+  bool propagates_configs_;
 };
 
 #endif  // TOOLS_GN_TOOLCHAIN_H_
