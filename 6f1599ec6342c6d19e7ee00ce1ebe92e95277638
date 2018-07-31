@@ -16,6 +16,24 @@
       "revId": "6f1599ec6342c6d19e7ee00ce1ebe92e95277638",
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "f9179dc8_b9fae772",
+        "filename": "tools/gn/command_gen.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 419,
+      "author": {
+        "id": 1000023
+      },
+      "writtenOn": "2018-07-31T21:37:33Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "cbca3d5e_ad831acd",
+      "revId": "6f1599ec6342c6d19e7ee00ce1ebe92e95277638",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": false
     }
   ]
 }
