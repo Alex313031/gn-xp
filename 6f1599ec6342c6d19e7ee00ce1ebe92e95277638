@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "cbca3d5e_ad831acd",
+        "filename": "tools/gn/command_gen.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 419,
+      "author": {
+        "id": 1000014
+      },
+      "writtenOn": "2018-07-31T21:28:18Z",
+      "side": 1,
+      "message": "Can you indent 2 more spaces to match the other sections? I think I did four spaces here because 2 didn\u0027t look like enough with with the \"--\" at the beginning of the heading line.",
+      "revId": "6f1599ec6342c6d19e7ee00ce1ebe92e95277638",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": true
+    }
+  ]
+}
