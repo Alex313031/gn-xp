@@ -142,6 +142,7 @@
     *   [labels: About labels.](#labels)
     *   [ninja_rules: How Ninja build rules are named.](#ninja_rules)
     *   [nogncheck: Annotating includes for checking.](#nogncheck)
+    *   [output_conversion: Specifies how to transform a variable to output.](#output_conversion)
     *   [runtime_deps: How runtime dependency computation works.](#runtime_deps)
     *   [source_expansion: Map sources to outputs for scripts.](#source_expansion)
     *   [switches: Show available command-line switches.](#switches)
@@ -3403,9 +3404,6 @@
   One use for write_file is to write a list of inputs to an script that might
   be too long for the command line. However, it is preferable to use response
   files for this purpose. See "gn help response_file_contents".
-
-  TODO(brettw) we probably need an optional third argument to control list
-  formatting.
 ```
 
 #### **Arguments**
@@ -3416,6 +3414,9 @@
 
   data
       The list or string to write.
+
+  output_conversion
+    Controls how the output is written. See "gn help output_conversion".
 ```
 ## <a name="predefined_variables"></a>Built-in predefined variables
 
@@ -6274,6 +6275,61 @@
   The topic "gn help check" has general information on how checking works and
   advice on fixing problems. Targets can also opt-out of checking, see
   "gn help check_includes".
+```
+### <a name="output_conversion"></a>**output_conversion**: Specifies how to transform a variable to output.
+
+```
+  output_conversion is an argument to write_file that specifies how the given
+  value should be converted into a string for writing.
+  
+  Note that if the output Value is empty, the resulting output string
+  will be "<void>".
+
+  "" (the default)
+      If value is a list, then "list lines"; otherwise "value".
+
+  "list lines"
+      Renders the value contents as a list, with a string for each line. The
+      newlines will not be present in the result. The last line will end in with
+      a newline.
+
+  "string"
+      Render the value contents into a single string. The output is:
+        a string renders with quotes, e.g. "str"
+        an integer renders as a stringified integer, e.g. "6"
+        a boolean renders as the associated string, e.g. "true" 
+        a list renders as a representation of its contents, e.g. "[\"str\", 6]"
+        a scope renders as a GN code block of its values. If the Value was: 
+            Value val;
+            val.a = [ "hello.cc", "world.cc" ];
+            val.b = 26
+          the resulting output would be:
+            "{
+                a = [ \"hello.cc\", \"world.cc\" ]
+                b = 26
+            }"
+            
+  "value"
+      Render the value contents as a literal rvalue. Strings render with escaped
+      quotes.
+
+  "scope"
+      Render the value contents as a GN code block. If the Value was: 
+          Value val;
+          val.a = [ "hello.cc", "world.cc" ];
+          val.b = 26
+        the resulting output would be:
+          "a = [ \"hello.cc\", \"world.cc\" ]
+           b = 26"
+
+  "json"
+      Convert the Value to equivalent JSON value. The data
+      type mapping is:
+        a string in GN maps to a string in JSON
+        an integer in GN maps to integer in JSON
+        a boolean in GN maps to boolean in JSON
+        a list in GN maps to array in JSON
+        a scope in GN maps to object in JSON
 ```
 ### <a name="runtime_deps"></a>**Runtime dependencies**
 
