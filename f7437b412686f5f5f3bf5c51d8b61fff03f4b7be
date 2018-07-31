@@ -1,0 +1,72 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "f1d4d28e_5d507b4b",
+        "filename": "tools/gn/function_toolchain.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 507,
+      "author": {
+        "id": 1000014
+      },
+      "writtenOn": "2018-07-31T17:51:10Z",
+      "side": 1,
+      "message": "We need to type check this or boolean_value() will assert if the BUILD file declares it as a string or something:\n  if (!propagates_configs-\u003eVerifyTypeIs(Value::BOOLEAN, err))\n    return Value();",
+      "revId": "f7437b412686f5f5f3bf5c51d8b61fff03f4b7be",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "3e161ed7_8b61c2df",
+        "filename": "tools/gn/misc/tm/GN.tmLanguage",
+        "patchSetId": 2
+      },
+      "lineNbr": 76,
+      "author": {
+        "id": 1000014
+      },
+      "writtenOn": "2018-07-31T17:51:10Z",
+      "side": 1,
+      "message": "Heh, I always forget these files exist.\n\nCan you also update the big reference file? Compile the new GN, then run (I think):\n  gn help --markdown all \u003e docs/reference.md",
+      "revId": "f7437b412686f5f5f3bf5c51d8b61fff03f4b7be",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "67574e6e_e6380bc1",
+        "filename": "tools/gn/toolchain.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 35,
+      "author": {
+        "id": 1000014
+      },
+      "writtenOn": "2018-07-31T17:51:10Z",
+      "side": 1,
+      "message": "Would you mind moving both of these boolean initializers to the members in the class definition in the header file? That wasn\u0027t an option when this was originally written but I think the C++11 much less error-prone.",
+      "revId": "f7437b412686f5f5f3bf5c51d8b61fff03f4b7be",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "77a3b20c_f0f3616b",
+        "filename": "tools/gn/toolchain.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 120,
+      "author": {
+        "id": 1000014
+      },
+      "writtenOn": "2018-07-31T17:51:10Z",
+      "side": 1,
+      "message": "For the individual flags, I\u0027ve been doing the style\n  bool propagates_configs() const { ... }\n  void set_propagates_configs(bool...)\n(see target.h for examples), and only using the weirder return-non-const-ref for the vectors (I wrote this before move semantics so this seemed like the most efficient way to do container access).",
+      "revId": "f7437b412686f5f5f3bf5c51d8b61fff03f4b7be",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": true
+    }
+  ]
+}
