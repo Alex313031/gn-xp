@@ -1,0 +1,78 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "daf7ba90_aca313c3",
+        "filename": "docs/reference.md",
+        "patchSetId": 4
+      },
+      "lineNbr": 3395,
+      "author": {
+        "id": 1000016
+      },
+      "writtenOn": "2018-08-01T23:39:42Z",
+      "side": 1,
+      "message": "This should list `output_conversion \u003d \"\"` (see e.g. exec_script).",
+      "revId": "e45d255f51d4c5d64b1fd5cbf169c2f9e806f7c3",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "1ea1f767_d8954a2f",
+        "filename": "docs/reference.md",
+        "patchSetId": 4
+      },
+      "lineNbr": 6279,
+      "author": {
+        "id": 1000016
+      },
+      "writtenOn": "2018-08-01T23:39:42Z",
+      "side": 1,
+      "message": "s/variable/value/",
+      "revId": "e45d255f51d4c5d64b1fd5cbf169c2f9e806f7c3",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "9d440d3b_af9f7892",
+        "filename": "docs/reference.md",
+        "patchSetId": 4
+      },
+      "lineNbr": 6282,
+      "author": {
+        "id": 1000016
+      },
+      "writtenOn": "2018-08-01T23:39:42Z",
+      "side": 1,
+      "message": "This should mention the parity with input_conversion, and input_conversion should mention the parity with output_conversion.  It might even be better to merge the documentation for the two.",
+      "revId": "e45d255f51d4c5d64b1fd5cbf169c2f9e806f7c3",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "bd61985a_674b9007",
+        "filename": "tools/gn/command_help.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 76,
+      "author": {
+        "id": 1000016
+      },
+      "writtenOn": "2018-08-01T23:39:42Z",
+      "side": 1,
+      "message": "s/variable/value/",
+      "range": {
+        "startLine": 76,
+        "startChar": 55,
+        "endLine": 76,
+        "endChar": 63
+      },
+      "revId": "e45d255f51d4c5d64b1fd5cbf169c2f9e806f7c3",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": true
+    }
+  ]
+}
