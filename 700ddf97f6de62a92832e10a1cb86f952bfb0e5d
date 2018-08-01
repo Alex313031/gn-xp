@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "efeab931_3c14b1c5",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 11,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2018-08-01T19:39:37Z",
+      "side": 1,
+      "message": "I\u0027ve already enabled the plugin for our Gerrit instance and this reminded me that I should configure it and turn it on ;)",
+      "range": {
+        "startLine": 9,
+        "startChar": 35,
+        "endLine": 11,
+        "endChar": 21
+      },
+      "revId": "700ddf97f6de62a92832e10a1cb86f952bfb0e5d",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": false
+    }
+  ]
+}
