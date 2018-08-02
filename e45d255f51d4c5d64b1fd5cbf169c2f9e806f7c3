@@ -53,6 +53,24 @@
     },
     {
       "key": {
+        "uuid": "ae5f9849_c8a6ff96",
+        "filename": "docs/reference.md",
+        "patchSetId": 4
+      },
+      "lineNbr": 6282,
+      "author": {
+        "id": 1000014
+      },
+      "writtenOn": "2018-08-02T17:43:49Z",
+      "side": 1,
+      "message": "I haven\u0027t looked at the rest of the patch yet, but I agree it would be nice to have one help text for both input_ and output_conversion and lists the conversions in both directions.",
+      "parentUuid": "9d440d3b_af9f7892",
+      "revId": "e45d255f51d4c5d64b1fd5cbf169c2f9e806f7c3",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "bd61985a_674b9007",
         "filename": "tools/gn/command_help.cc",
         "patchSetId": 4
