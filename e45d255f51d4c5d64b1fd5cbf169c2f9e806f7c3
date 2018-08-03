@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "906bd51a_0c8123ff",
+        "filename": "docs/reference.md",
+        "patchSetId": 4
+      },
+      "lineNbr": 3395,
+      "author": {
+        "id": 1000023
+      },
+      "writtenOn": "2018-08-03T18:26:56Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "daf7ba90_aca313c3",
+      "revId": "e45d255f51d4c5d64b1fd5cbf169c2f9e806f7c3",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "1ea1f767_d8954a2f",
         "filename": "docs/reference.md",
         "patchSetId": 4
@@ -33,6 +51,24 @@
       "revId": "e45d255f51d4c5d64b1fd5cbf169c2f9e806f7c3",
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "f0066791_98d600d9",
+        "filename": "docs/reference.md",
+        "patchSetId": 4
+      },
+      "lineNbr": 6279,
+      "author": {
+        "id": 1000023
+      },
+      "writtenOn": "2018-08-03T18:26:56Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "1ea1f767_d8954a2f",
+      "revId": "e45d255f51d4c5d64b1fd5cbf169c2f9e806f7c3",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": false
     },
     {
       "key": {
@@ -71,6 +107,24 @@
     },
     {
       "key": {
+        "uuid": "fa85a8e9_935afd5f",
+        "filename": "docs/reference.md",
+        "patchSetId": 4
+      },
+      "lineNbr": 6282,
+      "author": {
+        "id": 1000023
+      },
+      "writtenOn": "2018-08-03T18:26:56Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ae5f9849_c8a6ff96",
+      "revId": "e45d255f51d4c5d64b1fd5cbf169c2f9e806f7c3",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "bd61985a_674b9007",
         "filename": "tools/gn/command_help.cc",
         "patchSetId": 4
@@ -91,6 +145,30 @@
       "revId": "e45d255f51d4c5d64b1fd5cbf169c2f9e806f7c3",
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "6ac49948_bac03b64",
+        "filename": "tools/gn/command_help.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 76,
+      "author": {
+        "id": 1000023
+      },
+      "writtenOn": "2018-08-03T18:26:56Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "bd61985a_674b9007",
+      "range": {
+        "startLine": 76,
+        "startChar": 55,
+        "endLine": 76,
+        "endChar": 63
+      },
+      "revId": "e45d255f51d4c5d64b1fd5cbf169c2f9e806f7c3",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": false
     }
   ]
 }
