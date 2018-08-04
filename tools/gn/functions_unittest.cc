@@ -125,6 +125,29 @@ TEST(Functions, SplitList) {
       setup.print_output());
 }
 
+TEST(Functions, ReplaceString) {
+  TestWithScope setup;
+
+  TestParseInput input(
+      // Replace all occurrences of string.
+      "out1 = replace_string(\"abbcc\", \"b\", \"d\")\n"
+      "print(out1)\n"
+
+      // Replace onlt the first occurrence.
+      "out2 = replace_string(\"abbcc\", \"b\", \"d\", 1)\n"
+      "print(out2)\n");
+  ASSERT_FALSE(input.has_error());
+
+  Err err;
+  input.parsed()->Execute(setup.scope(), &err);
+  ASSERT_FALSE(err.has_error()) << err.message();
+
+  EXPECT_EQ(
+      "addcc\n"
+      "adbcc\n",
+      setup.print_output());
+}
+
 TEST(Functions, DeclareArgs) {
   TestWithScope setup;
   Err err;

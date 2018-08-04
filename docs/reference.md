@@ -48,6 +48,7 @@
     *   [process_file_template: Do template expansion over a list of files.](#process_file_template)
     *   [read_file: Read a file into a variable.](#read_file)
     *   [rebase_path: Rebase a file or directory to another location.](#rebase_path)
+    *   [replace_string: Replaces strings in the given string.](#replace_string)
     *   [set_default_toolchain: Sets the default toolchain name.](#set_default_toolchain)
     *   [set_defaults: Set default values for a target type.](#set_defaults)
     *   [set_sources_assignment_filter: Set a pattern to filter source files.](#set_sources_assignment_filter)
@@ -428,8 +429,8 @@
 #### **[\--format=json]**
 
 ```
-  Displays information about a given target or config. The build build
-  parameters will be taken for the build in the given <out_dir>.
+  Displays information about a given target or config. The build parameters
+  will be taken for the build in the given <out_dir>.
 
   The <label or pattern> can be a target label, a config label, or a label
   pattern (see "gn help label_pattern"). A label pattern will only match
@@ -446,8 +447,8 @@
   arflags [--blame]
   args
   cflags [--blame]
+  cflags_c [--blame]
   cflags_cc [--blame]
-  cflags_cxx [--blame]
   check_includes
   configs [--tree] (see below)
   defines [--blame]
@@ -496,7 +497,7 @@
 ```
   --blame
       Used with any value specified on a config, this will name the config that
-      cause that target to get the flag. This doesn't currently work for libs
+      causes that target to get the flag. This doesn't currently work for libs
       and lib_dirs because those are inherited and are more complicated to
       figure out the blame (patches welcome).
 ```
@@ -1039,6 +1040,7 @@
   It is recommended you put inputs to your script in the "sources" variable,
   and stuff like other Python files required to run your script in the "inputs"
   variable.
+
   The "deps" and "public_deps" for an action will always be
   completed before any part of the action is run so it can depend on
   the output of previous steps. The "data_deps" will be built if the
@@ -1052,6 +1054,7 @@
 ```
   You should specify files created by your script by specifying them in the
   "outputs".
+
   The script will be executed with the given arguments with the current
   directory being that of the root build directory. If you pass files
   to your script, see "gn help rebase_path" for how to convert
@@ -1061,6 +1064,7 @@
 ```
 
 #### **File name handling**
+
 ```
   All output files must be inside the output directory of the build.
   You would generally use |$target_out_dir| or |$target_gen_dir| to
@@ -1120,6 +1124,7 @@
   You can dynamically write input dependencies (for incremental rebuilds if an
   input file changes) by writing a depfile when the script is run (see "gn help
   depfile"). This is more flexible than "inputs".
+
   The "deps" and "public_deps" for an action will always be
   completed before any part of the action is run so it can depend on
   the output of previous steps. The "data_deps" will be built if the
@@ -1129,6 +1134,7 @@
 ```
 
 #### **Outputs**
+
 ```
   The script will be executed with the given arguments with the current
   directory being that of the root build directory. If you pass files
@@ -1139,6 +1145,7 @@
 ```
 
 #### **File name handling**
+
 ```
   All output files must be inside the output directory of the build.
   You would generally use |$target_out_dir| or |$target_gen_dir| to
@@ -1525,7 +1532,7 @@
   code elimination to delete code not reachable from exported functions.
 
   A source set will not do this code elimination since there is no link step.
-  This allows you to link many sources sets into a shared library and have the
+  This allows you to link many source sets into a shared library and have the
   "exported symbol" notation indicate "export from the final shared library and
   not from the intermediate targets." There is no way to express this concept
   when linking multiple static libraries into a shared library.
@@ -1889,8 +1896,7 @@
   template("my_test") {
     action(target_name) {
       forward_variables_from(invoker, [ "data_deps", "deps",
-                                        "public_deps", "visibility" "
-                                                                    "])
+                                        "public_deps", "visibility"])
       # Add our test code to the dependencies.
       # "deps" may or may not be defined at this point.
       if (defined(deps)) {
@@ -1901,8 +1907,8 @@
     }
   }
 
-  # This is a template around either a target whose type depends on a global
-  # variable. It forwards all values from the invoker.
+  # This is a template around a target whose type depends on a global variable.
+  # It forwards all values from the invoker.
   template("my_wrapper") {
     target(my_wrapper_target_type, target_name) {
       forward_variables_from(invoker, "*")
@@ -2209,6 +2215,13 @@
   context of more than one toolchain it is recommended to specify an
   explicit toolchain when defining and referencing a pool.
 
+  A pool named "console" defined in the root build file represents Ninja's
+  console pool. Targets using this pool will have access to the console's
+  stdin and stdout, and output will not be buffered. This special pool must
+  have a depth of 1. Pools not defined in the root must not be named "console".
+  The console pool can only be defined for the default toolchain.
+  Refer to the Ninja documentation on the console pool for more info.
+
   A pool is referenced by its label just like a target.
 ```
 
@@ -2419,6 +2432,25 @@
       rebase_path("relative_path.txt", root_build_dir)
     ] + rebase_path(sources, root_build_dir)
   }
+```
+### <a name="replace_string"></a>**replace_string**: Replaces strings in the given string.
+
+```
+  result = replace_string(str, old, new[, max])
+
+  Returns a copy of the string str in which the occurrences of old have been
+  replaced with new, optionally restricting the number of replacements.
+```
+
+#### **Example**
+
+```
+  The code:
+    mystr = "Hello, world!"
+    print(replace_string(mystr, "world", "GN"))
+
+  Will print:
+    Hello, GN!
 ```
 ### <a name="set_default_toolchain"></a>**set_default_toolchain**: Sets the default toolchain name.
 
@@ -2663,7 +2695,7 @@
 
     template("shared_library") {
       shared_library(shlib) {
-        forward_variables_from(invoker, [ "*" ])
+        forward_variables_from(invoker, "*")
         ...
       }
     }
@@ -3060,7 +3092,7 @@
         same directory as the target is declared in, they will will be the same
         as the "target" versions above. Example: "gen/base/test"
 
-  Linker tools have multiple inputs and (potentially) multiple outputs The
+  Linker tools have multiple inputs and (potentially) multiple outputs. The
   static library tool ("alink") is not considered a linker tool. The following
   expansions are available:
 
@@ -3261,8 +3293,8 @@
 
 ```
   tool()
-    The tool() function call specifies the commands commands to run for a given
-    step. See "gn help tool".
+    The tool() function call specifies the commands to run for a given step. See
+    "gn help tool".
 
   toolchain_args
     Overrides for build arguments to pass to the toolchain when invoking it.
@@ -3386,7 +3418,7 @@
   toolchain definitions to ensure that it always reflects the appropriate
   value.
 
-  This value is not used internally by GN for any purpose. It is set it to the
+  This value is not used internally by GN for any purpose. It is set to the
   empty string ("") by default but is declared so that it can be overridden on
   the command line if so desired.
 
@@ -3400,7 +3432,7 @@
   toolchain definitions to ensure that it always reflects the appropriate
   value.
 
-  This value is not used internally by GN for any purpose. It is set it to the
+  This value is not used internally by GN for any purpose. It is set to the
   empty string ("") by default but is declared so that it can be overridden on
   the command line if so desired.
 
@@ -4689,10 +4721,10 @@
 #### **Inputs for binary targets**
 
 ```
-  Any input dependencies will be resolved before compiling any sources.
-  Normally, all actions that a target depends on will be run before any files
-  in a target are compiled. So if you depend on generated headers, you do not
-  typically need to list them in the inputs section.
+  Any input dependencies will be resolved before compiling any sources or
+  linking the target. Normally, all actions that a target depends on will be run
+  before any files in a target are compiled. So if you depend on generated
+  headers, you do not typically need to list them in the inputs section.
 
   Inputs for binary targets will be treated as implicit dependencies, meaning
   that changes in any of the inputs will force all sources in the target to be
@@ -5136,6 +5168,17 @@
   associated code. In this case, list the test target in the "friend" list of
   the target that owns the private header to allow the inclusion. See
   "gn help friend" for more.
+
+  When a binary target has no explicit or implicit public headers (a "public"
+  list is defined but is empty), GN assumes that the target can not propagate
+  any compile-time dependencies up the dependency tree. In this case, the build
+  can be parallelized more efficiently.
+  Say there are dependencies:
+    A (shared library) -> B (shared library) -> C (action).
+  Normally C must complete before any source files in A can compile (because
+  there might be generated includes). But when B explicitly declares no public
+  headers, C can execute in parallel with A's compile steps. C must still be
+  complete before any dependents link.
 ```
 
 #### **Examples**
@@ -5145,6 +5188,7 @@
     public = [ "foo.h", "bar.h" ]
 
   No files are public (no targets may include headers from this one):
+    # This allows starting compile in dependent targets earlier.
     public = []
 ```
 ### <a name="public_configs"></a>**public_configs**: Configs to be applied on dependents.
@@ -5429,7 +5473,7 @@
   See "gn help create_bundle" for more information.
 ```
 
-#### **Exmaple**
+#### **Example**
 
 ```
   create_bundle("chrome_xctest") {
@@ -6003,11 +6047,12 @@
        "//foo/bar/*"  (all targets in any subdir of //foo/bar)
        "./*"  (all targets in the current build file or sub dirs)
 
-  Any of the above forms can additionally take an explicit toolchain. In this
-  case, the toolchain must be fully qualified (no wildcards are supported in
-  the toolchain name).
+  Any of the above forms can additionally take an explicit toolchain
+  in parenthesis at the end of the label pattern. In this case, the
+  toolchain must be fully qualified (no wildcards are supported in the
+  toolchain name).
 
-    "//foo:bar(//build/toochain:mac)"
+    "//foo:bar(//build/toolchain:mac)"
         An explicit target in an explicit toolchain.
 
     ":*(//build/toolchain/linux:32bit)"
