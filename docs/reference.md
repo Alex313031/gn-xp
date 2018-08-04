@@ -48,6 +48,7 @@
     *   [process_file_template: Do template expansion over a list of files.](#process_file_template)
     *   [read_file: Read a file into a variable.](#read_file)
     *   [rebase_path: Rebase a file or directory to another location.](#rebase_path)
+    *   [replace_string: Replaces strings in the given string.](#replace_string)
     *   [set_default_toolchain: Sets the default toolchain name.](#set_default_toolchain)
     *   [set_defaults: Set default values for a target type.](#set_defaults)
     *   [set_sources_assignment_filter: Set a pattern to filter source files.](#set_sources_assignment_filter)
@@ -2442,6 +2443,27 @@
       rebase_path("relative_path.txt", root_build_dir)
     ] + rebase_path(sources, root_build_dir)
   }
+```
+### <a name="replace_string"></a>**replace_string**: Replaces strings in the given string.
+
+```
+  result = replace_string(str, old, new[, max])
+
+  Returns a copy of the string str in which the occurrences of old have been
+  replaced with new, optionally restricting the number of replacements. The
+  replacement is performed sequentially, so if new contains old, it won't be
+  replaced.
+```
+
+#### **Example**
+
+```
+  The code:
+    mystr = "Hello, world!"
+    print(replace_string(mystr, "world", "GN"))
+
+  Will print:
+    Hello, GN!
 ```
 ### <a name="set_default_toolchain"></a>**set_default_toolchain**: Sets the default toolchain name.
 

@@ -7,6 +7,7 @@
 #include <stddef.h>
 #include <iostream>
 #include <memory>
+#include <regex>
 #include <utility>
 
 #include "base/environment.h"
@@ -1079,6 +1080,75 @@ Value RunSplitList(Scope* scope,
   return result;
 }
 
+// replace_string --------------------------------------------------------------
+
+const char kReplaceString[] = "replace_string";
+const char kReplaceString_HelpShort[] =
+    "replace_string: Replaces strings in the given string.";
+const char kReplaceString_Help[] =
+    R"(replace_string: Replaces strings in the given string.
+
+  result = replace_string(str, old, new[, max])
+
+  Returns a copy of the string str in which the occurrences of old have been
+  replaced with new, optionally restricting the number of replacements. The
+  replacement is performed sequentially, so if new contains old, it won't be
+  replaced.
+
+Example
+
+  The code:
+    mystr = "Hello, world!"
+    print(replace_string(mystr, "world", "GN"))
+
+  Will print:
+    Hello, GN!
+)";
+
+Value RunReplaceString(Scope* scope,
+                       const FunctionCallNode* function,
+                       const std::vector<Value>& args,
+                       Err* err) {
+  if (args.size() < 3 || args.size() > 4) {
+    *err = Err(function, "Wrong number of arguments to replace_string().");
+    return Value();
+  }
+
+  if (!args[0].VerifyTypeIs(Value::STRING, err))
+    return Value();
+  const std::string str = args[0].string_value();
+
+  if (!args[1].VerifyTypeIs(Value::STRING, err))
+    return Value();
+  const std::string& old = args[1].string_value();
+
+  if (!args[2].VerifyTypeIs(Value::STRING, err))
+    return Value();
+  const std::string& new_ = args[2].string_value();
+
+  int64_t max = INT64_MAX;
+  if (args.size() > 3) {
+    if (!args[3].VerifyTypeIs(Value::INTEGER, err))
+      return Value();
+    max = args[3].int_value();
+    if (max <= 0) {
+      *err = Err(function, "Requested number of replacements is not positive.");
+      return Value();
+    }
+  }
+
+  int64_t n = 0;
+  std::string val(str);
+  size_t start_pos = 0;
+  while((start_pos = val.find(old, start_pos)) != std::string::npos) {
+    val.replace(start_pos, old.length(), new_);
+    start_pos += new_.length();
+    if (++n >= max)
+      break;
+  }
+  return Value(function, std::move(val));
+}
+
 // -----------------------------------------------------------------------------
 
 FunctionInfo::FunctionInfo()
@@ -1186,6 +1256,7 @@ struct FunctionInfoInitializer {
     INSERT_FUNCTION(SetDefaultToolchain, false)
     INSERT_FUNCTION(SetSourcesAssignmentFilter, false)
     INSERT_FUNCTION(SplitList, false)
+    INSERT_FUNCTION(ReplaceString, false)
     INSERT_FUNCTION(Template, false)
     INSERT_FUNCTION(Tool, false)
     INSERT_FUNCTION(Toolchain, false)
