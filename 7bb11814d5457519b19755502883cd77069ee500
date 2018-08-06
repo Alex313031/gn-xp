@@ -16,6 +16,24 @@
       "revId": "7bb11814d5457519b19755502883cd77069ee500",
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "453acdd0_2bd88f32",
+        "filename": "tools/gn/visual_studio_writer_unittest.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 199,
+      "author": {
+        "id": 1000044
+      },
+      "writtenOn": "2018-08-06T22:03:37Z",
+      "side": 1,
+      "message": "I think it\u0027s not wrong but maybe could be better.\nfind(\"-tclean baz\") !\u003d npos means \"-tclean baz\" is found and the evil ./ was vanquished.\nWe could avoid the sort of double negative:\nfind(\"-tclean ./baz\") \u003d\u003d npos\nwith the caveat that something could be so wrong we don\u0027t get any clean target in the output, and the test would pass.\n\nWe could search for a bigger chunk, like \"ninja.exe -tclean baz\" but that makes it more fragile.",
+      "parentUuid": "ef3068a2_9f25230d",
+      "revId": "7bb11814d5457519b19755502883cd77069ee500",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": true
     }
   ]
 }
