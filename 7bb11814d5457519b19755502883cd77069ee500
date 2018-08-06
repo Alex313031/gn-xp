@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ef3068a2_9f25230d",
+        "filename": "tools/gn/visual_studio_writer_unittest.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 199,
+      "author": {
+        "id": 1000005
+      },
+      "writtenOn": "2018-08-06T21:48:23Z",
+      "side": 1,
+      "message": "I\u0027m not sure that this is asserting what you think it\u0027s asserting?",
+      "revId": "7bb11814d5457519b19755502883cd77069ee500",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": true
+    }
+  ]
+}
