@@ -34,6 +34,24 @@
       "revId": "7bb11814d5457519b19755502883cd77069ee500",
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "04ab3c6c_e39c7d09",
+        "filename": "tools/gn/visual_studio_writer_unittest.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 199,
+      "author": {
+        "id": 1000005
+      },
+      "writtenOn": "2018-08-06T22:42:15Z",
+      "side": 1,
+      "message": "Oh, I see. I think `find(\"-tclean ./baz\") \u003d\u003d npos` is probably a bit clearer. You could also have both asserts.\n\nUp to you.",
+      "parentUuid": "453acdd0_2bd88f32",
+      "revId": "7bb11814d5457519b19755502883cd77069ee500",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": true
     }
   ]
 }
