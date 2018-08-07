@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "47f7207e_bc2d3910",
+        "filename": "tools/gn/input_conversion.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 247,
+      "author": {
+        "id": 1000014
+      },
+      "writtenOn": "2018-08-07T19:25:54Z",
+      "side": 1,
+      "message": "How about for this paragraph replacing it with: \"Input and output conversions are arguments to file and process functions that specify how to convert data to or from external formats. The possible values for parameters specifying conversions are:\"",
+      "revId": "90ed0485f7581a3edbff5a9fabb1810080406613",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "3c2ad47b_b1f4dd11",
+        "filename": "tools/gn/output_conversion.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 30,
+      "author": {
+        "id": 1000014
+      },
+      "writtenOn": "2018-08-07T19:25:54Z",
+      "side": 1,
+      "message": "In a few other places I\u0027ve made a helper function to output the right amount of indent. That will save you 4 for-loops which I think will help clarity a bit.",
+      "revId": "90ed0485f7581a3edbff5a9fabb1810080406613",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "3961042a_ef7663f1",
+        "filename": "tools/gn/output_conversion.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 150,
+      "author": {
+        "id": 1000014
+      },
+      "writtenOn": "2018-08-07T19:25:54Z",
+      "side": 1,
+      "message": "Style guide: since some of this if/else chain uses {}, all arms should (even the ones above).",
+      "revId": "90ed0485f7581a3edbff5a9fabb1810080406613",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": true
+    }
+  ]
+}
