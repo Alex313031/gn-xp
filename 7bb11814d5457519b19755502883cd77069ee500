@@ -52,6 +52,24 @@
       "revId": "7bb11814d5457519b19755502883cd77069ee500",
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "91a0bc04_ad5f3422",
+        "filename": "tools/gn/visual_studio_writer_unittest.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 199,
+      "author": {
+        "id": 1000044
+      },
+      "writtenOn": "2018-08-07T04:04:19Z",
+      "side": 1,
+      "message": "I\u0027ll leave as is, because as noted it has the advantage of failing if the clean command doesn\u0027t appear at all.\nHaving both asserts might be a little redundant and/or confusing.\nI reworded the comment to try and clarify.",
+      "parentUuid": "04ab3c6c_e39c7d09",
+      "revId": "7bb11814d5457519b19755502883cd77069ee500",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": false
     }
   ]
 }
