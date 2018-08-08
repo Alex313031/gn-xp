@@ -2,6 +2,23 @@
   "comments": [
     {
       "key": {
+        "uuid": "4b731ca5_660899c1",
+        "filename": "tools/gn/functions.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 1116,
+      "author": {
+        "id": 1000014
+      },
+      "writtenOn": "2018-08-08T17:50:08Z",
+      "side": 1,
+      "message": "These adapters aren\u0027t getting you anything. The whole point of these is to avoid copying a large list when passing an identifier. It allows reading out of an identifier without copying. But here you\u0027re saving at most a string copy, which you copy below anyway, while adding complexity.\n\nInstead, implement this as the function type that takes its arguments as a vector of Values (see RunSetDefaultToolchain. Then all you need to do is typecheck that they\u0027re strings and do the replacement.",
+      "revId": "dce5191dafa9d18410523456eee0a8453339a672",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "8084e4e0_579049fa",
         "filename": "tools/gn/functions_unittest.cc",
         "patchSetId": 2
