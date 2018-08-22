@@ -23,6 +23,8 @@ and `AR`.
 GN uses [Gerrit](https://www.gerritcodereview.com/) for code review. The short
 version of how to patch is:
 
+    Register at https://gn-review.googlesource.com.
+
     ... edit code ...
     ninja -C out && out/gn_unittests
 
