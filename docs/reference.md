@@ -1271,6 +1271,8 @@
   mapping from each source file to an output file name using source expansion
   (see "gn help source_expansion"). The placeholders will look like
   "{{source_name_part}}", for example.
+
+  Directories are not valid inputs.
 ```
 
 #### **Examples**
