@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6c833565_97bea41e",
+        "filename": "docs/reference.md",
+        "patchSetId": 1
+      },
+      "lineNbr": 1275,
+      "author": {
+        "id": 1000012
+      },
+      "writtenOn": "2018-08-23T00:22:20Z",
+      "side": 1,
+      "message": "This is a generated file, so you\u0027ll need to update the source code copy of this instead.\n\nAssuming we decide this is right, of course.",
+      "revId": "2316fdb967cc4bb25b0336b8a0a2a0bfe6d4bc75",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": true
+    }
+  ]
+}
