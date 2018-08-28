@@ -6,6 +6,8 @@
 #include <iostream>
 
 #include "base/command_line.h"
+#include "base/strings/string_split.h"
+#include "base/strings/string_util.h"
 #include "tools/gn/args.h"
 #include "tools/gn/commands.h"
 #include "tools/gn/err.h"
@@ -211,6 +213,76 @@ Example
       Dump all help to stdout in markdown format.
 )";
 
+// Given a help text, tries to extract topics covered in it.
+std::vector<base::StringPiece> ExtractTopics(base::StringPiece help) {
+  // FIXME: `help tool` has 4-indent, `help dotfile`, `help toolchain` has 2-indent
+  bool last_line_was_empty = true;
+  std::vector<base::StringPiece> topics;
+
+  for (const auto& line : base::SplitStringPiece(help, "\r\n",
+                                                 base::KEEP_WHITESPACE,
+                                                 base::SPLIT_WANT_ALL)) {
+
+    // Look for several patterns.
+    // 1. Line starting with two spaces followed by a single word, optionally
+    //    followed by [text in brackets]. Detects things like
+    //    |  secondary_source [optional]|
+    //    from e.g. `gn help dotfile`
+    if (last_line_was_empty && line.size() > 2 && line[0] == ' ' && line[1]) {
+      size_t word_end = 2;
+      while (word_end < line.size() && line[word_end] != ' ')
+        ++word_end;
+
+      bool found_topic = word_end == line.size();
+      if (!found_topic && line[word_end + 1] == '[') {
+        size_t brackets = word_end + 1;
+        while (brackets < line.size() && line[brackets] != ']')
+          ++brackets;
+        if (brackets < line.size() && line[brackets] == ']')
+          found_topic = true;
+      }
+
+      if (found_topic)
+        topics.push_back(base::StringPiece(line.data() + 2, word_end - 2));
+    }
+
+    // 2. Line starting with four spaces containing a single {{word}}.
+    //    Detects things like
+    //    |    {{asmflags}}|
+    //    from e.g. `gn help tool`
+    if (last_line_was_empty &&
+        base::StartsWith(line, "    {{",
+                         base::CompareCase::INSENSITIVE_ASCII) &&
+        base::EndsWith(line, "}}", base::CompareCase::INSENSITIVE_ASCII)) {
+      bool is_single_word = true;
+      for (size_t i = strlen("    {{"); i < line.size() - strlen("}}"); ++i) {
+        if (base::IsAsciiWhitespace(line[i]))
+          is_single_word = false;
+      }
+      if (!is_single_word)
+        topics.push_back(base::StringPiece(line.data() + 6, line.size() - 8));
+    }
+
+    last_line_was_empty = line.empty();
+  }
+
+  return topics;
+}
+
+void SeeAlso(base::StringPiece key,
+             base::StringPiece help,
+             std::map<base::StringPiece, base::StringPiece>* see_also) {
+  std::vector<base::StringPiece> topics = ExtractTopics(help);
+  if (topics.empty())
+    return;
+  printf("for %s\n", key.as_string().c_str());
+  for (const auto& topic : topics) {
+    printf("  got %s\n", topic.as_string().c_str());
+  }
+
+  // XXX fill see_also
+}
+
 int RunHelp(const std::vector<std::string>& args) {
   std::string what;
   if (args.size() == 0) {
@@ -236,6 +308,8 @@ int RunHelp(const std::vector<std::string>& args) {
 
   std::vector<base::StringPiece> all_help_topics;
 
+  std::map<base::StringPiece, base::StringPiece> see_also;
+
   // Check commands.
   const commands::CommandInfoMap& command_map = commands::GetCommands();
   auto found_command = command_map.find(what);
@@ -243,16 +317,20 @@ int RunHelp(const std::vector<std::string>& args) {
     PrintLongHelp(found_command->second.help);
     return 0;
   }
-  for (const auto& entry : command_map)
+  for (const auto& entry : command_map) {
     all_help_topics.push_back(entry.first);
+    SeeAlso(entry.first, entry.second.help, &see_also);
+  }
 
   // Check functions.
   const functions::FunctionInfoMap& function_map = functions::GetFunctions();
   auto found_function = function_map.find(what);
   if (found_function != function_map.end())
     PrintLongHelp(found_function->second.help);
-  for (const auto& entry : function_map)
+  for (const auto& entry : function_map) {
     all_help_topics.push_back(entry.first);
+    SeeAlso(entry.first, entry.second.help, &see_also);
+  }
 
   // Builtin variables.
   const variables::VariableInfoMap& builtin_vars =
@@ -260,8 +338,10 @@ int RunHelp(const std::vector<std::string>& args) {
   auto found_builtin_var = builtin_vars.find(what);
   if (found_builtin_var != builtin_vars.end())
     PrintLongHelp(found_builtin_var->second.help);
-  for (const auto& entry : builtin_vars)
+  for (const auto& entry : builtin_vars) {
     all_help_topics.push_back(entry.first);
+    SeeAlso(entry.first, entry.second.help, &see_also);
+  }
 
   // Target variables.
   const variables::VariableInfoMap& target_vars =
@@ -269,9 +349,15 @@ int RunHelp(const std::vector<std::string>& args) {
   auto found_target_var = target_vars.find(what);
   if (found_target_var != target_vars.end())
     PrintLongHelp(found_target_var->second.help);
-  for (const auto& entry : target_vars)
+  for (const auto& entry : target_vars) {
     all_help_topics.push_back(entry.first);
+    SeeAlso(entry.first, entry.second.help, &see_also);
+  }
 
+// XXX
+  ExtractTopics(kDotfile_Help);
+
+  // XXX maybe remove this
   if (found_function != function_map.end() ||
       found_builtin_var != builtin_vars.end() ||
       found_target_var != target_vars.end())
@@ -280,24 +366,21 @@ int RunHelp(const std::vector<std::string>& args) {
   // Random other topics.
   std::map<std::string, void (*)()> random_topics;
   random_topics["all"] = PrintAllHelp;
-  random_topics["execution"] = []() { PrintLongHelp(kExecution_Help); };
-  random_topics["buildargs"] = []() { PrintLongHelp(kBuildArgs_Help); };
-  random_topics["dotfile"] = []() { PrintLongHelp(kDotfile_Help); };
-  random_topics["grammar"] = []() { PrintLongHelp(kGrammar_Help); };
-  random_topics["input_conversion"] = []() {
-    PrintLongHelp(kInputOutputConversion_Help);
-  };
-  random_topics["label_pattern"] = []() { PrintLongHelp(kLabelPattern_Help); };
-  random_topics["labels"] = []() { PrintLongHelp(kLabels_Help); };
-  random_topics["ninja_rules"] = []() { PrintLongHelp(kNinjaRules_Help); };
-  random_topics["nogncheck"] = []() { PrintLongHelp(kNoGnCheck_Help); };
-  random_topics["output_conversion"] = []() {
-    PrintLongHelp(kInputOutputConversion_Help);
-  };
-  random_topics["runtime_deps"] = []() { PrintLongHelp(kRuntimeDeps_Help); };
-  random_topics["source_expansion"] = []() {
-    PrintLongHelp(kSourceExpansion_Help);
-  };
+#define AddLongHelp(key, help) \
+  SeeAlso(key, help, &see_also); \
+  random_topics[key] = []() { PrintLongHelp(help); }
+  AddLongHelp("execution", kExecution_Help);
+  AddLongHelp("buildargs", kBuildArgs_Help);
+  AddLongHelp("dotfile", kDotfile_Help);
+  AddLongHelp("grammar", kGrammar_Help);
+  AddLongHelp("input_conversion", kInputOutputConversion_Help);
+  AddLongHelp("label_pattern", kLabelPattern_Help);
+  AddLongHelp("labels", kLabels_Help);
+  AddLongHelp("ninja_rules", kNinjaRules_Help);
+  AddLongHelp("nogncheck", kNoGnCheck_Help);
+  AddLongHelp("output_conversion", kInputOutputConversion_Help);
+  AddLongHelp("runtime_deps", kRuntimeDeps_Help);
+  AddLongHelp("source_expansion", kSourceExpansion_Help);
   random_topics["switches"] = PrintSwitchHelp;
   auto found_random_topic = random_topics.find(what);
   if (found_random_topic != random_topics.end()) {
