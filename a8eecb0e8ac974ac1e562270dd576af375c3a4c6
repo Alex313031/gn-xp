@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "2858a74f_51e010a7",
+        "filename": "tools/gn/standard_out.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 29,
+      "author": {
+        "id": 1000014
+      },
+      "writtenOn": "2018-08-28T19:57:07Z",
+      "side": 1,
+      "message": "Can you add a comment for this? Now that it\u0027s not local I think we need to be more obvious about its function.",
+      "revId": "a8eecb0e8ac974ac1e562270dd576af375c3a4c6",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": true
+    }
+  ]
+}
