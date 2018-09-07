@@ -284,3 +284,21 @@ value
 
 `foo_use_bar` - prefixes can be used to indicate a limited scope for an argument
 (e.g. `rtc_use_h264`, `v8_use_snapshot`)
+
+#### Variables
+
+Prefix variables within targets with an underscore. For example:
+
+```
+source_set("hello") {
+  _computed_paths = rebase_path(...)
+  sources = _computed_paths
+}
+```
+
+This convention conveys that `sources` is relevant to `source_set`, while
+`_computed_paths` is not.
+
+Prefix top-level variables within `.gni` files with an underscore. This prefix
+causes variables to be "private" to the `.gni` (unavailable to importing
+scripts).
