@@ -47,6 +47,7 @@
 .checkstyle
 cscope.*
 out/
+out_gn/
 GPATH
 GRTAGS
 GSYMS

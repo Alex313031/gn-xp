@@ -1,0 +1,26 @@
+# Copyright 2018 The Chromium Authors. All rights reserved.
+# Use of this source code is governed by a BSD-style license that can be
+# found in the LICENSE file.
+
+is_mac = host_os == "mac"
+is_win = host_os == "win"
+is_aix = host_os == "aix"
+is_linux = host_os == "linux"
+is_posix = is_mac || is_aix || is_linux
+
+set_defaults("static_library") {
+  configs = [
+    "//bld/gn:compile_flags"
+  ]
+}
+
+set_defaults("executable") {
+  configs = [
+    "//bld/gn:compile_flags",
+    "//bld/gn:link_flags"
+  ]
+}
+
+if (is_posix) {
+  set_default_toolchain("//bld/gn:clang")
+}
