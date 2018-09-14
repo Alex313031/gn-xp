@@ -45,6 +45,11 @@
 .pydevproject
 .recipe_deps
 .checkstyle
+bazel-bin
+bazel-genfiles
+bazel-gn
+bazel-out
+bazel-testlogs
 cscope.*
 out/
 out_gn/
