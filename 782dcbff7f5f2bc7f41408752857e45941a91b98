@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "fae09b73_df665e78",
+        "filename": "tools/gn/function_exec_script.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 82,
+      "author": {
+        "id": 1000004
+      },
+      "writtenOn": "2018-09-17T20:08:01Z",
+      "side": 1,
+      "message": "Please add a paragraph here something like:\n\nThe default script interpreter is Python. This can be configured by the\nscript_executable variable, see \"gn help dotfile\".",
+      "revId": "782dcbff7f5f2bc7f41408752857e45941a91b98",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": true
+    }
+  ]
+}
