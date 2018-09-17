@@ -1796,8 +1796,8 @@
 
 ```
   filename:
-      File name of python script to execute. Non-absolute names will be treated
-      as relative to the current build file.
+      File name of script to execute. Non-absolute names will be treated as
+      relative to the current build file.
 
   arguments:
       A list of strings to be passed to the script as arguments. May be
