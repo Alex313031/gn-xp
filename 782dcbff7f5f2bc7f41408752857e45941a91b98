@@ -16,6 +16,24 @@
       "revId": "782dcbff7f5f2bc7f41408752857e45941a91b98",
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "7a0572da_c99801a0",
+        "filename": "tools/gn/function_exec_script.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 82,
+      "author": {
+        "id": 1000062
+      },
+      "writtenOn": "2018-09-17T20:11:47Z",
+      "side": 1,
+      "message": "Could we add more info about where the python comes from?\nIs it whatever \"python\" resolves to from PATH?",
+      "parentUuid": "fae09b73_df665e78",
+      "revId": "782dcbff7f5f2bc7f41408752857e45941a91b98",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": true
     }
   ]
 }
