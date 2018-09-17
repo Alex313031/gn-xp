@@ -88,6 +88,24 @@
       "revId": "782dcbff7f5f2bc7f41408752857e45941a91b98",
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "62014764_5532250a",
+        "filename": "tools/gn/function_exec_script.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 82,
+      "author": {
+        "id": 1000062
+      },
+      "writtenOn": "2018-09-17T21:19:31Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "962d44a1_310a24b3",
+      "revId": "782dcbff7f5f2bc7f41408752857e45941a91b98",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": false
     }
   ]
 }
