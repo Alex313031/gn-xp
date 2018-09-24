@@ -214,6 +214,39 @@ Scopes
 
     myvalues.foo += 2
     empty_scope.new_thing = [ 1, 2, 3 ]
+
+  Scope equality is defined to indicate that two scopes are functionally
+  indistinguishable. To be so, they must have a) matching values in the current
+  scope, and b) matching values in all parent scopes. The current scopes must be
+  identical, while values in a parent scope must simply be defined in both at
+  some level (i.e. the level does not matter for parent scopes, just that the
+  value is defined in *a* parent scope). As an example:
+
+    parent_scope = {
+      foo = 42
+    }
+
+    # Inherits parent_scope
+    child_scope = {
+      bar = true
+    }
+
+    # Inherits child_scope
+    grandchild_scope = {
+      baz = "something"
+    }
+
+    other_parent_scope = {
+      foo = 42
+      bar = true
+    }
+
+    # Inherits other_parent_scope
+    other_child_scope = {
+      baz = "something"
+    }
+
+    grandchild_scope == other_child_scope # true
 )*";
 
 enum Precedence {

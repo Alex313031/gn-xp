@@ -333,3 +333,17 @@ TEST(Scope, RemovePrivateIdentifiers) {
   EXPECT_TRUE(setup.scope()->GetValue("a"));
   EXPECT_FALSE(setup.scope()->GetValue("_b"));
 }
+
+TEST(Scope, GetAllValuesSize) {
+  TestWithScope setup;
+  Scope* parent_scope = new Scope(setup.scope());
+  parent_scope->SetValue("a", Value(nullptr, static_cast<int64_t>(42)), nullptr);
+
+  Scope* child_scope = new Scope(parent_scope);
+  child_scope->SetValue("b", Value(nullptr, "hello, world"), nullptr);
+
+  Scope* grandchild_scope = new Scope(child_scope);
+  grandchild_scope->SetValue("c", Value(nullptr, true), nullptr);
+
+  EXPECT_EQ(grandchild_scope->GetAllValuesSize(), 3);
+}
