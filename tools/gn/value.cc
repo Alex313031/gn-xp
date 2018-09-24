@@ -195,11 +195,21 @@ bool Value::operator==(const Value& other) const {
           return false;
       }
       return true;
-    case Value::SCOPE:
-      // Scopes are always considered not equal because there's currently
-      // no use case for comparing them, and it requires a bunch of complex
-      // iteration code.
-      return false;
+    case Value::SCOPE: {
+      Scope::KeyValueMap scope_values;
+      scope_value()->GetCurrentScopeValues(&scope_values);
+      Scope::KeyValueMap other_scope_values;
+      other.scope_value()->GetCurrentScopeValues(&other_scope_values);
+      if (scope_values.size() != other_scope_values.size())
+        return false;
+      for (const auto& Pair : scope_values) {
+        if (const auto* V = other.scope_value()->GetValue(Pair.first)) {
+          if (*V != Pair.second)
+            return false;
+        }
+      }
+      return true;
+    }
     default:
       return false;
   }
