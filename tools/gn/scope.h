@@ -220,6 +220,22 @@ class Scope {
   // scopes.
   void GetCurrentScopeValues(KeyValueMap* output) const;
 
+  // Returns true if all values in the scope are the same as all values in the
+  // given scope.
+  // 
+  // Parent scopes need not be identical on the individual level, but must
+  // overall contain identical values (i.e. which parent scope declares a
+  // particular value is not relevant, as long as one does).
+  //
+  // Passing the parent parameter indicates that the function should consider
+  // all values to be parent scope values (used for recursive calls).
+  bool CheckScopeValuesEqual(const Scope* other) const;
+  bool CheckScopeValuesEqual(const Scope* other, bool parent) const;
+
+  // Returns the total number of values in the scope (incluse current and
+  // parent scope values).
+  int GetAllValuesSize() const;
+
   // Copies this scope's values into the destination. Values from the
   // containing scope(s) (normally shadowed into the current one) will not be
   // copied, neither will the reference to the containing scope (this is why

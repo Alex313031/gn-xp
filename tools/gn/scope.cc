@@ -274,6 +274,63 @@ void Scope::GetCurrentScopeValues(KeyValueMap* output) const {
     (*output)[pair.first] = pair.second.value;
 }
 
+bool Scope::CheckScopeValuesEqual(const Scope* other) const {
+  // Check the current scope.
+  if (values_.size() != other->values_.size())
+    return false;
+
+  for (const auto& pair : values_) {
+    const Value* v = other->GetValueWithScope(pair.first, &other);
+    if (!v || *v != pair.second.value)
+      return false;
+  }
+
+  // Check the parent scopes.
+  if (GetAllValuesSize() != other->GetAllValuesSize())
+    return false;
+
+  if (const_containing_ && other->const_containing())
+    return const_containing_->CheckScopeValuesEqual(other->const_containing(),
+                                                    /*parent=*/true);
+  if (mutable_containing_ && other->mutable_containing())
+    return mutable_containing_->CheckScopeValuesEqual(
+        other->mutable_containing(),
+        /*parent=*/true);
+  if ((const_containing_ && other->mutable_containing()) ||
+      (mutable_containing_ && other->const_containing()))
+    return false;
+  return true;
+}
+
+bool Scope::CheckScopeValuesEqual(const Scope* other, bool parent) const {
+  if (!parent)
+    return false;
+
+  for (const auto& pair : values_) {
+    const Value* v = other->GetValue(pair.first);
+    if (!v || *v != pair.second.value)
+      return false;
+  }
+
+  // Check all parent scopes. Since we're considering these values to be in
+  // parent scopes, we don't particularly care which parent scope they're
+  // declared in.
+  if (const_containing_)
+    return const_containing_->CheckScopeValuesEqual(other, /*parent=*/true);
+  if (mutable_containing_)
+    return mutable_containing_->CheckScopeValuesEqual(other, /*parent=*/true);
+  return true;
+}
+
+int Scope::GetAllValuesSize() const {
+  int size = values_.size();
+  if (const_containing_)
+    return values_.size() + const_containing_->GetAllValuesSize();
+  if (mutable_containing_)
+    return values_.size() + mutable_containing_->GetAllValuesSize();
+  return values_.size();
+}
+
 bool Scope::NonRecursiveMergeTo(Scope* dest,
                                 const MergeOptions& options,
                                 const ParseNode* node_for_err,
