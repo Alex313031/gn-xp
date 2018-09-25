@@ -1,0 +1,78 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "e957d39e_ab6abcca",
+        "filename": "tools/gn/scope.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 282,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2018-09-25T16:43:09Z",
+      "side": 1,
+      "message": "You should be able to avoid adding the new public function GetNumCurrentScopeValues by just implementing this line as:\n\n  if (values_.size() !\u003d other-\u003evalues_.size())",
+      "revId": "a778f913bc3996e6d51497945ecc32968c2c4431",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "22c7bed0_bc54f187",
+        "filename": "tools/gn/scope.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 284,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2018-09-25T16:43:09Z",
+      "side": 1,
+      "message": "Style nit: lower-case for local vars: \"pair\" and \"v\"",
+      "revId": "a778f913bc3996e6d51497945ecc32968c2c4431",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "4bf847c3_246e5ce3",
+        "filename": "tools/gn/scope.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 285,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2018-09-25T16:43:09Z",
+      "side": 1,
+      "message": "If the value doesn\u0027t exist in the other one we\u0027d want to return false. I might just implement that as an early return.",
+      "revId": "a778f913bc3996e6d51497945ecc32968c2c4431",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "8c99649b_fda6e992",
+        "filename": "tools/gn/scope.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 224,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2018-09-25T16:43:09Z",
+      "side": 1,
+      "message": "\"Returns\" spelling :)",
+      "range": {
+        "startLine": 224,
+        "startChar": 68,
+        "endLine": 224,
+        "endChar": 76
+      },
+      "revId": "a778f913bc3996e6d51497945ecc32968c2c4431",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": true
+    }
+  ]
+}
