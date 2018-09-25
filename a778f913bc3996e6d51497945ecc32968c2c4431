@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "00ce9962_f6117522",
+        "filename": "tools/gn/scope.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 282,
+      "author": {
+        "id": 1000023
+      },
+      "writtenOn": "2018-09-25T17:06:32Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "e957d39e_ab6abcca",
+      "revId": "a778f913bc3996e6d51497945ecc32968c2c4431",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "22c7bed0_bc54f187",
         "filename": "tools/gn/scope.cc",
         "patchSetId": 2
@@ -36,6 +54,24 @@
     },
     {
       "key": {
+        "uuid": "daca5075_f2169293",
+        "filename": "tools/gn/scope.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 284,
+      "author": {
+        "id": 1000023
+      },
+      "writtenOn": "2018-09-25T17:06:32Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "22c7bed0_bc54f187",
+      "revId": "a778f913bc3996e6d51497945ecc32968c2c4431",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "4bf847c3_246e5ce3",
         "filename": "tools/gn/scope.cc",
         "patchSetId": 2
@@ -50,6 +86,24 @@
       "revId": "a778f913bc3996e6d51497945ecc32968c2c4431",
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "7a3fb2bb_da102261",
+        "filename": "tools/gn/scope.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 285,
+      "author": {
+        "id": 1000023
+      },
+      "writtenOn": "2018-09-25T17:06:32Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "4bf847c3_246e5ce3",
+      "revId": "a778f913bc3996e6d51497945ecc32968c2c4431",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": false
     },
     {
       "key": {
@@ -73,6 +127,30 @@
       "revId": "a778f913bc3996e6d51497945ecc32968c2c4431",
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "dfa4295b_8d9951f6",
+        "filename": "tools/gn/scope.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 224,
+      "author": {
+        "id": 1000023
+      },
+      "writtenOn": "2018-09-25T17:06:32Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "8c99649b_fda6e992",
+      "range": {
+        "startLine": 224,
+        "startChar": 68,
+        "endLine": 224,
+        "endChar": 76
+      },
+      "revId": "a778f913bc3996e6d51497945ecc32968c2c4431",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": false
     }
   ]
 }
