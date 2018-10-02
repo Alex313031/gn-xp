@@ -596,6 +596,18 @@ bool XcodeWriter::WriteFiles(const BuildSettings* build_settings, Err* err) {
       return false;
   }
 
+  if (!WriteWorkspaceFile(build_settings, err))
+    return false;
+
+  if (!WriteWorkspaceSettingsFile(build_settings, err))
+    return false;
+
+  return true;
+}
+
+bool XcodeWriter::WriteWorkspaceFile(
+    const BuildSettings* build_settings,
+    Err* err) {
   SourceFile xcworkspacedata_file =
       build_settings->build_dir().ResolveRelativeFile(
           Value(nullptr, name_ + ".xcworkspace/contents.xcworkspacedata"), err);
@@ -607,6 +619,24 @@ bool XcodeWriter::WriteFiles(const BuildSettings* build_settings, Err* err) {
 
   return WriteFileIfChanged(build_settings->GetFullPath(xcworkspacedata_file),
                             xcworkspacedata_string_out.str(), err);
+}
+
+bool XcodeWriter::WriteWorkspaceSettingsFile(
+    const BuildSettings* build_settings,
+    Err* err) {
+  SourceFile xcworkspacesettings_file =
+      build_settings->build_dir().ResolveRelativeFile(
+          Value(nullptr, name_ + ".xcworkspace/xcshareddara/" +
+                "WorkSpaceSettings.xcsettings"), err);
+  if (xcworkspacesettings_file.is_null())
+    return false;
+
+  std::stringstream xcworkspacesettings_string_out;
+  WriteWorkspaceSettingsContent(xcworkspacesettings_string_out);
+
+  return WriteFileIfChanged(
+      build_settings->GetFullPath(xcworkspacesettings_file),
+      xcworkspacesettings_string_out.str(), err);
 }
 
 bool XcodeWriter::WriteProjectFile(const BuildSettings* build_settings,
@@ -635,6 +665,18 @@ void XcodeWriter::WriteWorkspaceContent(std::ostream& out) {
         << ".xcodeproj\"></FileRef>\n";
   }
   out << "</Workspace>\n";
+}
+
+void XcodeWriter::WriteWorkspaceSettingsContent(std::ostream& out) {
+  out << "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n"
+         "<!DOCTYPE plist PUBLIC \"-//Apple//DTD PLIST 1.0//EN\" "
+         "\"http://www.apple.com/DTDs/PropertyList-1.0.dtd\">\n"
+         "<plist version=\"1.0\">\n"
+         "<dict>\n"
+         "  <key>BuildSystemType</key>\n"
+         "  <string>Original</string>\n"
+         "</dict>\n"
+         "</plist>\n";
 }
 
 void XcodeWriter::WriteProjectContent(std::ostream& out, PBXProject* project) {
