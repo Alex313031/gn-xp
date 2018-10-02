@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "08031cea_4d2a9a3a",
+        "filename": "tools/gn/xcode_writer.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 670,
+      "author": {
+        "id": 1000071
+      },
+      "writtenOn": "2018-10-02T16:08:52Z",
+      "side": 1,
+      "message": "Can this be configurable?",
+      "range": {
+        "startLine": 670,
+        "startChar": 18,
+        "endLine": 670,
+        "endChar": 47
+      },
+      "revId": "a3091be12b41148c6b267cfe329416117628fc9e",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": true
+    }
+  ]
+}
