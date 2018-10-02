@@ -73,11 +73,15 @@ class XcodeWriter {
                              TargetOsType target_os);
 
   bool WriteFiles(const BuildSettings* build_settings, Err* err);
+  bool WriteWorkspaceFile(const BuildSettings* build_settings, Err* err);
+  bool WriteWorkspaceSettingsFile(const BuildSettings* build_settings,
+                                  Err* err);
   bool WriteProjectFile(const BuildSettings* build_settings,
                         PBXProject* project,
                         Err* err);
 
   void WriteWorkspaceContent(std::ostream& out);
+  void WriteWorkspaceSettingsContent(std::ostream& out);
   void WriteProjectContent(std::ostream& out, PBXProject* project);
 
   std::string name_;
