@@ -1,0 +1,72 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "fb845c5b_f3ef616d",
+        "filename": "tools/gn/scope.cc",
+        "patchSetId": 6
+      },
+      "lineNbr": 289,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2018-10-02T21:12:41Z",
+      "side": 1,
+      "message": "This isn\u0027t quite right because it doesn\u0027t take into account shadowing of values. If the scope and it\u0027s containing scope both have \"a\" definitions, I think this code will count it as 2 values, but really there\u0027s only one.\n\nI think there are also some other problems related to shadowing values when checking containing scopes.",
+      "revId": "9ff6fbc2b7662a498cfe9e65f243fd64ea443064",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "61e3a2f9_75a2fa44",
+        "filename": "tools/gn/scope.cc",
+        "patchSetId": 6
+      },
+      "lineNbr": 292,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2018-10-02T21:12:41Z",
+      "side": 1,
+      "message": "Can you be sure the indented blocks with \u003e1 line have {} around them? That\u0027s a Chrome team rule that GN follows (and I think we have the same rule on TQ).\n\nThe next if also.",
+      "revId": "9ff6fbc2b7662a498cfe9e65f243fd64ea443064",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "f1d2f13c_97dd4271",
+        "filename": "tools/gn/scope.cc",
+        "patchSetId": 6
+      },
+      "lineNbr": 299,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2018-10-02T21:12:41Z",
+      "side": 1,
+      "message": "I doubt this will come up in real life but I don\u0027t think the comparison should depend on whether the containing scopes are mutable or not.\n\nI think we can do the equivalent of (const|mutable)_containing-\u003eCheckScopeValuesEqual(other-\u003e(const|mutable)_containing); and it will be right.",
+      "revId": "9ff6fbc2b7662a498cfe9e65f243fd64ea443064",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "b3d2e62f_57074cd7",
+        "filename": "tools/gn/scope.cc",
+        "patchSetId": 6
+      },
+      "lineNbr": 306,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2018-10-02T21:12:41Z",
+      "side": 1,
+      "message": "Maybe I missed it but I don\u0027t see anywhere where false is passed for \"parent\". If true, maybe we can remove the param and give this other function a slightly different name?",
+      "revId": "9ff6fbc2b7662a498cfe9e65f243fd64ea443064",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": true
+    }
+  ]
+}
