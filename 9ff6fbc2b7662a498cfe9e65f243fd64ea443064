@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "11457c4d_92fc1926",
+        "filename": "tools/gn/scope.cc",
+        "patchSetId": 6
+      },
+      "lineNbr": 289,
+      "author": {
+        "id": 1000023
+      },
+      "writtenOn": "2018-10-03T22:03:07Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "fb845c5b_f3ef616d",
+      "revId": "9ff6fbc2b7662a498cfe9e65f243fd64ea443064",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "61e3a2f9_75a2fa44",
         "filename": "tools/gn/scope.cc",
         "patchSetId": 6
@@ -33,6 +51,24 @@
       "revId": "9ff6fbc2b7662a498cfe9e65f243fd64ea443064",
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "c2200914_94fbc4cc",
+        "filename": "tools/gn/scope.cc",
+        "patchSetId": 6
+      },
+      "lineNbr": 292,
+      "author": {
+        "id": 1000023
+      },
+      "writtenOn": "2018-10-03T22:03:07Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "61e3a2f9_75a2fa44",
+      "revId": "9ff6fbc2b7662a498cfe9e65f243fd64ea443064",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": false
     },
     {
       "key": {
@@ -53,6 +89,24 @@
     },
     {
       "key": {
+        "uuid": "f79a8122_e2a957e1",
+        "filename": "tools/gn/scope.cc",
+        "patchSetId": 6
+      },
+      "lineNbr": 299,
+      "author": {
+        "id": 1000023
+      },
+      "writtenOn": "2018-10-03T22:03:07Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "f1d2f13c_97dd4271",
+      "revId": "9ff6fbc2b7662a498cfe9e65f243fd64ea443064",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "b3d2e62f_57074cd7",
         "filename": "tools/gn/scope.cc",
         "patchSetId": 6
@@ -67,6 +121,24 @@
       "revId": "9ff6fbc2b7662a498cfe9e65f243fd64ea443064",
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "dffc0846_6f011edb",
+        "filename": "tools/gn/scope.cc",
+        "patchSetId": 6
+      },
+      "lineNbr": 306,
+      "author": {
+        "id": 1000023
+      },
+      "writtenOn": "2018-10-03T22:03:07Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "b3d2e62f_57074cd7",
+      "revId": "9ff6fbc2b7662a498cfe9e65f243fd64ea443064",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": false
     }
   ]
 }
