@@ -22,6 +22,30 @@
       "revId": "a3091be12b41148c6b267cfe329416117628fc9e",
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "f50a5ce1_2a604fc8",
+        "filename": "tools/gn/xcode_writer.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 670,
+      "author": {
+        "id": 1000070
+      },
+      "writtenOn": "2018-10-03T15:02:21Z",
+      "side": 1,
+      "message": "Sure, I\u0027ll make it configurable and upload a new patchset.",
+      "parentUuid": "08031cea_4d2a9a3a",
+      "range": {
+        "startLine": 670,
+        "startChar": 18,
+        "endLine": 670,
+        "endChar": 47
+      },
+      "revId": "a3091be12b41148c6b267cfe329416117628fc9e",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": true
     }
   ]
 }
