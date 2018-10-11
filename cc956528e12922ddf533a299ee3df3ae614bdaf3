@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "a114a3ec_2cb17779",
+        "filename": "base/files/file_util_posix.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 114,
+      "author": {
+        "id": 1000004
+      },
+      "writtenOn": "2018-10-11T04:06:59Z",
+      "side": 1,
+      "message": "You could change this to something less weird and more GN-y too if you want. .org.chromium.Chromium is strangely-Java-like.",
+      "revId": "cc956528e12922ddf533a299ee3df3ae614bdaf3",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": true
+    }
+  ]
+}
