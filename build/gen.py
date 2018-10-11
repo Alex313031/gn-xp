@@ -680,21 +680,6 @@ def WriteGNNinja(path, platform, host, options, linux_sysroot):
         'base/strings/sys_string_conversions_posix.cc',
     ])
 
-  if platform.is_darwin():
-    static_libraries['base']['sources'].extend([
-        'base/files/file_util_mac.mm',
-        'base/mac/bundle_locations.mm',
-        'base/mac/foundation_util.mm',
-        'base/strings/sys_string_conversions_mac.mm',
-    ])
-
-    libs.extend([
-        '-framework', 'AppKit',
-        '-framework', 'CoreFoundation',
-        '-framework', 'Foundation',
-        '-framework', 'Security',
-    ])
-
   if platform.is_windows():
     static_libraries['base']['sources'].extend([
         'base/files/file_enumerator_win.cc',
