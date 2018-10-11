@@ -379,8 +379,6 @@ def WriteGNNinja(path, platform, host, options, linux_sysroot):
       ])
     elif platform.is_darwin():
       min_mac_version_flag = '-mmacosx-version-min=10.9'
-      cflags.append(min_mac_version_flag)
-      ldflags.append(min_mac_version_flag)
     elif platform.is_aix():
       cflags_cc.append('-maix64')
       ldflags.extend(['-maix64', '-pthread'])
@@ -678,21 +676,6 @@ def WriteGNNinja(path, platform, host, options, linux_sysroot):
   if platform.is_linux() or platform.is_aix():
     static_libraries['base']['sources'].extend([
         'base/strings/sys_string_conversions_posix.cc',
-    ])
-
-  if platform.is_darwin():
-    static_libraries['base']['sources'].extend([
-        'base/files/file_util_mac.mm',
-        'base/mac/bundle_locations.mm',
-        'base/mac/foundation_util.mm',
-        'base/strings/sys_string_conversions_mac.mm',
-    ])
-
-    libs.extend([
-        '-framework', 'AppKit',
-        '-framework', 'CoreFoundation',
-        '-framework', 'Foundation',
-        '-framework', 'Security',
     ])
 
   if platform.is_windows():
