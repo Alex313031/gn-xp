@@ -47,6 +47,7 @@ const char kSwitchNoDeps[] = "no-deps";
 const char kSwitchRootTarget[] = "root-target";
 const char kSwitchSln[] = "sln";
 const char kSwitchWorkspace[] = "workspace";
+const char kSwitchUseOriginalBuilder[] = "use-original-builder";
 const char kSwitchJsonFileName[] = "json-file-name";
 const char kSwitchJsonIdeScript[] = "json-ide-script";
 const char kSwitchJsonIdeScriptArgs[] = "json-ide-script-args";
@@ -232,11 +233,17 @@ bool RunIdeWriter(const std::string& ide,
     return res;
   } else if (ide == kSwitchIdeValueXcode) {
     bool res = XcodeWriter::RunAndWriteFiles(
-        command_line->GetSwitchValueASCII(kSwitchWorkspace),
-        command_line->GetSwitchValueASCII(kSwitchRootTarget),
-        command_line->GetSwitchValueASCII(kSwitchNinjaExtraArgs),
-        command_line->GetSwitchValueASCII(kSwitchFilters), build_settings,
-        builder, err);
+        build_settings, builder,
+        XcodeWriter::Options{
+            command_line->GetSwitchValueASCII(kSwitchWorkspace),
+            command_line->GetSwitchValueASCII(kSwitchRootTarget),
+            command_line->GetSwitchValueASCII(kSwitchNinjaExtraArgs),
+            command_line->GetSwitchValueASCII(kSwitchFilters),
+            command_line->HasSwitch(kSwitchUseOriginalBuilder)
+                ? XcodeWriter::WorkspaceSettings{{"BuildSystemType",
+                                                  "Original"}}
+                : XcodeWriter::WorkspaceSettings{}},
+        err);
     if (res && !quiet) {
       OutputString("Generating Xcode projects took " +
                    base::Int64ToString(timer.Elapsed().InMilliseconds()) +
@@ -375,6 +382,13 @@ Xcode Flags
   --root-target=<target_name>
       Name of the target corresponding to "All" target in Xcode. If unset,
       "All" invokes ninja without any target and builds everything.
+
+  --use-original-builder
+      Force the use of the original builder in the generated Xcode project.
+      This is a workaround for an Xcode issue that prevents parsing error
+      from compiler when relative paths are used.
+
+      See https://bugreport.apple.com/web/?problemID=43290386 for tracking.
 
 QtCreator Flags
 
