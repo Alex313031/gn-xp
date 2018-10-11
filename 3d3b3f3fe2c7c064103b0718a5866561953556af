@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "e0a0306b_11861bea",
+        "filename": "tools/gn/command_format.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 1085,
+      "author": {
+        "id": 1000004
+      },
+      "writtenOn": "2018-10-11T04:04:33Z",
+      "side": 1,
+      "message": "The other two files don\u0027t run on Windows, but I don\u0027t understand how the changes in this file would work; base::FilePath::StringType is base::string16, so it\u0027s trying to join a std::string and string16 here, or sending a wide string to a %s in the printf.",
+      "revId": "3d3b3f3fe2c7c064103b0718a5866561953556af",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": true
+    }
+  ]
+}
