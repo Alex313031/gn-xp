@@ -46,6 +46,30 @@
       "revId": "a3091be12b41148c6b267cfe329416117628fc9e",
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "689d54b3_1fa57c9f",
+        "filename": "tools/gn/xcode_writer.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 670,
+      "author": {
+        "id": 1000070
+      },
+      "writtenOn": "2018-10-11T11:50:18Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "f50a5ce1_2a604fc8",
+      "range": {
+        "startLine": 670,
+        "startChar": 18,
+        "endLine": 670,
+        "endChar": 47
+      },
+      "revId": "a3091be12b41148c6b267cfe329416117628fc9e",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": false
     }
   ]
 }
