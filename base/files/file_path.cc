@@ -602,10 +602,6 @@ FilePath FilePath::FromUTF16Unsafe(StringPiece16 utf16) {
 // See file_path.h for a discussion of the encoding of paths on POSIX
 // platforms.  These encoding conversion functions are not quite correct.
 
-string16 FilePath::LossyDisplayName() const {
-  return WideToUTF16(SysNativeMBToWide(path_));
-}
-
 std::string FilePath::MaybeAsASCII() const {
   if (base::IsStringASCII(path_))
     return path_;
@@ -613,37 +609,21 @@ std::string FilePath::MaybeAsASCII() const {
 }
 
 std::string FilePath::AsUTF8Unsafe() const {
-#if defined(SYSTEM_NATIVE_UTF8)
   return value();
-#else
-  return WideToUTF8(SysNativeMBToWide(value()));
-#endif
 }
 
 string16 FilePath::AsUTF16Unsafe() const {
-#if defined(SYSTEM_NATIVE_UTF8)
   return UTF8ToUTF16(value());
-#else
-  return WideToUTF16(SysNativeMBToWide(value()));
-#endif
 }
 
 // static
 FilePath FilePath::FromUTF8Unsafe(StringPiece utf8) {
-#if defined(SYSTEM_NATIVE_UTF8)
   return FilePath(utf8);
-#else
-  return FilePath(SysWideToNativeMB(UTF8ToWide(utf8)));
-#endif
 }
 
 // static
 FilePath FilePath::FromUTF16Unsafe(StringPiece16 utf16) {
-#if defined(SYSTEM_NATIVE_UTF8)
   return FilePath(UTF16ToUTF8(utf16));
-#else
-  return FilePath(SysWideToNativeMB(UTF16ToWide(utf16.as_string())));
-#endif
 }
 
 #endif  // defined(OS_WIN)
