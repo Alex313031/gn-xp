@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "20779ce3_f5096a66",
+        "filename": "build/gen.py",
+        "patchSetId": 2
+      },
+      "lineNbr": 382,
+      "author": {
+        "id": 1000004
+      },
+      "writtenOn": "2018-10-11T04:10:55Z",
+      "side": 0,
+      "message": "I don\u0027t know much about this flag, but I think I had to add it so the binary would run on some Chromium bot somewhere. ... yeah here: https://gn.googlesource.com/gn/+/4cf8d1531a3980554937f96b50bf5db97aaf7925\n\nAre you sure we don\u0027t need it now?\n\nIf you are, then also delete min_mac_version_flag here anyway.",
+      "revId": "b85963d5e1086e0192485f7dd1fe8d5f65fb7294",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": true
+    }
+  ]
+}
