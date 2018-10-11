@@ -16,6 +16,24 @@
       "revId": "b85963d5e1086e0192485f7dd1fe8d5f65fb7294",
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "97a45c4d_e5238623",
+        "filename": "build/gen.py",
+        "patchSetId": 2
+      },
+      "lineNbr": 382,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2018-10-11T04:21:40Z",
+      "side": 0,
+      "message": "This is a leftover from testing, restored.",
+      "parentUuid": "20779ce3_f5096a66",
+      "revId": "b85963d5e1086e0192485f7dd1fe8d5f65fb7294",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": false
     }
   ]
 }
