@@ -355,12 +355,9 @@ void RecursivelyAssignIds(PBXProject* project) {
 }  // namespace
 
 // static
-bool XcodeWriter::RunAndWriteFiles(const std::string& workspace_name,
-                                   const std::string& root_target_name,
-                                   const std::string& ninja_extra_args,
-                                   const std::string& dir_filters_string,
-                                   const BuildSettings* build_settings,
+bool XcodeWriter::RunAndWriteFiles(const BuildSettings* build_settings,
                                    const Builder& builder,
+                                   Options options,
                                    Err* err) {
   const XcodeWriter::TargetOsType target_os =
       GetTargetOs(build_settings->build_args());
@@ -396,16 +393,17 @@ bool XcodeWriter::RunAndWriteFiles(const std::string& workspace_name,
   std::vector<const Target*> targets;
   std::vector<const Target*> all_targets = builder.GetAllResolvedTargets();
   if (!XcodeWriter::FilterTargets(build_settings, all_targets,
-                                  dir_filters_string, &targets, err)) {
+                                  options.dir_filters_string, &targets, err)) {
     return false;
   }
 
-  XcodeWriter workspace(workspace_name);
+  XcodeWriter workspace(options.workspace_name);
   workspace.CreateProductsProject(targets, all_targets, attributes, source_path,
-                                  config_name, root_target_name,
-                                  ninja_extra_args, build_settings, target_os);
+                                  config_name, options.root_target_name,
+                                  options.ninja_extra_args, build_settings,
+                                  target_os);
 
-  return workspace.WriteFiles(build_settings, err);
+  return workspace.WriteFiles(build_settings, options.workspace_settings, err);
 }
 
 XcodeWriter::XcodeWriter(const std::string& name) : name_(name) {
@@ -590,12 +588,27 @@ void XcodeWriter::CreateProductsProject(
   projects_.push_back(std::move(main_project));
 }
 
-bool XcodeWriter::WriteFiles(const BuildSettings* build_settings, Err* err) {
+bool XcodeWriter::WriteFiles(const BuildSettings* build_settings,
+                             const WorkspaceSettings& workspace_settings,
+                             Err* err) {
   for (const auto& project : projects_) {
     if (!WriteProjectFile(build_settings, project.get(), err))
       return false;
   }
 
+  if (!WriteWorkspaceFile(build_settings, err))
+    return false;
+
+  if (!workspace_settings.empty()) {
+    if (!WriteWorkspaceSettingsFile(build_settings, workspace_settings, err))
+      return false;
+  }
+
+  return true;
+}
+
+bool XcodeWriter::WriteWorkspaceFile(const BuildSettings* build_settings,
+                                     Err* err) {
   SourceFile xcworkspacedata_file =
       build_settings->build_dir().ResolveRelativeFile(
           Value(nullptr, name_ + ".xcworkspace/contents.xcworkspacedata"), err);
@@ -607,6 +620,27 @@ bool XcodeWriter::WriteFiles(const BuildSettings* build_settings, Err* err) {
 
   return WriteFileIfChanged(build_settings->GetFullPath(xcworkspacedata_file),
                             xcworkspacedata_string_out.str(), err);
+}
+
+bool XcodeWriter::WriteWorkspaceSettingsFile(
+    const BuildSettings* build_settings,
+    const WorkspaceSettings& workspace_settings,
+    Err* err) {
+  SourceFile xcworkspacesettings_file =
+      build_settings->build_dir().ResolveRelativeFile(
+          Value(nullptr, name_ + ".xcworkspace/xcshareddara/" +
+                             "WorkSpaceSettings.xcsettings"),
+          err);
+  if (xcworkspacesettings_file.is_null())
+    return false;
+
+  std::stringstream xcworkspacesettings_string_out;
+  WriteWorkspaceSettingsContent(xcworkspacesettings_string_out,
+                                workspace_settings);
+
+  return WriteFileIfChanged(
+      build_settings->GetFullPath(xcworkspacesettings_file),
+      xcworkspacesettings_string_out.str(), err);
 }
 
 bool XcodeWriter::WriteProjectFile(const BuildSettings* build_settings,
@@ -635,6 +669,22 @@ void XcodeWriter::WriteWorkspaceContent(std::ostream& out) {
         << ".xcodeproj\"></FileRef>\n";
   }
   out << "</Workspace>\n";
+}
+
+void XcodeWriter::WriteWorkspaceSettingsContent(
+    std::ostream& out,
+    const WorkspaceSettings& workspace_settings) {
+  out << "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n"
+         "<!DOCTYPE plist PUBLIC \"-//Apple//DTD PLIST 1.0//EN\" "
+         "\"http://www.apple.com/DTDs/PropertyList-1.0.dtd\">\n"
+         "<plist version=\"1.0\">\n"
+         "<dict>\n";
+  for (const auto& pair : workspace_settings) {
+    out << "  <key>" << pair.first << "</key>\n";
+    out << "  <string>" << pair.second << "</string>\n";
+  }
+  out << "</dict>\n"
+         "</plist>\n";
 }
 
 void XcodeWriter::WriteProjectContent(std::ostream& out, PBXProject* project) {

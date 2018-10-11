@@ -28,22 +28,41 @@ class XcodeWriter {
     WRITER_TARGET_OS_MACOS,
   };
 
-  // Writes Xcode workspace and project files.
+  using WorkspaceSettings = std::vector<std::pair<std::string, std::string>>;
+
+  // Options passed to configure the output of the RunAndWriteFiles().
   //
-  // |workspace_name| is the optional name of the workspace file name ("all"
-  // is used if not specified). |root_target_name| is the name of the main
-  // target corresponding to building "All" (for example "gn_all" in Chromium).
-  // |ninja_extra_args| are additional arguments to pass to ninja invocation
-  // (can be used to increase limit of concurrent processes when using goma).
-  // |dir_filters_string| is optional semicolon-separated list of label patterns
-  // used to limit the set of generated projects. Only matching targets will be
-  // included to the workspace. On failure will populate |err| and return false.
-  static bool RunAndWriteFiles(const std::string& workspace_name,
-                               const std::string& root_target_name,
-                               const std::string& ninja_extra_args,
-                               const std::string& dir_filters_string,
-                               const BuildSettings* build_settings,
+  // |workspace_name| is the basename of the workspace file generated; if
+  // empty, "all" is used (thus the workspace is named "all.xcworkspace").
+  //
+  // |root_target_name| is the name of the target passed to ninja to build
+  // "All" (e.g. "gn_all" in Chromium); if ommitted, ninja is invoked with
+  // no target (thus building all defined targets).
+  //
+  // |ninja_extra_args| are additional arguments to pass to the invocation
+  // of ninja; can be used to increase limit of concurrent process when
+  // using goma.
+  //
+  // |dir_filters_string| is an optional semicolon-separated list of label
+  // patterns used to limit the set of generated projects. Only matching
+  // targets will be included in the workspace.
+  //
+  // |workspace_settings| is a set of key-value pairs that will be written
+  // to the Xcode workspace shared settings file; if empty the file is not
+  // generated.
+  struct Options {
+    std::string workspace_name;
+    std::string root_target_name;
+    std::string ninja_extra_args;
+    std::string dir_filters_string;
+    WorkspaceSettings workspace_settings;
+  };
+
+  // Writes Xcode workspace and project files. On failure will populate |err|
+  // and return false.
+  static bool RunAndWriteFiles(const BuildSettings* build_settings,
                                const Builder& builder,
+                               Options options,
                                Err* err);
 
  private:
@@ -72,12 +91,21 @@ class XcodeWriter {
                              const BuildSettings* build_settings,
                              TargetOsType target_os);
 
-  bool WriteFiles(const BuildSettings* build_settings, Err* err);
+  bool WriteFiles(const BuildSettings* build_settings,
+                  const WorkspaceSettings& workspace_settings,
+                  Err* err);
+  bool WriteWorkspaceFile(const BuildSettings* build_settings, Err* err);
+  bool WriteWorkspaceSettingsFile(const BuildSettings* build_settings,
+                                  const WorkspaceSettings& workspace_settings,
+                                  Err* err);
   bool WriteProjectFile(const BuildSettings* build_settings,
                         PBXProject* project,
                         Err* err);
 
   void WriteWorkspaceContent(std::ostream& out);
+  void WriteWorkspaceSettingsContent(
+      std::ostream& out,
+      const WorkspaceSettings& workspace_settings);
   void WriteProjectContent(std::ostream& out, PBXProject* project);
 
   std::string name_;
