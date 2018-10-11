@@ -16,6 +16,24 @@
       "revId": "cc956528e12922ddf533a299ee3df3ae614bdaf3",
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "e4e508a5_08311de3",
+        "filename": "base/files/file_util_posix.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 114,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2018-10-11T04:23:22Z",
+      "side": 1,
+      "message": "I\u0027ll probably do a bit more cleanup as a followup change, right now I\u0027m just trying to remove unnecessary macOS dependencies to un-break builders.",
+      "parentUuid": "a114a3ec_2cb17779",
+      "revId": "cc956528e12922ddf533a299ee3df3ae614bdaf3",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": true
     }
   ]
 }
