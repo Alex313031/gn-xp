@@ -334,6 +334,8 @@ class FunctionCallNode : public ParseNode {
   const BlockNode* block() const { return block_.get(); }
   void set_block(std::unique_ptr<BlockNode> b) { block_ = std::move(b); }
 
+  void SetNewLocation(int line_number);
+
  private:
   Token function_;
   std::unique_ptr<ListNode> args_;
@@ -542,5 +544,7 @@ class EndNode : public ParseNode {
 
   DISALLOW_COPY_AND_ASSIGN(EndNode);
 };
+
+base::StringPiece GetStringRepresentation(const ParseNode* node);
 
 #endif  // TOOLS_GN_PARSE_TREE_H_

@@ -67,17 +67,6 @@ bool IsSortRangeSeparator(const ParseNode* node, const ParseNode* prev) {
                static_cast<int>(node->comments()->before().size() + 1)));
 }
 
-base::StringPiece GetStringRepresentation(const ParseNode* node) {
-  DCHECK(node->AsLiteral() || node->AsIdentifier() || node->AsAccessor());
-  if (node->AsLiteral())
-    return node->AsLiteral()->value().value();
-  else if (node->AsIdentifier())
-    return node->AsIdentifier()->value().value();
-  else if (node->AsAccessor())
-    return node->AsAccessor()->base().value();
-  return base::StringPiece();
-}
-
 }  // namespace
 
 Comments::Comments() = default;
@@ -391,8 +380,9 @@ Err BlockNode::MakeErrorDescribing(const std::string& msg,
 void BlockNode::Print(std::ostream& out, int indent) const {
   out << IndentFor(indent) << "BLOCK\n";
   PrintComments(out, indent);
-  for (const auto& statement : statements_)
+  for (const auto& statement : statements_) {
     statement->Print(out, indent + 1);
+  }
   if (end_ && end_->comments())
     end_->Print(out, indent + 1);
 }
@@ -469,6 +459,10 @@ LocationRange FunctionCallNode::GetRange() const {
     return LocationRange();  // This will be null in some tests.
   if (block_)
     return function_.range().Union(block_->GetRange());
+  LOG(ERROR) << "function is " << function_.range().begin().Describe(false)
+             << " to " << function_.range().end().Describe(false);
+  LOG(ERROR) << "args is " << args_->GetRange().begin().Describe(false)
+             << " to " << args_->GetRange().end().Describe(false);
   return function_.range().Union(args_->GetRange());
 }
 
@@ -483,6 +477,29 @@ void FunctionCallNode::Print(std::ostream& out, int indent) const {
   args_->Print(out, indent + 1);
   if (block_)
     block_->Print(out, indent + 1);
+}
+
+void FunctionCallNode::SetNewLocation(int line_number) {
+  Location old = function_.location();
+  function_.set_location(
+      Location(old.file(), line_number, old.column_number(), old.byte()));
+  CHECK(!block_);
+  if (!args_->contents().empty()) {
+    for (const auto& node : args_->contents()) {
+      if (node->AsLiteral()) {
+        LOG(ERROR) << "settings args to " << line_number;
+        const_cast<LiteralNode*>(node->AsLiteral())
+            ->SetNewLocation(line_number);
+        LOG(ERROR) << "now "
+                   << node->AsLiteral()->GetRange().begin().Describe(false)
+                   << " to "
+                   << node->AsLiteral()->GetRange().end().Describe(false);
+      } else {
+        LOG(ERROR) << "something else not set";
+      }
+      LOG(ERROR) << "   done args setting";
+    }
+  }
 }
 
 // IdentifierNode --------------------------------------------------------------
@@ -876,4 +893,15 @@ Err EndNode::MakeErrorDescribing(const std::string& msg,
 void EndNode::Print(std::ostream& out, int indent) const {
   out << IndentFor(indent) << "END(" << value_.value() << ")\n";
   PrintComments(out, indent);
+}
+
+base::StringPiece GetStringRepresentation(const ParseNode* node) {
+  DCHECK(node->AsLiteral() || node->AsIdentifier() || node->AsAccessor());
+  if (node->AsLiteral())
+    return node->AsLiteral()->value().value();
+  else if (node->AsIdentifier())
+    return node->AsIdentifier()->value().value();
+  else if (node->AsAccessor())
+    return node->AsAccessor()->base().value();
+  return base::StringPiece();
 }
