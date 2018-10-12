@@ -1,0 +1,5 @@
+import("b") import("c") import("a") import("d")
+
+import("z") declare_args() {} import("y") import("x") import("w")
+
+import("3") import("2") import("1")
