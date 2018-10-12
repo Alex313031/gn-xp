@@ -148,6 +148,9 @@ class Printer {
   // (both sorted alphabetically).
   void SortIfSourcesOrDeps(const BinaryOpNode* binop);
 
+  // Sort contiguous import() function calls in the given block.
+  void SortImportBlocks(const BlockNode* block);
+
   // Heuristics to decide if there should be a blank line added between two
   // items. For various "small" items, it doesn't look nice if there's too much
   // vertical whitespace added.
@@ -343,6 +346,86 @@ void Printer::SortIfSourcesOrDeps(const BinaryOpNode* binop) {
   }
 }
 
+void Printer::SortImportBlocks(const BlockNode* block) {
+  // Build a set of ranges by indices of FunctionCallNode's that are imports.
+
+  std::vector<std::vector<size_t>> import_statements;
+
+  auto is_import = [](const ParseNode* p) {
+    const FunctionCallNode* func_call = p->AsFunctionCall();
+    return func_call && func_call->function().value() == "import";
+  };
+
+  std::vector<size_t> current_group;
+  const auto& stmts = block->statements();
+  for (size_t i = 0; i < stmts.size(); ++i) {
+    if (is_import(stmts[i].get())) {
+      if (i > 0 &&
+          (!is_import(stmts[i - 1].get()) ||
+           ShouldAddBlankLineInBetween(stmts[i - 1].get(), stmts[i].get()))) {
+        if (!current_group.empty()) {
+          import_statements.push_back(current_group);
+          current_group.clear();
+        }
+      }
+      current_group.push_back(i);
+    }
+  }
+
+  if (!current_group.empty())
+    import_statements.push_back(current_group);
+
+  struct CompareByImportFile {
+    bool operator()(const std::unique_ptr<ParseNode>& a,
+                    const std::unique_ptr<ParseNode>& b) const {
+      const auto& a_args = a->AsFunctionCall()->args()->contents();
+      const auto& b_args = b->AsFunctionCall()->args()->contents();
+      base::StringPiece a_name;
+      base::StringPiece b_name;
+      if (!a_args.empty())
+        a_name = a_args[0]->AsLiteral()->value().value();
+      if (!b_args.empty())
+        b_name = b_args[0]->AsLiteral()->value().value();
+
+      auto is_absolute = [](base::StringPiece import) {
+        return import.size() >= 3 && import[0] == '"' && import[1] == '/' &&
+               import[2] == '/';
+      };
+      int a_is_rel = !is_absolute(a_name);
+      int b_is_rel = !is_absolute(b_name);
+
+      return std::tie(a_is_rel, a_name) < std::tie(b_is_rel, b_name);
+    }
+  };
+
+  auto& mutable_statements =
+      const_cast<std::vector<std::unique_ptr<ParseNode>>&>(block->statements());
+  for (const auto& group : import_statements) {
+    size_t begin = group[0];
+    size_t end = group.back() + 1;
+
+    // Save the original line number so that ranges can be re-assigned. They're
+    // contiguous because of the partitioning code above. Later formatting
+    // relies on correct line number to know whether to insert blank lines,
+    // which is why these need to be fixed up.
+    int start_line =
+        block->statements()[begin]->GetRange().begin().line_number();
+
+    std::sort(mutable_statements.begin() + begin,
+              mutable_statements.begin() + end, CompareByImportFile());
+
+    const ParseNode* prev = nullptr;
+    for (size_t i = begin; i < end; ++i) {
+      const ParseNode* node = block->statements()[i].get();
+      int line_number =
+          prev ? prev->GetRange().end().line_number() + 1 : start_line;
+      const_cast<FunctionCallNode*>(node->AsFunctionCall())
+          ->SetNewLocation(line_number);
+      prev = node;
+    }
+  }
+}
+
 bool Printer::ShouldAddBlankLineInBetween(const ParseNode* a,
                                           const ParseNode* b) {
   LocationRange a_range = a->GetRange();
@@ -381,6 +464,8 @@ void Printer::Block(const ParseNode* root) {
       Newline();
     }
   }
+
+  SortImportBlocks(block);
 
   size_t i = 0;
   for (const auto& stmt : block->statements()) {
