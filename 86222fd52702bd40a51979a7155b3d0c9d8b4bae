@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "a2063078_cd418f9a",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 3
+      },
+      "lineNbr": 11,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2018-10-12T02:25:01Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "58987611_9e2810fb",
+      "range": {
+        "startLine": 11,
+        "startChar": 0,
+        "endLine": 11,
+        "endChar": 5
+      },
+      "revId": "86222fd52702bd40a51979a7155b3d0c9d8b4bae",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "a890006a_8217eb40",
         "filename": "infra/recipe_modules/macos_sdk/__init__.py",
         "patchSetId": 3
@@ -36,6 +60,30 @@
       "writtenOn": "2018-10-12T02:18:01Z",
       "side": 1,
       "message": "It looks like there\u0027s a bunch of newer ones, is this the right default?",
+      "range": {
+        "startLine": 37,
+        "startChar": 21,
+        "endLine": 37,
+        "endChar": 26
+      },
+      "revId": "86222fd52702bd40a51979a7155b3d0c9d8b4bae",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "f59d5ba9_6727698c",
+        "filename": "infra/recipe_modules/macos_sdk/__init__.py",
+        "patchSetId": 3
+      },
+      "lineNbr": 37,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2018-10-12T02:25:01Z",
+      "side": 1,
+      "message": "This is the one currently used by depot_tools so I assumed it\u0027s good enough?",
+      "parentUuid": "a890006a_8217eb40",
       "range": {
         "startLine": 37,
         "startChar": 21,
@@ -68,6 +116,30 @@
       "revId": "86222fd52702bd40a51979a7155b3d0c9d8b4bae",
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "792960ee_d3689eb0",
+        "filename": "infra/recipe_modules/macos_sdk/api.py",
+        "patchSetId": 3
+      },
+      "lineNbr": 64,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2018-10-12T02:25:01Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "f105eb66_f1a6e75b",
+      "range": {
+        "startLine": 64,
+        "startChar": 8,
+        "endLine": 64,
+        "endChar": 11
+      },
+      "revId": "86222fd52702bd40a51979a7155b3d0c9d8b4bae",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": false
     }
   ]
 }
