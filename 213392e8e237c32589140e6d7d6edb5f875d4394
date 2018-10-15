@@ -52,6 +52,24 @@
       "revId": "213392e8e237c32589140e6d7d6edb5f875d4394",
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "0535f26f_60438828",
+        "filename": "tools/gn/format_test_data/071.gn",
+        "patchSetId": 6
+      },
+      "lineNbr": 27,
+      "author": {
+        "id": 1000004
+      },
+      "writtenOn": "2018-10-15T17:31:07Z",
+      "side": 1,
+      "message": "\u003e Added a test for this. It generally worked ok because the parser represents them the same way as if they\u0027re on separate lines (FunctionCallNode in the top level BlockNode).\n\nAh crap, now that I write that, I realize it won\u0027t sort import()s that are in the scope for a function because those aren\u0027t blocks, they\u0027re lists (or something... I think). Well, I guess this is step one then, and it\u0027s no worse than not sorting imports at all if sub-imports aren\u0027t sorted.",
+      "parentUuid": "4b7d4420_d54d330b",
+      "revId": "213392e8e237c32589140e6d7d6edb5f875d4394",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": true
     }
   ]
 }
