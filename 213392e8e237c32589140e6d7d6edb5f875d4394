@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "3b223909_d71f0735",
+        "filename": "tools/gn/format_test_data/071.gn",
+        "patchSetId": 6
+      },
+      "lineNbr": 27,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2018-10-15T16:54:13Z",
+      "side": 1,
+      "message": "Can you add a test where there is more than one import on the same line, and where there is other non-import statements on the same line? GN doesn\u0027t care about newlines in this situation so I don\u0027t want to corrupt anything.",
+      "revId": "213392e8e237c32589140e6d7d6edb5f875d4394",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": true
+    }
+  ]
+}
