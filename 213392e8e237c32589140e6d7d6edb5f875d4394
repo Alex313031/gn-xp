@@ -34,6 +34,24 @@
       "revId": "213392e8e237c32589140e6d7d6edb5f875d4394",
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "4b7d4420_d54d330b",
+        "filename": "tools/gn/format_test_data/071.gn",
+        "patchSetId": 6
+      },
+      "lineNbr": 27,
+      "author": {
+        "id": 1000004
+      },
+      "writtenOn": "2018-10-15T17:22:11Z",
+      "side": 1,
+      "message": "Added a test for this. It generally worked ok because the parser represents them the same way as if they\u0027re on separate lines (FunctionCallNode in the top level BlockNode).\n\nBut I had to fix the line renumbering to make sure that two lines with multiple imports, but with those two lines separated would still be maintained as separate blocks.\n\n(Generally line renumbering sucks and was a hacky mistake in retrospect. I think maybe it should be something more like inserting a hard line break into the parse tree, or a parse tree copy. But I\u0027m not sure how much better that\u0027d be overall.)",
+      "parentUuid": "2caf7f9a_fdc95e45",
+      "revId": "213392e8e237c32589140e6d7d6edb5f875d4394",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": true
     }
   ]
 }
