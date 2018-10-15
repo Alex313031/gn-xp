@@ -16,6 +16,24 @@
       "revId": "213392e8e237c32589140e6d7d6edb5f875d4394",
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "2caf7f9a_fdc95e45",
+        "filename": "tools/gn/format_test_data/071.gn",
+        "patchSetId": 6
+      },
+      "lineNbr": 27,
+      "author": {
+        "id": 1000004
+      },
+      "writtenOn": "2018-10-15T16:58:26Z",
+      "side": 1,
+      "message": "Oh, I didn\u0027t even consider you could do that, I imagine it\u0027ll break. Let me do some testing.",
+      "parentUuid": "3b223909_d71f0735",
+      "revId": "213392e8e237c32589140e6d7d6edb5f875d4394",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": true
     }
   ]
 }
