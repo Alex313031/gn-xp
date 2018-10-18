@@ -30,7 +30,8 @@ class LabelPattern {
   LabelPattern(Type type,
                const SourceDir& dir,
                const base::StringPiece& name,
-               const Label& toolchain_label);
+               const Label& toolchain_label,
+               bool is_negated_label_pattern);
   LabelPattern(const LabelPattern& other);
   ~LabelPattern();
 
@@ -49,6 +50,8 @@ class LabelPattern {
   // Returns true if any of the patterns in the vector match the label.
   static bool VectorMatches(const std::vector<LabelPattern>& patterns,
                             const Label& label);
+
+  bool IsNegated() const { return is_negated_; }
 
   // Returns a string representation of this pattern.
   std::string Describe() const;
@@ -75,6 +78,9 @@ class LabelPattern {
   // Empty name means match everything. Otherwise the name must match
   // exactly.
   std::string name_;
+
+  // If the pattern had a "!" in front.
+  bool is_negated_;
 };
 
 #endif  // TOOLS_GN_LABEL_PATTERN_H_

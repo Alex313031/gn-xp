@@ -527,7 +527,7 @@ const char kArgs_Help[] =
 
 const char kAssertNoDeps[] = "assert_no_deps";
 const char kAssertNoDeps_HelpShort[] =
-    "assert_no_deps: [label pattern list] Ensure no deps on these targets.";
+    "assert_no_deps: [label pattern list] Ensure no deps on these targets.";
 const char kAssertNoDeps_Help[] =
     R"(assert_no_deps: Ensure no deps on these targets.
 

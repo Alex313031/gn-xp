@@ -462,12 +462,15 @@ void FilterTargetsByPatterns(const std::vector<const Target*>& input,
                              const std::vector<LabelPattern>& filter,
                              std::vector<const Target*>* output) {
   for (auto* target : input) {
+    bool matched = false;
     for (const auto& pattern : filter) {
       if (pattern.Matches(target->label())) {
-        output->push_back(target);
-        break;
+        // Last matching rule will apply.
+        matched = !pattern.IsNegated();
       }
     }
+    if (matched)
+      output->push_back(target);
   }
 }
 
@@ -475,11 +478,14 @@ void FilterTargetsByPatterns(const std::vector<const Target*>& input,
                              const std::vector<LabelPattern>& filter,
                              UniqueVector<const Target*>* output) {
   for (auto* target : input) {
-    for (const auto& pattern : filter) {
+    bool matched = false;
+    for (const LabelPattern& pattern : filter) {
       if (pattern.Matches(target->label())) {
-        output->push_back(target);
-        break;
+        // Last matching rule will apply.
+        matched = !pattern.IsNegated();
       }
+      if (matched)
+        output->push_back(target);
     }
   }
 }

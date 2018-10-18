@@ -980,11 +980,11 @@ TEST_F(TargetTest, AssertNoDeps) {
   b.private_deps().push_back(LabelTargetPair(&a));
   b.assert_no_deps().push_back(LabelPattern(LabelPattern::RECURSIVE_DIRECTORY,
                                             SourceDir("//disallowed/"),
-                                            std::string(), Label()));
+                                            std::string(), Label(), false));
   ASSERT_TRUE(b.OnResolved(&err));
 
   LabelPattern disallow_a(LabelPattern::RECURSIVE_DIRECTORY, SourceDir("//a/"),
-                          std::string(), Label());
+                          std::string(), Label(), false);
 
   // C depends on B and disallows depending on A. This should fail.
   TestTarget c(setup, "//c", Target::EXECUTABLE);

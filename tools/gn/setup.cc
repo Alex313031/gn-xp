@@ -69,9 +69,12 @@ Variables
       build file execution environment for each toolchain.
 
   check_targets [optional]
-      A list of labels and label patterns that should be checked when running
-      "gn check" or "gn gen --check". If unspecified, all targets will be
-      checked. If it is the empty list, no targets will be checked.
+      A list of labels and label patterns that should be checked, or
+      not checked when running "gn check" or "gn gen --check".
+      If check_targets is unspecified, all targets will be
+      checked. If it is the empty list, no targets will be checked. The
+      list supports negated label patterns, making it possible to use it
+      as a black-list.
 
       The format of this list is identical to that of "visibility" so see "gn
       help visibility" for examples.

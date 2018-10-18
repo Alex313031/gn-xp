@@ -83,4 +83,22 @@ TEST(LabelPattern, PatternParse) {
     EXPECT_EQ(cur.toolchain, result.toolchain().GetUserVisibleName(false))
         << i << " " << cur.input;
   }
+
+  // Same patterns negated.
+  for (size_t i = 0; i < arraysize(cases); i++) {
+    const PatternCase& cur = cases[i];
+    Err err;
+    std::string negated_input(cur.input);
+    negated_input.insert(0, "!");
+    LabelPattern result =
+        LabelPattern::GetPattern(current_dir, Value(nullptr, negated_input),
+                                 &err);
+
+    EXPECT_EQ(cur.success, !err.has_error()) << i << ": '" << negated_input << "'";
+    EXPECT_EQ(cur.type, result.type()) << i << ": '" << negated_input << "'";
+    EXPECT_EQ(cur.dir, result.dir().value()) << i << " " << negated_input << "'";
+    EXPECT_EQ(cur.name, result.name()) << i << ": '" << negated_input << "'";
+    EXPECT_EQ(cur.toolchain, result.toolchain().GetUserVisibleName(false))
+      << i << ": '" << negated_input << "'";
+  }
 }

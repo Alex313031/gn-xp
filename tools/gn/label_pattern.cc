@@ -33,6 +33,10 @@ const char kLabelPattern_Help[] =
        "//foo/bar/*"  (all targets in any subdir of //foo/bar)
        "./*"  (all targets in the current build file or sub dirs)
 
+    - Negated rule (a rule starting with "!"):
+       "!*"  (no target)
+       "!//foo/bar/*"  (no target in a subdir of //foo/bar)
+
   Any of the above forms can additionally take an explicit toolchain
   in parenthesis at the end of the label pattern. In this case, the
   toolchain must be fully qualified (no wildcards are supported in the
@@ -49,13 +53,14 @@ const char kLabelPattern_Help[] =
         toolchain.
 )*";
 
-LabelPattern::LabelPattern() : type_(MATCH) {}
+LabelPattern::LabelPattern() : type_(MATCH), is_negated_(false) {}
 
 LabelPattern::LabelPattern(Type type,
                            const SourceDir& dir,
                            const base::StringPiece& name,
-                           const Label& toolchain_label)
-    : toolchain_(toolchain_label), type_(type), dir_(dir) {
+                           const Label& toolchain_label,
+                           bool is_negated_label_pattern)
+    : toolchain_(toolchain_label), type_(type), dir_(dir), is_negated_(is_negated_label_pattern) {
   name.CopyToString(&name_);
 }
 
@@ -65,12 +70,17 @@ LabelPattern::~LabelPattern() = default;
 
 // static
 LabelPattern LabelPattern::GetPattern(const SourceDir& current_dir,
-                                      const Value& value,
+                                      const Value& maybe_negated_value,
                                       Err* err) {
-  if (!value.VerifyTypeIs(Value::STRING, err))
+  if (!maybe_negated_value.VerifyTypeIs(Value::STRING, err))
     return LabelPattern();
 
-  base::StringPiece str(value.string_value());
+  base::StringPiece str(maybe_negated_value.string_value());
+  bool is_negated_pattern = !str.empty() && str.front() == '!';
+  if (is_negated_pattern)
+    str.set(str.data() + 1);  // Skip the '!' prefix
+  const Value& value = is_negated_pattern ? Value(maybe_negated_value.origin(), str.data()) : maybe_negated_value;
+
   if (str.empty()) {
     *err = Err(value, "Label pattern must not be empty.");
     return LabelPattern();
@@ -89,7 +99,8 @@ LabelPattern LabelPattern::GetPattern(const SourceDir& current_dir,
     if (!label.toolchain_dir().is_null() || !label.toolchain_name().empty())
       toolchain_label = label.GetToolchainLabel();
 
-    return LabelPattern(MATCH, label.dir(), label.name(), toolchain_label);
+    return LabelPattern(MATCH, label.dir(), label.name(), toolchain_label,
+                        is_negated_pattern);
   }
 
   // Wildcard case, need to split apart the label to see what it specifies.
@@ -209,7 +220,8 @@ LabelPattern LabelPattern::GetPattern(const SourceDir& current_dir,
   }
 
   // When we're doing wildcard matching, the name is always empty.
-  return LabelPattern(type, dir, base::StringPiece(), toolchain_label);
+  return LabelPattern(type, dir, base::StringPiece(), toolchain_label,
+                      is_negated_pattern);
 }
 
 bool LabelPattern::HasWildcard(const std::string& str) {
