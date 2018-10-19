@@ -22,6 +22,30 @@
       "revId": "66260c03691f3a29312025ec37d1a31c241d9917",
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "36e0cc44_e51946c7",
+        "filename": "tools/gn/ninja_target_writer.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 315,
+      "author": {
+        "id": 1000023
+      },
+      "writtenOn": "2018-10-19T17:12:46Z",
+      "side": 1,
+      "message": "Probably -- I\u0027m still learning which pieces are used where. I\u0027ll update it!",
+      "parentUuid": "d647a18c_72d50653",
+      "range": {
+        "startLine": 315,
+        "startChar": 4,
+        "endLine": 315,
+        "endChar": 10
+      },
+      "revId": "66260c03691f3a29312025ec37d1a31c241d9917",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": false
     }
   ]
 }
