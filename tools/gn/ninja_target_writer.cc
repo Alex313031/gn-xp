@@ -309,6 +309,19 @@ void NinjaTargetWriter::WriteStampForTarget(
       << "Output should end in \".stamp\" for stamp file output. Instead got: "
       << "\"" << stamp_file.value() << "\"";
 
+  // Then validate that this stamp file is not something the target expects to
+  // depend on.
+  for (const auto& file : files)
+    CHECK(file.value() != stamp_file.value())
+        << "Circular output in file dependency: " << target_->label().name()
+        << " is trying to generate the stamp file " << file.value()
+        << " that already exists.\"";
+  for (const auto& file : order_only_deps)
+    CHECK(file.value() != stamp_file.value())
+        << "Circular output in order-only dependency: "
+        << target_->label().name() << " is trying to generate the stamp file "
+        << file.value() << " that already exists.\"";
+
   out_ << "build ";
   path_output_.WriteFile(out_, stamp_file);
 
