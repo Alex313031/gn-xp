@@ -55,7 +55,7 @@ More information
 const char kCheck[] = "check";
 const char kCheck_HelpShort[] = "check: Check header dependencies.";
 const char kCheck_Help[] =
-    R"(gn check <out_dir> [<label_pattern>] [--force]
+    R"(gn check <out_dir> [<label_pattern>] [--force] [--ignore-filter]
 
   GN's include header checker validates that the includes for C-like source
   files match the build dependency graph.
@@ -72,7 +72,13 @@ Command-specific switches
 
   --force
       Ignores specifications of "check_includes = false" and checks all
-      target's files that match the target label.
+      target's files that match the target label. The check_targets list
+      will still apply, unless --ignore-filter is also specified.
+
+  --ignore-filter
+      Bypasses the filter set by the check_targets list and checks every
+      reachable target in the project unless it has check_includes set
+      to false. To also check those, use --force.
 
 What gets checked
 
@@ -177,6 +183,9 @@ int RunCheck(const std::vector<std::string>& args) {
   if (!setup->Run())
     return 1;
 
+  const base::CommandLine* cmdline = base::CommandLine::ForCurrentProcess();
+  bool ignore_filter = cmdline->HasSwitch("ignore-filter");
+
   std::vector<const Target*> all_targets =
       setup->builder().GetAllResolvedTargets();
 
@@ -203,7 +212,7 @@ int RunCheck(const std::vector<std::string>& args) {
   } else {
     // No argument means to check everything allowed by the filter in
     // the build config file.
-    if (setup->check_patterns()) {
+    if (!ignore_filter && setup->check_patterns()) {
       FilterTargetsByPatterns(all_targets, *setup->check_patterns(),
                               &targets_to_check);
       filtered_by_build_config = targets_to_check.size() != all_targets.size();
@@ -213,9 +222,7 @@ int RunCheck(const std::vector<std::string>& args) {
     }
   }
 
-  const base::CommandLine* cmdline = base::CommandLine::ForCurrentProcess();
   bool force = cmdline->HasSwitch("force");
-
   if (!CheckPublicHeaders(&setup->build_settings(), all_targets,
                           targets_to_check, force))
     return 1;
