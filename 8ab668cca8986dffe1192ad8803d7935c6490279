@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "b14bc3eb_560789fe",
+        "filename": "tools/gn/ninja_target_writer.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 314,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2018-10-19T17:18:06Z",
+      "side": 1,
+      "message": "Can you add {} for these multiline blocks?",
+      "revId": "8ab668cca8986dffe1192ad8803d7935c6490279",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": true
+    }
+  ]
+}
