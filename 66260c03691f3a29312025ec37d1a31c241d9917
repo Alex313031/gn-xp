@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "d647a18c_72d50653",
+        "filename": "tools/gn/ninja_target_writer.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 315,
+      "author": {
+        "id": 1000004
+      },
+      "writtenOn": "2018-10-19T16:52:45Z",
+      "side": 1,
+      "message": "I didn\u0027t try the repro, but I almost never run a gn with dchecks. Should these be CHECK or Error instead? Or is it truly just intended to catch a bug elsewhere in gn\u0027s implementation?",
+      "range": {
+        "startLine": 315,
+        "startChar": 4,
+        "endLine": 315,
+        "endChar": 10
+      },
+      "revId": "66260c03691f3a29312025ec37d1a31c241d9917",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": true
+    }
+  ]
+}
