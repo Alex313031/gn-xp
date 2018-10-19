@@ -46,6 +46,30 @@
       "revId": "66260c03691f3a29312025ec37d1a31c241d9917",
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "e0d52928_3aae2cc4",
+        "filename": "tools/gn/ninja_target_writer.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 315,
+      "author": {
+        "id": 1000004
+      },
+      "writtenOn": "2018-10-19T17:17:32Z",
+      "side": 1,
+      "message": "OK, I think a CHECK is probably better than a DCHECK unless this has some appreciable performance impact.\n\nI was mostly trying to distinguish between this is caused by incorrect .gn input (in which case it should turn into an error with a test), or whether this is the result of a bug in GN that you\u0027re checking for here to try to narrow down when it happens (or something like that).\n\nFrom looking at the diff in https://fuchsia.googlesource.com/zircon/+/sandbox/mcgrathr/gn-bug-16 it looks like it\u0027s sorta-reasonable-.gn, so that probably means it should be something detectable that can turn into a diagnostic error message for the author of the .gn?",
+      "parentUuid": "36e0cc44_e51946c7",
+      "range": {
+        "startLine": 315,
+        "startChar": 4,
+        "endLine": 315,
+        "endChar": 10
+      },
+      "revId": "66260c03691f3a29312025ec37d1a31c241d9917",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": false
     }
   ]
 }
