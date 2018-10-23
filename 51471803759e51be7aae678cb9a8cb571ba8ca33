@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "261dd301_6970ed4c",
+        "filename": "tools/gn/qt_creator_writer.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 174,
+      "author": {
+        "id": 1000082
+      },
+      "writtenOn": "2018-10-23T21:44:56Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "108d97d8_4dc3f225",
+      "revId": "51471803759e51be7aae678cb9a8cb571ba8ca33",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "ee22ce13_d6af26d4",
         "filename": "tools/gn/qt_creator_writer.cc",
         "patchSetId": 1
@@ -36,6 +54,24 @@
     },
     {
       "key": {
+        "uuid": "da2a5976_daa4decc",
+        "filename": "tools/gn/qt_creator_writer.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 179,
+      "author": {
+        "id": 1000082
+      },
+      "writtenOn": "2018-10-23T21:44:56Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ee22ce13_d6af26d4",
+      "revId": "51471803759e51be7aae678cb9a8cb571ba8ca33",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "8b816406_14867ed6",
         "filename": "tools/gn/qt_creator_writer.cc",
         "patchSetId": 1
@@ -50,6 +86,24 @@
       "revId": "51471803759e51be7aae678cb9a8cb571ba8ca33",
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "991cb0a1_e58cbd42",
+        "filename": "tools/gn/qt_creator_writer.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 249,
+      "author": {
+        "id": 1000082
+      },
+      "writtenOn": "2018-10-23T21:44:56Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "8b816406_14867ed6",
+      "revId": "51471803759e51be7aae678cb9a8cb571ba8ca33",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": false
     },
     {
       "key": {
@@ -73,6 +127,30 @@
       "revId": "51471803759e51be7aae678cb9a8cb571ba8ca33",
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "ba330492_7e0f970f",
+        "filename": "tools/gn/qt_creator_writer.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 263,
+      "author": {
+        "id": 1000082
+      },
+      "writtenOn": "2018-10-23T21:44:56Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "81d9d422_9cc15217",
+      "range": {
+        "startLine": 263,
+        "startChar": 31,
+        "endLine": 263,
+        "endChar": 32
+      },
+      "revId": "51471803759e51be7aae678cb9a8cb571ba8ca33",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": false
     }
   ]
 }
