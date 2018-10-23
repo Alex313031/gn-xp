@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "1af33831_886797db",
+        "filename": "tools/gn/operators.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 283,
+      "author": {
+        "id": 1000016
+      },
+      "writtenOn": "2018-10-23T21:06:53Z",
+      "side": 1,
+      "message": "How about either making this just `if (type \u003d\u003d LIST) ... else ...` or making it a switch with no default case so that failing to mention a type would be a compile-time warning/error?\n\nIt also seems worth auditing every switch or if-chain on value type.\n\nIt would be annoying to have a long tail of more obscure cases where one would expect everything to use the common \u003d\u003d logic but actually it doesn\u0027t.",
+      "revId": "b42fbe81fe85a55978a531507675f5405ea04272",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": true
+    }
+  ]
+}
