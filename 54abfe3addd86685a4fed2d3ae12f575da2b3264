@@ -22,6 +22,30 @@
       "revId": "54abfe3addd86685a4fed2d3ae12f575da2b3264",
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "89ffa9d1_63cfe94e",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 12,
+      "author": {
+        "id": 1000023
+      },
+      "writtenOn": "2018-10-23T19:01:38Z",
+      "side": 1,
+      "message": "Sure, but that doesn\u0027t linkify :(",
+      "parentUuid": "3edbf5f7_280173d2",
+      "range": {
+        "startLine": 12,
+        "startChar": 5,
+        "endLine": 12,
+        "endChar": 20
+      },
+      "revId": "54abfe3addd86685a4fed2d3ae12f575da2b3264",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": false
     }
   ]
 }
