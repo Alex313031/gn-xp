@@ -46,6 +46,30 @@
       "revId": "54abfe3addd86685a4fed2d3ae12f575da2b3264",
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2c71afc8_f76af1c6",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 12,
+      "author": {
+        "id": 1000004
+      },
+      "writtenOn": "2018-10-23T19:10:09Z",
+      "side": 1,
+      "message": "Dang it! There\u0027s some config file that has a scary regex in it to fix that, but I forget where it is.\n\nFeel free to land with crbug.com/ then, maybe bugdroid is smarter than I think it is.",
+      "parentUuid": "89ffa9d1_63cfe94e",
+      "range": {
+        "startLine": 12,
+        "startChar": 5,
+        "endLine": 12,
+        "endChar": 20
+      },
+      "revId": "54abfe3addd86685a4fed2d3ae12f575da2b3264",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": false
     }
   ]
 }
