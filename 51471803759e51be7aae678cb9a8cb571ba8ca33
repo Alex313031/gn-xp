@@ -1,0 +1,78 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "108d97d8_4dc3f225",
+        "filename": "tools/gn/qt_creator_writer.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 174,
+      "author": {
+        "id": 1000004
+      },
+      "writtenOn": "2018-10-23T17:56:55Z",
+      "side": 1,
+      "message": "clang-format to fix 80col",
+      "revId": "51471803759e51be7aae678cb9a8cb571ba8ca33",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "ee22ce13_d6af26d4",
+        "filename": "tools/gn/qt_creator_writer.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 179,
+      "author": {
+        "id": 1000004
+      },
+      "writtenOn": "2018-10-23T17:56:55Z",
+      "side": 1,
+      "message": "Formatting is wrong here too.",
+      "revId": "51471803759e51be7aae678cb9a8cb571ba8ca33",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "8b816406_14867ed6",
+        "filename": "tools/gn/qt_creator_writer.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 249,
+      "author": {
+        "id": 1000004
+      },
+      "writtenOn": "2018-10-23T17:56:55Z",
+      "side": 1,
+      "message": "constexpr?",
+      "revId": "51471803759e51be7aae678cb9a8cb571ba8ca33",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "81d9d422_9cc15217",
+        "filename": "tools/gn/qt_creator_writer.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 263,
+      "author": {
+        "id": 1000004
+      },
+      "writtenOn": "2018-10-23T17:56:55Z",
+      "side": 1,
+      "message": "Prefer non-default capture please.",
+      "range": {
+        "startLine": 263,
+        "startChar": 31,
+        "endLine": 263,
+        "endChar": 32
+      },
+      "revId": "51471803759e51be7aae678cb9a8cb571ba8ca33",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": true
+    }
+  ]
+}
