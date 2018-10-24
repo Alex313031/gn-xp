@@ -16,6 +16,24 @@
       "revId": "a2170b8375814d04b84fc83cf4683443fe429092",
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "77dd8055_edbfc661",
+        "filename": "docs/style_guide.md",
+        "patchSetId": 1
+      },
+      "lineNbr": 211,
+      "author": {
+        "id": 1000005
+      },
+      "writtenOn": "2018-10-24T20:49:52Z",
+      "side": 1,
+      "message": "Would this make more sense if I used \"component\" instead of shared library? \n\nThis change is motivated by someone being confused as to when to use a source_set vs. a static_library vs. a component, and I don\u0027t think we have very good guidance on that.\n\nAs to your last paragraph, a technical description of what a shared_library is to me doesn\u0027t actually belong in a style guide (which should be talking about when to use X vs. Y), it \nbelongs in the core docs for GN.",
+      "parentUuid": "19b446f3_03b0085c",
+      "revId": "a2170b8375814d04b84fc83cf4683443fe429092",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": true
     }
   ]
 }
