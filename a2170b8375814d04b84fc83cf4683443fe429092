@@ -34,6 +34,24 @@
       "revId": "a2170b8375814d04b84fc83cf4683443fe429092",
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "13a82220_d1eafee1",
+        "filename": "docs/style_guide.md",
+        "patchSetId": 1
+      },
+      "lineNbr": 211,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2018-10-24T20:56:57Z",
+      "side": 1,
+      "message": "I almost suggested talking about \"component\" here but it doesn\u0027t really make sense for the 2nd half of this paragraph where you\u0027re talking about distribution. Certainly this could be rewritten to be a comparison of component-vs-[static_librar|source_set] if you think such a description is needed.",
+      "parentUuid": "77dd8055_edbfc661",
+      "revId": "a2170b8375814d04b84fc83cf4683443fe429092",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": true
     }
   ]
 }
