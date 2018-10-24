@@ -156,7 +156,8 @@ import("//foo/bar/baz.gni")  # Even if this file is in the foo/bar directory
 
 Source sets and static libraries can be used interchangeably in most cases. If
 you're unsure what to use, a source set is almost never wrong and is less likely
-to cause problems.
+to cause problems, but on a large project using the right kind of target can
+be important, so you should know about the following tradeoffs.
 
 Static libraries follow different linking rules. When a static library is
 included in a link, only the object files that contain unresolved symbols will
@@ -177,13 +178,15 @@ to the link line of the final binary.
     file, linking a test into a static library and then into a test executable
     means the tests will get stripped.
 
-  * Static libraries involve duplicating all of the data in the object files
-    that comprise it. This takes more disk space and for certain very large
-    libraries in configurations with very large object files can cause
-    internal limits on the size of static libraries to be exceeded. Source
-    sets do not have this limitation. Some targets switch between source sets
-    and static libraries depending on the build configuration to avoid this
-    problem.
+  * On some platforms, static libraries may involve duplicating all of the
+    data in the object files that comprise it. This takes more disk space and
+    for certain very large libraries in configurations with very large object
+    files can cause internal limits on the size of static libraries to be
+    exceeded. Source sets do not have this limitation. Some targets switch
+    between source sets and static libraries depending on the build
+    configuration to avoid this problem. Some platforms (or toolchains) may
+    support something called "thin archives" which don't have this problem;
+    but you can't rely on this as a portable solution.
 
   * Source sets can have no sources, while static libraries will give strange
     platform-specific errors if they have no sources. If a target has only
@@ -204,6 +207,14 @@ expands either to a shared library or a static library / source set depending
 on the value of the `is_component_build` variable. This allows release builds
 to be linked statically in a large binary, but for developers to use shared
 libraries for most operations.
+
+Much like the source set versus static library tradeoff, there's no hard
+and fast rule as to when you should use a shared library or not. Using
+shared libraries can significantly speed up incremental builds by making
+linking much faster, but they require you to have to think about which
+symbols need to be exported from the shared library, and they can complicate
+distributing the final executable (since now you need to distribute the
+libraries as well).
 
 A shared library will be listed on the link line of dependent targets and will
 be loaded automatically by the operating system when the application starts
