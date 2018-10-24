@@ -52,6 +52,24 @@
       "revId": "a2170b8375814d04b84fc83cf4683443fe429092",
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "d14ef7c8_11f1ea71",
+        "filename": "docs/style_guide.md",
+        "patchSetId": 1
+      },
+      "lineNbr": 211,
+      "author": {
+        "id": 1000005
+      },
+      "writtenOn": "2018-10-24T21:21:29Z",
+      "side": 1,
+      "message": "Okay, I split this into two sections, one about components vs. other and one about loadable_modules vs shared_libraries. PTAL?",
+      "parentUuid": "13a82220_d1eafee1",
+      "revId": "a2170b8375814d04b84fc83cf4683443fe429092",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": false
     }
   ]
 }
