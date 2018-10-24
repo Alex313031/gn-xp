@@ -1,0 +1,193 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "8fcdcd94_6be709b1",
+        "filename": "tools/gn/qt_creator_writer.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 140,
+      "author": {
+        "id": 1000004
+      },
+      "writtenOn": "2018-10-24T16:40:08Z",
+      "side": 1,
+      "message": "Add the L suffix here since you have it on the C++ ones.",
+      "range": {
+        "startLine": 140,
+        "startChar": 25,
+        "endLine": 140,
+        "endChar": 26
+      },
+      "revId": "9009853e1715e1613fce16a6d6de171c761f93c9",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "d28c713b_d2c0df51",
+        "filename": "tools/gn/qt_creator_writer.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 143,
+      "author": {
+        "id": 1000004
+      },
+      "writtenOn": "2018-10-24T16:40:08Z",
+      "side": 1,
+      "message": "This is unusual in Chromium (and GN). Please use std::string() instead here and below.",
+      "range": {
+        "startLine": 143,
+        "startChar": 9,
+        "endLine": 143,
+        "endChar": 11
+      },
+      "revId": "9009853e1715e1613fce16a6d6de171c761f93c9",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "5b8cc8fe_77493d86",
+        "filename": "tools/gn/qt_creator_writer.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 164,
+      "author": {
+        "id": 1000004
+      },
+      "writtenOn": "2018-10-24T16:40:08Z",
+      "side": 1,
+      "message": "kFlagToCVersion",
+      "range": {
+        "startLine": 164,
+        "startChar": 38,
+        "endLine": 164,
+        "endChar": 39
+      },
+      "revId": "9009853e1715e1613fce16a6d6de171c761f93c9",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "82a8628a_84410ffd",
+        "filename": "tools/gn/qt_creator_writer.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 170,
+      "author": {
+        "id": 1000004
+      },
+      "writtenOn": "2018-10-24T16:40:08Z",
+      "side": 1,
+      "message": "kFlag...",
+      "range": {
+        "startLine": 170,
+        "startChar": 40,
+        "endLine": 170,
+        "endChar": 41
+      },
+      "revId": "9009853e1715e1613fce16a6d6de171c761f93c9",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "8691b380_c4ea7ea6",
+        "filename": "tools/gn/qt_creator_writer.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 170,
+      "author": {
+        "id": 1000004
+      },
+      "writtenOn": "2018-10-24T16:40:08Z",
+      "side": 1,
+      "message": "\\n before this",
+      "revId": "9009853e1715e1613fce16a6d6de171c761f93c9",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "36e5e1ba_19434027",
+        "filename": "tools/gn/qt_creator_writer.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 173,
+      "author": {
+        "id": 1000004
+      },
+      "writtenOn": "2018-10-24T16:40:08Z",
+      "side": 1,
+      "message": "03?",
+      "range": {
+        "startLine": 173,
+        "startChar": 34,
+        "endLine": 173,
+        "endChar": 36
+      },
+      "revId": "9009853e1715e1613fce16a6d6de171c761f93c9",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "c5cfb9d1_98490977",
+        "filename": "tools/gn/qt_creator_writer.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 173,
+      "author": {
+        "id": 1000004
+      },
+      "writtenOn": "2018-10-24T16:40:08Z",
+      "side": 1,
+      "message": "03?",
+      "range": {
+        "startLine": 173,
+        "startChar": 69,
+        "endLine": 173,
+        "endChar": 71
+      },
+      "revId": "9009853e1715e1613fce16a6d6de171c761f93c9",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "f8eb4387_4346b2dd",
+        "filename": "tools/gn/qt_creator_writer.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 181,
+      "author": {
+        "id": 1000004
+      },
+      "writtenOn": "2018-10-24T16:40:08Z",
+      "side": 1,
+      "message": "This is still not formatted.",
+      "revId": "9009853e1715e1613fce16a6d6de171c761f93c9",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "527fdbbe_7ac126fe",
+        "filename": "tools/gn/qt_creator_writer.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 263,
+      "author": {
+        "id": 1000004
+      },
+      "writtenOn": "2018-10-24T16:40:08Z",
+      "side": 1,
+      "message": "Please just use clang-format\u0027s output, rather than deviating in a bunch of minor ways.",
+      "revId": "9009853e1715e1613fce16a6d6de171c761f93c9",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": true
+    }
+  ]
+}
