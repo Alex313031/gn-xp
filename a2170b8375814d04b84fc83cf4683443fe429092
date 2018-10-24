@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "19b446f3_03b0085c",
+        "filename": "docs/style_guide.md",
+        "patchSetId": 1
+      },
+      "lineNbr": 211,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2018-10-24T20:32:31Z",
+      "side": 1,
+      "message": "This paragraph is correct when talking to general developers about general products, but I think it\u0027s actively misleading to Chrome developers who should basically never type \"shared_library\". The problem is this documentation is targeted in large part to Chrome developers (it\u0027s the first sentence of this section) so I think may give the wrong impression.\n\nI think it\u0027s OK to expect developers to know what a shared library is and what the tradeoffs are if they\u0027re going to use one. Certainly we don\u0027t provide enough information in this documentation for somebody who doesn\u0027t know what one is to make an informed decision.\n\nSo this is a long way of saying I think we should just delete this paragraph and keep the description of shared libraries very technical.",
+      "revId": "a2170b8375814d04b84fc83cf4683443fe429092",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": true
+    }
+  ]
+}
