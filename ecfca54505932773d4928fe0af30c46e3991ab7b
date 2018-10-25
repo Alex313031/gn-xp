@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "b991e77c_7d8f785d",
+        "filename": "tools/gn/qt_creator_writer.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 164,
+      "author": {
+        "id": 1000082
+      },
+      "writtenOn": "2018-10-25T06:17:12Z",
+      "side": 1,
+      "message": ")",
+      "parentUuid": "57a4bd30_f989aa40",
+      "range": {
+        "startLine": 164,
+        "startChar": 0,
+        "endLine": 164,
+        "endChar": 55
+      },
+      "revId": "ecfca54505932773d4928fe0af30c46e3991ab7b",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "17d1a514_78379efc",
         "filename": "tools/gn/qt_creator_writer.cc",
         "patchSetId": 3
