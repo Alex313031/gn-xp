@@ -307,7 +307,7 @@ To define a config:
 
 ```
 config("myconfig") {
-  includes = [ "src/include" ]
+  include_dirs = [ "src/include" ]
   defines = [ "ENABLE_DOOM_MELON" ]
 }
 ```
@@ -340,7 +340,7 @@ To do this, you write a config with the settings you want to apply:
 
 ```
 config("my_external_library_config") {
-  includes = "."
+  include_dirs = [ "." ]
   defines = [ "DISABLE_JANK" ]
 }
 ```

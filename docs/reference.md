@@ -1672,7 +1672,7 @@
 
 ```
   config("myconfig") {
-    includes = [ "include/common" ]
+    include_dirs = [ "include/common" ]
     defines = [ "ENABLE_DOOM_MELON" ]
   }
 
