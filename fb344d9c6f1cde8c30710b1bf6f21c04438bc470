@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "924d3ba5_4c2e642e",
+        "filename": "infra/recipes/gn.py",
+        "patchSetId": 2
+      },
+      "lineNbr": 59,
+      "author": {
+        "id": 1000004
+      },
+      "writtenOn": "2018-11-02T18:04:54Z",
+      "side": 1,
+      "message": "Do we want latest? This was some older thing before I think to make sure it runs on decrepit old bots.",
+      "range": {
+        "startLine": 59,
+        "startChar": 55,
+        "endLine": 59,
+        "endChar": 61
+      },
+      "revId": "fb344d9c6f1cde8c30710b1bf6f21c04438bc470",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": true
+    }
+  ]
+}
