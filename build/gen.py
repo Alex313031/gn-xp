@@ -304,11 +304,14 @@ def WriteGNNinja(path, platform, host, options, linux_sysroot):
     cxx = os.environ.get('CXX', 'cl.exe')
     ld = os.environ.get('LD', 'link.exe')
     ar = os.environ.get('AR', 'lib.exe')
-  elif platform.is_aix():
+  elif platform.is_aix() or platform.is_linux():
     cc = os.environ.get('CC', 'gcc')
     cxx = os.environ.get('CXX', 'g++')
     ld = os.environ.get('LD', 'g++')
-    ar = os.environ.get('AR', 'ar -X64')
+    if platform.is_aix():
+        ar = os.environ.get('AR', 'ar -X64')
+    else:
+        ar = os.environ.get('AR', 'ar')
   else:
     cc = os.environ.get('CC', 'clang')
     cxx = os.environ.get('CXX', 'clang++')
