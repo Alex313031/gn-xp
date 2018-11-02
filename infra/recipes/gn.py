@@ -55,8 +55,11 @@ def RunSteps(api, repository):
     pkgs.add_package('infra/ninja/${platform}', 'version:1.8.2')
     if api.platform.is_linux or api.platform.is_mac:
       pkgs.add_package('fuchsia/clang/${platform}', 'goma')
+    if api.platform.is_linux:
+      pkgs.add_package('fuchsia/sysroot/${platform}', 'latest', 'sysroot')
     api.cipd.ensure(cipd_dir, pkgs)
 
+  sysroot = '--sysroot=%s' %  cipd_dir.join('sysroot')
   stdlib = '%s %s %s' % (cipd_dir.join('lib', 'libc++.a'),
                          cipd_dir.join('lib', 'libc++abi.a'),
                          cipd_dir.join('lib', 'libunwind.a'))
@@ -65,7 +68,8 @@ def RunSteps(api, repository):
           'CC': cipd_dir.join('bin', 'clang'),
           'CXX': cipd_dir.join('bin', 'clang++'),
           'AR': cipd_dir.join('bin', 'llvm-ar'),
-          'LDFLAGS': '-static-libstdc++ -ldl -lpthread',
+          'CFLAGS': sysroot,
+          'LDFLAGS': '%s -static-libstdc++ -ldl -lpthread' % sysroot,
       },
       'mac': {
           'CC': cipd_dir.join('bin', 'clang'),
