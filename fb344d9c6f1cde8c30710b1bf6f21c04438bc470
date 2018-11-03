@@ -22,6 +22,30 @@
       "revId": "fb344d9c6f1cde8c30710b1bf6f21c04438bc470",
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "a1fa1ddf_9e890c0a",
+        "filename": "infra/recipes/gn.py",
+        "patchSetId": 2
+      },
+      "lineNbr": 59,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2018-11-03T03:15:22Z",
+      "side": 1,
+      "message": "I\u0027ve pinned to a known good version.",
+      "parentUuid": "924d3ba5_4c2e642e",
+      "range": {
+        "startLine": 59,
+        "startChar": 55,
+        "endLine": 59,
+        "endChar": 61
+      },
+      "revId": "fb344d9c6f1cde8c30710b1bf6f21c04438bc470",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": false
     }
   ]
 }
