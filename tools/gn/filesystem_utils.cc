@@ -168,33 +168,59 @@ bool FilesystemStringsEqual(const base::FilePath::StringType& a,
 }
 
 // Helper function for computing subdirectories in the build directory
-// corresponding to absolute paths. This will try to resolve the absolute
-// path as a source-relative path first, and otherwise it creates a
-// special subdirectory for absolute paths to keep them from colliding with
-// other generated sources and outputs.
-void AppendFixedAbsolutePathSuffix(const BuildSettings* build_settings,
-                                   const SourceDir& source_dir,
-                                   OutputFile* result) {
+// corresponding to absolute paths.  The subdirectory is formed as a path
+// relative to the source root, with "UP" in place of ".." (and also for
+// an imaginary directory above windows drive letters).
+//
+// Using absolute paths directly would make reproducible builds difficult,
+// and unnecessarily reduce cache hits for build systems like goma for
+// projects that can't always use sources inside the source root.
+//
+// If "UP" turns out to collide with actual directories with the same
+// name, we could change this to something less likely, eg "__".
+void AppendMappedAbsolutePath(const BuildSettings* build_settings,
+                              const SourceDir& abs_source_dir,
+                              OutputFile* result) {
+  DCHECK(abs_source_dir.is_system_absolute());
+
   const std::string& build_dir = build_settings->build_dir().value();
 
-  if (base::StartsWith(source_dir.value(), build_dir,
+  if (base::StartsWith(abs_source_dir.value(), build_dir,
                        base::CompareCase::SENSITIVE)) {
+    // Best case scenario, relative path within the source root.
+
     size_t build_dir_size = build_dir.size();
-    result->value().append(&source_dir.value()[build_dir_size],
-                           source_dir.value().size() - build_dir_size);
-  } else {
-    result->value().append("ABS_PATH");
+    result->value().append(&abs_source_dir.value()[build_dir_size],
+                           abs_source_dir.value().size() - build_dir_size);
+    return;
+  }
+
+  result->value().append("REL_PATH");
+  std::string abs_src_dir_value = abs_source_dir.value();
+
 #if defined(OS_WIN)
-    // Windows absolute path contains ':' after drive letter. Remove it to
-    // avoid inserting ':' in the middle of path (eg. "ABS_PATH/C:/").
-    std::string src_dir_value = source_dir.value();
-    const auto colon_pos = src_dir_value.find(':');
-    if (colon_pos != std::string::npos)
-      src_dir_value.erase(src_dir_value.begin() + colon_pos);
-#else
-    const std::string& src_dir_value = source_dir.value();
+  // Windows absolute path contains ':' after drive letter. Remove it to
+  // avoid inserting ':' in the middle of path (eg. "REL_PATH/C:/").
+  const auto colon_pos = abs_src_dir_value.find(':');
+  if (colon_pos != std::string::npos)
+    abs_src_dir_value.erase(abs_src_dir_value.begin() + colon_pos);
 #endif
-    result->value().append(src_dir_value);
+
+  std::string rel_path = RebasePath(abs_src_dir_value, SourceDir("//"),
+                                    build_settings->root_path_utf8());
+
+  std::vector<base::FilePath::StringType> components;
+  base::FilePath(rel_path).GetComponents(&components);
+
+  std::size_t i = 0;
+  for (; i < components.size(); i++) {
+    if (components[i].compare("..") != 0) {
+      break;
+    }
+    result->value().append("/UP");
+  }
+  for (; i < components.size(); i++) {
+    result->value().append("/" + components[i]);
   }
 }
 
@@ -1033,7 +1059,7 @@ OutputFile GetSubBuildDirAsOutputFile(const BuildDirContext& context,
                           source_dir.value().size() - 2);
   } else {
     // System-absolute.
-    AppendFixedAbsolutePathSuffix(context.build_settings, source_dir, &result);
+    AppendMappedAbsolutePath(context.build_settings, source_dir, &result);
   }
   return result;
 }

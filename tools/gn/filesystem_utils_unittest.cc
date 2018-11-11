@@ -783,22 +783,49 @@ TEST(FilesystemUtils, GetSubBuildDir) {
                                        BuildDirType::GEN)
                 .value());
 
-  // Absolute source path
-  EXPECT_EQ("//out/Debug/obj/ABS_PATH/abs/",
-            GetSubBuildDirAsSourceDir(default_context, SourceDir("/abs"),
+  // Paths outside source root.
+  build_settings.SetRootPath(base::FilePath("/some/pretend/source_root"));
+
+  // One directory above source root.
+  EXPECT_EQ("//out/Debug/obj/REL_PATH/UP/",
+            GetSubBuildDirAsSourceDir(
+                default_context, SourceDir("/some/pretend"), BuildDirType::OBJ)
+                .value());
+  EXPECT_EQ("gen/REL_PATH/UP",
+            GetSubBuildDirAsOutputFile(
+                default_context, SourceDir("/some/pretend"), BuildDirType::GEN)
+                .value());
+
+  // Two directories above source root.
+  EXPECT_EQ("//out/Debug/obj/REL_PATH/UP/UP/",
+            GetSubBuildDirAsSourceDir(default_context, SourceDir("/some"),
                                       BuildDirType::OBJ)
                 .value());
-  EXPECT_EQ("gen/ABS_PATH/abs/",
-            GetSubBuildDirAsOutputFile(default_context, SourceDir("/abs"),
+  EXPECT_EQ("gen/REL_PATH/UP/UP",
+            GetSubBuildDirAsOutputFile(default_context, SourceDir("/some"),
                                        BuildDirType::GEN)
                 .value());
+
 #if defined(OS_WIN)
-  EXPECT_EQ("//out/Debug/obj/ABS_PATH/C/abs/",
+  build_settings.SetRootPath(base::FilePath("/C:/some/pretend/source_root"));
+
+  // Three dirs above source root.
+  EXPECT_EQ("//out/Debug/obj/REL_PATH/UP/UP/UP/abs/",
             GetSubBuildDirAsSourceDir(default_context, SourceDir("/C:/abs"),
                                       BuildDirType::OBJ)
                 .value());
-  EXPECT_EQ("gen/ABS_PATH/C/abs/",
+  EXPECT_EQ("gen/REL_PATH/UP/UP/UP/abs",
             GetSubBuildDirAsOutputFile(default_context, SourceDir("/C:/abs"),
+                                       BuildDirType::GEN)
+                .value());
+
+  // Four dirs above source root (pretend that drive letters have a parent dir).
+  EXPECT_EQ("//out/Debug/obj/REL_PATH/UP/UP/UP/UP/D/abs/",
+            GetSubBuildDirAsSourceDir(default_context, SourceDir("/D:/abs"),
+                                      BuildDirType::OBJ)
+                .value());
+  EXPECT_EQ("gen/REL_PATH/UP/UP/UP/UP/D/abs",
+            GetSubBuildDirAsOutputFile(default_context, SourceDir("/D:/abs"),
                                        BuildDirType::GEN)
                 .value());
 #endif

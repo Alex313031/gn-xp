@@ -13,6 +13,13 @@ class GetPathInfoTest : public testing::Test {
  public:
   GetPathInfoTest() : testing::Test() {
     setup_.scope()->set_source_dir(SourceDir("//src/foo/"));
+#if defined(OS_WIN)
+    setup_.build_settings()->SetRootPath(
+        base::FilePath("/C:/some/pretend/source_root"));
+#else
+    setup_.build_settings()->SetRootPath(
+        base::FilePath("/some/pretend/source_root"));
+#endif
   }
 
   // Convenience wrapper to call GetLabelInfo.
@@ -96,11 +103,16 @@ TEST_F(GetPathInfoTest, OutDir) {
   EXPECT_EQ("//out/Debug/obj/src/foo", Call(".", "out_dir"));
   EXPECT_EQ("//out/Debug/obj/src/foo", Call("bar", "out_dir"));
   EXPECT_EQ("//out/Debug/obj/foo", Call("//foo/bar.txt", "out_dir"));
-  // System paths go into the ABS_PATH obj directory.
-  EXPECT_EQ("//out/Debug/obj/ABS_PATH/foo", Call("/foo/bar.txt", "out_dir"));
+
+  // System paths go into the REL_PATH obj directory (our source root is three
+  // directories deep).
+  EXPECT_EQ("//out/Debug/obj/REL_PATH/UP/UP/UP/foo",
+            Call("/foo/bar.txt", "out_dir"));
 #if defined(OS_WIN)
-  EXPECT_EQ("//out/Debug/obj/ABS_PATH/C/foo",
+  EXPECT_EQ("//out/Debug/obj/REL_PATH/UP/UP/UP/foo",
             Call("/C:/foo/bar.txt", "out_dir"));
+  EXPECT_EQ("//out/Debug/obj/REL_PATH/UP/UP/UP/UP/D/foo",
+            Call("/D:/foo/bar.txt", "out_dir"));
 #endif
 }
 
@@ -111,10 +123,15 @@ TEST_F(GetPathInfoTest, GenDir) {
   EXPECT_EQ("//out/Debug/gen/src/foo", Call(".", "gen_dir"));
   EXPECT_EQ("//out/Debug/gen/src/foo", Call("bar", "gen_dir"));
   EXPECT_EQ("//out/Debug/gen/foo", Call("//foo/bar.txt", "gen_dir"));
-  // System paths go into the ABS_PATH gen directory
-  EXPECT_EQ("//out/Debug/gen/ABS_PATH/foo", Call("/foo/bar.txt", "gen_dir"));
+
+  // System paths go into the REL_PATH gen directory (our source root is three
+  // directories deep).
+  EXPECT_EQ("//out/Debug/gen/REL_PATH/UP/UP/UP/foo",
+            Call("/foo/bar.txt", "gen_dir"));
 #if defined(OS_WIN)
-  EXPECT_EQ("//out/Debug/gen/ABS_PATH/C/foo",
+  EXPECT_EQ("//out/Debug/gen/REL_PATH/UP/UP/UP/foo",
             Call("/C:/foo/bar.txt", "gen_dir"));
+  EXPECT_EQ("//out/Debug/gen/REL_PATH/UP/UP/UP/UP/D/foo",
+            Call("/D:/foo/bar.txt", "gen_dir"));
 #endif
 }
