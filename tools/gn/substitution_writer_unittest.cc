@@ -101,6 +101,13 @@ TEST(SubstitutionWriter, WriteWithNinjaVariables) {
 
 TEST(SubstitutionWriter, SourceSubstitutions) {
   TestWithScope setup;
+#if defined(OS_WIN)
+  setup.build_settings()->SetRootPath(
+      base::FilePath("/C:/some/pretend/source_root"));
+#else
+  setup.build_settings()->SetRootPath(
+      base::FilePath("/some/pretend/source_root"));
+#endif
   Err err;
 
   Target target(setup.settings(), Label(SourceDir("//foo/bar/"), "baz"));
@@ -157,18 +164,24 @@ TEST(SubstitutionWriter, SourceSubstitutions) {
   EXPECT_EQ("//out/Debug/obj/foo/bar",
             GetAbsSubst("//foo/bar/baz.txt", SUBSTITUTION_SOURCE_OUT_DIR));
 
-  // Operations on an absolute path.
+  // Operations on an absolute path.  Note that our source root is three
+  // directories deep.
   EXPECT_EQ("/baz.txt", GetRelSubst("/baz.txt", SUBSTITUTION_SOURCE));
   EXPECT_EQ("/.", GetRelSubst("/baz.txt", SUBSTITUTION_SOURCE_DIR));
-  EXPECT_EQ("gen/ABS_PATH",
+  EXPECT_EQ("gen/REL_PATH/UP/UP/UP",
             GetRelSubst("/baz.txt", SUBSTITUTION_SOURCE_GEN_DIR));
-  EXPECT_EQ("obj/ABS_PATH",
+  EXPECT_EQ("obj/REL_PATH/UP/UP/UP",
             GetRelSubst("/baz.txt", SUBSTITUTION_SOURCE_OUT_DIR));
 #if defined(OS_WIN)
-  EXPECT_EQ("gen/ABS_PATH/C",
+  EXPECT_EQ("gen/REL_PATH/UP/UP/UP",
             GetRelSubst("/C:/baz.txt", SUBSTITUTION_SOURCE_GEN_DIR));
-  EXPECT_EQ("obj/ABS_PATH/C",
+  EXPECT_EQ("obj/REL_PATH/UP/UP/UP",
             GetRelSubst("/C:/baz.txt", SUBSTITUTION_SOURCE_OUT_DIR));
+
+  EXPECT_EQ("gen/REL_PATH/UP/UP/UP/UP/D",
+            GetRelSubst("/D:/baz.txt", SUBSTITUTION_SOURCE_GEN_DIR));
+  EXPECT_EQ("obj/REL_PATH/UP/UP/UP/UP/D",
+            GetRelSubst("/D:/baz.txt", SUBSTITUTION_SOURCE_OUT_DIR));
 #endif
 
   EXPECT_EQ(".",
