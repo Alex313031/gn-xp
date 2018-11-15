@@ -20,6 +20,7 @@
 #include "tools/gn/filesystem_utils.h"
 #include "tools/gn/functions.h"
 #include "tools/gn/group_target_generator.h"
+#include "tools/gn/metadata.h"
 #include "tools/gn/parse_tree.h"
 #include "tools/gn/scheduler.h"
 #include "tools/gn/scope.h"
@@ -27,6 +28,9 @@
 #include "tools/gn/value.h"
 #include "tools/gn/value_extractors.h"
 #include "tools/gn/variables.h"
+
+
+#include "tools/gn/standard_out.h"
 
 TargetGenerator::TargetGenerator(Target* target,
                                  Scope* scope,
@@ -48,6 +52,9 @@ void TargetGenerator::Run() {
     return;
 
   if (!FillDependencies())
+    return;
+
+  if (!FillMetadata())
     return;
 
   if (!FillTestonly())
@@ -250,6 +257,39 @@ bool TargetGenerator::FillDependencies() {
     if (!FillGenericDeps("datadeps", &target_->data_deps()))
       return false;
   }
+
+  return true;
+}
+
+bool TargetGenerator::FillMetadata() {
+  // Need to get a mutable value to mark all values in the scope as used. This
+  // cannot be done on a const Scope.
+  Value* value = scope_->GetMutableValue(variables::kMetadata,
+                                         Scope::SEARCH_CURRENT, true);
+  if (!value)
+    return true;
+
+  if (!value->VerifyTypeIs(Value::SCOPE, err_))
+    return false;
+
+  Scope* scope_value = value->scope_value();
+
+  Scope::KeyValueMap value_map;
+  scope_value->GetCurrentScopeValues(&value_map);
+  scope_value->MarkAllUsed();
+
+  // Metadata values should always hold lists of strings, such that they can be
+  // collected and concatenated.
+  for (const auto& iter : value_map) {
+    if (!iter.second.VerifyTypeIs(Value::LIST, err_))
+      return false;
+    for (const auto& val : iter.second.list_value()) {
+      if (!val.VerifyTypeIs(Value::STRING, err_))
+        return false;
+    }
+  }
+
+  target_->set_metadata(std::move(value_map), scope_->GetSourceDir());
 
   return true;
 }
