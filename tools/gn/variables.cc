@@ -1337,6 +1337,21 @@ Examples
     libs = [ "ld" ]
 )";
 
+const char kMetadata[] = "metadata";
+const char kMetadata_HelpShort[] =
+    "metadata: [scope] Metadata of this target.";
+const char kMetadata_Help[] =
+    R"(metadata: Metadata of this target.
+
+    Metadata is a collection of keys and values relating to a particular target.
+    Generally, these keys will include three categories of strings: ordinary
+    strings, filenames intended to be rebased according to their particular
+    source directory, and target labels intended to be used as barriers to the
+    walk. Verfication of these categories occurs at walk time, not creation
+    time (since it is not clear until the walk which values are intended for
+    which purpose).
+)";
+
 const char kOutputExtension[] = "output_extension";
 const char kOutputExtension_HelpShort[] =
     "output_extension: [string] Value to use for the output's file extension.";
@@ -2092,6 +2107,7 @@ const VariableInfoMap& GetTargetVariables() {
     INSERT_VARIABLE(Ldflags)
     INSERT_VARIABLE(Libs)
     INSERT_VARIABLE(LibDirs)
+    INSERT_VARIABLE(Metadata)
     INSERT_VARIABLE(OutputDir)
     INSERT_VARIABLE(OutputExtension)
     INSERT_VARIABLE(OutputName)

@@ -245,7 +245,7 @@ bool Scope::IsSetButUnused(const base::StringPiece& ident) const {
   }
   return false;
 }
-
+#include "tools/gn/standard_out.h"
 bool Scope::CheckForUnusedVars(Err* err) const {
   for (const auto& pair : values_) {
     if (!pair.second.used) {
