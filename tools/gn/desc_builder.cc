@@ -47,6 +47,7 @@
 //   "deps : [ list of target dependencies ],
 //   "libs" : [ list of libraries ],
 //   "lib_dirs" : [ list of library directories ]
+//   "metadata" : [ dictionary of target metadata values ]
 // }
 //
 // Optionally, if "what" is specified while generating description, two other
@@ -273,6 +274,21 @@ class TargetDescBuilder : public BaseDescBuilder {
     }
 
     // General target meta variables.
+    if (what(variables::kMetadata)) {
+      base::DictionaryValue metadata;
+      for (const auto& data : target_->metadata().contents()) {
+        CHECK(data.second.type() == Value::LIST);
+        base::ListValue contents;
+        for (const auto& cur : data.second.list_value()) {
+          CHECK(cur.type() == Value::STRING);
+          contents.GetList().emplace_back(cur.string_value());
+        }
+        metadata.SetKey(data.first, std::move(contents));
+        metadata.SetKey(data.first, base::Value(data.second.ToString(false)));
+      }
+      res->SetKey(variables::kMetadata, std::move(metadata));
+    }
+
     if (what(variables::kVisibility))
       res->SetWithoutPathExpansion(variables::kVisibility,
                                    target_->visibility().AsValue());
