@@ -189,6 +189,7 @@ bool PrintTarget(const Target* target,
   HANDLER("type", LabelHandler);
   HANDLER("toolchain", LabelHandler);
   HANDLER(variables::kVisibility, VisibilityHandler);
+  HANDLER(variables::kMetadata, DefaultHandler);
   HANDLER(variables::kTestonly, DefaultHandler);
   HANDLER(variables::kCheckIncludes, DefaultHandler);
   HANDLER(variables::kAllowCircularIncludesFrom, DefaultHandler);
@@ -323,6 +324,7 @@ Possibilities for <what to show>
   ldflags [--blame]
   lib_dirs
   libs
+  metadata
   outputs
   public_configs
   public
