@@ -11,6 +11,7 @@
 
 #include "base/command_line.h"
 #include "base/json/json_writer.h"
+#include "base/strings/string_number_conversions.h"
 #include "base/strings/string_util.h"
 #include "tools/gn/commands.h"
 #include "tools/gn/config.h"
@@ -37,6 +38,7 @@ void PrintValue(const base::Value* value, int indentLevel) {
   const base::DictionaryValue* dict_value = nullptr;
   std::string string_value;
   bool bool_value = false;
+  int int_value = 0;
   if (value->GetAsList(&list_value)) {
     for (const auto& v : *list_value) {
       PrintValue(&v, indentLevel);
@@ -56,6 +58,10 @@ void PrintValue(const base::Value* value, int indentLevel) {
       PrintValue(&iter.value(), indentLevel + 1);
       iter.Advance();
     }
+  } else if (value->GetAsInteger(&int_value)) {
+    OutputString(indent);
+    OutputString(base::IntToString(int_value));
+    OutputString("\n");
   } else if (value->is_none()) {
     OutputString(indent + "<null>\n");
   }
@@ -189,6 +195,7 @@ bool PrintTarget(const Target* target,
   HANDLER("type", LabelHandler);
   HANDLER("toolchain", LabelHandler);
   HANDLER(variables::kVisibility, VisibilityHandler);
+  HANDLER(variables::kMetadata, DefaultHandler);
   HANDLER(variables::kTestonly, DefaultHandler);
   HANDLER(variables::kCheckIncludes, DefaultHandler);
   HANDLER(variables::kAllowCircularIncludesFrom, DefaultHandler);
@@ -323,6 +330,7 @@ Possibilities for <what to show>
   ldflags [--blame]
   lib_dirs
   libs
+  metadata
   outputs
   public_configs
   public
