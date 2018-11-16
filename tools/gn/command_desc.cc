@@ -11,6 +11,7 @@
 
 #include "base/command_line.h"
 #include "base/json/json_writer.h"
+#include "base/strings/string_number_conversions.h"
 #include "base/strings/string_util.h"
 #include "tools/gn/commands.h"
 #include "tools/gn/config.h"
@@ -30,6 +31,52 @@ const char kBlame[] = "blame";
 const char kTree[] = "tree";
 const char kAll[] = "all";
 
+void PrintDictValue(const base::Value* value,
+                    int indentLevel,
+                    bool use_first_indent) {
+  std::string indent(indentLevel * 2, ' ');
+  const base::ListValue* list_value = nullptr;
+  const base::DictionaryValue* dict_value = nullptr;
+  std::string string_value;
+  bool bool_value = false;
+  int int_value = 0;
+  if (use_first_indent)
+    OutputString(indent);
+  if (value->GetAsList(&list_value)) {
+    OutputString("[\n");
+    bool first = true;
+    for (const auto& v : *list_value) {
+      if (!first)
+        OutputString(",\n");
+      PrintDictValue(&v, indentLevel + 1, true);
+      first = false;
+    }
+    OutputString("\n" + indent + "]");
+  } else if (value->GetAsString(&string_value)) {
+    OutputString("\"" + string_value + "\"");
+  } else if (value->GetAsBoolean(&bool_value)) {
+    OutputString(bool_value ? "true" : "false");
+  } else if (value->GetAsDictionary(&dict_value)) {
+    OutputString("{\n");
+    std::string indent_plus_one((indentLevel + 1) * 2, ' ');
+    base::DictionaryValue::Iterator iter(*dict_value);
+    bool first = true;
+    while (!iter.IsAtEnd()) {
+      if (!first)
+        OutputString(",\n");
+      OutputString(indent_plus_one + iter.key() + " = ");
+      PrintDictValue(&iter.value(), indentLevel + 1, false);
+      iter.Advance();
+      first = false;
+    }
+    OutputString("\n" + indent + "}");
+  } else if (value->GetAsInteger(&int_value)) {
+    OutputString(base::IntToString(int_value));
+  } else if (value->is_none()) {
+    OutputString("<null>");
+  }
+}
+
 // Prints value with specified indentation level
 void PrintValue(const base::Value* value, int indentLevel) {
   std::string indent(indentLevel * 2, ' ');
@@ -37,6 +84,7 @@ void PrintValue(const base::Value* value, int indentLevel) {
   const base::DictionaryValue* dict_value = nullptr;
   std::string string_value;
   bool bool_value = false;
+  int int_value = 0;
   if (value->GetAsList(&list_value)) {
     for (const auto& v : *list_value) {
       PrintValue(&v, indentLevel);
@@ -56,6 +104,10 @@ void PrintValue(const base::Value* value, int indentLevel) {
       PrintValue(&iter.value(), indentLevel + 1);
       iter.Advance();
     }
+  } else if (value->GetAsInteger(&int_value)) {
+    OutputString(indent);
+    OutputString(base::IntToString(int_value));
+    OutputString("\n");
   } else if (value->is_none()) {
     OutputString(indent + "<null>\n");
   }
@@ -71,9 +123,19 @@ void DefaultHandler(const std::string& name, const base::Value* value) {
 
 // Specific handler for properties that need different treatment
 
+// Prints the dict in GN scope-sytle.
+void MetadataHandler(const std::string& name, const base::Value* value) {
+  OutputString("\n");
+  OutputString(name);
+  OutputString("\n");
+  PrintDictValue(value, 1, true);
+  OutputString("\n");
+}
+
 // Prints label and property value on one line, capitalizing the label.
-void LabelHandler(std::string name, const base::Value* value) {
-  name[0] = base::ToUpperASCII(name[0]);
+void LabelHandler(const std::string& name, const base::Value* value) {
+  std::string label = name;
+  label[0] = base::ToUpperASCII(label[0]);
   std::string string_value;
   if (value->GetAsString(&string_value)) {
     OutputString(name + ": ", DECORATION_YELLOW);
@@ -154,9 +216,47 @@ void ProcessOutputs(base::DictionaryValue* target) {
   }
 }
 
+using DescHandlerFunc = void (*)(const std::string& name,
+                                 const base::Value* value);
+std::map<std::string, DescHandlerFunc> GetHandlers() {
+  return {{"type", LabelHandler},
+          {"toolchain", LabelHandler},
+          {variables::kVisibility, VisibilityHandler},
+          {variables::kMetadata, MetadataHandler},
+          {variables::kTestonly, DefaultHandler},
+          {variables::kCheckIncludes, DefaultHandler},
+          {variables::kAllowCircularIncludesFrom, DefaultHandler},
+          {variables::kSources, DefaultHandler},
+          {variables::kPublic, PublicHandler},
+          {variables::kInputs, DefaultHandler},
+          {variables::kConfigs, ConfigsHandler},
+          {variables::kPublicConfigs, ConfigsHandler},
+          {variables::kAllDependentConfigs, ConfigsHandler},
+          {variables::kScript, DefaultHandler},
+          {variables::kArgs, DefaultHandler},
+          {variables::kDepfile, DefaultHandler},
+          {"bundle_data", DefaultHandler},
+          {variables::kArflags, DefaultHandler},
+          {variables::kAsmflags, DefaultHandler},
+          {variables::kCflags, DefaultHandler},
+          {variables::kCflagsC, DefaultHandler},
+          {variables::kCflagsCC, DefaultHandler},
+          {variables::kCflagsObjC, DefaultHandler},
+          {variables::kCflagsObjCC, DefaultHandler},
+          {variables::kDefines, DefaultHandler},
+          {variables::kIncludeDirs, DefaultHandler},
+          {variables::kLdflags, DefaultHandler},
+          {variables::kPrecompiledHeader, DefaultHandler},
+          {variables::kPrecompiledSource, DefaultHandler},
+          {variables::kDeps, DepsHandler},
+          {variables::kLibs, DefaultHandler},
+          {variables::kLibDirs, DefaultHandler}};
+}
+
 bool PrintTarget(const Target* target,
                  const std::string& what,
                  bool single_target,
+                 const std::map<std::string, DescHandlerFunc>& handler_map,
                  bool all,
                  bool tree,
                  bool blame) {
@@ -168,10 +268,12 @@ bool PrintTarget(const Target* target,
                  "\".\n");
     return false;
   }
-  // Print single value, without any headers
+  // Print single value
   if (!what.empty() && dict->size() == 1 && single_target) {
     base::DictionaryValue::Iterator iter(*dict);
-    PrintValue(&iter.value(), 0);
+    auto pair = handler_map.find(what);
+    if (pair != handler_map.end())
+      pair->second(what, &iter.value());
     return true;
   }
 
@@ -180,15 +282,18 @@ bool PrintTarget(const Target* target,
   OutputString("\n");
 
   std::unique_ptr<base::Value> v;
-#define HANDLER(property, handler_name) \
-  if (dict->Remove(property, &v)) {     \
-    handler_name(property, v.get());    \
+#define HANDLER(property, handler_name)     \
+  if (dict->Remove(property, &v)) {         \
+    auto pair = handler_map.find(property); \
+    if (pair != handler_map.end())          \
+      pair->second(property, v.get());      \
   }
 
   // Entries with DefaultHandler are present to enforce order
   HANDLER("type", LabelHandler);
   HANDLER("toolchain", LabelHandler);
   HANDLER(variables::kVisibility, VisibilityHandler);
+  HANDLER(variables::kMetadata, MetadataHandler);
   HANDLER(variables::kTestonly, DefaultHandler);
   HANDLER(variables::kCheckIncludes, DefaultHandler);
   HANDLER(variables::kAllowCircularIncludesFrom, DefaultHandler);
@@ -233,17 +338,20 @@ bool PrintTarget(const Target* target,
 
 bool PrintConfig(const Config* config,
                  const std::string& what,
-                 bool single_config) {
+                 bool single_config,
+                 const std::map<std::string, DescHandlerFunc>& handler_map) {
   std::unique_ptr<base::DictionaryValue> dict =
       DescBuilder::DescriptionForConfig(config, what);
   if (!what.empty() && dict->empty()) {
     OutputString("Don't know how to display \"" + what + "\" for a config.\n");
     return false;
   }
-  // Print single value, without any headers
+  // Print single value
   if (!what.empty() && dict->size() == 1 && single_config) {
     base::DictionaryValue::Iterator iter(*dict);
-    PrintValue(&iter.value(), 0);
+    auto pair = handler_map.find(what);
+    if (pair != handler_map.end())
+      pair->second(what, &iter.value());
     return true;
   }
 
@@ -252,9 +360,11 @@ bool PrintConfig(const Config* config,
   OutputString("\n");
 
   std::unique_ptr<base::Value> v;
-#define HANDLER(property, handler_name) \
-  if (dict->Remove(property, &v)) {     \
-    handler_name(property, v.get());    \
+#define HANDLER(property, handler_name)     \
+  if (dict->Remove(property, &v)) {         \
+    auto pair = handler_map.find(property); \
+    if (pair != handler_map.end())          \
+      pair->second(property, v.get());      \
   }
 
   HANDLER("toolchain", LabelHandler);
@@ -323,6 +433,7 @@ Possibilities for <what to show>
   ldflags [--blame]
   lib_dirs
   libs
+  metadata
   outputs
   public_configs
   public
@@ -488,6 +599,7 @@ int RunDesc(const std::vector<std::string>& args) {
   } else {
     // Regular (non-json) formatted output
     bool multiple_outputs = (target_matches.size() + config_matches.size()) > 1;
+    std::map<std::string, DescHandlerFunc> handlers = GetHandlers();
 
     bool printed_output = false;
     for (const Target* target : target_matches) {
@@ -495,7 +607,7 @@ int RunDesc(const std::vector<std::string>& args) {
         OutputString("\n\n");
       printed_output = true;
 
-      if (!PrintTarget(target, what_to_print, !multiple_outputs,
+      if (!PrintTarget(target, what_to_print, !multiple_outputs, handlers,
                        cmdline->HasSwitch(kAll), cmdline->HasSwitch(kTree),
                        cmdline->HasSwitch(kBlame)))
         return 1;
@@ -505,7 +617,7 @@ int RunDesc(const std::vector<std::string>& args) {
         OutputString("\n\n");
       printed_output = true;
 
-      if (!PrintConfig(config, what_to_print, !multiple_outputs))
+      if (!PrintConfig(config, what_to_print, !multiple_outputs, handlers))
         return 1;
     }
   }
