@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "694d0123_68c779c4",
+        "filename": "tools/gn/build_settings.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 45,
+      "author": {
+        "id": 1000014
+      },
+      "writtenOn": "2018-11-16T17:52:39Z",
+      "side": 1,
+      "message": "Since this is an inline setter I\u0027d call it set_dotfile_name(). SetRootPath is camelcase because it\u0027s out-of-line and does some other stuff.",
+      "revId": "e145a6c0abbe40d7206b0c8d3218a196535e87fe",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": true
+    }
+  ]
+}
