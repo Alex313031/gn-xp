@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "23dfe62a_509e9eb4",
+        "filename": "tools/gn/target_generator.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 278,
+      "author": {
+        "id": 1000014
+      },
+      "writtenOn": "2018-11-16T23:00:15Z",
+      "side": 1,
+      "message": "So to clarify, we expect the barriers to look like this?\n\n  my_barrier \u003d []",
+      "revId": "db6e31a41807cb922083aa2520a6f15fd3d51391",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "7d53438f_ccbb1236",
+        "filename": "tools/gn/variables.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 1346,
+      "author": {
+        "id": 1000014
+      },
+      "writtenOn": "2018-11-16T23:00:15Z",
+      "side": 1,
+      "message": "Can you indent this paragraph only two spaces? That should match the other help topics.",
+      "revId": "db6e31a41807cb922083aa2520a6f15fd3d51391",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "19f8ca02_c9dab419",
+        "filename": "tools/gn/variables.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 1353,
+      "author": {
+        "id": 1000014
+      },
+      "writtenOn": "2018-11-16T23:00:15Z",
+      "side": 1,
+      "message": "I feel like we should mention the scope\u0027s keys map to lists of strings. We should come back when everything is done and add additional details and cross references (this will be hard for people to understand). In the meantime, we can at least add an example? I\u0027m thinking:\n\nExample\n\n  group(\"doom_melon\") {\n    metadata \u003d {\n      # These keys are not built in to GN but are interpreted when consuming\n      # metadata.\n      my_barrier \u003d []\n      my_extra_files \u003d [ \"a.txt\", \"b.txt\" ]\n    }\n  }",
+      "revId": "db6e31a41807cb922083aa2520a6f15fd3d51391",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": true
+    }
+  ]
+}
