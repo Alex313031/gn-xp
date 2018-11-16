@@ -41,6 +41,18 @@ class Metadata {
   SourceDir& source_dir() { return source_dir_; }
   void set_source_dir(const SourceDir& d) { source_dir_ = d; }
 
+  // Collect the specified metadata from this instance.
+  //
+  // Calling this will populate `next_walk_keys` with the values of targets to
+  // be walked next (with the empty string "" indicating that the target should
+  // populate)
+  void walk(const std::vector<base::StringPiece>& keys_to_extract,
+            const std::vector<base::StringPiece>& keys_to_walk,
+            std::vector<base::StringPiece>& next_walk_keys,
+            std::vector<Value>& result,
+            Err& err,
+            bool rebase_files = false) const;
+
  private:
   Contents contents_;
   SourceDir source_dir_;
