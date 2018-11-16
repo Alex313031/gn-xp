@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "d7eeed96_cf28fad3",
+        "filename": "tools/gn/target_generator.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 278,
+      "author": {
+        "id": 1000016
+      },
+      "writtenOn": "2018-11-16T23:20:14Z",
+      "side": 1,
+      "message": "Lists of anything (for data keys), not just lists of strings.\nCorrect, walk keys used as barriers will be keys with the empty list as their values.\nFor walk keys generally, they must be lists of strings that are labels.",
+      "parentUuid": "23dfe62a_509e9eb4",
+      "revId": "db6e31a41807cb922083aa2520a6f15fd3d51391",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "7d53438f_ccbb1236",
         "filename": "tools/gn/variables.cc",
         "patchSetId": 2
