@@ -16,6 +16,24 @@
       "revId": "e145a6c0abbe40d7206b0c8d3218a196535e87fe",
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "77b574e9_caad6128",
+        "filename": "tools/gn/build_settings.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 45,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2018-11-17T02:26:09Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "694d0123_68c779c4",
+      "revId": "e145a6c0abbe40d7206b0c8d3218a196535e87fe",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": false
     }
   ]
 }
