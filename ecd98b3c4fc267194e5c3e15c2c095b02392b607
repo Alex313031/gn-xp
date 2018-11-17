@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "a504770a_1347ecf6",
+        "filename": "tools/gn/desc_builder.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 283,
+      "author": {
+        "id": 1000016
+      },
+      "writtenOn": "2018-11-17T03:30:05Z",
+      "side": 1,
+      "message": "Should be a generic pretty-printing of any type, since they don\u0027t have to be strings.\nCan\u0027t it just use an existing pretty-printer for the whole DictionaryValue instead of writing the dictionary and list traversal logic out here?",
+      "revId": "ecd98b3c4fc267194e5c3e15c2c095b02392b607",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": true
+    }
+  ]
+}
