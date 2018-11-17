@@ -55,6 +55,24 @@
     },
     {
       "key": {
+        "uuid": "1fdfae39_9a162a14",
+        "filename": "tools/gn/target_generator.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 278,
+      "author": {
+        "id": 1000016
+      },
+      "writtenOn": "2018-11-17T01:19:00Z",
+      "side": 1,
+      "message": "Lists of arbitrary values will be written into files in JSON, either as final outputs or as input files to actions.  This is one of the core use cases.",
+      "parentUuid": "45972dc2_ff61c10f",
+      "revId": "db6e31a41807cb922083aa2520a6f15fd3d51391",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "7d53438f_ccbb1236",
         "filename": "tools/gn/variables.cc",
         "patchSetId": 2
