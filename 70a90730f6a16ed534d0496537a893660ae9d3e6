@@ -16,6 +16,24 @@
       "revId": "70a90730f6a16ed534d0496537a893660ae9d3e6",
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "597cb1cc_6e61ecce",
+        "filename": "tools/gn/setup.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 51,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2018-11-19T23:52:05Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "7f67697f_0f361f65",
+      "revId": "70a90730f6a16ed534d0496537a893660ae9d3e6",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": false
     }
   ]
 }
