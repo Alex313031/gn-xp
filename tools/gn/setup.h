@@ -29,7 +29,7 @@ class CommandLine;
 
 extern const char kDotfile_Help[];
 
-// Helper class to setup the build settings and environment for the various
+// Helper class to set up the build settings and environment for the various
 // commands to run.
 class Setup {
  public:
@@ -50,11 +50,15 @@ class Setup {
   // should set it to false to prevent creating oddly-named directories in case
   // the user omits the build directory argument (which is easy to do).
   bool DoSetup(const std::string& build_dir, bool force_create);
+  bool DoSetup(const std::string& build_dir,
+               bool force_create,
+               const base::CommandLine& cmdline);
 
   // Runs the load, returning true on success. On failure, prints the error
   // and returns false. This includes both RunPreMessageLoop() and
   // RunPostMessageLoop().
   bool Run();
+  bool Run(const base::CommandLine& cmdline);
 
   Scheduler& scheduler() { return scheduler_; }
 
@@ -93,7 +97,7 @@ class Setup {
   // Performs the two sets of operations to run the generation before and after
   // the message loop is run.
   void RunPreMessageLoop();
-  bool RunPostMessageLoop();
+  bool RunPostMessageLoop(const base::CommandLine& cmdline);
 
   // Fills build arguments. Returns true on success.
   bool FillArguments(const base::CommandLine& cmdline);
