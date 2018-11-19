@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "7f67697f_0f361f65",
+        "filename": "tools/gn/setup.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 51,
+      "author": {
+        "id": 1000014
+      },
+      "writtenOn": "2018-11-19T23:14:17Z",
+      "side": 1,
+      "message": "Can this comment mention that the command line is the one for the current process (I thought for a sec it was for running some other program), and what happens when you don\u0027t supply a command line?",
+      "revId": "70a90730f6a16ed534d0496537a893660ae9d3e6",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": true
+    }
+  ]
+}
