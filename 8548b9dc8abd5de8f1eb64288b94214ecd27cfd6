@@ -1,0 +1,84 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ce85b4db_ae17edf8",
+        "filename": "tools/gn/metadata.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 23,
+      "author": {
+        "id": 1000016
+      },
+      "writtenOn": "2018-11-20T04:31:15Z",
+      "side": 1,
+      "message": "continue?",
+      "range": {
+        "startLine": 23,
+        "startChar": 6,
+        "endLine": 23,
+        "endChar": 11
+      },
+      "revId": "8548b9dc8abd5de8f1eb64288b94214ecd27cfd6",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "990b03ba_361a9785",
+        "filename": "tools/gn/metadata.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 1000016
+      },
+      "writtenOn": "2018-11-20T04:31:15Z",
+      "side": 1,
+      "message": "Should this be validated when metadata is stored so this can be an assert here?",
+      "revId": "8548b9dc8abd5de8f1eb64288b94214ecd27cfd6",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "403d25cb_58a3cc6a",
+        "filename": "tools/gn/metadata.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 30,
+      "author": {
+        "id": 1000016
+      },
+      "writtenOn": "2018-11-20T04:31:15Z",
+      "side": 1,
+      "message": "Certainly the string can be any kind of path string that might ordinarily appear in a target-specific context (e.g. the target\u0027s sources list).",
+      "revId": "8548b9dc8abd5de8f1eb64288b94214ecd27cfd6",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "ea70b069_ef74196f",
+        "filename": "tools/gn/metadata.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 49,
+      "author": {
+        "id": 1000016
+      },
+      "writtenOn": "2018-11-20T04:31:15Z",
+      "side": 1,
+      "message": "This is actually only one step of the walk.  Perhaps call it walk_step?",
+      "range": {
+        "startLine": 49,
+        "startChar": 7,
+        "endLine": 49,
+        "endChar": 11
+      },
+      "revId": "8548b9dc8abd5de8f1eb64288b94214ecd27cfd6",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": true
+    }
+  ]
+}
