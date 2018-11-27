@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "f52cfc06_6ddcea48",
+        "filename": "tools/gn/metadata.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 25,
+      "author": {
+        "id": 1000014
+      },
+      "writtenOn": "2018-11-27T20:25:44Z",
+      "side": 1,
+      "message": "see comment below.",
+      "revId": "e098d48bc74e1e50be4f425ab26835cec5fcb5e5",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "d307bb20_3bb0e5d4",
+        "filename": "tools/gn/metadata.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 54,
+      "author": {
+        "id": 1000014
+      },
+      "writtenOn": "2018-11-27T20:25:44Z",
+      "side": 1,
+      "message": "We should use the logging macros instead of the C assert function. If we really need a runtime check, we can use CHECK, but I think this is probably OK to do DCHECK().",
+      "revId": "e098d48bc74e1e50be4f425ab26835cec5fcb5e5",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": true
+    }
+  ]
+}
