@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "fa288cd8_3b6c0516",
+        "filename": "tools/gn/metadata_walk.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 12,
+      "author": {
+        "id": 1000014
+      },
+      "writtenOn": "2018-11-27T20:50:36Z",
+      "side": 1,
+      "message": "This seems like it might make a nice helper on SourceDir. Put it by SourceAbsoluteWithOneSlash() and we can have it return a StringPiece like that function to avoid allocating. Also, then we can add a unit test for it since it will be easy to call externally.",
+      "revId": "4efced5c904197684346073ee8bd1089189bc912",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "99561d84_964150c2",
+        "filename": "tools/gn/metadata_walk.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 79,
+      "author": {
+        "id": 1000014
+      },
+      "writtenOn": "2018-11-27T20:50:36Z",
+      "side": 1,
+      "message": "I think the Chrome Clang plugins will warn on this but I guess the GN build isn\u0027t set up with that. Basically you should remove the std::move().\n\nBackground: One should never do a std::move for a return statement. Without the move it will do return value optimization in many cases so the stack variable will actually refer to the return location and there\u0027s no copy or move. When you type move explicitly, it forces the local variable to be different than the return value and prevents the optimization.",
+      "revId": "4efced5c904197684346073ee8bd1089189bc912",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "3d0b6d16_578b5046",
+        "filename": "tools/gn/metadata_walk.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 13,
+      "author": {
+        "id": 1000014
+      },
+      "writtenOn": "2018-11-27T20:50:36Z",
+      "side": 1,
+      "message": "This should have a comment with a high-level description of what it does.",
+      "revId": "4efced5c904197684346073ee8bd1089189bc912",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": true
+    }
+  ]
+}
