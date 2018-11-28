@@ -19,6 +19,125 @@
     },
     {
       "key": {
+        "uuid": "bd86a0ce_95c71f96",
+        "filename": "tools/gn/metadata_walk.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 30,
+      "author": {
+        "id": 1000016
+      },
+      "writtenOn": "2018-11-28T01:48:10Z",
+      "side": 1,
+      "message": "A range-based loop is shorthand for an iterator-based loop.\nThis is using an index rather than an iterator because of the mutation issue, so perhaps say, \"... an index-based loop instead of an iterator- or range-based one.\"",
+      "revId": "4efced5c904197684346073ee8bd1089189bc912",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "a21a89d2_9d41440a",
+        "filename": "tools/gn/metadata_walk.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 36,
+      "author": {
+        "id": 1000016
+      },
+      "writtenOn": "2018-11-28T01:48:10Z",
+      "side": 1,
+      "message": "I think this can be `return {};`.",
+      "revId": "4efced5c904197684346073ee8bd1089189bc912",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "575aa5b3_df990b25",
+        "filename": "tools/gn/metadata_walk.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 42,
+      "author": {
+        "id": 1000016
+      },
+      "writtenOn": "2018-11-28T01:48:10Z",
+      "side": 1,
+      "message": "DCHECK since this should have been vetted at a higher layer?",
+      "revId": "4efced5c904197684346073ee8bd1089189bc912",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "7fb1bafe_e74f9a84",
+        "filename": "tools/gn/metadata_walk.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 43,
+      "author": {
+        "id": 1000016
+      },
+      "writtenOn": "2018-11-28T01:48:10Z",
+      "side": 1,
+      "message": "The order here is relevant to the eventual result list, so perhaps call that issue out explicitly in a comment.",
+      "revId": "4efced5c904197684346073ee8bd1089189bc912",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "86dd0111_94ffe96d",
+        "filename": "tools/gn/metadata_walk.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 54,
+      "author": {
+        "id": 1000016
+      },
+      "writtenOn": "2018-11-28T01:48:10Z",
+      "side": 1,
+      "message": "This seems dubious to me.  Shouldn\u0027t the labels be fully canonicalized (i.e. to \"label_with_toolchain\") beforehand and then only match exactly?",
+      "revId": "4efced5c904197684346073ee8bd1089189bc912",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "534bc11b_44e7a4de",
+        "filename": "tools/gn/metadata_walk.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 69,
+      "author": {
+        "id": 1000016
+      },
+      "writtenOn": "2018-11-28T01:48:10Z",
+      "side": 1,
+      "message": "Should probably use label-with-toolchain in the error since referring to the same label in a different toolchain is an error likely to be confusing.",
+      "revId": "4efced5c904197684346073ee8bd1089189bc912",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "00c10e38_725c774d",
+        "filename": "tools/gn/metadata_walk.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 76,
+      "author": {
+        "id": 1000016
+      },
+      "writtenOn": "2018-11-28T01:48:10Z",
+      "side": 1,
+      "message": "Is this in some way substantially better than just making `next_walk_keys` local within the for block scope?  That seems cleaner and less error-prone to me (to wit, this line is not necessary and couldn\u0027t be accidentally forgotten or removed, or skipped with a `continue;` somewhere in the block).",
+      "revId": "4efced5c904197684346073ee8bd1089189bc912",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "99561d84_964150c2",
         "filename": "tools/gn/metadata_walk.cc",
         "patchSetId": 1
