@@ -33,6 +33,40 @@
       "revId": "e098d48bc74e1e50be4f425ab26835cec5fcb5e5",
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "e7dbcf8d_7bd7a6e2",
+        "filename": "tools/gn/metadata.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 49,
+      "author": {
+        "id": 1000016
+      },
+      "writtenOn": "2018-11-28T01:38:42Z",
+      "side": 1,
+      "message": "This sentence seems unfinished (and unpunctuated).  Did it mean to say, \"... (with the empty string \"\" indicating the containing target\u0027s deps of all kinds should be used).\" or something like that?",
+      "revId": "e098d48bc74e1e50be4f425ab26835cec5fcb5e5",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "a876079a_6941c736",
+        "filename": "tools/gn/metadata.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 53,
+      "author": {
+        "id": 1000016
+      },
+      "writtenOn": "2018-11-28T01:38:42Z",
+      "side": 1,
+      "message": "I think Google/Chrome style is to use pointers rather than mutable references for result parameters, but I\u0027m no expert.",
+      "revId": "e098d48bc74e1e50be4f425ab26835cec5fcb5e5",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": true
     }
   ]
 }
