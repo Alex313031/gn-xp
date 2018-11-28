@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "8b2eb87f_b4bed8fe",
+        "filename": "tools/gn/metadata.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 56,
+      "author": {
+        "id": 1000014
+      },
+      "writtenOn": "2018-11-28T17:52:23Z",
+      "side": 1,
+      "message": "I just noticed as part of the other patch: these out params should be pointers (Google-style says refs should be const)",
+      "revId": "374c8497667dca5ba19faf6a9f581a34c38f3c2b",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": true
+    }
+  ]
+}
