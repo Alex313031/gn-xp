@@ -1,0 +1,72 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "0264879d_060f79ec",
+        "filename": "tools/gn/source_dir_unittest.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 189,
+      "author": {
+        "id": 1000014
+      },
+      "writtenOn": "2018-11-28T17:57:01Z",
+      "side": 1,
+      "message": "Thanks!",
+      "revId": "ceac1421cafebc5776163b7780b62297bf918d5e",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "7104cc1e_62007705",
+        "filename": "tools/gn/target.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 878,
+      "author": {
+        "id": 1000014
+      },
+      "writtenOn": "2018-11-28T17:57:01Z",
+      "side": 1,
+      "message": "UniqueVector is basically an ordered set. I *think* you don\u0027t use the ordering guarantee in this code path. If this is correct, a std::set for the targets walked would be both lighter-weight and better document the requirements of the code.\n\nGoogle-style says out params should be bot last and passed as pointers, so I\u0027d do:\n\n  std::set\u003cconst Target*\u003e* targets_walked,\n\nright before the Err* out param.",
+      "revId": "ceac1421cafebc5776163b7780b62297bf918d5e",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "35a4c827_37f1ec89",
+        "filename": "tools/gn/target.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 891,
+      "author": {
+        "id": 1000014
+      },
+      "writtenOn": "2018-11-28T17:57:01Z",
+      "side": 1,
+      "message": "Local-var naming style: all_deps",
+      "revId": "ceac1421cafebc5776163b7780b62297bf918d5e",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "efce1c5e_9607a723",
+        "filename": "tools/gn/target.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 916,
+      "author": {
+        "id": 1000014
+      },
+      "writtenOn": "2018-11-28T17:57:01Z",
+      "side": 1,
+      "message": "I think Roland had a comment about this when it was in the other patch. Can we convert \"next\" to a label and then compare them?\n\nActually, the problem might be that I\u0027m not sure exactly what a walk key is. In one of these patches, we should specify in the header comments exactly what the format is and how it works.\n\nIf we can always pass the keys as Labels that\u0027s more self-documenting. If we need to optionally match all toolchains or a specific toolchain with a walk key, we can use an empty toolchain in the walk key to identify this, and then create a helper comparison function to determine if a walk key label matches a given target label.",
+      "revId": "ceac1421cafebc5776163b7780b62297bf918d5e",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": true
+    }
+  ]
+}
