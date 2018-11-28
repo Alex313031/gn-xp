@@ -149,6 +149,15 @@ class Target : public Item {
   const Metadata& metadata() const { return metadata_; }
   Metadata& metadata() { return metadata_; }
 
+  // Collect metadata from this target and its dependencies. This is intended to
+  // be called after the target is resolved.
+  bool GetMetadata(std::vector<Value>& result,
+                   UniqueVector<const Target*>& targets_walked,
+                   const std::vector<base::StringPiece>& keys_to_extract,
+                   const std::vector<base::StringPiece>& keys_to_walk,
+                   bool rebase_files,
+                   Err* err) const;
+
   bool testonly() const { return testonly_; }
   void set_testonly(bool value) { testonly_ = value; }
 

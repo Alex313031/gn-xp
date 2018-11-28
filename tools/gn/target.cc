@@ -873,3 +873,70 @@ void Target::CheckSourceGenerated(const SourceFile& source) const {
       g_scheduler->AddUnknownGeneratedInput(this, source);
   }
 }
+
+bool Target::GetMetadata(std::vector<Value>& result,
+                         UniqueVector<const Target*>& targets_walked,
+                         const std::vector<base::StringPiece>& keys_to_extract,
+                         const std::vector<base::StringPiece>& keys_to_walk,
+                         bool rebase_files,
+                         Err* err) const {
+  std::vector<Value> next_walk_keys;
+  if (!metadata_.WalkStep(settings()->build_settings(), keys_to_extract,
+                          keys_to_walk, next_walk_keys, result, rebase_files,
+                          err))
+    return false;
+
+  // Gather walk keys and find the appropriate target. Targets identified in
+  // the walk key set must be deps or data_deps of the declaring target.
+  const DepsIteratorRange& allDeps = GetDeps(Target::DEPS_ALL);
+  for (const auto& next : next_walk_keys) {
+    CHECK(next.type() == Value::STRING);
+
+    // If we hit an empty string in this list, add all deps and data_deps.
+    if (next.string_value().empty()) {
+      for (const auto& dep : allDeps) {
+        // If we haven't walked this dep yet, go down into it.
+        if (targets_walked.push_back(dep.ptr)) {
+          if (!dep.ptr->GetMetadata(result, targets_walked, keys_to_extract,
+                                    keys_to_walk, rebase_files, err))
+            return false;
+        }
+      }
+
+      // Any other walk keys are superfluous, as they can only be a subset of
+      // all deps.
+      break;
+    }
+
+    // Otherwise, look through the target's deps for the specified one.
+    bool found_next = false;
+    for (const auto& dep : allDeps) {
+      // Match against both the label with the toolchain and the label without
+      // it, to cover possible inputs.
+      if (dep.label.GetUserVisibleName(true) == next.string_value() ||
+          dep.label.GetUserVisibleName(false) == next.string_value() ||
+          dep.label.dir().SourceWithNoTrailingSlash() == next.string_value()) {
+        // If we haven't walked this dep yet, go down into it.
+        if (targets_walked.push_back(dep.ptr)) {
+          if (!dep.ptr->GetMetadata(result, targets_walked, keys_to_extract,
+                                    keys_to_walk, rebase_files, err))
+            return false;
+        }
+        // We found it, so we can exit this search now.
+        found_next = true;
+        break;
+      }
+    }
+    // If we didn't find the specified dep in the target, that's an error.
+    // Propagate it back to the user.
+    if (!found_next) {
+      *err = Err(next.origin(),
+                 std::string("I was expecting ") + next.string_value() +
+                     std::string(" to be a dependency of ") +
+                     label().GetUserVisibleName(false) +
+                     ". Make sure it's included in the deps or data_deps.");
+      return false;
+    }
+  }
+  return true;
+}
