@@ -16,6 +16,24 @@
       "revId": "374c8497667dca5ba19faf6a9f581a34c38f3c2b",
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "bac8f080_cffae878",
+        "filename": "tools/gn/metadata.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 56,
+      "author": {
+        "id": 1000023
+      },
+      "writtenOn": "2018-11-29T03:01:17Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "8b2eb87f_b4bed8fe",
+      "revId": "374c8497667dca5ba19faf6a9f581a34c38f3c2b",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": false
     }
   ]
 }

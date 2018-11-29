@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "730c11e5_7e0baea0",
+        "filename": "tools/gn/metadata.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 25,
+      "author": {
+        "id": 1000023
+      },
+      "writtenOn": "2018-11-29T03:01:17Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "f52cfc06_6ddcea48",
+      "revId": "e098d48bc74e1e50be4f425ab26835cec5fcb5e5",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "d307bb20_3bb0e5d4",
         "filename": "tools/gn/metadata.cc",
         "patchSetId": 2
@@ -33,6 +51,24 @@
       "revId": "e098d48bc74e1e50be4f425ab26835cec5fcb5e5",
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "aed8d036_6efa57d4",
+        "filename": "tools/gn/metadata.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 54,
+      "author": {
+        "id": 1000023
+      },
+      "writtenOn": "2018-11-29T03:01:17Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "d307bb20_3bb0e5d4",
+      "revId": "e098d48bc74e1e50be4f425ab26835cec5fcb5e5",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": false
     },
     {
       "key": {
@@ -53,6 +89,24 @@
     },
     {
       "key": {
+        "uuid": "c1d76b37_0a671731",
+        "filename": "tools/gn/metadata.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 49,
+      "author": {
+        "id": 1000023
+      },
+      "writtenOn": "2018-11-29T03:01:17Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "e7dbcf8d_7bd7a6e2",
+      "revId": "e098d48bc74e1e50be4f425ab26835cec5fcb5e5",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "a876079a_6941c736",
         "filename": "tools/gn/metadata.h",
         "patchSetId": 2
@@ -67,6 +121,24 @@
       "revId": "e098d48bc74e1e50be4f425ab26835cec5fcb5e5",
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "53a33f87_21481c5a",
+        "filename": "tools/gn/metadata.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 53,
+      "author": {
+        "id": 1000023
+      },
+      "writtenOn": "2018-11-29T03:01:17Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "a876079a_6941c736",
+      "revId": "e098d48bc74e1e50be4f425ab26835cec5fcb5e5",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": false
     }
   ]
 }
