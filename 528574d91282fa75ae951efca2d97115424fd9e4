@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "2141d202_e1fcf512",
+        "filename": "tools/gn/command_meta.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 30,
+      "author": {
+        "id": 1000014
+      },
+      "writtenOn": "2018-11-29T18:24:02Z",
+      "side": 1,
+      "message": "Are you sure you want the backslashes in here? I think you don\u0027t type those in the shell, and you\u0027re already in a raw string.",
+      "revId": "528574d91282fa75ae951efca2d97115424fd9e4",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "5a79dd14_a955a1b9",
+        "filename": "tools/gn/switches.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 116,
+      "author": {
+        "id": 1000014
+      },
+      "writtenOn": "2018-11-29T18:24:02Z",
+      "side": 1,
+      "message": "The style for the switches is that the word after the colon is capitalized (other additions too).",
+      "revId": "528574d91282fa75ae951efca2d97115424fd9e4",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": true
+    }
+  ]
+}
