@@ -73,6 +73,24 @@
     },
     {
       "key": {
+        "uuid": "1715ea9f_de131f81",
+        "filename": "tools/gn/target_generator.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 278,
+      "author": {
+        "id": 1000023
+      },
+      "writtenOn": "2018-11-29T03:01:06Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "1fdfae39_9a162a14",
+      "revId": "db6e31a41807cb922083aa2520a6f15fd3d51391",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "7d53438f_ccbb1236",
         "filename": "tools/gn/variables.cc",
         "patchSetId": 2
@@ -87,6 +105,24 @@
       "revId": "db6e31a41807cb922083aa2520a6f15fd3d51391",
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "3cded21d_296fed57",
+        "filename": "tools/gn/variables.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 1346,
+      "author": {
+        "id": 1000023
+      },
+      "writtenOn": "2018-11-29T03:01:06Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "7d53438f_ccbb1236",
+      "revId": "db6e31a41807cb922083aa2520a6f15fd3d51391",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": false
     },
     {
       "key": {
@@ -121,6 +157,42 @@
       "revId": "db6e31a41807cb922083aa2520a6f15fd3d51391",
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "c1dd3aae_b6788264",
+        "filename": "tools/gn/variables.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 1353,
+      "author": {
+        "id": 1000023
+      },
+      "writtenOn": "2018-11-29T03:01:06Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "19f8ca02_c9dab419",
+      "revId": "db6e31a41807cb922083aa2520a6f15fd3d51391",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "38046f21_ff0d9593",
+        "filename": "tools/gn/variables.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 1353,
+      "author": {
+        "id": 1000023
+      },
+      "writtenOn": "2018-11-29T03:01:06Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "07dfdced_3c7813a4",
+      "revId": "db6e31a41807cb922083aa2520a6f15fd3d51391",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": false
     }
   ]
 }
