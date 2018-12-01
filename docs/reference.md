@@ -52,7 +52,9 @@
     *   [set_defaults: Set default values for a target type.](#set_defaults)
     *   [set_sources_assignment_filter: Set a pattern to filter source files.](#set_sources_assignment_filter)
     *   [split_list: Splits a list into N different sub-lists.](#split_list)
+    *   [string_join: Concatenates a list of words with a separator.](#string_join)
     *   [string_replace: Replaces substring in the given string.](#string_replace)
+    *   [string_split: Split string into a list of strings.](#string_split)
     *   [template: Define a template rule.](#template)
     *   [tool: Specify arguments to a toolchain tool.](#tool)
     *   [toolchain: Defines a toolchain.](#toolchain)
@@ -331,9 +333,9 @@
 #### **What gets checked**
 
 ```
-  The .gn file may specify a list of targets to be checked. Only these targets
-  will be checked if no label_pattern is specified on the command line.
-  Otherwise, the command-line list is used instead. See "gn help dotfile".
+  The .gn file may specify a list of targets to be checked in the list
+  check_targets (see "gn help dotfile"). If a label pattern is specified
+  on the command line, check_targets is not used.
 
   Targets can opt-out from checking with "check_includes = false" (see
   "gn help check_includes").
@@ -2617,6 +2619,26 @@
   Will print:
     [[1, 2], [3, 4], [5, 6]
 ```
+### <a name="string_join"></a>**string_join**: Concatenates a list of words with a separator.
+
+```
+  result = string_join(strings[, sep])
+
+  Concatenate a list of words with intervening occurrences of separator.
+  The default value for separator is a single space character. The following
+  invocation should be idempotent: string_join(string_split(s, sep), sep)
+```
+
+#### **Example**
+
+```
+  The code:
+    mylist = ["Hello", "GN"]
+    print(string_join(mylist, ", "))
+
+  Will print:
+    Hello, GN
+```
 ### <a name="string_replace"></a>**string_replace**: Replaces substring in the given string.
 
 ```
@@ -2637,6 +2659,26 @@
 
   Will print:
     Hello, GN!
+```
+### <a name="string_split"></a>**string_split**: Split string into a list of strings.
+
+```
+  result = string_split(str[, sep[, max]])
+
+  Split string into all substrings separated by separator and returns a list
+  of the substrings between those separators. The default value for separator
+  is a single space character.
+```
+
+#### **Example**
+
+```
+  The code:
+    mystr = "Hello, GN"
+    print(string_split(mystr, ", "))
+
+  Will print:
+    ["Hello", "GN"]
 ```
 ### <a name="template"></a>**template**: Define a template rule.
 
@@ -5678,8 +5720,8 @@
   check_targets [optional]
       A list of labels and label patterns that should be checked when running
       "gn check" or "gn gen --check". If unspecified, all targets will be
-      checked. If it is the empty list, no targets will be checked. To bypass
-      this list, request an explicit check of targets, for instance "//*".
+      checked. If it is the empty list, no targets will be checked. To
+      bypass this list, request an explicit check of targets, like "//*".
 
       The format of this list is identical to that of "visibility" so see "gn
       help visibility" for examples.
@@ -6060,6 +6102,11 @@
 
     myvalues.foo += 2
     empty_scope.new_thing = [ 1, 2, 3 ]
+
+  Scope equality is defined as single-level scopes identical within the current
+  scope. That is, all values in the first scope must be present and identical
+  within the second, and vice versa. Note that this means inherited scopes are
+  always unequal by definition.
 ```
 ### <a name="input_conversion"></a>**Input and output conversions are arguments to file and process functions**
 #### **that specify how to convert data to or from external formats. The possible**

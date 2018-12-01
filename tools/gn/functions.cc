@@ -8,6 +8,7 @@
 #include <iostream>
 #include <memory>
 #include <regex>
+#include <string>
 #include <utility>
 
 #include "base/environment.h"
@@ -1087,6 +1088,61 @@ Value RunSplitList(Scope* scope,
   return result;
 }
 
+// string_join -----------------------------------------------------------------
+
+const char kStringJoin[] = "string_join";
+const char kStringJoin_HelpShort[] =
+    "string_join: Concatenates a list of words with a separator.";
+const char kStringJoin_Help[] =
+    R"(string_join: Concatenates a list of words with a separator.
+
+  result = string_join(strings[, sep])
+
+  Concatenate a list of words with intervening occurrences of separator.
+  The default value for separator is a single space character. The following
+  invocation should be idempotent: string_join(string_split(s, sep), sep)
+
+Example
+
+  The code:
+    mylist = ["Hello", "GN"]
+    print(string_join(mylist, ", "))
+
+  Will print:
+    Hello, GN
+)";
+
+Value RunStringJoin(Scope* scope,
+                    const FunctionCallNode* function,
+                    const std::vector<Value>& args,
+                    Err* err) {
+  if (args.size() < 1 || args.size() > 2) {
+    *err = Err(function, "Wrong number of arguments to string_join().");
+    return Value();
+  }
+
+  if (!args[0].VerifyTypeIs(Value::LIST, err))
+    return Value();
+  const std::vector<Value> strings = args[0].list_value();
+
+  std::string separator = " ";
+  if (args.size() > 1) {
+    if (!args[1].VerifyTypeIs(Value::STRING, err))
+      return Value();
+    separator = args[1].string_value();
+  }
+
+  std::stringstream stream;
+  for(size_t i = 0; i < strings.size(); ++i) {
+    if (i != 0)
+      stream << separator;
+    if (!strings[i].VerifyTypeIs(Value::STRING, err))
+      return Value();
+    stream << strings[i].string_value();
+  }
+  return Value(function, std::move(stream.str()));
+}
+
 // string_replace --------------------------------------------------------------
 
 const char kStringReplace[] = "string_replace";
@@ -1154,6 +1210,81 @@ Value RunStringReplace(Scope* scope,
       break;
   }
   return Value(function, std::move(val));
+}
+
+// string_split ----------------------------------------------------------------
+
+const char kStringSplit[] = "string_split";
+const char kStringSplit_HelpShort[] =
+    "string_split: Split string into a list of strings.";
+const char kStringSplit_Help[] =
+    R"(string_split: Split string into a list of strings.
+
+  result = string_split(str[, sep[, max]])
+
+  Split string into all substrings separated by separator and returns a list
+  of the substrings between those separators. The default value for separator
+  is a single space character.
+
+Example
+
+  The code:
+    mystr = "Hello, GN"
+    print(string_split(mystr, ", "))
+
+  Will print:
+    ["Hello", "GN"]
+)";
+
+Value RunStringSplit(Scope* scope,
+                     const FunctionCallNode* function,
+                     const std::vector<Value>& args,
+                     Err* err) {
+  if (args.size() < 1 || args.size() > 3) {
+    *err = Err(function, "Wrong number of arguments to string_split().");
+    return Value();
+  }
+
+  if (!args[0].VerifyTypeIs(Value::STRING, err))
+    return Value();
+  const std::string str = args[0].string_value();
+
+  std::string separator = " ";
+  if (args.size() > 1) {
+    if (!args[1].VerifyTypeIs(Value::STRING, err))
+      return Value();
+    separator = args[1].string_value();
+  }
+
+  int64_t max = INT64_MAX;
+  if (args.size() > 2) {
+    if (!args[2].VerifyTypeIs(Value::INTEGER, err))
+      return Value();
+    max = args[2].int_value();
+    if (max <= 0) {
+      *err = Err(function, "Requested number of splits is not positive.");
+      return Value();
+    }
+  }
+
+  size_t pos = 0;
+  int64_t n = 0;
+  std::string val(str);
+  std::vector<std::string> strings;
+  while ((pos = val.find(separator)) != std::string::npos) {
+    strings.push_back(val.substr(0, pos));
+    val.erase(0, pos + separator.length());
+    if (++n >= max)
+      break;
+  }
+  strings.push_back(val);
+
+  Value result(function, Value::LIST);
+  result.list_value().resize(strings.size());
+  for (size_t i = 0; i < strings.size(); ++i) {
+    result.list_value()[i] = Value(function, strings[i]);
+  }
+  return result;
 }
 
 // -----------------------------------------------------------------------------
@@ -1263,7 +1394,9 @@ struct FunctionInfoInitializer {
     INSERT_FUNCTION(SetDefaultToolchain, false)
     INSERT_FUNCTION(SetSourcesAssignmentFilter, false)
     INSERT_FUNCTION(SplitList, false)
+    INSERT_FUNCTION(StringJoin, false)
     INSERT_FUNCTION(StringReplace, false)
+    INSERT_FUNCTION(StringSplit, false)
     INSERT_FUNCTION(Template, false)
     INSERT_FUNCTION(Tool, false)
     INSERT_FUNCTION(Toolchain, false)
