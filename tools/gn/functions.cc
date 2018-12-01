@@ -1087,6 +1087,60 @@ Value RunSplitList(Scope* scope,
   return result;
 }
 
+// string_join ----------------------------------------------------------------
+
+const char kStringJoin[] = "string_join";
+const char kStringJoin_HelpShort[] =
+    "string_join: Concatenates a list of words with a separator.";
+const char kStringJoin_Help[] =
+    R"(string_join: Concatenates a list of words with a separator.
+
+  result = string_join(list[, str])
+
+  Concatenate a list of words with intervening occurrences of separator. The
+  default value for separator is a single space character.
+
+Example
+
+  The code:
+    mylist = ["Hello", "GN"]
+    print(string_join(mylist, ", "))
+
+  Will print:
+    Hello, GN
+)";
+
+Value RunStringJoin(Scope* scope,
+                    const FunctionCallNode* function,
+                    const std::vector<Value>& args,
+                    Err* err) {
+  if (args.size() < 1 || args.size() > 2) {
+    *err = Err(function, "Wrong number of arguments to string_join().");
+    return Value();
+  }
+
+  if (!args[0].VerifyTypeIs(Value::LIST, err))
+    return Value();
+  const std::vector<Value> list = args[0].list_value();
+
+  std::string separator = " ";
+  if (args.size() > 1) {
+    if (!args[1].VerifyTypeIs(Value::STRING, err))
+      return Value();
+    separator = args[1].string_value();
+  }
+
+  std::stringstream ss;
+  for(size_t i = 0; i < list.size(); ++i) {
+    if (i != 0)
+      ss << separator;
+    if (!list[i].VerifyTypeIs(Value::STRING, err))
+      return Value();
+    ss << list[i].string_value();
+  }
+  return Value(function, std::move(ss.str()));
+}
+
 // string_replace --------------------------------------------------------------
 
 const char kStringReplace[] = "string_replace";
@@ -1263,6 +1317,7 @@ struct FunctionInfoInitializer {
     INSERT_FUNCTION(SetDefaultToolchain, false)
     INSERT_FUNCTION(SetSourcesAssignmentFilter, false)
     INSERT_FUNCTION(SplitList, false)
+    INSERT_FUNCTION(StringJoin, false)
     INSERT_FUNCTION(StringReplace, false)
     INSERT_FUNCTION(Template, false)
     INSERT_FUNCTION(Tool, false)

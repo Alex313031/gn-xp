@@ -125,6 +125,29 @@ TEST(Functions, SplitList) {
       setup.print_output());
 }
 
+TEST(Functions, StringJoin) {
+  TestWithScope setup;
+
+  TestParseInput input(
+      // Use default separator.
+      "out1 = string_join([\"a\", \"b\", \"c\"])\n"
+      "print(out1)\n"
+
+      // Use custom separator.
+      "out2 = string_join([\"a\", \"b\", \"c\"], \", \")\n"
+      "print(out2)\n");
+  ASSERT_FALSE(input.has_error());
+
+  Err err;
+  input.parsed()->Execute(setup.scope(), &err);
+  ASSERT_FALSE(err.has_error()) << err.message();
+
+  EXPECT_EQ(
+      "a b c\n"
+      "a, b, c\n",
+      setup.print_output());
+}
+
 TEST(Functions, StringReplace) {
   TestWithScope setup;
 
