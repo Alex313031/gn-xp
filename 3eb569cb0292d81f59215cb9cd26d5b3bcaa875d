@@ -1,0 +1,44 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "231c1fff_599661a6",
+        "filename": "tools/gn/command_meta.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 26,
+      "author": {
+        "id": 1000016
+      },
+      "writtenOn": "2018-12-01T00:17:57Z",
+      "side": 1,
+      "message": "typo: \"given\"",
+      "range": {
+        "startLine": 26,
+        "startChar": 55,
+        "endLine": 26,
+        "endChar": 59
+      },
+      "revId": "3eb569cb0292d81f59215cb9cd26d5b3bcaa875d",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "10288f14_25da7b9a",
+        "filename": "tools/gn/command_meta.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 31,
+      "author": {
+        "id": 1000016
+      },
+      "writtenOn": "2018-12-01T00:17:57Z",
+      "side": 1,
+      "message": "Don\u0027t need the `\\` inside a raw string.",
+      "revId": "3eb569cb0292d81f59215cb9cd26d5b3bcaa875d",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": true
+    }
+  ]
+}
