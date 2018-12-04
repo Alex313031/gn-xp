@@ -253,3 +253,18 @@ TEST(ParseTree, Integers) {
     EXPECT_TRUE(err.has_error());
   }
 }
+
+TEST(ParseTree, OpaqueInList) {
+  TestParseInput input(R"(
+      target_name = "foo"
+      var = get_metadata(["//test:foo"], ["data"], ["walk"])
+      sources = [ "foo.cpp", get_metadata(["//test:foo"], ["data"], ["walk"]) ]
+      sources += var
+  )");
+  EXPECT_FALSE(input.has_error());
+
+  TestWithScope setup;
+  Err err;
+  input.parsed()->Execute(setup.scope(), &err);
+  EXPECT_FALSE(err.has_error()) << err.message();
+}

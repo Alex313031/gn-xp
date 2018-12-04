@@ -179,6 +179,14 @@ Value RunGetLabelInfo(Scope* scope,
                       const std::vector<Value>& args,
                       Err* err);
 
+extern const char kGetMetadata[];
+extern const char kGetMetadata_HelpShort[];
+extern const char kGetMetadata_Help[];
+Value RunGetMetadata(Scope* scope,
+                     const FunctionCallNode* function,
+                     const std::vector<Value>& args,
+                     Err* err);
+
 extern const char kGetPathInfo[];
 extern const char kGetPathInfo_HelpShort[];
 extern const char kGetPathInfo_Help[];

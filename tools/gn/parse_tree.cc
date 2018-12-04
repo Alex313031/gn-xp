@@ -194,6 +194,17 @@ Value AccessorNode::ExecuteArrayAccess(Scope* scope, Err* err) const {
     *err = MakeErrorDescribing("Undefined identifier.");
     return Value();
   }
+
+  if (base_value->type() == Value::OPAQUE) {
+    Value captured = *base_value;
+    return Value(this, [=](const Target* target,
+                           std::set<const Target*>* targets_walked, Err* err) {
+      Value result = captured.opaque_value()(target, targets_walked, err);
+      scope->SetValue(base_.value(), result, result.origin());
+      return this->ExecuteArrayAccess(scope, err);
+    });
+  }
+
   if (!base_value->VerifyTypeIs(Value::LIST, err))
     return Value();
 
@@ -272,7 +283,7 @@ bool AccessorNode::ComputeAndValidateListIndex(Scope* scope,
   if (max_len == 0) {
     *err = Err(index_->GetRange(), "Array subscript out of range.",
                "You gave me " + base::Int64ToString(index_int) + " but the " +
-               "array has no elements.");
+                   "array has no elements.");
     return false;
   }
   size_t index_sizet = static_cast<size_t>(index_int);
@@ -565,6 +576,7 @@ Value ListNode::Execute(Scope* scope, Err* err) const {
   std::vector<Value>& results = result_value.list_value();
   results.reserve(contents_.size());
 
+  bool contains_opaque = false;
   for (const auto& cur : contents_) {
     if (cur->AsBlockComment())
       continue;
@@ -576,8 +588,28 @@ Value ListNode::Execute(Scope* scope, Err* err) const {
                                       "I can't do something with nothing.");
       return Value();
     }
+    if (results.back().type() == Value::OPAQUE)
+      contains_opaque = true;
   }
-  return result_value;
+  if (!contains_opaque)
+    return result_value;
+
+  // If there are opaque values, add callback to resolve them when this gets
+  // resolved.
+  return Value(this, [=](const Target* target,
+                         std::set<const Target*>* targets_walked, Err* err) {
+    Value res(this, Value::LIST);
+    for (const auto& val : result_value.list_value()) {
+      // So that we don't clutter up the top-level call.
+      std::set<const Target*> targets_walked_local;
+      if (val.type() == Value::OPAQUE)
+        res.list_value().push_back(
+            val.opaque_value()(target, &targets_walked_local, err));
+      else
+        res.list_value().push_back(val);
+    }
+    return res;
+  });
 }
 
 LocationRange ListNode::GetRange() const {
