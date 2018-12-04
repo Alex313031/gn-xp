@@ -1248,3 +1248,50 @@ TEST(TargetTest, CollectMetadataWithError) {
             "specified the appropriate toolchain.")
       << err.message();
 }
+
+TEST_F(TargetTest, WriteMetadataCollection) {
+  TestWithScope setup;
+  Err err;
+
+  SourceFile source_file("//out/Debug/metadata.json");
+  OutputFile output_file(setup.build_settings(), source_file);
+
+  TestTarget generator(setup, "//foo:write", Target::WRITE_DATA);
+  generator.set_write_data_output(output_file);
+  generator.set_should_write(false);
+  g_scheduler->AddWriteDataTarget(&generator);
+
+  TestTarget middle_data_dep(setup, "//foo:middle", Target::EXECUTABLE);
+  middle_data_dep.data_deps().push_back(LabelTargetPair(&generator));
+
+  // This target has a generated metadata input and no dependency makes it.
+  TestTarget dep_missing(setup, "//foo:no_dep", Target::EXECUTABLE);
+  dep_missing.sources().push_back(source_file);
+  EXPECT_TRUE(dep_missing.OnResolved(&err));
+  AssertSchedulerHasOneUnknownFileMatching(&dep_missing, source_file);
+  scheduler().ClearUnknownGeneratedInputsAndWrittenFiles();
+
+  // This target has a generated file and we've directly dependended on it.
+  TestTarget dep_present(setup, "//foo:with_dep", Target::EXECUTABLE);
+  dep_present.sources().push_back(source_file);
+  dep_present.private_deps().push_back(LabelTargetPair(&generator));
+  EXPECT_TRUE(dep_present.OnResolved(&err));
+  EXPECT_TRUE(scheduler().GetUnknownGeneratedInputs().empty());
+
+  // This target has a generated file and we've indirectly dependended on it
+  // via data_deps.
+  TestTarget dep_indirect(setup, "//foo:with_dep", Target::EXECUTABLE);
+  dep_indirect.sources().push_back(source_file);
+  dep_indirect.data_deps().push_back(LabelTargetPair(&middle_data_dep));
+  EXPECT_TRUE(dep_indirect.OnResolved(&err));
+  AssertSchedulerHasOneUnknownFileMatching(&dep_indirect, source_file);
+  scheduler().ClearUnknownGeneratedInputsAndWrittenFiles();
+
+  // This target has a generated file and we've directly dependended on it
+  // via data_deps.
+  TestTarget data_dep_present(setup, "//foo:with_dep", Target::EXECUTABLE);
+  data_dep_present.sources().push_back(source_file);
+  data_dep_present.data_deps().push_back(LabelTargetPair(&generator));
+  EXPECT_TRUE(data_dep_present.OnResolved(&err));
+  EXPECT_TRUE(scheduler().GetUnknownGeneratedInputs().empty());
+}

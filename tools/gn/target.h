@@ -159,8 +159,11 @@ class Target : public Item {
                    std::set<const Target*>* targets_walked,
                    Err* err) const;
 
+  // Collect metadata if this is a metadata collection target.
+  bool CollectMetadata(Err* err);
+
   // WriteData-related methods.
-  bool WriteData(Err* err) const;
+  bool WriteData(Err* err);
 
   const Value& write_data() const {
     return write_data_;
