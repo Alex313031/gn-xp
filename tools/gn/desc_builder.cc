@@ -51,6 +51,11 @@
 //   "libs" : [ list of libraries ],
 //   "lib_dirs" : [ list of library directories ]
 //   "metadata" : [ dictionary of target metadata values ]
+//   "data_keys" : [ list of target data keys ]
+//   "walk_keys" : [ list of target walk keys ]
+//   "rebase" : true or false
+//   "write_data_output" : "filename for output"
+//   "write_output_conversion" : "string for output conversion"
 // }
 //
 // Optionally, if "what" is specified while generating description, two other
@@ -178,7 +183,7 @@ class BaseDescBuilder {
       case Value::LIST:
         return ToBaseValue(val.list_value());
       case Value::NONE:
-        return std::move(base::Value());
+        return base::Value();
     }
   }
 
@@ -457,6 +462,32 @@ class TargetDescBuilder : public BaseDescBuilder {
       FillInPrecompiledHeader(res.get(), target_->config_values());
     }
 
+    // WriteData vars.
+    if (target_->output_type() == Target::WRITE_DATA) {
+      if (what(variables::kDataKeys)) {
+        base::ListValue keys;
+        for (const auto& k : target_->write_data_keys())
+          keys.GetList().push_back(base::Value(k));
+        res->SetKey(variables::kDataKeys, std::move(keys));
+      }
+      if (what(variables::kRebase))
+        res->SetKey(variables::kRebase,
+                    std::move(base::Value(target_->write_rebase())));
+      if (what(variables::kWalkKeys)) {
+        base::ListValue keys;
+        for (const auto& k : target_->write_walk_keys())
+          keys.GetList().push_back(base::Value(k));
+        res->SetKey(variables::kWalkKeys, std::move(keys));
+      }
+      if (what(variables::kWriteDataOutput))
+        res->SetKey(
+            variables::kWriteDataOutput,
+            std::move(base::Value(target_->write_data_output().value())));
+      if (what(variables::kWalkKeys))
+        res->SetKey(variables::kWriteOutputConversion,
+                    std::move(ToBaseValue(target_->write_output_conversion())));
+    }
+
     if (what(variables::kDeps))
       res->SetWithoutPathExpansion(variables::kDeps, RenderDeps());
 
@@ -654,7 +685,8 @@ class TargetDescBuilder : public BaseDescBuilder {
         list->AppendString(elem.AsString());
 
       res->SetWithoutPathExpansion(variables::kOutputs, std::move(list));
-    } else if (target_->output_type() == Target::CREATE_BUNDLE) {
+    } else if (target_->output_type() == Target::CREATE_BUNDLE ||
+               target_->output_type() == Target::WRITE_DATA) {
       std::vector<SourceFile> output_files;
       target_->bundle_data().GetOutputsAsSourceFiles(target_->settings(),
                                                      &output_files);
