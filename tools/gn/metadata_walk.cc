@@ -16,7 +16,7 @@ std::vector<Value> WalkMetadata(
     auto pair = targets_walked->insert(target);
     if (pair.second) {
       if (!target->GetMetadata(keys_to_extract, keys_to_walk, rebase_files,
-                               &result, targets_walked, err))
+                               false, &result, targets_walked, err))
         return std::vector<Value>();
     }
   }
