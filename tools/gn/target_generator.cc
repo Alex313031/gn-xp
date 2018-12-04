@@ -11,6 +11,7 @@
 
 #include "tools/gn/action_target_generator.h"
 #include "tools/gn/binary_target_generator.h"
+#include "tools/gn/write_data_target_generator.h"
 #include "tools/gn/build_settings.h"
 #include "tools/gn/bundle_data_target_generator.h"
 #include "tools/gn/config.h"
@@ -138,6 +139,10 @@ void TargetGenerator::GenerateTarget(Scope* scope,
   } else if (output_type == functions::kStaticLibrary) {
     BinaryTargetGenerator generator(target.get(), scope, function_call,
                                     Target::STATIC_LIBRARY, err);
+    generator.Run();
+  } else if (output_type == functions::kWriteData) {
+    WriteDataTargetGenerator generator(target.get(), scope, function_call,
+                                    Target::WRITE_DATA, err);
     generator.Run();
   } else {
     *err = Err(function_call, "Not a known target type",
