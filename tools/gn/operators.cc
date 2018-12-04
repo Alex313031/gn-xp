@@ -127,6 +127,12 @@ bool ValueDestination::Init(Scope* exec_scope,
     return false;
   }
 
+  if (base->type() == Value::OPAQUE) {
+    *err = Err(dest_accessor->base(), "Opaque object can't be modified.",
+               "That's the point of opaque.");
+    return false;
+  }
+
   if (dest_accessor->index()) {
     // List access with an index.
     if (!base->VerifyTypeIs(Value::LIST, err)) {
@@ -312,9 +318,20 @@ void RemoveMatchesFromList(const BinaryOpNode* op_node,
       }
       break;
 
-    case Value::OPAQUE: // TODO(juliehockett): resolve this.
+    case Value::OPAQUE:  // TODO(juliehockett): resolve this.
     case Value::NONE:
       break;
+  }
+}
+
+void ApplyFilterIfPresent(const PatternList* filter, Value* value) {
+  // Optionally apply the assignment filter in-place.
+  if (filter) {
+    std::vector<Value>& list_value = value->list_value();
+    auto first_deleted = std::remove_if(
+        list_value.begin(), list_value.end(),
+        [filter](const Value& v) { return filter->MatchesValue(v); });
+    list_value.erase(first_deleted, list_value.end());
   }
 }
 
@@ -347,17 +364,20 @@ Value ExecuteEquals(Scope* exec_scope,
     }
   }
 
-  Value* written_value = dest->SetValue(std::move(right), op_node->right());
-
-  // Optionally apply the assignment filter in-place.
   const PatternList* filter = dest->GetAssignmentFilter(exec_scope);
-  if (filter) {
-    std::vector<Value>& list_value = written_value->list_value();
-    auto first_deleted = std::remove_if(
-        list_value.begin(), list_value.end(),
-        [filter](const Value& v) { return filter->MatchesValue(v); });
-    list_value.erase(first_deleted, list_value.end());
+
+  if (right.type() == Value::OPAQUE) {
+    Value result(right.origin(), [=](const Target* target, Err* err) {
+      Value res = right.opaque_value()(target, err);
+      if (!res.VerifyTypeIs(Value::LIST, err))
+        return Value();
+      ApplyFilterIfPresent(filter, &res);
+      return res;
+    });
   }
+
+  Value* written_value = dest->SetValue(std::move(right), op_node->right());
+  ApplyFilterIfPresent(filter, written_value);
   return Value();
 }
 
@@ -370,6 +390,28 @@ Value ExecutePlus(const BinaryOpNode* op_node,
                   Value right,
                   bool allow_left_type_conversion,
                   Err* err) {
+  if (left.type() == Value::OPAQUE) {
+    // Left- and right-hand-side opaque.
+    if (right.type() == Value::OPAQUE) {
+      return Value(op_node, [=](const Target* targets, Err* err) {
+        return ExecutePlus(op_node, left.opaque_value()(targets, err),
+                           right.opaque_value()(targets, err),
+                           allow_left_type_conversion, err);
+      });
+    }
+    // Left-hand-side only opaque.
+    return Value(op_node, [=](const Target* targets, Err* err) {
+      return ExecutePlus(op_node, left.opaque_value()(targets, err), right,
+                         allow_left_type_conversion, err);
+    });
+  } else if (right.type() == Value::OPAQUE) {
+    // Right-hand-side only opaque.
+    return Value(op_node, [=](const Target* targets, Err* err) {
+      return ExecutePlus(op_node, left, right.opaque_value()(targets, err),
+                         allow_left_type_conversion, err);
+    });
+  }
+
   // Left-hand-side integer.
   if (left.type() == Value::INTEGER) {
     if (right.type() == Value::INTEGER) {
@@ -420,6 +462,26 @@ Value ExecuteMinus(const BinaryOpNode* op_node,
                    Value left,
                    const Value& right,
                    Err* err) {
+  if (left.type() == Value::OPAQUE) {
+    // Left- and right-hand-side opaque.
+    if (right.type() == Value::OPAQUE) {
+      return Value(op_node, [=](const Target* targets, Err* err) {
+        return ExecuteMinus(op_node, left.opaque_value()(targets, err),
+                            right.opaque_value()(targets, err), err);
+      });
+    }
+    // Left-hand-side only opaque.
+    return Value(op_node, [=](const Target* targets, Err* err) {
+      return ExecuteMinus(op_node, left.opaque_value()(targets, err), right,
+                          err);
+    });
+  } else if (right.type() == Value::OPAQUE) {
+    // Right-hand-side only opaque.
+    return Value(op_node, [=](const Target* targets, Err* err) {
+      return ExecuteMinus(op_node, left, right.opaque_value()(targets, err),
+                          err);
+    });
+  }
   // Left-hand-side int. The only thing to do is subtract another int.
   if (left.type() == Value::INTEGER && right.type() == Value::INTEGER) {
     // Int - int -> subtraction.
@@ -500,6 +562,12 @@ void ExecutePlusEquals(Scope* exec_scope,
       *err = MakeIncompatibleTypeError(op_node, *mutable_dest, right);
     }
   } else if (mutable_dest->type() == Value::LIST) {
+    if (right.type() == Value::OPAQUE) {
+      dest->SetValue(
+          ExecutePlus(op_node, *mutable_dest, std::move(right), false, err),
+          op_node);
+      return;
+    }
     // List concat.
     if (right.type() == Value::LIST) {
       // Note: don't reserve() the dest vector here since that actually hurts
