@@ -155,12 +155,13 @@ class Target : public Item {
   bool GetMetadata(const std::vector<std::string>& keys_to_extract,
                    const std::vector<std::string>& keys_to_walk,
                    bool rebase_files,
+                   bool deps_only,
                    std::vector<Value>* result,
                    std::set<const Target*>* targets_walked,
                    Err* err) const;
 
   // WriteData-related methods.
-  bool WriteData(Err* err) const;
+  bool WriteData(Err* err);
 
   const Value& contents() const { return contents_; }
   void set_contents(const Value& value) { contents_ = value; }
