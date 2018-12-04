@@ -14,6 +14,7 @@
 #include "tools/gn/deps_iterator.h"
 #include "tools/gn/filesystem_utils.h"
 #include "tools/gn/functions.h"
+#include "tools/gn/output_conversion.h"
 #include "tools/gn/scheduler.h"
 #include "tools/gn/source_file_type.h"
 #include "tools/gn/substitution_writer.h"
@@ -287,7 +288,8 @@ Target::Target(const Settings* settings,
       check_includes_(true),
       complete_static_lib_(false),
       testonly_(false),
-      toolchain_(nullptr) {}
+      toolchain_(nullptr),
+      should_write_(true) {}
 
 Target::~Target() = default;
 
@@ -318,6 +320,8 @@ const char* Target::GetStringForOutputType(OutputType type) {
       return functions::kBundleData;
     case CREATE_BUNDLE:
       return functions::kCreateBundle;
+    case WRITE_DATA:
+      return functions::kWriteData;
     default:
       return "";
   }
@@ -391,6 +395,9 @@ bool Target::OnResolved(Err* err) {
 
   if (!write_runtime_deps_output_.value().empty())
     g_scheduler->AddWriteRuntimeDepsTarget(this);
+
+  if (!WriteData(err))
+    return false;
 
   return true;
 }
@@ -631,7 +638,8 @@ void Target::FillOutputFiles() {
     case SOURCE_SET:
     case COPY_FILES:
     case ACTION:
-    case ACTION_FOREACH: {
+    case ACTION_FOREACH:
+    case WRITE_DATA: {
       // These don't get linked to and use stamps which should be the first
       // entry in the outputs. These stamps are named
       // "<target_out_dir>/<targetname>.stamp".
@@ -941,5 +949,30 @@ bool Target::GetMetadata(const std::vector<std::string>& keys_to_extract,
       return false;
     }
   }
+  return true;
+}
+
+bool Target::WriteData(Err* err) const {
+  if (output_type_ != Target::WRITE_DATA)
+    return true;
+
+  std::vector<SourceFile> outputs_as_sources;
+  action_values_.GetOutputsAsSourceFiles(this, &outputs_as_sources);
+  CHECK(outputs_as_sources.size() == 1);
+
+  base::FilePath output =
+      settings()->build_settings()->GetFullPath(outputs_as_sources[0]);
+  ScopedTrace trace(TraceItem::TRACE_FILE_WRITE, outputs_as_sources[0].value());
+
+  // Compute output.
+  std::ostringstream contents;
+  ConvertValueToOutput(settings(), contents_, output_conversion_, contents,
+                       err);
+  if (err->has_error())
+    return false;
+  if (should_write_)
+    return WriteFileIfChanged(output, contents.str(), err);
+
+  g_scheduler->AddWriteDataTarget(this);
   return true;
 }
