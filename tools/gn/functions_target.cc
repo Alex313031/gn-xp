@@ -772,4 +772,43 @@ Value RunTarget(Scope* scope,
                               block, err);
 }
 
+const char kWriteData[] = "write_data";
+const char kWriteData_HelpShort[] = "write_data: Declare a write_data target.";
+const char kWriteData_Help[] =
+    R"(write_data: Declare a write_data target.
+
+  Writes data value(s) to disk on resolution. This target type mirrors some
+  functionality of the write_file() function, but also provides the ability to
+  collect metadata from its dependencies on resolution rather than writing out
+  parse time.
+
+  The `outputs` variable is required to be a list with a single element,
+  specifying the intended location of the output file. 
+
+  The `output_conversion` variable specified the format to write the
+  value. See `gn help output_conversion`.
+
+  One of `data` or `data_keys` must be specified; use of `data` will write the
+  contents of that value to file, while use of `data_keys` will trigger a
+  metadata collection walk based on the dependencies of the target and the
+  optional values of the `rebase` and `walk_keys` variables. See
+  `gn help metadata`.
+
+Variables
+
+  data_keys
+  rebase
+  walk_keys
+  output_conversion
+)" DEPS_VARS DEPENDENT_CONFIG_VARS;
+
+Value RunWriteData(Scope* scope,
+                   const FunctionCallNode* function,
+                   const std::vector<Value>& args,
+                   BlockNode* block,
+                   Err* err) {
+  return ExecuteGenericTarget(functions::kWriteData, scope, function, args,
+                              block, err);
+}
+
 }  // namespace functions

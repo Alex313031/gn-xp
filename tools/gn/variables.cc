@@ -2009,6 +2009,24 @@ Examples
     visibility = [ "./*", "//bar/*" ]
 )";
 
+const char kWriteValueContents[] = "contents";
+const char kWriteValueContents_HelpShort[] =
+    "contents: Value contents to write to file.";
+const char kWriteValueContents_Help[] =
+    R"(contents: Value contents to write to file.
+
+  See "gn help write_file".
+)";
+
+const char kWriteOutputConversion[] = "output_conversion";
+const char kWriteOutputConversion_HelpShort[] =
+    "output_conversion: Controls how the output is written.";
+const char kWriteOutputConversion_Help[] =
+    R"(write_output_conversion: Controls how the output is written.
+
+  Defaults to "json". See "gn help output_conversion".
+)";
+
 const char kWriteRuntimeDeps[] = "write_runtime_deps";
 const char kWriteRuntimeDeps_HelpShort[] =
     "write_runtime_deps: Writes the target's runtime_deps to the given path.";
@@ -2138,6 +2156,8 @@ const VariableInfoMap& GetTargetVariables() {
     INSERT_VARIABLE(XcodeTestApplicationName)
     INSERT_VARIABLE(Testonly)
     INSERT_VARIABLE(Visibility)
+    INSERT_VARIABLE(WriteOutputConversion)
+    INSERT_VARIABLE(WriteValueContents)
     INSERT_VARIABLE(WriteRuntimeDeps)
     INSERT_VARIABLE(XcodeExtraAttributes)
   }
