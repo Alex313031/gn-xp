@@ -183,6 +183,10 @@ extern const char kDataDeps[];
 extern const char kDataDeps_HelpShort[];
 extern const char kDataDeps_Help[];
 
+extern const char kDataKeys[];
+extern const char kDataKeys_HelpShort[];
+extern const char kDataKeys_Help[];
+
 extern const char kDefines[];
 extern const char kDefines_HelpShort[];
 extern const char kDefines_Help[];
@@ -279,6 +283,10 @@ extern const char kPublicDeps[];
 extern const char kPublicDeps_HelpShort[];
 extern const char kPublicDeps_Help[];
 
+extern const char kRebase[];
+extern const char kRebase_HelpShort[];
+extern const char kRebase_Help[];
+
 extern const char kResponseFileContents[];
 extern const char kResponseFileContents_HelpShort[];
 extern const char kResponseFileContents_Help[];
@@ -302,6 +310,22 @@ extern const char kTestonly_Help[];
 extern const char kVisibility[];
 extern const char kVisibility_HelpShort[];
 extern const char kVisibility_Help[];
+
+extern const char kWalkKeys[];
+extern const char kWalkKeys_HelpShort[];
+extern const char kWalkKeys_Help[];
+
+extern const char kWriteDataValue[];
+extern const char kWriteDataValue_HelpShort[];
+extern const char kWriteDataValue_Help[];
+
+extern const char kWriteDataOutput[];
+extern const char kWriteDataOutput_HelpShort[];
+extern const char kWriteDataOutput_Help[];
+
+extern const char kWriteOutputConversion[];
+extern const char kWriteOutputConversion_HelpShort[];
+extern const char kWriteOutputConversion_Help[];
 
 extern const char kWriteRuntimeDeps[];
 extern const char kWriteRuntimeDeps_HelpShort[];

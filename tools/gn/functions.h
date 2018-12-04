@@ -381,6 +381,15 @@ Value RunWriteFile(Scope* scope,
                    const std::vector<Value>& args,
                    Err* err);
 
+extern const char kWriteData[];
+extern const char kWriteData_HelpShort[];
+extern const char kWriteData_Help[];
+Value RunWriteData(Scope* scope,
+                   const FunctionCallNode* function,
+                   const std::vector<Value>& args,
+                   BlockNode* block,
+                   Err* err);
+
 // -----------------------------------------------------------------------------
 
 // One function record. Only one of the given runner types will be non-null

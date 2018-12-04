@@ -123,6 +123,28 @@ bool Scheduler::IsFileGeneratedByWriteRuntimeDeps(
   return false;
 }
 
+void Scheduler::AddWriteDataTarget(const Target* target) {
+  std::lock_guard<std::mutex> lock(lock_);
+  write_data_targets_.push_back(target);
+}
+
+std::vector<const Target*> Scheduler::GetWriteDataTargets() const {
+  std::lock_guard<std::mutex> lock(lock_);
+  return write_data_targets_;
+}
+
+bool Scheduler::IsFileGeneratedByWriteData(
+    const OutputFile& file) const {
+  std::lock_guard<std::mutex> lock(lock_);
+  // Number of targets should be quite small, so brute-force search is fine.
+  for (const Target* target : write_data_targets_) {
+    if (file == target->write_data_output()) {
+      return true;
+    }
+  }
+  return false;
+}
+
 std::multimap<SourceFile, const Target*> Scheduler::GetUnknownGeneratedInputs()
     const {
   std::lock_guard<std::mutex> lock(lock_);
