@@ -51,6 +51,7 @@
 //   "libs" : [ list of libraries ],
 //   "lib_dirs" : [ list of library directories ]
 //   "metadata" : [ dictionary of target metadata values ]
+//   "output_conversion" : "string for output conversion"
 // }
 //
 // Optionally, if "what" is specified while generating description, two other
@@ -459,6 +460,13 @@ class TargetDescBuilder : public BaseDescBuilder {
       FillInPrecompiledHeader(res.get(), target_->config_values());
     }
 
+    // WriteData vars.
+    if (target_->output_type() == Target::WRITE_DATA) {
+      if (what(variables::kWriteOutputConversion))
+        res->SetKey(variables::kWriteOutputConversion,
+                    std::move(ToBaseValue(target_->output_conversion())));
+    }
+
     if (what(variables::kDeps))
       res->SetWithoutPathExpansion(variables::kDeps, RenderDeps());
 
@@ -656,7 +664,8 @@ class TargetDescBuilder : public BaseDescBuilder {
         list->AppendString(elem.AsString());
 
       res->SetWithoutPathExpansion(variables::kOutputs, std::move(list));
-    } else if (target_->output_type() == Target::CREATE_BUNDLE) {
+    } else if (target_->output_type() == Target::CREATE_BUNDLE ||
+               target_->output_type() == Target::WRITE_DATA) {
       std::vector<SourceFile> output_files;
       target_->bundle_data().GetOutputsAsSourceFiles(target_->settings(),
                                                      &output_files);
