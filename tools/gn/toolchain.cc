@@ -198,6 +198,7 @@ Toolchain::ToolType Toolchain::GetToolTypeForTargetFinalOutput(
     case Target::BUNDLE_DATA:
     case Target::CREATE_BUNDLE:
     case Target::COPY_FILES:
+    case Target::GENERATED_FILE:
       return TYPE_STAMP;
     default:
       NOTREACHED();
