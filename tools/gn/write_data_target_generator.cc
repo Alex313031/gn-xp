@@ -17,7 +17,10 @@ WriteDataTargetGenerator::WriteDataTargetGenerator(
     const FunctionCallNode* function_call,
     Target::OutputType type,
     Err* err)
-    : TargetGenerator(target, scope, function_call, err), output_type_(type) {}
+    : TargetGenerator(target, scope, function_call, err),
+      output_type_(type),
+      contents_defined_(false),
+      data_keys_defined_(false) {}
 
 WriteDataTargetGenerator::~WriteDataTargetGenerator() = default;
 
@@ -34,11 +37,22 @@ void WriteDataTargetGenerator::DoRun() {
     return;
   }
 
-  if (!FillContents()) {
-    *err_ = Err(function_call_, "Contents should be set.",
+  if (!FillContents())
+    return;
+  if (!FillDataKeys())
+    return;
+
+  // One of data and data_keys should be defined.
+  if (!contents_defined_ && !data_keys_defined_) {
+    *err_ = Err(function_call_, "Either contents or data_keys should be set.",
                 "write_data wants some sort of data to write.");
     return;
   }
+
+  if (!FillRebase())
+    return;
+  if (!FillWalkKeys())
+    return;
 
   if (!FillOutputConversion())
     return;
@@ -47,9 +61,22 @@ void WriteDataTargetGenerator::DoRun() {
 bool WriteDataTargetGenerator::FillContents() {
   const Value* value = scope_->GetValue(variables::kWriteValueContents, true);
   if (!value)
-    return false;
+    return true;
   target_->set_contents(*value);
+  contents_defined_ = true;
   return true;
+}
+
+bool WriteDataTargetGenerator::ContentsDefined(const base::StringPiece& name) {
+  if (contents_defined_) {
+    *err_ =
+        Err(function_call_, name.as_string() + " won't be used.",
+            "write_data is defined on this target, and so setting " +
+                name.as_string() +
+                " will have no effect as no metdata collection will occur.");
+    return true;
+  }
+  return false;
 }
 
 bool WriteDataTargetGenerator::FillOutputConversion() {
@@ -71,4 +98,61 @@ bool WriteDataTargetGenerator::FillOutputConversion() {
   }
 
   return false;
+}
+
+bool WriteDataTargetGenerator::FillRebase() {
+  const Value* value = scope_->GetValue(variables::kRebase, true);
+  if (!value)
+    return true;
+  if (ContentsDefined(variables::kRebase))
+    return false;
+  if (!value->VerifyTypeIs(Value::BOOLEAN, err_))
+    return false;
+  target_->set_rebase(value->boolean_value());
+  return true;
+}
+
+bool WriteDataTargetGenerator::FillDataKeys() {
+  const Value* value = scope_->GetValue(variables::kDataKeys, true);
+  if (!value)
+    return true;
+  if (ContentsDefined(variables::kDataKeys))
+    return false;
+  if (!value->VerifyTypeIs(Value::LIST, err_))
+    return false;
+
+  for (const Value& v : value->list_value()) {
+    // Keys must be strings.
+    if (!v.VerifyTypeIs(Value::STRING, err_))
+      return false;
+    target_->data_keys().push_back(v.string_value());
+  }
+
+  data_keys_defined_ = true;
+  return true;
+}
+
+bool WriteDataTargetGenerator::FillWalkKeys() {
+  const Value* value = scope_->GetValue(variables::kWalkKeys, true);
+  // If we define this and contents, that's an error.
+  if (value && ContentsDefined(variables::kWalkKeys))
+    return false;
+
+  // If we don't define it, we want the default value which is a list
+  // containing the empty string.
+  if (!value) {
+    target_->walk_keys().push_back("");
+    return true;
+  }
+
+  // Otherwise, pull and validate the specified value.
+  if (!value->VerifyTypeIs(Value::LIST, err_))
+    return false;
+  for (const Value& v : value->list_value()) {
+    // Keys must be strings.
+    if (!v.VerifyTypeIs(Value::STRING, err_))
+      return false;
+    target_->walk_keys().push_back(v.string_value());
+  }
+  return true;
 }
