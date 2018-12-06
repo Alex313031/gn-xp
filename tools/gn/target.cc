@@ -289,6 +289,7 @@ Target::Target(const Settings* settings,
       complete_static_lib_(false),
       testonly_(false),
       toolchain_(nullptr),
+      rebase_(false),
       should_write_(true) {}
 
 Target::~Target() = default;
