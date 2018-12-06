@@ -26,6 +26,14 @@ class GeneratedFileTargetGenerator : public TargetGenerator {
   bool FillGeneratedFileOutput();
   bool FillOutputConversion();
   bool FillContents();
+  bool FillDataKeys();
+  bool FillWalkKeys();
+  bool FillRebase();
+
+  bool ContentsDefined(const base::StringPiece& name, const ParseNode* origin);
+
+  bool contents_defined_;
+  bool data_keys_defined_;
 
   Target::OutputType output_type_;
 
