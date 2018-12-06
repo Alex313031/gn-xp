@@ -25,9 +25,16 @@ class WriteDataTargetGenerator : public TargetGenerator {
  private:
   bool FillWriteDataOutput();
   bool FillOutputConversion();
+  bool FillRebase();
+  bool FillDataKeys();
+  bool FillWalkKeys();
   bool FillContents();
 
+  bool ContentsDefined(const base::StringPiece& name);
+
   Target::OutputType output_type_;
+  bool contents_defined_;
+  bool data_keys_defined_;
 
   DISALLOW_COPY_AND_ASSIGN(WriteDataTargetGenerator);
 };

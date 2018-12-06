@@ -169,6 +169,14 @@ class Target : public Item {
   bool should_write() const { return should_write_; }
   void set_should_write(bool value) { should_write_ = value; }
 
+  // Metadata collection methods for WriteData targets.
+  bool rebase() const { return rebase_; }
+  void set_rebase(bool value) { rebase_ = value; }
+  const std::vector<std::string>& data_keys() const { return data_keys_; }
+  std::vector<std::string>& data_keys() { return data_keys_; }
+  const std::vector<std::string>& walk_keys() const { return walk_keys_; }
+  std::vector<std::string>& walk_keys() { return walk_keys_; }
+
   bool testonly() const { return testonly_; }
   void set_testonly(bool value) { testonly_ = value; }
 
@@ -418,6 +426,12 @@ class Target : public Item {
   // WriteData values.
   Value output_conversion_;
   Value contents_;  // Value::NONE if metadata collection should occur.
+
+  // WriteData as metadata collection values.
+  bool rebase_;
+  std::vector<std::string> data_keys_;
+  std::vector<std::string> walk_keys_;
+
   // Controls whether the target should write the collected data to a file.
   // Used for testing.
   bool should_write_;
