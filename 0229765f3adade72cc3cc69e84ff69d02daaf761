@@ -1,0 +1,84 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "1542a27f_4f1aa3e0",
+        "filename": "tools/gn/functions_target.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 785,
+      "author": {
+        "id": 1000016
+      },
+      "writtenOn": "2018-12-06T01:12:23Z",
+      "side": 1,
+      "message": "Consistent with other targets would be to use `outputs` and just require that it be a one-element list (cf copy() targets).",
+      "range": {
+        "startLine": 785,
+        "startChar": 7,
+        "endLine": 785,
+        "endChar": 24
+      },
+      "revId": "0229765f3adade72cc3cc69e84ff69d02daaf761",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "878bae50_7be15728",
+        "filename": "tools/gn/functions_target.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 788,
+      "author": {
+        "id": 1000016
+      },
+      "writtenOn": "2018-12-06T01:12:23Z",
+      "side": 1,
+      "message": "How about either `output_conversion` (conveniently already the help topic) or `format`?\nFor consistency I think we probably should stick with the default of \"\" meaning \"list lines\" or \"value\" depending on type.  That way, output_conversion and omitting it means the same thing everywhere we have it.",
+      "revId": "0229765f3adade72cc3cc69e84ff69d02daaf761",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "fcdf2bd6_8e309407",
+        "filename": "tools/gn/functions_target.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 791,
+      "author": {
+        "id": 1000016
+      },
+      "writtenOn": "2018-12-06T01:12:23Z",
+      "side": 1,
+      "message": "Let\u0027s not use `data` since that has a different meaning in many other target types.\nPerhaps `contents` since that\u0027s consistent with `response_file_contents`.",
+      "range": {
+        "startLine": 791,
+        "startChar": 10,
+        "endLine": 791,
+        "endChar": 14
+      },
+      "revId": "0229765f3adade72cc3cc69e84ff69d02daaf761",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "9cf061f0_4da5eb6d",
+        "filename": "tools/gn/variables.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 2052,
+      "author": {
+        "id": 1000016
+      },
+      "writtenOn": "2018-12-06T01:12:23Z",
+      "side": 1,
+      "message": "I think the empty list should just be the empty list.  That means a simple collection on the deps (subset) with depth 1.  That\u0027s consistent with the empty list as the value of a walk key in metadata.\n\nHow about if the non-list value \"\" means deps+data_deps and any other non-list value here is an error?  Then we can just say the default is \"\".",
+      "revId": "0229765f3adade72cc3cc69e84ff69d02daaf761",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": true
+    }
+  ]
+}
