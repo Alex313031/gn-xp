@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "20667b2e_cd522188",
+        "filename": "tools/gn/functions_target.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 785,
+      "author": {
+        "id": 1000023
+      },
+      "writtenOn": "2018-12-06T19:44:00Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "1542a27f_4f1aa3e0",
+      "range": {
+        "startLine": 785,
+        "startChar": 7,
+        "endLine": 785,
+        "endChar": 24
+      },
+      "revId": "0229765f3adade72cc3cc69e84ff69d02daaf761",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "878bae50_7be15728",
         "filename": "tools/gn/functions_target.cc",
         "patchSetId": 1
@@ -39,6 +63,24 @@
       "revId": "0229765f3adade72cc3cc69e84ff69d02daaf761",
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "0e050953_1a0c9d13",
+        "filename": "tools/gn/functions_target.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 788,
+      "author": {
+        "id": 1000023
+      },
+      "writtenOn": "2018-12-06T19:44:00Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "878bae50_7be15728",
+      "revId": "0229765f3adade72cc3cc69e84ff69d02daaf761",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": false
     },
     {
       "key": {
@@ -65,6 +107,30 @@
     },
     {
       "key": {
+        "uuid": "bd620112_a583832c",
+        "filename": "tools/gn/functions_target.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 791,
+      "author": {
+        "id": 1000023
+      },
+      "writtenOn": "2018-12-06T19:44:00Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "fcdf2bd6_8e309407",
+      "range": {
+        "startLine": 791,
+        "startChar": 10,
+        "endLine": 791,
+        "endChar": 14
+      },
+      "revId": "0229765f3adade72cc3cc69e84ff69d02daaf761",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "9cf061f0_4da5eb6d",
         "filename": "tools/gn/variables.cc",
         "patchSetId": 1
@@ -79,6 +145,24 @@
       "revId": "0229765f3adade72cc3cc69e84ff69d02daaf761",
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "2a310831_6427bb0e",
+        "filename": "tools/gn/variables.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 2052,
+      "author": {
+        "id": 1000023
+      },
+      "writtenOn": "2018-12-06T19:44:00Z",
+      "side": 1,
+      "message": "Default is now [\"\"], which is consistent with the idea of if its not set, walk everything.",
+      "parentUuid": "9cf061f0_4da5eb6d",
+      "revId": "0229765f3adade72cc3cc69e84ff69d02daaf761",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": false
     }
   ]
 }
