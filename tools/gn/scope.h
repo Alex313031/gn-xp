@@ -127,6 +127,10 @@ class Scope {
   // unambiguous about nested scope handling. This can be added if needed.
   bool HasValues(SearchNested search_nested) const;
 
+  // Indicates whether this scope (or its nested scopes) contain an opaque value.
+  bool contains_opaque() const { return contains_opaque_; }
+  void set_contains_opaque(bool b) { contains_opaque_ = b; }
+
   // Returns NULL if there's no such value.
   //
   // counts_as_used should be set if the variable is being read in a way that
@@ -364,6 +368,7 @@ class Scope {
   unsigned mode_flags_;
 
   RecordMap values_;
+  bool contains_opaque_;
 
   // Note that this can't use string pieces since the names are constructed from
   // Values which might be deallocated before this goes out of scope.

@@ -3,10 +3,15 @@
 // found in the LICENSE file.
 
 #include <stdint.h>
+#include <set>
 
 #include "tools/gn/test_with_scope.h"
 #include "tools/gn/value.h"
 #include "util/test/test.h"
+
+Value callback(bool b) {
+  return Value(nullptr, b);
+}
 
 TEST(Value, ToString) {
   Value strval(nullptr, "hi\" $me\\you\\$\\\"");

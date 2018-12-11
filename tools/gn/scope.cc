@@ -44,7 +44,8 @@ Scope::Scope(const Settings* settings)
       mutable_containing_(nullptr),
       settings_(settings),
       mode_flags_(0),
-      item_collector_(nullptr) {}
+      item_collector_(nullptr),
+      contains_opaque_(false) {}
 
 Scope::Scope(Scope* parent)
     : const_containing_(nullptr),
@@ -52,7 +53,8 @@ Scope::Scope(Scope* parent)
       settings_(parent->settings()),
       mode_flags_(0),
       item_collector_(nullptr),
-      build_dependency_files_(parent->build_dependency_files_) {}
+      build_dependency_files_(parent->build_dependency_files_),
+      contains_opaque_(parent->contains_opaque()) {}
 
 Scope::Scope(const Scope* parent)
     : const_containing_(parent),
@@ -60,7 +62,8 @@ Scope::Scope(const Scope* parent)
       settings_(parent->settings()),
       mode_flags_(0),
       item_collector_(nullptr),
-      build_dependency_files_(parent->build_dependency_files_) {}
+      build_dependency_files_(parent->build_dependency_files_),
+      contains_opaque_(parent->contains_opaque()) {}
 
 Scope::~Scope() = default;
 
@@ -163,6 +166,8 @@ Value* Scope::SetValue(const base::StringPiece& ident,
   Record& r = values_[ident];  // Clears any existing value.
   r.value = std::move(v);
   r.value.set_origin(set_node);
+  if (v.type() == Value::OPAQUE)
+    contains_opaque_ = true;
   return &r.value;
 }
 

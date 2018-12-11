@@ -7,8 +7,10 @@
 
 #include <stdint.h>
 
+#include <functional>
 #include <map>
 #include <memory>
+#include <set>
 
 #include "base/logging.h"
 #include "base/macros.h"
@@ -16,6 +18,7 @@
 
 class ParseNode;
 class Scope;
+class Target;
 
 // Represents a variable value in the interpreter.
 class Value {
@@ -27,7 +30,12 @@ class Value {
     STRING,
     LIST,
     SCOPE,
+    OPAQUE,
   };
+
+  // typedef std::function<Value(const Target*, Err*)> Thunk;
+  typedef std::function<Value(const Target*, Err*&)> Opaque;
+  typedef std::map<base::StringPiece, Opaque> ScopeThunk;
 
   Value();
   Value(const ParseNode* origin, Type t);
@@ -41,6 +49,7 @@ class Value {
   // you can pass a null scope here if you promise to set it before any other
   // code gets it (code will generally assume the scope is not null).
   Value(const ParseNode* origin, std::unique_ptr<Scope> scope);
+  Value(const ParseNode* origin, Opaque opaque);
 
   Value(const Value& other);
   Value(Value&& other) noexcept;
@@ -104,10 +113,22 @@ class Value {
   }
   void SetScopeValue(std::unique_ptr<Scope> scope);
 
+  Opaque& opaque_value() {
+    DCHECK(type_ == OPAQUE);
+    return opaque_value_;
+  }
+  const Opaque& opaque_value() const {
+    DCHECK(type_ == OPAQUE);
+    return opaque_value_;
+  }
+
   // Converts the given value to a string. Returns true if strings should be
   // quoted or the ToString of a string should be the string itself. If the
   // string is quoted, it will also enable escaping.
   std::string ToString(bool quote_strings) const;
+
+  // Given a scope value with opaques, resolves all members of that scope.
+  bool Resolve(const Target* target, Err* err);
 
   // Verifies that the value is of the given type. If it isn't, returns
   // false and sets the error.
@@ -130,6 +151,7 @@ class Value {
   int64_t int_value_;
   std::vector<Value> list_value_;
   std::unique_ptr<Scope> scope_value_;
+  Opaque opaque_value_;
 
   const ParseNode* origin_;
 };

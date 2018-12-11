@@ -51,12 +51,21 @@ Value::Value(const ParseNode* origin, std::unique_ptr<Scope> scope)
       scope_value_(std::move(scope)),
       origin_(origin) {}
 
+Value::Value(const ParseNode* origin, Opaque opaque)
+    : type_(OPAQUE),
+      string_value_(),
+      boolean_value_(false),
+      int_value_(0),
+      opaque_value_(opaque),
+      origin_(origin) {}
+
 Value::Value(const Value& other)
     : type_(other.type_),
       string_value_(other.string_value_),
       boolean_value_(other.boolean_value_),
       int_value_(other.int_value_),
       list_value_(other.list_value_),
+      opaque_value_(other.opaque_value_),
       origin_(other.origin_) {
   if (type() == SCOPE && other.scope_value_.get())
     scope_value_ = other.scope_value_->MakeClosure();
@@ -74,6 +83,7 @@ Value& Value::operator=(const Value& other) {
   list_value_ = other.list_value_;
   if (type() == SCOPE && other.scope_value_.get())
     scope_value_ = other.scope_value_->MakeClosure();
+  opaque_value_ = other.opaque_value_;
   origin_ = other.origin_;
   return *this;
 }
@@ -93,6 +103,8 @@ const char* Value::DescribeType(Type t) {
       return "list";
     case SCOPE:
       return "scope";
+    case OPAQUE:
+      return "opaque";
     default:
       NOTREACHED();
       return "UNKNOWN";
@@ -162,8 +174,12 @@ std::string Value::ToString(bool quote_string) const {
 
       return result;
     }
+    case OPAQUE:
+      return "<opaque>";
+    default:
+      NOTREACHED();
+      return std::string();
   }
-  return std::string();
 }
 
 bool Value::VerifyTypeIs(Type t, Err* err) const {
@@ -197,6 +213,8 @@ bool Value::operator==(const Value& other) const {
       return true;
     case Value::SCOPE:
       return scope_value()->CheckCurrentScopeValuesEqual(other.scope_value());
+    case Value::OPAQUE:
+      return false;
     case Value::NONE:
       return false;
     default:
@@ -207,4 +225,33 @@ bool Value::operator==(const Value& other) const {
 
 bool Value::operator!=(const Value& other) const {
   return !operator==(other);
+}
+
+bool Value::Resolve(const Target* target, Err* err) {
+  DCHECK(type_ == SCOPE);
+  DCHECK(scope_value_->contains_opaque());
+  ScopeThunk fixed;
+  auto resolve = [](const Opaque& v) -> Opaque {
+    return [v](const Target* t, Err* e) { return v(t, e); };
+  };
+  auto pass = [](const Value& v) -> Opaque {
+    return [v](const Target*, Err*) { return v; };
+  };
+
+  Scope::KeyValueMap values;
+  scope_value_->GetCurrentScopeValues(&values);
+  for (const auto& p : values)
+    fixed[p.first] = p.second.type_ == OPAQUE ? resolve(p.second.opaque_value_)
+                                              : pass(p.second);
+
+  // Resolve these values into the original scope.
+  for (const auto& p : fixed) {
+    Value resolved = p.second(target, err);
+    if (err->has_error())
+      return false;
+    const ParseNode* origin = resolved.origin();
+    scope_value_->SetValue(p.first, std::move(resolved), origin);
+  }
+  scope_value_->set_contains_opaque(false);
+  return true;
 }
