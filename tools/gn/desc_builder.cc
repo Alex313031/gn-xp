@@ -181,6 +181,8 @@ class BaseDescBuilder {
         return ToBaseValue(val.scope_value());
       case Value::LIST:
         return ToBaseValue(val.list_value());
+      case Value::OPAQUE:
+        return base::Value();
       case Value::NONE:
         return base::Value();
     }
