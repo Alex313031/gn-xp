@@ -3,10 +3,15 @@
 // found in the LICENSE file.
 
 #include <stdint.h>
+#include <set>
 
 #include "tools/gn/test_with_scope.h"
 #include "tools/gn/value.h"
 #include "util/test/test.h"
+
+Value callback(bool b) {
+  return Value(nullptr, b);
+}
 
 TEST(Value, ToString) {
   Value strval(nullptr, "hi\" $me\\you\\$\\\"");
@@ -57,4 +62,16 @@ TEST(Value, ToString) {
   Scope* nested_scope = new Scope(scope);
   Value nested_scopeval(nullptr, std::unique_ptr<Scope>(nested_scope));
   EXPECT_FALSE(nested_scopeval == nested_scopeval);
+
+  bool a = true;
+  Value opaqueval(nullptr, [=](const Target*, std::set<const Target*>*, Err*) {
+    return callback(a);
+  });
+  EXPECT_EQ("<opaque>", opaqueval.ToString(false));
+
+  TestTarget b(setup, "//foo", Target::SOURCE_SET);
+  std::set<const Target*> c;
+  Err err;
+  opaqueval = opaqueval.opaque_value()(&b, &c, &err);
+  EXPECT_EQ(opaqueval, Value(nullptr, true));
 }
