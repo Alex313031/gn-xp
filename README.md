@@ -2,7 +2,8 @@
 
 GN is a meta-build system that generates build files for
 [Ninja](https://ninja-build.org). There is documentation in
-[docs/](https://gn.googlesource.com/gn/+/master/docs/).
+[docs/](https://gn.googlesource.com/gn/+/master/docs/) and
+a presentation on it at [https://bit.ly/using-gn-build].
 
 ## Getting started
 
