@@ -1,0 +1,157 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "8dd10405_4f433a22",
+        "filename": "tools/gn/function_get_metadata.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 135,
+      "author": {
+        "id": 1000101
+      },
+      "writtenOn": "2018-12-12T22:00:09Z",
+      "side": 1,
+      "message": "You can just return this directly.",
+      "revId": "597b83209da271e4bc68736970e77aace39a09c4",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "71d5a28a_a39b6c84",
+        "filename": "tools/gn/function_get_metadata_unittest.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 51,
+      "author": {
+        "id": 1000101
+      },
+      "writtenOn": "2018-12-12T22:00:09Z",
+      "side": 1,
+      "message": "I\u0027m not familiar with the precise get_metadata proposal but it seems odd that the scope should have to be anything specific in order to be able to call get_metadata.",
+      "revId": "597b83209da271e4bc68736970e77aace39a09c4",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "4687d307_2a23db49",
+        "filename": "tools/gn/operators.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 53,
+      "author": {
+        "id": 1000101
+      },
+      "writtenOn": "2018-12-12T22:00:09Z",
+      "side": 1,
+      "message": "Perhaps you should modify this so that non-opaque values can become opaque on assignment? Is that what this method does?",
+      "revId": "597b83209da271e4bc68736970e77aace39a09c4",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "d59d9be2_d4be736f",
+        "filename": "tools/gn/operators.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 131,
+      "author": {
+        "id": 1000101
+      },
+      "writtenOn": "2018-12-12T22:00:09Z",
+      "side": 1,
+      "message": "Why? I don\u0027t think this makes sense. There\u0027s nothing unique about an opaque value that implies this.",
+      "revId": "597b83209da271e4bc68736970e77aace39a09c4",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "374a95d4_b1a3d882",
+        "filename": "tools/gn/operators.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 342,
+      "author": {
+        "id": 1000101
+      },
+      "writtenOn": "2018-12-12T22:00:09Z",
+      "side": 1,
+      "message": "What does this do? I\u0027m so confused.",
+      "revId": "597b83209da271e4bc68736970e77aace39a09c4",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "ff824341_f40f602a",
+        "filename": "tools/gn/operators.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 370,
+      "author": {
+        "id": 1000101
+      },
+      "writtenOn": "2018-12-12T22:00:09Z",
+      "side": 1,
+      "message": "Nothing is done with this.",
+      "revId": "597b83209da271e4bc68736970e77aace39a09c4",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "02b65a4c_3fa43c90",
+        "filename": "tools/gn/operators.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 383,
+      "author": {
+        "id": 1000101
+      },
+      "writtenOn": "2018-12-12T22:00:09Z",
+      "side": 1,
+      "message": "What are assignment filters?",
+      "revId": "597b83209da271e4bc68736970e77aace39a09c4",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "fcf3c55f_0f9bf7b0",
+        "filename": "tools/gn/operators.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 421,
+      "author": {
+        "id": 1000101
+      },
+      "writtenOn": "2018-12-12T22:00:09Z",
+      "side": 1,
+      "message": "What if you made opaque_value() just return *this when it\u0027s type is not opaque? Then you can simplify all of this code so that it only checks `left.type() \u003d\u003d Value::OPAQUE || right.type() \u003d\u003d Value::OPAQUE`\n\nditto for remaining operations.",
+      "revId": "597b83209da271e4bc68736970e77aace39a09c4",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "56f8bb7b_ac2298cd",
+        "filename": "tools/gn/operators.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 615,
+      "author": {
+        "id": 1000101
+      },
+      "writtenOn": "2018-12-12T22:00:09Z",
+      "side": 1,
+      "message": "What about all the other operations? Getting an error when doing something legal with opaque values would be nasty.",
+      "revId": "597b83209da271e4bc68736970e77aace39a09c4",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": true
+    }
+  ]
+}
