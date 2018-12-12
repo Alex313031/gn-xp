@@ -30,13 +30,18 @@ void ActionTargetGenerator::DoRun() {
 
   if (!FillSources())
     return;
-  if (output_type_ == Target::ACTION_FOREACH && target_->sources().empty()) {
-    // Foreach rules must always have some sources to have an effect.
-    *err_ =
-        Err(function_call_, "action_foreach target has no sources.",
-            "If you don't specify any sources, there is nothing to run your\n"
-            "script over.");
-    return;
+  // Only do this validation here if these vars were not opaque, otherwise defer
+  // the work to DoFinish.
+  if (target_->unfinished_vars().find(variables::kSources) ==
+      target_->unfinished_vars().end()) {
+    if (output_type_ == Target::ACTION_FOREACH && target_->sources().empty()) {
+      // Foreach rules must always have some sources to have an effect.
+      *err_ =
+          Err(function_call_, "action_foreach target has no sources.",
+              "If you don't specify any sources, there is nothing to run your\n"
+              "script over.");
+      return;
+    }
   }
 
   if (!FillInputs())
@@ -63,34 +68,52 @@ void ActionTargetGenerator::DoRun() {
   if (!FillCheckIncludes())
     return;
 
-  if (!CheckOutputs())
-    return;
+  // Only do this validation here if these vars were not opaque, otherwise defer
+  // the work to DoFinish.
+  if (target_->unfinished_vars().find(variables::kOutputs) ==
+      target_->unfinished_vars().end()) {
+    if (!CheckOutputs())
+      return;
+  }
 
   // Action outputs don't depend on the current toolchain so we can skip adding
   // that dependency.
 
-  // response_file_contents and {{response_file_name}} in the args must go
-  // together.
-  const auto& required_args_substitutions =
-      target_->action_values().args().required_types();
-  bool has_rsp_file_name = base::ContainsValue(required_args_substitutions,
-                                               SUBSTITUTION_RSP_FILE_NAME);
-  if (target_->action_values().uses_rsp_file() && !has_rsp_file_name) {
-    *err_ = Err(
-        function_call_, "Missing {{response_file_name}} in args.",
-        "This target defines response_file_contents but doesn't use\n"
-        "{{response_file_name}} in the args, which means the response file\n"
-        "will be unused.");
-    return;
+  // Only do this validation here if these vars were not opaque, otherwise defer
+  // the work to DoFinish.
+  if (target_->unfinished_vars().find(variables::kResponseFileContents) ==
+      target_->unfinished_vars().end()) {
+    if (!CheckResponseFile())
+      return;
   }
-  if (!target_->action_values().uses_rsp_file() && has_rsp_file_name) {
-    *err_ = Err(
-        function_call_, "Missing response_file_contents definition.",
-        "This target uses {{response_file_name}} in the args, but does not\n"
-        "define response_file_contents which means the response file\n"
-        "will be empty.");
-    return;
+}
+
+void ActionTargetGenerator::DoFinish(Target::UnfinishedVars& unfinished_vars) {
+  for (const auto& var : unfinished_vars) {
+    if (var.first == variables::kSources) {
+      if (!FillSources())
+        return;
+    } else if (var.first == variables::kOutputs) {
+      if (!FillOutputs(output_type_ == Target::ACTION_FOREACH))
+        return;
+    } else if (var.first == variables::kInputs) {
+      if (!FillInputs())
+        return;
+    } else if (var.first == variables::kResponseFileContents) {
+      if (!FillResponseFileContents())
+        return;
+    } else if (var.first == variables::kArgs) {
+      if (!FillScriptArgs())
+        return;
+    }
   }
+  unfinished_vars.erase(variables::kSources);
+  unfinished_vars.erase(variables::kOutputs);
+
+  if (!CheckOutputs())
+    return;
+  if (!CheckResponseFile())
+    return;
 }
 
 bool ActionTargetGenerator::FillScript() {
@@ -117,6 +140,9 @@ bool ActionTargetGenerator::FillScriptArgs() {
   if (!value)
     return true;  // Nothing to do.
 
+  if (value->type() == Value::OPAQUE && allow_opaque_)
+    return WrapOpaque(variables::kArgs, *value);
+
   if (!target_->action_values().args().Parse(*value, err_))
     return false;
   if (!EnsureValidSubstitutions(
@@ -131,6 +157,9 @@ bool ActionTargetGenerator::FillResponseFileContents() {
   const Value* value = scope_->GetValue(variables::kResponseFileContents, true);
   if (!value)
     return true;  // Nothing to do.
+
+  if (value->type() == Value::OPAQUE && allow_opaque_)
+    return WrapOpaque(variables::kResponseFileContents, *value);
 
   if (!target_->action_values().rsp_file_contents().Parse(*value, err_))
     return false;
@@ -212,10 +241,39 @@ bool ActionTargetGenerator::FillInputs() {
   if (!value)
     return true;
 
+  if (value->type() == Value::OPAQUE && allow_opaque_)
+    return WrapOpaque(variables::kInputs, *value);
+
   Target::FileList dest_inputs;
   if (!ExtractListOfRelativeFiles(scope_->settings()->build_settings(), *value,
                                   scope_->GetSourceDir(), &dest_inputs, err_))
     return false;
   target_->config_values().inputs().swap(dest_inputs);
+  return true;
+}
+
+bool ActionTargetGenerator::CheckResponseFile() {
+  // response_file_contents and {{response_file_name}} in the args must go
+  // together.
+  const auto& required_args_substitutions =
+      target_->action_values().args().required_types();
+  bool has_rsp_file_name = base::ContainsValue(required_args_substitutions,
+                                               SUBSTITUTION_RSP_FILE_NAME);
+  if (target_->action_values().uses_rsp_file() && !has_rsp_file_name) {
+    *err_ = Err(
+        function_call_, "Missing {{response_file_name}} in args.",
+        "This target defines response_file_contents but doesn't use\n"
+        "{{response_file_name}} in the args, which means the response file\n"
+        "will be unused.");
+    return false;
+  }
+  if (!target_->action_values().uses_rsp_file() && has_rsp_file_name) {
+    *err_ = Err(
+        function_call_, "Missing response_file_contents definition.",
+        "This target uses {{response_file_name}} in the args, but does not\n"
+        "define response_file_contents which means the response file\n"
+        "will be empty.");
+    return false;
+  }
   return true;
 }

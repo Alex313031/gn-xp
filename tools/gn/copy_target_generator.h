@@ -19,6 +19,7 @@ class CopyTargetGenerator : public TargetGenerator {
 
  protected:
   void DoRun() override;
+  void DoFinish(Target::UnfinishedVars& unfinished_vars) override;
 
  private:
   DISALLOW_COPY_AND_ASSIGN(CopyTargetGenerator);

@@ -60,12 +60,47 @@ void BinaryTargetGenerator::DoRun() {
   if (!FillCompleteStaticLib())
     return;
 
+  // If configs was an opaque value, we'll defer this to DoFinish.
+  if (target_->unfinished_vars().find(variables::kConfigs) ==
+      target_->unfinished_vars().end()) {
+    // Config values (compiler flags, etc.) set directly on this target.
+    ConfigValuesGenerator gen(&target_->config_values(), scope_,
+                              scope_->GetSourceDir(), err_);
+    gen.Run();
+  }
+  if (err_->has_error())
+    return;
+}
+
+void BinaryTargetGenerator::DoFinish(Target::UnfinishedVars& unfinished_vars) {
+  for (const auto& var : unfinished_vars) {
+    if (var.first == variables::kFriend) {
+      if (!FillFriends())
+        return;
+    } else if (var.first == variables::kAllowCircularIncludesFrom) {
+      if (!FillAllowCircularIncludesFrom())
+        return;
+    } else if (var.first == variables::kSources) {
+      if (!FillSources())
+        return;
+    } else if (var.first == variables::kPublic) {
+      if (!FillPublic())
+        return;
+    } else if (var.first == variables::kConfigs) {
+      if (!FillConfigs())
+        return;
+    }
+  }
+  unfinished_vars.erase(variables::kFriend);
+  unfinished_vars.erase(variables::kAllowCircularIncludesFrom);
+  unfinished_vars.erase(variables::kSources);
+  unfinished_vars.erase(variables::kPublic);
+  unfinished_vars.erase(variables::kConfigs);
+
   // Config values (compiler flags, etc.) set directly on this target.
   ConfigValuesGenerator gen(&target_->config_values(), scope_,
                             scope_->GetSourceDir(), err_);
   gen.Run();
-  if (err_->has_error())
-    return;
 }
 
 bool BinaryTargetGenerator::FillCompleteStaticLib() {
@@ -83,6 +118,8 @@ bool BinaryTargetGenerator::FillCompleteStaticLib() {
 bool BinaryTargetGenerator::FillFriends() {
   const Value* value = scope_->GetValue(variables::kFriend, true);
   if (value) {
+    if (value->type() == Value::OPAQUE && allow_opaque_)
+      return WrapOpaque(variables::kFriend, *value);
     return ExtractListOfLabelPatterns(*value, scope_->GetSourceDir(),
                                       &target_->friends(), err_);
   }
@@ -146,6 +183,14 @@ bool BinaryTargetGenerator::FillAllowCircularIncludesFrom() {
   const Value* value =
       scope_->GetValue(variables::kAllowCircularIncludesFrom, true);
   if (!value)
+    return true;
+
+  // If this key is in target_'s unfinished_vars, that means that at least one
+  // of the deps was opaque and so this resolution can't happend until that is
+  // resolved. The value is already in the list of vars to finish, so just
+  // return from here.
+  if (target_->unfinished_vars().find(variables::kAllowCircularIncludesFrom) !=
+      target_->unfinished_vars().end())
     return true;
 
   UniqueVector<Label> circular;

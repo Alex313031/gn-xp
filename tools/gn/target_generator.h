@@ -10,6 +10,7 @@
 
 #include "base/macros.h"
 #include "tools/gn/label_ptr.h"
+#include "tools/gn/target.h"
 #include "tools/gn/unique_vector.h"
 
 class BuildSettings;
@@ -29,6 +30,7 @@ class TargetGenerator {
                   Scope* scope,
                   const FunctionCallNode* function_call,
                   Err* err);
+
   virtual ~TargetGenerator();
 
   void Run();
@@ -41,9 +43,18 @@ class TargetGenerator {
                              const std::string& output_type,
                              Err* err);
 
+  void Finish(Target::UnfinishedVars& unfinished_vars);
+
+  // The function call is the parse tree node that invoked the target.
+  // err() will be set on failure.
+  static void FinishTarget(Target* target,
+                           Target::UnfinishedVars& unfinished_vars,
+                           Err* err);
+
  protected:
   // Derived classes implement this to do type-specific generation.
   virtual void DoRun() = 0;
+  virtual void DoFinish(Target::UnfinishedVars& unfinished_vars) = 0;
 
   const BuildSettings* GetBuildSettings() const;
 
@@ -59,10 +70,14 @@ class TargetGenerator {
   bool EnsureSubstitutionIsInOutputDir(const SubstitutionPattern& pattern,
                                        const Value& original_value);
 
+  // Wraps the given opaque value into the appropriate resolution.
+  bool WrapOpaque(const std::string& variable, Value value);
+
   Target* target_;
   Scope* scope_;
   const FunctionCallNode* function_call_;
   Err* err_;
+  bool allow_opaque_;
 
  private:
   bool FillDependentConfigs();  // Includes all types of dependent configs.
@@ -78,6 +93,8 @@ class TargetGenerator {
   bool FillGenericConfigs(const char* var_name,
                           UniqueVector<LabelConfigPair>* dest);
   bool FillGenericDeps(const char* var_name, LabelTargetVector* dest);
+
+  void disallow_opaque() { allow_opaque_ = false; }
 
   DISALLOW_COPY_AND_ASSIGN(TargetGenerator);
 };

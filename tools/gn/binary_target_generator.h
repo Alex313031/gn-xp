@@ -22,6 +22,7 @@ class BinaryTargetGenerator : public TargetGenerator {
 
  protected:
   void DoRun() override;
+  void DoFinish(Target::UnfinishedVars& unfinished_vars) override;
 
  private:
   bool FillCompleteStaticLib();

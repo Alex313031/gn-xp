@@ -74,6 +74,28 @@ void CreateBundleTargetGenerator::DoRun() {
     return;
 }
 
+void CreateBundleTargetGenerator::DoFinish(Target::UnfinishedVars& unfinished_vars) {
+  for (const auto& var : unfinished_vars) {
+    if (var.first == variables::kCodeSigningSources) {
+      if (!FillCodeSigningSources())
+        return;
+    } else if (var.first == variables::kCodeSigningOutputs) {
+      if (!FillCodeSigningOutputs())
+        return;
+    } else if (var.first == variables::kCodeSigningArgs) {
+      if (!FillCodeSigningArgs())
+        return;
+    } else if (var.first == variables::kBundleDepsFilter) {
+      if (!FillBundleDepsFilter())
+        return;
+    }
+  }
+  unfinished_vars.erase(variables::kCodeSigningSources);
+  unfinished_vars.erase(variables::kCodeSigningOutputs);
+  unfinished_vars.erase(variables::kCodeSigningArgs);
+  unfinished_vars.erase(variables::kBundleDepsFilter);
+}
+
 bool CreateBundleTargetGenerator::FillBundleDir(
     const SourceDir& bundle_root_dir,
     const base::StringPiece& name,
@@ -212,6 +234,9 @@ bool CreateBundleTargetGenerator::FillCodeSigningSources() {
     return false;
   }
 
+  if (value->type() == Value::OPAQUE && allow_opaque_)
+    return WrapOpaque(variables::kCodeSigningSources, *value);
+
   Target::FileList script_sources;
   if (!ExtractListOfRelativeFiles(scope_->settings()->build_settings(), *value,
                                   scope_->GetSourceDir(), &script_sources,
@@ -234,6 +259,9 @@ bool CreateBundleTargetGenerator::FillCodeSigningOutputs() {
         "You must define code_signing_script if you use code_signing_outputs.");
     return false;
   }
+
+  if (value->type() == Value::OPAQUE && allow_opaque_)
+    return WrapOpaque(variables::kCodeSigningOutputs, *value);
 
   if (!value->VerifyTypeIs(Value::LIST, err_))
     return false;
@@ -275,6 +303,9 @@ bool CreateBundleTargetGenerator::FillCodeSigningArgs() {
     return false;
   }
 
+  if (value->type() == Value::OPAQUE && allow_opaque_)
+    return WrapOpaque(variables::kCodeSigningArgs, *value);
+
   if (!value->VerifyTypeIs(Value::LIST, err_))
     return false;
 
@@ -285,6 +316,9 @@ bool CreateBundleTargetGenerator::FillBundleDepsFilter() {
   const Value* value = scope_->GetValue(variables::kBundleDepsFilter, true);
   if (!value)
     return true;
+
+  if (value->type() == Value::OPAQUE && allow_opaque_)
+    return WrapOpaque(variables::kBundleDepsFilter, *value);
 
   if (!value->VerifyTypeIs(Value::LIST, err_))
     return false;
