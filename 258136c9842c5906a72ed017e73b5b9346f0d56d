@@ -1,0 +1,89 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "df86c356_83fb1a8c",
+        "filename": "tools/gn/desc_builder.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 172,
+      "author": {
+        "id": 1000101
+      },
+      "writtenOn": "2018-12-12T21:05:19Z",
+      "side": 1,
+      "message": "What does this function do?",
+      "revId": "258136c9842c5906a72ed017e73b5b9346f0d56d",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "d170b052_2c71875c",
+        "filename": "tools/gn/operators.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 278,
+      "author": {
+        "id": 1000101
+      },
+      "writtenOn": "2018-12-12T21:05:19Z",
+      "side": 1,
+      "message": "This is not correct. If I write\n\n```\n{\n  l \u003d [1, 2, 3]\n  l -\u003d get_metadata(dep)[0].something_equal_to_one\n}\n```\n\nThen after get_metadata is plugged in, the result should be as if `l` were `[2, 3]` but under these semantics its [1, 2, 3]. If an opaque value is removed from a list it becomes opaque. The user shouldn\u0027t be aware they\u0027re using an opaque value.",
+      "revId": "258136c9842c5906a72ed017e73b5b9346f0d56d",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "197b4fc5_690024bb",
+        "filename": "tools/gn/value.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 178,
+      "author": {
+        "id": 1000101
+      },
+      "writtenOn": "2018-12-12T21:05:19Z",
+      "side": 1,
+      "message": "Can the gn language ever use this function to convert things to a string? The key property I\u0027d like to see is that the user is never aware of weather they\u0027re using an opaque value or not. IF the user can convert to a string they become aware of this fact.",
+      "revId": "258136c9842c5906a72ed017e73b5b9346f0d56d",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "61b8a7ed_08553b3c",
+        "filename": "tools/gn/value.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 37,
+      "author": {
+        "id": 1000101
+      },
+      "writtenOn": "2018-12-12T21:05:19Z",
+      "side": 1,
+      "message": "I don\u0027t think this should a) ever modify any of its arguments or b) result in an error.",
+      "revId": "258136c9842c5906a72ed017e73b5b9346f0d56d",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "b687aa98_70b4a715",
+        "filename": "tools/gn/value_unittest.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 68,
+      "author": {
+        "id": 1000101
+      },
+      "writtenOn": "2018-12-12T21:05:19Z",
+      "side": 1,
+      "message": "What is the point of callback here?",
+      "revId": "258136c9842c5906a72ed017e73b5b9346f0d56d",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": true
+    }
+  ]
+}
