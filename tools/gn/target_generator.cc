@@ -11,7 +11,6 @@
 
 #include "tools/gn/action_target_generator.h"
 #include "tools/gn/binary_target_generator.h"
-#include "tools/gn/write_data_target_generator.h"
 #include "tools/gn/build_settings.h"
 #include "tools/gn/bundle_data_target_generator.h"
 #include "tools/gn/config.h"
@@ -29,6 +28,7 @@
 #include "tools/gn/value.h"
 #include "tools/gn/value_extractors.h"
 #include "tools/gn/variables.h"
+#include "tools/gn/write_data_target_generator.h"
 
 TargetGenerator::TargetGenerator(Target* target,
                                  Scope* scope,
@@ -37,7 +37,8 @@ TargetGenerator::TargetGenerator(Target* target,
     : target_(target),
       scope_(scope),
       function_call_(function_call),
-      err_(err) {}
+      err_(err),
+      allow_opaque_(true) {}
 
 TargetGenerator::~TargetGenerator() = default;
 
@@ -142,7 +143,7 @@ void TargetGenerator::GenerateTarget(Scope* scope,
     generator.Run();
   } else if (output_type == functions::kWriteData) {
     WriteDataTargetGenerator generator(target.get(), scope, function_call,
-                                    Target::WRITE_DATA, err);
+                                       Target::WRITE_DATA, err);
     generator.Run();
   } else {
     *err = Err(function_call, "Not a known target type",
@@ -161,14 +162,146 @@ void TargetGenerator::GenerateTarget(Scope* scope,
   collector->push_back(std::move(target));
 }
 
+void TargetGenerator::Finish(Target::UnfinishedVars& unfinished_vars) {
+  disallow_opaque();
+  for (const auto& var : unfinished_vars) {
+    if (var.first == variables::kData) {
+      if (!FillData())
+        return;
+    } else if (var.first == variables::kAssertNoDeps) {
+      if (!FillAssertNoDeps())
+        return;
+    } else if (var.first == variables::kAllDependentConfigs ||
+               var.first == variables::kPublicConfigs) {
+      if (!FillDependentConfigs())
+        return;
+    } else if (var.first == variables::kDeps ||
+               var.first == variables::kPublicDeps ||
+               var.first == variables::kDataDeps) {
+      if (!FillDependencies())
+        return;
+    }
+  }
+  unfinished_vars.erase(variables::kData);
+  unfinished_vars.erase(variables::kAssertNoDeps);
+  unfinished_vars.erase(variables::kAllDependentConfigs);
+  unfinished_vars.erase(variables::kPublicConfigs);
+  unfinished_vars.erase(variables::kDeps);
+  unfinished_vars.erase(variables::kPublicDeps);
+  unfinished_vars.erase(variables::kDataDeps);
+
+  DoFinish(unfinished_vars);
+
+  // There shouldn't be any unfinished vars left. If there are, make an error on
+  // the first one and bail.
+  for (const auto& pair : unfinished_vars) {
+    *err_ = Err(pair.second.origin(), "Unfinished variables left over.",
+                std::string("I am confused because the \"") +
+                    target_->GetStringForOutputType(target_->output_type()) +
+                    std::string("\" target type does not define ") +
+                    pair.first + std::string("."));
+    return;
+  }
+}
+
+// static
+void TargetGenerator::FinishTarget(Target* target,
+                                   Target::UnfinishedVars& unfinished_vars,
+                                   Err* err) {
+  if (g_scheduler->verbose_logging())
+    g_scheduler->Log("Finishing target",
+                     target->label().GetUserVisibleName(true));
+
+  Scope scope(target->settings());
+  for (const auto& pair : unfinished_vars) {
+    CHECK(pair.second.type() == Value::OPAQUE);
+    std::set<const Target*> targets_walked;
+    scope.SetValue(pair.first,
+                   pair.second.opaque_value()(target, &targets_walked, err),
+                   pair.second.origin());
+    if (err->has_error())
+      return;
+  }
+  scope.set_source_dir(target->dir());
+
+  // Create and call out to the proper generator.
+  switch (target->output_type()) {
+    case Target::BUNDLE_DATA: {
+      BundleDataTargetGenerator generator(target, &scope, target->def(), err);
+      generator.Finish(unfinished_vars);
+      break;
+    }
+    case Target::CREATE_BUNDLE: {
+      CreateBundleTargetGenerator generator(target, &scope, target->def(), err);
+      generator.Finish(unfinished_vars);
+      break;
+    }
+    case Target::COPY_FILES: {
+      CopyTargetGenerator generator(target, &scope, target->def(), err);
+      generator.Finish(unfinished_vars);
+      break;
+    }
+    case Target::ACTION:
+    case Target::ACTION_FOREACH: {
+      ActionTargetGenerator generator(target, &scope, target->def(),
+                                      target->output_type(), err);
+      generator.Finish(unfinished_vars);
+      break;
+    }
+    case Target::GROUP: {
+      GroupTargetGenerator generator(target, &scope, target->def(), err);
+      generator.Finish(unfinished_vars);
+      break;
+    }
+    case Target::EXECUTABLE:
+    case Target::LOADABLE_MODULE:
+    case Target::SHARED_LIBRARY:
+    case Target::SOURCE_SET:
+    case Target::STATIC_LIBRARY: {
+      BinaryTargetGenerator generator(target, &scope, target->def(),
+                                      target->output_type(), err);
+      generator.Finish(unfinished_vars);
+      break;
+    }
+    case Target::WRITE_DATA: {
+      WriteDataTargetGenerator generator(target, &scope, target->def(),
+                                         target->output_type(), err);
+      generator.Finish(unfinished_vars);
+      break;
+    }
+    default: {
+      *err = Err(target->def(), "Not a known target type",
+                 std::string("I am very confused by the target type \"") +
+                     Target::GetStringForOutputType(target->output_type()) +
+                     std::string("\""));
+    }
+  }
+}
+
 const BuildSettings* TargetGenerator::GetBuildSettings() const {
   return scope_->settings()->build_settings();
+}
+
+bool TargetGenerator::WrapOpaque(const std::string& variable, Value value) {
+  target_->unfinished_vars().insert(std::make_pair(
+      variable, Value(value.origin(),
+                      [=](const Target* target,
+                          std::set<const Target*>* targets_walked, Err* err) {
+                        return value.opaque_value()(target, targets_walked,
+                                                    err);
+                      })));
+  target_->set_dir(scope_->GetSourceDir());
+  target_->set_def(function_call_);
+  return true;
 }
 
 bool TargetGenerator::FillSources() {
   const Value* value = scope_->GetValue(variables::kSources, true);
   if (!value)
     return true;
+
+  if (value->type() == Value::OPAQUE && allow_opaque_)
+    return WrapOpaque(variables::kSources, *value);
 
   Target::FileList dest_sources;
   if (!ExtractListOfRelativeFiles(scope_->settings()->build_settings(), *value,
@@ -182,6 +315,9 @@ bool TargetGenerator::FillPublic() {
   const Value* value = scope_->GetValue(variables::kPublic, true);
   if (!value)
     return true;
+
+  if (value->type() == Value::OPAQUE && allow_opaque_)
+    return WrapOpaque(variables::kPublic, *value);
 
   // If the public headers are defined, don't default to public.
   target_->set_all_headers_public(false);
@@ -214,6 +350,10 @@ bool TargetGenerator::FillData() {
   const Value* value = scope_->GetValue(variables::kData, true);
   if (!value)
     return true;
+
+  if (value->type() == Value::OPAQUE && allow_opaque_)
+    return WrapOpaque(variables::kData, *value);
+
   if (!value->VerifyTypeIs(Value::LIST, err_))
     return false;
 
@@ -305,7 +445,10 @@ bool TargetGenerator::FillTestonly() {
 
 bool TargetGenerator::FillAssertNoDeps() {
   const Value* value = scope_->GetValue(variables::kAssertNoDeps, true);
+
   if (value) {
+    if (value->type() == Value::OPAQUE && allow_opaque_)
+      return WrapOpaque(variables::kAssertNoDeps, *value);
     return ExtractListOfLabelPatterns(*value, scope_->GetSourceDir(),
                                       &target_->assert_no_deps(), err_);
   }
@@ -316,6 +459,9 @@ bool TargetGenerator::FillOutputs(bool allow_substitutions) {
   const Value* value = scope_->GetValue(variables::kOutputs, true);
   if (!value)
     return true;
+
+  if (value->type() == Value::OPAQUE && allow_opaque_)
+    return WrapOpaque(variables::kOutputs, *value);
 
   SubstitutionList& outputs = target_->action_values().outputs();
   if (!outputs.Parse(*value, err_))
@@ -394,6 +540,8 @@ bool TargetGenerator::FillGenericConfigs(const char* var_name,
                                          UniqueVector<LabelConfigPair>* dest) {
   const Value* value = scope_->GetValue(var_name, true);
   if (value) {
+    if (value->type() == Value::OPAQUE && allow_opaque_)
+      return WrapOpaque(var_name, *value);
     ExtractListOfUniqueLabels(*value, scope_->GetSourceDir(),
                               ToolchainLabelForScope(scope_), dest, err_);
   }
@@ -404,6 +552,26 @@ bool TargetGenerator::FillGenericDeps(const char* var_name,
                                       LabelTargetVector* dest) {
   const Value* value = scope_->GetValue(var_name, true);
   if (value) {
+    if (value->type() == Value::OPAQUE && allow_opaque_) {
+      if (!WrapOpaque(var_name, *value))
+        return false;
+      // allow_circular_includes_from does deps checking in the
+      // BinaryTargetGenerator, and so we need to defer that resolution here.
+      if (target_->unfinished_vars().find(
+              variables::kAllowCircularIncludesFrom) ==
+          target_->unfinished_vars().end()) {
+        if (const Value* allow_val =
+                scope_->GetValue(variables::kAllowCircularIncludesFrom, true)) {
+          Value val = *allow_val;
+          target_->unfinished_vars().insert(std::make_pair(
+              variables::kAllowCircularIncludesFrom,
+              Value(val.origin(), [=](const Target* target,
+                                      std::set<const Target*>* targets_walked,
+                                      Err* err) { return val; })));
+        }
+      }
+      return true;
+    }
     ExtractListOfLabels(*value, scope_->GetSourceDir(),
                         ToolchainLabelForScope(scope_), dest, err_);
   }

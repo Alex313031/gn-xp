@@ -28,6 +28,46 @@ void BundleDataTargetGenerator::DoRun() {
   if (!FillOutputs())
     return;
 
+  // Only do this validation here if these vars were not opaque, otherwise defer
+  // the work to DoFinish.
+  if (target_->unfinished_vars().find(variables::kSources) ==
+      target_->unfinished_vars().end()) {
+    if (target_->sources().empty()) {
+      *err_ = Err(function_call_,
+                  "Empty sources for bundle_data target."
+                  "You have to specify at least one file in the \"sources\".");
+      return;
+    }
+  }
+  if (target_->unfinished_vars().find(variables::kOutputs) ==
+      target_->unfinished_vars().end()) {
+    if (target_->action_values().outputs().list().size() != 1) {
+      *err_ = Err(
+          function_call_, "Target bundle_data must have exactly one ouput.",
+          "You must specify exactly one value in the \"output\" array for the"
+          "destination\ninto the generated bundle (see \"gn help "
+          "bundle_data\"). "
+          "If there are multiple\nsources to copy, use source expansion (see "
+          "\"gn help source_expansion\").");
+      return;
+    }
+  }
+}
+
+void BundleDataTargetGenerator::DoFinish(
+    Target::UnfinishedVars& unfinished_vars) {
+  for (const auto& var : unfinished_vars) {
+    if (var.first == variables::kSources) {
+      if (!FillSources())
+        return;
+    } else if (var.first == variables::kOutputs) {
+      if (!FillOutputs())
+        return;
+    }
+  }
+  unfinished_vars.erase(variables::kSources);
+  unfinished_vars.erase(variables::kOutputs);
+
   if (target_->sources().empty()) {
     *err_ = Err(function_call_,
                 "Empty sources for bundle_data target."
@@ -49,6 +89,9 @@ bool BundleDataTargetGenerator::FillOutputs() {
   const Value* value = scope_->GetValue(variables::kOutputs, true);
   if (!value)
     return true;
+
+  if (value->type() == Value::OPAQUE && allow_opaque_)
+    return WrapOpaque(variables::kOutputs, *value);
 
   SubstitutionList& outputs = target_->action_values().outputs();
   if (!outputs.Parse(*value, err_))

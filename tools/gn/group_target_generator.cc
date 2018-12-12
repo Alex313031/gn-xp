@@ -21,3 +21,8 @@ void GroupTargetGenerator::DoRun() {
   // Groups only have the default types filled in by the target generator
   // base class.
 }
+
+void GroupTargetGenerator::DoFinish(Target::UnfinishedVars& vars) {
+  // Groups only have the default types filled in by the target generator
+  // base class.
+}

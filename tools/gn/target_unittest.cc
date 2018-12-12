@@ -1298,3 +1298,17 @@ TEST_F(TargetTest, WriteMetadataCollection) {
   EXPECT_TRUE(data_dep_present.OnResolved(&err));
   EXPECT_TRUE(scheduler().GetUnknownGeneratedInputs().empty());
 }
+
+TEST_F(TargetTest, OpaqueSources) {
+  TestParseInput input(R"(
+    source_set("foo") {
+      sources = [ "foo.cpp", get_metadata(["//test:foo"], ["data"], ["walk"]) ]
+    }
+  )");
+  ASSERT_FALSE(input.has_error());
+
+  TestWithScope setup;
+  Err err;
+  input.parsed()->Execute(setup.scope(), &err);
+  EXPECT_FALSE(err.has_error()) << err.message();
+}

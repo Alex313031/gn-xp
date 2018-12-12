@@ -28,6 +28,7 @@
 #include "tools/gn/unique_vector.h"
 
 class DepsIteratorRange;
+class FunctionCallNode;
 class Settings;
 class Toolchain;
 
@@ -56,6 +57,8 @@ class Target : public Item {
 
   typedef std::vector<SourceFile> FileList;
   typedef std::vector<std::string> StringVector;
+
+  typedef std::map<std::string, Value> UnfinishedVars;
 
   // We track the set of build files that may affect this target, please refer
   // to Scope for how this is determined.
@@ -149,6 +152,16 @@ class Target : public Item {
   // Metadata. Target takes ownership of the resulting scope.
   const Metadata& metadata() const { return metadata_; }
   Metadata& metadata() { return metadata_; }
+
+  const UnfinishedVars &unfinished_vars() const { return unfinished_vars_; }
+  UnfinishedVars& unfinished_vars() { return unfinished_vars_; }
+  // These are only set if unfinished_vars is not empty, as if there are any
+  // unfinished things lying around we need to keep track of where they came
+  // from.
+  const SourceDir& dir() const { return dir_; }
+  void set_dir(const SourceDir& dir) { dir_ = dir; }
+  const FunctionCallNode* def() const { return def_; }
+  void set_def(const FunctionCallNode* def) { def_ = def; }
 
   // Get metadata from this target and its dependencies. This is intended to
   // be called after the target is resolved.
@@ -423,6 +436,9 @@ class Target : public Item {
   std::vector<OutputFile> runtime_outputs_;
 
   Metadata metadata_;
+  UnfinishedVars unfinished_vars_;
+  SourceDir dir_;                // only set when unfinished_vars are present.
+  const FunctionCallNode* def_;  // only set when unfinished_vars are present.
 
   // WriteData values.
   Value output_conversion_;
