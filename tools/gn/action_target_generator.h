@@ -21,6 +21,7 @@ class ActionTargetGenerator : public TargetGenerator {
 
  protected:
   void DoRun() override;
+  void DoFinish(Target::UnfinishedVars& unfinished_vars) override;
 
  private:
   bool FillScript();
@@ -32,6 +33,8 @@ class ActionTargetGenerator : public TargetGenerator {
 
   // Checks for errors in the outputs variable.
   bool CheckOutputs();
+  // Checks for inconsistencies in the response file.
+  bool CheckResponseFile();
 
   Target::OutputType output_type_;
 

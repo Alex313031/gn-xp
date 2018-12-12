@@ -18,6 +18,7 @@
 #include "tools/gn/scheduler.h"
 #include "tools/gn/source_file_type.h"
 #include "tools/gn/substitution_writer.h"
+#include "tools/gn/target_generator.h"
 #include "tools/gn/tool.h"
 #include "tools/gn/toolchain.h"
 #include "tools/gn/trace.h"
@@ -395,6 +396,12 @@ bool Target::OnResolved(Err* err) {
   if (!CheckAssertNoDeps(err))
     return false;
   CheckSourcesGenerated();
+
+  if (!unfinished_vars_.empty()) {
+    TargetGenerator::FinishTarget(this, unfinished_vars_, err);
+    if (err->has_error())
+      return false;
+  }
 
   if (!write_runtime_deps_output_.value().empty())
     g_scheduler->AddWriteRuntimeDepsTarget(this);
@@ -938,10 +945,15 @@ bool Target::GetMetadata(const std::vector<std::string>& keys_to_extract,
     }
 
     // Otherwise, look through the target's deps for the specified one.
+    Value next_label(
+        next.origin(),
+        Label::Resolve(metadata_.source_dir(), toolchain_->label(), next, err)
+            .GetUserVisibleName(true));
     bool found_next = false;
     for (const auto& dep : all_deps) {
       // Match against the label with the toolchain.
-      if (dep.label.GetUserVisibleName(true) == next.string_value()) {
+      CHECK(next_label.type() == Value::STRING);
+      if (dep.label.GetUserVisibleName(true) == next_label.string_value()) {
         // If we haven't walked this dep yet, go down into it.
         auto pair = targets_walked->insert(dep.ptr);
         if (pair.second) {

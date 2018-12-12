@@ -29,12 +29,17 @@ void WriteDataTargetGenerator::DoRun() {
 
   if (!FillOutputs(false))
     return;
-  if (target_->action_values().outputs().list().size() != 1) {
-    *err_ = Err(
-        function_call_, "write_data command must have exactly one output.",
-        "You must specify exactly one value in the \"outputs\" array for the "
-        "destination of the write\n(see \"gn help write_data\").");
-    return;
+  // Only do this validation here if these vars were not opaque, otherwise defer
+  // the work to DoFinish.
+  if (target_->unfinished_vars().find(variables::kOutputs) ==
+      target_->unfinished_vars().end()) {
+    if (target_->action_values().outputs().list().size() != 1) {
+      *err_ = Err(
+          function_call_, "write_data command must have exactly one output.",
+          "You must specify exactly one value in the \"outputs\" array for the "
+          "destination of the write\n(see \"gn help write_data\").");
+      return;
+    }
   }
 
   if (!FillContents())
@@ -58,12 +63,42 @@ void WriteDataTargetGenerator::DoRun() {
     return;
 }
 
+void WriteDataTargetGenerator::DoFinish(Target::UnfinishedVars& unfinished_vars) {
+  for (const auto& var : unfinished_vars) {
+    if (var.first == variables::kWriteValueContents) {
+      if (!FillContents())
+        return;
+    } else if (var.first == variables::kDataKeys) {
+      if (!FillDataKeys())
+        return;
+    } else if (var.first == variables::kWalkKeys) {
+      if (!FillWalkKeys())
+        return;
+    }
+  }
+  unfinished_vars.erase(variables::kWriteValueContents);
+  unfinished_vars.erase(variables::kDataKeys);
+  unfinished_vars.erase(variables::kWalkKeys);
+
+  if (target_->action_values().outputs().list().size() != 1) {
+    *err_ = Err(
+        function_call_, "write_data command must have exactly one output.",
+        "You must specify exactly one value in the \"outputs\" array for the "
+        "destination of the write\n(see \"gn help write_data\").");
+    return;
+  }
+}
+
 bool WriteDataTargetGenerator::FillContents() {
   const Value* value = scope_->GetValue(variables::kWriteValueContents, true);
   if (!value)
     return true;
-  target_->set_contents(*value);
   contents_defined_ = true;
+
+  if (value->type() == Value::OPAQUE && allow_opaque_)
+    return WrapOpaque(variables::kWriteValueContents, *value);
+
+  target_->set_contents(*value);
   return true;
 }
 
@@ -118,6 +153,11 @@ bool WriteDataTargetGenerator::FillDataKeys() {
     return true;
   if (ContentsDefined(variables::kDataKeys))
     return false;
+  data_keys_defined_ = true;
+
+  if (value->type() == Value::OPAQUE && allow_opaque_)
+    return WrapOpaque(variables::kDataKeys, *value);
+
   if (!value->VerifyTypeIs(Value::LIST, err_))
     return false;
 
@@ -128,7 +168,6 @@ bool WriteDataTargetGenerator::FillDataKeys() {
     target_->data_keys().push_back(v.string_value());
   }
 
-  data_keys_defined_ = true;
   return true;
 }
 
@@ -144,6 +183,9 @@ bool WriteDataTargetGenerator::FillWalkKeys() {
     target_->walk_keys().push_back("");
     return true;
   }
+
+  if (value->type() == Value::OPAQUE && allow_opaque_)
+    return WrapOpaque(variables::kWalkKeys, *value);
 
   // Otherwise, pull and validate the specified value.
   if (!value->VerifyTypeIs(Value::LIST, err_))

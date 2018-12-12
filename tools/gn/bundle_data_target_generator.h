@@ -19,6 +19,7 @@ class BundleDataTargetGenerator : public TargetGenerator {
 
  protected:
   void DoRun() override;
+  void DoFinish(Target::UnfinishedVars& vars) override;
 
  private:
   bool FillOutputs();

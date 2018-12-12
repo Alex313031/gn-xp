@@ -19,6 +19,7 @@ class GroupTargetGenerator : public TargetGenerator {
 
  protected:
   void DoRun() override;
+  void DoFinish(Target::UnfinishedVars& vars) override; 
 
  private:
   DISALLOW_COPY_AND_ASSIGN(GroupTargetGenerator);
