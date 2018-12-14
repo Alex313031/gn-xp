@@ -14,7 +14,7 @@ class WriteDataTargetGenerator : public TargetGenerator {
  public:
   WriteDataTargetGenerator(Target* target,
                            Scope* scope,
-                           const FunctionCallNode* function_call,
+                           const ParseNode* function_call,
                            Target::OutputType type,
                            Err* err);
   ~WriteDataTargetGenerator() override;

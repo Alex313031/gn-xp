@@ -14,7 +14,7 @@
 WriteDataTargetGenerator::WriteDataTargetGenerator(
     Target* target,
     Scope* scope,
-    const FunctionCallNode* function_call,
+    const ParseNode* function_call,
     Target::OutputType type,
     Err* err)
     : TargetGenerator(target, scope, function_call, err),
@@ -25,8 +25,6 @@ WriteDataTargetGenerator::WriteDataTargetGenerator(
 WriteDataTargetGenerator::~WriteDataTargetGenerator() = default;
 
 void WriteDataTargetGenerator::DoRun() {
-  target_->set_output_type(output_type_);
-
   if (!FillOutputs(false))
     return;
   if (target_->action_values().outputs().list().size() != 1) {

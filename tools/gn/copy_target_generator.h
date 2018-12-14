@@ -13,7 +13,7 @@ class CopyTargetGenerator : public TargetGenerator {
  public:
   CopyTargetGenerator(Target* target,
                       Scope* scope,
-                      const FunctionCallNode* function_call,
+                      const ParseNode* function_call,
                       Err* err);
   ~CopyTargetGenerator() override;
 

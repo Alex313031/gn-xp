@@ -18,6 +18,7 @@
 #include "tools/gn/scheduler.h"
 #include "tools/gn/source_file_type.h"
 #include "tools/gn/substitution_writer.h"
+#include "tools/gn/target_generator.h"
 #include "tools/gn/tool.h"
 #include "tools/gn/toolchain.h"
 #include "tools/gn/trace.h"
@@ -344,6 +345,20 @@ bool Target::OnResolved(Err* err) {
 
   ScopedTrace trace(TraceItem::TRACE_ON_RESOLVED, label());
   trace.SetToolchain(settings()->toolchain_label());
+
+  // If this has been set, we haven't finished generating this target. Resolve
+  // the values in the scope and generate the target's fields.
+  if (definition_scope_.type() == Value::SCOPE) {
+    if (!definition_scope_.Resolve(this, err))
+      return false;
+    TargetGenerator::GenerateSpecificTarget(definition_scope_.scope_value(),
+                                            defined_from(),
+                                            /*first_run = */ false, this, err);
+    if (err->has_error())
+      return false;
+    if (!definition_scope_.scope_value()->CheckForUnusedVars(err))
+      return false;
+  }
 
   // Copy this target's own dependent and public configs to the list of configs
   // applying to it.
@@ -938,10 +953,15 @@ bool Target::GetMetadata(const std::vector<std::string>& keys_to_extract,
     }
 
     // Otherwise, look through the target's deps for the specified one.
+    Value next_label(
+        next.origin(),
+        Label::Resolve(metadata_.source_dir(), toolchain_->label(), next, err)
+            .GetUserVisibleName(true));
+    CHECK(next_label.type() == Value::STRING);
     bool found_next = false;
     for (const auto& dep : all_deps) {
       // Match against the label with the toolchain.
-      if (dep.label.GetUserVisibleName(true) == next.string_value()) {
+      if (dep.label.GetUserVisibleName(true) == next_label.string_value()) {
         // If we haven't walked this dep yet, go down into it.
         auto pair = targets_walked->insert(dep.ptr);
         if (pair.second) {

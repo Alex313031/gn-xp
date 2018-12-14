@@ -10,14 +10,13 @@
 GroupTargetGenerator::GroupTargetGenerator(
     Target* target,
     Scope* scope,
-    const FunctionCallNode* function_call,
+    const ParseNode* function_call,
     Err* err)
     : TargetGenerator(target, scope, function_call, err) {}
 
 GroupTargetGenerator::~GroupTargetGenerator() = default;
 
 void GroupTargetGenerator::DoRun() {
-  target_->set_output_type(Target::GROUP);
   // Groups only have the default types filled in by the target generator
   // base class.
 }

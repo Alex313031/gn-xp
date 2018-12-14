@@ -11,7 +11,6 @@
 
 #include "tools/gn/action_target_generator.h"
 #include "tools/gn/binary_target_generator.h"
-#include "tools/gn/write_data_target_generator.h"
 #include "tools/gn/build_settings.h"
 #include "tools/gn/bundle_data_target_generator.h"
 #include "tools/gn/config.h"
@@ -25,14 +24,53 @@
 #include "tools/gn/parse_tree.h"
 #include "tools/gn/scheduler.h"
 #include "tools/gn/scope.h"
+#include "tools/gn/target.h"
 #include "tools/gn/token.h"
 #include "tools/gn/value.h"
 #include "tools/gn/value_extractors.h"
 #include "tools/gn/variables.h"
+#include "tools/gn/write_data_target_generator.h"
+
+namespace {
+
+Target::OutputType StringToType(const std::string& str,
+                                const ParseNode* call,
+                                Err* err) {
+  if (str == functions::kBundleData)
+    return Target::BUNDLE_DATA;
+  else if (str == functions::kCreateBundle)
+    return Target::CREATE_BUNDLE;
+  else if (str == functions::kCopy)
+    return Target::COPY_FILES;
+  else if (str == functions::kAction)
+    return Target::ACTION;
+  else if (str == functions::kActionForEach)
+    return Target::ACTION_FOREACH;
+  else if (str == functions::kExecutable)
+    return Target::EXECUTABLE;
+  else if (str == functions::kGroup)
+    return Target::GROUP;
+  else if (str == functions::kLoadableModule)
+    return Target::LOADABLE_MODULE;
+  else if (str == functions::kSharedLibrary)
+    return Target::SHARED_LIBRARY;
+  else if (str == functions::kSourceSet)
+    return Target::SOURCE_SET;
+  else if (str == functions::kStaticLibrary)
+    return Target::STATIC_LIBRARY;
+  else if (str == functions::kWriteData)
+    return Target::WRITE_DATA;
+  else
+    *err = Err(call, "Not a known target type",
+               "I am very confused by the target type \"" + str + "\"");
+  return Target::UNKNOWN;
+}
+
+}  // namespace
 
 TargetGenerator::TargetGenerator(Target* target,
                                  Scope* scope,
-                                 const FunctionCallNode* function_call,
+                                 const ParseNode* function_call,
                                  Err* err)
     : target_(target),
       scope_(scope),
@@ -41,27 +79,50 @@ TargetGenerator::TargetGenerator(Target* target,
 
 TargetGenerator::~TargetGenerator() = default;
 
-void TargetGenerator::Run() {
+void TargetGenerator::Run(bool first_run) {
   // All target types use these.
-  if (!FillDependentConfigs())
+
+  // Dependencies, configs, and visibility must be explicitly listed (i.e. they
+  // cannot be opaque values) as we need to know them at evaluation time in
+  // order to properly trigger the resolution chain. We also need to have
+  // metadata explictly listed, otherwise we won't be able to resolve anything.
+
+  if (first_run) {
+    if (!FillDependentConfigs())
+      return;
+
+    if (!FillDependencies())
+      return;
+
+    if (target_->IsBinary()) {
+      if (!FillConfigs())
+        return;
+    }
+
+    if (!FillMetadata())
+      return;
+
+    if (!Visibility::FillItemVisibility(target_, scope_, err_))
+      return;
+  }
+
+  // If there's opaque things, defer this until we can resolve them.
+  if (scope_->contains_opaque() && first_run) {
+    Value definition(function_call_, std::move(scope_->MakeClosure()));
+    definition.scope_value()->set_source_dir(scope_->GetSourceDir());
+    target_->set_definition_scope(std::move(definition));
+    // Mark values used here, since they won't be used until later.
+    scope_->MarkAllUsed();
     return;
+  }
 
   if (!FillData())
-    return;
-
-  if (!FillDependencies())
-    return;
-
-  if (!FillMetadata())
     return;
 
   if (!FillTestonly())
     return;
 
   if (!FillAssertNoDeps())
-    return;
-
-  if (!Visibility::FillItemVisibility(target_, scope_, err_))
     return;
 
   if (!FillWriteRuntimeDeps())
@@ -97,57 +158,12 @@ void TargetGenerator::GenerateTarget(Scope* scope,
       scope->settings(), label, scope->build_dependency_files());
   target->set_defined_from(function_call);
 
-  // Create and call out to the proper generator.
-  if (output_type == functions::kBundleData) {
-    BundleDataTargetGenerator generator(target.get(), scope, function_call,
-                                        err);
-    generator.Run();
-  } else if (output_type == functions::kCreateBundle) {
-    CreateBundleTargetGenerator generator(target.get(), scope, function_call,
-                                          err);
-    generator.Run();
-  } else if (output_type == functions::kCopy) {
-    CopyTargetGenerator generator(target.get(), scope, function_call, err);
-    generator.Run();
-  } else if (output_type == functions::kAction) {
-    ActionTargetGenerator generator(target.get(), scope, function_call,
-                                    Target::ACTION, err);
-    generator.Run();
-  } else if (output_type == functions::kActionForEach) {
-    ActionTargetGenerator generator(target.get(), scope, function_call,
-                                    Target::ACTION_FOREACH, err);
-    generator.Run();
-  } else if (output_type == functions::kExecutable) {
-    BinaryTargetGenerator generator(target.get(), scope, function_call,
-                                    Target::EXECUTABLE, err);
-    generator.Run();
-  } else if (output_type == functions::kGroup) {
-    GroupTargetGenerator generator(target.get(), scope, function_call, err);
-    generator.Run();
-  } else if (output_type == functions::kLoadableModule) {
-    BinaryTargetGenerator generator(target.get(), scope, function_call,
-                                    Target::LOADABLE_MODULE, err);
-    generator.Run();
-  } else if (output_type == functions::kSharedLibrary) {
-    BinaryTargetGenerator generator(target.get(), scope, function_call,
-                                    Target::SHARED_LIBRARY, err);
-    generator.Run();
-  } else if (output_type == functions::kSourceSet) {
-    BinaryTargetGenerator generator(target.get(), scope, function_call,
-                                    Target::SOURCE_SET, err);
-    generator.Run();
-  } else if (output_type == functions::kStaticLibrary) {
-    BinaryTargetGenerator generator(target.get(), scope, function_call,
-                                    Target::STATIC_LIBRARY, err);
-    generator.Run();
-  } else if (output_type == functions::kWriteData) {
-    WriteDataTargetGenerator generator(target.get(), scope, function_call,
-                                    Target::WRITE_DATA, err);
-    generator.Run();
-  } else {
-    *err = Err(function_call, "Not a known target type",
-               "I am very confused by the target type \"" + output_type + "\"");
-  }
+  Target::OutputType type = StringToType(output_type, function_call, err);
+  if (err->has_error())
+    return;
+  target->set_output_type(type);
+  GenerateSpecificTarget(scope, function_call, /*first_run =*/true,
+                         target.get(), err);
 
   if (err->has_error())
     return;
@@ -159,6 +175,66 @@ void TargetGenerator::GenerateTarget(Scope* scope,
     return;
   }
   collector->push_back(std::move(target));
+}
+
+// static
+void TargetGenerator::GenerateSpecificTarget(Scope* scope,
+                                             const ParseNode* function_call,
+                                             bool first_run,
+                                             Target* target,
+                                             Err* err) {
+  // Create and call out to the proper generator.
+  switch (target->output_type()) {
+    case Target::BUNDLE_DATA: {
+      BundleDataTargetGenerator generator(target, scope, function_call, err);
+      generator.Run(first_run);
+      return;
+    }
+    case Target::CREATE_BUNDLE: {
+      CreateBundleTargetGenerator generator(target, scope, function_call, err);
+      generator.Run(first_run);
+      return;
+    }
+    case Target::COPY_FILES: {
+      CopyTargetGenerator generator(target, scope, function_call, err);
+      generator.Run(first_run);
+      return;
+    }
+    case Target::ACTION:
+    case Target::ACTION_FOREACH: {
+      ActionTargetGenerator generator(target, scope, function_call,
+                                      target->output_type(), err);
+      generator.Run(first_run);
+      return;
+    }
+    case Target::GROUP: {
+      GroupTargetGenerator generator(target, scope, function_call, err);
+      generator.Run(first_run);
+      return;
+    }
+    case Target::EXECUTABLE:
+    case Target::LOADABLE_MODULE:
+    case Target::SHARED_LIBRARY:
+    case Target::SOURCE_SET:
+    case Target::STATIC_LIBRARY: {
+      BinaryTargetGenerator generator(target, scope, function_call,
+                                      Target::STATIC_LIBRARY, err);
+      generator.Run(first_run);
+      return;
+    }
+    case Target::WRITE_DATA: {
+      WriteDataTargetGenerator generator(target, scope, function_call,
+                                         Target::WRITE_DATA, err);
+      generator.Run(first_run);
+      return;
+    }
+    case Target::UNKNOWN:
+      *err = Err(function_call, "Not a known target type",
+                 "I am very confused by the target type \"" +
+                     std::string(Target::GetStringForOutputType(
+                         target->output_type())) +
+                     "\"");
+  }
 }
 
 const BuildSettings* TargetGenerator::GetBuildSettings() const {

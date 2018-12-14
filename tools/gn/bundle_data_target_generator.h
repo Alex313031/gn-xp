@@ -13,7 +13,7 @@ class BundleDataTargetGenerator : public TargetGenerator {
  public:
   BundleDataTargetGenerator(Target* target,
                             Scope* scope,
-                            const FunctionCallNode* function_call,
+                            const ParseNode* function_call,
                             Err* err);
   ~BundleDataTargetGenerator() override;
 
