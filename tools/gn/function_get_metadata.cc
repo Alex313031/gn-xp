@@ -13,6 +13,7 @@
 #include "tools/gn/target.h"
 #include "tools/gn/value.h"
 
+#include "tools/gn/standard_out.h"
 namespace functions {
 
 namespace {

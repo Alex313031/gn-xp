@@ -27,11 +27,11 @@ class TargetGenerator {
  public:
   TargetGenerator(Target* target,
                   Scope* scope,
-                  const FunctionCallNode* function_call,
+                  const ParseNode* function_call,
                   Err* err);
   virtual ~TargetGenerator();
 
-  void Run();
+  void Run(bool first_run);
 
   // The function call is the parse tree node that invoked the target.
   // err() will be set on failure.
@@ -40,6 +40,13 @@ class TargetGenerator {
                              const std::vector<Value>& args,
                              const std::string& output_type,
                              Err* err);
+
+  // Delegate the final generation to the specific target type.
+  static void GenerateSpecificTarget(Scope* scope,
+                                     const ParseNode* function_call,
+                                     bool first_run,
+                                     Target* target,
+                                     Err* err);
 
  protected:
   // Derived classes implement this to do type-specific generation.
@@ -61,7 +68,7 @@ class TargetGenerator {
 
   Target* target_;
   Scope* scope_;
-  const FunctionCallNode* function_call_;
+  const ParseNode* function_call_;
   Err* err_;
 
  private:

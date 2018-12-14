@@ -15,7 +15,7 @@ class CreateBundleTargetGenerator : public TargetGenerator {
  public:
   CreateBundleTargetGenerator(Target* target,
                               Scope* scope,
-                              const FunctionCallNode* function_call,
+                              const ParseNode* function_call,
                               Err* err);
   ~CreateBundleTargetGenerator() override;
 

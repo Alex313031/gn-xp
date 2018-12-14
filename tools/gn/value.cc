@@ -227,7 +227,7 @@ bool Value::operator!=(const Value& other) const {
   return !operator==(other);
 }
 
-bool Value::Resolve(const Target* target, Err* err) {
+Value Value::Resolve(const Target* target, Err* err) const {
   DCHECK(type_ == SCOPE);
   DCHECK(scope_value_->contains_opaque());
   ScopeThunk fixed;
@@ -244,14 +244,17 @@ bool Value::Resolve(const Target* target, Err* err) {
     fixed[p.first] = p.second.type_ == OPAQUE ? resolve(p.second.opaque_value_)
                                               : pass(p.second);
 
-  // Resolve these values into the original scope.
+  // Resolve these values into a new scope.
+  std::unique_ptr<Scope> res_scope =
+      std::make_unique<Scope>(scope_value_->settings());
   for (const auto& p : fixed) {
     Value resolved = p.second(target, err);
     if (err->has_error())
-      return false;
+      return Value();
     const ParseNode* origin = resolved.origin();
-    scope_value_->SetValue(p.first, std::move(resolved), origin);
+    res_scope->SetValue(p.first, std::move(resolved), origin);
   }
-  scope_value_->set_contains_opaque(false);
-  return true;
+  res_scope->set_contains_opaque(false);
+  res_scope->set_source_dir(scope_value_->GetSourceDir());
+  return Value(origin(), std::move(res_scope));
 }

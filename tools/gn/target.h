@@ -160,6 +160,15 @@ class Target : public Item {
                    std::set<const Target*>* targets_walked,
                    Err* err) const;
 
+  // Store the definition scope if the target generator wasn't able to resolve
+  // an opaque value, this way we can properly populate the target once it's
+  // resolved.
+  Value& definition_scope() { return definition_scope_; }
+  const Value& definition_scope() const { return definition_scope_; }
+  void set_definition_scope(Value&& definition) {
+    definition_scope_ = std::move(definition);
+  }
+
   // WriteData-related methods.
   bool WriteData(Err* err);
 
@@ -423,6 +432,8 @@ class Target : public Item {
   std::vector<OutputFile> runtime_outputs_;
 
   Metadata metadata_;
+
+  Value definition_scope_;
 
   // WriteData values.
   Value output_conversion_;

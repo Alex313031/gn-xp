@@ -14,7 +14,7 @@ class ActionTargetGenerator : public TargetGenerator {
  public:
   ActionTargetGenerator(Target* target,
                         Scope* scope,
-                        const FunctionCallNode* function_call,
+                        const ParseNode* function_call,
                         Target::OutputType type,
                         Err* err);
   ~ActionTargetGenerator() override;

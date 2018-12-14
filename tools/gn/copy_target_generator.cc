@@ -12,15 +12,13 @@
 
 CopyTargetGenerator::CopyTargetGenerator(Target* target,
                                          Scope* scope,
-                                         const FunctionCallNode* function_call,
+                                         const ParseNode* function_call,
                                          Err* err)
     : TargetGenerator(target, scope, function_call, err) {}
 
 CopyTargetGenerator::~CopyTargetGenerator() = default;
 
 void CopyTargetGenerator::DoRun() {
-  target_->set_output_type(Target::COPY_FILES);
-
   if (!FillSources())
     return;
   if (!FillOutputs(true))

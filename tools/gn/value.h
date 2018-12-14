@@ -34,7 +34,7 @@ class Value {
   };
 
   // typedef std::function<Value(const Target*, Err*)> Thunk;
-  typedef std::function<Value(const Target*, Err*&)> Opaque;
+  typedef std::function<Value(const Target*, Err*)> Opaque;
   typedef std::map<base::StringPiece, Opaque> ScopeThunk;
 
   Value();
@@ -127,8 +127,9 @@ class Value {
   // string is quoted, it will also enable escaping.
   std::string ToString(bool quote_strings) const;
 
-  // Given a scope value with opaques, resolves all members of that scope.
-  bool Resolve(const Target* target, Err* err);
+  // Given a scope value with opaques, resolves all members of that scope and
+  // returns the resolved value.
+  Value Resolve(const Target* target, Err* err) const;
 
   // Verifies that the value is of the given type. If it isn't, returns
   // false and sets the error.

@@ -14,15 +14,13 @@
 BundleDataTargetGenerator::BundleDataTargetGenerator(
     Target* target,
     Scope* scope,
-    const FunctionCallNode* function_call,
+    const ParseNode* function_call,
     Err* err)
     : TargetGenerator(target, scope, function_call, err) {}
 
 BundleDataTargetGenerator::~BundleDataTargetGenerator() = default;
 
 void BundleDataTargetGenerator::DoRun() {
-  target_->set_output_type(Target::BUNDLE_DATA);
-
   if (!FillSources())
     return;
   if (!FillOutputs())

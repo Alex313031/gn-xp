@@ -18,7 +18,7 @@
 ActionTargetGenerator::ActionTargetGenerator(
     Target* target,
     Scope* scope,
-    const FunctionCallNode* function_call,
+    const ParseNode* function_call,
     Target::OutputType type,
     Err* err)
     : TargetGenerator(target, scope, function_call, err), output_type_(type) {}
@@ -26,8 +26,6 @@ ActionTargetGenerator::ActionTargetGenerator(
 ActionTargetGenerator::~ActionTargetGenerator() = default;
 
 void ActionTargetGenerator::DoRun() {
-  target_->set_output_type(output_type_);
-
   if (!FillSources())
     return;
   if (output_type_ == Target::ACTION_FOREACH && target_->sources().empty()) {

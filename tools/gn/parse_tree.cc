@@ -377,6 +377,12 @@ Value BlockNode::Execute(Scope* enclosing_scope, Err* err) const {
     // a value whose lifetime will not be related to the enclosing_scope passed
     // to this function.
     nested_scope->DetachFromContaining();
+    if (nested_scope->contains_opaque()) {
+      Value res = Value(this, std::move(nested_scope));
+      return Value(this, [=](const Target* target, Err* err) {
+        return res.Resolve(target, err);
+      });
+    }
     return Value(this, std::move(nested_scope));
   }
   return Value();
@@ -599,8 +605,7 @@ Value ListNode::Execute(Scope* scope, Err* err) const {
     Value res(this, Value::LIST);
     for (const auto& val : result_value.list_value()) {
       if (val.type() == Value::OPAQUE)
-        res.list_value().push_back(
-            val.opaque_value()(target, err));
+        res.list_value().push_back(val.opaque_value()(target, err));
       else
         res.list_value().push_back(val);
     }

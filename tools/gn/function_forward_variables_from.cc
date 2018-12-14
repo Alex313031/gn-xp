@@ -27,6 +27,7 @@ void ForwardAllValues(const FunctionCallNode* function,
   options.excluded_values = exclusion_set;
   source->NonRecursiveMergeTo(dest, options, function, "source scope", err);
   source->MarkAllUsed();
+  dest->set_contains_opaque(source->contains_opaque());
 }
 
 void ForwardValuesFromList(Scope* source,
@@ -75,6 +76,7 @@ void ForwardValuesFromList(Scope* source,
       dest->SetValue(storage_key, *value, value->origin());
     }
   }
+  dest->set_contains_opaque(source->contains_opaque());
 }
 
 }  // namespace

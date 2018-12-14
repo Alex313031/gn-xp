@@ -15,7 +15,7 @@ class BinaryTargetGenerator : public TargetGenerator {
  public:
   BinaryTargetGenerator(Target* target,
                         Scope* scope,
-                        const FunctionCallNode* function_call,
+                        const ParseNode* function_call,
                         Target::OutputType type,
                         Err* err);
   ~BinaryTargetGenerator() override;
