@@ -488,6 +488,12 @@ bool Builder::ResolveItem(BuilderRecord* record, Err* err) {
 
   if (!record->item()->OnResolved(err))
     return false;
+
+  if (record->type() == BuilderRecord::ITEM_TARGET && g_scheduler)
+    g_scheduler->resolver().Set(record->item()->AsTarget(), err);
+  if (err->has_error())
+    return false;
+
   if (record->should_generate() && !resolved_and_generated_callback_.is_null())
     resolved_and_generated_callback_.Run(record);
 

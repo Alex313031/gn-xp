@@ -7,9 +7,11 @@
 
 #include <memory>
 
-#include "tools/gn/build_settings.h"
+#include "tools/gn/label.h"
 #include "tools/gn/scope.h"
 #include "tools/gn/source_dir.h"
+
+class BuildSettings;
 
 // Metadata about a particular target.
 //

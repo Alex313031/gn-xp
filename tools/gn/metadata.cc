@@ -4,6 +4,8 @@
 
 #include "tools/gn/metadata.h"
 
+#include "tools/gn/build_settings.h"
+
 bool Metadata::WalkStep(const BuildSettings* settings,
                         const std::vector<std::string>& keys_to_extract,
                         const std::vector<std::string>& keys_to_walk,
@@ -39,7 +41,7 @@ bool Metadata::WalkStep(const BuildSettings* settings,
       }
     } else {
       result->insert(result->end(), iter->second.list_value().begin(),
-                    iter->second.list_value().end());
+                     iter->second.list_value().end());
     }
   }
 
@@ -65,3 +67,30 @@ bool Metadata::WalkStep(const BuildSettings* settings,
 
   return true;
 }
+
+// void Resolver::Set(Label label, const Target* target, Err* err) {
+//   std::unique_lock<std::shared_timed_mutex> lock(set_lock_);
+
+//   auto node = resolved_.find(label);
+//   if (node != resolved_.end()) {
+//     *err = Err(target->defined_from(), "Target has already been declared.",
+//                "You cannot create the same target more than once.");
+//     err->AppendSubErr(Err(node->second.target_->defined_from(),
+//                           "Previous declaration was here."));
+//     return;
+//   }
+
+//   node->second.target_ = target;
+//   node->second.prelock_.unlock();
+//   return;
+// }
+
+// const Value* Resolver::Get(Label label, Err* err) {
+//   std::shared_lock<std::shared_timed_mutex> lock(set_lock_);
+//   auto node = resolved_.find(label);
+//   if (node == resolved_.end()) {
+//     // wait for it to be there
+//   }
+//   std::shared_lock<std::shared_timed_mutex> lock(node->second.mutex_);
+//   return node->second.target_;
+// }

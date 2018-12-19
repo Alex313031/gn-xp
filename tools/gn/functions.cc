@@ -1251,6 +1251,7 @@ struct FunctionInfoInitializer {
     INSERT_FUNCTION(ForwardVariablesFrom, false)
     INSERT_FUNCTION(GetEnv, false)
     INSERT_FUNCTION(GetLabelInfo, false)
+    INSERT_FUNCTION(GetMetadata, false)
     INSERT_FUNCTION(GetPathInfo, false)
     INSERT_FUNCTION(GetTargetOutputs, false)
     INSERT_FUNCTION(Import, false)

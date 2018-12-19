@@ -15,6 +15,7 @@
 #include "tools/gn/filesystem_utils.h"
 #include "tools/gn/functions.h"
 #include "tools/gn/output_conversion.h"
+#include "tools/gn/resolver.h"
 #include "tools/gn/scheduler.h"
 #include "tools/gn/source_file_type.h"
 #include "tools/gn/substitution_writer.h"

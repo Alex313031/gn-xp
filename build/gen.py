@@ -443,6 +443,7 @@ def WriteGNNinja(path, platform, host, options):
         'tools/gn/function_exec_script.cc',
         'tools/gn/function_foreach.cc',
         'tools/gn/function_forward_variables_from.cc',
+        'tools/gn/function_get_metadata.cc',
         'tools/gn/function_get_label_info.cc',
         'tools/gn/function_get_path_info.cc',
         'tools/gn/function_get_target_outputs.cc',
