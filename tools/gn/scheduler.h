@@ -14,6 +14,7 @@
 #include "base/macros.h"
 #include "tools/gn/input_file_manager.h"
 #include "tools/gn/label.h"
+#include "tools/gn/resolver.h"
 #include "tools/gn/source_file.h"
 #include "tools/gn/token.h"
 #include "util/msg_loop.h"
@@ -99,6 +100,8 @@ class Scheduler {
 
   void SuppressOutputForTesting(bool suppress);
 
+  Resolver<>& resolver() { return resolver_; }
+
  private:
   void LogOnMainThread(const std::string& verb, const std::string& msg);
   void FailWithErrorOnMainThread(const Err& err);
@@ -146,6 +149,8 @@ class Scheduler {
   std::vector<const Target*> write_runtime_deps_targets_;
   std::vector<const Target*> write_data_targets_;
   std::multimap<SourceFile, const Target*> unknown_generated_inputs_;
+
+  Resolver<> resolver_;
 
   DISALLOW_COPY_AND_ASSIGN(Scheduler);
 };
