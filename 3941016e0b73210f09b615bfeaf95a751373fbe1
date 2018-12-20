@@ -1,0 +1,123 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "13daddc2_cf4bd6d7",
+        "filename": "tools/gn/scheduler.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 71,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2018-12-20T17:26:29Z",
+      "side": 1,
+      "message": "This comment isn\u0027t correct because it\u0027s actually called by the target after its data has been written. Actually, I think you don\u0027t use these functions at all. I think you were copying the runtime deps stuff but I think that was special for some reason I forget now.",
+      "revId": "3941016e0b73210f09b615bfeaf95a751373fbe1",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "d97f541c_9492af79",
+        "filename": "tools/gn/target.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 399,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2018-12-20T17:26:29Z",
+      "side": 1,
+      "message": "Here you\u0027re doing the write data call as part of target resolution. This currently happens on the main thread which is the limiting factor of performance today.\n\nI think we should have the data actually be written as part of the build writing phase when the ninja files are written out. Probably move the WriteData code to a write_data_target_writer file and call that from the ninja target writer code when the target is being written out.",
+      "revId": "3941016e0b73210f09b615bfeaf95a751373fbe1",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "80ef06c5_1e7cbdcf",
+        "filename": "tools/gn/write_data_target_generator.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 31,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2018-12-20T17:26:29Z",
+      "side": 1,
+      "message": "\"write_data command...\" -\u003e \"The write_data target...\"",
+      "revId": "3941016e0b73210f09b615bfeaf95a751373fbe1",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "29a122cf_face12d6",
+        "filename": "tools/gn/write_data_target_generator.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 38,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2018-12-20T17:26:29Z",
+      "side": 1,
+      "message": "How about \"The write_data target requires the \\\"contents\\\" variable be set. See \\\"gn help write_data\\\".\"",
+      "revId": "3941016e0b73210f09b615bfeaf95a751373fbe1",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "3b193c15_671a8343",
+        "filename": "tools/gn/write_data_target_generator.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 65,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2018-12-20T17:26:29Z",
+      "side": 1,
+      "message": "output_conversion.cc has code to deal with these different specifications. Can you move this validation code to that file so it can be next to the dispatch code for the writing?",
+      "revId": "3941016e0b73210f09b615bfeaf95a751373fbe1",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "8acdeb68_9b569aa8",
+        "filename": "tools/gn/write_data_target_generator.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 66,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2018-12-20T17:26:29Z",
+      "side": 1,
+      "message": "For\n  value-\u003estring_value() \u003d\u003d \"\"\nI usually do\n  value-\u003estring_value().empty()",
+      "revId": "3941016e0b73210f09b615bfeaf95a751373fbe1",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "208c6e3d_bda8ef2a",
+        "filename": "tools/gn/write_data_target_generator.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 73,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2018-12-20T17:26:29Z",
+      "side": 1,
+      "message": "This needs to set the err_ about an invalid output conversion.",
+      "revId": "3941016e0b73210f09b615bfeaf95a751373fbe1",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": true
+    }
+  ]
+}
