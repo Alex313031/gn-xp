@@ -29,36 +29,45 @@ namespace commands {
 
 namespace {
 
+// Some names exist in multiple sections, these prefixes are used for the
+// internal links to disambiguate when writing markdown.
+const char kCommandLinkPrefix[] = "cmd_";
+const char kFunctionLinkPrefix[] = "func_";
+const char kVariableLinkPrefix[] = "var_";
+
 void PrintToplevelHelp() {
   PrintSectionHelp("Commands", "<command>", "commands");
   for (const auto& cmd : commands::GetCommands())
-    PrintShortHelp(cmd.second.help_short);
+    PrintShortHelp(cmd.second.help_short, kCommandLinkPrefix + cmd.first);
 
   // Target declarations.
   PrintSectionHelp("Target declarations", "<function>", "targets");
   for (const auto& func : functions::GetFunctions()) {
     if (func.second.is_target)
-      PrintShortHelp(func.second.help_short);
+      PrintShortHelp(func.second.help_short, kFunctionLinkPrefix + func.first);
   }
 
   // Functions.
   PrintSectionHelp("Buildfile functions", "<function>", "functions");
   for (const auto& func : functions::GetFunctions()) {
     if (!func.second.is_target)
-      PrintShortHelp(func.second.help_short);
+      PrintShortHelp(func.second.help_short, kFunctionLinkPrefix + func.first);
   }
 
   // Built-in variables.
   PrintSectionHelp("Built-in predefined variables", "<variable>",
                    "predefined_variables");
-  for (const auto& builtin : variables::GetBuiltinVariables())
-    PrintShortHelp(builtin.second.help_short);
+  for (const auto& builtin : variables::GetBuiltinVariables()) {
+    PrintShortHelp(builtin.second.help_short,
+                   kVariableLinkPrefix + builtin.first);
+  }
 
   // Target variables.
   PrintSectionHelp("Variables you set in targets", "<variable>",
                    "target_variables");
   for (const auto& target : variables::GetTargetVariables())
-    PrintShortHelp(target.second.help_short);
+    PrintShortHelp(target.second.help_short,
+                   kVariableLinkPrefix + target.first);
 
   PrintSectionHelp("Other help topics", "", "other");
   PrintShortHelp("all: Print all the help at once");
@@ -125,7 +134,7 @@ void PrintAllHelp() {
                  NO_ESCAPING);
   }
   for (const auto& c : commands::GetCommands())
-    PrintLongHelp(c.second.help);
+    PrintLongHelp(c.second.help, kCommandLinkPrefix + c.first);
 
   if (is_markdown) {
     OutputString("## <a name=\"targets\"></a>Target declarations\n\n",
@@ -133,7 +142,7 @@ void PrintAllHelp() {
   }
   for (const auto& f : functions::GetFunctions()) {
     if (f.second.is_target)
-      PrintLongHelp(f.second.help);
+      PrintLongHelp(f.second.help, kFunctionLinkPrefix + f.first);
   }
 
   if (is_markdown) {
@@ -142,7 +151,7 @@ void PrintAllHelp() {
   }
   for (const auto& f : functions::GetFunctions()) {
     if (!f.second.is_target)
-      PrintLongHelp(f.second.help);
+      PrintLongHelp(f.second.help, kFunctionLinkPrefix + f.first);
   }
 
   if (is_markdown) {
@@ -152,7 +161,7 @@ void PrintAllHelp() {
         DECORATION_NONE, NO_ESCAPING);
   }
   for (const auto& v : variables::GetBuiltinVariables())
-    PrintLongHelp(v.second.help);
+    PrintLongHelp(v.second.help, kVariableLinkPrefix + v.first);
 
   if (is_markdown) {
     OutputString(
@@ -161,7 +170,7 @@ void PrintAllHelp() {
         DECORATION_NONE, NO_ESCAPING);
   }
   for (const auto& v : variables::GetTargetVariables())
-    PrintLongHelp(v.second.help);
+    PrintLongHelp(v.second.help, kVariableLinkPrefix + v.first);
 
   if (is_markdown) {
     OutputString("## <a name=\"other\"></a>Other help topics\n\n",
@@ -198,6 +207,18 @@ bool PrintHelpOnSwitch(const std::string& what) {
     return false;
   PrintLongHelp(found->second.long_help);
   return true;
+}
+
+// Special-case help for ambiguous "args" case.
+void PrintArgsHelp() {
+  PrintLongHelp(
+      "The string \"args\" is both a command and a variable for action "
+      "targets.\nShowing help for both...\n\n");
+  PrintLongHelp(commands::kArgs_Help);
+  PrintLongHelp(
+      "\n----------------------------------------------------------------------"
+      "---------\n\n");
+  PrintLongHelp(variables::kArgs_Help);
 }
 
 }  // namespace
@@ -247,6 +268,12 @@ int RunHelp(const std::vector<std::string>& args) {
   }
 
   std::vector<base::StringPiece> all_help_topics;
+
+  // Special-case ambiguous topics.
+  if (what == "args") {
+    PrintArgsHelp();
+    return 0;
+  }
 
   // Check commands.
   const commands::CommandInfoMap& command_map = commands::GetCommands();
