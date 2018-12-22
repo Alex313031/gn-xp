@@ -29,6 +29,8 @@ class Platform(object):
     self._platform = sys.platform
     if self._platform.startswith('linux'):
       self._platform = 'linux'
+    elif self._platform.find('bsd') != -1:
+      self._platform = 'bsd'
     elif self._platform.startswith('darwin'):
       self._platform = 'darwin'
     elif self._platform.startswith('mingw'):
@@ -42,13 +44,16 @@ class Platform(object):
 
   @staticmethod
   def known_platforms():
-    return ['linux', 'darwin', 'msvc', 'aix', 'fuchsia']
+    return ['linux', 'bsd', 'darwin', 'msvc', 'aix', 'fuchsia']
 
   def platform(self):
     return self._platform
 
   def is_linux(self):
     return self._platform == 'linux'
+
+  def is_bsd(self):
+    return self._platform == 'bsd'
 
   def is_mingw(self):
     return self._platform == 'mingw'
@@ -66,7 +71,7 @@ class Platform(object):
     return self._platform == 'aix'
 
   def is_posix(self):
-    return self._platform in ['linux', 'darwin', 'aix']
+    return self._platform in ['linux', 'bsd', 'darwin', 'aix']
 
 
 def main(argv):
@@ -167,6 +172,7 @@ def WriteGenericNinja(path, static_libraries, executables,
       'msvc': 'build_win.ninja.template',
       'darwin': 'build_mac.ninja.template',
       'linux': 'build_linux.ninja.template',
+      'bsd': 'build_bsd.ninja.template',
       'aix': 'build_aix.ninja.template',
   }[platform.platform()])
 
@@ -320,6 +326,9 @@ def WriteGNNinja(path, platform, host, options):
           '-ldl',
           '-lpthread',
       ])
+    elif platform.is_bsd():
+      ldflags.extend(['-pthread'])
+      include_dirs += ["/usr/local/include"]
     elif platform.is_darwin():
       min_mac_version_flag = '-mmacosx-version-min=10.9'
       cflags.append(min_mac_version_flag)

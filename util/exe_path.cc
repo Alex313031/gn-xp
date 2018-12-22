@@ -50,7 +50,11 @@ base::FilePath GetExePath() {
 
 base::FilePath GetExePath() {
   base::FilePath result;
+#if defined(OS_BSD)
+  const char kProcSelfExe[] = "/proc/curproc/file";
+#else
   const char kProcSelfExe[] = "/proc/self/exe";
+#endif
   if (!ReadSymbolicLink(base::FilePath(kProcSelfExe), &result)) {
     NOTREACHED() << "Unable to resolve " << kProcSelfExe << ".";
     return base::FilePath();
