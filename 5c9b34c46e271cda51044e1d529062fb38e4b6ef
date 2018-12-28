@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "25f44e3d_366908c8",
+        "filename": "tools/gn/command_help.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 73,
+      "author": {
+        "id": 1000023
+      },
+      "writtenOn": "2018-12-28T23:43:47Z",
+      "side": 1,
+      "message": "Add the link tag (e.g. PrintShortHelp(\"all: Print all the help at once\", \"all\");) to these -- the links disappeared from the markdown help.",
+      "revId": "5c9b34c46e271cda51044e1d529062fb38e4b6ef",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": true
+    }
+  ]
+}
