@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "d9b67776_3118e8cf",
+        "filename": "tools/gn/variables.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 1850,
+      "author": {
+        "id": 1000014
+      },
+      "writtenOn": "2018-12-28T19:21:14Z",
+      "side": 1,
+      "message": "What is the new base relative to? I assume the build dir, but we should be explicit. Did you consider making this a string instead? So if set, it would be the directory that the source files should be rebased relative to.",
+      "revId": "9cd0dc0e3744598c2940f4263d467d64f78a556c",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": true
+    }
+  ]
+}
