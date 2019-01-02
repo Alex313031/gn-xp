@@ -20,7 +20,7 @@ const char kMeta[] = "meta";
 const char kMeta_HelpShort[] = "meta: List target metadata collection results.";
 const char kMeta_Help[] =
     R"(gn meta <out_dir> <target>* --data=<key>[,<key>*]* [--walk=<key>[,<key>*]*]
-       [--rebase]
+       [--rebase=<source dir>]
 
   Lists collected metaresults of all given targets for the given data key(s),
   collecting metadata dependencies as specified by the given walk key(s).
@@ -39,17 +39,17 @@ Examples
       Lists collected metaresults for the `files` key in the //base/foo:foo
       target and all of the dependencies listed in the `stop` key (and so on).
 
-  gn meta out/Debug "//base/foo" --data=files --rebase-files
+  gn meta out/Debug "//base/foo" --data=files --rebase="/"
       Lists collected metaresults for the `files` key in the //base/foo:foo
       target and all of its dependency tree, rebasing the strings in the `files`
-      key onto the source directory of the target's declaration.
+      key onto the source directory of the target's declaration relative to "/".
 )";
 
 int RunMeta(const std::vector<std::string>& args) {
   if (args.size() == 0) {
     Err(Location(), "You're holding it wrong.",
         "Usage: \"gn meta <out_dir> <target>* --data=<key>[,<key>*] "
-        "[--walk=<key>[,<key>*]*] [--rebase-files]\"")
+        "[--walk=<key>[,<key>*]*] [--rebase=<source dir>]\"")
         .PrintToStdout();
     return 1;
   }
@@ -60,6 +60,8 @@ int RunMeta(const std::vector<std::string>& args) {
 
   const base::CommandLine* cmdline = base::CommandLine::ForCurrentProcess();
   bool rebase_files = cmdline->HasSwitch(switches::kMetaRebaseFiles);
+  std::string rebase_dir =
+      cmdline->GetSwitchValueASCII(switches::kMetaRebaseFiles);
   std::string data_keys_str =
       cmdline->GetSwitchValueASCII(switches::kMetaDataKeys);
   std::string walk_keys_str =
@@ -86,8 +88,9 @@ int RunMeta(const std::vector<std::string>& args) {
       walk_keys_str, ",", base::TRIM_WHITESPACE, base::SPLIT_WANT_NONEMPTY);
   Err err;
   std::set<const Target*> targets_walked;
-  std::vector<Value> result = WalkMetadata(targets, data_keys, walk_keys,
-                                           rebase_files, &targets_walked, &err);
+  std::vector<Value> result =
+      WalkMetadata(targets, data_keys, walk_keys, SourceDir(rebase_dir),
+                   &targets_walked, &err);
   if (err.has_error()) {
     err.PrintToStdout();
     return 1;
