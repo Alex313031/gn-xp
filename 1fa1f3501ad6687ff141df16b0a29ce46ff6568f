@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "33f17628_a88573d5",
+        "filename": "tools/gn/command_meta.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 23,
+      "author": {
+        "id": 1000014
+      },
+      "writtenOn": "2019-01-03T19:11:40Z",
+      "side": 1,
+      "message": "My understanding is that the rebase is the destination dir of the rebase. So maybe call the thing \u003cdest dir\u003e",
+      "revId": "1fa1f3501ad6687ff141df16b0a29ce46ff6568f",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "99b70b8f_a051f4fe",
+        "filename": "tools/gn/command_meta.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 26,
+      "author": {
+        "id": 1000014
+      },
+      "writtenOn": "2019-01-03T19:11:40Z",
+      "side": 1,
+      "message": "Can this comment reference the metadata write target for more info?",
+      "revId": "1fa1f3501ad6687ff141df16b0a29ce46ff6568f",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "a12fbdd7_625726ad",
+        "filename": "tools/gn/command_meta.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 28,
+      "author": {
+        "id": 1000014
+      },
+      "writtenOn": "2019-01-03T19:11:40Z",
+      "side": 1,
+      "message": "Can you add a new section here to document the flags?",
+      "revId": "1fa1f3501ad6687ff141df16b0a29ce46ff6568f",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": true
+    }
+  ]
+}
