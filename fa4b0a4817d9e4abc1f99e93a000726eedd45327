@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "8ddaa778_150fdbd5",
+        "filename": "tools/gn/command_desc.cc",
+        "patchSetId": 6
+      },
+      "lineNbr": 480,
+      "author": {
+        "id": 1000023
+      },
+      "writtenOn": "2019-01-03T23:25:36Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "1ba48aa3_861dba81",
+      "revId": "fa4b0a4817d9e4abc1f99e93a000726eedd45327",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "6b96aa76_9319e29d",
         "filename": "tools/gn/desc_builder.cc",
         "patchSetId": 6
@@ -33,6 +51,24 @@
       "revId": "fa4b0a4817d9e4abc1f99e93a000726eedd45327",
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "8824676e_32726b07",
+        "filename": "tools/gn/desc_builder.cc",
+        "patchSetId": 6
+      },
+      "lineNbr": 465,
+      "author": {
+        "id": 1000023
+      },
+      "writtenOn": "2019-01-03T23:25:36Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "6b96aa76_9319e29d",
+      "revId": "fa4b0a4817d9e4abc1f99e93a000726eedd45327",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": false
     },
     {
       "key": {
@@ -53,6 +89,24 @@
     },
     {
       "key": {
+        "uuid": "6d44e986_5c91f8e8",
+        "filename": "tools/gn/functions_target.cc",
+        "patchSetId": 6
+      },
+      "lineNbr": 787,
+      "author": {
+        "id": 1000023
+      },
+      "writtenOn": "2019-01-03T23:25:36Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "3654f73b_90155722",
+      "revId": "fa4b0a4817d9e4abc1f99e93a000726eedd45327",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "38f112d2_1c697489",
         "filename": "tools/gn/target.cc",
         "patchSetId": 6
@@ -64,6 +118,24 @@
       "writtenOn": "2019-01-03T21:06:28Z",
       "side": 1,
       "message": "Having a stamp file for a generated file seems unnecessary. Maybe in a followup can we remove that and just use the generated file name for these cases and don\u0027t even emit a stamp file?",
+      "revId": "fa4b0a4817d9e4abc1f99e93a000726eedd45327",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "98147011_2031310e",
+        "filename": "tools/gn/target.cc",
+        "patchSetId": 6
+      },
+      "lineNbr": 637,
+      "author": {
+        "id": 1000023
+      },
+      "writtenOn": "2019-01-03T23:25:36Z",
+      "side": 1,
+      "message": "There\u0027s a check to ensure that the generated ninja rule isn\u0027t empty, and so the target type needs to have some sort of ninja output. Definitely something to follow up with, though, since it\u0027s an unnecessary stamp (there\u0027s a similar TODO in the ACTION generator such that actions with one output shouldn\u0027t stamp but rather depend directly on the output file), but that will require a minor refactoring of the ninja generation pipeline (there\u0027s not really a way right now to not generate anything from a ninja target writer, so a few checks would have to be reworked).",
+      "parentUuid": "38f112d2_1c697489",
       "revId": "fa4b0a4817d9e4abc1f99e93a000726eedd45327",
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
       "unresolved": true
@@ -87,6 +159,24 @@
     },
     {
       "key": {
+        "uuid": "226f59dd_3a15f220",
+        "filename": "tools/gn/toolchain.cc",
+        "patchSetId": 6
+      },
+      "lineNbr": 201,
+      "author": {
+        "id": 1000023
+      },
+      "writtenOn": "2019-01-03T23:25:36Z",
+      "side": 1,
+      "message": "Something as to be defined as the target\u0027s final output type -- NONE triggers an error, so STAMP is the default most most everything else -- so this may have to stay, unless I\u0027m missing something, though in the minor refactoring above the concept of a generic file output could be introduced.",
+      "parentUuid": "a95d9f9c_30d186bf",
+      "revId": "fa4b0a4817d9e4abc1f99e93a000726eedd45327",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "70979157_ccb368b9",
         "filename": "tools/gn/variables.cc",
         "patchSetId": 6
@@ -101,6 +191,24 @@
       "revId": "fa4b0a4817d9e4abc1f99e93a000726eedd45327",
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "760abd52_807211e7",
+        "filename": "tools/gn/variables.cc",
+        "patchSetId": 6
+      },
+      "lineNbr": 2014,
+      "author": {
+        "id": 1000023
+      },
+      "writtenOn": "2019-01-03T23:25:36Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "70979157_ccb368b9",
+      "revId": "fa4b0a4817d9e4abc1f99e93a000726eedd45327",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": false
     },
     {
       "key": {
@@ -121,6 +229,24 @@
     },
     {
       "key": {
+        "uuid": "c081333e_aa1f4f5f",
+        "filename": "tools/gn/variables.cc",
+        "patchSetId": 6
+      },
+      "lineNbr": 2018,
+      "author": {
+        "id": 1000023
+      },
+      "writtenOn": "2019-01-03T23:25:36Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "0048c2e3_88e45156",
+      "revId": "fa4b0a4817d9e4abc1f99e93a000726eedd45327",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "376063ce_0ec11a64",
         "filename": "tools/gn/variables.cc",
         "patchSetId": 6
@@ -138,6 +264,24 @@
     },
     {
       "key": {
+        "uuid": "bd33da8e_0f8f30e0",
+        "filename": "tools/gn/variables.cc",
+        "patchSetId": 6
+      },
+      "lineNbr": 2023,
+      "author": {
+        "id": 1000023
+      },
+      "writtenOn": "2019-01-03T23:25:36Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "376063ce_0ec11a64",
+      "revId": "fa4b0a4817d9e4abc1f99e93a000726eedd45327",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "29deed17_6b826caf",
         "filename": "tools/gn/variables.cc",
         "patchSetId": 6
@@ -152,6 +296,24 @@
       "revId": "fa4b0a4817d9e4abc1f99e93a000726eedd45327",
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "cfda2ccc_e017a30f",
+        "filename": "tools/gn/variables.cc",
+        "patchSetId": 6
+      },
+      "lineNbr": 2027,
+      "author": {
+        "id": 1000023
+      },
+      "writtenOn": "2019-01-03T23:25:36Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "29deed17_6b826caf",
+      "revId": "fa4b0a4817d9e4abc1f99e93a000726eedd45327",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": false
     }
   ]
 }
