@@ -1,0 +1,157 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "1ba48aa3_861dba81",
+        "filename": "tools/gn/command_desc.cc",
+        "patchSetId": 6
+      },
+      "lineNbr": 480,
+      "author": {
+        "id": 1000014
+      },
+      "writtenOn": "2019-01-03T21:06:28Z",
+      "side": 1,
+      "message": "This should be in alphabetical order with the above stuff.",
+      "revId": "fa4b0a4817d9e4abc1f99e93a000726eedd45327",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "6b96aa76_9319e29d",
+        "filename": "tools/gn/desc_builder.cc",
+        "patchSetId": 6
+      },
+      "lineNbr": 465,
+      "author": {
+        "id": 1000014
+      },
+      "writtenOn": "2019-01-03T21:06:28Z",
+      "side": 1,
+      "message": "Add {}",
+      "revId": "fa4b0a4817d9e4abc1f99e93a000726eedd45327",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "3654f73b_90155722",
+        "filename": "tools/gn/functions_target.cc",
+        "patchSetId": 6
+      },
+      "lineNbr": 787,
+      "author": {
+        "id": 1000014
+      },
+      "writtenOn": "2019-01-03T21:06:28Z",
+      "side": 1,
+      "message": "EOL whitespace.",
+      "revId": "fa4b0a4817d9e4abc1f99e93a000726eedd45327",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "38f112d2_1c697489",
+        "filename": "tools/gn/target.cc",
+        "patchSetId": 6
+      },
+      "lineNbr": 637,
+      "author": {
+        "id": 1000014
+      },
+      "writtenOn": "2019-01-03T21:06:28Z",
+      "side": 1,
+      "message": "Having a stamp file for a generated file seems unnecessary. Maybe in a followup can we remove that and just use the generated file name for these cases and don\u0027t even emit a stamp file?",
+      "revId": "fa4b0a4817d9e4abc1f99e93a000726eedd45327",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "a95d9f9c_30d186bf",
+        "filename": "tools/gn/toolchain.cc",
+        "patchSetId": 6
+      },
+      "lineNbr": 201,
+      "author": {
+        "id": 1000014
+      },
+      "writtenOn": "2019-01-03T21:06:28Z",
+      "side": 1,
+      "message": "This may or may not need updating if we omit the stamp file.",
+      "revId": "fa4b0a4817d9e4abc1f99e93a000726eedd45327",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "70979157_ccb368b9",
+        "filename": "tools/gn/variables.cc",
+        "patchSetId": 6
+      },
+      "lineNbr": 2014,
+      "author": {
+        "id": 1000014
+      },
+      "writtenOn": "2019-01-03T21:06:28Z",
+      "side": 1,
+      "message": "How about just \"Contents to write to file.\" (same below)",
+      "revId": "fa4b0a4817d9e4abc1f99e93a000726eedd45327",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "0048c2e3_88e45156",
+        "filename": "tools/gn/variables.cc",
+        "patchSetId": 6
+      },
+      "lineNbr": 2018,
+      "author": {
+        "id": 1000014
+      },
+      "writtenOn": "2019-01-03T21:06:28Z",
+      "side": 1,
+      "message": "I think the write_file name changed to generated_file.\nHow about:\n  \"The contents of the file for a generated_file target. See \"gn help generated_file\".",
+      "revId": "fa4b0a4817d9e4abc1f99e93a000726eedd45327",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "376063ce_0ec11a64",
+        "filename": "tools/gn/variables.cc",
+        "patchSetId": 6
+      },
+      "lineNbr": 2023,
+      "author": {
+        "id": 1000014
+      },
+      "writtenOn": "2019-01-03T21:06:28Z",
+      "side": 1,
+      "message": "How about: \"output_conversion: Data format for generated_file targets.\" (same below)",
+      "revId": "fa4b0a4817d9e4abc1f99e93a000726eedd45327",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "29deed17_6b826caf",
+        "filename": "tools/gn/variables.cc",
+        "patchSetId": 6
+      },
+      "lineNbr": 2027,
+      "author": {
+        "id": 1000014
+      },
+      "writtenOn": "2019-01-03T21:06:28Z",
+      "side": 1,
+      "message": "How about:\n  Controls how the \"contents\" of a generated_file target is formatted. See \"gn help output_conversion\".",
+      "revId": "fa4b0a4817d9e4abc1f99e93a000726eedd45327",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": true
+    }
+  ]
+}
