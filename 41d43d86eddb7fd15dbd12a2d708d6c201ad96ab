@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "5bce3caf_bc335969",
+        "filename": "tools/gn/functions_target_unittest.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 100,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2019-01-05T02:43:40Z",
+      "side": 1,
+      "message": "(This tests a previously untested existing error path)",
+      "revId": "41d43d86eddb7fd15dbd12a2d708d6c201ad96ab",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "32e0139b_fe33706a",
+        "filename": "tools/gn/functions_target_unittest.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 111,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2019-01-05T02:43:40Z",
+      "side": 1,
+      "message": "(This test crashes without the code change)",
+      "revId": "41d43d86eddb7fd15dbd12a2d708d6c201ad96ab",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": true
+    }
+  ]
+}
