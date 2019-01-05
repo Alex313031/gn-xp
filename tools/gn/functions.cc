@@ -700,6 +700,12 @@ Value RunNotNeeded(Scope* scope,
   // Extract the source scope if different from current one.
   Scope* source = scope;
   if (value->type() == Value::SCOPE) {
+    if (args_cur == args_vector.end()) {
+      *err = Err(
+          function, "Wrong number of arguments.",
+          "The first argument is a scope, expecteding two or three arguments.");
+      return Value();
+    }
     // Copy the scope value if it will be overridden.
     if (value == &result_value) {
       scope_value = Value(nullptr, value->scope_value()->MakeClosure());
