@@ -22,6 +22,30 @@
       "revId": "54998d0b6945ba9657d285e10a55f8672f687184",
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "359a8858_9bc8b591",
+        "filename": "tools/gn/format_test_data/074.gn",
+        "patchSetId": 6
+      },
+      "lineNbr": 4,
+      "author": {
+        "id": 1000003
+      },
+      "writtenOn": "2019-01-08T02:46:31Z",
+      "side": 1,
+      "message": "Do you mean to confirm that it keeps it wrapped? The formatter always writes the file completely from scratch, so the input formatting doesn\u0027t really matter too much except to get the right parse tree.",
+      "parentUuid": "685cbe53_c9b19581",
+      "range": {
+        "startLine": 3,
+        "startChar": 0,
+        "endLine": 4,
+        "endChar": 48
+      },
+      "revId": "54998d0b6945ba9657d285e10a55f8672f687184",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": true
     }
   ]
 }
