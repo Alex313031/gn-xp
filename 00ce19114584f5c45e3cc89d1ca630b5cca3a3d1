@@ -1,0 +1,72 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "114d61ca_c9b5f747",
+        "filename": "tools/gn/value.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 14,
+      "author": {
+        "id": 1000014
+      },
+      "writtenOn": "2019-01-08T17:40:36Z",
+      "side": 1,
+      "message": "You can remove the initializers here. The class-level initializers will set the type and origin. I\u0027m not sure it makes sense to set the int value to 0 here. This won\u0027t set the whole union to 0\u0027s (would need a memset with the size of the union for that), and given that the values will all be garbage if you get the type wrong, it doesn\u0027t seem to add much value.",
+      "revId": "00ce19114584f5c45e3cc89d1ca630b5cca3a3d1",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "bb97ff38_eb28155e",
+        "filename": "tools/gn/value.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 34,
+      "author": {
+        "id": 1000014
+      },
+      "writtenOn": "2019-01-08T17:40:36Z",
+      "side": 1,
+      "message": "Can this have a NONE arm that just does a break and remove the default one? That way we\u0027ll get a warning if we add a new enum value and don\u0027t also add it here.",
+      "revId": "00ce19114584f5c45e3cc89d1ca630b5cca3a3d1",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "06c530c4_0b8ce501",
+        "filename": "tools/gn/value.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 84,
+      "author": {
+        "id": 1000014
+      },
+      "writtenOn": "2019-01-08T17:40:36Z",
+      "side": 1,
+      "message": "Remove this so we get a compile warning instead. Same below.",
+      "revId": "00ce19114584f5c45e3cc89d1ca630b5cca3a3d1",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "b15e822a_ba65b5c2",
+        "filename": "tools/gn/value.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 133,
+      "author": {
+        "id": 1000014
+      },
+      "writtenOn": "2019-01-08T17:40:36Z",
+      "side": 1,
+      "message": "This isn\u0027t clang-formatted.",
+      "revId": "00ce19114584f5c45e3cc89d1ca630b5cca3a3d1",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": true
+    }
+  ]
+}
