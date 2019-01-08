@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "685cbe53_c9b19581",
+        "filename": "tools/gn/format_test_data/074.gn",
+        "patchSetId": 6
+      },
+      "lineNbr": 4,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-01-08T01:34:08Z",
+      "side": 1,
+      "message": "Shouldn\u0027t this be on a single line?",
+      "range": {
+        "startLine": 3,
+        "startChar": 0,
+        "endLine": 4,
+        "endChar": 48
+      },
+      "revId": "54998d0b6945ba9657d285e10a55f8672f687184",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": true
+    }
+  ]
+}
