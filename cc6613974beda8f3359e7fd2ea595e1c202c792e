@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "f7571993_eaf8bd9f",
+        "filename": "tools/gn/value.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 14,
+      "author": {
+        "id": 1000014
+      },
+      "writtenOn": "2019-01-09T16:30:33Z",
+      "side": 1,
+      "message": "This comment is overly specific and not that useful. Maybe better to say \"Can\u0027t use \"\u003ddefault\" due to the use of a union.\"",
+      "revId": "cc6613974beda8f3359e7fd2ea595e1c202c792e",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": true
+    }
+  ]
+}
