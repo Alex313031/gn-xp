@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "d847cc75_fda8f9aa",
+        "filename": "docs/reference.md",
+        "patchSetId": 1
+      },
+      "lineNbr": 8,
+      "author": {
+        "id": 1000004
+      },
+      "writtenOn": "2019-01-09T18:12:03Z",
+      "side": 1,
+      "message": "This doesn\u0027t seem to render properly when I follow the gitiles link.",
+      "revId": "5fde78055bc1be315127fb2709dcc65d78c39814",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": true
+    }
+  ]
+}
