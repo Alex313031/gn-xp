@@ -16,6 +16,24 @@
       "revId": "cc6613974beda8f3359e7fd2ea595e1c202c792e",
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "123168ee_e4d8d507",
+        "filename": "tools/gn/value.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 14,
+      "author": {
+        "id": 1000067
+      },
+      "writtenOn": "2019-01-09T16:42:09Z",
+      "side": 1,
+      "message": "Done. I must say I was very surprised, since I though {} and \u003d default were equivalent :-)",
+      "parentUuid": "f7571993_eaf8bd9f",
+      "revId": "cc6613974beda8f3359e7fd2ea595e1c202c792e",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": true
     }
   ]
 }
