@@ -83,20 +83,15 @@ void PrintSwitchHelp() {
   const base::CommandLine* cmdline = base::CommandLine::ForCurrentProcess();
   bool is_markdown = cmdline->HasSwitch(switches::kMarkdown);
 
-  OutputString("Available global switches\n", DECORATION_YELLOW);
+  OutputString("Available global switches", DECORATION_YELLOW);
+  OutputString("\n\n", DECORATION_NONE);
   OutputString(
       "  Do \"gn help --the_switch_you_want_help_on\" for more. Individual\n"
       "  commands may take command-specific switches not listed here. See the\n"
       "  help on your specific command for more.\n\n");
 
-  if (is_markdown)
-    OutputString("```\n", DECORATION_NONE);
-
   for (const auto& s : switches::GetSwitches())
     PrintShortHelp(s.second.short_help);
-
-  if (is_markdown)
-    OutputString("```\n", DECORATION_NONE);
 
   OutputString("\n");
 }

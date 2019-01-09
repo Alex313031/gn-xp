@@ -233,7 +233,7 @@ void PrintShortHelp(const std::string& line) {
   size_t first_normal = 0;
   if (colon_offset != std::string::npos) {
     if (is_markdown) {
-      OutputString("    *   [" + line + "](#" + line.substr(0, colon_offset) +
+      OutputString(" *   [" + line + "](#" + line.substr(0, colon_offset) +
                    ")\n");
     } else {
       OutputString("  " + line.substr(0, colon_offset), DECORATION_YELLOW);
