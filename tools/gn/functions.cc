@@ -453,8 +453,7 @@ Value RunDeclareArgs(Scope* scope,
   // Pass the values from our scope into the Args object for adding to the
   // scope with the proper values (taking into account the defaults given in
   // the block_scope, and arguments passed into the build).
-  Scope::KeyValueMap values;
-  block_scope.GetCurrentScopeValues(&values);
+  Scope::KeyValueMap values = block_scope.GetCurrentScopeValues();
   scope->settings()->build_settings()->build_args().DeclareArgs(values, scope,
                                                                 err);
   return Value();

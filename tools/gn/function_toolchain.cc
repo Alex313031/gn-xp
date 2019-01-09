@@ -495,9 +495,7 @@ Value RunToolchain(Scope* scope,
     if (!toolchain_args->VerifyTypeIs(Value::SCOPE, err))
       return Value();
 
-    Scope::KeyValueMap values;
-    toolchain_args->scope_value()->GetCurrentScopeValues(&values);
-    toolchain->args() = values;
+    toolchain->args() = toolchain_args->scope_value()->GetCurrentScopeValues();
   }
 
   // Read propagates_configs (if present).

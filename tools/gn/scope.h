@@ -39,6 +39,9 @@ class Template;
 class Scope {
  public:
   typedef std::map<base::StringPiece, Value> KeyValueMap;
+  typedef std::pair<base::StringPiece, std::reference_wrapper<const Value>>
+      KeyValueRef;
+  typedef std::vector<KeyValueRef> KeyValueList;
   // Holds an owning list of Items.
   typedef std::vector<std::unique_ptr<Item>> ItemVector;
 
@@ -218,7 +221,17 @@ class Scope {
 
   // Returns all values set in the current scope, without going to the parent
   // scopes.
-  void GetCurrentScopeValues(KeyValueMap* output) const;
+  KeyValueMap GetCurrentScopeValues() const;
+
+  // Same as GetCurrentScopeValues() but returns a vector or KeyValueRef,
+  // which is faster and uses less memory. Useful to rapidly scan over all
+  // (key, value) item in increasing key name order. If you need to find
+  // values associated with random keys, use the result of
+  // GetCurrentScopeValues() instead.
+  KeyValueList GetCurrentScopeValuesList() const;
+
+  // Apply all values in the current scope into another target |output| map.
+  void ApplyCurrentScopeValuesTo(KeyValueMap* output) const;
 
   // Returns true if the values in the current scope are the same as all
   // values in the given scope, without going to the parent scopes. Returns

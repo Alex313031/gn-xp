@@ -162,8 +162,7 @@ class BaseDescBuilder {
 
   base::Value ToBaseValue(const Scope* scope) {
     base::DictionaryValue res;
-    Scope::KeyValueMap map;
-    scope->GetCurrentScopeValues(&map);
+    Scope::KeyValueMap map = scope->GetCurrentScopeValues();
     for (const auto& v : map)
       res.SetKey(v.first, ToBaseValue(v.second));
     return std::move(res);
