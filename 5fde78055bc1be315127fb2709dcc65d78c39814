@@ -16,6 +16,24 @@
       "revId": "5fde78055bc1be315127fb2709dcc65d78c39814",
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "957e63ed_def4e53a",
+        "filename": "docs/reference.md",
+        "patchSetId": 1
+      },
+      "lineNbr": 8,
+      "author": {
+        "id": 1000065
+      },
+      "writtenOn": "2019-01-10T19:29:45Z",
+      "side": 1,
+      "message": "Ah, you\u0027re right - thanks for catching this. I checked it in go/snippets but didn\u0027t realize gerrit shows a gitiles link (that\u0027s handy for the future).\n\nLet me think for a bit if there\u0027s an elegant way to format this more nicely",
+      "parentUuid": "d847cc75_fda8f9aa",
+      "revId": "5fde78055bc1be315127fb2709dcc65d78c39814",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": true
     }
   ]
 }
