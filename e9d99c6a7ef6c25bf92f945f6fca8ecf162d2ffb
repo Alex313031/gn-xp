@@ -1,0 +1,72 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "14e48214_2c4db1d3",
+        "filename": "tools/gn/output_conversion.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 53,
+      "author": {
+        "id": 1000014
+      },
+      "writtenOn": "2019-01-11T21:04:03Z",
+      "side": 1,
+      "message": "There\u0027s a good change that GN code can use C++17. Might want to do a try run and see it this passes:\n  for (const auto\u0026 [key, value] : output.scope...)\nin which case you can use this in the other loops too.",
+      "revId": "e9d99c6a7ef6c25bf92f945f6fca8ecf162d2ffb",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "da422b4a_8f139335",
+        "filename": "tools/gn/scope.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 291,
+      "author": {
+        "id": 1000014
+      },
+      "writtenOn": "2019-01-11T21:04:03Z",
+      "side": 1,
+      "message": "Isn\u0027t the result already in-order by virtue of being read out of a map in order?",
+      "revId": "e9d99c6a7ef6c25bf92f945f6fca8ecf162d2ffb",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "7afdb1aa_b2bc7b97",
+        "filename": "tools/gn/scope.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 42,
+      "author": {
+        "id": 1000014
+      },
+      "writtenOn": "2019-01-11T21:04:03Z",
+      "side": 1,
+      "message": "I had never heard of reference_wrapper before!",
+      "revId": "e9d99c6a7ef6c25bf92f945f6fca8ecf162d2ffb",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "942da3aa_e3a68333",
+        "filename": "tools/gn/scope.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 234,
+      "author": {
+        "id": 1000014
+      },
+      "writtenOn": "2019-01-11T21:04:03Z",
+      "side": 1,
+      "message": "\"Apply\" would make more sense to me as \"Copy\" instead.",
+      "revId": "e9d99c6a7ef6c25bf92f945f6fca8ecf162d2ffb",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": true
+    }
+  ]
+}
