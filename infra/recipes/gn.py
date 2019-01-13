@@ -17,16 +17,21 @@ DEPS = [
     'recipe_engine/python',
     'recipe_engine/raw_io',
     'recipe_engine/step',
+    'target',
     'macos_sdk',
     'windows_sdk',
 ]
 
 PROPERTIES = {
-    'repository': Property(kind=str, default='https://gn.googlesource.com/gn'),
+    'repository':
+        Property(kind=str, default='https://gn.googlesource.com/gn'),
+    'platform':
+        Property(
+            kind=str, help='CIPD platform for the target', default=None),
 }
 
 
-def RunSteps(api, repository):
+def RunSteps(api, repository, platform):
   src_dir = api.path['start_dir'].join('gn')
 
   with api.step.nest('git'), api.context(infra_steps=True):
@@ -56,7 +61,7 @@ def RunSteps(api, repository):
     if api.platform.is_linux or api.platform.is_mac:
       pkgs.add_package('fuchsia/clang/${platform}', 'goma')
     if api.platform.is_linux:
-      pkgs.add_package('fuchsia/sysroot/${platform}',
+      pkgs.add_package('fuchsia/sysroot/%s' % platform,
                        'git_revision:a28dfa20af063e5ca00634024c85732e20220419',
                        'sysroot')
     api.cipd.ensure(cipd_dir, pkgs)
@@ -73,17 +78,20 @@ def RunSteps(api, repository):
       },
   ]
 
+  target = api.target.from_string(platform) if platform else api.target.host
+
   with api.macos_sdk(), api.windows_sdk():
-    if api.platform.is_linux:
+    if target.is_linux:
+      triple = '--target=%s' % target.triple
       sysroot = '--sysroot=%s' % cipd_dir.join('sysroot')
       env = {
           'CC': cipd_dir.join('bin', 'clang'),
           'CXX': cipd_dir.join('bin', 'clang++'),
           'AR': cipd_dir.join('bin', 'llvm-ar'),
-          'CFLAGS': sysroot,
-          'LDFLAGS': '%s -static-libstdc++ -ldl -lpthread' % sysroot,
+          'CFLAGS': '%s %s' % (triple, sysroot),
+          'LDFLAGS': '%s %s -static-libstdc++ -ldl -lpthread' % (triple, sysroot),
       }
-    elif api.platform.is_mac:
+    elif target.is_mac:
       sysroot = '--sysroot=%s' % api.step(
           'xcrun', ['xcrun', '--show-sdk-path'],
           stdout=api.raw_io.output(name='sdk-path', add_output_log=True),
@@ -112,7 +120,8 @@ def RunSteps(api, repository):
           # Windows requires the environment modifications when building too.
           api.step('ninja', [cipd_dir.join('ninja'), '-C', src_dir.join('out')])
 
-        api.step('test', [src_dir.join('out', 'gn_unittests')])
+        if target == api.target.host:
+          api.step('test', [src_dir.join('out', 'gn_unittests')])
 
   if build_input.gerrit_changes:
     return
@@ -166,12 +175,19 @@ def GenTests(api):
                revision=REVISION,
            ))
 
-    yield (api.test('cq_' + platform) + api.platform.name(platform) +
-           api.buildbucket.try_build(
-               gerrit_host='gn-review.googlesource.com',
-               change_number=1000,
-               patch_set=1,
-           ))
+  yield (api.test('cross') +
+         api.platform.name('linux') +
+         api.properties(platform='linux-arm64') +
+         api.buildbucket.ci_build(
+             git_repo='gn.googlesource.com/gn',
+             revision=REVISION,
+         ))
+
+  yield (api.test('cq') + api.buildbucket.try_build(
+      gerrit_host='gn-review.googlesource.com',
+      change_number=1000,
+      patch_set=1,
+  ))
 
   yield (api.test('cipd_exists') + api.buildbucket.ci_build(
       project='infra-internal',
