@@ -301,7 +301,7 @@ def WriteGNNinja(path, platform, host, options):
           ldflags.append('-Wl,-strip-all')
 
       # Enable identical code-folding.
-      if options.use_icf:
+      if options.use_icf and not platform.is_darwin():
         ldflags.append('-Wl,--icf=all')
 
     cflags.extend([
@@ -341,7 +341,11 @@ def WriteGNNinja(path, platform, host, options):
     if not options.debug:
       cflags.extend(['/O2', '/DNDEBUG', '/GL'])
       libflags.extend(['/LTCG'])
-      ldflags.extend(['/LTCG', '/OPT:REF', '/OPT:ICF'])
+      ldflags.extend(['/LTCG', '/OPT:REF'])
+
+    # Enable identical code-folding.
+    if options.use_icf:
+      ldflags.append(['/OPT:ICF'])
 
     cflags.extend([
         '/DNOMINMAX',
