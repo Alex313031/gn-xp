@@ -238,7 +238,9 @@
     "cmd": [
       "python",
       "-u",
-      "[START_DIR]/gn/build/gen.py"
+      "[START_DIR]/gn/build/gen.py",
+      "--use-lto",
+      "--use-icf"
     ],
     "cwd": "[START_DIR]/gn",
     "env": {
