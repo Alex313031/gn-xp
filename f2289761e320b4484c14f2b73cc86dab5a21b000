@@ -22,6 +22,30 @@
       "revId": "f2289761e320b4484c14f2b73cc86dab5a21b000",
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "ac657a7b_1392c9c7",
+        "filename": "tools/gn/command_format.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 1175,
+      "author": {
+        "id": 1000072
+      },
+      "writtenOn": "2019-01-14T18:27:03Z",
+      "side": 1,
+      "message": "Sorry - that was silly. Fixed.",
+      "parentUuid": "8ef16537_971f4e54",
+      "range": {
+        "startLine": 1175,
+        "startChar": 54,
+        "endLine": 1175,
+        "endChar": 58
+      },
+      "revId": "f2289761e320b4484c14f2b73cc86dab5a21b000",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": false
     }
   ]
 }
