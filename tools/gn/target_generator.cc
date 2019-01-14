@@ -277,7 +277,7 @@ bool TargetGenerator::FillMetadata() {
 
   Scope* scope_value = value->scope_value();
 
-  scope_value->GetCurrentScopeValues(&target_->metadata().contents());
+  scope_value->CopyCurrentScopeValuesTo(&target_->metadata().contents());
   scope_value->MarkAllUsed();
 
   // Metadata values should always hold lists of Values, such that they can be

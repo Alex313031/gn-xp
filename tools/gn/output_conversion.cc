@@ -48,21 +48,20 @@ void RenderListToJSON(const Value& output, std::ostream& out, int indent) {
 
 void RenderScopeToJSON(const Value& output, std::ostream& out, int indent) {
   assert(indent > 0);
-  Scope::KeyValueMap scope_values;
-  output.scope_value()->GetCurrentScopeValues(&scope_values);
   bool first = true;
   out << "{\n";
-  for (const auto& pair : scope_values) {
+  for (const auto& pair : output.scope_value()->GetCurrentScopeValuesList()) {
     if (!first)
       out << ",\n";
     Indent(indent, out);
     out << "\"" << pair.first.as_string() << "\": ";
-    if (pair.second.type() == Value::SCOPE)
-      RenderScopeToJSON(pair.second, out, indent + 1);
-    else if (pair.second.type() == Value::LIST)
-      RenderListToJSON(pair.second, out, indent + 1);
+    const Value& value = pair.second.get();
+    if (value.type() == Value::SCOPE)
+      RenderScopeToJSON(value, out, indent + 1);
+    else if (value.type() == Value::LIST)
+      RenderListToJSON(value, out, indent + 1);
     else
-      out << pair.second.ToString(true);
+      out << value.ToString(true);
     first = false;
   }
   out << "\n";
@@ -100,11 +99,9 @@ void OutputValue(const Value& output, std::ostream& out) {
 // The direct Value::ToString call wraps the scope in '{}', which we don't want
 // here for the top-level scope being output.
 void OutputScope(const Value& output, std::ostream& out) {
-  Scope::KeyValueMap scope_values;
-  output.scope_value()->GetCurrentScopeValues(&scope_values);
-  for (const auto& pair : scope_values) {
-    out << "  " << pair.first.as_string() << " = " << pair.second.ToString(true)
-        << "\n";
+  for (const auto& pair : output.scope_value()->GetCurrentScopeValuesList()) {
+    out << "  " << pair.first.as_string() << " = "
+        << pair.second.get().ToString(true) << "\n";
   }
 }
 

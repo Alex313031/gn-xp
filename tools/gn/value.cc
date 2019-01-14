@@ -9,6 +9,7 @@
 
 #include "base/strings/string_number_conversions.h"
 #include "base/strings/string_util.h"
+#include "base/strings/stringprintf.h"
 #include "tools/gn/scope.h"
 
 // NOTE: Cannot use = default here due to the use of a union member.
@@ -210,15 +211,16 @@ std::string Value::ToString(bool quote_string) const {
       return result;
     }
     case SCOPE: {
-      Scope::KeyValueMap scope_values;
-      scope_value_->GetCurrentScopeValues(&scope_values);
+      Scope::KeyValueList scope_values =
+          scope_value_->GetCurrentScopeValuesList();
       if (scope_values.empty())
         return std::string("{ }");
 
       std::string result = "{\n";
       for (const auto& pair : scope_values) {
-        result += "  " + pair.first.as_string() + " = " +
-                  pair.second.ToString(true) + "\n";
+        base::StringAppendF(&result, "  %s = %s\n",
+                            pair.first.as_string().c_str(),
+                            pair.second.get().ToString(true).c_str());
       }
       result += "}";
 

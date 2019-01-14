@@ -269,9 +269,30 @@ bool Scope::CheckForUnusedVars(Err* err) const {
   return true;
 }
 
-void Scope::GetCurrentScopeValues(KeyValueMap* output) const {
+Scope::KeyValueMap Scope::GetCurrentScopeValues() const {
+  KeyValueMap result;
+  for (const auto& pair : values_) {
+    result[pair.first] = pair.second.value;
+  }
+  return result;
+}
+
+void Scope::CopyCurrentScopeValuesTo(KeyValueMap* output) const {
   for (const auto& pair : values_)
     (*output)[pair.first] = pair.second.value;
+}
+
+Scope::KeyValueList Scope::GetCurrentScopeValuesList() const {
+  KeyValueList result;
+  result.reserve(values_.size());
+  for (const auto& pair : values_) {
+    result.push_back(KeyValueRef{pair.first, std::cref(pair.second.value)});
+  }
+  std::sort(result.begin(), result.end(),
+            [](const KeyValueRef& a, const KeyValueRef& b) -> bool {
+              return a.first < b.first;
+            });
+  return result;
 }
 
 bool Scope::CheckCurrentScopeValuesEqual(const Scope* other) const {
