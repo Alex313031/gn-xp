@@ -37,6 +37,24 @@
     },
     {
       "key": {
+        "uuid": "56dabc43_26092411",
+        "filename": "build/gen.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 86,
+      "author": {
+        "id": 1000004
+      },
+      "writtenOn": "2019-01-14T19:56:52Z",
+      "side": 1,
+      "message": "I don\u0027t think it\u0027s particularly expensive, so probably Release could default to being ICF on all platforms. Do we still care about ld.bfd? Maybe we could just delete the option instead.",
+      "parentUuid": "babb5c5a_d00e7459",
+      "revId": "827e2d3e9db61af182d7b2c29ac8f888ce2bc6dd",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "445fba3d_4bb91f68",
         "filename": "build/gen.py",
         "patchSetId": 1
