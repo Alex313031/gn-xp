@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "17ccca2c_12e701a8",
+        "filename": "tools/gn/command_format.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 70,
+      "author": {
+        "id": 1000004
+      },
+      "writtenOn": "2019-01-14T17:57:37Z",
+      "side": 1,
+      "message": "I don\u0027t think this example will work on Windows, you\u0027re just relying on the shell to glob, right?",
+      "range": {
+        "startLine": 70,
+        "startChar": 12,
+        "endLine": 70,
+        "endChar": 35
+      },
+      "revId": "839ca520788d302a27c7c6061b66363cc8f8368f",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "37bc1763_aaf237e2",
+        "filename": "tools/gn/command_format.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 1167,
+      "author": {
+        "id": 1000004
+      },
+      "writtenOn": "2019-01-14T17:57:37Z",
+      "side": 1,
+      "message": "size_t, or better `for (const auto\u0026 arg : args) {`",
+      "range": {
+        "startLine": 1167,
+        "startChar": 7,
+        "endLine": 1167,
+        "endChar": 10
+      },
+      "revId": "839ca520788d302a27c7c6061b66363cc8f8368f",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": true
+    }
+  ]
+}
