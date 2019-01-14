@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "8ef16537_971f4e54",
+        "filename": "tools/gn/command_format.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 1175,
+      "author": {
+        "id": 1000004
+      },
+      "writtenOn": "2019-01-14T18:24:33Z",
+      "side": 1,
+      "message": "I don\u0027t think this is right.",
+      "range": {
+        "startLine": 1175,
+        "startChar": 54,
+        "endLine": 1175,
+        "endChar": 58
+      },
+      "revId": "f2289761e320b4484c14f2b73cc86dab5a21b000",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": true
+    }
+  ]
+}
