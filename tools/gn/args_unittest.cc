@@ -13,18 +13,16 @@
 TEST(ArgsTest, VerifyAllOverridesUsed) {
   TestWithScope setup1, setup2;
   Args args;
-  Scope::KeyValueMap key_value_map1;
   Err err;
   LiteralNode assignment1;
 
   setup1.scope()->SetValue("a", Value(nullptr, true), &assignment1);
-  setup1.scope()->GetCurrentScopeValues(&key_value_map1);
+  Scope::KeyValueMap key_value_map1 = setup1.scope()->GetCurrentScopeValues();
   EXPECT_TRUE(args.DeclareArgs(key_value_map1, setup1.scope(), &err));
 
   LiteralNode assignment2;
   setup2.scope()->SetValue("b", Value(nullptr, true), &assignment2);
-  Scope::KeyValueMap key_value_map2;
-  setup2.scope()->GetCurrentScopeValues(&key_value_map2);
+  Scope::KeyValueMap key_value_map2 = setup2.scope()->GetCurrentScopeValues();
   EXPECT_TRUE(args.DeclareArgs(key_value_map2, setup2.scope(), &err));
 
   // Override "a", shouldn't see any errors as "a" was defined.
