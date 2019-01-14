@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "07dd6013_41ee6e25",
+        "filename": "build/gen.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 86,
+      "author": {
+        "id": 1000004
+      },
+      "writtenOn": "2019-01-14T18:02:03Z",
+      "side": 1,
+      "message": "This should default to true on Windows, there\u0027s no reason to turn it off there. (It looks like it was hacked out for ld.bfd due to a bug previously.)",
+      "revId": "827e2d3e9db61af182d7b2c29ac8f888ce2bc6dd",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "445fba3d_4bb91f68",
+        "filename": "build/gen.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 346,
+      "author": {
+        "id": 1000004
+      },
+      "writtenOn": "2019-01-14T18:02:03Z",
+      "side": 1,
+      "message": "This changed behaviour and applies it to debug builds now too. I don\u0027t think there\u0027s a good reason to want ICF without other opt.",
+      "revId": "827e2d3e9db61af182d7b2c29ac8f888ce2bc6dd",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": true
+    }
+  ]
+}
