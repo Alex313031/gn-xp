@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "687b40da_de6a1e0a",
+        "filename": "tools/gn/output_conversion.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 53,
+      "author": {
+        "id": 1000067
+      },
+      "writtenOn": "2019-01-14T12:52:54Z",
+      "side": 1,
+      "message": "That would be really nice, unfortunately that doesn\u0027t seem to work yet, i.e. I get:\n\n  .../create_bundle_target_generator.cc:122:19: warning: \ndecomposition declarations are a C++1z extension [-Wc++1z-extensions]\n    for (const auto [key, value] : scope_value-\u003eGetCurrentScopeValuesList()) {\n                    ^~~~~~~~~~~~",
+      "parentUuid": "14e48214_2c4db1d3",
+      "revId": "e9d99c6a7ef6c25bf92f945f6fca8ecf162d2ffb",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "da422b4a_8f139335",
         "filename": "tools/gn/scope.cc",
         "patchSetId": 1
@@ -30,6 +48,24 @@
       "writtenOn": "2019-01-11T21:04:03Z",
       "side": 1,
       "message": "Isn\u0027t the result already in-order by virtue of being read out of a map in order?",
+      "revId": "e9d99c6a7ef6c25bf92f945f6fca8ecf162d2ffb",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "f77ad9f7_50fbd8f2",
+        "filename": "tools/gn/scope.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 291,
+      "author": {
+        "id": 1000067
+      },
+      "writtenOn": "2019-01-14T12:52:54Z",
+      "side": 1,
+      "message": "values_ is an std::unordered_map\u003c\u003e so iterating over here doesn\u0027t guarantee any order in the result, hence the sort requirement. This is not needed for GetCurrentScopeValues because KeyValueMap is an std::map\u003c\u003e. Both methods should have the same complexity, but GetCurrentScopeValuesList() should be faster an use a lot less memory.",
+      "parentUuid": "da422b4a_8f139335",
       "revId": "e9d99c6a7ef6c25bf92f945f6fca8ecf162d2ffb",
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
       "unresolved": true
@@ -64,6 +100,24 @@
       "writtenOn": "2019-01-11T21:04:03Z",
       "side": 1,
       "message": "\"Apply\" would make more sense to me as \"Copy\" instead.",
+      "revId": "e9d99c6a7ef6c25bf92f945f6fca8ecf162d2ffb",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "301f1cb3_57912124",
+        "filename": "tools/gn/scope.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 234,
+      "author": {
+        "id": 1000067
+      },
+      "writtenOn": "2019-01-14T12:52:54Z",
+      "side": 1,
+      "message": "Good idea. Done!",
+      "parentUuid": "942da3aa_e3a68333",
       "revId": "e9d99c6a7ef6c25bf92f945f6fca8ecf162d2ffb",
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
       "unresolved": true
