@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "d85ad503_8ee667d0",
+        "filename": "tools/gn/command_format.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 70,
+      "author": {
+        "id": 1000072
+      },
+      "writtenOn": "2019-01-14T18:10:29Z",
+      "side": 1,
+      "message": "Ah, I\u0027m not Window\u0027s literate. For non-Windows users I suppose using globs in the command line will be obvious, and it doesn\u0027t say anything in particular about the function of gn format to add this, so I deleted the line.",
+      "parentUuid": "17ccca2c_12e701a8",
+      "range": {
+        "startLine": 70,
+        "startChar": 12,
+        "endLine": 70,
+        "endChar": 35
+      },
+      "revId": "839ca520788d302a27c7c6061b66363cc8f8368f",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "37bc1763_aaf237e2",
         "filename": "tools/gn/command_format.cc",
         "patchSetId": 1
@@ -45,6 +69,30 @@
       "revId": "839ca520788d302a27c7c6061b66363cc8f8368f",
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "6a104150_58932133",
+        "filename": "tools/gn/command_format.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 1167,
+      "author": {
+        "id": 1000072
+      },
+      "writtenOn": "2019-01-14T18:10:29Z",
+      "side": 1,
+      "message": "Done.",
+      "parentUuid": "37bc1763_aaf237e2",
+      "range": {
+        "startLine": 1167,
+        "startChar": 7,
+        "endLine": 1167,
+        "endChar": 10
+      },
+      "revId": "839ca520788d302a27c7c6061b66363cc8f8368f",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": false
     }
   ]
 }
