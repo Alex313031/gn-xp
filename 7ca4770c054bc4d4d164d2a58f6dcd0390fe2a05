@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "33b30d1b_bdcdb942",
+        "filename": "infra/recipes/gn.py",
+        "patchSetId": 2
+      },
+      "lineNbr": 124,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-01-17T04:49:20Z",
+      "side": 1,
+      "message": "Maybe we should always build the debug for host with tests, and only cross-compile the release build? We could also consider introducing a third build type: production, and only cross-compile and upload that to CIPD.",
+      "range": {
+        "startLine": 123,
+        "startChar": 0,
+        "endLine": 124,
+        "endChar": 65
+      },
+      "revId": "7ca4770c054bc4d4d164d2a58f6dcd0390fe2a05",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": true
+    }
+  ]
+}
