@@ -16,6 +16,24 @@
       "revId": "9168b862e146340c36cc413ff4c29cf3131fd6b4",
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "39a79917_51109ccd",
+        "filename": "tools/gn/variables.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 2073,
+      "author": {
+        "id": 1000023
+      },
+      "writtenOn": "2019-01-23T23:05:33Z",
+      "side": 1,
+      "message": "I don\u0027t think so -- output_conversion is a valid target variable (for generated_file types), and it\u0027s used in that code. The issue is that if it\u0027s in the help, we get the not-helpful version below instead of the useful one. I couldn\u0027t figure out a way to have both without special-casing it, which I can do if you\u0027d rather.",
+      "parentUuid": "6c2f9d6e_dd181b97",
+      "revId": "9168b862e146340c36cc413ff4c29cf3131fd6b4",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": true
     }
   ]
 }
