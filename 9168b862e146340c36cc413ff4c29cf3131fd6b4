@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6c2f9d6e_dd181b97",
+        "filename": "tools/gn/variables.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 2073,
+      "author": {
+        "id": 1000004
+      },
+      "writtenOn": "2019-01-23T22:50:48Z",
+      "side": 1,
+      "message": "Should this be deleted if below is too?",
+      "revId": "9168b862e146340c36cc413ff4c29cf3131fd6b4",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": true
+    }
+  ]
+}
