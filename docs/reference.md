@@ -10,7 +10,7 @@
     *   [check: Check header dependencies.](#cmd_check)
     *   [clean: Cleans the output directory.](#cmd_clean)
     *   [desc: Show lots of insightful information about a target or config.](#cmd_desc)
-    *   [format: Format .gn file.](#cmd_format)
+    *   [format: Format .gn files.](#cmd_format)
     *   [gen: Generate ninja files.](#cmd_gen)
     *   [help: Does what you think.](#cmd_help)
     *   [ls: List matching targets.](#cmd_ls)
@@ -115,7 +115,6 @@
     *   [lib_dirs: [directory list] Additional library directories.](#var_lib_dirs)
     *   [libs: [string list] Additional libraries to link.](#var_libs)
     *   [metadata: [scope] Metadata of this target.](#var_metadata)
-    *   [output_conversion: Data format for generated_file targets.](#var_output_conversion)
     *   [output_dir: [directory] Directory to put output file in.](#var_output_dir)
     *   [output_extension: [string] Value to use for the output's file extension.](#var_output_extension)
     *   [output_name: [string] Name for the output file other than the default.](#var_output_name)
@@ -602,7 +601,7 @@
       Shows defines set for the //base:base target, annotated by where
       each one was set from.
 ```
-### <a name="cmd_format"></a>**gn format [\--dump-tree] (\--stdin | &lt;build_file&gt;)**
+### <a name="cmd_format"></a>**gn format [\--dump-tree] (\--stdin | &lt;list of build_files...&gt;)**
 
 ```
   Formats .gn file to a standard format.
@@ -640,7 +639,7 @@
 
 #### **Examples**
 ```
-  gn format //some/BUILD.gn
+  gn format //some/BUILD.gn //some/other/BUILD.gn //and/another/BUILD.gn
   gn format some\\BUILD.gn
   gn format /abspath/some/BUILD.gn
   gn format --stdin
@@ -1573,7 +1572,7 @@
       deps = [ ":b" ]
     }
 
-    group("c") {
+    group("b") {
       metadata = {
         my_files = [ "bar.cpp" ]
         my_barrier = [ ":c" ]
@@ -1655,6 +1654,7 @@
 #### **Variables**
 
 ```
+  contents
   data_keys
   rebase
   walk_keys
@@ -5176,12 +5176,6 @@
       my_files = [ "a.txt", "b.txt" ]
     }
   }
-```
-### <a name="var_output_conversion"></a>**"output_conversion**: Data format for generated_file targets.
-
-```
-  Controls how the "contents" of a generated_file target is formatted.
-  See "gn help output_conversion".
 ```
 ### <a name="var_output_dir"></a>**output_dir**: [directory] Directory to put output file in.
 
