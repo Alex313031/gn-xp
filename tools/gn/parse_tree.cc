@@ -10,6 +10,7 @@
 #include <string>
 #include <tuple>
 
+#include "base/json/string_escape.h"
 #include "base/stl_util.h"
 #include "base/strings/string_number_conversions.h"
 #include "tools/gn/functions.h"
@@ -188,6 +189,16 @@ void AccessorNode::Print(std::ostream& out, int indent) const {
     member_->Print(out, indent + 1);
 }
 
+void AccessorNode::PrintJSON(std::ostream& out, int indent) const {
+  out << IndentFor(indent) << "{ \"type\": \"ACCESSOR\", \"value\": \"" <<
+      base_.value() << "\", \"child\": [\n";
+  if (index_)
+    index_->PrintJSON(out, indent + 1);
+  else if (member_)
+    member_->PrintJSON(out, indent + 1);
+  out << "\n" << IndentFor(indent) << "]}";
+}
+
 Value AccessorNode::ExecuteArrayAccess(Scope* scope, Err* err) const {
   const Value* base_value = scope->GetValue(base_.value(), true);
   if (!base_value) {
@@ -318,6 +329,15 @@ void BinaryOpNode::Print(std::ostream& out, int indent) const {
   right_->Print(out, indent + 1);
 }
 
+void BinaryOpNode::PrintJSON(std::ostream& out, int indent) const {
+  out << IndentFor(indent) << "{ \"type\": \"BINARY\", \"value\" : \"" << op_.value()
+      << "\", \"child\": [\n";
+  left_->PrintJSON(out, indent + 1);
+  out << ",\n";
+  right_->PrintJSON(out, indent + 1);
+  out << "\n" << IndentFor(indent) << "]}";
+}
+
 // BlockNode ------------------------------------------------------------------
 
 BlockNode::BlockNode(ResultMode result_mode) : result_mode_(result_mode) {}
@@ -397,6 +417,22 @@ void BlockNode::Print(std::ostream& out, int indent) const {
     end_->Print(out, indent + 1);
 }
 
+void BlockNode::PrintJSON(std::ostream& out, int indent) const {
+  out << IndentFor(indent) << "{ \"type\": \"BLOCK\", \"child\": [\n";
+  bool first = true;
+  for (const auto& statement : statements_) {
+    if (!first)
+      out << ",\n";
+    else
+      first = false;
+    statement->PrintJSON(out, indent + 1);
+    first = false;
+  }
+  if (end_ && end_->comments())
+    end_->PrintJSON(out, indent + 1);
+  out << "\n" << IndentFor(indent) << "]}";
+}
+
 // ConditionNode --------------------------------------------------------------
 
 ConditionNode::ConditionNode() = default;
@@ -450,6 +486,18 @@ void ConditionNode::Print(std::ostream& out, int indent) const {
     if_false_->Print(out, indent + 1);
 }
 
+void ConditionNode::PrintJSON(std::ostream& out, int indent) const {
+  out << IndentFor(indent) << "{ \"type\": \"CONDITION\", \"child\": [\n";
+  condition_->PrintJSON(out, indent + 1);
+  out << ",\n";
+  if_true_->PrintJSON(out, indent + 1);
+  if (if_false_) {
+    out << ",\n";
+    if_false_->PrintJSON(out, indent + 1);
+  }
+  out << "\n" << IndentFor(indent) << "]}";
+}
+
 // FunctionCallNode -----------------------------------------------------------
 
 FunctionCallNode::FunctionCallNode() = default;
@@ -483,6 +531,17 @@ void FunctionCallNode::Print(std::ostream& out, int indent) const {
   args_->Print(out, indent + 1);
   if (block_)
     block_->Print(out, indent + 1);
+}
+
+void FunctionCallNode::PrintJSON(std::ostream& out, int indent) const {
+  out << IndentFor(indent) << "{ \"type\": \"FUNCTION\", \"value\": \""
+      << function_.value() << "\", \"child\": [\n";
+  args_->PrintJSON(out, indent + 1);
+  if (block_) {
+    out << ",\n";
+    block_->PrintJSON(out, indent + 1);
+  }
+  out << "\n" << IndentFor(indent) << "]}";
 }
 
 void FunctionCallNode::SetNewLocation(int line_number) {
@@ -544,6 +603,11 @@ void IdentifierNode::Print(std::ostream& out, int indent) const {
   PrintComments(out, indent);
 }
 
+void IdentifierNode::PrintJSON(std::ostream& out, int indent) const {
+  out << IndentFor(indent) << "{ \"type\": \"IDENTIFIER\", \"value\": \""
+      << value_.value() << "\" }";
+}
+
 void IdentifierNode::SetNewLocation(int line_number) {
   Location old = value_.location();
   value_.set_location(
@@ -597,6 +661,21 @@ void ListNode::Print(std::ostream& out, int indent) const {
     cur->Print(out, indent + 1);
   if (end_ && end_->comments())
     end_->Print(out, indent + 1);
+}
+
+void ListNode::PrintJSON(std::ostream& out, int indent) const {
+  out << IndentFor(indent) << "{ \"type\": \"LIST\", \"child\": [\n";
+  bool first = true;
+  for (const auto& cur : contents_) {
+    if (!first)
+      out << ",\n";
+    else
+      first = false;
+    cur->PrintJSON(out, indent + 1);
+  }
+  if (end_ && end_->comments())
+    end_->PrintJSON(out, indent + 1);
+  out << "\n" << IndentFor(indent) << "]}";
 }
 
 template <typename Comparator>
@@ -799,6 +878,11 @@ void LiteralNode::Print(std::ostream& out, int indent) const {
   PrintComments(out, indent);
 }
 
+void LiteralNode::PrintJSON(std::ostream& out, int indent) const {
+  out << IndentFor(indent) << "{ \"type\": \"LITERAL\", \"value\": " <<
+      value_.value() << "}";
+}
+
 void LiteralNode::SetNewLocation(int line_number) {
   Location old = value_.location();
   value_.set_location(
@@ -837,6 +921,12 @@ void UnaryOpNode::Print(std::ostream& out, int indent) const {
   operand_->Print(out, indent + 1);
 }
 
+void UnaryOpNode::PrintJSON(std::ostream& out, int indent) const {
+  out << IndentFor(indent) << "{ \"type\": \"UNARY\", \"value\": \"" << op_.value() << "\", \"child\": [\n";
+  operand_->PrintJSON(out, indent + 1);
+  out << IndentFor(indent) << "] }\n";
+}
+
 // BlockCommentNode ------------------------------------------------------------
 
 BlockCommentNode::BlockCommentNode() = default;
@@ -865,6 +955,11 @@ void BlockCommentNode::Print(std::ostream& out, int indent) const {
   PrintComments(out, indent);
 }
 
+void BlockCommentNode::PrintJSON(std::ostream& out, int indent) const {
+  out << IndentFor(indent) << "{ \"type\": \"BLOCK_COMMENT\", \"value\": "
+      << base::GetQuotedJSONString(comment_.value().as_string()) << " }";
+}
+
 // EndNode ---------------------------------------------------------------------
 
 EndNode::EndNode(const Token& token) : value_(token) {}
@@ -891,4 +986,8 @@ Err EndNode::MakeErrorDescribing(const std::string& msg,
 void EndNode::Print(std::ostream& out, int indent) const {
   out << IndentFor(indent) << "END(" << value_.value() << ")\n";
   PrintComments(out, indent);
+}
+
+void EndNode::PrintJSON(std::ostream& out, int indent) const {
+  out << IndentFor(indent) << "{ \"type\": \"END\", \"value\": \"" << value_.value() << "\" }";
 }

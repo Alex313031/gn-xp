@@ -96,6 +96,10 @@ class ParseNode {
   // by the given number of spaces.
   virtual void Print(std::ostream& out, int indent) const = 0;
 
+  // Prints a representation of this node to the given string, indenting
+  // by the given number of spaces.
+  virtual void PrintJSON(std::ostream& out, int indent) const = 0;
+
   const Comments* comments() const { return comments_.get(); }
   Comments* comments_mutable();
   void PrintComments(std::ostream& out, int indent) const;
@@ -143,6 +147,7 @@ class AccessorNode : public ParseNode {
       const std::string& msg,
       const std::string& help = std::string()) const override;
   void Print(std::ostream& out, int indent) const override;
+  void PrintJSON(std::ostream& out, int indent) const override;
 
   // Base is the thing on the left of the [] or dot, currently always required
   // to be an identifier token.
@@ -197,6 +202,7 @@ class BinaryOpNode : public ParseNode {
       const std::string& msg,
       const std::string& help = std::string()) const override;
   void Print(std::ostream& out, int indent) const override;
+  void PrintJSON(std::ostream& out, int indent) const override;
 
   const Token& op() const { return op_; }
   void set_op(const Token& t) { op_ = t; }
@@ -242,6 +248,7 @@ class BlockNode : public ParseNode {
       const std::string& msg,
       const std::string& help = std::string()) const override;
   void Print(std::ostream& out, int indent) const override;
+  void PrintJSON(std::ostream& out, int indent) const override;
 
   void set_begin_token(const Token& t) { begin_token_ = t; }
   void set_end(std::unique_ptr<EndNode> e) { end_ = std::move(e); }
@@ -283,6 +290,7 @@ class ConditionNode : public ParseNode {
       const std::string& msg,
       const std::string& help = std::string()) const override;
   void Print(std::ostream& out, int indent) const override;
+  void PrintJSON(std::ostream& out, int indent) const override;
 
   void set_if_token(const Token& token) { if_token_ = token; }
 
@@ -324,6 +332,7 @@ class FunctionCallNode : public ParseNode {
       const std::string& msg,
       const std::string& help = std::string()) const override;
   void Print(std::ostream& out, int indent) const override;
+  void PrintJSON(std::ostream& out, int indent) const override;
 
   const Token& function() const { return function_; }
   void set_function(Token t) { function_ = t; }
@@ -359,6 +368,7 @@ class IdentifierNode : public ParseNode {
       const std::string& msg,
       const std::string& help = std::string()) const override;
   void Print(std::ostream& out, int indent) const override;
+  void PrintJSON(std::ostream& out, int indent) const override;
 
   const Token& value() const { return value_; }
   void set_value(const Token& t) { value_ = t; }
@@ -385,6 +395,7 @@ class ListNode : public ParseNode {
       const std::string& msg,
       const std::string& help = std::string()) const override;
   void Print(std::ostream& out, int indent) const override;
+  void PrintJSON(std::ostream& out, int indent) const override;
 
   void set_begin_token(const Token& t) { begin_token_ = t; }
   const Token& Begin() const { return begin_token_; }
@@ -447,6 +458,7 @@ class LiteralNode : public ParseNode {
       const std::string& msg,
       const std::string& help = std::string()) const override;
   void Print(std::ostream& out, int indent) const override;
+  void PrintJSON(std::ostream& out, int indent) const override;
 
   const Token& value() const { return value_; }
   void set_value(const Token& t) { value_ = t; }
@@ -473,6 +485,7 @@ class UnaryOpNode : public ParseNode {
       const std::string& msg,
       const std::string& help = std::string()) const override;
   void Print(std::ostream& out, int indent) const override;
+  void PrintJSON(std::ostream& out, int indent) const override;
 
   const Token& op() const { return op_; }
   void set_op(const Token& t) { op_ = t; }
@@ -508,6 +521,7 @@ class BlockCommentNode : public ParseNode {
       const std::string& msg,
       const std::string& help = std::string()) const override;
   void Print(std::ostream& out, int indent) const override;
+  void PrintJSON(std::ostream& out, int indent) const override;
 
   const Token& comment() const { return comment_; }
   void set_comment(const Token& t) { comment_ = t; }
@@ -536,6 +550,7 @@ class EndNode : public ParseNode {
       const std::string& msg,
       const std::string& help = std::string()) const override;
   void Print(std::ostream& out, int indent) const override;
+  void PrintJSON(std::ostream& out, int indent) const override;
 
   const Token& value() const { return value_; }
   void set_value(const Token& t) { value_ = t; }

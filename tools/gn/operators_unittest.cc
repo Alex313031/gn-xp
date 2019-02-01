@@ -41,6 +41,7 @@ class TestParseNode : public ParseNode {
     return Err(this, msg);
   }
   void Print(std::ostream& out, int indent) const override {}
+  void PrintJSON(std::ostream& out, int indent) const override {}
 
  private:
   Value value_;
