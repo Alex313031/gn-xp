@@ -10,6 +10,7 @@
 #include <string>
 #include <tuple>
 
+#include "base/json/string_escape.h"
 #include "base/stl_util.h"
 #include "base/strings/string_number_conversions.h"
 #include "tools/gn/functions.h"
@@ -25,6 +26,14 @@ enum DepsCategory {
   DEPS_CATEGORY_ABSOLUTE,
   DEPS_CATEGORY_OTHER,
 };
+
+// Dictionary keys used for JSON-formatted tree dump.
+const char kNodeChild[] = "child";
+const char kNodeType[] = "type";
+const char kNodeValue[] = "value";
+const char kBeforeComment[] = "before_comment";
+const char kSuffixComment[] = "suffix_comment";
+const char kAfterComment[] = "after_comment";
 
 DepsCategory GetDepsCategory(base::StringPiece deps) {
   if (deps.length() < 2 || deps[0] != '"' || deps[deps.size() - 1] != '"')
@@ -145,6 +154,33 @@ void ParseNode::PrintComments(std::ostream& out, int indent) const {
   }
 }
 
+base::Value ParseNode::CreateJSONNode(const char* type) const {
+  base::Value dict(base::Value::Type::DICTIONARY);
+  dict.SetKey(kNodeType, base::Value(type));
+  AddCommentsJSONNodes(&dict);
+  return dict;
+}
+
+base::Value ParseNode::CreateJSONNode(const char* type,
+    const base::StringPiece& value) const {
+  base::Value dict(base::Value::Type::DICTIONARY);
+  dict.SetKey(kNodeType, base::Value(type));
+  dict.SetKey(kNodeValue, base::Value(value));
+  AddCommentsJSONNodes(&dict);
+  return dict;
+}
+
+void ParseNode::AddCommentsJSONNodes(base::Value* out_value) const {
+  if (comments_) {
+    for (const auto& token : comments_->before())
+      out_value->SetKey(kBeforeComment, base::Value(token.value()));
+    for (const auto& token : comments_->suffix())
+      out_value->SetKey(kSuffixComment, base::Value(token.value()));
+    for (const auto& token : comments_->after())
+      out_value->SetKey(kAfterComment, base::Value(token.value()));
+  }
+}
+
 // AccessorNode ---------------------------------------------------------------
 
 AccessorNode::AccessorNode() = default;
@@ -186,6 +222,17 @@ void AccessorNode::Print(std::ostream& out, int indent) const {
     index_->Print(out, indent + 1);
   else if (member_)
     member_->Print(out, indent + 1);
+}
+
+base::Value AccessorNode::GetJSONNode() const {
+  base::Value dict(CreateJSONNode("ACCESSOR", base_.value()));
+  base::Value child(base::Value::Type::LIST);
+  if (index_)
+    child.GetList().push_back(index_->GetJSONNode());
+  else if (member_)
+    child.GetList().push_back(member_->GetJSONNode());
+  dict.SetKey(kNodeChild, std::move(child));
+  return dict;
 }
 
 Value AccessorNode::ExecuteArrayAccess(Scope* scope, Err* err) const {
@@ -318,6 +365,15 @@ void BinaryOpNode::Print(std::ostream& out, int indent) const {
   right_->Print(out, indent + 1);
 }
 
+base::Value BinaryOpNode::GetJSONNode() const {
+  base::Value dict(CreateJSONNode("BINARY", op_.value()));
+  base::Value child(base::Value::Type::LIST);
+  child.GetList().push_back(left_->GetJSONNode());
+  child.GetList().push_back(right_->GetJSONNode());
+  dict.SetKey(kNodeChild, std::move(child));
+  return dict;
+}
+
 // BlockNode ------------------------------------------------------------------
 
 BlockNode::BlockNode(ResultMode result_mode) : result_mode_(result_mode) {}
@@ -397,6 +453,18 @@ void BlockNode::Print(std::ostream& out, int indent) const {
     end_->Print(out, indent + 1);
 }
 
+base::Value BlockNode::GetJSONNode() const {
+  base::Value dict(CreateJSONNode("BLOCK"));
+  base::Value statements(base::Value::Type::LIST);
+  for (const auto& statement : statements_)
+    statements.GetList().push_back(statement->GetJSONNode());
+  if (end_ && end_->comments())
+    statements.GetList().push_back(end_->GetJSONNode());
+
+  dict.SetKey("child", std::move(statements));
+  return dict;
+}
+
 // ConditionNode --------------------------------------------------------------
 
 ConditionNode::ConditionNode() = default;
@@ -450,6 +518,18 @@ void ConditionNode::Print(std::ostream& out, int indent) const {
     if_false_->Print(out, indent + 1);
 }
 
+base::Value ConditionNode::GetJSONNode() const {
+  base::Value dict = CreateJSONNode("CONDITION");
+  base::Value child(base::Value::Type::LIST);
+  child.GetList().push_back(condition_->GetJSONNode());
+  child.GetList().push_back(if_true_->GetJSONNode());
+  if (if_false_) {
+    child.GetList().push_back(if_false_->GetJSONNode());
+  }
+  dict.SetKey(kNodeChild, std::move(child));
+  return std::move(dict);
+}
+
 // FunctionCallNode -----------------------------------------------------------
 
 FunctionCallNode::FunctionCallNode() = default;
@@ -483,6 +563,17 @@ void FunctionCallNode::Print(std::ostream& out, int indent) const {
   args_->Print(out, indent + 1);
   if (block_)
     block_->Print(out, indent + 1);
+}
+
+base::Value FunctionCallNode::GetJSONNode() const {
+  base::Value dict = CreateJSONNode("FUNCTION", function_.value());
+  base::Value child(base::Value::Type::LIST);
+  child.GetList().push_back(args_->GetJSONNode());
+  if (block_) {
+    child.GetList().push_back(block_->GetJSONNode());
+  }
+  dict.SetKey(kNodeChild, std::move(child));
+  return dict;
 }
 
 void FunctionCallNode::SetNewLocation(int line_number) {
@@ -544,6 +635,10 @@ void IdentifierNode::Print(std::ostream& out, int indent) const {
   PrintComments(out, indent);
 }
 
+base::Value IdentifierNode::GetJSONNode() const {
+  return CreateJSONNode("IDENTIFIER", value_.value());
+}
+
 void IdentifierNode::SetNewLocation(int line_number) {
   Location old = value_.location();
   value_.set_location(
@@ -597,6 +692,19 @@ void ListNode::Print(std::ostream& out, int indent) const {
     cur->Print(out, indent + 1);
   if (end_ && end_->comments())
     end_->Print(out, indent + 1);
+}
+
+base::Value ListNode::GetJSONNode() const {
+  base::Value dict(CreateJSONNode("LIST"));
+  base::Value child(base::Value::Type::LIST);
+  for (const auto& cur : contents_) {
+    child.GetList().push_back(cur->GetJSONNode());
+  }
+  if (end_ && end_->comments()) {
+    child.GetList().push_back(end_->GetJSONNode());
+  }
+  dict.SetKey(kNodeChild, std::move(child));
+  return dict;
 }
 
 template <typename Comparator>
@@ -799,6 +907,10 @@ void LiteralNode::Print(std::ostream& out, int indent) const {
   PrintComments(out, indent);
 }
 
+base::Value LiteralNode::GetJSONNode() const {
+  return CreateJSONNode("LITERAL", value_.value());
+}
+
 void LiteralNode::SetNewLocation(int line_number) {
   Location old = value_.location();
   value_.set_location(
@@ -837,6 +949,14 @@ void UnaryOpNode::Print(std::ostream& out, int indent) const {
   operand_->Print(out, indent + 1);
 }
 
+base::Value UnaryOpNode::GetJSONNode() const {
+  base::Value dict = CreateJSONNode("UNARY", op_.value());
+  base::Value child(base::Value::Type::LIST);
+  child.GetList().push_back(operand_->GetJSONNode());
+  dict.SetKey(kNodeChild, std::move(child));
+  return dict;
+}
+
 // BlockCommentNode ------------------------------------------------------------
 
 BlockCommentNode::BlockCommentNode() = default;
@@ -865,6 +985,12 @@ void BlockCommentNode::Print(std::ostream& out, int indent) const {
   PrintComments(out, indent);
 }
 
+base::Value BlockCommentNode::GetJSONNode() const {
+  std::string escaped;
+  base::EscapeJSONString(comment_.value().as_string(), false, &escaped);
+  return CreateJSONNode("BLOCK_COMMENT", escaped);
+}
+
 // EndNode ---------------------------------------------------------------------
 
 EndNode::EndNode(const Token& token) : value_(token) {}
@@ -891,4 +1017,8 @@ Err EndNode::MakeErrorDescribing(const std::string& msg,
 void EndNode::Print(std::ostream& out, int indent) const {
   out << IndentFor(indent) << "END(" << value_.value() << ")\n";
   PrintComments(out, indent);
+}
+
+base::Value EndNode::GetJSONNode() const {
+  return CreateJSONNode("END", value_.value());
 }
