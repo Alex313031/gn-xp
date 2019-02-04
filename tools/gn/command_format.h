@@ -12,13 +12,19 @@ class SourceFile;
 
 namespace commands {
 
+enum class TreeDumpMode {
+  kInactive,
+  kPlainText,
+  kJSON
+};
+
 bool FormatFileToString(Setup* setup,
                         const SourceFile& file,
-                        bool dump_tree,
+                        TreeDumpMode dump_tree,
                         std::string* output);
 
 bool FormatStringToString(const std::string& input,
-                          bool dump_tree,
+                          TreeDumpMode dump_tree,
                           std::string* output);
 
 }  // namespace commands
