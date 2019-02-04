@@ -1,0 +1,61 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "e893be76_a6a66abb",
+        "filename": "tools/gn/command_format.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 64,
+      "author": {
+        "id": 1000014
+      },
+      "writtenOn": "2019-02-04T17:44:12Z",
+      "side": 1,
+      "message": "(before you do this, read the other comment to see what direction you want to go)\n\nI think I would prefer a slightly different command-line API:\n\n  --dump-tree[\u003d( text | json )]\n      Dumps the parse tree to stdout and does not update the file or\n      print formatted output. If no format is specified, text format will\n      be used.",
+      "range": {
+        "startLine": 64,
+        "startChar": 9,
+        "endLine": 64,
+        "endChar": 13
+      },
+      "revId": "82e2c5492b45aa6041e18a9bd4aca021de95f69b",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "b648ce8b_e5b07bc2",
+        "filename": "tools/gn/command_format.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 1156,
+      "author": {
+        "id": 1000014
+      },
+      "writtenOn": "2019-02-04T17:44:12Z",
+      "side": 1,
+      "message": "This can be simplified with the above interface change.",
+      "revId": "82e2c5492b45aa6041e18a9bd4aca021de95f69b",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "8419ca03_226e2997",
+        "filename": "tools/gn/parse_tree.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 102,
+      "author": {
+        "id": 1000014
+      },
+      "writtenOn": "2019-02-04T17:44:12Z",
+      "side": 1,
+      "message": "The thing that we do for \"gn desc\" that I like is that it generates a hierarchy of base::Value, and then the formatting is applied to that. This allows the core classes to be simplified and puts the output control in the frontend where it belongs.\n\nFor this patch, that means that you replace the Print() command with GetNode rather than having to ways for a node to output itself. Then there would be a helper that converts the base::Value to text or JSON.\n\nI\u0027m only concerned about readability. You don\u0027t have to exactly match the old format exactly (it may require updating some test expectations).\n\nAs long as the JSON output is easily readable, I\u0027m actually fine if you want to remove the text format which might simplify the code. The parser_unittests.cc files will need updating, but the format may change slightly going from base::Value to text anyway.",
+      "revId": "82e2c5492b45aa6041e18a9bd4aca021de95f69b",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": true
+    }
+  ]
+}
