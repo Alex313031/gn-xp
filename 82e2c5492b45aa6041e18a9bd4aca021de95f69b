@@ -92,6 +92,24 @@
       "revId": "82e2c5492b45aa6041e18a9bd4aca021de95f69b",
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "d938f15d_1cec8f3d",
+        "filename": "tools/gn/parse_tree.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 102,
+      "author": {
+        "id": 1000116
+      },
+      "writtenOn": "2019-02-05T05:59:54Z",
+      "side": 1,
+      "message": "I think it would be simper than existing Print() functions, as it\u0027d aggregate representations logic to one place. I\u0027ll revise this patch to cover it and will ask review again.",
+      "parentUuid": "814c8e0b_49d806af",
+      "revId": "82e2c5492b45aa6041e18a9bd4aca021de95f69b",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": true
     }
   ]
 }
