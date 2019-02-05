@@ -56,6 +56,24 @@
       "revId": "82e2c5492b45aa6041e18a9bd4aca021de95f69b",
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "69385254_5b52236f",
+        "filename": "tools/gn/parse_tree.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 102,
+      "author": {
+        "id": 1000116
+      },
+      "writtenOn": "2019-02-05T03:03:12Z",
+      "side": 1,
+      "message": "I think the JSON output by this change is not as readable as before.\nFor example,\n-----\n  # Here is cflags\n  cflags \u003d [ \"-fvisibility\u003dpublic\" ]  # suffix comment \"\n-----\n\nwill be rendered like:\n-----\n  {\n    \"before_comment\": \"# Here is cflags\",\n    \"child\": [ {\n       \"type\": \"IDENTIFIER\",\n       \"value\": \"cflags\"\n    }, {\n       \"child\": [ {\n          \"type\": \"LITERAL\",\n          \"value\": \"\\\"-fvisibility\u003dpublic\\\"\"\n       } ],\n       \"type\": \"LIST\"\n    } ],\n    \"suffix_comment\": \"# suffix comment \\\"\",\n    \"type\": \"BINARY\",\n    \"value\": \"\u003d\"\n }\n-----\nPain point with this simple pretty print of JSON would be that:\n- All hierarchy is expressed by \"child\" element, which makes rendering relatively redundant.\n- Cannot specify ordering of keys for rendering. If it\u0027s sorted alphabetically, \"type\" will come 2nd last, which is after all child nodes.\n\nDo you think it\u0027s acceptable to replace existing text format with this?\n(and optionally, to add logic to text-format the base::Value tree later?)",
+      "parentUuid": "8419ca03_226e2997",
+      "revId": "82e2c5492b45aa6041e18a9bd4aca021de95f69b",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": true
     }
   ]
 }
