@@ -74,6 +74,24 @@
       "revId": "82e2c5492b45aa6041e18a9bd4aca021de95f69b",
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "814c8e0b_49d806af",
+        "filename": "tools/gn/parse_tree.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 102,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2019-02-05T05:21:27Z",
+      "side": 1,
+      "message": "Hm, I agree, that is not very readable. How do you think a Value-to-text converter would compare in overall complexity to the existing Print() functions?",
+      "parentUuid": "69385254_5b52236f",
+      "revId": "82e2c5492b45aa6041e18a9bd4aca021de95f69b",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": true
     }
   ]
 }
