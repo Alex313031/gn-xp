@@ -52,6 +52,24 @@
       "revId": "9168b862e146340c36cc413ff4c29cf3131fd6b4",
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "ae7c0dd1_96637330",
+        "filename": "tools/gn/variables.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 2073,
+      "author": {
+        "id": 1000023
+      },
+      "writtenOn": "2019-02-06T18:38:11Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "c63211c0_8f8a045c",
+      "revId": "9168b862e146340c36cc413ff4c29cf3131fd6b4",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": false
     }
   ]
 }
