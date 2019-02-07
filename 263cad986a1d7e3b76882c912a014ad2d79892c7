@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "30c1b98f_7e4321cf",
+        "filename": "tools/gn/variables.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 1367,
+      "author": {
+        "id": 1000014
+      },
+      "writtenOn": "2019-02-07T00:16:55Z",
+      "side": 1,
+      "message": "While you\u0027re here, can you out-dent this line?",
+      "revId": "263cad986a1d7e3b76882c912a014ad2d79892c7",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": true
+    }
+  ]
+}
