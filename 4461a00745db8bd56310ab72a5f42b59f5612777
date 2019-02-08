@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "727f23c5_c05d4371",
+        "filename": "tools/gn/parse_tree.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 34,
+      "author": {
+        "id": 1000014
+      },
+      "writtenOn": "2019-02-08T19:10:22Z",
+      "side": 1,
+      "message": "Can you have a uniform prefix for these constants to help group them together and also provide some namespacing? I\u0027m thinking like kJsonNodeChild, kJsonBeforeComment, etc.",
+      "revId": "4461a00745db8bd56310ab72a5f42b59f5612777",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": true
+    }
+  ]
+}
