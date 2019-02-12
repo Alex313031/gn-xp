@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "8744b2a4_47942472",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 11
+      },
+      "lineNbr": 15,
+      "author": {
+        "id": 1000012
+      },
+      "writtenOn": "2019-02-12T22:51:27Z",
+      "side": 1,
+      "message": "I think in the bug description you actually have A and B reversed (B depends on A). Can you rewrite this description to match that, to avoid confusion?\n\nThat said, I *think* your analysis is correct and it should be safe to remove the dependency so that you can compile things earlier, but I\u0027m curious to see if brettw thinks of a case I\u0027m not thinking of.\n\nObviously, this is somewhat risky in the case where public_deps is wrong. Do we know if `gn check` will catch that and complain?",
+      "revId": "336bae461c9aa420c1eb42a5412abadc606018c9",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": true
+    }
+  ]
+}
