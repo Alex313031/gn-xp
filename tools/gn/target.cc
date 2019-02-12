@@ -585,26 +585,42 @@ void Target::PullDependentTargetLibs() {
     PullDependentTargetLibsFrom(dep.ptr, false);
 }
 
-void Target::PullRecursiveHardDeps() {
-  for (const auto& pair : GetDeps(DEPS_LINKED)) {
-    // Direct hard dependencies.
-    if (hard_dep() || pair.ptr->hard_dep()) {
-      recursive_hard_deps_.insert(pair.ptr);
-      continue;
-    }
-
-    // If |pair.ptr| is binary target and |pair.ptr| has no public header,
-    // |this| target does not need to have |pair.ptr|'s hard_deps as its
-    // hard_deps to start compiles earlier.
-    if (pair.ptr->IsBinary() && !pair.ptr->all_headers_public() &&
-        pair.ptr->public_headers().empty()) {
-      continue;
-    }
-
-    // Recursive hard dependencies of all dependencies.
-    recursive_hard_deps_.insert(pair.ptr->recursive_hard_deps().begin(),
-                                pair.ptr->recursive_hard_deps().end());
+void Target::PullRecursiveHardDepsFrom(const Target* dep, bool is_public) {
+  // Direct hard dependencies.
+  if (hard_dep() || dep->hard_dep()) {
+    recursive_hard_deps_.insert(dep);
+    return;
   }
+
+  // If |dep| is binary target and |dep| has no public header,
+  // |this| target does not need to have |dep|'s hard_deps as its
+  // hard_deps to start compiles earlier.
+  if (dep->IsBinary() && !dep->all_headers_public() &&
+      dep->public_headers().empty()) {
+    return;
+  }
+
+  // If |dep| is binary target and |dep| is private dependency,
+  // |this| target does not need to have |dep|'s hard_deps as its
+  // hard_deps to start compiles earlier.
+  // |this| only depends on direct or indirect public_deps other than its
+  // private deps.
+  if (IsBinary() && dep->IsBinary() && !is_public) {
+    for (const auto& public_dep : dep->public_deps())
+      PullRecursiveHardDepsFrom(public_dep.ptr, true);
+    return;
+  }
+
+  // Recursive hard dependencies of all dependencies.
+  recursive_hard_deps_.insert(dep->recursive_hard_deps().begin(),
+                              dep->recursive_hard_deps().end());
+}
+
+void Target::PullRecursiveHardDeps() {
+  for (const auto& dep : public_deps_)
+    PullRecursiveHardDepsFrom(dep.ptr, true);
+  for (const auto& dep : private_deps_)
+    PullRecursiveHardDepsFrom(dep.ptr, false);
 }
 
 void Target::PullRecursiveBundleData() {
