@@ -7,6 +7,7 @@
 #include <memory>
 #include <sstream>
 #include <utility>
+#include <iostream>
 
 #include "tools/gn/config.h"
 #include "tools/gn/ninja_target_command_util.h"
@@ -462,6 +463,95 @@ TEST_F(NinjaBinaryTargetWriterTest, NoHardDepsToNoPublicHeaderTarget) {
 
   std::string final_str = final_out.str();
   EXPECT_EQ(final_expected, final_str);
+}
+
+TEST_F(NinjaBinaryTargetWriterTest, NoDepsToIndirectPrivateDeps) {
+  Err err;
+  TestWithScope setup;
+
+  SourceFile generated_file("//out/Debug/generated.h");
+
+  // An action does code generation.
+  Target action(setup.settings(), Label(SourceDir("//foo/"), "generate"));
+  action.set_output_type(Target::ACTION);
+  action.visibility().SetPublic();
+  action.SetToolchain(setup.toolchain());
+  action.set_output_dir(SourceDir("//out/Debug/foo/"));
+  action.action_values().outputs() =
+      SubstitutionList::MakeForTest("//out/Debug/generated.h");
+  ASSERT_TRUE(action.OnResolved(&err));
+
+  // A source set include geneated code header in cc files, header in this
+  // target does include generated headers.
+  Target gen_obj(setup.settings(), Label(SourceDir("//foo/"), "gen_obj"));
+  gen_obj.set_output_type(Target::SOURCE_SET);
+  gen_obj.set_output_dir(SourceDir("//out/Debug/foo/"));
+  gen_obj.sources().push_back(SourceFile("//obj/obj.cc"));
+  gen_obj.sources().push_back(SourceFile("//obj/obj.h"));
+  gen_obj.visibility().SetPublic();
+  gen_obj.public_deps().push_back(LabelTargetPair(&action));
+  gen_obj.SetToolchain(setup.toolchain());
+  ASSERT_TRUE(gen_obj.OnResolved(&err));
+
+  std::ostringstream obj_out;
+  NinjaBinaryTargetWriter obj_writer(&gen_obj, obj_out);
+  obj_writer.Run();
+
+  const char obj_expected[] =
+      "defines =\n"
+      "include_dirs =\n"
+      "cflags =\n"
+      "cflags_cc =\n"
+      "root_out_dir = .\n"
+      "target_out_dir = obj/foo\n"
+      "target_output_name = gen_obj\n"
+      "\n"
+      "build obj/obj/gen_obj.obj.o: cxx ../../obj/obj.cc"
+      " || obj/foo/generate.stamp\n"
+      "\n"
+      "build obj/foo/gen_obj.stamp: stamp obj/obj/gen_obj.obj.o"
+      " || obj/foo/generate.stamp\n";
+
+  std::string obj_str = obj_out.str();
+  EXPECT_EQ(obj_expected, obj_str);
+
+  // A shared library depends on gen_obj.
+  Target gen_lib(setup.settings(), Label(SourceDir("//foo/"), "gen_lib"));
+  gen_lib.set_output_type(Target::SHARED_LIBRARY);
+  gen_lib.set_output_dir(SourceDir("//out/Debug/foo/"));
+  gen_lib.sources().push_back(SourceFile("//foo/foo.h"));
+  gen_lib.sources().push_back(SourceFile("//foo/foo.cc"));
+  gen_lib.visibility().SetPublic();
+  gen_lib.private_deps().push_back(LabelTargetPair(&gen_obj));
+  gen_lib.SetToolchain(setup.toolchain());
+  ASSERT_TRUE(gen_lib.OnResolved(&err));
+
+  std::ostringstream lib_out;
+  NinjaBinaryTargetWriter lib_writer(&gen_lib, lib_out);
+  lib_writer.Run();
+
+  // obj/foo/libgen_lib.foo.o does not depends on obj/foo/gen_obj.stamp (and
+  // its depdendency obj/foo/generate.stamp).
+  const char lib_expected[] =
+      "defines =\n"
+      "include_dirs =\n"
+      "cflags =\n"
+      "cflags_cc =\n"
+      "root_out_dir = .\n"
+      "target_out_dir = obj/foo\n"
+      "target_output_name = libgen_lib\n"
+      "\n"
+      "build obj/foo/libgen_lib.foo.o: cxx ../../foo/foo.cc\n"
+      "\n"
+      "build ./libgen_lib.so: solink obj/foo/libgen_lib.foo.o obj/obj/gen_obj.obj.o"
+      " || obj/foo/gen_obj.stamp\n"
+      "  ldflags =\n"
+      "  libs =\n"
+      "  output_extension = .so\n"
+      "  output_dir = foo\n";
+
+  std::string lib_str = lib_out.str();
+  EXPECT_EQ(lib_expected, lib_str);
 }
 
 // Tests libs are applied.
