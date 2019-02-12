@@ -601,6 +601,21 @@ void Target::PullRecursiveHardDeps() {
       continue;
     }
 
+    // If |pair.ptr| is binary target, |this| target does not need to depend on
+    // |pair.ptr|'s private_deps.
+    // |this| only depends on direct or indirect |public_deps|'s hard deps.
+    if (pair.ptr->IsBinary()) {
+      for (const auto& public_dep : pair.ptr->public_deps()) {
+        if (public_dep.ptr->hard_dep()) {
+          recursive_hard_deps_.insert(public_dep.ptr);
+          continue;
+        }
+        recursive_hard_deps_.insert(public_dep.ptr->recursive_hard_deps().begin(),
+                                    public_dep.ptr->recursive_hard_deps().end());
+      }
+      continue;
+    }
+
     // Recursive hard dependencies of all dependencies.
     recursive_hard_deps_.insert(pair.ptr->recursive_hard_deps().begin(),
                                 pair.ptr->recursive_hard_deps().end());
