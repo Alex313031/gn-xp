@@ -16,6 +16,24 @@
       "revId": "336bae461c9aa420c1eb42a5412abadc606018c9",
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "8c538431_638c3258",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 11
+      },
+      "lineNbr": 15,
+      "author": {
+        "id": 1000030
+      },
+      "writtenOn": "2019-02-12T23:10:04Z",
+      "side": 1,
+      "message": "\u003e I think in the bug description you actually have A and B reversed (B depends on A). Can you rewrite this description to match that, to avoid confusion?\n\u003e \n\nDone.\n\n\u003e Obviously, this is somewhat risky in the case where public_deps is wrong. Do we know if `gn check` will catch that and complain?\n\ngn check seems not perfect to detect such wrong usage.\nBut https://crbug.com/gn/49 is filed for that.",
+      "parentUuid": "8744b2a4_47942472",
+      "revId": "336bae461c9aa420c1eb42a5412abadc606018c9",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": true
     }
   ]
 }
