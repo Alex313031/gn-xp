@@ -343,6 +343,7 @@ class Target : public Item {
   void PullDependentTargetLibsFrom(const Target* dep, bool is_public);
   void PullDependentTargetLibs();
   void PullRecursiveHardDeps();
+  void PullRecursiveHardDepsFrom(const Target* dep, bool is_public);
   void PullRecursiveBundleData();
 
   // Fills the link and dependency output files when a target is resolved.
