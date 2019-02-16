@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6b04621e_db39e158",
+        "filename": "tools/gn/target.cc",
+        "patchSetId": 12
+      },
+      "lineNbr": 620,
+      "author": {
+        "id": 1000014
+      },
+      "writtenOn": "2019-02-16T00:21:33Z",
+      "side": 1,
+      "message": "I\u0027d rather this be an \"else\" arm and remove the continue above.",
+      "revId": "2600875d9e954a346c0757d8321b7c7b47c24dba",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": true
+    }
+  ]
+}
