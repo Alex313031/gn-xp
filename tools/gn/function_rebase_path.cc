@@ -66,7 +66,7 @@ Value ConvertOnePath(const Scope* scope,
     return result;
   const std::string& string_value = value.string_value();
 
-  bool looks_like_dir = ValueLooksLikeDir(string_value);
+  bool looks_like_dir = true; //ValueLooksLikeDir(string_value);
 
   // System-absolute output special case.
   if (convert_to_system_absolute) {

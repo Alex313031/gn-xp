@@ -44,6 +44,7 @@ TEST(RebasePath, Strings) {
 
   // Without a source root defined, we cannot move out of the source tree.
   EXPECT_EQ("../..", RebaseOne(scope, "../../..", "//out/Debug", "."));
+  EXPECT_EQ("..", RebaseOne(scope, "//out/Debug", "//out/Debug/foo", "."));
 
   // Source-absolute input paths.
   EXPECT_EQ("./", RebaseOne(scope, "//", "//", "//"));
