@@ -41,10 +41,12 @@ class Platform(object):
       self._platform = 'fuchsia'
     elif self._platform.startswith('freebsd'):
       self._platform = 'freebsd'
+    elif self._platform.startswith('openbsd'):
+      self._platform = 'openbsd'
 
   @staticmethod
   def known_platforms():
-    return ['linux', 'darwin', 'msvc', 'aix', 'fuchsia']
+    return ['linux', 'darwin', 'msvc', 'aix', 'fuchsia', 'openbsd']
 
   def platform(self):
     return self._platform
@@ -67,8 +69,11 @@ class Platform(object):
   def is_aix(self):
     return self._platform == 'aix'
 
+  def is_openbsd(self):
+    return self._platform == 'openbsd'
+
   def is_posix(self):
-    return self._platform in ['linux', 'freebsd', 'darwin', 'aix']
+    return self._platform in ['linux', 'freebsd', 'darwin', 'aix', 'openbsd']
 
 
 def main(argv):
@@ -173,6 +178,7 @@ def WriteGenericNinja(path, static_libraries, executables,
       'linux': 'build_linux.ninja.template',
       'freebsd': 'build_linux.ninja.template',
       'aix': 'build_aix.ninja.template',
+      'openbsd': 'build_openbsd.ninja.template',
   }[platform.platform()])
 
   with open(template_filename) as f:
@@ -658,6 +664,10 @@ def WriteGNNinja(path, platform, host, options):
         'ws2_32.lib',
         'Shlwapi.lib',
     ])
+
+  if platform.is_openbsd():
+    ldflags.extend(['-lpthread', '-L/usr/local/lib', '-lexecinfo'])
+    include_dirs += ["/usr/local/include"]
 
   # we just build static libraries that GN needs
   executables['gn']['libs'].extend(static_libraries.keys())
