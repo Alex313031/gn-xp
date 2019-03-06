@@ -1,0 +1,72 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "b23625ef_6228533a",
+        "filename": "tools/gn/commands.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 139,
+      "author": {
+        "id": 1000014
+      },
+      "writtenOn": "2019-03-06T17:48:52Z",
+      "side": 1,
+      "message": "Capital \"G\" :)",
+      "revId": "5eb49ed235cfa18ecfc9e6073844988ed89d2a50",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "f7d6d20a_61261acc",
+        "filename": "tools/gn/header_checker.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 435,
+      "author": {
+        "id": 1000014
+      },
+      "writtenOn": "2019-03-06T17:48:52Z",
+      "side": 1,
+      "message": "Just push_back here is OK since the object already exists and push_back will move it. I think \"push\" is easier to read.",
+      "revId": "5eb49ed235cfa18ecfc9e6073844988ed89d2a50",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "013ddaba_9325b76c",
+        "filename": "tools/gn/header_checker.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 438,
+      "author": {
+        "id": 1000014
+      },
+      "writtenOn": "2019-03-06T17:48:52Z",
+      "side": 1,
+      "message": "Same",
+      "revId": "5eb49ed235cfa18ecfc9e6073844988ed89d2a50",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "e34c8d8f_bcf924aa",
+        "filename": "tools/gn/header_checker.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 443,
+      "author": {
+        "id": 1000014
+      },
+      "writtenOn": "2019-03-06T17:48:52Z",
+      "side": 1,
+      "message": "Is this block specifically part of the feature described in the CL? This seems to be something a little bit different that I feel like needs more thought than a flag to optionally check generated files does.",
+      "revId": "5eb49ed235cfa18ecfc9e6073844988ed89d2a50",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": true
+    }
+  ]
+}
