@@ -131,12 +131,9 @@ bool HeaderChecker::Run(const std::vector<const Target*>& to_check,
                         bool force_check,
                         std::vector<Err>* errors) {
   FileMap files_to_check;
-  for (auto* check : to_check) {
-    // This function will get called with all target types, but check only
-    // applies to binary targets.
-    if (check->IsBinary())
-      AddTargetToFileMap(check, &files_to_check);
-  }
+  for (auto* check : to_check)
+    AddTargetToFileMap(check, &files_to_check);
+
   RunCheckOverFiles(files_to_check, force_check);
 
   if (errors_.empty())
@@ -200,11 +197,16 @@ void HeaderChecker::AddTargetToFileMap(const Target* target, FileMap* dest) {
 
   std::map<SourceFile, PublicGeneratedPair> files_to_public;
 
-  // First collect the normal files, they get the default visibility. If you
-  // depend on the compiled target, it should be enough to be able to include
-  // the header.
+  // First collect the normal files, sources in compile targets,
+  // inputs in action targets. They get the default visibility. If you
+  // depend on the compiled target, it should be enough to be able to
+  // include the header.
   for (const auto& source : target->sources()) {
     files_to_public[source].is_public = default_public;
+  }
+
+  for (const auto& input : target->config_values().inputs()) {
+    files_to_public[input].is_public = default_public;
   }
 
   // Add in the public files, forcing them to public. This may overwrite some
