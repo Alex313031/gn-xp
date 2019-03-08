@@ -72,6 +72,24 @@
     },
     {
       "key": {
+        "uuid": "fc229610_e89b6443",
+        "filename": "tools/gn/header_checker.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 435,
+      "author": {
+        "id": 1000014
+      },
+      "writtenOn": "2019-03-08T18:04:03Z",
+      "side": 1,
+      "message": "Yup! They both end up doing the same thing, but emplace is locally constructing a new one by calling the contructor with the given arguments, while push_back with a lvalue ref moves the parameter to the destination. These both end up calling the move constructor but I feel like push_back is more logically what we want.",
+      "parentUuid": "b4a16218_3b7e8330",
+      "revId": "5eb49ed235cfa18ecfc9e6073844988ed89d2a50",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "013ddaba_9325b76c",
         "filename": "tools/gn/header_checker.cc",
         "patchSetId": 1
