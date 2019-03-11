@@ -440,6 +440,20 @@ void HeaderChecker::CheckInclude(const Target* from_target,
     return;
   }
 
+  // Compilable files that are included by other files need to be
+  // checked recursively since they cannot be listed in the build
+  // system (or they would be compiled). This is common for unity
+  // build systems like Chromium's jumbo build.
+  SourceFileType type = GetSourceFileType(include_file);
+  if (type == SOURCE_CPP || type == SOURCE_C || type == SOURCE_M ||
+      type == SOURCE_MM) {
+    if (errors) {
+      // Ignore return value since it will insert any problems into
+      // |errors|.
+      CheckFile(from_target, include_file, errors);
+    }
+  }
+
   // One thing we didn't check for is targets that expose their dependents
   // headers in their own public headers.
   //
