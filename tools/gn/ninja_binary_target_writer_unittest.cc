@@ -464,6 +464,93 @@ TEST_F(NinjaBinaryTargetWriterTest, NoHardDepsToNoPublicHeaderTarget) {
   EXPECT_EQ(final_expected, final_str);
 }
 
+TEST_F(NinjaBinaryTargetWriterTest, NoDepsToIndirectPrivateDeps) {
+  Err err;
+  TestWithScope setup;
+
+  // An action does header generation included from public header.
+  Target action_public(setup.settings(), Label(SourceDir("//foo/"), "generate_public"));
+  action_public.set_output_type(Target::ACTION);
+  action_public.visibility().SetPublic();
+  action_public.SetToolchain(setup.toolchain());
+  action_public.set_output_dir(SourceDir("//out/Debug/foo/"));
+  action_public.action_values().outputs() =
+      SubstitutionList::MakeForTest("//out/Debug/public.h");
+  ASSERT_TRUE(action_public.OnResolved(&err));
+
+  // An action does header generation included from cc files.
+  Target action_private(setup.settings(), Label(SourceDir("//foo/"), "generate_private"));
+  action_private.set_output_type(Target::ACTION);
+  action_private.visibility().SetPublic();
+  action_private.SetToolchain(setup.toolchain());
+  action_private.set_output_dir(SourceDir("//out/Debug/foo/"));
+  action_private.action_values().outputs() =
+      SubstitutionList::MakeForTest("//out/Debug/private.h");
+  ASSERT_TRUE(action_private.OnResolved(&err));
+
+  // A source set include geneated code header in public header files.
+  Target deps_public(setup.settings(), Label(SourceDir("//foo/"), "public"));
+  deps_public.set_output_type(Target::SOURCE_SET);
+  deps_public.set_output_dir(SourceDir("//out/Debug/foo/"));
+  deps_public.sources().push_back(SourceFile("//obj/public.cc"));
+  deps_public.sources().push_back(SourceFile("//obj/public.h"));
+  deps_public.visibility().SetPublic();
+  deps_public.public_deps().push_back(LabelTargetPair(&action_public));
+  deps_public.SetToolchain(setup.toolchain());
+  ASSERT_TRUE(deps_public.OnResolved(&err));
+
+  // A source set include geneated code header in cc files, header in this
+  // target does include generated headers.
+  Target deps_private(setup.settings(), Label(SourceDir("//foo/"), "private"));
+  deps_private.set_output_type(Target::SOURCE_SET);
+  deps_private.set_output_dir(SourceDir("//out/Debug/foo/"));
+  deps_private.sources().push_back(SourceFile("//obj/private.cc"));
+  deps_private.sources().push_back(SourceFile("//obj/private.h"));
+  deps_private.visibility().SetPublic();
+  deps_private.private_deps().push_back(LabelTargetPair(&action_private));
+  deps_private.SetToolchain(setup.toolchain());
+  ASSERT_TRUE(deps_private.OnResolved(&err));
+
+  // A shared library depends on //foo:private and //foo:public.
+  Target foo(setup.settings(), Label(SourceDir("//foo/"), "foo"));
+  foo.set_output_type(Target::SHARED_LIBRARY);
+  foo.set_output_dir(SourceDir("//out/Debug/foo/"));
+  foo.sources().push_back(SourceFile("//foo/foo.h"));
+  foo.sources().push_back(SourceFile("//foo/foo.cc"));
+  foo.visibility().SetPublic();
+  foo.private_deps().push_back(LabelTargetPair(&deps_private));
+  foo.private_deps().push_back(LabelTargetPair(&deps_public));
+  foo.SetToolchain(setup.toolchain());
+  ASSERT_TRUE(foo.OnResolved(&err));
+
+  std::ostringstream foo_out;
+  NinjaBinaryTargetWriter foo_writer(&foo, foo_out);
+  foo_writer.Run();
+
+  // obj/foo/libfoo.foo.o only depends on obj/foo/generate_public.stamp, not
+  // depends on obj/foo/generate_private.stamp.
+  const char foo_expected[] =
+      "defines =\n"
+      "include_dirs =\n"
+      "cflags =\n"
+      "cflags_cc =\n"
+      "root_out_dir = .\n"
+      "target_out_dir = obj/foo\n"
+      "target_output_name = libfoo\n"
+      "\n"
+      "build obj/foo/libfoo.foo.o: cxx ../../foo/foo.cc || obj/foo/generate_public.stamp\n"
+      "\n"
+      "build ./libfoo.so: solink obj/foo/libfoo.foo.o obj/obj/private.private.o"
+      " obj/obj/public.public.o || obj/foo/private.stamp obj/foo/public.stamp\n"
+      "  ldflags =\n"
+      "  libs =\n"
+      "  output_extension = .so\n"
+      "  output_dir = foo\n";
+
+  std::string foo_str = foo_out.str();
+  EXPECT_EQ(foo_expected, foo_str);
+}
+
 // Tests libs are applied.
 TEST_F(NinjaBinaryTargetWriterTest, LibsAndLibDirs) {
   Err err;
