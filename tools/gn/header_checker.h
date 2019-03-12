@@ -7,6 +7,7 @@
 
 #include <condition_variable>
 #include <map>
+#include <set>
 #include <mutex>
 #include <vector>
 
@@ -131,6 +132,7 @@ class HeaderChecker : public base::RefCountedThreadSafe<HeaderChecker> {
                     const InputFile& source_file,
                     const SourceFile& include_file,
                     const LocationRange& range,
+                    std::set<std::pair<const Target*, const Target*>>* no_dependency_cache,
                     std::vector<Err>* errors) const;
 
   // Returns true if the given search_for target is a dependency of
