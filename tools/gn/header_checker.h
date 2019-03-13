@@ -76,6 +76,8 @@ class HeaderChecker : public base::RefCountedThreadSafe<HeaderChecker> {
   FRIEND_TEST_ALL_PREFIXES(HeaderCheckerTest,
                            SourceFileForInclude_FileNotFound);
   FRIEND_TEST_ALL_PREFIXES(HeaderCheckerTest, Friend);
+  FRIEND_TEST_ALL_PREFIXES(HeaderCheckerTest, CheckFile);
+  FRIEND_TEST_ALL_PREFIXES(HeaderCheckerTest, CheckFileRecursive);
 
   ~HeaderChecker();
 
@@ -107,15 +109,32 @@ class HeaderChecker : public base::RefCountedThreadSafe<HeaderChecker> {
   // Adds the sources and public files from the given target to the given map.
   static void AddTargetToFileMap(const Target* target, FileMap* dest);
 
+  // Returns true if the given file would be compiled if includes in
+  // a |sources| list. If this returns |true| it might not be correct
+  // to assume that file is listed anywhere since the build files
+  // could not do so without triggering side effects.
+  bool IsCompilableInclude(const SourceFile& include) const;
+
   // Returns true if the given file is in the output directory.
   bool IsFileInOuputDir(const SourceFile& file) const;
 
-  // Resolves the contents of an include to a SourceFile.
+  // Resolves the contents of an include to a SourceFile by finding it
+  // somewhere in the build system.
   SourceFile SourceFileForInclude(const base::StringPiece& relative_file_path,
                                   const std::vector<SourceDir>& include_dirs,
                                   const InputFile& source_file,
                                   const LocationRange& range,
                                   Err* err) const;
+
+  // Resolves the contents of an include to a SourceFile by looking at
+  // the disk rather than in the build system as
+  // |SourceFileForInclude| does.
+  SourceFile SourceFileForOnDiskInclude(
+      const base::StringPiece& relative_file_path,
+      const std::vector<SourceDir>& include_dirs,
+      const InputFile& source_file,
+      const LocationRange& range,
+      Err* err) const;
 
   // from_target is the target the file was defined from. It will be used in
   // error messages.
