@@ -100,8 +100,11 @@ What gets checked
     - GN does not run the preprocessor so will not understand conditional
       includes.
 
-    - Only includes matching known files in the build are checked: includes
-      matching unknown paths are ignored.
+    - Only includes matching known header files in the build are checked:
+      includes matching unknown paths are ignored.
+
+    - Non-header source files included by listed C-like source files are
+      checked recursively, also if they are not known to the build.
 
   For an include to be valid:
 
