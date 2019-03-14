@@ -69,6 +69,24 @@
       "revId": "e9b8854be547df53dd07dc941b80531031ae792b",
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "bf7a1b30_4402af70",
+        "filename": "tools/gn/header_checker_unittest.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 392,
+      "author": {
+        "id": 1000014
+      },
+      "writtenOn": "2019-03-14T17:53:13Z",
+      "side": 1,
+      "message": "Oh, I always just use the script I set up for Chromium. If there was something weird you had to do, it might be nice to do a patch to add that to the readme.",
+      "parentUuid": "a7c58c4c_988cfd65",
+      "revId": "e9b8854be547df53dd07dc941b80531031ae792b",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": false
     }
   ]
 }
