@@ -8,6 +8,7 @@
 #include <condition_variable>
 #include <map>
 #include <mutex>
+#include <set>
 #include <vector>
 
 #include "base/atomic_ref_count.h"
@@ -76,6 +77,9 @@ class HeaderChecker : public base::RefCountedThreadSafe<HeaderChecker> {
   FRIEND_TEST_ALL_PREFIXES(HeaderCheckerTest,
                            SourceFileForInclude_FileNotFound);
   FRIEND_TEST_ALL_PREFIXES(HeaderCheckerTest, Friend);
+  FRIEND_TEST_ALL_PREFIXES(HeaderCheckerTest, CheckFile);
+  FRIEND_TEST_ALL_PREFIXES(HeaderCheckerTest, CheckFileRecursive);
+  FRIEND_TEST_ALL_PREFIXES(HeaderCheckerTest, CheckFileInfiniteRecursive);
 
   ~HeaderChecker();
 
@@ -107,21 +111,40 @@ class HeaderChecker : public base::RefCountedThreadSafe<HeaderChecker> {
   // Adds the sources and public files from the given target to the given map.
   static void AddTargetToFileMap(const Target* target, FileMap* dest);
 
+  // Checks if a file is of a type that triggers compilation when
+  // included in the |sources| list. That effect means that when such
+  // files are used as header files, they cannot also be listed in
+  // |sources|. For such files the requirement that "headers" should
+  // be listed somewhere will be slightly relaxed.
+  bool IsCompilableInclude(const SourceFile& include) const;
+
   // Returns true if the given file is in the output directory.
   bool IsFileInOuputDir(const SourceFile& file) const;
 
-  // Resolves the contents of an include to a SourceFile.
+  // Resolves the contents of an include to a SourceFile by finding it
+  // somewhere in the build system.
   SourceFile SourceFileForInclude(const base::StringPiece& relative_file_path,
                                   const std::vector<SourceDir>& include_dirs,
                                   const InputFile& source_file,
                                   const LocationRange& range,
                                   Err* err) const;
 
+  // Resolves the contents of an include to a SourceFile by looking at
+  // the disk rather than in the build system as
+  // |SourceFileForInclude| does.
+  SourceFile SourceFileForOnDiskInclude(
+      const base::StringPiece& relative_file_path,
+      const std::vector<SourceDir>& include_dirs,
+      const InputFile& source_file,
+      const LocationRange& range,
+      Err* err) const;
+
   // from_target is the target the file was defined from. It will be used in
   // error messages.
   bool CheckFile(const Target* from_target,
                  const SourceFile& file,
-                 std::vector<Err>* err) const;
+                 std::vector<Err>* err,
+                 std::set<std::string>* visited=nullptr) const;
 
   // Checks that the given file in the given target can include the
   // given include file. If disallowed, adds the error or errors to
@@ -131,7 +154,8 @@ class HeaderChecker : public base::RefCountedThreadSafe<HeaderChecker> {
                     const InputFile& source_file,
                     const SourceFile& include_file,
                     const LocationRange& range,
-                    std::vector<Err>* errors) const;
+                    std::vector<Err>* errors,
+                    std::set<std::string>* visited=nullptr) const;
 
   // Returns true if the given search_for target is a dependency of
   // search_from.
