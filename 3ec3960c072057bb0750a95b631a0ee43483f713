@@ -1,0 +1,72 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "2124ac4a_f95cd972",
+        "filename": "tools/gn/header_checker.cc",
+        "patchSetId": 6
+      },
+      "lineNbr": 334,
+      "author": {
+        "id": 1000014
+      },
+      "writtenOn": "2019-03-18T18:27:28Z",
+      "side": 1,
+      "message": "Can you please clang-format this?",
+      "revId": "3ec3960c072057bb0750a95b631a0ee43483f713",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "83ab88f1_a748ca0b",
+        "filename": "tools/gn/header_checker.cc",
+        "patchSetId": 6
+      },
+      "lineNbr": 396,
+      "author": {
+        "id": 1000014
+      },
+      "writtenOn": "2019-03-18T18:27:28Z",
+      "side": 1,
+      "message": "Clang-format should also fix this line.",
+      "revId": "3ec3960c072057bb0750a95b631a0ee43483f713",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "5778af09_8312caa6",
+        "filename": "tools/gn/header_checker.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 1000014
+      },
+      "writtenOn": "2019-03-18T18:27:28Z",
+      "side": 1,
+      "message": "These should be sorted.",
+      "revId": "3ec3960c072057bb0750a95b631a0ee43483f713",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "dfc7abf7_835f4050",
+        "filename": "tools/gn/header_checker.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 130,
+      "author": {
+        "id": 1000014
+      },
+      "writtenOn": "2019-03-18T18:27:28Z",
+      "side": 1,
+      "message": "This function comment should document the meaning of the no_dependency_cache parameter",
+      "revId": "3ec3960c072057bb0750a95b631a0ee43483f713",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": true
+    }
+  ]
+}
