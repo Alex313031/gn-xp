@@ -2,6 +2,40 @@
   "comments": [
     {
       "key": {
+        "uuid": "08b3e13d_8fa6ef4e",
+        "filename": "tools/gn/header_checker.cc",
+        "patchSetId": 13
+      },
+      "lineNbr": 397,
+      "author": {
+        "id": 1000014
+      },
+      "writtenOn": "2019-03-19T21:01:58Z",
+      "side": 1,
+      "message": "Can you come up with a better name for this? The line below \"!no_dependency \u0026\u0026 IsDependency\" doesn\u0027t read very well with this name. My best idea is \"cached_no_dependency\".",
+      "revId": "1bc248211480d6fe012993eab55b7bb70f50af30",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "57693ffb_44abdd8c",
+        "filename": "tools/gn/header_checker.cc",
+        "patchSetId": 13
+      },
+      "lineNbr": 401,
+      "author": {
+        "id": 1000014
+      },
+      "writtenOn": "2019-03-19T21:01:58Z",
+      "side": 1,
+      "message": "Since we\u0027re renaming stuff, I think this would be better called \"add_to_cache\"",
+      "revId": "1bc248211480d6fe012993eab55b7bb70f50af30",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "8200b48d_6cae9443",
         "filename": "tools/gn/substitution_writer.h",
         "patchSetId": 13
@@ -13,6 +47,24 @@
       "writtenOn": "2019-03-19T12:13:32Z",
       "side": 1,
       "message": "This is build fix for vs2019 RC2",
+      "revId": "1bc248211480d6fe012993eab55b7bb70f50af30",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0559ea8c_88e23bb6",
+        "filename": "tools/gn/substitution_writer.h",
+        "patchSetId": 13
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 1000014
+      },
+      "writtenOn": "2019-03-19T21:01:58Z",
+      "side": 1,
+      "message": "Great, thanks.",
+      "parentUuid": "8200b48d_6cae9443",
       "revId": "1bc248211480d6fe012993eab55b7bb70f50af30",
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
       "unresolved": false
