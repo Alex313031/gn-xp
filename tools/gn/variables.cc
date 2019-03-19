@@ -618,8 +618,7 @@ const char kBundleResourcesDir_HelpShort[] =
     "bundle_resources_dir: "
     "Expansion of {{bundle_resources_dir}} in create_bundle.";
 const char kBundleResourcesDir_Help[] =
-    R"(bundle_resources_dir: Expansion of {{bundle_resources_dir}} in
-                             create_bundle.
+    R"(bundle_resources_dir: Expansion of {{bundle_resources_dir}} in create_bundle.
 
   A string corresponding to a path in $root_build_dir.
 
@@ -668,8 +667,7 @@ const char kBundleExecutableDir_HelpShort[] =
     "bundle_executable_dir: "
     "Expansion of {{bundle_executable_dir}} in create_bundle";
 const char kBundleExecutableDir_Help[] =
-    R"(bundle_executable_dir: Expansion of {{bundle_executable_dir}} in
-                              create_bundle.
+    R"(bundle_executable_dir: Expansion of {{bundle_executable_dir}} in create_bundle.
 
   A string corresponding to a path in $root_build_dir.
 
