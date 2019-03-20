@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "9ac8445b_85a3e37b",
+        "filename": "tools/gn/command_refs.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 295,
+      "author": {
+        "id": 1000014
+      },
+      "writtenOn": "2019-03-20T17:27:44Z",
+      "side": 1,
+      "message": "I think we should change the format here since the new one will look bad in a terminal. I\u0027m thinking we should split the heading and usage summary:\n\n    R\"(gn refs\n\n  gn refs \u003cout_dir\u003e (\u003clabel_pattern\u003e|\u003clabel\u003e|\u003cfile\u003e|@\u003cresponse_file\u003e)*\n          [--all] [--all-toolchains] [--as\u003d...] [--testonly\u003d...] [--type\u003d...]\n\nSame for the other cases.",
+      "revId": "b8c16968ea7d524d32cdd67e0e790acdbeac4b1b",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": true
+    }
+  ]
+}
