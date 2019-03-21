@@ -181,7 +181,8 @@ void OutputString(const std::string& output,
         WriteToStdOut("\e[34m\e[1m");
         break;
       case DECORATION_YELLOW:
-        WriteToStdOut("\e[33m\e[1m");
+        // Including a black background since yellow on white doesn't work.
+        WriteToStdOut("\e[40m\e[33m\e[1m");
         break;
     }
   }
