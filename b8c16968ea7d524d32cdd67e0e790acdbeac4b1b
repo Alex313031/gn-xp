@@ -16,6 +16,24 @@
       "revId": "b8c16968ea7d524d32cdd67e0e790acdbeac4b1b",
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "3b6be58d_da4fc7b0",
+        "filename": "tools/gn/command_refs.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 295,
+      "author": {
+        "id": 1000095
+      },
+      "writtenOn": "2019-03-21T01:50:17Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "9ac8445b_85a3e37b",
+      "revId": "b8c16968ea7d524d32cdd67e0e790acdbeac4b1b",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": false
     }
   ]
 }
