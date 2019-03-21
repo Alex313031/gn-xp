@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "406c26a7_5ea3bcc8",
+        "filename": "tools/gn/standard_out.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 175,
+      "author": {
+        "id": 1000081
+      },
+      "writtenOn": "2019-03-21T15:14:29Z",
+      "side": 1,
+      "message": "\"Dim red\" becomes almost the same colour as \"dim yellow\" on my screen and it has a low brightness contrast on top of black so I think it\u0027s best to use intense red instead.\n\nSince I was curious I checked what happened to the text when using remote desktop software with compression and it makes the test very hard to read. Seen that happen to dim red on black before.",
+      "range": {
+        "startLine": 175,
+        "startChar": 0,
+        "endLine": 175,
+        "endChar": 32
+      },
+      "revId": "ad7c05aa49376096e59d9d65d0b154ffcde82718",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "4782f583_ab354cff",
+        "filename": "tools/gn/standard_out.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 181,
+      "author": {
+        "id": 1000081
+      },
+      "writtenOn": "2019-03-21T15:14:29Z",
+      "side": 1,
+      "message": "Sadly this disappears completely on top of black.",
+      "range": {
+        "startLine": 181,
+        "startChar": 1,
+        "endLine": 181,
+        "endChar": 32
+      },
+      "revId": "ad7c05aa49376096e59d9d65d0b154ffcde82718",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": true
+    }
+  ]
+}
