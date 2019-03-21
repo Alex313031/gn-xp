@@ -317,7 +317,7 @@
     given arguments set (which may affect the values of other
     arguments).
 ```
-### <a name="cmd_check"></a>**gn check &lt;out_dir&gt; [&lt;label_pattern&gt;] [\--force]**
+### <a name="cmd_check"></a>**gn check &lt;out_dir&gt; [&lt;label_pattern&gt;] [\--force] [\--check-generated]**
 
 ```
   GN's include header checker validates that the includes for C-like source
@@ -338,6 +338,11 @@
   --force
       Ignores specifications of "check_includes = false" and checks all
       target's files that match the target label.
+
+  --check-generated
+      Generated files are normally not checked since they do not exist
+      until after a build. With this flag, those generated files that
+      can be found on disk are also checked.
 ```
 
 #### **What gets checked**
@@ -354,6 +359,9 @@
 
     - GN opens all C-like source files in the targets to be checked and scans
       the top for includes.
+
+    - Generated files (that might not exist yet) are ignored unless
+      the --check-generated flag is provided.
 
     - Includes with a "nogncheck" annotation are skipped (see
       "gn help nogncheck").
@@ -438,10 +446,12 @@
   Deletes the contents of the output directory except for args.gn and
   creates a Ninja build environment sufficient to regenerate the build.
 ```
-### <a name="cmd_desc"></a>**gn desc &lt;out_dir&gt; &lt;label or pattern&gt; [&lt;what to show&gt;] [\--blame] "**
-#### **[\--format=json]**
+### <a name="cmd_desc"></a>**gn desc**
 
 ```
+  gn desc <out_dir> <label or pattern> [<what to show>] [--blame]
+          [--format=json]
+
   Displays information about a given target or config. The build parameters
   will be taken for the build in the given <out_dir>.
 
@@ -870,9 +880,11 @@
       Lists all variants of the target //base:base (it may be referenced
       in multiple toolchains).
 ```
-### <a name="cmd_meta"></a>**gn meta &lt;out_dir&gt; &lt;target&gt;* \--data=&lt;key&gt;[,&lt;key&gt;*]* [\--walk=&lt;key&gt;[,&lt;key&gt;*]*]**
+### <a name="cmd_meta"></a>**gn meta**
+
 ```
-       [--rebase=<dest dir>]
+  gn meta <out_dir> <target>* --data=<key>[,<key>*]* [--walk=<key>[,<key>*]*]
+          [--rebase=<dest dir>]
 
   Lists collected metaresults of all given targets for the given data key(s),
   collecting metadata dependencies as specified by the given walk key(s).
@@ -970,9 +982,11 @@
 ```
   gn path out/Default //base //tools/gn
 ```
-### <a name="cmd_refs"></a>**gn refs &lt;out_dir&gt; (&lt;label_pattern&gt;|&lt;label&gt;|&lt;file&gt;|@&lt;response_file&gt;)***
+### <a name="cmd_refs"></a>**gn refs**
+
 ```
-        [--all] [--all-toolchains] [--as=...] [--testonly=...] [--type=...]
+  gn refs <out_dir> (<label_pattern>|<label>|<file>|@<response_file>)*
+          [--all] [--all-toolchains] [--as=...] [--testonly=...] [--type=...]
 
   Finds reverse dependencies (which targets reference something). The input is
   a list containing:
@@ -1865,7 +1879,26 @@
       tree in the order that the targets appear in "deps".
 ```
 
+#### **More background**
+
+```
+  Configs solve a problem where the build system needs to have a higher-level
+  understanding of various compiler settings. For example, some compiler flags
+  have to appear in a certain order relative to each other, some settings like
+  defines and flags logically go together, and the build system needs to
+  de-duplicate flags even though raw command-line parameters can't always be
+  operated on in that way.
+
+  The config gives a name to a group of settings that can then be reasoned
+  about by GN. GN can know that configs with the same label are the same thing
+  so can be de-duplicated. It allows related settings to be grouped so they
+  are added or removed as a unit. And it allows targets to refer to settings
+  with conceptual names ("no_rtti", "enable_exceptions", etc.) rather than
+  having to hard-coding every compiler's flags each time they are referred to.
+```
+
 #### **Variables valid in a config definition**
+
 ```
   Flags: cflags, cflags_c, cflags_cc, cflags_objc, cflags_objcc,
          asmflags, defines, include_dirs, inputs, ldflags, lib_dirs,
@@ -2303,7 +2336,7 @@
   # result will be "//foo/bar"
 
   # Extract the source-absolute directory name,
-  result = get_path_info(get_path_info(path, "dir"), "abspath"
+  result = get_path_info(get_path_info(path, "dir"), "abspath")
 ```
 ### <a name="func_get_target_outputs"></a>**get_target_outputs**: [file list] Get the list of outputs from a target.
 
@@ -4254,10 +4287,9 @@
     ]
   }
 ```
-### <a name="var_bundle_executable_dir"></a>**bundle_executable_dir**: Expansion of {{bundle_executable_dir}} in
-```
-                              create_bundle.
+### <a name="var_bundle_executable_dir"></a>**bundle_executable_dir**: Expansion of {{bundle_executable_dir}} in create_bundle.
 
+```
   A string corresponding to a path in $root_build_dir.
 
   This string is used by the "create_bundle" target to expand the
@@ -4277,9 +4309,10 @@
 
   See "gn help bundle_root_dir" for examples.
 ```
-### <a name="var_bundle_resources_dir"></a>**bundle_resources_dir**: Expansion of {{bundle_resources_dir}} in
+### <a name="var_bundle_resources_dir"></a>**bundle_resources_dir**
+
 ```
-                             create_bundle.
+  bundle_resources_dir: Expansion of {{bundle_resources_dir}} in create_bundle.
 
   A string corresponding to a path in $root_build_dir.
 
