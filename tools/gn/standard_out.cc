@@ -172,16 +172,16 @@ void OutputString(const std::string& output,
         WriteToStdOut("\e[2m");
         break;
       case DECORATION_RED:
-        WriteToStdOut("\e[31m\e[1m");
+        WriteToStdOut("\e[31m");
         break;
       case DECORATION_GREEN:
         WriteToStdOut("\e[32m");
         break;
       case DECORATION_BLUE:
-        WriteToStdOut("\e[34m\e[1m");
+        WriteToStdOut("\e[34m");
         break;
       case DECORATION_YELLOW:
-        WriteToStdOut("\e[33m\e[1m");
+        WriteToStdOut("\e[33m");
         break;
     }
   }
