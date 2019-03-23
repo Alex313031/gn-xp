@@ -149,6 +149,7 @@ Example .gn file contents
 namespace {
 
 const base::FilePath::CharType kGnFile[] = FILE_PATH_LITERAL(".gn");
+const char kDefaultArgsGn[] = "# Set build arguments here.";
 
 base::FilePath FindDotFile(const base::FilePath& current_dir) {
   base::FilePath try_this_file = current_dir.Append(kGnFile);
@@ -300,7 +301,8 @@ Setup::Setup()
       dotfile_settings_(&build_settings_, std::string()),
       dotfile_scope_(&dotfile_settings_),
       default_args_(nullptr),
-      fill_arguments_(true) {
+      fill_arguments_(true),
+      gen_empty_args_(false) {
   dotfile_settings_.set_toolchain_label(Label());
 
   build_settings_.set_item_defined_callback(
@@ -461,8 +463,16 @@ bool Setup::FillArgsFromFile() {
       build_settings_.GetFullPath(build_arg_source_file);
 
   std::string contents;
-  if (!base::ReadFileToString(build_arg_file, &contents))
-    return true;  // File doesn't exist, continue with default args.
+  if (!base::ReadFileToString(build_arg_file, &contents)) {
+    // File doesn't exist.
+    if (gen_empty_args_) {
+      // Write an empty args.gn file if gen_empty_args_ is set.
+      if (!FillArgsFromCommandLine(kDefaultArgsGn))
+        return false;
+      SaveArgsToFile();
+    }
+    return true;  // continue with default args. 
+  }
 
   // Add a dependency on the build arguments file. If this changes, we want
   // to re-generate the build.
