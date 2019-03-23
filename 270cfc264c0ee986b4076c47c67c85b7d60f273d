@@ -1,0 +1,78 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "5ddd314c_3584cf4c",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 1000016
+      },
+      "writtenOn": "2019-03-23T06:16:42Z",
+      "side": 1,
+      "message": "typo: \"exist\"",
+      "range": {
+        "startLine": 10,
+        "startChar": 52,
+        "endLine": 10,
+        "endChar": 58
+      },
+      "revId": "270cfc264c0ee986b4076c47c67c85b7d60f273d",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "bc249275_0655ad2a",
+        "filename": "tools/gn/setup.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 152,
+      "author": {
+        "id": 1000016
+      },
+      "writtenOn": "2019-03-23T06:16:42Z",
+      "side": 1,
+      "message": "Perhaps also say, \"See `gn buildargs`.\"",
+      "revId": "270cfc264c0ee986b4076c47c67c85b7d60f273d",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "6f81644d_48c2aa09",
+        "filename": "tools/gn/setup.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 458,
+      "author": {
+        "id": 1000016
+      },
+      "writtenOn": "2019-03-23T06:16:42Z",
+      "side": 1,
+      "message": "The only caller of this method is FillArguments, above.\nThat method already has logic testing whether --args was set so I think it makes more sense to just rework the logic there to do `if (hasswitch || !FillArgsFromFile()) { FillArgsFromCommandLine() }`.  AFAICT GetSwitchValueASCII() for a missing switch just returns \"\" anyway.  You could make it `FillArgsFromCommandLine(hasswitch ? GetSwitchValueASCII() : kDefaultArgsGn)` to get the default comment behavior, which is nice.",
+      "revId": "270cfc264c0ee986b4076c47c67c85b7d60f273d",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "de3f06bf_0391186b",
+        "filename": "tools/gn/setup.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 178,
+      "author": {
+        "id": 1000016
+      },
+      "writtenOn": "2019-03-23T06:16:42Z",
+      "side": 1,
+      "message": "I don\u0027t think you need to keep this state.",
+      "revId": "270cfc264c0ee986b4076c47c67c85b7d60f273d",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": true
+    }
+  ]
+}
