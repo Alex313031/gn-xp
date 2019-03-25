@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "6813a5ba_f0c14643",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 1000135
+      },
+      "writtenOn": "2019-03-25T20:06:05Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "5ddd314c_3584cf4c",
+      "range": {
+        "startLine": 10,
+        "startChar": 52,
+        "endLine": 10,
+        "endChar": 58
+      },
+      "revId": "270cfc264c0ee986b4076c47c67c85b7d60f273d",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "bc249275_0655ad2a",
         "filename": "tools/gn/setup.cc",
         "patchSetId": 1
@@ -39,6 +63,24 @@
       "revId": "270cfc264c0ee986b4076c47c67c85b7d60f273d",
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "27225bd4_e3eabf0b",
+        "filename": "tools/gn/setup.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 152,
+      "author": {
+        "id": 1000135
+      },
+      "writtenOn": "2019-03-25T20:06:05Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "bc249275_0655ad2a",
+      "revId": "270cfc264c0ee986b4076c47c67c85b7d60f273d",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": false
     },
     {
       "key": {
@@ -59,6 +101,24 @@
     },
     {
       "key": {
+        "uuid": "77e23b46_719ad1c5",
+        "filename": "tools/gn/setup.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 458,
+      "author": {
+        "id": 1000135
+      },
+      "writtenOn": "2019-03-25T20:06:05Z",
+      "side": 1,
+      "message": "I moved the logics from the FillArgsFromFile into FillArguments. But, I don\u0027t think FillArgsFromCommandLine(hasswitch ? GetSwitchValueASCII() : kDefaultArgsGn) followed by a SaveArgsToFile() is the right way to go. It will flush the content of args.gn file if it already exists. This file should be flushed if a user use \"--args\" switch, but its content should be untouched if this switch is not used.",
+      "parentUuid": "6f81644d_48c2aa09",
+      "revId": "270cfc264c0ee986b4076c47c67c85b7d60f273d",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "de3f06bf_0391186b",
         "filename": "tools/gn/setup.h",
         "patchSetId": 1
@@ -70,6 +130,24 @@
       "writtenOn": "2019-03-23T06:16:42Z",
       "side": 1,
       "message": "I don\u0027t think you need to keep this state.",
+      "revId": "270cfc264c0ee986b4076c47c67c85b7d60f273d",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "a11529d2_45f1cc4f",
+        "filename": "tools/gn/setup.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 178,
+      "author": {
+        "id": 1000135
+      },
+      "writtenOn": "2019-03-25T20:06:05Z",
+      "side": 1,
+      "message": "Without this flag, other gn command that calls Setup::DoSetup() will generate an empty args.gn file. E.g. `gn desc`. I think generating the args.gn with \"--args\" should only happen when using `gn gen`.",
+      "parentUuid": "de3f06bf_0391186b",
       "revId": "270cfc264c0ee986b4076c47c67c85b7d60f273d",
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
       "unresolved": true
