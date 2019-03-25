@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "e1a0725d_448e8a00",
+        "filename": "tools/gn/visual_studio_writer.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 521,
+      "author": {
+        "id": 1000014
+      },
+      "writtenOn": "2019-03-25T22:24:34Z",
+      "side": 1,
+      "message": "Got an extra space after \"Text\".",
+      "revId": "19848f41630eb65af82d0b4c09d6f86101764ceb",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": true
+    }
+  ]
+}
