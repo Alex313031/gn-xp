@@ -9,7 +9,9 @@
 #include "base/files/file_util.h"
 #include "base/strings/stringize_macros.h"
 #include "tools/gn/build_settings.h"
+#include "tools/gn/c_tool.h"
 #include "tools/gn/filesystem_utils.h"
+#include "tools/gn/general_tool.h"
 #include "tools/gn/ninja_utils.h"
 #include "tools/gn/pool.h"
 #include "tools/gn/settings.h"
@@ -41,7 +43,7 @@ void NinjaToolchainWriter::Run(
   std::string rule_prefix = GetNinjaRulePrefixForToolchain(settings_);
 
   for (const auto& tool : toolchain_->tools()) {
-    if (tool.second->name() == Tool::kToolAction)
+    if (tool.second->name() == GeneralTool::kGeneralToolAction)
       continue;
     WriteToolRule(tool.second.get(), rule_prefix);
   }
@@ -73,7 +75,7 @@ bool NinjaToolchainWriter::RunAndWriteFile(
   return true;
 }
 
-void NinjaToolchainWriter::WriteToolRule(const Tool* tool,
+void NinjaToolchainWriter::WriteToolRule(Tool* tool,
                                          const std::string& rule_prefix) {
   out_ << "rule " << rule_prefix << tool->name() << std::endl;
 
@@ -88,15 +90,17 @@ void NinjaToolchainWriter::WriteToolRule(const Tool* tool,
   WriteRulePattern("rspfile", tool->rspfile(), options);
   WriteRulePattern("rspfile_content", tool->rspfile_content(), options);
 
-  if (tool->depsformat() == Tool::DEPS_GCC) {
-    // GCC-style deps require a depfile.
-    if (!tool->depfile().empty()) {
-      WriteRulePattern("depfile", tool->depfile(), options);
-      out_ << kIndent << "deps = gcc" << std::endl;
+  if (CTool* c_tool = tool->AsC()) {
+    if (c_tool->depsformat() == CTool::DEPS_GCC) {
+      // GCC-style deps require a depfile.
+      if (!tool->depfile().empty()) {
+        WriteRulePattern("depfile", tool->depfile(), options);
+        out_ << kIndent << "deps = gcc" << std::endl;
+      }
+    } else if (c_tool->depsformat() == CTool::DEPS_MSVC) {
+      // MSVC deps don't have a depfile.
+      out_ << kIndent << "deps = msvc" << std::endl;
     }
-  } else if (tool->depsformat() == Tool::DEPS_MSVC) {
-    // MSVC deps don't have a depfile.
-    out_ << kIndent << "deps = msvc" << std::endl;
   }
 
   // Use pool is specified.

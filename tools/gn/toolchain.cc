@@ -45,6 +45,34 @@ const Tool* Toolchain::GetTool(const char* name) const {
   return nullptr;
 }
 
+GeneralTool* Toolchain::GetToolAsGeneral(const char* name) {
+  if (Tool* tool = GetTool(name)) {
+    return tool->AsGeneral();
+  }
+  return nullptr;
+}
+
+const GeneralTool* Toolchain::GetToolAsGeneral(const char* name) const {
+  if (const Tool* tool = GetTool(name)) {
+    return tool->AsGeneral();
+  }
+  return nullptr;
+}
+
+CTool* Toolchain::GetToolAsC(const char* name) {
+  if (Tool* tool = GetTool(name)) {
+    return tool->AsC();
+  }
+  return nullptr;
+}
+
+const CTool* Toolchain::GetToolAsC(const char* name) const {
+  if (const Tool* tool = GetTool(name)) {
+    return tool->AsC();
+  }
+  return nullptr;
+}
+
 void Toolchain::SetTool(std::unique_ptr<Tool> t) {
   DCHECK(t->name() != Tool::kToolNone);
   DCHECK(tools_.find(t->name()) != tools_.end());
@@ -57,14 +85,32 @@ void Toolchain::ToolchainSetupComplete() {
   for (const auto& tool : tools_) {
     substitution_bits_.MergeFrom(tool.second->substitution_bits());
   }
-
   setup_complete_ = true;
 }
 
-const Tool* Toolchain::GetToolForSourceType(SourceFileType type) {
-  return tools_[Tool::GetToolTypeForSourceType(type)].get();
+const Tool* Toolchain::GetToolForSourceType(SourceFileType type) const {
+  return GetTool(Tool::GetToolTypeForSourceType(type));
+}
+
+const CTool* Toolchain::GetToolForSourceTypeAsC(SourceFileType type) const {
+  return GetToolAsC(Tool::GetToolTypeForSourceType(type));
+}
+
+const GeneralTool* Toolchain::GetToolForSourceTypeAsGeneral(
+    SourceFileType type) const {
+  return GetToolAsGeneral(Tool::GetToolTypeForSourceType(type));
 }
 
 const Tool* Toolchain::GetToolForTargetFinalOutput(const Target* target) const {
   return GetTool(Tool::GetToolTypeForTargetFinalOutput(target));
+}
+
+const CTool* Toolchain::GetToolForTargetFinalOutputAsC(
+    const Target* target) const {
+  return GetToolAsC(Tool::GetToolTypeForTargetFinalOutput(target));
+}
+
+const GeneralTool* Toolchain::GetToolForTargetFinalOutputAsGeneral(
+    const Target* target) const {
+  return GetToolAsGeneral(Tool::GetToolTypeForTargetFinalOutput(target));
 }

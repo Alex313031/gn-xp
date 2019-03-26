@@ -5,6 +5,7 @@
 #include "tools/gn/ninja_copy_target_writer.h"
 
 #include "base/strings/string_util.h"
+#include "tools/gn/general_tool.h"
 #include "tools/gn/ninja_utils.h"
 #include "tools/gn/output_file.h"
 #include "tools/gn/scheduler.h"
@@ -21,7 +22,7 @@ NinjaCopyTargetWriter::NinjaCopyTargetWriter(const Target* target,
 NinjaCopyTargetWriter::~NinjaCopyTargetWriter() = default;
 
 void NinjaCopyTargetWriter::Run() {
-  const Tool* copy_tool = target_->toolchain()->GetTool(Tool::kToolCopy);
+  const Tool* copy_tool = target_->toolchain()->GetTool(GeneralTool::kGeneralToolCopy);
   if (!copy_tool) {
     g_scheduler->FailWithError(Err(
         nullptr, "Copy tool not defined",
@@ -32,7 +33,7 @@ void NinjaCopyTargetWriter::Run() {
     return;
   }
 
-  const Tool* stamp_tool = target_->toolchain()->GetTool(Tool::kToolStamp);
+  const Tool* stamp_tool = target_->toolchain()->GetTool(GeneralTool::kGeneralToolStamp);
   if (!stamp_tool) {
     g_scheduler->FailWithError(Err(
         nullptr, "Copy tool not defined",
@@ -66,7 +67,7 @@ void NinjaCopyTargetWriter::WriteCopyRules(
   const SubstitutionPattern& output_subst = output_subst_list.list()[0];
 
   std::string tool_name = GetNinjaRulePrefixForToolchain(settings_) +
-                          Tool::kToolCopy;
+                          GeneralTool::kGeneralToolCopy;
 
   size_t num_stamp_uses = target_->sources().size();
   std::vector<OutputFile> input_deps = WriteInputDepsStampAndGetDep(

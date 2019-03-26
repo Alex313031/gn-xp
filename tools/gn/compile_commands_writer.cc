@@ -9,6 +9,7 @@
 #include "base/json/string_escape.h"
 #include "base/strings/stringprintf.h"
 #include "tools/gn/builder.h"
+#include "tools/gn/c_tool.h"
 #include "tools/gn/config_values_extractors.h"
 #include "tools/gn/escape.h"
 #include "tools/gn/filesystem_utils.h"
@@ -72,26 +73,26 @@ void SetupCompileFlags(const Target* target,
 
   std::ostringstream cflags_c_out;
   WriteOneFlag(target, SUBSTITUTION_CFLAGS_C, has_precompiled_headers,
-               Tool::kToolCc, &ConfigValues::cflags_c, opts, path_output,
+               CTool::kCToolCc, &ConfigValues::cflags_c, opts, path_output,
                cflags_c_out, /*write_substitution=*/false);
   base::EscapeJSONString(cflags_c_out.str(), false, &flags.cflags_c);
 
   std::ostringstream cflags_cc_out;
   WriteOneFlag(target, SUBSTITUTION_CFLAGS_CC, has_precompiled_headers,
-               Tool::kToolCxx, &ConfigValues::cflags_cc, opts, path_output,
+               CTool::kCToolCxx, &ConfigValues::cflags_cc, opts, path_output,
                cflags_cc_out, /*write_substitution=*/false);
   base::EscapeJSONString(cflags_cc_out.str(), false, &flags.cflags_cc);
 
   std::ostringstream cflags_objc_out;
   WriteOneFlag(target, SUBSTITUTION_CFLAGS_OBJC, has_precompiled_headers,
-               Tool::kToolObjC, &ConfigValues::cflags_objc, opts, path_output,
+               CTool::kCToolObjC, &ConfigValues::cflags_objc, opts, path_output,
                cflags_objc_out,
                /*write_substitution=*/false);
   base::EscapeJSONString(cflags_objc_out.str(), false, &flags.cflags_objc);
 
   std::ostringstream cflags_objcc_out;
   WriteOneFlag(target, SUBSTITUTION_CFLAGS_OBJCC, has_precompiled_headers,
-               Tool::kToolObjCxx, &ConfigValues::cflags_objcc, opts,
+               CTool::kCToolObjCxx, &ConfigValues::cflags_objcc, opts,
                path_output, cflags_objcc_out, /*write_substitution=*/false);
   base::EscapeJSONString(cflags_objcc_out.str(), false, &flags.cflags_objcc);
 }

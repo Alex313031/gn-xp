@@ -281,7 +281,8 @@ bool Builder::ToolchainDefined(BuilderRecord* record, Err* err) {
       continue;
 
     BuilderRecord* dep_record = GetOrCreateRecordOfType(
-        tool.second->pool().label, tool.second->pool().origin, BuilderRecord::ITEM_POOL, err);
+        tool.second->pool().label, tool.second->pool().origin,
+        BuilderRecord::ITEM_POOL, err);
     if (!dep_record)
       return false;
     record->AddDep(dep_record);
@@ -567,9 +568,9 @@ bool Builder::ResolvePools(Toolchain* toolchain, Err* err) {
     if (tool.second->pool().label.is_null())
       continue;
 
-    BuilderRecord* record =
-        GetResolvedRecordOfType(tool.second->pool().label, toolchain->defined_from(),
-                                BuilderRecord::ITEM_POOL, err);
+    BuilderRecord* record = GetResolvedRecordOfType(
+        tool.second->pool().label, toolchain->defined_from(),
+        BuilderRecord::ITEM_POOL, err);
     if (!record) {
       *err = Err(tool.second->pool().origin, "Pool for tool not defined.",
                  "I was hoping to find a pool " +
