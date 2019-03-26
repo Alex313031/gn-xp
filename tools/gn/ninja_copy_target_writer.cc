@@ -66,7 +66,7 @@ void NinjaCopyTargetWriter::WriteCopyRules(
   const SubstitutionPattern& output_subst = output_subst_list.list()[0];
 
   std::string tool_name = GetNinjaRulePrefixForToolchain(settings_) +
-                          Toolchain::ToolTypeToName(Tool::TYPE_COPY);
+                          Tool::ToolTypeToName(Tool::TYPE_COPY);
 
   size_t num_stamp_uses = target_->sources().size();
   std::vector<OutputFile> input_deps = WriteInputDepsStampAndGetDep(

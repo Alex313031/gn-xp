@@ -319,11 +319,10 @@ void NinjaBuildWriter::WriteAllPools() {
   // Compute the pools referenced by all tools of all used toolchains.
   std::unordered_set<const Pool*> used_pools;
   for (const auto& pair : used_toolchains_) {
-    for (int j = Tool::TYPE_NONE + 1; j < Tool::TYPE_NUMTYPES; j++) {
-      Tool::ToolType tool_type = static_cast<Tool::ToolType>(j);
-      const Tool* tool = pair.second->GetTool(tool_type);
-      if (tool && tool->pool().ptr)
-        used_pools.insert(tool->pool().ptr);
+    const Toolchain* toolchain = pair.second;
+    for (const auto& tool : toolchain->tools()) {
+      if (tool.second->pool().ptr)
+        used_pools.insert(tool.second->pool().ptr);
     }
   }
 
