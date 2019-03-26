@@ -74,119 +74,120 @@ void TestWithScope::SetupToolchain(Toolchain* toolchain) {
   Err err;
 
   // CC
-  std::unique_ptr<Tool> cc_tool = std::make_unique<Tool>();
+  std::unique_ptr<Tool> cc_tool = std::make_unique<CTool>(Tool::TYPE_CC);
   SetCommandForTool(
       "cc {{source}} {{cflags}} {{cflags_c}} {{defines}} {{include_dirs}} "
       "-o {{output}}",
       cc_tool.get());
   cc_tool->set_outputs(SubstitutionList::MakeForTest(
       "{{source_out_dir}}/{{target_output_name}}.{{source_name_part}}.o"));
-  toolchain->SetTool(Tool::TYPE_CC, std::move(cc_tool));
+  toolchain->SetTool(std::move(cc_tool));
 
   // CXX
-  std::unique_ptr<Tool> cxx_tool = std::make_unique<Tool>();
+  std::unique_ptr<Tool> cxx_tool = std::make_unique<CTool>(Tool::TYPE_CXX);
   SetCommandForTool(
       "c++ {{source}} {{cflags}} {{cflags_cc}} {{defines}} {{include_dirs}} "
       "-o {{output}}",
       cxx_tool.get());
   cxx_tool->set_outputs(SubstitutionList::MakeForTest(
       "{{source_out_dir}}/{{target_output_name}}.{{source_name_part}}.o"));
-  toolchain->SetTool(Tool::TYPE_CXX, std::move(cxx_tool));
+  toolchain->SetTool(std::move(cxx_tool));
 
   // OBJC
-  std::unique_ptr<Tool> objc_tool = std::make_unique<Tool>();
+  std::unique_ptr<Tool> objc_tool = std::make_unique<CTool>(Tool::TYPE_OBJC);
   SetCommandForTool(
       "objcc {{source}} {{cflags}} {{cflags_objc}} {{defines}} "
       "{{include_dirs}} -o {{output}}",
       objc_tool.get());
   objc_tool->set_outputs(SubstitutionList::MakeForTest(
       "{{source_out_dir}}/{{target_output_name}}.{{source_name_part}}.o"));
-  toolchain->SetTool(Tool::TYPE_OBJC, std::move(objc_tool));
+  toolchain->SetTool(std::move(objc_tool));
 
   // OBJC
-  std::unique_ptr<Tool> objcxx_tool = std::make_unique<Tool>();
+  std::unique_ptr<Tool> objcxx_tool = std::make_unique<CTool>(Tool::TYPE_OBJCXX);
   SetCommandForTool(
       "objcxx {{source}} {{cflags}} {{cflags_objcc}} {{defines}} "
       "{{include_dirs}} -o {{output}}",
       objcxx_tool.get());
   objcxx_tool->set_outputs(SubstitutionList::MakeForTest(
       "{{source_out_dir}}/{{target_output_name}}.{{source_name_part}}.o"));
-  toolchain->SetTool(Tool::TYPE_OBJCXX, std::move(objcxx_tool));
+  toolchain->SetTool(std::move(objcxx_tool));
 
   // Don't use RC and ASM tools in unit tests yet. Add here if needed.
 
   // ALINK
-  std::unique_ptr<Tool> alink_tool = std::make_unique<Tool>();
-  SetCommandForTool("ar {{output}} {{source}}", alink_tool.get());
+  std::unique_ptr<Tool> alink = std::make_unique<CTool>(Tool::TYPE_ALINK);
+  CTool* alink_tool = alink->AsC();
+  SetCommandForTool("ar {{output}} {{source}}", alink_tool);
   alink_tool->set_lib_switch("-l");
   alink_tool->set_lib_dir_switch("-L");
   alink_tool->set_output_prefix("lib");
   alink_tool->set_outputs(SubstitutionList::MakeForTest(
       "{{target_out_dir}}/{{target_output_name}}.a"));
-  toolchain->SetTool(Tool::TYPE_ALINK, std::move(alink_tool));
+  toolchain->SetTool(std::move(alink));
 
   // SOLINK
-  std::unique_ptr<Tool> solink_tool = std::make_unique<Tool>();
+  std::unique_ptr<Tool> solink = std::make_unique<CTool>(Tool::TYPE_SOLINK);
+  CTool* solink_tool = solink->AsC();
   SetCommandForTool(
       "ld -shared -o {{target_output_name}}.so {{inputs}} "
       "{{ldflags}} {{libs}}",
-      solink_tool.get());
+      solink_tool);
   solink_tool->set_lib_switch("-l");
   solink_tool->set_lib_dir_switch("-L");
   solink_tool->set_output_prefix("lib");
   solink_tool->set_default_output_extension(".so");
   solink_tool->set_outputs(SubstitutionList::MakeForTest(
       "{{root_out_dir}}/{{target_output_name}}{{output_extension}}"));
-  toolchain->SetTool(Tool::TYPE_SOLINK, std::move(solink_tool));
+  toolchain->SetTool(std::move(solink));
 
   // SOLINK_MODULE
-  std::unique_ptr<Tool> solink_module_tool = std::make_unique<Tool>();
+  std::unique_ptr<Tool> solink_module = std::make_unique<CTool>(Tool::TYPE_SOLINK_MODULE);
+  CTool* solink_module_tool = solink_module->AsC();
   SetCommandForTool(
       "ld -bundle -o {{target_output_name}}.so {{inputs}} "
       "{{ldflags}} {{libs}}",
-      solink_module_tool.get());
+      solink_module_tool);
   solink_module_tool->set_lib_switch("-l");
   solink_module_tool->set_lib_dir_switch("-L");
   solink_module_tool->set_output_prefix("lib");
   solink_module_tool->set_default_output_extension(".so");
   solink_module_tool->set_outputs(SubstitutionList::MakeForTest(
       "{{root_out_dir}}/{{target_output_name}}{{output_extension}}"));
-  toolchain->SetTool(Tool::TYPE_SOLINK_MODULE,
-                     std::move(solink_module_tool));
+  toolchain->SetTool(std::move(solink_module));
 
   // LINK
-  std::unique_ptr<Tool> link_tool = std::make_unique<Tool>();
+  std::unique_ptr<Tool> link = std::make_unique<CTool>(Tool::TYPE_LINK);
+  CTool* link_tool = link->AsC();
   SetCommandForTool(
       "ld -o {{target_output_name}} {{source}} "
       "{{ldflags}} {{libs}}",
-      link_tool.get());
+      link_tool);
   link_tool->set_lib_switch("-l");
   link_tool->set_lib_dir_switch("-L");
   link_tool->set_outputs(
       SubstitutionList::MakeForTest("{{root_out_dir}}/{{target_output_name}}"));
-  toolchain->SetTool(Tool::TYPE_LINK, std::move(link_tool));
+  toolchain->SetTool(std::move(link));
 
   // STAMP
-  std::unique_ptr<Tool> stamp_tool = std::make_unique<Tool>();
+  std::unique_ptr<Tool> stamp_tool = std::make_unique<GeneralTool>(Tool::TYPE_STAMP);
   SetCommandForTool("touch {{output}}", stamp_tool.get());
-  toolchain->SetTool(Tool::TYPE_STAMP, std::move(stamp_tool));
+  toolchain->SetTool(std::move(stamp_tool));
 
   // COPY
-  std::unique_ptr<Tool> copy_tool = std::make_unique<Tool>();
+  std::unique_ptr<Tool> copy_tool = std::make_unique<GeneralTool>(Tool::TYPE_COPY);
   SetCommandForTool("cp {{source}} {{output}}", copy_tool.get());
-  toolchain->SetTool(Tool::TYPE_COPY, std::move(copy_tool));
+  toolchain->SetTool(std::move(copy_tool));
 
   // COPY_BUNDLE_DATA
-  std::unique_ptr<Tool> copy_bundle_data_tool = std::make_unique<Tool>();
+  std::unique_ptr<Tool> copy_bundle_data_tool = std::make_unique<GeneralTool>(Tool::TYPE_COPY_BUNDLE_DATA);
   SetCommandForTool("cp {{source}} {{output}}", copy_bundle_data_tool.get());
-  toolchain->SetTool(Tool::TYPE_COPY_BUNDLE_DATA,
-                     std::move(copy_bundle_data_tool));
+  toolchain->SetTool(std::move(copy_bundle_data_tool));
 
   // COMPILE_XCASSETS
-  std::unique_ptr<Tool> compile_xcassets_tool = std::make_unique<Tool>();
+  std::unique_ptr<Tool> compile_xcassets_tool = std::make_unique<GeneralTool>(Tool::TYPE_COMPILE_XCASSETS);
   SetCommandForTool("touch {{output}}", compile_xcassets_tool.get());
-  toolchain->SetTool(Tool::TYPE_COMPILE_XCASSETS,
-                     std::move(compile_xcassets_tool));
+  toolchain->SetTool(std::move(compile_xcassets_tool));
 
   toolchain->ToolchainSetupComplete();
 }

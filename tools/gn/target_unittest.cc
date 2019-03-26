@@ -9,6 +9,7 @@
 
 #include "tools/gn/build_settings.h"
 #include "tools/gn/config.h"
+#include "tools/gn/general_tool.h"
 #include "tools/gn/scheduler.h"
 #include "tools/gn/settings.h"
 #include "tools/gn/test_with_scheduler.h"
@@ -637,7 +638,9 @@ TEST_F(TargetTest, LinkAndDepOutputs) {
 
   Toolchain toolchain(setup.settings(), Label(SourceDir("//tc/"), "tc"));
 
-  std::unique_ptr<Tool> solink_tool = std::make_unique<Tool>();
+  std::unique_ptr<Tool> solink =
+      std::make_unique<CTool>(Tool::TYPE_SOLINK);
+  CTool* solink_tool = solink->AsC();
   solink_tool->set_output_prefix("lib");
   solink_tool->set_default_output_extension(".so");
 
@@ -656,7 +659,7 @@ TEST_F(TargetTest, LinkAndDepOutputs) {
   solink_tool->set_outputs(
       SubstitutionList::MakeForTest(kLinkPattern, kDependPattern));
 
-  toolchain.SetTool(Tool::TYPE_SOLINK, std::move(solink_tool));
+  toolchain.SetTool(std::move(solink));
 
   Target target(setup.settings(), Label(SourceDir("//a/"), "a"));
   target.set_output_type(Target::SHARED_LIBRARY);
@@ -678,7 +681,9 @@ TEST_F(TargetTest, RuntimeOuputs) {
 
   Toolchain toolchain(setup.settings(), Label(SourceDir("//tc/"), "tc"));
 
-  std::unique_ptr<Tool> solink_tool = std::make_unique<Tool>();
+  std::unique_ptr<Tool> solink =
+      std::make_unique<CTool>(Tool::TYPE_SOLINK);
+  CTool* solink_tool = solink->AsC();
   solink_tool->set_output_prefix("");
   solink_tool->set_default_output_extension(".dll");
 
@@ -699,7 +704,7 @@ TEST_F(TargetTest, RuntimeOuputs) {
   solink_tool->set_runtime_outputs(
       SubstitutionList::MakeForTest(kDllPattern, kPdbPattern));
 
-  toolchain.SetTool(Tool::TYPE_SOLINK, std::move(solink_tool));
+  toolchain.SetTool(std::move(solink));
 
   Target target(setup.settings(), Label(SourceDir("//a/"), "a"));
   target.set_output_type(Target::SHARED_LIBRARY);

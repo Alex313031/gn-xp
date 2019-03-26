@@ -4,33 +4,16 @@
 
 #include "tools/gn/tool.h"
 #include "tools/gn/target.h"
+#include "tools/gn/c_tool.h"
+#include "tools/gn/general_tool.h"
+#include "tools/gn/target.h"
 
-const char* Tool::kToolCc = "cc";
-const char* Tool::kToolCxx = "cxx";
-const char* Tool::kToolObjC = "objc";
-const char* Tool::kToolObjCxx = "objcxx";
-const char* Tool::kToolRc = "rc";
-const char* Tool::kToolAsm = "asm";
-const char* Tool::kToolAlink = "alink";
-const char* Tool::kToolSolink = "solink";
-const char* Tool::kToolSolinkModule = "solink_module";
-const char* Tool::kToolLink = "link";
-const char* Tool::kToolStamp = "stamp";
-const char* Tool::kToolCopy = "copy";
-const char* Tool::kToolCopyBundleData = "copy_bundle_data";
-const char* Tool::kToolCompileXCAssets = "compile_xcassets";
-const char* Tool::kToolAction = "action";
-
-Tool::Tool()
-    : defined_from_(nullptr),
-      depsformat_(DEPS_GCC),
-      precompiled_header_type_(PCH_NONE),
-      restat_(false),
-      complete_(false) {}
+Tool::Tool(Tool::ToolType t)
+    : defined_from_(nullptr), restat_(false), complete_(false), type_(t) {}
 
 Tool::~Tool() = default;
 
-void Tool::SetComplete() {
+void Tool::SetToolComplete() {
   DCHECK(!complete_);
   complete_ = true;
 
@@ -38,43 +21,274 @@ void Tool::SetComplete() {
   depfile_.FillRequiredTypes(&substitution_bits_);
   description_.FillRequiredTypes(&substitution_bits_);
   outputs_.FillRequiredTypes(&substitution_bits_);
-  link_output_.FillRequiredTypes(&substitution_bits_);
-  depend_output_.FillRequiredTypes(&substitution_bits_);
   rspfile_.FillRequiredTypes(&substitution_bits_);
   rspfile_content_.FillRequiredTypes(&substitution_bits_);
 }
 
+GeneralTool* Tool::AsGeneral() {
+  return nullptr;
+}
+const GeneralTool* Tool::AsGeneral() const {
+  return nullptr;
+}
+
+CTool* Tool::AsC() {
+  return nullptr;
+}
+const CTool* Tool::AsC() const {
+  return nullptr;
+}
+
+
+bool Tool::IsPatternInOutputList(const SubstitutionList& output_list,
+                           const SubstitutionPattern& pattern) const {
+  for (const auto& cur : output_list.list()) {
+    if (pattern.ranges().size() == cur.ranges().size() &&
+        std::equal(pattern.ranges().begin(), pattern.ranges().end(),
+                   cur.ranges().begin()))
+      return true;
+  }
+  return false;
+}
+
+bool Tool::ValidateSubstitutionList(const std::vector<SubstitutionType>& list,
+                                    const Value* origin,
+                                    Err* err) const {
+  for (const auto& cur_type : list) {
+    if (!ValidateSubstitution(cur_type)) {
+      *err = Err(*origin, "Pattern not valid here.",
+                 "You used the pattern " +
+                     std::string(kSubstitutionNames[cur_type]) +
+                     " which is not valid\nfor this variable.");
+      return false;
+    }
+  }
+  return true;
+}
+
+bool Tool::ReadBool(Scope* scope,
+                    const char* var,
+                    bool* field,
+                    Err* err) {
+  DCHECK(!complete_);
+  const Value* v = scope->GetValue(var, true);
+  if (!v)
+    return true;  // Not present is fine.
+  if (!v->VerifyTypeIs(Value::BOOLEAN, err))
+    return false;
+  *field = v->boolean_value();
+  return true;
+}
+
+bool Tool::ReadString(Scope* scope,
+                      const char* var,
+                      std::string* field,
+                      Err* err) {
+  DCHECK(!complete_);
+  const Value* v = scope->GetValue(var, true);
+  if (!v)
+    return true;  // Not present is fine.
+  if (!v->VerifyTypeIs(Value::STRING, err))
+    return false;
+  *field = v->string_value();
+  return true;
+}
+
+bool Tool::ReadPattern(Scope* scope,
+                       const char* var,
+                       SubstitutionPattern* field,
+                       Err* err) {
+  DCHECK(!complete_);
+  const Value* value = scope->GetValue(var, true);
+  if (!value)
+    return true;  // Not present is fine.
+  if (!value->VerifyTypeIs(Value::STRING, err))
+    return false;
+
+  SubstitutionPattern pattern;
+  if (!pattern.Parse(*value, err))
+    return false;
+  if (!ValidateSubstitutionList(pattern.required_types(), value, err))
+    return false;
+
+  *field = std::move(pattern);
+  return true;
+}
+
+bool Tool::ReadPatternList(Scope* scope,
+                     const char* var,
+                     SubstitutionList* field,
+                     Err* err) {
+  DCHECK(!complete_);
+  const Value* value = scope->GetValue(var, true);
+  if (!value)
+    return true;  // Not present is fine.
+  if (!value->VerifyTypeIs(Value::LIST, err))
+    return false;
+
+  SubstitutionList list;
+  if (!list.Parse(*value, err))
+    return false;
+
+  // Validate the right kinds of patterns are used.
+  if (!ValidateSubstitutionList(list.required_types(), value, err))
+    return false;
+
+  *field = std::move(list);
+  return true;
+}
+
+bool Tool::ReadLabel(Scope* scope,
+                     const char* var,
+                     const Label& current_toolchain,
+                     LabelPtrPair<Pool>* field,
+                     Err* err) {
+  DCHECK(!complete_);
+  const Value* v = scope->GetValue(var, true);
+  if (!v)
+    return true;  // Not present is fine.
+
+  Label label =
+      Label::Resolve(scope->GetSourceDir(), current_toolchain, *v, err);
+  if (err->has_error())
+    return false;
+
+  LabelPtrPair<Pool> pair(label);
+  pair.origin = defined_from();
+
+  *field = std::move(pair);
+  return true;
+}
+
+bool Tool::ReadOutputExtension(Scope* scope, Err* err) {
+  DCHECK(!complete_);
+  const Value* value = scope->GetValue("default_output_extension", true);
+  if (!value)
+    return true;  // Not present is fine.
+  if (!value->VerifyTypeIs(Value::STRING, err))
+    return false;
+
+  if (value->string_value().empty())
+    return true;  // Accept empty string.
+
+  if (value->string_value()[0] != '.') {
+    *err = Err(*value, "default_output_extension must begin with a '.'");
+    return false;
+  }
+
+  set_default_output_extension(value->string_value());
+  return true;
+}
+
+bool Tool::InitTool(Scope* scope, Toolchain* toolchain, Err* err) {
+  if (!ReadPattern(scope, "command", &command_, err) ||
+      !ReadOutputExtension(scope, err) ||
+      !ReadPattern(scope, "depfile", &depfile_, err) ||
+      !ReadPattern(scope, "description", &description_, err) ||
+      !ReadPatternList(scope, "runtime_outputs", &runtime_outputs_, err) ||
+      !ReadString(scope, "output_prefix", &output_prefix_, err) ||
+      !ReadPattern(scope, "default_output_dir", &default_output_dir_, err) ||
+      !ReadBool(scope, "restat", &restat_, err) ||
+      !ReadPattern(scope, "rspfile", &rspfile_, err) ||
+      !ReadPattern(scope, "rspfile_content", &rspfile_content_, err) ||
+      !ReadLabel(scope, "pool", toolchain->label(), &pool_, err)) {
+    return false;
+  }
+  return true;
+}
+
+// static
+std::unique_ptr<Tool> Tool::CreateTool(Tool::ToolType type) {
+  switch (type) {
+    case TYPE_CC:
+    case TYPE_CXX:
+    case TYPE_OBJC:
+    case TYPE_OBJCXX:
+    case TYPE_RC:
+    case TYPE_ASM:
+    case TYPE_ALINK:
+    case TYPE_SOLINK:
+    case TYPE_SOLINK_MODULE:
+    case TYPE_LINK:
+      return std::make_unique<CTool>(type);
+    case TYPE_STAMP:
+    case TYPE_COPY:
+    case TYPE_COPY_BUNDLE_DATA:
+    case TYPE_COMPILE_XCASSETS:
+    case TYPE_ACTION:
+      return std::make_unique<GeneralTool>(type);
+    default:
+      NOTREACHED();
+      return nullptr;
+  }
+}
+
+std::unique_ptr<Tool> Tool::CreateTool(Tool::ToolType type,
+                                       Scope* scope,
+                                       Toolchain* toolchain,
+                                       Err* err) {
+  switch (type) {
+    case TYPE_CC:
+    case TYPE_CXX:
+    case TYPE_OBJC:
+    case TYPE_OBJCXX:
+    case TYPE_RC:
+    case TYPE_ASM:
+    case TYPE_ALINK:
+    case TYPE_SOLINK:
+    case TYPE_SOLINK_MODULE:
+    case TYPE_LINK: {
+      std::unique_ptr<Tool> tool = std::make_unique<CTool>(type);
+      if (tool->AsC()->InitTool(scope, toolchain, err))
+        return tool;
+      return nullptr;
+    }
+    case TYPE_STAMP:
+    case TYPE_COPY:
+    case TYPE_COPY_BUNDLE_DATA:
+    case TYPE_COMPILE_XCASSETS:
+    case TYPE_ACTION: {
+      std::unique_ptr<Tool> tool = std::make_unique<GeneralTool>(type);
+      tool->AsGeneral()->InitTool(scope, toolchain, err);
+      return tool;
+    }
+    default:
+      NOTREACHED();
+      return nullptr;
+  }
+}
+
 // static
 Tool::ToolType Tool::ToolNameToType(const base::StringPiece& str) {
-  if (str == Tool::kToolCc)
+  if (str == CTool::kCToolCc)
     return TYPE_CC;
-  if (str == Tool::kToolCxx)
+  if (str == CTool::kCToolCxx)
     return TYPE_CXX;
-  if (str == Tool::kToolObjC)
+  if (str == CTool::kCToolObjC)
     return TYPE_OBJC;
-  if (str == Tool::kToolObjCxx)
+  if (str == CTool::kCToolObjCxx)
     return TYPE_OBJCXX;
-  if (str == Tool::kToolRc)
+  if (str == CTool::kCToolRc)
     return TYPE_RC;
-  if (str == Tool::kToolAsm)
+  if (str == CTool::kCToolAsm)
     return TYPE_ASM;
-  if (str == Tool::kToolAlink)
+  if (str == CTool::kCToolAlink)
     return TYPE_ALINK;
-  if (str == Tool::kToolSolink)
+  if (str == CTool::kCToolSolink)
     return TYPE_SOLINK;
-  if (str == Tool::kToolSolinkModule)
+  if (str == CTool::kCToolSolinkModule)
     return TYPE_SOLINK_MODULE;
-  if (str == Tool::kToolLink)
+  if (str == CTool::kCToolLink)
     return TYPE_LINK;
-  if (str == Tool::kToolStamp)
+  if (str == GeneralTool::kGeneralToolStamp)
     return TYPE_STAMP;
-  if (str == Tool::kToolCopy)
+  if (str == GeneralTool::kGeneralToolCopy)
     return TYPE_COPY;
-  if (str == Tool::kToolCopyBundleData)
+  if (str == GeneralTool::kGeneralToolCopyBundleData)
     return TYPE_COPY_BUNDLE_DATA;
-  if (str == Tool::kToolCompileXCAssets)
+  if (str == GeneralTool::kGeneralToolCompileXCAssets)
     return TYPE_COMPILE_XCASSETS;
-  if (str == Tool::kToolAction)
+  if (str == GeneralTool::kGeneralToolAction)
     return TYPE_ACTION;
   return TYPE_NONE;
 }
@@ -83,35 +297,35 @@ Tool::ToolType Tool::ToolNameToType(const base::StringPiece& str) {
 std::string Tool::ToolTypeToName(Tool::ToolType type) {
   switch (type) {
     case TYPE_CC:
-      return Tool::kToolCc;
+      return CTool::kCToolCc;
     case TYPE_CXX:
-      return Tool::kToolCxx;
+      return CTool::kCToolCxx;
     case TYPE_OBJC:
-      return Tool::kToolObjC;
+      return CTool::kCToolObjC;
     case TYPE_OBJCXX:
-      return Tool::kToolObjCxx;
+      return CTool::kCToolObjCxx;
     case TYPE_RC:
-      return Tool::kToolRc;
+      return CTool::kCToolRc;
     case TYPE_ASM:
-      return Tool::kToolAsm;
+      return CTool::kCToolAsm;
     case TYPE_ALINK:
-      return Tool::kToolAlink;
+      return CTool::kCToolAlink;
     case TYPE_SOLINK:
-      return Tool::kToolSolink;
+      return CTool::kCToolSolink;
     case TYPE_SOLINK_MODULE:
-      return Tool::kToolSolinkModule;
+      return CTool::kCToolSolinkModule;
     case TYPE_LINK:
-      return Tool::kToolLink;
+      return CTool::kCToolLink;
     case TYPE_STAMP:
-      return Tool::kToolStamp;
+      return GeneralTool::kGeneralToolStamp;
     case TYPE_COPY:
-      return Tool::kToolCopy;
+      return GeneralTool::kGeneralToolCopy;
     case TYPE_COPY_BUNDLE_DATA:
-      return Tool::kToolCopyBundleData;
+      return GeneralTool::kGeneralToolCopyBundleData;
     case TYPE_COMPILE_XCASSETS:
-      return Tool::kToolCompileXCAssets;
+      return GeneralTool::kGeneralToolCompileXCAssets;
     case TYPE_ACTION:
-      return Tool::kToolAction;
+      return GeneralTool::kGeneralToolAction;
     default:
       NOTREACHED();
       return std::string();

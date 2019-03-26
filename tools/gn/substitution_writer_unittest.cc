@@ -286,7 +286,7 @@ TEST(SubstitutionWriter, OutputDir) {
 
   // This tool has an output directory pattern and uses that for the
   // output name.
-  Tool tool;
+  GeneralTool tool(Tool::TYPE_LINK);
   SubstitutionPattern out_dir_pattern;
   ASSERT_TRUE(out_dir_pattern.Parse("{{root_out_dir}}/{{target_output_name}}",
                                     nullptr, &err));
