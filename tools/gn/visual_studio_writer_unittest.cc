@@ -175,7 +175,7 @@ TEST_F(VisualStudioWriterTest, NoDotSlash) {
           "base", path, MakeGuid(path, "project"), MakeTestPath("/foo"),
           "Win32"));
 
-  std::unique_ptr<Tool> tool = std::make_unique<Tool>(Tool::TYPE_ALINK);
+  std::unique_ptr<Tool> tool = std::make_unique<CTool>(Tool::TYPE_ALINK);
   tool->set_outputs(SubstitutionList::MakeForTest(
       "{{root_out_dir}}/{{target_output_name}}{{output_extension}}", ""));
 

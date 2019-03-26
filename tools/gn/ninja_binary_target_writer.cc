@@ -90,29 +90,30 @@ void AddSourceSetObjectFiles(const Target* source_set,
   // files so they are omitted.
   if (source_set->config_values().has_precompiled_headers()) {
     if (used_types.Get(SOURCE_C)) {
-      const Tool* tool = source_set->toolchain()->GetTool(Tool::TYPE_CC);
-      if (tool && tool->precompiled_header_type() == Tool::PCH_MSVC) {
+      const CTool* tool = source_set->toolchain()->GetToolAsC(Tool::TYPE_CC);
+      if (tool && tool->precompiled_header_type() == CTool::PCH_MSVC) {
         GetPCHOutputFiles(source_set, Tool::TYPE_CC, &tool_outputs);
         obj_files->Append(tool_outputs.begin(), tool_outputs.end());
       }
     }
     if (used_types.Get(SOURCE_CPP)) {
-      const Tool* tool = source_set->toolchain()->GetTool(Tool::TYPE_CXX);
-      if (tool && tool->precompiled_header_type() == Tool::PCH_MSVC) {
+      const CTool* tool = source_set->toolchain()->GetToolAsC(Tool::TYPE_CXX);
+      if (tool && tool->precompiled_header_type() == CTool::PCH_MSVC) {
         GetPCHOutputFiles(source_set, Tool::TYPE_CXX, &tool_outputs);
         obj_files->Append(tool_outputs.begin(), tool_outputs.end());
       }
     }
     if (used_types.Get(SOURCE_M)) {
-      const Tool* tool = source_set->toolchain()->GetTool(Tool::TYPE_OBJC);
-      if (tool && tool->precompiled_header_type() == Tool::PCH_MSVC) {
+      const CTool* tool = source_set->toolchain()->GetToolAsC(Tool::TYPE_OBJC);
+      if (tool && tool->precompiled_header_type() == CTool::PCH_MSVC) {
         GetPCHOutputFiles(source_set, Tool::TYPE_OBJC, &tool_outputs);
         obj_files->Append(tool_outputs.begin(), tool_outputs.end());
       }
     }
     if (used_types.Get(SOURCE_MM)) {
-      const Tool* tool = source_set->toolchain()->GetTool(Tool::TYPE_OBJCXX);
-      if (tool && tool->precompiled_header_type() == Tool::PCH_MSVC) {
+      const CTool* tool =
+          source_set->toolchain()->GetToolAsC(Tool::TYPE_OBJCXX);
+      if (tool && tool->precompiled_header_type() == CTool::PCH_MSVC) {
         GetPCHOutputFiles(source_set, Tool::TYPE_OBJCXX, &tool_outputs);
         obj_files->Append(tool_outputs.begin(), tool_outputs.end());
       }
@@ -125,7 +126,7 @@ void AddSourceSetObjectFiles(const Target* source_set,
 NinjaBinaryTargetWriter::NinjaBinaryTargetWriter(const Target* target,
                                                  std::ostream& out)
     : NinjaTargetWriter(target, out),
-      tool_(target->toolchain()->GetToolForTargetFinalOutput(target)),
+      tool_(target->toolchain()->GetToolForTargetFinalOutputAsC(target)),
       rule_prefix_(GetNinjaRulePrefixForToolchain(settings_)) {}
 
 NinjaBinaryTargetWriter::~NinjaBinaryTargetWriter() = default;
@@ -332,31 +333,32 @@ void NinjaBinaryTargetWriter::WritePCHCommands(
   if (!target_->config_values().has_precompiled_headers())
     return;
 
-  const Tool* tool_c = target_->toolchain()->GetTool(Tool::TYPE_CC);
-  if (tool_c && tool_c->precompiled_header_type() != Tool::PCH_NONE &&
+  const CTool* tool_c = target_->toolchain()->GetToolAsC(Tool::TYPE_CC);
+  if (tool_c && tool_c->precompiled_header_type() != CTool::PCH_NONE &&
       used_types.Get(SOURCE_C)) {
     WritePCHCommand(SUBSTITUTION_CFLAGS_C, Tool::TYPE_CC,
                     tool_c->precompiled_header_type(), input_dep,
                     order_only_deps, object_files, other_files);
   }
-  const Tool* tool_cxx = target_->toolchain()->GetTool(Tool::TYPE_CXX);
-  if (tool_cxx && tool_cxx->precompiled_header_type() != Tool::PCH_NONE &&
+  const CTool* tool_cxx = target_->toolchain()->GetToolAsC(Tool::TYPE_CXX);
+  if (tool_cxx && tool_cxx->precompiled_header_type() != CTool::PCH_NONE &&
       used_types.Get(SOURCE_CPP)) {
     WritePCHCommand(SUBSTITUTION_CFLAGS_CC, Tool::TYPE_CXX,
                     tool_cxx->precompiled_header_type(), input_dep,
                     order_only_deps, object_files, other_files);
   }
 
-  const Tool* tool_objc = target_->toolchain()->GetTool(Tool::TYPE_OBJC);
-  if (tool_objc && tool_objc->precompiled_header_type() == Tool::PCH_GCC &&
+  const CTool* tool_objc = target_->toolchain()->GetToolAsC(Tool::TYPE_OBJC);
+  if (tool_objc && tool_objc->precompiled_header_type() == CTool::PCH_GCC &&
       used_types.Get(SOURCE_M)) {
     WritePCHCommand(SUBSTITUTION_CFLAGS_OBJC, Tool::TYPE_OBJC,
                     tool_objc->precompiled_header_type(), input_dep,
                     order_only_deps, object_files, other_files);
   }
 
-  const Tool* tool_objcxx = target_->toolchain()->GetTool(Tool::TYPE_OBJCXX);
-  if (tool_objcxx && tool_objcxx->precompiled_header_type() == Tool::PCH_GCC &&
+  const CTool* tool_objcxx =
+      target_->toolchain()->GetToolAsC(Tool::TYPE_OBJCXX);
+  if (tool_objcxx && tool_objcxx->precompiled_header_type() == CTool::PCH_GCC &&
       used_types.Get(SOURCE_MM)) {
     WritePCHCommand(SUBSTITUTION_CFLAGS_OBJCC, Tool::TYPE_OBJCXX,
                     tool_objcxx->precompiled_header_type(), input_dep,
@@ -367,21 +369,21 @@ void NinjaBinaryTargetWriter::WritePCHCommands(
 void NinjaBinaryTargetWriter::WritePCHCommand(
     SubstitutionType flag_type,
     Tool::ToolType tool_type,
-    Tool::PrecompiledHeaderType header_type,
+    CTool::PrecompiledHeaderType header_type,
     const OutputFile& input_dep,
     const std::vector<OutputFile>& order_only_deps,
     std::vector<OutputFile>* object_files,
     std::vector<OutputFile>* other_files) {
   switch (header_type) {
-    case Tool::PCH_MSVC:
+    case CTool::PCH_MSVC:
       WriteWindowsPCHCommand(flag_type, tool_type, input_dep, order_only_deps,
                              object_files);
       break;
-    case Tool::PCH_GCC:
+    case CTool::PCH_GCC:
       WriteGCCPCHCommand(flag_type, tool_type, input_dep, order_only_deps,
                          other_files);
       break;
-    case Tool::PCH_NONE:
+    case CTool::PCH_NONE:
       NOTREACHED() << "Cannot write a PCH command with no PCH header type";
       break;
   }
@@ -506,18 +508,18 @@ void NinjaBinaryTargetWriter::WriteSources(
       // This makes the assumption that pch_deps only contains pch output files
       // with the naming scheme specified in GetWindowsPCHObjectExtension or
       // GetGCCPCHOutputExtension.
-      const Tool* tool = target_->toolchain()->GetTool(tool_type);
-      if (tool->precompiled_header_type() != Tool::PCH_NONE) {
+      const CTool* tool = target_->toolchain()->GetToolAsC(tool_type);
+      if (tool->precompiled_header_type() != CTool::PCH_NONE) {
         for (const auto& dep : pch_deps) {
           const std::string& output_value = dep.value();
           size_t extension_offset = FindExtensionOffset(output_value);
           if (extension_offset == std::string::npos)
             continue;
           std::string output_extension;
-          if (tool->precompiled_header_type() == Tool::PCH_MSVC) {
+          if (tool->precompiled_header_type() == CTool::PCH_MSVC) {
             output_extension = GetWindowsPCHObjectExtension(
                 tool_type, output_value.substr(extension_offset - 1));
-          } else if (tool->precompiled_header_type() == Tool::PCH_GCC) {
+          } else if (tool->precompiled_header_type() == CTool::PCH_GCC) {
             output_extension = GetGCCPCHOutputExtension(tool_type);
           }
           if (output_value.compare(

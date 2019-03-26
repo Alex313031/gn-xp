@@ -12,6 +12,7 @@
 #include "tools/gn/config_values_extractors.h"
 #include "tools/gn/escape.h"
 #include "tools/gn/filesystem_utils.h"
+#include "tools/gn/general_tool.h"
 #include "tools/gn/ninja_target_command_util.h"
 #include "tools/gn/path_output.h"
 #include "tools/gn/substitution_writer.h"
