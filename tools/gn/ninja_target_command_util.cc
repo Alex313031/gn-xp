@@ -6,6 +6,7 @@
 
 #include <string.h>
 
+#include "tools/gn/c_tool.h"
 #include "tools/gn/substitution_writer.h"
 
 namespace {
@@ -60,8 +61,8 @@ void WriteOneFlag(const Target* target,
     out << kSubstitutionNinjaNames[subst_enum] << " =";
 
   if (has_precompiled_headers) {
-    const Tool* tool = target->toolchain()->GetTool(tool_type);
-    if (tool && tool->precompiled_header_type() == Tool::PCH_MSVC) {
+    const CTool* tool = target->toolchain()->GetToolAsC(tool_type);
+    if (tool && tool->precompiled_header_type() == CTool::PCH_MSVC) {
       // Name the .pch file.
       out << " /Fp";
       path_output.WriteFile(out, GetWindowsPCHFile(target, tool_type));
@@ -71,11 +72,12 @@ void WriteOneFlag(const Target* target,
       out << " /Yu" << target->config_values().precompiled_header();
       RecursiveTargetConfigStringsToStream(target, getter, flag_escape_options,
                                            out);
-    } else if (tool && tool->precompiled_header_type() == Tool::PCH_GCC) {
+    } else if (tool && tool->precompiled_header_type() == CTool::PCH_GCC) {
       // The targets to build the .gch files should omit the -include flag
-      // below. To accomplish this, each substitution flag is overwritten in the
-      // target rule and these values are repeated. The -include flag is omitted
-      // in place of the required -x <header lang> flag for .gch targets.
+      // below. To accomplish this, each substitution flag is overwritten in
+      // the target rule and these values are repeated. The -include flag is
+      // omitted in place of the required -x <header lang> flag for .gch
+      // targets.
       RecursiveTargetConfigStringsToStream(target, getter, flag_escape_options,
                                            out);
 
@@ -111,7 +113,7 @@ void GetPCHOutputFiles(const Target* target,
   // Compute the tool. This must use the tool type passed in rather than the
   // detected file type of the precompiled source file since the same
   // precompiled source file will be used for separate C/C++ compiles.
-  const Tool* tool = target->toolchain()->GetTool(tool_type);
+  const CTool* tool = target->toolchain()->GetToolAsC(tool_type);
   if (!tool)
     return;
   SubstitutionWriter::ApplyListToCompilerAsOutputFile(
@@ -133,16 +135,16 @@ void GetPCHOutputFiles(const Target* target,
   DCHECK(output_value[extension_offset - 1] == '.');
 
   std::string output_extension;
-  Tool::PrecompiledHeaderType header_type = tool->precompiled_header_type();
+  CTool::PrecompiledHeaderType header_type = tool->precompiled_header_type();
   switch (header_type) {
-    case Tool::PCH_MSVC:
+    case CTool::PCH_MSVC:
       output_extension = GetWindowsPCHObjectExtension(
           tool_type, output_value.substr(extension_offset - 1));
       break;
-    case Tool::PCH_GCC:
+    case CTool::PCH_GCC:
       output_extension = GetGCCPCHOutputExtension(tool_type);
       break;
-    case Tool::PCH_NONE:
+    case CTool::PCH_NONE:
       NOTREACHED() << "No outputs for no PCH type.";
       break;
   }
