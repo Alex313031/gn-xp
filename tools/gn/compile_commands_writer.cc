@@ -12,6 +12,7 @@
 #include "tools/gn/config_values_extractors.h"
 #include "tools/gn/escape.h"
 #include "tools/gn/filesystem_utils.h"
+#include "tools/gn/general_tool.h"
 #include "tools/gn/ninja_target_command_util.h"
 #include "tools/gn/path_output.h"
 #include "tools/gn/substitution_writer.h"
@@ -84,8 +85,8 @@ void SetupCompileFlags(const Target* target,
 
   std::ostringstream cflags_objc_out;
   WriteOneFlag(target, SUBSTITUTION_CFLAGS_OBJC, has_precompiled_headers,
-               Tool::TYPE_OBJC, &ConfigValues::cflags_objc, opts,
-               path_output, cflags_objc_out,
+               Tool::TYPE_OBJC, &ConfigValues::cflags_objc, opts, path_output,
+               cflags_objc_out,
                /*write_substitution=*/false);
   base::EscapeJSONString(cflags_objc_out.str(), false, &flags.cflags_objc);
 

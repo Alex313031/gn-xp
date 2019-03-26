@@ -9,6 +9,7 @@
 #include <utility>
 
 #include "base/logging.h"
+#include "tools/gn/err.h"
 #include "tools/gn/target.h"
 #include "tools/gn/value.h"
 
@@ -29,35 +30,87 @@ const Toolchain* Toolchain::AsToolchain() const {
 
 Tool* Toolchain::GetTool(Tool::ToolType type) {
   DCHECK(type != Tool::TYPE_NONE);
-  return tools_[static_cast<size_t>(type)].get();
+  auto t = tools_.find(type);
+  if (t != tools_.end()) {
+    return t->second.get();
+  }
+  return nullptr;
 }
 
 const Tool* Toolchain::GetTool(Tool::ToolType type) const {
   DCHECK(type != Tool::TYPE_NONE);
-  return tools_[static_cast<size_t>(type)].get();
+  const auto t = tools_.find(type);
+  if (t != tools_.end()) {
+    return t->second.get();
+  }
+  return nullptr;
 }
 
-void Toolchain::SetTool(Tool::ToolType type, std::unique_ptr<Tool> t) {
-  DCHECK(type != Tool::TYPE_NONE);
-  DCHECK(!tools_[type].get());
+GeneralTool* Toolchain::GetToolAsGeneral(Tool::ToolType type) {
+  if (Tool* tool = GetTool(type)) {
+    return tool->AsGeneral();
+  }
+  return nullptr;
+}
+
+const GeneralTool* Toolchain::GetToolAsGeneral(Tool::ToolType type) const {
+  if (const Tool* tool = GetTool(type)) {
+    return tool->AsGeneral();
+  }
+  return nullptr;
+}
+
+CTool* Toolchain::GetToolAsC(Tool::ToolType type) {
+  if (Tool* tool = GetTool(type)) {
+    return tool->AsC();
+  }
+  return nullptr;
+}
+
+const CTool* Toolchain::GetToolAsC(Tool::ToolType type) const {
+  if (const Tool* tool = GetTool(type)) {
+    return tool->AsC();
+  }
+  return nullptr;
+}
+
+void Toolchain::SetTool(std::unique_ptr<Tool> t) {
+  DCHECK(t);
+  DCHECK(t->type() != Tool::TYPE_NONE);
+  DCHECK(tools_.find(t->type()) == tools_.end());
   t->SetComplete();
-  tools_[type] = std::move(t);
+  tools_.insert(std::make_pair<Tool::ToolType, std::unique_ptr<Tool>>(
+      t->type(), std::move(t)));
 }
 
 void Toolchain::ToolchainSetupComplete() {
   // Collect required bits from all tools.
   for (const auto& tool : tools_) {
-    if (tool)
-      substitution_bits_.MergeFrom(tool->substitution_bits());
+    substitution_bits_.MergeFrom(tool.second->substitution_bits());
   }
-
   setup_complete_ = true;
 }
 
-const Tool* Toolchain::GetToolForSourceType(SourceFileType type) {
-  return tools_[Tool::GetToolTypeForSourceType(type)].get();
+const Tool* Toolchain::GetToolForSourceType(SourceFileType type) const {
+  return GetTool(Tool::GetToolTypeForSourceType(type));
+}
+
+const CTool* Toolchain::GetToolForSourceTypeAsC(SourceFileType type) const {
+  return GetToolAsC(Tool::GetToolTypeForSourceType(type));
+}
+
+const GeneralTool* Toolchain::GetToolForSourceTypeAsGeneral(SourceFileType type) const {
+  return GetToolAsGeneral(Tool::GetToolTypeForSourceType(type));
 }
 
 const Tool* Toolchain::GetToolForTargetFinalOutput(const Target* target) const {
-  return tools_[Tool::GetToolTypeForTargetFinalOutput(target)].get();
+  return GetTool(Tool::GetToolTypeForTargetFinalOutput(target));
+}
+
+const CTool* Toolchain::GetToolForTargetFinalOutputAsC(const Target* target) const {
+  return GetToolAsC(Tool::GetToolTypeForTargetFinalOutput(target));
+}
+
+const GeneralTool* Toolchain::GetToolForTargetFinalOutputAsGeneral(const Target* target) const {
+  return GetToolAsGeneral(Tool::GetToolTypeForTargetFinalOutput(target));
 }

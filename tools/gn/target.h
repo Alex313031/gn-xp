@@ -30,6 +30,7 @@
 class DepsIteratorRange;
 class Settings;
 class Toolchain;
+class ToolchainRegistry;
 
 class Target : public Item {
  public:

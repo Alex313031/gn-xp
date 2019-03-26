@@ -56,9 +56,15 @@ class Toolchain : public Item {
   Tool* GetTool(Tool::ToolType type);
   const Tool* GetTool(Tool::ToolType type) const;
 
+  // Returns null if the tool hasn't been defined or is not the correct type.
+  GeneralTool* GetToolAsGeneral(Tool::ToolType type);
+  const GeneralTool* GetToolAsGeneral(Tool::ToolType type) const;
+  CTool* GetToolAsC(Tool::ToolType type);
+  const CTool* GetToolAsC(Tool::ToolType type) const;
+
   // Set a tool. When all tools are configured, you should call
   // ToolchainSetupComplete().
-  void SetTool(Tool::ToolType type, std::unique_ptr<Tool> t);
+  void SetTool(std::unique_ptr<Tool> t);
 
   // Does final setup on the toolchain once all tools are known.
   void ToolchainSetupComplete();
@@ -82,21 +88,27 @@ class Toolchain : public Item {
   }
 
   // Returns the tool for compiling the given source file type.
-  const Tool* GetToolForSourceType(SourceFileType type);
+  const Tool* GetToolForSourceType(SourceFileType type) const;
+  const CTool* GetToolForSourceTypeAsC(SourceFileType type) const;
+  const GeneralTool* GetToolForSourceTypeAsGeneral(SourceFileType type) const;
 
   // Returns the tool that produces the final output for the given target type.
   // This isn't necessarily the tool you would expect. For copy target, this
   // will return the stamp tool instead since the final output of a copy
   // target is to stamp the set of copies done so there is one output.
   const Tool* GetToolForTargetFinalOutput(const Target* target) const;
+  const CTool* GetToolForTargetFinalOutputAsC(const Target* target) const;
+  const GeneralTool* GetToolForTargetFinalOutputAsGeneral(const Target* target) const;
 
   const SubstitutionBits& substitution_bits() const {
     DCHECK(setup_complete_);
     return substitution_bits_;
   }
 
+  const std::map<Tool::ToolType, std::unique_ptr<Tool>>& tools() const { return tools_; }
+
  private:
-  std::unique_ptr<Tool> tools_[Tool::TYPE_NUMTYPES];
+  std::map<Tool::ToolType, std::unique_ptr<Tool>> tools_;
 
   bool setup_complete_ = false;
 
