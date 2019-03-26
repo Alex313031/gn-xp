@@ -10,6 +10,7 @@
 #include "base/stl_util.h"
 #include "base/strings/string_util.h"
 #include "base/strings/stringprintf.h"
+#include "tools/gn/c_tool.h"
 #include "tools/gn/config_values_extractors.h"
 #include "tools/gn/deps_iterator.h"
 #include "tools/gn/filesystem_utils.h"
@@ -679,30 +680,32 @@ bool Target::FillOutputFiles(Err* err) {
     case SHARED_LIBRARY:
       CHECK(tool->outputs().list().size() >= 1);
       check_tool_outputs = true;
-      if (tool->link_output().empty() && tool->depend_output().empty()) {
-        // Default behavior, use the first output file for both.
-        link_output_file_ = dependency_output_file_ =
-            SubstitutionWriter::ApplyPatternToLinkerAsOutputFile(
-                this, tool, tool->outputs().list()[0]);
-      } else {
-        // Use the tool-specified ones.
-        if (!tool->link_output().empty()) {
-          link_output_file_ =
+      if (const CTool* ctool = tool->AsC()) {
+        if (ctool->link_output().empty() && ctool->depend_output().empty()) {
+          // Default behavior, use the first output file for both.
+          link_output_file_ = dependency_output_file_ =
               SubstitutionWriter::ApplyPatternToLinkerAsOutputFile(
-                  this, tool, tool->link_output());
+                  this, tool, tool->outputs().list()[0]);
+        } else {
+          // Use the tool-specified ones.
+          if (!ctool->link_output().empty()) {
+            link_output_file_ =
+                SubstitutionWriter::ApplyPatternToLinkerAsOutputFile(
+                    this, tool, ctool->link_output());
+          }
+          if (!ctool->depend_output().empty()) {
+            dependency_output_file_ =
+                SubstitutionWriter::ApplyPatternToLinkerAsOutputFile(
+                    this, tool, ctool->depend_output());
+          }
         }
-        if (!tool->depend_output().empty()) {
-          dependency_output_file_ =
-              SubstitutionWriter::ApplyPatternToLinkerAsOutputFile(
-                  this, tool, tool->depend_output());
+        if (tool->runtime_outputs().list().empty()) {
+          // Default to the link output for the runtime output.
+          runtime_outputs_.push_back(link_output_file_);
+        } else {
+          SubstitutionWriter::ApplyListToLinkerAsOutputFile(
+              this, tool, tool->runtime_outputs(), &runtime_outputs_);
         }
-      }
-      if (tool->runtime_outputs().list().empty()) {
-        // Default to the link output for the runtime output.
-        runtime_outputs_.push_back(link_output_file_);
-      } else {
-        SubstitutionWriter::ApplyListToLinkerAsOutputFile(
-            this, tool, tool->runtime_outputs(), &runtime_outputs_);
       }
       break;
     case UNKNOWN:

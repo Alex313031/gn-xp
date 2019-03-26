@@ -13,7 +13,7 @@ TEST(NinjaToolchainWriter, WriteToolRule) {
 
   std::ostringstream stream;
   NinjaToolchainWriter writer(setup.settings(), setup.toolchain(), stream);
-  writer.WriteToolRule(setup.toolchain()->GetTool(Tool::kToolCc),
+  writer.WriteToolRule(setup.toolchain()->GetTool(CTool::kCToolCc),
                        std::string("prefix_"));
 
   EXPECT_EQ(

@@ -56,6 +56,12 @@ class Toolchain : public Item {
   Tool* GetTool(const char* name);
   const Tool* GetTool(const char* name) const;
 
+  // Returns null if the tool hasn't been defined or is not the correct type.
+  GeneralTool* GetToolAsGeneral(const char* name);
+  const GeneralTool* GetToolAsGeneral(const char* name) const;
+  CTool* GetToolAsC(const char* name);
+  const CTool* GetToolAsC(const char* name) const;
+
   // Set a tool. When all tools are configured, you should call
   // ToolchainSetupComplete().
   void SetTool(std::unique_ptr<Tool> t);
@@ -82,13 +88,18 @@ class Toolchain : public Item {
   }
 
   // Returns the tool for compiling the given source file type.
-  const Tool* GetToolForSourceType(SourceFileType type);
+  const Tool* GetToolForSourceType(SourceFileType type) const;
+  const CTool* GetToolForSourceTypeAsC(SourceFileType type) const;
+  const GeneralTool* GetToolForSourceTypeAsGeneral(SourceFileType type) const;
 
   // Returns the tool that produces the final output for the given target type.
   // This isn't necessarily the tool you would expect. For copy target, this
   // will return the stamp tool instead since the final output of a copy
   // target is to stamp the set of copies done so there is one output.
   const Tool* GetToolForTargetFinalOutput(const Target* target) const;
+  const CTool* GetToolForTargetFinalOutputAsC(const Target* target) const;
+  const GeneralTool* GetToolForTargetFinalOutputAsGeneral(
+      const Target* target) const;
 
   const SubstitutionBits& substitution_bits() const {
     DCHECK(setup_complete_);

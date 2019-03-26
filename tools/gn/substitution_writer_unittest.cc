@@ -286,7 +286,7 @@ TEST(SubstitutionWriter, OutputDir) {
 
   // This tool has an output directory pattern and uses that for the
   // output name.
-  std::unique_ptr<Tool> tool = Tool::CreateTool(Tool::kToolLink);
+  std::unique_ptr<Tool> tool = Tool::CreateTool(CTool::kCToolLink);
   SubstitutionPattern out_dir_pattern;
   ASSERT_TRUE(out_dir_pattern.Parse("{{root_out_dir}}/{{target_output_name}}",
                                     nullptr, &err));
