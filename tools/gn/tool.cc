@@ -272,6 +272,8 @@ const char* Tool::GetToolTypeForSourceType(SourceFileType type) {
     case SOURCE_H:
     case SOURCE_O:
     case SOURCE_DEF:
+    case SOURCE_GO:
+    case SOURCE_RS:
       return kToolNone;
     default:
       NOTREACHED();
