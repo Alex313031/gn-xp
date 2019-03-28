@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "77a65ce8_aee583af",
+        "filename": "tools/gn/visual_studio_writer.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 528,
+      "author": {
+        "id": 1000014
+      },
+      "writtenOn": "2019-03-28T19:58:21Z",
+      "side": 1,
+      "message": "This is weird (it was weird before your patch too), does the {} do anything here? Can we remove it?",
+      "revId": "340894ebb1d3e86476b3c3f7233d18ca75bf5a9a",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": true
+    }
+  ]
+}
