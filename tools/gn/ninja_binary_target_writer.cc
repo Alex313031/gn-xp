@@ -33,6 +33,14 @@ bool NinjaBinaryTargetWriter::SourceFileTypeSet::CSourceUsed() {
   return Get(SOURCE_CPP) || Get(SOURCE_H) || Get(SOURCE_C) || Get(SOURCE_M) || Get(SOURCE_MM) || Get(SOURCE_RC) || Get(SOURCE_S);
 }
 
+bool NinjaBinaryTargetWriter::SourceFileTypeSet::RustSourceUsed() {
+  return Get(SOURCE_RS);
+}
+
+bool NinjaBinaryTargetWriter::SourceFileTypeSet::GoSourceUsed() {
+  return Get(SOURCE_GO);
+}
+
 NinjaBinaryTargetWriter::NinjaBinaryTargetWriter(const Target* target,
                                                  std::ostream& out)
     : NinjaTargetWriter(target, out),
