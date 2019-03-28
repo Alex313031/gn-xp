@@ -352,6 +352,8 @@ Tool::ToolType Tool::GetToolTypeForSourceType(SourceFileType type) {
     case SOURCE_H:
     case SOURCE_O:
     case SOURCE_DEF:
+    case SOURCE_GO:
+    case SOURCE_RS:
       return TYPE_NONE;
     default:
       NOTREACHED();
