@@ -276,8 +276,8 @@ bool Builder::ToolchainDefined(BuilderRecord* record, Err* err) {
   if (!AddDeps(record, toolchain->deps(), err))
     return false;
 
-  for (int i = Toolchain::TYPE_NONE + 1; i < Toolchain::TYPE_NUMTYPES; i++) {
-    Toolchain::ToolType tool_type = static_cast<Toolchain::ToolType>(i);
+  for (int i = Tool::TYPE_NONE + 1; i < Tool::TYPE_NUMTYPES; i++) {
+    Tool::ToolType tool_type = static_cast<Tool::ToolType>(i);
     Tool* tool = toolchain->GetTool(tool_type);
     if (!tool || tool->pool().label.is_null())
       continue;
@@ -565,8 +565,8 @@ bool Builder::ResolveActionValues(ActionValues* action_values, Err* err) {
 }
 
 bool Builder::ResolvePools(Toolchain* toolchain, Err* err) {
-  for (int i = Toolchain::TYPE_NONE + 1; i < Toolchain::TYPE_NUMTYPES; i++) {
-    Toolchain::ToolType tool_type = static_cast<Toolchain::ToolType>(i);
+  for (int i = Tool::TYPE_NONE + 1; i < Tool::TYPE_NUMTYPES; i++) {
+    Tool::ToolType tool_type = static_cast<Tool::ToolType>(i);
     Tool* tool = toolchain->GetTool(tool_type);
     if (!tool || tool->pool().label.is_null())
       continue;

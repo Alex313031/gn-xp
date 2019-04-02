@@ -634,7 +634,7 @@ class TargetDescBuilder : public BaseDescBuilder {
     auto dict = std::make_unique<base::DictionaryValue>();
     for (const auto& source : target_->sources()) {
       std::vector<OutputFile> outputs;
-      Toolchain::ToolType tool_type = Toolchain::TYPE_NONE;
+      Tool::ToolType tool_type = Tool::TYPE_NONE;
       if (target_->GetOutputFilesForSource(source, &tool_type, &outputs)) {
         auto list = std::make_unique<base::ListValue>();
         for (const auto& output : outputs)
