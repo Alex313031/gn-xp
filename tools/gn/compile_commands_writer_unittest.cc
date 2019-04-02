@@ -272,7 +272,7 @@ TEST_F(CompileCommandsTest, WinPrecompiledHeaders) {
   cxx_tool->set_outputs(SubstitutionList::MakeForTest(
       "{{source_out_dir}}/{{target_output_name}}.{{source_name_part}}.o"));
   cxx_tool->set_precompiled_header_type(Tool::PCH_MSVC);
-  pch_toolchain.SetTool(Toolchain::TYPE_CXX, std::move(cxx_tool));
+  pch_toolchain.SetTool(Tool::TYPE_CXX, std::move(cxx_tool));
 
   // Add a C compiler as well.
   std::unique_ptr<Tool> cc_tool = std::make_unique<Tool>();
@@ -283,7 +283,7 @@ TEST_F(CompileCommandsTest, WinPrecompiledHeaders) {
   cc_tool->set_outputs(SubstitutionList::MakeForTest(
       "{{source_out_dir}}/{{target_output_name}}.{{source_name_part}}.o"));
   cc_tool->set_precompiled_header_type(Tool::PCH_MSVC);
-  pch_toolchain.SetTool(Toolchain::TYPE_CC, std::move(cc_tool));
+  pch_toolchain.SetTool(Tool::TYPE_CC, std::move(cc_tool));
   pch_toolchain.ToolchainSetupComplete();
 
   // This target doesn't specify precompiled headers.
@@ -420,7 +420,7 @@ TEST_F(CompileCommandsTest, GCCPrecompiledHeaders) {
   cxx_tool->set_outputs(SubstitutionList::MakeForTest(
       "{{source_out_dir}}/{{target_output_name}}.{{source_name_part}}.o"));
   cxx_tool->set_precompiled_header_type(Tool::PCH_GCC);
-  pch_toolchain.SetTool(Toolchain::TYPE_CXX, std::move(cxx_tool));
+  pch_toolchain.SetTool(Tool::TYPE_CXX, std::move(cxx_tool));
   pch_toolchain.ToolchainSetupComplete();
 
   // Add a C compiler as well.
@@ -432,7 +432,7 @@ TEST_F(CompileCommandsTest, GCCPrecompiledHeaders) {
   cc_tool->set_outputs(SubstitutionList::MakeForTest(
       "{{source_out_dir}}/{{target_output_name}}.{{source_name_part}}.o"));
   cc_tool->set_precompiled_header_type(Tool::PCH_GCC);
-  pch_toolchain.SetTool(Toolchain::TYPE_CC, std::move(cc_tool));
+  pch_toolchain.SetTool(Tool::TYPE_CC, std::move(cc_tool));
   pch_toolchain.ToolchainSetupComplete();
 
   // This target doesn't specify precompiled headers.
