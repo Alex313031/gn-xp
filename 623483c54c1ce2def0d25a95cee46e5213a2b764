@@ -22,6 +22,30 @@
       "revId": "623483c54c1ce2def0d25a95cee46e5213a2b764",
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "54ac9a66_14903cb4",
+        "filename": "tools/gn/setup.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 448,
+      "author": {
+        "id": 1000135
+      },
+      "writtenOn": "2019-04-02T20:49:31Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "6ed96bdf_7d43140e",
+      "range": {
+        "startLine": 448,
+        "startChar": 45,
+        "endLine": 448,
+        "endChar": 51
+      },
+      "revId": "623483c54c1ce2def0d25a95cee46e5213a2b764",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": false
     }
   ]
 }
