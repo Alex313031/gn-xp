@@ -1,0 +1,67 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "15375374_1d6725ea",
+        "filename": "tools/gn/setup.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 446,
+      "author": {
+        "id": 1000004
+      },
+      "writtenOn": "2019-04-02T18:03:18Z",
+      "side": 1,
+      "message": "No camels for variables here.",
+      "range": {
+        "startLine": 446,
+        "startChar": 7,
+        "endLine": 446,
+        "endChar": 18
+      },
+      "revId": "714492aa60a3cf7f5f2b3b32e9c2fd97ffa0483a",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "c2a8efb8_8d7ce626",
+        "filename": "tools/gn/setup.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 448,
+      "author": {
+        "id": 1000004
+      },
+      "writtenOn": "2019-04-02T18:03:18Z",
+      "side": 1,
+      "message": "Is this just !PathExists(build_arg_file)?",
+      "range": {
+        "startLine": 448,
+        "startChar": 25,
+        "endLine": 448,
+        "endChar": 75
+      },
+      "revId": "714492aa60a3cf7f5f2b3b32e9c2fd97ffa0483a",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "fdb300ab_b88039bc",
+        "filename": "tools/gn/setup.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 450,
+      "author": {
+        "id": 1000004
+      },
+      "writtenOn": "2019-04-02T18:03:18Z",
+      "side": 1,
+      "message": "clang-format for ternary spacing, and {} if the `if` is still multiline.",
+      "revId": "714492aa60a3cf7f5f2b3b32e9c2fd97ffa0483a",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": true
+    }
+  ]
+}
