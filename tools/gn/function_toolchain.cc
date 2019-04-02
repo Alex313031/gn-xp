@@ -207,16 +207,16 @@ bool ReadDepsFormat(Scope* scope, Tool* tool, Err* err) {
   return true;
 }
 
-bool IsCompilerTool(Toolchain::ToolType type) {
-  return type == Toolchain::TYPE_CC || type == Toolchain::TYPE_CXX ||
-         type == Toolchain::TYPE_OBJC || type == Toolchain::TYPE_OBJCXX ||
-         type == Toolchain::TYPE_RC || type == Toolchain::TYPE_ASM;
+bool IsCompilerTool(Tool::ToolType type) {
+  return type == Tool::TYPE_CC || type == Tool::TYPE_CXX ||
+         type == Tool::TYPE_OBJC || type == Tool::TYPE_OBJCXX ||
+         type == Tool::TYPE_RC || type == Tool::TYPE_ASM;
 }
 
-bool IsLinkerTool(Toolchain::ToolType type) {
+bool IsLinkerTool(Tool::ToolType type) {
   // "alink" is not counted as in the generic "linker" tool list.
-  return type == Toolchain::TYPE_SOLINK ||
-         type == Toolchain::TYPE_SOLINK_MODULE || type == Toolchain::TYPE_LINK;
+  return type == Tool::TYPE_SOLINK || type == Tool::TYPE_SOLINK_MODULE ||
+         type == Tool::TYPE_LINK;
 }
 
 bool IsPatternInOutputList(const SubstitutionList& output_list,
@@ -243,7 +243,7 @@ bool ValidateOutputs(const Tool* tool, Err* err) {
 // the associated pattern, and the variable name that should appear in error
 // messages.
 bool ValidateLinkAndDependOutput(const Tool* tool,
-                                 Toolchain::ToolType tool_type,
+                                 Tool::ToolType tool_type,
                                  const SubstitutionPattern& pattern,
                                  const char* variable_name,
                                  Err* err) {
@@ -251,8 +251,7 @@ bool ValidateLinkAndDependOutput(const Tool* tool,
     return true;  // Empty is always OK.
 
   // It should only be specified for certain tool types.
-  if (tool_type != Toolchain::TYPE_SOLINK &&
-      tool_type != Toolchain::TYPE_SOLINK_MODULE) {
+  if (tool_type != Tool::TYPE_SOLINK && tool_type != Tool::TYPE_SOLINK_MODULE) {
     *err = Err(tool->defined_from(),
                "This tool specifies a " + std::string(variable_name) + ".",
                "This is only valid for solink and solink_module tools.");
@@ -269,7 +268,7 @@ bool ValidateLinkAndDependOutput(const Tool* tool,
 }
 
 bool ValidateRuntimeOutputs(const Tool* tool,
-                            Toolchain::ToolType tool_type,
+                            Tool::ToolType tool_type,
                             Err* err) {
   if (tool->runtime_outputs().list().empty())
     return true;  // Empty is always OK.
@@ -1006,8 +1005,8 @@ Value RunTool(Scope* scope,
   if (!EnsureSingleStringArg(function, args, err))
     return Value();
   const std::string& tool_name = args[0].string_value();
-  Toolchain::ToolType tool_type = Toolchain::ToolNameToType(tool_name);
-  if (tool_type == Toolchain::TYPE_NONE) {
+  Tool::ToolType tool_type = Tool::ToolNameToType(tool_name);
+  if (tool_type == Tool::TYPE_NONE) {
     *err = Err(args[0], "Unknown tool type");
     return Value();
   }
@@ -1029,15 +1028,15 @@ Value RunTool(Scope* scope,
   } else if (IsLinkerTool(tool_type)) {
     subst_validator = &IsValidLinkerSubstitution;
     subst_output_validator = &IsValidLinkerOutputsSubstitution;
-  } else if (tool_type == Toolchain::TYPE_ALINK) {
+  } else if (tool_type == Tool::TYPE_ALINK) {
     subst_validator = &IsValidALinkSubstitution;
     // ALink uses the standard output file patterns as other linker tools.
     subst_output_validator = &IsValidLinkerOutputsSubstitution;
-  } else if (tool_type == Toolchain::TYPE_COPY ||
-             tool_type == Toolchain::TYPE_COPY_BUNDLE_DATA) {
+  } else if (tool_type == Tool::TYPE_COPY ||
+             tool_type == Tool::TYPE_COPY_BUNDLE_DATA) {
     subst_validator = &IsValidCopySubstitution;
     subst_output_validator = &IsValidCopySubstitution;
-  } else if (tool_type == Toolchain::TYPE_COMPILE_XCASSETS) {
+  } else if (tool_type == Tool::TYPE_COMPILE_XCASSETS) {
     subst_validator = &IsValidCompileXCassetsSubstitution;
     subst_output_validator = &IsValidCompileXCassetsSubstitution;
   } else {
@@ -1081,10 +1080,10 @@ Value RunTool(Scope* scope,
     return Value();
   }
 
-  if (tool_type != Toolchain::TYPE_COPY && tool_type != Toolchain::TYPE_STAMP &&
-      tool_type != Toolchain::TYPE_COPY_BUNDLE_DATA &&
-      tool_type != Toolchain::TYPE_COMPILE_XCASSETS &&
-      tool_type != Toolchain::TYPE_ACTION) {
+  if (tool_type != Tool::TYPE_COPY && tool_type != Tool::TYPE_STAMP &&
+      tool_type != Tool::TYPE_COPY_BUNDLE_DATA &&
+      tool_type != Tool::TYPE_COMPILE_XCASSETS &&
+      tool_type != Tool::TYPE_ACTION) {
     // All tools should have outputs, except the copy, stamp, copy_bundle_data
     // compile_xcassets and action tools that generate their outputs internally.
     if (!ReadPatternList(&block_scope, "outputs", subst_output_validator,

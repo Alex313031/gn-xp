@@ -52,7 +52,7 @@ class NinjaBinaryTargetWriter : public NinjaTargetWriter {
 
   // Writes a .pch compile build line for a language type.
   void WritePCHCommand(SubstitutionType flag_type,
-                       Toolchain::ToolType tool_type,
+                       Tool::ToolType tool_type,
                        Tool::PrecompiledHeaderType header_type,
                        const OutputFile& input_dep,
                        const std::vector<OutputFile>& order_only_deps,
@@ -60,13 +60,13 @@ class NinjaBinaryTargetWriter : public NinjaTargetWriter {
                        std::vector<OutputFile>* other_files);
 
   void WriteGCCPCHCommand(SubstitutionType flag_type,
-                          Toolchain::ToolType tool_type,
+                          Tool::ToolType tool_type,
                           const OutputFile& input_dep,
                           const std::vector<OutputFile>& order_only_deps,
                           std::vector<OutputFile>* gch_files);
 
   void WriteWindowsPCHCommand(SubstitutionType flag_type,
-                              Toolchain::ToolType tool_type,
+                              Tool::ToolType tool_type,
                               const OutputFile& input_dep,
                               const std::vector<OutputFile>& order_only_deps,
                               std::vector<OutputFile>* object_files);
@@ -88,7 +88,7 @@ class NinjaBinaryTargetWriter : public NinjaTargetWriter {
   void WriteCompilerBuildLine(const SourceFile& source,
                               const std::vector<OutputFile>& extra_deps,
                               const std::vector<OutputFile>& order_only_deps,
-                              Toolchain::ToolType tool_type,
+                              Tool::ToolType tool_type,
                               const std::vector<OutputFile>& outputs);
 
   void WriteLinkerStuff(const std::vector<OutputFile>& object_files,
