@@ -11,14 +11,53 @@
 #include "base/macros.h"
 #include "tools/gn/label.h"
 #include "tools/gn/label_ptr.h"
+#include "tools/gn/source_file_type.h"
 #include "tools/gn/substitution_list.h"
 #include "tools/gn/substitution_pattern.h"
 
 class ParseNode;
 class Pool;
+class Target;
 
 class Tool {
  public:
+  enum ToolType {
+    TYPE_NONE = 0,
+    TYPE_CC,
+    TYPE_CXX,
+    TYPE_OBJC,
+    TYPE_OBJCXX,
+    TYPE_RC,
+    TYPE_ASM,
+    TYPE_ALINK,
+    TYPE_SOLINK,
+    TYPE_SOLINK_MODULE,
+    TYPE_LINK,
+    TYPE_STAMP,
+    TYPE_COPY,
+    TYPE_COPY_BUNDLE_DATA,
+    TYPE_COMPILE_XCASSETS,
+    TYPE_ACTION,
+
+    TYPE_NUMTYPES  // Must be last.
+  };
+
+  static const char* kToolCc;
+  static const char* kToolCxx;
+  static const char* kToolObjC;
+  static const char* kToolObjCxx;
+  static const char* kToolRc;
+  static const char* kToolAsm;
+  static const char* kToolAlink;
+  static const char* kToolSolink;
+  static const char* kToolSolinkModule;
+  static const char* kToolLink;
+  static const char* kToolStamp;
+  static const char* kToolCopy;
+  static const char* kToolCopyBundleData;
+  static const char* kToolCompileXCAssets;
+  static const char* kToolAction;
+
   enum DepsFormat { DEPS_GCC = 0, DEPS_MSVC = 1 };
 
   enum PrecompiledHeaderType { PCH_NONE = 0, PCH_GCC = 1, PCH_MSVC = 2 };
@@ -169,7 +208,11 @@ class Tool {
     return substitution_bits_;
   }
 
-  bool OnResolved(Err* err);
+  // Returns TYPE_NONE on failure.
+  static ToolType ToolNameToType(const base::StringPiece& str);
+  static std::string ToolTypeToName(ToolType type);
+  static ToolType GetToolTypeForSourceType(SourceFileType type);
+  static ToolType GetToolTypeForTargetFinalOutput(const Target* target);
 
  private:
   const ParseNode* defined_from_;

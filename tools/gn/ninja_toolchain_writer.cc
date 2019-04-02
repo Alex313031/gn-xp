@@ -40,10 +40,10 @@ void NinjaToolchainWriter::Run(
     const std::vector<NinjaWriter::TargetRulePair>& rules) {
   std::string rule_prefix = GetNinjaRulePrefixForToolchain(settings_);
 
-  for (int i = Toolchain::TYPE_NONE + 1; i < Toolchain::TYPE_NUMTYPES; i++) {
-    Toolchain::ToolType tool_type = static_cast<Toolchain::ToolType>(i);
+  for (int i = Tool::TYPE_NONE + 1; i < Tool::TYPE_NUMTYPES; i++) {
+    Tool::ToolType tool_type = static_cast<Tool::ToolType>(i);
     const Tool* tool = toolchain_->GetTool(tool_type);
-    if (tool_type == Toolchain::TYPE_ACTION)
+    if (tool_type == Tool::TYPE_ACTION)
       continue;
     if (tool)
       WriteToolRule(tool_type, tool, rule_prefix);
@@ -76,10 +76,10 @@ bool NinjaToolchainWriter::RunAndWriteFile(
   return true;
 }
 
-void NinjaToolchainWriter::WriteToolRule(const Toolchain::ToolType type,
+void NinjaToolchainWriter::WriteToolRule(const Tool::ToolType type,
                                          const Tool* tool,
                                          const std::string& rule_prefix) {
-  out_ << "rule " << rule_prefix << Toolchain::ToolTypeToName(type)
+  out_ << "rule " << rule_prefix << Tool::ToolTypeToName(type)
        << std::endl;
 
   // Rules explicitly include shell commands, so don't try to escape.

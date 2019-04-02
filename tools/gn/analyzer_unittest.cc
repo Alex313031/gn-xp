@@ -381,7 +381,7 @@ TEST_F(AnalyzerTest, AffectedToolchainpropagatesToDependentTargets) {
   std::unique_ptr<Tool> fake_tool(new Tool());
   fake_tool->set_outputs(
       SubstitutionList::MakeForTest("//out/debug/output.txt"));
-  toolchain->SetTool(Toolchain::TYPE_LINK, std::move(fake_tool));
+  toolchain->SetTool(Tool::TYPE_LINK, std::move(fake_tool));
   builder_.ItemDefined(std::unique_ptr<Item>(target));
   builder_.ItemDefined(std::unique_ptr<Item>(toolchain));
 

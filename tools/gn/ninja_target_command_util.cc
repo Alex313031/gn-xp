@@ -11,15 +11,15 @@
 namespace {
 
 // Returns the language-specific suffix for precompiled header files.
-const char* GetPCHLangSuffixForToolType(Toolchain::ToolType type) {
+const char* GetPCHLangSuffixForToolType(Tool::ToolType type) {
   switch (type) {
-    case Toolchain::TYPE_CC:
+    case Tool::TYPE_CC:
       return "c";
-    case Toolchain::TYPE_CXX:
+    case Tool::TYPE_CXX:
       return "cc";
-    case Toolchain::TYPE_OBJC:
+    case Tool::TYPE_OBJC:
       return "m";
-    case Toolchain::TYPE_OBJCXX:
+    case Tool::TYPE_OBJCXX:
       return "mm";
     default:
       NOTREACHED() << "Not a valid PCH tool type: " << type;
@@ -32,7 +32,7 @@ const char* GetPCHLangSuffixForToolType(Toolchain::ToolType type) {
 // Returns the computed name of the Windows .pch file for the given
 // tool type. The tool must support precompiled headers.
 OutputFile GetWindowsPCHFile(const Target* target,
-                             Toolchain::ToolType tool_type) {
+                             Tool::ToolType tool_type) {
   // Use "obj/{dir}/{target_name}_{lang}.pch" which ends up
   // looking like "obj/chrome/browser/browser_cc.pch"
   OutputFile ret = GetBuildDirForTargetAsOutputFile(target, BuildDirType::OBJ);
@@ -47,7 +47,7 @@ OutputFile GetWindowsPCHFile(const Target* target,
 void WriteOneFlag(const Target* target,
                   SubstitutionType subst_enum,
                   bool has_precompiled_headers,
-                  Toolchain::ToolType tool_type,
+                  Tool::ToolType tool_type,
                   const std::vector<std::string>& (ConfigValues::*getter)()
                       const,
                   EscapeOptions flag_escape_options,
@@ -105,7 +105,7 @@ void WriteOneFlag(const Target* target,
 }
 
 void GetPCHOutputFiles(const Target* target,
-                       Toolchain::ToolType tool_type,
+                       Tool::ToolType tool_type,
                        std::vector<OutputFile>* outputs) {
   outputs->clear();
 
@@ -151,7 +151,7 @@ void GetPCHOutputFiles(const Target* target,
                        output_extension);
 }
 
-std::string GetGCCPCHOutputExtension(Toolchain::ToolType tool_type) {
+std::string GetGCCPCHOutputExtension(Tool::ToolType tool_type) {
   const char* lang_suffix = GetPCHLangSuffixForToolType(tool_type);
   std::string result = ".";
   // For GCC, the output name must have a .gch suffix and be annotated with
@@ -166,7 +166,7 @@ std::string GetGCCPCHOutputExtension(Toolchain::ToolType tool_type) {
   return result;
 }
 
-std::string GetWindowsPCHObjectExtension(Toolchain::ToolType tool_type,
+std::string GetWindowsPCHObjectExtension(Tool::ToolType tool_type,
                                          const std::string& obj_extension) {
   const char* lang_suffix = GetPCHLangSuffixForToolType(tool_type);
   std::string result = ".";
