@@ -44,72 +44,72 @@ const Toolchain* Toolchain::AsToolchain() const {
 }
 
 // static
-Toolchain::ToolType Toolchain::ToolNameToType(const base::StringPiece& str) {
+Tool::Tool::ToolType Toolchain::ToolNameToType(const base::StringPiece& str) {
   if (str == kToolCc)
-    return TYPE_CC;
+    return Tool::TYPE_CC;
   if (str == kToolCxx)
-    return TYPE_CXX;
+    return Tool::TYPE_CXX;
   if (str == kToolObjC)
-    return TYPE_OBJC;
+    return Tool::TYPE_OBJC;
   if (str == kToolObjCxx)
-    return TYPE_OBJCXX;
+    return Tool::TYPE_OBJCXX;
   if (str == kToolRc)
-    return TYPE_RC;
+    return Tool::TYPE_RC;
   if (str == kToolAsm)
-    return TYPE_ASM;
+    return Tool::TYPE_ASM;
   if (str == kToolAlink)
-    return TYPE_ALINK;
+    return Tool::TYPE_ALINK;
   if (str == kToolSolink)
-    return TYPE_SOLINK;
+    return Tool::TYPE_SOLINK;
   if (str == kToolSolinkModule)
-    return TYPE_SOLINK_MODULE;
+    return Tool::TYPE_SOLINK_MODULE;
   if (str == kToolLink)
-    return TYPE_LINK;
+    return Tool::TYPE_LINK;
   if (str == kToolStamp)
-    return TYPE_STAMP;
+    return Tool::TYPE_STAMP;
   if (str == kToolCopy)
-    return TYPE_COPY;
+    return Tool::TYPE_COPY;
   if (str == kToolCopyBundleData)
-    return TYPE_COPY_BUNDLE_DATA;
+    return Tool::TYPE_COPY_BUNDLE_DATA;
   if (str == kToolCompileXCAssets)
-    return TYPE_COMPILE_XCASSETS;
+    return Tool::TYPE_COMPILE_XCASSETS;
   if (str == kToolAction)
-    return TYPE_ACTION;
-  return TYPE_NONE;
+    return Tool::TYPE_ACTION;
+  return Tool::TYPE_NONE;
 }
 
 // static
-std::string Toolchain::ToolTypeToName(ToolType type) {
+std::string Toolchain::ToolTypeToName(Tool::ToolType type) {
   switch (type) {
-    case TYPE_CC:
+    case Tool::TYPE_CC:
       return kToolCc;
-    case TYPE_CXX:
+    case Tool::TYPE_CXX:
       return kToolCxx;
-    case TYPE_OBJC:
+    case Tool::TYPE_OBJC:
       return kToolObjC;
-    case TYPE_OBJCXX:
+    case Tool::TYPE_OBJCXX:
       return kToolObjCxx;
-    case TYPE_RC:
+    case Tool::TYPE_RC:
       return kToolRc;
-    case TYPE_ASM:
+    case Tool::TYPE_ASM:
       return kToolAsm;
-    case TYPE_ALINK:
+    case Tool::TYPE_ALINK:
       return kToolAlink;
-    case TYPE_SOLINK:
+    case Tool::TYPE_SOLINK:
       return kToolSolink;
-    case TYPE_SOLINK_MODULE:
+    case Tool::TYPE_SOLINK_MODULE:
       return kToolSolinkModule;
-    case TYPE_LINK:
+    case Tool::TYPE_LINK:
       return kToolLink;
-    case TYPE_STAMP:
+    case Tool::TYPE_STAMP:
       return kToolStamp;
-    case TYPE_COPY:
+    case Tool::TYPE_COPY:
       return kToolCopy;
-    case TYPE_COPY_BUNDLE_DATA:
+    case Tool::TYPE_COPY_BUNDLE_DATA:
       return kToolCopyBundleData;
-    case TYPE_COMPILE_XCASSETS:
+    case Tool::TYPE_COMPILE_XCASSETS:
       return kToolCompileXCAssets;
-    case TYPE_ACTION:
+    case Tool::TYPE_ACTION:
       return kToolAction;
     default:
       NOTREACHED();
@@ -117,18 +117,18 @@ std::string Toolchain::ToolTypeToName(ToolType type) {
   }
 }
 
-Tool* Toolchain::GetTool(ToolType type) {
-  DCHECK(type != TYPE_NONE);
+Tool* Toolchain::GetTool(Tool::ToolType type) {
+  DCHECK(type != Tool::TYPE_NONE);
   return tools_[static_cast<size_t>(type)].get();
 }
 
-const Tool* Toolchain::GetTool(ToolType type) const {
-  DCHECK(type != TYPE_NONE);
+const Tool* Toolchain::GetTool(Tool::ToolType type) const {
+  DCHECK(type != Tool::TYPE_NONE);
   return tools_[static_cast<size_t>(type)].get();
 }
 
-void Toolchain::SetTool(ToolType type, std::unique_ptr<Tool> t) {
-  DCHECK(type != TYPE_NONE);
+void Toolchain::SetTool(Tool::ToolType type, std::unique_ptr<Tool> t) {
+  DCHECK(type != Tool::TYPE_NONE);
   DCHECK(!tools_[type].get());
   t->SetComplete();
   tools_[type] = std::move(t);
@@ -145,29 +145,29 @@ void Toolchain::ToolchainSetupComplete() {
 }
 
 // static
-Toolchain::ToolType Toolchain::GetToolTypeForSourceType(SourceFileType type) {
+Tool::ToolType Toolchain::GetToolTypeForSourceType(SourceFileType type) {
   switch (type) {
     case SOURCE_C:
-      return TYPE_CC;
+      return Tool::TYPE_CC;
     case SOURCE_CPP:
-      return TYPE_CXX;
+      return Tool::TYPE_CXX;
     case SOURCE_M:
-      return TYPE_OBJC;
+      return Tool::TYPE_OBJC;
     case SOURCE_MM:
-      return TYPE_OBJCXX;
+      return Tool::TYPE_OBJCXX;
     case SOURCE_ASM:
     case SOURCE_S:
-      return TYPE_ASM;
+      return Tool::TYPE_ASM;
     case SOURCE_RC:
-      return TYPE_RC;
+      return Tool::TYPE_RC;
     case SOURCE_UNKNOWN:
     case SOURCE_H:
     case SOURCE_O:
     case SOURCE_DEF:
-      return TYPE_NONE;
+      return Tool::TYPE_NONE;
     default:
       NOTREACHED();
-      return TYPE_NONE;
+      return Tool::TYPE_NONE;
   }
 }
 
@@ -176,34 +176,34 @@ const Tool* Toolchain::GetToolForSourceType(SourceFileType type) {
 }
 
 // static
-Toolchain::ToolType Toolchain::GetToolTypeForTargetFinalOutput(
+Tool::ToolType Toolchain::GetToolTypeForTargetFinalOutput(
     const Target* target) {
   // The contents of this list might be suprising (i.e. stamp tool for copy
   // rules). See the header for why.
   // TODO(crbug.com/gn/39): Don't emit stamp files for single-output targets.
   switch (target->output_type()) {
     case Target::GROUP:
-      return TYPE_STAMP;
+      return Tool::TYPE_STAMP;
     case Target::EXECUTABLE:
-      return Toolchain::TYPE_LINK;
+      return Tool::Tool::TYPE_LINK;
     case Target::SHARED_LIBRARY:
-      return Toolchain::TYPE_SOLINK;
+      return Tool::Tool::TYPE_SOLINK;
     case Target::LOADABLE_MODULE:
-      return Toolchain::TYPE_SOLINK_MODULE;
+      return Tool::Tool::TYPE_SOLINK_MODULE;
     case Target::STATIC_LIBRARY:
-      return Toolchain::TYPE_ALINK;
+      return Tool::Tool::TYPE_ALINK;
     case Target::SOURCE_SET:
-      return TYPE_STAMP;
+      return Tool::TYPE_STAMP;
     case Target::ACTION:
     case Target::ACTION_FOREACH:
     case Target::BUNDLE_DATA:
     case Target::CREATE_BUNDLE:
     case Target::COPY_FILES:
     case Target::GENERATED_FILE:
-      return TYPE_STAMP;
+      return Tool::TYPE_STAMP;
     default:
       NOTREACHED();
-      return Toolchain::TYPE_NONE;
+      return Tool::Tool::TYPE_NONE;
   }
 }
 

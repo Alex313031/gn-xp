@@ -31,27 +31,6 @@
 // be accessed until this Item is resolved.
 class Toolchain : public Item {
  public:
-  enum ToolType {
-    TYPE_NONE = 0,
-    TYPE_CC,
-    TYPE_CXX,
-    TYPE_OBJC,
-    TYPE_OBJCXX,
-    TYPE_RC,
-    TYPE_ASM,
-    TYPE_ALINK,
-    TYPE_SOLINK,
-    TYPE_SOLINK_MODULE,
-    TYPE_LINK,
-    TYPE_STAMP,
-    TYPE_COPY,
-    TYPE_COPY_BUNDLE_DATA,
-    TYPE_COMPILE_XCASSETS,
-    TYPE_ACTION,
-
-    TYPE_NUMTYPES  // Must be last.
-  };
-
   static const char* kToolCc;
   static const char* kToolCxx;
   static const char* kToolObjC;
@@ -90,16 +69,16 @@ class Toolchain : public Item {
   const Toolchain* AsToolchain() const override;
 
   // Returns TYPE_NONE on failure.
-  static ToolType ToolNameToType(const base::StringPiece& str);
-  static std::string ToolTypeToName(ToolType type);
+  static Tool::ToolType ToolNameToType(const base::StringPiece& str);
+  static std::string ToolTypeToName(Tool::ToolType type);
 
   // Returns null if the tool hasn't been defined.
-  Tool* GetTool(ToolType type);
-  const Tool* GetTool(ToolType type) const;
+  Tool* GetTool(Tool::ToolType type);
+  const Tool* GetTool(Tool::ToolType type) const;
 
   // Set a tool. When all tools are configured, you should call
   // ToolchainSetupComplete().
-  void SetTool(ToolType type, std::unique_ptr<Tool> t);
+  void SetTool(Tool::ToolType type, std::unique_ptr<Tool> t);
 
   // Does final setup on the toolchain once all tools are known.
   void ToolchainSetupComplete();
@@ -123,14 +102,14 @@ class Toolchain : public Item {
   }
 
   // Returns the tool for compiling the given source file type.
-  static ToolType GetToolTypeForSourceType(SourceFileType type);
+  static Tool::ToolType GetToolTypeForSourceType(SourceFileType type);
   const Tool* GetToolForSourceType(SourceFileType type);
 
   // Returns the tool that produces the final output for the given target type.
   // This isn't necessarily the tool you would expect. For copy target, this
   // will return the stamp tool instead since the final output of a copy
   // target is to stamp the set of copies done so there is one output.
-  static ToolType GetToolTypeForTargetFinalOutput(const Target* target);
+  static Tool::ToolType GetToolTypeForTargetFinalOutput(const Target* target);
   const Tool* GetToolForTargetFinalOutput(const Target* target) const;
 
   const SubstitutionBits& substitution_bits() const {
@@ -139,7 +118,7 @@ class Toolchain : public Item {
   }
 
  private:
-  std::unique_ptr<Tool> tools_[TYPE_NUMTYPES];
+  std::unique_ptr<Tool> tools_[Tool::TYPE_NUMTYPES];
 
   bool setup_complete_ = false;
 

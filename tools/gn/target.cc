@@ -94,7 +94,7 @@ bool EnsureFileIsGeneratedByDependency(const Target* target,
   if (consider_object_files && target->IsBinary()) {
     std::vector<OutputFile> source_outputs;
     for (const SourceFile& source : target->sources()) {
-      Toolchain::ToolType tool_type;
+      Tool::ToolType tool_type;
       if (!target->GetOutputFilesForSource(source, &tool_type, &source_outputs))
         continue;
       if (base::ContainsValue(source_outputs, file))
@@ -482,10 +482,10 @@ bool Target::SetToolchain(const Toolchain* toolchain, Err* err) {
 }
 
 bool Target::GetOutputFilesForSource(const SourceFile& source,
-                                     Toolchain::ToolType* computed_tool_type,
+                                     Tool::ToolType* computed_tool_type,
                                      std::vector<OutputFile>* outputs) const {
   outputs->clear();
-  *computed_tool_type = Toolchain::TYPE_NONE;
+  *computed_tool_type = Tool::TYPE_NONE;
 
   SourceFileType file_type = GetSourceFileType(source);
   if (file_type == SOURCE_UNKNOWN)
@@ -497,7 +497,7 @@ bool Target::GetOutputFilesForSource(const SourceFile& source,
   }
 
   *computed_tool_type = toolchain_->GetToolTypeForSourceType(file_type);
-  if (*computed_tool_type == Toolchain::TYPE_NONE)
+  if (*computed_tool_type == Tool::TYPE_NONE)
     return false;  // No tool for this file (it's a header file or something).
   const Tool* tool = toolchain_->GetTool(*computed_tool_type);
   if (!tool)

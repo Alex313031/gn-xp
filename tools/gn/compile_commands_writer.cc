@@ -65,33 +65,33 @@ void SetupCompileFlags(const Target* target,
   base::EscapeJSONString(includes_out.str(), false, &flags.includes);
 
   std::ostringstream cflags_out;
-  WriteOneFlag(target, SUBSTITUTION_CFLAGS, false, Toolchain::TYPE_NONE,
+  WriteOneFlag(target, SUBSTITUTION_CFLAGS, false, Tool::TYPE_NONE,
                &ConfigValues::cflags, opts, path_output, cflags_out,
                /*write_substitution=*/false);
   base::EscapeJSONString(cflags_out.str(), false, &flags.cflags);
 
   std::ostringstream cflags_c_out;
   WriteOneFlag(target, SUBSTITUTION_CFLAGS_C, has_precompiled_headers,
-               Toolchain::TYPE_CC, &ConfigValues::cflags_c, opts, path_output,
+               Tool::TYPE_CC, &ConfigValues::cflags_c, opts, path_output,
                cflags_c_out, /*write_substitution=*/false);
   base::EscapeJSONString(cflags_c_out.str(), false, &flags.cflags_c);
 
   std::ostringstream cflags_cc_out;
   WriteOneFlag(target, SUBSTITUTION_CFLAGS_CC, has_precompiled_headers,
-               Toolchain::TYPE_CXX, &ConfigValues::cflags_cc, opts, path_output,
+               Tool::TYPE_CXX, &ConfigValues::cflags_cc, opts, path_output,
                cflags_cc_out, /*write_substitution=*/false);
   base::EscapeJSONString(cflags_cc_out.str(), false, &flags.cflags_cc);
 
   std::ostringstream cflags_objc_out;
   WriteOneFlag(target, SUBSTITUTION_CFLAGS_OBJC, has_precompiled_headers,
-               Toolchain::TYPE_OBJC, &ConfigValues::cflags_objc, opts,
+               Tool::TYPE_OBJC, &ConfigValues::cflags_objc, opts,
                path_output, cflags_objc_out,
                /*write_substitution=*/false);
   base::EscapeJSONString(cflags_objc_out.str(), false, &flags.cflags_objc);
 
   std::ostringstream cflags_objcc_out;
   WriteOneFlag(target, SUBSTITUTION_CFLAGS_OBJCC, has_precompiled_headers,
-               Toolchain::TYPE_OBJCXX, &ConfigValues::cflags_objcc, opts,
+               Tool::TYPE_OBJCXX, &ConfigValues::cflags_objcc, opts,
                path_output, cflags_objcc_out, /*write_substitution=*/false);
   base::EscapeJSONString(cflags_objcc_out.str(), false, &flags.cflags_objcc);
 }
@@ -119,7 +119,7 @@ void WriteCommand(const Target* target,
                   std::vector<OutputFile>& tool_outputs,
                   PathOutput& path_output,
                   SourceFileType source_type,
-                  Toolchain::ToolType tool_type,
+                  Tool::ToolType tool_type,
                   EscapeOptions opts,
                   std::string* compile_commands) {
   EscapeOptions no_quoting(opts);
@@ -235,7 +235,7 @@ void CompileCommandsWriter::RenderJSON(const BuildSettings* build_settings,
           source_type != SOURCE_M && source_type != SOURCE_MM)
         continue;
 
-      Toolchain::ToolType tool_type = Toolchain::TYPE_NONE;
+      Tool::ToolType tool_type = Tool::TYPE_NONE;
       if (!target->GetOutputFilesForSource(source, &tool_type, &tool_outputs))
         continue;
 

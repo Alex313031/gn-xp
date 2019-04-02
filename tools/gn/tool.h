@@ -19,6 +19,27 @@ class Pool;
 
 class Tool {
  public:
+  enum ToolType {
+    TYPE_NONE = 0,
+    TYPE_CC,
+    TYPE_CXX,
+    TYPE_OBJC,
+    TYPE_OBJCXX,
+    TYPE_RC,
+    TYPE_ASM,
+    TYPE_ALINK,
+    TYPE_SOLINK,
+    TYPE_SOLINK_MODULE,
+    TYPE_LINK,
+    TYPE_STAMP,
+    TYPE_COPY,
+    TYPE_COPY_BUNDLE_DATA,
+    TYPE_COMPILE_XCASSETS,
+    TYPE_ACTION,
+
+    TYPE_NUMTYPES  // Must be last.
+  };
+
   enum DepsFormat { DEPS_GCC = 0, DEPS_MSVC = 1 };
 
   enum PrecompiledHeaderType { PCH_NONE = 0, PCH_GCC = 1, PCH_MSVC = 2 };

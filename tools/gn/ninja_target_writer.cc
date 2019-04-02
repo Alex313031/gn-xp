@@ -294,7 +294,7 @@ std::vector<OutputFile> NinjaTargetWriter::WriteInputDepsStampAndGetDep(
   out_ << "build ";
   path_output_.WriteFile(out_, input_stamp_file);
   out_ << ": " << GetNinjaRulePrefixForToolchain(settings_)
-       << Toolchain::ToolTypeToName(Toolchain::TYPE_STAMP);
+       << Toolchain::ToolTypeToName(Tool::TYPE_STAMP);
   path_output_.WriteFiles(out_, outs);
 
   out_ << "\n";
@@ -317,7 +317,7 @@ void NinjaTargetWriter::WriteStampForTarget(
   path_output_.WriteFile(out_, stamp_file);
 
   out_ << ": " << GetNinjaRulePrefixForToolchain(settings_)
-       << Toolchain::ToolTypeToName(Toolchain::TYPE_STAMP);
+       << Toolchain::ToolTypeToName(Tool::TYPE_STAMP);
   path_output_.WriteFiles(out_, files);
 
   if (!order_only_deps.empty()) {
