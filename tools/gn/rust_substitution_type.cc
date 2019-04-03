@@ -12,12 +12,24 @@
 
 const SubstitutionTypes RustSubstitutions = {
     &RustSubstitutionRustFlags,
+    &RustSubstitutionRustEnv,
+    &RustSubstitutionCrateName,
+    &RustSubstitutionRustDeps,
+    &RustSubstitutionRustRlibs,
 };
 
 // Valid for compiler tools.
 const Substitution RustSubstitutionRustFlags = {"{{rustflags}}", "rustflags"};
+const Substitution RustSubstitutionRustEnv = {"{{rustenv}}", "rustenv"};
+const Substitution RustSubstitutionCrateName = {"{{crate_name}}", "crate_name"};
+const Substitution RustSubstitutionRustDeps = {"{{rustdeps}}", "rustdeps"};
+const Substitution RustSubstitutionRustRlibs = {"{{rlibs}}", "rlibs"};
 
 bool IsValidRustSubstitution(const Substitution* type) {
   return IsValidToolSubstitution(type) || IsValidSourceSubstitution(type) ||
-         type == &RustSubstitutionRustFlags;
+         type == &RustSubstitutionRustFlags ||
+         type == &RustSubstitutionRustEnv ||
+         type == &RustSubstitutionCrateName ||
+         type == &RustSubstitutionRustDeps ||
+         type == &RustSubstitutionRustRlibs;
 }

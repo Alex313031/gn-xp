@@ -35,9 +35,53 @@ void RustTool::SetComplete() {
   SetToolComplete();
 }
 
+bool RustTool::ReadOutputsPatternList(Scope* scope,
+                                      const char* var,
+                                      SubstitutionList* field,
+                                      Err* err) {
+  DCHECK(!complete_);
+  const Value* value = scope->GetValue(var, true);
+  if (!value)
+    return true;  // Not present is fine.
+  if (!value->VerifyTypeIs(Value::LIST, err))
+    return false;
+
+  SubstitutionList list;
+  if (!list.Parse(*value, err))
+    return false;
+
+  // Validate the right kinds of patterns are used.
+  if (list.list().empty()) {
+    *err = Err(defined_from(), "\"outputs\" must be specified for this tool.");
+    return false;
+  }
+
+  for (const auto& cur_type : list.required_types()) {
+    if (!IsValidRustSubstitution(cur_type)) {
+      *err = Err(*value, "Pattern not valid here.",
+                 "You used the pattern " +
+                     std::string(cur_type->name) +
+                     " which is not valid\nfor this variable.");
+      return false;
+    }
+  }
+
+  *field = std::move(list);
+  return true;
+}
+
 bool RustTool::InitTool(Scope* scope, Toolchain* toolchain, Err* err) {
   // Initialize default vars.
-  return Tool::InitTool(scope, toolchain, err);
+  if (!Tool::InitTool(scope, toolchain, err)) {
+    return false;
+  }
+
+  // All Rust tools should have outputs.
+  if (!ReadOutputsPatternList(scope, "outputs", &outputs_, err)) {
+    return false;
+  }
+
+  return true;
 }
 
 bool RustTool::ValidateSubstitution(const Substitution* sub_type) const {

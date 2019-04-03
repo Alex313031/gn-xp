@@ -15,6 +15,10 @@ extern const SubstitutionTypes RustSubstitutions;
 
 // Valid for compiler tools.
 extern const Substitution RustSubstitutionRustFlags;
+extern const Substitution RustSubstitutionRustEnv;
+extern const Substitution RustSubstitutionCrateName;
+extern const Substitution RustSubstitutionRustDeps;
+extern const Substitution RustSubstitutionRustRlibs;
 
 bool IsValidRustSubstitution(const Substitution* type);
 
