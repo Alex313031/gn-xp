@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "8b24d28e_68a3c815",
+        "filename": "tools/gn/target_unittest.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 1056,
+      "author": {
+        "id": 1000070
+      },
+      "writtenOn": "2019-04-03T14:30:36Z",
+      "side": 1,
+      "message": "Ha. This should have been foo_c.bundle :-/",
+      "revId": "21abbfc6d1279e4c66a83ab3445654637065e92a",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": false
+    }
+  ]
+}
