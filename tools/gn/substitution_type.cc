@@ -227,6 +227,11 @@ bool IsValidCompileXCassetsSubstitution(SubstitutionType type) {
          type == SUBSTITUTION_BUNDLE_PARTIAL_INFO_PLIST;
 }
 
+bool IsValidRustSubstitution(SubstitutionType type) {
+  return IsValidToolSubstitution(type) || IsValidSourceSubstitution(type) ||
+         type == SUBSTITUTION_SOURCE;
+}
+
 bool EnsureValidSubstitutions(const std::vector<SubstitutionType>& types,
                               bool (*is_valid_subst)(SubstitutionType),
                               const ParseNode* origin,
