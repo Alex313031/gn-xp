@@ -31,20 +31,21 @@ void CreateBundleTargetGenerator::DoRun() {
 
   BundleData& bundle_data = target_->bundle_data();
   if (!FillBundleDir(SourceDir(), variables::kBundleRootDir,
-                     &bundle_data.root_dir()))
+                     &bundle_data.root_dir())) {
     return;
+  }
   if (!FillBundleDir(bundle_data.root_dir(), variables::kBundleContentsDir,
-                     &bundle_data.contents_dir()))
+                     &bundle_data.contents_dir())) {
     return;
+  }
   if (!FillBundleDir(bundle_data.root_dir(), variables::kBundleResourcesDir,
-                     &bundle_data.resources_dir()))
+                     &bundle_data.resources_dir())) {
     return;
+  }
   if (!FillBundleDir(bundle_data.root_dir(), variables::kBundleExecutableDir,
-                     &bundle_data.executable_dir()))
+                     &bundle_data.executable_dir())) {
     return;
-  if (!FillBundleDir(bundle_data.root_dir(), variables::kBundlePlugInsDir,
-                     &bundle_data.plugins_dir()))
-    return;
+  }
 
   if (!FillXcodeExtraAttributes())
     return;
