@@ -39,6 +39,11 @@ class RustTool : public Tool {
   const RustTool* AsRust() const override;
 
  private:
+  bool ReadOutputsPatternList(Scope* scope,
+                              const char* var,
+                              SubstitutionList* field,
+                              Err* err);
+
   DISALLOW_COPY_AND_ASSIGN(RustTool);
 };
 
