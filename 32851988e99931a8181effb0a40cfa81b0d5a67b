@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "192c86f5_fa21602c",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 13
+      },
+      "lineNbr": 20,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2019-04-03T14:46:08Z",
+      "side": 1,
+      "message": "(fyi: `gn:64` works too and is a bit shorter)",
+      "revId": "32851988e99931a8181effb0a40cfa81b0d5a67b",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": true
+    }
+  ]
+}
