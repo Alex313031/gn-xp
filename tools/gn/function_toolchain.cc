@@ -207,16 +207,16 @@ bool ReadDepsFormat(Scope* scope, Tool* tool, Err* err) {
   return true;
 }
 
-bool IsCompilerTool(Tool::ToolType type) {
-  return type == Tool::TYPE_CC || type == Tool::TYPE_CXX ||
-         type == Tool::TYPE_OBJC || type == Tool::TYPE_OBJCXX ||
-         type == Tool::TYPE_RC || type == Tool::TYPE_ASM;
+bool IsCompilerTool(const char* name) {
+  return name == Tool::kToolCc || name == Tool::kToolCxx ||
+         name == Tool::kToolObjC || name == Tool::kToolObjCxx ||
+         name == Tool::kToolRc || name == Tool::kToolAsm;
 }
 
-bool IsLinkerTool(Tool::ToolType type) {
+bool IsLinkerTool(const char* name) {
   // "alink" is not counted as in the generic "linker" tool list.
-  return type == Tool::TYPE_SOLINK || type == Tool::TYPE_SOLINK_MODULE ||
-         type == Tool::TYPE_LINK;
+  return name == Tool::kToolSolink || name == Tool::kToolSolinkModule ||
+         name == Tool::kToolLink;
 }
 
 bool IsPatternInOutputList(const SubstitutionList& output_list,
@@ -243,7 +243,7 @@ bool ValidateOutputs(const Tool* tool, Err* err) {
 // the associated pattern, and the variable name that should appear in error
 // messages.
 bool ValidateLinkAndDependOutput(const Tool* tool,
-                                 Tool::ToolType tool_type,
+                                 const char* tool_name,
                                  const SubstitutionPattern& pattern,
                                  const char* variable_name,
                                  Err* err) {
@@ -251,7 +251,7 @@ bool ValidateLinkAndDependOutput(const Tool* tool,
     return true;  // Empty is always OK.
 
   // It should only be specified for certain tool types.
-  if (tool_type != Tool::TYPE_SOLINK && tool_type != Tool::TYPE_SOLINK_MODULE) {
+  if (tool_name != Tool::kToolSolink && tool_name != Tool::kToolSolinkModule) {
     *err = Err(tool->defined_from(),
                "This tool specifies a " + std::string(variable_name) + ".",
                "This is only valid for solink and solink_module tools.");
@@ -268,12 +268,12 @@ bool ValidateLinkAndDependOutput(const Tool* tool,
 }
 
 bool ValidateRuntimeOutputs(const Tool* tool,
-                            Tool::ToolType tool_type,
+                            const char* tool_name,
                             Err* err) {
   if (tool->runtime_outputs().list().empty())
     return true;  // Empty is always OK.
 
-  if (!IsLinkerTool(tool_type)) {
+  if (!IsLinkerTool(tool_name)) {
     *err = Err(tool->defined_from(), "This tool specifies runtime_outputs.",
                "This is only valid for linker tools (alink doesn't count).");
     return false;
@@ -1005,11 +1005,6 @@ Value RunTool(Scope* scope,
   if (!EnsureSingleStringArg(function, args, err))
     return Value();
   const std::string& tool_name = args[0].string_value();
-  Tool::ToolType tool_type = Tool::ToolNameToType(tool_name);
-  if (tool_type == Tool::TYPE_NONE) {
-    *err = Err(args[0], "Unknown tool type");
-    return Value();
-  }
 
   // Run the tool block.
   Scope block_scope(scope);
@@ -1017,35 +1012,39 @@ Value RunTool(Scope* scope,
   if (err->has_error())
     return Value();
 
+  std::unique_ptr<Tool> tool = Tool::CreateTool(tool_name);
+  if (!tool) {
+    *err = Err(args[0], "Unknown tool type");
+    return Value();
+  }
+  tool->set_defined_from(function);
+
   // Figure out which validator to use for the substitution pattern for this
   // tool type. There are different validators for the "outputs" than for the
   // rest of the strings.
   bool (*subst_validator)(SubstitutionType) = nullptr;
   bool (*subst_output_validator)(SubstitutionType) = nullptr;
-  if (IsCompilerTool(tool_type)) {
+  if (IsCompilerTool(tool->name())) {
     subst_validator = &IsValidCompilerSubstitution;
     subst_output_validator = &IsValidCompilerOutputsSubstitution;
-  } else if (IsLinkerTool(tool_type)) {
+  } else if (IsLinkerTool(tool->name())) {
     subst_validator = &IsValidLinkerSubstitution;
     subst_output_validator = &IsValidLinkerOutputsSubstitution;
-  } else if (tool_type == Tool::TYPE_ALINK) {
+  } else if (tool->name() == Tool::kToolAlink) {
     subst_validator = &IsValidALinkSubstitution;
     // ALink uses the standard output file patterns as other linker tools.
     subst_output_validator = &IsValidLinkerOutputsSubstitution;
-  } else if (tool_type == Tool::TYPE_COPY ||
-             tool_type == Tool::TYPE_COPY_BUNDLE_DATA) {
+  } else if (tool->name() == Tool::kToolCopy ||
+             tool->name() == Tool::kToolCopyBundleData) {
     subst_validator = &IsValidCopySubstitution;
     subst_output_validator = &IsValidCopySubstitution;
-  } else if (tool_type == Tool::TYPE_COMPILE_XCASSETS) {
+  } else if (tool->name() == Tool::kToolCompileXCAssets) {
     subst_validator = &IsValidCompileXCassetsSubstitution;
     subst_output_validator = &IsValidCompileXCassetsSubstitution;
   } else {
     subst_validator = &IsValidToolSubstitution;
     subst_output_validator = &IsValidToolSubstitution;
   }
-
-  std::unique_ptr<Tool> tool = std::make_unique<Tool>();
-  tool->set_defined_from(function);
 
   if (!ReadPattern(&block_scope, "command", subst_validator, tool.get(),
                    &Tool::set_command, err) ||
@@ -1080,10 +1079,10 @@ Value RunTool(Scope* scope,
     return Value();
   }
 
-  if (tool_type != Tool::TYPE_COPY && tool_type != Tool::TYPE_STAMP &&
-      tool_type != Tool::TYPE_COPY_BUNDLE_DATA &&
-      tool_type != Tool::TYPE_COMPILE_XCASSETS &&
-      tool_type != Tool::TYPE_ACTION) {
+  if (tool->name() != Tool::kToolCopy && tool->name() != Tool::kToolStamp &&
+      tool->name() != Tool::kToolCopyBundleData &&
+      tool->name() != Tool::kToolCompileXCAssets &&
+      tool->name() != Tool::kToolAction) {
     // All tools should have outputs, except the copy, stamp, copy_bundle_data
     // compile_xcassets and action tools that generate their outputs internally.
     if (!ReadPatternList(&block_scope, "outputs", subst_output_validator,
@@ -1091,14 +1090,14 @@ Value RunTool(Scope* scope,
         !ValidateOutputs(tool.get(), err))
       return Value();
   }
-  if (!ValidateRuntimeOutputs(tool.get(), tool_type, err))
+  if (!ValidateRuntimeOutputs(tool.get(), tool->name(), err))
     return Value();
 
   // Validate link_output and depend_output.
-  if (!ValidateLinkAndDependOutput(tool.get(), tool_type, tool->link_output(),
+  if (!ValidateLinkAndDependOutput(tool.get(), tool->name(), tool->link_output(),
                                    "link_output", err))
     return Value();
-  if (!ValidateLinkAndDependOutput(tool.get(), tool_type, tool->depend_output(),
+  if (!ValidateLinkAndDependOutput(tool.get(), tool->name(), tool->depend_output(),
                                    "depend_output", err))
     return Value();
   if ((!tool->link_output().empty() && tool->depend_output().empty()) ||
@@ -1113,7 +1112,7 @@ Value RunTool(Scope* scope,
   if (!block_scope.CheckForUnusedVars(err))
     return Value();
 
-  toolchain->SetTool(tool_type, std::move(tool));
+  toolchain->SetTool(std::move(tool));
   return Value();
 }
 

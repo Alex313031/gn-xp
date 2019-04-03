@@ -11,33 +11,30 @@
 namespace {
 
 // Returns the language-specific suffix for precompiled header files.
-const char* GetPCHLangSuffixForToolType(Tool::ToolType type) {
-  switch (type) {
-    case Tool::TYPE_CC:
-      return "c";
-    case Tool::TYPE_CXX:
-      return "cc";
-    case Tool::TYPE_OBJC:
-      return "m";
-    case Tool::TYPE_OBJCXX:
-      return "mm";
-    default:
-      NOTREACHED() << "Not a valid PCH tool type: " << type;
-      return "";
-  }
+const char* GetPCHLangSuffixForToolType(const char* name) {
+  if (name == Tool::kToolCc)
+    return "c";
+  if (name == Tool::kToolCxx)
+    return "cc";
+  if (name == Tool::kToolObjC)
+    return "m";
+  if (name == Tool::kToolObjCxx)
+    return "mm";
+  NOTREACHED() << "Not a valid PCH tool type: " << name;
+  return "";
 }
 
 }  // namespace
 
 // Returns the computed name of the Windows .pch file for the given
 // tool type. The tool must support precompiled headers.
-OutputFile GetWindowsPCHFile(const Target* target, Tool::ToolType tool_type) {
+OutputFile GetWindowsPCHFile(const Target* target, const char* tool_name) {
   // Use "obj/{dir}/{target_name}_{lang}.pch" which ends up
   // looking like "obj/chrome/browser/browser_cc.pch"
   OutputFile ret = GetBuildDirForTargetAsOutputFile(target, BuildDirType::OBJ);
   ret.value().append(target->label().name());
   ret.value().push_back('_');
-  ret.value().append(GetPCHLangSuffixForToolType(tool_type));
+  ret.value().append(GetPCHLangSuffixForToolType(tool_name));
   ret.value().append(".pch");
 
   return ret;
@@ -46,7 +43,7 @@ OutputFile GetWindowsPCHFile(const Target* target, Tool::ToolType tool_type) {
 void WriteOneFlag(const Target* target,
                   SubstitutionType subst_enum,
                   bool has_precompiled_headers,
-                  Tool::ToolType tool_type,
+                  const char* tool_name,
                   const std::vector<std::string>& (ConfigValues::*getter)()
                       const,
                   EscapeOptions flag_escape_options,
@@ -60,11 +57,11 @@ void WriteOneFlag(const Target* target,
     out << kSubstitutionNinjaNames[subst_enum] << " =";
 
   if (has_precompiled_headers) {
-    const Tool* tool = target->toolchain()->GetTool(tool_type);
+    const Tool* tool = target->toolchain()->GetTool(tool_name);
     if (tool && tool->precompiled_header_type() == Tool::PCH_MSVC) {
       // Name the .pch file.
       out << " /Fp";
-      path_output.WriteFile(out, GetWindowsPCHFile(target, tool_type));
+      path_output.WriteFile(out, GetWindowsPCHFile(target, tool_name));
 
       // Enables precompiled headers and names the .h file. It's a string
       // rather than a file name (so no need to rebase or use path_output).
@@ -81,7 +78,7 @@ void WriteOneFlag(const Target* target,
 
       // Compute the gch file (it will be language-specific).
       std::vector<OutputFile> outputs;
-      GetPCHOutputFiles(target, tool_type, &outputs);
+      GetPCHOutputFiles(target, tool_name, &outputs);
       if (!outputs.empty()) {
         // Trim the .gch suffix for the -include flag.
         // e.g. for gch file foo/bar/target.precompiled.h.gch:
@@ -104,14 +101,14 @@ void WriteOneFlag(const Target* target,
 }
 
 void GetPCHOutputFiles(const Target* target,
-                       Tool::ToolType tool_type,
+                       const char* tool_name,
                        std::vector<OutputFile>* outputs) {
   outputs->clear();
 
   // Compute the tool. This must use the tool type passed in rather than the
   // detected file type of the precompiled source file since the same
   // precompiled source file will be used for separate C/C++ compiles.
-  const Tool* tool = target->toolchain()->GetTool(tool_type);
+  const Tool* tool = target->toolchain()->GetTool(tool_name);
   if (!tool)
     return;
   SubstitutionWriter::ApplyListToCompilerAsOutputFile(
@@ -137,10 +134,10 @@ void GetPCHOutputFiles(const Target* target,
   switch (header_type) {
     case Tool::PCH_MSVC:
       output_extension = GetWindowsPCHObjectExtension(
-          tool_type, output_value.substr(extension_offset - 1));
+          tool_name, output_value.substr(extension_offset - 1));
       break;
     case Tool::PCH_GCC:
-      output_extension = GetGCCPCHOutputExtension(tool_type);
+      output_extension = GetGCCPCHOutputExtension(tool_name);
       break;
     case Tool::PCH_NONE:
       NOTREACHED() << "No outputs for no PCH type.";
@@ -150,8 +147,8 @@ void GetPCHOutputFiles(const Target* target,
                        output_extension);
 }
 
-std::string GetGCCPCHOutputExtension(Tool::ToolType tool_type) {
-  const char* lang_suffix = GetPCHLangSuffixForToolType(tool_type);
+std::string GetGCCPCHOutputExtension(const char* tool_name) {
+  const char* lang_suffix = GetPCHLangSuffixForToolType(tool_name);
   std::string result = ".";
   // For GCC, the output name must have a .gch suffix and be annotated with
   // the language type. For example:
@@ -165,9 +162,9 @@ std::string GetGCCPCHOutputExtension(Tool::ToolType tool_type) {
   return result;
 }
 
-std::string GetWindowsPCHObjectExtension(Tool::ToolType tool_type,
+std::string GetWindowsPCHObjectExtension(const char* tool_name,
                                          const std::string& obj_extension) {
-  const char* lang_suffix = GetPCHLangSuffixForToolType(tool_type);
+  const char* lang_suffix = GetPCHLangSuffixForToolType(tool_name);
   std::string result = ".";
   // For MSVC, annotate the obj files with the language type. For example:
   //   obj/foo/target_name.precompile.obj ->

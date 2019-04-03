@@ -21,10 +21,9 @@ bool TargetRequireAssetCatalogCompilation(const Target* target) {
          !target->bundle_data().partial_info_plist().is_null();
 }
 
-void FailWithMissingToolError(Tool::ToolType tool, const Target* target) {
-  const std::string& tool_name = Tool::ToolTypeToName(tool);
+void FailWithMissingToolError(const char* tool_name, const Target* target) {
   g_scheduler->FailWithError(
-      Err(nullptr, tool_name + " tool not defined",
+      Err(nullptr, std::string(tool_name) + " tool not defined",
           "The toolchain " +
               target->toolchain()->label().GetUserVisibleName(false) +
               "\n"
@@ -36,9 +35,9 @@ void FailWithMissingToolError(Tool::ToolType tool, const Target* target) {
 }
 
 bool EnsureAllToolsAvailable(const Target* target) {
-  const Tool::ToolType kRequiredTools[] = {
-      Tool::TYPE_COPY_BUNDLE_DATA,
-      Tool::TYPE_STAMP,
+  const char* kRequiredTools[] = {
+      Tool::kToolCopyBundleData,
+      Tool::kToolStamp,
   };
 
   for (size_t i = 0; i < arraysize(kRequiredTools); ++i) {
@@ -51,8 +50,8 @@ bool EnsureAllToolsAvailable(const Target* target) {
   // The compile_xcassets tool is only required if the target has asset
   // catalog resources to compile.
   if (TargetRequireAssetCatalogCompilation(target)) {
-    if (!target->toolchain()->GetTool(Tool::TYPE_COMPILE_XCASSETS)) {
-      FailWithMissingToolError(Tool::TYPE_COMPILE_XCASSETS, target);
+    if (!target->toolchain()->GetTool(Tool::kToolCompileXCAssets)) {
+      FailWithMissingToolError(Tool::kToolCompileXCAssets, target);
       return false;
     }
   }
@@ -161,7 +160,7 @@ void NinjaCreateBundleTargetWriter::WriteCopyBundleFileRuleSteps(
     out_ << "build ";
     path_output_.WriteFile(out_, expanded_output_file);
     out_ << ": " << GetNinjaRulePrefixForToolchain(settings_)
-         << Tool::ToolTypeToName(Tool::TYPE_COPY_BUNDLE_DATA) << " ";
+         << Tool::kToolCopyBundleData << " ";
     path_output_.WriteFile(out_, source_file);
 
     if (!order_only_deps.empty()) {
@@ -205,7 +204,7 @@ void NinjaCreateBundleTargetWriter::WriteCompileAssetsCatalogStep(
     out_ << "build ";
     path_output_.WriteFile(out_, partial_info_plist);
     out_ << ": " << GetNinjaRulePrefixForToolchain(settings_)
-         << Tool::ToolTypeToName(Tool::TYPE_STAMP);
+         << Tool::kToolStamp;
     if (!order_only_deps.empty()) {
       out_ << " ||";
       path_output_.WriteFiles(out_, order_only_deps);
@@ -230,7 +229,7 @@ void NinjaCreateBundleTargetWriter::WriteCompileAssetsCatalogStep(
   }
 
   out_ << ": " << GetNinjaRulePrefixForToolchain(settings_)
-       << Tool::ToolTypeToName(Tool::TYPE_COMPILE_XCASSETS);
+       << Tool::kToolCompileXCAssets;
 
   std::set<SourceFile> asset_catalog_bundles;
   for (const auto& source : target_->bundle_data().assets_catalog_sources()) {
@@ -274,7 +273,7 @@ NinjaCreateBundleTargetWriter::WriteCompileAssetsCatalogInputDepsStamp(
   out_ << "build ";
   path_output_.WriteFile(out_, xcassets_input_stamp_file);
   out_ << ": " << GetNinjaRulePrefixForToolchain(settings_)
-       << Tool::ToolTypeToName(Tool::TYPE_STAMP);
+       << Tool::kToolStamp;
 
   for (const Target* target : dependencies) {
     out_ << " ";
@@ -340,7 +339,7 @@ OutputFile NinjaCreateBundleTargetWriter::WriteCodeSigningInputDepsStamp(
   out_ << "build ";
   path_output_.WriteFile(out_, code_signing_input_stamp_file);
   out_ << ": " << GetNinjaRulePrefixForToolchain(settings_)
-       << Tool::ToolTypeToName(Tool::TYPE_STAMP);
+       << Tool::kToolStamp;
 
   for (const SourceFile& source : code_signing_input_files) {
     out_ << " ";
