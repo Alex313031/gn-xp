@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "2b53e6c4_7aeb1d64",
+        "filename": "docs/reference.md",
+        "patchSetId": 1
+      },
+      "lineNbr": 1424,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2019-04-03T10:27:01Z",
+      "side": 1,
+      "message": "I found the other bundle_ variables aren\u0027t required either. Nothing complains if I don\u0027t set them, as long as no bundle_data() references them.",
+      "revId": "8fd651d50be0b9f2e58e30e12cd80ef0eaf9c09d",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "2dd7c1aa_3dcb49e3",
+        "filename": "docs/reference.md",
+        "patchSetId": 1
+      },
+      "lineNbr": 1472,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2019-04-03T10:27:01Z",
+      "side": 1,
+      "message": "I think this conditional should be `if (!is_ios || !code_signing)`, else you don\u0027t have this bundle_data() target on mac. (The target is used in the else to `is_ios \u0026\u0026 code_signing` below, and !(is_ios \u0026\u0026 code_signing) is !is_ios || !code_signing.)",
+      "revId": "8fd651d50be0b9f2e58e30e12cd80ef0eaf9c09d",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": true
+    }
+  ]
+}
