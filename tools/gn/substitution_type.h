@@ -130,6 +130,7 @@ bool IsValidLinkerOutputsSubstitution(SubstitutionType type);
 bool IsValidALinkSubstitution(SubstitutionType type);
 bool IsValidCopySubstitution(SubstitutionType type);
 bool IsValidCompileXCassetsSubstitution(SubstitutionType type);
+bool IsValidRustSubstitution(SubstitutionType type);
 
 // Validates that each substitution type in the vector passes the given
 // is_valid_subst predicate. Returns true on success. On failure, fills in the
