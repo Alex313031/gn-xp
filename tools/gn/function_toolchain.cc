@@ -1044,7 +1044,7 @@ Value RunTool(Scope* scope,
     subst_output_validator = &IsValidToolSubstitution;
   }
 
-  std::unique_ptr<Tool> tool = std::make_unique<Tool>();
+  std::unique_ptr<Tool> tool = std::make_unique<Tool>(tool_type);
   tool->set_defined_from(function);
 
   if (!ReadPattern(&block_scope, "command", subst_validator, tool.get(),
@@ -1113,7 +1113,7 @@ Value RunTool(Scope* scope,
   if (!block_scope.CheckForUnusedVars(err))
     return Value();
 
-  toolchain->SetTool(tool_type, std::move(tool));
+  toolchain->SetTool(std::move(tool));
   return Value();
 }
 

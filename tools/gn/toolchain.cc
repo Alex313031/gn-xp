@@ -37,11 +37,11 @@ const Tool* Toolchain::GetTool(Tool::ToolType type) const {
   return tools_[static_cast<size_t>(type)].get();
 }
 
-void Toolchain::SetTool(Tool::ToolType type, std::unique_ptr<Tool> t) {
-  DCHECK(type != Tool::TYPE_NONE);
-  DCHECK(!tools_[type].get());
+void Toolchain::SetTool(std::unique_ptr<Tool> t) {
+  DCHECK(t->type() != Tool::TYPE_NONE);
+  DCHECK(!tools_[t->type()].get());
   t->SetComplete();
-  tools_[type] = std::move(t);
+  tools_[t->type()] = std::move(t);
 }
 
 void Toolchain::ToolchainSetupComplete() {

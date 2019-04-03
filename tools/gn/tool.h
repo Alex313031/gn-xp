@@ -62,11 +62,13 @@ class Tool {
 
   enum PrecompiledHeaderType { PCH_NONE = 0, PCH_GCC = 1, PCH_MSVC = 2 };
 
-  Tool();
+  Tool(ToolType t);
   ~Tool();
 
   const ParseNode* defined_from() const { return defined_from_; }
   void set_defined_from(const ParseNode* df) { defined_from_ = df; }
+
+  const ToolType type() const { return type_; }
 
   // Getters/setters ----------------------------------------------------------
   //
@@ -216,6 +218,7 @@ class Tool {
 
  private:
   const ParseNode* defined_from_;
+  const ToolType type_;
 
   SubstitutionPattern command_;
   std::string default_output_extension_;

@@ -21,12 +21,13 @@ const char* Tool::kToolCopyBundleData = "copy_bundle_data";
 const char* Tool::kToolCompileXCAssets = "compile_xcassets";
 const char* Tool::kToolAction = "action";
 
-Tool::Tool()
+Tool::Tool(ToolType t)
     : defined_from_(nullptr),
       depsformat_(DEPS_GCC),
       precompiled_header_type_(PCH_NONE),
       restat_(false),
-      complete_(false) {}
+      complete_(false),
+      type_(t) {}
 
 Tool::~Tool() = default;
 
