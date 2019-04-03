@@ -47,3 +47,25 @@ TEST(SubstitutionPattern, ParseErrors) {
   EXPECT_FALSE(pattern.Parse("{{source{{source}}", nullptr, &err));
   EXPECT_TRUE(err.has_error());
 }
+
+TEST(SubstitutionPattern, ParseRust) {
+  SubstitutionPattern pattern;
+  Err err;
+  EXPECT_TRUE(pattern.Parse(
+      "AA{{rustflags}}{{rustenv}}BB{{crate_name}}{{rustdeps}}CC{{rlibs}}",
+      nullptr, &err));
+  EXPECT_FALSE(err.has_error());
+  ASSERT_EQ(8u, pattern.ranges().size());
+
+  EXPECT_EQ(SUBSTITUTION_LITERAL, pattern.ranges()[0].type);
+  EXPECT_EQ("AA", pattern.ranges()[0].literal);
+  EXPECT_EQ(SUBSTITUTION_RUSTFLAGS, pattern.ranges()[1].type);
+  EXPECT_EQ(SUBSTITUTION_RUSTENV, pattern.ranges()[2].type);
+  EXPECT_EQ(SUBSTITUTION_LITERAL, pattern.ranges()[3].type);
+  EXPECT_EQ("BB", pattern.ranges()[3].literal);
+  EXPECT_EQ(SUBSTITUTION_CRATE_NAME, pattern.ranges()[4].type);
+  EXPECT_EQ(SUBSTITUTION_RUSTDEPS, pattern.ranges()[5].type);
+  EXPECT_EQ(SUBSTITUTION_LITERAL, pattern.ranges()[6].type);
+  EXPECT_EQ("CC", pattern.ranges()[6].literal);
+  EXPECT_EQ(SUBSTITUTION_RLIBS, pattern.ranges()[7].type);
+}
