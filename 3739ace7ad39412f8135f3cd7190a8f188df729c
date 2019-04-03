@@ -37,6 +37,24 @@
     },
     {
       "key": {
+        "uuid": "4b8ded41_1733d4fb",
+        "filename": "docs/reference.md",
+        "patchSetId": 5
+      },
+      "lineNbr": 1423,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2019-04-03T13:00:13Z",
+      "side": 1,
+      "message": "I think \"silently do something weird\" is at least consistent with how other things in gn behave -- say if you don\u0027t have a cxx tool in your toolchain, all cc files are silently not compiled etc. So I\u0027d probably recommend keeping these not required (so that it\u0027s ok to not set the when not used), updating the docs, and maybe add an error message later for when they\u0027re used but not defined.",
+      "parentUuid": "98cceae5_adb0e06c",
+      "revId": "3739ace7ad39412f8135f3cd7190a8f188df729c",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "573937cd_e876ad95",
         "filename": "docs/reference.md",
         "patchSetId": 5
