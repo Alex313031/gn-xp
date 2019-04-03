@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "98cceae5_adb0e06c",
+        "filename": "docs/reference.md",
+        "patchSetId": 5
+      },
+      "lineNbr": 1423,
+      "author": {
+        "id": 1000070
+      },
+      "writtenOn": "2019-04-03T12:57:35Z",
+      "side": 1,
+      "message": "I guess this will break your CL, but I agree that this is unfortunate.\n\nAre those properties required? bundle_root_dir is required because otherwise there is no way for the bundle_data to communicate the correct path for the file (since the same bundle_data target may be depended on by multiple create_bundle target, thus the path in bundle_data outputs needs to use some indirection which is provided by {{bundle_root_dir}} expansion).\n\nRegarding the other properties, it is less clear. Currently if the property is not set and the corresponding expansion is used, the {{bundle_foo_dir}} will be expanded to an empty string and will result in a really hard to understand error at build time, e.g.:\n\n    ninja: error: \u0027../../ios_chrome_autofill_automation_egtests_module.xctest\u0027, needed by \u0027obj/ios/chrome/test/earl_grey/ios_chrome_autofill_automation_egtests.codesigning.inputdeps.stamp\u0027, missing and no known rule to make it\n\nI got that error after removing bundle_plugins_dir everywhere except in one place. The {{bundle_plugins_dir}}/{{source_file_part}} was expanded to a path starting with a / which was assumed to be relative to repository root.\n\nCurrently the code performing the substitution does not report an error. I can see a way to add such an error reporting (at least for bundle_data targets), however this will require a larger CL.\n\nI can either add the error reporting as a followup CL (thus resulting in a breakage for your use case if gn is rolled between the two CLs) or adding it first and waiting for it before landing current CL.\n\nWhat do you think?",
+      "parentUuid": "f6849a75_7acb5c7a",
+      "revId": "3739ace7ad39412f8135f3cd7190a8f188df729c",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "573937cd_e876ad95",
         "filename": "docs/reference.md",
         "patchSetId": 5
@@ -36,6 +54,24 @@
     },
     {
       "key": {
+        "uuid": "634cff7f_f2dbf61e",
+        "filename": "docs/reference.md",
+        "patchSetId": 5
+      },
+      "lineNbr": 1494,
+      "author": {
+        "id": 1000070
+      },
+      "writtenOn": "2019-04-03T12:57:35Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "573937cd_e876ad95",
+      "revId": "3739ace7ad39412f8135f3cd7190a8f188df729c",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "0368ceac_99c181a8",
         "filename": "tools/gn/create_bundle_target_generator.cc",
         "patchSetId": 5
@@ -50,6 +86,24 @@
       "revId": "3739ace7ad39412f8135f3cd7190a8f188df729c",
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "270486de_1f26dfba",
+        "filename": "tools/gn/create_bundle_target_generator.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 45,
+      "author": {
+        "id": 1000070
+      },
+      "writtenOn": "2019-04-03T12:57:35Z",
+      "side": 1,
+      "message": "See my other comment.",
+      "parentUuid": "0368ceac_99c181a8",
+      "revId": "3739ace7ad39412f8135f3cd7190a8f188df729c",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": false
     }
   ]
 }
