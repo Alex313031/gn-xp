@@ -7,6 +7,7 @@
 #include <map>
 
 #include "base/logging.h"
+#include "base/strings/stringprintf.h"
 #include "tools/gn/filesystem_utils.h"
 #include "tools/gn/label_pattern.h"
 #include "tools/gn/parse_tree.h"
@@ -31,20 +32,25 @@ void CreateBundleTargetGenerator::DoRun() {
 
   BundleData& bundle_data = target_->bundle_data();
   if (!FillBundleDir(SourceDir(), variables::kBundleRootDir,
-                     &bundle_data.root_dir()))
+                     /*bundle_path_is_required=*/true,
+                     &bundle_data.root_dir())) {
     return;
+  }
   if (!FillBundleDir(bundle_data.root_dir(), variables::kBundleContentsDir,
-                     &bundle_data.contents_dir()))
+                     /*bundle_path_is_required=*/true,
+                     &bundle_data.contents_dir())) {
     return;
+  }
   if (!FillBundleDir(bundle_data.root_dir(), variables::kBundleResourcesDir,
-                     &bundle_data.resources_dir()))
+                     /*bundle_path_is_required=*/true,
+                     &bundle_data.resources_dir())) {
     return;
+  }
   if (!FillBundleDir(bundle_data.root_dir(), variables::kBundleExecutableDir,
-                     &bundle_data.executable_dir()))
+                     /*bundle_path_is_required=*/false,
+                     &bundle_data.executable_dir())) {
     return;
-  if (!FillBundleDir(bundle_data.root_dir(), variables::kBundlePlugInsDir,
-                     &bundle_data.plugins_dir()))
-    return;
+  }
 
   if (!FillXcodeExtraAttributes())
     return;
@@ -77,12 +83,20 @@ void CreateBundleTargetGenerator::DoRun() {
 bool CreateBundleTargetGenerator::FillBundleDir(
     const SourceDir& bundle_root_dir,
     const base::StringPiece& name,
+    bool bundle_path_is_required,
     SourceDir* bundle_dir) {
   // All bundle_foo_dir properties are optional. They are only required if they
   // are used in an expansion. The check is performed there.
   const Value* value = scope_->GetValue(name, true);
-  if (!value)
-    return true;
+  if (!value) {
+    if (bundle_path_is_required) {
+      *err_ =
+          Err(function_call_,
+              base::StringPrintf("This target requires \"%s\" to be defined.",
+                                 name.data()));
+    }
+    return !bundle_path_is_required;
+  }
   if (!value->VerifyTypeIs(Value::STRING, err_))
     return false;
   std::string str = value->string_value();
