@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "431a21fe_28d5c8e0",
+        "filename": "docs/reference.md",
+        "patchSetId": 6
+      },
+      "lineNbr": 1484,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2019-04-03T13:01:12Z",
+      "side": 1,
+      "message": "That ß looks unintentional btw :)",
+      "revId": "42fa028a943b557310536b41b5ce68465c7dc920",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": true
+    }
+  ]
+}
