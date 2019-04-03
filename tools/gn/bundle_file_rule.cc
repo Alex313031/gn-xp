@@ -44,9 +44,6 @@ SourceFile BundleFileRule::ApplyPatternToSource(
       case SUBSTITUTION_BUNDLE_EXECUTABLE_DIR:
         output_path.append(bundle_data.executable_dir().value());
         break;
-      case SUBSTITUTION_BUNDLE_PLUGINS_DIR:
-        output_path.append(bundle_data.plugins_dir().value());
-        break;
       default:
         output_path.append(SubstitutionWriter::GetSourceSubstitution(
             target_, target_->settings(), source_file, subrange.type,
