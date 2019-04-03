@@ -52,7 +52,7 @@ class NinjaBinaryTargetWriter : public NinjaTargetWriter {
 
   // Writes a .pch compile build line for a language type.
   void WritePCHCommand(SubstitutionType flag_type,
-                       Tool::ToolType tool_type,
+                       const char* tool_name,
                        Tool::PrecompiledHeaderType header_type,
                        const OutputFile& input_dep,
                        const std::vector<OutputFile>& order_only_deps,
@@ -60,13 +60,13 @@ class NinjaBinaryTargetWriter : public NinjaTargetWriter {
                        std::vector<OutputFile>* other_files);
 
   void WriteGCCPCHCommand(SubstitutionType flag_type,
-                          Tool::ToolType tool_type,
+                          const char* tool_name,
                           const OutputFile& input_dep,
                           const std::vector<OutputFile>& order_only_deps,
                           std::vector<OutputFile>* gch_files);
 
   void WriteWindowsPCHCommand(SubstitutionType flag_type,
-                              Tool::ToolType tool_type,
+                              const char* tool_name,
                               const OutputFile& input_dep,
                               const std::vector<OutputFile>& order_only_deps,
                               std::vector<OutputFile>* object_files);
@@ -88,7 +88,7 @@ class NinjaBinaryTargetWriter : public NinjaTargetWriter {
   void WriteCompilerBuildLine(const SourceFile& source,
                               const std::vector<OutputFile>& extra_deps,
                               const std::vector<OutputFile>& order_only_deps,
-                              Tool::ToolType tool_type,
+                              const char* tool_name,
                               const std::vector<OutputFile>& outputs);
 
   void WriteLinkerStuff(const std::vector<OutputFile>& object_files,
@@ -124,7 +124,6 @@ class NinjaBinaryTargetWriter : public NinjaTargetWriter {
   // argument, plus the data file depdencies in the target.
   void WriteOrderOnlyDependencies(
       const UniqueVector<const Target*>& non_linkable_deps);
-
 
   // Checks for duplicates in the given list of output files. If any duplicates
   // are found, throws an error and return false.

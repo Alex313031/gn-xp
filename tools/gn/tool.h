@@ -21,27 +21,7 @@ class Target;
 
 class Tool {
  public:
-  enum ToolType {
-    TYPE_NONE = 0,
-    TYPE_CC,
-    TYPE_CXX,
-    TYPE_OBJC,
-    TYPE_OBJCXX,
-    TYPE_RC,
-    TYPE_ASM,
-    TYPE_ALINK,
-    TYPE_SOLINK,
-    TYPE_SOLINK_MODULE,
-    TYPE_LINK,
-    TYPE_STAMP,
-    TYPE_COPY,
-    TYPE_COPY_BUNDLE_DATA,
-    TYPE_COMPILE_XCASSETS,
-    TYPE_ACTION,
-
-    TYPE_NUMTYPES  // Must be last.
-  };
-
+  static const char* kToolNone;
   static const char* kToolCc;
   static const char* kToolCxx;
   static const char* kToolObjC;
@@ -62,11 +42,13 @@ class Tool {
 
   enum PrecompiledHeaderType { PCH_NONE = 0, PCH_GCC = 1, PCH_MSVC = 2 };
 
-  Tool();
+  Tool(const char* name);
   ~Tool();
 
   const ParseNode* defined_from() const { return defined_from_; }
   void set_defined_from(const ParseNode* df) { defined_from_ = df; }
+
+  const char* name() const { return name_; }
 
   // Getters/setters ----------------------------------------------------------
   //
@@ -208,14 +190,18 @@ class Tool {
     return substitution_bits_;
   }
 
+  // Create a tool given the name.
+  static std::unique_ptr<Tool> CreateTool(const std::string& name);
+
   // Returns TYPE_NONE on failure.
-  static ToolType ToolNameToType(const base::StringPiece& str);
-  static std::string ToolTypeToName(ToolType type);
-  static ToolType GetToolTypeForSourceType(SourceFileType type);
-  static ToolType GetToolTypeForTargetFinalOutput(const Target* target);
+  static const char* GetToolTypeForSourceType(SourceFileType type);
+  static const char* GetToolTypeForTargetFinalOutput(const Target* target);
 
  private:
+  bool ValidateName(const char* name);
+
   const ParseNode* defined_from_;
+  const char* name_;
 
   SubstitutionPattern command_;
   std::string default_output_extension_;

@@ -145,7 +145,7 @@ std::string NinjaActionTargetWriter::WriteRuleDefinition() {
   out_ << std::endl;
   out_ << "  description = ACTION " << target_label << std::endl;
   out_ << "  restat = 1" << std::endl;
-  const Tool* tool = target_->toolchain()->GetTool(Tool::TYPE_ACTION);
+  const Tool* tool = target_->toolchain()->GetTool(Tool::kToolAction);
   if (tool && tool->pool().ptr) {
     out_ << "  pool = ";
     out_ << tool->pool().ptr->GetNinjaName(

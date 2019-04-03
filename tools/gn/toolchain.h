@@ -53,12 +53,12 @@ class Toolchain : public Item {
   const Toolchain* AsToolchain() const override;
 
   // Returns null if the tool hasn't been defined.
-  Tool* GetTool(Tool::ToolType type);
-  const Tool* GetTool(Tool::ToolType type) const;
+  Tool* GetTool(const char* name);
+  const Tool* GetTool(const char* name) const;
 
   // Set a tool. When all tools are configured, you should call
   // ToolchainSetupComplete().
-  void SetTool(Tool::ToolType type, std::unique_ptr<Tool> t);
+  void SetTool(std::unique_ptr<Tool> t);
 
   // Does final setup on the toolchain once all tools are known.
   void ToolchainSetupComplete();
@@ -95,8 +95,12 @@ class Toolchain : public Item {
     return substitution_bits_;
   }
 
+  const std::map<const char*, std::unique_ptr<Tool>>& tools() const {
+    return tools_;
+  }
+
  private:
-  std::unique_ptr<Tool> tools_[Tool::TYPE_NUMTYPES];
+  std::map<const char*, std::unique_ptr<Tool>> tools_;
 
   bool setup_complete_ = false;
 

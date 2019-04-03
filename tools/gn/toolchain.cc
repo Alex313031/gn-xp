@@ -27,28 +27,35 @@ const Toolchain* Toolchain::AsToolchain() const {
   return this;
 }
 
-Tool* Toolchain::GetTool(Tool::ToolType type) {
-  DCHECK(type != Tool::TYPE_NONE);
-  return tools_[static_cast<size_t>(type)].get();
+Tool* Toolchain::GetTool(const char* name) {
+  DCHECK(name != Tool::kToolNone);
+  auto pair = tools_.find(name);
+  if (pair != tools_.end()) {
+    return pair->second.get();
+  }
+  return nullptr;
 }
 
-const Tool* Toolchain::GetTool(Tool::ToolType type) const {
-  DCHECK(type != Tool::TYPE_NONE);
-  return tools_[static_cast<size_t>(type)].get();
+const Tool* Toolchain::GetTool(const char* name) const {
+  DCHECK(name != Tool::kToolNone);
+  auto pair = tools_.find(name);
+  if (pair != tools_.end()) {
+    return pair->second.get();
+  }
+  return nullptr;
 }
 
-void Toolchain::SetTool(Tool::ToolType type, std::unique_ptr<Tool> t) {
-  DCHECK(type != Tool::TYPE_NONE);
-  DCHECK(!tools_[type].get());
+void Toolchain::SetTool(std::unique_ptr<Tool> t) {
+  DCHECK(t->name() != Tool::kToolNone);
+  DCHECK(tools_.find(t->name()) != tools_.end());
   t->SetComplete();
-  tools_[type] = std::move(t);
+  tools_[t->name()] = std::move(t);
 }
 
 void Toolchain::ToolchainSetupComplete() {
   // Collect required bits from all tools.
   for (const auto& tool : tools_) {
-    if (tool)
-      substitution_bits_.MergeFrom(tool->substitution_bits());
+    substitution_bits_.MergeFrom(tool.second->substitution_bits());
   }
 
   setup_complete_ = true;
@@ -59,5 +66,5 @@ const Tool* Toolchain::GetToolForSourceType(SourceFileType type) {
 }
 
 const Tool* Toolchain::GetToolForTargetFinalOutput(const Target* target) const {
-  return tools_[Tool::GetToolTypeForTargetFinalOutput(target)].get();
+  return GetTool(Tool::GetToolTypeForTargetFinalOutput(target));
 }

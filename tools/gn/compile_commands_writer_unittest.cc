@@ -264,7 +264,7 @@ TEST_F(CompileCommandsTest, WinPrecompiledHeaders) {
   pch_settings.set_default_toolchain_label(toolchain()->label());
 
   // Declare a C++ compiler that supports PCH.
-  std::unique_ptr<Tool> cxx_tool = std::make_unique<Tool>();
+  std::unique_ptr<Tool> cxx_tool = Tool::CreateTool(Tool::kToolCxx);
   TestWithScope::SetCommandForTool(
       "c++ {{source}} {{cflags}} {{cflags_cc}} {{defines}} {{include_dirs}} "
       "-o {{output}}",
@@ -272,10 +272,10 @@ TEST_F(CompileCommandsTest, WinPrecompiledHeaders) {
   cxx_tool->set_outputs(SubstitutionList::MakeForTest(
       "{{source_out_dir}}/{{target_output_name}}.{{source_name_part}}.o"));
   cxx_tool->set_precompiled_header_type(Tool::PCH_MSVC);
-  pch_toolchain.SetTool(Tool::TYPE_CXX, std::move(cxx_tool));
+  pch_toolchain.SetTool(std::move(cxx_tool));
 
   // Add a C compiler as well.
-  std::unique_ptr<Tool> cc_tool = std::make_unique<Tool>();
+  std::unique_ptr<Tool> cc_tool = Tool::CreateTool(Tool::kToolCc);
   TestWithScope::SetCommandForTool(
       "cc {{source}} {{cflags}} {{cflags_c}} {{defines}} {{include_dirs}} "
       "-o {{output}}",
@@ -283,7 +283,7 @@ TEST_F(CompileCommandsTest, WinPrecompiledHeaders) {
   cc_tool->set_outputs(SubstitutionList::MakeForTest(
       "{{source_out_dir}}/{{target_output_name}}.{{source_name_part}}.o"));
   cc_tool->set_precompiled_header_type(Tool::PCH_MSVC);
-  pch_toolchain.SetTool(Tool::TYPE_CC, std::move(cc_tool));
+  pch_toolchain.SetTool(std::move(cc_tool));
   pch_toolchain.ToolchainSetupComplete();
 
   // This target doesn't specify precompiled headers.
@@ -412,7 +412,7 @@ TEST_F(CompileCommandsTest, GCCPrecompiledHeaders) {
   pch_settings.set_default_toolchain_label(toolchain()->label());
 
   // Declare a C++ compiler that supports PCH.
-  std::unique_ptr<Tool> cxx_tool = std::make_unique<Tool>();
+  std::unique_ptr<Tool> cxx_tool = Tool::CreateTool(Tool::kToolCxx);
   TestWithScope::SetCommandForTool(
       "c++ {{source}} {{cflags}} {{cflags_cc}} {{defines}} {{include_dirs}} "
       "-o {{output}}",
@@ -420,11 +420,11 @@ TEST_F(CompileCommandsTest, GCCPrecompiledHeaders) {
   cxx_tool->set_outputs(SubstitutionList::MakeForTest(
       "{{source_out_dir}}/{{target_output_name}}.{{source_name_part}}.o"));
   cxx_tool->set_precompiled_header_type(Tool::PCH_GCC);
-  pch_toolchain.SetTool(Tool::TYPE_CXX, std::move(cxx_tool));
+  pch_toolchain.SetTool(std::move(cxx_tool));
   pch_toolchain.ToolchainSetupComplete();
 
   // Add a C compiler as well.
-  std::unique_ptr<Tool> cc_tool = std::make_unique<Tool>();
+  std::unique_ptr<Tool> cc_tool = Tool::CreateTool(Tool::kToolCc);
   TestWithScope::SetCommandForTool(
       "cc {{source}} {{cflags}} {{cflags_c}} {{defines}} {{include_dirs}} "
       "-o {{output}}",
@@ -432,7 +432,7 @@ TEST_F(CompileCommandsTest, GCCPrecompiledHeaders) {
   cc_tool->set_outputs(SubstitutionList::MakeForTest(
       "{{source_out_dir}}/{{target_output_name}}.{{source_name_part}}.o"));
   cc_tool->set_precompiled_header_type(Tool::PCH_GCC);
-  pch_toolchain.SetTool(Tool::TYPE_CC, std::move(cc_tool));
+  pch_toolchain.SetTool(std::move(cc_tool));
   pch_toolchain.ToolchainSetupComplete();
 
   // This target doesn't specify precompiled headers.
