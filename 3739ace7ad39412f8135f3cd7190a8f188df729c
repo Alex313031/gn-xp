@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "f6849a75_7acb5c7a",
+        "filename": "docs/reference.md",
+        "patchSetId": 5
+      },
+      "lineNbr": 1423,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2019-04-03T12:17:45Z",
+      "side": 1,
+      "message": "In https://reviews.llvm.org/D60130 I don\u0027t set bundle_resources_dir for one of the bundles (it doesn\u0027t have a Resources dir) and that seems to work fine too. Maybe none of these are required?",
+      "revId": "3739ace7ad39412f8135f3cd7190a8f188df729c",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "573937cd_e876ad95",
+        "filename": "docs/reference.md",
+        "patchSetId": 5
+      },
+      "lineNbr": 1494,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2019-04-03T12:17:45Z",
+      "side": 1,
+      "message": "Sorry, I forgot to mention this last time: I think this needs to be $target_name here. (Also, the $foo / ${foo} style in the example is somewhat self-inconsistent. I personally only use ${foo} when I must and $foo else, but I suppose I can see the case for using ${foo} always. Right not the example doesn\u0027t follow either style though.)",
+      "revId": "3739ace7ad39412f8135f3cd7190a8f188df729c",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "0368ceac_99c181a8",
+        "filename": "tools/gn/create_bundle_target_generator.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 45,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2019-04-03T12:17:45Z",
+      "side": 1,
+      "message": "Oh -- does this mean this will break https://reviews.llvm.org/D60130 ?\n\nWhat\u0027s the argument for making any of these required?",
+      "revId": "3739ace7ad39412f8135f3cd7190a8f188df729c",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": true
+    }
+  ]
+}
