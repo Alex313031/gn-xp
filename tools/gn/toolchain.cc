@@ -73,6 +73,20 @@ const CTool* Toolchain::GetToolAsC(const char* name) const {
   return nullptr;
 }
 
+RustTool* Toolchain::GetToolAsRust(const char* name) {
+  if (Tool* tool = GetTool(name)) {
+    return tool->AsRust();
+  }
+  return nullptr;
+}
+
+const RustTool* Toolchain::GetToolAsRust(const char* name) const {
+  if (const Tool* tool = GetTool(name)) {
+    return tool->AsRust();
+  }
+  return nullptr;
+}
+
 void Toolchain::SetTool(std::unique_ptr<Tool> t) {
   DCHECK(t->name() != Tool::kToolNone);
   DCHECK(tools_.find(t->name()) == tools_.end());

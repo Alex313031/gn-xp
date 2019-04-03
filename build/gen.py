@@ -513,6 +513,8 @@ def WriteGNNinja(path, platform, host, options):
         'tools/gn/pool.cc',
         'tools/gn/qt_creator_writer.cc',
         'tools/gn/runtime_deps.cc',
+        'tools/gn/rust_substitution_type.cc',
+        'tools/gn/rust_tool.cc',
         'tools/gn/scheduler.cc',
         'tools/gn/scope.cc',
         'tools/gn/scope_per_file_provider.cc',
