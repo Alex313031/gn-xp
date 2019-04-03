@@ -42,9 +42,6 @@ void CreateBundleTargetGenerator::DoRun() {
   if (!FillBundleDir(bundle_data.root_dir(), variables::kBundleExecutableDir,
                      &bundle_data.executable_dir()))
     return;
-  if (!FillBundleDir(bundle_data.root_dir(), variables::kBundlePlugInsDir,
-                     &bundle_data.plugins_dir()))
-    return;
 
   if (!FillXcodeExtraAttributes())
     return;
@@ -80,7 +77,7 @@ bool CreateBundleTargetGenerator::FillBundleDir(
     SourceDir* bundle_dir) {
   const Value* value = scope_->GetValue(name, true);
   if (!value)
-    return true;
+    return false;
   if (!value->VerifyTypeIs(Value::STRING, err_))
     return false;
   std::string str = value->string_value();
