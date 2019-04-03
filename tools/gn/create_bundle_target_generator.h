@@ -25,6 +25,7 @@ class CreateBundleTargetGenerator : public TargetGenerator {
  private:
   bool FillBundleDir(const SourceDir& bundle_root_dir,
                      const base::StringPiece& name,
+                     bool bundle_path_is_required,
                      SourceDir* bundle_dir);
 
   bool FillXcodeExtraAttributes();
