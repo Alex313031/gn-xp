@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "9fa6a7c7_6bc2727e",
+        "filename": "docs/reference.md",
+        "patchSetId": 1
+      },
+      "lineNbr": 1424,
+      "author": {
+        "id": 1000070
+      },
+      "writtenOn": "2019-04-03T12:11:22Z",
+      "side": 1,
+      "message": "I\u0027ve also noticed this when I tried to use my modified version to generate ninja files for Chromium. I\u0027ve fixed it and marked bundle_executable_dir as optional.",
+      "parentUuid": "2b53e6c4_7aeb1d64",
+      "revId": "8fd651d50be0b9f2e58e30e12cd80ef0eaf9c09d",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "2dd7c1aa_3dcb49e3",
         "filename": "docs/reference.md",
         "patchSetId": 1
@@ -33,6 +51,24 @@
       "revId": "8fd651d50be0b9f2e58e30e12cd80ef0eaf9c09d",
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "eba14e60_749bc1f4",
+        "filename": "docs/reference.md",
+        "patchSetId": 1
+      },
+      "lineNbr": 1472,
+      "author": {
+        "id": 1000070
+      },
+      "writtenOn": "2019-04-03T12:11:22Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "2dd7c1aa_3dcb49e3",
+      "revId": "8fd651d50be0b9f2e58e30e12cd80ef0eaf9c09d",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": false
     }
   ]
 }
