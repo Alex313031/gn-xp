@@ -58,6 +58,12 @@ const char* kSubstitutionNames[SUBSTITUTION_NUM_TYPES] = {
     "{{bundle_partial_info_plist}}",  // SUBSTITUTION_BUNDLE_PARTIAL_INFO_PLIST,
 
     "{{response_file_name}}",  // SUBSTITUTION_RSP_FILE_NAME
+
+    "{{rustflags}}",   // SUBSTITUTION_RUSTFLAGS
+    "{{rustenv}}",     // SUBSTITUTION_RUSTENV
+    "{{crate_name}}",  // SUBSTITUTION_CRATE_NAME
+    "{{rustdeps}}",    // SUBSTITUTION_RUSTDEPS
+    "{{rlibs}}",       // SUBSTITUTION_RLIB
 };
 
 const char* kSubstitutionNinjaNames[SUBSTITUTION_NUM_TYPES] = {
@@ -112,6 +118,12 @@ const char* kSubstitutionNinjaNames[SUBSTITUTION_NUM_TYPES] = {
     "partial_info_plist",     // SUBSTITUTION_BUNDLE_PARTIAL_INFO_PLIST
 
     "rspfile",  // SUBSTITUTION_RSP_FILE_NAME
+
+    "rustflags",   // SUBSTITUTION_RUSTFLAGS
+    "rustenv",     // SUBSTITUTION_RUSTENV
+    "crate_name",  // SUBSTITUTION_CRATE_NAME
+    "rustdeps",    // SUBSTITUTION_RUSTDEPS
+    "rlibs",       // SUBSTITUTION_RLIBS
 };
 
 SubstitutionBits::SubstitutionBits() : used() {}
@@ -229,7 +241,15 @@ bool IsValidCompileXCassetsSubstitution(SubstitutionType type) {
 
 bool IsValidRustSubstitution(SubstitutionType type) {
   return IsValidToolSubstitution(type) || IsValidSourceSubstitution(type) ||
-         type == SUBSTITUTION_SOURCE;
+         type == SUBSTITUTION_OUTPUT || type == SUBSTITUTION_RUSTFLAGS ||
+         type == SUBSTITUTION_RUSTENV || type == SUBSTITUTION_CRATE_NAME ||
+         type == SUBSTITUTION_RUSTDEPS || type == SUBSTITUTION_RLIBS;
+}
+
+bool IsValidRustOutputsSubstitution(SubstitutionType type) {
+  // All valid compiler outputs plus the output extension.
+  return IsValidCompilerOutputsSubstitution(type) ||
+         type == SUBSTITUTION_OUTPUT_DIR;
 }
 
 bool EnsureValidSubstitutions(const std::vector<SubstitutionType>& types,

@@ -77,6 +77,13 @@ enum SubstitutionType {
   // Used only for the args of actions.
   SUBSTITUTION_RSP_FILE_NAME,  // {{response_file_name}}
 
+  // Valid for Rust tools only.
+  SUBSTITUTION_RUSTFLAGS,   // {{rustflags}}
+  SUBSTITUTION_RUSTENV,     // {{rustenv}}
+  SUBSTITUTION_CRATE_NAME,  // {{crate_name}}
+  SUBSTITUTION_RUSTDEPS,    // {{rustdeps}}
+  SUBSTITUTION_RLIBS,       // {{rlibs}}
+
   SUBSTITUTION_NUM_TYPES  // Must be last.
 };
 
@@ -131,6 +138,7 @@ bool IsValidALinkSubstitution(SubstitutionType type);
 bool IsValidCopySubstitution(SubstitutionType type);
 bool IsValidCompileXCassetsSubstitution(SubstitutionType type);
 bool IsValidRustSubstitution(SubstitutionType type);
+bool IsValidRustOutputsSubstitution(SubstitutionType type);
 
 // Validates that each substitution type in the vector passes the given
 // is_valid_subst predicate. Returns true on success. On failure, fills in the

@@ -68,7 +68,7 @@ TEST_F(FunctionToolchain, Rust) {
     TestParseInput input(
         R"(toolchain("rust") {
           tool("rust") {
-            command = "rustc -o {{output}} {{source}}"
+            command = "{{rustenv}} rustc --crate-name {{crate_name}} --crate-type bin {{rustflags}} -o {{output}} {{rlibs}} {{source}}"
             description = "RUST {{output}}"
           }
         })");
@@ -86,7 +86,9 @@ TEST_F(FunctionToolchain, Rust) {
     // The toolchain should have a link tool with the two outputs.
     const Tool* rust = toolchain->GetTool(RustTool::kRsToolRust);
     ASSERT_TRUE(rust);
-    ASSERT_EQ(rust->command().AsString(), "rustc -o {{output}} {{source}}");
+    ASSERT_EQ(rust->command().AsString(),
+              "{{rustenv}} rustc --crate-name {{crate_name}} --crate-type bin "
+              "{{rustflags}} -o {{output}} {{rlibs}} {{source}}");
     ASSERT_EQ(rust->description().AsString(), "RUST {{output}}");
   }
 }
