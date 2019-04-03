@@ -378,10 +378,10 @@ TEST_F(AnalyzerTest, AffectedToolchainpropagatesToDependentTargets) {
 
   // The tool is not used anywhere, but is required to construct the dependency
   // between a target and the toolchain.
-  std::unique_ptr<Tool> fake_tool(new Tool());
+  std::unique_ptr<Tool> fake_tool = std::make_unique<Tool>(Tool::TYPE_LINK);
   fake_tool->set_outputs(
       SubstitutionList::MakeForTest("//out/debug/output.txt"));
-  toolchain->SetTool(Tool::TYPE_LINK, std::move(fake_tool));
+  toolchain->SetTool(std::move(fake_tool));
   builder_.ItemDefined(std::unique_ptr<Item>(target));
   builder_.ItemDefined(std::unique_ptr<Item>(toolchain));
 

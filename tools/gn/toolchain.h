@@ -58,7 +58,7 @@ class Toolchain : public Item {
 
   // Set a tool. When all tools are configured, you should call
   // ToolchainSetupComplete().
-  void SetTool(Tool::ToolType type, std::unique_ptr<Tool> t);
+  void SetTool(std::unique_ptr<Tool> t);
 
   // Does final setup on the toolchain once all tools are known.
   void ToolchainSetupComplete();
