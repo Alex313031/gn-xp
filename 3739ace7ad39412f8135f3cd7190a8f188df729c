@@ -55,6 +55,24 @@
     },
     {
       "key": {
+        "uuid": "34a993c8_501fc054",
+        "filename": "docs/reference.md",
+        "patchSetId": 5
+      },
+      "lineNbr": 1423,
+      "author": {
+        "id": 1000070
+      },
+      "writtenOn": "2019-04-03T14:22:37Z",
+      "side": 1,
+      "message": "I decided to do the fix as a prerequisite CL.\n\nhttps://gn-review.googlesource.com/c/gn/+/4482",
+      "parentUuid": "4b8ded41_1733d4fb",
+      "revId": "3739ace7ad39412f8135f3cd7190a8f188df729c",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "573937cd_e876ad95",
         "filename": "docs/reference.md",
         "patchSetId": 5
