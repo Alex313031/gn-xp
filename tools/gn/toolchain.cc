@@ -73,6 +73,20 @@ const CTool* Toolchain::GetToolAsC(Tool::ToolType type) const {
   return nullptr;
 }
 
+RustTool* Toolchain::GetToolAsRust(Tool::ToolType type) {
+  if (Tool* tool = GetTool(type)) {
+    return tool->AsRust();
+  }
+  return nullptr;
+}
+
+const RustTool* Toolchain::GetToolAsRust(Tool::ToolType type) const {
+  if (const Tool* tool = GetTool(type)) {
+    return tool->AsRust();
+  }
+  return nullptr;
+}
+
 void Toolchain::SetTool(std::unique_ptr<Tool> t) {
   DCHECK(t);
   DCHECK(t->type() != Tool::TYPE_NONE);

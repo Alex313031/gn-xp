@@ -58,3 +58,34 @@ TEST_F(FunctionToolchain, RuntimeOutputs) {
     ASSERT_TRUE(err.has_error()) << err.message();
   }
 }
+
+TEST_F(FunctionToolchain, Rust) {
+  TestWithScope setup;
+
+  // These runtime outputs are a subset of the outputs so are OK.
+  {
+    TestParseInput input(
+        R"(toolchain("rust") {
+          tool("rust") {
+            command = "rustc -o {{output}} {{source}}"
+            description = "RUST {{output}}"
+          }
+        })");
+    ASSERT_FALSE(input.has_error());
+
+    Err err;
+    input.parsed()->Execute(setup.scope(), &err);
+    ASSERT_FALSE(err.has_error()) << err.message();
+
+    // It should have generated a toolchain.
+    ASSERT_EQ(1u, setup.items().size());
+    const Toolchain* toolchain = setup.items()[0]->AsToolchain();
+    ASSERT_TRUE(toolchain);
+
+    // The toolchain should have a link tool with the two outputs.
+    const Tool* rust = toolchain->GetTool(Tool::TYPE_RS);
+    ASSERT_TRUE(rust);
+    ASSERT_EQ(rust->command().AsString(), "rustc -o {{output}} {{source}}");
+    ASSERT_EQ(rust->description().AsString(), "RUST {{output}}");
+  }
+}

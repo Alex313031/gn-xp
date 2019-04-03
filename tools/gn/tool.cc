@@ -5,6 +5,7 @@
 #include "tools/gn/tool.h"
 #include "tools/gn/c_tool.h"
 #include "tools/gn/general_tool.h"
+#include "tools/gn/rust_tool.h"
 #include "tools/gn/target.h"
 
 Tool::Tool(Tool::ToolType t)
@@ -35,6 +36,13 @@ CTool* Tool::AsC() {
   return nullptr;
 }
 const CTool* Tool::AsC() const {
+  return nullptr;
+}
+
+RustTool* Tool::AsRust() {
+  return nullptr;
+}
+const RustTool* Tool::AsRust() const {
   return nullptr;
 }
 
@@ -212,6 +220,12 @@ std::unique_ptr<Tool> Tool::CreateTool(Tool::ToolType type) {
     case TYPE_COMPILE_XCASSETS:
     case TYPE_ACTION:
       return std::make_unique<GeneralTool>(type);
+    case TYPE_RS:
+    case TYPE_RS_ALINK:
+    case TYPE_RS_SOLINK:
+    case TYPE_RS_SOLINK_MODULE:
+    case TYPE_RS_PROC_MACRO:
+      return std::make_unique<RustTool>(type);
     default:
       NOTREACHED();
       return nullptr;
@@ -245,6 +259,15 @@ std::unique_ptr<Tool> Tool::CreateTool(Tool::ToolType type,
     case TYPE_ACTION: {
       std::unique_ptr<Tool> tool = std::make_unique<GeneralTool>(type);
       tool->AsGeneral()->InitTool(scope, toolchain, err);
+      return tool;
+    }
+    case TYPE_RS:
+    case TYPE_RS_ALINK:
+    case TYPE_RS_SOLINK:
+    case TYPE_RS_SOLINK_MODULE:
+    case TYPE_RS_PROC_MACRO: {
+      std::unique_ptr<Tool> tool = std::make_unique<RustTool>(type);
+      tool->AsRust()->InitTool(scope, toolchain, err);
       return tool;
     }
     default:
@@ -285,6 +308,16 @@ Tool::ToolType Tool::ToolNameToType(const base::StringPiece& str) {
     return TYPE_COMPILE_XCASSETS;
   if (str == GeneralTool::kGeneralToolAction)
     return TYPE_ACTION;
+  if (str == RustTool::kRsToolRust)
+    return TYPE_RS;
+  if (str == RustTool::kRsToolRustAlink)
+    return TYPE_RS_ALINK;
+  if (str == RustTool::kRsToolRustSolink)
+    return TYPE_RS_SOLINK;
+  if (str == RustTool::kRsToolRustSolinkModule)
+    return TYPE_RS_SOLINK_MODULE;
+  if (str == RustTool::kRsToolRustProcMacro)
+    return TYPE_RS_PROC_MACRO;
   return TYPE_NONE;
 }
 
@@ -321,6 +354,16 @@ std::string Tool::ToolTypeToName(Tool::ToolType type) {
       return GeneralTool::kGeneralToolCompileXCAssets;
     case TYPE_ACTION:
       return GeneralTool::kGeneralToolAction;
+    case TYPE_RS:
+      return RustTool::kRsToolRust;
+    case TYPE_RS_ALINK:
+      return RustTool::kRsToolRustAlink;
+    case TYPE_RS_SOLINK:
+      return RustTool::kRsToolRustSolink;
+    case TYPE_RS_SOLINK_MODULE:
+      return RustTool::kRsToolRustSolinkModule;
+    case TYPE_RS_PROC_MACRO:
+      return RustTool::kRsToolRustProcMacro;
     default:
       NOTREACHED();
       return std::string();
@@ -343,12 +386,14 @@ Tool::ToolType Tool::GetToolTypeForSourceType(SourceFileType type) {
       return TYPE_ASM;
     case SOURCE_RC:
       return TYPE_RC;
+    case SOURCE_RS:
+      // TODO(juliehockett): extend this to take target type into consideration
+      return TYPE_RS;
     case SOURCE_UNKNOWN:
     case SOURCE_H:
     case SOURCE_O:
     case SOURCE_DEF:
     case SOURCE_GO:
-    case SOURCE_RS:
       return TYPE_NONE;
     default:
       NOTREACHED();
@@ -361,6 +406,7 @@ Tool::ToolType Tool::GetToolTypeForTargetFinalOutput(const Target* target) {
   // The contents of this list might be suprising (i.e. stamp tool for copy
   // rules). See the header for why.
   // TODO(crbug.com/gn/39): Don't emit stamp files for single-output targets.
+  // TODO(juliehockett): Adjust this to consider SourceFileType
   switch (target->output_type()) {
     case Target::GROUP:
       return TYPE_STAMP;

@@ -23,6 +23,7 @@ class Toolchain;
 
 class CTool;
 class GeneralTool;
+class RustTool;
 
 // To add a new Tool category, create a subclass implementing SetComplete()
 // Add a new category to ToolCategories
@@ -54,6 +55,13 @@ class Tool {
     // Platform-specific tools
     TYPE_COPY_BUNDLE_DATA,
     TYPE_COMPILE_XCASSETS,
+
+    // Rust tools
+    TYPE_RS,
+    TYPE_RS_ALINK,
+    TYPE_RS_SOLINK,
+    TYPE_RS_SOLINK_MODULE,
+    TYPE_RS_PROC_MACRO,
 
     TYPE_NUMTYPES  // Must be last.
   };
@@ -88,6 +96,8 @@ class Tool {
   virtual const CTool* AsC() const;
   virtual GeneralTool* AsGeneral();
   virtual const GeneralTool* AsGeneral() const;
+  virtual RustTool* AsRust();
+  virtual const RustTool* AsRust() const;
 
   // Basic information ---------------------------------------------------------
 
