@@ -61,6 +61,8 @@ class Toolchain : public Item {
   const GeneralTool* GetToolAsGeneral(const char* name) const;
   CTool* GetToolAsC(const char* name);
   const CTool* GetToolAsC(const char* name) const;
+  RustTool* GetToolAsRust(const char* name);
+  const RustTool* GetToolAsRust(const char* name) const;
 
   // Set a tool. When all tools are configured, you should call
   // ToolchainSetupComplete().
