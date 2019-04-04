@@ -16,11 +16,17 @@ class CompileCommandsWriter {
   static bool RunAndWriteFiles(const BuildSettings* build_setting,
                                const Builder& builder,
                                const std::string& file_name,
+                               const std::string& target_filters,
                                bool quiet,
                                Err* err);
   static void RenderJSON(const BuildSettings* build_settings,
                          std::vector<const Target*>& all_targets,
                          std::string* compile_commands);
+ private:
+  static std::vector<const Target*> filterTargets(
+      const std::vector<const Target*>& all_targets,
+      const std::string& target_filters);
+  static void visitDeps(const Target* target, std::set<const Target*>& visited);
 };
 
 #endif  // TOOLS_GN_COMPILE_COMMANDS_WRITER_H_

@@ -294,9 +294,11 @@ bool RunCompileCommandsWriter(const BuildSettings* build_settings,
   base::ElapsedTimer timer;
 
   std::string file_name = "compile_commands.json";
+  std::string target_filters =
+      command_line->GetSwitchValueASCII(kSwitchExportCompileCommands);
 
-  bool res = CompileCommandsWriter::RunAndWriteFiles(build_settings, builder,
-                                                     file_name, quiet, err);
+  bool res = CompileCommandsWriter::RunAndWriteFiles(
+      build_settings, builder, file_name, target_filters, quiet, err);
   if (res && !quiet) {
     OutputString("Generating compile_commands took " +
                  base::Int64ToString(timer.Elapsed().InMilliseconds()) +
