@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ebe8a138_f3072cf6",
+        "filename": "build/gen.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 668,
+      "author": {
+        "id": 1000120
+      },
+      "writtenOn": "2019-04-04T05:47:34Z",
+      "side": 1,
+      "message": "Can you explain why this part is necessary?\n- We pass -pthread on is_posix platforms (see line 343), does OpenBSD really need -lpthread as well?\n- The code that included execinfo.h was removed in https://gn-review.googlesource.com/1541 , does it still end up used somewhere else?",
+      "revId": "cfc93c06c308693b7181158ce3012b4672ea488a",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": true
+    }
+  ]
+}
