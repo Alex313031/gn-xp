@@ -224,23 +224,24 @@ int RunCheck(const std::vector<std::string>& args) {
   const base::CommandLine* cmdline = base::CommandLine::ForCurrentProcess();
   bool force = cmdline->HasSwitch("force");
   bool check_generated = cmdline->HasSwitch("check-generated");
+  bool quiet =
+      base::CommandLine::ForCurrentProcess()->HasSwitch(switches::kQuiet);
 
-  if (!CheckPublicHeaders(&setup->build_settings(), all_targets,
-                          targets_to_check, force, check_generated))
-    return 1;
-
-  if (!base::CommandLine::ForCurrentProcess()->HasSwitch(switches::kQuiet)) {
-    if (filtered_by_build_config) {
-      // Tell the user about the implicit filtering since this is obscure.
-      OutputString(base::StringPrintf(
-          "%d targets out of %d checked based on the check_targets defined in"
-          " \".gn\".\n",
-          static_cast<int>(targets_to_check.size()),
-          static_cast<int>(all_targets.size())));
-    }
-    OutputString("Header dependency check OK\n", DECORATION_GREEN);
+  bool success = CheckPublicHeaders(&setup->build_settings(), all_targets,
+                                    targets_to_check, force, check_generated);
+  if (!quiet && filtered_by_build_config) {
+    // Tell the user about the implicit filtering since this is obscure.
+    OutputString(base::StringPrintf(
+        "%d targets out of %d checked based on the check_targets defined in"
+        " \".gn\".\n",
+        static_cast<int>(targets_to_check.size()),
+        static_cast<int>(all_targets.size())));
   }
-  return 0;
+
+  if (success && !quiet)
+    OutputString("Header dependency check OK\n", DECORATION_GREEN);
+
+  return success ? 0 : 1;
 }
 
 bool CheckPublicHeaders(const BuildSettings* build_settings,
