@@ -5,11 +5,14 @@
 #include "tools/gn/compile_commands_writer.h"
 
 #include <sstream>
+#include <iostream>
 
 #include "base/json/string_escape.h"
 #include "base/strings/stringprintf.h"
+#include "base/strings/string_split.h"
 #include "tools/gn/builder.h"
 #include "tools/gn/config_values_extractors.h"
+#include "tools/gn/deps_iterator.h"
 #include "tools/gn/escape.h"
 #include "tools/gn/filesystem_utils.h"
 #include "tools/gn/ninja_target_command_util.h"
@@ -267,6 +270,7 @@ bool CompileCommandsWriter::RunAndWriteFiles(
     const BuildSettings* build_settings,
     const Builder& builder,
     const std::string& file_name,
+    const std::string& target_filters,
     bool quiet,
     Err* err) {
   SourceFile output_file = build_settings->build_dir().ResolveRelativeFile(
@@ -278,9 +282,52 @@ bool CompileCommandsWriter::RunAndWriteFiles(
 
   std::vector<const Target*> all_targets = builder.GetAllResolvedTargets();
 
+  std::vector<const Target*> preserved_targets =
+      filterTargets(all_targets, target_filters);
+
   std::string json;
-  RenderJSON(build_settings, all_targets, &json);
+  RenderJSON(build_settings, preserved_targets, &json);
   if (!WriteFileIfChanged(output_path, json, err))
     return false;
   return true;
+}
+
+std::vector<const Target*> CompileCommandsWriter::filterTargets(
+    const std::vector<const Target*>& all_targets,
+    const std::string& target_filters) {
+  std::set<std::string> preserved_targets_set;
+  for (auto& target :
+       base::SplitString(target_filters, ",", base::TRIM_WHITESPACE,
+                         base::SPLIT_WANT_NONEMPTY)) {
+    preserved_targets_set.insert(target);
+  }
+
+  std::vector<const Target*> preserved_targets;
+  if (preserved_targets_set.empty()) {
+    preserved_targets = all_targets;
+    return preserved_targets;
+  }
+
+  std::set<const Target*> visited;
+  for (auto& target : all_targets) {
+    if (preserved_targets_set.count(target->label().name())) {
+      visitDeps(target, visited);
+    }
+  }
+
+  preserved_targets.reserve(preserved_targets_set.size());
+  for (auto& target : visited) {
+    preserved_targets.push_back(target);
+  }
+  return preserved_targets;
+}
+
+void CompileCommandsWriter::visitDeps(const Target* target,
+                                      std::set<const Target*>& visited) {
+  if (!visited.count(target)) {
+    visited.insert(target);
+    for (const auto& pair : target->GetDeps(Target::DEPS_ALL)) {
+      visitDeps(pair.ptr, visited);
+    }
+  }
 }
