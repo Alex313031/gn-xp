@@ -16,6 +16,24 @@
       "revId": "cfc93c06c308693b7181158ce3012b4672ea488a",
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "5c7df876_371428d4",
+        "filename": "build/gen.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 668,
+      "author": {
+        "id": 1000132
+      },
+      "writtenOn": "2019-04-04T21:50:09Z",
+      "side": 1,
+      "message": "Sorry for the confusion, I was merging in from an older patch. I\u0027ve re-tested and removed this entire conditional.",
+      "parentUuid": "ebe8a138_f3072cf6",
+      "revId": "cfc93c06c308693b7181158ce3012b4672ea488a",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": false
     }
   ]
 }
