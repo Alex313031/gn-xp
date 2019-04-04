@@ -6,12 +6,14 @@
 #include <vector>
 
 #include "base/bind.h"
+#include "base/files/file_util.h"
 #include "tools/gn/config.h"
 #include "tools/gn/header_checker.h"
 #include "tools/gn/scheduler.h"
 #include "tools/gn/target.h"
 #include "tools/gn/test_with_scheduler.h"
 #include "tools/gn/test_with_scope.h"
+#include "util/exe_path.h"
 #include "util/test/test.h"
 
 namespace {
@@ -381,4 +383,111 @@ TEST_F(HeaderCheckerTest, Friend) {
   errors.clear();
   checker->CheckInclude(&a_, input_file, c_private, range, &errors);
   EXPECT_EQ(errors.size(), 0);
+}
+
+TEST_F(HeaderCheckerTest, CheckFile) {
+  // Same assumptions about the location of gn_unittests as in
+  // command_format_unittest.cc, i.e. that it's in "out".
+  base::FilePath src_dir =
+      GetExePath().DirName().Append(FILE_PATH_LITERAL(".."));
+  base::SetCurrentDirectory(src_dir);
+
+  // Add a private header on C.
+  SourceFile c_private("//c_private.h");
+  c_.sources().push_back(c_private);
+  c_.set_all_headers_public(false);
+
+  scoped_refptr<HeaderChecker> checker(
+      new HeaderChecker(setup_.build_settings(), targets_));
+  std::vector<Err> errors;
+  // The |c| target should be allowed to use the internal c_private.h header.
+  EXPECT_TRUE(checker->CheckFile(
+      &c_, SourceFile("//tools/gn/check_test_data/test_file_1.cc"), &errors));
+
+  // The |a| target should not be allowed to use the internal
+  // c_private.h header.
+  // Expect:
+  // ERROR at //tools/gn/check_test_data/test_file_1.cc:1:11:
+  // Including a private header.
+  // #include "../../../c_private.h"
+  //           ^-------------------
+  // This file is private to the target //c:c
+  errors.clear();
+  EXPECT_FALSE(checker->CheckFile(
+      &a_, SourceFile("//tools/gn/check_test_data/test_file_1.cc"), &errors));
+  EXPECT_EQ(errors.size(), 1);
+}
+
+TEST_F(HeaderCheckerTest, CheckFileRecursive) {
+  // Same assumptions about the location of gn_unittests as in
+  // command_format_unittest.cc, i.e. that it's in "out".
+  base::FilePath src_dir =
+      GetExePath().DirName().Append(FILE_PATH_LITERAL(".."));
+  base::SetCurrentDirectory(src_dir);
+
+  // Add a private header on C.
+  SourceFile c_private("//c_private.h");
+  c_.sources().push_back(c_private);
+  c_.set_all_headers_public(false);
+
+  scoped_refptr<HeaderChecker> checker(
+      new HeaderChecker(setup_.build_settings(), targets_));
+  std::vector<Err> errors;
+  // The |c| target should be allowed to use the internal c_private.h header.
+  EXPECT_TRUE(checker->CheckFile(
+      &c_, SourceFile("//tools/gn/check_test_data/wrapper_file_1.cc"),
+      &errors));
+
+  // The |a| target should not be allowed to use the internal
+  // c_private.h header.
+  // Expect:
+  // ERROR at //tools/gn/check_test_data/test_file_1.cc:1:11:
+  // Including a private header.
+  // #include "../../../c_private.h"
+  //           ^-------------------
+  // This file is private to the target //c:c
+  errors.clear();
+  EXPECT_FALSE(checker->CheckFile(
+      &a_, SourceFile("//tools/gn/check_test_data/wrapper_file_1.cc"),
+      &errors));
+  EXPECT_EQ(errors.size(), 1);
+}
+
+TEST_F(HeaderCheckerTest, CheckFileInfiniteRecursive) {
+  // Same assumptions about the location of gn_unittests as in
+  // command_format_unittest.cc, i.e. that it's in "out".
+  base::FilePath src_dir =
+      GetExePath().DirName().Append(FILE_PATH_LITERAL(".."));
+  base::SetCurrentDirectory(src_dir);
+
+  // Add a private header on C.
+  SourceFile c_private("//c_private.h");
+  c_.sources().push_back(c_private);
+  c_.set_all_headers_public(false);
+
+  scoped_refptr<HeaderChecker> checker(
+      new HeaderChecker(setup_.build_settings(), targets_));
+  std::vector<Err> errors;
+  EXPECT_TRUE(checker->CheckFile(
+      &c_, SourceFile("//tools/gn/check_test_data/including_itself_1.cc"),
+      &errors));
+
+  // The |c| target should be allowed to use the internal c_private.h header.
+  EXPECT_TRUE(checker->CheckFile(
+      &c_, SourceFile("//tools/gn/check_test_data/including_itself_2.cc"),
+      &errors));
+
+  // The |a| target should not be allowed to use the internal
+  // c_private.h header.
+  // Expect:
+  // ERROR at //tools/gn/check_test_data/test_file_1.cc:1:11:
+  // Including a private header.
+  // #include "../../../c_private.h"
+  //           ^-------------------
+  // This file is private to the target //c:c
+  errors.clear();
+  EXPECT_FALSE(checker->CheckFile(
+      &a_, SourceFile("//tools/gn/check_test_data/including_itself_2.cc"),
+      &errors));
+  EXPECT_EQ(errors.size(), 1);
 }
