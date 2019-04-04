@@ -185,6 +185,7 @@ void HeaderChecker::RunCheckOverFiles(const FileMap& files, bool force_check) {
 
 void HeaderChecker::DoWork(const Target* target, const SourceFile& file) {
   std::vector<Err> errors;
+  std::set<std::string> visited;
   if (!CheckFile(target, file, &errors)) {
     std::lock_guard<std::mutex> lock(lock_);
     errors_.insert(errors_.end(), errors.begin(), errors.end());
@@ -236,6 +237,12 @@ void HeaderChecker::AddTargetToFileMap(const Target* target, FileMap* dest) {
   }
 }
 
+bool HeaderChecker::IsCompilableInclude(const SourceFile& include) const {
+  SourceFileType type = GetSourceFileType(include);
+  return (type == SOURCE_CPP || type == SOURCE_C || type == SOURCE_M ||
+          type == SOURCE_MM);
+}
+
 bool HeaderChecker::IsFileInOuputDir(const SourceFile& file) const {
   const std::string& build_dir = build_settings_->build_dir().value();
   return file.value().compare(0, build_dir.size(), build_dir) == 0;
@@ -247,8 +254,6 @@ SourceFile HeaderChecker::SourceFileForInclude(
     const InputFile& source_file,
     const LocationRange& range,
     Err* err) const {
-  using base::FilePath;
-
   Value relative_file_value(nullptr, relative_file_path.as_string());
   auto it = std::find_if(
       include_dirs.begin(), include_dirs.end(),
@@ -264,10 +269,42 @@ SourceFile HeaderChecker::SourceFileForInclude(
   return SourceFile();
 }
 
+SourceFile HeaderChecker::SourceFileForOnDiskInclude(
+    const base::StringPiece& relative_file_path,
+    const std::vector<SourceDir>& include_dirs,
+    const InputFile& source_file,
+    const LocationRange& range,
+    Err* err) const {
+  Value relative_file_value(nullptr, relative_file_path.as_string());
+  for (const SourceDir& include_dir : include_dirs) {
+    SourceFile include_file =
+        include_dir.ResolveRelativeFile(relative_file_value, err);
+    base::FilePath path = build_settings_->GetFullPath(include_file);
+    FILE* f = fopen(path.value().c_str(), "r");
+    if (f) {
+      fclose(f);
+      return include_file;
+    }
+  }
+
+  return SourceFile();
+}
+
 bool HeaderChecker::CheckFile(const Target* from_target,
                               const SourceFile& file,
-                              std::vector<Err>* errors) const {
+                              std::vector<Err>* errors,
+                              std::set<std::string>* visited) const {
   ScopedTrace trace(TraceItem::TRACE_CHECK_HEADER, file.value());
+
+  std::set<std::string> root_visited;
+  if (!visited)
+    visited = &root_visited;
+
+  // If we have already looked at a file, don't look at it again. This can
+  // happen with include loops and include guards we don't understand.
+  if (visited->find(file.value()) != visited->end())
+    return true;
+  visited->insert(file.value());
 
   // Sometimes you have generated source files included as sources in another
   // target. These won't exist at checking time. Since we require all generated
@@ -314,9 +351,15 @@ bool HeaderChecker::CheckFile(const Target* from_target,
     Err err;
     SourceFile include = SourceFileForInclude(current_include, include_dirs,
                                               input_file, range, &err);
+    if (include.is_null()) {
+      if (IsCompilableInclude(SourceFile(current_include))) {
+        include = SourceFileForOnDiskInclude(current_include, include_dirs,
+                                             input_file, range, &err);
+      }
+    }
     if (!include.is_null())
       CheckInclude(from_target, input_file, include, range,
-                   &no_dependency_cache, errors);
+                   &no_dependency_cache, errors, visited);
   }
 
   return errors->size() == error_count_before;
@@ -334,7 +377,23 @@ void HeaderChecker::CheckInclude(
     const SourceFile& include_file,
     const LocationRange& range,
     std::set<std::pair<const Target*, const Target*>>* no_dependency_cache,
-    std::vector<Err>* errors) const {
+    std::vector<Err>* errors,
+    std::set<std::string>* visited) const {
+  bool is_compilable_include = IsCompilableInclude(include_file);
+
+  if (is_compilable_include) {
+    // Compilable files that are included by other files need to be
+    // checked recursively since they cannot be listed in the build
+    // system (or they would be compiled). This is common for unity
+    // build systems like Chromium's jumbo build.
+    if (errors) {
+      // Ignore return value since it will insert any problems into
+      // |errors|.
+      CheckFile(from_target, include_file, errors, visited);
+    }
+    return;
+  }
+
   // Assume if the file isn't declared in our sources that we don't need to
   // check it. It would be nice if we could give an error if this happens, but
   // our include finder is too primitive and returns all includes, even if
