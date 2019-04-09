@@ -46,6 +46,57 @@
       "revId": "9e6325fb7002bc53d5a7b220789c6e5430645866",
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "b4e82acb_e0bc4ee4",
+        "filename": "tools/gn/compile_commands_writer.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 16,
+      "author": {
+        "id": 1000014
+      },
+      "writtenOn": "2019-04-09T16:06:36Z",
+      "side": 1,
+      "message": "This could probably use a comment about what the target_filters are. Actually, while your working on this code, documenting \"quiet\" too would be nice since that\u0027s not obvious to me in this context.",
+      "revId": "9e6325fb7002bc53d5a7b220789c6e5430645866",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "c59e4462_f6f84081",
+        "filename": "tools/gn/compile_commands_writer.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 25,
+      "author": {
+        "id": 1000014
+      },
+      "writtenOn": "2019-04-09T16:06:36Z",
+      "side": 1,
+      "message": "I usually do a blank line before this.",
+      "revId": "9e6325fb7002bc53d5a7b220789c6e5430645866",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "5ac1ff9c_39f8b502",
+        "filename": "tools/gn/compile_commands_writer.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 26,
+      "author": {
+        "id": 1000014
+      },
+      "writtenOn": "2019-04-09T16:06:36Z",
+      "side": 1,
+      "message": "These functions should begin with a capital letter.",
+      "revId": "9e6325fb7002bc53d5a7b220789c6e5430645866",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": true
     }
   ]
 }

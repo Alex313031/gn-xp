@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6bb3a630_bd1b5dd9",
+        "filename": "tools/gn/command_gen.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 425,
+      "author": {
+        "id": 1000014
+      },
+      "writtenOn": "2019-04-09T16:06:36Z",
+      "side": 1,
+      "message": "This documentation needs to be updated.",
+      "revId": "ef91b92118c79550c92cc48e2696572a6d35de76",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "c1ecbf5e_fc549997",
+        "filename": "tools/gn/compile_commands_writer.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 319,
+      "author": {
+        "id": 1000014
+      },
+      "writtenOn": "2019-04-09T16:06:36Z",
+      "side": 1,
+      "message": "easiler -\u003e easier",
+      "revId": "ef91b92118c79550c92cc48e2696572a6d35de76",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "998796c5_d1a2f498",
+        "filename": "tools/gn/compile_commands_writer.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 29,
+      "author": {
+        "id": 1000014
+      },
+      "writtenOn": "2019-04-09T16:06:36Z",
+      "side": 1,
+      "message": "Style guide: Functions should be named with capital letters, and modified parameters should be passed by pointer and not reference.\n\nThis should probably have a comment about what this function does and what \"visited\" is used for.",
+      "revId": "ef91b92118c79550c92cc48e2696572a6d35de76",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": true
+    }
+  ]
+}
