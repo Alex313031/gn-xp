@@ -66,6 +66,24 @@
     },
     {
       "key": {
+        "uuid": "30619d67_1d158cbe",
+        "filename": "tools/gn/compile_commands_writer.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 16,
+      "author": {
+        "id": 1000135
+      },
+      "writtenOn": "2019-04-11T21:33:45Z",
+      "side": 1,
+      "message": "I have added comments for target_filters. However, arg \"quite\" is not used in the implementation. Do you want me to remove this parameter in this patch?",
+      "parentUuid": "b4e82acb_e0bc4ee4",
+      "revId": "9e6325fb7002bc53d5a7b220789c6e5430645866",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "c59e4462_f6f84081",
         "filename": "tools/gn/compile_commands_writer.h",
         "patchSetId": 2
@@ -83,6 +101,24 @@
     },
     {
       "key": {
+        "uuid": "6f155537_92b32bf0",
+        "filename": "tools/gn/compile_commands_writer.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 25,
+      "author": {
+        "id": 1000135
+      },
+      "writtenOn": "2019-04-11T21:33:45Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "c59e4462_f6f84081",
+      "revId": "9e6325fb7002bc53d5a7b220789c6e5430645866",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "5ac1ff9c_39f8b502",
         "filename": "tools/gn/compile_commands_writer.h",
         "patchSetId": 2
@@ -97,6 +133,24 @@
       "revId": "9e6325fb7002bc53d5a7b220789c6e5430645866",
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "e862abef_ea85a161",
+        "filename": "tools/gn/compile_commands_writer.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 26,
+      "author": {
+        "id": 1000135
+      },
+      "writtenOn": "2019-04-11T21:33:45Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "5ac1ff9c_39f8b502",
+      "revId": "9e6325fb7002bc53d5a7b220789c6e5430645866",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": false
     }
   ]
 }
