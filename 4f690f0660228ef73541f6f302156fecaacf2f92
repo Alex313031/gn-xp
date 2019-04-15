@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "e6c2dee2_e29cd5d6",
+        "filename": "tools/gn/tool.cc",
+        "patchSetId": 9
+      },
+      "lineNbr": 29,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2019-04-15T16:49:50Z",
+      "side": 1,
+      "message": "Can you make sure to clang-format this? It looks different than I\u0027d expect but it could just be GN\u0027s config is different than Fuchsia\u0027s",
+      "revId": "4f690f0660228ef73541f6f302156fecaacf2f92",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "d3c787ab_09ccc0b7",
+        "filename": "tools/gn/tool.h",
+        "patchSetId": 9
+      },
+      "lineNbr": 177,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2019-04-15T16:49:50Z",
+      "side": 1,
+      "message": "explicit",
+      "revId": "4f690f0660228ef73541f6f302156fecaacf2f92",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": true
+    }
+  ]
+}
