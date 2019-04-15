@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "31d960f1_cc4da625",
+        "filename": "tools/gn/command_gen.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 425,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2019-04-15T16:19:44Z",
+      "side": 1,
+      "message": "Can you write this as:\n\n  --export-compile-commands[\u003d\u003ctarget_name1,target_name2...\u003e]\n\nThe other flags parameters are required so I want to make sure it\u0027s clear that the targets are optional.",
+      "revId": "bb78d39c2e1159082c08d6da8eac4612f411ab7a",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": true
+    }
+  ]
+}
