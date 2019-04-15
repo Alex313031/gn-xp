@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "769c6932_dbd47ebb",
+        "filename": "tools/gn/escape.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 203,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2019-04-15T23:01:21Z",
+      "side": 1,
+      "message": "This make me nervous about stack overflows. Although I guess we\u0027re not processing completely untrusted data, I still prefer to be more careful. Is there a way to get most of the benefit without this? Like fall back on the heap for inputs above a certain size?",
+      "revId": "7487d27001a765b390dce5c5af281eb1d210cebc",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": true
+    }
+  ]
+}
