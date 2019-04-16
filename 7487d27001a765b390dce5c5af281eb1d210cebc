@@ -16,6 +16,24 @@
       "revId": "7487d27001a765b390dce5c5af281eb1d210cebc",
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "673a6b4e_297e3c82",
+        "filename": "tools/gn/escape.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 203,
+      "author": {
+        "id": 1000020
+      },
+      "writtenOn": "2019-04-16T01:16:16Z",
+      "side": 1,
+      "message": "Done.  Please see delta between 4 and 6.  I chose 1024 as the constant since the largest string that went through these functions when generating Chromium\u0027s build files was ~300 chars, and 3x that for escaping is less than 1024.",
+      "parentUuid": "769c6932_dbd47ebb",
+      "revId": "7487d27001a765b390dce5c5af281eb1d210cebc",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": false
     }
   ]
 }
