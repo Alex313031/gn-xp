@@ -1,0 +1,72 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "49331249_0d03c7d8",
+        "filename": "tools/gn/escape.cc",
+        "patchSetId": 6
+      },
+      "lineNbr": 46,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2019-04-16T16:22:17Z",
+      "side": 1,
+      "message": "Can you make this explicit?",
+      "revId": "ea67dfd47aa25d572bb6fac28441b77738209c7f",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "87daa66c_c3ac4be8",
+        "filename": "tools/gn/escape.cc",
+        "patchSetId": 6
+      },
+      "lineNbr": 178,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2019-04-16T16:22:17Z",
+      "side": 1,
+      "message": "Can this have a comment about what the return value is?",
+      "revId": "ea67dfd47aa25d572bb6fac28441b77738209c7f",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "7964e51e_2bae91ee",
+        "filename": "tools/gn/escape.cc",
+        "patchSetId": 6
+      },
+      "lineNbr": 186,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2019-04-16T16:22:17Z",
+      "side": 1,
+      "message": "Can you remove the breaks after the return statements in this function?",
+      "revId": "ea67dfd47aa25d572bb6fac28441b77738209c7f",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "e0b35390_30a90fcd",
+        "filename": "tools/gn/escape.cc",
+        "patchSetId": 6
+      },
+      "lineNbr": 219,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2019-04-16T16:22:17Z",
+      "side": 1,
+      "message": "Better return 0 here.",
+      "revId": "ea67dfd47aa25d572bb6fac28441b77738209c7f",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": true
+    }
+  ]
+}
