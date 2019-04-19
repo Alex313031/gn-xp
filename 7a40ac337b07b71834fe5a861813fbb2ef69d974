@@ -22,6 +22,30 @@
       "revId": "7a40ac337b07b71834fe5a861813fbb2ef69d974",
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "b5b5940d_cc6c9c53",
+        "filename": "tools/gn/target.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 952,
+      "author": {
+        "id": 1000135
+      },
+      "writtenOn": "2019-04-19T23:53:33Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "c6637535_c8f0d1fc",
+      "range": {
+        "startLine": 952,
+        "startChar": 16,
+        "endLine": 952,
+        "endChar": 39
+      },
+      "revId": "7a40ac337b07b71834fe5a861813fbb2ef69d974",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": false
     }
   ]
 }
