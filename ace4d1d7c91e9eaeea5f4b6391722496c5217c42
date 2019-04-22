@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "5c34eb6b_ddb5ff42",
+        "filename": "tools/gn/metadata.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 84,
+      "author": {
+        "id": 1000023
+      },
+      "writtenOn": "2019-04-22T17:59:41Z",
+      "side": 1,
+      "message": "These don\u0027t need to be exposed, since they\u0027re only used in the cc file. Remove them from the header and wrap them in an anonymous namespace in the cc file.",
+      "range": {
+        "startLine": 71,
+        "startChar": 2,
+        "endLine": 84,
+        "endChar": 58
+      },
+      "revId": "ace4d1d7c91e9eaeea5f4b6391722496c5217c42",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": true
+    }
+  ]
+}
