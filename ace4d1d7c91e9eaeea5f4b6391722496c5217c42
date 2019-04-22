@@ -22,6 +22,30 @@
       "revId": "ace4d1d7c91e9eaeea5f4b6391722496c5217c42",
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "ba74b266_eacd28c9",
+        "filename": "tools/gn/metadata.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 84,
+      "author": {
+        "id": 1000135
+      },
+      "writtenOn": "2019-04-22T18:32:28Z",
+      "side": 1,
+      "message": "These functions contain invocations to RebaseValue which is a private non-static function of class Metadata. I think I can make RebaseValue a static function but is it possible to invoke RebaseValue inside anonymous namespace without make it a public function?",
+      "parentUuid": "5c34eb6b_ddb5ff42",
+      "range": {
+        "startLine": 71,
+        "startChar": 2,
+        "endLine": 84,
+        "endChar": 58
+      },
+      "revId": "ace4d1d7c91e9eaeea5f4b6391722496c5217c42",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": true
     }
   ]
 }
