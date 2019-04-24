@@ -8,6 +8,7 @@
   * [windows_sdk](#recipe_modules-windows_sdk)
 
 **[Recipes](#Recipes)**
+  * [fuchsia](#recipes-fuchsia) &mdash; Recipe for building GN.
   * [gn](#recipes-gn) &mdash; Recipe for building GN.
   * [gn:examples/full](#recipes-gn_examples_full)
   * [macos_sdk:examples/full](#recipes-macos_sdk_examples_full)
@@ -106,6 +107,21 @@ Raises:
     StepFailure or InfraFailure.
 ## Recipes
 
+### *recipes* / [fuchsia](/infra/recipes/fuchsia.py)
+
+[DEPS](/infra/recipes/fuchsia.py#9): [gn](#recipe_modules-gn), [macos\_sdk](#recipe_modules-macos_sdk), [windows\_sdk](#recipe_modules-windows_sdk), [recipe\_engine/buildbucket][recipe_engine/recipe_modules/buildbucket], [recipe\_engine/cipd][recipe_engine/recipe_modules/cipd], [recipe\_engine/context][recipe_engine/recipe_modules/context], [recipe\_engine/file][recipe_engine/recipe_modules/file], [recipe\_engine/path][recipe_engine/recipe_modules/path], [recipe\_engine/platform][recipe_engine/recipe_modules/platform], [recipe\_engine/properties][recipe_engine/recipe_modules/properties], [recipe\_engine/raw\_io][recipe_engine/recipe_modules/raw_io], [recipe\_engine/step][recipe_engine/recipe_modules/step]
+
+Recipe for building GN.
+
+&mdash; **def [RunSteps](/infra/recipes/fuchsia.py#117)(api, repository, project, manifest, remote, gn_args):**
+
+&mdash; **def [build\_fuchsia](/infra/recipes/fuchsia.py#99)(api, fuchsia_dir, gn_executable, gn_args=None):**
+
+Build Fuchsia with the given GN executable
+
+&mdash; **def [checkout\_fuchsia](/infra/recipes/fuchsia.py#45)(api, project, manifest, remote, fuchsia_dir, jiri_executable):**
+
+Checkout the Fuchsia codebase
 ### *recipes* / [gn](/infra/recipes/gn.py)
 
 [DEPS](/infra/recipes/gn.py#8): [gn](#recipe_modules-gn), [macos\_sdk](#recipe_modules-macos_sdk), [windows\_sdk](#recipe_modules-windows_sdk), [recipe\_engine/buildbucket][recipe_engine/recipe_modules/buildbucket], [recipe\_engine/cipd][recipe_engine/recipe_modules/cipd], [recipe\_engine/context][recipe_engine/recipe_modules/context], [recipe\_engine/file][recipe_engine/recipe_modules/file], [recipe\_engine/path][recipe_engine/recipe_modules/path], [recipe\_engine/platform][recipe_engine/recipe_modules/platform], [recipe\_engine/properties][recipe_engine/recipe_modules/properties], [recipe\_engine/raw\_io][recipe_engine/recipe_modules/raw_io], [recipe\_engine/step][recipe_engine/recipe_modules/step]
