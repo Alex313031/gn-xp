@@ -3,15 +3,45 @@
 ## Table of Contents
 
 **[Recipe Modules](#Recipe-Modules)**
+  * [gn](#recipe_modules-gn) &mdash; The `gn` module checks out, builds, and tests GN.
   * [macos_sdk](#recipe_modules-macos_sdk) &mdash; The `macos_sdk` module provides safe functions to access a semi-hermetic XCode installation.
   * [windows_sdk](#recipe_modules-windows_sdk)
 
 **[Recipes](#Recipes)**
   * [gn](#recipes-gn) &mdash; Recipe for building GN.
+  * [gn:examples/full](#recipes-gn_examples_full)
   * [macos_sdk:examples/full](#recipes-macos_sdk_examples_full)
   * [windows_sdk:examples/full](#recipes-windows_sdk_examples_full)
 ## Recipe Modules
 
+### *recipe_modules* / [gn](/infra/recipe_modules/gn)
+
+[DEPS](/infra/recipe_modules/gn/__init__.py#5): [recipe\_engine/buildbucket][recipe_engine/recipe_modules/buildbucket], [recipe\_engine/cipd][recipe_engine/recipe_modules/cipd], [recipe\_engine/context][recipe_engine/recipe_modules/context], [recipe\_engine/path][recipe_engine/recipe_modules/path], [recipe\_engine/platform][recipe_engine/recipe_modules/platform], [recipe\_engine/python][recipe_engine/recipe_modules/python], [recipe\_engine/raw\_io][recipe_engine/recipe_modules/raw_io], [recipe\_engine/step][recipe_engine/recipe_modules/step]
+
+The `gn` module checks out, builds, and tests GN.
+
+#### **class [GnApi](/infra/recipe_modules/gn/api.py#9)([RecipeApi][recipe_engine/wkt/RecipeApi]):**
+
+API for checking out, building, and testing GN.
+
+&mdash; **def [build](/infra/recipe_modules/gn/api.py#70)(self, build_name, build_args, run_tests=False):**
+
+Build GN and unittests.
+
+&emsp; **@property**<br>&mdash; **def [build\_input](/infra/recipe_modules/gn/api.py#20)(self):**
+
+&mdash; **def [checkout](/infra/recipe_modules/gn/api.py#24)(self, src_dir, repository):**
+
+Checkout GN codebase at a particular revision
+Args:
+  src_dir (Path): Path for checkout.
+  repository (string): URL for Git repository to checkout.
+
+&mdash; **def [ensure](/infra/recipe_modules/gn/api.py#52)(self, cipd_dir):**
+
+Ensure necessary tools from CIPD are present, and if not download them.
+Args:
+  cipd_dir (Path): Path for CIPD prebuilts.
 ### *recipe_modules* / [macos\_sdk](/infra/recipe_modules/macos_sdk)
 
 [DEPS](/infra/recipe_modules/macos_sdk/__init__.py#5): [recipe\_engine/cipd][recipe_engine/recipe_modules/cipd], [recipe\_engine/context][recipe_engine/recipe_modules/context], [recipe\_engine/json][recipe_engine/recipe_modules/json], [recipe\_engine/path][recipe_engine/recipe_modules/path], [recipe\_engine/platform][recipe_engine/recipe_modules/platform], [recipe\_engine/step][recipe_engine/recipe_modules/step]
@@ -78,11 +108,16 @@ Raises:
 
 ### *recipes* / [gn](/infra/recipes/gn.py)
 
-[DEPS](/infra/recipes/gn.py#8): [macos\_sdk](#recipe_modules-macos_sdk), [windows\_sdk](#recipe_modules-windows_sdk), [recipe\_engine/buildbucket][recipe_engine/recipe_modules/buildbucket], [recipe\_engine/cipd][recipe_engine/recipe_modules/cipd], [recipe\_engine/context][recipe_engine/recipe_modules/context], [recipe\_engine/file][recipe_engine/recipe_modules/file], [recipe\_engine/json][recipe_engine/recipe_modules/json], [recipe\_engine/path][recipe_engine/recipe_modules/path], [recipe\_engine/platform][recipe_engine/recipe_modules/platform], [recipe\_engine/properties][recipe_engine/recipe_modules/properties], [recipe\_engine/python][recipe_engine/recipe_modules/python], [recipe\_engine/raw\_io][recipe_engine/recipe_modules/raw_io], [recipe\_engine/step][recipe_engine/recipe_modules/step]
+[DEPS](/infra/recipes/gn.py#8): [gn](#recipe_modules-gn), [macos\_sdk](#recipe_modules-macos_sdk), [windows\_sdk](#recipe_modules-windows_sdk), [recipe\_engine/buildbucket][recipe_engine/recipe_modules/buildbucket], [recipe\_engine/cipd][recipe_engine/recipe_modules/cipd], [recipe\_engine/context][recipe_engine/recipe_modules/context], [recipe\_engine/file][recipe_engine/recipe_modules/file], [recipe\_engine/path][recipe_engine/recipe_modules/path], [recipe\_engine/platform][recipe_engine/recipe_modules/platform], [recipe\_engine/properties][recipe_engine/recipe_modules/properties], [recipe\_engine/raw\_io][recipe_engine/recipe_modules/raw_io], [recipe\_engine/step][recipe_engine/recipe_modules/step]
 
 Recipe for building GN.
 
-&mdash; **def [RunSteps](/infra/recipes/gn.py#29)(api, repository):**
+&mdash; **def [RunSteps](/infra/recipes/gn.py#28)(api, repository):**
+### *recipes* / [gn:examples/full](/infra/recipe_modules/gn/examples/full.py)
+
+[DEPS](/infra/recipe_modules/gn/examples/full.py#5): [gn](#recipe_modules-gn), [recipe\_engine/buildbucket][recipe_engine/recipe_modules/buildbucket], [recipe\_engine/path][recipe_engine/recipe_modules/path], [recipe\_engine/platform][recipe_engine/recipe_modules/platform], [recipe\_engine/properties][recipe_engine/recipe_modules/properties], [recipe\_engine/step][recipe_engine/recipe_modules/step]
+
+&mdash; **def [RunSteps](/infra/recipe_modules/gn/examples/full.py#15)(api):**
 ### *recipes* / [macos\_sdk:examples/full](/infra/recipe_modules/macos_sdk/examples/full.py)
 
 [DEPS](/infra/recipe_modules/macos_sdk/examples/full.py#5): [macos\_sdk](#recipe_modules-macos_sdk), [recipe\_engine/platform][recipe_engine/recipe_modules/platform], [recipe\_engine/properties][recipe_engine/recipe_modules/properties], [recipe\_engine/step][recipe_engine/recipe_modules/step]
