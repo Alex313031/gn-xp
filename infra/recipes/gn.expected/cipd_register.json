@@ -50,7 +50,7 @@
       "-root",
       "[START_DIR]/cipd",
       "-ensure-file",
-      "infra/ninja/${platform} version:1.8.2\nfuchsia/clang/${platform} goma\n@Subdir sysroot\nfuchsia/sysroot/${platform} git_revision:a28dfa20af063e5ca00634024c85732e20220419",
+      "infra/ninja/${platform} version:1.8.2\nfuchsia/clang/${platform} goma\ninfra/tools/luci/gitiles/${platform} latest\n@Subdir sysroot\nfuchsia/sysroot/${platform} git_revision:a28dfa20af063e5ca00634024c85732e20220419",
       "-json-output",
       "/path/to/tmp/json"
     ],
@@ -67,6 +67,10 @@
       "@@@STEP_LOG_LINE@json.output@      {@@@",
       "@@@STEP_LOG_LINE@json.output@        \"instance_id\": \"resolved-instance_id-of-version:1.8.2---\", @@@",
       "@@@STEP_LOG_LINE@json.output@        \"package\": \"infra/ninja/resolved-platform\"@@@",
+      "@@@STEP_LOG_LINE@json.output@      }, @@@",
+      "@@@STEP_LOG_LINE@json.output@      {@@@",
+      "@@@STEP_LOG_LINE@json.output@        \"instance_id\": \"resolved-instance_id-of-latest----------\", @@@",
+      "@@@STEP_LOG_LINE@json.output@        \"package\": \"infra/tools/luci/gitiles/resolved-platform\"@@@",
       "@@@STEP_LOG_LINE@json.output@      }@@@",
       "@@@STEP_LOG_LINE@json.output@    ], @@@",
       "@@@STEP_LOG_LINE@json.output@    \"sysroot\": [@@@",
@@ -274,6 +278,39 @@
       "@@@STEP_LOG_LINE@json.output@  }@@@",
       "@@@STEP_LOG_LINE@json.output@}@@@",
       "@@@STEP_LOG_END@json.output@@@"
+    ]
+  },
+  {
+    "cmd": [
+      "[START_DIR]/cipd/gitiles",
+      "refs",
+      "-json-output",
+      "/path/to/tmp/json",
+      "https://fuchsia.googlesource.com/fuchsia",
+      "refs"
+    ],
+    "name": "get fuchsia refs",
+    "~followup_annotations": [
+      "@@@STEP_LOG_LINE@json.output@{@@@",
+      "@@@STEP_LOG_LINE@json.output@  \"refs/heads/master\": \"bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb\"@@@",
+      "@@@STEP_LOG_LINE@json.output@}@@@",
+      "@@@STEP_LOG_END@json.output@@@"
+    ]
+  },
+  {
+    "cmd": [
+      "prpc",
+      "call",
+      "-format=json",
+      "luci-scheduler.appspot.com",
+      "scheduler.Scheduler.EmitTriggers"
+    ],
+    "infra_step": true,
+    "name": "luci-scheduler.EmitTriggers",
+    "stdin": "{\"batches\": [{\"jobs\": [{\"job\": \"f\", \"project\": \"fuchsia\"}, {\"job\": \"u\", \"project\": \"fuchsia\"}, {\"job\": \"c\", \"project\": \"fuchsia\"}, {\"job\": \"h\", \"project\": \"fuchsia\"}, {\"job\": \"s\", \"project\": \"fuchsia\"}, {\"job\": \"i\", \"project\": \"fuchsia\"}, {\"job\": \"a\", \"project\": \"fuchsia\"}, {\"job\": \"-\", \"project\": \"fuchsia\"}, {\"job\": \"x\", \"project\": \"fuchsia\"}, {\"job\": \"6\", \"project\": \"fuchsia\"}, {\"job\": \"4\", \"project\": \"fuchsia\"}, {\"job\": \"-\", \"project\": \"fuchsia\"}, {\"job\": \"g\", \"project\": \"fuchsia\"}, {\"job\": \"n\", \"project\": \"fuchsia\"}], \"trigger\": {\"buildbucket\": {\"properties\": {\"build.gn_instance\": {\"instance\": \"40-chars-fake-of-the-package-instance_id\", \"type\": \"cipd\"}, \"gn\": {\"git_repository\": \"https://gn.googlesource.com/gn\", \"git_revision\": \"aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa\"}}, \"tags\": [\"buildset:commit/gitiles/fuchsia.googlesource.com/fuchsia/+/bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb\", \"gitiles_ref:refs/heads/master\", \"parent_buildername:builder\", \"user_agent:recipe\"]}, \"id\": \"6a0a73b0-070b-492b-9135-9f26a2a00001\", \"title\": \"builder/0\"}}], \"timestamp\": 1337000001500000}",
+    "stdout": "/path/to/tmp/json",
+    "~followup_annotations": [
+      "@@@STEP_TEXT@input {<br/>    \"batches\": [<br/>        {<br/>            \"jobs\": [<br/>                {<br/>                    \"job\": \"f\", <br/>                    \"project\": \"fuchsia\"<br/>                }, <br/>                {<br/>                    \"job\": \"u\", <br/>                    \"project\": \"fuchsia\"<br/>                }, <br/>                {<br/>                    \"job\": \"c\", <br/>                    \"project\": \"fuchsia\"<br/>                }, <br/>                {<br/>                    \"job\": \"h\", <br/>                    \"project\": \"fuchsia\"<br/>                }, <br/>                {<br/>                    \"job\": \"s\", <br/>                    \"project\": \"fuchsia\"<br/>                }, <br/>                {<br/>                    \"job\": \"i\", <br/>                    \"project\": \"fuchsia\"<br/>                }, <br/>                {<br/>                    \"job\": \"a\", <br/>                    \"project\": \"fuchsia\"<br/>                }, <br/>                {<br/>                    \"job\": \"-\", <br/>                    \"project\": \"fuchsia\"<br/>                }, <br/>                {<br/>                    \"job\": \"x\", <br/>                    \"project\": \"fuchsia\"<br/>                }, <br/>                {<br/>                    \"job\": \"6\", <br/>                    \"project\": \"fuchsia\"<br/>                }, <br/>                {<br/>                    \"job\": \"4\", <br/>                    \"project\": \"fuchsia\"<br/>                }, <br/>                {<br/>                    \"job\": \"-\", <br/>                    \"project\": \"fuchsia\"<br/>                }, <br/>                {<br/>                    \"job\": \"g\", <br/>                    \"project\": \"fuchsia\"<br/>                }, <br/>                {<br/>                    \"job\": \"n\", <br/>                    \"project\": \"fuchsia\"<br/>                }<br/>            ], <br/>            \"trigger\": {<br/>                \"buildbucket\": {<br/>                    \"properties\": {<br/>                        \"build.gn_instance\": {<br/>                            \"instance\": \"40-chars-fake-of-the-package-instance_id\", <br/>                            \"type\": \"cipd\"<br/>                        }, <br/>                        \"gn\": {<br/>                            \"git_repository\": \"https://gn.googlesource.com/gn\", <br/>                            \"git_revision\": \"aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa\"<br/>                        }<br/>                    }, <br/>                    \"tags\": [<br/>                        \"buildset:commit/gitiles/fuchsia.googlesource.com/fuchsia/+/bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb\", <br/>                        \"gitiles_ref:refs/heads/master\", <br/>                        \"parent_buildername:builder\", <br/>                        \"user_agent:recipe\"<br/>                    ]<br/>                }, <br/>                \"id\": \"6a0a73b0-070b-492b-9135-9f26a2a00001\", <br/>                \"title\": \"builder/0\"<br/>            }<br/>        }<br/>    ], <br/>    \"timestamp\": 1337000001500000<br/>}@@@"
     ]
   },
   {

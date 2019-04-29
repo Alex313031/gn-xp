@@ -16,6 +16,8 @@ DEPS = [
     'recipe_engine/properties',
     'recipe_engine/python',
     'recipe_engine/raw_io',
+    'recipe_engine/runtime',
+    'recipe_engine/scheduler',
     'recipe_engine/step',
     'macos_sdk',
     'windows_sdk',
@@ -24,6 +26,46 @@ DEPS = [
 PROPERTIES = {
     'repository': Property(kind=str, default='https://gn.googlesource.com/gn'),
 }
+
+
+def EmitTrigger(api, gitiles_path, instance, repository, revision, host,
+                project, builder):
+  properties = {
+      'gn': {
+          'git_repository': repository,
+          'git_revision': revision,
+      },
+      'build.gn_instance': {
+          'type': 'cipd',
+          'instance': instance,
+      }
+  }
+
+  refs = api.step('get %s refs' % project, [
+      gitiles_path,
+      'refs',
+      '-json-output',
+      api.json.output(),
+      'https://%s/%s' % (host, project),
+      'refs',
+  ]).json.output
+
+  ref = 'refs/heads/master'
+  revision = refs.get(ref, 'HEAD')
+  # Trigger the build. This will use the just-built GN to build all of the
+  # given project to check whether there are any regressions.
+  api.scheduler.emit_trigger(
+      api.scheduler.BuildbucketTrigger(
+          properties=properties,
+          tags={
+              'buildset':
+                  'commit/gitiles/%s/%s/+/%s' % (host, project, revision),
+              'gitiles_ref':
+                  ref,
+          }),
+      project=project,
+      jobs=(builder),
+  )
 
 
 def RunSteps(api, repository):
@@ -59,6 +101,7 @@ def RunSteps(api, repository):
       pkgs.add_package('fuchsia/sysroot/${platform}',
                        'git_revision:a28dfa20af063e5ca00634024c85732e20220419',
                        'sysroot')
+      pkgs.add_package('infra/tools/luci/gitiles/${platform}', 'latest')
     api.cipd.ensure(cipd_dir, pkgs)
 
   # The order is important since release build will get uploaded to CIPD.
@@ -143,7 +186,7 @@ def RunSteps(api, repository):
       api.step('Package is up-to-date', cmd=None)
       return
 
-    api.cipd.register(
+    cipd_pin = api.cipd.register(
         package_name=cipd_pkg_name,
         package_path=cipd_pkg_file,
         refs=['latest'],
@@ -152,6 +195,28 @@ def RunSteps(api, repository):
             'git_revision': revision,
         },
     )
+
+    platform = '%s-%s' % (api.platform.name.replace('win', 'windows'), {
+        'intel': {
+            32: '386',
+            64: 'amd64',
+        },
+        'arm': {
+            32: 'armv6',
+            64: 'arm64',
+        },
+    }[api.platform.arch][api.platform.bits])
+
+    if platform == 'linux-amd64':
+      EmitTrigger(
+          api,
+          cipd_dir.join('gitiles'),
+          cipd_pin.instance_id,
+          repository,
+          revision,
+          host='fuchsia.googlesource.com',
+          project='fuchsia',
+          builder='fuchsia-x64-gn')
 
 
 def GenTests(api):
@@ -183,4 +248,8 @@ def GenTests(api):
       revision='a' * 40,
   ) + api.step_data('rev-parse', api.raw_io.stream_output('a' * 40)) +
          api.step_data('cipd search gn/gn/${platform} git_revision:' + 'a' * 40,
-                       api.cipd.example_search('gn/gn/linux-amd64', [])))
+                       api.cipd.example_search('gn/gn/linux-amd64', [])) +
+         api.runtime(is_luci=True, is_experimental=False) + api.step_data(
+             'get fuchsia refs', api.json.output({
+                 'refs/heads/master': 'b' * 40
+             })))
