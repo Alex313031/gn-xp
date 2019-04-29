@@ -78,11 +78,13 @@ Raises:
 
 ### *recipes* / [gn](/infra/recipes/gn.py)
 
-[DEPS](/infra/recipes/gn.py#8): [macos\_sdk](#recipe_modules-macos_sdk), [windows\_sdk](#recipe_modules-windows_sdk), [recipe\_engine/buildbucket][recipe_engine/recipe_modules/buildbucket], [recipe\_engine/cipd][recipe_engine/recipe_modules/cipd], [recipe\_engine/context][recipe_engine/recipe_modules/context], [recipe\_engine/file][recipe_engine/recipe_modules/file], [recipe\_engine/json][recipe_engine/recipe_modules/json], [recipe\_engine/path][recipe_engine/recipe_modules/path], [recipe\_engine/platform][recipe_engine/recipe_modules/platform], [recipe\_engine/properties][recipe_engine/recipe_modules/properties], [recipe\_engine/python][recipe_engine/recipe_modules/python], [recipe\_engine/raw\_io][recipe_engine/recipe_modules/raw_io], [recipe\_engine/step][recipe_engine/recipe_modules/step]
+[DEPS](/infra/recipes/gn.py#8): [macos\_sdk](#recipe_modules-macos_sdk), [windows\_sdk](#recipe_modules-windows_sdk), [recipe\_engine/buildbucket][recipe_engine/recipe_modules/buildbucket], [recipe\_engine/cipd][recipe_engine/recipe_modules/cipd], [recipe\_engine/context][recipe_engine/recipe_modules/context], [recipe\_engine/file][recipe_engine/recipe_modules/file], [recipe\_engine/json][recipe_engine/recipe_modules/json], [recipe\_engine/path][recipe_engine/recipe_modules/path], [recipe\_engine/platform][recipe_engine/recipe_modules/platform], [recipe\_engine/properties][recipe_engine/recipe_modules/properties], [recipe\_engine/python][recipe_engine/recipe_modules/python], [recipe\_engine/raw\_io][recipe_engine/recipe_modules/raw_io], [recipe\_engine/runtime][recipe_engine/recipe_modules/runtime], [recipe\_engine/scheduler][recipe_engine/recipe_modules/scheduler], [recipe\_engine/step][recipe_engine/recipe_modules/step]
 
 Recipe for building GN.
 
-&mdash; **def [RunSteps](/infra/recipes/gn.py#29)(api, repository):**
+&mdash; **def [EmitTrigger](/infra/recipes/gn.py#31)(api, gitiles_path, instance, repository, revision, host, project):**
+
+&mdash; **def [RunSteps](/infra/recipes/gn.py#71)(api, repository):**
 ### *recipes* / [macos\_sdk:examples/full](/infra/recipe_modules/macos_sdk/examples/full.py)
 
 [DEPS](/infra/recipe_modules/macos_sdk/examples/full.py#5): [macos\_sdk](#recipe_modules-macos_sdk), [recipe\_engine/platform][recipe_engine/recipe_modules/platform], [recipe\_engine/properties][recipe_engine/recipe_modules/properties], [recipe\_engine/step][recipe_engine/recipe_modules/step]
@@ -104,5 +106,7 @@ Recipe for building GN.
 [recipe_engine/recipe_modules/properties]: https://chromium.googlesource.com/infra/luci/recipes-py.git/+/82e233fa4e6fed0a5dd99501e0d52d3dce25c994/README.recipes.md#recipe_modules-properties
 [recipe_engine/recipe_modules/python]: https://chromium.googlesource.com/infra/luci/recipes-py.git/+/82e233fa4e6fed0a5dd99501e0d52d3dce25c994/README.recipes.md#recipe_modules-python
 [recipe_engine/recipe_modules/raw_io]: https://chromium.googlesource.com/infra/luci/recipes-py.git/+/82e233fa4e6fed0a5dd99501e0d52d3dce25c994/README.recipes.md#recipe_modules-raw_io
+[recipe_engine/recipe_modules/runtime]: https://chromium.googlesource.com/infra/luci/recipes-py.git/+/82e233fa4e6fed0a5dd99501e0d52d3dce25c994/README.recipes.md#recipe_modules-runtime
+[recipe_engine/recipe_modules/scheduler]: https://chromium.googlesource.com/infra/luci/recipes-py.git/+/82e233fa4e6fed0a5dd99501e0d52d3dce25c994/README.recipes.md#recipe_modules-scheduler
 [recipe_engine/recipe_modules/step]: https://chromium.googlesource.com/infra/luci/recipes-py.git/+/82e233fa4e6fed0a5dd99501e0d52d3dce25c994/README.recipes.md#recipe_modules-step
 [recipe_engine/wkt/RecipeApi]: https://chromium.googlesource.com/infra/luci/recipes-py.git/+/82e233fa4e6fed0a5dd99501e0d52d3dce25c994/recipe_engine/recipe_api.py#1006
