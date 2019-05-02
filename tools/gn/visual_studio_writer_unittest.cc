@@ -183,7 +183,7 @@ TEST_F(VisualStudioWriterTest, NoDotSlash) {
   toolchain.SetTool(std::move(tool));
 
   Target target(setup_.settings(), Label(SourceDir("//baz/"), "baz"));
-  target.set_output_type(Target::STATIC_LIBRARY);
+  target.set_output_type(functions::kStaticLibrary);
   target.SetToolchain(&toolchain);
 
   Err err;

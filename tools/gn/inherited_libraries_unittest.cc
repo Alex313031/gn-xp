@@ -112,18 +112,18 @@ TEST(InheritedLibraries, AppendPublicSharedLibraries) {
 
   // Two source sets.
   Target set_pub(setup.settings(), Label(SourceDir("//foo/"), "set_pub"));
-  set_pub.set_output_type(Target::SOURCE_SET);
+  set_pub.set_output_type(functions::kSourceSet);
   append.Append(&set_pub, true);
   Target set_priv(setup.settings(), Label(SourceDir("//foo/"), "set_priv"));
-  set_priv.set_output_type(Target::SOURCE_SET);
+  set_priv.set_output_type(functions::kSourceSet);
   append.Append(&set_priv, false);
 
   // Two shared libraries.
   Target sh_pub(setup.settings(), Label(SourceDir("//foo/"), "sh_pub"));
-  sh_pub.set_output_type(Target::SHARED_LIBRARY);
+  sh_pub.set_output_type(functions::kSharedLibrary);
   append.Append(&sh_pub, true);
   Target sh_priv(setup.settings(), Label(SourceDir("//foo/"), "sh_priv"));
-  sh_priv.set_output_type(Target::SHARED_LIBRARY);
+  sh_priv.set_output_type(functions::kSharedLibrary);
   append.Append(&sh_priv, false);
 
   InheritedLibraries libs;

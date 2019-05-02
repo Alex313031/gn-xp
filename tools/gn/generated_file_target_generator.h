@@ -15,7 +15,7 @@ class GeneratedFileTargetGenerator : public TargetGenerator {
   GeneratedFileTargetGenerator(Target* target,
                                Scope* scope,
                                const FunctionCallNode* function_call,
-                               Target::OutputType type,
+                               const char* type,
                                Err* err);
   ~GeneratedFileTargetGenerator() override;
 
@@ -41,7 +41,7 @@ class GeneratedFileTargetGenerator : public TargetGenerator {
   bool contents_defined_;
   bool data_keys_defined_;
 
-  Target::OutputType output_type_;
+  const char* output_type_;
 
   DISALLOW_COPY_AND_ASSIGN(GeneratedFileTargetGenerator);
 };

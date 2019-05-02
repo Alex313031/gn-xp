@@ -119,9 +119,9 @@ Value RunGetTargetOutputs(Scope* scope,
 
   // Compute the output list.
   std::vector<SourceFile> files;
-  if (target->output_type() == Target::ACTION ||
-      target->output_type() == Target::COPY_FILES ||
-      target->output_type() == Target::ACTION_FOREACH) {
+  if (target->output_type() == functions::kAction ||
+      target->output_type() == functions::kCopy ||
+      target->output_type() == functions::kActionForEach) {
     target->action_values().GetOutputsAsSourceFiles(target, &files);
   } else {
     // Other types of targets are not supported.

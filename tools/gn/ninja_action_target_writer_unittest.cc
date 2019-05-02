@@ -18,7 +18,7 @@ TEST(NinjaActionTargetWriter, WriteOutputFilesForBuildLine) {
   TestWithScope setup;
 
   Target target(setup.settings(), Label(SourceDir("//foo/"), "bar"));
-  target.set_output_type(Target::ACTION_FOREACH);
+  target.set_output_type(functions::kActionForEach);
   target.action_values().outputs() =
       SubstitutionList::MakeForTest("//out/Debug/gen/a b{{source_name_part}}.h",
                                     "//out/Debug/gen/{{source_name_part}}.cc");
@@ -42,7 +42,7 @@ TEST(NinjaActionTargetWriter, ActionNoSources) {
   TestWithScope setup;
 
   Target target(setup.settings(), Label(SourceDir("//foo/"), "bar"));
-  target.set_output_type(Target::ACTION);
+  target.set_output_type(functions::kAction);
 
   target.action_values().set_script(SourceFile("//foo/script.py"));
   target.config_values().inputs().push_back(SourceFile("//foo/included.txt"));
@@ -78,7 +78,7 @@ TEST(NinjaActionTargetWriter, ActionNoSourcesConsole) {
   TestWithScope setup;
 
   Target target(setup.settings(), Label(SourceDir("//foo/"), "bar"));
-  target.set_output_type(Target::ACTION);
+  target.set_output_type(functions::kAction);
 
   target.action_values().set_script(SourceFile("//foo/script.py"));
   target.config_values().inputs().push_back(SourceFile("//foo/included.txt"));
@@ -124,7 +124,7 @@ TEST(NinjaActionTargetWriter, ActionWithSources) {
   TestWithScope setup;
 
   Target target(setup.settings(), Label(SourceDir("//foo/"), "bar"));
-  target.set_output_type(Target::ACTION);
+  target.set_output_type(functions::kAction);
 
   target.action_values().set_script(SourceFile("//foo/script.py"));
 
@@ -166,19 +166,19 @@ TEST(NinjaActionTargetWriter, ForEach) {
   // output (rather than having to worry about how the current platform names
   // binaries).
   Target dep(setup.settings(), Label(SourceDir("//foo/"), "dep"));
-  dep.set_output_type(Target::ACTION);
+  dep.set_output_type(functions::kAction);
   dep.visibility().SetPublic();
   dep.SetToolchain(setup.toolchain());
   ASSERT_TRUE(dep.OnResolved(&err));
 
   Target datadep(setup.settings(), Label(SourceDir("//foo/"), "datadep"));
-  datadep.set_output_type(Target::ACTION);
+  datadep.set_output_type(functions::kAction);
   datadep.visibility().SetPublic();
   datadep.SetToolchain(setup.toolchain());
   ASSERT_TRUE(datadep.OnResolved(&err));
 
   Target target(setup.settings(), Label(SourceDir("//foo/"), "bar"));
-  target.set_output_type(Target::ACTION_FOREACH);
+  target.set_output_type(functions::kActionForEach);
   target.private_deps().push_back(LabelTargetPair(&dep));
   target.data_deps().push_back(LabelTargetPair(&datadep));
 
@@ -240,7 +240,7 @@ TEST(NinjaActionTargetWriter, ForEachWithDepfile) {
   TestWithScope setup;
 
   Target target(setup.settings(), Label(SourceDir("//foo/"), "bar"));
-  target.set_output_type(Target::ACTION_FOREACH);
+  target.set_output_type(functions::kActionForEach);
 
   target.sources().push_back(SourceFile("//foo/input1.txt"));
   target.sources().push_back(SourceFile("//foo/input2.txt"));
@@ -300,7 +300,7 @@ TEST(NinjaActionTargetWriter, ForEachWithResponseFile) {
   TestWithScope setup;
 
   Target target(setup.settings(), Label(SourceDir("//foo/"), "bar"));
-  target.set_output_type(Target::ACTION_FOREACH);
+  target.set_output_type(functions::kActionForEach);
 
   target.sources().push_back(SourceFile("//foo/input1.txt"));
   target.action_values().set_script(SourceFile("//foo/script.py"));
@@ -354,7 +354,7 @@ TEST(NinjaActionTargetWriter, ForEachWithPool) {
   TestWithScope setup;
 
   Target target(setup.settings(), Label(SourceDir("//foo/"), "bar"));
-  target.set_output_type(Target::ACTION_FOREACH);
+  target.set_output_type(functions::kActionForEach);
 
   target.sources().push_back(SourceFile("//foo/input1.txt"));
   target.action_values().set_script(SourceFile("//foo/script.py"));
@@ -408,13 +408,13 @@ TEST(NinjaActionTargetWriter, NoTransitiveHardDeps) {
       base::FilePath(FILE_PATH_LITERAL("/usr/bin/python")));
 
   Target dep(setup.settings(), Label(SourceDir("//foo/"), "dep"));
-  dep.set_output_type(Target::ACTION);
+  dep.set_output_type(functions::kAction);
   dep.visibility().SetPublic();
   dep.SetToolchain(setup.toolchain());
   ASSERT_TRUE(dep.OnResolved(&err));
 
   Target foo(setup.settings(), Label(SourceDir("//foo/"), "foo"));
-  foo.set_output_type(Target::ACTION);
+  foo.set_output_type(functions::kAction);
   foo.visibility().SetPublic();
   foo.sources().push_back(SourceFile("//foo/input1.txt"));
   foo.action_values().set_script(SourceFile("//foo/script.py"));
@@ -444,7 +444,7 @@ TEST(NinjaActionTargetWriter, NoTransitiveHardDeps) {
   }
 
   Target bar(setup.settings(), Label(SourceDir("//bar/"), "bar"));
-  bar.set_output_type(Target::ACTION);
+  bar.set_output_type(functions::kAction);
   bar.sources().push_back(SourceFile("//bar/input1.txt"));
   bar.action_values().set_script(SourceFile("//bar/script.py"));
   bar.private_deps().push_back(LabelTargetPair(&foo));

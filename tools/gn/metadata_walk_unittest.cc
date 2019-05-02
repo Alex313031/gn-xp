@@ -13,7 +13,7 @@
 TEST(MetadataWalkTest, CollectNoRecurse) {
   TestWithScope setup;
 
-  TestTarget one(setup, "//foo:one", Target::SOURCE_SET);
+  TestTarget one(setup, "//foo:one", functions::kSourceSet);
   Value a_expected(nullptr, Value::LIST);
   a_expected.list_value().push_back(Value(nullptr, "foo"));
   one.metadata().contents().insert(
@@ -26,7 +26,7 @@ TEST(MetadataWalkTest, CollectNoRecurse) {
 
   one.metadata().set_source_dir(SourceDir("/usr/home/files/"));
 
-  TestTarget two(setup, "//foo:two", Target::SOURCE_SET);
+  TestTarget two(setup, "//foo:two", functions::kSourceSet);
   Value a_2_expected(nullptr, Value::LIST);
   a_2_expected.list_value().push_back(Value(nullptr, "bar"));
   two.metadata().contents().insert(
@@ -71,7 +71,7 @@ TEST(MetadataWalkTest, CollectNoRecurse) {
 TEST(MetadataWalkTest, CollectWithRecurse) {
   TestWithScope setup;
 
-  TestTarget one(setup, "//foo:one", Target::SOURCE_SET);
+  TestTarget one(setup, "//foo:one", functions::kSourceSet);
   Value a_expected(nullptr, Value::LIST);
   a_expected.list_value().push_back(Value(nullptr, "foo"));
   one.metadata().contents().insert(
@@ -82,7 +82,7 @@ TEST(MetadataWalkTest, CollectWithRecurse) {
   one.metadata().contents().insert(
       std::pair<base::StringPiece, Value>("b", b_expected));
 
-  TestTarget two(setup, "//foo:two", Target::SOURCE_SET);
+  TestTarget two(setup, "//foo:two", functions::kSourceSet);
   Value a_2_expected(nullptr, Value::LIST);
   a_2_expected.list_value().push_back(Value(nullptr, "bar"));
   two.metadata().contents().insert(
@@ -120,7 +120,7 @@ TEST(MetadataWalkTest, CollectWithRecurse) {
 TEST(MetadataWalkTest, CollectWithBarrier) {
   TestWithScope setup;
 
-  TestTarget one(setup, "//foo:one", Target::SOURCE_SET);
+  TestTarget one(setup, "//foo:one", functions::kSourceSet);
   Value a_expected(nullptr, Value::LIST);
   a_expected.list_value().push_back(Value(nullptr, "foo"));
   one.metadata().contents().insert(
@@ -132,13 +132,13 @@ TEST(MetadataWalkTest, CollectWithBarrier) {
   one.metadata().contents().insert(
       std::pair<base::StringPiece, Value>("walk", walk_expected));
 
-  TestTarget two(setup, "//foo:two", Target::SOURCE_SET);
+  TestTarget two(setup, "//foo:two", functions::kSourceSet);
   Value a_2_expected(nullptr, Value::LIST);
   a_2_expected.list_value().push_back(Value(nullptr, "bar"));
   two.metadata().contents().insert(
       std::pair<base::StringPiece, Value>("a", a_2_expected));
 
-  TestTarget three(setup, "//foo:three", Target::SOURCE_SET);
+  TestTarget three(setup, "//foo:three", functions::kSourceSet);
   Value a_3_expected(nullptr, Value::LIST);
   a_3_expected.list_value().push_back(Value(nullptr, "baz"));
   three.metadata().contents().insert(
@@ -176,7 +176,7 @@ TEST(MetadataWalkTest, CollectWithBarrier) {
 TEST(MetadataWalkTest, CollectWithError) {
   TestWithScope setup;
 
-  TestTarget one(setup, "//foo:one", Target::SOURCE_SET);
+  TestTarget one(setup, "//foo:one", functions::kSourceSet);
   Value a_expected(nullptr, Value::LIST);
   a_expected.list_value().push_back(Value(nullptr, "foo"));
   one.metadata().contents().insert(

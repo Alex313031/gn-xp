@@ -28,7 +28,7 @@ std::unique_ptr<Target> NewAction(const TestWithScope& setup) {
   Err err;
   auto action = std::make_unique<Target>(setup.settings(),
                                          Label(SourceDir("//foo/"), "bar"));
-  action->set_output_type(Target::ACTION);
+  action->set_output_type(functions::kAction);
   action->visibility().SetPublic();
   action->action_values().set_script(SourceFile("//foo/script.py"));
 
@@ -50,7 +50,7 @@ TEST(NinjaCreateBundleTargetWriter, Run) {
   ASSERT_TRUE(action->OnResolved(&err)) << err.message();
 
   Target bundle_data(setup.settings(), Label(SourceDir("//foo/"), "data"));
-  bundle_data.set_output_type(Target::BUNDLE_DATA);
+  bundle_data.set_output_type(functions::kBundleData);
   bundle_data.sources().push_back(SourceFile("//foo/input1.txt"));
   bundle_data.sources().push_back(SourceFile("//foo/input2.txt"));
   bundle_data.action_values().outputs() = SubstitutionList::MakeForTest(
@@ -64,7 +64,7 @@ TEST(NinjaCreateBundleTargetWriter, Run) {
       Label(SourceDir("//baz/"), "bar", setup.toolchain()->label().dir(),
             setup.toolchain()->label().name()));
   SetupBundleDataDir(&create_bundle.bundle_data(), "//out/Debug");
-  create_bundle.set_output_type(Target::CREATE_BUNDLE);
+  create_bundle.set_output_type(functions::kCreateBundle);
   create_bundle.private_deps().push_back(LabelTargetPair(&bundle_data));
   create_bundle.private_deps().push_back(LabelTargetPair(action.get()));
   create_bundle.SetToolchain(setup.toolchain());
@@ -99,7 +99,7 @@ TEST(NinjaCreateBundleTargetWriter, InSubDirectory) {
   ASSERT_TRUE(action->OnResolved(&err)) << err.message();
 
   Target bundle_data(setup.settings(), Label(SourceDir("//foo/"), "data"));
-  bundle_data.set_output_type(Target::BUNDLE_DATA);
+  bundle_data.set_output_type(functions::kBundleData);
   bundle_data.sources().push_back(SourceFile("//foo/input1.txt"));
   bundle_data.sources().push_back(SourceFile("//foo/input2.txt"));
   bundle_data.action_values().outputs() = SubstitutionList::MakeForTest(
@@ -113,7 +113,7 @@ TEST(NinjaCreateBundleTargetWriter, InSubDirectory) {
       Label(SourceDir("//baz/"), "bar", setup.toolchain()->label().dir(),
             setup.toolchain()->label().name()));
   SetupBundleDataDir(&create_bundle.bundle_data(), "//out/Debug/gen");
-  create_bundle.set_output_type(Target::CREATE_BUNDLE);
+  create_bundle.set_output_type(functions::kCreateBundle);
   create_bundle.private_deps().push_back(LabelTargetPair(&bundle_data));
   create_bundle.private_deps().push_back(LabelTargetPair(action.get()));
   create_bundle.SetToolchain(setup.toolchain());
@@ -152,7 +152,7 @@ TEST(NinjaCreateBundleTargetWriter, JustPartialInfoPlist) {
       Label(SourceDir("//baz/"), "bar", setup.toolchain()->label().dir(),
             setup.toolchain()->label().name()));
   SetupBundleDataDir(&create_bundle.bundle_data(), "//out/Debug");
-  create_bundle.set_output_type(Target::CREATE_BUNDLE);
+  create_bundle.set_output_type(functions::kCreateBundle);
   create_bundle.private_deps().push_back(LabelTargetPair(action.get()));
   create_bundle.bundle_data().product_type().assign("com.apple.product-type");
   create_bundle.bundle_data().set_partial_info_plist(
@@ -182,7 +182,7 @@ TEST(NinjaCreateBundleTargetWriter, AssetCatalog) {
   ASSERT_TRUE(action->OnResolved(&err)) << err.message();
 
   Target bundle_data(setup.settings(), Label(SourceDir("//foo/"), "data"));
-  bundle_data.set_output_type(Target::BUNDLE_DATA);
+  bundle_data.set_output_type(functions::kBundleData);
   bundle_data.sources().push_back(
       SourceFile("//foo/Foo.xcassets/Contents.json"));
   bundle_data.sources().push_back(
@@ -204,7 +204,7 @@ TEST(NinjaCreateBundleTargetWriter, AssetCatalog) {
       Label(SourceDir("//baz/"), "bar", setup.toolchain()->label().dir(),
             setup.toolchain()->label().name()));
   SetupBundleDataDir(&create_bundle.bundle_data(), "//out/Debug");
-  create_bundle.set_output_type(Target::CREATE_BUNDLE);
+  create_bundle.set_output_type(functions::kCreateBundle);
   create_bundle.private_deps().push_back(LabelTargetPair(&bundle_data));
   create_bundle.private_deps().push_back(LabelTargetPair(action.get()));
   create_bundle.bundle_data().product_type().assign("com.apple.product-type");
@@ -241,7 +241,7 @@ TEST(NinjaCreateBundleTargetWriter, PhonyTarget) {
       Label(SourceDir("//baz/"), "bar", setup.toolchain()->label().dir(),
             setup.toolchain()->label().name()));
   SetupBundleDataDir(&create_bundle.bundle_data(), "//out/Debug");
-  create_bundle.set_output_type(Target::CREATE_BUNDLE);
+  create_bundle.set_output_type(functions::kCreateBundle);
   create_bundle.SetToolchain(setup.toolchain());
   ASSERT_TRUE(create_bundle.OnResolved(&err));
 
@@ -267,7 +267,7 @@ TEST(NinjaCreateBundleTargetWriter, Complex) {
 
   Target bundle_data0(setup.settings(),
                       Label(SourceDir("//qux/"), "info_plist"));
-  bundle_data0.set_output_type(Target::BUNDLE_DATA);
+  bundle_data0.set_output_type(functions::kBundleData);
   bundle_data0.sources().push_back(SourceFile("//qux/qux-Info.plist"));
   bundle_data0.action_values().outputs() =
       SubstitutionList::MakeForTest("{{bundle_contents_dir}}/Info.plist");
@@ -276,7 +276,7 @@ TEST(NinjaCreateBundleTargetWriter, Complex) {
   ASSERT_TRUE(bundle_data0.OnResolved(&err));
 
   Target bundle_data1(setup.settings(), Label(SourceDir("//foo/"), "data"));
-  bundle_data1.set_output_type(Target::BUNDLE_DATA);
+  bundle_data1.set_output_type(functions::kBundleData);
   bundle_data1.sources().push_back(SourceFile("//foo/input1.txt"));
   bundle_data1.sources().push_back(SourceFile("//foo/input2.txt"));
   bundle_data1.action_values().outputs() = SubstitutionList::MakeForTest(
@@ -286,7 +286,7 @@ TEST(NinjaCreateBundleTargetWriter, Complex) {
   ASSERT_TRUE(bundle_data1.OnResolved(&err));
 
   Target bundle_data2(setup.settings(), Label(SourceDir("//foo/"), "assets"));
-  bundle_data2.set_output_type(Target::BUNDLE_DATA);
+  bundle_data2.set_output_type(functions::kBundleData);
   bundle_data2.sources().push_back(
       SourceFile("//foo/Foo.xcassets/Contents.json"));
   bundle_data2.sources().push_back(
@@ -304,7 +304,7 @@ TEST(NinjaCreateBundleTargetWriter, Complex) {
   ASSERT_TRUE(bundle_data2.OnResolved(&err));
 
   Target bundle_data3(setup.settings(), Label(SourceDir("//quz/"), "assets"));
-  bundle_data3.set_output_type(Target::BUNDLE_DATA);
+  bundle_data3.set_output_type(functions::kBundleData);
   bundle_data3.sources().push_back(
       SourceFile("//quz/Quz.xcassets/Contents.json"));
   bundle_data3.sources().push_back(
@@ -326,7 +326,7 @@ TEST(NinjaCreateBundleTargetWriter, Complex) {
       Label(SourceDir("//baz/"), "bar", setup.toolchain()->label().dir(),
             setup.toolchain()->label().name()));
   SetupBundleDataDir(&create_bundle.bundle_data(), "//out/Debug");
-  create_bundle.set_output_type(Target::CREATE_BUNDLE);
+  create_bundle.set_output_type(functions::kCreateBundle);
   create_bundle.private_deps().push_back(LabelTargetPair(&bundle_data0));
   create_bundle.private_deps().push_back(LabelTargetPair(&bundle_data1));
   create_bundle.private_deps().push_back(LabelTargetPair(&bundle_data2));
@@ -382,14 +382,14 @@ TEST(NinjaCreateBundleTargetWriter, CodeSigning) {
   ASSERT_TRUE(action->OnResolved(&err)) << err.message();
 
   Target executable(setup.settings(), Label(SourceDir("//baz/"), "quz"));
-  executable.set_output_type(Target::EXECUTABLE);
+  executable.set_output_type(functions::kExecutable);
   executable.sources().push_back(SourceFile("//baz/quz.c"));
   executable.SetToolchain(setup.toolchain());
   executable.visibility().SetPublic();
   ASSERT_TRUE(executable.OnResolved(&err));
 
   Target bundle_data(setup.settings(), Label(SourceDir("//foo/"), "data"));
-  bundle_data.set_output_type(Target::BUNDLE_DATA);
+  bundle_data.set_output_type(functions::kBundleData);
   bundle_data.sources().push_back(SourceFile("//foo/input1.txt"));
   bundle_data.sources().push_back(SourceFile("//foo/input2.txt"));
   bundle_data.action_values().outputs() = SubstitutionList::MakeForTest(
@@ -403,7 +403,7 @@ TEST(NinjaCreateBundleTargetWriter, CodeSigning) {
       Label(SourceDir("//baz/"), "bar", setup.toolchain()->label().dir(),
             setup.toolchain()->label().name()));
   SetupBundleDataDir(&create_bundle.bundle_data(), "//out/Debug");
-  create_bundle.set_output_type(Target::CREATE_BUNDLE);
+  create_bundle.set_output_type(functions::kCreateBundle);
   create_bundle.bundle_data().set_code_signing_script(
       SourceFile("//build/codesign.py"));
   create_bundle.bundle_data().code_signing_sources().push_back(

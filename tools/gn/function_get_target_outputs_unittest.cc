@@ -60,7 +60,7 @@ class GetTargetOutputsTest : public testing::Test {
 TEST_F(GetTargetOutputsTest, Copy) {
   auto action =
       std::make_unique<Target>(setup_.settings(), GetLabel("//foo/", "bar"));
-  action->set_output_type(Target::COPY_FILES);
+  action->set_output_type(functions::kCopy);
   action->sources().push_back(SourceFile("//file.txt"));
   action->action_values().outputs() =
       SubstitutionList::MakeForTest("//out/Debug/{{source_file_part}}.one");
@@ -76,7 +76,7 @@ TEST_F(GetTargetOutputsTest, Copy) {
 TEST_F(GetTargetOutputsTest, Action) {
   auto action =
       std::make_unique<Target>(setup_.settings(), GetLabel("//foo/", "bar"));
-  action->set_output_type(Target::ACTION);
+  action->set_output_type(functions::kAction);
   action->action_values().outputs() =
       SubstitutionList::MakeForTest("//output1.txt", "//output2.txt");
 
@@ -91,7 +91,7 @@ TEST_F(GetTargetOutputsTest, Action) {
 TEST_F(GetTargetOutputsTest, ActionForeach) {
   auto action =
       std::make_unique<Target>(setup_.settings(), GetLabel("//foo/", "bar"));
-  action->set_output_type(Target::ACTION_FOREACH);
+  action->set_output_type(functions::kActionForEach);
   action->sources().push_back(SourceFile("//file.txt"));
   action->action_values().outputs() =
       SubstitutionList::MakeForTest("//out/Debug/{{source_file_part}}.one",

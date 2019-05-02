@@ -224,7 +224,7 @@ TestParseInput::~TestParseInput() = default;
 
 TestTarget::TestTarget(const TestWithScope& setup,
                        const std::string& label_string,
-                       Target::OutputType type)
+                       const char* type)
     : Target(setup.settings(), setup.ParseLabel(label_string)) {
   visibility().SetPublic();
   set_output_type(type);

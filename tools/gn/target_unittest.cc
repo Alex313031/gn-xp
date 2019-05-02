@@ -46,7 +46,7 @@ TEST_F(TargetTest, LibInheritance) {
   const SourceDir libdir("/foo_dir/");
 
   // Leaf target with ldflags set.
-  TestTarget z(setup, "//foo:z", Target::STATIC_LIBRARY);
+  TestTarget z(setup, "//foo:z", functions::kStaticLibrary);
   z.config_values().libs().push_back(lib);
   z.config_values().lib_dirs().push_back(libdir);
   ASSERT_TRUE(z.OnResolved(&err));
@@ -61,7 +61,7 @@ TEST_F(TargetTest, LibInheritance) {
   // and its own. Its own flag should be before the inherited one.
   const LibFile second_lib("bar");
   const SourceDir second_libdir("/bar_dir/");
-  TestTarget shared(setup, "//foo:shared", Target::SHARED_LIBRARY);
+  TestTarget shared(setup, "//foo:shared", functions::kSharedLibrary);
   shared.config_values().libs().push_back(second_lib);
   shared.config_values().lib_dirs().push_back(second_libdir);
   shared.private_deps().push_back(LabelTargetPair(&z));
@@ -75,7 +75,7 @@ TEST_F(TargetTest, LibInheritance) {
   EXPECT_EQ(libdir, shared.all_lib_dirs()[1]);
 
   // Executable target shouldn't get either by depending on shared.
-  TestTarget exec(setup, "//foo:exec", Target::EXECUTABLE);
+  TestTarget exec(setup, "//foo:exec", functions::kExecutable);
   exec.private_deps().push_back(LabelTargetPair(&shared));
   ASSERT_TRUE(exec.OnResolved(&err));
   EXPECT_EQ(0u, exec.all_libs().size());
@@ -88,9 +88,9 @@ TEST_F(TargetTest, DependentConfigs) {
   Err err;
 
   // Set up a dependency chain of a -> b -> c
-  TestTarget a(setup, "//foo:a", Target::EXECUTABLE);
-  TestTarget b(setup, "//foo:b", Target::STATIC_LIBRARY);
-  TestTarget c(setup, "//foo:c", Target::STATIC_LIBRARY);
+  TestTarget a(setup, "//foo:a", functions::kExecutable);
+  TestTarget b(setup, "//foo:b", functions::kStaticLibrary);
+  TestTarget c(setup, "//foo:c", functions::kStaticLibrary);
   a.private_deps().push_back(LabelTargetPair(&b));
   b.private_deps().push_back(LabelTargetPair(&c));
 
@@ -126,8 +126,8 @@ TEST_F(TargetTest, DependentConfigs) {
   EXPECT_EQ(&all, a.all_dependent_configs()[0].ptr);
 
   // Making an an alternate A and B with B forwarding the direct dependents.
-  TestTarget a_fwd(setup, "//foo:a_fwd", Target::EXECUTABLE);
-  TestTarget b_fwd(setup, "//foo:b_fwd", Target::STATIC_LIBRARY);
+  TestTarget a_fwd(setup, "//foo:a_fwd", functions::kExecutable);
+  TestTarget b_fwd(setup, "//foo:b_fwd", functions::kStaticLibrary);
   a_fwd.private_deps().push_back(LabelTargetPair(&b_fwd));
   b_fwd.private_deps().push_back(LabelTargetPair(&c));
 
@@ -156,10 +156,10 @@ TEST_F(TargetTest, NoDependentConfigsBetweenToolchains) {
   Target a(setup.settings(),
            Label(SourceDir("//foo/"), "a", other_toolchain.label().dir(),
                  other_toolchain.label().name()));
-  a.set_output_type(Target::EXECUTABLE);
+  a.set_output_type(functions::kExecutable);
   EXPECT_TRUE(a.SetToolchain(&other_toolchain, &err));
-  TestTarget b(setup, "//foo:b", Target::EXECUTABLE);
-  TestTarget c(setup, "//foo:c", Target::SOURCE_SET);
+  TestTarget b(setup, "//foo:b", functions::kExecutable);
+  TestTarget c(setup, "//foo:c", functions::kSourceSet);
   a.private_deps().push_back(LabelTargetPair(&b));
   b.private_deps().push_back(LabelTargetPair(&c));
 
@@ -210,12 +210,12 @@ TEST_F(TargetTest, DependentConfigsBetweenToolchainsWhenSet) {
 
   // Set up a dependency chain of |a| -> |b| where |b| has a different
   // toolchain (with propagate_configs set).
-  TestTarget a(setup, "//foo:a", Target::EXECUTABLE);
+  TestTarget a(setup, "//foo:a", functions::kExecutable);
   Target b(setup.settings(),
            Label(SourceDir("//foo/"), "b", other_toolchain.label().dir(),
                  other_toolchain.label().name()));
   b.visibility().SetPublic();
-  b.set_output_type(Target::SHARED_LIBRARY);
+  b.set_output_type(functions::kSharedLibrary);
   EXPECT_TRUE(b.SetToolchain(&other_toolchain, &err));
   a.private_deps().push_back(LabelTargetPair(&b));
 
@@ -246,10 +246,10 @@ TEST_F(TargetTest, InheritLibs) {
 
   // Create a dependency chain:
   //   A (executable) -> B (shared lib) -> C (static lib) -> D (source set)
-  TestTarget a(setup, "//foo:a", Target::EXECUTABLE);
-  TestTarget b(setup, "//foo:b", Target::SHARED_LIBRARY);
-  TestTarget c(setup, "//foo:c", Target::STATIC_LIBRARY);
-  TestTarget d(setup, "//foo:d", Target::SOURCE_SET);
+  TestTarget a(setup, "//foo:a", functions::kExecutable);
+  TestTarget b(setup, "//foo:b", functions::kSharedLibrary);
+  TestTarget c(setup, "//foo:c", functions::kStaticLibrary);
+  TestTarget d(setup, "//foo:d", functions::kSourceSet);
   a.private_deps().push_back(LabelTargetPair(&b));
   b.private_deps().push_back(LabelTargetPair(&c));
   c.private_deps().push_back(LabelTargetPair(&d));
@@ -283,13 +283,13 @@ TEST_F(TargetTest, InheritCompleteStaticLib) {
 
   // Create a dependency chain:
   //   A (executable) -> B (complete static lib) -> C (source set)
-  TestTarget a(setup, "//foo:a", Target::EXECUTABLE);
-  TestTarget b(setup, "//foo:b", Target::STATIC_LIBRARY);
+  TestTarget a(setup, "//foo:a", functions::kExecutable);
+  TestTarget b(setup, "//foo:b", functions::kStaticLibrary);
   b.set_complete_static_lib(true);
 
   const LibFile lib("foo");
   const SourceDir lib_dir("/foo_dir/");
-  TestTarget c(setup, "//foo:c", Target::SOURCE_SET);
+  TestTarget c(setup, "//foo:c", functions::kSourceSet);
   c.config_values().libs().push_back(lib);
   c.config_values().lib_dirs().push_back(lib_dir);
 
@@ -324,10 +324,10 @@ TEST_F(TargetTest, InheritCompleteStaticLibStaticLibDeps) {
 
   // Create a dependency chain:
   //   A (executable) -> B (complete static lib) -> C (static lib)
-  TestTarget a(setup, "//foo:a", Target::EXECUTABLE);
-  TestTarget b(setup, "//foo:b", Target::STATIC_LIBRARY);
+  TestTarget a(setup, "//foo:a", functions::kExecutable);
+  TestTarget b(setup, "//foo:b", functions::kStaticLibrary);
   b.set_complete_static_lib(true);
-  TestTarget c(setup, "//foo:c", Target::STATIC_LIBRARY);
+  TestTarget c(setup, "//foo:c", functions::kStaticLibrary);
   a.public_deps().push_back(LabelTargetPair(&b));
   b.public_deps().push_back(LabelTargetPair(&c));
 
@@ -353,10 +353,10 @@ TEST_F(TargetTest, InheritCompleteStaticLibInheritedCompleteStaticLibDeps) {
 
   // Create a dependency chain:
   //   A (executable) -> B (complete static lib) -> C (complete static lib)
-  TestTarget a(setup, "//foo:a", Target::EXECUTABLE);
-  TestTarget b(setup, "//foo:b", Target::STATIC_LIBRARY);
+  TestTarget a(setup, "//foo:a", functions::kExecutable);
+  TestTarget b(setup, "//foo:b", functions::kStaticLibrary);
   b.set_complete_static_lib(true);
-  TestTarget c(setup, "//foo:c", Target::STATIC_LIBRARY);
+  TestTarget c(setup, "//foo:c", functions::kStaticLibrary);
   c.set_complete_static_lib(true);
 
   a.private_deps().push_back(LabelTargetPair(&b));
@@ -385,9 +385,9 @@ TEST_F(TargetTest, NoActionDepPropgation) {
   // Create a dependency chain:
   //   A (exe) -> B (action) -> C (source_set)
   {
-    TestTarget a(setup, "//foo:a", Target::EXECUTABLE);
-    TestTarget b(setup, "//foo:b", Target::ACTION);
-    TestTarget c(setup, "//foo:c", Target::SOURCE_SET);
+    TestTarget a(setup, "//foo:a", functions::kExecutable);
+    TestTarget b(setup, "//foo:b", functions::kAction);
+    TestTarget c(setup, "//foo:c", functions::kSourceSet);
 
     a.private_deps().push_back(LabelTargetPair(&b));
     b.private_deps().push_back(LabelTargetPair(&c));
@@ -409,31 +409,31 @@ TEST_F(TargetTest, GetComputedOutputName) {
 
   // Basic target with no prefix (executable type tool in the TestWithScope has
   // no prefix) or output name.
-  TestTarget basic(setup, "//foo:bar", Target::EXECUTABLE);
+  TestTarget basic(setup, "//foo:bar", functions::kExecutable);
   ASSERT_TRUE(basic.OnResolved(&err));
   EXPECT_EQ("bar", basic.GetComputedOutputName());
 
   // Target with no prefix but an output name.
-  TestTarget with_name(setup, "//foo:bar", Target::EXECUTABLE);
+  TestTarget with_name(setup, "//foo:bar", functions::kExecutable);
   with_name.set_output_name("myoutput");
   ASSERT_TRUE(with_name.OnResolved(&err));
   EXPECT_EQ("myoutput", with_name.GetComputedOutputName());
 
   // Target with a "lib" prefix (the static library tool in the TestWithScope
   // should specify a "lib" output prefix).
-  TestTarget with_prefix(setup, "//foo:bar", Target::STATIC_LIBRARY);
+  TestTarget with_prefix(setup, "//foo:bar", functions::kStaticLibrary);
   ASSERT_TRUE(with_prefix.OnResolved(&err));
   EXPECT_EQ("libbar", with_prefix.GetComputedOutputName());
 
   // Target with a "lib" prefix that already has it applied. The prefix should
   // not duplicate something already in the target name.
-  TestTarget dup_prefix(setup, "//foo:bar", Target::STATIC_LIBRARY);
+  TestTarget dup_prefix(setup, "//foo:bar", functions::kStaticLibrary);
   dup_prefix.set_output_name("libbar");
   ASSERT_TRUE(dup_prefix.OnResolved(&err));
   EXPECT_EQ("libbar", dup_prefix.GetComputedOutputName());
 
   // Target with an output prefix override should not have a prefix.
-  TestTarget override_prefix(setup, "//foo:bar", Target::SHARED_LIBRARY);
+  TestTarget override_prefix(setup, "//foo:bar", functions::kSharedLibrary);
   override_prefix.set_output_prefix_override(true);
   ASSERT_TRUE(dup_prefix.OnResolved(&err));
   EXPECT_EQ("bar", override_prefix.GetComputedOutputName());
@@ -444,13 +444,13 @@ TEST_F(TargetTest, VisibilityFails) {
   TestWithScope setup;
   Err err;
 
-  TestTarget b(setup, "//private:b", Target::STATIC_LIBRARY);
+  TestTarget b(setup, "//private:b", functions::kStaticLibrary);
   b.visibility().SetPrivate(b.label().dir());
   ASSERT_TRUE(b.OnResolved(&err));
 
   // Make a target depending on "b". The dependency must have an origin to mark
   // it as user-set so we check visibility. This check should fail.
-  TestTarget a(setup, "//app:a", Target::EXECUTABLE);
+  TestTarget a(setup, "//app:a", functions::kExecutable);
   a.private_deps().push_back(LabelTargetPair(&b));
   IdentifierNode origin;  // Dummy origin.
   a.private_deps()[0].origin = &origin;
@@ -462,12 +462,12 @@ TEST_F(TargetTest, VisibilityDatadeps) {
   TestWithScope setup;
   Err err;
 
-  TestTarget b(setup, "//public:b", Target::STATIC_LIBRARY);
+  TestTarget b(setup, "//public:b", functions::kStaticLibrary);
   ASSERT_TRUE(b.OnResolved(&err));
 
   // Make a target depending on "b". The dependency must have an origin to mark
   // it as user-set so we check visibility. This check should fail.
-  TestTarget a(setup, "//app:a", Target::EXECUTABLE);
+  TestTarget a(setup, "//app:a", functions::kExecutable);
   a.data_deps().push_back(LabelTargetPair(&b));
   IdentifierNode origin;  // Dummy origin.
   a.data_deps()[0].origin = &origin;
@@ -484,18 +484,18 @@ TEST_F(TargetTest, VisibilityGroup) {
 
   // B has private visibility. This lets the group see it since the group is in
   // the same directory.
-  TestTarget b(setup, "//private:b", Target::STATIC_LIBRARY);
+  TestTarget b(setup, "//private:b", functions::kStaticLibrary);
   b.visibility().SetPrivate(b.label().dir());
   ASSERT_TRUE(b.OnResolved(&err));
 
   // The group has public visibility and depends on b.
-  TestTarget g(setup, "//public:g", Target::GROUP);
+  TestTarget g(setup, "//public:g", functions::kGroup);
   g.private_deps().push_back(LabelTargetPair(&b));
   g.private_deps()[0].origin = &origin;
   ASSERT_TRUE(b.OnResolved(&err));
 
   // Make a target depending on "g". This should succeed.
-  TestTarget a(setup, "//app:a", Target::EXECUTABLE);
+  TestTarget a(setup, "//app:a", functions::kExecutable);
   a.private_deps().push_back(LabelTargetPair(&g));
   a.private_deps()[0].origin = &origin;
   ASSERT_TRUE(a.OnResolved(&err));
@@ -509,18 +509,18 @@ TEST_F(TargetTest, Testonly) {
   Err err;
 
   // "testlib" is a test-only library.
-  TestTarget testlib(setup, "//test:testlib", Target::STATIC_LIBRARY);
+  TestTarget testlib(setup, "//test:testlib", functions::kStaticLibrary);
   testlib.set_testonly(true);
   ASSERT_TRUE(testlib.OnResolved(&err));
 
   // "test" is a test-only executable depending on testlib, this is OK.
-  TestTarget test(setup, "//test:test", Target::EXECUTABLE);
+  TestTarget test(setup, "//test:test", functions::kExecutable);
   test.set_testonly(true);
   test.private_deps().push_back(LabelTargetPair(&testlib));
   ASSERT_TRUE(test.OnResolved(&err));
 
   // "product" is a non-test depending on testlib. This should fail.
-  TestTarget product(setup, "//app:product", Target::EXECUTABLE);
+  TestTarget product(setup, "//app:product", functions::kExecutable);
   product.set_testonly(false);
   product.private_deps().push_back(LabelTargetPair(&testlib));
   ASSERT_FALSE(product.OnResolved(&err));
@@ -537,18 +537,18 @@ TEST_F(TargetTest, PublicConfigs) {
   ASSERT_TRUE(pub_config.OnResolved(&err));
 
   // This is the destination target that has a public config.
-  TestTarget dest(setup, "//a:a", Target::SOURCE_SET);
+  TestTarget dest(setup, "//a:a", functions::kSourceSet);
   dest.public_configs().push_back(LabelConfigPair(&pub_config));
   ASSERT_TRUE(dest.OnResolved(&err));
 
   // This target has a public dependency on dest.
-  TestTarget pub(setup, "//a:pub", Target::SOURCE_SET);
+  TestTarget pub(setup, "//a:pub", functions::kSourceSet);
   pub.public_deps().push_back(LabelTargetPair(&dest));
   ASSERT_TRUE(pub.OnResolved(&err));
 
   // Depending on the target with the public dependency should forward dest's
   // to the current target.
-  TestTarget dep_on_pub(setup, "//a:dop", Target::SOURCE_SET);
+  TestTarget dep_on_pub(setup, "//a:dop", functions::kSourceSet);
   dep_on_pub.private_deps().push_back(LabelTargetPair(&pub));
   ASSERT_TRUE(dep_on_pub.OnResolved(&err));
   ASSERT_EQ(1u, dep_on_pub.configs().size());
@@ -560,7 +560,7 @@ TEST_F(TargetTest, PublicConfigs) {
   ASSERT_EQ(lib_name, dep_on_pub.all_libs()[0]);
 
   // This target has a private dependency on dest for forwards configs.
-  TestTarget forward(setup, "//a:f", Target::SOURCE_SET);
+  TestTarget forward(setup, "//a:f", functions::kSourceSet);
   forward.private_deps().push_back(LabelTargetPair(&dest));
   ASSERT_TRUE(forward.OnResolved(&err));
 }
@@ -571,7 +571,7 @@ TEST_F(TargetTest, ConfigOrdering) {
   Err err;
 
   // Make Dep1. It has all_dependent_configs and public_configs.
-  TestTarget dep1(setup, "//:dep1", Target::SOURCE_SET);
+  TestTarget dep1(setup, "//:dep1", functions::kSourceSet);
   Label dep1_all_config_label(SourceDir("//"), "dep1_all_config");
   Config dep1_all_config(setup.settings(), dep1_all_config_label);
   ASSERT_TRUE(dep1_all_config.OnResolved(&err));
@@ -584,7 +584,7 @@ TEST_F(TargetTest, ConfigOrdering) {
   ASSERT_TRUE(dep1.OnResolved(&err));
 
   // Make Dep2 with the same structure.
-  TestTarget dep2(setup, "//:dep2", Target::SOURCE_SET);
+  TestTarget dep2(setup, "//:dep2", functions::kSourceSet);
   Label dep2_all_config_label(SourceDir("//"), "dep2_all_config");
   Config dep2_all_config(setup.settings(), dep2_all_config_label);
   ASSERT_TRUE(dep2_all_config.OnResolved(&err));
@@ -597,7 +597,7 @@ TEST_F(TargetTest, ConfigOrdering) {
   ASSERT_TRUE(dep2.OnResolved(&err));
 
   // This target depends on both previous targets.
-  TestTarget target(setup, "//:foo", Target::SOURCE_SET);
+  TestTarget target(setup, "//:foo", functions::kSourceSet);
   target.private_deps().push_back(LabelTargetPair(&dep1));
   target.private_deps().push_back(LabelTargetPair(&dep2));
 
@@ -660,7 +660,7 @@ TEST_F(TargetTest, LinkAndDepOutputs) {
   toolchain.SetTool(std::move(solink));
 
   Target target(setup.settings(), Label(SourceDir("//a/"), "a"));
-  target.set_output_type(Target::SHARED_LIBRARY);
+  target.set_output_type(functions::kSharedLibrary);
   target.SetToolchain(&toolchain);
   ASSERT_TRUE(target.OnResolved(&err));
 
@@ -704,7 +704,7 @@ TEST_F(TargetTest, RuntimeOuputs) {
   toolchain.SetTool(std::move(solink));
 
   Target target(setup.settings(), Label(SourceDir("//a/"), "a"));
-  target.set_output_type(Target::SHARED_LIBRARY);
+  target.set_output_type(functions::kSharedLibrary);
   target.SetToolchain(&toolchain);
   ASSERT_TRUE(target.OnResolved(&err));
 
@@ -723,15 +723,15 @@ TEST_F(TargetTest, SharedInheritance) {
   Err err;
 
   // Create two leaf shared libraries.
-  TestTarget pub(setup, "//foo:pub", Target::SHARED_LIBRARY);
+  TestTarget pub(setup, "//foo:pub", functions::kSharedLibrary);
   ASSERT_TRUE(pub.OnResolved(&err));
 
-  TestTarget priv(setup, "//foo:priv", Target::SHARED_LIBRARY);
+  TestTarget priv(setup, "//foo:priv", functions::kSharedLibrary);
   ASSERT_TRUE(priv.OnResolved(&err));
 
   // Intermediate shared library with the leaf shared libraries as
   // dependencies, one public, one private.
-  TestTarget inter(setup, "//foo:inter", Target::SHARED_LIBRARY);
+  TestTarget inter(setup, "//foo:inter", functions::kSharedLibrary);
   inter.public_deps().push_back(LabelTargetPair(&pub));
   inter.private_deps().push_back(LabelTargetPair(&priv));
   ASSERT_TRUE(inter.OnResolved(&err));
@@ -745,7 +745,7 @@ TEST_F(TargetTest, SharedInheritance) {
   EXPECT_EQ(&priv, inter_inherited[1]);
 
   // Make a toplevel executable target depending on the intermediate one.
-  TestTarget exe(setup, "//foo:exe", Target::SHARED_LIBRARY);
+  TestTarget exe(setup, "//foo:exe", functions::kSharedLibrary);
   exe.private_deps().push_back(LabelTargetPair(&inter));
   ASSERT_TRUE(exe.OnResolved(&err));
 
@@ -766,7 +766,7 @@ TEST_F(TargetTest, GeneratedInputs) {
 
   // This target has a generated input and no dependency makes it.
   TestTarget non_existent_generator(setup, "//foo:non_existent_generator",
-                                    Target::EXECUTABLE);
+                                    functions::kExecutable);
   non_existent_generator.sources().push_back(generated_file);
   EXPECT_TRUE(non_existent_generator.OnResolved(&err)) << err.message();
   AssertSchedulerHasOneUnknownFileMatching(&non_existent_generator,
@@ -774,7 +774,7 @@ TEST_F(TargetTest, GeneratedInputs) {
   scheduler().ClearUnknownGeneratedInputsAndWrittenFiles();
 
   // Make a target that generates the file.
-  TestTarget generator(setup, "//foo:generator", Target::ACTION);
+  TestTarget generator(setup, "//foo:generator", functions::kAction);
   generator.action_values().outputs() =
       SubstitutionList::MakeForTest(generated_file.value().c_str());
   err = Err();
@@ -783,7 +783,7 @@ TEST_F(TargetTest, GeneratedInputs) {
   // A target that depends on the generator that uses the file as a source
   // should be OK. This uses a private dep (will be used later).
   TestTarget existent_generator(setup, "//foo:existent_generator",
-                                Target::SHARED_LIBRARY);
+                                functions::kSharedLibrary);
   existent_generator.sources().push_back(generated_file);
   existent_generator.private_deps().push_back(LabelTargetPair(&generator));
   EXPECT_TRUE(existent_generator.OnResolved(&err)) << err.message();
@@ -794,7 +794,7 @@ TEST_F(TargetTest, GeneratedInputs) {
   // This is:
   //    indirect_private --> existent_generator --[private]--> generator
   TestTarget indirect_private(setup, "//foo:indirect_private",
-                              Target::EXECUTABLE);
+                              functions::kExecutable);
   indirect_private.sources().push_back(generated_file);
   indirect_private.public_deps().push_back(
       LabelTargetPair(&existent_generator));
@@ -804,11 +804,11 @@ TEST_F(TargetTest, GeneratedInputs) {
 
   // Now make a chain like the above but with all public deps, it should be OK.
   TestTarget existent_public(setup, "//foo:existent_public",
-                             Target::SHARED_LIBRARY);
+                             functions::kSharedLibrary);
   existent_public.public_deps().push_back(LabelTargetPair(&generator));
   EXPECT_TRUE(existent_public.OnResolved(&err)) << err.message();
   TestTarget indirect_public(setup, "//foo:indirect_public",
-                             Target::EXECUTABLE);
+                             functions::kExecutable);
   indirect_public.sources().push_back(generated_file);
   indirect_public.public_deps().push_back(LabelTargetPair(&existent_public));
   EXPECT_TRUE(indirect_public.OnResolved(&err)) << err.message();
@@ -824,7 +824,7 @@ TEST_F(TargetTest, WriteFileGeneratedInputs) {
 
   // This target has a generated input and no dependency makes it.
   TestTarget non_existent_generator(setup, "//foo:non_existent_generator",
-                                    Target::EXECUTABLE);
+                                    functions::kExecutable);
   non_existent_generator.sources().push_back(generated_file);
   EXPECT_TRUE(non_existent_generator.OnResolved(&err));
   AssertSchedulerHasOneUnknownFileMatching(&non_existent_generator,
@@ -833,7 +833,7 @@ TEST_F(TargetTest, WriteFileGeneratedInputs) {
 
   // This target has a generated file and we've decared we write it.
   TestTarget existent_generator(setup, "//foo:existent_generator",
-                                Target::EXECUTABLE);
+                                functions::kExecutable);
   existent_generator.sources().push_back(generated_file);
   EXPECT_TRUE(existent_generator.OnResolved(&err));
   scheduler().AddWrittenFile(generated_file);
@@ -849,22 +849,22 @@ TEST_F(TargetTest, WriteRuntimeDepsGeneratedInputs) {
   SourceFile source_file("//out/Debug/generated.runtime_deps");
   OutputFile output_file(setup.build_settings(), source_file);
 
-  TestTarget generator(setup, "//foo:generator", Target::EXECUTABLE);
+  TestTarget generator(setup, "//foo:generator", functions::kExecutable);
   generator.set_write_runtime_deps_output(output_file);
   g_scheduler->AddWriteRuntimeDepsTarget(&generator);
 
-  TestTarget middle_data_dep(setup, "//foo:middle", Target::EXECUTABLE);
+  TestTarget middle_data_dep(setup, "//foo:middle", functions::kExecutable);
   middle_data_dep.data_deps().push_back(LabelTargetPair(&generator));
 
   // This target has a generated input and no dependency makes it.
-  TestTarget dep_missing(setup, "//foo:no_dep", Target::EXECUTABLE);
+  TestTarget dep_missing(setup, "//foo:no_dep", functions::kExecutable);
   dep_missing.sources().push_back(source_file);
   EXPECT_TRUE(dep_missing.OnResolved(&err));
   AssertSchedulerHasOneUnknownFileMatching(&dep_missing, source_file);
   scheduler().ClearUnknownGeneratedInputsAndWrittenFiles();
 
   // This target has a generated file and we've directly dependended on it.
-  TestTarget dep_present(setup, "//foo:with_dep", Target::EXECUTABLE);
+  TestTarget dep_present(setup, "//foo:with_dep", functions::kExecutable);
   dep_present.sources().push_back(source_file);
   dep_present.private_deps().push_back(LabelTargetPair(&generator));
   EXPECT_TRUE(dep_present.OnResolved(&err));
@@ -872,7 +872,7 @@ TEST_F(TargetTest, WriteRuntimeDepsGeneratedInputs) {
 
   // This target has a generated file and we've indirectly dependended on it
   // via data_deps.
-  TestTarget dep_indirect(setup, "//foo:with_dep", Target::EXECUTABLE);
+  TestTarget dep_indirect(setup, "//foo:with_dep", functions::kExecutable);
   dep_indirect.sources().push_back(source_file);
   dep_indirect.data_deps().push_back(LabelTargetPair(&middle_data_dep));
   EXPECT_TRUE(dep_indirect.OnResolved(&err));
@@ -881,7 +881,7 @@ TEST_F(TargetTest, WriteRuntimeDepsGeneratedInputs) {
 
   // This target has a generated file and we've directly dependended on it
   // via data_deps.
-  TestTarget data_dep_present(setup, "//foo:with_dep", Target::EXECUTABLE);
+  TestTarget data_dep_present(setup, "//foo:with_dep", functions::kExecutable);
   data_dep_present.sources().push_back(source_file);
   data_dep_present.data_deps().push_back(LabelTargetPair(&generator));
   EXPECT_TRUE(data_dep_present.OnResolved(&err));
@@ -898,14 +898,14 @@ TEST_F(TargetTest, ObjectGeneratedInputs) {
 
   // This target compiles the source.
   SourceFile source_file("//source.cc");
-  TestTarget source_generator(setup, "//:source_target", Target::SOURCE_SET);
+  TestTarget source_generator(setup, "//:source_target", functions::kSourceSet);
   source_generator.sources().push_back(source_file);
   EXPECT_TRUE(source_generator.OnResolved(&err));
 
   // This is the object file that the test toolchain generates for the source.
   SourceFile object_file("//out/Debug/obj/source_target.source.o");
 
-  TestTarget final_target(setup, "//:final", Target::ACTION);
+  TestTarget final_target(setup, "//:final", functions::kAction);
   final_target.config_values().inputs().push_back(object_file);
   EXPECT_TRUE(final_target.OnResolved(&err));
 
@@ -974,11 +974,11 @@ TEST_F(TargetTest, AssertNoDeps) {
   Err err;
 
   // A target.
-  TestTarget a(setup, "//a", Target::SHARED_LIBRARY);
+  TestTarget a(setup, "//a", functions::kSharedLibrary);
   ASSERT_TRUE(a.OnResolved(&err));
 
   // B depends on A and has an assert_no_deps for a random dir.
-  TestTarget b(setup, "//b", Target::SHARED_LIBRARY);
+  TestTarget b(setup, "//b", functions::kSharedLibrary);
   b.private_deps().push_back(LabelTargetPair(&a));
   b.assert_no_deps().push_back(LabelPattern(LabelPattern::RECURSIVE_DIRECTORY,
                                             SourceDir("//disallowed/"),
@@ -989,7 +989,7 @@ TEST_F(TargetTest, AssertNoDeps) {
                           std::string(), Label());
 
   // C depends on B and disallows depending on A. This should fail.
-  TestTarget c(setup, "//c", Target::EXECUTABLE);
+  TestTarget c(setup, "//c", functions::kExecutable);
   c.private_deps().push_back(LabelTargetPair(&b));
   c.assert_no_deps().push_back(disallow_a);
   ASSERT_FALSE(c.OnResolved(&err));
@@ -1006,20 +1006,20 @@ TEST_F(TargetTest, AssertNoDeps) {
   err = Err();
 
   // Add an intermediate executable with: exe -> b -> a
-  TestTarget exe(setup, "//exe", Target::EXECUTABLE);
+  TestTarget exe(setup, "//exe", functions::kExecutable);
   exe.private_deps().push_back(LabelTargetPair(&b));
   ASSERT_TRUE(exe.OnResolved(&err));
 
   // D depends on the executable and disallows depending on A. Since there is
   // an intermediate executable, this should be OK.
-  TestTarget d(setup, "//d", Target::EXECUTABLE);
+  TestTarget d(setup, "//d", functions::kExecutable);
   d.private_deps().push_back(LabelTargetPair(&exe));
   d.assert_no_deps().push_back(disallow_a);
   ASSERT_TRUE(d.OnResolved(&err));
 
   // A2 disallows depending on anything in its own directory, but the
   // assertions should not match the target itself so this should be OK.
-  TestTarget a2(setup, "//a:a2", Target::EXECUTABLE);
+  TestTarget a2(setup, "//a:a2", functions::kExecutable);
   a2.assert_no_deps().push_back(disallow_a);
   ASSERT_TRUE(a2.OnResolved(&err));
 }
@@ -1033,12 +1033,12 @@ TEST_F(TargetTest, PullRecursiveBundleData) {
   //                  \-> C (create_bundle) -> D (bundle_data)
   //                  \-> E (group) -> F (bundle_data)
   //                               \-> B (bundle_data)
-  TestTarget a(setup, "//foo:a", Target::CREATE_BUNDLE);
-  TestTarget b(setup, "//foo:b", Target::BUNDLE_DATA);
-  TestTarget c(setup, "//foo:c", Target::CREATE_BUNDLE);
-  TestTarget d(setup, "//foo:d", Target::BUNDLE_DATA);
-  TestTarget e(setup, "//foo:e", Target::GROUP);
-  TestTarget f(setup, "//foo:f", Target::BUNDLE_DATA);
+  TestTarget a(setup, "//foo:a", functions::kCreateBundle);
+  TestTarget b(setup, "//foo:b", functions::kBundleData);
+  TestTarget c(setup, "//foo:c", functions::kCreateBundle);
+  TestTarget d(setup, "//foo:d", functions::kBundleData);
+  TestTarget e(setup, "//foo:e", functions::kGroup);
+  TestTarget f(setup, "//foo:f", functions::kBundleData);
   a.public_deps().push_back(LabelTargetPair(&b));
   a.public_deps().push_back(LabelTargetPair(&c));
   a.public_deps().push_back(LabelTargetPair(&e));
@@ -1104,7 +1104,7 @@ TEST_F(TargetTest, PullRecursiveBundleData) {
 TEST(TargetTest, CollectMetadataNoRecurse) {
   TestWithScope setup;
 
-  TestTarget one(setup, "//foo:one", Target::SOURCE_SET);
+  TestTarget one(setup, "//foo:one", functions::kSourceSet);
   Value a_expected(nullptr, Value::LIST);
   a_expected.list_value().push_back(Value(nullptr, "foo"));
   one.metadata().contents().insert(
@@ -1139,7 +1139,7 @@ TEST(TargetTest, CollectMetadataNoRecurse) {
 TEST(TargetTest, CollectMetadataWithRecurse) {
   TestWithScope setup;
 
-  TestTarget one(setup, "//foo:one", Target::SOURCE_SET);
+  TestTarget one(setup, "//foo:one", functions::kSourceSet);
   Value a_expected(nullptr, Value::LIST);
   a_expected.list_value().push_back(Value(nullptr, "foo"));
   one.metadata().contents().insert(
@@ -1150,7 +1150,7 @@ TEST(TargetTest, CollectMetadataWithRecurse) {
   one.metadata().contents().insert(
       std::pair<base::StringPiece, Value>("b", b_expected));
 
-  TestTarget two(setup, "//foo:two", Target::SOURCE_SET);
+  TestTarget two(setup, "//foo:two", functions::kSourceSet);
   Value a_2_expected(nullptr, Value::LIST);
   a_2_expected.list_value().push_back(Value(nullptr, "bar"));
   two.metadata().contents().insert(
@@ -1181,7 +1181,7 @@ TEST(TargetTest, CollectMetadataWithRecurse) {
 TEST(TargetTest, CollectMetadataWithBarrier) {
   TestWithScope setup;
 
-  TestTarget one(setup, "//foo:one", Target::SOURCE_SET);
+  TestTarget one(setup, "//foo:one", functions::kSourceSet);
   Value a_expected(nullptr, Value::LIST);
   a_expected.list_value().push_back(Value(nullptr, "foo"));
   one.metadata().contents().insert(
@@ -1193,13 +1193,13 @@ TEST(TargetTest, CollectMetadataWithBarrier) {
   one.metadata().contents().insert(
       std::pair<base::StringPiece, Value>("walk", walk_expected));
 
-  TestTarget two(setup, "//foo:two", Target::SOURCE_SET);
+  TestTarget two(setup, "//foo:two", functions::kSourceSet);
   Value a_2_expected(nullptr, Value::LIST);
   a_2_expected.list_value().push_back(Value(nullptr, "bar"));
   two.metadata().contents().insert(
       std::pair<base::StringPiece, Value>("a", a_2_expected));
 
-  TestTarget three(setup, "//foo:three", Target::SOURCE_SET);
+  TestTarget three(setup, "//foo:three", functions::kSourceSet);
   Value a_3_expected(nullptr, Value::LIST);
   a_3_expected.list_value().push_back(Value(nullptr, "baz"));
   three.metadata().contents().insert(
@@ -1230,7 +1230,7 @@ TEST(TargetTest, CollectMetadataWithBarrier) {
 TEST(TargetTest, CollectMetadataWithError) {
   TestWithScope setup;
 
-  TestTarget one(setup, "//foo:one", Target::SOURCE_SET);
+  TestTarget one(setup, "//foo:one", functions::kSourceSet);
   Value a_expected(nullptr, Value::LIST);
   a_expected.list_value().push_back(Value(nullptr, "foo"));
   one.metadata().contents().insert(
@@ -1268,24 +1268,24 @@ TEST_F(TargetTest, WriteMetadataCollection) {
   SourceFile source_file("//out/Debug/metadata.json");
   OutputFile output_file(setup.build_settings(), source_file);
 
-  TestTarget generator(setup, "//foo:write", Target::GENERATED_FILE);
+  TestTarget generator(setup, "//foo:write", functions::kGeneratedFile);
   generator.action_values().outputs() =
       SubstitutionList::MakeForTest("//out/Debug/metadata.json");
   EXPECT_TRUE(generator.OnResolved(&err));
 
-  TestTarget middle_data_dep(setup, "//foo:middle", Target::EXECUTABLE);
+  TestTarget middle_data_dep(setup, "//foo:middle", functions::kExecutable);
   middle_data_dep.data_deps().push_back(LabelTargetPair(&generator));
   EXPECT_TRUE(middle_data_dep.OnResolved(&err));
 
   // This target has a generated metadata input and no dependency makes it.
-  TestTarget dep_missing(setup, "//foo:no_dep", Target::EXECUTABLE);
+  TestTarget dep_missing(setup, "//foo:no_dep", functions::kExecutable);
   dep_missing.sources().push_back(source_file);
   EXPECT_TRUE(dep_missing.OnResolved(&err));
   AssertSchedulerHasOneUnknownFileMatching(&dep_missing, source_file);
   scheduler().ClearUnknownGeneratedInputsAndWrittenFiles();
 
   // This target has a generated file and we've directly dependended on it.
-  TestTarget dep_present(setup, "//foo:with_dep", Target::EXECUTABLE);
+  TestTarget dep_present(setup, "//foo:with_dep", functions::kExecutable);
   dep_present.sources().push_back(source_file);
   dep_present.private_deps().push_back(LabelTargetPair(&generator));
   EXPECT_TRUE(dep_present.OnResolved(&err));
@@ -1293,7 +1293,7 @@ TEST_F(TargetTest, WriteMetadataCollection) {
 
   // This target has a generated file and we've indirectly dependended on it
   // via data_deps.
-  TestTarget dep_indirect(setup, "//foo:indirect_dep", Target::EXECUTABLE);
+  TestTarget dep_indirect(setup, "//foo:indirect_dep", functions::kExecutable);
   dep_indirect.sources().push_back(source_file);
   dep_indirect.data_deps().push_back(LabelTargetPair(&middle_data_dep));
   EXPECT_TRUE(dep_indirect.OnResolved(&err));
@@ -1302,7 +1302,7 @@ TEST_F(TargetTest, WriteMetadataCollection) {
 
   // This target has a generated file and we've directly dependended on it
   // via data_deps.
-  TestTarget data_dep_present(setup, "//foo:with_data_dep", Target::EXECUTABLE);
+  TestTarget data_dep_present(setup, "//foo:with_data_dep", functions::kExecutable);
   data_dep_present.sources().push_back(source_file);
   data_dep_present.data_deps().push_back(LabelTargetPair(&generator));
   EXPECT_TRUE(data_dep_present.OnResolved(&err));
