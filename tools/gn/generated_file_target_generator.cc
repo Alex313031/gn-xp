@@ -15,7 +15,7 @@ GeneratedFileTargetGenerator::GeneratedFileTargetGenerator(
     Target* target,
     Scope* scope,
     const FunctionCallNode* function_call,
-    Target::OutputType type,
+    const char* type,
     Err* err)
     : TargetGenerator(target, scope, function_call, err),
       output_type_(type),

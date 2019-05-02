@@ -71,7 +71,7 @@ TEST_F(NinjaBuildWriterTest, TwoTargets) {
   Err err;
 
   Target target_foo(setup.settings(), Label(SourceDir("//foo/"), "bar"));
-  target_foo.set_output_type(Target::ACTION);
+  target_foo.set_output_type(functions::kAction);
   target_foo.action_values().set_script(SourceFile("//foo/script.py"));
   target_foo.action_values().outputs() = SubstitutionList::MakeForTest(
       "//out/Debug/out1.out", "//out/Debug/out2.out");
@@ -79,7 +79,7 @@ TEST_F(NinjaBuildWriterTest, TwoTargets) {
   ASSERT_TRUE(target_foo.OnResolved(&err));
 
   Target target_bar(setup.settings(), Label(SourceDir("//bar/"), "bar"));
-  target_bar.set_output_type(Target::ACTION);
+  target_bar.set_output_type(functions::kAction);
   target_bar.action_values().set_script(SourceFile("//bar/script.py"));
   target_bar.action_values().outputs() = SubstitutionList::MakeForTest(
       "//out/Debug/out3.out", "//out/Debug/out4.out");
@@ -108,7 +108,7 @@ TEST_F(NinjaBuildWriterTest, TwoTargets) {
   another_regular_pool.set_depth(7);
 
   Target target_baz(setup.settings(), Label(SourceDir("//baz/"), "baz"));
-  target_baz.set_output_type(Target::ACTION);
+  target_baz.set_output_type(functions::kAction);
   target_baz.action_values().set_script(SourceFile("//baz/script.py"));
   target_baz.action_values().outputs() = SubstitutionList::MakeForTest(
       "//out/Debug/out5.out", "//out/Debug/out6.out");
@@ -189,7 +189,7 @@ TEST_F(NinjaBuildWriterTest, DuplicateOutputs) {
   Err err;
 
   Target target_foo(setup.settings(), Label(SourceDir("//foo/"), "bar"));
-  target_foo.set_output_type(Target::ACTION);
+  target_foo.set_output_type(functions::kAction);
   target_foo.action_values().set_script(SourceFile("//foo/script.py"));
   target_foo.action_values().outputs() = SubstitutionList::MakeForTest(
       "//out/Debug/out1.out", "//out/Debug/out2.out");
@@ -197,7 +197,7 @@ TEST_F(NinjaBuildWriterTest, DuplicateOutputs) {
   ASSERT_TRUE(target_foo.OnResolved(&err));
 
   Target target_bar(setup.settings(), Label(SourceDir("//bar/"), "bar"));
-  target_bar.set_output_type(Target::ACTION);
+  target_bar.set_output_type(functions::kAction);
   target_bar.action_values().set_script(SourceFile("//bar/script.py"));
   target_bar.action_values().outputs() = SubstitutionList::MakeForTest(
       "//out/Debug/out3.out", "//out/Debug/out2.out");

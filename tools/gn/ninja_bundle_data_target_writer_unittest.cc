@@ -16,7 +16,7 @@ TEST(NinjaBundleDataTargetWriter, Run) {
   TestWithScope setup;
 
   Target bundle_data(setup.settings(), Label(SourceDir("//foo/"), "data"));
-  bundle_data.set_output_type(Target::BUNDLE_DATA);
+  bundle_data.set_output_type(functions::kBundleData);
   bundle_data.sources().push_back(SourceFile("//foo/input1.txt"));
   bundle_data.sources().push_back(SourceFile("//foo/input2.txt"));
   bundle_data.sources().push_back(

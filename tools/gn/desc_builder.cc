@@ -25,7 +25,7 @@
 // (not applicable or empty fields will be ommitted depending on target type)
 //
 // target_properties = {
-//   "type" : "output_type", // matching Target::GetStringForOutputType
+//   "type" : "output_type", // matching Target::output_type
 //   "toolchain" : "toolchain_name",
 //   "visibility" : [ list of visibility pattern descriptions ],
 //   "test_only" : true or false,
@@ -309,7 +309,7 @@ class TargetDescBuilder : public BaseDescBuilder {
     if (what_.empty()) {
       res->SetKey(
           "type",
-          base::Value(Target::GetStringForOutputType(target_->output_type())));
+          base::Value(target_->output_type()));
       res->SetKey(
           "toolchain",
           base::Value(
@@ -403,8 +403,8 @@ class TargetDescBuilder : public BaseDescBuilder {
     }
 
     // Action
-    if (target_->output_type() == Target::ACTION ||
-        target_->output_type() == Target::ACTION_FOREACH) {
+    if (target_->output_type() == functions::kAction ||
+        target_->output_type() == functions::kActionForEach) {
       if (what(variables::kScript))
         res->SetKey(variables::kScript,
                     base::Value(target_->action_values().script().value()));
@@ -423,9 +423,9 @@ class TargetDescBuilder : public BaseDescBuilder {
       }
     }
 
-    if (target_->output_type() != Target::SOURCE_SET &&
-        target_->output_type() != Target::GROUP &&
-        target_->output_type() != Target::BUNDLE_DATA) {
+    if (target_->output_type() != functions::kSourceSet &&
+        target_->output_type() != functions::kGroup &&
+        target_->output_type() != functions::kBundleData) {
       if (what(variables::kOutputs))
         FillInOutputs(res.get());
     }
@@ -434,7 +434,7 @@ class TargetDescBuilder : public BaseDescBuilder {
     if (what_.find("source_outputs") != what_.end())
       FillInSourceOutputs(res.get());
 
-    if (target_->output_type() == Target::CREATE_BUNDLE && what("bundle_data"))
+    if (target_->output_type() == functions::kCreateBundle && what("bundle_data"))
       FillInBundle(res.get());
 
     if (is_binary_output) {
@@ -464,7 +464,7 @@ class TargetDescBuilder : public BaseDescBuilder {
     }
 
     // GeneratedFile vars.
-    if (target_->output_type() == Target::GENERATED_FILE) {
+    if (target_->output_type() == functions::kGeneratedFile) {
       if (what(variables::kWriteOutputConversion)) {
         res->SetKey(variables::kWriteOutputConversion,
                     std::move(ToBaseValue(target_->output_conversion())));
@@ -675,14 +675,14 @@ class TargetDescBuilder : public BaseDescBuilder {
   }
 
   void FillInOutputs(base::DictionaryValue* res) {
-    if (target_->output_type() == Target::ACTION) {
+    if (target_->output_type() == functions::kAction) {
       auto list = std::make_unique<base::ListValue>();
       for (const auto& elem : target_->action_values().outputs().list())
         list->AppendString(elem.AsString());
 
       res->SetWithoutPathExpansion(variables::kOutputs, std::move(list));
-    } else if (target_->output_type() == Target::CREATE_BUNDLE ||
-               target_->output_type() == Target::GENERATED_FILE) {
+    } else if (target_->output_type() == functions::kCreateBundle ||
+               target_->output_type() == functions::kGeneratedFile) {
       Err err;
       std::vector<SourceFile> output_files;
       if (!target_->bundle_data().GetOutputsAsSourceFiles(
@@ -691,8 +691,8 @@ class TargetDescBuilder : public BaseDescBuilder {
       }
       res->SetWithoutPathExpansion(variables::kOutputs,
                                    RenderValue(output_files));
-    } else if (target_->output_type() == Target::ACTION_FOREACH ||
-               target_->output_type() == Target::COPY_FILES) {
+    } else if (target_->output_type() == functions::kActionForEach ||
+               target_->output_type() == functions::kCopy) {
       const SubstitutionList& outputs = target_->action_values().outputs();
       if (!outputs.required_types().empty()) {
         auto patterns = std::make_unique<base::ListValue>();

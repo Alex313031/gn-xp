@@ -16,7 +16,7 @@ namespace {
 
 void InitTargetWithType(TestWithScope& setup,
                         Target* target,
-                        Target::OutputType type) {
+                        const char* type) {
   target->set_output_type(type);
   target->visibility().SetPublic();
   target->SetToolchain(setup.toolchain());
@@ -54,27 +54,27 @@ TEST_F(RuntimeDeps, Libs) {
   //                                 -> source set
 
   Target stat(setup.settings(), Label(SourceDir("//"), "stat"));
-  InitTargetWithType(setup, &stat, Target::STATIC_LIBRARY);
+  InitTargetWithType(setup, &stat, functions::kStaticLibrary);
   stat.data().push_back("//stat.dat");
   ASSERT_TRUE(stat.OnResolved(&err));
 
   Target shared(setup.settings(), Label(SourceDir("//"), "shared"));
-  InitTargetWithType(setup, &shared, Target::SHARED_LIBRARY);
+  InitTargetWithType(setup, &shared, functions::kSharedLibrary);
   shared.data().push_back("//shared.dat");
   ASSERT_TRUE(shared.OnResolved(&err));
 
   Target loadable(setup.settings(), Label(SourceDir("//"), "loadable"));
-  InitTargetWithType(setup, &loadable, Target::LOADABLE_MODULE);
+  InitTargetWithType(setup, &loadable, functions::kLoadableModule);
   loadable.data().push_back("//loadable.dat");
   ASSERT_TRUE(loadable.OnResolved(&err));
 
   Target set(setup.settings(), Label(SourceDir("//"), "set"));
-  InitTargetWithType(setup, &set, Target::SOURCE_SET);
+  InitTargetWithType(setup, &set, functions::kSourceSet);
   set.data().push_back("//set.dat");
   ASSERT_TRUE(set.OnResolved(&err));
 
   Target main(setup.settings(), Label(SourceDir("//"), "main"));
-  InitTargetWithType(setup, &main, Target::EXECUTABLE);
+  InitTargetWithType(setup, &main, functions::kExecutable);
   main.private_deps().push_back(LabelTargetPair(&stat));
   main.private_deps().push_back(LabelTargetPair(&shared));
   main.private_deps().push_back(LabelTargetPair(&loadable));
@@ -126,27 +126,27 @@ TEST_F(RuntimeDeps, ExeDataDep) {
   // included, final_out's should not be.
 
   Target final_in(setup.settings(), Label(SourceDir("//"), "final_in"));
-  InitTargetWithType(setup, &final_in, Target::SOURCE_SET);
+  InitTargetWithType(setup, &final_in, functions::kSourceSet);
   final_in.data().push_back("//final_in.dat");
   ASSERT_TRUE(final_in.OnResolved(&err));
 
   Target datadep(setup.settings(), Label(SourceDir("//"), "datadep"));
-  InitTargetWithType(setup, &datadep, Target::EXECUTABLE);
+  InitTargetWithType(setup, &datadep, functions::kExecutable);
   datadep.private_deps().push_back(LabelTargetPair(&final_in));
   ASSERT_TRUE(datadep.OnResolved(&err));
 
   Target final_out(setup.settings(), Label(SourceDir("//"), "final_out"));
-  InitTargetWithType(setup, &final_out, Target::SOURCE_SET);
+  InitTargetWithType(setup, &final_out, functions::kSourceSet);
   final_out.data().push_back("//final_out.dat");
   ASSERT_TRUE(final_out.OnResolved(&err));
 
   Target dep(setup.settings(), Label(SourceDir("//"), "dep"));
-  InitTargetWithType(setup, &dep, Target::EXECUTABLE);
+  InitTargetWithType(setup, &dep, functions::kExecutable);
   dep.private_deps().push_back(LabelTargetPair(&final_out));
   ASSERT_TRUE(dep.OnResolved(&err));
 
   Target main(setup.settings(), Label(SourceDir("//"), "main"));
-  InitTargetWithType(setup, &main, Target::EXECUTABLE);
+  InitTargetWithType(setup, &main, functions::kExecutable);
   main.private_deps().push_back(LabelTargetPair(&dep));
   main.data_deps().push_back(LabelTargetPair(&datadep));
   ASSERT_TRUE(main.OnResolved(&err));
@@ -177,15 +177,15 @@ TEST_F(RuntimeDeps, ActionSharedLib) {
   // Datadep should be included, dep should not be.
 
   Target dep(setup.settings(), Label(SourceDir("//"), "dep"));
-  InitTargetWithType(setup, &dep, Target::SHARED_LIBRARY);
+  InitTargetWithType(setup, &dep, functions::kSharedLibrary);
   ASSERT_TRUE(dep.OnResolved(&err));
 
   Target datadep(setup.settings(), Label(SourceDir("//"), "datadep"));
-  InitTargetWithType(setup, &datadep, Target::SHARED_LIBRARY);
+  InitTargetWithType(setup, &datadep, functions::kSharedLibrary);
   ASSERT_TRUE(datadep.OnResolved(&err));
 
   Target action(setup.settings(), Label(SourceDir("//"), "action"));
-  InitTargetWithType(setup, &action, Target::ACTION);
+  InitTargetWithType(setup, &action, functions::kAction);
   action.private_deps().push_back(LabelTargetPair(&dep));
   action.data_deps().push_back(LabelTargetPair(&datadep));
   action.action_values().outputs() =
@@ -193,7 +193,7 @@ TEST_F(RuntimeDeps, ActionSharedLib) {
   ASSERT_TRUE(action.OnResolved(&err));
 
   Target main(setup.settings(), Label(SourceDir("//"), "main"));
-  InitTargetWithType(setup, &main, Target::EXECUTABLE);
+  InitTargetWithType(setup, &main, functions::kExecutable);
   main.private_deps().push_back(LabelTargetPair(&action));
   ASSERT_TRUE(main.OnResolved(&err));
 
@@ -221,14 +221,14 @@ TEST_F(RuntimeDeps, ActionOutputs) {
   //                                 -> dep_copy (copy)
 
   Target datadep(setup.settings(), Label(SourceDir("//"), "datadep"));
-  InitTargetWithType(setup, &datadep, Target::ACTION);
+  InitTargetWithType(setup, &datadep, functions::kAction);
   datadep.data().push_back("//datadep.data");
   datadep.action_values().outputs() =
       SubstitutionList::MakeForTest("//datadep.output");
   ASSERT_TRUE(datadep.OnResolved(&err));
 
   Target datadep_copy(setup.settings(), Label(SourceDir("//"), "datadep_copy"));
-  InitTargetWithType(setup, &datadep_copy, Target::COPY_FILES);
+  InitTargetWithType(setup, &datadep_copy, functions::kCopy);
   datadep_copy.sources().push_back(SourceFile("//input"));
   datadep_copy.data().push_back("//datadep_copy.data");
   datadep_copy.action_values().outputs() =
@@ -236,13 +236,13 @@ TEST_F(RuntimeDeps, ActionOutputs) {
   ASSERT_TRUE(datadep_copy.OnResolved(&err));
 
   Target dep(setup.settings(), Label(SourceDir("//"), "dep"));
-  InitTargetWithType(setup, &dep, Target::ACTION);
+  InitTargetWithType(setup, &dep, functions::kAction);
   dep.data().push_back("//dep.data");
   dep.action_values().outputs() = SubstitutionList::MakeForTest("//dep.output");
   ASSERT_TRUE(dep.OnResolved(&err));
 
   Target dep_copy(setup.settings(), Label(SourceDir("//"), "dep_copy"));
-  InitTargetWithType(setup, &dep_copy, Target::COPY_FILES);
+  InitTargetWithType(setup, &dep_copy, functions::kCopy);
   dep_copy.sources().push_back(SourceFile("//input"));
   dep_copy.data().push_back("//dep_copy/data/");  // Tests a directory.
   dep_copy.action_values().outputs() =
@@ -250,7 +250,7 @@ TEST_F(RuntimeDeps, ActionOutputs) {
   ASSERT_TRUE(dep_copy.OnResolved(&err));
 
   Target main(setup.settings(), Label(SourceDir("//"), "main"));
-  InitTargetWithType(setup, &main, Target::EXECUTABLE);
+  InitTargetWithType(setup, &main, functions::kExecutable);
   main.private_deps().push_back(LabelTargetPair(&dep));
   main.private_deps().push_back(LabelTargetPair(&dep_copy));
   main.data_deps().push_back(LabelTargetPair(&datadep));
@@ -311,12 +311,12 @@ TEST_F(RuntimeDeps, CreateBundle) {
 
   Target loadable_module(setup.settings(),
                          Label(source_dir, "loadable_module"));
-  InitTargetWithType(setup, &loadable_module, Target::LOADABLE_MODULE);
+  InitTargetWithType(setup, &loadable_module, functions::kLoadableModule);
   loadable_module.data().push_back("//lm.data");
   ASSERT_TRUE(loadable_module.OnResolved(&err));
 
   Target module_data(setup.settings(), Label(source_dir, "module_data"));
-  InitTargetWithType(setup, &module_data, Target::BUNDLE_DATA);
+  InitTargetWithType(setup, &module_data, functions::kBundleData);
   module_data.private_deps().push_back(LabelTargetPair(&loadable_module));
   module_data.bundle_data().file_rules().push_back(BundleFileRule(
       nullptr,
@@ -325,7 +325,7 @@ TEST_F(RuntimeDeps, CreateBundle) {
   ASSERT_TRUE(module_data.OnResolved(&err));
 
   Target source_set(setup.settings(), Label(source_dir, "sources"));
-  InitTargetWithType(setup, &source_set, Target::SOURCE_SET);
+  InitTargetWithType(setup, &source_set, functions::kSourceSet);
   source_set.sources().push_back(SourceFile(source_dir.value() + "foo.cc"));
   ASSERT_TRUE(source_set.OnResolved(&err));
 
@@ -333,12 +333,12 @@ TEST_F(RuntimeDeps, CreateBundle) {
   dylib.set_output_prefix_override(true);
   dylib.set_output_extension("");
   dylib.set_output_name("Bundle");
-  InitTargetWithType(setup, &dylib, Target::SHARED_LIBRARY);
+  InitTargetWithType(setup, &dylib, functions::kSharedLibrary);
   dylib.private_deps().push_back(LabelTargetPair(&source_set));
   ASSERT_TRUE(dylib.OnResolved(&err));
 
   Target dylib_data(setup.settings(), Label(source_dir, "dylib_data"));
-  InitTargetWithType(setup, &dylib_data, Target::BUNDLE_DATA);
+  InitTargetWithType(setup, &dylib_data, functions::kBundleData);
   dylib_data.private_deps().push_back(LabelTargetPair(&dylib));
   dylib_data.bundle_data().file_rules().push_back(BundleFileRule(
       nullptr, std::vector<SourceFile>{SourceFile(build_dir + "dylib")},
@@ -346,12 +346,12 @@ TEST_F(RuntimeDeps, CreateBundle) {
   ASSERT_TRUE(dylib_data.OnResolved(&err));
 
   Target data_dep(setup.settings(), Label(source_dir, "datadep"));
-  InitTargetWithType(setup, &data_dep, Target::EXECUTABLE);
+  InitTargetWithType(setup, &data_dep, functions::kExecutable);
   data_dep.data().push_back("//dd.data");
   ASSERT_TRUE(data_dep.OnResolved(&err));
 
   Target bundle(setup.settings(), Label(source_dir, "bundle"));
-  InitTargetWithType(setup, &bundle, Target::CREATE_BUNDLE);
+  InitTargetWithType(setup, &bundle, functions::kCreateBundle);
   const std::string root_dir(build_dir + "Bundle.framework/");
   const std::string contents_dir(root_dir + "Versions/A/");
   bundle.bundle_data().root_dir() = SourceDir(root_dir);
@@ -365,7 +365,7 @@ TEST_F(RuntimeDeps, CreateBundle) {
   ASSERT_TRUE(bundle.OnResolved(&err));
 
   Target main(setup.settings(), Label(source_dir, "main"));
-  InitTargetWithType(setup, &main, Target::EXECUTABLE);
+  InitTargetWithType(setup, &main, functions::kExecutable);
   main.data_deps().push_back(LabelTargetPair(&bundle));
   ASSERT_TRUE(main.OnResolved(&err));
 
@@ -400,13 +400,13 @@ TEST_F(RuntimeDeps, Dupe) {
   Err err;
 
   Target action(setup.settings(), Label(SourceDir("//"), "action"));
-  InitTargetWithType(setup, &action, Target::ACTION);
+  InitTargetWithType(setup, &action, functions::kAction);
   action.action_values().outputs() =
       SubstitutionList::MakeForTest("//action.output");
   ASSERT_TRUE(action.OnResolved(&err));
 
   Target target(setup.settings(), Label(SourceDir("//"), "foo"));
-  InitTargetWithType(setup, &target, Target::EXECUTABLE);
+  InitTargetWithType(setup, &target, functions::kExecutable);
   target.private_deps().push_back(LabelTargetPair(&action));
   target.data_deps().push_back(LabelTargetPair(&action));
   ASSERT_TRUE(target.OnResolved(&err));

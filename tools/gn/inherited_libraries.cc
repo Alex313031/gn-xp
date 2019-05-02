@@ -68,7 +68,7 @@ void InheritedLibraries::AppendPublicSharedLibraries(
     const InheritedLibraries& other,
     bool is_public) {
   for (const auto& cur : other.GetOrderedAndPublicFlag()) {
-    if (cur.first->output_type() == Target::SHARED_LIBRARY && cur.second)
+    if (cur.first->output_type() == functions::kSharedLibrary && cur.second)
       Append(cur.first, is_public);
   }
 }

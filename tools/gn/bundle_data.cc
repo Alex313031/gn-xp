@@ -52,7 +52,7 @@ BundleData::BundleData() = default;
 BundleData::~BundleData() = default;
 
 void BundleData::AddBundleData(const Target* target) {
-  DCHECK_EQ(target->output_type(), Target::BUNDLE_DATA);
+  DCHECK_EQ(target->output_type(), functions::kBundleData);
   for (const auto& pattern : bundle_deps_filter_) {
     if (pattern.Matches(target->label()))
       return;
@@ -63,7 +63,7 @@ void BundleData::AddBundleData(const Target* target) {
 void BundleData::OnTargetResolved(Target* owning_target) {
   // Only initialize file_rules_ and assets_catalog_sources for "create_bundle"
   // target (properties are only used by those targets).
-  if (owning_target->output_type() != Target::CREATE_BUNDLE)
+  if (owning_target->output_type() != functions::kCreateBundle)
     return;
 
   UniqueVector<const Target*> assets_catalog_deps;

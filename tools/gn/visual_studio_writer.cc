@@ -126,25 +126,21 @@ std::string GetWindowsKitsIncludeDirs(const std::string& win_kit) {
 }
 
 std::string GetConfigurationType(const Target* target, Err* err) {
-  switch (target->output_type()) {
-    case Target::EXECUTABLE:
-      return "Application";
-    case Target::SHARED_LIBRARY:
-    case Target::LOADABLE_MODULE:
-      return "DynamicLibrary";
-    case Target::STATIC_LIBRARY:
-    case Target::SOURCE_SET:
-      return "StaticLibrary";
-    case Target::GROUP:
-      return "Utility";
+  if (target->output_type() == functions::kExecutable)
+    return "Application";
+  else if (target->output_type() == functions::kSharedLibrary ||
+           target->output_type() == functions::kLoadableModule)
+    return "DynamicLibrary";
+  else if (target->output_type() == functions::kStaticLibrary ||
+           target->output_type() == functions::kSourceSet)
+    return "StaticLibrary";
+  else if (target->output_type() == functions::kGroup)
+    return "Utility";
 
-    default:
-      *err = Err(Location(),
-                 "Visual Studio doesn't support '" + target->label().name() +
-                     "' target output type: " +
-                     Target::GetStringForOutputType(target->output_type()));
-      return std::string();
-  }
+  *err = Err(Location(), "Visual Studio doesn't support '" +
+                             target->label().name() +
+                             "' target output type: " + target->output_type());
+  return std::string();
 }
 
 void ParseCompilerOptions(const std::vector<std::string>& cflags,
@@ -352,10 +348,10 @@ bool VisualStudioWriter::RunAndWriteFiles(const BuildSettings* build_settings,
 
   for (const Target* target : targets) {
     // Skip actions and bundle targets.
-    if (target->output_type() == Target::COPY_FILES ||
-        target->output_type() == Target::ACTION ||
-        target->output_type() == Target::ACTION_FOREACH ||
-        target->output_type() == Target::BUNDLE_DATA) {
+    if (target->output_type() == functions::kCopy ||
+        target->output_type() == functions::kAction ||
+        target->output_type() == functions::kActionForEach ||
+        target->output_type() == functions::kBundleData) {
       continue;
     }
 
@@ -527,7 +523,7 @@ bool VisualStudioWriter::WriteProjectFileContents(
         project.SubElement("PropertyGroup");
     properties->SubElement("OutDir")->Text("$(SolutionDir)");
     properties->SubElement("TargetName")->Text("$(ProjectName)");
-    if (target->output_type() != Target::GROUP) {
+    if (target->output_type() != functions::kGroup) {
       properties->SubElement("TargetPath")->Text("$(OutDir)\\" + ninja_target);
     }
   }

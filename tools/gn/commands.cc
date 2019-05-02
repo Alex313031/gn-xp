@@ -167,50 +167,50 @@ bool GetTargetPrintingMode(TargetPrintingMode* mode) {
 // current process. Returns true on success. On error, prints a message to the
 // console and returns false.
 //
-// Target::UNKNOWN will be set if there is no filter. Target::ACTION_FOREACH
-// will never be returned. Code applying the filters should apply Target::ACTION
+// Target::kTypeUnknown will be set if there is no filter. functions::kActionForEach
+// will never be returned. Code applying the filters should apply functions::kAction
 // to both ACTION and ACTION_FOREACH.
-bool GetTargetTypeFilter(Target::OutputType* type) {
+bool GetTargetTypeFilter(const char** type) {
   std::string switch_key = "type";
   const base::CommandLine* cmdline = base::CommandLine::ForCurrentProcess();
 
   if (!cmdline->HasSwitch(switch_key)) {
     // Default to unknown -> no filtering.
-    *type = Target::UNKNOWN;
+    *type = Target::kTypeUnknown;
     return true;
   }
 
   std::string value = cmdline->GetSwitchValueASCII(switch_key);
   if (value == "group") {
-    *type = Target::GROUP;
+    *type = functions::kGroup;
     return true;
   }
   if (value == "executable") {
-    *type = Target::EXECUTABLE;
+    *type = functions::kExecutable;
     return true;
   }
   if (value == "shared_library") {
-    *type = Target::SHARED_LIBRARY;
+    *type = functions::kSharedLibrary;
     return true;
   }
   if (value == "loadable_module") {
-    *type = Target::LOADABLE_MODULE;
+    *type = functions::kLoadableModule;
     return true;
   }
   if (value == "static_library") {
-    *type = Target::STATIC_LIBRARY;
+    *type = functions::kStaticLibrary;
     return true;
   }
   if (value == "source_set") {
-    *type = Target::SOURCE_SET;
+    *type = functions::kSourceSet;
     return true;
   }
   if (value == "copy") {
-    *type = Target::COPY_FILES;
+    *type = functions::kCopy;
     return true;
   }
   if (value == "action") {
-    *type = Target::ACTION;
+    *type = functions::kAction;
     return true;
   }
 
@@ -254,10 +254,10 @@ bool ApplyTestonlyFilter(std::vector<const Target*>* targets) {
 // Applies any target type filtering specified on the command line to the given
 // target set. On failure, prints an error and returns false.
 bool ApplyTypeFilter(std::vector<const Target*>* targets) {
-  Target::OutputType type = Target::UNKNOWN;
+  const char* type = Target::kTypeUnknown;
   if (!GetTargetTypeFilter(&type))
     return false;
-  if (targets->empty() || type == Target::UNKNOWN)
+  if (targets->empty() || type == Target::kTypeUnknown)
     return true;  // Nothing to filter out.
 
   // Filter into a copy of the vector, then swap to output.
@@ -267,8 +267,8 @@ bool ApplyTypeFilter(std::vector<const Target*>* targets) {
   for (const Target* target : *targets) {
     // Make "action" also apply to ACTION_FOREACH.
     if (target->output_type() == type ||
-        (type == Target::ACTION &&
-         target->output_type() == Target::ACTION_FOREACH))
+        (type == functions::kAction &&
+         target->output_type() == functions::kActionForEach))
       result.push_back(target);
   }
 

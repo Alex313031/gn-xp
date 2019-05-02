@@ -42,7 +42,7 @@ void NinjaActionTargetWriter::Run() {
   // file, so WriteInputDepsStampAndGetDep() won't create a stamp file
   // and the action will just depend on all the input deps directly.
   size_t num_stamp_uses =
-      target_->output_type() == Target::ACTION ? 1u : target_->sources().size();
+      target_->output_type() == functions::kAction ? 1u : target_->sources().size();
   std::vector<OutputFile> input_deps =
       WriteInputDepsStampAndGetDep(extra_hard_deps, num_stamp_uses);
   out_ << std::endl;
@@ -50,11 +50,11 @@ void NinjaActionTargetWriter::Run() {
   // Collects all output files for writing below.
   std::vector<OutputFile> output_files;
 
-  if (target_->output_type() == Target::ACTION_FOREACH) {
+  if (target_->output_type() == functions::kActionForEach) {
     // Write separate build lines for each input source file.
     WriteSourceRules(custom_rule_name, input_deps, &output_files);
   } else {
-    DCHECK(target_->output_type() == Target::ACTION);
+    DCHECK(target_->output_type() == functions::kAction);
 
     // Write a rule that invokes the script once with the outputs as outputs,
     // and the data as inputs. It does not depend on the sources.

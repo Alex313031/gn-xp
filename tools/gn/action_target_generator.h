@@ -15,7 +15,7 @@ class ActionTargetGenerator : public TargetGenerator {
   ActionTargetGenerator(Target* target,
                         Scope* scope,
                         const FunctionCallNode* function_call,
-                        Target::OutputType type,
+                        const char* type,
                         Err* err);
   ~ActionTargetGenerator() override;
 
@@ -33,7 +33,7 @@ class ActionTargetGenerator : public TargetGenerator {
   // Checks for errors in the outputs variable.
   bool CheckOutputs();
 
-  Target::OutputType output_type_;
+  const char* output_type_;
 
   DISALLOW_COPY_AND_ASSIGN(ActionTargetGenerator);
 };
