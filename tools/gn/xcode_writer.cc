@@ -105,7 +105,7 @@ std::string GetBuildScript(const std::string& target_name,
 }
 
 bool IsApplicationTarget(const Target* target) {
-  return target->output_type() == Target::CREATE_BUNDLE &&
+  return target->output_type() == functions::kCreateBundle &&
          target->bundle_data().product_type() ==
              "com.apple.product-type.application";
 }
@@ -118,7 +118,7 @@ bool IsXCUITestRunnerTarget(const Target* target) {
 }
 
 bool IsXCTestModuleTarget(const Target* target) {
-  return target->output_type() == Target::CREATE_BUNDLE &&
+  return target->output_type() == functions::kCreateBundle &&
          target->bundle_data().product_type() ==
              "com.apple.product-type.bundle.unit-test" &&
          base::EndsWith(target->label().name(), kXCTestModuleTargetNamePostfix,
@@ -126,7 +126,7 @@ bool IsXCTestModuleTarget(const Target* target) {
 }
 
 bool IsXCUITestModuleTarget(const Target* target) {
-  return target->output_type() == Target::CREATE_BUNDLE &&
+  return target->output_type() == functions::kCreateBundle &&
          target->bundle_data().product_type() ==
              "com.apple.product-type.bundle.ui-testing" &&
          base::EndsWith(target->label().name(), kXCTestModuleTargetNamePostfix,
@@ -443,11 +443,11 @@ bool XcodeWriter::FilterTargets(const BuildSettings* build_settings,
     if (!target->settings()->is_default())
       continue;
 
-    if (target->output_type() != Target::BUNDLE_DATA)
+    if (target->output_type() != functions::kBundleData)
       continue;
 
     for (const auto& pair : target->GetDeps(Target::DEPS_LINKED)) {
-      if (pair.ptr->output_type() != Target::EXECUTABLE)
+      if (pair.ptr->output_type() != functions::kExecutable)
         continue;
 
       auto iter = std::lower_bound(targets->begin(), targets->end(), pair.ptr);
@@ -496,85 +496,75 @@ void XcodeWriter::CreateProductsProject(
   TargetToFileList xctest_files_per_target;
 
   for (const Target* target : targets) {
-    switch (target->output_type()) {
-      case Target::EXECUTABLE:
-        if (target_os == XcodeWriter::WRITER_TARGET_OS_IOS)
-          continue;
+    if (target->output_type() == functions::kExecutable) {
+      if (target_os == XcodeWriter::WRITER_TARGET_OS_IOS)
+        continue;
 
-        main_project->AddNativeTarget(
-            target->label().name(), "compiled.mach-o.executable",
-            target->output_name().empty() ? target->label().name()
-                                          : target->output_name(),
-            "com.apple.product-type.tool",
-            GetBuildScript(target->label().name(), ninja_extra_args,
-                           env.get()));
-        break;
+      main_project->AddNativeTarget(
+          target->label().name(), "compiled.mach-o.executable",
+          target->output_name().empty() ? target->label().name()
+                                        : target->output_name(),
+          "com.apple.product-type.tool",
+          GetBuildScript(target->label().name(), ninja_extra_args, env.get()));
+    } else if (target->output_type() == functions::kCreateBundle) {
+      if (target->bundle_data().product_type().empty())
+        continue;
 
-      case Target::CREATE_BUNDLE: {
-        if (target->bundle_data().product_type().empty())
-          continue;
-
-        // For XCUITest, two CREATE_BUNDLE targets are generated:
-        // ${target_name}_runner and ${target_name}_module, however, Xcode
-        // requires only one target named ${target_name} to run tests.
-        if (IsXCUITestRunnerTarget(target))
-          continue;
-        std::string pbxtarget_name = target->label().name();
-        if (IsXCUITestModuleTarget(target)) {
-          std::string target_name = target->label().name();
-          pbxtarget_name = target_name.substr(
-              0, target_name.rfind(kXCTestModuleTargetNamePostfix));
-        }
-
-        PBXAttributes xcode_extra_attributes =
-            target->bundle_data().xcode_extra_attributes();
-
-        const std::string& target_output_name =
-            RebasePath(target->bundle_data()
-                           .GetBundleRootDirOutput(target->settings())
-                           .value(),
-                       build_settings->build_dir());
-        PBXNativeTarget* native_target = main_project->AddNativeTarget(
-            pbxtarget_name, std::string(), target_output_name,
-            target->bundle_data().product_type(),
-            GetBuildScript(pbxtarget_name, ninja_extra_args, env.get()),
-            xcode_extra_attributes);
-
-        bundle_targets.push_back(target);
-        bundle_target_to_pbxtarget.insert(
-            std::make_pair(target, native_target));
-
-        if (!IsXCTestModuleTarget(target) && !IsXCUITestModuleTarget(target))
-          continue;
-
-        // For XCTest, test files are compiled into the application bundle.
-        // For XCUITest, test files are compiled into the test module bundle.
-        const Target* target_with_xctest_files = nullptr;
-        if (IsXCTestModuleTarget(target)) {
-          target_with_xctest_files = FindApplicationTargetByName(
-              target->bundle_data().xcode_test_application_name(), targets);
-        } else if (IsXCUITestModuleTarget(target)) {
-          target_with_xctest_files = target;
-        } else {
-          NOTREACHED();
-        }
-
-        SearchXCTestFilesForTarget(target_with_xctest_files,
-                                   &xctest_files_per_target);
-        const Target::FileList& xctest_file_list =
-            xctest_files_per_target[target_with_xctest_files];
-
-        // Add xctest files to the "Compiler Sources" of corresponding xctest
-        // and xcuitest native targets for proper indexing and for discovery of
-        // tests function.
-        AddXCTestFilesToTestModuleTarget(xctest_file_list, native_target,
-                                         main_project.get(), source_dir,
-                                         build_settings);
-        break;
+      // For XCUITest, two CREATE_BUNDLE targets are generated:
+      // ${target_name}_runner and ${target_name}_module, however, Xcode
+      // requires only one target named ${target_name} to run tests.
+      if (IsXCUITestRunnerTarget(target))
+        continue;
+      std::string pbxtarget_name = target->label().name();
+      if (IsXCUITestModuleTarget(target)) {
+        std::string target_name = target->label().name();
+        pbxtarget_name = target_name.substr(
+            0, target_name.rfind(kXCTestModuleTargetNamePostfix));
       }
 
-      default:
-        break;
+      PBXAttributes xcode_extra_attributes =
+          target->bundle_data().xcode_extra_attributes();
+
+      const std::string& target_output_name =
+          RebasePath(target->bundle_data()
+                         .GetBundleRootDirOutput(target->settings())
+                         .value(),
+                     build_settings->build_dir());
+      PBXNativeTarget* native_target = main_project->AddNativeTarget(
+          pbxtarget_name, std::string(), target_output_name,
+          target->bundle_data().product_type(),
+          GetBuildScript(pbxtarget_name, ninja_extra_args, env.get()),
+          xcode_extra_attributes);
+
+      bundle_targets.push_back(target);
+      bundle_target_to_pbxtarget.insert(std::make_pair(target, native_target));
+
+      if (!IsXCTestModuleTarget(target) && !IsXCUITestModuleTarget(target))
+        continue;
+
+      // For XCTest, test files are compiled into the application bundle.
+      // For XCUITest, test files are compiled into the test module bundle.
+      const Target* target_with_xctest_files = nullptr;
+      if (IsXCTestModuleTarget(target)) {
+        target_with_xctest_files = FindApplicationTargetByName(
+            target->bundle_data().xcode_test_application_name(), targets);
+      } else if (IsXCUITestModuleTarget(target)) {
+        target_with_xctest_files = target;
+      } else {
+        NOTREACHED();
+      }
+
+      SearchXCTestFilesForTarget(target_with_xctest_files,
+                                 &xctest_files_per_target);
+      const Target::FileList& xctest_file_list =
+          xctest_files_per_target[target_with_xctest_files];
+
+      // Add xctest files to the "Compiler Sources" of corresponding xctest
+      // and xcuitest native targets for proper indexing and for discovery of
+      // tests function.
+      AddXCTestFilesToTestModuleTarget(xctest_file_list, native_target,
+                                       main_project.get(), source_dir,
+                                       build_settings);
     }
   }
 

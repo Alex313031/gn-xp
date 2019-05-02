@@ -69,23 +69,23 @@ std::string NinjaTargetWriter::RunAndWriteFile(const Target* target) {
   // or write variables scoped under each build line. As a result, they don't
   // need the separate files.
   bool needs_file_write = false;
-  if (target->output_type() == Target::BUNDLE_DATA) {
+  if (target->output_type() == functions::kBundleData) {
     NinjaBundleDataTargetWriter writer(target, rules);
     writer.Run();
-  } else if (target->output_type() == Target::CREATE_BUNDLE) {
+  } else if (target->output_type() == functions::kCreateBundle) {
     NinjaCreateBundleTargetWriter writer(target, rules);
     writer.Run();
-  } else if (target->output_type() == Target::COPY_FILES) {
+  } else if (target->output_type() == functions::kCopy) {
     NinjaCopyTargetWriter writer(target, rules);
     writer.Run();
-  } else if (target->output_type() == Target::ACTION ||
-             target->output_type() == Target::ACTION_FOREACH) {
+  } else if (target->output_type() == functions::kAction ||
+             target->output_type() == functions::kActionForEach) {
     NinjaActionTargetWriter writer(target, rules);
     writer.Run();
-  } else if (target->output_type() == Target::GROUP) {
+  } else if (target->output_type() == functions::kGroup) {
     NinjaGroupTargetWriter writer(target, rules);
     writer.Run();
-  } else if (target->output_type() == Target::GENERATED_FILE) {
+  } else if (target->output_type() == functions::kGeneratedFile) {
     NinjaGeneratedFileTargetWriter writer(target, rules);
     writer.Run();
   } else if (target->IsBinary()) {
@@ -195,8 +195,8 @@ std::vector<OutputFile> NinjaTargetWriter::WriteInputDepsStampAndGetDep(
   input_deps_sources.reserve(32);
 
   // Actions get implicit dependencies on the script itself.
-  if (target_->output_type() == Target::ACTION ||
-      target_->output_type() == Target::ACTION_FOREACH)
+  if (target_->output_type() == functions::kAction ||
+      target_->output_type() == functions::kActionForEach)
     input_deps_sources.push_back(&target_->action_values().script());
 
   // Input files are only considered for non-binary targets which use an
@@ -212,7 +212,7 @@ std::vector<OutputFile> NinjaTargetWriter::WriteInputDepsStampAndGetDep(
   // For an action (where we run a script only once) the sources are the same
   // as the inputs. For action_foreach, the sources will be operated on
   // separately so don't handle them here.
-  if (target_->output_type() == Target::ACTION) {
+  if (target_->output_type() == functions::kAction) {
     for (const auto& source : target_->sources())
       input_deps_sources.push_back(&source);
   }

@@ -326,7 +326,7 @@ void NinjaBuildWriter::WriteAllPools() {
   }
 
   for (const Target* target : all_targets_) {
-    if (target->output_type() == Target::ACTION) {
+    if (target->output_type() == functions::kAction) {
       const LabelPtrPair<Pool>& pool = target->action_values().pool();
       if (pool.ptr)
         used_pools.insert(pool.ptr);
@@ -480,7 +480,7 @@ bool NinjaBuildWriter::WritePhonyAndAllRules(Err* err) {
     short_names_counts.last_seen = target;
 
     // Count executables with the given short name.
-    if (target->output_type() == Target::EXECUTABLE) {
+    if (target->output_type() == functions::kExecutable) {
       Counts& exes_counts = exes[short_name];
       exes_counts.count++;
       exes_counts.last_seen = target;

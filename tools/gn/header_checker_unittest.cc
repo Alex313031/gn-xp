@@ -23,10 +23,10 @@ class HeaderCheckerTest : public TestWithScheduler {
         b_(setup_.settings(), Label(SourceDir("//b/"), "b")),
         c_(setup_.settings(), Label(SourceDir("//c/"), "c")),
         d_(setup_.settings(), Label(SourceDir("//d/"), "d")) {
-    a_.set_output_type(Target::SOURCE_SET);
-    b_.set_output_type(Target::SOURCE_SET);
-    c_.set_output_type(Target::SOURCE_SET);
-    d_.set_output_type(Target::SOURCE_SET);
+    a_.set_output_type(functions::kSourceSet);
+    b_.set_output_type(functions::kSourceSet);
+    c_.set_output_type(functions::kSourceSet);
+    d_.set_output_type(functions::kSourceSet);
 
     Err err;
     a_.SetToolchain(setup_.toolchain(), &err);
@@ -81,7 +81,7 @@ TEST_F(HeaderCheckerTest, IsDependencyOf) {
   // chain so that A -> P -> C. A will depend on C via two different paths.
   Err err;
   Target p(setup_.settings(), Label(SourceDir("//p/"), "p"));
-  p.set_output_type(Target::SOURCE_SET);
+  p.set_output_type(functions::kSourceSet);
   p.SetToolchain(setup_.toolchain(), &err);
   EXPECT_FALSE(err.has_error());
   p.private_deps().push_back(LabelTargetPair(&c_));
@@ -180,7 +180,7 @@ TEST_F(HeaderCheckerTest, CheckInclude) {
   Target otc(&other_settings,
              Label(SourceDir("//p/"), "otc", other_toolchain.label().dir(),
                    other_toolchain.label().name()));
-  otc.set_output_type(Target::SOURCE_SET);
+  otc.set_output_type(functions::kSourceSet);
   Err err;
   EXPECT_TRUE(otc.SetToolchain(&other_toolchain, &err));
   otc.visibility().SetPublic();
@@ -242,7 +242,7 @@ TEST_F(HeaderCheckerTest, PublicFirst) {
   // Now make a A -> Z -> D private dependency chain (one shorter than the
   // public one to get to D).
   Target z(setup_.settings(), Label(SourceDir("//a/"), "a"));
-  z.set_output_type(Target::SOURCE_SET);
+  z.set_output_type(functions::kSourceSet);
   Err err;
   EXPECT_TRUE(z.SetToolchain(setup_.toolchain(), &err));
   z.private_deps().push_back(LabelTargetPair(&d_));

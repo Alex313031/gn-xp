@@ -17,7 +17,7 @@ GroupTargetGenerator::GroupTargetGenerator(
 GroupTargetGenerator::~GroupTargetGenerator() = default;
 
 void GroupTargetGenerator::DoRun() {
-  target_->set_output_type(Target::GROUP);
+  target_->set_output_type(functions::kGroup);
   // Groups only have the default types filled in by the target generator
   // base class.
 }

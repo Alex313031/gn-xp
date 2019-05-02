@@ -15,7 +15,7 @@ TEST_F(NinjaBinaryTargetWriterTest, CSources) {
   TestWithScope setup;
 
   Target target(setup.settings(), Label(SourceDir("//foo/"), "bar"));
-  target.set_output_type(Target::SOURCE_SET);
+  target.set_output_type(functions::kSourceSet);
   target.visibility().SetPublic();
   target.sources().push_back(SourceFile("//foo/input1.cc"));
   target.sources().push_back(SourceFile("//foo/input2.cc"));

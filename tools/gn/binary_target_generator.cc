@@ -18,7 +18,7 @@ BinaryTargetGenerator::BinaryTargetGenerator(
     Target* target,
     Scope* scope,
     const FunctionCallNode* function_call,
-    Target::OutputType type,
+    const char* type,
     Err* err)
     : TargetGenerator(target, scope, function_call, err), output_type_(type) {}
 
@@ -69,7 +69,7 @@ void BinaryTargetGenerator::DoRun() {
 }
 
 bool BinaryTargetGenerator::FillCompleteStaticLib() {
-  if (target_->output_type() == Target::STATIC_LIBRARY) {
+  if (target_->output_type() == functions::kStaticLibrary) {
     const Value* value = scope_->GetValue(variables::kCompleteStaticLib, true);
     if (!value)
       return true;

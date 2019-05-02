@@ -16,7 +16,7 @@ TEST(NinjaCopyTargetWriter, Run) {
   TestWithScope setup;
 
   Target target(setup.settings(), Label(SourceDir("//foo/"), "bar"));
-  target.set_output_type(Target::COPY_FILES);
+  target.set_output_type(functions::kCopy);
 
   target.sources().push_back(SourceFile("//foo/input1.txt"));
   target.sources().push_back(SourceFile("//foo/input2.txt"));
@@ -46,7 +46,7 @@ TEST(NinjaCopyTargetWriter, ToolchainDeps) {
   TestWithScope setup;
 
   Target target(setup.settings(), Label(SourceDir("//foo/"), "bar"));
-  target.set_output_type(Target::COPY_FILES);
+  target.set_output_type(functions::kCopy);
 
   target.sources().push_back(SourceFile("//foo/input1.txt"));
 
@@ -73,7 +73,7 @@ TEST(NinjaCopyTargetWriter, OrderOnlyDeps) {
   TestWithScope setup;
 
   Target target(setup.settings(), Label(SourceDir("//foo/"), "bar"));
-  target.set_output_type(Target::COPY_FILES);
+  target.set_output_type(functions::kCopy);
   target.sources().push_back(SourceFile("//foo/input1.txt"));
   target.action_values().outputs() =
       SubstitutionList::MakeForTest("//out/Debug/{{source_name_part}}.out");

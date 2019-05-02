@@ -238,8 +238,8 @@ Analyzer::Analyzer(const Builder& builder,
 
       dep_map_.insert(std::make_pair(item->AsTarget()->toolchain(), item));
 
-      if (item->AsTarget()->output_type() == Target::ACTION ||
-          item->AsTarget()->output_type() == Target::ACTION_FOREACH) {
+      if (item->AsTarget()->output_type() == functions::kAction ||
+          item->AsTarget()->output_type() == functions::kActionForEach) {
         const LabelPtrPair<Pool>& pool =
             item->AsTarget()->action_values().pool();
         if (pool.ptr)
@@ -391,7 +391,7 @@ void Analyzer::FilterTarget(const Target* target,
                             std::set<const Target*>* filtered) const {
   if (seen->find(target) == seen->end()) {
     seen->insert(target);
-    if (target->output_type() != Target::GROUP) {
+    if (target->output_type() != functions::kGroup) {
       filtered->insert(target);
     } else {
       for (const auto& pair : target->GetDeps(Target::DEPS_ALL))

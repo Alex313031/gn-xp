@@ -19,7 +19,7 @@ CopyTargetGenerator::CopyTargetGenerator(Target* target,
 CopyTargetGenerator::~CopyTargetGenerator() = default;
 
 void CopyTargetGenerator::DoRun() {
-  target_->set_output_type(Target::COPY_FILES);
+  target_->set_output_type(functions::kCopy);
 
   if (!FillSources())
     return;

@@ -105,7 +105,7 @@ TEST(SubstitutionWriter, SourceSubstitutions) {
   Err err;
 
   Target target(setup.settings(), Label(SourceDir("//foo/bar/"), "baz"));
-  target.set_output_type(Target::STATIC_LIBRARY);
+  target.set_output_type(functions::kStaticLibrary);
   target.SetToolchain(setup.toolchain());
   ASSERT_TRUE(target.OnResolved(&err));
 
@@ -186,7 +186,7 @@ TEST(SubstitutionWriter, TargetSubstitutions) {
   Err err;
 
   Target target(setup.settings(), Label(SourceDir("//foo/bar/"), "baz"));
-  target.set_output_type(Target::STATIC_LIBRARY);
+  target.set_output_type(functions::kStaticLibrary);
   target.SetToolchain(setup.toolchain());
   ASSERT_TRUE(target.OnResolved(&err));
 
@@ -225,7 +225,7 @@ TEST(SubstitutionWriter, CompilerSubstitutions) {
   Err err;
 
   Target target(setup.settings(), Label(SourceDir("//foo/bar/"), "baz"));
-  target.set_output_type(Target::STATIC_LIBRARY);
+  target.set_output_type(functions::kStaticLibrary);
   target.SetToolchain(setup.toolchain());
   ASSERT_TRUE(target.OnResolved(&err));
 
@@ -244,7 +244,7 @@ TEST(SubstitutionWriter, LinkerSubstitutions) {
   Err err;
 
   Target target(setup.settings(), Label(SourceDir("//foo/bar/"), "baz"));
-  target.set_output_type(Target::SHARED_LIBRARY);
+  target.set_output_type(functions::kSharedLibrary);
   target.SetToolchain(setup.toolchain());
   ASSERT_TRUE(target.OnResolved(&err));
 
@@ -293,7 +293,7 @@ TEST(SubstitutionWriter, OutputDir) {
 
   // Default target with no output dir overrides.
   Target target(setup.settings(), Label(SourceDir("//foo/"), "baz"));
-  target.set_output_type(Target::EXECUTABLE);
+  target.set_output_type(functions::kExecutable);
   target.SetToolchain(setup.toolchain());
   ASSERT_TRUE(target.OnResolved(&err));
 

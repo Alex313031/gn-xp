@@ -27,7 +27,7 @@ CreateBundleTargetGenerator::CreateBundleTargetGenerator(
 CreateBundleTargetGenerator::~CreateBundleTargetGenerator() = default;
 
 void CreateBundleTargetGenerator::DoRun() {
-  target_->set_output_type(Target::CREATE_BUNDLE);
+  target_->set_output_type(functions::kCreateBundle);
 
   BundleData& bundle_data = target_->bundle_data();
   if (!FillBundleDir(SourceDir(), variables::kBundleRootDir,
