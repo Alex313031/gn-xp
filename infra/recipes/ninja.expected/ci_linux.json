@@ -1,0 +1,175 @@
+[
+  {
+    "cmd": [],
+    "name": "git"
+  },
+  {
+    "cmd": [
+      "git",
+      "init",
+      "[START_DIR]/ninja"
+    ],
+    "infra_step": true,
+    "name": "git.init",
+    "~followup_annotations": [
+      "@@@STEP_NEST_LEVEL@1@@@"
+    ]
+  },
+  {
+    "cmd": [
+      "git",
+      "fetch",
+      "--tags",
+      "https://gn.googlesource.com/external/github.com/ninja-build/ninja",
+      "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+    ],
+    "cwd": "[START_DIR]/ninja",
+    "infra_step": true,
+    "name": "git.fetch",
+    "~followup_annotations": [
+      "@@@STEP_NEST_LEVEL@1@@@"
+    ]
+  },
+  {
+    "cmd": [
+      "git",
+      "checkout",
+      "FETCH_HEAD"
+    ],
+    "cwd": "[START_DIR]/ninja",
+    "infra_step": true,
+    "name": "git.checkout",
+    "~followup_annotations": [
+      "@@@STEP_NEST_LEVEL@1@@@"
+    ]
+  },
+  {
+    "cmd": [
+      "cipd",
+      "ensure",
+      "-root",
+      "[START_DIR]/cipd",
+      "-ensure-file",
+      "fuchsia/clang/${platform} goma\n@Subdir sysroot\nfuchsia/sysroot/${platform} git_revision:a28dfa20af063e5ca00634024c85732e20220419",
+      "-json-output",
+      "/path/to/tmp/json"
+    ],
+    "infra_step": true,
+    "name": "ensure_installed",
+    "~followup_annotations": [
+      "@@@STEP_LOG_LINE@json.output@{@@@",
+      "@@@STEP_LOG_LINE@json.output@  \"result\": {@@@",
+      "@@@STEP_LOG_LINE@json.output@    \"\": [@@@",
+      "@@@STEP_LOG_LINE@json.output@      {@@@",
+      "@@@STEP_LOG_LINE@json.output@        \"instance_id\": \"resolved-instance_id-of-goma------------\", @@@",
+      "@@@STEP_LOG_LINE@json.output@        \"package\": \"fuchsia/clang/resolved-platform\"@@@",
+      "@@@STEP_LOG_LINE@json.output@      }@@@",
+      "@@@STEP_LOG_LINE@json.output@    ], @@@",
+      "@@@STEP_LOG_LINE@json.output@    \"sysroot\": [@@@",
+      "@@@STEP_LOG_LINE@json.output@      {@@@",
+      "@@@STEP_LOG_LINE@json.output@        \"instance_id\": \"resolved-instance_id-of-git_revision:a28\", @@@",
+      "@@@STEP_LOG_LINE@json.output@        \"package\": \"fuchsia/sysroot/resolved-platform\"@@@",
+      "@@@STEP_LOG_LINE@json.output@      }@@@",
+      "@@@STEP_LOG_LINE@json.output@    ]@@@",
+      "@@@STEP_LOG_LINE@json.output@  }@@@",
+      "@@@STEP_LOG_LINE@json.output@}@@@",
+      "@@@STEP_LOG_END@json.output@@@"
+    ]
+  },
+  {
+    "cmd": [
+      "python",
+      "-u",
+      "[START_DIR]/ninja/configure.py",
+      "--bootstrap"
+    ],
+    "cwd": "[START_DIR]/ninja",
+    "env": {
+      "AR": "[START_DIR]/cipd/bin/llvm-ar",
+      "CXX": "[START_DIR]/cipd/bin/clang++",
+      "CXXFLAGS": "--sysroot=[START_DIR]/cipd/sysroot",
+      "LDFLAGS": "--sysroot=[START_DIR]/cipd/sysroot"
+    },
+    "name": "bootstrap"
+  },
+  {
+    "cmd": [],
+    "name": "test"
+  },
+  {
+    "cmd": [
+      "[START_DIR]/ninja/ninja",
+      "ninja_test"
+    ],
+    "cwd": "[START_DIR]/ninja",
+    "env": {
+      "AR": "[START_DIR]/cipd/bin/llvm-ar",
+      "CXX": "[START_DIR]/cipd/bin/clang++",
+      "CXXFLAGS": "--sysroot=[START_DIR]/cipd/sysroot",
+      "LDFLAGS": "--sysroot=[START_DIR]/cipd/sysroot"
+    },
+    "name": "test.ninja",
+    "~followup_annotations": [
+      "@@@STEP_NEST_LEVEL@1@@@"
+    ]
+  },
+  {
+    "cmd": [
+      "[START_DIR]/ninja/ninja_test"
+    ],
+    "cwd": "[START_DIR]/ninja",
+    "env": {
+      "AR": "[START_DIR]/cipd/bin/llvm-ar",
+      "CXX": "[START_DIR]/cipd/bin/clang++",
+      "CXXFLAGS": "--sysroot=[START_DIR]/cipd/sysroot",
+      "LDFLAGS": "--sysroot=[START_DIR]/cipd/sysroot"
+    },
+    "name": "test.test",
+    "~followup_annotations": [
+      "@@@STEP_NEST_LEVEL@1@@@"
+    ]
+  },
+  {
+    "cmd": [
+      "[START_DIR]/cipd/bin/llvm-objcopy",
+      "--strip-sections",
+      "[START_DIR]/ninja/ninja"
+    ],
+    "cwd": "[START_DIR]/ninja",
+    "env": {
+      "AR": "[START_DIR]/cipd/bin/llvm-ar",
+      "CXX": "[START_DIR]/cipd/bin/clang++",
+      "CXXFLAGS": "--sysroot=[START_DIR]/cipd/sysroot",
+      "LDFLAGS": "--sysroot=[START_DIR]/cipd/sysroot"
+    },
+    "name": "strip"
+  },
+  {
+    "cmd": [
+      "cipd",
+      "pkg-build",
+      "-pkg-def",
+      "{\"data\": [{\"file\": \"ninja\"}, {\"version_file\": \".versions/ninja.cipd_version\"}], \"install_mode\": \"copy\", \"package\": \"gn/ninja/${platform}\", \"root\": \"[START_DIR]/ninja/out\"}",
+      "-out",
+      "[CLEANUP]/ninja.cipd",
+      "-hash-algo",
+      "sha256",
+      "-json-output",
+      "/path/to/tmp/json"
+    ],
+    "name": "build gn/ninja/${platform}",
+    "~followup_annotations": [
+      "@@@STEP_LOG_LINE@json.output@{@@@",
+      "@@@STEP_LOG_LINE@json.output@  \"result\": {@@@",
+      "@@@STEP_LOG_LINE@json.output@    \"instance_id\": \"40-chars-fake-of-the-package-instance_id\", @@@",
+      "@@@STEP_LOG_LINE@json.output@    \"package\": \"gn/ninja/resolved-platform\"@@@",
+      "@@@STEP_LOG_LINE@json.output@  }@@@",
+      "@@@STEP_LOG_LINE@json.output@}@@@",
+      "@@@STEP_LOG_END@json.output@@@"
+    ]
+  },
+  {
+    "jsonResult": null,
+    "name": "$result"
+  }
+]

@@ -9,6 +9,7 @@
 **[Recipes](#Recipes)**
   * [gn](#recipes-gn) &mdash; Recipe for building GN.
   * [macos_sdk:examples/full](#recipes-macos_sdk_examples_full)
+  * [ninja](#recipes-ninja) &mdash; Recipe for building Ninja.
   * [windows_sdk:examples/full](#recipes-windows_sdk_examples_full)
 ## Recipe Modules
 
@@ -88,6 +89,13 @@ Recipe for building GN.
 [DEPS](/infra/recipe_modules/macos_sdk/examples/full.py#5): [macos\_sdk](#recipe_modules-macos_sdk), [recipe\_engine/platform][recipe_engine/recipe_modules/platform], [recipe\_engine/properties][recipe_engine/recipe_modules/properties], [recipe\_engine/step][recipe_engine/recipe_modules/step]
 
 &mdash; **def [RunSteps](/infra/recipe_modules/macos_sdk/examples/full.py#13)(api):**
+### *recipes* / [ninja](/infra/recipes/ninja.py)
+
+[DEPS](/infra/recipes/ninja.py#8): [macos\_sdk](#recipe_modules-macos_sdk), [windows\_sdk](#recipe_modules-windows_sdk), [recipe\_engine/buildbucket][recipe_engine/recipe_modules/buildbucket], [recipe\_engine/cipd][recipe_engine/recipe_modules/cipd], [recipe\_engine/context][recipe_engine/recipe_modules/context], [recipe\_engine/file][recipe_engine/recipe_modules/file], [recipe\_engine/json][recipe_engine/recipe_modules/json], [recipe\_engine/path][recipe_engine/recipe_modules/path], [recipe\_engine/platform][recipe_engine/recipe_modules/platform], [recipe\_engine/properties][recipe_engine/recipe_modules/properties], [recipe\_engine/python][recipe_engine/recipe_modules/python], [recipe\_engine/raw\_io][recipe_engine/recipe_modules/raw_io], [recipe\_engine/step][recipe_engine/recipe_modules/step]
+
+Recipe for building Ninja.
+
+&mdash; **def [RunSteps](/infra/recipes/ninja.py#27)(api):**
 ### *recipes* / [windows\_sdk:examples/full](/infra/recipe_modules/windows_sdk/examples/full.py)
 
 [DEPS](/infra/recipe_modules/windows_sdk/examples/full.py#5): [windows\_sdk](#recipe_modules-windows_sdk), [recipe\_engine/platform][recipe_engine/recipe_modules/platform], [recipe\_engine/properties][recipe_engine/recipe_modules/properties], [recipe\_engine/step][recipe_engine/recipe_modules/step]
