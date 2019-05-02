@@ -40,7 +40,7 @@ TEST_F(CompileCommandsTest, SourceSet) {
 
   std::vector<const Target*> targets;
   Target target(settings(), Label(SourceDir("//foo/"), "bar"));
-  target.set_output_type(Target::SOURCE_SET);
+  target.set_output_type(functions::kSourceSet);
   target.visibility().SetPublic();
   target.sources().push_back(SourceFile("//foo/input1.cc"));
   target.sources().push_back(SourceFile("//foo/input2.cc"));
@@ -97,7 +97,7 @@ TEST_F(CompileCommandsTest, SourceSet) {
   // A shared library that depends on the source set.
   Target shlib_target(settings(), Label(SourceDir("//foo/"), "shlib"));
   shlib_target.sources().push_back(SourceFile("//foo/input3.cc"));
-  shlib_target.set_output_type(Target::SHARED_LIBRARY);
+  shlib_target.set_output_type(functions::kSharedLibrary);
   shlib_target.public_deps().push_back(LabelTargetPair(&target));
   shlib_target.SetToolchain(toolchain());
   ASSERT_TRUE(shlib_target.OnResolved(&err));
@@ -159,7 +159,7 @@ TEST_F(CompileCommandsTest, SourceSet) {
   // A static library that depends on the source set (should not link it).
   Target stlib_target(settings(), Label(SourceDir("//foo/"), "stlib"));
   stlib_target.sources().push_back(SourceFile("//foo/input4.cc"));
-  stlib_target.set_output_type(Target::STATIC_LIBRARY);
+  stlib_target.set_output_type(functions::kStaticLibrary);
   stlib_target.public_deps().push_back(LabelTargetPair(&target));
   stlib_target.SetToolchain(toolchain());
   ASSERT_TRUE(stlib_target.OnResolved(&err));
@@ -235,7 +235,7 @@ TEST_F(CompileCommandsTest, EscapeDefines) {
   Err err;
 
   std::vector<const Target*> targets;
-  TestTarget target(setup(), "//foo:bar", Target::STATIC_LIBRARY);
+  TestTarget target(setup(), "//foo:bar", functions::kStaticLibrary);
   target.sources().push_back(SourceFile("//foo/input.cc"));
   target.config_values().defines().push_back("BOOL_DEF");
   target.config_values().defines().push_back("INT_DEF=123");
@@ -293,7 +293,7 @@ TEST_F(CompileCommandsTest, WinPrecompiledHeaders) {
     std::vector<const Target*> targets;
     Target no_pch_target(&pch_settings,
                          Label(SourceDir("//foo/"), "no_pch_target"));
-    no_pch_target.set_output_type(Target::SOURCE_SET);
+    no_pch_target.set_output_type(functions::kSourceSet);
     no_pch_target.visibility().SetPublic();
     no_pch_target.sources().push_back(SourceFile("//foo/input1.cc"));
     no_pch_target.sources().push_back(SourceFile("//foo/input2.c"));
@@ -349,7 +349,7 @@ TEST_F(CompileCommandsTest, WinPrecompiledHeaders) {
     pch_target.config_values().set_precompiled_header("build/precompile.h");
     pch_target.config_values().set_precompiled_source(
         SourceFile("//build/precompile.cc"));
-    pch_target.set_output_type(Target::SOURCE_SET);
+    pch_target.set_output_type(functions::kSourceSet);
     pch_target.visibility().SetPublic();
     pch_target.sources().push_back(SourceFile("//foo/input1.cc"));
     pch_target.sources().push_back(SourceFile("//foo/input2.c"));
@@ -444,7 +444,7 @@ TEST_F(CompileCommandsTest, GCCPrecompiledHeaders) {
     std::vector<const Target*> targets;
     Target no_pch_target(&pch_settings,
                          Label(SourceDir("//foo/"), "no_pch_target"));
-    no_pch_target.set_output_type(Target::SOURCE_SET);
+    no_pch_target.set_output_type(functions::kSourceSet);
     no_pch_target.visibility().SetPublic();
     no_pch_target.sources().push_back(SourceFile("//foo/input1.cc"));
     no_pch_target.sources().push_back(SourceFile("//foo/input2.c"));
@@ -500,7 +500,7 @@ TEST_F(CompileCommandsTest, GCCPrecompiledHeaders) {
     pch_target.config_values().set_precompiled_source(
         SourceFile("//build/precompile.h"));
     pch_target.config_values().cflags_c().push_back("-std=c99");
-    pch_target.set_output_type(Target::SOURCE_SET);
+    pch_target.set_output_type(functions::kSourceSet);
     pch_target.visibility().SetPublic();
     pch_target.sources().push_back(SourceFile("//foo/input1.cc"));
     pch_target.sources().push_back(SourceFile("//foo/input2.c"));
@@ -558,7 +558,7 @@ TEST_F(CompileCommandsTest, EscapedFlags) {
 
   std::vector<const Target*> targets;
   Target target(settings(), Label(SourceDir("//foo/"), "bar"));
-  target.set_output_type(Target::SOURCE_SET);
+  target.set_output_type(functions::kSourceSet);
   target.sources().push_back(SourceFile("//foo/input1.c"));
   target.config_values().cflags_c().push_back("-DCONFIG=\"/config\"");
   target.SetToolchain(toolchain());
@@ -598,7 +598,7 @@ TEST_F(CompileCommandsTest, CompDBFilter) {
 
   std::vector<const Target*> targets;
   Target target1(settings(), Label(SourceDir("//foo/"), "bar1"));
-  target1.set_output_type(Target::SOURCE_SET);
+  target1.set_output_type(functions::kSourceSet);
   target1.sources().push_back(SourceFile("//foo/input1.c"));
   target1.config_values().cflags_c().push_back("-DCONFIG=\"/config\"");
   target1.SetToolchain(toolchain());
@@ -606,7 +606,7 @@ TEST_F(CompileCommandsTest, CompDBFilter) {
   targets.push_back(&target1);
 
   Target target2(settings(), Label(SourceDir("//foo/"), "bar2"));
-  target2.set_output_type(Target::SOURCE_SET);
+  target2.set_output_type(functions::kSourceSet);
   target2.sources().push_back(SourceFile("//foo/input2.c"));
   target2.config_values().cflags_c().push_back("-DCONFIG=\"/config\"");
   target2.SetToolchain(toolchain());
@@ -614,7 +614,7 @@ TEST_F(CompileCommandsTest, CompDBFilter) {
   targets.push_back(&target2);
 
   Target target3(settings(), Label(SourceDir("//foo/"), "bar3"));
-  target3.set_output_type(Target::SOURCE_SET);
+  target3.set_output_type(functions::kSourceSet);
   target3.sources().push_back(SourceFile("//foo/input3.c"));
   target3.config_values().cflags_c().push_back("-DCONFIG=\"/config\"");
   target3.SetToolchain(toolchain());

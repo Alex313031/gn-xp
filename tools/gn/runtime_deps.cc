@@ -75,9 +75,9 @@ void RecursiveCollectRuntimeDeps(const Target* target,
 
   // Add the main output file for executables, shared libraries, and
   // loadable modules.
-  if (target->output_type() == Target::EXECUTABLE ||
-      target->output_type() == Target::LOADABLE_MODULE ||
-      target->output_type() == Target::SHARED_LIBRARY) {
+  if (target->output_type() == functions::kExecutable ||
+      target->output_type() == functions::kLoadableModule ||
+      target->output_type() == functions::kSharedLibrary) {
     for (const auto& runtime_output : target->runtime_outputs())
       AddIfNew(runtime_output, target, deps, found_files);
   }
@@ -87,9 +87,9 @@ void RecursiveCollectRuntimeDeps(const Target* target,
     AddIfNew(file, target, deps, found_files);
 
   // Actions/copy have all outputs considered when the're a data dep.
-  if (is_target_data_dep && (target->output_type() == Target::ACTION ||
-                             target->output_type() == Target::ACTION_FOREACH ||
-                             target->output_type() == Target::COPY_FILES)) {
+  if (is_target_data_dep && (target->output_type() == functions::kAction ||
+                             target->output_type() == functions::kActionForEach ||
+                             target->output_type() == functions::kCopy)) {
     std::vector<SourceFile> outputs;
     target->action_values().GetOutputsAsSourceFiles(target, &outputs);
     for (const auto& output_file : outputs)
@@ -104,7 +104,7 @@ void RecursiveCollectRuntimeDeps(const Target* target,
 
   // Do not recurse into bundle targets. A bundle's dependencies should be
   // copied into the bundle itself for run-time access.
-  if (target->output_type() == Target::CREATE_BUNDLE) {
+  if (target->output_type() == functions::kCreateBundle) {
     SourceDir bundle_root_dir =
         target->bundle_data().GetBundleRootDirOutputAsDir(target->settings());
     AddIfNew(bundle_root_dir.value(), target, deps, found_files);
@@ -113,11 +113,11 @@ void RecursiveCollectRuntimeDeps(const Target* target,
 
   // Non-data dependencies (both public and private).
   for (const auto& dep_pair : target->GetDeps(Target::DEPS_LINKED)) {
-    if (dep_pair.ptr->output_type() == Target::EXECUTABLE)
+    if (dep_pair.ptr->output_type() == functions::kExecutable)
       continue;  // Skip executables that aren't data deps.
-    if (dep_pair.ptr->output_type() == Target::SHARED_LIBRARY &&
-        (target->output_type() == Target::ACTION ||
-         target->output_type() == Target::ACTION_FOREACH)) {
+    if (dep_pair.ptr->output_type() == functions::kSharedLibrary &&
+        (target->output_type() == functions::kAction ||
+         target->output_type() == functions::kActionForEach)) {
       // Skip shared libraries that action depends on,
       // unless it were listed in data deps.
       continue;
@@ -176,8 +176,8 @@ bool CollectRuntimeDepsFromFlag(const Builder& builder,
 
     OutputFile output_file;
     const char extension[] = ".runtime_deps";
-    if (target->output_type() == Target::SHARED_LIBRARY ||
-        target->output_type() == Target::LOADABLE_MODULE) {
+    if (target->output_type() == functions::kSharedLibrary ||
+        target->output_type() == functions::kLoadableModule) {
       // Force the first output for shared-library-type linker outputs since
       // the dependency output files might not be the main output.
       CHECK(!target->computed_outputs().empty());

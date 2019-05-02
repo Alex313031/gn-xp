@@ -294,28 +294,26 @@ const char* Tool::GetToolTypeForTargetFinalOutput(const Target* target) {
   // The contents of this list might be suprising (i.e. stamp tool for copy
   // rules). See the header for why.
   // TODO(crbug.com/gn/39): Don't emit stamp files for single-output targets.
-  switch (target->output_type()) {
-    case Target::GROUP:
-      return GeneralTool::kGeneralToolStamp;
-    case Target::EXECUTABLE:
-      return CTool::kCToolLink;
-    case Target::SHARED_LIBRARY:
-      return CTool::kCToolSolink;
-    case Target::LOADABLE_MODULE:
-      return CTool::kCToolSolinkModule;
-    case Target::STATIC_LIBRARY:
-      return CTool::kCToolAlink;
-    case Target::SOURCE_SET:
-      return GeneralTool::kGeneralToolStamp;
-    case Target::ACTION:
-    case Target::ACTION_FOREACH:
-    case Target::BUNDLE_DATA:
-    case Target::CREATE_BUNDLE:
-    case Target::COPY_FILES:
-    case Target::GENERATED_FILE:
-      return GeneralTool::kGeneralToolStamp;
-    default:
-      NOTREACHED();
-      return kToolNone;
-  }
+  // TODO(juliehockett): Adjust this to consider SourceFileType
+  if (target->output_type() == functions::kGroup)
+    return GeneralTool::kGeneralToolStamp;
+  else if (target->output_type() == functions::kExecutable)
+    return CTool::kCToolLink;
+  else if (target->output_type() == functions::kSharedLibrary)
+    return CTool::kCToolSolink;
+  else if (target->output_type() == functions::kLoadableModule)
+    return CTool::kCToolSolinkModule;
+  else if (target->output_type() == functions::kStaticLibrary)
+    return CTool::kCToolAlink;
+  else if (target->output_type() == functions::kSourceSet)
+    return GeneralTool::kGeneralToolStamp;
+  else if (target->output_type() == functions::kAction ||
+           target->output_type() == functions::kActionForEach ||
+           target->output_type() == functions::kBundleData ||
+           target->output_type() == functions::kCreateBundle ||
+           target->output_type() == functions::kCopy ||
+           target->output_type() == functions::kGeneratedFile)
+    return GeneralTool::kGeneralToolStamp;
+  NOTREACHED();
+  return kToolNone;
 }

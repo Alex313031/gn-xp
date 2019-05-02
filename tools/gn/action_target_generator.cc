@@ -19,7 +19,7 @@ ActionTargetGenerator::ActionTargetGenerator(
     Target* target,
     Scope* scope,
     const FunctionCallNode* function_call,
-    Target::OutputType type,
+    const char* type,
     Err* err)
     : TargetGenerator(target, scope, function_call, err), output_type_(type) {}
 
@@ -30,7 +30,7 @@ void ActionTargetGenerator::DoRun() {
 
   if (!FillSources())
     return;
-  if (output_type_ == Target::ACTION_FOREACH && target_->sources().empty()) {
+  if (output_type_ == functions::kActionForEach && target_->sources().empty()) {
     // Foreach rules must always have some sources to have an effect.
     *err_ =
         Err(function_call_, "action_foreach target has no sources.",
@@ -51,7 +51,7 @@ void ActionTargetGenerator::DoRun() {
   if (!FillResponseFileContents())
     return;
 
-  if (!FillOutputs(output_type_ == Target::ACTION_FOREACH))
+  if (!FillOutputs(output_type_ == functions::kActionForEach))
     return;
 
   if (!FillDepfile())
@@ -184,7 +184,7 @@ bool ActionTargetGenerator::CheckOutputs() {
     return false;
   }
 
-  if (output_type_ == Target::ACTION) {
+  if (output_type_ == functions::kAction) {
     if (!outputs.required_types().empty()) {
       *err_ = Err(
           function_call_, "Action has patterns in the output.",
@@ -193,7 +193,7 @@ bool ActionTargetGenerator::CheckOutputs() {
           "\"action_foreach\" target.");
       return false;
     }
-  } else if (output_type_ == Target::ACTION_FOREACH) {
+  } else if (output_type_ == functions::kActionForEach) {
     // A foreach target should always have a pattern in the outputs.
     if (outputs.required_types().empty()) {
       *err_ = Err(

@@ -115,7 +115,7 @@ class TestTarget : public Target {
  public:
   TestTarget(const TestWithScope& setup,
              const std::string& label_string,
-             Target::OutputType type);
+             const char* type);
   ~TestTarget() override;
 };
 

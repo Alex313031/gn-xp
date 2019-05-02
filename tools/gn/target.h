@@ -15,6 +15,7 @@
 #include "tools/gn/action_values.h"
 #include "tools/gn/bundle_data.h"
 #include "tools/gn/config_values.h"
+#include "tools/gn/functions.h"
 #include "tools/gn/inherited_libraries.h"
 #include "tools/gn/item.h"
 #include "tools/gn/label_pattern.h"
@@ -33,21 +34,7 @@ class Toolchain;
 
 class Target : public Item {
  public:
-  enum OutputType {
-    UNKNOWN,
-    GROUP,
-    EXECUTABLE,
-    SHARED_LIBRARY,
-    LOADABLE_MODULE,
-    STATIC_LIBRARY,
-    SOURCE_SET,
-    COPY_FILES,
-    ACTION,
-    ACTION_FOREACH,
-    BUNDLE_DATA,
-    CREATE_BUNDLE,
-    GENERATED_FILE,
-  };
+  static const char* kTypeUnknown;
 
   enum DepsIterationType {
     DEPS_ALL,     // Iterates through all public, private, and data deps.
@@ -64,16 +51,13 @@ class Target : public Item {
          const std::set<SourceFile>& build_dependency_files = {});
   ~Target() override;
 
-  // Returns a string naming the output type.
-  static const char* GetStringForOutputType(OutputType type);
-
   // Item overrides.
   Target* AsTarget() override;
   const Target* AsTarget() const override;
   bool OnResolved(Err* err) override;
 
-  OutputType output_type() const { return output_type_; }
-  void set_output_type(OutputType t) { output_type_ = t; }
+  const char* output_type() const { return output_type_; }
+  void set_output_type(const char* t) { output_type_ = t; }
 
   // True for targets that compile source code (all types of libaries and
   // executables).
@@ -142,7 +126,7 @@ class Target : public Item {
   // Whether this static_library target should have code linked in.
   bool complete_static_lib() const { return complete_static_lib_; }
   void set_complete_static_lib(bool complete) {
-    DCHECK_EQ(STATIC_LIBRARY, output_type_);
+    DCHECK_EQ(functions::kStaticLibrary, output_type_);
     complete_static_lib_ = complete;
   }
 
@@ -200,9 +184,12 @@ class Target : public Item {
   // Returns true if targets depending on this one should have an order
   // dependency.
   bool hard_dep() const {
-    return output_type_ == ACTION || output_type_ == ACTION_FOREACH ||
-           output_type_ == COPY_FILES || output_type_ == CREATE_BUNDLE ||
-           output_type_ == BUNDLE_DATA || output_type_ == GENERATED_FILE;
+    return output_type_ == functions::kAction ||
+           output_type_ == functions::kActionForEach ||
+           output_type_ == functions::kCopy ||
+           output_type_ == functions::kCreateBundle ||
+           output_type_ == functions::kBundleData ||
+           output_type_ == functions::kGeneratedFile;
   }
 
   // Returns the iterator range which can be used in range-based for loops
@@ -359,7 +346,7 @@ class Target : public Item {
   void CheckSourcesGenerated() const;
   void CheckSourceGenerated(const SourceFile& source) const;
 
-  OutputType output_type_;
+  const char* output_type_;
   std::string output_name_;
   bool output_prefix_override_;
   SourceDir output_dir_;

@@ -317,8 +317,7 @@ bool PrintTarget(const Target* target,
       DescBuilder::DescriptionForTarget(target, what, all, tree, blame);
   if (!what.empty() && dict->empty()) {
     OutputString("Don't know how to display \"" + what + "\" for \"" +
-                 Target::GetStringForOutputType(target->output_type()) +
-                 "\".\n");
+                 target->output_type() + "\".\n");
     return false;
   }
   // Print single value

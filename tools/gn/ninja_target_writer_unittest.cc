@@ -38,7 +38,7 @@ TEST(NinjaTargetWriter, WriteInputDepsStampAndGetDep) {
 
   // Make a base target that's a hard dep (action).
   Target base_target(setup.settings(), Label(SourceDir("//foo/"), "base"));
-  base_target.set_output_type(Target::ACTION);
+  base_target.set_output_type(functions::kAction);
   base_target.visibility().SetPublic();
   base_target.SetToolchain(setup.toolchain());
   base_target.action_values().set_script(SourceFile("//foo/script.py"));
@@ -46,7 +46,7 @@ TEST(NinjaTargetWriter, WriteInputDepsStampAndGetDep) {
   // Dependent target that also includes a source prerequisite (should get
   // included) and a source (should not be included).
   Target target(setup.settings(), Label(SourceDir("//foo/"), "target"));
-  target.set_output_type(Target::EXECUTABLE);
+  target.set_output_type(functions::kExecutable);
   target.visibility().SetPublic();
   target.SetToolchain(setup.toolchain());
   target.config_values().inputs().push_back(SourceFile("//foo/input.txt"));
@@ -56,7 +56,7 @@ TEST(NinjaTargetWriter, WriteInputDepsStampAndGetDep) {
   // Dependent action to test that action sources will be treated the same as
   // inputs.
   Target action(setup.settings(), Label(SourceDir("//foo/"), "action"));
-  action.set_output_type(Target::ACTION);
+  action.set_output_type(functions::kAction);
   action.visibility().SetPublic();
   action.SetToolchain(setup.toolchain());
   action.action_values().set_script(SourceFile("//foo/script.py"));
@@ -139,14 +139,14 @@ TEST(NinjaTargetWriter, WriteInputDepsStampAndGetDepWithToolchainDeps) {
   // toolchain, and the toolchain depends on this target).
   Target toolchain_dep_target(setup.settings(),
                               Label(SourceDir("//foo/"), "setup"));
-  toolchain_dep_target.set_output_type(Target::ACTION);
+  toolchain_dep_target.set_output_type(functions::kAction);
   toolchain_dep_target.SetToolchain(setup.toolchain());
   ASSERT_TRUE(toolchain_dep_target.OnResolved(&err));
   setup.toolchain()->deps().push_back(LabelTargetPair(&toolchain_dep_target));
 
   // Make a binary target
   Target target(setup.settings(), Label(SourceDir("//foo/"), "target"));
-  target.set_output_type(Target::EXECUTABLE);
+  target.set_output_type(functions::kExecutable);
   target.SetToolchain(setup.toolchain());
   ASSERT_TRUE(target.OnResolved(&err));
 

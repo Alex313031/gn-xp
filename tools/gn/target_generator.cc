@@ -111,38 +111,38 @@ void TargetGenerator::GenerateTarget(Scope* scope,
     generator.Run();
   } else if (output_type == functions::kAction) {
     ActionTargetGenerator generator(target.get(), scope, function_call,
-                                    Target::ACTION, err);
+                                    functions::kAction, err);
     generator.Run();
   } else if (output_type == functions::kActionForEach) {
     ActionTargetGenerator generator(target.get(), scope, function_call,
-                                    Target::ACTION_FOREACH, err);
+                                    functions::kActionForEach, err);
     generator.Run();
   } else if (output_type == functions::kExecutable) {
     BinaryTargetGenerator generator(target.get(), scope, function_call,
-                                    Target::EXECUTABLE, err);
+                                    functions::kExecutable, err);
     generator.Run();
   } else if (output_type == functions::kGroup) {
     GroupTargetGenerator generator(target.get(), scope, function_call, err);
     generator.Run();
   } else if (output_type == functions::kLoadableModule) {
     BinaryTargetGenerator generator(target.get(), scope, function_call,
-                                    Target::LOADABLE_MODULE, err);
+                                    functions::kLoadableModule, err);
     generator.Run();
   } else if (output_type == functions::kSharedLibrary) {
     BinaryTargetGenerator generator(target.get(), scope, function_call,
-                                    Target::SHARED_LIBRARY, err);
+                                    functions::kSharedLibrary, err);
     generator.Run();
   } else if (output_type == functions::kSourceSet) {
     BinaryTargetGenerator generator(target.get(), scope, function_call,
-                                    Target::SOURCE_SET, err);
+                                    functions::kSourceSet, err);
     generator.Run();
   } else if (output_type == functions::kStaticLibrary) {
     BinaryTargetGenerator generator(target.get(), scope, function_call,
-                                    Target::STATIC_LIBRARY, err);
+                                    functions::kStaticLibrary, err);
     generator.Run();
   } else if (output_type == functions::kGeneratedFile) {
     GeneratedFileTargetGenerator generator(target.get(), scope, function_call,
-                                           Target::GENERATED_FILE, err);
+                                           functions::kGeneratedFile, err);
     generator.Run();
   } else {
     *err = Err(function_call, "Not a known target type",

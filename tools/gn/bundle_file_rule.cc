@@ -36,7 +36,7 @@ BundleFileRule::BundleFileRule(const Target* bundle_data_target,
                                const SubstitutionPattern& pattern)
     : target_(bundle_data_target), sources_(sources), pattern_(pattern) {
   // target_ may be null during testing.
-  DCHECK(!target_ || target_->output_type() == Target::BUNDLE_DATA);
+  DCHECK(!target_ || target_->output_type() == functions::kBundleData);
 }
 
 BundleFileRule::BundleFileRule(const BundleFileRule& other) = default;

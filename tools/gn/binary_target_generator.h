@@ -16,7 +16,7 @@ class BinaryTargetGenerator : public TargetGenerator {
   BinaryTargetGenerator(Target* target,
                         Scope* scope,
                         const FunctionCallNode* function_call,
-                        Target::OutputType type,
+                        const char* type,
                         Err* err);
   ~BinaryTargetGenerator() override;
 
@@ -32,7 +32,7 @@ class BinaryTargetGenerator : public TargetGenerator {
   bool FillOutputExtension();
   bool FillAllowCircularIncludesFrom();
 
-  Target::OutputType output_type_;
+  const char* output_type_;
 
   DISALLOW_COPY_AND_ASSIGN(BinaryTargetGenerator);
 };

@@ -242,7 +242,7 @@ TEST_F(AnalyzerTest, TargetRefersToData) {
 TEST_F(AnalyzerTest, TargetRefersToActionScript) {
   Target* t = MakeTarget("//dir", "target_name");
   builder_.ItemDefined(std::unique_ptr<Item>(t));
-  t->set_output_type(Target::ACTION);
+  t->set_output_type(functions::kAction);
   RunAnalyzerTest(
       R"({
        "files": [ "//dir/script.py" ],
@@ -376,7 +376,7 @@ TEST_F(AnalyzerTest, AffectedConfigpropagatesToDependentTargets) {
 // dependent test_targets.
 TEST_F(AnalyzerTest, AffectedToolchainpropagatesToDependentTargets) {
   Target* target = MakeTarget("//dir", "target_name");
-  target->set_output_type(Target::EXECUTABLE);
+  target->set_output_type(functions::kExecutable);
   Toolchain* toolchain = new Toolchain(&settings_, settings_.toolchain_label());
 
   // The tool is not used anywhere, but is required to construct the dependency
@@ -418,7 +418,7 @@ TEST_F(AnalyzerTest, AffectedToolchainpropagatesToDependentTargets) {
 // targets.
 TEST_F(AnalyzerTest, AffectedPoolpropagatesToDependentTargets) {
   Target* t = MakeTarget("//dir", "target_name");
-  t->set_output_type(Target::ACTION);
+  t->set_output_type(functions::kAction);
   Pool* p = MakePool("//dir", "pool_name");
   t->action_values().set_pool(LabelPtrPair<Pool>(p));
 

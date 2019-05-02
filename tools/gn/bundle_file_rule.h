@@ -40,7 +40,7 @@ class BundleFileRule {
                                         OutputFile* expanded_output_file,
                                         Err* err) const;
 
-  // Returns the associated target (of type Target::BUNDLE_DATA). May be
+  // Returns the associated target (of type functions::kBundleData). May be
   // null during testing.
   const Target* target() const { return target_; }
 

@@ -130,7 +130,7 @@ bool EnsureFileIsGeneratedByDependency(const Target* target,
                                             check_data_deps, seen_targets))
         return true;  // Found a path.
     }
-    if (target->output_type() == Target::CREATE_BUNDLE) {
+    if (target->output_type() == functions::kCreateBundle) {
       for (auto* dep : target->bundle_data().bundle_deps()) {
         if (EnsureFileIsGeneratedByDependency(dep, file, false,
                                               consider_object_files,
@@ -182,7 +182,7 @@ bool RecursiveCheckAssertNoDeps(const Target* target,
 
   // Recursively check dependencies.
   for (const auto& pair : target->GetDeps(Target::DEPS_ALL)) {
-    if (pair.ptr->output_type() == Target::EXECUTABLE)
+    if (pair.ptr->output_type() == functions::kExecutable)
       continue;
     if (!RecursiveCheckAssertNoDeps(pair.ptr, true, assert_no, visited,
                                     failure_path_str, failure_pattern)) {
@@ -277,11 +277,13 @@ Dependencies
   future, do not rely on this behavior.
 )";
 
+const char* Target::kTypeUnknown = "";
+
 Target::Target(const Settings* settings,
                const Label& label,
                const std::set<SourceFile>& build_dependency_files)
     : Item(settings, label, build_dependency_files),
-      output_type_(UNKNOWN),
+      output_type_(Target::kTypeUnknown),
       output_prefix_override_(false),
       output_extension_set_(false),
       all_headers_public_(true),
@@ -292,40 +294,6 @@ Target::Target(const Settings* settings,
 
 Target::~Target() = default;
 
-// static
-const char* Target::GetStringForOutputType(OutputType type) {
-  switch (type) {
-    case UNKNOWN:
-      return "unknown";
-    case GROUP:
-      return functions::kGroup;
-    case EXECUTABLE:
-      return functions::kExecutable;
-    case LOADABLE_MODULE:
-      return functions::kLoadableModule;
-    case SHARED_LIBRARY:
-      return functions::kSharedLibrary;
-    case STATIC_LIBRARY:
-      return functions::kStaticLibrary;
-    case SOURCE_SET:
-      return functions::kSourceSet;
-    case COPY_FILES:
-      return functions::kCopy;
-    case ACTION:
-      return functions::kAction;
-    case ACTION_FOREACH:
-      return functions::kActionForEach;
-    case BUNDLE_DATA:
-      return functions::kBundleData;
-    case CREATE_BUNDLE:
-      return functions::kCreateBundle;
-    case GENERATED_FILE:
-      return functions::kGeneratedFile;
-    default:
-      return "";
-  }
-}
-
 Target* Target::AsTarget() {
   return this;
 }
@@ -335,7 +303,7 @@ const Target* Target::AsTarget() const {
 }
 
 bool Target::OnResolved(Err* err) {
-  DCHECK(output_type_ != UNKNOWN);
+  DCHECK(output_type_ != kTypeUnknown);
   DCHECK(toolchain_) << "Toolchain should have been set before resolving.";
 
   ScopedTrace trace(TraceItem::TRACE_ON_RESOLVED, label());
@@ -396,7 +364,7 @@ bool Target::OnResolved(Err* err) {
   if (!write_runtime_deps_output_.value().empty())
     g_scheduler->AddWriteRuntimeDepsTarget(this);
 
-  if (output_type_ == GENERATED_FILE) {
+  if (output_type_ == functions::kGeneratedFile) {
     DCHECK(!computed_outputs_.empty());
     g_scheduler->AddGeneratedFile(
         computed_outputs_[0].AsSourceFile(settings()->build_settings()));
@@ -406,21 +374,27 @@ bool Target::OnResolved(Err* err) {
 }
 
 bool Target::IsBinary() const {
-  return output_type_ == EXECUTABLE || output_type_ == SHARED_LIBRARY ||
-         output_type_ == LOADABLE_MODULE || output_type_ == STATIC_LIBRARY ||
-         output_type_ == SOURCE_SET;
+  return output_type_ == functions::kExecutable ||
+         output_type_ == functions::kSharedLibrary ||
+         output_type_ == functions::kLoadableModule ||
+         output_type_ == functions::kStaticLibrary ||
+         output_type_ == functions::kSourceSet;
 }
 
 bool Target::IsLinkable() const {
-  return output_type_ == STATIC_LIBRARY || output_type_ == SHARED_LIBRARY;
+  return output_type_ == functions::kStaticLibrary ||
+         output_type_ == functions::kSharedLibrary;
 }
 
 bool Target::IsFinal() const {
-  return output_type_ == EXECUTABLE || output_type_ == SHARED_LIBRARY ||
-         output_type_ == LOADABLE_MODULE || output_type_ == ACTION ||
-         output_type_ == ACTION_FOREACH || output_type_ == COPY_FILES ||
-         output_type_ == CREATE_BUNDLE ||
-         (output_type_ == STATIC_LIBRARY && complete_static_lib_);
+  return output_type_ == functions::kExecutable ||
+         output_type_ == functions::kSharedLibrary ||
+         output_type_ == functions::kLoadableModule ||
+         output_type_ == functions::kAction ||
+         output_type_ == functions::kActionForEach ||
+         output_type_ == functions::kCopy ||
+         output_type_ == functions::kCreateBundle ||
+         (output_type_ == functions::kStaticLibrary && complete_static_lib_);
 }
 
 DepsIteratorRange Target::GetDeps(DepsIterationType type) const {
@@ -456,7 +430,7 @@ std::string Target::GetComputedOutputName() const {
 
 bool Target::SetToolchain(const Toolchain* toolchain, Err* err) {
   DCHECK(!toolchain_);
-  DCHECK_NE(UNKNOWN, output_type_);
+  DCHECK_NE(kTypeUnknown, output_type_);
   toolchain_ = toolchain;
 
   const Tool* tool = toolchain->GetToolForTargetFinalOutput(this);
@@ -465,18 +439,17 @@ bool Target::SetToolchain(const Toolchain* toolchain, Err* err) {
 
   // Tool not specified for this target type.
   if (err) {
-    *err = Err(
-        defined_from(), "This target uses an undefined tool.",
-        base::StringPrintf(
-            "The target %s\n"
-            "of type \"%s\"\n"
-            "uses toolchain %s\n"
-            "which doesn't have the tool \"%s\" defined.\n\n"
-            "Alas, I can not continue.",
-            label().GetUserVisibleName(false).c_str(),
-            GetStringForOutputType(output_type_),
-            label().GetToolchainLabel().GetUserVisibleName(false).c_str(),
-            Tool::GetToolTypeForTargetFinalOutput(this)));
+    *err =
+        Err(defined_from(), "This target uses an undefined tool.",
+            base::StringPrintf(
+                "The target %s\n"
+                "of type \"%s\"\n"
+                "uses toolchain %s\n"
+                "which doesn't have the tool \"%s\" defined.\n\n"
+                "Alas, I can not continue.",
+                label().GetUserVisibleName(false).c_str(), output_type_,
+                label().GetToolchainLabel().GetUserVisibleName(false).c_str(),
+                Tool::GetToolTypeForTargetFinalOutput(this)));
   }
   return false;
 }
@@ -525,11 +498,12 @@ void Target::PullDependentTargetConfigs() {
 
 void Target::PullDependentTargetLibsFrom(const Target* dep, bool is_public) {
   // Direct dependent libraries.
-  if (dep->output_type() == STATIC_LIBRARY ||
-      dep->output_type() == SHARED_LIBRARY || dep->output_type() == SOURCE_SET)
+  if (dep->output_type() == functions::kStaticLibrary ||
+      dep->output_type() == functions::kSharedLibrary ||
+      dep->output_type() == functions::kSourceSet)
     inherited_libraries_.Append(dep, is_public);
 
-  if (dep->output_type() == SHARED_LIBRARY) {
+  if (dep->output_type() == functions::kSharedLibrary) {
     // Shared library dependendencies are inherited across public shared
     // library boundaries.
     //
@@ -572,7 +546,7 @@ void Target::PullDependentTargetLibsFrom(const Target* dep, bool is_public) {
   }
 
   // Library settings are always inherited across static library boundaries.
-  if (!dep->IsFinal() || dep->output_type() == STATIC_LIBRARY) {
+  if (!dep->IsFinal() || dep->output_type() == functions::kStaticLibrary) {
     all_lib_dirs_.append(dep->all_lib_dirs());
     all_libs_.append(dep->all_libs());
   }
@@ -610,7 +584,7 @@ void Target::PullRecursiveHardDeps() {
 void Target::PullRecursiveBundleData() {
   for (const auto& pair : GetDeps(DEPS_LINKED)) {
     // Don't propagate bundle_data once they are added to a bundle.
-    if (pair.ptr->output_type() == CREATE_BUNDLE)
+    if (pair.ptr->output_type() == functions::kCreateBundle)
       continue;
 
     // Don't propagate across toolchain.
@@ -618,7 +592,7 @@ void Target::PullRecursiveBundleData() {
       continue;
 
     // Direct dependency on a bundle_data target.
-    if (pair.ptr->output_type() == BUNDLE_DATA)
+    if (pair.ptr->output_type() == functions::kBundleData)
       bundle_data_.AddBundleData(pair.ptr);
 
     // Recursive bundle_data informations from all dependencies.
@@ -632,89 +606,81 @@ void Target::PullRecursiveBundleData() {
 bool Target::FillOutputFiles(Err* err) {
   const Tool* tool = toolchain_->GetToolForTargetFinalOutput(this);
   bool check_tool_outputs = false;
-  switch (output_type_) {
-    case GROUP:
-    case BUNDLE_DATA:
-    case CREATE_BUNDLE:
-    case SOURCE_SET:
-    case COPY_FILES:
-    case ACTION:
-    case ACTION_FOREACH:
-    case GENERATED_FILE: {
-      // These don't get linked to and use stamps which should be the first
-      // entry in the outputs. These stamps are named
-      // "<target_out_dir>/<targetname>.stamp".
-      dependency_output_file_ =
-          GetBuildDirForTargetAsOutputFile(this, BuildDirType::OBJ);
-      dependency_output_file_.value().append(GetComputedOutputName());
-      dependency_output_file_.value().append(".stamp");
-      break;
-    }
-    case EXECUTABLE:
-    case LOADABLE_MODULE:
-      // Executables and loadable modules don't get linked to, but the first
-      // output is used for dependency management.
-      CHECK_GE(tool->outputs().list().size(), 1u);
-      check_tool_outputs = true;
-      dependency_output_file_ =
-          SubstitutionWriter::ApplyPatternToLinkerAsOutputFile(
-              this, tool, tool->outputs().list()[0]);
+  if (output_type_ == functions::kGroup ||
+      output_type_ == functions::kBundleData ||
+      output_type_ == functions::kCreateBundle ||
+      output_type_ == functions::kSourceSet ||
+      output_type_ == functions::kCopy || output_type_ == functions::kAction ||
+      output_type_ == functions::kActionForEach ||
+      output_type_ == functions::kGeneratedFile) {
+    // These don't get linked to and use stamps which should be the first
+    // entry in the outputs. These stamps are named
+    // "<target_out_dir>/<targetname>.stamp".
+    dependency_output_file_ =
+        GetBuildDirForTargetAsOutputFile(this, BuildDirType::OBJ);
+    dependency_output_file_.value().append(GetComputedOutputName());
+    dependency_output_file_.value().append(".stamp");
+  } else if (output_type_ == functions::kExecutable ||
+             output_type_ == functions::kLoadableModule) {
+    // Executables and loadable modules don't get linked to, but the first
+    // output is used for dependency management.
+    CHECK_GE(tool->outputs().list().size(), 1u);
+    check_tool_outputs = true;
+    dependency_output_file_ =
+        SubstitutionWriter::ApplyPatternToLinkerAsOutputFile(
+            this, tool, tool->outputs().list()[0]);
 
+    if (tool->runtime_outputs().list().empty()) {
+      // Default to the first output for the runtime output.
+      runtime_outputs_.push_back(dependency_output_file_);
+    } else {
+      SubstitutionWriter::ApplyListToLinkerAsOutputFile(
+          this, tool, tool->runtime_outputs(), &runtime_outputs_);
+    }
+  } else if (output_type_ == functions::kStaticLibrary) {
+    // Static libraries both have dependencies and linking going off of the
+    // first output.
+    CHECK(tool->outputs().list().size() >= 1);
+    check_tool_outputs = true;
+    link_output_file_ = dependency_output_file_ =
+        SubstitutionWriter::ApplyPatternToLinkerAsOutputFile(
+            this, tool, tool->outputs().list()[0]);
+  } else if (output_type_ == functions::kSharedLibrary) {
+    CHECK(tool->outputs().list().size() >= 1);
+    check_tool_outputs = true;
+    if (const CTool* ctool = tool->AsC()) {
+      if (ctool->link_output().empty() && ctool->depend_output().empty()) {
+        // Default behavior, use the first output file for both.
+        link_output_file_ = dependency_output_file_ =
+            SubstitutionWriter::ApplyPatternToLinkerAsOutputFile(
+                this, tool, tool->outputs().list()[0]);
+      } else {
+        // Use the tool-specified ones.
+        if (!ctool->link_output().empty()) {
+          link_output_file_ =
+              SubstitutionWriter::ApplyPatternToLinkerAsOutputFile(
+                  this, tool, ctool->link_output());
+        }
+        if (!ctool->depend_output().empty()) {
+          dependency_output_file_ =
+              SubstitutionWriter::ApplyPatternToLinkerAsOutputFile(
+                  this, tool, ctool->depend_output());
+        }
+      }
       if (tool->runtime_outputs().list().empty()) {
-        // Default to the first output for the runtime output.
-        runtime_outputs_.push_back(dependency_output_file_);
+        // Default to the link output for the runtime output.
+        runtime_outputs_.push_back(link_output_file_);
       } else {
         SubstitutionWriter::ApplyListToLinkerAsOutputFile(
             this, tool, tool->runtime_outputs(), &runtime_outputs_);
       }
-      break;
-    case STATIC_LIBRARY:
-      // Static libraries both have dependencies and linking going off of the
-      // first output.
-      CHECK(tool->outputs().list().size() >= 1);
-      check_tool_outputs = true;
-      link_output_file_ = dependency_output_file_ =
-          SubstitutionWriter::ApplyPatternToLinkerAsOutputFile(
-              this, tool, tool->outputs().list()[0]);
-      break;
-    case SHARED_LIBRARY:
-      CHECK(tool->outputs().list().size() >= 1);
-      check_tool_outputs = true;
-      if (const CTool* ctool = tool->AsC()) {
-        if (ctool->link_output().empty() && ctool->depend_output().empty()) {
-          // Default behavior, use the first output file for both.
-          link_output_file_ = dependency_output_file_ =
-              SubstitutionWriter::ApplyPatternToLinkerAsOutputFile(
-                  this, tool, tool->outputs().list()[0]);
-        } else {
-          // Use the tool-specified ones.
-          if (!ctool->link_output().empty()) {
-            link_output_file_ =
-                SubstitutionWriter::ApplyPatternToLinkerAsOutputFile(
-                    this, tool, ctool->link_output());
-          }
-          if (!ctool->depend_output().empty()) {
-            dependency_output_file_ =
-                SubstitutionWriter::ApplyPatternToLinkerAsOutputFile(
-                    this, tool, ctool->depend_output());
-          }
-        }
-        if (tool->runtime_outputs().list().empty()) {
-          // Default to the link output for the runtime output.
-          runtime_outputs_.push_back(link_output_file_);
-        } else {
-          SubstitutionWriter::ApplyListToLinkerAsOutputFile(
-              this, tool, tool->runtime_outputs(), &runtime_outputs_);
-        }
-      }
-      break;
-    case UNKNOWN:
-    default:
-      NOTREACHED();
+    }
+  } else {
+    NOTREACHED();
   }
 
   // Count anything generated from bundle_data dependencies.
-  if (output_type_ == CREATE_BUNDLE) {
+  if (output_type_ == functions::kCreateBundle) {
     if (!bundle_data_.GetOutputFiles(settings(), this, &computed_outputs_, err))
       return false;
   }

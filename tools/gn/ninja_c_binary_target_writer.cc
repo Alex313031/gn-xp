@@ -191,7 +191,7 @@ void NinjaCBinaryTargetWriter::Run() {
   if (!CheckForDuplicateObjectFiles(obj_files))
     return;
 
-  if (target_->output_type() == Target::SOURCE_SET) {
+  if (target_->output_type() == functions::kSourceSet) {
     WriteSourceSetStamp(obj_files);
 #ifndef NDEBUG
     // Verify that the function that separately computes a source set's object
@@ -645,12 +645,12 @@ void NinjaCBinaryTargetWriter::WriteLinkerStuff(
   out_ << std::endl;
 
   // The remaining things go in the inner scope of the link line.
-  if (target_->output_type() == Target::EXECUTABLE ||
-      target_->output_type() == Target::SHARED_LIBRARY ||
-      target_->output_type() == Target::LOADABLE_MODULE) {
+  if (target_->output_type() == functions::kExecutable ||
+      target_->output_type() == functions::kSharedLibrary ||
+      target_->output_type() == functions::kLoadableModule) {
     WriteLinkerFlags(optional_def_file);
     WriteLibs();
-  } else if (target_->output_type() == Target::STATIC_LIBRARY) {
+  } else if (target_->output_type() == functions::kStaticLibrary) {
     out_ << "  arflags =";
     RecursiveTargetConfigStringsToStream(target_, &ConfigValues::arflags,
                                          GetFlagOptions(), out_);
@@ -802,13 +802,13 @@ void NinjaCBinaryTargetWriter::ClassifyDependency(
   // don't link at all.
   bool can_link_libs = target_->IsFinal();
 
-  if (dep->output_type() == Target::SOURCE_SET ||
+  if (dep->output_type() == functions::kSourceSet ||
       // If a complete static library depends on an incomplete static library,
       // manually link in the object files of the dependent library as if it
       // were a source set. This avoids problems with braindead tools such as
       // ar which don't properly link dependent static libraries.
       (target_->complete_static_lib() &&
-       dep->output_type() == Target::STATIC_LIBRARY &&
+       dep->output_type() == functions::kStaticLibrary &&
        !dep->complete_static_lib())) {
     // Source sets have their object files linked into final targets
     // (shared libraries, executables, loadable modules, and complete static
