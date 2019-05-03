@@ -1,0 +1,72 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "937d8eba_ececab69",
+        "filename": "tools/gn/substitution_type.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 8,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2019-05-03T17:23:18Z",
+      "side": 1,
+      "message": "(could be in a followup): I feel like the current usage would be more efficient with a flat_set instead of a full std::set. We already have most of the Chrome flat container code, just need this file containing the typedef:\n  https://cs.chromium.org/chromium/src/base/containers/flat_set.h\ncopied from Chrome.",
+      "revId": "04f6059e5bd888d861e56330058c1c1f87890e52",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "dc2abf1e_ddeff145",
+        "filename": "tools/gn/substitution_type.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 16,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2019-05-03T17:23:18Z",
+      "side": 1,
+      "message": "Since we use pointer identity for these classes, can you see if you can delete copy and assignment from this struct so code don\u0027t accidentally make other ones?",
+      "revId": "04f6059e5bd888d861e56330058c1c1f87890e52",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "c84d1630_356b2fb0",
+        "filename": "tools/gn/substitution_type.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 76,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2019-05-03T17:23:18Z",
+      "side": 1,
+      "message": "This comment is out-of-date.",
+      "revId": "04f6059e5bd888d861e56330058c1c1f87890e52",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "a91588c7_0ed77023",
+        "filename": "tools/gn/substitution_type.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 80,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2019-05-03T17:23:18Z",
+      "side": 1,
+      "message": "This should probably mention that it depends on pointer uniqueness so the pointers should point to the global constants.",
+      "revId": "04f6059e5bd888d861e56330058c1c1f87890e52",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": true
+    }
+  ]
+}
