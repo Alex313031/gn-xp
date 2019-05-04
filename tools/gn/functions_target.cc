@@ -23,8 +23,6 @@
 
 namespace functions {
 
-namespace {
-
 Value ExecuteGenericTarget(const char* target_type,
                            Scope* scope,
                            const FunctionCallNode* function,
@@ -55,8 +53,6 @@ Value ExecuteGenericTarget(const char* target_type,
   block_scope.CheckForUnusedVars(err);
   return Value();
 }
-
-}  // namespace
 
 // action ----------------------------------------------------------------------
 

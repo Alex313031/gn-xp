@@ -24,6 +24,7 @@
 #include "tools/gn/metadata.h"
 #include "tools/gn/ordered_set.h"
 #include "tools/gn/output_file.h"
+#include "tools/gn/rust_target_values.h"
 #include "tools/gn/source_file.h"
 #include "tools/gn/toolchain.h"
 #include "tools/gn/unique_vector.h"
@@ -250,6 +251,9 @@ class Target : public Item {
   ActionValues& action_values() { return action_values_; }
   const ActionValues& action_values() const { return action_values_; }
 
+  RustValues& rust_values() { return rust_values_; }
+  const RustValues& rust_values() const { return rust_values_; }
+
   const OrderedSet<SourceDir>& all_lib_dirs() const { return all_lib_dirs_; }
   const OrderedSet<LibFile>& all_libs() const { return all_libs_; }
 
@@ -397,6 +401,9 @@ class Target : public Item {
 
   // Used for action[_foreach] targets.
   ActionValues action_values_;
+
+  // Used for Rust targets.
+  RustValues rust_values_;
 
   // Toolchain used by this target. Null until target is resolved.
   const Toolchain* toolchain_;

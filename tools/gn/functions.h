@@ -436,6 +436,13 @@ Value RunFunction(Scope* scope,
                   BlockNode* block,  // Optional.
                   Err* err);
 
+Value ExecuteGenericTarget(const char* target_type,
+                           Scope* scope,
+                           const FunctionCallNode* function,
+                           const std::vector<Value>& args,
+                           BlockNode* block,
+                           Err* err);
+
 }  // namespace functions
 
 // Helper functions -----------------------------------------------------------
