@@ -19,6 +19,7 @@
 #include "tools/gn/parse_node_value_adapter.h"
 #include "tools/gn/parse_tree.h"
 #include "tools/gn/pool.h"
+#include "tools/gn/rust_functions.h"
 #include "tools/gn/scheduler.h"
 #include "tools/gn/scope.h"
 #include "tools/gn/settings.h"
@@ -1297,6 +1298,8 @@ struct FunctionInfoInitializer {
     INSERT_FUNCTION(Tool, false)
     INSERT_FUNCTION(Toolchain, false)
     INSERT_FUNCTION(WriteFile, false)
+
+    InsertRustFunctions(&map);
 
 #undef INSERT_FUNCTION
   }

@@ -23,6 +23,8 @@
 #include "tools/gn/group_target_generator.h"
 #include "tools/gn/metadata.h"
 #include "tools/gn/parse_tree.h"
+#include "tools/gn/rust_functions.h"
+#include "tools/gn/rust_target_generator.h"
 #include "tools/gn/scheduler.h"
 #include "tools/gn/scope.h"
 #include "tools/gn/token.h"
@@ -143,6 +145,14 @@ void TargetGenerator::GenerateTarget(Scope* scope,
   } else if (output_type == functions::kGeneratedFile) {
     GeneratedFileTargetGenerator generator(target.get(), scope, function_call,
                                            functions::kGeneratedFile, err);
+    generator.Run();
+  } else if (output_type == functions::kRustExecutable) {
+    RustTargetGenerator generator(target.get(), scope, function_call,
+                                           functions::kRustExecutable, err);
+    generator.Run();
+  } else if (output_type == functions::kRustLibrary) {
+    RustTargetGenerator generator(target.get(), scope, function_call,
+                                           functions::kRustLibrary, err);
     generator.Run();
   } else {
     *err = Err(function_call, "Not a known target type",
