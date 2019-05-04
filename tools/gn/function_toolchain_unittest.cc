@@ -67,7 +67,7 @@ TEST_F(FunctionToolchain, Rust) {
   {
     TestParseInput input(
         R"(toolchain("rust") {
-          tool("rust") {
+          tool("rustc") {
             command = "{{rustenv}} rustc --crate-name {{crate_name}} --crate-type bin {{rustflags}} -o {{output}} {{rlibs}} {{source}}"
             description = "RUST {{output}}"
           }
