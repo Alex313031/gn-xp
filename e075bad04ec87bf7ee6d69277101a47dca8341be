@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "f9a4aab4_fca95ad0",
+        "filename": "infra/recipes/gn.py",
+        "patchSetId": 3
+      },
+      "lineNbr": 65,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-05-06T19:32:29Z",
+      "side": 1,
+      "message": "After talking to Nodir, it seems like it might possible to avoid setting tags altogether and instead just set inherit_tags\u003dFalse (note that I haven\u0027t tested it yet).",
+      "range": {
+        "startLine": 60,
+        "startChar": 0,
+        "endLine": 65,
+        "endChar": 12
+      },
+      "revId": "e075bad04ec87bf7ee6d69277101a47dca8341be",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": true
+    }
+  ]
+}

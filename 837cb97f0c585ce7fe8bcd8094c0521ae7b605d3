@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "269159e5_456193d4",
+        "filename": "infra/recipes/gn.py",
+        "patchSetId": 2
+      },
+      "lineNbr": 212,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-05-06T19:32:29Z",
+      "side": 1,
+      "message": "We\u0027re not cross-compiling GN (yet) so I\u0027d use `api.platform.is_linux` for now.",
+      "range": {
+        "startLine": 212,
+        "startChar": 4,
+        "endLine": 212,
+        "endChar": 33
+      },
+      "revId": "837cb97f0c585ce7fe8bcd8094c0521ae7b605d3",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": true
+    }
+  ]
+}
