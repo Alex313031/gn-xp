@@ -16,6 +16,24 @@
       "revId": "7ba427d4b1e628fbe524f2f8ba46d0592132336d",
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "fb2fb57b_473a5f74",
+        "filename": "tools/gn/tool.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 206,
+      "author": {
+        "id": 1000023
+      },
+      "writtenOn": "2019-05-06T17:29:07Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "91b5a112_8544b36b",
+      "revId": "7ba427d4b1e628fbe524f2f8ba46d0592132336d",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": false
     }
   ]
 }
