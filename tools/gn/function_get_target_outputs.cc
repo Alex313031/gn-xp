@@ -121,12 +121,15 @@ Value RunGetTargetOutputs(Scope* scope,
   std::vector<SourceFile> files;
   if (target->output_type() == Target::ACTION ||
       target->output_type() == Target::COPY_FILES ||
-      target->output_type() == Target::ACTION_FOREACH) {
+      target->output_type() == Target::ACTION_FOREACH ||
+      target->output_type() == Target::GENERATED_FILE) {
     target->action_values().GetOutputsAsSourceFiles(target, &files);
   } else {
     // Other types of targets are not supported.
-    *err = Err(args[0], "Target is not an action, action_foreach, or copy.",
-               "Only these target types are supported by get_target_outputs.");
+    *err =
+        Err(args[0],
+            "Target is not an action, action_foreach, generated_file, or copy.",
+            "Only these target types are supported by get_target_outputs.");
     return Value();
   }
 
