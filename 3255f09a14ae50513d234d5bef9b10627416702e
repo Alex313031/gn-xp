@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "b1acdb85_e9535e75",
+        "filename": "tools/gn/rust_example/hello_world/foo/src/BUILD.gn",
+        "patchSetId": 1
+      },
+      "lineNbr": 3,
+      "author": {
+        "id": 1000167
+      },
+      "writtenOn": "2019-05-09T23:47:48Z",
+      "side": 1,
+      "message": "why is this in `public_deps` rather than `deps`?",
+      "revId": "3255f09a14ae50513d234d5bef9b10627416702e",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "8252add0_51c7c6bf",
+        "filename": "tools/gn/rust_example/hello_world/foo/src/lib.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 1000167
+      },
+      "writtenOn": "2019-05-09T23:47:48Z",
+      "side": 1,
+      "message": "do you have a mechanism for setting `--edition` currently? I\u0027d personally like to see it required to be specified so that folks don\u0027t accidentally get confused creating new 2015-edition targets.",
+      "revId": "3255f09a14ae50513d234d5bef9b10627416702e",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "2136aa35_0e6b55e3",
+        "filename": "tools/gn/rust_example/hello_world/src/BUILD.gn",
+        "patchSetId": 1
+      },
+      "lineNbr": 2,
+      "author": {
+        "id": 1000167
+      },
+      "writtenOn": "2019-05-09T23:47:48Z",
+      "side": 1,
+      "message": "is it implicit that files named `main.rs` are the crate root for executables?",
+      "revId": "3255f09a14ae50513d234d5bef9b10627416702e",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": true
+    }
+  ]
+}
