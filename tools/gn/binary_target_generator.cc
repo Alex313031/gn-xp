@@ -9,6 +9,7 @@
 #include "tools/gn/err.h"
 #include "tools/gn/filesystem_utils.h"
 #include "tools/gn/functions.h"
+#include "tools/gn/parse_tree.h"
 #include "tools/gn/scope.h"
 #include "tools/gn/settings.h"
 #include "tools/gn/value_extractors.h"
@@ -58,6 +59,9 @@ void BinaryTargetGenerator::DoRun() {
     return;
 
   if (!FillCompleteStaticLib())
+    return;
+  
+  if (!ValidateSources())
     return;
 
   // Config values (compiler flags, etc.) set directly on this target.
@@ -177,5 +181,18 @@ bool BinaryTargetGenerator::FillAllowCircularIncludesFrom() {
   // Add to the set.
   for (const auto& cur : circular)
     target_->allow_circular_includes_from().insert(cur);
+  return true;
+}
+
+bool BinaryTargetGenerator::ValidateSources() {
+  for (const auto& source : target_->sources()) {
+    target_->source_types_used().Set(GetSourceFileType(source));
+  }
+  if (target_->source_types_used().MixedSourceUsed()) {
+    *err_ = Err(function_call_, "More than one language used in target sources.",
+               "Mixed sources are not allowed, unless they are "
+               "compilation-compatible (e.g. Objective C and C++).");
+    return false;
+  }
   return true;
 }
