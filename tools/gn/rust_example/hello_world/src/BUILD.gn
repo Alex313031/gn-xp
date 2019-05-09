@@ -1,0 +1,8 @@
+executable("hello_world") {
+  sources = [ "main.rs" ]
+  deps = [ "//hello_world/foo/src:foo" ]
+  edition = "2018"
+  renamed_deps = [
+    [ "baz", "//hello_world/foo/src:foo" ]
+  ]
+}
