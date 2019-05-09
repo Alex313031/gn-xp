@@ -1,0 +1,3 @@
+rust_library("bar") {
+    sources = [ "lib.rs" ]
+}
