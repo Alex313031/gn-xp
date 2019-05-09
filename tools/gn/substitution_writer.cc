@@ -571,17 +571,17 @@ std::string SubstitutionWriter::GetLinkerSubstitution(
     if (target->output_extension().empty())
       return std::string();  // Explicitly set to no extension.
     return std::string(".") + target->output_extension();
-  } else if (type == &RustSubstitutionCrateName) {
+  } else if (type == &kRustSubstitutionCrateName) {
     // Only include the toolchain for non-default toolchains.
     return target->rust_values().crate_name();
-  } else if (type == &RustSubstitutionOutputPrefix) {
+  } else if (type == &kRustSubstitutionOutputPrefix) {
     // Rustc expects specific output prefixes, so make sure we provide it if
     // necessary.
     if (target->output_type() == Target::RUST_LIBRARY ||
         target->output_type() == Target::SHARED_LIBRARY)
       return "lib";
     return "";
-  } else if (type == &RustSubstitutionOutputExtension) {
+  } else if (type == &kRustSubstitutionOutputExtension) {
     if (!target->output_extension_set()) {
       DCHECK(tool->AsRust());
       return tool->AsRust()->rustc_output_extension(
