@@ -4,6 +4,8 @@
 
 #include "tools/gn/variables.h"
 
+#include "tools/gn/rust_variables.h"
+
 namespace variables {
 
 // Built-in variables ----------------------------------------------------------
@@ -2203,6 +2205,7 @@ const VariableInfoMap& GetTargetVariables() {
     INSERT_VARIABLE(WriteValueContents)
     INSERT_VARIABLE(WriteRuntimeDeps)
     INSERT_VARIABLE(XcodeExtraAttributes)
+    InsertRustVariables(&info_map);
   }
   return info_map;
 }
