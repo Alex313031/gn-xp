@@ -35,3 +35,26 @@ SourceFileType GetSourceFileType(const SourceFile& file) {
 
   return SOURCE_UNKNOWN;
 }
+
+SourceFileTypeSet::SourceFileTypeSet() : empty_(true) {
+  memset(flags_, 0, sizeof(bool) * static_cast<int>(SOURCE_NUMTYPES));
+}
+
+bool SourceFileTypeSet::CSourceUsed() const {
+  return empty_ || Get(SOURCE_CPP) || Get(SOURCE_H) || Get(SOURCE_C) ||
+         Get(SOURCE_M) || Get(SOURCE_MM) || Get(SOURCE_RC) || Get(SOURCE_S) ||
+         Get(SOURCE_O) || Get(SOURCE_DEF);
+}
+
+bool SourceFileTypeSet::RustSourceUsed() const {
+  return Get(SOURCE_RS);
+}
+
+bool SourceFileTypeSet::GoSourceUsed() const {
+  return Get(SOURCE_GO);
+}
+
+bool SourceFileTypeSet::MixedSourceUsed() const {
+  return false;
+  return (1 << CSourceUsed() << RustSourceUsed() << GoSourceUsed()) > 2;
+}

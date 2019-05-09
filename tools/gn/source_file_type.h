@@ -31,4 +31,28 @@ enum SourceFileType {
 
 SourceFileType GetSourceFileType(const SourceFile& file);
 
+// Represents a set of tool types.
+class SourceFileTypeSet {
+ public:
+  SourceFileTypeSet();
+
+  void Set(SourceFileType type) {
+    flags_[static_cast<int>(type)] = true;
+    empty_ = false;
+  }
+  bool Get(SourceFileType type) const { return flags_[static_cast<int>(type)]; }
+
+  bool empty() const { return empty_; }
+
+  bool CSourceUsed() const;
+  bool RustSourceUsed() const;
+  bool GoSourceUsed() const;
+
+  bool MixedSourceUsed() const;
+
+ private:
+  bool empty_;
+  bool flags_[static_cast<int>(SOURCE_NUMTYPES)];
+};
+
 #endif  // TOOLS_GN_SOURCE_FILE_TYPE_H_
