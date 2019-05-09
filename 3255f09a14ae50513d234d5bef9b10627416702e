@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "a0df9a87_29a74a2a",
+        "filename": "tools/gn/rust_example/hello_world/foo/src/BUILD.gn",
+        "patchSetId": 1
+      },
+      "lineNbr": 3,
+      "author": {
+        "id": 1000023
+      },
+      "writtenOn": "2019-05-09T23:59:05Z",
+      "side": 1,
+      "message": "Doesn\u0027t need to be -- leftover from an earlier implementation.",
+      "parentUuid": "b1acdb85_e9535e75",
+      "revId": "3255f09a14ae50513d234d5bef9b10627416702e",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "8252add0_51c7c6bf",
         "filename": "tools/gn/rust_example/hello_world/foo/src/lib.rs",
         "patchSetId": 1
@@ -36,6 +54,24 @@
     },
     {
       "key": {
+        "uuid": "5e0475a1_5de63f33",
+        "filename": "tools/gn/rust_example/hello_world/foo/src/lib.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 1000023
+      },
+      "writtenOn": "2019-05-09T23:59:05Z",
+      "side": 1,
+      "message": "In this example it\u0027s explicitly set in the toolchain command, but you could do \n\nconfig(\"edition2018\") {\n   rustflags \u003d [ \"--edition\u003d2018\" ]\n}\n\nand set it as the default, if you wanted to allow for other editions.",
+      "parentUuid": "8252add0_51c7c6bf",
+      "revId": "3255f09a14ae50513d234d5bef9b10627416702e",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "2136aa35_0e6b55e3",
         "filename": "tools/gn/rust_example/hello_world/src/BUILD.gn",
         "patchSetId": 1
@@ -47,6 +83,24 @@
       "writtenOn": "2019-05-09T23:47:48Z",
       "side": 1,
       "message": "is it implicit that files named `main.rs` are the crate root for executables?",
+      "revId": "3255f09a14ae50513d234d5bef9b10627416702e",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "6706e707_33a141f5",
+        "filename": "tools/gn/rust_example/hello_world/src/BUILD.gn",
+        "patchSetId": 1
+      },
+      "lineNbr": 2,
+      "author": {
+        "id": 1000023
+      },
+      "writtenOn": "2019-05-09T23:59:05Z",
+      "side": 1,
+      "message": "Definitely something that needs documentation, but yes. You can also explicitly set `crate_root` to be something else (I updated one of these examples to show that), but if you don\u0027t explicitly set it, it\u0027ll try to find `main.rs` or `lib.rs` for executables and libraries respectively.",
+      "parentUuid": "2136aa35_0e6b55e3",
       "revId": "3255f09a14ae50513d234d5bef9b10627416702e",
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
       "unresolved": true
