@@ -609,6 +609,24 @@ Value RunLoadableModule(Scope* scope,
                               block, err);
 }
 
+// rust_library ----------------------------------------------------------------
+
+// TODO(juliehockett): write docs
+const char kRustLibrary[] = "rust_library";
+const char kRustLibrary_HelpShort[] =
+    "rust_executable: Declare a Rust library target.";
+const char kRustLibrary_Help[] =
+    R"(rust_executable: Declare a Rust library target.
+)";
+Value RunRustLibrary(Scope* scope,
+                     const FunctionCallNode* function,
+                     const std::vector<Value>& args,
+                     BlockNode* block,
+                     Err* err) {
+  return ExecuteGenericTarget(functions::kRustLibrary, scope, function, args,
+                              block, err);
+}
+
 // shared_library --------------------------------------------------------------
 
 const char kSharedLibrary[] = "shared_library";
