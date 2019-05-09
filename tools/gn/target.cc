@@ -408,11 +408,12 @@ bool Target::OnResolved(Err* err) {
 bool Target::IsBinary() const {
   return output_type_ == EXECUTABLE || output_type_ == SHARED_LIBRARY ||
          output_type_ == LOADABLE_MODULE || output_type_ == STATIC_LIBRARY ||
-         output_type_ == SOURCE_SET;
+         output_type_ == SOURCE_SET || output_type_ == RUST_LIBRARY;
 }
 
 bool Target::IsLinkable() const {
-  return output_type_ == STATIC_LIBRARY || output_type_ == SHARED_LIBRARY;
+  return output_type_ == STATIC_LIBRARY || output_type_ == SHARED_LIBRARY ||
+         output_type_ == RUST_LIBRARY;
 }
 
 bool Target::IsFinal() const {
@@ -420,7 +421,8 @@ bool Target::IsFinal() const {
          output_type_ == LOADABLE_MODULE || output_type_ == ACTION ||
          output_type_ == ACTION_FOREACH || output_type_ == COPY_FILES ||
          output_type_ == CREATE_BUNDLE ||
-         (output_type_ == STATIC_LIBRARY && complete_static_lib_);
+         (output_type_ == STATIC_LIBRARY && complete_static_lib_) ||
+         output_type_ == RUST_LIBRARY;
 }
 
 DepsIteratorRange Target::GetDeps(DepsIterationType type) const {
@@ -465,18 +467,18 @@ bool Target::SetToolchain(const Toolchain* toolchain, Err* err) {
 
   // Tool not specified for this target type.
   if (err) {
-    *err = Err(
-        defined_from(), "This target uses an undefined tool.",
-        base::StringPrintf(
-            "The target %s\n"
-            "of type \"%s\"\n"
-            "uses toolchain %s\n"
-            "which doesn't have the tool \"%s\" defined.\n\n"
-            "Alas, I can not continue.",
-            label().GetUserVisibleName(false).c_str(),
-            GetStringForOutputType(output_type_),
-            label().GetToolchainLabel().GetUserVisibleName(false).c_str(),
-            Tool::GetToolTypeForTargetFinalOutput(this)));
+    *err =
+        Err(defined_from(), "This target uses an undefined tool.",
+            base::StringPrintf(
+                "The target %s\n"
+                "of type \"%s\"\n"
+                "uses toolchain %s\n"
+                "which doesn't have the tool \"%s\" defined.\n\n"
+                "Alas, I can not continue.",
+                label().GetUserVisibleName(false).c_str(),
+                GetStringForOutputType(output_type_),
+                label().GetToolchainLabel().GetUserVisibleName(false).c_str(),
+                Tool::GetToolTypeForTargetFinalOutput(this)));
   }
   return false;
 }
@@ -526,7 +528,8 @@ void Target::PullDependentTargetConfigs() {
 void Target::PullDependentTargetLibsFrom(const Target* dep, bool is_public) {
   // Direct dependent libraries.
   if (dep->output_type() == STATIC_LIBRARY ||
-      dep->output_type() == SHARED_LIBRARY || dep->output_type() == SOURCE_SET)
+      dep->output_type() == SHARED_LIBRARY ||
+      dep->output_type() == SOURCE_SET || dep->output_type() == RUST_LIBRARY)
     inherited_libraries_.Append(dep, is_public);
 
   if (dep->output_type() == SHARED_LIBRARY) {
@@ -551,7 +554,7 @@ void Target::PullDependentTargetLibsFrom(const Target* dep, bool is_public) {
     // library.
     inherited_libraries_.AppendPublicSharedLibraries(dep->inherited_libraries(),
                                                      is_public);
-  } else if (!dep->IsFinal()) {
+  } else if (!dep->IsFinal() || dep->output_type() == RUST_LIBRARY) {
     // The current target isn't linked, so propogate linked deps and
     // libraries up the dependency tree.
     inherited_libraries_.AppendInherited(dep->inherited_libraries(), is_public);
@@ -572,7 +575,8 @@ void Target::PullDependentTargetLibsFrom(const Target* dep, bool is_public) {
   }
 
   // Library settings are always inherited across static library boundaries.
-  if (!dep->IsFinal() || dep->output_type() == STATIC_LIBRARY) {
+  if (!dep->IsFinal() || dep->output_type() == STATIC_LIBRARY ||
+      dep->output_type() == RUST_LIBRARY) {
     all_lib_dirs_.append(dep->all_lib_dirs());
     all_libs_.append(dep->all_libs());
   }
@@ -668,6 +672,7 @@ bool Target::FillOutputFiles(Err* err) {
             this, tool, tool->runtime_outputs(), &runtime_outputs_);
       }
       break;
+    case RUST_LIBRARY:
     case STATIC_LIBRARY:
       // Static libraries both have dependencies and linking going off of the
       // first output.
