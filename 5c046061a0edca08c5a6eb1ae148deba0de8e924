@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "cda64602_0f1f0d7f",
+        "filename": "tools/gn/rust_values.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 19,
+      "author": {
+        "id": 1000023
+      },
+      "writtenOn": "2019-05-10T18:37:18Z",
+      "side": 1,
+      "message": "Is it an option, though? I\u0027m more inclined to support the rustc compiler to whatever extent the user wants to, and don\u0027t want to limit this simply because it\u0027s not recommended.",
+      "parentUuid": "9ee22508_327b720f",
+      "revId": "5c046061a0edca08c5a6eb1ae148deba0de8e924",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "f58f1eb0_b300ae42",
         "filename": "tools/gn/rust_values.h",
         "patchSetId": 2
@@ -30,6 +48,24 @@
       "writtenOn": "2019-05-10T17:52:01Z",
       "side": 1,
       "message": "missing `staticlib`",
+      "revId": "5c046061a0edca08c5a6eb1ae148deba0de8e924",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "71c5423b_49525ed5",
+        "filename": "tools/gn/rust_values.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 22,
+      "author": {
+        "id": 1000023
+      },
+      "writtenOn": "2019-05-10T18:37:18Z",
+      "side": 1,
+      "message": "Definitely needs more documentation (and probably should rename this SharedLibCrateType or something) -- staticlib is automatically handled by using a `static_library` target. This is just so that users can indicate what type of shared library they wish to produce.",
+      "parentUuid": "f58f1eb0_b300ae42",
       "revId": "5c046061a0edca08c5a6eb1ae148deba0de8e924",
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
       "unresolved": true
