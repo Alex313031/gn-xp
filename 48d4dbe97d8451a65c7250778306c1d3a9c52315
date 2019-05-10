@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "484dec90_d90cbf00",
+        "filename": "tools/gn/rust_substitution_type.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 25,
+      "author": {
+        "id": 1000167
+      },
+      "writtenOn": "2019-05-10T17:46:11Z",
+      "side": 1,
+      "message": "could use a comment (\"e.g. `lib`\")",
+      "revId": "48d4dbe97d8451a65c7250778306c1d3a9c52315",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "89131c98_a9eebf52",
+        "filename": "tools/gn/rust_substitution_type.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 28,
+      "author": {
+        "id": 1000167
+      },
+      "writtenOn": "2019-05-10T17:46:11Z",
+      "side": 1,
+      "message": "I\u0027m not sure what this or `rlibs` are-- would you mind explaining + adding a comment?",
+      "revId": "48d4dbe97d8451a65c7250778306c1d3a9c52315",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": true
+    }
+  ]
+}
