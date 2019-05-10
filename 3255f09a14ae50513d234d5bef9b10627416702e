@@ -72,6 +72,24 @@
     },
     {
       "key": {
+        "uuid": "f887d686_9f79c2f7",
+        "filename": "tools/gn/rust_example/hello_world/foo/src/lib.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 1000167
+      },
+      "writtenOn": "2019-05-10T00:12:57Z",
+      "side": 1,
+      "message": "this is getting a bit into the weeds, but I actually think there shouldn\u0027t be a default at all, as changing the default would consistently require resetting all existing usages to be explicit. I would advocate for having `edition` as a required arg to all rust rules, much like we do in our existing GN templates.",
+      "parentUuid": "5e0475a1_5de63f33",
+      "revId": "3255f09a14ae50513d234d5bef9b10627416702e",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "2136aa35_0e6b55e3",
         "filename": "tools/gn/rust_example/hello_world/src/BUILD.gn",
         "patchSetId": 1
@@ -101,6 +119,24 @@
       "side": 1,
       "message": "Definitely something that needs documentation, but yes. You can also explicitly set `crate_root` to be something else (I updated one of these examples to show that), but if you don\u0027t explicitly set it, it\u0027ll try to find `main.rs` or `lib.rs` for executables and libraries respectively.",
       "parentUuid": "2136aa35_0e6b55e3",
+      "revId": "3255f09a14ae50513d234d5bef9b10627416702e",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "e22cbbac_a5b1e328",
+        "filename": "tools/gn/rust_example/hello_world/src/BUILD.gn",
+        "patchSetId": 1
+      },
+      "lineNbr": 2,
+      "author": {
+        "id": 1000167
+      },
+      "writtenOn": "2019-05-10T00:12:57Z",
+      "side": 1,
+      "message": "interesting. do you just look for that as the last element of a path? (e.g will src/lib.rs get picked?)",
+      "parentUuid": "6706e707_33a141f5",
       "revId": "3255f09a14ae50513d234d5bef9b10627416702e",
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
       "unresolved": true
