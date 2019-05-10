@@ -37,6 +37,24 @@
     },
     {
       "key": {
+        "uuid": "cb8decc4_66d41928",
+        "filename": "tools/gn/rust_values.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 19,
+      "author": {
+        "id": 1000167
+      },
+      "writtenOn": "2019-05-10T18:39:31Z",
+      "side": 1,
+      "message": "It\u0027s an option you can pass to the compiler, but the set of symbols it exposes is unstable and almost any usage today is potentially wrong and broken in the future.",
+      "parentUuid": "cda64602_0f1f0d7f",
+      "revId": "5c046061a0edca08c5a6eb1ae148deba0de8e924",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "f58f1eb0_b300ae42",
         "filename": "tools/gn/rust_values.h",
         "patchSetId": 2
