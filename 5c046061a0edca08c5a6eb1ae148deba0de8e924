@@ -1,0 +1,78 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "9ee22508_327b720f",
+        "filename": "tools/gn/rust_values.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 19,
+      "author": {
+        "id": 1000167
+      },
+      "writtenOn": "2019-05-10T17:52:01Z",
+      "side": 1,
+      "message": "I\u0027d consider leaving off dylib, as it\u0027s unstable and basically never what you want today.",
+      "revId": "5c046061a0edca08c5a6eb1ae148deba0de8e924",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "f58f1eb0_b300ae42",
+        "filename": "tools/gn/rust_values.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 22,
+      "author": {
+        "id": 1000167
+      },
+      "writtenOn": "2019-05-10T17:52:01Z",
+      "side": 1,
+      "message": "missing `staticlib`",
+      "revId": "5c046061a0edca08c5a6eb1ae148deba0de8e924",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "4b64e28e_da3b76b7",
+        "filename": "tools/gn/rust_variables.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 41,
+      "author": {
+        "id": 1000167
+      },
+      "writtenOn": "2019-05-10T17:52:01Z",
+      "side": 1,
+      "message": "nit: whitespace",
+      "range": {
+        "startLine": 41,
+        "startChar": 15,
+        "endLine": 41,
+        "endChar": 16
+      },
+      "revId": "5c046061a0edca08c5a6eb1ae148deba0de8e924",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "a64866c6_e5fe892d",
+        "filename": "tools/gn/target.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 470,
+      "author": {
+        "id": 1000167
+      },
+      "writtenOn": "2019-05-10T17:52:01Z",
+      "side": 1,
+      "message": "unrelated formatting change?",
+      "revId": "5c046061a0edca08c5a6eb1ae148deba0de8e924",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": true
+    }
+  ]
+}
