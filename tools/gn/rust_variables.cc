@@ -45,6 +45,41 @@ const char kRustCrateRoot_Help[] =
   contains only one file.
 )";
 
+const char kRustRenamedDeps[] = "renamed_deps";
+const char kRustRenamedDeps_HelpShort[] =
+    "renamed_deps: [list of lists] List of crate-dependency pairs.";
+const char kRustRenamedDeps_Help[] =
+    R"(renamed_deps: [list of lists] List of crate-dependency pairs.
+
+  A list of two-element lists, with the first element in each sublist
+  indicating the renamed crate and the second element specifying the label of
+  the dependency producing the relevant binary.
+
+  All dependencies listed in this field *must* be listed as deps of the target.
+
+  ```
+  executable("foo") {
+    sources = [ "main.rs" ]
+    deps = [ "//bar" ]
+  }
+  ```
+
+  This target would compile the `foo` crate with the following `extern` flag:
+  `rustc ...command... --extern bar=<build_out_dir>/obj/bar`
+
+  ```
+  executable("foo") {
+    sources = [ "main.rs" ]
+    deps = [ ":bar" ]
+    renamed_deps = [ "bar_renamed", ":bar" ]
+  }
+  ```
+  
+  With the addition of `renamed_deps`, above target would instead compile with:
+  `rustc ...command... --extern bar_renamed=<build_out_dir>/obj/bar`
+
+)";
+
 void InsertRustVariables(VariableInfoMap* info_map) {
   info_map->insert(std::make_pair(
       kRustCrateRoot,

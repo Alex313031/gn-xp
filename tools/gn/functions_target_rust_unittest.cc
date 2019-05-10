@@ -64,7 +64,7 @@ TEST_F(RustFunctionsTarget, CrateRootFind) {
   normal_input.parsed()->Execute(setup.scope(), &err);
   ASSERT_FALSE(err.has_error()) << err.message();
   ASSERT_EQ(
-      item_collector.back()->AsTarget()->rust_values().crate_root()->value(),
+      item_collector.back()->AsTarget()->rust_values().crate_root().value(),
       "/foo.rs");
 
   TestParseInput normal_shlib_input(
@@ -78,7 +78,7 @@ TEST_F(RustFunctionsTarget, CrateRootFind) {
   normal_shlib_input.parsed()->Execute(setup.scope(), &err);
   ASSERT_FALSE(err.has_error()) << err.message();
   ASSERT_EQ(
-      item_collector.back()->AsTarget()->rust_values().crate_root()->value(),
+      item_collector.back()->AsTarget()->rust_values().crate_root().value(),
       "/foo.rs");
 
   TestParseInput exe_input(
@@ -90,7 +90,7 @@ TEST_F(RustFunctionsTarget, CrateRootFind) {
   exe_input.parsed()->Execute(setup.scope(), &err);
   ASSERT_FALSE(err.has_error()) << err.message();
   ASSERT_EQ(
-      item_collector.back()->AsTarget()->rust_values().crate_root()->value(),
+      item_collector.back()->AsTarget()->rust_values().crate_root().value(),
       "/main.rs");
 
   TestParseInput lib_input(
@@ -102,7 +102,7 @@ TEST_F(RustFunctionsTarget, CrateRootFind) {
   lib_input.parsed()->Execute(setup.scope(), &err);
   ASSERT_FALSE(err.has_error()) << err.message();
   ASSERT_EQ(
-      item_collector.back()->AsTarget()->rust_values().crate_root()->value(),
+      item_collector.back()->AsTarget()->rust_values().crate_root().value(),
       "/lib.rs");
 
   TestParseInput singlesource_input(
@@ -114,7 +114,7 @@ TEST_F(RustFunctionsTarget, CrateRootFind) {
   singlesource_input.parsed()->Execute(setup.scope(), &err);
   ASSERT_FALSE(err.has_error()) << err.message();
   ASSERT_EQ(
-      item_collector.back()->AsTarget()->rust_values().crate_root()->value(),
+      item_collector.back()->AsTarget()->rust_values().crate_root().value(),
       "/bar.rs");
 
   TestParseInput error_input(
@@ -261,4 +261,50 @@ TEST_F(RustFunctionsTarget, SetDefaults) {
                 ->list_value()[0]
                 .string_value(),
             ":foo");
+}
+
+// Checks renamed_deps parsing.
+TEST_F(RustFunctionsTarget, RenamedDeps) {
+  TestWithScope setup;
+
+  // The target generator needs a place to put the targets or it will fail.
+  Scope::ItemVector item_collector;
+  setup.scope()->set_item_collector(&item_collector);
+  SourceDir source_dir("/");
+  setup.scope()->set_source_dir(source_dir);
+
+  TestParseInput exe_input(
+      "executable(\"foo\") {\n"
+      "  sources = [ \"main.rs\" ]\n"
+      "  deps = [ \"//bar\", \"//baz\" ]\n"
+      "  renamed_deps = [\n"
+      "    [ \"bar_renamed\", \"//bar\" ],\n"
+      "    [ \"baz_renamed\", \"//baz:baz\" ],\n"
+      "  ]\n"
+      "}\n");
+  ASSERT_FALSE(exe_input.has_error());
+  Err err;
+  exe_input.parsed()->Execute(setup.scope(), &err);
+  ASSERT_FALSE(err.has_error()) << err.message();
+
+  EXPECT_EQ(
+      item_collector.back()->AsTarget()->rust_values().renamed_deps().size(),
+      2U);
+
+  TestParseInput err_input(
+      "executable(\"foo\") {\n"
+      "  sources = [ \"main.rs\" ]\n"
+      "  deps = [ \"//bar\", \"//baz\" ]\n"
+      "  renamed_deps = [\n"
+      "    [ \"//bar\" ],\n"
+      "  ]\n"
+      "}\n");
+  ASSERT_FALSE(err_input.has_error());
+  err = Err();
+  err_input.parsed()->Execute(setup.scope(), &err);
+  EXPECT_TRUE(err.has_error());
+
+  EXPECT_EQ(
+      err.message(),
+      "Each element in a \"renamed_deps\" list must be a two-element list.");
 }

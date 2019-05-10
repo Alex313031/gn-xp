@@ -5,6 +5,9 @@
 #ifndef TOOLS_GN_RUST_TARGET_VALUES_H_
 #define TOOLS_GN_RUST_TARGET_VALUES_H_
 
+#include <map>
+#include "base/containers/flat_map.h"
+#include "tools/gn/label.h"
 #include "tools/gn/source_file.h"
 
 // Holds the values (outputs, args, script name, etc.) for either an action or
@@ -29,18 +32,25 @@ class RustValues {
   const std::string& crate_name() const { return crate_name_; }
 
   // Main source file for this crate.
-  const SourceFile* crate_root() const { return crate_root_; }
-  void set_crate_root(SourceFile* s) { crate_root_ = s; }
+  const SourceFile& crate_root() const { return crate_root_; }
+  void set_crate_root(SourceFile& s) { crate_root_ = s; }
 
   // Crate type for compilation.
   CrateType crate_type() { return crate_type_; }
   const CrateType crate_type() const { return crate_type_; }
   void set_crate_type(CrateType s) { crate_type_ = s; }
 
+  // Any renamed dependencies for the `extern` flags.
+  const std::map<Label, std::string>& renamed_deps() const {
+    return renamed_deps_;
+  }
+  std::map<Label, std::string>& renamed_deps() { return renamed_deps_; }
+
  private:
   std::string crate_name_;
-  SourceFile* crate_root_;
+  SourceFile crate_root_;
   CrateType crate_type_;
+  std::map<Label, std::string> renamed_deps_;
 
   DISALLOW_COPY_AND_ASSIGN(RustValues);
 };

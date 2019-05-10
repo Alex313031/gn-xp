@@ -25,6 +25,7 @@ class RustTargetGenerator : public TargetGenerator {
   bool FillCrateName();
   bool FillCrateRoot();
   bool FillCrateType();
+  bool FillRenamedDeps();
 
   DISALLOW_COPY_AND_ASSIGN(RustTargetGenerator);
 };

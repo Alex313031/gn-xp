@@ -7,6 +7,7 @@
 #include "tools/gn/config_values_generator.h"
 #include "tools/gn/err.h"
 #include "tools/gn/filesystem_utils.h"
+#include "tools/gn/functions.h"
 #include "tools/gn/parse_tree.h"
 #include "tools/gn/rust_variables.h"
 #include "tools/gn/scope.h"
@@ -50,6 +51,9 @@ void RustTargetGenerator::DoRun() {
     return;
 
   if (!FillCrateRoot())
+    return;
+
+  if (!FillRenamedDeps())
     return;
 }
 
@@ -117,7 +121,7 @@ bool RustTargetGenerator::FillCrateRoot() {
   if (!value) {
     // If there's only one source, use that.
     if (target_->sources().size() == 1) {
-      target_->rust_values().set_crate_root(&target_->sources()[0]);
+      target_->rust_values().set_crate_root(target_->sources()[0]);
       return true;
     }
     // Otherwise, see if "lib.rs" or "main.rs" (as relevant) are in sources.
@@ -125,7 +129,7 @@ bool RustTargetGenerator::FillCrateRoot() {
         target_->output_type() == Target::EXECUTABLE ? "main.rs" : "lib.rs";
     for (auto& source : target_->sources()) {
       if (source.GetName() == to_find) {
-        target_->rust_values().set_crate_root(&source);
+        target_->rust_values().set_crate_root(source);
         return true;
       }
     }
@@ -142,16 +146,46 @@ bool RustTargetGenerator::FillCrateRoot() {
                            scope_->GetSourceDir(), &dest, err_))
     return false;
 
-  // Check if this file is already in sources.
-  for (const auto& source : target_->sources()) {
-    if (source == dest) {
-      target_->rust_values().set_crate_root(&dest);
-      return true;
+  target_->rust_values().set_crate_root(dest);
+  return true;
+}
+
+bool RustTargetGenerator::FillRenamedDeps() {
+  const Value* value = scope_->GetValue(variables::kRustRenamedDeps, true);
+  if (!value)
+    return true;
+
+  if (!value->VerifyTypeIs(Value::LIST, err_))
+    return false;
+
+  for (const Value& pair : value->list_value()) {
+    if (!pair.VerifyTypeIs(Value::LIST, err_))
+      return false;
+    if (pair.list_value().size() != 2U) {
+      *err_ = Err(
+          pair.origin(),
+          "Each element in a \"renamed_deps\" list must be a two-element list.",
+          "The first element should indicate the new name for the crate, and "
+          "the second should indicate the relevant label.");
+      return false;
     }
+
+    // Both elements in the two-element list should be strings, but the label
+    // resolver checks the second one.
+    if (!pair.list_value()[0].VerifyTypeIs(Value::STRING, err_))
+      return false;
+
+    Label dep_label =
+        Label::Resolve(scope_->GetSourceDir(), ToolchainLabelForScope(scope_),
+                       pair.list_value()[1], err_);
+
+    if (err_->has_error())
+      return false;
+
+    // Insert into the renamed_deps map.
+    target_->rust_values().renamed_deps().insert(std::pair<Label, std::string>(
+        std::move(dep_label), std::move(pair.list_value()[0].string_value())));
   }
 
-  // It's not in sources, so we should add it.
-  target_->sources().push_back(std::move(dest));
-  target_->rust_values().set_crate_root(&target_->sources().back());
   return true;
 }

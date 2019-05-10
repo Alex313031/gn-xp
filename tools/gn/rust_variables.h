@@ -23,6 +23,10 @@ extern const char kRustCrateRoot[];
 extern const char kRustCrateRoot_HelpShort[];
 extern const char kRustCrateRoot_Help[];
 
+extern const char kRustRenamedDeps[];
+extern const char kRustRenamedDeps_HelpShort[];
+extern const char kRustRenamedDeps_Help[];
+
 void InsertRustVariables(VariableInfoMap* info_map);
 
 }  // namespace variables

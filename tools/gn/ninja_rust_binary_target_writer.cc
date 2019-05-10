@@ -139,7 +139,7 @@ void NinjaRustBinaryTargetWriter::Run() {
     std::vector<OutputFile> tool_outputs;
     SubstitutionWriter::ApplyListToLinkerAsOutputFile(
         target_, tool_, tool_->outputs(), &tool_outputs);
-    WriteCompilerBuildLine(*target_->rust_values().crate_root(), deps.vector(),
+    WriteCompilerBuildLine(target_->rust_values().crate_root(), deps.vector(),
                            order_only_deps, tool_->name(), tool_outputs);
     WriteExterns();
     WriteRustdeps(rustdeps);
@@ -174,7 +174,15 @@ void NinjaRustBinaryTargetWriter::WriteExterns() {
   out_ << "  externs =";
   for (const Target* ex : externs) {
     out_ << " --extern ";
-    out_ << std::string(ex->rust_values().crate_name()) << "=";
+
+    const auto& renamed_dep =
+        target_->rust_values().renamed_deps().find(ex->label());
+    if (renamed_dep != target_->rust_values().renamed_deps().end()) {
+      out_ << renamed_dep->second << "=";
+    } else {
+      out_ << std::string(ex->rust_values().crate_name()) << "=";
+    }
+
     path_output_.WriteFile(out_, ex->dependency_output_file());
   }
   out_ << std::endl;
