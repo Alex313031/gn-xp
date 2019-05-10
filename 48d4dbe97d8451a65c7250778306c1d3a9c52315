@@ -51,6 +51,23 @@
       "revId": "48d4dbe97d8451a65c7250778306c1d3a9c52315",
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "c469213f_251bced6",
+        "filename": "tools/gn/rust_substitution_type.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 17,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2019-05-10T21:20:03Z",
+      "side": 1,
+      "message": "These are variables so they shouldn\u0027t use the CamelCase naming scheme. It seems they are most like constants in which case we should probably name them \"kRustSubstutition...\"",
+      "revId": "48d4dbe97d8451a65c7250778306c1d3a9c52315",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": true
     }
   ]
 }
