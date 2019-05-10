@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "644d1c89_c46a4768",
+        "filename": "tools/gn/source_file_type.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 58,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2019-05-10T21:52:07Z",
+      "side": 1,
+      "message": "Remove this?",
+      "revId": "c3e01c685d3858625aef41f8f8412663ab4f2070",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": true
+    }
+  ]
+}
