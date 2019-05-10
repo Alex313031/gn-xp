@@ -33,6 +33,24 @@
       "revId": "48d4dbe97d8451a65c7250778306c1d3a9c52315",
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "a699f65b_50e4b45c",
+        "filename": "tools/gn/rust_substitution_type.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 28,
+      "author": {
+        "id": 1000023
+      },
+      "writtenOn": "2019-05-10T18:39:05Z",
+      "side": 1,
+      "message": "will do -- substitutions will be documented in the `RustTool` help, but this could be renamed to `RustSubstitutionExterns` to be more clear.",
+      "parentUuid": "89131c98_a9eebf52",
+      "revId": "48d4dbe97d8451a65c7250778306c1d3a9c52315",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": true
     }
   ]
 }
