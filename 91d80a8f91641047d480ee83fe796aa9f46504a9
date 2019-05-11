@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "20a92f35_b7bc12c8",
+        "filename": "tools/gn/config_values.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 37,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-05-11T00:16:21Z",
+      "side": 1,
+      "message": "Have you considered cflags_rust? That seems to be more in line with we have above e.g. cflags_objc. rustflags might be fine as well depending on whether we consider cflags to stand for \"compiler flags\" or \"flags for C like languages\".",
+      "range": {
+        "startLine": 37,
+        "startChar": 16,
+        "endLine": 37,
+        "endChar": 26
+      },
+      "revId": "91d80a8f91641047d480ee83fe796aa9f46504a9",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": true
+    }
+  ]
+}
