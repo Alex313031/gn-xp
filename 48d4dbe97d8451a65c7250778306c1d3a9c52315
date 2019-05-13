@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "49815227_55f04587",
+        "filename": "tools/gn/rust_substitution_type.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 25,
+      "author": {
+        "id": 1000023
+      },
+      "writtenOn": "2019-05-13T22:26:01Z",
+      "side": 1,
+      "message": "Done (added to the documentation for all substitutions in the Rust tool patch)",
+      "parentUuid": "484dec90_d90cbf00",
+      "revId": "48d4dbe97d8451a65c7250778306c1d3a9c52315",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "89131c98_a9eebf52",
         "filename": "tools/gn/rust_substitution_type.cc",
         "patchSetId": 2
@@ -54,6 +72,24 @@
     },
     {
       "key": {
+        "uuid": "15d90c8a_f30facdc",
+        "filename": "tools/gn/rust_substitution_type.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 28,
+      "author": {
+        "id": 1000023
+      },
+      "writtenOn": "2019-05-13T22:26:01Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "a699f65b_50e4b45c",
+      "revId": "48d4dbe97d8451a65c7250778306c1d3a9c52315",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "c469213f_251bced6",
         "filename": "tools/gn/rust_substitution_type.h",
         "patchSetId": 2
@@ -68,6 +104,24 @@
       "revId": "48d4dbe97d8451a65c7250778306c1d3a9c52315",
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "90e4230f_c4e93c7b",
+        "filename": "tools/gn/rust_substitution_type.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 17,
+      "author": {
+        "id": 1000023
+      },
+      "writtenOn": "2019-05-13T22:26:01Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "c469213f_251bced6",
+      "revId": "48d4dbe97d8451a65c7250778306c1d3a9c52315",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": false
     }
   ]
 }
