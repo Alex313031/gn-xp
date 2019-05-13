@@ -16,6 +16,24 @@
       "revId": "c3e01c685d3858625aef41f8f8412663ab4f2070",
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "a2c3db0d_64375386",
+        "filename": "tools/gn/source_file_type.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 58,
+      "author": {
+        "id": 1000023
+      },
+      "writtenOn": "2019-05-13T22:06:34Z",
+      "side": 1,
+      "message": "Done, and added a test that the error throws properly.",
+      "parentUuid": "644d1c89_c46a4768",
+      "revId": "c3e01c685d3858625aef41f8f8412663ab4f2070",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": false
     }
   ]
 }
