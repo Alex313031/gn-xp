@@ -55,6 +55,24 @@
     },
     {
       "key": {
+        "uuid": "0e59d81d_1af18b28",
+        "filename": "tools/gn/rust_values.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 19,
+      "author": {
+        "id": 1000023
+      },
+      "writtenOn": "2019-05-13T22:26:08Z",
+      "side": 1,
+      "message": "Would it be acceptable to update the documentation to discourage it, rather than not supporting it?",
+      "parentUuid": "cb8decc4_66d41928",
+      "revId": "5c046061a0edca08c5a6eb1ae148deba0de8e924",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "f58f1eb0_b300ae42",
         "filename": "tools/gn/rust_values.h",
         "patchSetId": 2
@@ -87,6 +105,24 @@
       "revId": "5c046061a0edca08c5a6eb1ae148deba0de8e924",
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "16017b53_f136cef5",
+        "filename": "tools/gn/rust_values.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 22,
+      "author": {
+        "id": 1000023
+      },
+      "writtenOn": "2019-05-13T22:26:08Z",
+      "side": 1,
+      "message": "Added a comment \u0026 updated documentation on the flag.",
+      "parentUuid": "71c5423b_49525ed5",
+      "revId": "5c046061a0edca08c5a6eb1ae148deba0de8e924",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": false
     },
     {
       "key": {
