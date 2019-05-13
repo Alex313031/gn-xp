@@ -22,6 +22,30 @@
       "revId": "91d80a8f91641047d480ee83fe796aa9f46504a9",
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "5e010284_0a24e951",
+        "filename": "tools/gn/config_values.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 37,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2019-05-13T16:39:03Z",
+      "side": 1,
+      "message": "It never occured to me that \"cflags\" stood for \"compiler flags\" but it probably does!\n\nSince we\u0027re not adding a separate target type for languages, we need to have existing projects\u0027 flags make sense so \"cflags\" can\u0027t apply to Rust. It seems weird to me that \"cflags\" would combine with \"cflags_c\" but not \"cflags_rust\". so let\u0027s declare that \"cflags\" means \"c-like languages\" and stick with \"rustflags\"",
+      "parentUuid": "20a92f35_b7bc12c8",
+      "range": {
+        "startLine": 37,
+        "startChar": 16,
+        "endLine": 37,
+        "endChar": 26
+      },
+      "revId": "91d80a8f91641047d480ee83fe796aa9f46504a9",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": true
     }
   ]
 }
