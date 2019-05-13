@@ -108,6 +108,24 @@
     },
     {
       "key": {
+        "uuid": "26e2a0b6_a6329ef3",
+        "filename": "tools/gn/rust_example/hello_world/foo/src/lib.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 1000023
+      },
+      "writtenOn": "2019-05-13T22:26:18Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "b044bb66_365d5375",
+      "revId": "3255f09a14ae50513d234d5bef9b10627416702e",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "2136aa35_0e6b55e3",
         "filename": "tools/gn/rust_example/hello_world/src/BUILD.gn",
         "patchSetId": 1
@@ -176,6 +194,24 @@
       "revId": "3255f09a14ae50513d234d5bef9b10627416702e",
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "b6e071e7_afdd325d",
+        "filename": "tools/gn/rust_example/hello_world/src/BUILD.gn",
+        "patchSetId": 1
+      },
+      "lineNbr": 2,
+      "author": {
+        "id": 1000023
+      },
+      "writtenOn": "2019-05-13T22:26:18Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "d6bbdef2_ada48f8c",
+      "revId": "3255f09a14ae50513d234d5bef9b10627416702e",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": false
     }
   ]
 }
