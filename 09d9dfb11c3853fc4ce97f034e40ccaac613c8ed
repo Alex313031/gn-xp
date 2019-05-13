@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "f52dd241_1f5291eb",
+        "filename": "tools/gn/rust_example/hello_world/src/main.rs",
+        "patchSetId": 8
+      },
+      "lineNbr": 2,
+      "author": {
+        "id": 1000167
+      },
+      "writtenOn": "2019-05-13T22:36:11Z",
+      "side": 1,
+      "message": "nit: remove `extern crate` here and everywhere else now that you\u0027re on 2018 edition",
+      "revId": "09d9dfb11c3853fc4ce97f034e40ccaac613c8ed",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": true
+    }
+  ]
+}
