@@ -68,6 +68,16 @@ void BinaryTargetGenerator::DoRun() {
     return;
 }
 
+bool BinaryTargetGenerator::FillSources() {
+  bool ret = TargetGenerator::FillSources();
+  for (const auto& source : target_->sources()) {
+    if (source.type() == SourceFile::SOURCE_UNKNOWN) {
+      // printf("UNKNOWN SOURCE FILE TYPE for %s\n", source.GetName().c_str());
+    }
+  }
+  return ret;
+}
+
 bool BinaryTargetGenerator::FillCompleteStaticLib() {
   if (target_->output_type() == Target::STATIC_LIBRARY) {
     const Value* value = scope_->GetValue(variables::kCompleteStaticLib, true);
