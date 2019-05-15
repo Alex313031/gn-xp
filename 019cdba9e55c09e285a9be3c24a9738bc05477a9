@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "c4978be8_8d306284",
+        "filename": "tools/gn/source_file.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 29,
+      "author": {
+        "id": 1000020
+      },
+      "writtenOn": "2019-05-15T20:01:15Z",
+      "side": 1,
+      "message": "fyi \"inc\" is a new addition here",
+      "range": {
+        "startLine": 29,
+        "startChar": 27,
+        "endLine": 29,
+        "endChar": 45
+      },
+      "revId": "019cdba9e55c09e285a9be3c24a9738bc05477a9",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": true
+    }
+  ]
+}
