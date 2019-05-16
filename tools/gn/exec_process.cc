@@ -22,7 +22,11 @@
 #else
 #include <errno.h>
 #include <fcntl.h>
+#if defined(OS_HAIKU)
+#include <signal.h>
+#else
 #include <sys/signal.h>
+#endif
 #include <sys/wait.h>
 #include <unistd.h>
 
