@@ -97,13 +97,14 @@ class SourceFile {
     return value_ < other.value_;
   }
 
-  void swap(SourceFile& other) { value_.swap(other.value_); }
+  void swap(SourceFile& other) {
+    value_.swap(other.value_);
+    std::swap(type_, other.type_);
+  }
 
  private:
-  friend class SourceDir;
-
   std::string value_;
-  Type type_;
+  Type type_ = static_cast<Type>(1234);
 
   // Copy & assign supported.
 };
