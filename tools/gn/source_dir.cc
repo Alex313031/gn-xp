@@ -92,17 +92,14 @@ SourceFile SourceDir::ResolveRelativeFile(
     const Value& p,
     Err* err,
     const base::StringPiece& source_root) const {
-  SourceFile ret;
-
   if (!p.VerifyTypeIs(Value::STRING, err))
-    return ret;
+    return SourceFile();
 
   const std::string& input_string = p.string_value();
-  if (!ValidateResolveInput<std::string>(true, p, input_string, err)) {
-    return ret;
-  }
-  ret.value_ = ResolveRelative(input_string, value_, true, source_root);
-  return ret;
+  if (!ValidateResolveInput<std::string>(true, p, input_string, err))
+    return SourceFile();
+
+  return SourceFile(ResolveRelative(input_string, value_, true, source_root));
 }
 
 std::string SourceDir::ResolveRelativeAs(bool as_file,
