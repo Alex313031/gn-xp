@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "10e62708_82114688",
+        "filename": "tools/gn/binary_target_generator.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 89,
+      "author": {
+        "id": 1000020
+      },
+      "writtenOn": "2019-05-16T01:46:23Z",
+      "side": 1,
+      "message": "I suspect these should probably be allowed too.  Just want to confirm exactly which should be moved to allowed.",
+      "range": {
+        "startLine": 86,
+        "startChar": 0,
+        "endLine": 89,
+        "endChar": 33
+      },
+      "revId": "7f699a8f404dec81abd7a48d02fa4080ec307034",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": true
+    }
+  ]
+}
