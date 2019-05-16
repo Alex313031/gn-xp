@@ -25,7 +25,7 @@ static_assert(File::FROM_BEGIN == SEEK_SET && File::FROM_CURRENT == SEEK_CUR &&
 namespace {
 
 #if defined(OS_BSD) || defined(OS_MACOSX) || defined(OS_NACL) || \
-    defined(OS_ANDROID) && __ANDROID_API__ < 21
+    defined(OS_HAIKU) || defined(OS_ANDROID) && __ANDROID_API__ < 21
 int CallFstat(int fd, stat_wrapper_t* sb) {
   return fstat(fd, sb);
 }
@@ -93,7 +93,7 @@ void File::Info::FromStat(const stat_wrapper_t& stat_info) {
   int64_t last_accessed_nsec = stat_info.st_atimespec.tv_nsec;
   time_t creation_time_sec = stat_info.st_ctimespec.tv_sec;
   int64_t creation_time_nsec = stat_info.st_ctimespec.tv_nsec;
-#elif defined(OS_AIX)
+#elif defined(OS_AIX) || defined(OS_HAIKU)
   time_t last_modified_sec = stat_info.st_mtime;
   int64_t last_modified_nsec = 0;
   time_t last_accessed_sec = stat_info.st_atime;
