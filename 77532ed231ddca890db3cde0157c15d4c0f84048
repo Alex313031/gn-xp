@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "733a553a_c1605f0c",
+        "filename": "tools/gn/source_file.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 29,
+      "author": {
+        "id": 1000020
+      },
+      "writtenOn": "2019-05-17T23:02:37Z",
+      "side": 1,
+      "message": "fyi: the style guide prefers .inc over .inl.  I\u0027m changing the third_party deps over to using .inc",
+      "range": {
+        "startLine": 29,
+        "startChar": 85,
+        "endLine": 29,
+        "endChar": 88
+      },
+      "revId": "77532ed231ddca890db3cde0157c15d4c0f84048",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "8454ec97_9735a07e",
+        "filename": "tools/gn/source_file.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 29,
+      "author": {
+        "id": 1000020
+      },
+      "writtenOn": "2019-05-17T23:02:37Z",
+      "side": 1,
+      "message": "nit: wrap @ 80chars",
+      "range": {
+        "startLine": 29,
+        "startChar": 6,
+        "endLine": 29,
+        "endChar": 45
+      },
+      "revId": "77532ed231ddca890db3cde0157c15d4c0f84048",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": true
+    }
+  ]
+}
