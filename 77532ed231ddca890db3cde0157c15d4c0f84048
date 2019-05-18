@@ -2,6 +2,29 @@
   "comments": [
     {
       "key": {
+        "uuid": "18d20003_10cff8f3",
+        "filename": "tools/gn/binary_target_generator.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 89,
+      "author": {
+        "id": 1000020
+      },
+      "writtenOn": "2019-05-18T01:27:09Z",
+      "side": 1,
+      "message": "Sorry I just realized .rc files should be in the whitelist too.  And then I guess the switch would be kind of gratuitous at that point.  Maybe a \"if (source.type() \u003d\u003d SourceFile::SOURCE_UNKNOWN)\" would do.",
+      "range": {
+        "startLine": 89,
+        "startChar": 6,
+        "endLine": 89,
+        "endChar": 32
+      },
+      "revId": "77532ed231ddca890db3cde0157c15d4c0f84048",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "733a553a_c1605f0c",
         "filename": "tools/gn/source_file.cc",
         "patchSetId": 1
