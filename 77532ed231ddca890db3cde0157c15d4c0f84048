@@ -71,6 +71,54 @@
     },
     {
       "key": {
+        "uuid": "a592704f_44423c3a",
+        "filename": "tools/gn/source_file.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 29,
+      "author": {
+        "id": 1000023
+      },
+      "writtenOn": "2019-05-20T17:23:51Z",
+      "side": 1,
+      "message": "Fuchsia has some graphics libraries that use .inl, and other projects that don\u0027t necessarily follow Chromium\u0027s style guide may as well.",
+      "parentUuid": "733a553a_c1605f0c",
+      "range": {
+        "startLine": 29,
+        "startChar": 85,
+        "endLine": 29,
+        "endChar": 88
+      },
+      "revId": "77532ed231ddca890db3cde0157c15d4c0f84048",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "5d543d43_753ef3d4",
+        "filename": "tools/gn/source_file.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 29,
+      "author": {
+        "id": 1000023
+      },
+      "writtenOn": "2019-05-20T17:23:51Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "8454ec97_9735a07e",
+      "range": {
+        "startLine": 29,
+        "startChar": 6,
+        "endLine": 29,
+        "endChar": 45
+      },
+      "revId": "77532ed231ddca890db3cde0157c15d4c0f84048",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "3113340f_8893fe71",
         "filename": "tools/gn/source_file.cc",
         "patchSetId": 1
@@ -85,6 +133,24 @@
       "revId": "77532ed231ddca890db3cde0157c15d4c0f84048",
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "dd40fe10_83ba2257",
+        "filename": "tools/gn/source_file.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 43,
+      "author": {
+        "id": 1000023
+      },
+      "writtenOn": "2019-05-20T17:23:51Z",
+      "side": 1,
+      "message": "As far as I know, a symbol table file. There\u0027s one in a target from the Crashpad GN files. I could also just remove that and try to roll crashpad.",
+      "parentUuid": "3113340f_8893fe71",
+      "revId": "77532ed231ddca890db3cde0157c15d4c0f84048",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": false
     }
   ]
 }
