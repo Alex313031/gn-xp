@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "905c1f7a_7da87bdd",
+        "filename": "tools/gn/binary_target_generator.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 89,
+      "author": {
+        "id": 1000020
+      },
+      "writtenOn": "2019-05-20T17:28:55Z",
+      "side": 1,
+      "message": "Pls whitelist .rc too (not sure if you saw my other comment)",
+      "range": {
+        "startLine": 89,
+        "startChar": 11,
+        "endLine": 89,
+        "endChar": 32
+      },
+      "revId": "92b23a80bde5c25c3dc50abbb40097b774b52aa8",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": true
+    }
+  ]
+}

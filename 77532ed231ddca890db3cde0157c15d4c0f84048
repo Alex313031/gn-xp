@@ -151,6 +151,24 @@
       "revId": "77532ed231ddca890db3cde0157c15d4c0f84048",
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "888dc58e_33c84122",
+        "filename": "tools/gn/source_file.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 43,
+      "author": {
+        "id": 1000020
+      },
+      "writtenOn": "2019-05-20T17:28:55Z",
+      "side": 1,
+      "message": "Crashpad change that removes the .sym file is over at https://chromium-review.googlesource.com/c/chromium/src/+/1617562/",
+      "parentUuid": "dd40fe10_83ba2257",
+      "revId": "77532ed231ddca890db3cde0157c15d4c0f84048",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": false
     }
   ]
 }
