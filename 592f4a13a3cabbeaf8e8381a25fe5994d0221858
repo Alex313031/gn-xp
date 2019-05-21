@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "edbf1221_7aa70289",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 13,
+      "author": {
+        "id": 1000135
+      },
+      "writtenOn": "2019-05-21T22:41:49Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "bf2ff98c_bae7f783",
+      "revId": "592f4a13a3cabbeaf8e8381a25fe5994d0221858",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "5ab3d311_14ef7748",
         "filename": "tools/gn/args.h",
         "patchSetId": 1
@@ -33,6 +51,24 @@
       "revId": "592f4a13a3cabbeaf8e8381a25fe5994d0221858",
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "417567c6_591dfad9",
+        "filename": "tools/gn/args.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 100,
+      "author": {
+        "id": 1000135
+      },
+      "writtenOn": "2019-05-21T22:41:49Z",
+      "side": 1,
+      "message": "Thanks for pointing out. I changed it to sorting the keys using the toolchain_label.",
+      "parentUuid": "5ab3d311_14ef7748",
+      "revId": "592f4a13a3cabbeaf8e8381a25fe5994d0221858",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": false
     }
   ]
 }
