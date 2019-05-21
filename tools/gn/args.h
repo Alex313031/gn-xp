@@ -97,7 +97,7 @@ class Args {
 
  private:
   using ArgumentsPerToolchain =
-      std::unordered_map<const Settings*, Scope::KeyValueMap>;
+      std::map<const Settings*, Scope::KeyValueMap>;
 
   // Sets the default config based on the current system.
   void SetSystemVarsLocked(Scope* scope) const;
