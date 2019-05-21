@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "bf2ff98c_bae7f783",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 13,
+      "author": {
+        "id": 1000016
+      },
+      "writtenOn": "2019-05-21T21:47:06Z",
+      "side": 1,
+      "message": "Fuchsia bug references are only for Fuchsia repos.\nFile it at crbug.com/gn and point to that bug here.",
+      "revId": "592f4a13a3cabbeaf8e8381a25fe5994d0221858",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "5ab3d311_14ef7748",
+        "filename": "tools/gn/args.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 100,
+      "author": {
+        "id": 1000016
+      },
+      "writtenOn": "2019-05-21T21:47:06Z",
+      "side": 1,
+      "message": "The pointer value is arbitrary and won\u0027t necessarily maintain the intended ordering.\nYou need to order this on something directly tied to the input.",
+      "revId": "592f4a13a3cabbeaf8e8381a25fe5994d0221858",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": true
+    }
+  ]
+}
