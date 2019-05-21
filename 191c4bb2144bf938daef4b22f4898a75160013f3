@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "0d527a34_55895738",
+        "filename": "tools/gn/rust_variables.cc",
+        "patchSetId": 10
+      },
+      "lineNbr": 15,
+      "author": {
+        "id": 1000023
+      },
+      "writtenOn": "2019-05-21T22:07:24Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "3db9227b_911d850f",
+      "revId": "191c4bb2144bf938daef4b22f4898a75160013f3",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "18fed8f8_a72453af",
         "filename": "tools/gn/rust_variables.cc",
         "patchSetId": 10
@@ -33,6 +51,24 @@
       "revId": "191c4bb2144bf938daef4b22f4898a75160013f3",
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "e6af73cf_1aa1863f",
+        "filename": "tools/gn/rust_variables.cc",
+        "patchSetId": 10
+      },
+      "lineNbr": 48,
+      "author": {
+        "id": 1000023
+      },
+      "writtenOn": "2019-05-21T22:07:24Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "18fed8f8_a72453af",
+      "revId": "191c4bb2144bf938daef4b22f4898a75160013f3",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": false
     },
     {
       "key": {
@@ -71,6 +107,24 @@
     },
     {
       "key": {
+        "uuid": "3b1e56be_152b0711",
+        "filename": "tools/gn/rust_variables.cc",
+        "patchSetId": 10
+      },
+      "lineNbr": 72,
+      "author": {
+        "id": 1000023
+      },
+      "writtenOn": "2019-05-21T22:07:24Z",
+      "side": 1,
+      "message": "I\u0027ve left it the same as the Rust convention in the latest patchset, but Brett if you think it\u0027d be more idiomatic from a GN perspective to switch it I can.",
+      "parentUuid": "a189c6f9_6b5b44ba",
+      "revId": "191c4bb2144bf938daef4b22f4898a75160013f3",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "c5a450a6_5309f30a",
         "filename": "tools/gn/rust_variables.cc",
         "patchSetId": 10
@@ -85,6 +139,24 @@
       "revId": "191c4bb2144bf938daef4b22f4898a75160013f3",
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "e7615292_928197f0",
+        "filename": "tools/gn/rust_variables.cc",
+        "patchSetId": 10
+      },
+      "lineNbr": 78,
+      "author": {
+        "id": 1000023
+      },
+      "writtenOn": "2019-05-21T22:07:24Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "c5a450a6_5309f30a",
+      "revId": "191c4bb2144bf938daef4b22f4898a75160013f3",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": false
     },
     {
       "key": {
@@ -105,6 +177,24 @@
     },
     {
       "key": {
+        "uuid": "aaa60841_ca455aef",
+        "filename": "tools/gn/rust_variables.cc",
+        "patchSetId": 10
+      },
+      "lineNbr": 92,
+      "author": {
+        "id": 1000023
+      },
+      "writtenOn": "2019-05-21T22:07:24Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "d12feb6c_d8672967",
+      "revId": "191c4bb2144bf938daef4b22f4898a75160013f3",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "c8379b85_bca2545b",
         "filename": "tools/gn/rust_variables.cc",
         "patchSetId": 10
@@ -119,6 +209,24 @@
       "revId": "191c4bb2144bf938daef4b22f4898a75160013f3",
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "7a504feb_459fc72e",
+        "filename": "tools/gn/rust_variables.cc",
+        "patchSetId": 10
+      },
+      "lineNbr": 98,
+      "author": {
+        "id": 1000023
+      },
+      "writtenOn": "2019-05-21T22:07:24Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "c8379b85_bca2545b",
+      "revId": "191c4bb2144bf938daef4b22f4898a75160013f3",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": false
     }
   ]
 }
