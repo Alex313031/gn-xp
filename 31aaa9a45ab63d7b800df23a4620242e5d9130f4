@@ -16,6 +16,24 @@
       "revId": "31aaa9a45ab63d7b800df23a4620242e5d9130f4",
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "c1d0a466_53e7e93f",
+        "filename": "tools/gn/args.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 281,
+      "author": {
+        "id": 1000135
+      },
+      "writtenOn": "2019-05-21T23:27:09Z",
+      "side": 1,
+      "message": "Oh, I am not aware of that. I thought it would we good if for some reason the toolchain_label() is equal, it can have some other metrics to compare the keys. I removed this condition and it won\u0027t make a difference in the output.",
+      "parentUuid": "e4afa554_d5015984",
+      "revId": "31aaa9a45ab63d7b800df23a4620242e5d9130f4",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": false
     }
   ]
 }
