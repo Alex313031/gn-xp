@@ -125,6 +125,24 @@
     },
     {
       "key": {
+        "uuid": "ea56269f_faac025b",
+        "filename": "tools/gn/rust_variables.cc",
+        "patchSetId": 10
+      },
+      "lineNbr": 72,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2019-05-21T22:20:45Z",
+      "side": 1,
+      "message": "I thought about this more and I think the thing is whether we have \"rename\" in the variable name. With \"rename\" I would expect it to have syntax like a \"rename\" or \"move\" command which always lists the source first, and the destination second.\n\nBut maybe this variable should have a different name? Without the \"rename\" word the current syntax makes sense. Brainstorming: \"extern_names\", \"extern_crates\".",
+      "parentUuid": "3b1e56be_152b0711",
+      "revId": "191c4bb2144bf938daef4b22f4898a75160013f3",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "c5a450a6_5309f30a",
         "filename": "tools/gn/rust_variables.cc",
         "patchSetId": 10
