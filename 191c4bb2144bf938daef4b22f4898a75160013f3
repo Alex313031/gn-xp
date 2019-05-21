@@ -53,6 +53,24 @@
     },
     {
       "key": {
+        "uuid": "a189c6f9_6b5b44ba",
+        "filename": "tools/gn/rust_variables.cc",
+        "patchSetId": 10
+      },
+      "lineNbr": 72,
+      "author": {
+        "id": 1000167
+      },
+      "writtenOn": "2019-05-21T18:39:43Z",
+      "side": 1,
+      "message": "In Rust, typically we think of it not as modifying the existing name of a target, but rather mapping a particular library name to a particular build target. The syntax to the compiler is `--extern \u003clibrary_name\u003e\u003d\u003clibrary_file\u003e.rlib`.\n\nI have no opinion on whether it\u0027s better to keep that convention here or to reverse it-- that seems like more of a question of GN idioms.",
+      "parentUuid": "6a8a1440_0ead9be1",
+      "revId": "191c4bb2144bf938daef4b22f4898a75160013f3",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "c5a450a6_5309f30a",
         "filename": "tools/gn/rust_variables.cc",
         "patchSetId": 10
