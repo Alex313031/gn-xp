@@ -1,0 +1,106 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "3db9227b_911d850f",
+        "filename": "tools/gn/rust_variables.cc",
+        "patchSetId": 10
+      },
+      "lineNbr": 15,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2019-05-21T18:26:32Z",
+      "side": 1,
+      "message": "Can each of these entries say:\n\n  Valid for \"rust_library\" targets.\n\nAnd I guess anything else it\u0027s valid for (executables with rust?).",
+      "revId": "191c4bb2144bf938daef4b22f4898a75160013f3",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "18fed8f8_a72453af",
+        "filename": "tools/gn/rust_variables.cc",
+        "patchSetId": 10
+      },
+      "lineNbr": 48,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2019-05-21T18:26:32Z",
+      "side": 1,
+      "message": "EOL whitespace. Also below.",
+      "revId": "191c4bb2144bf938daef4b22f4898a75160013f3",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "6a8a1440_0ead9be1",
+        "filename": "tools/gn/rust_variables.cc",
+        "patchSetId": 10
+      },
+      "lineNbr": 72,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2019-05-21T18:26:32Z",
+      "side": 1,
+      "message": "Maybe there\u0027s a rust convention for this. But I would expect the order of these to be reversed, as in a \"rename\" CLI command. e.g. [ \":bar\", \"renamed\" ] renames \":bar\" to \"renamed\". Might be worth asking around for other opinions.",
+      "revId": "191c4bb2144bf938daef4b22f4898a75160013f3",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "c5a450a6_5309f30a",
+        "filename": "tools/gn/rust_variables.cc",
+        "patchSetId": 10
+      },
+      "lineNbr": 78,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2019-05-21T18:26:32Z",
+      "side": 1,
+      "message": "This is markdown which won\u0027t look right in \"gn help\" (I think). I think it\u0027s enough to indent the examples two more spaces and remove these which is the normal formatting in the help.",
+      "revId": "191c4bb2144bf938daef4b22f4898a75160013f3",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "d12feb6c_d8672967",
+        "filename": "tools/gn/rust_variables.cc",
+        "patchSetId": 10
+      },
+      "lineNbr": 92,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2019-05-21T18:26:32Z",
+      "side": 1,
+      "message": "This isn\u0027t a list of two-element lists. Did you mean to add another layer of []?",
+      "revId": "191c4bb2144bf938daef4b22f4898a75160013f3",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "c8379b85_bca2545b",
+        "filename": "tools/gn/rust_variables.cc",
+        "patchSetId": 10
+      },
+      "lineNbr": 98,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2019-05-21T18:26:32Z",
+      "side": 1,
+      "message": "Extra blank",
+      "revId": "191c4bb2144bf938daef4b22f4898a75160013f3",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": true
+    }
+  ]
+}
