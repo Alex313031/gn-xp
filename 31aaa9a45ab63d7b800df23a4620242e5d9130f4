@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "e4afa554_d5015984",
+        "filename": "tools/gn/args.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 281,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2019-05-21T23:10:24Z",
+      "side": 1,
+      "message": "Maybe I\u0027m misunderstanding or misremembering what the default_toolchain_label() is, but I thought this would be the same for all Settings objects in a given run. Are you sure you need this condition?",
+      "revId": "31aaa9a45ab63d7b800df23a4620242e5d9130f4",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": true
+    }
+  ]
+}
