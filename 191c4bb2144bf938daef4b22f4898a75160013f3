@@ -143,6 +143,24 @@
     },
     {
       "key": {
+        "uuid": "382275a1_dcb2d539",
+        "filename": "tools/gn/rust_variables.cc",
+        "patchSetId": 10
+      },
+      "lineNbr": 72,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2019-05-21T22:24:27Z",
+      "side": 1,
+      "message": "Ooh: Do the crate names have simple identifier-like names or can you have \"foo::bar\"? If the former, the nicest syntax might be:\n\n  extern_crates \u003d {\n    foo \u003d \":bar\"\n  }",
+      "parentUuid": "ea56269f_faac025b",
+      "revId": "191c4bb2144bf938daef4b22f4898a75160013f3",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "c5a450a6_5309f30a",
         "filename": "tools/gn/rust_variables.cc",
         "patchSetId": 10
