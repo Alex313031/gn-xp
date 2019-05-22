@@ -1,0 +1,72 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "c15d9981_9bb06c69",
+        "filename": "base/files/file.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 28,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2019-05-22T16:28:13Z",
+      "side": 1,
+      "message": "You shouldn\u0027t need the change on this line since this is an #elif and HAIKU would be caugh by the first condition.",
+      "revId": "72f199ce3f04ca81a0bfb0b00ecd46c8adca7ade",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "ecb49241_b986295d",
+        "filename": "build/gen.py",
+        "patchSetId": 4
+      },
+      "lineNbr": 350,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2019-05-22T16:28:13Z",
+      "side": 1,
+      "message": "Isn\u0027t this arm already protected by is_haiku()?",
+      "revId": "72f199ce3f04ca81a0bfb0b00ecd46c8adca7ade",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "bde50454_1d11703a",
+        "filename": "util/build_config.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 67,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2019-05-22T16:28:13Z",
+      "side": 1,
+      "message": "While you\u0027re here, can you define this previous line to 1? Your change made me notice this existing error.",
+      "revId": "72f199ce3f04ca81a0bfb0b00ecd46c8adca7ade",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "c8e1d8bc_6e4f221f",
+        "filename": "util/exe_path.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 78,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2019-05-22T16:28:13Z",
+      "side": 1,
+      "message": "Can you phrase this as\n\n  return base::FilePath(std::string(i_info.name));\n\nI think it\u0027s shorter and easier to read. Also, while currently this won\u0027t matter, I\u0027m hoping to add a string\u0026\u0026 constructor to FilePath in the future and constructing a std::string in place will avoid a copy.",
+      "revId": "72f199ce3f04ca81a0bfb0b00ecd46c8adca7ade",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": true
+    }
+  ]
+}
