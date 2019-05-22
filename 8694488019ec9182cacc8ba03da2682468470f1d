@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "d9c7ff4a_782b66f5",
+        "filename": "build/gen.py",
+        "patchSetId": 2
+      },
+      "lineNbr": 322,
+      "author": {
+        "id": 1000155
+      },
+      "writtenOn": "2019-05-22T15:07:35Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "c03042f1_e3b39ca7",
+      "range": {
+        "startLine": 322,
+        "startChar": 19,
+        "endLine": 322,
+        "endChar": 53
+      },
+      "revId": "8694488019ec9182cacc8ba03da2682468470f1d",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "e7f7bf54_af3f2603",
         "filename": "util/exe_path.cc",
         "patchSetId": 2
@@ -48,6 +72,30 @@
     },
     {
       "key": {
+        "uuid": "2f097f78_4ce90dfa",
+        "filename": "util/exe_path.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 72,
+      "author": {
+        "id": 1000155
+      },
+      "writtenOn": "2019-05-22T15:07:35Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "e7f7bf54_af3f2603",
+      "range": {
+        "startLine": 72,
+        "startChar": 7,
+        "endLine": 72,
+        "endChar": 8
+      },
+      "revId": "8694488019ec9182cacc8ba03da2682468470f1d",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "72984576_f7a14d68",
         "filename": "util/exe_path.cc",
         "patchSetId": 2
@@ -68,6 +116,30 @@
       "revId": "8694488019ec9182cacc8ba03da2682468470f1d",
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "4ce71830_86d5d5be",
+        "filename": "util/exe_path.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 73,
+      "author": {
+        "id": 1000155
+      },
+      "writtenOn": "2019-05-22T15:07:35Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "72984576_f7a14d68",
+      "range": {
+        "startLine": 73,
+        "startChar": 4,
+        "endLine": 73,
+        "endChar": 7
+      },
+      "revId": "8694488019ec9182cacc8ba03da2682468470f1d",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": false
     }
   ]
 }
