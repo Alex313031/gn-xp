@@ -42,19 +42,13 @@ class SourceFile {
     SOURCE_NUMTYPES,
   };
 
-  enum SwapIn { SWAP_IN };
-
-  SourceFile();
+  SourceFile() = default;
 
   // Takes a known absolute source file. Always begins in a slash.
-  explicit SourceFile(const base::StringPiece& p);
-  SourceFile(const SourceFile& other) = default;
+  explicit SourceFile(const std::string& value);
+  explicit SourceFile(std::string&& value);
 
-  // Constructs from the given string by swapping in the contents of the given
-  // value. The value will be the empty string after this call.
-  SourceFile(SwapIn, std::string* value);
-
-  ~SourceFile();
+  ~SourceFile() = default;
 
   bool is_null() const { return value_.empty(); }
   const std::string& value() const { return value_; }
@@ -97,15 +91,11 @@ class SourceFile {
     return value_ < other.value_;
   }
 
-  void swap(SourceFile& other) { value_.swap(other.value_); }
-
  private:
   friend class SourceDir;
 
   std::string value_;
-  Type type_;
-
-  // Copy & assign supported.
+  Type type_ = SOURCE_UNKNOWN;
 };
 
 namespace std {
@@ -119,9 +109,5 @@ struct hash<SourceFile> {
 };
 
 }  // namespace std
-
-inline void swap(SourceFile& lhs, SourceFile& rhs) {
-  lhs.swap(rhs);
-}
 
 #endif  // TOOLS_GN_SOURCE_FILE_H_

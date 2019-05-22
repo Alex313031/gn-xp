@@ -3,14 +3,14 @@
 // found in the LICENSE file.
 
 #include "tools/gn/tool.h"
+
 #include "tools/gn/c_tool.h"
 #include "tools/gn/general_tool.h"
 #include "tools/gn/target.h"
 
 const char* Tool::kToolNone = "";
 
-Tool::Tool(const char* n)
-    : defined_from_(nullptr), restat_(false), complete_(false), name_(n) {}
+Tool::Tool(const char* n) : name_(n) {}
 
 Tool::~Tool() = default;
 
