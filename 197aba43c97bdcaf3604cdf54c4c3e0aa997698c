@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "35f25961_9e2d7e99",
+        "filename": "tools/gn/location.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 37,
+      "author": {
+        "id": 1000004
+      },
+      "writtenOn": "2019-05-22T18:56:02Z",
+      "side": 1,
+      "message": "I see this one wasn\u0027t initialized before... Looks like maybe it\u0027s completely unused?",
+      "range": {
+        "startLine": 37,
+        "startChar": 2,
+        "endLine": 37,
+        "endChar": 15
+      },
+      "revId": "197aba43c97bdcaf3604cdf54c4c3e0aa997698c",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": true
+    }
+  ]
+}
