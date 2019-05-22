@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "a3c7700b_13525ce8",
+        "filename": "base/files/file.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 28,
+      "author": {
+        "id": 1000155
+      },
+      "writtenOn": "2019-05-22T22:03:48Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "c15d9981_9bb06c69",
+      "revId": "72f199ce3f04ca81a0bfb0b00ecd46c8adca7ade",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "ecb49241_b986295d",
         "filename": "build/gen.py",
         "patchSetId": 4
@@ -33,6 +51,24 @@
       "revId": "72f199ce3f04ca81a0bfb0b00ecd46c8adca7ade",
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "45e3c7d0_861c38ae",
+        "filename": "build/gen.py",
+        "patchSetId": 4
+      },
+      "lineNbr": 350,
+      "author": {
+        "id": 1000155
+      },
+      "writtenOn": "2019-05-22T22:03:48Z",
+      "side": 1,
+      "message": "I don\u0027t think so, I was still getting errors with the -pthread flag in Haiku with GCC. I tried Clang and it builds GN as long as the -pthread flag is not passed into the linker. As I am using clang instead, i\u0027ve removed this line from the cflags as it is ignored by clang anyway.",
+      "parentUuid": "ecb49241_b986295d",
+      "revId": "72f199ce3f04ca81a0bfb0b00ecd46c8adca7ade",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": false
     },
     {
       "key": {
@@ -53,6 +89,24 @@
     },
     {
       "key": {
+        "uuid": "9c023585_d1fe13a3",
+        "filename": "util/build_config.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 67,
+      "author": {
+        "id": 1000155
+      },
+      "writtenOn": "2019-05-22T22:03:48Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "bde50454_1d11703a",
+      "revId": "72f199ce3f04ca81a0bfb0b00ecd46c8adca7ade",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "c8e1d8bc_6e4f221f",
         "filename": "util/exe_path.cc",
         "patchSetId": 4
@@ -67,6 +121,24 @@
       "revId": "72f199ce3f04ca81a0bfb0b00ecd46c8adca7ade",
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "5febb5e7_78c03ef0",
+        "filename": "util/exe_path.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 78,
+      "author": {
+        "id": 1000155
+      },
+      "writtenOn": "2019-05-22T22:03:48Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "c8e1d8bc_6e4f221f",
+      "revId": "72f199ce3f04ca81a0bfb0b00ecd46c8adca7ade",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": false
     }
   ]
 }
