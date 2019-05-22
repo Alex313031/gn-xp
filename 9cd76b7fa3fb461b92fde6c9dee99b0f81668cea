@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "24f477b9_90d5bce0",
+        "filename": "tools/gn/functions_target.cc",
+        "patchSetId": 12
+      },
+      "lineNbr": 614,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2019-05-22T20:11:33Z",
+      "side": 1,
+      "message": "Can we do this now? This section doesn\u0027t really make sense, the comment above and some of the content says \"library\" but other parts say \"executable\". Can that be unified? It would probably be good to document how this is different than a static_library or whatever with Rust sources.\n\nAlso, the regular static/shared library targets should probably mention Rust and what to do.",
+      "revId": "9cd76b7fa3fb461b92fde6c9dee99b0f81668cea",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "f715e199_e0db66b9",
+        "filename": "tools/gn/rust_target_generator.cc",
+        "patchSetId": 12
+      },
+      "lineNbr": 127,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2019-05-22T20:11:33Z",
+      "side": 1,
+      "message": "I didn\u0027t check but make sure this behavior is documented in the |sources| documentation.",
+      "revId": "9cd76b7fa3fb461b92fde6c9dee99b0f81668cea",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": true
+    }
+  ]
+}
