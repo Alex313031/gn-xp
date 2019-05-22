@@ -174,7 +174,7 @@ bool TargetGenerator::FillSources() {
   if (!ExtractListOfRelativeFiles(scope_->settings()->build_settings(), *value,
                                   scope_->GetSourceDir(), &dest_sources, err_))
     return false;
-  target_->sources().swap(dest_sources);
+  target_->sources() = std::move(dest_sources);
   return true;
 }
 
@@ -190,7 +190,7 @@ bool TargetGenerator::FillPublic() {
   if (!ExtractListOfRelativeFiles(scope_->settings()->build_settings(), *value,
                                   scope_->GetSourceDir(), &dest_public, err_))
     return false;
-  target_->public_headers().swap(dest_public);
+  target_->public_headers() = std::move(dest_public);
   return true;
 }
 
