@@ -22,6 +22,30 @@
       "revId": "197aba43c97bdcaf3604cdf54c4c3e0aa997698c",
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "6076740d_9a6fb694",
+        "filename": "tools/gn/location.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 37,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2019-05-22T19:25:40Z",
+      "side": 1,
+      "message": "It\u0027s used because it\u0027s initialized when the location isn\u0027t null and I think everybody would check is_null() before getting any data out.",
+      "parentUuid": "35f25961_9e2d7e99",
+      "range": {
+        "startLine": 37,
+        "startChar": 2,
+        "endLine": 37,
+        "endChar": 15
+      },
+      "revId": "197aba43c97bdcaf3604cdf54c4c3e0aa997698c",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": false
     }
   ]
 }

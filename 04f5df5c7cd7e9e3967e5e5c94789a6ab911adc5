@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "25e4a633_b380e58f",
+        "filename": "tools/gn/input_file_manager.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 301,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2019-05-22T19:25:40Z",
+      "side": 0,
+      "message": "I don\u0027t quite follow. data-\u003etokens is swapped with the local variable |tokens| which isn\u0027t used after this line. I don\u0027t see a InputFileManager modifications with this line.",
+      "parentUuid": "6c23eb18_8fba8fb6",
+      "range": {
+        "startLine": 301,
+        "startChar": 19,
+        "endLine": 301,
+        "endChar": 23
+      },
+      "revId": "04f5df5c7cd7e9e3967e5e5c94789a6ab911adc5",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "69e7e75b_062f324e",
         "filename": "tools/gn/label.h",
         "patchSetId": 3
