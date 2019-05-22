@@ -383,7 +383,7 @@ void LoaderImpl::DidLoadBuildConfig(const Label& label) {
     for (const auto& load : old_loads) {
       if (load.toolchain_name.is_null()) {
         // Fix up toolchain label
-        invocations_.insert(LoadID(load.file, label));
+        invocations_.emplace(load.file, label);
       } else {
         // Can keep the old one.
         invocations_.insert(load);
