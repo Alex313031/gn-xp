@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "41136b29_24016f97",
+        "filename": "tools/gn/rust_values.h",
+        "patchSetId": 12
+      },
+      "lineNbr": 48,
+      "author": {
+        "id": 1000023
+      },
+      "writtenOn": "2019-05-23T23:44:07Z",
+      "side": 1,
+      "message": "Future patches do look up by label, but since this list won\u0027t ever be terribly long the cost of iterating won\u0027t be high if you\u0027d rather the map be avoided",
+      "parentUuid": "053dfaf4_d020363a",
+      "revId": "08f8dac6979a3832bab2cc45782e128eeeccebb0",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "abe37f1e_ea02395e",
         "filename": "tools/gn/rust_values.h",
         "patchSetId": 12
@@ -30,6 +48,24 @@
       "writtenOn": "2019-05-23T23:12:10Z",
       "side": 1,
       "message": "Can you default initialize this here?",
+      "revId": "08f8dac6979a3832bab2cc45782e128eeeccebb0",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "b629e288_e6597595",
+        "filename": "tools/gn/rust_values.h",
+        "patchSetId": 12
+      },
+      "lineNbr": 56,
+      "author": {
+        "id": 1000023
+      },
+      "writtenOn": "2019-05-23T23:44:07Z",
+      "side": 1,
+      "message": "It\u0027s initialized in the constructor -- is that sufficient?",
+      "parentUuid": "abe37f1e_ea02395e",
       "revId": "08f8dac6979a3832bab2cc45782e128eeeccebb0",
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
       "unresolved": true
@@ -50,6 +86,24 @@
       "revId": "08f8dac6979a3832bab2cc45782e128eeeccebb0",
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "c5f0e539_70470d0f",
+        "filename": "tools/gn/rust_variables.cc",
+        "patchSetId": 12
+      },
+      "lineNbr": 16,
+      "author": {
+        "id": 1000023
+      },
+      "writtenOn": "2019-05-23T23:44:07Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ae8e03b8_373ba0ae",
+      "revId": "08f8dac6979a3832bab2cc45782e128eeeccebb0",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": false
     }
   ]
 }
