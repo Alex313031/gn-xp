@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "053dfaf4_d020363a",
+        "filename": "tools/gn/rust_values.h",
+        "patchSetId": 12
+      },
+      "lineNbr": 48,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2019-05-23T23:12:10Z",
+      "side": 1,
+      "message": "Since you don\u0027t use it on this patch, I\u0027m wondering if you really need the map here. A vector of pairs would be more efficient (I would swap the order to match the input in that case).\n\nBut if the future patches will look up by label, this map is fine.",
+      "revId": "08f8dac6979a3832bab2cc45782e128eeeccebb0",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "abe37f1e_ea02395e",
+        "filename": "tools/gn/rust_values.h",
+        "patchSetId": 12
+      },
+      "lineNbr": 56,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2019-05-23T23:12:10Z",
+      "side": 1,
+      "message": "Can you default initialize this here?",
+      "revId": "08f8dac6979a3832bab2cc45782e128eeeccebb0",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "ae8e03b8_373ba0ae",
+        "filename": "tools/gn/rust_variables.cc",
+        "patchSetId": 12
+      },
+      "lineNbr": 16,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2019-05-23T23:12:10Z",
+      "side": 1,
+      "message": "Extra blank.",
+      "revId": "08f8dac6979a3832bab2cc45782e128eeeccebb0",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": true
+    }
+  ]
+}
