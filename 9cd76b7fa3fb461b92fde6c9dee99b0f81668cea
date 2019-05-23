@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "69c50248_a27d56e3",
+        "filename": "tools/gn/functions_target.cc",
+        "patchSetId": 12
+      },
+      "lineNbr": 614,
+      "author": {
+        "id": 1000023
+      },
+      "writtenOn": "2019-05-23T22:55:07Z",
+      "side": 1,
+      "message": "Ah yes sorry, I meant to do this before putting the patch up. Docs are present and accounted for now!",
+      "parentUuid": "24f477b9_90d5bce0",
+      "revId": "9cd76b7fa3fb461b92fde6c9dee99b0f81668cea",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "f715e199_e0db66b9",
         "filename": "tools/gn/rust_target_generator.cc",
         "patchSetId": 12
@@ -33,6 +51,24 @@
       "revId": "9cd76b7fa3fb461b92fde6c9dee99b0f81668cea",
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "3e392c1a_9121a45d",
+        "filename": "tools/gn/rust_target_generator.cc",
+        "patchSetId": 12
+      },
+      "lineNbr": 127,
+      "author": {
+        "id": 1000023
+      },
+      "writtenOn": "2019-05-23T22:55:07Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "f715e199_e0db66b9",
+      "revId": "9cd76b7fa3fb461b92fde6c9dee99b0f81668cea",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": false
     }
   ]
 }
