@@ -37,6 +37,24 @@
     },
     {
       "key": {
+        "uuid": "d6cad924_69046d44",
+        "filename": "tools/gn/rust_values.h",
+        "patchSetId": 12
+      },
+      "lineNbr": 48,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2019-05-23T23:46:16Z",
+      "side": 1,
+      "message": "Map is fine if you lookup by label. Performance shouldn\u0027t matter here and the usage is clearer.",
+      "parentUuid": "41136b29_24016f97",
+      "revId": "08f8dac6979a3832bab2cc45782e128eeeccebb0",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "abe37f1e_ea02395e",
         "filename": "tools/gn/rust_values.h",
         "patchSetId": 12
@@ -66,6 +84,24 @@
       "side": 1,
       "message": "It\u0027s initialized in the constructor -- is that sufficient?",
       "parentUuid": "abe37f1e_ea02395e",
+      "revId": "08f8dac6979a3832bab2cc45782e128eeeccebb0",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "1ee219a5_a6f01e23",
+        "filename": "tools/gn/rust_values.h",
+        "patchSetId": 12
+      },
+      "lineNbr": 56,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2019-05-23T23:46:16Z",
+      "side": 1,
+      "message": "I prefer to initialize in the header when the values are simpler. It\u0027s harder to mess up.",
+      "parentUuid": "b629e288_e6597595",
       "revId": "08f8dac6979a3832bab2cc45782e128eeeccebb0",
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
       "unresolved": true
