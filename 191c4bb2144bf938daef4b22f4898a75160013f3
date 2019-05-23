@@ -161,6 +161,24 @@
     },
     {
       "key": {
+        "uuid": "77d2a794_ff47c8f9",
+        "filename": "tools/gn/rust_variables.cc",
+        "patchSetId": 10
+      },
+      "lineNbr": 72,
+      "author": {
+        "id": 1000023
+      },
+      "writtenOn": "2019-05-23T22:54:59Z",
+      "side": 1,
+      "message": "https://github.com/rust-lang/rfcs/blob/master/text/0940-hyphens-considered-harmful.md is implying to me that at the rustc level, they must be identifier-like names, so I\u0027ve gone with the scope syntax for simplicity.\n\nAlso switched it to aliased_deps, which should be a bit clearer.",
+      "parentUuid": "382275a1_dcb2d539",
+      "revId": "191c4bb2144bf938daef4b22f4898a75160013f3",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "c5a450a6_5309f30a",
         "filename": "tools/gn/rust_variables.cc",
         "patchSetId": 10
