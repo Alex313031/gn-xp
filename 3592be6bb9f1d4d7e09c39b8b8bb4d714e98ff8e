@@ -1,0 +1,89 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ed543713_ea1e512b",
+        "filename": "tools/gn/escape.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 80,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2019-05-24T23:02:59Z",
+      "side": 1,
+      "message": "Reading https://stackoverflow.com/a/7860705/1252893 that says that backslashes can\u0027t be escaped themselves. But that\u0027s for Make, Ninja\u0027s parser might be more sane. Can you test this to make sure we want to include \u0027\\\u0027 in this list?",
+      "revId": "3592be6bb9f1d4d7e09c39b8b8bb4d714e98ff8e",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "8185e3a5_01ce455d",
+        "filename": "tools/gn/escape.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 81,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2019-05-24T23:02:59Z",
+      "side": 1,
+      "message": "Be sure this is wrapped to 80 cols (I suggest moving this line below).",
+      "revId": "3592be6bb9f1d4d7e09c39b8b8bb4d714e98ff8e",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "40f3b7b0_ae7c140a",
+        "filename": "tools/gn/escape.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 85,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2019-05-24T23:02:59Z",
+      "side": 1,
+      "message": "The args should all be aligned here.",
+      "revId": "3592be6bb9f1d4d7e09c39b8b8bb4d714e98ff8e",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "7ffab40a_2b3789aa",
+        "filename": "tools/gn/escape.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 90,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2019-05-24T23:02:59Z",
+      "side": 1,
+      "message": "With the two different types of escaping I think it would actually be more clear here to skip the helper function and just write:\n\n  if (elem \u003d\u003d \u0027$\u0027)\n    dest[i++] \u003d \u0027$\u0027;\n  else if (elem \u003d\u003d ... || elem \u003d\u003d ...)\n    dest[i++] \u003d \u0027\\\\\u0027;",
+      "revId": "3592be6bb9f1d4d7e09c39b8b8bb4d714e98ff8e",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "46284b28_058ad300",
+        "filename": "tools/gn/ninja_build_writer.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 316,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2019-05-24T23:02:59Z",
+      "side": 1,
+      "message": "Wrap to 80 cols please.",
+      "revId": "3592be6bb9f1d4d7e09c39b8b8bb4d714e98ff8e",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": true
+    }
+  ]
+}
