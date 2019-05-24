@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "8efb751a_5d8e9232",
+        "filename": "tools/gn/ninja_binary_target_writer.h",
+        "patchSetId": 16
+      },
+      "lineNbr": 32,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2019-05-24T22:34:20Z",
+      "side": 1,
+      "message": "Need blank above here.",
+      "revId": "14102add5817d09dcfe49820763446d37d984847",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "5882f9e8_056ce38b",
+        "filename": "tools/gn/ninja_rust_binary_target_writer.cc",
+        "patchSetId": 16
+      },
+      "lineNbr": 88,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2019-05-24T22:34:20Z",
+      "side": 1,
+      "message": "I think this comment is wrong.",
+      "revId": "14102add5817d09dcfe49820763446d37d984847",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": true
+    }
+  ]
+}
