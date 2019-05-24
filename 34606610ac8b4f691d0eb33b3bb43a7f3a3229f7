@@ -16,6 +16,24 @@
       "revId": "34606610ac8b4f691d0eb33b3bb43a7f3a3229f7",
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "1e92082c_60b3ec46",
+        "filename": "tools/gn/rust_example/hello_world/bar/src/BUILD.gn",
+        "patchSetId": 18
+      },
+      "lineNbr": 2,
+      "author": {
+        "id": 1000023
+      },
+      "writtenOn": "2019-05-24T22:44:12Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "24ad56b3_f74d9bfc",
+      "revId": "34606610ac8b4f691d0eb33b3bb43a7f3a3229f7",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": false
     }
   ]
 }
