@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "2624f22e_fb438a8c",
+        "filename": "tools/gn/trace.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 27,
+      "author": {
+        "id": 1000004
+      },
+      "writtenOn": "2019-05-29T23:21:54Z",
+      "side": 1,
+      "message": "Stylish!",
+      "range": {
+        "startLine": 27,
+        "startChar": 49,
+        "endLine": 27,
+        "endChar": 50
+      },
+      "revId": "6d4b253ba96e03264dc26f59e636e445193b1d4f",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": false
+    }
+  ]
+}
