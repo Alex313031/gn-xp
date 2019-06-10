@@ -72,6 +72,24 @@
     },
     {
       "key": {
+        "uuid": "039a156e_a3df0be7",
+        "filename": "build/gen.py",
+        "patchSetId": 4
+      },
+      "lineNbr": 350,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2019-06-10T17:48:07Z",
+      "side": 1,
+      "message": "I meant the \"if not platform.is_haiku()\" because this code is in a \"elif platform.is_haiku()\" block.",
+      "parentUuid": "45e3c7d0_861c38ae",
+      "revId": "72f199ce3f04ca81a0bfb0b00ecd46c8adca7ade",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "bde50454_1d11703a",
         "filename": "util/build_config.h",
         "patchSetId": 4
