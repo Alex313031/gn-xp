@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "bfa82113_525378c0",
+        "filename": "tools/gn/function_toolchain.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 319,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-06-11T01:39:02Z",
+      "side": 1,
+      "message": "Maybe mention compilation database as well, e.g. \"in compilation database or IDE files generated from the build\"?",
+      "range": {
+        "startLine": 318,
+        "startChar": 50,
+        "endLine": 319,
+        "endChar": 18
+      },
+      "revId": "bcb7dc3403ca27864b31ddb5540627d30d6b37fe",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": true
+    }
+  ]
+}
