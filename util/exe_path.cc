@@ -16,6 +16,7 @@
 #elif defined(OS_FREEBSD)
 #include <sys/sysctl.h>
 #include <sys/types.h>
+#include <limits.h>
 #endif
 
 #if defined(OS_MACOSX)
