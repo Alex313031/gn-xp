@@ -16,6 +16,24 @@
       "revId": "a27bcda3c5589515137d6f3a9882df8f0298ff0c",
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "5120791a_33bf0119",
+        "filename": "tools/gn/ninja_rust_binary_target_writer.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 28,
+      "author": {
+        "id": 1000023
+      },
+      "writtenOn": "2019-06-13T19:12:09Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "24fcdd88_77ee59ee",
+      "revId": "a27bcda3c5589515137d6f3a9882df8f0298ff0c",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": false
     }
   ]
 }
