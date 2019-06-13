@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "24fcdd88_77ee59ee",
+        "filename": "tools/gn/ninja_rust_binary_target_writer.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 28,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2019-06-13T18:25:08Z",
+      "side": 1,
+      "message": "These vector refs should both be const.",
+      "revId": "a27bcda3c5589515137d6f3a9882df8f0298ff0c",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": true
+    }
+  ]
+}
