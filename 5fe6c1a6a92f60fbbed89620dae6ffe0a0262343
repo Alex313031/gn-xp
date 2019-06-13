@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "56eef610_b72f5089",
+        "filename": "tools/gn/function_toolchain.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 315,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2019-06-13T20:01:58Z",
+      "side": 1,
+      "message": "Can this make clear that the launcher is optional?",
+      "revId": "5fe6c1a6a92f60fbbed89620dae6ffe0a0262343",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": true
+    }
+  ]
+}
