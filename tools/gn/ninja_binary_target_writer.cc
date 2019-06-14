@@ -134,7 +134,7 @@ void NinjaBinaryTargetWriter::ClassifyDependency(
   // Child deps of intermediate static libraries get pushed up the
   // dependency tree until one of these is reached, and source sets
   // don't link at all.
-  bool can_link_libs = target_->IsFinal();
+  bool can_link_libs = target_->IsFinal() || target_->output_type() == Target::RUST_LIBRARY;
 
   if (dep->output_type() == Target::SOURCE_SET ||
       // If a complete static library depends on an incomplete static library,

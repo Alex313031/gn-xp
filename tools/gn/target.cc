@@ -420,8 +420,7 @@ bool Target::IsFinal() const {
          output_type_ == LOADABLE_MODULE || output_type_ == ACTION ||
          output_type_ == ACTION_FOREACH || output_type_ == COPY_FILES ||
          output_type_ == CREATE_BUNDLE ||
-         (output_type_ == STATIC_LIBRARY && complete_static_lib_) ||
-         output_type_ == RUST_LIBRARY;
+         (output_type_ == STATIC_LIBRARY && complete_static_lib_);
 }
 
 DepsIteratorRange Target::GetDeps(DepsIterationType type) const {
