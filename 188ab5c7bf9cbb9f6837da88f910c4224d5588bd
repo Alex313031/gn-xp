@@ -16,6 +16,24 @@
       "revId": "188ab5c7bf9cbb9f6837da88f910c4224d5588bd",
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "40fcc685_bdbf509b",
+        "filename": "util/exe_path.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 19,
+      "author": {
+        "id": 1000103
+      },
+      "writtenOn": "2019-06-18T12:57:23Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "a10139e2_ed20cefd",
+      "revId": "188ab5c7bf9cbb9f6837da88f910c4224d5588bd",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": false
     }
   ]
 }
