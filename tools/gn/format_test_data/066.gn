@@ -30,3 +30,21 @@ sources += [
   "a",
   "y.cc",
 ]
+
+# This is SORT because reason:
+# SORT
+keys = [
+  "z",
+  "z2",
+  "a",
+  "y",
+]
+
+# This is SORTED as DEPS because reason:
+# DEPSSORT
+exclude_target = [
+  "//z/a",
+  ":z2",
+  "//z/a:test",
+  "y",
+]

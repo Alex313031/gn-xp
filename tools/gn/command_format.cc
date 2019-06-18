@@ -332,6 +332,8 @@ void Printer::AnnotatePreferredMultilineAssignment(const BinaryOpNode* binop) {
 }
 
 void Printer::SortIfSourcesOrDeps(const BinaryOpNode* binop) {
+  bool forced_sort_as_string = false;
+  bool forced_sort_as_deps = false;
   if (const Comments* comments = binop->comments()) {
     const std::vector<Token>& before = comments->before();
     if (!before.empty() &&
@@ -341,6 +343,16 @@ void Printer::SortIfSourcesOrDeps(const BinaryOpNode* binop) {
       // order-sensitive.
       return;
     }
+    if (!before.empty() &&
+        (before.front().value().as_string() == "# SORT" ||
+         before.back().value().as_string() == "# SORT")) {
+      forced_sort_as_string = true;
+    }
+    if (!before.empty() &&
+        (before.front().value().as_string() == "# DEPSSORT" ||
+         before.back().value().as_string() == "# DEPSSORT")) {
+      forced_sort_as_deps = true;
+    }
   }
   const IdentifierNode* ident = binop->left()->AsIdentifier();
   const ListNode* list = binop->right()->AsList();
@@ -348,9 +360,9 @@ void Printer::SortIfSourcesOrDeps(const BinaryOpNode* binop) {
        binop->op().value() == "-=") &&
       ident && list) {
     const base::StringPiece lhs = ident->value().value();
-    if (lhs == "public" || lhs == "sources")
+    if (lhs == "public" || lhs == "sources" || forced_sort_as_string)
       const_cast<ListNode*>(list)->SortAsStringsList();
-    else if (lhs == "deps" || lhs == "public_deps")
+    else if (lhs == "deps" || lhs == "public_deps" || forced_sort_as_deps)
       const_cast<ListNode*>(list)->SortAsDepsList();
   }
 }
