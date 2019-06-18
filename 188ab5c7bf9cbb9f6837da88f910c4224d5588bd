@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "a10139e2_ed20cefd",
+        "filename": "util/exe_path.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 19,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2019-06-18T11:22:23Z",
+      "side": 1,
+      "message": "Can you keep these alphabetized, please?",
+      "revId": "188ab5c7bf9cbb9f6837da88f910c4224d5588bd",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": true
+    }
+  ]
+}
