@@ -90,6 +90,24 @@
     },
     {
       "key": {
+        "uuid": "0a0a6e77_01d3b8a4",
+        "filename": "build/gen.py",
+        "patchSetId": 4
+      },
+      "lineNbr": 350,
+      "author": {
+        "id": 1000155
+      },
+      "writtenOn": "2019-06-20T10:24:24Z",
+      "side": 1,
+      "message": "Right, line 350 is indeed protected by the \u0027elif platform.is_haiku()\u0027. However, GN still ignores this and generates ninja files with the \u0027-pthread\u0027 flag which clang ignores and gcc reports as unrecognized, unless line 350 is moved to line 324.\n\nSince I\u0027m using clang to build GN, line 350 is not needed and has been removed.",
+      "parentUuid": "039a156e_a3df0be7",
+      "revId": "72f199ce3f04ca81a0bfb0b00ecd46c8adca7ade",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "bde50454_1d11703a",
         "filename": "util/build_config.h",
         "patchSetId": 4
