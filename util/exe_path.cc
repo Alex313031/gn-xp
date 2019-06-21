@@ -16,10 +16,6 @@
 #elif defined(OS_FREEBSD)
 #include <sys/sysctl.h>
 #include <sys/types.h>
-#elif defined(OS_AIX)
-#include <stdlib.h>
-#include <procinfo.h>
-#include <sys/types.h>
 #endif
 
 #if defined(OS_MACOSX)
@@ -63,24 +59,6 @@ base::FilePath GetExePath() {
     return base::FilePath();
   }
   return base::FilePath(buf);
-}
-
-#elif defined(OS_AIX)
-
-base::FilePath GetExePath() {
- int res;
- char args[PATH_MAX];
- char abspath[PATH_MAX];
- struct procsinfo pi;
-
- pi.pi_pid = getpid();
- res = getargs(&pi, sizeof(pi), args, sizeof(args));
- DCHECK_EQ(res, 0);
-
- if (realpath(args, abspath) != abspath) {
-	return base::FilePath();
- }
- return base::FilePath(abspath);
 }
 
 #else
