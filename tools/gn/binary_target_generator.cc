@@ -9,6 +9,9 @@
 #include "tools/gn/err.h"
 #include "tools/gn/filesystem_utils.h"
 #include "tools/gn/functions.h"
+#include "tools/gn/parse_tree.h"
+#include "tools/gn/rust_target_generator.h"
+#include "tools/gn/rust_variables.h"
 #include "tools/gn/scope.h"
 #include "tools/gn/settings.h"
 #include "tools/gn/value_extractors.h"
@@ -60,6 +63,16 @@ void BinaryTargetGenerator::DoRun() {
   if (!FillCompleteStaticLib())
     return;
 
+  if (!ValidateSources())
+    return;
+
+  if (target_->source_types_used().RustSourceUsed()) {
+    RustTargetGenerator rustgen(target_, scope_, function_call_, err_);
+    rustgen.Run();
+    if (err_->has_error())
+      return;
+  }
+
   // Config values (compiler flags, etc.) set directly on this target.
   ConfigValuesGenerator gen(&target_->config_values(), scope_,
                             scope_->GetSourceDir(), err_);
@@ -81,12 +94,12 @@ bool BinaryTargetGenerator::FillSources() {
       case SourceFile::SOURCE_S:
       case SourceFile::SOURCE_ASM:
       case SourceFile::SOURCE_O:
+      case SourceFile::SOURCE_DEF:
+      case SourceFile::SOURCE_GO:
+      case SourceFile::SOURCE_RS:
+      case SourceFile::SOURCE_RC:
         // These are allowed.
         break;
-      case SourceFile::SOURCE_RC:
-      case SourceFile::SOURCE_DEF:
-      case SourceFile::SOURCE_RS:
-      case SourceFile::SOURCE_GO:
       case SourceFile::SOURCE_UNKNOWN:
       case SourceFile::SOURCE_NUMTYPES:
         *err_ =
@@ -96,6 +109,8 @@ bool BinaryTargetGenerator::FillSources() {
                     Target::GetStringForOutputType(target_->output_type()) +
                     ". " + source.value() + " is not one of the valid types.");
     }
+
+    target_->source_types_used().Set(source.type());
   }
   return ret;
 }
@@ -164,16 +179,6 @@ bool BinaryTargetGenerator::FillOutputDir() {
   return true;
 }
 
-bool BinaryTargetGenerator::FillOutputExtension() {
-  const Value* value = scope_->GetValue(variables::kOutputExtension, true);
-  if (!value)
-    return true;
-  if (!value->VerifyTypeIs(Value::STRING, err_))
-    return false;
-  target_->set_output_extension(value->string_value());
-  return true;
-}
-
 bool BinaryTargetGenerator::FillAllowCircularIncludesFrom() {
   const Value* value =
       scope_->GetValue(variables::kAllowCircularIncludesFrom, true);
@@ -209,5 +214,22 @@ bool BinaryTargetGenerator::FillAllowCircularIncludesFrom() {
   // Add to the set.
   for (const auto& cur : circular)
     target_->allow_circular_includes_from().insert(cur);
+  return true;
+}
+
+bool BinaryTargetGenerator::ValidateSources() {
+  // For Rust targets, if the only source file is the root `sources` can be
+  // omitted/empty.
+  if (scope_->GetValue(variables::kRustCrateRoot, false)) {
+    target_->source_types_used().Set(SourceFile::SOURCE_RS);
+  }
+
+  if (target_->source_types_used().MixedSourceUsed()) {
+    *err_ =
+        Err(function_call_, "More than one language used in target sources.",
+            "Mixed sources are not allowed, unless they are "
+            "compilation-compatible (e.g. Objective C and C++).");
+    return false;
+  }
   return true;
 }

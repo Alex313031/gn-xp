@@ -46,7 +46,7 @@ class Platform(object):
 
   @staticmethod
   def known_platforms():
-    return ['linux', 'darwin', 'msvc', 'aix', 'fuchsia', 'openbsd']
+    return ['linux', 'darwin', 'msvc', 'aix', 'fuchsia', 'freebsd', 'openbsd']
 
   def platform(self):
     return self._platform
@@ -499,6 +499,7 @@ def WriteGNNinja(path, platform, host, options):
         'tools/gn/ninja_create_bundle_target_writer.cc',
         'tools/gn/ninja_generated_file_target_writer.cc',
         'tools/gn/ninja_group_target_writer.cc',
+        'tools/gn/ninja_rust_binary_target_writer.cc',
         'tools/gn/ninja_target_command_util.cc',
         'tools/gn/ninja_target_writer.cc',
         'tools/gn/ninja_toolchain_writer.cc',
@@ -515,6 +516,11 @@ def WriteGNNinja(path, platform, host, options):
         'tools/gn/pool.cc',
         'tools/gn/qt_creator_writer.cc',
         'tools/gn/runtime_deps.cc',
+        'tools/gn/rust_substitution_type.cc',
+        'tools/gn/rust_target_generator.cc',
+        'tools/gn/rust_tool.cc',
+        'tools/gn/rust_values.cc',
+        'tools/gn/rust_variables.cc',
         'tools/gn/scheduler.cc',
         'tools/gn/scope.cc',
         'tools/gn/scope_per_file_provider.cc',
@@ -583,10 +589,12 @@ def WriteGNNinja(path, platform, host, options):
         'tools/gn/function_toolchain_unittest.cc',
         'tools/gn/function_write_file_unittest.cc',
         'tools/gn/functions_target_unittest.cc',
+        'tools/gn/functions_target_rust_unittest.cc',
         'tools/gn/functions_unittest.cc',
         'tools/gn/header_checker_unittest.cc',
         'tools/gn/inherited_libraries_unittest.cc',
         'tools/gn/input_conversion_unittest.cc',
+        'tools/gn/json_project_writer_unittest.cc',
         'tools/gn/label_pattern_unittest.cc',
         'tools/gn/label_unittest.cc',
         'tools/gn/loader_unittest.cc',
@@ -599,6 +607,7 @@ def WriteGNNinja(path, platform, host, options):
         'tools/gn/ninja_bundle_data_target_writer_unittest.cc',
         'tools/gn/ninja_copy_target_writer_unittest.cc',
         'tools/gn/ninja_create_bundle_target_writer_unittest.cc',
+        'tools/gn/ninja_rust_binary_target_writer_unittest.cc',
         'tools/gn/ninja_generated_file_target_writer_unittest.cc',
         'tools/gn/ninja_group_target_writer_unittest.cc',
         'tools/gn/ninja_target_writer_unittest.cc',
