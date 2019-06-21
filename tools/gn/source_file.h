@@ -42,19 +42,13 @@ class SourceFile {
     SOURCE_NUMTYPES,
   };
 
-  enum SwapIn { SWAP_IN };
-
-  SourceFile();
+  SourceFile() = default;
 
   // Takes a known absolute source file. Always begins in a slash.
-  explicit SourceFile(const base::StringPiece& p);
-  SourceFile(const SourceFile& other) = default;
+  explicit SourceFile(const std::string& value);
+  explicit SourceFile(std::string&& value);
 
-  // Constructs from the given string by swapping in the contents of the given
-  // value. The value will be the empty string after this call.
-  SourceFile(SwapIn, std::string* value);
-
-  ~SourceFile();
+  ~SourceFile() = default;
 
   bool is_null() const { return value_.empty(); }
   const std::string& value() const { return value_; }
@@ -97,20 +91,13 @@ class SourceFile {
     return value_ < other.value_;
   }
 
-  void swap(SourceFile& other) {
-    value_.swap(other.value_);
-    std::swap(type_, other.type_);
-  }
-
  private:
   friend class SourceDir;
 
   void SetValue(const std::string& value);
 
   std::string value_;
-  Type type_;
-
-  // Copy & assign supported.
+  Type type_ = SOURCE_UNKNOWN;
 };
 
 namespace std {
@@ -125,8 +112,30 @@ struct hash<SourceFile> {
 
 }  // namespace std
 
-inline void swap(SourceFile& lhs, SourceFile& rhs) {
-  lhs.swap(rhs);
-}
+// Represents a set of tool types.
+class SourceFileTypeSet {
+ public:
+  SourceFileTypeSet();
+
+  void Set(SourceFile::Type type) {
+    flags_[static_cast<int>(type)] = true;
+    empty_ = false;
+  }
+  bool Get(SourceFile::Type type) const {
+    return flags_[static_cast<int>(type)];
+  }
+
+  bool empty() const { return empty_; }
+
+  bool CSourceUsed() const;
+  bool RustSourceUsed() const;
+  bool GoSourceUsed() const;
+
+  bool MixedSourceUsed() const;
+
+ private:
+  bool empty_;
+  bool flags_[static_cast<int>(SourceFile::SOURCE_NUMTYPES)];
+};
 
 #endif  // TOOLS_GN_SOURCE_FILE_H_
