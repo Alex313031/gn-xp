@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "263674fc_bba4ac29",
+        "filename": "tools/gn/rust_target_generator.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 88,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2019-07-01T17:14:06Z",
+      "side": 1,
+      "message": "This list of possible crate types is duplicated twice. Maybe we can have a constant at the top of this function so we only have to maintain one copy?",
+      "range": {
+        "startLine": 87,
+        "startChar": 9,
+        "endLine": 88,
+        "endChar": 52
+      },
+      "revId": "b537c16608ef2a59cdeb12e6f49ae4a21f2807b6",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": true
+    }
+  ]
+}
