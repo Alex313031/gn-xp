@@ -22,6 +22,30 @@
       "revId": "b537c16608ef2a59cdeb12e6f49ae4a21f2807b6",
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "2a0a85fa_3b02525f",
+        "filename": "tools/gn/rust_target_generator.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 88,
+      "author": {
+        "id": 1000023
+      },
+      "writtenOn": "2019-07-02T18:24:05Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "263674fc_bba4ac29",
+      "range": {
+        "startLine": 87,
+        "startChar": 9,
+        "endLine": 88,
+        "endChar": 52
+      },
+      "revId": "b537c16608ef2a59cdeb12e6f49ae4a21f2807b6",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": false
     }
   ]
 }
