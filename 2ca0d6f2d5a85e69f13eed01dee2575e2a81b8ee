@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "eba9be16_d628b3bf",
+        "filename": "infra/recipes/ninja.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 50,
+      "author": {
+        "id": 1000072
+      },
+      "writtenOn": "2019-07-03T01:37:37Z",
+      "side": 1,
+      "message": "Let\u0027s make this a global.",
+      "range": {
+        "startLine": 50,
+        "startChar": 23,
+        "endLine": 50,
+        "endChar": 78
+      },
+      "revId": "2ca0d6f2d5a85e69f13eed01dee2575e2a81b8ee",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "4e5d07ef_e4ad547d",
+        "filename": "infra/recipes/ninja.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 140,
+      "author": {
+        "id": 1000072
+      },
+      "writtenOn": "2019-07-03T01:37:37Z",
+      "side": 1,
+      "message": "Let\u0027s assign to a variable and use that here and below.",
+      "range": {
+        "startLine": 140,
+        "startChar": 24,
+        "endLine": 140,
+        "endChar": 32
+      },
+      "revId": "2ca0d6f2d5a85e69f13eed01dee2575e2a81b8ee",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": true
+    }
+  ]
+}
