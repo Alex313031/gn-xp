@@ -60,7 +60,7 @@ void SetupCompileFlags(const Target* target,
   RecursiveTargetConfigToStream<std::string>(
       target, &ConfigValues::defines,
       DefineWriter(ESCAPE_NINJA_PREFORMATTED_COMMAND, true), defines_out);
-  base::EscapeJSONString(defines_out.str(), false, &flags.defines);
+  flags.defines = defines_out.str();
 
   std::ostringstream includes_out;
   RecursiveTargetConfigToStream<SourceDir>(target, &ConfigValues::include_dirs,

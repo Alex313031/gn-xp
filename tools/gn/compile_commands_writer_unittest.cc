@@ -248,7 +248,7 @@ TEST_F(CompileCommandsTest, EscapeDefines) {
   writer.RenderJSON(build_settings(), targets, &out);
 
   const char expected[] =
-      "-DBOOL_DEF -DINT_DEF=123 -DSTR_DEF=\\\\\\\"ABCD-1\\\\\\\"";
+      "-DBOOL_DEF -DINT_DEF=123 -DSTR_DEF=\\\"ABCD-1\\\"";
   EXPECT_TRUE(out.find(expected) != std::string::npos);
 }
 
