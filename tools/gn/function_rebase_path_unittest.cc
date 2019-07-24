@@ -133,6 +133,11 @@ TEST(RebasePath, StringsSystemPaths) {
   EXPECT_EQ("../../ssd/out/Debug/foo/",
             RebaseOne(scope, "foo/", "//", "/ssd/out/Debug"));
 
+  setup.build_settings()->SetRootPath(base::FilePath("/ssd/out/Debug"));
+  EXPECT_EQ("../Debug-suffix/a", RebaseOne(scope, "/ssd/out/Debug-suffix/a",
+                                           "/ssd/out/Debug", "/ssd/out/Debug"));
+  setup.build_settings()->SetRootPath(base::FilePath("/hdd/src"));
+
   // Test system absolute from-dir.
   EXPECT_EQ("../../../hdd/src", RebaseOne(scope, ".", "/ssd/out/Debug", "//"));
   EXPECT_EQ("../../../hdd/src/",

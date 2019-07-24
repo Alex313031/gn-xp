@@ -528,7 +528,6 @@ TEST(FilesystemUtils, RebasePath) {
   EXPECT_EQ("../../../../path/to/foo",
             RebasePath("/path/to/foo", SourceDir("/source/root/a/b"),
                        base::StringPiece("/x/y/z")));
-
 #if defined(OS_WIN)
   // Test corrections while rebasing Windows-style absolute paths.
   EXPECT_EQ("../../../../path/to/foo",
@@ -847,4 +846,16 @@ TEST(FilesystemUtils, GetDirForEmptyBuildDir) {
             GetBuildDirAsOutputFile(context, BuildDirType::GEN).value());
   EXPECT_EQ("obj/",
             GetBuildDirAsOutputFile(context, BuildDirType::OBJ).value());
+}
+
+TEST(FilesystemUtils, ResolveRelativeTest) {
+#ifndef OS_WIN
+  std::string result;
+  EXPECT_TRUE(
+      MakeAbsolutePathRelativeIfPossible("/some/dir", "/some/dir/a", &result));
+  EXPECT_EQ(result, "//a");
+
+  EXPECT_FALSE(MakeAbsolutePathRelativeIfPossible(
+      "/some/dir", "/some/dir-sufix/a", &result));
+#endif
 }

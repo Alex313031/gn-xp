@@ -352,31 +352,42 @@ bool MakeAbsolutePathRelativeIfPossible(const base::StringPiece& source_root,
   DCHECK(IsPathAbsolute(path));
 
   dest->clear();
-
-  if (source_root.size() > path.size())
+  if (path == source_root) {
+    *dest = "//";
+    return true;
+  }
+  std::string source_root_normalized(source_root);
+  if (!source_root.empty() && !source_root.ends_with("/")) {
+    source_root_normalized += "/";
+  }
+  if (source_root_normalized.size() > path.size())
     return false;  // The source root is longer: the path can never be inside.
 
 #if defined(OS_WIN)
   // Source root should be canonical on Windows. Note that the initial slash
   // must be forward slash, but that the other ones can be either forward or
   // backward.
-  DCHECK(source_root.size() > 2 && source_root[0] != '/' &&
-         source_root[1] == ':' && IsSlash(source_root[2]));
+  DCHECK(source_root_normalized.size() > 2 &&
+         source_root_normalized[0] != '/' && source_root_normalized[1] == ':' &&
+         IsSlash(source_root_normalized[2]));
 
   size_t after_common_index = std::string::npos;
   if (DoesBeginWindowsDriveLetter(path)) {
     // Handle "C:\foo"
-    if (AreAbsoluteWindowsPathsEqual(source_root,
-                                     path.substr(0, source_root.size())))
-      after_common_index = source_root.size();
+    if (AreAbsoluteWindowsPathsEqual(
+            source_root_normalized,
+            path.substr(0, source_root_normalized.size())))
+      after_common_index = source_root_normalized.size();
     else
       return false;
-  } else if (path[0] == '/' && source_root.size() <= path.size() - 1 &&
+  } else if (path[0] == '/' &&
+             source_root_normalized.size() <= path.size() - 1 &&
              DoesBeginWindowsDriveLetter(path.substr(1))) {
     // Handle "/C:/foo"
-    if (AreAbsoluteWindowsPathsEqual(source_root,
-                                     path.substr(1, source_root.size())))
-      after_common_index = source_root.size() + 1;
+    if (AreAbsoluteWindowsPathsEqual(
+            source_root_normalized,
+            path.substr(1, source_root_normalized.size())))
+      after_common_index = source_root_normalized.size() + 1;
     else
       return false;
   } else {
@@ -401,10 +412,10 @@ bool MakeAbsolutePathRelativeIfPossible(const base::StringPiece& source_root,
 
   // On non-Windows this is easy. Since we know both are absolute, just do a
   // prefix check.
-  if (path.substr(0, source_root.size()) == source_root) {
+  if (path.substr(0, source_root_normalized.size()) == source_root_normalized) {
     // The base may or may not have a trailing slash, so skip all slashes from
     // the path after our prefix match.
-    size_t first_after_slash = source_root.size();
+    size_t first_after_slash = source_root_normalized.size();
     while (first_after_slash < path.size() && IsSlash(path[first_after_slash]))
       first_after_slash++;
 
