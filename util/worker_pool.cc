@@ -9,7 +9,41 @@
 #include "tools/gn/switches.h"
 #include "util/sys_info.h"
 
+#ifdef _WIN32
+#include <windows.h>
+#endif
+
 namespace {
+
+#ifdef _WIN32
+const int kNumProcessorGroups = GetActiveProcessorGroupCount();
+int processor_group = 0;
+int num_cores_in_group = GetActiveProcessorCount(processor_group) / 2;
+int num_threads_allocated_to_group = 0;
+
+int GetNextProcessorGroup() {
+  if (num_threads_allocated_to_group >= num_cores_in_group) {
+    // A thread has been allocated for every core in the current group. Begin
+    // allocating threads in the next group (or restart from group 0).
+    processor_group++;
+    if (processor_group >= kNumProcessorGroups) {
+      processor_group = 0;
+    }
+    num_threads_allocated_to_group = 0;
+    num_cores_in_group = GetActiveProcessorCount(processor_group) / 2;
+  }
+  num_threads_allocated_to_group++;
+  return processor_group;
+}
+
+void SetThreadProcessorGroup(std::thread* thread) {
+  HANDLE thread_handle = thread->native_handle();
+  GROUP_AFFINITY group_affinity;
+  CHECK(GetThreadGroupAffinity(thread_handle, &group_affinity));
+  group_affinity.Group = GetNextProcessorGroup();
+  CHECK(SetThreadGroupAffinity(thread_handle, &group_affinity, NULL));
+}
+#endif
 
 int GetThreadCount() {
   std::string thread_count =
@@ -49,6 +83,13 @@ WorkerPool::WorkerPool(size_t thread_count) : should_stop_processing_(false) {
   threads_.reserve(thread_count);
   for (size_t i = 0; i < thread_count; ++i)
     threads_.emplace_back([this]() { Worker(); });
+#ifdef _WIN32
+    // Set thread processor group. This is needed for systems with more than 64
+    // logical processors, wherein available processors are divided into groups,
+    // and applications that need to use more than one group's processors must
+    // manually assign their threads to groups.
+    SetThreadProcessorGroup(&threads_.back());
+#endif
 }
 
 WorkerPool::~WorkerPool() {
