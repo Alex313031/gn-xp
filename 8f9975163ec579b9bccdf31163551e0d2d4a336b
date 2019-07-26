@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "69594cc3_45ca9bbe",
+        "filename": "tools/gn/setup.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 403,
+      "author": {
+        "id": 1000014
+      },
+      "writtenOn": "2019-07-26T21:45:23Z",
+      "side": 1,
+      "message": "Can this just say \"Nonfatal error.\"? The other part of the comment makes sense in the context of this diff where we\u0027re removing the \"return true\", but by itself it\u0027s weird that we\u0027re saying we\u0027re not returning true here.",
+      "revId": "8f9975163ec579b9bccdf31163551e0d2d4a336b",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": true
+    }
+  ]
+}
