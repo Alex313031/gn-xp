@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "5bb36538_f3bc17af",
+        "filename": "tools/gn/filesystem_utils.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 360,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-07-26T19:41:10Z",
+      "side": 1,
+      "message": "Can you leave the comment you made on this change about the trailing slash here in the code? I\u0027d probably also add a TODO and say that if we go over the entire codebase and clean up every invocation of this function that doesn\u0027t pass a path with trailing slash, this could be replaced with a DCHECK to enforce that source_root ends with slash.",
+      "revId": "3071379f5b474298d54505bd1ef69cd901704178",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": true
+    }
+  ]
+}
