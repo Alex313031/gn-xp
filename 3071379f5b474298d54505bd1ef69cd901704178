@@ -2,6 +2,23 @@
   "comments": [
     {
       "key": {
+        "uuid": "113ad1d5_a1b40c46",
+        "filename": "tools/gn/filesystem_utils.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 359,
+      "author": {
+        "id": 1000014
+      },
+      "writtenOn": "2019-07-26T20:09:45Z",
+      "side": 1,
+      "message": "First, I wouldn\u0027t call the ending-in-a-slash condition \"normalized\" because I don\u0027t think there is an expected type of input here.\n\nSecond, I believe this function is called a lot (several tens of thousands of times in a Chrome run) and I went through some effort to try to not copy strings. That\u0027s why this function takes a StringPiece.\n\nI didn\u0027t spend any time thinking about implementation details, but is it possible to implement in a different way to avoid reallocating the string here? If you find in the vast majority of calls it always has a slash maybe we could allocate only in those cases, but I suspect this isn\u0027t the case and if we can make the implementation more sensitive about handling end-of-string it would probably be better.",
+      "revId": "3071379f5b474298d54505bd1ef69cd901704178",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "5bb36538_f3bc17af",
         "filename": "tools/gn/filesystem_utils.cc",
         "patchSetId": 1
@@ -13,6 +30,58 @@
       "writtenOn": "2019-07-26T19:41:10Z",
       "side": 1,
       "message": "Can you leave the comment you made on this change about the trailing slash here in the code? I\u0027d probably also add a TODO and say that if we go over the entire codebase and clean up every invocation of this function that doesn\u0027t pass a path with trailing slash, this could be replaced with a DCHECK to enforce that source_root ends with slash.",
+      "revId": "3071379f5b474298d54505bd1ef69cd901704178",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "c18fcae4_64bf3292",
+        "filename": "tools/gn/filesystem_utils.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 360,
+      "author": {
+        "id": 1000014
+      },
+      "writtenOn": "2019-07-26T20:09:45Z",
+      "side": 1,
+      "message": "I don\u0027t think we need that TODO. I don\u0027t think anything claims to require a slash here, and most similar functions (RebasePath for example) requires that the source root not end in a slash.",
+      "parentUuid": "5bb36538_f3bc17af",
+      "revId": "3071379f5b474298d54505bd1ef69cd901704178",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "f874ffd4_9b66614d",
+        "filename": "tools/gn/filesystem_utils_unittest.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 852,
+      "author": {
+        "id": 1000014
+      },
+      "writtenOn": "2019-07-26T20:09:45Z",
+      "side": 1,
+      "message": "I think we can provide a similar Windows version of this with a path like \"/C:/...\"",
+      "revId": "3071379f5b474298d54505bd1ef69cd901704178",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "01f6881f_93fdd9f8",
+        "filename": "tools/gn/function_rebase_path_unittest.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 136,
+      "author": {
+        "id": 1000014
+      },
+      "writtenOn": "2019-07-26T20:09:45Z",
+      "side": 1,
+      "message": "Can you move this new block up to between lines 123 and 124 so we don\u0027t have to set the root path to \"/hdd/src\" twice?",
       "revId": "3071379f5b474298d54505bd1ef69cd901704178",
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
       "unresolved": true
