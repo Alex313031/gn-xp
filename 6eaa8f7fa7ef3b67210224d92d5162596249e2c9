@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "c4db0fba_72246967",
+        "filename": "tools/gn/rust_substitution_type.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 29,
+      "author": {
+        "id": 1000014
+      },
+      "writtenOn": "2019-07-31T23:59:35Z",
+      "side": 1,
+      "message": "Can this just be \"{{output_dir}}\" and use the same everything as the existing variable? I think Julie separated these and I suspect (maybe she can correct me) that the only reason it ended up in the C variable list is that that was the only place it was needed.\n\nIt seems nice to me to have fewer things when the same concepts overlap, and these both get mapped to the target variable |output_dir| anyway. In that case I think we just need to move the definition of the existing output_dir stuff to the shared file.",
+      "revId": "6eaa8f7fa7ef3b67210224d92d5162596249e2c9",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": true
+    }
+  ]
+}
