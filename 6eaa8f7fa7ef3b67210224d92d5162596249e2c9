@@ -16,6 +16,24 @@
       "revId": "6eaa8f7fa7ef3b67210224d92d5162596249e2c9",
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "d19fc8e6_d77ee1be",
+        "filename": "tools/gn/rust_substitution_type.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 29,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-08-01T21:53:08Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "c4db0fba_72246967",
+      "revId": "6eaa8f7fa7ef3b67210224d92d5162596249e2c9",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": false
     }
   ]
 }
