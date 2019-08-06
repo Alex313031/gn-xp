@@ -17,6 +17,8 @@
 // as a std::string. Similarly for Values that are always Value::DICTIONARY
 // (should be flat_map), Value::LIST (should be std::vector), et cetera.
 
+// Whitespace change
+
 #ifndef BASE_VALUES_H_
 #define BASE_VALUES_H_
 
