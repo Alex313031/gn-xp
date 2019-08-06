@@ -2,6 +2,75 @@
   "comments": [
     {
       "key": {
+        "uuid": "e4f0ec45_f737ced8",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 3
+      },
+      "lineNbr": 30,
+      "author": {
+        "id": 1000004
+      },
+      "writtenOn": "2019-08-06T23:51:37Z",
+      "side": 1,
+      "message": "This delta seems pretty close to noise to me, but no reason not try to use all cores anyway.",
+      "range": {
+        "startLine": 30,
+        "startChar": 44,
+        "endLine": 30,
+        "endChar": 50
+      },
+      "revId": "71461060183eb95c98b6277ab3e782d887e87696",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "b9dfbce8_076c7980",
+        "filename": "util/worker_pool.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 12,
+      "author": {
+        "id": 1000004
+      },
+      "writtenOn": "2019-08-06T23:51:37Z",
+      "side": 1,
+      "message": "Please use\n\n  #include \"util/build_config.h\"\n\nand\n\n  #if defined(OS_WIN)\n\ninstead of raw #ifdef _WIN32.",
+      "range": {
+        "startLine": 12,
+        "startChar": 0,
+        "endLine": 12,
+        "endChar": 13
+      },
+      "revId": "71461060183eb95c98b6277ab3e782d887e87696",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "ad3d4f64_4f094f14",
+        "filename": "util/worker_pool.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 21,
+      "author": {
+        "id": 1000004
+      },
+      "writtenOn": "2019-08-06T23:51:37Z",
+      "side": 1,
+      "message": "Sorry, I must be missing something, why / 2 ?",
+      "range": {
+        "startLine": 21,
+        "startChar": 65,
+        "endLine": 21,
+        "endChar": 69
+      },
+      "revId": "71461060183eb95c98b6277ab3e782d887e87696",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "86232a77_c4a8acee",
         "filename": "util/worker_pool.cc",
         "patchSetId": 3
@@ -18,6 +87,53 @@
         "startChar": 0,
         "endLine": 22,
         "endChar": 39
+      },
+      "revId": "71461060183eb95c98b6277ab3e782d887e87696",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "2c703aeb_15a90e92",
+        "filename": "util/worker_pool.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 22,
+      "author": {
+        "id": 1000004
+      },
+      "writtenOn": "2019-08-06T23:51:37Z",
+      "side": 1,
+      "message": "That seems tidier to me too if possible.",
+      "parentUuid": "86232a77_c4a8acee",
+      "range": {
+        "startLine": 19,
+        "startChar": 0,
+        "endLine": 22,
+        "endChar": 39
+      },
+      "revId": "71461060183eb95c98b6277ab3e782d887e87696",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "6ccc7932_dabc275e",
+        "filename": "util/worker_pool.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 44,
+      "author": {
+        "id": 1000004
+      },
+      "writtenOn": "2019-08-06T23:51:37Z",
+      "side": 1,
+      "message": "nullptr",
+      "range": {
+        "startLine": 44,
+        "startChar": 63,
+        "endLine": 44,
+        "endChar": 67
       },
       "revId": "71461060183eb95c98b6277ab3e782d887e87696",
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
