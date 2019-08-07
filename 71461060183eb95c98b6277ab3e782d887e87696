@@ -118,6 +118,30 @@
     },
     {
       "key": {
+        "uuid": "c35b5473_df853613",
+        "filename": "util/worker_pool.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 22,
+      "author": {
+        "id": 1000014
+      },
+      "writtenOn": "2019-08-07T00:01:59Z",
+      "side": 1,
+      "message": "At least this should be done in a way that doesn\u0027t do system calls from static initializers.",
+      "parentUuid": "86232a77_c4a8acee",
+      "range": {
+        "startLine": 19,
+        "startChar": 0,
+        "endLine": 22,
+        "endChar": 39
+      },
+      "revId": "71461060183eb95c98b6277ab3e782d887e87696",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "6ccc7932_dabc275e",
         "filename": "util/worker_pool.cc",
         "patchSetId": 3
