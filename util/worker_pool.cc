@@ -7,9 +7,49 @@
 #include "base/command_line.h"
 #include "base/strings/string_number_conversions.h"
 #include "tools/gn/switches.h"
+#include "util/build_config.h"
 #include "util/sys_info.h"
 
+#if defined(OS_WIN)
+#include <windows.h>
+#endif
+
 namespace {
+
+#if defined (OS_WIN)
+class ProcessorGroupSetter {
+ public:
+  void SetProcessorGroup(std::thread* thread);
+
+ private:
+  int group = 0;
+  GROUP_AFFINITY group_affinity;
+  int num_available_cores_in_group = ::GetActiveProcessorCount(group) / 2;
+  const int num_groups = ::GetActiveProcessorGroupCount();
+};
+
+void ProcessorGroupSetter::SetProcessorGroup(std::thread* thread) {
+  if (num_groups <= 1)
+    return;
+
+  const HANDLE thread_handle = thread->native_handle();
+  ::GetThreadGroupAffinity(thread_handle, &group_affinity);
+  group_affinity.Group = group;
+  const bool success = ::SetThreadGroupAffinity(
+      thread_handle, &group_affinity, nullptr);
+  DCHECK(success);
+
+  // Move to next group once one thread has been assigned per core in |group|.
+  num_available_cores_in_group--;
+  if (num_available_cores_in_group <= 0) {
+    group++;
+    if (group >= num_groups) {
+      group = 0;
+    }
+    num_available_cores_in_group = ::GetActiveProcessorCount(group) / 2;
+  }
+}
+#endif
 
 int GetThreadCount() {
   std::string thread_count =
@@ -46,9 +86,22 @@ int GetThreadCount() {
 WorkerPool::WorkerPool() : WorkerPool(GetThreadCount()) {}
 
 WorkerPool::WorkerPool(size_t thread_count) : should_stop_processing_(false) {
+#if defined(OS_WIN)
+  ProcessorGroupSetter processor_group_setter;
+#endif
+
   threads_.reserve(thread_count);
-  for (size_t i = 0; i < thread_count; ++i)
+  for (size_t i = 0; i < thread_count; ++i) {
     threads_.emplace_back([this]() { Worker(); });
+
+#if defined(OS_WIN)
+    // Set thread processor group. This is needed for systems with more than 64
+    // logical processors, wherein available processors are divided into groups,
+    // and applications that need to use more than one group's processors must
+    // manually assign their threads to groups.
+    processor_group_setter.SetProcessorGroup(&threads_.back());
+#endif
+  }
 }
 
 WorkerPool::~WorkerPool() {
