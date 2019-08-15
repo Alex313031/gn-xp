@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "968de384_f64973dd",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 3
+      },
+      "lineNbr": 30,
+      "author": {
+        "id": 1000201
+      },
+      "writtenOn": "2019-08-15T22:00:19Z",
+      "side": 1,
+      "message": "I think you\u0027re right - after doing more measurements, it\u0027s not clear that it results in a speed improvement. I\u0027ll remove these lines from the commit message.",
+      "parentUuid": "e4f0ec45_f737ced8",
+      "range": {
+        "startLine": 30,
+        "startChar": 44,
+        "endLine": 30,
+        "endChar": 50
+      },
+      "revId": "71461060183eb95c98b6277ab3e782d887e87696",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "b9dfbce8_076c7980",
         "filename": "util/worker_pool.cc",
         "patchSetId": 3
@@ -48,6 +72,30 @@
     },
     {
       "key": {
+        "uuid": "3d8cd03b_86e94954",
+        "filename": "util/worker_pool.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 12,
+      "author": {
+        "id": 1000201
+      },
+      "writtenOn": "2019-08-15T22:00:19Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "b9dfbce8_076c7980",
+      "range": {
+        "startLine": 12,
+        "startChar": 0,
+        "endLine": 12,
+        "endChar": 13
+      },
+      "revId": "71461060183eb95c98b6277ab3e782d887e87696",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "ad3d4f64_4f094f14",
         "filename": "util/worker_pool.cc",
         "patchSetId": 3
@@ -68,6 +116,30 @@
       "revId": "71461060183eb95c98b6277ab3e782d887e87696",
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "43a8ce99_ff1017ab",
+        "filename": "util/worker_pool.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 21,
+      "author": {
+        "id": 1000201
+      },
+      "writtenOn": "2019-08-15T22:00:19Z",
+      "side": 1,
+      "message": "The existing code defaults to a maximum of num_cores (i.e. num_processors / 2) threads as returned by WorkerPool::GetThreadCount(), so the idea was to stay consistent with that approach by assigning one thread per core in the current processor group, rather than one per processor.",
+      "parentUuid": "ad3d4f64_4f094f14",
+      "range": {
+        "startLine": 21,
+        "startChar": 65,
+        "endLine": 21,
+        "endChar": 69
+      },
+      "revId": "71461060183eb95c98b6277ab3e782d887e87696",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": false
     },
     {
       "key": {
@@ -142,6 +214,30 @@
     },
     {
       "key": {
+        "uuid": "a80204ba_af4b7ca5",
+        "filename": "util/worker_pool.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 22,
+      "author": {
+        "id": 1000201
+      },
+      "writtenOn": "2019-08-15T22:00:19Z",
+      "side": 1,
+      "message": "I decided to make a seperate class to contain the processor-group logic in order to: 1. keep WorkerPool and its constructor clean and single-purpose, and 2. save WorkerPool having to store these local variables throughout its lifetime.\n\nAny comments on this approach are more than welcome! :)",
+      "parentUuid": "c35b5473_df853613",
+      "range": {
+        "startLine": 19,
+        "startChar": 0,
+        "endLine": 22,
+        "endChar": 39
+      },
+      "revId": "71461060183eb95c98b6277ab3e782d887e87696",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "6ccc7932_dabc275e",
         "filename": "util/worker_pool.cc",
         "patchSetId": 3
@@ -162,6 +258,30 @@
       "revId": "71461060183eb95c98b6277ab3e782d887e87696",
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "66d42483_db47b50b",
+        "filename": "util/worker_pool.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 44,
+      "author": {
+        "id": 1000201
+      },
+      "writtenOn": "2019-08-15T22:00:19Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "6ccc7932_dabc275e",
+      "range": {
+        "startLine": 44,
+        "startChar": 63,
+        "endLine": 44,
+        "endChar": 67
+      },
+      "revId": "71461060183eb95c98b6277ab3e782d887e87696",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": false
     }
   ]
 }
