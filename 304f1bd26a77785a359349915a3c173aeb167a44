@@ -1,0 +1,67 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "65fba2f6_3df01c33",
+        "filename": "util/worker_pool.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 19,
+      "author": {
+        "id": 1000004
+      },
+      "writtenOn": "2019-08-15T22:15:32Z",
+      "side": 1,
+      "message": "nit; no space here.",
+      "range": {
+        "startLine": 19,
+        "startChar": 11,
+        "endLine": 19,
+        "endChar": 12
+      },
+      "revId": "304f1bd26a77785a359349915a3c173aeb167a44",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "605aa305_6f5d40fe",
+        "filename": "util/worker_pool.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 25,
+      "author": {
+        "id": 1000004
+      },
+      "writtenOn": "2019-08-15T22:15:32Z",
+      "side": 1,
+      "message": "group_, group_affinity_, etc. for private member variables.",
+      "range": {
+        "startLine": 25,
+        "startChar": 6,
+        "endLine": 25,
+        "endChar": 11
+      },
+      "revId": "304f1bd26a77785a359349915a3c173aeb167a44",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "9f8dcd23_73f8d388",
+        "filename": "util/worker_pool.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 38,
+      "author": {
+        "id": 1000004
+      },
+      "writtenOn": "2019-08-15T22:15:32Z",
+      "side": 1,
+      "message": "mega-nit; I think clang-format would normally wrap after the \u003d, maybe you can just run a `git cl format`.",
+      "revId": "304f1bd26a77785a359349915a3c173aeb167a44",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": true
+    }
+  ]
+}
