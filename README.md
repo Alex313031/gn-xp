@@ -2,8 +2,9 @@
 
 GN is a meta-build system that generates build files for
 [Ninja](https://ninja-build.org). There is documentation in
-[docs/](https://gn.googlesource.com/gn/+/master/docs/) and
-[a presentation on it](https://docs.google.com/presentation/d/15Zwb53JcncHfEwHpnG_PoIbbzQ3GQi_cpujYwbpcbZo/edit?usp=sharing).
+[docs/](https://gn.googlesource.com/gn/+/master/docs/),
+[a presentation on it](https://docs.google.com/presentation/d/15Zwb53JcncHfEwHpnG_PoIbbzQ3GQi_cpujYwbpcbZo/edit?usp=sharing),
+and a [mailing list](https://groups.google.com/a/chromium.org/forum/#!forum/gn-dev).
 
 ## Getting a binary
 
