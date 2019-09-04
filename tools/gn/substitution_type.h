@@ -54,6 +54,10 @@ extern const Substitution SubstitutionSourceGenDir;
 extern const Substitution SubstitutionSourceOutDir;
 extern const Substitution SubstitutionSourceTargetRelative;
 
+// Valid for linker tools.
+extern const Substitution SubstitutionLdFlags;
+extern const Substitution SubstitutionLibs;
+
 // Valid for bundle_data targets.
 extern const Substitution SubstitutionBundleRootDir;
 extern const Substitution SubstitutionBundleContentsDir;

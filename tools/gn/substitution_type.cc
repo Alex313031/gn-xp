@@ -36,6 +36,9 @@ const SubstitutionTypes GeneralSubstitutions = {
     &SubstitutionSourceOutDir,
     &SubstitutionSourceTargetRelative,
 
+    &SubstitutionLdFlags,
+    &SubstitutionLibs,
+
     &SubstitutionBundleRootDir,
     &SubstitutionBundleContentsDir,
     &SubstitutionBundleResourcesDir,
@@ -65,6 +68,9 @@ const Substitution SubstitutionSourceOutDir = {"{{source_out_dir}}",
                                                "source_out_dir"};
 const Substitution SubstitutionSourceTargetRelative = {
     "{{source_target_relative}}", "source_target_relative"};
+
+const Substitution SubstitutionLdFlags = {"{{ldflags}}", "ldflags"};
+const Substitution SubstitutionLibs = {"{{libs}}", "libs"};
 
 // Valid for all compiler and linker tools. These depend on the target and
 // do not vary on a per-file basis.
