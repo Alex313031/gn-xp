@@ -458,6 +458,11 @@ void NinjaCBinaryTargetWriter::WriteLinkerStuff(
         << "No link output file for "
         << target_->label().GetUserVisibleName(false);
 
+    if (cur->output_type() == Target::RUST_LIBRARY ||
+        (cur->source_types_used().RustSourceUsed() &&
+         cur->rust_values().crate_type() == RustValues::CRATE_PROC_MACRO))
+      continue;
+
     if (cur->dependency_output_file().value() !=
         cur->link_output_file().value()) {
       // This is a shared library with separate link and deps files. Save for
