@@ -92,9 +92,10 @@ TEST_F(NinjaRustBinaryTargetWriterTest, RustExecutable) {
         "build obj/foo/foo_bar: rustc ../../foo/main.rs | ../../foo/input3.rs "
         "../../foo/main.rs ../../foo/input1.rs ../../foo/input2.rs || "
         "obj/foo/sources.stamp\n"
+        "  rustdeps =\n"
         "  edition = 2018\n";
     std::string out_str = out.str();
-    EXPECT_EQ(expected, out_str) << out_str;
+    EXPECT_EQ(expected, out_str) << expected << "\n" << out_str;
   }
 }
 
@@ -134,6 +135,7 @@ TEST_F(NinjaRustBinaryTargetWriterTest, RlibDeps) {
         "\n"
         "build obj/bar/libmylib.rlib: rustc ../../bar/lib.rs | "
         "../../bar/mylib.rs ../../bar/lib.rs\n"
+        "  rustdeps =\n"
         "  edition = 2018\n";
     std::string out_str = out.str();
     EXPECT_EQ(expected, out_str) << out_str;
@@ -311,7 +313,7 @@ TEST_F(NinjaRustBinaryTargetWriterTest, NonRustDeps) {
         "build obj/foo/foo_bar: rustc ../../foo/main.rs | ../../foo/source.rs "
         "../../foo/main.rs obj/bar/libmylib.rlib obj/foo/libstatic.a\n"
         "  externs = --extern mylib=obj/bar/libmylib.rlib\n"
-        "  rustdeps = -Ldependency=obj/bar -Lnative=obj/foo\n"
+        "  rustdeps = -Ldependency=obj/bar -Lnative=obj/foo -lstatic\n"
         "  edition = 2018\n";
     std::string out_str = out.str();
     EXPECT_EQ(expected, out_str) << expected << "\n" << out_str;
@@ -348,7 +350,7 @@ TEST_F(NinjaRustBinaryTargetWriterTest, NonRustDeps) {
         "\n"
         "build obj/foo/foo_bar: rustc ../../foo/main.rs | ../../foo/source.rs "
         "../../foo/main.rs obj/foo/libstatic.a\n"
-        "  rustdeps = -Lnative=obj/foo\n"
+        "  rustdeps = -Lnative=obj/foo -lstatic\n"
         "  edition = 2018\n";
     std::string out_str = out.str();
     EXPECT_EQ(expected, out_str) << expected << "\n" << out_str;
@@ -403,9 +405,55 @@ TEST_F(NinjaRustBinaryTargetWriterTest, RustOutputExtensionAndDir) {
         "build obj/foo/foo_bar.exe: rustc ../../foo/main.rs | ../../foo/input3.rs "
         "../../foo/main.rs ../../foo/input1.rs ../../foo/input2.rs || "
         "obj/foo/sources.stamp\n"
+        "  rustdeps =\n"
         "  edition = 2018\n";
     std::string out_str = out.str();
-    EXPECT_EQ(expected, out_str) << out_str;
+    EXPECT_EQ(expected, out_str) << expected << "\n" << out_str;
+  }
+}
+
+TEST_F(NinjaRustBinaryTargetWriterTest, LibsAndLibDirs) {
+  Err err;
+  TestWithScope setup;
+
+  Target target(setup.settings(), Label(SourceDir("//foo/"), "bar"));
+  target.set_output_type(Target::EXECUTABLE);
+  target.visibility().SetPublic();
+  SourceFile main("//foo/main.rs");
+  target.sources().push_back(SourceFile("//foo/input.rs"));
+  target.sources().push_back(main);
+  target.source_types_used().Set(SourceFile::SOURCE_RS);
+  target.set_output_dir(SourceDir("//out/Debug/foo/"));
+  target.config_values().libs().push_back(LibFile("quux"));
+  target.config_values().lib_dirs().push_back(SourceDir("//baz/"));
+  target.rust_values().set_crate_root(main);
+  target.rust_values().crate_name() = "foo_bar";
+  target.rust_values().edition() = "2018";
+  target.SetToolchain(setup.toolchain());
+  ASSERT_TRUE(target.OnResolved(&err));
+
+  {
+    std::ostringstream out;
+    NinjaRustBinaryTargetWriter writer(&target, out);
+    writer.Run();
+
+    const char expected[] =
+        "crate_name = foo_bar\n"
+        "crate_type = bin\n"
+        "output_dir = foo\n"
+        "rustc_output_extension = \n"
+        "rustflags =\n"
+        "rustenv =\n"
+        "root_out_dir = .\n"
+        "target_out_dir = obj/foo\n"
+        "target_output_name = bar\n"
+        "\n"
+        "build obj/foo/foo_bar: rustc ../../foo/main.rs | ../../foo/input.rs "
+        "../../foo/main.rs\n"
+        "  rustdeps = -lquux -Lnative=../../baz\n"
+        "  edition = 2018\n";
+    std::string out_str = out.str();
+    EXPECT_EQ(expected, out_str) << expected << "\n" << out_str;
   }
 }
 
@@ -445,6 +493,7 @@ TEST_F(NinjaRustBinaryTargetWriterTest, ProcMacro) {
         "\n"
         "build obj/bar/libmymacro.so: rustc ../../bar/lib.rs | "
         "../../bar/mylib.rs ../../bar/lib.rs\n"
+        "  rustdeps =\n"
         "  edition = 2018\n";
     std::string out_str = out.str();
     EXPECT_EQ(expected, out_str) << out_str;
@@ -483,6 +532,7 @@ TEST_F(NinjaRustBinaryTargetWriterTest, ProcMacro) {
         "build obj/foo/foo_bar: rustc ../../foo/main.rs | ../../foo/source.rs "
         "../../foo/main.rs || obj/bar/libmymacro.so\n"
         "  externs = --extern mymacro=obj/bar/libmymacro.so\n"
+        "  rustdeps = -Ldependency=obj/bar\n"
         "  edition = 2018\n";
     std::string out_str = out.str();
     EXPECT_EQ(expected, out_str) << expected << "\n" << out_str;
@@ -525,6 +575,7 @@ TEST_F(NinjaRustBinaryTargetWriterTest, GroupDeps) {
         "\n"
         "build obj/bar/libmylib.rlib: rustc ../../bar/lib.rs | "
         "../../bar/mylib.rs ../../bar/lib.rs\n"
+        "  rustdeps =\n"
         "  edition = 2018\n";
     std::string out_str = out.str();
     EXPECT_EQ(expected, out_str) << out_str;

@@ -5,8 +5,11 @@
 #include "tools/gn/ninja_rust_binary_target_writer.h"
 
 #include <sstream>
+#include <iostream>
 
+#include "base/strings/string_util.h"
 #include "tools/gn/deps_iterator.h"
+#include "tools/gn/filesystem_utils.h"
 #include "tools/gn/general_tool.h"
 #include "tools/gn/ninja_target_command_util.h"
 #include "tools/gn/ninja_utils.h"
@@ -142,12 +145,15 @@ void NinjaRustBinaryTargetWriter::Run() {
     if (!input_dep.value().empty())
       order_only_deps.push_back(input_dep);
 
-    std::vector<OutputFile> rustdeps;
-    std::vector<OutputFile> nonrustdeps;
+    UniqueVector<OutputFile> rustdeps;
+    UniqueVector<OutputFile> nonrustdeps;
     for (const auto* non_linkable_dep : non_linkable_deps) {
+      if (non_linkable_dep->source_types_used().RustSourceUsed() &&
+          non_linkable_dep->output_type() != Target::SOURCE_SET) {
+        rustdeps.push_back(non_linkable_dep->dependency_output_file());
+      }
       order_only_deps.push_back(non_linkable_dep->dependency_output_file());
     }
-
     for (const auto* linkable_dep : linkable_deps) {
       if (linkable_dep->source_types_used().RustSourceUsed()) {
         rustdeps.push_back(linkable_dep->dependency_output_file());
@@ -167,8 +173,7 @@ void NinjaRustBinaryTargetWriter::Run() {
     std::copy(non_linkable_deps.begin(), non_linkable_deps.end(),
               std::back_inserter(extern_deps));
     WriteExterns(extern_deps);
-
-    WriteRustdeps(rustdeps, nonrustdeps);
+    WriteRustdeps(rustdeps.vector(), nonrustdeps.vector());
     WriteEdition();
   }
 }
@@ -221,10 +226,9 @@ void NinjaRustBinaryTargetWriter::WriteExterns(
 void NinjaRustBinaryTargetWriter::WriteRustdeps(
     const std::vector<OutputFile>& rustdeps,
     const std::vector<OutputFile>& nonrustdeps) {
-  if (rustdeps.empty() && nonrustdeps.empty())
-    return;
-
   out_ << "  rustdeps =";
+
+  // Rust dependencies.
   for (const auto& rustdep : rustdeps) {
     out_ << " -Ldependency=";
     path_output_.WriteDir(
@@ -232,12 +236,65 @@ void NinjaRustBinaryTargetWriter::WriteRustdeps(
         PathOutput::DIR_NO_LAST_SLASH);
   }
 
+  EscapeOptions lib_escape_opts;
+  lib_escape_opts.mode = ESCAPE_NINJA_COMMAND;
+
+  // Non-Rust native dependencies.
   for (const auto& rustdep : nonrustdeps) {
     out_ << " -Lnative=";
     path_output_.WriteDir(
         out_, rustdep.AsSourceFile(settings_->build_settings()).GetDir(),
         PathOutput::DIR_NO_LAST_SLASH);
+    base::StringPiece file = FindFilenameNoExtension(&rustdep.value());
+    const std::string lib_prefix("lib");
+    if (file.starts_with(lib_prefix)) {
+      out_ << " -l";
+      EscapeStringToStream(out_, file.substr(lib_prefix.size()), lib_escape_opts);
+    } else {
+      out_ << " -Clink-arg=";
+      path_output_.WriteFile(out_, rustdep);
+    }
   }
+
+  // Libraries that have been recursively pushed through the dependency tree.
+  const OrderedSet<LibFile> all_libs = target_->all_libs();
+  const std::string framework_ending(".framework");
+  for (size_t i = 0; i < all_libs.size(); i++) {
+    const LibFile& lib_file = all_libs[i];
+    const std::string& lib_value = lib_file.value();
+    if (lib_file.is_source_file()) {
+      out_ << " -Clink-arg=";
+      path_output_.WriteFile(out_, lib_file.source_file());
+    } else if (base::EndsWith(lib_value, framework_ending,
+                              base::CompareCase::INSENSITIVE_ASCII)) {
+      // Special-case libraries ending in ".framework" to support Mac: Add the
+      // -framework switch and don't add the extension to the output.
+      out_ << " -lframework=";
+      EscapeStringToStream(
+          out_, lib_value.substr(0, lib_value.size() - framework_ending.size()),
+          lib_escape_opts);
+    } else {
+      out_ << " -l";
+      EscapeStringToStream(out_, lib_value, lib_escape_opts);
+    }
+  }
+
+  // Followed by library search paths that have been recursively pushed
+  // through the dependency tree.
+  const OrderedSet<SourceDir> all_lib_dirs = target_->all_lib_dirs();
+  if (!all_lib_dirs.empty()) {
+    // Since we're passing these on the command line to the linker and not
+    // to Ninja, we need to do shell escaping.
+    PathOutput lib_path_output(path_output_.current_dir(),
+                               settings_->build_settings()->root_path_utf8(),
+                               ESCAPE_NINJA_COMMAND);
+    for (size_t i = 0; i < all_lib_dirs.size(); i++) {
+      out_ << " -Lnative=";
+      lib_path_output.WriteDir(out_, all_lib_dirs[i],
+                               PathOutput::DIR_NO_LAST_SLASH);
+    }
+  }
+
   out_ << std::endl;
 }
 
