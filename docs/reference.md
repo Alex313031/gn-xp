@@ -2612,7 +2612,7 @@
   toolchain("toolchain") {
     tool("link") {
       command = "..."
-      pool = ":link_pool($default_toolchain)")
+      pool = ":link_pool($default_toolchain)"
     }
   }
 ```
