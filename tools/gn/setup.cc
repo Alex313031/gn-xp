@@ -192,17 +192,17 @@ void DecrementWorkCount() {
 
 #if defined(OS_WIN)
 
-std::wstring SysMultiByteToWide(base::StringPiece mb) {
+std::u16string SysMultiByteTo16(base::StringPiece mb) {
   if (mb.empty())
-    return std::wstring();
+    return std::u16string();
 
   int mb_length = static_cast<int>(mb.length());
   // Compute the length of the buffer.
   int charcount = MultiByteToWideChar(CP_ACP, 0, mb.data(), mb_length, NULL, 0);
   if (charcount == 0)
-    return std::wstring();
+    return std::u16string();
 
-  std::wstring wide;
+  std::u16string wide;
   wide.resize(charcount);
   MultiByteToWideChar(CP_ACP, 0, mb.data(), mb_length, &wide[0], charcount);
 
