@@ -72,7 +72,6 @@ int CallLstat(const char* path, stat_wrapper_t* sb) {
 }
 #endif
 
-#if !defined(OS_NACL_NONSFI)
 // Helper for VerifyPathControlledByUser.
 bool VerifySpecificPathControlledByUser(const FilePath& path,
                                         uid_t owner_uid,
@@ -179,7 +178,6 @@ bool CopyFileContents(File* infile, File* outfile) {
   NOTREACHED();
   return false;
 }
-#endif  // !defined(OS_NACL_NONSFI)
 
 #if !defined(OS_MACOSX)
 // Appends |mode_char| to |mode| before the optional character set encoding; see
@@ -196,7 +194,6 @@ std::string AppendModeCharacter(StringPiece mode, char mode_char) {
 
 }  // namespace
 
-#if !defined(OS_NACL_NONSFI)
 FilePath MakeAbsoluteFilePath(const FilePath& input) {
   char full_path[PATH_MAX];
   if (realpath(input.value().c_str(), full_path) == nullptr)
@@ -251,7 +248,6 @@ bool ReplaceFile(const FilePath& from_path,
     *error = File::GetLastFileError();
   return false;
 }
-#endif  // !defined(OS_NACL_NONSFI)
 
 bool CreateLocalNonBlockingPipe(int fds[2]) {
 #if defined(OS_LINUX)
@@ -288,15 +284,11 @@ bool SetNonBlocking(int fd) {
 }
 
 bool SetCloseOnExec(int fd) {
-#if defined(OS_NACL_NONSFI)
-  const int flags = 0;
-#else
   const int flags = fcntl(fd, F_GETFD);
   if (flags == -1)
     return false;
   if (flags & FD_CLOEXEC)
     return true;
-#endif  // defined(OS_NACL_NONSFI)
   if (HANDLE_EINTR(fcntl(fd, F_SETFD, flags | FD_CLOEXEC)) == -1)
     return false;
   return true;
@@ -306,11 +298,9 @@ bool PathExists(const FilePath& path) {
   return access(path.value().c_str(), F_OK) == 0;
 }
 
-#if !defined(OS_NACL_NONSFI)
 bool PathIsWritable(const FilePath& path) {
   return access(path.value().c_str(), W_OK) == 0;
 }
-#endif  // !defined(OS_NACL_NONSFI)
 
 bool DirectoryExists(const FilePath& path) {
   stat_wrapper_t file_info;
@@ -330,8 +320,6 @@ bool ReadFromFD(int fd, char* buffer, size_t bytes) {
   }
   return total_read == bytes;
 }
-
-#if !defined(OS_NACL_NONSFI)
 
 int CreateAndOpenFdForTemporaryFileInDir(const FilePath& directory,
                                          FilePath* path) {
@@ -575,7 +563,6 @@ bool GetFileInfo(const FilePath& file_path, File::Info* results) {
   results->FromStat(file_info);
   return true;
 }
-#endif  // !defined(OS_NACL_NONSFI)
 
 FILE* OpenFile(const FilePath& filename, const char* mode) {
   // 'e' is unconditionally added below, so be sure there is not one already
@@ -648,8 +635,6 @@ bool WriteFileDescriptor(const int fd, const char* data, int size) {
 
   return true;
 }
-
-#if !defined(OS_NACL_NONSFI)
 
 bool AppendToFile(const FilePath& filename, const char* data, int size) {
   bool ret = true;
@@ -783,5 +768,4 @@ bool CopyFile(const FilePath& from_path, const FilePath& to_path) {
 }
 #endif  // !defined(OS_MACOSX)
 
-#endif  // !defined(OS_NACL_NONSFI)
 }  // namespace base

@@ -380,7 +380,7 @@ CommandLine::StringVector CommandLine::GetArgs() const {
 void CommandLine::AppendArg(const std::string& value) {
 #if defined(OS_WIN)
   DCHECK(IsStringUTF8(value));
-  AppendArgNative(UTF8ToWide(value));
+  AppendArgNative(UTF8ToUTF16(value));
 #elif defined(OS_POSIX) || defined(OS_FUCHSIA)
   AppendArgNative(value);
 #else
@@ -428,7 +428,7 @@ void CommandLine::ParseFromString(const string16& command_line) {
     return;
 
   int num_args = 0;
-  wchar_t** args = NULL;
+  char16_t** args = NULL;
   args = ::CommandLineToArgvW(command_line_string.c_str(), &num_args);
 
   DPLOG_IF(FATAL, !args) << "CommandLineToArgvW failed on command line: "

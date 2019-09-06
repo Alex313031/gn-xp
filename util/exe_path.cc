@@ -42,7 +42,7 @@ base::FilePath GetExePath() {
 #elif defined(OS_WIN)
 
 base::FilePath GetExePath() {
-  wchar_t system_buffer[MAX_PATH];
+  char16_t system_buffer[MAX_PATH];
   system_buffer[0] = 0;
   if (GetModuleFileName(NULL, system_buffer, MAX_PATH) == 0) {
     return base::FilePath();
