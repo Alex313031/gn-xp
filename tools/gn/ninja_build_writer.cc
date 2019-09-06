@@ -122,7 +122,7 @@ std::string GetSelfInvocationCommand(const BuildSettings* build_settings) {
   base::CommandLine cmdline = GetSelfInvocationCommandLine(
       build_settings);
 #if defined(OS_WIN)
-  return base::WideToUTF8(cmdline.GetCommandLineString());
+  return base::UTF16ToUTF8(cmdline.GetCommandLineString());
 #else
   return cmdline.GetCommandLineString();
 #endif
