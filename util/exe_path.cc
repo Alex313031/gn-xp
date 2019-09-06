@@ -42,7 +42,7 @@ base::FilePath GetExePath() {
 #elif defined(OS_WIN)
 
 base::FilePath GetExePath() {
-  wchar_t system_buffer[MAX_PATH];
+  char16_t system_buffer[MAX_PATH];
   system_buffer[0] = 0;
   if (GetModuleFileName(NULL, system_buffer, MAX_PATH) == 0) {
     return base::FilePath();
@@ -53,7 +53,7 @@ base::FilePath GetExePath() {
 #elif defined(OS_FREEBSD)
 
 base::FilePath GetExePath() {
-  int mib[] = { CTL_KERN, KERN_PROC, KERN_PROC_PATHNAME, -1 };
+  int mib[] = {CTL_KERN, KERN_PROC, KERN_PROC_PATHNAME, -1};
   char buf[PATH_MAX];
   size_t buf_size = PATH_MAX;
   if (sysctl(mib, 4, buf, &buf_size, nullptr, 0) == -1) {
