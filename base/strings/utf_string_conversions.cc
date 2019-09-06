@@ -237,7 +237,7 @@ bool WideToUTF16(const wchar_t* src, size_t src_len, string16* output) {
 }
 
 string16 WideToUTF16(WStringPiece wide) {
-  return wide.as_string();
+  return string16(wide);
 }
 
 bool UTF16ToWide(const char16* src, size_t src_len, std::wstring* output) {
@@ -246,7 +246,7 @@ bool UTF16ToWide(const char16* src, size_t src_len, std::wstring* output) {
 }
 
 std::wstring UTF16ToWide(StringPiece16 utf16) {
-  return utf16.as_string();
+  return std::wstring(utf16);
 }
 
 #elif defined(WCHAR_T_IS_UTF32)
