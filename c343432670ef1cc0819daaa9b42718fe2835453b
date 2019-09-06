@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "2caad05d_f0fe3b08",
+        "filename": "base/command_line.cc",
+        "patchSetId": 7
+      },
+      "lineNbr": 189,
+      "author": {
+        "id": 1000004
+      },
+      "writtenOn": "2019-09-06T23:42:06Z",
+      "side": 1,
+      "message": "80col",
+      "revId": "c343432670ef1cc0819daaa9b42718fe2835453b",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": true
+    }
+  ]
+}
