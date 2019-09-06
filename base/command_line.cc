@@ -428,7 +428,7 @@ void CommandLine::ParseFromString(const string16& command_line) {
     return;
 
   int num_args = 0;
-  wchar_t** args = NULL;
+  char16_t** args = NULL;
   args = ::CommandLineToArgvW(command_line_string.c_str(), &num_args);
 
   DPLOG_IF(FATAL, !args) << "CommandLineToArgvW failed on command line: "

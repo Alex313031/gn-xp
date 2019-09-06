@@ -62,7 +62,7 @@ class EnvironmentImpl : public Environment {
     if (value_length == 0)
       return false;
     if (result) {
-      std::unique_ptr<wchar_t[]> value(new wchar_t[value_length]);
+      std::unique_ptr<char16_t[]> value(new char16_t[value_length]);
       ::GetEnvironmentVariable(UTF8ToWide(variable_name).c_str(), value.get(),
                                value_length);
       *result = WideToUTF8(value.get());
@@ -143,14 +143,14 @@ bool Environment::HasVar(StringPiece variable_name) {
 
 #if defined(OS_WIN)
 
-string16 AlterEnvironment(const wchar_t* env, const EnvironmentMap& changes) {
+string16 AlterEnvironment(const char16_t* env, const EnvironmentMap& changes) {
   string16 result;
 
   // First copy all unmodified values to the output.
   size_t cur_env = 0;
   string16 key;
   while (env[cur_env]) {
-    const wchar_t* line = &env[cur_env];
+    const char16_t* line = &env[cur_env];
     size_t line_length = ParseEnvLine(line, &key);
 
     // Keep only values not specified in the change vector.

@@ -9,7 +9,7 @@
 //
 //                   POSIX            Windows
 //                   ---------------  ----------------------------------
-// Fundamental type  char[]           wchar_t[]
+// Fundamental type  char[]           char16_t[]
 // Encoding          unspecified*     UTF-16
 // Separator         /                \, tolerant of /
 // Drive letters     no               case-insensitive A-Z followed by :
@@ -50,7 +50,7 @@
 //
 // To aid in initialization of FilePath objects from string literals, a
 // FILE_PATH_LITERAL macro is provided, which accounts for the difference
-// between char[]-based pathnames on POSIX systems and wchar_t[]-based
+// between char[]-based pathnames on POSIX systems and char16_t[]-based
 // pathnames on Windows.
 //
 // As a precaution against premature truncation, paths can't contain NULs.
@@ -142,9 +142,9 @@ class PickleIterator;
 class FilePath {
  public:
 #if defined(OS_WIN)
-  // On Windows, for Unicode-aware applications, native pathnames are wchar_t
+  // On Windows, for Unicode-aware applications, native pathnames are char16_t
   // arrays encoded in UTF-16.
-  typedef std::wstring StringType;
+  typedef std::u16string StringType;
 #elif defined(OS_POSIX) || defined(OS_FUCHSIA)
   // On most platforms, native pathnames are char arrays, and the encoding
   // may or may not be specified.  On Mac OS X, native pathnames are encoded
@@ -306,7 +306,7 @@ class FilePath {
   FilePath Append(StringPieceType component) const WARN_UNUSED_RESULT;
   FilePath Append(const FilePath& component) const WARN_UNUSED_RESULT;
 
-  // Although Windows StringType is std::wstring, since the encoding it uses for
+  // Although Windows StringType is std::u16string, since the encoding it uses for
   // paths is well defined, it can handle ASCII path components as well.
   // Mac uses UTF8, and since ASCII is a subset of that, it works there as well.
   // On Linux, although it can use any 8-bit encoding for paths, we assume that
