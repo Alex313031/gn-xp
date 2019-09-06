@@ -1,0 +1,72 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "4a8b3cf9_b2fdeaaa",
+        "filename": "tools/gn/ninja_rust_binary_target_writer.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 147,
+      "author": {
+        "id": 1000014
+      },
+      "writtenOn": "2019-09-06T16:13:46Z",
+      "side": 1,
+      "message": "Why do we need a UniqueVector here? We don\u0027t have it for the order only deps and it feels like they should match.",
+      "revId": "bafe85828eb748ff01f159da533efb3b2a8e4a10",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "db42bd4a_cfc92be1",
+        "filename": "tools/gn/ninja_rust_binary_target_writer.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 248,
+      "author": {
+        "id": 1000014
+      },
+      "writtenOn": "2019-09-06T16:13:46Z",
+      "side": 1,
+      "message": "Bring this out of the loop to avoid re-constructing each time. I\u0027d also make it a StringPiece to avoid a copy.",
+      "revId": "bafe85828eb748ff01f159da533efb3b2a8e4a10",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "f63ac788_3b295f22",
+        "filename": "tools/gn/ninja_rust_binary_target_writer.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 258,
+      "author": {
+        "id": 1000014
+      },
+      "writtenOn": "2019-09-06T16:13:46Z",
+      "side": 1,
+      "message": "This is the same as the C binary target writer except the linker flag names are hardcoded to specific values. Can this be factored out so the flag names are passed in and the logic can be shared?",
+      "revId": "bafe85828eb748ff01f159da533efb3b2a8e4a10",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "ff5eb429_a52e9c4d",
+        "filename": "tools/gn/ninja_rust_binary_target_writer.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 281,
+      "author": {
+        "id": 1000014
+      },
+      "writtenOn": "2019-09-06T16:13:46Z",
+      "side": 1,
+      "message": "Ditto.",
+      "revId": "bafe85828eb748ff01f159da533efb3b2a8e4a10",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": true
+    }
+  ]
+}
