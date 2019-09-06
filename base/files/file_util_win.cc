@@ -185,7 +185,7 @@ std::string GenerateGUID() {
 }  // namespace
 
 FilePath MakeAbsoluteFilePath(const FilePath& input) {
-  wchar_t file_path[MAX_PATH];
+  char16_t file_path[MAX_PATH];
   if (!_wfullpath(file_path, input.value().c_str(), MAX_PATH))
     return FilePath();
   return FilePath(file_path);
@@ -265,7 +265,7 @@ bool DirectoryExists(const FilePath& path) {
 }
 
 bool GetTempDir(FilePath* path) {
-  wchar_t temp_path[MAX_PATH + 1];
+  char16_t temp_path[MAX_PATH + 1];
   DWORD path_len = ::GetTempPath(MAX_PATH, temp_path);
   if (path_len >= MAX_PATH || path_len <= 0)
     return false;
@@ -334,7 +334,7 @@ bool CreateTemporaryFileInDir(const FilePath& dir, FilePath* temp_file) {
     return false;
   }
 
-  wchar_t long_temp_name[MAX_PATH + 1];
+  char16_t long_temp_name[MAX_PATH + 1];
   DWORD long_name_len =
       GetLongPathName(temp_name.value().c_str(), long_temp_name, MAX_PATH);
   if (long_name_len > MAX_PATH || long_name_len == 0) {
@@ -384,7 +384,7 @@ bool CreateNewTempDirectory(const FilePath::StringType& prefix,
 
 bool CreateDirectoryAndGetError(const FilePath& full_path, File::Error* error) {
   // If the path exists, we've succeeded if it's a directory, failed otherwise.
-  const wchar_t* full_path_str = full_path.value().c_str();
+  const char16_t* full_path_str = full_path.value().c_str();
   DWORD fileattr = ::GetFileAttributes(full_path_str);
   if (fileattr != INVALID_FILE_ATTRIBUTES) {
     if ((fileattr & FILE_ATTRIBUTE_DIRECTORY) != 0) {
@@ -453,7 +453,7 @@ bool DevicePathToDriveLetterPath(const FilePath& nt_device_path,
                                  FilePath* out_drive_letter_path) {
   // Get the mapping of drive letters to device paths.
   const int kDriveMappingSize = 1024;
-  wchar_t drive_mapping[kDriveMappingSize] = {'\0'};
+  char16_t drive_mapping[kDriveMappingSize] = {'\0'};
   if (!::GetLogicalDriveStrings(kDriveMappingSize - 1, drive_mapping)) {
     DLOG(ERROR) << "Failed to get drive mapping.";
     return false;
@@ -461,9 +461,9 @@ bool DevicePathToDriveLetterPath(const FilePath& nt_device_path,
 
   // The drive mapping is a sequence of null terminated strings.
   // The last string is empty.
-  wchar_t* drive_map_ptr = drive_mapping;
-  wchar_t device_path_as_string[MAX_PATH];
-  wchar_t drive[] = L" :";
+  char16_t* drive_map_ptr = drive_mapping;
+  char16_t device_path_as_string[MAX_PATH];
+  char16_t drive[] = L" :";
 
   // For each string in the drive mapping, get the junction that links
   // to it.  If that junction is a prefix of |device_path|, then we
@@ -528,7 +528,7 @@ bool NormalizeToNativeFilePath(const FilePath& path, FilePath* nt_path) {
   // not return kMaxPathLength.  This would mean that only part of the
   // path fit in |mapped_file_path|.
   const int kMaxPathLength = MAX_PATH + 10;
-  wchar_t mapped_file_path[kMaxPathLength];
+  char16_t mapped_file_path[kMaxPathLength];
   bool success = false;
   HANDLE cp = GetCurrentProcess();
   if (::GetMappedFileNameW(cp, file_view, mapped_file_path, kMaxPathLength)) {
@@ -649,7 +649,7 @@ bool AppendToFile(const FilePath& filename, const char* data, int size) {
 }
 
 bool GetCurrentDirectory(FilePath* dir) {
-  wchar_t system_buffer[MAX_PATH];
+  char16_t system_buffer[MAX_PATH];
   system_buffer[0] = 0;
   DWORD len = ::GetCurrentDirectory(MAX_PATH, system_buffer);
   if (len == 0 || len > MAX_PATH)
@@ -657,7 +657,7 @@ bool GetCurrentDirectory(FilePath* dir) {
   // TODO(evanm): the old behavior of this function was to always strip the
   // trailing slash.  We duplicate this here, but it shouldn't be necessary
   // when everyone is using the appropriate FilePath APIs.
-  std::wstring dir_str(system_buffer);
+  std::u16string dir_str(system_buffer);
   *dir = FilePath(dir_str).StripTrailingSeparators();
   return true;
 }
@@ -667,7 +667,7 @@ bool SetCurrentDirectory(const FilePath& directory) {
 }
 
 int GetMaximumPathComponentLength(const FilePath& path) {
-  wchar_t volume_path[MAX_PATH];
+  char16_t volume_path[MAX_PATH];
   if (!GetVolumePathNameW(path.NormalizePathSeparators().value().c_str(),
                           volume_path, arraysize(volume_path))) {
     return -1;

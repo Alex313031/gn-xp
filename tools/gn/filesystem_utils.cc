@@ -214,7 +214,7 @@ size_t AbsPathLenWithNoTrailingSlash(const base::StringPiece& path) {
 
 std::string FilePathToUTF8(const base::FilePath::StringType& str) {
 #if defined(OS_WIN)
-  return base::WideToUTF8(str);
+  return base::UTF16ToUTF8(str);
 #else
   return str;
 #endif
@@ -222,7 +222,7 @@ std::string FilePathToUTF8(const base::FilePath::StringType& str) {
 
 base::FilePath UTF8ToFilePath(const base::StringPiece& sp) {
 #if defined(OS_WIN)
-  return base::FilePath(base::UTF8ToWide(sp));
+  return base::FilePath(base::UTF8ToUTF16(sp));
 #else
   return base::FilePath(sp.as_string());
 #endif
