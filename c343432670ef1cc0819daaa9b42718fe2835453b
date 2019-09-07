@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "0c7be694_200263c9",
+        "filename": "tools/gn/parse_tree.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 54,
+      "author": {
+        "id": 1000004
+      },
+      "writtenOn": "2019-09-07T01:05:27Z",
+      "side": 0,
+      "message": "So silly to have to wait until C++20 for this of all things.",
+      "range": {
+        "startLine": 54,
+        "startChar": 11,
+        "endLine": 54,
+        "endChar": 22
+      },
+      "revId": "c343432670ef1cc0819daaa9b42718fe2835453b",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": false
+    }
+  ]
+}
