@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "018a20f7_2564d17f",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 8
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2019-09-07T01:17:59Z",
+      "side": 1,
+      "message": "You mean std::u16string?",
+      "range": {
+        "startLine": 7,
+        "startChar": 28,
+        "endLine": 7,
+        "endChar": 39
+      },
+      "revId": "3ee7653250abc75e6d854903c765a71ef8b4a60d",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": true
+    }
+  ]
+}
