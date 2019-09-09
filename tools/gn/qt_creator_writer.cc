@@ -4,6 +4,7 @@
 
 #include "tools/gn/qt_creator_writer.h"
 
+#include <optional>
 #include <set>
 #include <sstream>
 #include <string>
@@ -11,7 +12,6 @@
 #include "base/files/file_path.h"
 #include "base/files/file_util.h"
 #include "base/strings/utf_string_conversions.h"
-#include "base/optional.h"
 
 #include "tools/gn/builder.h"
 #include "tools/gn/config_values_extractors.h"
@@ -186,8 +186,8 @@ struct CompVersion {
 };
 
 struct CompilerOptions {
-  base::Optional<CVersion> c_version_;
-  base::Optional<CxxVersion> cxx_version_;
+  std::optional<CVersion> c_version_;
+  std::optional<CxxVersion> cxx_version_;
 
   void SetCVersion(CVersion ver) {
     SetVersionImpl(c_version_, ver);
@@ -199,7 +199,7 @@ struct CompilerOptions {
 
 private:
   template<typename Version>
-  void SetVersionImpl(base::Optional<Version> &cur_ver, Version ver) {
+  void SetVersionImpl(std::optional<Version> &cur_ver, Version ver) {
     if (cur_ver)
       cur_ver = std::max(*cur_ver, ver, CompVersion<Version> {});
     else

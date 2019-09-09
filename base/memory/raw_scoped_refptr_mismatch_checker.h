@@ -27,7 +27,7 @@ struct IsRefCountedType : std::false_type {};
 
 template <typename T>
 struct IsRefCountedType<T,
-                        void_t<decltype(std::declval<T*>()->AddRef()),
+                        std::void_t<decltype(std::declval<T*>()->AddRef()),
                                decltype(std::declval<T*>()->Release())>>
     : std::true_type {};
 
