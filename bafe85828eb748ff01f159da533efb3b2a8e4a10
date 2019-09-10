@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "45d63fcb_da799e46",
+        "filename": "tools/gn/ninja_rust_binary_target_writer.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 147,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-09-10T23:38:28Z",
+      "side": 1,
+      "message": "I\u0027ve noticed duplicate deps in generated Ninja files so I changed these to UniqueVector to deduplicate rustdeps and nonrustdeps, but it turned out that this doesn\u0027t help.",
+      "parentUuid": "4a8b3cf9_b2fdeaaa",
+      "revId": "bafe85828eb748ff01f159da533efb3b2a8e4a10",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "db42bd4a_cfc92be1",
         "filename": "tools/gn/ninja_rust_binary_target_writer.cc",
         "patchSetId": 2
@@ -33,6 +51,24 @@
       "revId": "bafe85828eb748ff01f159da533efb3b2a8e4a10",
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "5a578cc5_aea5b91a",
+        "filename": "tools/gn/ninja_rust_binary_target_writer.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 248,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-09-10T23:38:28Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "db42bd4a_cfc92be1",
+      "revId": "bafe85828eb748ff01f159da533efb3b2a8e4a10",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": false
     },
     {
       "key": {
