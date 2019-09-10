@@ -89,6 +89,24 @@
     },
     {
       "key": {
+        "uuid": "19a2ef2e_d63bab56",
+        "filename": "tools/gn/ninja_rust_binary_target_writer.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 258,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-09-10T23:39:11Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "f63ac788_3b295f22",
+      "revId": "bafe85828eb748ff01f159da533efb3b2a8e4a10",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "ff5eb429_a52e9c4d",
         "filename": "tools/gn/ninja_rust_binary_target_writer.cc",
         "patchSetId": 2
@@ -103,6 +121,24 @@
       "revId": "bafe85828eb748ff01f159da533efb3b2a8e4a10",
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "52b7ea51_7a26b70e",
+        "filename": "tools/gn/ninja_rust_binary_target_writer.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 281,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-09-10T23:39:11Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ff5eb429_a52e9c4d",
+      "revId": "bafe85828eb748ff01f159da533efb3b2a8e4a10",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": false
     }
   ]
 }
