@@ -34,6 +34,24 @@
       "revId": "364eb03eddcfddb9efc2be19bf57976ed42015b3",
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "3cd6e15f_4fd21900",
+        "filename": "tools/gn/functions.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 781,
+      "author": {
+        "id": 1000014
+      },
+      "writtenOn": "2019-09-17T19:45:44Z",
+      "side": 1,
+      "message": "Oh I see. I agree it\u0027s not worth adding another function for this case, but then we should clearly comment this call and what we\u0027re trying to do. Otherwise it looks like a mistake.",
+      "parentUuid": "fe303e67_8802290c",
+      "revId": "364eb03eddcfddb9efc2be19bf57976ed42015b3",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": true
     }
   ]
 }
