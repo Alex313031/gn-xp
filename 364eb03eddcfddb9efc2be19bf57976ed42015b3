@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "c382e9fa_64552d89",
+        "filename": "tools/gn/functions.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 781,
+      "author": {
+        "id": 1000014
+      },
+      "writtenOn": "2019-09-17T18:09:19Z",
+      "side": 1,
+      "message": "Can this call be changed to:\n\n  MarkUsed(cur.string_value());\n\nThe current thing is kind of myterious.",
+      "revId": "364eb03eddcfddb9efc2be19bf57976ed42015b3",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": true
+    }
+  ]
+}
