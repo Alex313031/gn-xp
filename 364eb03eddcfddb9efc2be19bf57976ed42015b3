@@ -16,6 +16,24 @@
       "revId": "364eb03eddcfddb9efc2be19bf57976ed42015b3",
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "fe303e67_8802290c",
+        "filename": "tools/gn/functions.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 781,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-09-17T18:56:06Z",
+      "side": 1,
+      "message": "I tried that, but MarkUsed behaves differently from GetValue in that GetValue also searches through parent scopes while MarkUsed only looks through current scope. That behavior is necessary when used inside templates.\n\nAlternative would be to create a new method, e.g. MarkUsedParent that also looks through parent scopes. WDYT?",
+      "parentUuid": "c382e9fa_64552d89",
+      "revId": "364eb03eddcfddb9efc2be19bf57976ed42015b3",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": true
     }
   ]
 }
