@@ -244,21 +244,28 @@ bool HeaderChecker::IsFileInOuputDir(const SourceFile& file) const {
 }
 
 SourceFile HeaderChecker::SourceFileForInclude(
-    const std::string_view& relative_file_path,
+    const IncludeStringWithLocation& include,
     const std::vector<SourceDir>& include_dirs,
     const InputFile& source_file,
-    const LocationRange& range,
     Err* err) const {
   using base::FilePath;
 
-  Value relative_file_value(nullptr, std::string(relative_file_path));
-  auto it = std::find_if(
-      include_dirs.begin(), include_dirs.end(),
-      [relative_file_value, err, this](const SourceDir& dir) -> bool {
+  Value relative_file_value(nullptr, std::string(include.contents));
+
+  auto find_predicate = [relative_file_value, err, this](const SourceDir& dir) -> bool {
         SourceFile include_file =
             dir.ResolveRelativeFile(relative_file_value, err);
         return file_map_.find(include_file) != file_map_.end();
-      });
+      };
+  if (!include.system_style_include) {
+    const SourceDir& file_dir = source_file.dir();
+    if (find_predicate(file_dir)) {
+      return file_dir.ResolveRelativeFile(relative_file_value, err);
+    }
+  }
+
+  auto it = std::find_if(
+      include_dirs.begin(), include_dirs.end(), find_predicate);
 
   if (it != include_dirs.end())
     return it->ResolveRelativeFile(relative_file_value, err);
@@ -298,7 +305,6 @@ bool HeaderChecker::CheckFile(const Target* from_target,
   input_file.SetContents(contents);
 
   std::vector<SourceDir> include_dirs;
-  include_dirs.push_back(file.GetDir());
   for (ConfigValuesIterator iter(from_target); !iter.done(); iter.Next()) {
     const std::vector<SourceDir>& target_include_dirs =
         iter.cur().include_dirs();
@@ -308,16 +314,19 @@ bool HeaderChecker::CheckFile(const Target* from_target,
 
   size_t error_count_before = errors->size();
   CIncludeIterator iter(&input_file);
-  std::string_view current_include;
-  LocationRange range;
+
+  IncludeStringWithLocation include;
 
   std::set<std::pair<const Target*, const Target*>> no_dependency_cache;
-  while (iter.GetNextIncludeString(&current_include, &range)) {
+
+  while (iter.GetNextIncludeString(&include)) {
     Err err;
-    SourceFile include = SourceFileForInclude(current_include, include_dirs,
-                                              input_file, range, &err);
-    if (!include.is_null())
-      CheckInclude(from_target, input_file, include, range,
+    SourceFile included_file = SourceFileForInclude(include,
+                                                    include_dirs,
+                                                    input_file,
+                                                    &err);
+    if (!included_file.is_null())
+      CheckInclude(from_target, input_file, included_file, include.location,
                    &no_dependency_cache, errors);
   }
 

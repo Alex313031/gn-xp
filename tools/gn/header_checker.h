@@ -17,12 +17,12 @@
 #include "base/gtest_prod_util.h"
 #include "base/macros.h"
 #include "base/memory/ref_counted.h"
+#include "tools/gn/c_include_iterator.h"
 #include "tools/gn/err.h"
 #include "tools/gn/source_dir.h"
 
 class BuildSettings;
 class InputFile;
-class LocationRange;
 class SourceFile;
 class Target;
 
@@ -112,10 +112,9 @@ class HeaderChecker : public base::RefCountedThreadSafe<HeaderChecker> {
   bool IsFileInOuputDir(const SourceFile& file) const;
 
   // Resolves the contents of an include to a SourceFile.
-  SourceFile SourceFileForInclude(const std::string_view& relative_file_path,
+  SourceFile SourceFileForInclude(const IncludeStringWithLocation& include,
                                   const std::vector<SourceDir>& include_dirs,
                                   const InputFile& source_file,
-                                  const LocationRange& range,
                                   Err* err) const;
 
   // from_target is the target the file was defined from. It will be used in

@@ -99,8 +99,7 @@ What gets checked
     - Includes with a "nogncheck" annotation are skipped (see
       "gn help nogncheck").
 
-    - Only includes using "quotes" are checked. <brackets> are assumed to be
-      system includes.
+    - Includes using both "quotes" and <brackets> are checked.
 
     - Include paths are assumed to be relative to any of the "include_dirs" for
       the target (including the implicit current dir).
