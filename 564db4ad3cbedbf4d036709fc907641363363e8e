@@ -34,6 +34,24 @@
       "revId": "564db4ad3cbedbf4d036709fc907641363363e8e",
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "674fdce7_195f1ad1",
+        "filename": "tools/gn/function_toolchain.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 305,
+      "author": {
+        "id": 1000014
+      },
+      "writtenOn": "2019-10-02T23:33:10Z",
+      "side": 1,
+      "message": "To continue to the thread of writing here what we said in chat, I responded \"rust_\" for consistency seems best.",
+      "parentUuid": "e78074f7_36e72c54",
+      "revId": "564db4ad3cbedbf4d036709fc907641363363e8e",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": true
     }
   ]
 }
