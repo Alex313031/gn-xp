@@ -8,6 +8,11 @@
 #include "tools/gn/target.h"
 
 const char* RustTool::kRsToolRustc = "rustc";
+const char* RustTool::kRsToolCDylib = "cdylib";
+const char* RustTool::kRsToolDylib = "dylib";
+const char* RustTool::kRsToolProcMacro = "proc_macro";
+const char* RustTool::kRsToolRlib = "rlib";
+const char* RustTool::kRsToolStaticlib = "staticlib";
 
 RustTool::RustTool(const char* n) : Tool(n), rlib_output_extension_(".rlib") {
   CHECK(ValidateName(n));
@@ -28,7 +33,9 @@ const RustTool* RustTool::AsRust() const {
 }
 
 bool RustTool::ValidateName(const char* name) const {
-  return name_ == kRsToolRustc;
+  return name == kRsToolRustc || name == kRsToolCDylib ||
+         name == kRsToolDylib || name == kRsToolProcMacro ||
+         name == kRsToolRlib || name == kRsToolStaticlib;
 }
 
 void RustTool::SetComplete() {
@@ -124,7 +131,9 @@ bool RustTool::InitTool(Scope* scope, Toolchain* toolchain, Err* err) {
 }
 
 bool RustTool::ValidateSubstitution(const Substitution* sub_type) const {
-  if (name_ == kRsToolRustc)
+  if (name_ == kRsToolRustc || name_ == kRsToolCDylib ||
+      name_ == kRsToolDylib || name_ == kRsToolProcMacro ||
+      name_ == kRsToolRlib || name_ == kRsToolStaticlib)
     return IsValidRustSubstitution(sub_type);
   NOTREACHED();
   return false;
@@ -147,12 +156,18 @@ const std::string& RustTool::rustc_output_extension(
           return exe_output_extension_;
       }
     }
-    case RustValues::CRATE_DYLIB:
-      return dylib_output_extension_;
+    case RustValues::CRATE_BIN:
+      return exe_output_extension_;
     case RustValues::CRATE_CDYLIB:
       return cdylib_output_extension_;
+    case RustValues::CRATE_DYLIB:
+      return dylib_output_extension_;
     case RustValues::CRATE_PROC_MACRO:
       return proc_macro_output_extension_;
+    case RustValues::CRATE_RLIB:
+      return rlib_output_extension_;
+    case RustValues::CRATE_STATICLIB:
+      return staticlib_output_extension_;
     default:
       NOTREACHED();
       return exe_output_extension_;

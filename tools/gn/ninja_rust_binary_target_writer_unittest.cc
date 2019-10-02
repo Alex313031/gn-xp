@@ -88,7 +88,7 @@ TEST_F(NinjaRustBinaryTargetWriterTest, RustExecutable) {
         "target_out_dir = obj/foo\n"
         "target_output_name = bar\n"
         "\n"
-        "build obj/foo/foo_bar: rustc ../../foo/main.rs | ../../foo/input3.rs "
+        "build ./foo_bar: rustc ../../foo/main.rs | ../../foo/input3.rs "
         "../../foo/main.rs ../../foo/input1.rs ../../foo/input2.rs || "
         "obj/foo/sources.stamp\n"
         "  rustdeps =\n";
@@ -130,11 +130,11 @@ TEST_F(NinjaRustBinaryTargetWriterTest, RlibDeps) {
         "target_out_dir = obj/bar\n"
         "target_output_name = mylib\n"
         "\n"
-        "build obj/bar/libmylib.rlib: rustc ../../bar/lib.rs | "
+        "build obj/bar/libmylib.rlib: rlib ../../bar/lib.rs | "
         "../../bar/mylib.rs ../../bar/lib.rs\n"
         "  rustdeps =\n";
     std::string out_str = out.str();
-    EXPECT_EQ(expected, out_str) << out_str;
+    EXPECT_EQ(expected, out_str) << expected << "\n" << out_str;
   }
 
   Target another_rlib(setup.settings(), Label(SourceDir("//foo/"), "direct"));
@@ -179,7 +179,7 @@ TEST_F(NinjaRustBinaryTargetWriterTest, RlibDeps) {
         "target_out_dir = obj/foo\n"
         "target_output_name = bar\n"
         "\n"
-        "build obj/foo/foo_bar: rustc ../../foo/main.rs | ../../foo/source.rs "
+        "build ./foo_bar: rustc ../../foo/main.rs | ../../foo/source.rs "
         "../../foo/main.rs obj/foo/libdirect.rlib obj/bar/libmylib.rlib\n"
         "  externs = --extern direct=obj/foo/libdirect.rlib --extern "
         "mylib=obj/bar/libmylib.rlib\n"
@@ -235,7 +235,7 @@ TEST_F(NinjaRustBinaryTargetWriterTest, RenamedDeps) {
         "target_out_dir = obj/foo\n"
         "target_output_name = bar\n"
         "\n"
-        "build obj/foo/foo_bar: rustc ../../foo/main.rs | ../../foo/source.rs "
+        "build ./foo_bar: rustc ../../foo/main.rs | ../../foo/source.rs "
         "../../foo/main.rs obj/foo/libdirect.rlib\n"
         "  externs = --extern direct_renamed=obj/foo/libdirect.rlib\n"
         "  rustdeps = -Ldependency=obj/foo\n";
@@ -298,7 +298,7 @@ TEST_F(NinjaRustBinaryTargetWriterTest, NonRustDeps) {
         "target_out_dir = obj/foo\n"
         "target_output_name = bar\n"
         "\n"
-        "build obj/foo/foo_bar: rustc ../../foo/main.rs | ../../foo/source.rs "
+        "build ./foo_bar: rustc ../../foo/main.rs | ../../foo/source.rs "
         "../../foo/main.rs obj/bar/libmylib.rlib obj/foo/libstatic.a\n"
         "  externs = --extern mylib=obj/bar/libmylib.rlib\n"
         "  rustdeps = -Ldependency=obj/bar -Lnative=obj/foo -lstatic\n";
@@ -334,7 +334,7 @@ TEST_F(NinjaRustBinaryTargetWriterTest, NonRustDeps) {
         "target_out_dir = obj/foo\n"
         "target_output_name = bar\n"
         "\n"
-        "build obj/foo/foo_bar: rustc ../../foo/main.rs | ../../foo/source.rs "
+        "build ./foo_bar: rustc ../../foo/main.rs | ../../foo/source.rs "
         "../../foo/main.rs obj/foo/libstatic.a\n"
         "  rustdeps = -Lnative=obj/foo -lstatic\n";
     std::string out_str = out.str();
@@ -386,7 +386,7 @@ TEST_F(NinjaRustBinaryTargetWriterTest, RustOutputExtensionAndDir) {
         "target_out_dir = obj/foo\n"
         "target_output_name = bar\n"
         "\n"
-        "build obj/foo/foo_bar.exe: rustc ../../foo/main.rs | ../../foo/input3.rs "
+        "build ./foo_bar.exe: rustc ../../foo/main.rs | ../../foo/input3.rs "
         "../../foo/main.rs ../../foo/input1.rs ../../foo/input2.rs || "
         "obj/foo/sources.stamp\n"
         "  rustdeps =\n";
@@ -430,7 +430,7 @@ TEST_F(NinjaRustBinaryTargetWriterTest, LibsAndLibDirs) {
         "target_out_dir = obj/foo\n"
         "target_output_name = bar\n"
         "\n"
-        "build obj/foo/foo_bar: rustc ../../foo/main.rs | ../../foo/input.rs "
+        "build ./foo_bar: rustc ../../foo/main.rs | ../../foo/input.rs "
         "../../foo/main.rs\n"
         "  rustdeps = -Lnative=../../baz -lquux\n";
     std::string out_str = out.str();
@@ -471,7 +471,7 @@ TEST_F(NinjaRustBinaryTargetWriterTest, ProcMacro) {
         "target_out_dir = obj/bar\n"
         "target_output_name = mymacro\n"
         "\n"
-        "build obj/bar/libmymacro.so: rustc ../../bar/lib.rs | "
+        "build obj/bar/libmymacro.so: proc_macro ../../bar/lib.rs | "
         "../../bar/mylib.rs ../../bar/lib.rs\n"
         "  rustdeps =\n";
     std::string out_str = out.str();
@@ -507,7 +507,7 @@ TEST_F(NinjaRustBinaryTargetWriterTest, ProcMacro) {
         "target_out_dir = obj/foo\n"
         "target_output_name = bar\n"
         "\n"
-        "build obj/foo/foo_bar: rustc ../../foo/main.rs | ../../foo/source.rs "
+        "build ./foo_bar: rustc ../../foo/main.rs | ../../foo/source.rs "
         "../../foo/main.rs || obj/bar/libmymacro.so\n"
         "  externs = --extern mymacro=obj/bar/libmymacro.so\n"
         "  rustdeps = -Ldependency=obj/bar\n";
@@ -549,7 +549,7 @@ TEST_F(NinjaRustBinaryTargetWriterTest, GroupDeps) {
         "target_out_dir = obj/bar\n"
         "target_output_name = mylib\n"
         "\n"
-        "build obj/bar/libmylib.rlib: rustc ../../bar/lib.rs | "
+        "build obj/bar/libmylib.rlib: rlib ../../bar/lib.rs | "
         "../../bar/mylib.rs ../../bar/lib.rs\n"
         "  rustdeps =\n";
     std::string out_str = out.str();
@@ -592,7 +592,7 @@ TEST_F(NinjaRustBinaryTargetWriterTest, GroupDeps) {
         "target_out_dir = obj/foo\n"
         "target_output_name = bar\n"
         "\n"
-        "build obj/foo/foo_bar: rustc ../../foo/main.rs | ../../foo/source.rs "
+        "build ./foo_bar: rustc ../../foo/main.rs | ../../foo/source.rs "
         "../../foo/main.rs obj/bar/libmylib.rlib || obj/baz/group.stamp\n"
         "  externs = --extern mylib=obj/bar/libmylib.rlib\n"
         "  rustdeps = -Ldependency=obj/bar\n";

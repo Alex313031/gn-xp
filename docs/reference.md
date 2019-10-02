@@ -2041,8 +2041,9 @@
       the current scope is not (since the overrides haven't been applied yet).
 
    2. At the end of executing the block, any variables set within that scope
-      are saved globally as build arguments, with their current values being
-      saved as the "default value" for that argument.
+      are saved, with the values specified in the block used as the "default value"
+      for that argument. Once saved, these variables are available for override
+      via args.gn.
 
    3. User-defined overrides are applied. Anything set in "gn args" now
       overrides any default values. The resulting set of variables is promoted
@@ -3175,7 +3176,12 @@
       "compile_xcassets": [iOS, macOS] Tool to compile asset catalogs.
 
     Rust tools:
-      "rustc": Rust compiler and linker
+      "rustc": Tool for compiling Rust binaries
+      "cdylib": Tool for compiling C-compatible dynamic libraries.
+      "dylib": Tool for compiling Rust dynamic libraries.
+      "proc_macro": Tool for compiling Rust procedural macros.
+      "rlib": Tool for compiling Rust libraries.
+      "staticlib": Tool for compiling Rust static libraries.
 ```
 
 #### **Tool variables**

@@ -22,6 +22,11 @@ class RustTool : public Tool {
  public:
   // Rust tools
   static const char* kRsToolRustc;
+  static const char* kRsToolCDylib;
+  static const char* kRsToolDylib;
+  static const char* kRsToolProcMacro;
+  static const char* kRsToolRlib;
+  static const char* kRsToolStaticlib;
 
   explicit RustTool(const char* n);
   ~RustTool();

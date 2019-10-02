@@ -183,11 +183,11 @@ void NinjaRustBinaryTargetWriter::WriteCompilerVars() {
   WriteCrateVars(target_, tool_, opts, out_);
 
   WriteOneFlag(target_, &kRustSubstitutionRustFlags, false,
-               RustTool::kRsToolRustc, &ConfigValues::rustflags, opts,
+               Tool::kToolNone, &ConfigValues::rustflags, opts,
                path_output_, out_);
 
   WriteOneFlag(target_, &kRustSubstitutionRustEnv, false,
-               RustTool::kRsToolRustc, &ConfigValues::rustenv, opts,
+               Tool::kToolNone, &ConfigValues::rustenv, opts,
                path_output_, out_);
 
   WriteSharedVars(subst);
