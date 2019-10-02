@@ -16,6 +16,24 @@
       "revId": "564db4ad3cbedbf4d036709fc907641363363e8e",
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "e78074f7_36e72c54",
+        "filename": "tools/gn/function_toolchain.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 305,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-10-02T23:12:19Z",
+      "side": 1,
+      "message": "Yes, see my message https://gn-review.googlesource.com/c/gn/+/6220/1#message-0b39ff0aeecc8a53b5fac2cb9336a495bea20fa5\n\nWould you prefer for all of these to be prefixed with rust_ for consistency or just the dylib and staticlib?",
+      "parentUuid": "f815d181_97e72d07",
+      "revId": "564db4ad3cbedbf4d036709fc907641363363e8e",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": true
     }
   ]
 }
