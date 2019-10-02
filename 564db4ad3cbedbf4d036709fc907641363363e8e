@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "f815d181_97e72d07",
+        "filename": "tools/gn/function_toolchain.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 305,
+      "author": {
+        "id": 1000014
+      },
+      "writtenOn": "2019-10-02T23:04:35Z",
+      "side": 1,
+      "message": "Can these have some kind of \"rust\" prefix? I find this confusing, for example, \"dylib\" is the name of a shared library on Mac (in any language), and \"staticlib\" sounds like it makes a static library in any language.",
+      "revId": "564db4ad3cbedbf4d036709fc907641363363e8e",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": true
+    }
+  ]
+}
