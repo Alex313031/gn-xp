@@ -87,22 +87,6 @@ void WriteCrateVars(const Target* target,
            SubstitutionWriter::GetLinkerSubstitution(target, tool,
                                                      &SubstitutionOutputDir),
            opts, out);
-  if (!target->output_extension_set()) {
-    DCHECK(tool->AsRust());
-    WriteVar(kRustSubstitutionOutputExtension.ninja_name,
-             tool->AsRust()->rustc_output_extension(
-                 target->output_type(), target->rust_values().crate_type()),
-             opts, out);
-  } else if (target->output_extension().empty()) {
-    WriteVar(kRustSubstitutionOutputExtension.ninja_name, "", opts, out);
-  } else {
-    WriteVar(kRustSubstitutionOutputExtension.ninja_name,
-             std::string(".") + target->output_extension(), opts, out);
-  }
-
-  if (target->output_type() == Target::RUST_LIBRARY ||
-      target->output_type() == Target::SHARED_LIBRARY)
-    WriteVar(kRustSubstitutionOutputPrefix.ninja_name, "lib", opts, out);
 }
 
 }  // namespace
@@ -183,11 +167,11 @@ void NinjaRustBinaryTargetWriter::WriteCompilerVars() {
   WriteCrateVars(target_, tool_, opts, out_);
 
   WriteOneFlag(target_, &kRustSubstitutionRustFlags, false,
-               RustTool::kRsToolRustc, &ConfigValues::rustflags, opts,
+               Tool::kToolNone, &ConfigValues::rustflags, opts,
                path_output_, out_);
 
   WriteOneFlag(target_, &kRustSubstitutionRustEnv, false,
-               RustTool::kRsToolRustc, &ConfigValues::rustenv, opts,
+               Tool::kToolNone, &ConfigValues::rustenv, opts,
                path_output_, out_);
 
   WriteSharedVars(subst);

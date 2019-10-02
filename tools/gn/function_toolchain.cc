@@ -300,7 +300,12 @@ Tool types
       "compile_xcassets": [iOS, macOS] Tool to compile asset catalogs.
 
     Rust tools:
-      "rustc": Rust compiler and linker
+      "rustc": Tool for compiling Rust binaries
+      "cdylib": Tool for compiling C-compatible dynamic libraries.
+      "dylib": Tool for compiling Rust dynamic libraries.
+      "proc_macro": Tool for compiling Rust procedural macros.
+      "rlib": Tool for compiling Rust libraries.
+      "staticlib": Tool for compiling Rust static libraries.
 
 Tool variables
 
@@ -714,13 +719,6 @@ Tool variables
     {{externs}}
         Expands to the list of --extern flags needed to include addition Rust
         libraries in this target. Includes any specified renamed dependencies.
-
-    {{rustc_output_extension}}
-        Expands to the output extension for this target's crate type.
-
-    {{rustc_output_prefix}}
-        Expands to the prefix for shared and static libraries. This should
-        generally be "lib". Empty for executable targets.
 
     {{rustdeps}}
         Expands to the list of -Ldependency=<path> strings needed to compile

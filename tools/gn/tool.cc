@@ -276,6 +276,16 @@ std::unique_ptr<Tool> Tool::CreateTool(const std::string& name) {
   // Rust tool
   else if (name == RustTool::kRsToolRustc)
     return std::make_unique<RustTool>(RustTool::kRsToolRustc);
+  else if (name == RustTool::kRsToolCDylib)
+    return std::make_unique<RustTool>(RustTool::kRsToolCDylib);
+  else if (name == RustTool::kRsToolDylib)
+    return std::make_unique<RustTool>(RustTool::kRsToolDylib);
+  else if (name == RustTool::kRsToolProcMacro)
+    return std::make_unique<RustTool>(RustTool::kRsToolProcMacro);
+  else if (name == RustTool::kRsToolRlib)
+    return std::make_unique<RustTool>(RustTool::kRsToolRlib);
+  else if (name == RustTool::kRsToolStaticlib)
+    return std::make_unique<RustTool>(RustTool::kRsToolStaticlib);
 
   return nullptr;
 }
@@ -315,8 +325,39 @@ const char* Tool::GetToolTypeForTargetFinalOutput(const Target* target) {
   // The contents of this list might be suprising (i.e. stamp tool for copy
   // rules). See the header for why.
   // TODO(crbug.com/gn/39): Don't emit stamp files for single-output targets.
-  if (target->source_types_used().RustSourceUsed())
-    return RustTool::kRsToolRustc;
+  if (target->source_types_used().RustSourceUsed()) {
+    switch (target->rust_values().crate_type()) {
+      case RustValues::CRATE_AUTO: {
+        switch (target->output_type()) {
+          case Target::EXECUTABLE:
+            return RustTool::kRsToolRustc;
+          case Target::SHARED_LIBRARY:
+            return RustTool::kRsToolDylib;
+          case Target::STATIC_LIBRARY:
+            return RustTool::kRsToolStaticlib;
+          case Target::RUST_LIBRARY:
+            return RustTool::kRsToolRlib;
+          default:
+            break;
+        }
+        break;
+      }
+      case RustValues::CRATE_BIN:
+        return RustTool::kRsToolRustc;
+      case RustValues::CRATE_CDYLIB:
+        return RustTool::kRsToolCDylib;
+      case RustValues::CRATE_DYLIB:
+        return RustTool::kRsToolDylib;
+      case RustValues::CRATE_PROC_MACRO:
+        return RustTool::kRsToolProcMacro;
+      case RustValues::CRATE_RLIB:
+        return RustTool::kRsToolRlib;
+      case RustValues::CRATE_STATICLIB:
+        return RustTool::kRsToolStaticlib;
+      default:
+        NOTREACHED();
+    }
+  }
   switch (target->output_type()) {
     case Target::GROUP:
       return GeneralTool::kGeneralToolStamp;

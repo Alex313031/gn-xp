@@ -8,8 +8,13 @@
 #include "tools/gn/target.h"
 
 const char* RustTool::kRsToolRustc = "rustc";
+const char* RustTool::kRsToolCDylib = "cdylib";
+const char* RustTool::kRsToolDylib = "dylib";
+const char* RustTool::kRsToolProcMacro = "proc_macro";
+const char* RustTool::kRsToolRlib = "rlib";
+const char* RustTool::kRsToolStaticlib = "staticlib";
 
-RustTool::RustTool(const char* n) : Tool(n), rlib_output_extension_(".rlib") {
+RustTool::RustTool(const char* n) : Tool(n) {
   CHECK(ValidateName(n));
   // TODO: should these be settable in toolchain definition?
   set_framework_switch("-lframework=");
@@ -28,7 +33,9 @@ const RustTool* RustTool::AsRust() const {
 }
 
 bool RustTool::ValidateName(const char* name) const {
-  return name_ == kRsToolRustc;
+  return name == kRsToolRustc || name == kRsToolCDylib ||
+         name == kRsToolDylib || name == kRsToolProcMacro ||
+         name == kRsToolRlib || name == kRsToolStaticlib;
 }
 
 void RustTool::SetComplete() {
@@ -47,28 +54,6 @@ bool RustTool::SetOutputExtension(const Value* value,
     return true;
 
   *var = std::move(value->string_value());
-  return true;
-}
-
-bool RustTool::ReadOutputExtensions(Scope* scope, Err* err) {
-  if (!SetOutputExtension(scope->GetValue("exe_output_extension", true),
-                          &exe_output_extension_, err))
-    return false;
-  if (!SetOutputExtension(scope->GetValue("rlib_output_extension", true),
-                          &rlib_output_extension_, err))
-    return false;
-  if (!SetOutputExtension(scope->GetValue("dylib_output_extension", true),
-                          &dylib_output_extension_, err))
-    return false;
-  if (!SetOutputExtension(scope->GetValue("cdylib_output_extension", true),
-                          &cdylib_output_extension_, err))
-    return false;
-  if (!SetOutputExtension(scope->GetValue("staticlib_output_extension", true),
-                          &staticlib_output_extension_, err))
-    return false;
-  if (!SetOutputExtension(scope->GetValue("proc_macro_output_extension", true),
-                          &proc_macro_output_extension_, err))
-    return false;
   return true;
 }
 
@@ -112,10 +97,6 @@ bool RustTool::InitTool(Scope* scope, Toolchain* toolchain, Err* err) {
     return false;
   }
 
-  if (!ReadOutputExtensions(scope, err)) {
-    return false;
-  }
-
   // All Rust tools should have outputs.
   if (!ReadOutputsPatternList(scope, "outputs", &outputs_, err)) {
     return false;
@@ -124,37 +105,10 @@ bool RustTool::InitTool(Scope* scope, Toolchain* toolchain, Err* err) {
 }
 
 bool RustTool::ValidateSubstitution(const Substitution* sub_type) const {
-  if (name_ == kRsToolRustc)
+  if (name_ == kRsToolRustc || name_ == kRsToolCDylib ||
+      name_ == kRsToolDylib || name_ == kRsToolProcMacro ||
+      name_ == kRsToolRlib || name_ == kRsToolStaticlib)
     return IsValidRustSubstitution(sub_type);
   NOTREACHED();
   return false;
-}
-
-const std::string& RustTool::rustc_output_extension(
-    Target::OutputType type,
-    const RustValues::CrateType crate_type) const {
-  switch (crate_type) {
-    case RustValues::CRATE_AUTO: {
-      switch (type) {
-        case Target::EXECUTABLE:
-          return exe_output_extension_;
-        case Target::STATIC_LIBRARY:
-          return staticlib_output_extension_;
-        case Target::RUST_LIBRARY:
-          return rlib_output_extension_;
-        default:
-          NOTREACHED();
-          return exe_output_extension_;
-      }
-    }
-    case RustValues::CRATE_DYLIB:
-      return dylib_output_extension_;
-    case RustValues::CRATE_CDYLIB:
-      return cdylib_output_extension_;
-    case RustValues::CRATE_PROC_MACRO:
-      return proc_macro_output_extension_;
-    default:
-      NOTREACHED();
-      return exe_output_extension_;
-  }
 }
