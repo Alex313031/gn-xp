@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "58f5c3f1_92008659",
+        "filename": "docs/reference.md",
+        "patchSetId": 3
+      },
+      "lineNbr": 3179,
+      "author": {
+        "id": 1000014
+      },
+      "writtenOn": "2019-10-03T00:12:40Z",
+      "side": 1,
+      "message": "Don\u0027t forget to regenerate this file.",
+      "revId": "aaff2e3495623b7dcb5044f14d5aed22b2bcee38",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": true
+    }
+  ]
+}
