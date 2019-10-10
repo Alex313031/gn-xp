@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "db219ce1_789beb4d",
+        "filename": "util/semaphore.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 1000004
+      },
+      "writtenOn": "2019-10-10T22:18:05Z",
+      "side": 1,
+      "message": "I have absolutely no recollection of this, but that certainly seems to agree with your accusations!",
+      "range": {
+        "startLine": 1,
+        "startChar": 3,
+        "endLine": 1,
+        "endChar": 41
+      },
+      "revId": "0e40176a4be53e3dd53ae7992487636cdcc99f13",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "855c1796_9513bfcf",
+        "filename": "util/semaphore.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 28,
+      "author": {
+        "id": 1000004
+      },
+      "writtenOn": "2019-10-10T22:18:05Z",
+      "side": 1,
+      "message": "DCHECK return \u003d\u003d 0? https://developer.apple.com/documentation/dispatch/1453087-dispatch_semaphore_wait",
+      "range": {
+        "startLine": 28,
+        "startChar": 2,
+        "endLine": 28,
+        "endChar": 25
+      },
+      "revId": "0e40176a4be53e3dd53ae7992487636cdcc99f13",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": true
+    }
+  ]
+}
