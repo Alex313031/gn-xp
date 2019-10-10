@@ -45,6 +45,30 @@
       "revId": "0e40176a4be53e3dd53ae7992487636cdcc99f13",
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "e1343a31_0c0d9d65",
+        "filename": "util/semaphore.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 28,
+      "author": {
+        "id": 1000166
+      },
+      "writtenOn": "2019-10-10T22:20:03Z",
+      "side": 1,
+      "message": "Not needed here. The man page is a little more explanative: \"If the timeout is DISPATCH_TIME_FOREVER, then dispatch_semaphore_wait() waits forever and always returns zero.\"",
+      "parentUuid": "855c1796_9513bfcf",
+      "range": {
+        "startLine": 28,
+        "startChar": 2,
+        "endLine": 28,
+        "endChar": 25
+      },
+      "revId": "0e40176a4be53e3dd53ae7992487636cdcc99f13",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": false
     }
   ]
 }
