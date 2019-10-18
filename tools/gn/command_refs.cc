@@ -186,6 +186,43 @@ void GetTargetsContainingFile(Setup* setup,
   }
 }
 
+void GetTargetsThatOutputFile(Setup* setup,
+                              const std::vector<const Target*>& all_targets,
+                              const OutputFile& file,
+                              bool all_toolchains,
+                              UniqueVector<const Target*>* matches) {
+  Label default_toolchain = setup->loader()->default_toolchain_label();
+  for (auto* target : all_targets) {
+    if (!all_toolchains) {
+      // Only check targets in the default toolchain.
+      if (target->label().GetToolchainLabel() != default_toolchain)
+        continue;
+    }
+
+    for (const OutputFile& cur : target->computed_outputs()) {
+      if (file == cur) {
+        matches->push_back(target);
+        break;
+      }
+    }
+
+    if (target->IsBinary()) {
+      std::vector<OutputFile> source_outputs;
+      for (const SourceFile& source : target->sources()) {
+        const char* tool_name;
+        if (!target->GetOutputFilesForSource(source, &tool_name,
+                                             &source_outputs)) {
+          continue;
+        }
+        if (base::ContainsValue(source_outputs, file)) {
+          matches->push_back(target);
+          break;
+        }
+      }
+    }
+  }
+}
+
 bool TargetReferencesConfig(const Target* target, const Config* config) {
   for (const LabelConfigPair& cur : target->configs()) {
     if (cur.ptr == config)
@@ -459,6 +496,11 @@ int RunRefs(const std::vector<std::string>& args) {
   for (const auto& file : file_matches) {
     GetTargetsContainingFile(setup, all_targets, file, all_toolchains,
                              &explicit_target_matches);
+    if (file.is_source_absolute()) {
+      GetTargetsThatOutputFile(setup, all_targets,
+                               OutputFile(file.value().substr(2)),
+                               all_toolchains, &explicit_target_matches);
+    }
   }
   for (auto* config : config_matches) {
     GetTargetsReferencingConfig(setup, all_targets, config, all_toolchains,
