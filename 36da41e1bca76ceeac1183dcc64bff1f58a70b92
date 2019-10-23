@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ebe4fccd_56af7bda",
+        "filename": "tools/gn/functions_target.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 878,
+      "author": {
+        "id": 1000014
+      },
+      "writtenOn": "2019-10-23T21:55:57Z",
+      "side": 1,
+      "message": "Do we need the backslashes? I thought \"#\" should work fine.",
+      "revId": "36da41e1bca76ceeac1183dcc64bff1f58a70b92",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": true
+    }
+  ]
+}
