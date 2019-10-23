@@ -34,6 +34,24 @@
       "revId": "36da41e1bca76ceeac1183dcc64bff1f58a70b92",
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "aa5ee72d_92738fab",
+        "filename": "tools/gn/functions_target.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 878,
+      "author": {
+        "id": 1000014
+      },
+      "writtenOn": "2019-10-23T23:58:09Z",
+      "side": 1,
+      "message": "This output should be in console format (so plain text) and then if we need to escape things for markdown, that should be in the markdown outputter thing.\n\nSo can you remove it? If it\u0027s causing markdown problems we should fix that separately since it will affect all the help.",
+      "parentUuid": "b1f246d9_e942a711",
+      "revId": "36da41e1bca76ceeac1183dcc64bff1f58a70b92",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": true
     }
   ]
 }
