@@ -16,6 +16,24 @@
       "revId": "36da41e1bca76ceeac1183dcc64bff1f58a70b92",
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "b1f246d9_e942a711",
+        "filename": "tools/gn/functions_target.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 878,
+      "author": {
+        "id": 1000222
+      },
+      "writtenOn": "2019-10-23T23:30:57Z",
+      "side": 1,
+      "message": "I read and tested that it\u0027s needed for markdown but, your call, should I remove it ?",
+      "parentUuid": "ebe4fccd_56af7bda",
+      "revId": "36da41e1bca76ceeac1183dcc64bff1f58a70b92",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": true
     }
   ]
 }
