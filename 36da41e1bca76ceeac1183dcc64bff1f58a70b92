@@ -52,6 +52,24 @@
       "revId": "36da41e1bca76ceeac1183dcc64bff1f58a70b92",
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "40f0ca80_206213c1",
+        "filename": "tools/gn/functions_target.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 878,
+      "author": {
+        "id": 1000222
+      },
+      "writtenOn": "2019-10-24T00:06:37Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "aa5ee72d_92738fab",
+      "revId": "36da41e1bca76ceeac1183dcc64bff1f58a70b92",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": false
     }
   ]
 }
