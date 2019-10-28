@@ -4,6 +4,8 @@
 """Recipe for building GN."""
 
 from recipe_engine.recipe_api import Property
+import os
+
 
 DEPS = [
     'recipe_engine/buildbucket',
@@ -53,13 +55,23 @@ def RunSteps(api, repository):
     cipd_dir = api.path['start_dir'].join('cipd')
     pkgs = api.cipd.EnsureFile()
     pkgs.add_package('infra/ninja/${platform}', 'version:1.8.2')
-    if api.platform.is_linux or api.platform.is_mac:
-      pkgs.add_package('fuchsia/clang/${platform}',
-                       'git_revision:b920a7f65b13237dc4d5b2b836b29a954fff440a')
-    if api.platform.is_linux:
-      pkgs.add_package('fuchsia/sysroot/${platform}',
-                       'git_revision:a28dfa20af063e5ca00634024c85732e20220419',
-                       'sysroot')
+
+    # Set up cross compilation environment for s390x or ppc64le on linux platform.
+    if os.environ.get('TARGET') == 's390x' and api.platform.is_linux:
+      os.system('apt install gcc-7-s390x-linux-gnu g++-7-s390x-linux-gnu -y')
+    elif os.environ.get('TARGET') == 'ppc64le' and api.platform.is_linux:
+      os.system(
+          'apt install gcc-7-powerpc64le-linux-gnu g++-7-powerpc64le-linux-gnu  -y'
+      )
+    else:
+      if api.platform.is_linux or api.platform.is_mac:
+        pkgs.add_package(
+            'fuchsia/clang/${platform}',
+            'git_revision:b920a7f65b13237dc4d5b2b836b29a954fff440a')
+      if api.platform.is_linux:
+        pkgs.add_package(
+            'fuchsia/sysroot/${platform}',
+            'git_revision:a28dfa20af063e5ca00634024c85732e20220419', 'sysroot')
     api.cipd.ensure(cipd_dir, pkgs)
 
   # The order is important since release build will get uploaded to CIPD.
@@ -74,16 +86,44 @@ def RunSteps(api, repository):
       },
   ]
 
+  # Change 'release' args for s390x and ppc64le.
+  if os.environ.get('TARGET') == 's390x' or os.environ.get(
+      'TARGET') == 'ppc64le':
+    configs = [
+        {
+            'name': 'debug',
+            'args': ['-d']
+        },
+        {
+            'name': 'release',
+            'args': []
+        },
+    ]
+
   with api.macos_sdk(), api.windows_sdk():
     if api.platform.is_linux:
-      sysroot = '--sysroot=%s' % cipd_dir.join('sysroot')
-      env = {
-          'CC': cipd_dir.join('bin', 'clang'),
-          'CXX': cipd_dir.join('bin', 'clang++'),
-          'AR': cipd_dir.join('bin', 'llvm-ar'),
-          'CFLAGS': sysroot,
-          'LDFLAGS': sysroot,
-      }
+      # Set up gcc environment for s390x and ppc64le.
+      if os.environ.get('TARGET') == 's390x' or os.environ.get(
+          'TARGET') == 'ppc64le':
+        if os.environ.get('TARGET') == 's390x':
+          cc_path = os.path.join('/usr', 'bin', 's390x-linux-gnu-gcc-7')
+          cxx_path = os.path.join('/usr', 'bin', 's390x-linux-gnu-g++-7')
+        elif os.environ.get('TARGET') == 'ppc64le':
+          cc_path = os.path.join('/usr', 'bin', 'powerpc64le-linux-gnu-gcc-7')
+          cxx_path = os.path.join('/usr', 'bin', 'powerpc64le-linux-gnu-g++-7')
+        env = {
+            'CC': cc_path,
+            'CXX': cxx_path,
+        }
+      else:
+        sysroot = '--sysroot=%s' % cipd_dir.join('sysroot')
+        env = {
+            'CC': cipd_dir.join('bin', 'clang'),
+            'CXX': cipd_dir.join('bin', 'clang++'),
+            'AR': cipd_dir.join('bin', 'llvm-ar'),
+            'CFLAGS': sysroot,
+            'LDFLAGS': sysroot,
+        }
     elif api.platform.is_mac:
       sysroot = '--sysroot=%s' % api.step(
           'xcrun', ['xcrun', '--show-sdk-path'],
@@ -107,11 +147,11 @@ def RunSteps(api, repository):
         with api.step.nest('build'), api.context(env=env, cwd=src_dir):
           api.python(
               'generate', src_dir.join('build', 'gen.py'), args=config['args'])
-
           # Windows requires the environment modifications when building too.
           api.step('ninja', [cipd_dir.join('ninja'), '-C', src_dir.join('out')])
-
-        api.step('test', [src_dir.join('out', 'gn_unittests')])
+        # Skip tests for cross compiling gn on ppc64le and s390x.
+        if os.environ.get('TARGET') is None:
+          api.step('test', [src_dir.join('out', 'gn_unittests')])
 
   if build_input.gerrit_changes:
     return
@@ -125,7 +165,6 @@ def RunSteps(api, repository):
       install_mode='copy')
   pkg_def.add_file(src_dir.join('out', gn))
   pkg_def.add_version_file('.versions/%s.cipd_version' % gn)
-
   cipd_pkg_file = api.path['cleanup'].join('gn.cipd')
 
   api.cipd.build_from_pkg(
