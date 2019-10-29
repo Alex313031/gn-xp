@@ -1227,6 +1227,48 @@ TEST(TargetTest, CollectMetadataWithBarrier) {
   EXPECT_EQ(result, expected) << result.size();
 }
 
+TEST(TargetTest, CollectMetadataWithRelativePath) {
+  TestWithScope setup;
+
+  TestTarget one(setup, "//foo:one", Target::SOURCE_SET);
+  Value a_expected(nullptr, Value::LIST);
+  a_expected.list_value().push_back(Value(nullptr, "foo"));
+  one.metadata().contents().insert(
+      std::pair<std::string_view, Value>("a", a_expected));
+
+  Value walk_expected(nullptr, Value::LIST);
+  walk_expected.list_value().push_back(
+      Value(nullptr, "two"));
+  one.metadata().contents().insert(
+      std::pair<std::string_view, Value>("walk", walk_expected));
+
+  TestTarget two(setup, "//foo/two:two", Target::SOURCE_SET);
+  Value a_2_expected(nullptr, Value::LIST);
+  a_2_expected.list_value().push_back(Value(nullptr, "bar"));
+  two.metadata().contents().insert(
+      std::pair<std::string_view, Value>("a", a_2_expected));
+
+  one.public_deps().push_back(LabelTargetPair(&two));
+
+  std::vector<std::string> data_keys;
+  data_keys.push_back("a");
+
+  std::vector<std::string> walk_keys;
+  walk_keys.push_back("walk");
+
+  Err err;
+  std::vector<Value> result;
+  std::set<const Target*> targets;
+  one.GetMetadata(data_keys, walk_keys, SourceDir(), false, &result, &targets,
+                  &err);
+  EXPECT_FALSE(err.has_error()) << err.message();
+
+  std::vector<Value> expected;
+  expected.push_back(Value(nullptr, "bar"));
+  expected.push_back(Value(nullptr, "foo"));
+  EXPECT_EQ(result, expected) << result.size();
+}
+
 TEST(TargetTest, CollectMetadataWithError) {
   TestWithScope setup;
 
