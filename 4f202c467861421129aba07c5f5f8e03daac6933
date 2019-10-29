@@ -1,0 +1,44 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "c1d7c1a2_43354dc7",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 1000016
+      },
+      "writtenOn": "2019-10-29T17:53:44Z",
+      "side": 1,
+      "message": "typo: \"labels\"",
+      "range": {
+        "startLine": 9,
+        "startChar": 23,
+        "endLine": 9,
+        "endChar": 28
+      },
+      "revId": "4f202c467861421129aba07c5f5f8e03daac6933",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "cf60eae5_9fe7d2fb",
+        "filename": "tools/gn/target_unittest.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 1251,
+      "author": {
+        "id": 1000016
+      },
+      "writtenOn": "2019-10-29T17:53:44Z",
+      "side": 1,
+      "message": "Any particular reason this is using public_deps?",
+      "revId": "4f202c467861421129aba07c5f5f8e03daac6933",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": true
+    }
+  ]
+}
