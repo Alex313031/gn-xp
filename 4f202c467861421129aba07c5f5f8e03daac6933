@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "520c84cb_6859cf46",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-10-30T01:08:03Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "c1d7c1a2_43354dc7",
+      "range": {
+        "startLine": 9,
+        "startChar": 23,
+        "endLine": 9,
+        "endChar": 28
+      },
+      "revId": "4f202c467861421129aba07c5f5f8e03daac6933",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "cf60eae5_9fe7d2fb",
         "filename": "tools/gn/target_unittest.cc",
         "patchSetId": 1
@@ -36,6 +60,24 @@
       "writtenOn": "2019-10-29T17:53:44Z",
       "side": 1,
       "message": "Any particular reason this is using public_deps?",
+      "revId": "4f202c467861421129aba07c5f5f8e03daac6933",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "25f8a6b1_dafa34be",
+        "filename": "tools/gn/target_unittest.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 1251,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-10-30T01:08:03Z",
+      "side": 1,
+      "message": "No, I\u0027ve updated the test to use combination of both to exercise both paths.",
+      "parentUuid": "cf60eae5_9fe7d2fb",
       "revId": "4f202c467861421129aba07c5f5f8e03daac6933",
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
       "unresolved": true
