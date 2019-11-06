@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "d3731503_d0cde3fa",
+        "filename": "infra/recipes/gn.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 61,
+      "author": {
+        "id": 1000014
+      },
+      "writtenOn": "2019-11-06T21:01:46Z",
+      "side": 1,
+      "message": "I\u0027d be surprised if we want the build script to be configuring the system, but I don\u0027t know where this should go. I\u0027ll leave to an infra person to comment on.",
+      "revId": "6e9476036499f7b35fc372652745cf33e71f053a",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": true
+    }
+  ]
+}
