@@ -22,6 +22,30 @@
       "revId": "52a9fdea15472b36510b801ba2538faebeed1a44",
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "ba370419_bc7d7672",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 15
+      },
+      "lineNbr": 28,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2019-11-07T19:24:31Z",
+      "side": 1,
+      "message": "Full is ~identical, incremental is 30x as fast.",
+      "parentUuid": "bf1ca2a1_2ff611c7",
+      "range": {
+        "startLine": 28,
+        "startChar": 6,
+        "endLine": 28,
+        "endChar": 11
+      },
+      "revId": "52a9fdea15472b36510b801ba2538faebeed1a44",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": true
     }
   ]
 }
