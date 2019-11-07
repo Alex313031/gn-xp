@@ -142,19 +142,6 @@ bool DetermineDevShmExecutable() {
 }
 #endif  // defined(OS_LINUX) || defined(OS_AIX)
 
-bool AdvanceEnumeratorWithStat(FileEnumerator* traversal,
-                               FilePath* out_next_path,
-                               struct stat* out_next_stat) {
-  DCHECK(out_next_path);
-  DCHECK(out_next_stat);
-  *out_next_path = traversal->Next();
-  if (out_next_path->empty())
-    return false;
-
-  *out_next_stat = traversal->GetInfo().stat();
-  return true;
-}
-
 bool CopyFileContents(File* infile, File* outfile) {
   static constexpr size_t kBufferSize = 32768;
   std::vector<char> buffer(kBufferSize);
