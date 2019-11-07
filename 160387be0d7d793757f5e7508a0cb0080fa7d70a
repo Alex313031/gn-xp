@@ -140,6 +140,24 @@
       "revId": "160387be0d7d793757f5e7508a0cb0080fa7d70a",
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "6454d208_969bb912",
+        "filename": "src/gn/ninja_c_binary_target_writer_unittest.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 178,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2019-11-07T20:21:58Z",
+      "side": 0,
+      "message": "It feels like the compilers on the non-win bots should\u0027ve caught this too; mac at least probably builds with clang.\n\n...aha, we don\u0027t build with -Wall on non-Win, even though we use /W4 on Windows. (Also no -Werror.) We probably want to turn on at least -Wall.",
+      "parentUuid": "e82ead27_3d9b3c8f",
+      "revId": "160387be0d7d793757f5e7508a0cb0080fa7d70a",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": true
     }
   ]
 }
