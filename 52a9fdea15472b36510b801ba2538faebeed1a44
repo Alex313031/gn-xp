@@ -46,6 +46,30 @@
       "revId": "52a9fdea15472b36510b801ba2538faebeed1a44",
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "591d29cb_bca9587e",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 15
+      },
+      "lineNbr": 28,
+      "author": {
+        "id": 1000004
+      },
+      "writtenOn": "2019-11-07T19:47:26Z",
+      "side": 1,
+      "message": "Derp, sorry.",
+      "parentUuid": "ba370419_bc7d7672",
+      "range": {
+        "startLine": 28,
+        "startChar": 6,
+        "endLine": 28,
+        "endChar": 11
+      },
+      "revId": "52a9fdea15472b36510b801ba2538faebeed1a44",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": true
     }
   ]
 }
