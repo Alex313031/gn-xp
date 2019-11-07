@@ -2,6 +2,52 @@
   "comments": [
     {
       "key": {
+        "uuid": "ce81966b_fe77d70a",
+        "filename": "src/base/gtest_prod_util.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 14,
+      "author": {
+        "id": 1000004
+      },
+      "writtenOn": "2019-11-07T20:05:34Z",
+      "side": 0,
+      "message": "Looks like this one can go if you don\u0027t mind while you\u0027re here.",
+      "range": {
+        "startLine": 12,
+        "startChar": 0,
+        "endLine": 14,
+        "endChar": 33
+      },
+      "revId": "160387be0d7d793757f5e7508a0cb0080fa7d70a",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "08ed1324_b1780244",
+        "filename": "src/base/logging.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 789,
+      "author": {
+        "id": 1000004
+      },
+      "writtenOn": "2019-11-07T20:05:34Z",
+      "side": 0,
+      "message": "heh",
+      "range": {
+        "startLine": 789,
+        "startChar": 14,
+        "endLine": 789,
+        "endChar": 20
+      },
+      "revId": "160387be0d7d793757f5e7508a0cb0080fa7d70a",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "666ec958_ed0c1382",
         "filename": "src/gn/ninja_c_binary_target_writer_unittest.cc",
         "patchSetId": 4
@@ -13,6 +59,24 @@
       "writtenOn": "2019-11-07T19:57:33Z",
       "side": 0,
       "message": "Whoops!",
+      "revId": "160387be0d7d793757f5e7508a0cb0080fa7d70a",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "f8fd63b1_d1bb8076",
+        "filename": "src/gn/ninja_c_binary_target_writer_unittest.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 178,
+      "author": {
+        "id": 1000004
+      },
+      "writtenOn": "2019-11-07T20:05:34Z",
+      "side": 0,
+      "message": "What\u0027s the warning for this one? It magically knows that it\u0027s tautological?",
+      "parentUuid": "666ec958_ed0c1382",
       "revId": "160387be0d7d793757f5e7508a0cb0080fa7d70a",
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
       "unresolved": true
