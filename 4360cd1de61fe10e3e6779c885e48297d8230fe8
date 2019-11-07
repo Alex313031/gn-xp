@@ -1,0 +1,72 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "59df382a_cdb77653",
+        "filename": "tools/gn/functions.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 1129,
+      "author": {
+        "id": 1000014
+      },
+      "writtenOn": "2019-11-07T00:09:52Z",
+      "side": 1,
+      "message": "The docs don\u0027t mention that the separator is optional and that it defaults to a space. If we\u0027re going to have the argument be optional, I think an empty joiner makes more sense, but I lean to requiring this parameter for clarity.",
+      "revId": "4360cd1de61fe10e3e6779c885e48297d8230fe8",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "31ebe439_9c434d67",
+        "filename": "tools/gn/functions.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 1223,
+      "author": {
+        "id": 1000014
+      },
+      "writtenOn": "2019-11-07T00:09:52Z",
+      "side": 1,
+      "message": "What\u0027s the use-case for the |max| parameter? Can we avoid this? Chrome\u0027s string splitter ended up adding some extra options for what to to with empty items and how to handle whitespace, and these options get more cumbersome to add here if there\u0027s another argument in the middle that people don\u0027t need.",
+      "revId": "4360cd1de61fe10e3e6779c885e48297d8230fe8",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "854303a9_47532662",
+        "filename": "tools/gn/functions.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 1259,
+      "author": {
+        "id": 1000014
+      },
+      "writtenOn": "2019-11-07T00:09:52Z",
+      "side": 1,
+      "message": "If we keep this I prefer std::numeric_limits\u003cint64_t\u003e().",
+      "revId": "4360cd1de61fe10e3e6779c885e48297d8230fe8",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "e1fde0a4_4b82c5a9",
+        "filename": "tools/gn/functions_unittest.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 187,
+      "author": {
+        "id": 1000014
+      },
+      "writtenOn": "2019-11-07T00:09:52Z",
+      "side": 1,
+      "message": "Suggestions for more tests:\n\n- Empty input\n- Nonempty input but has no separator match.\n- Input is only a separator\n- Separator is e.g. \"aabaa\" and you give it the string aabaabaabaa (overlapping itself).",
+      "revId": "4360cd1de61fe10e3e6779c885e48297d8230fe8",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": true
+    }
+  ]
+}
