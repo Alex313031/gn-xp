@@ -46,6 +46,30 @@
       "revId": "83b82ee31af9736dad48384fddbf3233d48ddd69",
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "388548a8_9fb4f73d",
+        "filename": "build/build_win.ninja.template",
+        "patchSetId": 2
+      },
+      "lineNbr": 12,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2019-11-07T17:42:16Z",
+      "side": 1,
+      "message": "No, Mac/Linux don\u0027t have libflags in their .template files at all. (They also don\u0027t set it in build\\gen.py -- still a bit surprising, but hey)",
+      "parentUuid": "906ee8f6_ad66cdf9",
+      "range": {
+        "startLine": 12,
+        "startChar": 68,
+        "endLine": 12,
+        "endChar": 77
+      },
+      "revId": "83b82ee31af9736dad48384fddbf3233d48ddd69",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": true
     }
   ]
 }
