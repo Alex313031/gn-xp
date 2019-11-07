@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "666ec958_ed0c1382",
+        "filename": "src/gn/ninja_c_binary_target_writer_unittest.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 178,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2019-11-07T19:57:33Z",
+      "side": 0,
+      "message": "Whoops!",
+      "revId": "160387be0d7d793757f5e7508a0cb0080fa7d70a",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": true
+    }
+  ]
+}
