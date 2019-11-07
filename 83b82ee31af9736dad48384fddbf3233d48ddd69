@@ -22,6 +22,30 @@
       "revId": "83b82ee31af9736dad48384fddbf3233d48ddd69",
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "906ee8f6_ad66cdf9",
+        "filename": "build/build_win.ninja.template",
+        "patchSetId": 2
+      },
+      "lineNbr": 12,
+      "author": {
+        "id": 1000004
+      },
+      "writtenOn": "2019-11-07T17:39:07Z",
+      "side": 1,
+      "message": "Oh, that\u0027s probably Mac/Linux-order, ok never mind.",
+      "parentUuid": "88dc06ff_e9ca7027",
+      "range": {
+        "startLine": 12,
+        "startChar": 68,
+        "endLine": 12,
+        "endChar": 77
+      },
+      "revId": "83b82ee31af9736dad48384fddbf3233d48ddd69",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": true
     }
   ]
 }
