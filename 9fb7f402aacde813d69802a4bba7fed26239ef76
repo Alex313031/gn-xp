@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "911382b2_5b848323",
+        "filename": "README.md",
+        "patchSetId": 1
+      },
+      "lineNbr": 73,
+      "author": {
+        "id": 1000014
+      },
+      "writtenOn": "2019-11-08T21:34:24Z",
+      "side": 1,
+      "message": "When I wrote this I used \"git cl\" but not I just do \n\n  git push origin HEAD:refs/for/master\n\nwhich I think is the normal flow for non-Chrome developers and what I do now (GN was split off of Chrome). Does it work for you to run that command?\n\nI\u0027m thinking we should replace \"git cl upload\" with this line instead of having people pull in depot tools.",
+      "revId": "9fb7f402aacde813d69802a4bba7fed26239ef76",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": true
+    }
+  ]
+}
