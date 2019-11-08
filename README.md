@@ -58,7 +58,9 @@ database](https://bugs.chromium.org/p/gn/issues/list).
 ## Sending patches
 
 GN uses [Gerrit](https://www.gerritcodereview.com/) for code review. The short
-version of how to patch is:
+version of how to patch is:  
+(Note: [Get depot tools](https://commondatastorage.googleapis.com/chrome-infra-docs/flat/depot_tools/docs/html/depot_tools_tutorial.html#_setting_up)
+for `git cl`)
 
     Register at https://gn-review.googlesource.com.
 
