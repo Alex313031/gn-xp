@@ -158,6 +158,71 @@ TEST(Functions, StringReplace) {
       setup.print_output());
 }
 
+TEST(Functions, StringJoin) {
+  TestWithScope setup;
+
+  // Verify outputs when string_join() is called correctly.
+  TestParseInput input(R"gn(
+      # No elements in the list and empty separator.
+      print("<" + string_join("", []) + ">")
+
+      # No elements in the list.
+      print("<" + string_join(" ", []) + ">")
+
+      # One element in the list.
+      print(string_join("|", ["a"]))
+
+      # Multiple elements in the list.
+      print(string_join(" ", ["a", "b", "c"]))
+
+      # Multi-character separator.
+      print(string_join("-.", ["a", "b", "c"]))
+
+      # Empty separator.
+      print(string_join("", ["x", "y", "z"]))
+      )gn");
+  ASSERT_FALSE(input.has_error());
+
+  Err err;
+  input.parsed()->Execute(setup.scope(), &err);
+  ASSERT_FALSE(err.has_error()) << err.message();
+
+  EXPECT_EQ(
+      "<>\n"
+      "<>\n"
+      "a\n"
+      "a b c\n"
+      "a-.b-.c\n"
+      "xyz\n",
+      setup.print_output());
+
+  // Verify usage errors are detected.
+  std::vector<std::string> bad_usage_examples = {
+    // Number of arguments.
+    R"gn(string_join())gn",
+    R"gn(string_join(["oops"]))gn",
+    R"gn(string_join("kk", [], "oops"))gn",
+
+    // Argument types.
+    R"gn(string_join(1, []))gn",
+    R"gn(string_join("kk", "oops"))gn",
+    R"gn(string_join(["oops"], []))gn",
+
+    // Non-string elements in list of strings.
+    R"gn(string_join("kk", [1]))gn",
+    R"gn(string_join("kk", ["hello", 1]))gn",
+    R"gn(string_join("kk", ["hello", []]))gn",
+  };
+  for (const auto& bad_usage_example : bad_usage_examples) {
+    TestParseInput input(bad_usage_example);
+    ASSERT_FALSE(input.has_error());
+
+    Err err;
+    input.parsed()->Execute(setup.scope(), &err);
+    ASSERT_TRUE(err.has_error()) << bad_usage_example;
+  }
+}
+
 TEST(Functions, DeclareArgs) {
   TestWithScope setup;
   Err err;

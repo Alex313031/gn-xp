@@ -1198,6 +1198,69 @@ Value RunStringReplace(Scope* scope,
   return Value(function, std::move(val));
 }
 
+// string_join -----------------------------------------------------------------
+
+const char kStringJoin[] = "string_join";
+const char kStringJoin_HelpShort[] =
+    "string_join: Concatenates a list of words with a separator.";
+const char kStringJoin_Help[] =
+    R"(string_join: Concatenates a list of words with a separator.
+
+  result = string_join(separator, strings)
+
+  Concatenate a list of strings with intervening occurrences of separator.
+
+Example
+
+  The code:
+    my_list = ["a", "b"]
+    print(string_join(";", my_list))
+
+  Will print:
+    a;b
+)";
+
+Value RunStringJoin(Scope* scope,
+                    const FunctionCallNode* function,
+                    const std::vector<Value>& args,
+                    Err* err) {
+  // Check usage: Number of arguments.
+  if (args.size() != 2) {
+    *err = Err(function, "Wrong number of arguments to string_join().",
+               "Expecting exactly two. usage: string_join(separator, strings)");
+    return Value();
+  }
+
+  // Check usage: separator is a string.
+  if (!args[0].VerifyTypeIs(Value::STRING, err)) {
+    *err = Err(function, "separator in string_join(separator, strings) is not "
+               "a string", "Expecting separator argument to be a string.");
+    return Value();
+  }
+  const std::string separator = args[0].string_value();
+
+  // Check usage: strings is a list.
+  if (!args[1].VerifyTypeIs(Value::LIST, err)) {
+    *err = Err(function, "strings in string_join(separator, strings) "
+               "is not a list", "Expecting strings argument to be a list.");
+    return Value();
+  }
+  const std::vector<Value> strings = args[1].list_value();
+
+  // Arguments looks good; do the join.
+  std::stringstream stream;
+  for (size_t i = 0; i < strings.size(); ++i) {
+    if (!strings[i].VerifyTypeIs(Value::STRING, err)) {
+      return Value();
+    }
+    if (i != 0) {
+      stream << separator;
+    }
+    stream << strings[i].string_value();
+  }
+  return Value(function, stream.str());
+}
+
 // -----------------------------------------------------------------------------
 
 FunctionInfo::FunctionInfo()
@@ -1308,6 +1371,7 @@ struct FunctionInfoInitializer {
     INSERT_FUNCTION(SetSourcesAssignmentFilter, false)
     INSERT_FUNCTION(SplitList, false)
     INSERT_FUNCTION(StringReplace, false)
+    INSERT_FUNCTION(StringJoin, false)
     INSERT_FUNCTION(Template, false)
     INSERT_FUNCTION(Tool, false)
     INSERT_FUNCTION(Toolchain, false)
