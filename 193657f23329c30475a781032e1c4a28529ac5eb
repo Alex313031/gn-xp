@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "b7522b57_5a821bcc",
+        "filename": "examples/simple_build/build/BUILDCONFIG.gn",
+        "patchSetId": 2
+      },
+      "lineNbr": 21,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-11-09T02:16:11Z",
+      "side": 1,
+      "message": "I don\u0027t think this is a pattern we should encourage because it requires users of the build to be aware of the toolchain labels.. I\u0027d rather prefer a boolean argument e.g. `use_clang`.",
+      "revId": "193657f23329c30475a781032e1c4a28529ac5eb",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": true
+    }
+  ]
+}
