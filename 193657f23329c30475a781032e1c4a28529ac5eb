@@ -16,6 +16,29 @@
       "revId": "193657f23329c30475a781032e1c4a28529ac5eb",
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "6c49d490_16d63089",
+        "filename": "examples/simple_build/build/toolchain/BUILD.gn",
+        "patchSetId": 2
+      },
+      "lineNbr": 169,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-11-09T02:17:38Z",
+      "side": 1,
+      "message": "This could be deduplicated into a template, similar template already exists in Chromium and many other projects, see https://cs.chromium.org/chromium/src/build/toolchain/gcc_toolchain.gni",
+      "range": {
+        "startLine": 88,
+        "startChar": 0,
+        "endLine": 169,
+        "endChar": 1
+      },
+      "revId": "193657f23329c30475a781032e1c4a28529ac5eb",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": true
     }
   ]
 }
