@@ -45,6 +45,15 @@ To build and run the simple example with the default gcc compiler:
     ninja -C out
     ./out/hello
 
+To compile the simple example with the alternate clang compiler, you can select it with
+a custom_toolchain variable defined in BUILDCONFIG.gn. The ninja --verbose flag will show
+the commands being executed during the build:
+
+    cd examples/simple_build
+    ../../out/gn gen out-clang --args="custom_toolchain=\"//build/toolchain:clang\""
+    ninja -C out-clang --verbose
+    ./out-clang/hello
+
 For a maximal configuration see the Chromium setup:
   * [.gn](https://cs.chromium.org/chromium/src/.gn)
   * [BUILDCONFIG.gn](https://cs.chromium.org/chromium/src/build/config/BUILDCONFIG.gn)
