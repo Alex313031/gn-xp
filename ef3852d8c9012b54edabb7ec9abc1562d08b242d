@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "24c11403_c004b847",
+        "filename": "src/gn/functions.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 1137,
+      "author": {
+        "id": 1000014
+      },
+      "writtenOn": "2019-11-12T17:50:13Z",
+      "side": 1,
+      "message": "s/words/strings",
+      "revId": "ef3852d8c9012b54edabb7ec9abc1562d08b242d",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "7980a78c_e02fd162",
+        "filename": "src/gn/functions.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 1139,
+      "author": {
+        "id": 1000014
+      },
+      "writtenOn": "2019-11-12T17:50:13Z",
+      "side": 1,
+      "message": "Ditto",
+      "revId": "ef3852d8c9012b54edabb7ec9abc1562d08b242d",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "d26df13f_d3377918",
+        "filename": "src/gn/functions.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 1348,
+      "author": {
+        "id": 1000014
+      },
+      "writtenOn": "2019-11-12T17:50:13Z",
+      "side": 1,
+      "message": "Can you put spaces inside the {} like you did above?",
+      "revId": "ef3852d8c9012b54edabb7ec9abc1562d08b242d",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": true
+    }
+  ]
+}
