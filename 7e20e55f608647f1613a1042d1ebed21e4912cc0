@@ -22,6 +22,30 @@
       "revId": "7e20e55f608647f1613a1042d1ebed21e4912cc0",
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "bfe311fb_14eb9b26",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 3
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2019-11-18T23:17:54Z",
+      "side": 1,
+      "message": "This round of fixes was brought to you by https://github.com/aras-p/ClangBuildAnalyzer\n\nIt moved the numbers printed by that; the effect on actual build time was a bit smaller (but still measuable -- and peak mem use during the build went down 10%)",
+      "parentUuid": "c8bff742_e8b79571",
+      "range": {
+        "startLine": 10,
+        "startChar": 0,
+        "endLine": 10,
+        "endChar": 17
+      },
+      "revId": "7e20e55f608647f1613a1042d1ebed21e4912cc0",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": true
     }
   ]
 }
