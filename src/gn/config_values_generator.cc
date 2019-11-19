@@ -71,6 +71,7 @@ void ConfigValuesGenerator::Run() {
   FILL_STRING_CONFIG_VALUE(cflags_objc)
   FILL_STRING_CONFIG_VALUE(cflags_objcc)
   FILL_STRING_CONFIG_VALUE(defines)
+  FILL_DIR_CONFIG_VALUE(framework_dirs)
   FILL_DIR_CONFIG_VALUE(include_dirs)
   FILL_STRING_CONFIG_VALUE(ldflags)
   FILL_DIR_CONFIG_VALUE(lib_dirs)

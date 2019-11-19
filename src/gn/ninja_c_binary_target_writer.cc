@@ -159,6 +159,18 @@ void NinjaCBinaryTargetWriter::WriteCompilerVars() {
     out_ << std::endl;
   }
 
+  // Framework search path.
+  if (subst.used.count(&CSubstitutionFrameworkDirs)) {
+    out_ << CSubstitutionFrameworkDirs.ninja_name << " =";
+    PathOutput include_path_output(
+        path_output_.current_dir(),
+        settings_->build_settings()->root_path_utf8(), ESCAPE_NINJA_COMMAND);
+    RecursiveTargetConfigToStream<SourceDir>(
+        target_, &ConfigValues::framework_dirs,
+        FrameworkWriter(include_path_output), out_);
+    out_ << std::endl;
+  }
+
   // Include directories.
   if (subst.used.count(&CSubstitutionIncludeDirs)) {
     out_ << CSubstitutionIncludeDirs.ninja_name << " =";

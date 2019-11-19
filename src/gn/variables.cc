@@ -1158,6 +1158,23 @@ Example
   }
 )";
 
+const char kFrameworkDirs[] = "framework_dirs";
+const char kFrameworkDirs_HelpShort[] =
+    "framework_dirs: [directory list] Additional framework search directories.";
+const char kFrameworkDirs_Help[] =
+    R"(framework_dirs: [directory list] Additional framework search directories.
+
+  A list of source directories.
+
+  The directories in this list will be added to the framework search path for
+  the files in the affected target.
+)" COMMON_ORDERING_HELP
+    R"(
+Example
+
+  framework_dirs = [ "src/include", "//third_party/foo" ]
+)";
+
 const char kIncludeDirs[] = "include_dirs";
 const char kIncludeDirs_HelpShort[] =
     "include_dirs: [directory list] Additional include directories.";
@@ -2177,6 +2194,7 @@ const VariableInfoMap& GetTargetVariables() {
     INSERT_VARIABLE(Depfile)
     INSERT_VARIABLE(Deps)
     INSERT_VARIABLE(Friend)
+    INSERT_VARIABLE(FrameworkDirs)
     INSERT_VARIABLE(IncludeDirs)
     INSERT_VARIABLE(Inputs)
     INSERT_VARIABLE(Ldflags)
