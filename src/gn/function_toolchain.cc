@@ -395,12 +395,32 @@ Tool variables
         Valid for: Linker tools except "alink"
 
         These strings will be prepended to the libraries and library search
-        directories, respectively, because linkers differ on how specify them.
+        directories, respectively, because linkers differ on how to specify
+        them.
+
         If you specified:
           lib_switch = "-l"
           lib_dir_switch = "-L"
-        then the "{{libs}}" expansion for [ "freetype", "expat"] would be
-        "-lfreetype -lexpat".
+        then the "{{libs}}" expansion for
+          [ "freetype", "expat" ]
+        would be
+          "-lfreetype -lexpat".
+
+    framework_switch [string, optional, link tools only]
+    framework_dir_switch [string, optional, link tools only]
+        Valid for: Linker tools
+
+        These strings will be prepended to the frameworks and framework search
+        path directories, respectively, because linkers differ on how to specify
+        them.
+
+        If you specified:
+          framework_switch = "-framework "
+          framework_dir_switch = "-F"
+        then the "{{libs}}" expansion for
+          [ "UIKit.framework", "$root_out_dir/Foo.framework" ]
+        would be
+          "-framework UIKit -F. -framework Foo"
 
     outputs  [list of strings with substitutions]
         Valid for: Linker and compiler tools (required)

@@ -21,6 +21,7 @@ extern const Substitution CSubstitutionCFlagsCc;
 extern const Substitution CSubstitutionCFlagsObjC;
 extern const Substitution CSubstitutionCFlagsObjCc;
 extern const Substitution CSubstitutionDefines;
+extern const Substitution CSubstitutionFrameworkDirs;
 extern const Substitution CSubstitutionIncludeDirs;
 
 // Valid for linker tools.
