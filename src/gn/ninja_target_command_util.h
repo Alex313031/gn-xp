@@ -35,6 +35,24 @@ struct DefineWriter {
   bool escape_strings = false;
 };
 
+struct FrameworkWriter {
+  explicit FrameworkWriter(PathOutput& path_output)
+      : path_output_(path_output) {}
+  ~FrameworkWriter() = default;
+
+  void operator()(const SourceDir& d, std::ostream& out) const {
+    std::ostringstream path_out;
+    path_output_.WriteDir(path_out, d, PathOutput::DIR_NO_LAST_SLASH);
+    const std::string& path = path_out.str();
+    if (path[0] == '"')
+      out << " \"-F" << path.substr(1);
+    else
+      out << " -F" << path;
+  }
+
+  PathOutput& path_output_;
+};
+
 struct IncludeWriter {
   explicit IncludeWriter(PathOutput& path_output) : path_output_(path_output) {}
   ~IncludeWriter() = default;

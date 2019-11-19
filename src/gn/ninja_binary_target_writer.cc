@@ -259,17 +259,31 @@ void NinjaBinaryTargetWriter::WriteLibs(std::ostream& out, const Tool* tool) {
   for (size_t i = 0; i < all_libs.size(); i++) {
     const LibFile& lib_file = all_libs[i];
     const std::string& lib_value = lib_file.value();
-    if (lib_file.is_source_file()) {
-      out << " " << tool->linker_arg();
-      path_output_.WriteFile(out, lib_file.source_file());
-    } else if (base::EndsWith(lib_value, framework_ending,
-                              base::CompareCase::INSENSITIVE_ASCII)) {
-      // Special-case libraries ending in ".framework" to support Mac: Add the
-      // -framework switch and don't add the extension to the output.
+    // Special-case libraries ending in ".framework" to support Mac: Add the
+    // -framework switch and don't add the extension to the output.
+    if (base::EndsWith(lib_value, framework_ending,
+                       base::CompareCase::INSENSITIVE_ASCII)) {
+      // If the value is a path, break it to directory component that is added
+      // to the framework search path, and the framework name. Otherwise, use
+      // the value as the framework name and expect it to be in the search path
+      // (usually the case for system frameworks).
+      std::string framework_name = lib_value;
+      if (lib_file.is_source_file()) {
+        out << " " << tool->framework_dir_switch();
+        path_output_.WriteDir(out, lib_file.source_file().GetDir(),
+                              PathOutput::DIR_NO_LAST_SLASH);
+        framework_name = lib_file.source_file().GetName();
+      }
+
       out << " " << tool->framework_switch();
       EscapeStringToStream(
-          out, lib_value.substr(0, lib_value.size() - framework_ending.size()),
+          out,
+          framework_name.substr(
+              0, framework_name.size() - framework_ending.size()),
           lib_escape_opts);
+    } else if (lib_file.is_source_file()) {
+      out << " " << tool->linker_arg();
+      path_output_.WriteFile(out, lib_file.source_file());
     } else {
       out << " " << tool->lib_switch();
       EscapeStringToStream(out, lib_value, lib_escape_opts);
