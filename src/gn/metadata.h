@@ -13,6 +13,8 @@
 
 extern const char kMetadata_Help[];
 
+class Target;
+
 // Metadata about a particular target.
 //
 // Metadata is a collection of keys and values relating to a particular target.
@@ -57,32 +59,46 @@ class Metadata {
                 const SourceDir& rebase_dir,
                 std::vector<Value>* next_walk_keys,
                 std::vector<Value>* result,
-                Err* err) const;
+                Err* err,
+                const Target* target = nullptr) const;
 
  private:
   const ParseNode* origin_ = nullptr;
   Contents contents_;
   SourceDir source_dir_;
 
-  std::pair<Value, bool> RebaseValue(const BuildSettings* settings,
-                                     const SourceDir& rebase_dir,
-                                     const Value& value,
-                                     Err* err) const;
+  std::pair<Value, bool> ProcessValue(const Target* target,
+                                      const BuildSettings* settings,
+                                      const SourceDir& rebase_dir,
+                                      const Value& value,
+                                      Err* err) const;
 
-  std::pair<Value, bool> RebaseStringValue(const BuildSettings* settings,
+  std::pair<Value, bool> ProcessStringValue(const Target* target,
+                                            const BuildSettings* settings,
+                                            const SourceDir& rebase_dir,
+                                            const Value& value,
+                                            Err* err) const;
+
+  std::pair<Value, bool> ProcessListValue(const Target* target,
+                                          const BuildSettings* settings,
+                                          const SourceDir& rebase_dir,
+                                          const Value& value,
+                                          Err* err) const;
+
+  std::pair<Value, bool> ProcessScopeValue(const Target* target,
+                                           const BuildSettings* settings,
                                            const SourceDir& rebase_dir,
                                            const Value& value,
                                            Err* err) const;
 
-  std::pair<Value, bool> RebaseListValue(const BuildSettings* settings,
-                                         const SourceDir& rebase_dir,
+  std::pair<Value, bool> SubstituteValue(const Target* target,
                                          const Value& value,
                                          Err* err) const;
 
-  std::pair<Value, bool> RebaseScopeValue(const BuildSettings* settings,
-                                          const SourceDir& rebase_dir,
-                                          const Value& value,
-                                          Err* err) const;
+  std::pair<Value, bool> RebaseValue(const BuildSettings* settings,
+                                     const SourceDir& rebase_dir,
+                                     const Value& value,
+                                     Err* err) const;
 
   DISALLOW_COPY_AND_ASSIGN(Metadata);
 };

@@ -6,6 +6,8 @@
 
 #include "gn/filesystem_utils.h"
 
+#include "gn/substitution_writer.h"
+
 const char kMetadata_Help[] =
     R"(Metadata Collection
 
@@ -150,7 +152,8 @@ bool Metadata::WalkStep(const BuildSettings* settings,
                         const SourceDir& rebase_dir,
                         std::vector<Value>* next_walk_keys,
                         std::vector<Value>* result,
-                        Err* err) const {
+                        Err* err,
+                        const Target* target) const {
   // If there's no metadata, there's nothing to find, so quick exit.
   if (contents_.empty()) {
     next_walk_keys->emplace_back(nullptr, "");
@@ -164,17 +167,12 @@ bool Metadata::WalkStep(const BuildSettings* settings,
       continue;
     assert(iter->second.type() == Value::LIST);
 
-    if (!rebase_dir.is_null()) {
-      for (const auto& val : iter->second.list_value()) {
-        std::pair<Value, bool> pair =
-            this->RebaseValue(settings, rebase_dir, val, err);
-        if (!pair.second)
-          return false;
-        result->push_back(pair.first);
-      }
-    } else {
-      result->insert(result->end(), iter->second.list_value().begin(),
-                     iter->second.list_value().end());
+    for (const auto& val : iter->second.list_value()) {
+      std::pair<Value, bool> pair =
+          this->ProcessValue(target, settings, rebase_dir, val, err);
+      if (!pair.second)
+        return false;
+      result->push_back(pair.first);
     }
   }
 
@@ -201,29 +199,58 @@ bool Metadata::WalkStep(const BuildSettings* settings,
   return true;
 }
 
-std::pair<Value, bool> Metadata::RebaseValue(const BuildSettings* settings,
-                                             const SourceDir& rebase_dir,
-                                             const Value& value,
-                                             Err* err) const {
+std::pair<Value, bool> Metadata::ProcessValue(const Target* target,
+                                              const BuildSettings* settings,
+                                              const SourceDir& rebase_dir,
+                                              const Value& value,
+                                              Err* err) const {
   switch (value.type()) {
     case Value::STRING:
-      return this->RebaseStringValue(settings, rebase_dir, value, err);
+      return this->ProcessStringValue(target, settings, rebase_dir, value, err);
     case Value::LIST:
-      return this->RebaseListValue(settings, rebase_dir, value, err);
+      return this->ProcessListValue(target, settings, rebase_dir, value, err);
     case Value::SCOPE:
-      return this->RebaseScopeValue(settings, rebase_dir, value, err);
+      return this->ProcessScopeValue(target, settings, rebase_dir, value, err);
     default:
       return std::make_pair(value, true);
   }
 }
 
-std::pair<Value, bool> Metadata::RebaseStringValue(
-    const BuildSettings* settings,
-    const SourceDir& rebase_dir,
-    const Value& value,
-    Err* err) const {
-  if (!value.VerifyTypeIs(Value::STRING, err))
+std::pair<Value, bool> Metadata::SubstituteValue(const Target* target,
+                                                 const Value& value,
+                                                 Err* err) const {
+  if (value.string_value().find("{{") == std::string::npos)
+    return std::make_pair(value, true);
+
+  SubstitutionPattern pattern;
+  if (!pattern.Parse(value, err))
     return std::make_pair(value, false);
+
+  if (pattern.empty())
+    return std::make_pair(value, true);
+
+  const Tool* tool = target->toolchain()->GetToolForTargetFinalOutput(target);
+
+  std::string result;
+  for (const auto& subrange : pattern.ranges()) {
+    if (subrange.type == &SubstitutionLiteral) {
+      result.append(subrange.literal);
+    } else {
+      result.append(SubstitutionWriter::GetLinkerSubstitution(target, tool, subrange.type));
+    }
+  }
+  Value substituted_value(value.origin(), result);
+
+  return std::make_pair(substituted_value, true);
+}
+
+std::pair<Value, bool> Metadata::RebaseValue(const BuildSettings* settings,
+                                             const SourceDir& rebase_dir,
+                                             const Value& value,
+                                             Err* err) const {
+  if (rebase_dir.is_null())
+    return std::make_pair(value, true);
+
   std::string filename = source_dir_.ResolveRelativeAs(
       /*as_file = */ true, value, err, settings->root_path_utf8());
   if (err->has_error())
@@ -233,16 +260,33 @@ std::pair<Value, bool> Metadata::RebaseStringValue(
   return std::make_pair(rebased_value, true);
 }
 
-std::pair<Value, bool> Metadata::RebaseListValue(const BuildSettings* settings,
-                                                 const SourceDir& rebase_dir,
-                                                 const Value& value,
-                                                 Err* err) const {
+std::pair<Value, bool> Metadata::ProcessStringValue(
+    const Target* target,
+    const BuildSettings* settings,
+    const SourceDir& rebase_dir,
+    const Value& value,
+    Err* err) const {
+  if (!value.VerifyTypeIs(Value::STRING, err))
+    return std::make_pair(value, false);
+
+  std::pair<Value, bool> pair = SubstituteValue(target, value, err);
+  if (!pair.second)
+    return pair;
+
+  return RebaseValue(settings, rebase_dir, pair.first, err);
+}
+
+std::pair<Value, bool> Metadata::ProcessListValue(const Target* target,
+                                                  const BuildSettings* settings,
+                                                  const SourceDir& rebase_dir,
+                                                  const Value& value,
+                                                  Err* err) const {
   if (!value.VerifyTypeIs(Value::LIST, err))
     return std::make_pair(value, false);
 
   Value rebased_list_value(value.origin(), Value::LIST);
   for (auto& val : value.list_value()) {
-    std::pair<Value, bool> pair = RebaseValue(settings, rebase_dir, val, err);
+    std::pair<Value, bool> pair = ProcessValue(target, settings, rebase_dir, val, err);
     if (!pair.second)
       return std::make_pair(value, false);
     rebased_list_value.list_value().push_back(pair.first);
@@ -250,10 +294,11 @@ std::pair<Value, bool> Metadata::RebaseListValue(const BuildSettings* settings,
   return std::make_pair(rebased_list_value, true);
 }
 
-std::pair<Value, bool> Metadata::RebaseScopeValue(const BuildSettings* settings,
-                                                  const SourceDir& rebase_dir,
-                                                  const Value& value,
-                                                  Err* err) const {
+std::pair<Value, bool> Metadata::ProcessScopeValue(const Target* target,
+                                                   const BuildSettings* settings,
+                                                   const SourceDir& rebase_dir,
+                                                   const Value& value,
+                                                   Err* err) const {
   if (!value.VerifyTypeIs(Value::SCOPE, err))
     return std::make_pair(value, false);
   Value rebased_scope_value(value);
@@ -261,7 +306,7 @@ std::pair<Value, bool> Metadata::RebaseScopeValue(const BuildSettings* settings,
   value.scope_value()->GetCurrentScopeValues(&scope_values);
   for (auto& value_pair : scope_values) {
     std::pair<Value, bool> pair =
-        RebaseValue(settings, rebase_dir, value_pair.second, err);
+        ProcessValue(target, settings, rebase_dir, value_pair.second, err);
     if (!pair.second)
       return std::make_pair(value, false);
 

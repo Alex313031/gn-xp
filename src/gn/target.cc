@@ -911,7 +911,7 @@ bool Target::GetMetadata(const std::vector<std::string>& keys_to_extract,
     // Otherwise, we walk this target and collect the appropriate data.
     if (!metadata_.WalkStep(settings()->build_settings(), keys_to_extract,
                             keys_to_walk, rebase_dir, &next_walk_keys,
-                            &current_result, err))
+                            &current_result, err, this))
       return false;
   }
 
