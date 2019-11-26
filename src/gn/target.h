@@ -49,6 +49,7 @@ class Target : public Item {
     CREATE_BUNDLE,
     GENERATED_FILE,
     RUST_LIBRARY,
+    PROC_MACRO,
   };
 
   enum DepsIterationType {

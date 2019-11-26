@@ -52,6 +52,9 @@ void WriteCrateVars(const Target* target,
         case Target::STATIC_LIBRARY:
           crate_type = "staticlib";
           break;
+        case Target::PROC_MACRO:
+          crate_type = "proc-macro";
+          break;
         case Target::RUST_LIBRARY:
           crate_type = "rlib";
           break;
@@ -186,7 +189,7 @@ void NinjaRustBinaryTargetWriter::WriteExterns(
   std::vector<const Target*> externs;
   for (const Target* target : deps) {
     if (target->output_type() == Target::RUST_LIBRARY ||
-        target->rust_values().crate_type() == RustValues::CRATE_PROC_MACRO) {
+        target->output_type() == Target::PROC_MACRO) {
       externs.push_back(target);
     }
   }
