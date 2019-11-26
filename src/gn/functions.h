@@ -261,6 +261,15 @@ Value RunProcessFileTemplate(Scope* scope,
                              const std::vector<Value>& args,
                              Err* err);
 
+extern const char kProcMacro[];
+extern const char kProcMacro_HelpShort[];
+extern const char kProcMacro_Help[];
+Value RunProcMacro(Scope* scope,
+                   const FunctionCallNode* function,
+                   const std::vector<Value>& args,
+                   BlockNode* block,
+                   Err* err);
+
 extern const char kReadFile[];
 extern const char kReadFile_HelpShort[];
 extern const char kReadFile_Help[];
