@@ -34,6 +34,24 @@
       "revId": "6e9476036499f7b35fc372652745cf33e71f053a",
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "f98da7de_5ffda518",
+        "filename": "infra/recipes/gn.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 61,
+      "author": {
+        "id": 1000005
+      },
+      "writtenOn": "2019-12-02T17:58:22Z",
+      "side": 1,
+      "message": "That would be better, but we don\u0027t want to have everyone install a package that virtually no one would need.\n\nWe could modify the script to support an `--all` flag or something like that would be used on the builders, though. \n\nAnother downside is that install-build-deps is in the Chromium repo, and chromium wouldn\u0027t use this. We kinda instead want an install-build-deps in the GN repo.\n\nThere are other ways in infra that we can add packages on just a few machines for builders; it\u0027s not actually clear if one of them would be better or worse than a GN install-build-deps equivalent.",
+      "parentUuid": "9d441fec_94b86c48",
+      "revId": "6e9476036499f7b35fc372652745cf33e71f053a",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": true
     }
   ]
 }
