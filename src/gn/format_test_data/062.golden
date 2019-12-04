@@ -130,3 +130,15 @@ public = [
 
   # alone!
 ]
+
+# Lists with  "files" suffix should be sorted.
+foo_files = [
+  "a",
+  "z",
+]
+
+# Lists with "sources" suffix should also be sorted.
+bar_sources = [
+  "a",
+  "z",
+]
