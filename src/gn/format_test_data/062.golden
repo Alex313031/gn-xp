@@ -130,3 +130,9 @@ public = [
 
   # alone!
 ]
+
+# Sort "java_files" too.
+java_files = [
+  "A.java",
+  "Z.java",
+]
