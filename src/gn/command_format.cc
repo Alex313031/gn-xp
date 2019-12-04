@@ -41,14 +41,9 @@ const char kFormat_Help[] =
   Formats .gn file to a standard format.
 
   The contents of some lists ('sources', 'deps', etc.) will be sorted to a
-  canonical order. To suppress this, you can add a comment of the form "#
-  NOSORT" immediately preceding the assignment. e.g.
-
-  # NOSORT
-  sources = [
-    "z.cc",
-    "a.cc",
-  ]
+  canonical order. To suppress this, you can add a comment of the form
+  "# NOSORT" immediately preceding the assignment. To force list sorting, you
+  can add a comment of the form "# SORT".
 
 Arguments
 
@@ -334,22 +329,30 @@ void Printer::AnnotatePreferredMultilineAssignment(const BinaryOpNode* binop) {
 }
 
 void Printer::SortIfSourcesOrDeps(const BinaryOpNode* binop) {
-  if (const Comments* comments = binop->comments()) {
-    const std::vector<Token>& before = comments->before();
-    if (!before.empty() && (before.front().value() == "# NOSORT" ||
-                            before.back().value() == "# NOSORT")) {
+  bool force_sort = false;
+  const Comments* comments = binop->comments();
+  if (comments && !comments->before().empty()) {
+    const std::string_view first = comments->before().front().value();
+    const std::string_view last = comments->before().back().value();
+    if (first == "# NOSORT" || last == "# NOSORT") {
       // Allow disabling of sort for specific actions that might be
       // order-sensitive.
       return;
     }
+    if (first == "# SORT" || last == "# SORT") {
+      // Allow enabling of sort for arbitrarily named lists.
+      force_sort = true;
+    }
   }
+
   const IdentifierNode* ident = binop->left()->AsIdentifier();
   const ListNode* list = binop->right()->AsList();
   if ((binop->op().value() == "=" || binop->op().value() == "+=" ||
        binop->op().value() == "-=") &&
       ident && list) {
     const std::string_view lhs = ident->value().value();
-    if (lhs == "public" || lhs == "sources" || lhs == "java_files")
+    if (lhs == "public" || lhs == "sources" || lhs == "java_files" ||
+        force_sort)
       const_cast<ListNode*>(list)->SortAsStringsList();
     else if (lhs == "deps" || lhs == "public_deps")
       const_cast<ListNode*>(list)->SortAsDepsList();

@@ -1,0 +1,25 @@
+# Force sorting based on comment.
+
+# SORT
+foo = [
+  "a",
+  "z",
+]
+
+# SORT
+# This is SORT because reason.
+bar -= [
+  "a",
+  "y.cc",
+  "z",
+  "z2",
+]
+
+# This is SORT because reason:
+# SORT
+baz += [
+  "a",
+  "y.cc",
+  "z",
+  "z2",
+]
