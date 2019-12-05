@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "c73fcd5b_b20e8802",
+        "filename": "src/gn/functions_target.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 674,
+      "author": {
+        "id": 1000014
+      },
+      "writtenOn": "2019-12-05T20:58:25Z",
+      "side": 1,
+      "message": "The thing I\u0027m not following: how does the compiler use these proc macros for future compiler invocations? To get them for dependent targets, do I need to pass a flag, or does this implicitly get pushed to dependents and used? It would be good to add another paragraph here explaining this.",
+      "revId": "df60de3726ac3d3b06bca0bcfe2709c031348665",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": true
+    }
+  ]
+}
