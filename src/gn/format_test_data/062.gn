@@ -120,3 +120,15 @@ public = [
   "these", "two"
   # alone!
 ]
+
+# Sort "java_files" too.
+java_files = [
+  "Z.java",
+  "A.java",
+]
+
+# Lists with "sources" suffix should also be sorted.
+foo_sources = [
+  "z",
+  "a",
+]
