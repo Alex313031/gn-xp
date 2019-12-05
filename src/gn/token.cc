@@ -11,7 +11,9 @@ Token::Token() : type_(INVALID), value_() {}
 Token::Token(const Location& location, Type t, const std::string_view& v)
     : type_(t), value_(v), location_(location) {}
 
-Token::Token(const Token& other) = default;
+Token::Token(const Token&) = default;
+
+Token& Token::operator=(const Token&) = default;
 
 bool Token::IsIdentifierEqualTo(const char* v) const {
   return type_ == IDENTIFIER && value_ == v;
