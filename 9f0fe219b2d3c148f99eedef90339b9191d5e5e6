@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "39f563e5_303d5de9",
+        "filename": "src/gn/token.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 62,
+      "author": {
+        "id": 1000014
+      },
+      "writtenOn": "2019-12-06T00:31:15Z",
+      "side": 1,
+      "message": "This change is fine. But would it also work to just remove the custom copy constructor instead? That seems cleaner to me since this custom one isn\u0027t doing much for us.",
+      "revId": "9f0fe219b2d3c148f99eedef90339b9191d5e5e6",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": true
+    }
+  ]
+}
