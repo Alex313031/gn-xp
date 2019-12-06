@@ -16,6 +16,24 @@
       "revId": "9f0fe219b2d3c148f99eedef90339b9191d5e5e6",
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "e9c4e4cd_cdf60e4a",
+        "filename": "src/gn/token.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 62,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-12-06T00:45:47Z",
+      "side": 1,
+      "message": "Yes, that works as well.",
+      "parentUuid": "39f563e5_303d5de9",
+      "revId": "9f0fe219b2d3c148f99eedef90339b9191d5e5e6",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": false
     }
   ]
 }
