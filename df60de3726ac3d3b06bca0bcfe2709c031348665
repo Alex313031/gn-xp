@@ -16,6 +16,24 @@
       "revId": "df60de3726ac3d3b06bca0bcfe2709c031348665",
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "fcffda37_5cad99e9",
+        "filename": "src/gn/functions_target.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 674,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-12-07T03:23:53Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "c73fcd5b_b20e8802",
+      "revId": "df60de3726ac3d3b06bca0bcfe2709c031348665",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": false
     }
   ]
 }
