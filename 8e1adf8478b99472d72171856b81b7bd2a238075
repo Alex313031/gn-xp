@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "2d94b7cd_764fde24",
+        "filename": "src/gn/escape.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 15,
+      "author": {
+        "id": 1000014
+      },
+      "writtenOn": "2019-12-09T23:39:58Z",
+      "side": 1,
+      "message": "Super nitpick: please put a period after this for consistency (style guide says).",
+      "revId": "8e1adf8478b99472d72171856b81b7bd2a238075",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": true
+    }
+  ]
+}
