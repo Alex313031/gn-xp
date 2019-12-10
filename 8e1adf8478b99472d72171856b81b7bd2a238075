@@ -16,6 +16,24 @@
       "revId": "8e1adf8478b99472d72171856b81b7bd2a238075",
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "110152fc_bcaae962",
+        "filename": "src/gn/escape.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 15,
+      "author": {
+        "id": 1000252
+      },
+      "writtenOn": "2019-12-10T04:44:41Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "2d94b7cd_764fde24",
+      "revId": "8e1adf8478b99472d72171856b81b7bd2a238075",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": true
     }
   ]
 }
