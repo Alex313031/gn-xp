@@ -315,6 +315,11 @@ class TargetDescBuilder : public BaseDescBuilder {
           "toolchain",
           base::Value(
               target_->label().GetToolchainLabel().GetUserVisibleName(false)));
+
+      if (target_->source_types_used().CSourceUsed())
+        res->SetKey("language", base::Value("c"));
+      else if (target_->source_types_used().RustSourceUsed())
+        res->SetKey("language", base::Value("rust"));
     }
 
     // General target meta variables.
