@@ -27,6 +27,7 @@
 // target_properties = {
 //   "type" : "output_type", // matching Target::GetStringForOutputType
 //   "toolchain" : "toolchain_name",
+//   "language" : "target language (c or rust)",
 //   "visibility" : [ list of visibility pattern descriptions ],
 //   "test_only" : true or false,
 //   "check_includes": true or false,
@@ -42,7 +43,7 @@
 //   "depfile : "file name for action input dependencies",
 //   "outputs" : [ list of target outputs ],
 //   "arflags", "asmflags", "cflags", "cflags_c",
-//   "clfags_cc", "cflags_objc", "clfags_objcc" : [ list of flags],
+//   "cflags_cc", "cflags_objc", "cflags_objcc" : [ list of flags],
 //   "defines" : [ list of preprocessor definitions ],
 //   "include_dirs" : [ list of include directories ],
 //   "precompiled_header" : "name of precompiled header file",
@@ -315,6 +316,11 @@ class TargetDescBuilder : public BaseDescBuilder {
           "toolchain",
           base::Value(
               target_->label().GetToolchainLabel().GetUserVisibleName(false)));
+
+      if (target_->source_types_used().CSourceUsed())
+        res->SetKey("language", base::Value("c"));
+      else if (target_->source_types_used().RustSourceUsed())
+        res->SetKey("language", base::Value("rust"));
     }
 
     // General target meta variables.
