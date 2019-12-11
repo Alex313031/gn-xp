@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "555c7f85_1012baaf",
+        "filename": "src/gn/desc_builder.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 28,
+      "author": {
+        "id": 1000014
+      },
+      "writtenOn": "2019-12-11T17:26:43Z",
+      "side": 1,
+      "message": "\"language\" should be documented here.",
+      "revId": "4e4ee778b4f4f352bfb88a5543035395ea6be22e",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": true
+    }
+  ]
+}
