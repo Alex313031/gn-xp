@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "4d7e008a_2e8ca611",
+        "filename": "examples/rust_example/build/BUILD.gn",
+        "patchSetId": 1
+      },
+      "lineNbr": 11,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2019-12-18T18:58:15Z",
+      "side": 1,
+      "message": "Nit: would be possible to leave an empty line between each tool to match the rest of this file?",
+      "revId": "7bedd688e561111442cfa0fdecbcb5e9411cb509",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": true
+    }
+  ]
+}
