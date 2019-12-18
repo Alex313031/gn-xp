@@ -16,6 +16,24 @@
       "revId": "7bedd688e561111442cfa0fdecbcb5e9411cb509",
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "048bb774_cef254fe",
+        "filename": "examples/rust_example/build/BUILD.gn",
+        "patchSetId": 1
+      },
+      "lineNbr": 11,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2019-12-18T20:23:54Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "4d7e008a_2e8ca611",
+      "revId": "7bedd688e561111442cfa0fdecbcb5e9411cb509",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": false
     }
   ]
 }
