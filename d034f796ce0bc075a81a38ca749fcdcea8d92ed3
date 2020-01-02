@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6ad44a49_5809a8ae",
+        "filename": "src/gn/analyzer_unittest.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 98,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2020-01-02T18:19:27Z",
+      "side": 1,
+      "message": "These _raw pointers are ugly, but they arguably just expose pre-existing ugliness.",
+      "revId": "d034f796ce0bc075a81a38ca749fcdcea8d92ed3",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": true
+    }
+  ]
+}
