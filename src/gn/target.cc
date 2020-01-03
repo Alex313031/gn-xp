@@ -368,6 +368,7 @@ bool Target::OnResolved(Err* err) {
     const ConfigValues& cur = iter.cur();
     all_lib_dirs_.append(cur.lib_dirs().begin(), cur.lib_dirs().end());
     all_libs_.append(cur.libs().begin(), cur.libs().end());
+    all_externs_.append(cur.externs().begin(), cur.externs().end());
   }
 
   PullRecursiveBundleData();
@@ -575,6 +576,7 @@ void Target::PullDependentTargetLibsFrom(const Target* dep, bool is_public) {
   if (!dep->IsFinal() || dep->output_type() == STATIC_LIBRARY) {
     all_lib_dirs_.append(dep->all_lib_dirs());
     all_libs_.append(dep->all_libs());
+    all_externs_.append(dep->all_externs());
   }
 }
 

@@ -276,6 +276,9 @@ class Target : public Item {
 
   const OrderedSet<SourceDir>& all_lib_dirs() const { return all_lib_dirs_; }
   const OrderedSet<LibFile>& all_libs() const { return all_libs_; }
+  const OrderedSet<std::pair<std::string, LibFile>>& all_externs() const {
+    return all_externs_;
+  }
 
   const std::set<const Target*>& recursive_hard_deps() const {
     return recursive_hard_deps_;
@@ -407,6 +410,7 @@ class Target : public Item {
   // configs applying to this target.
   OrderedSet<SourceDir> all_lib_dirs_;
   OrderedSet<LibFile> all_libs_;
+  OrderedSet<std::pair<std::string, LibFile>> all_externs_;
 
   // All hard deps from this target and all dependencies. Filled in when this
   // target is marked resolved. This will not include the current target.
