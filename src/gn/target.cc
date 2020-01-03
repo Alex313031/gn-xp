@@ -368,6 +368,7 @@ bool Target::OnResolved(Err* err) {
     const ConfigValues& cur = iter.cur();
     all_lib_dirs_.append(cur.lib_dirs().begin(), cur.lib_dirs().end());
     all_libs_.append(cur.libs().begin(), cur.libs().end());
+    all_externs_.append(cur.externs().begin(), cur.externs().end());
   }
 
   PullRecursiveBundleData();

@@ -326,6 +326,16 @@ class TargetDescBuilder : public BaseDescBuilder {
       res->SetKey(variables::kMetadata, std::move(metadata));
     }
 
+    if (what(variables::kExterns)) {
+      base::DictionaryValue externs;
+      const auto& all_externs = target_->all_externs();
+      for (size_t i = 0; i < all_externs.size(); i++) {
+        externs.SetKey(all_externs[i].first,
+                       base::Value(all_externs[i].second.value()));
+      }
+      res->SetKey(variables::kExterns, std::move(externs));
+    }
+
     if (what(variables::kVisibility))
       res->SetWithoutPathExpansion(variables::kVisibility,
                                    target_->visibility().AsValue());
