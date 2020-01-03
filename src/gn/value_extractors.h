@@ -5,6 +5,7 @@
 #ifndef TOOLS_GN_VALUE_EXTRACTORS_H_
 #define TOOLS_GN_VALUE_EXTRACTORS_H_
 
+#include <map>
 #include <string>
 #include <vector>
 
@@ -85,5 +86,11 @@ bool ExtractListOfLabelPatterns(const Value& value,
                                 const SourceDir& current_dir,
                                 std::vector<LabelPattern>* patterns,
                                 Err* err);
+
+bool ExtractMapOfExterns(const BuildSettings* build_settings,
+                         const Value& value,
+                         const SourceDir& current_dir,
+                         std::map<std::string, LibFile>* externs,
+                         Err* err);
 
 #endif  // TOOLS_GN_VALUE_EXTRACTORS_H_

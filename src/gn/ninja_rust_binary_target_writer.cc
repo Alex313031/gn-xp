@@ -153,6 +153,14 @@ void NinjaRustBinaryTargetWriter::Run() {
       deps.push_back(linkable_dep->dependency_output_file());
     }
 
+    // Rust libraries specified by paths.
+    for (const auto& ext : target_->all_externs()) {
+      if (ext.second.is_source_file()) {
+        deps.push_back(OutputFile(settings_->build_settings(),
+                                  ext.second.source_file()));
+      }
+    }
+
     std::vector<OutputFile> tool_outputs;
     SubstitutionWriter::ApplyListToLinkerAsOutputFile(
         target_, tool_, tool_->outputs(), &tool_outputs);
@@ -186,29 +194,35 @@ void NinjaRustBinaryTargetWriter::WriteCompilerVars() {
 
 void NinjaRustBinaryTargetWriter::WriteExterns(
     const std::vector<const Target*>& deps) {
-  std::vector<const Target*> externs;
+  out_ << "  externs =";
+
   for (const Target* target : deps) {
     if (target->output_type() == Target::RUST_LIBRARY ||
         target->output_type() == Target::RUST_PROC_MACRO) {
-      externs.push_back(target);
+      out_ << " --extern ";
+      const auto& renamed_dep =
+          target_->rust_values().aliased_deps().find(target->label());
+      if (renamed_dep != target_->rust_values().aliased_deps().end()) {
+        out_ << renamed_dep->second << "=";
+      } else {
+        out_ << std::string(target->rust_values().crate_name()) << "=";
+      }
+      path_output_.WriteFile(out_, target->dependency_output_file());
     }
   }
-  if (externs.empty())
-    return;
-  out_ << "  externs =";
-  for (const Target* ex : externs) {
-    out_ << " --extern ";
 
-    const auto& renamed_dep =
-        target_->rust_values().aliased_deps().find(ex->label());
-    if (renamed_dep != target_->rust_values().aliased_deps().end()) {
-      out_ << renamed_dep->second << "=";
+  EscapeOptions extern_escape_opts;
+  extern_escape_opts.mode = ESCAPE_NINJA_COMMAND;
+
+  for (const auto& ext : target_->all_externs()) {
+    out_ << " --extern " << std::string(ext.first) << "=";
+    if (ext.second.is_source_file()) {
+      path_output_.WriteFile(out_, ext.second.source_file());
     } else {
-      out_ << std::string(ex->rust_values().crate_name()) << "=";
+      EscapeStringToStream(out_, ext.second.value(), extern_escape_opts);
     }
-
-    path_output_.WriteFile(out_, ex->dependency_output_file());
   }
+
   out_ << std::endl;
 }
 

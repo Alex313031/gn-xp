@@ -5,6 +5,7 @@
 #ifndef TOOLS_GN_CONFIG_VALUES_H_
 #define TOOLS_GN_CONFIG_VALUES_H_
 
+#include <map>
 #include <string>
 #include <vector>
 
@@ -61,6 +62,9 @@ class ConfigValues {
   const std::vector<LibFile>& libs() const { return libs_; }
   std::vector<LibFile>& libs() { return libs_; }
 
+  const std::map<std::string, LibFile>& externs() const { return externs_; }
+  std::map<std::string, LibFile>& externs() { return externs_; }
+
   bool has_precompiled_headers() const {
     return !precompiled_header_.empty() || !precompiled_source_.is_null();
   }
@@ -85,6 +89,7 @@ class ConfigValues {
   std::vector<LibFile> libs_;
   std::vector<std::string> rustflags_;
   std::vector<std::string> rustenv_;
+  std::map<std::string, LibFile> externs_;
   // If you add a new one, be sure to update AppendValues().
 
   std::string precompiled_header_;

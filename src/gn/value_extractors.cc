@@ -33,6 +33,25 @@ bool ListValueExtractor(const Value& value,
   return true;
 }
 
+// Sets the error and returns false on failure.
+template <typename T, class Converter>
+bool MapValueExtractor(const Value& value,
+                       std::map<std::string, T>* dest,
+                       Err* err,
+                       const Converter& converter) {
+  if (!value.VerifyTypeIs(Value::SCOPE, err))
+    return false;
+  Scope::KeyValueMap scope_values;
+  value.scope_value()->GetCurrentScopeValues(&scope_values);
+  for (const auto& pair : scope_values) {
+    T value;
+    if (!converter(pair.second, &value, err))
+      return false;
+    dest->emplace(pair.first, std::move(value));
+  }
+  return true;
+}
+
 // Like the above version but extracts to a UniqueVector and sets the error if
 // there are duplicates.
 template <typename T, class Converter>
@@ -246,4 +265,13 @@ bool ExtractListOfLabelPatterns(const Value& value,
                                 Err* err) {
   return ListValueExtractor(value, patterns, err,
                             LabelPatternResolver(current_dir));
+}
+
+bool ExtractMapOfExterns(const BuildSettings* build_settings,
+                         const Value& value,
+                         const SourceDir& current_dir,
+                         std::map<std::string, LibFile>* externs,
+                         Err* err) {
+  return MapValueExtractor(value, externs, err,
+                           LibFileConverter(build_settings, current_dir));
 }
