@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "987b26ea_88e910f6",
+        "filename": "src/gn/target.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 371,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-01-06T22:48:12Z",
+      "side": 1,
+      "message": "The existing use case we have is exactly the same as libs, see https://fuchsia-review.googlesource.com/c/fuchsia/+/351642 (we need to link against libraries built by Cargo).\n\nWould adding these to `gn desc` be sufficient for you? I forgot to do that but that\u0027s something we should definitely do.",
+      "parentUuid": "8f3a4cf6_3c7b77dc",
+      "revId": "2229d6b18fbd1dda19f0697711a558b1fb7bb1d9",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "d75fbdd4_0421b0cc",
         "filename": "src/gn/variables.cc",
         "patchSetId": 3
@@ -36,6 +54,24 @@
     },
     {
       "key": {
+        "uuid": "1eefe347_2cfb137c",
+        "filename": "src/gn/variables.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 1100,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-01-06T22:48:12Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "d75fbdd4_0421b0cc",
+      "revId": "2229d6b18fbd1dda19f0697711a558b1fb7bb1d9",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "f2b3db42_db15be65",
         "filename": "src/gn/variables.cc",
         "patchSetId": 3
@@ -47,6 +83,24 @@
       "writtenOn": "2020-01-06T20:39:52Z",
       "side": 1,
       "message": "This isn\u0027t very clear about the propagation behavior of the flag. From the implementation it looks like externs are propagated until it reaches an executable or shared library. Do we really need the auto propagation behavior? That makes everything more complicated and if so, I think we need to clarify some things.",
+      "revId": "2229d6b18fbd1dda19f0697711a558b1fb7bb1d9",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "32ab6927_3beb8822",
+        "filename": "src/gn/variables.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 1108,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-01-06T22:48:12Z",
+      "side": 1,
+      "message": "I originally thought that we do but we\u0027ve confirmed that it\u0027s not necessary as Rust embed this information inside the .rlib metadata, so I removed the auto propagation behavior.",
+      "parentUuid": "f2b3db42_db15be65",
       "revId": "2229d6b18fbd1dda19f0697711a558b1fb7bb1d9",
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
       "unresolved": true
