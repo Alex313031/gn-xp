@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "8f3a4cf6_3c7b77dc",
+        "filename": "src/gn/target.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 371,
+      "author": {
+        "id": 1000014
+      },
+      "writtenOn": "2020-01-06T20:39:52Z",
+      "side": 1,
+      "message": "It seems like there could be conflicts here if one target says \"foo\u003dbar\" and another says \"foo\u003dsomethingelse\". This seems especially bad since there is no attribution on these so \"gn desc\" can\u0027t say where the value comes from to help fix the problem. And I\u0027m more paranoid about being clear here since it seems this will be used in more complex cases than \"libs\"",
+      "revId": "2229d6b18fbd1dda19f0697711a558b1fb7bb1d9",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "d75fbdd4_0421b0cc",
+        "filename": "src/gn/variables.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 1100,
+      "author": {
+        "id": 1000014
+      },
+      "writtenOn": "2020-01-06T20:39:52Z",
+      "side": 1,
+      "message": "Can this say \"Set of Rust crate-dependency pairs.\" so it\u0027s more clear what language this applies to?",
+      "revId": "2229d6b18fbd1dda19f0697711a558b1fb7bb1d9",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "f2b3db42_db15be65",
+        "filename": "src/gn/variables.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 1108,
+      "author": {
+        "id": 1000014
+      },
+      "writtenOn": "2020-01-06T20:39:52Z",
+      "side": 1,
+      "message": "This isn\u0027t very clear about the propagation behavior of the flag. From the implementation it looks like externs are propagated until it reaches an executable or shared library. Do we really need the auto propagation behavior? That makes everything more complicated and if so, I think we need to clarify some things.",
+      "revId": "2229d6b18fbd1dda19f0697711a558b1fb7bb1d9",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": true
+    }
+  ]
+}
