@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "95488a62_f791564e",
+        "filename": "src/gn/string_utils.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 352,
+      "author": {
+        "id": 1000004
+      },
+      "writtenOn": "2020-01-07T17:18:01Z",
+      "side": 0,
+      "message": "what the heck was i up to... strlen? really?",
+      "revId": "e67b81b5bfb733b27e1fc91326575d9e65ef6eb1",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": true
+    }
+  ]
+}
