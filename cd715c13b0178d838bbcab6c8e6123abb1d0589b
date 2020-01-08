@@ -52,6 +52,24 @@
       "revId": "cd715c13b0178d838bbcab6c8e6123abb1d0589b",
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "e5663df7_8e1bd926",
+        "filename": "src/gn/header_checker.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 301,
+      "author": {
+        "id": 1000014
+      },
+      "writtenOn": "2020-01-08T21:48:50Z",
+      "side": 0,
+      "message": "Ack",
+      "parentUuid": "b6133ab4_6e5a386e",
+      "revId": "cd715c13b0178d838bbcab6c8e6123abb1d0589b",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": false
     }
   ]
 }
