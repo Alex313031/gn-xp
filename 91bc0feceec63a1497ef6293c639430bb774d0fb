@@ -33,6 +33,24 @@
       "revId": "91bc0feceec63a1497ef6293c639430bb774d0fb",
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "b7cdc462_b04f8a2f",
+        "filename": "src/gn/target.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 371,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-01-08T00:34:43Z",
+      "side": 1,
+      "message": "I removed all_externs and instead iterate over configs in ninja_rust_binary_target_writer, I\u0027m not sure if that\u0027s what you had in mind?",
+      "parentUuid": "8413ecc3_83cbbafb",
+      "revId": "91bc0feceec63a1497ef6293c639430bb774d0fb",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": true
     }
   ]
 }
