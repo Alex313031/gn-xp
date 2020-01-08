@@ -1,0 +1,61 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "88477293_694b1b1c",
+        "filename": "src/gn/header_checker.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 333,
+      "author": {
+        "id": 1000014
+      },
+      "writtenOn": "2020-01-08T21:41:20Z",
+      "side": 1,
+      "message": "Can you add {} here since it\u0027s more than one line now?",
+      "revId": "1b61ece248b5a6c1b74c4005c7dc5e1b3daacbf0",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "a89a4edf_71afa53a",
+        "filename": "src/gn/header_checker_unittest.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 60,
+      "author": {
+        "id": 1000014
+      },
+      "writtenOn": "2020-01-08T21:41:20Z",
+      "side": 1,
+      "message": "Can you fix the wrapping here?",
+      "revId": "1b61ece248b5a6c1b74c4005c7dc5e1b3daacbf0",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "93626624_bd269da6",
+        "filename": "src/gn/setup.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 83,
+      "author": {
+        "id": 1000014
+      },
+      "writtenOn": "2020-01-08T21:41:20Z",
+      "side": 1,
+      "message": "brackets",
+      "range": {
+        "startLine": 83,
+        "startChar": 30,
+        "endLine": 83,
+        "endChar": 37
+      },
+      "revId": "1b61ece248b5a6c1b74c4005c7dc5e1b3daacbf0",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": true
+    }
+  ]
+}

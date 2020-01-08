@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "dd3c04d9_a44f48df",
+        "filename": "src/gn/header_checker.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 301,
+      "author": {
+        "id": 1000014
+      },
+      "writtenOn": "2020-01-08T21:41:20Z",
+      "side": 0,
+      "message": "It\u0027s not clear to me why this got deleted. I think this was to emulate the normal compiler behavior of accepting includes in the current directory.",
+      "revId": "cd715c13b0178d838bbcab6c8e6123abb1d0589b",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": true
+    }
+  ]
+}
