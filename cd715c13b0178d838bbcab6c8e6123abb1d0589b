@@ -16,6 +16,24 @@
       "revId": "cd715c13b0178d838bbcab6c8e6123abb1d0589b",
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "c474cb49_2dc0c528",
+        "filename": "src/gn/header_checker.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 301,
+      "author": {
+        "id": 1000034
+      },
+      "writtenOn": "2020-01-08T21:46:26Z",
+      "side": 0,
+      "message": "The source directory is added back for non-system style includes on line 262-265. This is to match compiler\u0027s typical behavior\n\nfoo.cc:\n#include \"foo.h\" \u003c-- looks in directory containing foo.cc\n#include \u003cbar.h\u003e \u003c-- does not look in directory containing foo.cc\n\nThere are tests for both behaviors in header_checker_unittests.cc SourceFileForInclude",
+      "parentUuid": "dd3c04d9_a44f48df",
+      "revId": "cd715c13b0178d838bbcab6c8e6123abb1d0589b",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": true
     }
   ]
 }
