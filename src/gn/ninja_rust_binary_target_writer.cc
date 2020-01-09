@@ -146,9 +146,9 @@ void NinjaRustBinaryTargetWriter::Run() {
     }
     for (const auto* linkable_dep : linkable_deps) {
       if (linkable_dep->source_types_used().RustSourceUsed()) {
-        rustdeps.push_back(linkable_dep->dependency_output_file());
+        rustdeps.push_back(linkable_dep->link_output_file());
       } else {
-        nonrustdeps.push_back(linkable_dep->dependency_output_file());
+        nonrustdeps.push_back(linkable_dep->link_output_file());
       }
       deps.push_back(linkable_dep->dependency_output_file());
     }
@@ -230,18 +230,18 @@ void NinjaRustBinaryTargetWriter::WriteRustdeps(
   const std::string_view lib_prefix("lib");
 
   // Non-Rust native dependencies.
-  for (const auto& rustdep : nonrustdeps) {
+  for (const auto& nonrustdep : nonrustdeps) {
     out_ << " -Lnative=";
     path_output_.WriteDir(
-        out_, rustdep.AsSourceFile(settings_->build_settings()).GetDir(),
+        out_, nonrustdep.AsSourceFile(settings_->build_settings()).GetDir(),
         PathOutput::DIR_NO_LAST_SLASH);
-    std::string_view file = FindFilenameNoExtension(&rustdep.value());
+    std::string_view file = FindFilenameNoExtension(&nonrustdep.value());
     if (!file.compare(0, lib_prefix.size(), lib_prefix)) {
       out_ << " -l";
       EscapeStringToStream(out_, file.substr(lib_prefix.size()), lib_escape_opts);
     } else {
       out_ << " -Clink-arg=";
-      path_output_.WriteFile(out_, rustdep);
+      path_output_.WriteFile(out_, nonrustdep);
     }
   }
 
