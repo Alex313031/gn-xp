@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "358dc033_c52f5dbb",
+        "filename": "src/gn/ninja_rust_binary_target_writer_unittest.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 278,
+      "author": {
+        "id": 1000014
+      },
+      "writtenOn": "2020-01-10T17:43:26Z",
+      "side": 1,
+      "message": "Can you clang-format this?",
+      "revId": "5acf74cd966817780db105f4c6577b3da7403da3",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "3004cb78_eb8d8818",
+        "filename": "src/gn/test_with_scope.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 63,
+      "author": {
+        "id": 1000014
+      },
+      "writtenOn": "2020-01-10T17:43:26Z",
+      "side": 1,
+      "message": "Clang format this too (needs spaces around the \u003d).",
+      "revId": "5acf74cd966817780db105f4c6577b3da7403da3",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": true
+    }
+  ]
+}
