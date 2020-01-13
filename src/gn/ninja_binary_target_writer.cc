@@ -18,8 +18,11 @@
 #include "gn/string_utils.h"
 #include "gn/substitution_writer.h"
 #include "gn/target.h"
+#include "gn/variables.h"
 
 namespace {
+
+const char kFrameworkExtension[] = ".framework";
 
 // Returns the proper escape options for writing compiler and linker flags.
 EscapeOptions GetFlagOptions() {
@@ -97,7 +100,9 @@ void NinjaBinaryTargetWriter::WriteSourceSetStamp(
   UniqueVector<OutputFile> extra_object_files;
   UniqueVector<const Target*> linkable_deps;
   UniqueVector<const Target*> non_linkable_deps;
-  GetDeps(&extra_object_files, &linkable_deps, &non_linkable_deps);
+  UniqueVector<const Target*> framework_deps;
+  GetDeps(&extra_object_files, &linkable_deps, &non_linkable_deps,
+          &framework_deps);
 
   // The classifier should never put extra object files in a source sets: any
   // source sets that we depend on should appear in our non-linkable deps
@@ -114,17 +119,18 @@ void NinjaBinaryTargetWriter::WriteSourceSetStamp(
 void NinjaBinaryTargetWriter::GetDeps(
     UniqueVector<OutputFile>* extra_object_files,
     UniqueVector<const Target*>* linkable_deps,
-    UniqueVector<const Target*>* non_linkable_deps) const {
+    UniqueVector<const Target*>* non_linkable_deps,
+    UniqueVector<const Target*>* framework_deps) const {
   // Normal public/private deps.
   for (const auto& pair : target_->GetDeps(Target::DEPS_LINKED)) {
     ClassifyDependency(pair.ptr, extra_object_files, linkable_deps,
-                       non_linkable_deps);
+                       non_linkable_deps, framework_deps);
   }
 
   // Inherited libraries.
   for (auto* inherited_target : target_->inherited_libraries().GetOrdered()) {
     ClassifyDependency(inherited_target, extra_object_files, linkable_deps,
-                       non_linkable_deps);
+                       non_linkable_deps, framework_deps);
   }
 
   // Data deps.
@@ -136,7 +142,8 @@ void NinjaBinaryTargetWriter::ClassifyDependency(
     const Target* dep,
     UniqueVector<OutputFile>* extra_object_files,
     UniqueVector<const Target*>* linkable_deps,
-    UniqueVector<const Target*>* non_linkable_deps) const {
+    UniqueVector<const Target*>* non_linkable_deps,
+    UniqueVector<const Target*>* framework_deps) const {
   // Only the following types of outputs have libraries linked into them:
   //  EXECUTABLE
   //  SHARED_LIBRARY
@@ -179,6 +186,9 @@ void NinjaBinaryTargetWriter::ClassifyDependency(
     non_linkable_deps->push_back(dep);
   } else if (can_link_libs && dep->IsLinkable()) {
     linkable_deps->push_back(dep);
+  } else if (dep->output_type() == Target::CREATE_BUNDLE &&
+             dep->bundle_data().is_framework()) {
+    framework_deps->push_back(dep);
   } else {
     non_linkable_deps->push_back(dep);
   }
@@ -244,6 +254,21 @@ void NinjaBinaryTargetWriter::WriteLinkerFlags(
     }
   }
 
+  const OrderedSet<SourceDir> all_framework_dirs =
+      target_->all_framework_dirs();
+  if (!all_framework_dirs.empty()) {
+    // Since we're passing these on the command line to the linker and not
+    // to Ninja, we need to do shell escaping.
+    PathOutput framework_path_output(
+        path_output_.current_dir(),
+        settings_->build_settings()->root_path_utf8(), ESCAPE_NINJA_COMMAND);
+    for (size_t i = 0; i < all_framework_dirs.size(); i++) {
+      out << " " << tool->framework_dir_switch();
+      framework_path_output.WriteDir(out, all_framework_dirs[i],
+                                     PathOutput::DIR_NO_LAST_SLASH);
+    }
+  }
+
   if (optional_def_file) {
     out_ << " /DEF:";
     path_output_.WriteFile(out, *optional_def_file);
@@ -255,24 +280,42 @@ void NinjaBinaryTargetWriter::WriteLibs(std::ostream& out, const Tool* tool) {
   EscapeOptions lib_escape_opts;
   lib_escape_opts.mode = ESCAPE_NINJA_COMMAND;
   const OrderedSet<LibFile> all_libs = target_->all_libs();
-  const std::string framework_ending(".framework");
   for (size_t i = 0; i < all_libs.size(); i++) {
     const LibFile& lib_file = all_libs[i];
     const std::string& lib_value = lib_file.value();
     if (lib_file.is_source_file()) {
       out << " " << tool->linker_arg();
       path_output_.WriteFile(out, lib_file.source_file());
-    } else if (base::EndsWith(lib_value, framework_ending,
+    } else if (base::EndsWith(lib_value, kFrameworkExtension,
                               base::CompareCase::INSENSITIVE_ASCII)) {
       // Special-case libraries ending in ".framework" to support Mac: Add the
       // -framework switch and don't add the extension to the output.
+      // TODO(crbug.com/gn/119): remove this once all code has been ported to
+      // use "frameworks" and "framework_dirs" instead.
       out << " " << tool->framework_switch();
       EscapeStringToStream(
-          out, lib_value.substr(0, lib_value.size() - framework_ending.size()),
+          out,
+          lib_value.substr(0, lib_value.size() - strlen(kFrameworkExtension)),
           lib_escape_opts);
     } else {
       out << " " << tool->lib_switch();
       EscapeStringToStream(out, lib_value, lib_escape_opts);
     }
+  }
+}
+
+void NinjaBinaryTargetWriter::WriteFrameworks(std::ostream& out,
+                                              const Tool* tool) {
+  // Libraries that have been recursively pushed through the dependency tree.
+  EscapeOptions lib_escape_opts;
+  lib_escape_opts.mode = ESCAPE_NINJA_COMMAND;
+  const OrderedSet<std::string> all_frameworks = target_->all_frameworks();
+  for (size_t i = 0; i < all_frameworks.size(); i++) {
+    std::string_view framework_name(
+        all_frameworks[i].data(),
+        all_frameworks[i].size() - strlen(kFrameworkExtension));
+
+    out << " " << tool->framework_switch();
+    EscapeStringToStream(out, framework_name, lib_escape_opts);
   }
 }

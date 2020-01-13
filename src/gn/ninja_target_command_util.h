@@ -12,6 +12,13 @@
 #include "gn/path_output.h"
 #include "gn/target.h"
 #include "gn/toolchain.h"
+#include "gn/variables.h"
+
+namespace {
+
+const char kFrameworkExtension[] = ".framework";
+
+}  // anonymous namespace
 
 struct DefineWriter {
   DefineWriter() { options.mode = ESCAPE_NINJA_COMMAND; }
@@ -33,6 +40,49 @@ struct DefineWriter {
 
   EscapeOptions options;
   bool escape_strings = false;
+};
+
+struct FrameworksWriter {
+  FrameworksWriter() { options.mode = ESCAPE_NINJA_COMMAND; }
+  FrameworksWriter(EscapingMode mode, bool escape_strings)
+      : escape_strings(escape_strings) {
+    options.mode = mode;
+  }
+
+  void operator()(const std::string& s, std::ostream& out) const {
+    out << " -framework ";
+    std::string_view framework(s.data(),
+                               s.size() - strlen(kFrameworkExtension));
+
+    if (escape_strings) {
+      std::string dest;
+      base::EscapeJSONString(framework, false, &dest);
+      EscapeStringToStream(out, dest, options);
+      return;
+    }
+    EscapeStringToStream(out, framework, options);
+  }
+
+  EscapeOptions options;
+  bool escape_strings = false;
+};
+
+struct FrameworkDirsWriter {
+  explicit FrameworkDirsWriter(PathOutput& path_output)
+      : path_output_(path_output) {}
+  ~FrameworkDirsWriter() = default;
+
+  void operator()(const SourceDir& d, std::ostream& out) const {
+    std::ostringstream path_out;
+    path_output_.WriteDir(path_out, d, PathOutput::DIR_NO_LAST_SLASH);
+    const std::string& path = path_out.str();
+    if (path[0] == '"')
+      out << " \"-F" << path.substr(1);
+    else
+      out << " -F" << path;
+  }
+
+  PathOutput& path_output_;
 };
 
 struct IncludeWriter {

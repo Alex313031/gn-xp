@@ -287,6 +287,8 @@ std::map<std::string, DescHandlerFunc> GetHandlers() {
           {variables::kCflagsObjC, DefaultHandler},
           {variables::kCflagsObjCC, DefaultHandler},
           {variables::kDefines, DefaultHandler},
+          {variables::kFrameworkDirs, DefaultHandler},
+          {variables::kFrameworks, DefaultHandler},
           {variables::kIncludeDirs, DefaultHandler},
           {variables::kLdflags, DefaultHandler},
           {variables::kPrecompiledHeader, DefaultHandler},
@@ -372,6 +374,8 @@ bool PrintTarget(const Target* target,
   HandleProperty(variables::kCflagsObjC, handler_map, v, dict);
   HandleProperty(variables::kCflagsObjCC, handler_map, v, dict);
   HandleProperty(variables::kDefines, handler_map, v, dict);
+  HandleProperty(variables::kFrameworkDirs, handler_map, v, dict);
+  HandleProperty(variables::kFrameworks, handler_map, v, dict);
   HandleProperty(variables::kIncludeDirs, handler_map, v, dict);
   HandleProperty(variables::kLdflags, handler_map, v, dict);
   HandleProperty(variables::kPrecompiledHeader, handler_map, v, dict);
@@ -434,6 +438,8 @@ bool PrintConfig(const Config* config,
   HandleProperty(variables::kCflagsObjC, handler_map, v, dict);
   HandleProperty(variables::kCflagsObjCC, handler_map, v, dict);
   HandleProperty(variables::kDefines, handler_map, v, dict);
+  HandleProperty(variables::kFrameworkDirs, handler_map, v, dict);
+  HandleProperty(variables::kFrameworks, handler_map, v, dict);
   HandleProperty(variables::kIncludeDirs, handler_map, v, dict);
   HandleProperty(variables::kInputs, handler_map, v, dict);
   HandleProperty(variables::kLdflags, handler_map, v, dict);
@@ -484,6 +490,7 @@ Possibilities for <what to show>
   defines [--blame]
   depfile
   deps [--all] [--tree] (see below)
+  framework_dirs [--blame]
   include_dirs [--blame]
   inputs
   ldflags [--blame]

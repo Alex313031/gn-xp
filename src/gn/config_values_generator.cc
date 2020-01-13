@@ -15,6 +15,8 @@
 
 namespace {
 
+const char kFrameworkExtension[] = ".framework";
+
 void GetStringList(Scope* scope,
                    const char* var_name,
                    ConfigValues* config_values,
@@ -71,6 +73,7 @@ void ConfigValuesGenerator::Run() {
   FILL_STRING_CONFIG_VALUE(cflags_objc)
   FILL_STRING_CONFIG_VALUE(cflags_objcc)
   FILL_STRING_CONFIG_VALUE(defines)
+  FILL_DIR_CONFIG_VALUE(framework_dirs)
   FILL_DIR_CONFIG_VALUE(include_dirs)
   FILL_STRING_CONFIG_VALUE(ldflags)
   FILL_DIR_CONFIG_VALUE(lib_dirs)
@@ -100,6 +103,29 @@ void ConfigValuesGenerator::Run() {
   if (externs_value) {
     ExtractListOfExterns(scope_->settings()->build_settings(), *externs_value,
                          input_dir_, &config_values_->externs(), err_);
+  }
+
+  // Frameworks
+  const Value* frameworks_value =
+      scope_->GetValue(variables::kFrameworks, true);
+  if (frameworks_value) {
+    std::vector<std::string> frameworks;
+    if (!ExtractListOfStringValues(*frameworks_value, &frameworks, err_))
+      return;
+
+    // All strings must end with ".frameworks".
+    for (const std::string& framework : frameworks) {
+      if (!base::EndsWith(framework, kFrameworkExtension,
+                          base::CompareCase::SENSITIVE)) {
+        *err_ = Err(
+            *frameworks_value,
+            "This frameworks value is wrong."
+            "All listed frameworks name must end with \".framework\" suffix.");
+        return;
+      }
+    }
+
+    config_values_->frameworks().swap(frameworks);
   }
 
   // Precompiled headers.

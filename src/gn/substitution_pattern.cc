@@ -64,6 +64,14 @@ bool SubstitutionPattern::Parse(const std::string& str,
           found_match = true;
           break;
         }
+        if (strcmp(cur_pattern, "{{frameworks}}") == 0) {
+          if (str.compare(next, cur_len, cur_pattern) == 0) {
+            ranges_.push_back(Subrange(sub));
+            cur = next + cur_len;
+            found_match = true;
+            break;
+          }
+        }
       }
     }
 
