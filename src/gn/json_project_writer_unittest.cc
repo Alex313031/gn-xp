@@ -7,10 +7,13 @@
 #include "gn/substitution_list.h"
 #include "gn/target.h"
 #include "gn/test_with_scope.h"
+#include "gn/test_with_scheduler.h"
 #include "util/build_config.h"
 #include "util/test/test.h"
 
-TEST(JSONProjectWriter, ActionWithResponseFile) {
+using JSONWriter = TestWithScheduler;
+
+TEST_F(JSONWriter, ActionWithResponseFile) {
   Err err;
   TestWithScope setup;
 
@@ -47,6 +50,7 @@ TEST(JSONProjectWriter, ActionWithResponseFile) {
       "   \"build_settings\": {\n"
       "      \"build_dir\": \"//out/Debug/\",\n"
       "      \"default_toolchain\": \"//toolchain:default\",\n"
+      "      \"gen_input_files\": [  ],\n"
       "      \"root_path\": \"\"\n"
       "   },\n"
       "   \"targets\": {\n"
@@ -72,7 +76,7 @@ TEST(JSONProjectWriter, ActionWithResponseFile) {
   EXPECT_EQ(expected_json, out);
 }
 
-TEST(JSONProjectWriter, ForEachWithResponseFile) {
+TEST(JSONWriter, ForEachWithResponseFile) {
   Err err;
   TestWithScope setup;
 
