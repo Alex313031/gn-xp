@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "5ef84874_8d11862d",
+        "filename": "build/gen.py",
+        "patchSetId": 8
+      },
+      "lineNbr": 436,
+      "author": {
+        "id": 1000070
+      },
+      "writtenOn": "2020-01-14T15:57:53Z",
+      "side": 1,
+      "message": "I\u0027ve sorted the list of files. If you prefer I can revert the sorting or move to a separate CL.",
+      "revId": "e08d1f8b672f2f672e5aea9e810425c7fa687c47",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": false
+    }
+  ]
+}
