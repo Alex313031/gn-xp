@@ -1,0 +1,106 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6b2483e5_b86d9f90",
+        "filename": "src/gn/command_desc.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 492,
+      "author": {
+        "id": 1000014
+      },
+      "writtenOn": "2020-01-14T00:27:45Z",
+      "side": 1,
+      "message": "Add frameworks?",
+      "revId": "59a1b9adeda83fd5a95a42d47a9bf5c841013da3",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "328001f7_a3a9d6e4",
+        "filename": "src/gn/command_desc.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 493,
+      "author": {
+        "id": 1000014
+      },
+      "writtenOn": "2020-01-14T00:27:45Z",
+      "side": 1,
+      "message": "I don\u0027t think this command supports --blame for the same reason libs don\u0027t.",
+      "revId": "59a1b9adeda83fd5a95a42d47a9bf5c841013da3",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "2e457afe_ab98d90e",
+        "filename": "src/gn/ninja_binary_target_writer.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 316,
+      "author": {
+        "id": 1000014
+      },
+      "writtenOn": "2020-01-14T00:27:45Z",
+      "side": 1,
+      "message": "This makes me nervous where there are two pieces of code (here and in config_values_generator.cc) that need to agree on some string stuff and it wil do weird things or even crash if they don\u0027t.\n\nWhat about having a function along the lines of:\n\n  std::string_view GetFrameworkName(const std::string\u0026 file)\n\nthat strips the \".framework suffix and returns empty on failure. The input checking code can check for the empty string to check for errors and this code can use here. Don\u0027t forget tests for it.",
+      "revId": "59a1b9adeda83fd5a95a42d47a9bf5c841013da3",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "8d48c612_d1b3e61a",
+        "filename": "src/gn/ninja_target_command_util.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 53,
+      "author": {
+        "id": 1000014
+      },
+      "writtenOn": "2020-01-14T00:27:45Z",
+      "side": 1,
+      "message": "Did you mean to hook up the tool variables to this writing code? I\u0027m thinking the test should specify some non-default values for these two flags so we can be sure they come out correctly.",
+      "revId": "59a1b9adeda83fd5a95a42d47a9bf5c841013da3",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "7a4fc0ae_4a53c2ee",
+        "filename": "src/gn/ninja_target_command_util.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 54,
+      "author": {
+        "id": 1000014
+      },
+      "writtenOn": "2020-01-14T00:27:45Z",
+      "side": 1,
+      "message": "Ditto here.",
+      "revId": "59a1b9adeda83fd5a95a42d47a9bf5c841013da3",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "16dbc640_bc35f5c8",
+        "filename": "src/gn/substitution_pattern.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 67,
+      "author": {
+        "id": 1000014
+      },
+      "writtenOn": "2020-01-14T00:27:45Z",
+      "side": 1,
+      "message": "I forget how this code works but I don\u0027t think this should be necessary. It looks like everything should be in the AllSubstitutions list and the above case will handle it. If this really needs to be different we should have a comment about why frameworks needs special handling.",
+      "revId": "59a1b9adeda83fd5a95a42d47a9bf5c841013da3",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": true
+    }
+  ]
+}
