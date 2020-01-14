@@ -133,7 +133,7 @@ int main(int argc, char** argv) {
 #if defined(OS_WIN)
   if (enable_vt_processing.is_valid())
 #else
-  if (isatty(1))
+  if (isatty(1) && getenv("__XCODE_BUILT_PRODUCTS_DIR_PATHS") == NULL)
 #endif
   {
     prefix = "\r";
