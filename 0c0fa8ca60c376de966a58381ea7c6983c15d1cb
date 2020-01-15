@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "0e4e1f08_14568d54",
+        "filename": "src/util/test/gn_test.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 136,
+      "author": {
+        "id": 1000014
+      },
+      "writtenOn": "2020-01-15T23:43:41Z",
+      "side": 1,
+      "message": "I think this should have a comment about why we\u0027re checking for this random variable.",
+      "revId": "0c0fa8ca60c376de966a58381ea7c6983c15d1cb",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": true
+    }
+  ]
+}
