@@ -563,9 +563,9 @@ int Printer::Expr(const ParseNode* root,
       Print(".");
       Expr(accessor->member(), kPrecedenceLowest, std::string());
     } else {
-      CHECK(accessor->index());
+      CHECK(accessor->subscript());
       Print("[");
-      Expr(accessor->index(), kPrecedenceLowest, "]");
+      Expr(accessor->subscript(), kPrecedenceLowest, "]");
     }
   } else if (const BinaryOpNode* binop = root->AsBinaryOp()) {
     CHECK(precedence_.find(binop->op().value()) != precedence_.end());
