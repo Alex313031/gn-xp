@@ -1026,10 +1026,13 @@ bool Printer::ListWillBeMultiline(
   if (end && end->comments() && !end->comments()->before().empty())
     return true;
 
-  // If there's before line comments, make sure we have a place to put them.
+  // If there's before or suffix line comments, make sure we have a place to put
+  // them.
   for (const auto& i : list) {
-    if (i->comments() && !i->comments()->before().empty())
+    if (i->comments() && (!i->comments()->before().empty() ||
+                          !i->comments()->suffix().empty())) {
       return true;
+    }
   }
 
   // When a scope is used as a list entry, it's too complicated to go one a
