@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "567c49ea_b8bd9453",
+        "filename": "src/gn/command_format.cc",
+        "patchSetId": 16
+      },
+      "lineNbr": 291,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2020-01-20T23:14:58Z",
+      "side": 1,
+      "message": "Do you need i? From what I can tell it\u0027s incremented on every iteration and only compared to \u003e 0 to not run the PrintMargin() block if i \u003d\u003d 0, but the !have_empty_line alone protects the i \u003d\u003d 0 case already due to its initial value. Just removing i and the one non-increment reference should be behavior preserving?",
+      "revId": "3ee91caa1f6f4b2adcae10e0844adc645a7d4045",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "0357ccd2_f450a69d",
+        "filename": "src/gn/command_format.cc",
+        "patchSetId": 16
+      },
+      "lineNbr": 327,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2020-01-20T23:14:58Z",
+      "side": 1,
+      "message": "optional: You could do\n\nauto StartLine() \u003d [this, \u0026have_empty_line]() {\n  Trim();\n  Print(\"\\n\");\n  PrintMargin();\n  have_empty_line \u003d true;\n}\n\nat the start of the function and call that at the start of the loop and here. (Maybe even put the !have_empty_line check inside this lambda.)",
+      "revId": "3ee91caa1f6f4b2adcae10e0844adc645a7d4045",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": true
+    }
+  ]
+}
