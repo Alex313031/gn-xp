@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "7a84d2f2_a690d3cc",
+        "filename": "src/gn/command_format.cc",
+        "patchSetId": 15
+      },
+      "lineNbr": 285,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2020-01-20T20:44:01Z",
+      "side": 1,
+      "message": "Do none of the functions in base/strings/string_split.h do the right thing?",
+      "revId": "c4eeb4ec8c07828504c0e97f27a8e5585d550407",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": true
+    }
+  ]
+}
