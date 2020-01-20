@@ -16,6 +16,24 @@
       "revId": "c4eeb4ec8c07828504c0e97f27a8e5585d550407",
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "80ea6d4b_e4d528ee",
+        "filename": "src/gn/command_format.cc",
+        "patchSetId": 15
+      },
+      "lineNbr": 285,
+      "author": {
+        "id": 1000004
+      },
+      "writtenOn": "2020-01-20T20:48:41Z",
+      "side": 1,
+      "message": "Oops, I thought we didn\u0027t have that file in gn. \n\n... says the guy who uses it earlier in the file.\n\nDone",
+      "parentUuid": "7a84d2f2_a690d3cc",
+      "revId": "c4eeb4ec8c07828504c0e97f27a8e5585d550407",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": false
     }
   ]
 }
