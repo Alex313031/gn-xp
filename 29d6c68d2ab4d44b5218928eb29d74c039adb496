@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "d26c0361_a79c1941",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 3
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 1000004
+      },
+      "writtenOn": "2020-01-21T21:42:19Z",
+      "side": 1,
+      "message": "Ironically, commit messages started wrapping in gerrit earlier than character 72 recently. Internal bug 148098058 if you care about that.",
+      "range": {
+        "startLine": 9,
+        "startChar": 66,
+        "endLine": 9,
+        "endChar": 72
+      },
+      "revId": "29d6c68d2ab4d44b5218928eb29d74c039adb496",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": true
+    }
+  ]
+}
