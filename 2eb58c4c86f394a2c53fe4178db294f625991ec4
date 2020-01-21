@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "400270ce_bed31acf",
+        "filename": "src/gn/format_test_data/080.gn",
+        "patchSetId": 4
+      },
+      "lineNbr": 4,
+      "author": {
+        "id": 1000004
+      },
+      "writtenOn": "2020-01-21T19:49:32Z",
+      "side": 1,
+      "message": "This comment1 disappears before this CL, and sane with similar comment7 and comment8. The others are all OK, but seems worth having a few extra styles to confirm.",
+      "range": {
+        "startLine": 4,
+        "startChar": 13,
+        "endLine": 4,
+        "endChar": 23
+      },
+      "revId": "2eb58c4c86f394a2c53fe4178db294f625991ec4",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": true
+    }
+  ]
+}
