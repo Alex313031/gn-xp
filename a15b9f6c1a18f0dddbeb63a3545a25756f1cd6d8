@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "4fb406cf_f223dfce",
+        "filename": "src/gn/command_format.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 500,
+      "author": {
+        "id": 1000014
+      },
+      "writtenOn": "2020-01-22T21:50:58Z",
+      "side": 1,
+      "message": "Optional: I would have done this as:\n\n  if (int result \u003d (x); result \u003e\u003d 0)\n    return result;\n\nand then you don\u0027t need the extra {}.",
+      "revId": "a15b9f6c1a18f0dddbeb63a3545a25756f1cd6d8",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": true
+    }
+  ]
+}
