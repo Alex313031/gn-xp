@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "fee5266b_df0951b3",
+        "filename": "src/gn/json_project_writer.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 224,
+      "author": {
+        "id": 1000014
+      },
+      "writtenOn": "2020-01-24T22:37:00Z",
+      "side": 1,
+      "message": "Are you sure we want to normalize these separators? Do we do that for other files (say, sources) in the JSON input? It doesn\u0027t look like it to me in which case I\u0027d prefer to leave it out here (and below) as well.",
+      "revId": "666180e17bde8f284a89e3ae4f08b7fb0ac7ee97",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "98f9978c_afb20378",
+        "filename": "src/gn/json_project_writer.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 227,
+      "author": {
+        "id": 1000014
+      },
+      "writtenOn": "2020-01-24T22:37:00Z",
+      "side": 1,
+      "message": "clang-format please (should wrap to 80 cols)",
+      "revId": "666180e17bde8f284a89e3ae4f08b7fb0ac7ee97",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": true
+    }
+  ]
+}
