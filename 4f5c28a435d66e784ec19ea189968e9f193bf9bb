@@ -16,6 +16,24 @@
       "revId": "4f5c28a435d66e784ec19ea189968e9f193bf9bb",
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "f1277f2d_c6babf08",
+        "filename": "src/gn/json_project_writer.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 212,
+      "author": {
+        "id": 1000031
+      },
+      "writtenOn": "2020-01-29T12:10:06Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "bd7104fe_d2c499f1",
+      "revId": "4f5c28a435d66e784ec19ea189968e9f193bf9bb",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": false
     }
   ]
 }

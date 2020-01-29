@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "f1d9ec0b_0bf31f94",
+        "filename": "src/gn/json_project_writer_unittest.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 53,
+      "author": {
+        "id": 1000031
+      },
+      "writtenOn": "2020-01-29T12:10:06Z",
+      "side": 1,
+      "message": "sadly there are no input files g_scheduler ...",
+      "revId": "2c3ab3b4fb1f894d51d2b400e7dff6f5c0187d9c",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": true
+    }
+  ]
+}
