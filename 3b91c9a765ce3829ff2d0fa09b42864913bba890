@@ -1,0 +1,222 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ca6edc2c_fbaf0fd2",
+        "filename": "src/gn/unique_key.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 22,
+      "author": {
+        "id": 1000004
+      },
+      "writtenOn": "2020-01-30T20:48:40Z",
+      "side": 1,
+      "message": "address",
+      "range": {
+        "startLine": 22,
+        "startChar": 59,
+        "endLine": 22,
+        "endChar": 65
+      },
+      "revId": "3b91c9a765ce3829ff2d0fa09b42864913bba890",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "4d2569a2_1f89f49f",
+        "filename": "src/gn/unique_key.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 67,
+      "author": {
+        "id": 1000004
+      },
+      "writtenOn": "2020-01-30T20:48:40Z",
+      "side": 1,
+      "message": "Why do you need to cast away const here?",
+      "range": {
+        "startLine": 67,
+        "startChar": 18,
+        "endLine": 67,
+        "endChar": 28
+      },
+      "revId": "3b91c9a765ce3829ff2d0fa09b42864913bba890",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "9162760a_f3976674",
+        "filename": "src/gn/unique_key.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 73,
+      "author": {
+        "id": 1000004
+      },
+      "writtenOn": "2020-01-30T20:48:40Z",
+      "side": 1,
+      "message": "Could you use *node-\u003ekey here please, I was confused by using indexing as it looks like it\u0027s comparing the first character of the string or something.",
+      "range": {
+        "startLine": 73,
+        "startChar": 32,
+        "endLine": 73,
+        "endChar": 44
+      },
+      "revId": "3b91c9a765ce3829ff2d0fa09b42864913bba890",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "7eba4877_0099d207",
+        "filename": "src/gn/unique_key.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 118,
+      "author": {
+        "id": 1000004
+      },
+      "writtenOn": "2020-01-30T20:48:40Z",
+      "side": 1,
+      "message": "unsigned int, and below",
+      "range": {
+        "startLine": 118,
+        "startChar": 19,
+        "endLine": 118,
+        "endChar": 27
+      },
+      "revId": "3b91c9a765ce3829ff2d0fa09b42864913bba890",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "d30cffc6_fc73ef77",
+        "filename": "src/gn/unique_key.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 120,
+      "author": {
+        "id": 1000004
+      },
+      "writtenOn": "2020-01-30T20:48:40Z",
+      "side": 1,
+      "message": "clang-format",
+      "range": {
+        "startLine": 120,
+        "startChar": 17,
+        "endLine": 120,
+        "endChar": 21
+      },
+      "revId": "3b91c9a765ce3829ff2d0fa09b42864913bba890",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "22c4d50c_e7acc043",
+        "filename": "src/gn/unique_key.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 122,
+      "author": {
+        "id": 1000004
+      },
+      "writtenOn": "2020-01-30T20:48:40Z",
+      "side": 1,
+      "message": "What\u0027s going on here?",
+      "revId": "3b91c9a765ce3829ff2d0fa09b42864913bba890",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "b74729d3_aa1677de",
+        "filename": "src/gn/unique_key.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 153,
+      "author": {
+        "id": 1000004
+      },
+      "writtenOn": "2020-01-30T20:48:40Z",
+      "side": 1,
+      "message": "back()?",
+      "range": {
+        "startLine": 153,
+        "startChar": 33,
+        "endLine": 153,
+        "endChar": 42
+      },
+      "revId": "3b91c9a765ce3829ff2d0fa09b42864913bba890",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "f4fc6e77_928c6c3c",
+        "filename": "src/gn/unique_key.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 120,
+      "author": {
+        "id": 1000004
+      },
+      "writtenOn": "2020-01-30T20:48:40Z",
+      "side": 1,
+      "message": "So tantalizing!",
+      "range": {
+        "startLine": 120,
+        "startChar": 55,
+        "endLine": 120,
+        "endChar": 73
+      },
+      "revId": "3b91c9a765ce3829ff2d0fa09b42864913bba890",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "a2ed931c_b4d9c07b",
+        "filename": "src/gn/unique_key.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 122,
+      "author": {
+        "id": 1000004
+      },
+      "writtenOn": "2020-01-30T20:48:40Z",
+      "side": 1,
+      "message": "I\u0027m not sure about using \"Fast\" in the name, but I get that you want to indicate that it\u0027s a shallow comparison.",
+      "range": {
+        "startLine": 122,
+        "startChar": 9,
+        "endLine": 122,
+        "endChar": 13
+      },
+      "revId": "3b91c9a765ce3829ff2d0fa09b42864913bba890",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "81dc567c_d46b5f1b",
+        "filename": "src/gn/unique_key_unittest.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 104,
+      "author": {
+        "id": 1000004
+      },
+      "writtenOn": "2020-01-30T20:48:40Z",
+      "side": 1,
+      "message": "Maybe a test that vaguely exercises the size of slabs (\u003e 128 keys, etc.)",
+      "revId": "3b91c9a765ce3829ff2d0fa09b42864913bba890",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": true
+    }
+  ]
+}
