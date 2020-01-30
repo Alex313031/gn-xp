@@ -28,6 +28,7 @@ ios_app_bundle("hello") {
 
   deps = [
     ":storyboards",
+    "//app/parser",
     "//shared:hello_framework",
     "//shared:hello_framework+bundle",
   ]

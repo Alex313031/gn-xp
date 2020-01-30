@@ -4,6 +4,8 @@
 
 #import "app/SceneDelegate.h"
 
+#import "app/parser/Sanitizer-Swift.h"
+
 @implementation SceneDelegate
 
 - (void)scene:(UIScene*)scene
@@ -15,6 +17,7 @@
 }
 
 - (void)sceneDidBecomeActive:(UIScene*)scene {
+  NSLog(@"%@", [[[Sanitizer alloc] init] sanitizeWithJSON:@"{}"]);
 }
 
 - (void)sceneWillResignActive:(UIScene*)scene {
