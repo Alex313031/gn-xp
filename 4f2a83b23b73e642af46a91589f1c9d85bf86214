@@ -2,6 +2,29 @@
   "comments": [
     {
       "key": {
+        "uuid": "228f1b1d_e7bc3dbc",
+        "filename": "src/gn/unique_key.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 23,
+      "author": {
+        "id": 1000014
+      },
+      "writtenOn": "2020-01-31T23:23:35Z",
+      "side": 1,
+      "message": "address",
+      "range": {
+        "startLine": 23,
+        "startChar": 59,
+        "endLine": 23,
+        "endChar": 65
+      },
+      "revId": "4f2a83b23b73e642af46a91589f1c9d85bf86214",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "4046f519_40f8d0e1",
         "filename": "src/gn/unique_key.cc",
         "patchSetId": 3
@@ -145,6 +168,24 @@
       "writtenOn": "2020-01-31T23:21:17Z",
       "side": 1,
       "message": "Might this be called an AtomicString? That\u0027s how I\u0027ve seen such a thing named in other places.",
+      "revId": "4f2a83b23b73e642af46a91589f1c9d85bf86214",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "48c85621_77eb68d3",
+        "filename": "src/gn/unique_key.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 56,
+      "author": {
+        "id": 1000014
+      },
+      "writtenOn": "2020-01-31T23:23:35Z",
+      "side": 1,
+      "message": "Or StringAtom",
+      "parentUuid": "f294940a_7cc54f83",
       "revId": "4f2a83b23b73e642af46a91589f1c9d85bf86214",
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
       "unresolved": true
