@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "1daaecff_0e3f0edd",
+        "filename": "src/gn/unique_key.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 22,
+      "author": {
+        "id": 1000067
+      },
+      "writtenOn": "2020-01-31T15:32:19Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ca6edc2c_fbaf0fd2",
+      "range": {
+        "startLine": 22,
+        "startChar": 59,
+        "endLine": 22,
+        "endChar": 65
+      },
+      "revId": "3b91c9a765ce3829ff2d0fa09b42864913bba890",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "4d2569a2_1f89f49f",
         "filename": "src/gn/unique_key.cc",
         "patchSetId": 2
@@ -36,6 +60,30 @@
       "writtenOn": "2020-01-30T20:48:40Z",
       "side": 1,
       "message": "Why do you need to cast away const here?",
+      "range": {
+        "startLine": 67,
+        "startChar": 18,
+        "endLine": 67,
+        "endChar": 28
+      },
+      "revId": "3b91c9a765ce3829ff2d0fa09b42864913bba890",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "3ed00424_79ce1997",
+        "filename": "src/gn/unique_key.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 67,
+      "author": {
+        "id": 1000067
+      },
+      "writtenOn": "2020-01-31T15:32:19Z",
+      "side": 1,
+      "message": "The method is const but returns a mutable pointer. I\u0027ve moved the const to the return instead and added a comment to explain this.",
+      "parentUuid": "4d2569a2_1f89f49f",
       "range": {
         "startLine": 67,
         "startChar": 18,
@@ -71,6 +119,30 @@
     },
     {
       "key": {
+        "uuid": "157ad399_af35efff",
+        "filename": "src/gn/unique_key.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 73,
+      "author": {
+        "id": 1000067
+      },
+      "writtenOn": "2020-01-31T15:32:19Z",
+      "side": 1,
+      "message": "Sure. Done.",
+      "parentUuid": "9162760a_f3976674",
+      "range": {
+        "startLine": 73,
+        "startChar": 32,
+        "endLine": 73,
+        "endChar": 44
+      },
+      "revId": "3b91c9a765ce3829ff2d0fa09b42864913bba890",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "7eba4877_0099d207",
         "filename": "src/gn/unique_key.cc",
         "patchSetId": 2
@@ -91,6 +163,30 @@
       "revId": "3b91c9a765ce3829ff2d0fa09b42864913bba890",
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "f858b6c4_22b9af62",
+        "filename": "src/gn/unique_key.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 118,
+      "author": {
+        "id": 1000067
+      },
+      "writtenOn": "2020-01-31T15:32:19Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "7eba4877_0099d207",
+      "range": {
+        "startLine": 118,
+        "startChar": 19,
+        "endLine": 118,
+        "endChar": 27
+      },
+      "revId": "3b91c9a765ce3829ff2d0fa09b42864913bba890",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": false
     },
     {
       "key": {
@@ -117,6 +213,30 @@
     },
     {
       "key": {
+        "uuid": "453f98ad_a32d08ba",
+        "filename": "src/gn/unique_key.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 120,
+      "author": {
+        "id": 1000067
+      },
+      "writtenOn": "2020-01-31T15:32:19Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "d30cffc6_fc73ef77",
+      "range": {
+        "startLine": 120,
+        "startChar": 17,
+        "endLine": 120,
+        "endChar": 21
+      },
+      "revId": "3b91c9a765ce3829ff2d0fa09b42864913bba890",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "22c4d50c_e7acc043",
         "filename": "src/gn/unique_key.cc",
         "patchSetId": 2
@@ -128,6 +248,24 @@
       "writtenOn": "2020-01-30T20:48:40Z",
       "side": 1,
       "message": "What\u0027s going on here?",
+      "revId": "3b91c9a765ce3829ff2d0fa09b42864913bba890",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "f66a9636_42973803",
+        "filename": "src/gn/unique_key.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 122,
+      "author": {
+        "id": 1000067
+      },
+      "writtenOn": "2020-01-31T15:32:19Z",
+      "side": 1,
+      "message": "I\u0027ve added a comment explaining what happens. The union is used to create a struct that as the same alignment and size as std::string, but doesn\u0027t need default-initialization code. This very slightly speeds up Slab allocation and string initialization. Inherited from an early prototype, it may not be strictly needed though, but at least reduces the generated code.",
+      "parentUuid": "22c4d50c_e7acc043",
       "revId": "3b91c9a765ce3829ff2d0fa09b42864913bba890",
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
       "unresolved": true
@@ -157,6 +295,30 @@
     },
     {
       "key": {
+        "uuid": "59564a49_f2c57496",
+        "filename": "src/gn/unique_key.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 153,
+      "author": {
+        "id": 1000067
+      },
+      "writtenOn": "2020-01-31T15:32:19Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "b74729d3_aa1677de",
+      "range": {
+        "startLine": 153,
+        "startChar": 33,
+        "endLine": 153,
+        "endChar": 42
+      },
+      "revId": "3b91c9a765ce3829ff2d0fa09b42864913bba890",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "f4fc6e77_928c6c3c",
         "filename": "src/gn/unique_key.h",
         "patchSetId": 2
@@ -168,6 +330,30 @@
       "writtenOn": "2020-01-30T20:48:40Z",
       "side": 1,
       "message": "So tantalizing!",
+      "range": {
+        "startLine": 120,
+        "startChar": 55,
+        "endLine": 120,
+        "endChar": 73
+      },
+      "revId": "3b91c9a765ce3829ff2d0fa09b42864913bba890",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "4acf5bcb_6fbd8df8",
+        "filename": "src/gn/unique_key.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 120,
+      "author": {
+        "id": 1000067
+      },
+      "writtenOn": "2020-01-31T15:32:19Z",
+      "side": 1,
+      "message": "Ack :-) Fixed.",
+      "parentUuid": "f4fc6e77_928c6c3c",
       "range": {
         "startLine": 120,
         "startChar": 55,
@@ -203,6 +389,30 @@
     },
     {
       "key": {
+        "uuid": "ebcf7a7a_f6d939a2",
+        "filename": "src/gn/unique_key.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 122,
+      "author": {
+        "id": 1000067
+      },
+      "writtenOn": "2020-01-31T15:32:19Z",
+      "side": 1,
+      "message": "I\u0027ve renamed these to Ptr{Hash,Equal,Compare} then.",
+      "parentUuid": "a2ed931c_b4d9c07b",
+      "range": {
+        "startLine": 122,
+        "startChar": 9,
+        "endLine": 122,
+        "endChar": 13
+      },
+      "revId": "3b91c9a765ce3829ff2d0fa09b42864913bba890",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "81dc567c_d46b5f1b",
         "filename": "src/gn/unique_key_unittest.cc",
         "patchSetId": 2
@@ -214,6 +424,24 @@
       "writtenOn": "2020-01-30T20:48:40Z",
       "side": 1,
       "message": "Maybe a test that vaguely exercises the size of slabs (\u003e 128 keys, etc.)",
+      "revId": "3b91c9a765ce3829ff2d0fa09b42864913bba890",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "080e5338_ca761f7d",
+        "filename": "src/gn/unique_key_unittest.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 104,
+      "author": {
+        "id": 1000067
+      },
+      "writtenOn": "2020-01-31T15:32:19Z",
+      "side": 1,
+      "message": "Yes, good idea. Done!",
+      "parentUuid": "81dc567c_d46b5f1b",
       "revId": "3b91c9a765ce3829ff2d0fa09b42864913bba890",
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
       "unresolved": true
