@@ -55,6 +55,12 @@ class BuildSettings {
   base::FilePath python_path() const { return python_path_; }
   void set_python_path(const base::FilePath& p) { python_path_ = p; }
 
+  base::FilePath python3_path() const { return python3_path_; }
+  void set_python3_path(const base::FilePath& p) { python3_path_ = p; }
+
+  base::FilePath vpython3_path() const { return vpython3_path_; }
+  void set_vpython3_path(const base::FilePath& p) { vpython3_path_ = p; }
+
   const SourceFile& build_config_file() const { return build_config_file_; }
   void set_build_config_file(const SourceFile& f) { build_config_file_ = f; }
 
@@ -125,6 +131,8 @@ class BuildSettings {
   std::string root_path_utf8_;
   base::FilePath secondary_source_path_;
   base::FilePath python_path_;
+  base::FilePath python3_path_;
+  base::FilePath vpython3_path_;
 
   SourceFile build_config_file_;
   SourceFile arg_file_template_path_;

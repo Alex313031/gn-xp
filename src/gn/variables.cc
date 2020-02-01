@@ -271,6 +271,26 @@ const char kPythonPath_Help[] =
   automatically finds it for you.
 )";
 
+const char kPython3Path[] = "python3_path";
+const char kPython3Path_HelpShort[] =
+    "python3_path: [string] Absolute path of Python 3.";
+const char kPython3Path_Help[] =
+    R"(python3_path: Absolute path of Python 3.
+
+  Normally used in toolchain definitions if running some command requires
+  Python 3.
+)";
+
+const char kVPython3Path[] = "vpython3_path";
+const char kVPython3Path_HelpShort[] =
+    "vpython3_path: [string] Absolute path of vpython3.";
+const char kVPython3Path_Help[] =
+    R"(vpython3_path: Absolute path of vpython3.
+
+  Normally used in toolchain definitions if running some command requires
+  vpython3.
+)";
+
 const char kRootBuildDir[] = "root_build_dir";
 const char kRootBuildDir_HelpShort[] =
     "root_build_dir: [string] Directory where build commands are run.";
@@ -2192,6 +2212,8 @@ const VariableInfoMap& GetBuiltinVariables() {
     INSERT_VARIABLE(HostOs)
     INSERT_VARIABLE(Invoker)
     INSERT_VARIABLE(PythonPath)
+    INSERT_VARIABLE(Python3Path)
+    INSERT_VARIABLE(VPython3Path)
     INSERT_VARIABLE(RootBuildDir)
     INSERT_VARIABLE(RootGenDir)
     INSERT_VARIABLE(RootOutDir)

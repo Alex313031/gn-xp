@@ -366,6 +366,8 @@ bool Setup::DoSetup(const std::string& build_dir,
   }
   if (!FillPythonPath(cmdline))
     return false;
+  FillPython3Path();
+  FillVPython3Path();
 
   // Check for unused variables in the .gn file.
   Err err;
@@ -717,6 +719,24 @@ bool Setup::FillPythonPath(const base::CommandLine& cmdline) {
 #endif
   }
   return true;
+}
+
+// Change to bool when this does something that can fail.
+void Setup::FillPython3Path() {
+#if defined(OS_WIN)
+  build_settings_.set_python3_path(base::FilePath("python3.exe"));
+#else
+  build_settings_.set_python3_path(base::FilePath("python3"));
+#endif
+}
+
+// Change to bool when this does something that can fail.
+void Setup::FillVPython3Path() {
+#if defined(OS_WIN)
+  build_settings_.set_python3_path(base::FilePath("vpython3.exe"));
+#else
+  build_settings_.set_python3_path(base::FilePath("vpython3"));
+#endif
 }
 
 bool Setup::RunConfigFile() {

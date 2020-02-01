@@ -25,7 +25,10 @@ const Value* ScopePerFileProvider::GetProgrammaticValue(
     return GetDefaultToolchain();
   if (ident == variables::kPythonPath)
     return GetPythonPath();
-
+  if (ident == variables::kPython3Path)
+    return GetPython3Path();
+  if (ident == variables::kVPython3Path)
+    return GetVPython3Path();
   if (ident == variables::kRootBuildDir)
     return GetRootBuildDir();
   if (ident == variables::kRootGenDir)
@@ -68,6 +71,24 @@ const Value* ScopePerFileProvider::GetPythonPath() {
         FilePathToUTF8(scope_->settings()->build_settings()->python_path()));
   }
   return python_path_.get();
+}
+
+const Value* ScopePerFileProvider::GetPython3Path() {
+  if (!python3_path_) {
+    python3_path_ = std::make_unique<Value>(
+        nullptr,
+        FilePathToUTF8(scope_->settings()->build_settings()->python3_path()));
+  }
+  return python3_path_.get();
+}
+
+const Value* ScopePerFileProvider::GetVPython3Path() {
+  if (!vpython3_path_) {
+    vpython3_path_ = std::make_unique<Value>(
+        nullptr,
+        FilePathToUTF8(scope_->settings()->build_settings()->vpython3_path()));
+  }
+  return vpython3_path_.get();
 }
 
 const Value* ScopePerFileProvider::GetRootBuildDir() {

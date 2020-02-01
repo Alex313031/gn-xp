@@ -27,6 +27,8 @@ class ScopePerFileProvider : public Scope::ProgrammaticProvider {
   const Value* GetCurrentToolchain();
   const Value* GetDefaultToolchain();
   const Value* GetPythonPath();
+  const Value* GetPython3Path();
+  const Value* GetVPython3Path();
   const Value* GetRootBuildDir();
   const Value* GetRootGenDir();
   const Value* GetRootOutDir();
@@ -39,6 +41,8 @@ class ScopePerFileProvider : public Scope::ProgrammaticProvider {
   std::unique_ptr<Value> current_toolchain_;
   std::unique_ptr<Value> default_toolchain_;
   std::unique_ptr<Value> python_path_;
+  std::unique_ptr<Value> python3_path_;
+  std::unique_ptr<Value> vpython3_path_;
   std::unique_ptr<Value> root_build_dir_;
   std::unique_ptr<Value> root_gen_dir_;
   std::unique_ptr<Value> root_out_dir_;

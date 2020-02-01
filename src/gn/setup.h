@@ -142,6 +142,9 @@ class Setup {
   // it to just "python".
   bool FillPythonPath(const base::CommandLine& cmdline);
 
+  void FillPython3Path();
+  void FillVPython3Path();
+
   // Run config file.
   bool RunConfigFile();
 
