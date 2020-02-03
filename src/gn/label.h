@@ -10,6 +10,7 @@
 #include <stddef.h>
 
 #include "gn/source_dir.h"
+#include "gn/string_atom.h"
 
 class Err;
 class Value;
@@ -42,10 +43,12 @@ class Label {
   bool is_null() const { return dir_.is_null(); }
 
   const SourceDir& dir() const { return dir_; }
-  const std::string& name() const { return name_; }
+  const std::string& name() const { return name_.str(); }
+  StringAtom name_atom() const { return name_; }
 
   const SourceDir& toolchain_dir() const { return toolchain_dir_; }
-  const std::string& toolchain_name() const { return toolchain_name_; }
+  const std::string& toolchain_name() const { return toolchain_name_.str(); }
+  StringAtom toolchain_name_atom() const { return toolchain_name_; }
 
   // Returns the current label's toolchain as its own Label.
   Label GetToolchainLabel() const;
@@ -65,9 +68,9 @@ class Label {
   std::string GetUserVisibleName(const Label& default_toolchain) const;
 
   bool operator==(const Label& other) const {
-    return name_ == other.name_ && dir_ == other.dir_ &&
+    return name_.SameAs(other.name_) && dir_ == other.dir_ &&
            toolchain_dir_ == other.toolchain_dir_ &&
-           toolchain_name_ == other.toolchain_name_;
+           toolchain_name_.SameAs(other.toolchain_name_);
   }
   bool operator!=(const Label& other) const { return !operator==(other); }
   bool operator<(const Label& other) const {
@@ -80,28 +83,46 @@ class Label {
   // other object.
   bool ToolchainsEqual(const Label& other) const {
     return toolchain_dir_ == other.toolchain_dir_ &&
-           toolchain_name_ == other.toolchain_name_;
+           toolchain_name_.SameAs(other.toolchain_name_);
   }
 
+  size_t hash() const { return hash_; }
+
  private:
+  Label(SourceDir dir, StringAtom name) : dir_(dir), name_(name) {}
+
+  Label(SourceDir dir,
+        StringAtom name,
+        SourceDir toolchain_dir,
+        StringAtom toolchain_name)
+      : dir_(dir),
+        name_(name),
+        toolchain_dir_(toolchain_dir),
+        toolchain_name_(toolchain_name) {}
+
+  static size_t ComputeHash(SourceDir dir,
+                            StringAtom name,
+                            SourceDir toolchain_dir,
+                            StringAtom toolchain_name) {
+    return ((dir.hash() * 131 + name.hash()) * 131 + toolchain_dir.hash()) *
+               131 +
+           toolchain_name.hash();
+  }
+
   SourceDir dir_;
-  std::string name_;
+  StringAtom name_;
 
   SourceDir toolchain_dir_;
-  std::string toolchain_name_;
+  StringAtom toolchain_name_;
+
+  size_t hash_ = ComputeHash(dir_, name_, toolchain_dir_, toolchain_name_);
 };
 
 namespace std {
 
 template <>
 struct hash<Label> {
-  std::size_t operator()(const Label& v) const {
-    hash<std::string> stringhash;
-    return ((stringhash(v.dir().value()) * 131 + stringhash(v.name())) * 131 +
-            stringhash(v.toolchain_dir().value())) *
-               131 +
-           stringhash(v.toolchain_name());
-  }
+  std::size_t operator()(const Label& v) const { return v.hash(); }
 };
 
 }  // namespace std
