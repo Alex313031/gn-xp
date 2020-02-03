@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "833212a3_4c750609",
+        "filename": "src/gn/unique_key.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 23,
+      "author": {
+        "id": 1000067
+      },
+      "writtenOn": "2020-02-03T10:55:24Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "228f1b1d_e7bc3dbc",
+      "range": {
+        "startLine": 23,
+        "startChar": 59,
+        "endLine": 23,
+        "endChar": 65
+      },
+      "revId": "4f2a83b23b73e642af46a91589f1c9d85bf86214",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "4046f519_40f8d0e1",
         "filename": "src/gn/unique_key.cc",
         "patchSetId": 3
@@ -36,6 +60,30 @@
       "writtenOn": "2020-01-31T16:39:39Z",
       "side": 1,
       "message": "Have you tried comparing it against absl::flat_hash_set by any chance?",
+      "range": {
+        "startLine": 47,
+        "startChar": 3,
+        "endLine": 47,
+        "endChar": 19
+      },
+      "revId": "4f2a83b23b73e642af46a91589f1c9d85bf86214",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "ad70a7f8_b6924cd4",
+        "filename": "src/gn/unique_key.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 47,
+      "author": {
+        "id": 1000067
+      },
+      "writtenOn": "2020-02-03T10:55:24Z",
+      "side": 1,
+      "message": "No, I\u0027ve only tried what I could use from the standard library + src/{base,utils} since Abseil is not part of the GN source tree. I would expect it definitely goes a little faster.",
+      "parentUuid": "4046f519_40f8d0e1",
       "range": {
         "startLine": 47,
         "startChar": 3,
@@ -71,6 +119,30 @@
     },
     {
       "key": {
+        "uuid": "5ce75612_15abff6a",
+        "filename": "src/gn/unique_key.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 144,
+      "author": {
+        "id": 1000067
+      },
+      "writtenOn": "2020-02-03T10:55:24Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "5d1a97f1_b567e584",
+      "range": {
+        "startLine": 144,
+        "startChar": 21,
+        "endLine": 144,
+        "endChar": 22
+      },
+      "revId": "4f2a83b23b73e642af46a91589f1c9d85bf86214",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "04392140_6732db20",
         "filename": "src/gn/unique_key.cc",
         "patchSetId": 3
@@ -94,6 +166,30 @@
     },
     {
       "key": {
+        "uuid": "09d756a9_522906eb",
+        "filename": "src/gn/unique_key.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 161,
+      "author": {
+        "id": 1000067
+      },
+      "writtenOn": "2020-02-03T10:55:24Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "04392140_6732db20",
+      "range": {
+        "startLine": 141,
+        "startChar": 0,
+        "endLine": 161,
+        "endChar": 4
+      },
+      "revId": "4f2a83b23b73e642af46a91589f1c9d85bf86214",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "7dc1dcaa_aaf01c21",
         "filename": "src/gn/unique_key.cc",
         "patchSetId": 3
@@ -108,6 +204,24 @@
       "revId": "4f2a83b23b73e642af46a91589f1c9d85bf86214",
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "691d86a1_9163c135",
+        "filename": "src/gn/unique_key.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 222,
+      "author": {
+        "id": 1000067
+      },
+      "writtenOn": "2020-02-03T10:55:24Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "7dc1dcaa_aaf01c21",
+      "revId": "4f2a83b23b73e642af46a91589f1c9d85bf86214",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": false
     },
     {
       "key": {
@@ -134,6 +248,30 @@
     },
     {
       "key": {
+        "uuid": "ec6703f0_ac437179",
+        "filename": "src/gn/unique_key.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 34,
+      "author": {
+        "id": 1000067
+      },
+      "writtenOn": "2020-02-03T10:55:24Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "97a40c4e_caf11f4f",
+      "range": {
+        "startLine": 34,
+        "startChar": 56,
+        "endLine": 34,
+        "endChar": 68
+      },
+      "revId": "4f2a83b23b73e642af46a91589f1c9d85bf86214",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "5f927ce7_e2958538",
         "filename": "src/gn/unique_key.h",
         "patchSetId": 3
@@ -154,6 +292,30 @@
       "revId": "4f2a83b23b73e642af46a91589f1c9d85bf86214",
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "92c04862_4b64526d",
+        "filename": "src/gn/unique_key.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 43,
+      "author": {
+        "id": 1000067
+      },
+      "writtenOn": "2020-02-03T10:55:24Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "5f927ce7_e2958538",
+      "range": {
+        "startLine": 43,
+        "startChar": 57,
+        "endLine": 43,
+        "endChar": 69
+      },
+      "revId": "4f2a83b23b73e642af46a91589f1c9d85bf86214",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": false
     },
     {
       "key": {
@@ -186,6 +348,24 @@
       "side": 1,
       "message": "Or StringAtom",
       "parentUuid": "f294940a_7cc54f83",
+      "revId": "4f2a83b23b73e642af46a91589f1c9d85bf86214",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "28ae0cfa_5d9d35a6",
+        "filename": "src/gn/unique_key.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 56,
+      "author": {
+        "id": 1000067
+      },
+      "writtenOn": "2020-02-03T10:55:24Z",
+      "side": 1,
+      "message": "Renamed to StringAtom (which is common for Win32 and X11 developers). \"AtomicString\" is slightly ambiguous (it could mean a shared string that can be atomically updated, and that\u0027s definitely not what is meant here).",
+      "parentUuid": "48c85621_77eb68d3",
       "revId": "4f2a83b23b73e642af46a91589f1c9d85bf86214",
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
       "unresolved": true
