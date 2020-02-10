@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "5807d0fa_ec18001c",
+        "filename": "src/base/files/file_util_win.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1000014
+      },
+      "writtenOn": "2020-02-10T19:13:09Z",
+      "side": 1,
+      "message": "I don\u0027t follow this move. Normally everything must be after windows.h. If this really has to be first there should be a clear comment about why.",
+      "revId": "a6d0e43bd88199198e3d055933a3f23bf9c5daa8",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": true
+    }
+  ]
+}
