@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "eaa6574a_11cca7d6",
+        "filename": "src/gn/desc_builder.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 325,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-02-10T20:02:12Z",
+      "side": 1,
+      "message": "Minot nit, can you make sure these fit into 80 columns (or just run git-clang-format on your change)?",
+      "range": {
+        "startLine": 324,
+        "startChar": 0,
+        "endLine": 325,
+        "endChar": 82
+      },
+      "revId": "c156c8420be82cdf27709128c4ccb02f466b11e4",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": true
+    }
+  ]
+}
