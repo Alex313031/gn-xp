@@ -34,6 +34,24 @@
       "revId": "a6d0e43bd88199198e3d055933a3f23bf9c5daa8",
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "43ac71a1_1d3c7f45",
+        "filename": "src/base/files/file_util_win.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1000014
+      },
+      "writtenOn": "2020-02-11T17:06:43Z",
+      "side": 1,
+      "message": "We should add a comment then:\n\n  // windows.h includes winsock.h which isn\u0027t compatible with winsock2.h. To use winsock2.h\n  // you have to include it first.",
+      "parentUuid": "c1ad8aff_c61beb87",
+      "revId": "a6d0e43bd88199198e3d055933a3f23bf9c5daa8",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": true
     }
   ]
 }
