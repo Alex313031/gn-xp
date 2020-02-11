@@ -16,6 +16,24 @@
       "revId": "a6d0e43bd88199198e3d055933a3f23bf9c5daa8",
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "c1ad8aff_c61beb87",
+        "filename": "src/base/files/file_util_win.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1000031
+      },
+      "writtenOn": "2020-02-11T16:13:56Z",
+      "side": 1,
+      "message": "This is what mingw told me to do 😉 .\n\nHere https://stackoverflow.com/questions/29069904/why-does-mingw-w64-require-winsock2-to-be-manually-included it\u0027s an educated explanation why it should be before.\nAgain, I want to stress that I didn\u0027t touched windows in years ...",
+      "parentUuid": "5807d0fa_ec18001c",
+      "revId": "a6d0e43bd88199198e3d055933a3f23bf9c5daa8",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": true
     }
   ]
 }
