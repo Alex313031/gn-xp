@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "df03f805_71d3a7bd",
+        "filename": "src/gn/analyzer.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 104,
+      "author": {
+        "id": 1000014
+      },
+      "writtenOn": "2020-02-11T22:47:34Z",
+      "side": 1,
+      "message": "Nice",
+      "revId": "ab8de0744e76424b56949cc5b15d50a0dad64164",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "49931106_7f58e170",
+        "filename": "src/gn/scheduler.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 150,
+      "author": {
+        "id": 1000014
+      },
+      "writtenOn": "2020-02-11T22:47:34Z",
+      "side": 1,
+      "message": "scheduler.cc inserts into this and I don\u0027t see how that can compile as-is with this change.",
+      "revId": "ab8de0744e76424b56949cc5b15d50a0dad64164",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": true
+    }
+  ]
+}
