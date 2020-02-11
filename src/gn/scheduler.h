@@ -8,6 +8,7 @@
 #include <condition_variable>
 #include <functional>
 #include <map>
+#include <unordered_set>
 #include <mutex>
 
 #include "base/atomic_ref_count.h"
@@ -146,7 +147,7 @@ class Scheduler {
   std::vector<SourceFile> written_files_;
   std::vector<const Target*> write_runtime_deps_targets_;
   std::multimap<SourceFile, const Target*> unknown_generated_inputs_;
-  std::map<SourceFile, bool> generated_files_;
+  std::unordered_set<SourceFile> generated_files_;
 
   DISALLOW_COPY_AND_ASSIGN(Scheduler);
 };
