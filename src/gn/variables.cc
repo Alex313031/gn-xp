@@ -49,6 +49,19 @@ Some possible values
   - "win"
 )";
 
+const char kGnVersion[] = "gn_version";
+const char kGnVersion_HelpShort[] =
+    "gn_version: [number] The version of gn.";
+const char kGnVersion_Help[] =
+  R"(gn_version: [number] The version of gn.
+
+  Corresponds to the number printed by `gn --version`.
+
+Example
+
+  assert(gn_version >= 1700, "need GN version 1700 for the frobulate feature")
+)";
+
 const char kInvoker[] = "invoker";
 const char kInvoker_HelpShort[] =
     "invoker: [string] The invoking scope inside a template.";
@@ -2191,6 +2204,7 @@ const VariableInfoMap& GetBuiltinVariables() {
     INSERT_VARIABLE(HostCpu)
     INSERT_VARIABLE(HostOs)
     INSERT_VARIABLE(Invoker)
+    INSERT_VARIABLE(GnVersion)
     INSERT_VARIABLE(PythonPath)
     INSERT_VARIABLE(RootBuildDir)
     INSERT_VARIABLE(RootGenDir)
