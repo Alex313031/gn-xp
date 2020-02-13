@@ -1,0 +1,61 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "4fd29131_4877f188",
+        "filename": "src/gn/command_gen.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 383,
+      "author": {
+        "id": 1000070
+      },
+      "writtenOn": "2020-02-13T19:51:29Z",
+      "side": 1,
+      "message": "Add documentation for --ninja-mode here.\n\n  --ninja-mode\u003d[default|auto]\n      Controls whether the generated project uses \"ninja\" or \"autoninja\".",
+      "revId": "76bf221d7fcf7bcf2f8db06345e65f0d317e8572",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "0cbae572_295173fe",
+        "filename": "src/gn/xcode_writer.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 74,
+      "author": {
+        "id": 1000070
+      },
+      "writtenOn": "2020-02-13T19:51:29Z",
+      "side": 1,
+      "message": "Please make this function public (and document it).",
+      "revId": "76bf221d7fcf7bcf2f8db06345e65f0d317e8572",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "9695ea0a_5d62219d",
+        "filename": "src/gn/xcode_writer.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 50,
+      "author": {
+        "id": 1000070
+      },
+      "writtenOn": "2020-02-13T19:51:29Z",
+      "side": 1,
+      "message": "I would pass ninja_mode as NinjaMode type and make the function GetNinjaMode() public.",
+      "range": {
+        "startLine": 50,
+        "startChar": 31,
+        "endLine": 50,
+        "endChar": 49
+      },
+      "revId": "76bf221d7fcf7bcf2f8db06345e65f0d317e8572",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": true
+    }
+  ]
+}
