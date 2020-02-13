@@ -71,7 +71,12 @@ XcodeWriter::TargetOsType GetTargetOs(const Args& args) {
   return XcodeWriter::WRITER_TARGET_OS_MACOS;
 }
 
+XcodeWriter::NinjaMode GetNinjaMode(const std::string& ninja_mode) {
+  return ninja_mode == "auto" ? XcodeWriter::NINJA_AUTO : XcodeWriter::NINJA_DEFAULT;
+}
+
 std::string GetBuildScript(const std::string& target_name,
+                           const std::string& ninja_mode,
                            const std::string& ninja_extra_args,
                            base::Environment* environment) {
   std::stringstream script;
@@ -96,7 +101,16 @@ std::string GetBuildScript(const std::string& target_name,
     script << "\" ";
   }
 
-  script << "ninja -C .";
+  switch (GetNinjaMode(ninja_mode)) {
+    case XcodeWriter::NINJA_AUTO:
+      script << "autoninja ";
+      break;
+    default:
+      script << "ninja ";
+      break;
+  }
+
+  script << "-C .";
   if (!ninja_extra_args.empty())
     script << " " << ninja_extra_args;
   if (!target_name.empty())
@@ -358,6 +372,7 @@ void RecursivelyAssignIds(PBXProject* project) {
 // static
 bool XcodeWriter::RunAndWriteFiles(const std::string& workspace_name,
                                    const std::string& root_target_name,
+                                   const std::string& ninja_mode,
                                    const std::string& ninja_extra_args,
                                    const std::string& dir_filters_string,
                                    const BuildSettings* build_settings,
@@ -400,7 +415,7 @@ bool XcodeWriter::RunAndWriteFiles(const std::string& workspace_name,
 
   XcodeWriter workspace(workspace_name);
   workspace.CreateProductsProject(targets, all_targets, attributes, source_path,
-                                  config_name, root_target_name,
+                                  config_name, root_target_name, ninja_mode,
                                   ninja_extra_args, build_settings, target_os);
 
   return workspace.WriteFiles(build_settings, err);
@@ -474,6 +489,7 @@ void XcodeWriter::CreateProductsProject(
     const std::string& source_path,
     const std::string& config_name,
     const std::string& root_target,
+    const std::string& ninja_mode,
     const std::string& ninja_extra_args,
     const BuildSettings* build_settings,
     TargetOsType target_os) {
@@ -489,7 +505,7 @@ void XcodeWriter::CreateProductsProject(
   AddSourceFilesToProjectForIndexing(all_targets, main_project.get(),
                                      source_dir, build_settings);
   main_project->AddAggregateTarget(
-      "All", GetBuildScript(root_target, ninja_extra_args, env.get()));
+      "All", GetBuildScript(root_target, ninja_mode, ninja_extra_args, env.get()));
 
   // Needs to search for xctest files under the application targets, and this
   // variable is used to store the results of visited targets, thus making the
@@ -507,7 +523,7 @@ void XcodeWriter::CreateProductsProject(
             target->output_name().empty() ? target->label().name()
                                           : target->output_name(),
             "com.apple.product-type.tool",
-            GetBuildScript(target->label().name(), ninja_extra_args,
+            GetBuildScript(target->label().name(), ninja_mode, ninja_extra_args,
                            env.get()));
         break;
 
@@ -538,7 +554,7 @@ void XcodeWriter::CreateProductsProject(
         PBXNativeTarget* native_target = main_project->AddNativeTarget(
             pbxtarget_name, std::string(), target_output_name,
             target->bundle_data().product_type(),
-            GetBuildScript(pbxtarget_name, ninja_extra_args, env.get()),
+            GetBuildScript(pbxtarget_name, ninja_mode, ninja_extra_args, env.get()),
             xcode_extra_attributes);
 
         bundle_targets.push_back(target);
