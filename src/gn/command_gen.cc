@@ -43,6 +43,7 @@ const char kSwitchIdeValueWinSdk[] = "winsdk";
 const char kSwitchIdeValueXcode[] = "xcode";
 const char kSwitchIdeValueJson[] = "json";
 const char kSwitchNinjaExtraArgs[] = "ninja-extra-args";
+const char kSwitchNinjaMode[] = "ninja-mode";
 const char kSwitchNoDeps[] = "no-deps";
 const char kSwitchRootTarget[] = "root-target";
 const char kSwitchSln[] = "sln";
@@ -237,6 +238,7 @@ bool RunIdeWriter(const std::string& ide,
     bool res = XcodeWriter::RunAndWriteFiles(
         command_line->GetSwitchValueASCII(kSwitchWorkspace),
         command_line->GetSwitchValueASCII(kSwitchRootTarget),
+        command_line->GetSwitchValueASCII(kSwitchNinjaMode),
         command_line->GetSwitchValueASCII(kSwitchNinjaExtraArgs),
         command_line->GetSwitchValueASCII(kSwitchFilters), build_settings,
         builder, err);
