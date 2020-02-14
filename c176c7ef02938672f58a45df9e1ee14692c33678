@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "8c7b1911_117f9d60",
+        "filename": "docs/reference.md",
+        "patchSetId": 2
+      },
+      "lineNbr": 6484,
+      "author": {
+        "id": 1000014
+      },
+      "writtenOn": "2020-02-14T01:11:20Z",
+      "side": 1,
+      "message": "This comes from kDotFileHelp in setup.cc. Change that and then run:\n\n out/gn help --markdown all \u003e docs/reference.md\n\nto regenerate this file (which will also include the help for the switch you added).",
+      "revId": "c176c7ef02938672f58a45df9e1ee14692c33678",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": true
+    }
+  ]
+}
