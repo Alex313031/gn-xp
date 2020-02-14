@@ -43,6 +43,7 @@ const char kSwitchIdeValueWinSdk[] = "winsdk";
 const char kSwitchIdeValueXcode[] = "xcode";
 const char kSwitchIdeValueJson[] = "json";
 const char kSwitchNinjaExtraArgs[] = "ninja-extra-args";
+const char kSwitchNinjaMode[] = "ninja-mode";
 const char kSwitchNoDeps[] = "no-deps";
 const char kSwitchRootTarget[] = "root-target";
 const char kSwitchSln[] = "sln";
@@ -237,6 +238,8 @@ bool RunIdeWriter(const std::string& ide,
     bool res = XcodeWriter::RunAndWriteFiles(
         command_line->GetSwitchValueASCII(kSwitchWorkspace),
         command_line->GetSwitchValueASCII(kSwitchRootTarget),
+        XcodeWriter::GetNinjaMode(
+          command_line->GetSwitchValueASCII(kSwitchNinjaMode)),
         command_line->GetSwitchValueASCII(kSwitchNinjaExtraArgs),
         command_line->GetSwitchValueASCII(kSwitchFilters), build_settings,
         builder, err);
@@ -378,6 +381,9 @@ Xcode Flags
   --ninja-extra-args=<string>
       This string is passed without any quoting to the ninja invocation
       command-line. Can be used to configure ninja flags, like "-j".
+
+  --ninja-mode=[default|auto]
+      Controls whether the generated project uses "ninja" or "autoninja".
 
   --root-target=<target_name>
       Name of the target corresponding to "All" target in Xcode. If unset,

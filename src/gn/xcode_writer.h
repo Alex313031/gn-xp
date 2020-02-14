@@ -28,11 +28,23 @@ class XcodeWriter {
     WRITER_TARGET_OS_MACOS,
   };
 
+  enum NinjaMode {
+    NINJA_DEFAULT,
+    NINJA_AUTO
+  };
+
+  // Converts a string to its NinjaMode enum equivalent.
+  //
+  // |ninja_mode| will be used to identify which enum value to return.
+  static NinjaMode GetNinjaMode(const std::string& ninja_mode);
+
   // Writes Xcode workspace and project files.
   //
   // |workspace_name| is the optional name of the workspace file name ("all"
   // is used if not specified). |root_target_name| is the name of the main
   // target corresponding to building "All" (for example "gn_all" in Chromium).
+  // |ninja_mode| can be used to control which ninja command will be run (e.g.
+  // 'auto' would use autoninja).
   // |ninja_extra_args| are additional arguments to pass to ninja invocation
   // (can be used to increase limit of concurrent processes when using goma).
   // |dir_filters_string| is optional semicolon-separated list of label patterns
@@ -40,6 +52,7 @@ class XcodeWriter {
   // included to the workspace. On failure will populate |err| and return false.
   static bool RunAndWriteFiles(const std::string& workspace_name,
                                const std::string& root_target_name,
+                               NinjaMode ninja_mode,
                                const std::string& ninja_extra_args,
                                const std::string& dir_filters_string,
                                const BuildSettings* build_settings,
@@ -68,6 +81,7 @@ class XcodeWriter {
                              const std::string& source_path,
                              const std::string& config_name,
                              const std::string& root_target,
+                             NinjaMode ninja_mode,
                              const std::string& ninja_extra_args,
                              const BuildSettings* build_settings,
                              TargetOsType target_os);
