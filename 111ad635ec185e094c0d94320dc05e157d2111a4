@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "003dcb4a_9835fa3f",
+        "filename": "src/gn/xcode_writer.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 75,
+      "author": {
+        "id": 1000291
+      },
+      "writtenOn": "2020-02-14T19:07:00Z",
+      "side": 1,
+      "message": "Whoops, good  catch, done.",
+      "parentUuid": "d76e881b_de048700",
+      "range": {
+        "startLine": 75,
+        "startChar": 27,
+        "endLine": 75,
+        "endChar": 50
+      },
+      "revId": "111ad635ec185e094c0d94320dc05e157d2111a4",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "36fd452c_591089e2",
         "filename": "src/gn/xcode_writer.cc",
         "patchSetId": 5
@@ -42,6 +66,24 @@
     },
     {
       "key": {
+        "uuid": "2499809a_bcd63085",
+        "filename": "src/gn/xcode_writer.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 100,
+      "author": {
+        "id": 1000291
+      },
+      "writtenOn": "2020-02-14T19:07:00Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "36fd452c_591089e2",
+      "revId": "111ad635ec185e094c0d94320dc05e157d2111a4",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "249977df_72e9bd99",
         "filename": "src/gn/xcode_writer.h",
         "patchSetId": 5
@@ -56,6 +98,24 @@
       "revId": "111ad635ec185e094c0d94320dc05e157d2111a4",
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "69cfd1f3_af44e2ea",
+        "filename": "src/gn/xcode_writer.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 39,
+      "author": {
+        "id": 1000291
+      },
+      "writtenOn": "2020-02-14T19:07:00Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "249977df_72e9bd99",
+      "revId": "111ad635ec185e094c0d94320dc05e157d2111a4",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": false
     }
   ]
 }
