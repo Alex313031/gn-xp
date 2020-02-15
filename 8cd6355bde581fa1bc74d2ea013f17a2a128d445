@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6bd67a53_d154a9d8",
+        "filename": "src/gn/label.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 43,
+      "author": {
+        "id": 1000014
+      },
+      "writtenOn": "2020-02-15T00:37:03Z",
+      "side": 1,
+      "message": "This is the actual change.",
+      "revId": "8cd6355bde581fa1bc74d2ea013f17a2a128d445",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": true
+    }
+  ]
+}
