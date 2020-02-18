@@ -650,6 +650,15 @@ def WriteGNNinja(path, platform, host, options):
   executables = {
       'gn': {'sources': [ 'src/gn/gn_main.cc' ], 'libs': []},
 
+      'gn-tidy': {
+        'sources': [
+          'tools/gn/tidy.cpp',
+        ],
+        'tool': 'cxx',
+        'include_dirs': [],
+        'libs': [],
+      },
+
       'gn_unittests': { 'sources': [
         'src/gn/action_target_generator_unittest.cc',
         'src/gn/analyzer_unittest.cc',
@@ -794,6 +803,7 @@ def WriteGNNinja(path, platform, host, options):
   # we just build static libraries that GN needs
   executables['gn']['libs'].extend(static_libraries.keys())
   executables['gn_unittests']['libs'].extend(static_libraries.keys())
+  executables['gn-tidy']['libs'].extend(static_libraries.keys())
 
   WriteGenericNinja(path, static_libraries, executables, cxx, ar, ld,
                     platform, host, options, cflags, ldflags,
