@@ -2,6 +2,52 @@
   "comments": [
     {
       "key": {
+        "uuid": "f256fe23_a7d60763",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 12,
+      "author": {
+        "id": 1000004
+      },
+      "writtenOn": "2020-02-18T18:05:12Z",
+      "side": 1,
+      "message": "behavior",
+      "range": {
+        "startLine": 12,
+        "startChar": 12,
+        "endLine": 12,
+        "endChar": 20
+      },
+      "revId": "8cd6355bde581fa1bc74d2ea013f17a2a128d445",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "f76677d1_e7957644",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 16,
+      "author": {
+        "id": 1000004
+      },
+      "writtenOn": "2020-02-18T18:05:12Z",
+      "side": 1,
+      "message": "Is the output in ninja actually absolute too? Could it be made relative for ccache, goma, etc?",
+      "range": {
+        "startLine": 16,
+        "startChar": 11,
+        "endLine": 16,
+        "endChar": 22
+      },
+      "revId": "8cd6355bde581fa1bc74d2ea013f17a2a128d445",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "6bd67a53_d154a9d8",
         "filename": "src/gn/label.cc",
         "patchSetId": 1
@@ -13,6 +59,52 @@
       "writtenOn": "2020-02-15T00:37:03Z",
       "side": 1,
       "message": "This is the actual change.",
+      "revId": "8cd6355bde581fa1bc74d2ea013f17a2a128d445",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "9f36e0bc_6fd2c4cb",
+        "filename": "src/gn/label_unittest.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 100,
+      "author": {
+        "id": 1000004
+      },
+      "writtenOn": "2020-02-18T18:05:12Z",
+      "side": 1,
+      "message": "an",
+      "range": {
+        "startLine": 100,
+        "startChar": 16,
+        "endLine": 100,
+        "endChar": 19
+      },
+      "revId": "8cd6355bde581fa1bc74d2ea013f17a2a128d445",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "1ccf2358_229b45ad",
+        "filename": "src/gn/label_unittest.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 121,
+      "author": {
+        "id": 1000004
+      },
+      "writtenOn": "2020-02-18T18:05:12Z",
+      "side": 1,
+      "message": "... ok, I guess not. Could this not be relative to the source root?",
+      "range": {
+        "startLine": 121,
+        "startChar": 13,
+        "endLine": 121,
+        "endChar": 18
+      },
       "revId": "8cd6355bde581fa1bc74d2ea013f17a2a128d445",
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
       "unresolved": true
