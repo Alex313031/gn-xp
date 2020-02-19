@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "08415801_6aa4df38",
+        "filename": "src/gn/xcode_writer.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 37,
+      "author": {
+        "id": 1000014
+      },
+      "writtenOn": "2020-02-19T23:46:55Z",
+      "side": 1,
+      "message": "This should mention what happens if it\u0027s empty.",
+      "revId": "e7839796bddacd93e42c2822e9cb4fc8ca2de96c",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": true
+    }
+  ]
+}
