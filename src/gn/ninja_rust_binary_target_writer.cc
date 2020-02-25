@@ -168,6 +168,13 @@ void NinjaRustBinaryTargetWriter::Run() {
       }
     }
 
+    std::vector<OutputFile> transitive_rustlibs;
+    for (const auto* dep : target_->rust_values().rust_libs_.GetOrdered()) {
+      if (dep->source_types_used().RustSourceUsed()) {
+        transitive_rustlibs.push_back(dep->dependency_output_file());
+      }
+    }
+
     std::vector<OutputFile> tool_outputs;
     SubstitutionWriter::ApplyListToLinkerAsOutputFile(
         target_, tool_, tool_->outputs(), &tool_outputs);
@@ -178,7 +185,7 @@ void NinjaRustBinaryTargetWriter::Run() {
     std::copy(non_linkable_deps.begin(), non_linkable_deps.end(),
               std::back_inserter(extern_deps));
     WriteExterns(extern_deps);
-    WriteRustdeps(rustdeps, nonrustdeps);
+    WriteRustdeps(transitive_rustlibs, nonrustdeps);
   }
 }
 

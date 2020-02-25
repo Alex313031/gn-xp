@@ -547,7 +547,10 @@ void Target::PullDependentTargetLibsFrom(const Target* dep, bool is_public) {
     inherited_libraries_.Append(dep, is_public);
   }
 
-  if (dep->output_type() == SHARED_LIBRARY) {
+  if (dep->output_type() == RUST_LIBRARY || dep->output_type() == RUST_PROC_MACRO) {
+    rust_values().rust_libs_.Append(dep, is_public);
+    rust_values().rust_libs_.AppendInherited(dep->rust_values().rust_libs_, is_public);
+  } else if (dep->output_type() == SHARED_LIBRARY) {
     // Shared library dependendencies are inherited across public shared
     // library boundaries.
     //
@@ -573,6 +576,7 @@ void Target::PullDependentTargetLibsFrom(const Target* dep, bool is_public) {
     // The current target isn't linked, so propogate linked deps and
     // libraries up the dependency tree.
     inherited_libraries_.AppendInherited(dep->inherited_libraries(), is_public);
+    rust_values().rust_libs_.AppendInherited(dep->rust_values().rust_libs_, is_public);
   } else if (dep->complete_static_lib()) {
     // Inherit only final targets through _complete_ static libraries.
     //
