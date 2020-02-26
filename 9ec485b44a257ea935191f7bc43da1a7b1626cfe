@@ -22,6 +22,30 @@
       "revId": "9ec485b44a257ea935191f7bc43da1a7b1626cfe",
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "7f0248cf_c51a6cf0",
+        "filename": "src/gn/ninja_rust_binary_target_writer.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 260,
+      "author": {
+        "id": 1000288
+      },
+      "writtenOn": "2020-02-26T19:40:36Z",
+      "side": 1,
+      "message": "--extern-private has been mentioned a couple times, but to the best of my knowledge it doesn\u0027t exist. It\u0027s not documented on rustc and I can\u0027t get cargo to do any invocation that uses it either.",
+      "parentUuid": "9bbb13d6_e8c17fe6",
+      "range": {
+        "startLine": 260,
+        "startChar": 14,
+        "endLine": 260,
+        "endChar": 27
+      },
+      "revId": "9ec485b44a257ea935191f7bc43da1a7b1626cfe",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": true
     }
   ]
 }
