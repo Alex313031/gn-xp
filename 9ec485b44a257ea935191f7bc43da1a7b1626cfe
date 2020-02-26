@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "9bbb13d6_e8c17fe6",
+        "filename": "src/gn/ninja_rust_binary_target_writer.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 260,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-02-26T19:30:21Z",
+      "side": 1,
+      "message": "Could we use --extern-private to achieve the same effect while being more explicit? We always prefer explicit flags (e.g. pass `path/to/library.a` rather than combination of `-Lpath/to -lrary`) so we know precisely what inputs are being used and there\u0027s no risk of collision in case multiple -L directories contain library with the same name.",
+      "range": {
+        "startLine": 260,
+        "startChar": 14,
+        "endLine": 260,
+        "endChar": 27
+      },
+      "revId": "9ec485b44a257ea935191f7bc43da1a7b1626cfe",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": true
+    }
+  ]
+}
