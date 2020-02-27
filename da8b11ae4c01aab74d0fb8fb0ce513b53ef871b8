@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "05f2ae29_03fdd196",
+        "filename": "src/gn/command_gen.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 224,
+      "author": {
+        "id": 1000014
+      },
+      "writtenOn": "2020-02-27T21:44:29Z",
+      "side": 1,
+      "message": "We always use {} if there\u0027s \u003e 1 line under it.",
+      "revId": "da8b11ae4c01aab74d0fb8fb0ce513b53ef871b8",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": true
+    }
+  ]
+}
