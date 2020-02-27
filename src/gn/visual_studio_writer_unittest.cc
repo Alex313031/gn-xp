@@ -193,7 +193,7 @@ TEST_F(VisualStudioWriterTest, NoDotSlash) {
 
   std::stringstream file_contents;
   writer.WriteProjectFileContents(file_contents, *writer.projects_.back(),
-                                  &target, "", &source_types, &err);
+                                  &target, "", "", &source_types, &err);
 
   // Should find args of a ninja clean command, with no ./ before the file name.
   ASSERT_NE(file_contents.str().find("-tclean baz"), std::string::npos);

@@ -39,13 +39,18 @@ class VisualStudioWriter {
   // generated projects. Only matching targets and their dependencies (unless
   // |no_deps| is true) will be included to the solution. On failure will
   // populate |err| and will return false. |win_sdk| is the Windows SDK version
-  // which will be used by Visual Studio IntelliSense.
+  // which will be used by Visual Studio IntelliSense. |ninja_executable| is
+  // used to specify the ninja executable to run. When empty, regular ninja
+  // will be used. |ninja_extra_args| are additional arguments to pass to
+  // ninja invocation (can be used to increase limit of concurrent processes
+  // when using goma).
   static bool RunAndWriteFiles(const BuildSettings* build_settings,
                                const Builder& builder,
                                Version version,
                                const std::string& sln_name,
                                const std::string& filters,
                                const std::string& win_sdk,
+                               const std::string& ninja_executable,
                                const std::string& ninja_extra_args,
                                bool no_deps,
                                Err* err);
@@ -108,11 +113,13 @@ class VisualStudioWriter {
   ~VisualStudioWriter();
 
   bool WriteProjectFiles(const Target* target,
+                         const std::string& ninja_executable,
                          const std::string& ninja_extra_args,
                          Err* err);
   bool WriteProjectFileContents(std::ostream& out,
                                 const SolutionProject& solution_project,
                                 const Target* target,
+                                const std::string& ninja_executable,
                                 const std::string& ninja_extra_args,
                                 SourceFileCompileTypePairs* source_types,
                                 Err* err);
