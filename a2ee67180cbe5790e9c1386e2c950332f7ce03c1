@@ -1,0 +1,199 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "be30417d_c558c567",
+        "filename": "src/gn/hash_table_base.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 58,
+      "author": {
+        "id": 1000004
+      },
+      "writtenOn": "2020-02-29T00:19:31Z",
+      "side": 1,
+      "message": "your",
+      "range": {
+        "startLine": 58,
+        "startChar": 19,
+        "endLine": 58,
+        "endChar": 22
+      },
+      "revId": "a2ee67180cbe5790e9c1386e2c950332f7ce03c1",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "c1922530_3e4a9de5",
+        "filename": "src/gn/hash_table_base.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 96,
+      "author": {
+        "id": 1000004
+      },
+      "writtenOn": "2020-02-29T00:19:31Z",
+      "side": 1,
+      "message": "Deletion",
+      "range": {
+        "startLine": 96,
+        "startChar": 13,
+        "endLine": 96,
+        "endChar": 33
+      },
+      "revId": "a2ee67180cbe5790e9c1386e2c950332f7ce03c1",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "d6dbc86b_d49e7330",
+        "filename": "src/gn/hash_table_base.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 207,
+      "author": {
+        "id": 1000004
+      },
+      "writtenOn": "2020-02-29T00:19:31Z",
+      "side": 1,
+      "message": "This looks like it should be other.buckets0_ at first glance, maybe just don\u0027t write this since it\u0027s in the member definition initialization anyway.",
+      "range": {
+        "startLine": 207,
+        "startChar": 50,
+        "endLine": 207,
+        "endChar": 69
+      },
+      "revId": "a2ee67180cbe5790e9c1386e2c950332f7ce03c1",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "a1dd3093_f2abd3f4",
+        "filename": "src/gn/hash_table_base.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 413,
+      "author": {
+        "id": 1000004
+      },
+      "writtenOn": "2020-02-29T00:19:31Z",
+      "side": 1,
+      "message": "Maybe overwrite buckets0_[0] here since it\u0027s garbage now.",
+      "revId": "a2ee67180cbe5790e9c1386e2c950332f7ce03c1",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "5b725314_2450abba",
+        "filename": "src/gn/hash_table_base_unittest.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 98,
+      "author": {
+        "id": 1000004
+      },
+      "writtenOn": "2020-02-29T00:19:31Z",
+      "side": 1,
+      "message": "Yikes!",
+      "range": {
+        "startLine": 97,
+        "startChar": 17,
+        "endLine": 98,
+        "endChar": 24
+      },
+      "revId": "a2ee67180cbe5790e9c1386e2c950332f7ce03c1",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "a0cc62bb_ef18529a",
+        "filename": "src/gn/hash_table_base_unittest.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 296,
+      "author": {
+        "id": 1000004
+      },
+      "writtenOn": "2020-02-29T00:19:31Z",
+      "side": 1,
+      "message": "I think these might be UB? dunno.",
+      "range": {
+        "startLine": 295,
+        "startChar": 4,
+        "endLine": 296,
+        "endChar": 32
+      },
+      "revId": "a2ee67180cbe5790e9c1386e2c950332f7ce03c1",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "fc982b14_4c388e75",
+        "filename": "src/gn/label.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 109,
+      "author": {
+        "id": 1000004
+      },
+      "writtenOn": "2020-02-29T00:19:31Z",
+      "side": 1,
+      "message": "Any insights you could add on the effectiveness/selection of 131? (I realize you just moved it up in this CL.)\n\n(Also this is the worst clang-format I\u0027ve seen in a while. Maybe you could use some const size_t locals to make it less awful.)",
+      "range": {
+        "startLine": 107,
+        "startChar": 0,
+        "endLine": 109,
+        "endChar": 33
+      },
+      "revId": "a2ee67180cbe5790e9c1386e2c950332f7ce03c1",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "eabd1b71_25ff374c",
+        "filename": "src/gn/string_atom.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 94,
+      "author": {
+        "id": 1000004
+      },
+      "writtenOn": "2020-02-29T00:19:31Z",
+      "side": 1,
+      "message": "Maybe a comment here to say that we know for certain that it\u0027s is_valid() because key isn\u0027t null by virtue of being returned, and there\u0027s no tombstones in this derivation.",
+      "revId": "a2ee67180cbe5790e9c1386e2c950332f7ce03c1",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "6febc151_eb196672",
+        "filename": "src/gn/unique_vector.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 31,
+      "author": {
+        "id": 1000004
+      },
+      "writtenOn": "2020-02-29T00:19:31Z",
+      "side": 1,
+      "message": "Oh, so there\u0027s no real implementations that even need deletion then? Could we just delete that part?",
+      "range": {
+        "startLine": 31,
+        "startChar": 24,
+        "endLine": 31,
+        "endChar": 36
+      },
+      "revId": "a2ee67180cbe5790e9c1386e2c950332f7ce03c1",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": true
+    }
+  ]
+}
