@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "acb597db_9a6deb3e",
+        "filename": "src/gn/hash_table_base.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 58,
+      "author": {
+        "id": 1000067
+      },
+      "writtenOn": "2020-03-02T11:52:53Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "be30417d_c558c567",
+      "range": {
+        "startLine": 58,
+        "startChar": 19,
+        "endLine": 58,
+        "endChar": 22
+      },
+      "revId": "a2ee67180cbe5790e9c1386e2c950332f7ce03c1",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "c1922530_3e4a9de5",
         "filename": "src/gn/hash_table_base.h",
         "patchSetId": 2
@@ -48,6 +72,30 @@
     },
     {
       "key": {
+        "uuid": "9219234f_bd0c60c1",
+        "filename": "src/gn/hash_table_base.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 96,
+      "author": {
+        "id": 1000067
+      },
+      "writtenOn": "2020-03-02T11:52:53Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "c1922530_3e4a9de5",
+      "range": {
+        "startLine": 96,
+        "startChar": 13,
+        "endLine": 96,
+        "endChar": 33
+      },
+      "revId": "a2ee67180cbe5790e9c1386e2c950332f7ce03c1",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "d6dbc86b_d49e7330",
         "filename": "src/gn/hash_table_base.h",
         "patchSetId": 2
@@ -59,6 +107,30 @@
       "writtenOn": "2020-02-29T00:19:31Z",
       "side": 1,
       "message": "This looks like it should be other.buckets0_ at first glance, maybe just don\u0027t write this since it\u0027s in the member definition initialization anyway.",
+      "range": {
+        "startLine": 207,
+        "startChar": 50,
+        "endLine": 207,
+        "endChar": 69
+      },
+      "revId": "a2ee67180cbe5790e9c1386e2c950332f7ce03c1",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "98f3af74_0015e5ee",
+        "filename": "src/gn/hash_table_base.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 207,
+      "author": {
+        "id": 1000067
+      },
+      "writtenOn": "2020-03-02T11:52:53Z",
+      "side": 1,
+      "message": "Good idea, I\u0027ve removed it.",
+      "parentUuid": "d6dbc86b_d49e7330",
       "range": {
         "startLine": 207,
         "startChar": 50,
@@ -88,6 +160,24 @@
     },
     {
       "key": {
+        "uuid": "9af98ac0_b95cbfdf",
+        "filename": "src/gn/hash_table_base.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 413,
+      "author": {
+        "id": 1000067
+      },
+      "writtenOn": "2020-03-02T11:52:53Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "a1dd3093_f2abd3f4",
+      "revId": "a2ee67180cbe5790e9c1386e2c950332f7ce03c1",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "5b725314_2450abba",
         "filename": "src/gn/hash_table_base_unittest.cc",
         "patchSetId": 2
@@ -99,6 +189,30 @@
       "writtenOn": "2020-02-29T00:19:31Z",
       "side": 1,
       "message": "Yikes!",
+      "range": {
+        "startLine": 97,
+        "startChar": 17,
+        "endLine": 98,
+        "endChar": 24
+      },
+      "revId": "a2ee67180cbe5790e9c1386e2c950332f7ce03c1",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "3204be8b_da9e368a",
+        "filename": "src/gn/hash_table_base_unittest.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 98,
+      "author": {
+        "id": 1000067
+      },
+      "writtenOn": "2020-03-02T11:52:53Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "5b725314_2450abba",
       "range": {
         "startLine": 97,
         "startChar": 17,
@@ -134,6 +248,30 @@
     },
     {
       "key": {
+        "uuid": "dd7e10f4_12fb8a4a",
+        "filename": "src/gn/hash_table_base_unittest.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 296,
+      "author": {
+        "id": 1000067
+      },
+      "writtenOn": "2020-03-02T11:52:53Z",
+      "side": 1,
+      "message": "I believe that this is not UB because this code is testing a very specific implementation, with its own semantics. My understanding is that the C++ specification allows the state of moved values to be rather unspecified, but that concrete implementations can add more constraints (e.g. [1] for standard library objects).\n\n\n[1] https://timsong-cpp.github.io/cppwp/n3337/lib.types.movedfrom",
+      "parentUuid": "a0cc62bb_ef18529a",
+      "range": {
+        "startLine": 295,
+        "startChar": 4,
+        "endLine": 296,
+        "endChar": 32
+      },
+      "revId": "a2ee67180cbe5790e9c1386e2c950332f7ce03c1",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "fc982b14_4c388e75",
         "filename": "src/gn/label.h",
         "patchSetId": 2
@@ -145,6 +283,30 @@
       "writtenOn": "2020-02-29T00:19:31Z",
       "side": 1,
       "message": "Any insights you could add on the effectiveness/selection of 131? (I realize you just moved it up in this CL.)\n\n(Also this is the worst clang-format I\u0027ve seen in a while. Maybe you could use some const size_t locals to make it less awful.)",
+      "range": {
+        "startLine": 107,
+        "startChar": 0,
+        "endLine": 109,
+        "endChar": 33
+      },
+      "revId": "a2ee67180cbe5790e9c1386e2c950332f7ce03c1",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "2b017f86_f711ec84",
+        "filename": "src/gn/label.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 109,
+      "author": {
+        "id": 1000067
+      },
+      "writtenOn": "2020-03-02T11:52:53Z",
+      "side": 1,
+      "message": "I have not idea why this was selected, apart from that this technique sounds adequate here (see  https://cs.stackexchange.com/questions/77570/what-is-the-reasoning-behind-magic-constancs-in-hash-code-calculations-found-in for the best answer I found on the subject here). I have changed the code to be more readable using local variables h0, h1, h2 and h3 though.\n\nMaybe we can experiment with modifying the algorithm in a different CL though.",
+      "parentUuid": "fc982b14_4c388e75",
       "range": {
         "startLine": 107,
         "startChar": 0,
@@ -174,6 +336,24 @@
     },
     {
       "key": {
+        "uuid": "9c818b21_1217914c",
+        "filename": "src/gn/string_atom.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 94,
+      "author": {
+        "id": 1000067
+      },
+      "writtenOn": "2020-03-02T11:52:53Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "eabd1b71_25ff374c",
+      "revId": "a2ee67180cbe5790e9c1386e2c950332f7ce03c1",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "6febc151_eb196672",
         "filename": "src/gn/unique_vector.h",
         "patchSetId": 2
@@ -185,6 +365,30 @@
       "writtenOn": "2020-02-29T00:19:31Z",
       "side": 1,
       "message": "Oh, so there\u0027s no real implementations that even need deletion then? Could we just delete that part?",
+      "range": {
+        "startLine": 31,
+        "startChar": 24,
+        "endLine": 31,
+        "endChar": 36
+      },
+      "revId": "a2ee67180cbe5790e9c1386e2c950332f7ce03c1",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "8c3e580b_0d35c645",
+        "filename": "src/gn/unique_vector.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 31,
+      "author": {
+        "id": 1000067
+      },
+      "writtenOn": "2020-03-02T11:52:53Z",
+      "side": 1,
+      "message": "Yes that\u0027s correct, there is no concrete implementation that requires deletion for now. However, I added that because I experimented with other optimizations (that didn\u0027t pan out) that did require them. But maybe other ones in the future might use them?\n\nGiven that the constexpr trick means it doesn\u0027t generate more code, I\u0027d prefer to keep it here for now. However, I\u0027ll gladly remove it if you insist :)",
+      "parentUuid": "6febc151_eb196672",
       "range": {
         "startLine": 31,
         "startChar": 24,
