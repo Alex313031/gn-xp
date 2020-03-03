@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "24f66898_44023905",
+        "filename": "docs/reference.md",
+        "patchSetId": 8
+      },
+      "lineNbr": 2280,
+      "author": {
+        "id": 1000055
+      },
+      "writtenOn": "2020-03-03T16:06:27Z",
+      "side": 1,
+      "message": "Somewhat of a classic case of unnamed parameters being unclear as to their meaning.\n\nWDYT about using two functions instead to make it clear about include vs exclude?\n\n\"filter_in\" vs \"filter_out\" maybe?",
+      "revId": "421a0a9be035209d8e26360e5df3026f5a1d6391",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": true
+    }
+  ]
+}
