@@ -24,6 +24,12 @@
 #include "gn/string_utils.h"
 #include "gn/switches.h"
 #include "gn/tokenizer.h"
+#include "util/build_config.h"
+
+#if defined(OS_WIN)
+#include <fcntl.h>
+#include <io.h>
+#endif
 
 namespace commands {
 
@@ -1282,6 +1288,10 @@ int RunFormat(const std::vector<std::string>& args) {
     std::string output;
     if (!FormatStringToString(input, dump_tree, &output))
       return 1;
+#if defined(OS_WIN)
+    // Set stdout to binary mode to prevent converting newlines to \r\n.
+    _setmode(_fileno(stdout), _O_BINARY)
+#endif
     printf("%s", output.c_str());
     return 0;
   }
