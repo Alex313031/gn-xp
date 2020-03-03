@@ -1,0 +1,103 @@
+# Copyright 2020 The Chromium Authors. All rights reserved.
+# Use of this source code is governed by a BSD-style license that can be
+# found in the LICENSE file.
+
+template("swift_module") {
+  _target_name = target_name
+
+  assert(defined(invoker.bridge_header) && invoker.bridge_header != "")
+
+  _bridge_header_target_name = _target_name + "_bridge_header"
+  _compile_swift_target_name = _target_name + "_compile_swift"
+  _interop_swift_config_name = _target_name + "_interop_swift"
+
+  _compiled_object_file_list = []
+  foreach(_source, invoker.sources) {
+    assert(get_path_info(_source, "extension") == "swift")
+    _compiled_object_file_list += [ "$target_out_dir/$_target_name/" +
+                                    get_path_info(_source, "name") + ".o" ]
+  }
+
+  source_set(_bridge_header_target_name) {
+    forward_variables_from(invoker,
+                           "*",
+                           [
+                             "sources",
+                             "bridge_header",
+                             "visibility",
+                           ])
+
+    visibility = [ ":$_compile_swift_target_name" ]
+    sources = [ invoker.bridge_header ]
+  }
+
+  action(_compile_swift_target_name) {
+    forward_variables_from(invoker, [ "testonly" ])
+
+    visibility = [ ":$_target_name" ]
+
+    script = "//build/config/ios/scripts/swift-frontend.py"
+    sources = invoker.sources
+    outputs = [
+      "$target_gen_dir/$_target_name-Swift.h",
+      "$target_out_dir/$_target_name.swiftdoc",
+      "$target_out_dir/$_target_name.swiftmodule",
+    ]
+
+    outputs += _compiled_object_file_list
+    foreach(_source, invoker.sources) {
+      _base_name = get_path_info(_source, "name")
+      outputs += [
+        "$target_out_dir/$_target_name/$_base_name~partial.swiftdoc",
+        "$target_out_dir/$_target_name/$_base_name~partial.swiftmodule",
+      ]
+    }
+
+    args = [
+      "--target-name",
+      get_label_info(":$_target_name", "label_no_toolchain"),
+      "--bridge-header",
+      rebase_path(invoker.bridge_header, root_build_dir),
+      "--header-dir",
+      rebase_path(target_gen_dir, root_build_dir),
+      "--object-dir",
+      rebase_path(target_out_dir, root_build_dir),
+      "@{{response_file_name}}",
+    ]
+
+    response_file_contents = rebase_path(invoker.sources, root_build_dir)
+
+    if (!defined(deps)) {
+      deps = []
+    }
+    deps += [ ":$_bridge_header_target_name" ]
+  }
+
+  config(_interop_swift_config_name) {
+    include_dirs = [ root_gen_dir ]
+    lib_dirs = [
+      "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/swift/iphonesimulator",
+      "/usr/lib/swift",
+    ]
+    ldflags = [
+      "-Xlinker",
+      "-add_ast_path",
+      "-Xlinker",
+      rebase_path("$target_out_dir/$_target_name.swiftmodule"),
+    ]
+  }
+
+  source_set(_target_name) {
+    forward_variables_from(invoker,
+                           [
+                             "testonly",
+                             "visibility",
+                           ])
+
+    sources = _compiled_object_file_list
+    public = [ "$target_gen_dir/$_target_name-Swift.h" ]
+    deps = [ ":$_compile_swift_target_name" ]
+
+    public_configs = [ ":$_interop_swift_config_name" ]
+  }
+}
