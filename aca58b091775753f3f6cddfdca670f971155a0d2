@@ -16,6 +16,24 @@
       "revId": "aca58b091775753f3f6cddfdca670f971155a0d2",
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "82eaf942_80c43c06",
+        "filename": "src/gn/command_format.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 1293,
+      "author": {
+        "id": 1000295
+      },
+      "writtenOn": "2020-03-03T23:33:01Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "e4a28c0b_f5a2df3f",
+      "revId": "aca58b091775753f3f6cddfdca670f971155a0d2",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": false
     }
   ]
 }
