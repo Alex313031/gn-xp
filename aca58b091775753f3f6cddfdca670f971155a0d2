@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "e4a28c0b_f5a2df3f",
+        "filename": "src/gn/command_format.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 1293,
+      "author": {
+        "id": 1000004
+      },
+      "writtenOn": "2020-03-03T20:10:55Z",
+      "side": 1,
+      "message": "DoFormat() prints the tree to stderr, so maybe you should make that _O_BINARY too for the case where it\u0027s redirected to a file.",
+      "revId": "aca58b091775753f3f6cddfdca670f971155a0d2",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": true
+    }
+  ]
+}
