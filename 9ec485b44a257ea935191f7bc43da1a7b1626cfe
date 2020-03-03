@@ -70,6 +70,30 @@
       "revId": "9ec485b44a257ea935191f7bc43da1a7b1626cfe",
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "2803558e_fd6afc0f",
+        "filename": "src/gn/ninja_rust_binary_target_writer.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 260,
+      "author": {
+        "id": 1000288
+      },
+      "writtenOn": "2020-03-03T19:56:36Z",
+      "side": 1,
+      "message": "--extern-private has been renamed to \"--extern priv:\u003cname\u003e\"\n\nUnfortunately, it seems to rely on the \u0027-Z unstable-options\u0027 flag, which I think we should avoid using.",
+      "parentUuid": "eac8b027_5f284129",
+      "range": {
+        "startLine": 260,
+        "startChar": 14,
+        "endLine": 260,
+        "endChar": 27
+      },
+      "revId": "9ec485b44a257ea935191f7bc43da1a7b1626cfe",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": true
     }
   ]
 }
