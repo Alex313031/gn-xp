@@ -146,6 +146,14 @@ Value RunExecutable(Scope* scope,
                     BlockNode* block,
                     Err* err);
 
+extern const char kFilter[];
+extern const char kFilter_HelpShort[];
+extern const char kFilter_Help[];
+Value RunFilter(Scope* scope,
+                const FunctionCallNode* function,
+                const std::vector<Value>& args,
+                Err* err);
+
 extern const char kForEach[];
 extern const char kForEach_HelpShort[];
 extern const char kForEach_Help[];
