@@ -39,6 +39,7 @@
     *   [declare_args: Declare build arguments.](#func_declare_args)
     *   [defined: Returns whether an identifier is defined.](#func_defined)
     *   [exec_script: Synchronously run a script and return the output.](#func_exec_script)
+    *   [filter: Remove values from a list that match a set of patterns.](#func_filter)
     *   [foreach: Iterate over a list.](#func_foreach)
     *   [forward_variables_from: Copies variables from a different scope.](#func_forward_variables_from)
     *   [get_label_info: Get an attribute from a target's label.](#func_get_label_info)
@@ -2248,6 +2249,22 @@
   # This example just calls the script with no arguments and discards the
   # result.
   exec_script("//foo/bar/myscript.py")
+```
+### <a name="func_filter"></a>**filter**: Remove values from a list that match a set of patterns.
+
+```
+  filter(values, patterns)
+
+  The first argument is a list of strings and the second a list of patterns.
+  The returned value is a list of strings containing all strings from values
+  that matched none of the patterns.
+```
+
+#### **Examples**
+```
+  values = [ "foo.cc", "foo.h", "foo.proto" ]
+  result = filter(values, [ "*.proto" ])
+  # result will be [ "foo.h", "foo.cc" ]
 ```
 ### <a name="func_foreach"></a>**foreach**: Iterate over a list.
 
