@@ -39,6 +39,7 @@
     *   [declare_args: Declare build arguments.](#func_declare_args)
     *   [defined: Returns whether an identifier is defined.](#func_defined)
     *   [exec_script: Synchronously run a script and return the output.](#func_exec_script)
+    *   [filter: Remove values from a list that match a set of patterns.](#func_filter)
     *   [foreach: Iterate over a list.](#func_foreach)
     *   [forward_variables_from: Copies variables from a different scope.](#func_forward_variables_from)
     *   [get_label_info: Get an attribute from a target's label.](#func_get_label_info)
@@ -748,6 +749,9 @@
   --workspace=<file_name>
       Override defaut workspace file name ("all"). The workspace file is
       written to the root build directory.
+
+  --ninja-executable=<string>
+      Can be used to specify the ninja executable to use when building.
 
   --ninja-extra-args=<string>
       This string is passed without any quoting to the ninja invocation
@@ -2248,6 +2252,33 @@
   # This example just calls the script with no arguments and discards the
   # result.
   exec_script("//foo/bar/myscript.py")
+```
+### <a name="func_filter"></a>**filter**: Remove values from a list that match a set of patterns.
+
+```
+  filter(values, exclude_patterns)
+  filter(values, exclude_patterns, include_patterns)
+
+  The argument values must be a list of strings.
+
+  The argument exclude_patterns must be a list of patterns. All elements
+  in values matching any of those patterns will be removed from the list
+  that is returned by the filter function.
+
+  The argument include_patterns, if specified, must be a list of patterns.
+  Any elements in values matchin any of those patterns will be included,
+  even if they match a pattern in exclude_patterns.
+```
+
+#### **Examples**
+```
+  values = [ "foo.cc", "foo.h", "foo.proto" ]
+  result = filter(values, [ "*.proto" ])
+  # result will be [ "foo.h", "foo.cc" ]
+
+  values = [ "foo.cc", "foo.h", "foo.proto" ]
+  result = filter(values, [ "*" ], [ "*.proto" ])
+  # result will be [ "foo.proto" ]
 ```
 ### <a name="func_foreach"></a>**foreach**: Iterate over a list.
 
