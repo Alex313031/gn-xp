@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "88c0d11a_d5e243fd",
+        "filename": "src/gn/xcode_writer.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 334,
+      "author": {
+        "id": 1000070
+      },
+      "writtenOn": "2020-03-04T17:48:50Z",
+      "side": 1,
+      "message": "I don\u0027t really like this, but I don\u0027t know if there is any other way to convert a resolved base::FilePath to a SourceFile.",
+      "revId": "3f455d79d1097c93dc8342692205480477afc7b7",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": false
+    }
+  ]
+}
