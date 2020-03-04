@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "3b38f3fe_9db571c6",
+        "filename": "src/gn/label.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 121,
+      "author": {
+        "id": 1000014
+      },
+      "writtenOn": "2020-03-04T18:31:08Z",
+      "side": 1,
+      "message": "Can you move this to the out-of-line constructor? I\u0027m not so confident of the semantics of a function initializer when there are manual initializers, and since everything else is initialized explicitly in the constructor, it seems best to be consistent.",
+      "revId": "3db7a0e132b82208f3f59e183c159f6216bcdf93",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "d5dfd501_ae38075e",
+        "filename": "src/gn/source_dir.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 60,
+      "author": {
+        "id": 1000014
+      },
+      "writtenOn": "2020-03-04T18:31:08Z",
+      "side": 1,
+      "message": "Is this template and std::forward stuff below doing anything that a \"const std::string\u0026\" wouldn\u0027t? In the canonical path at the top the StringAtom constructor takes a string_view and in the longer path you append the buffer to a different string.",
+      "revId": "3db7a0e132b82208f3f59e183c159f6216bcdf93",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "36de825f_e4c4fe01",
+        "filename": "src/gn/string_atom.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 45,
+      "author": {
+        "id": 1000014
+      },
+      "writtenOn": "2020-03-04T18:31:08Z",
+      "side": 1,
+      "message": "Nit: need period.",
+      "revId": "3db7a0e132b82208f3f59e183c159f6216bcdf93",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": true
+    }
+  ]
+}
