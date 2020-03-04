@@ -21,8 +21,11 @@
 #include "gn/build_settings.h"
 #include "gn/builder.h"
 #include "gn/commands.h"
+#include "gn/config.h"
 #include "gn/deps_iterator.h"
 #include "gn/filesystem_utils.h"
+#include "gn/loader.h"
+#include "gn/scheduler.h"
 #include "gn/settings.h"
 #include "gn/source_file.h"
 #include "gn/target.h"
@@ -256,16 +259,40 @@ void SearchXCTestFilesForTarget(const Target* target,
 // Add all source files for indexing, both private and public.
 void AddSourceFilesToProjectForIndexing(
     const std::vector<const Target*>& targets,
+    const std::vector<const Config*>& configs,
+    const std::vector<const Toolchain*> toolchains,
     PBXProject* project,
     SourceDir source_dir,
     const BuildSettings* build_settings) {
   std::vector<SourceFile> sources;
+
+  // Add all sources files referenced by the target, and also all the BUILD.gn
+  // and *.gni used to define the targets themselves.
   for (const Target* target : targets) {
+    sources.push_back(Loader::BuildFileForLabel(target->label()));
+
+    for (const SourceFile& source :
+         target->settings()->import_manager().GetImportedFiles()) {
+      sources.push_back(source);
+    }
+
     for (const SourceFile& source : target->sources()) {
       if (IsStringInOutputDir(build_settings->build_dir(), source.value()))
         continue;
 
       sources.push_back(source);
+    }
+
+    for (const SourceFile& source : target->config_values().inputs()) {
+      if (IsStringInOutputDir(build_settings->build_dir(), source.value()))
+        continue;
+
+      sources.push_back(source);
+    }
+
+    if (target->output_type() == Target::ACTION ||
+        target->output_type() == Target::ACTION_FOREACH) {
+      sources.push_back(target->action_values().script());
     }
 
     if (target->all_headers_public())
@@ -277,6 +304,39 @@ void AddSourceFilesToProjectForIndexing(
 
       sources.push_back(source);
     }
+  }
+
+  // Add all BUILD.gn and *.gni used to define the configs.
+  for (const Config* config : configs) {
+    sources.push_back(Loader::BuildFileForLabel(config->label()));
+
+    for (const SourceFile& source :
+         config->settings()->import_manager().GetImportedFiles()) {
+      sources.push_back(source);
+    }
+  }
+
+  // Add all BUILD.gn and *.gni used to define the toolchains.
+  for (const Toolchain* toolchain : toolchains) {
+    sources.push_back(Loader::BuildFileForLabel(toolchain->label()));
+
+    for (const SourceFile& source :
+         toolchain->settings()->import_manager().GetImportedFiles()) {
+      sources.push_back(source);
+    }
+  }
+
+  // Add other files read by gn (the main dotfile, exec_script scripts, ...).
+  for (const auto& path : g_scheduler->GetGenDependencies()) {
+    if (!build_settings->root_path().IsParent(path))
+      continue;
+
+    const std::string as8bit = path.As8Bit();
+    SourceFile source(
+        "//" + as8bit.substr(build_settings->root_path().value().size() + 1));
+
+    if (!IsStringInOutputDir(build_settings->build_dir(), source.value()))
+      sources.push_back(source);
   }
 
   // Sort sources to ensure determinism of the project file generation and
@@ -411,8 +471,23 @@ bool XcodeWriter::RunAndWriteFiles(const std::string& workspace_name,
   if (separator != std::string::npos)
     config_name = config_name.substr(0, separator);
 
+  std::vector<const Target*> all_targets;
+  std::vector<const Config*> all_configs;
+  std::vector<const Toolchain*> all_toolchains;
+  for (const Item* item : builder.GetAllResolvedItems()) {
+    if (const Target* target = item->AsTarget()) {
+      all_targets.push_back(target);
+      continue;
+    }
+    if (const Config* config = item->AsConfig()) {
+      all_configs.push_back(config);
+    }
+    if (const Toolchain* toolchain = item->AsToolchain()) {
+      all_toolchains.push_back(toolchain);
+    }
+  }
+
   std::vector<const Target*> targets;
-  std::vector<const Target*> all_targets = builder.GetAllResolvedTargets();
   if (!XcodeWriter::FilterTargets(build_settings, all_targets,
                                   dir_filters_string, &targets, err)) {
     return false;
@@ -420,9 +495,9 @@ bool XcodeWriter::RunAndWriteFiles(const std::string& workspace_name,
 
   XcodeWriter workspace(workspace_name);
   if (!workspace.CreateProductsProject(
-          targets, all_targets, attributes, source_path, config_name,
-          root_target_name, ninja_executable, ninja_extra_args, build_settings,
-          target_os, err)) {
+          targets, all_targets, all_configs, all_toolchains, attributes,
+          source_path, config_name, root_target_name, ninja_executable,
+          ninja_extra_args, build_settings, target_os, err)) {
     return false;
   }
 
@@ -493,6 +568,8 @@ bool XcodeWriter::FilterTargets(const BuildSettings* build_settings,
 bool XcodeWriter::CreateProductsProject(
     const std::vector<const Target*>& targets,
     const std::vector<const Target*>& all_targets,
+    const std::vector<const Config*>& all_configs,
+    const std::vector<const Toolchain*>& all_toolchains,
     const PBXAttributes& attributes,
     const std::string& source_path,
     const std::string& config_name,
@@ -511,8 +588,9 @@ bool XcodeWriter::CreateProductsProject(
   std::string build_path;
   std::unique_ptr<base::Environment> env(base::Environment::Create());
   SourceDir source_dir("//");
-  AddSourceFilesToProjectForIndexing(all_targets, main_project.get(),
-                                     source_dir, build_settings);
+  AddSourceFilesToProjectForIndexing(all_targets, all_configs, all_toolchains,
+                                     main_project.get(), source_dir,
+                                     build_settings);
   main_project->AddAggregateTarget(
       "All", GetBuildScript(root_target, ninja_executable, ninja_extra_args,
                             env.get()));
@@ -546,6 +624,7 @@ bool XcodeWriter::CreateProductsProject(
         // requires only one target named ${target_name} to run tests.
         if (IsXCUITestRunnerTarget(target))
           continue;
+
         std::string pbxtarget_name = target->label().name();
         if (IsXCUITestModuleTarget(target)) {
           std::string target_name = target->label().name();

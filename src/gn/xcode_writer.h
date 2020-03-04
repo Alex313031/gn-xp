@@ -15,8 +15,10 @@
 
 class Builder;
 class BuildSettings;
+class Config;
 class Err;
 class Target;
+class Toolchain;
 
 using PBXAttributes = std::map<std::string, std::string>;
 class PBXProject;
@@ -65,17 +67,20 @@ class XcodeWriter {
   // Generate the "products.xcodeproj" project that reference all products
   // (i.e. targets that have a build artefact usable from Xcode, mostly
   // application bundles).
-  bool CreateProductsProject(const std::vector<const Target*>& targets,
-                             const std::vector<const Target*>& all_targets,
-                             const PBXAttributes& attributes,
-                             const std::string& source_path,
-                             const std::string& config_name,
-                             const std::string& root_target,
-                             const std::string& ninja_executable,
-                             const std::string& ninja_extra_args,
-                             const BuildSettings* build_settings,
-                             TargetOsType target_os,
-                             Err* err);
+  bool CreateProductsProject(
+      const std::vector<const Target*>& targets,
+      const std::vector<const Target*>& all_targets,
+      const std::vector<const Config*>& all_configs,
+      const std::vector<const Toolchain*>& all_toolchains,
+      const PBXAttributes& attributes,
+      const std::string& source_path,
+      const std::string& config_name,
+      const std::string& root_target,
+      const std::string& ninja_executable,
+      const std::string& ninja_extra_args,
+      const BuildSettings* build_settings,
+      TargetOsType target_os,
+      Err* err);
 
   bool WriteFiles(const BuildSettings* build_settings, Err* err);
   bool WriteProjectFile(const BuildSettings* build_settings,
