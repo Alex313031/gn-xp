@@ -142,6 +142,30 @@
       "revId": "9ec485b44a257ea935191f7bc43da1a7b1626cfe",
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "a8e08806_2c5d98c5",
+        "filename": "src/gn/ninja_rust_binary_target_writer.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 260,
+      "author": {
+        "id": 1000168
+      },
+      "writtenOn": "2020-03-04T21:43:38Z",
+      "side": 1,
+      "message": "I don\u0027t think there\u0027s a stabilization process underway. We could possibly drive stabilization of the flag. I don\u0027t see why there would be pushback, but it would take a few weeks at minimum.\n\nI don\u0027t think that should block this CL, but I am willing to own the push to stabilize, and change this later if it happens.",
+      "parentUuid": "698e5d0a_a97ea61f",
+      "range": {
+        "startLine": 260,
+        "startChar": 14,
+        "endLine": 260,
+        "endChar": 27
+      },
+      "revId": "9ec485b44a257ea935191f7bc43da1a7b1626cfe",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": true
     }
   ]
 }
