@@ -2,6 +2,160 @@
   "comments": [
     {
       "key": {
+        "uuid": "26192314_f0793d4b",
+        "filename": "src/gn/hash_table_base.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 140,
+      "author": {
+        "id": 1000014
+      },
+      "writtenOn": "2020-03-04T21:02:07Z",
+      "side": 1,
+      "message": "Remove \"const\"",
+      "range": {
+        "startLine": 140,
+        "startChar": 33,
+        "endLine": 140,
+        "endChar": 38
+      },
+      "revId": "3db7a0e132b82208f3f59e183c159f6216bcdf93",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "ade1d566_17b89f24",
+        "filename": "src/gn/hash_table_base.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 160,
+      "author": {
+        "id": 1000014
+      },
+      "writtenOn": "2020-03-04T21:02:07Z",
+      "side": 1,
+      "message": "Remove \"const\"",
+      "range": {
+        "startLine": 160,
+        "startChar": 35,
+        "endLine": 160,
+        "endChar": 40
+      },
+      "revId": "3db7a0e132b82208f3f59e183c159f6216bcdf93",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "36da05de_729dec81",
+        "filename": "src/gn/hash_table_base.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 209,
+      "author": {
+        "id": 1000014
+      },
+      "writtenOn": "2020-03-04T21:02:07Z",
+      "side": 1,
+      "message": "Can you add a comment here about why we don\u0027t want to use new[]? That initially surprised me.",
+      "revId": "3db7a0e132b82208f3f59e183c159f6216bcdf93",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "ccc45b13_86df2037",
+        "filename": "src/gn/hash_table_base.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 294,
+      "author": {
+        "id": 1000014
+      },
+      "writtenOn": "2020-03-04T21:02:07Z",
+      "side": 1,
+      "message": "I\u0027d feel better if these were default-initialized to nullptr.",
+      "revId": "3db7a0e132b82208f3f59e183c159f6216bcdf93",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "902c3818_95bbf59f",
+        "filename": "src/gn/hash_table_base.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 298,
+      "author": {
+        "id": 1000014
+      },
+      "writtenOn": "2020-03-04T21:02:07Z",
+      "side": 1,
+      "message": "These are protected and just wrap Node* versions. Can we just have begin() instead of NodeBegin()? Likewise for end()/NodeEnd().",
+      "revId": "3db7a0e132b82208f3f59e183c159f6216bcdf93",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "27509ecb_64623d50",
+        "filename": "src/gn/hash_table_base.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 346,
+      "author": {
+        "id": 1000014
+      },
+      "writtenOn": "2020-03-04T21:02:07Z",
+      "side": 1,
+      "message": "I\u0027d rather have this return a \"const Node*\" and then have a fully non-const NodeLookup version that calls this one does the cast going in and out of the const version.",
+      "revId": "3db7a0e132b82208f3f59e183c159f6216bcdf93",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "27998efa_017fdb51",
+        "filename": "src/gn/hash_table_base.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 353,
+      "author": {
+        "id": 1000014
+      },
+      "writtenOn": "2020-03-04T21:02:07Z",
+      "side": 1,
+      "message": "I don\u0027t follow why we need to track the tombstone and use it here. If node-\u003eis_null() is true, couldn\u0027t we unconditionally return it here?",
+      "revId": "3db7a0e132b82208f3f59e183c159f6216bcdf93",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "92e9b113_b9df778d",
+        "filename": "src/gn/hash_table_base.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 395,
+      "author": {
+        "id": 1000014
+      },
+      "writtenOn": "2020-03-04T21:02:07Z",
+      "side": 1,
+      "message": "Is there any reason to not call this index \"i\" or maybe \"source_i\" (then rename \"index\" below to \"dest_i\" or something)? \"nn\" seems random and obscure to me.",
+      "range": {
+        "startLine": 395,
+        "startChar": 16,
+        "endLine": 395,
+        "endChar": 18
+      },
+      "revId": "3db7a0e132b82208f3f59e183c159f6216bcdf93",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "3b38f3fe_9db571c6",
         "filename": "src/gn/label.h",
         "patchSetId": 3
@@ -47,6 +201,23 @@
       "writtenOn": "2020-03-04T18:31:08Z",
       "side": 1,
       "message": "Nit: need period.",
+      "revId": "3db7a0e132b82208f3f59e183c159f6216bcdf93",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "7f4564cd_899b9022",
+        "filename": "src/gn/unique_vector.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 21,
+      "author": {
+        "id": 1000014
+      },
+      "writtenOn": "2020-03-04T21:02:07Z",
+      "side": 1,
+      "message": "Would it hurt to 0-initialize these? I realize the table will do that itself but in case we ever make a free-floating one I think it\u0027s safer.",
       "revId": "3db7a0e132b82208f3f59e183c159f6216bcdf93",
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
       "unresolved": true
