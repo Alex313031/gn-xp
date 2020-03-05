@@ -16,6 +16,23 @@
       "revId": "3f455d79d1097c93dc8342692205480477afc7b7",
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "60a32060_f4168b07",
+        "filename": "src/gn/xcode_writer.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 70,
+      "author": {
+        "id": 1000014
+      },
+      "writtenOn": "2020-03-05T03:57:33Z",
+      "side": 1,
+      "message": "This function was already out-of-control and now it\u0027s even more so. Can we do something to clean this up?",
+      "revId": "3f455d79d1097c93dc8342692205480477afc7b7",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": true
     }
   ]
 }
