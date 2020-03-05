@@ -33,6 +33,24 @@
       "revId": "3f455d79d1097c93dc8342692205480477afc7b7",
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "0274fa12_13fb5291",
+        "filename": "src/gn/xcode_writer.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 70,
+      "author": {
+        "id": 1000070
+      },
+      "writtenOn": "2020-03-05T10:05:09Z",
+      "side": 1,
+      "message": "Understood. I\u0027ll ping this CL when it is ready for review again.",
+      "parentUuid": "60a32060_f4168b07",
+      "revId": "3f455d79d1097c93dc8342692205480477afc7b7",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": false
     }
   ]
 }
