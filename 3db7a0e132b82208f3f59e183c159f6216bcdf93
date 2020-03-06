@@ -335,6 +335,24 @@
     },
     {
       "key": {
+        "uuid": "9cbb612c_ad87d149",
+        "filename": "src/gn/label.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 121,
+      "author": {
+        "id": 1000067
+      },
+      "writtenOn": "2020-03-06T14:22:56Z",
+      "side": 1,
+      "message": "Done.",
+      "parentUuid": "3b38f3fe_9db571c6",
+      "revId": "3db7a0e132b82208f3f59e183c159f6216bcdf93",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "d5dfd501_ae38075e",
         "filename": "src/gn/source_dir.cc",
         "patchSetId": 3
@@ -346,6 +364,24 @@
       "writtenOn": "2020-03-04T18:31:08Z",
       "side": 1,
       "message": "Is this template and std::forward stuff below doing anything that a \"const std::string\u0026\" wouldn\u0027t? In the canonical path at the top the StringAtom constructor takes a string_view and in the longer path you append the buffer to a different string.",
+      "revId": "3db7a0e132b82208f3f59e183c159f6216bcdf93",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "f3414eae_9b1b30d6",
+        "filename": "src/gn/source_dir.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 60,
+      "author": {
+        "id": 1000067
+      },
+      "writtenOn": "2020-03-06T14:22:56Z",
+      "side": 1,
+      "message": "Thank you, this is a left-over from a previous optimization attempt to use std::string_view more aggressively over the whole source tree. I\u0027ve changed the code to use an std::string_view here and in the SourceDir() constructor, since it avoids a few un-wanted std::string() creations in some call sites (and benchmarking shows no notable difference doing so).",
+      "parentUuid": "d5dfd501_ae38075e",
       "revId": "3db7a0e132b82208f3f59e183c159f6216bcdf93",
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
       "unresolved": true
@@ -366,6 +402,24 @@
       "revId": "3db7a0e132b82208f3f59e183c159f6216bcdf93",
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "f036eaca_7c3bed20",
+        "filename": "src/gn/string_atom.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 45,
+      "author": {
+        "id": 1000067
+      },
+      "writtenOn": "2020-03-06T14:22:56Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "36de825f_e4c4fe01",
+      "revId": "3db7a0e132b82208f3f59e183c159f6216bcdf93",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": false
     },
     {
       "key": {
