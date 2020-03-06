@@ -8,6 +8,7 @@
 #include <iterator>
 #include <map>
 #include <memory>
+#include <optional>
 #include <sstream>
 #include <string>
 #include <utility>
@@ -15,6 +16,7 @@
 #include "base/environment.h"
 #include "base/logging.h"
 #include "base/sha1.h"
+#include "base/stl_util.h"
 #include "base/strings/string_number_conversions.h"
 #include "base/strings/string_util.h"
 #include "gn/args.h"
@@ -30,11 +32,18 @@
 #include "gn/variables.h"
 #include "gn/xcode_object.h"
 
+#include <iostream>
+
 namespace {
 
 using TargetToFileList = std::unordered_map<const Target*, Target::FileList>;
 using TargetToTarget = std::unordered_map<const Target*, const Target*>;
 using TargetToPBXTarget = std::unordered_map<const Target*, PBXTarget*>;
+
+enum TargetOsType {
+  WRITER_TARGET_OS_IOS,
+  WRITER_TARGET_OS_MACOS,
+};
 
 const char* kXCTestFileSuffixes[] = {
     "egtest.m",
@@ -60,15 +69,15 @@ SafeEnvironmentVariableInfo kSafeEnvironmentVariables[] = {
     {"ICECC_VERSION", true},
     {"ICECC_CLANG_REMOTE_CPP", true}};
 
-XcodeWriter::TargetOsType GetTargetOs(const Args& args) {
+TargetOsType GetTargetOs(const Args& args) {
   const Value* target_os_value = args.GetArgOverride(variables::kTargetOs);
   if (target_os_value) {
     if (target_os_value->type() == Value::STRING) {
       if (target_os_value->string_value() == "ios")
-        return XcodeWriter::WRITER_TARGET_OS_IOS;
+        return WRITER_TARGET_OS_IOS;
     }
   }
-  return XcodeWriter::WRITER_TARGET_OS_MACOS;
+  return WRITER_TARGET_OS_MACOS;
 }
 
 std::string GetNinjaExecutable(const std::string& ninja_executable) {
@@ -253,46 +262,6 @@ void SearchXCTestFilesForTarget(const Target* target,
   xctest_files_per_target->insert(std::make_pair(target, xctest_files));
 }
 
-// Add all source files for indexing, both private and public.
-void AddSourceFilesToProjectForIndexing(
-    const std::vector<const Target*>& targets,
-    PBXProject* project,
-    SourceDir source_dir,
-    const BuildSettings* build_settings) {
-  std::vector<SourceFile> sources;
-  for (const Target* target : targets) {
-    for (const SourceFile& source : target->sources()) {
-      if (IsStringInOutputDir(build_settings->build_dir(), source.value()))
-        continue;
-
-      sources.push_back(source);
-    }
-
-    if (target->all_headers_public())
-      continue;
-
-    for (const SourceFile& source : target->public_headers()) {
-      if (IsStringInOutputDir(build_settings->build_dir(), source.value()))
-        continue;
-
-      sources.push_back(source);
-    }
-  }
-
-  // Sort sources to ensure determinism of the project file generation and
-  // remove duplicate reference to the source files (can happen due to the
-  // bundle_data targets).
-  std::sort(sources.begin(), sources.end());
-  sources.erase(std::unique(sources.begin(), sources.end()), sources.end());
-
-  for (const SourceFile& source : sources) {
-    std::string source_file = RebasePath(source.value(), source_dir,
-                                         build_settings->root_path_utf8());
-    project->AddSourceFileToIndexingTarget(source_file, source_file,
-                                           CompilerFlags::NONE);
-  }
-}
-
 // Add xctest files to the "Compiler Sources" of corresponding test module
 // native targets.
 void AddXCTestFilesToTestModuleTarget(const Target::FileList& xctest_file_list,
@@ -313,11 +282,11 @@ void AddXCTestFilesToTestModuleTarget(const Target::FileList& xctest_file_list,
   }
 }
 
-class CollectPBXObjectsPerClassHelper : public PBXObjectVisitor {
+class CollectPBXObjectsPerClassHelper : public PBXObjectVisitorConst {
  public:
   CollectPBXObjectsPerClassHelper() = default;
 
-  void Visit(PBXObject* object) override {
+  void Visit(const PBXObject* object) override {
     DCHECK(object);
     objects_per_class_[object->Class()].push_back(object);
   }
@@ -334,7 +303,7 @@ class CollectPBXObjectsPerClassHelper : public PBXObjectVisitor {
 };
 
 std::map<PBXObjectClass, std::vector<const PBXObject*>>
-CollectPBXObjectsPerClass(PBXProject* project) {
+CollectPBXObjectsPerClass(const PBXProject* project) {
   CollectPBXObjectsPerClassHelper visitor;
   project->Visit(visitor);
   return visitor.objects_per_class();
@@ -372,169 +341,158 @@ void RecursivelyAssignIds(PBXProject* project) {
   project->Visit(visitor);
 }
 
-}  // namespace
-
-// static
-bool XcodeWriter::RunAndWriteFiles(const std::string& workspace_name,
-                                   const std::string& root_target_name,
-                                   const std::string& ninja_executable,
-                                   const std::string& ninja_extra_args,
-                                   const std::string& dir_filters_string,
-                                   const BuildSettings* build_settings,
-                                   const Builder& builder,
-                                   Err* err) {
-  const XcodeWriter::TargetOsType target_os =
-      GetTargetOs(build_settings->build_args());
-
-  PBXAttributes attributes;
-  switch (target_os) {
-    case XcodeWriter::WRITER_TARGET_OS_IOS:
-      attributes["SDKROOT"] = "iphoneos";
-      attributes["TARGETED_DEVICE_FAMILY"] = "1,2";
-      break;
-    case XcodeWriter::WRITER_TARGET_OS_MACOS:
-      attributes["SDKROOT"] = "macosx";
-      break;
-  }
-
-  const std::string source_path = FilePathToUTF8(
-      UTF8ToFilePath(RebasePath("//", build_settings->build_dir()))
-          .StripTrailingSeparators());
-
+// Returns a configuration name derived from the build directory. This gives
+// standard names if using the Xcode convention of naming the build directory
+// out/$configuration-$platform (e.g. out/Debug-iphonesimulator).
+std::string ConfigNameFromBuildSettings(const BuildSettings* build_settings) {
   std::string config_name = FilePathToUTF8(build_settings->build_dir()
                                                .Resolve(base::FilePath())
                                                .StripTrailingSeparators()
                                                .BaseName());
-  DCHECK(!config_name.empty());
 
   std::string::size_type separator = config_name.find('-');
   if (separator != std::string::npos)
     config_name = config_name.substr(0, separator);
 
-  std::vector<const Target*> targets;
-  std::vector<const Target*> all_targets = builder.GetAllResolvedTargets();
-  if (!XcodeWriter::FilterTargets(build_settings, all_targets,
-                                  dir_filters_string, &targets, err)) {
-    return false;
-  }
-
-  XcodeWriter workspace(workspace_name);
-  if (!workspace.CreateProductsProject(
-          targets, all_targets, attributes, source_path, config_name,
-          root_target_name, ninja_executable, ninja_extra_args, build_settings,
-          target_os, err)) {
-    return false;
-  }
-
-  return workspace.WriteFiles(build_settings, err);
+  DCHECK(!config_name.empty());
+  return config_name;
 }
 
-XcodeWriter::XcodeWriter(const std::string& name) : name_(name) {
-  if (name_.empty())
-    name_.assign("all");
+// Returns the path to root_src_dir from settings.
+std::string SourcePathFromBuildSettings(const BuildSettings* build_settings) {
+  return RebasePath("//", build_settings->build_dir());
 }
 
-XcodeWriter::~XcodeWriter() = default;
+// Returns the default attributes for the project from settings.
+PBXAttributes ProjectAttributesFromBuildSettings(
+    const BuildSettings* build_settings) {
+  const TargetOsType target_os = GetTargetOs(build_settings->build_args());
 
-// static
-bool XcodeWriter::FilterTargets(const BuildSettings* build_settings,
-                                const std::vector<const Target*>& all_targets,
-                                const std::string& dir_filters_string,
-                                std::vector<const Target*>* targets,
-                                Err* err) {
-  // Filter targets according to the semicolon-delimited list of label patterns,
-  // if defined, first.
-  targets->reserve(all_targets.size());
-  if (dir_filters_string.empty()) {
-    *targets = all_targets;
-  } else {
-    std::vector<LabelPattern> filters;
-    if (!commands::FilterPatternsFromString(build_settings, dir_filters_string,
-                                            &filters, err)) {
-      return false;
-    }
-
-    commands::FilterTargetsByPatterns(all_targets, filters, targets);
+  PBXAttributes attributes;
+  switch (target_os) {
+    case WRITER_TARGET_OS_IOS:
+      attributes["SDKROOT"] = "iphoneos";
+      attributes["TARGETED_DEVICE_FAMILY"] = "1,2";
+      break;
+    case WRITER_TARGET_OS_MACOS:
+      attributes["SDKROOT"] = "macosx";
+      break;
   }
 
-  // Filter out all target of type EXECUTABLE that are direct dependency of
-  // a BUNDLE_DATA target (under the assumption that they will be part of a
-  // CREATE_BUNDLE target generating an application bundle). Sort the list
-  // of targets per pointer to use binary search for the removal.
-  std::sort(targets->begin(), targets->end());
+  return attributes;
+}
 
-  for (const Target* target : all_targets) {
-    if (!target->settings()->is_default())
-      continue;
+}  // namespace
 
-    if (target->output_type() != Target::BUNDLE_DATA)
-      continue;
+class XcodeProject {
+ public:
+  XcodeProject(const BuildSettings* build_settings,
+               XcodeWriter::Options options,
+               const std::string& name);
+  ~XcodeProject();
 
-    for (const auto& pair : target->GetDeps(Target::DEPS_LINKED)) {
-      if (pair.ptr->output_type() != Target::EXECUTABLE)
+  bool AddSourcesFromBuilder(const Builder& builder, Err* err);
+  bool AddTargetsFromBuilder(const Builder& builder, Err* err);
+  bool AssignIds(Err* err);
+
+  bool WriteFile(Err* err) const;
+
+ private:
+  void WriteFileContent(std::ostream& out) const;
+
+  std::optional<std::vector<const Target*>> GetTargetsFromBuilder(
+      const Builder& builder,
+      Err* err) const;
+
+  bool AddBundleTarget();
+  bool AddBinaryTarget();
+
+  const BuildSettings* build_settings_;
+  XcodeWriter::Options options_;
+  PBXProject project_;
+};
+
+XcodeProject::XcodeProject(const BuildSettings* build_settings,
+                           XcodeWriter::Options options,
+                           const std::string& name)
+    : build_settings_(build_settings),
+      options_(options),
+      project_(name,
+               ConfigNameFromBuildSettings(build_settings),
+               SourcePathFromBuildSettings(build_settings),
+               ProjectAttributesFromBuildSettings(build_settings)) {}
+
+XcodeProject::~XcodeProject() = default;
+
+bool XcodeProject::AddSourcesFromBuilder(const Builder& builder, Err* err) {
+  SourceFileSet sources;
+
+  // Add sources from all targets.
+  for (const Target* target : builder.GetAllResolvedTargets()) {
+    for (const SourceFile& source : target->sources()) {
+      if (IsStringInOutputDir(build_settings_->build_dir(), source.value()))
         continue;
 
-      auto iter = std::lower_bound(targets->begin(), targets->end(), pair.ptr);
-      if (iter != targets->end() && *iter == pair.ptr)
-        targets->erase(iter);
+      sources.insert(source);
+    }
+
+    for (const SourceFile& source : target->public_headers()) {
+      if (IsStringInOutputDir(build_settings_->build_dir(), source.value()))
+        continue;
+
+      sources.insert(source);
     }
   }
 
-  // Sort the list of targets per-label to get a consistent ordering of them
-  // in the generated Xcode project (and thus stability of the file generated).
-  std::sort(targets->begin(), targets->end(),
-            [](const Target* a, const Target* b) {
-              return a->label().name() < b->label().name();
-            });
+  const SourceDir source_dir("//");
+  for (const SourceFile& source : sources) {
+    const std::string source_file = RebasePath(
+        source.value(), source_dir, build_settings_->root_path_utf8());
+    project_.AddSourceFileToIndexingTarget(source_file, source_file,
+                                           CompilerFlags::NONE);
+  }
 
   return true;
 }
 
-bool XcodeWriter::CreateProductsProject(
-    const std::vector<const Target*>& targets,
-    const std::vector<const Target*>& all_targets,
-    const PBXAttributes& attributes,
-    const std::string& source_path,
-    const std::string& config_name,
-    const std::string& root_target,
-    const std::string& ninja_executable,
-    const std::string& ninja_extra_args,
-    const BuildSettings* build_settings,
-    TargetOsType target_os,
-    Err* err) {
-  std::unique_ptr<PBXProject> main_project(
-      new PBXProject("products", config_name, source_path, attributes));
+bool XcodeProject::AddTargetsFromBuilder(const Builder& builder, Err* err) {
+  const std::optional<std::vector<const Target*>> targets =
+      GetTargetsFromBuilder(builder, err);
+  if (!targets)
+    return false;
+
+  std::unique_ptr<base::Environment> env(base::Environment::Create());
+  project_.AddAggregateTarget(
+      "All",
+      GetBuildScript(options_.root_target_name, options_.ninja_executable,
+                     options_.ninja_extra_args, env.get()));
+
 
   std::vector<const Target*> bundle_targets;
   TargetToPBXTarget bundle_target_to_pbxtarget;
 
-  std::string build_path;
-  std::unique_ptr<base::Environment> env(base::Environment::Create());
-  SourceDir source_dir("//");
-  AddSourceFilesToProjectForIndexing(all_targets, main_project.get(),
-                                     source_dir, build_settings);
-  main_project->AddAggregateTarget(
-      "All", GetBuildScript(root_target, ninja_executable, ninja_extra_args,
-                            env.get()));
+  const SourceDir source_dir("//");
 
   // Needs to search for xctest files under the application targets, and this
   // variable is used to store the results of visited targets, thus making the
   // search more efficient.
   TargetToFileList xctest_files_per_target;
 
-  for (const Target* target : targets) {
+  const TargetOsType target_os = GetTargetOs(build_settings_->build_args());
+
+  for (const Target* target : *targets) {
     switch (target->output_type()) {
       case Target::EXECUTABLE:
-        if (target_os == XcodeWriter::WRITER_TARGET_OS_IOS)
+        if (target_os == WRITER_TARGET_OS_IOS)
           continue;
 
-        main_project->AddNativeTarget(
+        project_.AddNativeTarget(
             target->label().name(), "compiled.mach-o.executable",
             target->output_name().empty() ? target->label().name()
                                           : target->output_name(),
             "com.apple.product-type.tool",
-            GetBuildScript(target->label().name(), ninja_executable,
-                           ninja_extra_args, env.get()));
+            GetBuildScript(target->label().name(), options_.ninja_executable,
+                           options_.ninja_extra_args, env.get()));
         break;
 
       case Target::CREATE_BUNDLE: {
@@ -560,12 +518,12 @@ bool XcodeWriter::CreateProductsProject(
             RebasePath(target->bundle_data()
                            .GetBundleRootDirOutput(target->settings())
                            .value(),
-                       build_settings->build_dir());
-        PBXNativeTarget* native_target = main_project->AddNativeTarget(
+                       build_settings_->build_dir());
+        PBXNativeTarget* native_target = project_.AddNativeTarget(
             pbxtarget_name, std::string(), target_output_name,
             target->bundle_data().product_type(),
-            GetBuildScript(pbxtarget_name, ninja_executable, ninja_extra_args,
-              env.get()),
+            GetBuildScript(pbxtarget_name, options_.ninja_executable,
+                           options_.ninja_extra_args, env.get()),
             xcode_extra_attributes);
 
         bundle_targets.push_back(target);
@@ -581,7 +539,7 @@ bool XcodeWriter::CreateProductsProject(
         if (IsXCTestModuleTarget(target)) {
           target_with_xctest_files = FindApplicationTargetByName(
               target->defined_from(),
-              target->bundle_data().xcode_test_application_name(), targets,
+              target->bundle_data().xcode_test_application_name(), *targets,
               err);
           if (!target_with_xctest_files)
             return false;
@@ -599,8 +557,8 @@ bool XcodeWriter::CreateProductsProject(
         // and xcuitest native targets for proper indexing and for discovery of
         // tests function.
         AddXCTestFilesToTestModuleTarget(xctest_file_list, native_target,
-                                         main_project.get(), source_dir,
-                                         build_settings);
+                                         &project_, source_dir,
+                                         build_settings_);
         break;
       }
 
@@ -612,66 +570,35 @@ bool XcodeWriter::CreateProductsProject(
   // Adding the corresponding test application target as a dependency of xctest
   // or xcuitest module target in the generated Xcode project so that the
   // application target is re-compiled when compiling the test module target.
-  if (!AddDependencyTargetForTestModuleTargets(bundle_targets,
-                                               bundle_target_to_pbxtarget,
-                                               main_project.get(), err)) {
+  if (!AddDependencyTargetForTestModuleTargets(
+          bundle_targets, bundle_target_to_pbxtarget, &project_, err)) {
     return false;
   }
 
-  projects_.push_back(std::move(main_project));
   return true;
 }
 
-bool XcodeWriter::WriteFiles(const BuildSettings* build_settings, Err* err) {
-  for (const auto& project : projects_) {
-    if (!WriteProjectFile(build_settings, project.get(), err))
-      return false;
-  }
-
-  SourceFile xcworkspacedata_file =
-      build_settings->build_dir().ResolveRelativeFile(
-          Value(nullptr, name_ + ".xcworkspace/contents.xcworkspacedata"), err);
-  if (xcworkspacedata_file.is_null())
-    return false;
-
-  std::stringstream xcworkspacedata_string_out;
-  WriteWorkspaceContent(xcworkspacedata_string_out);
-
-  return WriteFileIfChanged(build_settings->GetFullPath(xcworkspacedata_file),
-                            xcworkspacedata_string_out.str(), err);
+bool XcodeProject::AssignIds(Err* err) {
+  RecursivelyAssignIds(&project_);
+  return true;
 }
 
-bool XcodeWriter::WriteProjectFile(const BuildSettings* build_settings,
-                                   PBXProject* project,
-                                   Err* err) {
-  SourceFile pbxproj_file = build_settings->build_dir().ResolveRelativeFile(
-      Value(nullptr, project->Name() + ".xcodeproj/project.pbxproj"), err);
+bool XcodeProject::WriteFile(Err* err) const {
+  DCHECK(!project_.id().empty());
+
+  SourceFile pbxproj_file = build_settings_->build_dir().ResolveRelativeFile(
+      Value(nullptr, project_.Name() + ".xcodeproj/project.pbxproj"), err);
   if (pbxproj_file.is_null())
     return false;
 
   std::stringstream pbxproj_string_out;
-  WriteProjectContent(pbxproj_string_out, project);
+  WriteFileContent(pbxproj_string_out);
 
-  if (!WriteFileIfChanged(build_settings->GetFullPath(pbxproj_file),
-                          pbxproj_string_out.str(), err))
-    return false;
-
-  return true;
+  return WriteFileIfChanged(build_settings_->GetFullPath(pbxproj_file),
+                            pbxproj_string_out.str(), err);
 }
 
-void XcodeWriter::WriteWorkspaceContent(std::ostream& out) {
-  out << "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n"
-      << "<Workspace version = \"1.0\">\n";
-  for (const auto& project : projects_) {
-    out << "  <FileRef location = \"group:" << project->Name()
-        << ".xcodeproj\"></FileRef>\n";
-  }
-  out << "</Workspace>\n";
-}
-
-void XcodeWriter::WriteProjectContent(std::ostream& out, PBXProject* project) {
-  RecursivelyAssignIds(project);
-
+void XcodeProject::WriteFileContent(std::ostream& out) const {
   out << "// !$*UTF8*$!\n"
       << "{\n"
       << "\tarchiveVersion = 1;\n"
@@ -680,7 +607,7 @@ void XcodeWriter::WriteProjectContent(std::ostream& out, PBXProject* project) {
       << "\tobjectVersion = 46;\n"
       << "\tobjects = {\n";
 
-  for (auto& pair : CollectPBXObjectsPerClass(project)) {
+  for (auto& pair : CollectPBXObjectsPerClass(&project_)) {
     out << "\n"
         << "/* Begin " << ToString(pair.first) << " section */\n";
     std::sort(pair.second.begin(), pair.second.end(),
@@ -694,6 +621,165 @@ void XcodeWriter::WriteProjectContent(std::ostream& out, PBXProject* project) {
   }
 
   out << "\t};\n"
-      << "\trootObject = " << project->Reference() << ";\n"
+      << "\trootObject = " << project_.Reference() << ";\n"
       << "}\n";
+}
+
+std::optional<std::vector<const Target*>> XcodeProject::GetTargetsFromBuilder(
+    const Builder& builder,
+    Err* err) const {
+  std::vector<const Target*> all_targets = builder.GetAllResolvedTargets();
+
+  // Filter targets according to the dir_filters_string if defined.
+  if (!options_.dir_filters_string.empty()) {
+    std::vector<LabelPattern> filters;
+    if (!commands::FilterPatternsFromString(
+            build_settings_, options_.dir_filters_string, &filters, err)) {
+      return std::nullopt;
+    }
+
+    std::vector<const Target*> unfiltered_targets;
+    std::swap(unfiltered_targets, all_targets);
+
+    commands::FilterTargetsByPatterns(unfiltered_targets, filters,
+                                      &all_targets);
+  }
+
+  std::vector<const Target*> targets;
+  targets.reserve(all_targets.size());
+
+  // Filter out all target of type EXECUTABLE that are direct dependency of
+  // a BUNDLE_DATA target (under the assumption that they will be part of a
+  // CREATE_BUNDLE target generating an application bundle). Sort the list
+  // of targets per pointer to use binary search for the removal.
+  std::sort(all_targets.begin(), all_targets.end());
+
+  for (const Target* target : all_targets) {
+    if (!target->settings()->is_default())
+      continue;
+
+    if (target->output_type() != Target::BUNDLE_DATA)
+      continue;
+
+    for (const auto& pair : target->GetDeps(Target::DEPS_LINKED)) {
+      if (pair.ptr->output_type() != Target::EXECUTABLE)
+        continue;
+
+      auto iter = std::lower_bound(targets.begin(), targets.end(), pair.ptr);
+      if (iter != targets.end() && *iter == pair.ptr)
+        targets.erase(iter);
+    }
+  }
+
+  // Sort the list of targets per-label to get a consistent ordering of them
+  // in the generated Xcode project (and thus stability of the file generated).
+  std::sort(
+      targets.begin(), targets.end(),
+      [](const Target* a, const Target* b) { return a->label() < b->label(); });
+
+  return targets;
+}
+
+class XcodeWorkspace {
+ public:
+  XcodeWorkspace(const BuildSettings* settings, XcodeWriter::Options options);
+  ~XcodeWorkspace();
+
+  std::unique_ptr<XcodeProject> CreateProject(const std::string& name);
+
+  bool WriteFile(Err* err) const;
+
+ private:
+  void WriteFileContent(std::ostream& out) const;
+
+  const BuildSettings* build_settings_;
+  std::vector<std::string> project_names_;
+  XcodeWriter::Options options_;
+};
+
+XcodeWorkspace::XcodeWorkspace(const BuildSettings* build_settings,
+                               XcodeWriter::Options options)
+    : build_settings_(build_settings), options_(options) {
+  if (options_.workspace_name.empty())
+    options.workspace_name.assign("all");
+}
+
+XcodeWorkspace::~XcodeWorkspace() = default;
+
+std::unique_ptr<XcodeProject> XcodeWorkspace::CreateProject(
+    const std::string& name) {
+  DCHECK(!base::ContainsValue(project_names_, name));
+  project_names_.push_back(name);
+  return std::make_unique<XcodeProject>(build_settings_, options_, name);
+}
+
+bool XcodeWorkspace::WriteFile(Err* err) const {
+  SourceFile xcworkspacedata_file =
+      build_settings_->build_dir().ResolveRelativeFile(
+          Value(nullptr, options_.workspace_name +
+                             ".xcworkspace/contents.xcworkspacedata"),
+          err);
+  if (xcworkspacedata_file.is_null())
+    return false;
+
+  std::stringstream xcworkspacedata_string_out;
+  WriteFileContent(xcworkspacedata_string_out);
+
+  return WriteFileIfChanged(build_settings_->GetFullPath(xcworkspacedata_file),
+                            xcworkspacedata_string_out.str(), err);
+}
+
+void XcodeWorkspace::WriteFileContent(std::ostream& out) const {
+  out << "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n"
+      << "<Workspace version = \"1.0\">\n";
+  for (const std::string& project_name : project_names_) {
+    out << "  <FileRef location = \"group:" << project_name
+        << ".xcodeproj\"></FileRef>\n";
+  }
+  out << "</Workspace>\n";
+}
+
+// static
+bool XcodeWriter::RunAndWriteFiles(const BuildSettings* build_settings,
+                                   const Builder& builder,
+                                   Options options,
+                                   Err* err) {
+  XcodeWriter writer(build_settings, options);
+  if (!writer.AddSourcesFromBuilder(builder, err))
+    return false;
+
+  if (!writer.AddTargetsFromBuilder(builder, err))
+    return false;
+
+  if (!writer.WriteFiles(err))
+    return false;
+
+  return true;
+}
+
+XcodeWriter::XcodeWriter(const BuildSettings* build_settings, Options options) {
+  workspace_ = std::make_unique<XcodeWorkspace>(build_settings, options);
+  products_ = workspace_->CreateProject("products");
+}
+
+XcodeWriter::~XcodeWriter() = default;
+
+bool XcodeWriter::AddSourcesFromBuilder(const Builder& builder, Err* err) {
+  return products_->AddSourcesFromBuilder(builder, err);
+}
+
+bool XcodeWriter::AddTargetsFromBuilder(const Builder& builder, Err* err) {
+  return products_->AddTargetsFromBuilder(builder, err);
+}
+
+bool XcodeWriter::WriteFiles(Err* err) const {
+  if (!products_->WriteFile(err)) {
+    return false;
+  }
+
+  if (!workspace_->WriteFile(err)) {
+    return false;
+  }
+
+  return true;
 }
