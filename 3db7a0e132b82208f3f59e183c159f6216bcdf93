@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "c70dae88_9ba5a9ab",
+        "filename": "src/gn/hash_table_base.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 140,
+      "author": {
+        "id": 1000067
+      },
+      "writtenOn": "2020-03-06T00:02:05Z",
+      "side": 1,
+      "message": "Ah, thank you! Done.",
+      "parentUuid": "26192314_f0793d4b",
+      "range": {
+        "startLine": 140,
+        "startChar": 33,
+        "endLine": 140,
+        "endChar": 38
+      },
+      "revId": "3db7a0e132b82208f3f59e183c159f6216bcdf93",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "ade1d566_17b89f24",
         "filename": "src/gn/hash_table_base.h",
         "patchSetId": 3
@@ -36,6 +60,30 @@
       "writtenOn": "2020-03-04T21:02:07Z",
       "side": 1,
       "message": "Remove \"const\"",
+      "range": {
+        "startLine": 160,
+        "startChar": 35,
+        "endLine": 160,
+        "endChar": 40
+      },
+      "revId": "3db7a0e132b82208f3f59e183c159f6216bcdf93",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "260726e8_afbf35df",
+        "filename": "src/gn/hash_table_base.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 160,
+      "author": {
+        "id": 1000067
+      },
+      "writtenOn": "2020-03-06T00:02:05Z",
+      "side": 1,
+      "message": "Ditto.",
+      "parentUuid": "ade1d566_17b89f24",
       "range": {
         "startLine": 160,
         "startChar": 35,
@@ -65,6 +113,24 @@
     },
     {
       "key": {
+        "uuid": "43c9749d_66198be6",
+        "filename": "src/gn/hash_table_base.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 209,
+      "author": {
+        "id": 1000067
+      },
+      "writtenOn": "2020-03-06T00:02:05Z",
+      "side": 1,
+      "message": "Done. This is to clarify that no object construction can or should take place here (due to the NODE_TYPE requirements).",
+      "parentUuid": "36da05de_729dec81",
+      "revId": "3db7a0e132b82208f3f59e183c159f6216bcdf93",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "ccc45b13_86df2037",
         "filename": "src/gn/hash_table_base.h",
         "patchSetId": 3
@@ -76,6 +142,24 @@
       "writtenOn": "2020-03-04T21:02:07Z",
       "side": 1,
       "message": "I\u0027d feel better if these were default-initialized to nullptr.",
+      "revId": "3db7a0e132b82208f3f59e183c159f6216bcdf93",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "fd6337d6_a4c67aeb",
+        "filename": "src/gn/hash_table_base.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 294,
+      "author": {
+        "id": 1000067
+      },
+      "writtenOn": "2020-03-06T00:02:05Z",
+      "side": 1,
+      "message": "Sure. Done.",
+      "parentUuid": "ccc45b13_86df2037",
       "revId": "3db7a0e132b82208f3f59e183c159f6216bcdf93",
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
       "unresolved": true
@@ -99,6 +183,24 @@
     },
     {
       "key": {
+        "uuid": "333d15a4_1a7c7d4b",
+        "filename": "src/gn/hash_table_base.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 298,
+      "author": {
+        "id": 1000067
+      },
+      "writtenOn": "2020-03-06T00:02:05Z",
+      "side": 1,
+      "message": "These are protected intentionally to avoid exposing them by mistake in derived classes.\n\nThe NodeBegin() and NodeEnd() names are a convenience for derived classes, because it makes writing their own begin() / end() methods much easier. I\u0027ve added a comment to clarify that with an example.\n\nAnd I added a comment explaining ValidNodesRange() too.",
+      "parentUuid": "902c3818_95bbf59f",
+      "revId": "3db7a0e132b82208f3f59e183c159f6216bcdf93",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "27509ecb_64623d50",
         "filename": "src/gn/hash_table_base.h",
         "patchSetId": 3
@@ -110,6 +212,24 @@
       "writtenOn": "2020-03-04T21:02:07Z",
       "side": 1,
       "message": "I\u0027d rather have this return a \"const Node*\" and then have a fully non-const NodeLookup version that calls this one does the cast going in and out of the const version.",
+      "revId": "3db7a0e132b82208f3f59e183c159f6216bcdf93",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "d6dcbcb0_5fef12ee",
+        "filename": "src/gn/hash_table_base.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 346,
+      "author": {
+        "id": 1000067
+      },
+      "writtenOn": "2020-03-06T00:02:05Z",
+      "side": 1,
+      "message": "I fear this makes everything more complicated with nearly no benefit, because:\n\n1) This forces derived classes to implement two methods instead of one as well, and the cast expressions are a little annoying, e.g.:\n\n   Node* NodeLookup(size_t hash, NODE_EQUAL node_equal) {\n      return const_cast\u003cNode *\u003e(\n         const_cast\u003cHashTableBase\u003cNode\u003e *\u003e(this)-\u003eNodeLookup(hash, node_equal));\n   }\n\nwhich must be duplicated in derived classes as well. An alternative is to use a different name for the mutable version, but you then lose in simplicity.\n\n2) The mutable method must pass |node_equal| to the const method, which means the type must be NODE_EQUAL type must be copyable now, which loses genericity. This can alleviated by using a NODE_EQUAL\u0026\u0026 parameter type + std::forward\u003cNODE_EQUAL\u003e(node_equal), but again, this makes the code harder to read and write.\n\n3) And finally, the method does not mutate the state of the table at all. Mutation must be performed by the caller if it wants to insert/remove an item after the call, and pushing the cast to the caller is also annoying.\n\nThus I would prefer to keep this as-is, because it is already tricky enough to write a derived class. What do you think?",
+      "parentUuid": "27509ecb_64623d50",
       "revId": "3db7a0e132b82208f3f59e183c159f6216bcdf93",
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
       "unresolved": true
@@ -133,6 +253,24 @@
     },
     {
       "key": {
+        "uuid": "24eaba3c_248398c0",
+        "filename": "src/gn/hash_table_base.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 353,
+      "author": {
+        "id": 1000067
+      },
+      "writtenOn": "2020-03-06T00:02:05Z",
+      "side": 1,
+      "message": "The point is to return the location of the first tombstone, in order to overwrite it on the next insertion.\n\nThis is critical, otherwise, tombstone nodes are never removed from the table, reducing the number of actual free nodes for future insertions, and preventing UpdateAfterInsert() to properly grow the table if needed (since it essentially assumes there are |size_ - count_| free nodes, which is no longer true with unremovable tombstones).",
+      "parentUuid": "27998efa_017fdb51",
+      "revId": "3db7a0e132b82208f3f59e183c159f6216bcdf93",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "92e9b113_b9df778d",
         "filename": "src/gn/hash_table_base.h",
         "patchSetId": 3
@@ -144,6 +282,30 @@
       "writtenOn": "2020-03-04T21:02:07Z",
       "side": 1,
       "message": "Is there any reason to not call this index \"i\" or maybe \"source_i\" (then rename \"index\" below to \"dest_i\" or something)? \"nn\" seems random and obscure to me.",
+      "range": {
+        "startLine": 395,
+        "startChar": 16,
+        "endLine": 395,
+        "endChar": 18
+      },
+      "revId": "3db7a0e132b82208f3f59e183c159f6216bcdf93",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "aba5584b_b1cc9b2a",
+        "filename": "src/gn/hash_table_base.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 395,
+      "author": {
+        "id": 1000067
+      },
+      "writtenOn": "2020-03-06T00:02:05Z",
+      "side": 1,
+      "message": "Thanks. I\u0027ve replaced them with |src_index| and |dst_index|.\n\nIn case you were wondering, naming small indices with repeated letters (e.g. ii, jj, or nn) is typically handy to rapidly find them in the loop\u0027s source code (unlike single-letter indices which appear in many other identifiers / keywords). I agree that its use here was a bit obscure though :)",
+      "parentUuid": "92e9b113_b9df778d",
       "range": {
         "startLine": 395,
         "startChar": 16,
