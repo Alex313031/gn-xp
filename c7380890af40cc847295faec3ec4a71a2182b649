@@ -55,6 +55,24 @@
     },
     {
       "key": {
+        "uuid": "790f5937_7024e86c",
+        "filename": "src/gn/visual_studio_writer.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 137,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2020-03-09T15:52:31Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "3f30badd_326dfb5a",
+      "revId": "c7380890af40cc847295faec3ec4a71a2182b649",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "9060dc9e_88fc96f9",
         "filename": "src/gn/visual_studio_writer.cc",
         "patchSetId": 1
