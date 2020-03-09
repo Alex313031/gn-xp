@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "b7cc72b9_3b422e0f",
+        "filename": "src/gn/visual_studio_writer.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 137,
+      "author": {
+        "id": 1000070
+      },
+      "writtenOn": "2020-03-09T14:23:07Z",
+      "side": 1,
+      "message": "As far as I know we should never has target of type Target::CREATE_BUNDLE on Windows (as they are only used on iOS/macOS).\n\nWould probably be better to skip them in the loop line 355.",
+      "revId": "c7380890af40cc847295faec3ec4a71a2182b649",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "9060dc9e_88fc96f9",
+        "filename": "src/gn/visual_studio_writer.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 358,
+      "author": {
+        "id": 1000070
+      },
+      "writtenOn": "2020-03-09T14:23:07Z",
+      "side": 1,
+      "message": "I think we should also skip Target::CREATE_BUNDLE here.",
+      "revId": "c7380890af40cc847295faec3ec4a71a2182b649",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": true
+    }
+  ]
+}
