@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "cd61789a_f2889aa0",
+        "filename": "src/gn/visual_studio_writer.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 137,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2020-03-09T14:42:14Z",
+      "side": 1,
+      "message": "I added it because I tried testing this change on my macbook, and I forgot to add `target_os \u003d \"win\"` to my args.gn at first. Since CREATE_BUNDLE is conceptually like GROUP (I think?) it felt better here, but I\u0027m also happy to move it if you prefer.",
+      "parentUuid": "b7cc72b9_3b422e0f",
+      "revId": "c7380890af40cc847295faec3ec4a71a2182b649",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "9060dc9e_88fc96f9",
         "filename": "src/gn/visual_studio_writer.cc",
         "patchSetId": 1
