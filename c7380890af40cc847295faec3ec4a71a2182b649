@@ -37,6 +37,24 @@
     },
     {
       "key": {
+        "uuid": "3f30badd_326dfb5a",
+        "filename": "src/gn/visual_studio_writer.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 137,
+      "author": {
+        "id": 1000070
+      },
+      "writtenOn": "2020-03-09T15:50:26Z",
+      "side": 1,
+      "message": "CREATE_BUNDLE + BUNDLE_DATA are closer to COPY_FILES target than to a GROUP target. I think they should get the same treatment as COPY_FILES when generating MSVC project (as opposed to Xcode project where they are treated as EXECUTABLE/*_LIBRARY).\n\nSo, I think they should both be ignored by the loop below.",
+      "parentUuid": "cd61789a_f2889aa0",
+      "revId": "c7380890af40cc847295faec3ec4a71a2182b649",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "9060dc9e_88fc96f9",
         "filename": "src/gn/visual_studio_writer.cc",
         "patchSetId": 1
