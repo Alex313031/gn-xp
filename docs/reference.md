@@ -39,8 +39,6 @@
     *   [declare_args: Declare build arguments.](#func_declare_args)
     *   [defined: Returns whether an identifier is defined.](#func_defined)
     *   [exec_script: Synchronously run a script and return the output.](#func_exec_script)
-    *   [filter_exclude: Remove values that match a set of patterns.](#func_filter_exclude)
-    *   [filter_include: Remove values that do not match a set of patterns.](#func_filter_include)
     *   [foreach: Iterate over a list.](#func_foreach)
     *   [forward_variables_from: Copies variables from a different scope.](#func_forward_variables_from)
     *   [get_label_info: Get an attribute from a target's label.](#func_get_label_info)
@@ -750,9 +748,6 @@
   --workspace=<file_name>
       Override defaut workspace file name ("all"). The workspace file is
       written to the root build directory.
-
-  --ninja-executable=<string>
-      Can be used to specify the ninja executable to use when building.
 
   --ninja-extra-args=<string>
       This string is passed without any quoting to the ninja invocation
@@ -2253,40 +2248,6 @@
   # This example just calls the script with no arguments and discards the
   # result.
   exec_script("//foo/bar/myscript.py")
-```
-### <a name="func_filter_exclude"></a>**filter_exclude**: Remove values that match a set of patterns.
-
-```
-  filter_exclude(values, exclude_patterns)
-
-  The argument values must be a list of strings.
-
-  The argument exclude_patterns must be a list of patterns. Any elements in
-  values matching at least one of those patterns will be excluded.
-```
-
-#### **Examples**
-```
-  values = [ "foo.cc", "foo.h", "foo.proto" ]
-  result = filter_exclude(values, [ "*.proto" ])
-  # result will be [ "foo.cc", "foo.h" ]
-```
-### <a name="func_filter_include"></a>**filter_include**: Remove values that do not match a set of patterns.
-
-```
-  filter_include(values, include_patterns)
-
-  The argument values must be a list of strings.
-
-  The argument include_patterns must be a list of patterns. Only elements
-  from values matching at least one of the pattern will be included.
-```
-
-#### **Examples**
-```
-  values = [ "foo.cc", "foo.h", "foo.proto" ]
-  result = filter_include(values, [ "*.proto" ])
-  # result will be [ "foo.proto" ]
 ```
 ### <a name="func_foreach"></a>**foreach**: Iterate over a list.
 
