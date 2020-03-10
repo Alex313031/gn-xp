@@ -16,8 +16,10 @@
 
 class Builder;
 class BuildSettings;
+class Config;
 class Err;
 class Target;
+class Toolchain;
 
 // Writes an Xcode workspace to build and debug code.
 class XcodeWriter {
