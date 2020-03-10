@@ -268,6 +268,9 @@ void AddSourceFilesToProjectForIndexing(
       sources.push_back(source);
     }
 
+		auto build_dep_files = target->build_dependency_files();
+		std::move(build_dep_files.begin(), build_dep_files.end(), std::back_inserter(sources));
+
     if (target->all_headers_public())
       continue;
 
