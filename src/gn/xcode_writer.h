@@ -12,6 +12,7 @@
 #include <vector>
 
 #include "base/macros.h"
+#include "gn/source_file.h"
 
 class Builder;
 class BuildSettings;
@@ -67,6 +68,7 @@ class XcodeWriter {
   // application bundles).
   bool CreateProductsProject(const std::vector<const Target*>& targets,
                              const std::vector<const Target*>& all_targets,
+														 const std::vector<SourceFile> buildGNFiles,
                              const PBXAttributes& attributes,
                              const std::string& source_path,
                              const std::string& config_name,

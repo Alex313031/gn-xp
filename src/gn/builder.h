@@ -52,6 +52,9 @@ class Builder {
   // Returns targets which should be generated and which are defined.
   std::vector<const Target*> GetAllResolvedTargets() const;
 
+	// Return build GN files which should be added to project
+	std::vector<SourceFile> GetAllBuildGNFiles() const;
+
   // Returns the record for the given label, or NULL if it doesn't exist.
   // Mostly used for unit tests.
   const BuilderRecord* GetRecord(const Label& label) const;
@@ -100,6 +103,8 @@ class Builder {
                           Err* err);
   bool AddToolchainDep(BuilderRecord* record, const Target* target, Err* err);
 
+	void AddBuildGNFile(BuilderRecord* record);
+
   // Given a target, sets the "should generate" bit and pushes it through the
   // dependency tree. Any time the bit it set, we ensure that the given item is
   // scheduled to be loaded.
@@ -137,6 +142,7 @@ class Builder {
   Loader* loader_;
 
   std::map<Label, std::unique_ptr<BuilderRecord>> records_;
+	std::vector<SourceFile> buildGNFiles_;
 
   ResolvedGeneratedCallback resolved_and_generated_callback_;
 

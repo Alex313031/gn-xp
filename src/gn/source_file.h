@@ -37,6 +37,7 @@ class SourceFile {
     SOURCE_RC,
     SOURCE_O,  // Object files can be inputs, too. Also counts .obj.
     SOURCE_DEF,
+		SOURCE_GN,
 
     SOURCE_RS,
     SOURCE_GO,
