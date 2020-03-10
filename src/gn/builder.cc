@@ -161,6 +161,10 @@ std::vector<const Target*> Builder::GetAllResolvedTargets() const {
   return result;
 }
 
+std::vector<SourceFile> Builder::GetAllBuildGNFiles() const {
+	return buildGNFiles_;
+}
+
 const BuilderRecord* Builder::GetRecord(const Label& label) const {
   // Forward to the non-const version.
   return const_cast<Builder*>(this)->GetRecord(label);
@@ -433,6 +437,11 @@ bool Builder::AddToolchainDep(BuilderRecord* record,
   return true;
 }
 
+void Builder::AddBuildGNFile(BuilderRecord* record)
+{
+	buildGNFiles_.emplace_back(loader_->BuildFileForLabel(record->label()));
+}
+
 void Builder::RecursiveSetShouldGenerate(BuilderRecord* record, bool force) {
   if (!record->should_generate()) {
     record->set_should_generate(true);
@@ -448,6 +457,7 @@ void Builder::RecursiveSetShouldGenerate(BuilderRecord* record, bool force) {
     if (!cur->should_generate()) {
       ScheduleItemLoadIfNecessary(cur);
       RecursiveSetShouldGenerate(cur, false);
+			AddBuildGNFile(cur);
     }
   }
 }

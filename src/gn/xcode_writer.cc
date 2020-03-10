@@ -256,6 +256,7 @@ void SearchXCTestFilesForTarget(const Target* target,
 // Add all source files for indexing, both private and public.
 void AddSourceFilesToProjectForIndexing(
     const std::vector<const Target*>& targets,
+		std::vector<SourceFile> all_buildGNFiles,
     PBXProject* project,
     SourceDir source_dir,
     const BuildSettings* build_settings) {
@@ -278,6 +279,9 @@ void AddSourceFilesToProjectForIndexing(
       sources.push_back(source);
     }
   }
+
+	// move build gn files to sources
+	std::move(all_buildGNFiles.begin(), all_buildGNFiles.end(), std::back_inserter(sources));
 
   // Sort sources to ensure determinism of the project file generation and
   // remove duplicate reference to the source files (can happen due to the
@@ -418,9 +422,12 @@ bool XcodeWriter::RunAndWriteFiles(const std::string& workspace_name,
     return false;
   }
 
+	std::vector<SourceFile> all_buildGNFiles = builder.GetAllBuildGNFiles();
+  all_buildGNFiles.erase(std::unique(all_buildGNFiles.begin(), all_buildGNFiles.end()), all_buildGNFiles.end());
+
   XcodeWriter workspace(workspace_name);
   if (!workspace.CreateProductsProject(
-          targets, all_targets, attributes, source_path, config_name,
+          targets, all_targets, all_buildGNFiles, attributes, source_path, config_name,
           root_target_name, ninja_executable, ninja_extra_args, build_settings,
           target_os, err)) {
     return false;
@@ -493,6 +500,7 @@ bool XcodeWriter::FilterTargets(const BuildSettings* build_settings,
 bool XcodeWriter::CreateProductsProject(
     const std::vector<const Target*>& targets,
     const std::vector<const Target*>& all_targets,
+		const std::vector<SourceFile> all_buildGNFiles,
     const PBXAttributes& attributes,
     const std::string& source_path,
     const std::string& config_name,
@@ -511,7 +519,7 @@ bool XcodeWriter::CreateProductsProject(
   std::string build_path;
   std::unique_ptr<base::Environment> env(base::Environment::Create());
   SourceDir source_dir("//");
-  AddSourceFilesToProjectForIndexing(all_targets, main_project.get(),
+  AddSourceFilesToProjectForIndexing(all_targets, all_buildGNFiles, main_project.get(),
                                      source_dir, build_settings);
   main_project->AddAggregateTarget(
       "All", GetBuildScript(root_target, ninja_executable, ninja_extra_args,

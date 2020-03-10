@@ -47,6 +47,8 @@ SourceFile::Type GetSourceFileType(const std::string& file) {
     return SourceFile::SOURCE_RS;
   if (extension == "go")
     return SourceFile::SOURCE_GO;
+	if (extension == "gn")
+		return SourceFile::SOURCE_GN;
 
   return SourceFile::SOURCE_UNKNOWN;
 }
