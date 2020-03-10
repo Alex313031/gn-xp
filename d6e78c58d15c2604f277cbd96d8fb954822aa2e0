@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "2463c6fe_8a4170bd",
+        "filename": "src/gn/function_filter.cc",
+        "patchSetId": 11
+      },
+      "lineNbr": 26,
+      "author": {
+        "id": 1000014
+      },
+      "writtenOn": "2020-03-10T20:39:03Z",
+      "side": 1,
+      "message": "Instead of \"pattern\" can you say \"file pattern\"? There\u0027s also a thing called a label pattern that I want to differentiate it from.\n\nWe should also document in each of these places what a \"file pattern\" is. It looks like we should probably just say\n\n  See \"gn help set_sources_assignment_filter\" for documentation on file patterns.\n\nAn alternative would be to separate out the file patterns into a separate topic like label_patterns is and reference it from all three places.",
+      "revId": "d6e78c58d15c2604f277cbd96d8fb954822aa2e0",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": true
+    }
+  ]
+}
