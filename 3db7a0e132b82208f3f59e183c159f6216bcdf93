@@ -166,6 +166,24 @@
     },
     {
       "key": {
+        "uuid": "0923e056_dca606cd",
+        "filename": "src/gn/hash_table_base.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 294,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2020-03-11T16:40:45Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "fd6337d6_a4c67aeb",
+      "revId": "3db7a0e132b82208f3f59e183c159f6216bcdf93",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "902c3818_95bbf59f",
         "filename": "src/gn/hash_table_base.h",
         "patchSetId": 3
@@ -198,6 +216,24 @@
       "revId": "3db7a0e132b82208f3f59e183c159f6216bcdf93",
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "03431368_afccf829",
+        "filename": "src/gn/hash_table_base.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 298,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2020-03-11T16:40:45Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "333d15a4_1a7c7d4b",
+      "revId": "3db7a0e132b82208f3f59e183c159f6216bcdf93",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": false
     },
     {
       "key": {
@@ -236,6 +272,24 @@
     },
     {
       "key": {
+        "uuid": "ff160cd0_22c2f67f",
+        "filename": "src/gn/hash_table_base.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 346,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2020-03-11T16:40:45Z",
+      "side": 1,
+      "message": "OK",
+      "parentUuid": "d6dcbcb0_5fef12ee",
+      "revId": "3db7a0e132b82208f3f59e183c159f6216bcdf93",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "27998efa_017fdb51",
         "filename": "src/gn/hash_table_base.h",
         "patchSetId": 3
@@ -265,6 +319,24 @@
       "side": 1,
       "message": "The point is to return the location of the first tombstone, in order to overwrite it on the next insertion.\n\nThis is critical, otherwise, tombstone nodes are never removed from the table, reducing the number of actual free nodes for future insertions, and preventing UpdateAfterInsert() to properly grow the table if needed (since it essentially assumes there are |size_ - count_| free nodes, which is no longer true with unremovable tombstones).",
       "parentUuid": "27998efa_017fdb51",
+      "revId": "3db7a0e132b82208f3f59e183c159f6216bcdf93",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "6b0cf581_f5716459",
+        "filename": "src/gn/hash_table_base.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 353,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2020-03-11T16:40:45Z",
+      "side": 1,
+      "message": "I see, can the function comment talk about how it returns the first tombstone in this case?",
+      "parentUuid": "24eaba3c_248398c0",
       "revId": "3db7a0e132b82208f3f59e183c159f6216bcdf93",
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
       "unresolved": true
