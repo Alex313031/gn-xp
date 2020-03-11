@@ -325,6 +325,7 @@ class PBXProject : public PBXObject {
   PBXNativeTarget* AddNativeTarget(
       const std::string& name,
       const std::string& type,
+      const std::string& output_dir,
       const std::string& output_name,
       const std::string& output_type,
       const std::string& shell_script,

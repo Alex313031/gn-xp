@@ -187,3 +187,12 @@ SourceDir BundleData::GetBundleRootDirOutputAsDir(
     const Settings* settings) const {
   return SourceDir(GetBundleRootDirOutput(settings).value());
 }
+
+SourceDir BundleData::GetBundleDir(const Settings* settings) const{
+  std::string root_dir_value = GetBundleRootDirOutput(settings).value();
+  size_t last_separator = root_dir_value.rfind('/');
+  if (last_separator != std::string::npos)
+    root_dir_value = root_dir_value.substr(0, last_separator);
+
+  return SourceDir(std::move(root_dir_value));
+}
