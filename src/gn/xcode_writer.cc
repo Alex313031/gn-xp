@@ -515,7 +515,7 @@ void XcodeWriter::CreateProductsProject(
             target->label().name(), "compiled.mach-o.executable",
             target->output_name().empty() ? target->label().name()
                                           : target->output_name(),
-            "com.apple.product-type.tool",
+            "com.apple.product-type.tool", ".",
             GetBuildScript(target->label().name(), ninja_executable,
                            ninja_extra_args, env.get()));
         break;
@@ -539,14 +539,19 @@ void XcodeWriter::CreateProductsProject(
         PBXAttributes xcode_extra_attributes =
             target->bundle_data().xcode_extra_attributes();
 
+        const std::string output_dir = RebasePath(target->bundle_data()
+                           .GetBundleDir(target->settings())
+                           .value(),
+                       build_settings->build_dir());
         const std::string& target_output_name =
             RebasePath(target->bundle_data()
                            .GetBundleRootDirOutput(target->settings())
                            .value(),
                        build_settings->build_dir());
+
         PBXNativeTarget* native_target = main_project->AddNativeTarget(
             pbxtarget_name, std::string(), target_output_name,
-            target->bundle_data().product_type(),
+            target->bundle_data().product_type(), output_dir,
             GetBuildScript(pbxtarget_name, ninja_executable, ninja_extra_args,
               env.get()),
             xcode_extra_attributes);
