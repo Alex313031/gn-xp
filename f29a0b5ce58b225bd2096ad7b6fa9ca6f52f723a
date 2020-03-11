@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "56e9fd40_65bfa39a",
+        "filename": "src/gn/functions.cc",
+        "patchSetId": 12
+      },
+      "lineNbr": 833,
+      "author": {
+        "id": 1000014
+      },
+      "writtenOn": "2020-03-11T16:46:34Z",
+      "side": 1,
+      "message": "file_",
+      "range": {
+        "startLine": 833,
+        "startChar": 15,
+        "endLine": 833,
+        "endChar": 20
+      },
+      "revId": "f29a0b5ce58b225bd2096ad7b6fa9ca6f52f723a",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": true
+    }
+  ]
+}
