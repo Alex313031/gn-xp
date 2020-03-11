@@ -81,6 +81,10 @@ Value Template::Invoke(Scope* scope,
   Value* invoker_value = template_scope.GetMutableValue(
       variables::kInvoker, Scope::SEARCH_NESTED, false);
   invoker_value->SetScopeValue(std::move(invocation_scope));
+  // Mark |invoker| as used because we don't want to issue an error if the
+  // template ignores it (e.g. might use only |template_name|).
+  template_scope.MarkUsed(variables::kInvoker);
+
   template_scope.set_source_dir(scope->GetSourceDir());
 
   const std::string_view target_name(variables::kTargetName);
