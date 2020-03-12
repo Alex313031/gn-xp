@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ab7bac98_17c1a533",
+        "filename": "src/gn/bundle_data.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 192,
+      "author": {
+        "id": 1000014
+      },
+      "writtenOn": "2020-03-12T16:06:07Z",
+      "side": 1,
+      "message": "I think this code can be GetBundleRootDirOutput(settings).GetDir(). This will have a trailing slash, there are some functions in SourceDir to deal with this if necessary.",
+      "revId": "3fb5a676f965120d65363d81aea3202018c8af6b",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": true
+    }
+  ]
+}
