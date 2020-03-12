@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "9f40410c_2ec91e6f",
+        "filename": "src/gn/input_file_manager.cc",
+        "patchSetId": 7
+      },
+      "lineNbr": 59,
+      "author": {
+        "id": 1000055
+      },
+      "writtenOn": "2020-03-12T01:15:42Z",
+      "side": 1,
+      "message": "Looks like no. Changed as you suggested.",
+      "parentUuid": "eaa2ae12_057e4e4c",
+      "revId": "4c04a910b0a6d774e7a1b667f5e760600db6c4c2",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "8383e014_71d65c6f",
         "filename": "src/gn/input_file_manager.h",
         "patchSetId": 7
@@ -33,6 +51,24 @@
       "revId": "4c04a910b0a6d774e7a1b667f5e760600db6c4c2",
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "9c70cc0d_a0d7cb80",
+        "filename": "src/gn/input_file_manager.h",
+        "patchSetId": 7
+      },
+      "lineNbr": 160,
+      "author": {
+        "id": 1000055
+      },
+      "writtenOn": "2020-03-12T01:15:42Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "8383e014_71d65c6f",
+      "revId": "4c04a910b0a6d774e7a1b667f5e760600db6c4c2",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": false
     }
   ]
 }
