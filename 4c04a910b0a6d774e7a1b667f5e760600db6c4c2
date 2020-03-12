@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "eaa2ae12_057e4e4c",
+        "filename": "src/gn/input_file_manager.cc",
+        "patchSetId": 7
+      },
+      "lineNbr": 59,
+      "author": {
+        "id": 1000014
+      },
+      "writtenOn": "2020-03-12T00:35:22Z",
+      "side": 1,
+      "message": "Do we need this fallback? I would expect if the mock callback exists, we should go with what it says rather than falling back on normal loading (i.e. I\u0027d replace this line with \"} else {\").",
+      "revId": "4c04a910b0a6d774e7a1b667f5e760600db6c4c2",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "8383e014_71d65c6f",
+        "filename": "src/gn/input_file_manager.h",
+        "patchSetId": 7
+      },
+      "lineNbr": 160,
+      "author": {
+        "id": 1000014
+      },
+      "writtenOn": "2020-03-12T00:35:22Z",
+      "side": 1,
+      "message": "This should be more clear that it can be null and what should happen when its non-null (call this function rather than the normal Load path for mocking purposes).",
+      "revId": "4c04a910b0a6d774e7a1b667f5e760600db6c4c2",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": true
+    }
+  ]
+}
