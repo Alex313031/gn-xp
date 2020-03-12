@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "d11ef1a6_582dc163",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1000305
+      },
+      "writtenOn": "2020-03-12T19:32:54Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "3425429c_ce5a20b4",
+      "revId": "45316f29dadf5971f17d0b0ea66a80d7f1e5630c",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "371210dc_bc6207af",
         "filename": "src/gn/compile_commands_writer.cc",
         "patchSetId": 1
@@ -30,6 +48,30 @@
       "writtenOn": "2020-03-12T02:10:59Z",
       "side": 1,
       "message": "check more than 2 case?",
+      "range": {
+        "startLine": 301,
+        "startChar": 30,
+        "endLine": 301,
+        "endChar": 31
+      },
+      "revId": "45316f29dadf5971f17d0b0ea66a80d7f1e5630c",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "d0e67e69_25e35bdf",
+        "filename": "src/gn/compile_commands_writer.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 301,
+      "author": {
+        "id": 1000305
+      },
+      "writtenOn": "2020-03-12T19:32:54Z",
+      "side": 1,
+      "message": "Should I do a INFO(WARNING) or a INFO(FATAL) if there\u0027s more than 2?\n\nSanity check, is it possible for targets to have \":\" in their name?",
+      "parentUuid": "371210dc_bc6207af",
       "range": {
         "startLine": 301,
         "startChar": 30,
@@ -65,6 +107,30 @@
     },
     {
       "key": {
+        "uuid": "c377fb60_d3af4f60",
+        "filename": "src/gn/compile_commands_writer.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 304,
+      "author": {
+        "id": 1000305
+      },
+      "writtenOn": "2020-03-12T19:32:54Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "613b3d76_9575d1d8",
+      "range": {
+        "startLine": 303,
+        "startChar": 0,
+        "endLine": 304,
+        "endChar": 10
+      },
+      "revId": "45316f29dadf5971f17d0b0ea66a80d7f1e5630c",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "6bf2171b_6002dc93",
         "filename": "src/gn/compile_commands_writer.cc",
         "patchSetId": 1
@@ -76,6 +142,30 @@
       "writtenOn": "2020-03-12T02:10:59Z",
       "side": 1,
       "message": "const?",
+      "range": {
+        "startLine": 331,
+        "startChar": 8,
+        "endLine": 331,
+        "endChar": 12
+      },
+      "revId": "45316f29dadf5971f17d0b0ea66a80d7f1e5630c",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "61ca6a35_17959845",
+        "filename": "src/gn/compile_commands_writer.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 331,
+      "author": {
+        "id": 1000305
+      },
+      "writtenOn": "2020-03-12T19:32:54Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "6bf2171b_6002dc93",
       "range": {
         "startLine": 331,
         "startChar": 8,
