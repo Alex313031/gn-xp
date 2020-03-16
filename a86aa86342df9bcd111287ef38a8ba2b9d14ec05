@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "3dcc3891_59af7d44",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 6
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 1000070
+      },
+      "writtenOn": "2020-03-16T14:02:05Z",
+      "side": 1,
+      "message": "nit: chromium.org recommends using ~ 75 character lines.",
+      "range": {
+        "startLine": 9,
+        "startChar": 0,
+        "endLine": 9,
+        "endChar": 10
+      },
+      "revId": "a86aa86342df9bcd111287ef38a8ba2b9d14ec05",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": true
+    }
+  ]
+}
