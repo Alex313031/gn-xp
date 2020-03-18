@@ -48,7 +48,7 @@ bool ResolveTargetsFromCommandLinePattern(Setup* setup,
     // By default a pattern with an empty toolchain will match all toolchains.
     // If the caller wants to default to the main toolchain only, set it
     // explicitly.
-    if (pattern.toolchain().is_null()) {
+    if (pattern.toolchain().empty()) {
       // No explicit toolchain set.
       pattern.set_toolchain(setup->loader()->default_toolchain_label());
     }
@@ -301,12 +301,13 @@ void PrintTargetsAsLabels(const std::vector<const Target*>& targets,
     unique_labels.insert(target->label());
 
   // Grab the label of the default toolchain from the first target.
-  Label default_tc_label = targets[0]->settings()->default_toolchain_label();
+  ToolchainLabel default_tc_label =
+      targets[0]->settings()->default_toolchain_label();
 
   for (const Label& label : unique_labels) {
     // Print toolchain only for ones not in the default toolchain.
-    out->AppendString(label.GetUserVisibleName(label.GetToolchainLabel() !=
-                                               default_tc_label));
+    out->AppendString(
+        label.GetUserVisibleName(label.toolchain() != default_tc_label));
   }
 }
 
@@ -400,7 +401,7 @@ const Target* ResolveTargetFromCommandLineString(
     Setup* setup,
     const std::string& label_string) {
   // Need to resolve the label after we know the default toolchain.
-  Label default_toolchain = setup->loader()->default_toolchain_label();
+  ToolchainLabel default_toolchain = setup->loader()->default_toolchain_label();
   Value arg_value(nullptr, FixGitBashLabelEdit(label_string));
   Err err;
   Label label = Label::Resolve(

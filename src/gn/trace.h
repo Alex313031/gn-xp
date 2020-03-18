@@ -12,6 +12,7 @@
 #include "util/ticks.h"
 
 class Label;
+class ToolchainLabel;
 
 namespace base {
 class CommandLine;
@@ -75,7 +76,7 @@ class ScopedTrace {
   ScopedTrace(TraceItem::Type t, const Label& label);
   ~ScopedTrace();
 
-  void SetToolchain(const Label& label);
+  void SetToolchain(ToolchainLabel label);
   void SetCommandLine(const base::CommandLine& cmdline);
 
   void Done();

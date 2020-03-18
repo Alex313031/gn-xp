@@ -26,5 +26,5 @@ std::string GetNinjaRulePrefixForToolchain(const Settings* settings) {
   // else.
   if (settings->is_default())
     return std::string();  // Default toolchain has no prefix.
-  return settings->toolchain_label().name() + "_";
+  return std::string(settings->toolchain_label().name()) + "_";
 }

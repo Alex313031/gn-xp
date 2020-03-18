@@ -44,6 +44,7 @@ void Scheduler::Log(const std::string& verb, const std::string& msg) {
 
 void Scheduler::FailWithError(const Err& err) {
   DCHECK(err.has_error());
+  DCHECK(this);
   {
     std::lock_guard<std::mutex> lock(lock_);
 

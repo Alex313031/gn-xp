@@ -149,7 +149,7 @@ template <typename T>
 struct LabelResolver {
   LabelResolver(const BuildSettings* build_settings_in,
                 const SourceDir& current_dir_in,
-                const Label& current_toolchain_in)
+                ToolchainLabel current_toolchain_in)
       : build_settings(build_settings_in),
         current_dir(current_dir_in),
         current_toolchain(current_toolchain_in) {}
@@ -162,7 +162,7 @@ struct LabelResolver {
   }
   const BuildSettings* build_settings;
   const SourceDir& current_dir;
-  const Label& current_toolchain;
+  ToolchainLabel current_toolchain;
 };
 
 // Fills the label part of a LabelPtrPair, leaving the pointer null.
@@ -170,7 +170,7 @@ template <typename T>
 struct LabelPtrResolver {
   LabelPtrResolver(const BuildSettings* build_settings_in,
                    const SourceDir& current_dir_in,
-                   const Label& current_toolchain_in)
+                   ToolchainLabel current_toolchain_in)
       : build_settings(build_settings_in),
         current_dir(current_dir_in),
         current_toolchain(current_toolchain_in) {}
@@ -184,7 +184,7 @@ struct LabelPtrResolver {
   }
   const BuildSettings* build_settings;
   const SourceDir& current_dir;
-  const Label& current_toolchain;
+  ToolchainLabel current_toolchain;
 };
 
 struct LabelPatternResolver {
@@ -248,7 +248,7 @@ bool ExtractListOfRelativeDirs(const BuildSettings* build_settings,
 bool ExtractListOfLabels(const BuildSettings* build_settings,
                          const Value& value,
                          const SourceDir& current_dir,
-                         const Label& current_toolchain,
+                         ToolchainLabel current_toolchain,
                          LabelTargetVector* dest,
                          Err* err) {
   return ListValueExtractor(
@@ -259,7 +259,7 @@ bool ExtractListOfLabels(const BuildSettings* build_settings,
 bool ExtractListOfUniqueLabels(const BuildSettings* build_settings,
                                const Value& value,
                                const SourceDir& current_dir,
-                               const Label& current_toolchain,
+                               ToolchainLabel current_toolchain,
                                UniqueVector<Label>* dest,
                                Err* err) {
   return ListValueUniqueExtractor(
@@ -270,7 +270,7 @@ bool ExtractListOfUniqueLabels(const BuildSettings* build_settings,
 bool ExtractListOfUniqueLabels(const BuildSettings* build_settings,
                                const Value& value,
                                const SourceDir& current_dir,
-                               const Label& current_toolchain,
+                               ToolchainLabel current_toolchain,
                                UniqueVector<LabelConfigPair>* dest,
                                Err* err) {
   return ListValueUniqueExtractor(
@@ -281,7 +281,7 @@ bool ExtractListOfUniqueLabels(const BuildSettings* build_settings,
 bool ExtractListOfUniqueLabels(const BuildSettings* build_settings,
                                const Value& value,
                                const SourceDir& current_dir,
-                               const Label& current_toolchain,
+                               ToolchainLabel current_toolchain,
                                UniqueVector<LabelTargetPair>* dest,
                                Err* err) {
   return ListValueUniqueExtractor(

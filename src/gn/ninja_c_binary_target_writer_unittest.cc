@@ -812,9 +812,10 @@ TEST_F(NinjaCBinaryTargetWriterTest, WinPrecompiledHeaders) {
   // A precompiled header toolchain.
   Settings pch_settings(setup.build_settings(), "withpch/");
   Toolchain pch_toolchain(&pch_settings,
-                          Label(SourceDir("//toolchain/"), "withpch"));
-  pch_settings.set_toolchain_label(pch_toolchain.label());
-  pch_settings.set_default_toolchain_label(setup.toolchain()->label());
+                          ToolchainLabel(SourceDir("//toolchain/"), "withpch"));
+  pch_settings.set_toolchain_label(pch_toolchain.toolchain_label());
+  pch_settings.set_default_toolchain_label(
+      setup.toolchain()->toolchain_label());
 
   // Declare a C++ compiler that supports PCH.
   std::unique_ptr<Tool> cxx = std::make_unique<CTool>(CTool::kCToolCxx);
@@ -945,9 +946,10 @@ TEST_F(NinjaCBinaryTargetWriterTest, GCCPrecompiledHeaders) {
   // A precompiled header toolchain.
   Settings pch_settings(setup.build_settings(), "withpch/");
   Toolchain pch_toolchain(&pch_settings,
-                          Label(SourceDir("//toolchain/"), "withpch"));
-  pch_settings.set_toolchain_label(pch_toolchain.label());
-  pch_settings.set_default_toolchain_label(setup.toolchain()->label());
+                          ToolchainLabel(SourceDir("//toolchain/"), "withpch"));
+  pch_settings.set_toolchain_label(pch_toolchain.toolchain_label());
+  pch_settings.set_default_toolchain_label(
+      setup.toolchain()->toolchain_label());
 
   // Declare a C++ compiler that supports PCH.
   std::unique_ptr<Tool> cxx = std::make_unique<CTool>(CTool::kCToolCxx);

@@ -196,7 +196,7 @@ TEST_F(LoaderTest, Foo) {
   // Request the root build file be loaded. This should kick off the default
   // build config loading.
   SourceFile root_build("//BUILD.gn");
-  loader->Load(root_build, LocationRange(), Label());
+  loader->Load(root_build, LocationRange(), ToolchainLabel());
   EXPECT_TRUE(mock_ifm_.HasOnePending(build_config));
 
   // Completing the build config load should kick off the root build file load.
@@ -209,7 +209,7 @@ TEST_F(LoaderTest, Foo) {
   MsgLoop::Current()->RunUntilIdleForTesting();
 
   // Schedule some other file to load in another toolchain.
-  Label second_tc(SourceDir("//tc2/"), "tc2");
+  ToolchainLabel second_tc(SourceDir("//tc2/"), "tc2");
   SourceFile second_file("//foo/BUILD.gn");
   loader->Load(second_file, LocationRange(), second_tc);
   EXPECT_TRUE(mock_ifm_.HasOnePending(SourceFile("//tc2/BUILD.gn")));
@@ -221,7 +221,8 @@ TEST_F(LoaderTest, Foo) {
 
   // We have to tell it we have a toolchain definition now (normally the
   // builder would do this).
-  const Settings* default_settings = loader->GetToolchainSettings(Label());
+  const Settings* default_settings =
+      loader->GetToolchainSettings(ToolchainLabel());
   Toolchain second_tc_object(default_settings, second_tc);
   loader->ToolchainLoaded(&second_tc_object);
   EXPECT_TRUE(mock_ifm_.HasOnePending(build_config));
@@ -263,7 +264,7 @@ TEST_F(LoaderTest, BuildDependencyFilesAreCollected) {
 
   // Request the root build file be loaded. This should kick off the default
   // build config loading.
-  loader->Load(root_build, LocationRange(), Label());
+  loader->Load(root_build, LocationRange(), ToolchainLabel());
   EXPECT_TRUE(mock_ifm_.HasOnePending(build_config));
 
   // Completing the build config load should kick off the root build file load.
@@ -314,7 +315,7 @@ TEST_F(LoaderTest, TemplateBuildDependencyFilesAreCollected) {
 
   // Request the root build file be loaded. This should kick off the default
   // build config loading.
-  loader->Load(root_build, LocationRange(), Label());
+  loader->Load(root_build, LocationRange(), ToolchainLabel());
   EXPECT_TRUE(mock_ifm_.HasOnePending(build_config));
 
   // Completing the build config load should kick off the root build file load.

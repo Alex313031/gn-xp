@@ -117,7 +117,7 @@ class BaseDescBuilder {
       : what_(what), all_(all), tree_(tree), blame_(blame) {}
 
  protected:
-  virtual Label GetToolchainLabel() const = 0;
+  virtual ToolchainLabel GetToolchainLabel() const = 0;
 
   bool what(const std::string& w) const {
     return what_.empty() || what_.find(w) != what_.end();
@@ -235,10 +235,7 @@ class ConfigDescBuilder : public BaseDescBuilder {
     const ConfigValues& values = config_->resolved_values();
 
     if (what_.empty())
-      res->SetKey(
-          "toolchain",
-          base::Value(
-              config_->label().GetToolchainLabel().GetUserVisibleName(false)));
+      res->SetKey("toolchain", base::Value(config_->label().toolchain().str()));
 
     if (what(variables::kConfigs) && !config_->configs().empty()) {
       auto configs = std::make_unique<base::ListValue>();
@@ -276,8 +273,8 @@ class ConfigDescBuilder : public BaseDescBuilder {
   }
 
  protected:
-  Label GetToolchainLabel() const override {
-    return config_->label().GetToolchainLabel();
+  ToolchainLabel GetToolchainLabel() const override {
+    return config_->label().toolchain();
   }
 
  private:
@@ -313,10 +310,7 @@ class TargetDescBuilder : public BaseDescBuilder {
       res->SetKey(
           "type",
           base::Value(Target::GetStringForOutputType(target_->output_type())));
-      res->SetKey(
-          "toolchain",
-          base::Value(
-              target_->label().GetToolchainLabel().GetUserVisibleName(false)));
+      res->SetKey("toolchain", base::Value(target_->label().toolchain().str()));
     }
 
     if (target_->source_types_used().RustSourceUsed()) {
@@ -826,8 +820,8 @@ class TargetDescBuilder : public BaseDescBuilder {
     return res->empty() ? nullptr : std::move(res);
   }
 
-  Label GetToolchainLabel() const override {
-    return target_->label().GetToolchainLabel();
+  ToolchainLabel GetToolchainLabel() const override {
+    return target_->label().toolchain();
   }
 
   const Target* target_;

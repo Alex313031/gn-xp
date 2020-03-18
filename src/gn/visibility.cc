@@ -44,13 +44,14 @@ bool Visibility::Set(const SourceDir& current_dir,
 void Visibility::SetPublic() {
   patterns_.clear();
   patterns_.push_back(LabelPattern(LabelPattern::RECURSIVE_DIRECTORY,
-                                   SourceDir(), std::string(), Label()));
+                                   SourceDir(), std::string(),
+                                   ToolchainLabel()));
 }
 
 void Visibility::SetPrivate(const SourceDir& current_dir) {
   patterns_.clear();
   patterns_.push_back(LabelPattern(LabelPattern::DIRECTORY, current_dir,
-                                   std::string(), Label()));
+                                   std::string(), ToolchainLabel()));
 }
 
 bool Visibility::CanSeeMe(const Label& label) const {

@@ -40,7 +40,7 @@ bool NinjaWriter::WriteToolchains(const PerToolchainRules& per_toolchain_rules,
   for (const auto& i : per_toolchain_rules) {
     const Toolchain* toolchain = i.first;
     const Settings* settings =
-        builder_.loader()->GetToolchainSettings(toolchain->label());
+        builder_.loader()->GetToolchainSettings(toolchain->toolchain_label());
     if (!NinjaToolchainWriter::RunAndWriteFile(settings, toolchain, i.second)) {
       Err(Location(), "Couldn't open toolchain buildfile(s) for writing")
           .PrintToStdout();

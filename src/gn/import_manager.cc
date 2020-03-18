@@ -131,7 +131,7 @@ bool ImportManager::DoImport(const SourceFile& file,
         import_block_trace->set_begin(import_block_begin);
         import_block_trace->set_end(import_block_end);
         import_block_trace->set_toolchain(
-            scope->settings()->toolchain_label().GetUserVisibleName(false));
+            scope->settings()->toolchain_label().str());
         AddTrace(import_block_trace);
       }
     }

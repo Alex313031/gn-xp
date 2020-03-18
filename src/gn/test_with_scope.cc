@@ -23,14 +23,15 @@ BuildSettings CreateBuildSettingsForTest() {
 TestWithScope::TestWithScope()
     : build_settings_(CreateBuildSettingsForTest()),
       settings_(&build_settings_, std::string()),
-      toolchain_(&settings_, Label(SourceDir("//toolchain/"), "default")),
+      toolchain_(&settings_,
+                 ToolchainLabel(SourceDir("//toolchain/"), "default")),
       scope_(&settings_),
       scope_progammatic_provider_(&scope_, true) {
   build_settings_.set_print_callback(
       [this](const std::string& str) { AppendPrintOutput(str); });
 
-  settings_.set_toolchain_label(toolchain_.label());
-  settings_.set_default_toolchain_label(toolchain_.label());
+  settings_.set_toolchain_label(toolchain_.toolchain_label());
+  settings_.set_default_toolchain_label(toolchain_.toolchain_label());
 
   SetupToolchain(&toolchain_);
   scope_.set_item_collector(&items_);
@@ -40,8 +41,9 @@ TestWithScope::~TestWithScope() = default;
 
 Label TestWithScope::ParseLabel(const std::string& str) const {
   Err err;
-  Label result = Label::Resolve(SourceDir("//"), std::string_view(),
-                                toolchain_.label(), Value(nullptr, str), &err);
+  Label result =
+      Label::Resolve(SourceDir("//"), std::string_view(),
+                     toolchain_.toolchain_label(), Value(nullptr, str), &err);
   CHECK(!err.has_error());
   return result;
 }

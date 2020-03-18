@@ -114,7 +114,7 @@ void EclipseWriter::GetAllDefines() {
 }
 
 bool EclipseWriter::UsesDefaultToolchain(const Target* target) const {
-  return target->toolchain()->label() ==
+  return target->toolchain()->toolchain_label() ==
          builder_.loader()->GetDefaultToolchain();
 }
 

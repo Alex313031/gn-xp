@@ -17,6 +17,7 @@ class Label;
 class ListNode;
 class ParseNode;
 class Scope;
+class ToolchainLabel;
 class Value;
 
 // -----------------------------------------------------------------------------
@@ -523,7 +524,7 @@ bool EnsureSingleStringArg(const FunctionCallNode* function,
                            Err* err);
 
 // Returns the name of the toolchain for the given scope.
-const Label& ToolchainLabelForScope(const Scope* scope);
+ToolchainLabel ToolchainLabelForScope(const Scope* scope);
 
 // Generates a label for the given scope, using the current directory and
 // toolchain, and the given name.

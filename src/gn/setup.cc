@@ -316,7 +316,7 @@ Setup::Setup()
       root_build_file_("//BUILD.gn"),
       dotfile_settings_(&build_settings_, std::string()),
       dotfile_scope_(&dotfile_settings_) {
-  dotfile_settings_.set_toolchain_label(Label());
+  dotfile_settings_.set_toolchain_label(ToolchainLabel());
 
   build_settings_.set_item_defined_callback(
       [task_runner = scheduler_.task_runner(),
@@ -401,7 +401,7 @@ void Setup::RunPreMessageLoop() {
   g_scheduler->IncrementWorkCount();
 
   // Load the root build file.
-  loader_->Load(root_build_file_, LocationRange(), Label());
+  loader_->Load(root_build_file_, LocationRange(), ToolchainLabel());
 }
 
 bool Setup::RunPostMessageLoop(const base::CommandLine& cmdline) {
@@ -790,8 +790,8 @@ bool Setup::FillOtherConfig(const base::CommandLine& cmdline) {
       return false;
     }
 
-    root_target_label = Label::Resolve(current_dir, std::string_view(), Label(),
-                                       *root_value, &err);
+    root_target_label = Label::Resolve(current_dir, std::string_view(),
+                                       ToolchainLabel(), *root_value, &err);
     if (err.has_error()) {
       err.PrintToStdout();
       return false;

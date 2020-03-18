@@ -6,6 +6,7 @@
 #include "gn/config.h"
 #include "gn/loader.h"
 #include "gn/target.h"
+#include "gn/test_with_scheduler.h"
 #include "gn/test_with_scope.h"
 #include "gn/toolchain.h"
 #include "util/test/test.h"
@@ -19,12 +20,14 @@ class MockLoader : public Loader {
   // Loader implementation:
   void Load(const SourceFile& file,
             const LocationRange& origin,
-            const Label& toolchain_name) override {
+            ToolchainLabel toolchain_name) override {
     files_.push_back(file);
   }
   void ToolchainLoaded(const Toolchain* toolchain) override {}
-  Label GetDefaultToolchain() const override { return Label(); }
-  const Settings* GetToolchainSettings(const Label& label) const override {
+  ToolchainLabel GetDefaultToolchain() const override {
+    return ToolchainLabel();
+  }
+  const Settings* GetToolchainSettings(ToolchainLabel) const override {
     return nullptr;
   }
 
@@ -59,7 +62,7 @@ class MockLoader : public Loader {
   std::vector<SourceFile> files_;
 };
 
-class BuilderTest : public testing::Test {
+class BuilderTest : public TestWithScheduler {
  public:
   BuilderTest()
       : loader_(new MockLoader),
@@ -67,7 +70,8 @@ class BuilderTest : public testing::Test {
         settings_(&build_settings_, std::string()),
         scope_(&settings_) {
     build_settings_.SetBuildDir(SourceDir("//out/"));
-    settings_.set_toolchain_label(Label(SourceDir("//tc/"), "default"));
+    settings_.set_toolchain_label(
+        ToolchainLabel(SourceDir("//tc/"), "default"));
     settings_.set_default_toolchain_label(settings_.toolchain_label());
   }
 
@@ -87,15 +91,14 @@ class BuilderTest : public testing::Test {
 };
 
 TEST_F(BuilderTest, BasicDeps) {
-  SourceDir toolchain_dir = settings_.toolchain_label().dir();
-  std::string toolchain_name = settings_.toolchain_label().name();
+  ToolchainLabel toolchain_label = settings_.toolchain_label();
 
   // Construct a dependency chain: A -> B -> C. Define A first with a
   // forward-reference to B, then C, then B to test the different orders that
   // the dependencies are hooked up.
-  Label a_label(SourceDir("//a/"), "a", toolchain_dir, toolchain_name);
-  Label b_label(SourceDir("//b/"), "b", toolchain_dir, toolchain_name);
-  Label c_label(SourceDir("//c/"), "c", toolchain_dir, toolchain_name);
+  Label a_label(SourceDir("//a/"), "a", toolchain_label);
+  Label b_label(SourceDir("//b/"), "b", toolchain_label);
+  Label c_label(SourceDir("//c/"), "c", toolchain_label);
 
   // The builder will take ownership of the pointers.
   Target* a = new Target(&settings_, a_label);
@@ -110,7 +113,7 @@ TEST_F(BuilderTest, BasicDeps) {
   // Define the toolchain.
   DefineToolchain();
   BuilderRecord* toolchain_record =
-      builder_.GetRecord(settings_.toolchain_label());
+      builder_.GetRecord(Label(settings_.toolchain_label()));
   ASSERT_TRUE(toolchain_record);
   EXPECT_EQ(BuilderRecord::ITEM_TOOLCHAIN, toolchain_record->type());
 
@@ -183,7 +186,7 @@ TEST_F(BuilderTest, ShouldGenerate) {
 
   // Define a secondary toolchain.
   Settings settings2(&build_settings_, "secondary/");
-  Label toolchain_label2(SourceDir("//tc/"), "secondary");
+  ToolchainLabel toolchain_label2(SourceDir("//tc/"), "secondary");
   settings2.set_toolchain_label(toolchain_label2);
   Toolchain* tc2 = new Toolchain(&settings2, toolchain_label2);
   TestWithScope::SetupToolchain(tc2);
@@ -191,10 +194,9 @@ TEST_F(BuilderTest, ShouldGenerate) {
 
   // Construct a dependency chain: A -> B. A is in the default toolchain, B
   // is not.
-  Label a_label(SourceDir("//foo/"), "a", settings_.toolchain_label().dir(),
-                "a");
-  Label b_label(SourceDir("//foo/"), "b", toolchain_label2.dir(),
-                toolchain_label2.name());
+  Label a_label(SourceDir("//foo/"), "a",
+                ToolchainLabel(settings_.toolchain_label().dir(), "a"));
+  Label b_label(SourceDir("//foo/"), "b", toolchain_label2);
 
   // First define B.
   Target* b = new Target(&settings2, b_label);
@@ -222,15 +224,14 @@ TEST_F(BuilderTest, ShouldGenerate) {
 
 // Tests that configs applied to a config get loaded (bug 536844).
 TEST_F(BuilderTest, ConfigLoad) {
-  SourceDir toolchain_dir = settings_.toolchain_label().dir();
-  std::string toolchain_name = settings_.toolchain_label().name();
+  ToolchainLabel toolchain_label = settings_.toolchain_label();
 
   // Construct a dependency chain: A -> B -> C. Define A first with a
   // forward-reference to B, then C, then B to test the different orders that
   // the dependencies are hooked up.
-  Label a_label(SourceDir("//a/"), "a", toolchain_dir, toolchain_name);
-  Label b_label(SourceDir("//b/"), "b", toolchain_dir, toolchain_name);
-  Label c_label(SourceDir("//c/"), "c", toolchain_dir, toolchain_name);
+  Label a_label(SourceDir("//a/"), "a", toolchain_label);
+  Label b_label(SourceDir("//b/"), "b", toolchain_label);
+  Label c_label(SourceDir("//c/"), "c", toolchain_label);
 
   // The builder will take ownership of the pointers.
   Config* a = new Config(&settings_, a_label);

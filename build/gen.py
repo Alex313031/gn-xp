@@ -572,6 +572,7 @@ def WriteGNNinja(path, platform, host, options):
         'src/gn/tokenizer.cc',
         'src/gn/tool.cc',
         'src/gn/toolchain.cc',
+        'src/gn/toolchain_label.cc',
         'src/gn/trace.cc',
         'src/gn/value.cc',
         'src/gn/value_extractors.cc',
