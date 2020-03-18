@@ -179,7 +179,8 @@ TEST_F(VisualStudioWriterTest, NoDotSlash) {
   tool->set_outputs(SubstitutionList::MakeForTest(
       "{{root_out_dir}}/{{target_output_name}}{{output_extension}}", ""));
 
-  Toolchain toolchain(setup_.settings(), Label(SourceDir("//tc/"), "tc"));
+  Toolchain toolchain(setup_.settings(),
+                      ToolchainLabel(SourceDir("//tc/"), "tc"));
   toolchain.SetTool(std::move(tool));
 
   Target target(setup_.settings(), Label(SourceDir("//baz/"), "baz"));

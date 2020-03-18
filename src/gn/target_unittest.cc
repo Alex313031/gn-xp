@@ -194,14 +194,13 @@ TEST_F(TargetTest, NoDependentConfigsBetweenToolchains) {
 
   // Create another toolchain.
   Toolchain other_toolchain(setup.settings(),
-                            Label(SourceDir("//other/"), "toolchain"));
+                            ToolchainLabel(SourceDir("//other/"), "toolchain"));
   TestWithScope::SetupToolchain(&other_toolchain);
 
   // Set up a dependency chain of |a| -> |b| -> |c| where |a| has a different
   // toolchain.
   Target a(setup.settings(),
-           Label(SourceDir("//foo/"), "a", other_toolchain.label().dir(),
-                 other_toolchain.label().name()));
+           Label(SourceDir("//foo/"), "a", other_toolchain.toolchain_label()));
   a.set_output_type(Target::EXECUTABLE);
   EXPECT_TRUE(a.SetToolchain(&other_toolchain, &err));
   TestTarget b(setup, "//foo:b", Target::EXECUTABLE);
@@ -250,7 +249,7 @@ TEST_F(TargetTest, DependentConfigsBetweenToolchainsWhenSet) {
 
   // Create another toolchain.
   Toolchain other_toolchain(setup.settings(),
-                            Label(SourceDir("//other/"), "toolchain"));
+                            ToolchainLabel(SourceDir("//other/"), "toolchain"));
   TestWithScope::SetupToolchain(&other_toolchain);
   other_toolchain.set_propagates_configs(true);
 
@@ -258,8 +257,7 @@ TEST_F(TargetTest, DependentConfigsBetweenToolchainsWhenSet) {
   // toolchain (with propagate_configs set).
   TestTarget a(setup, "//foo:a", Target::EXECUTABLE);
   Target b(setup.settings(),
-           Label(SourceDir("//foo/"), "b", other_toolchain.label().dir(),
-                 other_toolchain.label().name()));
+           Label(SourceDir("//foo/"), "b", other_toolchain.toolchain_label()));
   b.visibility().SetPublic();
   b.set_output_type(Target::SHARED_LIBRARY);
   EXPECT_TRUE(b.SetToolchain(&other_toolchain, &err));
@@ -681,7 +679,8 @@ TEST_F(TargetTest, LinkAndDepOutputs) {
   TestWithScope setup;
   Err err;
 
-  Toolchain toolchain(setup.settings(), Label(SourceDir("//tc/"), "tc"));
+  Toolchain toolchain(setup.settings(),
+                      ToolchainLabel(SourceDir("//tc/"), "tc"));
 
   std::unique_ptr<Tool> solink = Tool::CreateTool(CTool::kCToolSolink);
   CTool* solink_tool = solink->AsC();
@@ -725,7 +724,8 @@ TEST_F(TargetTest, RuntimeOuputs) {
   TestWithScope setup;
   Err err;
 
-  Toolchain toolchain(setup.settings(), Label(SourceDir("//tc/"), "tc"));
+  Toolchain toolchain(setup.settings(),
+                      ToolchainLabel(SourceDir("//tc/"), "tc"));
 
   std::unique_ptr<Tool> solink = Tool::CreateTool(CTool::kCToolSolink);
   CTool* solink_tool = solink->AsC();
@@ -778,7 +778,8 @@ TEST_F(TargetTest, RuntimeOuputs) {
 TEST_F(TargetTest, GetOutputFilesForSource_Binary) {
   TestWithScope setup;
 
-  Toolchain toolchain(setup.settings(), Label(SourceDir("//tc/"), "tc"));
+  Toolchain toolchain(setup.settings(),
+                      ToolchainLabel(SourceDir("//tc/"), "tc"));
 
   std::unique_ptr<Tool> tool = Tool::CreateTool(CTool::kCToolCxx);
   CTool* cxx = tool->AsC();
@@ -1167,11 +1168,11 @@ TEST_F(TargetTest, AssertNoDeps) {
   b.private_deps().push_back(LabelTargetPair(&a));
   b.assert_no_deps().push_back(LabelPattern(LabelPattern::RECURSIVE_DIRECTORY,
                                             SourceDir("//disallowed/"),
-                                            std::string(), Label()));
+                                            std::string(), ToolchainLabel()));
   ASSERT_TRUE(b.OnResolved(&err));
 
   LabelPattern disallow_a(LabelPattern::RECURSIVE_DIRECTORY, SourceDir("//a/"),
-                          std::string(), Label());
+                          std::string(), ToolchainLabel());
 
   // C depends on B and disallows depending on A. This should fail.
   TestTarget c(setup, "//c", Target::EXECUTABLE);

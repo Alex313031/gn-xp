@@ -281,7 +281,7 @@ void QtCreatorWriter::Run() {
     return;
 
   for (const Target* target : targets_) {
-    if (target->toolchain()->label() !=
+    if (target->toolchain()->toolchain_label() !=
         builder_.loader()->GetDefaultToolchain())
       continue;
     HandleTarget(target);

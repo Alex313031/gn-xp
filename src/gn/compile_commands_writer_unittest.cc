@@ -259,9 +259,9 @@ TEST_F(CompileCommandsTest, WinPrecompiledHeaders) {
   // A precompiled header toolchain.
   Settings pch_settings(build_settings(), "withpch/");
   Toolchain pch_toolchain(&pch_settings,
-                          Label(SourceDir("//toolchain/"), "withpch"));
-  pch_settings.set_toolchain_label(pch_toolchain.label());
-  pch_settings.set_default_toolchain_label(toolchain()->label());
+                          ToolchainLabel(SourceDir("//toolchain/"), "withpch"));
+  pch_settings.set_toolchain_label(pch_toolchain.toolchain_label());
+  pch_settings.set_default_toolchain_label(toolchain()->toolchain_label());
 
   // Declare a C++ compiler that supports PCH.
   std::unique_ptr<Tool> cxx = Tool::CreateTool(CTool::kCToolCxx);
@@ -409,9 +409,9 @@ TEST_F(CompileCommandsTest, GCCPrecompiledHeaders) {
   // A precompiled header toolchain.
   Settings pch_settings(build_settings(), "withpch/");
   Toolchain pch_toolchain(&pch_settings,
-                          Label(SourceDir("//toolchain/"), "withpch"));
-  pch_settings.set_toolchain_label(pch_toolchain.label());
-  pch_settings.set_default_toolchain_label(toolchain()->label());
+                          ToolchainLabel(SourceDir("//toolchain/"), "withpch"));
+  pch_settings.set_toolchain_label(pch_toolchain.toolchain_label());
+  pch_settings.set_default_toolchain_label(toolchain()->toolchain_label());
 
   // Declare a C++ compiler that supports PCH.
   std::unique_ptr<Tool> cxx = Tool::CreateTool(CTool::kCToolCxx);

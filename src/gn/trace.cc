@@ -140,9 +140,9 @@ ScopedTrace::~ScopedTrace() {
   Done();
 }
 
-void ScopedTrace::SetToolchain(const Label& label) {
+void ScopedTrace::SetToolchain(ToolchainLabel label) {
   if (item_)
-    item_->set_toolchain(label.GetUserVisibleName(false));
+    item_->set_toolchain(label.str());
 }
 
 void ScopedTrace::SetCommandLine(const base::CommandLine& cmdline) {

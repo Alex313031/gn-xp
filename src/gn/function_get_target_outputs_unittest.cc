@@ -25,8 +25,7 @@ class GetTargetOutputsTest : public testing::Test {
 
   // Shortcut to get a label with the current toolchain.
   Label GetLabel(const std::string& dir, const std::string& name) {
-    return Label(SourceDir(dir), name, setup_.toolchain()->label().dir(),
-                 setup_.toolchain()->label().name());
+    return Label(SourceDir(dir), name, setup_.toolchain()->toolchain_label());
   }
 
   // Asserts that the given list contains a single string with the given value.

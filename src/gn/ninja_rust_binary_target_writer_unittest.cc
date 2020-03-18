@@ -401,7 +401,8 @@ TEST_F(NinjaRustBinaryTargetWriterTest, NonRustDeps) {
   ASSERT_TRUE(sharedlib.OnResolved(&err));
 
   Toolchain toolchain_with_toc(
-      setup.settings(), Label(SourceDir("//toolchain_with_toc/"), "with_toc"));
+      setup.settings(),
+      ToolchainLabel(SourceDir("//toolchain_with_toc/"), "with_toc"));
   TestWithScope::SetupToolchain(&toolchain_with_toc, true);
   Target sharedlib_with_toc(setup.settings(),
                             Label(SourceDir("//foo/"), "shared_with_toc"));

@@ -43,13 +43,13 @@ class Settings {
   // object because it might not be resolved yet. Code running after the
   // load is complete can ask the Builder for the Toolchain corresponding to
   // this label.
-  const Label& toolchain_label() const { return toolchain_label_; }
-  void set_toolchain_label(const Label& l) { toolchain_label_ = l; }
+  ToolchainLabel toolchain_label() const { return toolchain_label_; }
+  void set_toolchain_label(ToolchainLabel l) { toolchain_label_ = l; }
 
-  const Label& default_toolchain_label() const {
+  ToolchainLabel default_toolchain_label() const {
     return default_toolchain_label_;
   }
-  void set_default_toolchain_label(const Label& default_label) {
+  void set_default_toolchain_label(ToolchainLabel default_label) {
     default_toolchain_label_ = default_label;
   }
 
@@ -90,8 +90,8 @@ class Settings {
  private:
   const BuildSettings* build_settings_;
 
-  Label toolchain_label_;
-  Label default_toolchain_label_;
+  ToolchainLabel toolchain_label_;
+  ToolchainLabel default_toolchain_label_;
 
   mutable ImportManager import_manager_;
 

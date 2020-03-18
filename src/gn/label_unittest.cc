@@ -73,7 +73,7 @@ TEST(Label, Resolve) {
     {"//chrome/", ":bar(t/b)", true, "//chrome/", "bar", "//chrome/t/b/", "b"},
   };
 
-  Label default_toolchain(SourceDir("//t/"), "d");
+  ToolchainLabel default_toolchain(SourceDir("//t/"), "d");
 
   for (size_t i = 0; i < std::size(cases); i++) {
     const ParseDepStringCase& cur = cases[i];
@@ -88,10 +88,12 @@ TEST(Label, Resolve) {
     if (!err.has_error() && cur.success) {
       EXPECT_EQ(cur.expected_dir, result.dir().value()) << i << " " << cur.str;
       EXPECT_EQ(cur.expected_name, result.name()) << i << " " << cur.str;
-      EXPECT_EQ(cur.expected_toolchain_dir, result.toolchain_dir().value())
+      EXPECT_EQ(cur.expected_toolchain_dir, result.toolchain().dir().value())
           << i << " " << cur.str;
-      EXPECT_EQ(cur.expected_toolchain_name, result.toolchain_name())
-          << i << " " << cur.str;
+      EXPECT_EQ(cur.expected_toolchain_name, result.toolchain().name())
+          << i << " " << cur.str << " expected " << cur.expected_toolchain_name
+          << " got " << result.toolchain().name() << " toolchain ["
+          << result.toolchain().str() << "]";
     }
   }
 }
@@ -99,7 +101,7 @@ TEST(Label, Resolve) {
 // Tests the case where the path resolves to something above "//". It should get
 // converted to an absolute path "/foo/bar".
 TEST(Label, ResolveAboveRootBuildDir) {
-  Label default_toolchain(SourceDir("//t/"), "d");
+  ToolchainLabel default_toolchain(SourceDir("//t/"), "d");
 
   std::string location, name;
   Err err;

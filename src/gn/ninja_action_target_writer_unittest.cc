@@ -86,9 +86,8 @@ TEST(NinjaActionTargetWriter, ActionNoSourcesConsole) {
   target.action_values().outputs() =
       SubstitutionList::MakeForTest("//out/Debug/foo.out");
 
-  Pool pool(setup.settings(),
-            Label(SourceDir("//"), "console", setup.toolchain()->label().dir(),
-                  setup.toolchain()->label().name()));
+  Pool pool(setup.settings(), Label(SourceDir("//"), "console",
+                                    setup.toolchain()->toolchain_label()));
   pool.set_depth(1);
   target.action_values().set_pool(LabelPtrPair<Pool>(&pool));
 
@@ -359,9 +358,8 @@ TEST(NinjaActionTargetWriter, ForEachWithPool) {
   target.sources().push_back(SourceFile("//foo/input1.txt"));
   target.action_values().set_script(SourceFile("//foo/script.py"));
 
-  Pool pool(setup.settings(),
-            Label(SourceDir("//foo/"), "pool", setup.toolchain()->label().dir(),
-                  setup.toolchain()->label().name()));
+  Pool pool(setup.settings(), Label(SourceDir("//foo/"), "pool",
+                                    setup.toolchain()->toolchain_label()));
   pool.set_depth(5);
   target.action_values().set_pool(LabelPtrPair<Pool>(&pool));
 

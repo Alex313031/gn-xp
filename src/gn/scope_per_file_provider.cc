@@ -49,8 +49,7 @@ const Value* ScopePerFileProvider::GetProgrammaticValue(
 const Value* ScopePerFileProvider::GetCurrentToolchain() {
   if (!current_toolchain_) {
     current_toolchain_ = std::make_unique<Value>(
-        nullptr,
-        scope_->settings()->toolchain_label().GetUserVisibleName(false));
+        nullptr, scope_->settings()->toolchain_label().str());
   }
   return current_toolchain_.get();
 }
@@ -58,9 +57,7 @@ const Value* ScopePerFileProvider::GetCurrentToolchain() {
 const Value* ScopePerFileProvider::GetDefaultToolchain() {
   if (!default_toolchain_) {
     default_toolchain_ = std::make_unique<Value>(
-        nullptr,
-        scope_->settings()->default_toolchain_label().GetUserVisibleName(
-            false));
+        nullptr, scope_->settings()->default_toolchain_label().str());
   }
   return default_toolchain_.get();
 }

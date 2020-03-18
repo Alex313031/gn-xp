@@ -159,16 +159,15 @@ bool EnsureSingleStringArg(const FunctionCallNode* function,
   return args[0].VerifyTypeIs(Value::STRING, err);
 }
 
-const Label& ToolchainLabelForScope(const Scope* scope) {
+ToolchainLabel ToolchainLabelForScope(const Scope* scope) {
   return scope->settings()->toolchain_label();
 }
 
 Label MakeLabelForScope(const Scope* scope,
                         const FunctionCallNode* function,
                         const std::string& name) {
-  const Label& toolchain_label = ToolchainLabelForScope(scope);
-  return Label(scope->GetSourceDir(), name, toolchain_label.dir(),
-               toolchain_label.name());
+  ToolchainLabel toolchain_label = ToolchainLabelForScope(scope);
+  return Label(scope->GetSourceDir(), name, toolchain_label);
 }
 
 // static

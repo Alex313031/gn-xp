@@ -9,6 +9,7 @@
 
 #include "base/macros.h"
 #include "gn/item.h"
+#include "gn/label.h"
 
 // Represents a named pool in the dependency graph.
 //
@@ -28,7 +29,7 @@ class Pool : public Item {
   void set_depth(int64_t depth) { depth_ = depth; }
 
   // The pool name in generated ninja files.
-  std::string GetNinjaName(const Label& default_toolchain) const;
+  std::string GetNinjaName(ToolchainLabel default_toolchain) const;
 
  private:
   std::string GetNinjaName(bool include_toolchain) const;

@@ -16,11 +16,12 @@ namespace {
 
 // We print user visible label names with no trailing slash after the
 // directory name.
-std::string DirWithNoTrailingSlash(const SourceDir& dir) {
+std::string_view DirWithNoTrailingSlash(const SourceDir& dir) {
   // Be careful not to trim if the input is just "/" or "//".
-  if (dir.value().size() > 2)
-    return dir.value().substr(0, dir.value().size() - 1);
-  return dir.value();
+  const std::string& value = dir.value();
+  if (value.size() > 2)
+    return {value.c_str(), value.size() - 1};
+  return value;
 }
 
 // Given the separate-out input (everything before the colon) in the dep rule,
@@ -89,13 +90,12 @@ bool ComputeTargetNameFromDep(const Value& input_value,
 // but shouldn't be used.
 bool Resolve(const SourceDir& current_dir,
              const std::string_view& source_root,
-             const Label& current_toolchain,
+             ToolchainLabel current_toolchain,
              const Value& original_value,
              const std::string_view& input,
              SourceDir* out_dir,
              StringAtom* out_name,
-             SourceDir* out_toolchain_dir,
-             StringAtom* out_toolchain_name,
+             ToolchainLabel* out_toolchain,
              Err* err) {
   // To workaround the problem that std::string_view operator[] doesn't return a
   // ref.
@@ -128,7 +128,7 @@ bool Resolve(const SourceDir& current_dir,
       name_piece = std::string_view(&input_str[path_separator + 1],
                                     input.size() - path_separator - 1);
       // Leave location piece null.
-    } else if (!out_toolchain_dir) {
+    } else if (!out_toolchain) {
       // Toolchain specified but not allows in this context.
       *err =
           Err(original_value, "Toolchain has a toolchain.",
@@ -179,18 +179,23 @@ bool Resolve(const SourceDir& current_dir,
     return false;
 
   // Last, do the toolchains.
-  if (out_toolchain_dir) {
+  if (out_toolchain) {
     // Handle empty toolchain strings. We don't allow normal labels to be
     // empty so we can't allow the recursive call of this function to do this
     // check.
     if (toolchain_piece.empty()) {
-      *out_toolchain_dir = current_toolchain.dir();
-      *out_toolchain_name = current_toolchain.name_atom();
+      *out_toolchain = current_toolchain;
       return true;
     } else {
-      return Resolve(current_dir, source_root, current_toolchain,
-                     original_value, toolchain_piece, out_toolchain_dir,
-                     out_toolchain_name, nullptr, nullptr, err);
+      SourceDir toolchain_dir;
+      StringAtom toolchain_name;
+      if (!Resolve(current_dir, source_root, current_toolchain, original_value,
+                   toolchain_piece, &toolchain_dir, &toolchain_name, nullptr,
+                   err)) {
+        return false;
+      }
+      *out_toolchain = ToolchainLabel(toolchain_dir, toolchain_name);
+      return true;
     }
   }
   return true;
@@ -257,22 +262,23 @@ Label::Label() : hash_(ComputeHash()) {}
 
 Label::Label(const SourceDir& dir,
              const std::string_view& name,
-             const SourceDir& toolchain_dir,
-             const std::string_view& toolchain_name)
+             ToolchainLabel toolchain)
     : dir_(dir),
       name_(StringAtom(name)),
-      toolchain_dir_(toolchain_dir),
-      toolchain_name_(StringAtom(toolchain_name)),
+      toolchain_(toolchain),
       hash_(ComputeHash()) {}
 
 Label::Label(const SourceDir& dir, const std::string_view& name)
     : dir_(dir), name_(StringAtom(name)),
       hash_(ComputeHash()) {}
 
+Label::Label(ToolchainLabel toolchain_label)
+    : Label(toolchain_label.dir(), toolchain_label.name()) {}
+
 // static
 Label Label::Resolve(const SourceDir& current_dir,
                      const std::string_view& source_root,
-                     const Label& current_toolchain,
+                     ToolchainLabel current_toolchain,
                      const Value& input,
                      Err* err) {
   Label ret;
@@ -287,14 +293,9 @@ Label Label::Resolve(const SourceDir& current_dir,
   }
 
   if (!::Resolve(current_dir, source_root, current_toolchain, input,
-                 input_string, &ret.dir_, &ret.name_, &ret.toolchain_dir_,
-                 &ret.toolchain_name_, err))
+                 input_string, &ret.dir_, &ret.name_, &ret.toolchain_, err))
     return Label();
   return ret;
-}
-
-Label Label::GetToolchainLabel() const {
-  return Label(toolchain_dir_, toolchain_name_);
 }
 
 Label Label::GetWithNoToolchain() const {
@@ -303,10 +304,12 @@ Label Label::GetWithNoToolchain() const {
 
 std::string Label::GetUserVisibleName(bool include_toolchain) const {
   std::string ret;
-  ret.reserve(dir_.value().size() + name_.str().size() + 1);
 
   if (dir_.is_null())
     return ret;
+
+  ret.reserve(dir_.value().size() + name_.str().size() + 1 +
+              (include_toolchain ? toolchain_.str().size() + 2 : 0));
 
   ret = DirWithNoTrailingSlash(dir_);
   ret.push_back(':');
@@ -314,18 +317,14 @@ std::string Label::GetUserVisibleName(bool include_toolchain) const {
 
   if (include_toolchain) {
     ret.push_back('(');
-    if (!toolchain_dir_.is_null() && !toolchain_name_.empty()) {
-      ret.append(DirWithNoTrailingSlash(toolchain_dir_));
-      ret.push_back(':');
-      ret.append(toolchain_name_.str());
-    }
+    if (!toolchain_.empty())
+      ret.append(toolchain_.str());
     ret.push_back(')');
   }
   return ret;
 }
 
-std::string Label::GetUserVisibleName(const Label& default_toolchain) const {
-  bool include_toolchain = default_toolchain.dir() != toolchain_dir_ ||
-                           default_toolchain.name_atom() != toolchain_name_;
+std::string Label::GetUserVisibleName(ToolchainLabel default_toolchain) const {
+  bool include_toolchain = default_toolchain != toolchain_;
   return GetUserVisibleName(include_toolchain);
 }

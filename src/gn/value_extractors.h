@@ -52,7 +52,7 @@ bool ExtractListOfRelativeDirs(const BuildSettings* build_settings,
 bool ExtractListOfLabels(const BuildSettings* build_settings,
                          const Value& value,
                          const SourceDir& current_dir,
-                         const Label& current_toolchain,
+                         ToolchainLabel current_toolchain,
                          LabelTargetVector* dest,
                          Err* err);
 
@@ -63,19 +63,19 @@ bool ExtractListOfLabels(const BuildSettings* build_settings,
 bool ExtractListOfUniqueLabels(const BuildSettings* build_settings,
                                const Value& value,
                                const SourceDir& current_dir,
-                               const Label& current_toolchain,
+                               ToolchainLabel current_toolchain,
                                UniqueVector<Label>* dest,
                                Err* err);
 bool ExtractListOfUniqueLabels(const BuildSettings* build_settings,
                                const Value& value,
                                const SourceDir& current_dir,
-                               const Label& current_toolchain,
+                               ToolchainLabel current_toolchain,
                                UniqueVector<LabelConfigPair>* dest,
                                Err* err);
 bool ExtractListOfUniqueLabels(const BuildSettings* build_settings,
                                const Value& value,
                                const SourceDir& current_dir,
-                               const Label& current_toolchain,
+                               ToolchainLabel current_toolchain,
                                UniqueVector<LabelTargetPair>* dest,
                                Err* err);
 

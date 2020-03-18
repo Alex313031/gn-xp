@@ -472,16 +472,15 @@ bool Target::SetToolchain(const Toolchain* toolchain, Err* err) {
   if (err) {
     *err =
         Err(defined_from(), "This target uses an undefined tool.",
-            base::StringPrintf(
-                "The target %s\n"
-                "of type \"%s\"\n"
-                "uses toolchain %s\n"
-                "which doesn't have the tool \"%s\" defined.\n\n"
-                "Alas, I can not continue.",
-                label().GetUserVisibleName(false).c_str(),
-                GetStringForOutputType(output_type_),
-                label().GetToolchainLabel().GetUserVisibleName(false).c_str(),
-                Tool::GetToolTypeForTargetFinalOutput(this)));
+            base::StringPrintf("The target %s\n"
+                               "of type \"%s\"\n"
+                               "uses toolchain %s\n"
+                               "which doesn't have the tool \"%s\" defined.\n\n"
+                               "Alas, I can not continue.",
+                               label().GetUserVisibleName(false).c_str(),
+                               GetStringForOutputType(output_type_),
+                               label().toolchain().str().c_str(),
+                               Tool::GetToolTypeForTargetFinalOutput(this)));
   }
   return false;
 }

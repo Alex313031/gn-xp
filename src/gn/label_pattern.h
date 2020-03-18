@@ -31,7 +31,7 @@ class LabelPattern {
   LabelPattern(Type type,
                const SourceDir& dir,
                const std::string_view& name,
-               const Label& toolchain_label);
+               ToolchainLabel toolchain_label);
   LabelPattern(const LabelPattern& other);
   ~LabelPattern();
 
@@ -60,13 +60,13 @@ class LabelPattern {
   const SourceDir& dir() const { return dir_; }
   const std::string& name() const { return name_; }
 
-  const Label& toolchain() const { return toolchain_; }
-  void set_toolchain(const Label& tc) { toolchain_ = tc; }
+  ToolchainLabel toolchain() const { return toolchain_; }
+  void set_toolchain(ToolchainLabel tc) { toolchain_ = tc; }
 
  private:
   // If nonempty, specifies the toolchain to use. If empty, this will match
   // all toolchains. This is independent of the match type.
-  Label toolchain_;
+  ToolchainLabel toolchain_;
 
   Type type_;
 

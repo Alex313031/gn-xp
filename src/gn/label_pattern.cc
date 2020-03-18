@@ -54,7 +54,7 @@ LabelPattern::LabelPattern() : type_(MATCH) {}
 LabelPattern::LabelPattern(Type type,
                            const SourceDir& dir,
                            const std::string_view& name,
-                           const Label& toolchain_label)
+                           ToolchainLabel toolchain_label)
     : toolchain_(toolchain_label), type_(type), dir_(dir), name_(name) {}
 
 LabelPattern::LabelPattern(const LabelPattern& other) = default;
@@ -79,16 +79,13 @@ LabelPattern LabelPattern::GetPattern(const SourceDir& current_dir,
   // label resolution code to get all the implicit name stuff.
   size_t star = str.find('*');
   if (star == std::string::npos) {
-    Label label = Label::Resolve(current_dir, source_root, Label(), value, err);
+    Label label =
+        Label::Resolve(current_dir, source_root, ToolchainLabel(), value, err);
     if (err->has_error())
       return LabelPattern();
 
     // Toolchain.
-    Label toolchain_label;
-    if (!label.toolchain_dir().is_null() || !label.toolchain_name().empty())
-      toolchain_label = label.GetToolchainLabel();
-
-    return LabelPattern(MATCH, label.dir(), label.name(), toolchain_label);
+    return LabelPattern(MATCH, label.dir(), label.name(), label.toolchain());
   }
 
   // Wildcard case, need to split apart the label to see what it specifies.
@@ -111,7 +108,7 @@ LabelPattern LabelPattern::GetPattern(const SourceDir& current_dir,
 
     // Parse the inside of the parens as a label for a toolchain.
     Value value_for_toolchain(value.origin(), toolchain_string);
-    toolchain_label = Label::Resolve(current_dir, source_root, Label(),
+    toolchain_label = Label::Resolve(current_dir, source_root, ToolchainLabel(),
                                      value_for_toolchain, err);
     if (err->has_error())
       return LabelPattern();
@@ -208,7 +205,9 @@ LabelPattern LabelPattern::GetPattern(const SourceDir& current_dir,
   }
 
   // When we're doing wildcard matching, the name is always empty.
-  return LabelPattern(type, dir, std::string_view(), toolchain_label);
+  return LabelPattern(
+      type, dir, std::string_view(),
+      ToolchainLabel(toolchain_label.dir(), toolchain_label.name()));
 }
 
 bool LabelPattern::HasWildcard(const std::string& str) {
@@ -218,10 +217,9 @@ bool LabelPattern::HasWildcard(const std::string& str) {
 }
 
 bool LabelPattern::Matches(const Label& label) const {
-  if (!toolchain_.is_null()) {
+  if (!toolchain_.empty()) {
     // Toolchain must match exactly.
-    if (toolchain_.dir() != label.toolchain_dir() ||
-        toolchain_.name() != label.toolchain_name())
+    if (toolchain_ != label.toolchain())
       return false;
   }
 
@@ -266,9 +264,9 @@ std::string LabelPattern::Describe() const {
       break;
   }
 
-  if (!toolchain_.is_null()) {
+  if (!toolchain_.empty()) {
     result.push_back('(');
-    result.append(toolchain_.GetUserVisibleName(false));
+    result.append(toolchain_.str());
     result.push_back(')');
   }
   return result;

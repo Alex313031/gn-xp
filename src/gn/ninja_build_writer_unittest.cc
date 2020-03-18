@@ -87,14 +87,13 @@ TEST_F(NinjaBuildWriterTest, TwoTargets) {
   ASSERT_TRUE(target_bar.OnResolved(&err));
 
   // Make a secondary toolchain that references two pools.
-  Label other_toolchain_label(SourceDir("//other/"), "toolchain");
+  ToolchainLabel other_toolchain_label(SourceDir("//other/"), "toolchain");
   Toolchain other_toolchain(setup.settings(), other_toolchain_label);
   TestWithScope::SetupToolchain(&other_toolchain);
 
   Pool other_regular_pool(
       setup.settings(),
-      Label(SourceDir("//other/"), "depth_pool", other_toolchain_label.dir(),
-            other_toolchain_label.name()));
+      Label(SourceDir("//other/"), "depth_pool", other_toolchain_label));
   other_regular_pool.set_depth(42);
   other_toolchain.GetTool(CTool::kCToolLink)
       ->set_pool(LabelPtrPair<Pool>(&other_regular_pool));
@@ -103,8 +102,7 @@ TEST_F(NinjaBuildWriterTest, TwoTargets) {
 
   Pool another_regular_pool(
       setup.settings(),
-      Label(SourceDir("//another/"), "depth_pool", other_toolchain_label.dir(),
-            other_toolchain_label.name()));
+      Label(SourceDir("//another/"), "depth_pool", other_toolchain_label));
   another_regular_pool.set_depth(7);
 
   Target target_baz(setup.settings(), Label(SourceDir("//baz/"), "baz"));
@@ -118,9 +116,9 @@ TEST_F(NinjaBuildWriterTest, TwoTargets) {
   ASSERT_TRUE(target_baz.OnResolved(&err));
 
   // The console pool must be in the default toolchain.
-  Pool console_pool(setup.settings(), Label(SourceDir("//"), "console",
-                                            setup.toolchain()->label().dir(),
-                                            setup.toolchain()->label().name()));
+  Pool console_pool(
+      setup.settings(),
+      Label(SourceDir("//"), "console", setup.toolchain()->toolchain_label()));
   console_pool.set_depth(1);
   other_toolchain.GetTool(GeneralTool::kGeneralToolStamp)
       ->set_pool(LabelPtrPair<Pool>(&console_pool));
@@ -169,8 +167,8 @@ TEST_F(NinjaBuildWriterTest, TwoTargets) {
   std::string out_str = ninja_out.str();
 #define EXPECT_SNIPPET(expected)                       \
   EXPECT_NE(std::string::npos, out_str.find(expected)) \
-      << "Expected to find: " << expected << "\n"      \
-      << "Within: " << out_str
+      << "Expected to find: [" << expected << "]\n"    \
+      << "Within: [" << out_str << "]";
   EXPECT_SNIPPET(expected_rule_gn);
   EXPECT_SNIPPET(expected_build_ninja);
   EXPECT_SNIPPET(expected_other_pool);

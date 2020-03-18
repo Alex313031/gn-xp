@@ -123,7 +123,7 @@ void PrintInvalidGeneratedInput(const Builder& builder,
   // Only show the toolchain labels (which can be confusing) if something
   // isn't the default.
   bool show_toolchains = false;
-  const Label& default_toolchain =
+  ToolchainLabel default_toolchain =
       targets[0]->settings()->default_toolchain_label();
   for (const Target* target : targets) {
     if (target->settings()->toolchain_label() != default_toolchain) {

@@ -101,7 +101,7 @@ void PrintPath(const PathVector& path, DepType implicit_last_dep) {
     return;
 
   // Don't print toolchains unless they differ from the first target.
-  const Label& default_toolchain = path[0].first->label().GetToolchainLabel();
+  ToolchainLabel default_toolchain = path[0].first->label().toolchain();
 
   for (size_t i = 0; i < path.size(); i++) {
     OutputString(path[i].first->label().GetUserVisibleName(default_toolchain));
