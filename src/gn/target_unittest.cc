@@ -762,7 +762,85 @@ TEST_F(TargetTest, RuntimeOuputs) {
   EXPECT_EQ("./a.pdb", target.runtime_outputs()[1].value());
 }
 
-// Shared libraries should be inherited across public shared liobrary
+// Tests Target::GetOutputFilesForSource for binary targets (these require a
+// tool definition).
+TEST_F(TargetTest, GetOutputFilesForSource_Binary) {
+  TestWithScope setup;
+
+  Toolchain toolchain(setup.settings(), Label(SourceDir("//tc/"), "tc"));
+
+  std::unique_ptr<Tool> tool = Tool::CreateTool(CTool::kCToolCxx);
+  CTool* cxx = tool->AsC();
+  cxx->set_outputs(SubstitutionList::MakeForTest("{{source_file_part}}.o"));
+  toolchain.SetTool(std::move(tool));
+
+  Target target(setup.settings(), Label(SourceDir("//a/"), "a"));
+  target.set_output_type(Target::SOURCE_SET);
+  target.SetToolchain(&toolchain);
+  Err err;
+  ASSERT_TRUE(target.OnResolved(&err));
+
+  const char* computed_tool_type = nullptr;
+  std::vector<OutputFile> output;
+  bool result = target.GetOutputFilesForSource(SourceFile("//source/input.cc"),
+                                               &computed_tool_type, &output);
+  ASSERT_TRUE(result);
+  EXPECT_EQ("cxx", computed_tool_type) << computed_tool_type;
+
+  // Outputs are relative to the build directory "//out/Debug/".
+  ASSERT_EQ(1u, output.size());
+  EXPECT_EQ("input.cc.o", output[0].value()) << output[0].value();
+}
+
+// Tests Target::GetOutputFilesForSource for action_foreach targets (these, like
+// copy targets, apply a pattern to the source file).
+TEST_F(TargetTest, GetOutputFilesForSource_ActionForEach) {
+  TestWithScope setup;
+
+  TestTarget target(setup, "//a:a", Target::ACTION_FOREACH);
+  target.action_values().outputs() =
+      SubstitutionList::MakeForTest("//out/Debug/{{source_file_part}}.one",
+                                    "//out/Debug/{{source_file_part}}.two");
+  Err err;
+  ASSERT_TRUE(target.OnResolved(&err));
+
+  const char* computed_tool_type = nullptr;
+  std::vector<OutputFile> output;
+  bool result = target.GetOutputFilesForSource(SourceFile("//source/input.txt"),
+                                               &computed_tool_type, &output);
+  ASSERT_TRUE(result);
+
+  // Outputs are relative to the build directory "//out/Debug/".
+  ASSERT_EQ(2u, output.size());
+  EXPECT_EQ("input.txt.one", output[0].value());
+  EXPECT_EQ("input.txt.two", output[1].value());
+}
+
+// Tests Target::GetOutputFilesForSource for action targets (these just list the
+// output of the action as the result of all possible inputs). This should also
+// cover everything other than binary, action_foreach, and copy targets.
+TEST_F(TargetTest, GetOutputFilesForSource_Action) {
+  TestWithScope setup;
+
+  TestTarget target(setup, "//a:a", Target::ACTION);
+  target.action_values().outputs() =
+      SubstitutionList::MakeForTest("//out/Debug/one", "//out/Debug/two");
+  Err err;
+  ASSERT_TRUE(target.OnResolved(&err));
+
+  const char* computed_tool_type = nullptr;
+  std::vector<OutputFile> output;
+  bool result = target.GetOutputFilesForSource(SourceFile("//source/input.txt"),
+                                               &computed_tool_type, &output);
+  ASSERT_TRUE(result);
+
+  // Outputs are relative to the build directory "//out/Debug/".
+  ASSERT_EQ(2u, output.size());
+  EXPECT_EQ("one", output[0].value());
+  EXPECT_EQ("two", output[1].value());
+}
+
+// Shared libraries should be inherited across public shared library
 // boundaries.
 TEST_F(TargetTest, SharedInheritance) {
   TestWithScope setup;
@@ -1234,8 +1312,7 @@ TEST(TargetTest, CollectMetadataWithBarrier) {
       std::pair<std::string_view, Value>("a", a_expected));
 
   Value walk_expected(nullptr, Value::LIST);
-  walk_expected.list_value().push_back(
-      Value(nullptr, "two"));
+  walk_expected.list_value().push_back(Value(nullptr, "two"));
   one.metadata().contents().insert(
       std::pair<std::string_view, Value>("walk", walk_expected));
 
