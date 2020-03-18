@@ -37,6 +37,24 @@
     },
     {
       "key": {
+        "uuid": "bc373b13_25c4a658",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1000305
+      },
+      "writtenOn": "2020-03-18T18:15:38Z",
+      "side": 1,
+      "message": "I think this should be covered by the previous tests as those have SourceDir(...) in them already.",
+      "parentUuid": "d11ef1a6_582dc163",
+      "revId": "45316f29dadf5971f17d0b0ea66a80d7f1e5630c",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "371210dc_bc6207af",
         "filename": "src/gn/compile_commands_writer.cc",
         "patchSetId": 1
@@ -108,6 +126,30 @@
     },
     {
       "key": {
+        "uuid": "01476d1f_f494fc9f",
+        "filename": "src/gn/compile_commands_writer.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 301,
+      "author": {
+        "id": 1000305
+      },
+      "writtenOn": "2020-03-18T18:15:38Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "771d8400_8925d24c",
+      "range": {
+        "startLine": 301,
+        "startChar": 30,
+        "endLine": 301,
+        "endChar": 31
+      },
+      "revId": "45316f29dadf5971f17d0b0ea66a80d7f1e5630c",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "613b3d76_9575d1d8",
         "filename": "src/gn/compile_commands_writer.cc",
         "patchSetId": 1
@@ -155,6 +197,30 @@
     },
     {
       "key": {
+        "uuid": "f047321e_9b462690",
+        "filename": "src/gn/compile_commands_writer.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 304,
+      "author": {
+        "id": 1000305
+      },
+      "writtenOn": "2020-03-18T18:15:38Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "c377fb60_d3af4f60",
+      "range": {
+        "startLine": 303,
+        "startChar": 0,
+        "endLine": 304,
+        "endChar": 10
+      },
+      "revId": "45316f29dadf5971f17d0b0ea66a80d7f1e5630c",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "6bf2171b_6002dc93",
         "filename": "src/gn/compile_commands_writer.cc",
         "patchSetId": 1
@@ -199,6 +265,30 @@
       "revId": "45316f29dadf5971f17d0b0ea66a80d7f1e5630c",
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "abde8022_f4574129",
+        "filename": "src/gn/compile_commands_writer.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 331,
+      "author": {
+        "id": 1000305
+      },
+      "writtenOn": "2020-03-18T18:15:38Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "61ca6a35_17959845",
+      "range": {
+        "startLine": 331,
+        "startChar": 8,
+        "endLine": 331,
+        "endChar": 12
+      },
+      "revId": "45316f29dadf5971f17d0b0ea66a80d7f1e5630c",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": false
     }
   ]
 }
