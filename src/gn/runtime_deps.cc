@@ -151,7 +151,8 @@ bool CollectRuntimeDepsFromFlag(const BuildSettings* build_settings,
   load_trace.Done();
 
   SourceDir root_dir("//");
-  Label default_toolchain_label = builder.loader()->GetDefaultToolchain();
+  ToolchainLabel default_toolchain_label =
+      builder.loader()->GetDefaultToolchain();
   for (const auto& line : base::SplitString(
            list_contents, "\n", base::TRIM_WHITESPACE, base::SPLIT_WANT_ALL)) {
     if (line.empty())

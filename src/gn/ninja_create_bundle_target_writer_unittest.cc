@@ -61,8 +61,7 @@ TEST(NinjaCreateBundleTargetWriter, Run) {
 
   Target create_bundle(
       setup.settings(),
-      Label(SourceDir("//baz/"), "bar", setup.toolchain()->label().dir(),
-            setup.toolchain()->label().name()));
+      Label(SourceDir("//baz/"), "bar", setup.toolchain()->toolchain_label()));
   SetupBundleDataDir(&create_bundle.bundle_data(), "//out/Debug");
   create_bundle.set_output_type(Target::CREATE_BUNDLE);
   create_bundle.private_deps().push_back(LabelTargetPair(&bundle_data));
@@ -110,8 +109,7 @@ TEST(NinjaCreateBundleTargetWriter, InSubDirectory) {
 
   Target create_bundle(
       setup.settings(),
-      Label(SourceDir("//baz/"), "bar", setup.toolchain()->label().dir(),
-            setup.toolchain()->label().name()));
+      Label(SourceDir("//baz/"), "bar", setup.toolchain()->toolchain_label()));
   SetupBundleDataDir(&create_bundle.bundle_data(), "//out/Debug/gen");
   create_bundle.set_output_type(Target::CREATE_BUNDLE);
   create_bundle.private_deps().push_back(LabelTargetPair(&bundle_data));
@@ -149,8 +147,7 @@ TEST(NinjaCreateBundleTargetWriter, JustPartialInfoPlist) {
 
   Target create_bundle(
       setup.settings(),
-      Label(SourceDir("//baz/"), "bar", setup.toolchain()->label().dir(),
-            setup.toolchain()->label().name()));
+      Label(SourceDir("//baz/"), "bar", setup.toolchain()->toolchain_label()));
   SetupBundleDataDir(&create_bundle.bundle_data(), "//out/Debug");
   create_bundle.set_output_type(Target::CREATE_BUNDLE);
   create_bundle.private_deps().push_back(LabelTargetPair(action.get()));
@@ -207,8 +204,7 @@ TEST(NinjaCreateBundleTargetWriter, AssetCatalog) {
 
   Target create_bundle(
       setup.settings(),
-      Label(SourceDir("//baz/"), "bar", setup.toolchain()->label().dir(),
-            setup.toolchain()->label().name()));
+      Label(SourceDir("//baz/"), "bar", setup.toolchain()->toolchain_label()));
   SetupBundleDataDir(&create_bundle.bundle_data(), "//out/Debug");
   create_bundle.set_output_type(Target::CREATE_BUNDLE);
   create_bundle.private_deps().push_back(LabelTargetPair(&bundle_data));
@@ -244,8 +240,7 @@ TEST(NinjaCreateBundleTargetWriter, PhonyTarget) {
 
   Target create_bundle(
       setup.settings(),
-      Label(SourceDir("//baz/"), "bar", setup.toolchain()->label().dir(),
-            setup.toolchain()->label().name()));
+      Label(SourceDir("//baz/"), "bar", setup.toolchain()->toolchain_label()));
   SetupBundleDataDir(&create_bundle.bundle_data(), "//out/Debug");
   create_bundle.set_output_type(Target::CREATE_BUNDLE);
   create_bundle.SetToolchain(setup.toolchain());
@@ -351,8 +346,7 @@ TEST(NinjaCreateBundleTargetWriter, Complex) {
 
   Target create_bundle(
       setup.settings(),
-      Label(SourceDir("//baz/"), "bar", setup.toolchain()->label().dir(),
-            setup.toolchain()->label().name()));
+      Label(SourceDir("//baz/"), "bar", setup.toolchain()->toolchain_label()));
   SetupBundleDataDir(&create_bundle.bundle_data(), "//out/Debug");
   create_bundle.set_output_type(Target::CREATE_BUNDLE);
   create_bundle.private_deps().push_back(LabelTargetPair(&bundle_data0));
@@ -429,8 +423,7 @@ TEST(NinjaCreateBundleTargetWriter, CodeSigning) {
 
   Target create_bundle(
       setup.settings(),
-      Label(SourceDir("//baz/"), "bar", setup.toolchain()->label().dir(),
-            setup.toolchain()->label().name()));
+      Label(SourceDir("//baz/"), "bar", setup.toolchain()->toolchain_label()));
   SetupBundleDataDir(&create_bundle.bundle_data(), "//out/Debug");
   create_bundle.set_output_type(Target::CREATE_BUNDLE);
   create_bundle.bundle_data().set_code_signing_script(

@@ -18,25 +18,27 @@ const Pool* Pool::AsPool() const {
   return this;
 }
 
-std::string Pool::GetNinjaName(const Label& default_toolchain) const {
-  bool include_toolchain = label().toolchain_dir() != default_toolchain.dir() ||
-                           label().toolchain_name() != default_toolchain.name();
+std::string Pool::GetNinjaName(ToolchainLabel default_toolchain) const {
+  bool include_toolchain = label().toolchain() != default_toolchain;
   return GetNinjaName(include_toolchain);
 }
 
 std::string Pool::GetNinjaName(bool include_toolchain) const {
   std::ostringstream buffer;
   if (include_toolchain) {
-    DCHECK(label().toolchain_dir().is_source_absolute());
-    std::string toolchain_dir = label().toolchain_dir().value();
-    for (std::string::size_type i = 2; i < toolchain_dir.size(); ++i) {
-      buffer << (toolchain_dir[i] == '/' ? '_' : toolchain_dir[i]);
+    const std::string& toolchain = label().toolchain().str();
+    DCHECK(!toolchain.empty() && toolchain[0] == '/');
+    for (std::string::size_type i = 2; i < toolchain.size(); ++i) {
+      char c = toolchain[i];
+      if (c == '/' || c == ':')
+        c = '_';
+      buffer << c;
     }
-    buffer << label().toolchain_name() << "_";
+    buffer << "_";
   }
 
   DCHECK(label().dir().is_source_absolute());
-  std::string label_dir = label().dir().value();
+  const std::string& label_dir = label().dir().value();
   for (std::string::size_type i = 2; i < label_dir.size(); ++i) {
     buffer << (label_dir[i] == '/' ? '_' : label_dir[i]);
   }

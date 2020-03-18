@@ -199,7 +199,8 @@ SourceDir SourceDirForCurrentDirectory(const base::FilePath& source_root);
 // toolchain, returns the name of the subdirectory for that toolchain's
 // output. This will be the empty string to indicate that the toolchain outputs
 // go in the root build directory. Otherwise, the result will end in a slash.
-std::string GetOutputSubdirName(const Label& toolchain_label, bool is_default);
+std::string GetOutputSubdirName(ToolchainLabel toolchain_label,
+                                bool is_default);
 
 // Returns true if the contents of the file and stream given are equal, false
 // otherwise.
@@ -257,15 +258,15 @@ class BuildDirContext {
   // scope. The toolchain you want to query must be passed in. This doesn't
   // use the settings object from the Scope so one can query other toolchains.
   // If you want to use the scope's current toolchain, use the version above.
-  BuildDirContext(const Scope* execution_scope, const Label& toolchain_label);
+  BuildDirContext(const Scope* execution_scope, ToolchainLabel toolchain_label);
 
   // Specify all information manually.
   BuildDirContext(const BuildSettings* build_settings,
-                  const Label& toolchain_label,
+                  ToolchainLabel toolchain_label,
                   bool is_default_toolchain);
 
   const BuildSettings* build_settings;
-  const Label& toolchain_label;
+  ToolchainLabel toolchain_label;
   bool is_default_toolchain;
 };
 

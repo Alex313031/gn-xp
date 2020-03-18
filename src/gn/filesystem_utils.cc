@@ -920,14 +920,13 @@ SourceDir SourceDirForCurrentDirectory(const base::FilePath& source_root) {
   return SourceDirForPath(source_root, cd);
 }
 
-std::string GetOutputSubdirName(const Label& toolchain_label, bool is_default) {
+std::string GetOutputSubdirName(ToolchainLabel toolchain_label,
+                                bool is_default) {
   // The default toolchain has no subdir.
   if (is_default)
     return std::string();
 
-  // For now just assume the toolchain name is always a valid dir name. We may
-  // want to clean up the in the future.
-  return toolchain_label.name() + "/";
+  return toolchain_label.GetOutputDir();
 }
 
 bool ContentsEqual(const base::FilePath& file_path, const std::string& data) {
@@ -1028,14 +1027,14 @@ BuildDirContext::BuildDirContext(const Scope* execution_scope)
     : BuildDirContext(execution_scope->settings()) {}
 
 BuildDirContext::BuildDirContext(const Scope* execution_scope,
-                                 const Label& toolchain_label)
+                                 ToolchainLabel toolchain_label)
     : BuildDirContext(execution_scope->settings()->build_settings(),
                       toolchain_label,
                       execution_scope->settings()->default_toolchain_label() ==
                           toolchain_label) {}
 
 BuildDirContext::BuildDirContext(const BuildSettings* in_build_settings,
-                                 const Label& in_toolchain_label,
+                                 ToolchainLabel in_toolchain_label,
                                  bool in_is_default_toolchain)
     : build_settings(in_build_settings),
       toolchain_label(in_toolchain_label),

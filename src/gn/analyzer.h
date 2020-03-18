@@ -91,7 +91,7 @@ class Analyzer {
 
   std::vector<const Item*> all_items_;
   std::map<Label, const Item*> labels_to_items_;
-  Label default_toolchain_;
+  ToolchainLabel default_toolchain_;
 
   // Maps items to the list of items that depend on them.
   std::multimap<const Item*, const Item*> dep_map_;

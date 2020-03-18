@@ -146,11 +146,11 @@ void GetTargetsReferencingConfig(Setup* setup,
                                  const Config* config,
                                  bool default_toolchain_only,
                                  UniqueVector<const Target*>* matches) {
-  Label default_toolchain = setup->loader()->default_toolchain_label();
+  ToolchainLabel default_toolchain = setup->loader()->default_toolchain_label();
   for (auto* target : all_targets) {
     if (default_toolchain_only) {
       // Only check targets in the default toolchain.
-      if (target->label().GetToolchainLabel() != default_toolchain)
+      if (target->label().toolchain() != default_toolchain)
         continue;
     }
     if (TargetReferencesConfig(target, config))

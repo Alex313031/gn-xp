@@ -86,9 +86,8 @@ void TargetGenerator::GenerateTarget(Scope* scope,
 
   // The location of the target is the directory name with no slash at the end.
   // FIXME(brettw) validate name.
-  const Label& toolchain_label = ToolchainLabelForScope(scope);
-  Label label(scope->GetSourceDir(), args[0].string_value(),
-              toolchain_label.dir(), toolchain_label.name());
+  ToolchainLabel toolchain_label = ToolchainLabelForScope(scope);
+  Label label(scope->GetSourceDir(), args[0].string_value(), toolchain_label);
 
   if (g_scheduler->verbose_logging())
     g_scheduler->Log("Defining target", label.GetUserVisibleName(true));

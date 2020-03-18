@@ -27,12 +27,12 @@ class MockLoader : public Loader {
 
   void Load(const SourceFile& file,
             const LocationRange& origin,
-            const Label& toolchain_name) override {}
+            ToolchainLabel toolchain_name) override {}
   void ToolchainLoaded(const Toolchain* toolchain) override {}
-  Label GetDefaultToolchain() const override {
-    return Label(SourceDir("//tc/"), "default");
+  ToolchainLabel GetDefaultToolchain() const override {
+    return ToolchainLabel(SourceDir("//tc/"), "default");
   }
-  const Settings* GetToolchainSettings(const Label& label) const override {
+  const Settings* GetToolchainSettings(ToolchainLabel label) const override {
     return nullptr;
   }
 
@@ -47,7 +47,8 @@ class AnalyzerTest : public testing::Test {
         builder_(loader_.get()),
         settings_(&build_settings_, std::string()) {
     build_settings_.SetBuildDir(SourceDir("//out/"));
-    settings_.set_toolchain_label(Label(SourceDir("//tc/"), "default"));
+    settings_.set_toolchain_label(
+        ToolchainLabel(SourceDir("//tc/"), "default"));
     settings_.set_default_toolchain_label(settings_.toolchain_label());
     tc_dir_ = settings_.toolchain_label().dir();
     tc_name_ = settings_.toolchain_label().name();
@@ -55,19 +56,19 @@ class AnalyzerTest : public testing::Test {
 
   std::unique_ptr<Target> MakeTarget(const std::string& dir,
                                      const std::string& name) {
-    Label label(SourceDir(dir), name, tc_dir_, tc_name_);
+    Label label(SourceDir(dir), name, ToolchainLabel(tc_dir_, tc_name_));
     return std::make_unique<Target>(&settings_, label);
   }
 
   std::unique_ptr<Config> MakeConfig(const std::string& dir,
                                      const std::string& name) {
-    Label label(SourceDir(dir), name, tc_dir_, tc_name_);
+    Label label(SourceDir(dir), name, ToolchainLabel(tc_dir_, tc_name_));
     return std::make_unique<Config>(&settings_, label);
   }
 
   std::unique_ptr<Pool> MakePool(const std::string& dir,
                                  const std::string& name) {
-    Label label(SourceDir(dir), name, tc_dir_, tc_name_);
+    Label label(SourceDir(dir), name, ToolchainLabel(tc_dir_, tc_name_));
     return std::make_unique<Pool>(&settings_, label);
   }
 

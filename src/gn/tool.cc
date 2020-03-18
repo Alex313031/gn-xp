@@ -148,7 +148,7 @@ bool Tool::ReadPatternList(Scope* scope,
 
 bool Tool::ReadLabel(Scope* scope,
                      const char* var,
-                     const Label& current_toolchain,
+                     ToolchainLabel current_toolchain,
                      LabelPtrPair<Pool>* field,
                      Err* err) {
   DCHECK(!complete_);
@@ -202,7 +202,7 @@ bool Tool::InitTool(Scope* scope, Toolchain* toolchain, Err* err) {
       !ReadBool(scope, "restat", &restat_, err) ||
       !ReadPattern(scope, "rspfile", &rspfile_, err) ||
       !ReadPattern(scope, "rspfile_content", &rspfile_content_, err) ||
-      !ReadLabel(scope, "pool", toolchain->label(), &pool_, err)) {
+      !ReadLabel(scope, "pool", toolchain->toolchain_label(), &pool_, err)) {
     return false;
   }
   return true;

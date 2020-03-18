@@ -175,16 +175,16 @@ TEST_F(HeaderCheckerTest, CheckInclude) {
   // Create another toolchain.
   Settings other_settings(setup_.build_settings(), "other/");
   Toolchain other_toolchain(&other_settings,
-                            Label(SourceDir("//toolchain/"), "other"));
+                            ToolchainLabel(SourceDir("//toolchain/"), "other"));
   TestWithScope::SetupToolchain(&other_toolchain);
-  other_settings.set_toolchain_label(other_toolchain.label());
-  other_settings.set_default_toolchain_label(setup_.toolchain()->label());
+  other_settings.set_toolchain_label(other_toolchain.toolchain_label());
+  other_settings.set_default_toolchain_label(
+      setup_.toolchain()->toolchain_label());
 
   // Add a target in the other toolchain with a header in it that is not
   // connected to any targets in the main toolchain.
-  Target otc(&other_settings,
-             Label(SourceDir("//p/"), "otc", other_toolchain.label().dir(),
-                   other_toolchain.label().name()));
+  Target otc(&other_settings, Label(SourceDir("//p/"), "otc",
+                                    other_toolchain.toolchain_label()));
   otc.set_output_type(Target::SOURCE_SET);
   Err err;
   EXPECT_TRUE(otc.SetToolchain(&other_toolchain, &err));

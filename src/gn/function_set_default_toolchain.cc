@@ -65,13 +65,13 @@ Value RunSetDefaultToolchain(Scope* scope,
 
   // When the loader is expecting the default toolchain to be set, it will set
   // this key on the scope to point to the destination.
-  Label* default_toolchain_dest = static_cast<Label*>(
+  ToolchainLabel* default_toolchain_dest = static_cast<ToolchainLabel*>(
       scope->GetProperty(Loader::kDefaultToolchainKey, nullptr));
   if (!default_toolchain_dest)
     return Value();
 
   const SourceDir& current_dir = scope->GetSourceDir();
-  const Label& default_toolchain = ToolchainLabelForScope(scope);
+  ToolchainLabel default_toolchain = ToolchainLabelForScope(scope);
 
   if (!EnsureSingleStringArg(function, args, err))
     return Value();
@@ -81,7 +81,8 @@ Value RunSetDefaultToolchain(Scope* scope,
   if (toolchain_label.is_null())
     return Value();
 
-  *default_toolchain_dest = toolchain_label;
+  *default_toolchain_dest =
+      ToolchainLabel(toolchain_label.dir(), toolchain_label.name());
   return Value();
 }
 

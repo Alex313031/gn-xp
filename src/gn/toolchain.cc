@@ -13,9 +13,10 @@
 #include "gn/value.h"
 
 Toolchain::Toolchain(const Settings* settings,
-                     const Label& label,
+                     ToolchainLabel toolchain_label,
                      const SourceFileSet& build_dependency_files)
-    : Item(settings, label, build_dependency_files) {}
+    : Item(settings, Label(toolchain_label), build_dependency_files),
+      toolchain_label_(toolchain_label) {}
 
 Toolchain::~Toolchain() = default;
 

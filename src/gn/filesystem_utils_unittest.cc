@@ -681,7 +681,7 @@ TEST(FilesystemUtils, GetToolchainDirs) {
 
   // The default toolchain.
   Settings default_settings(&build_settings, "");
-  Label default_toolchain_label(SourceDir("//toolchain/"), "default");
+  ToolchainLabel default_toolchain_label(SourceDir("//toolchain/"), "default");
   default_settings.set_toolchain_label(default_toolchain_label);
   default_settings.set_default_toolchain_label(default_toolchain_label);
   BuildDirContext default_context(&default_settings);
@@ -708,7 +708,7 @@ TEST(FilesystemUtils, GetToolchainDirs) {
 
   // Check a secondary toolchain.
   Settings other_settings(&build_settings, "two/");
-  Label other_toolchain_label(SourceDir("//toolchain/"), "two");
+  ToolchainLabel other_toolchain_label(SourceDir("//toolchain/"), "two");
   other_settings.set_toolchain_label(other_toolchain_label);
   other_settings.set_default_toolchain_label(default_toolchain_label);
   BuildDirContext other_context(&other_settings);
@@ -737,7 +737,7 @@ TEST(FilesystemUtils, GetSubBuildDir) {
   build_settings.SetBuildDir(SourceDir("//out/Debug/"));
 
   // Test the default toolchain.
-  Label default_toolchain_label(SourceDir("//toolchain/"), "default");
+  ToolchainLabel default_toolchain_label(SourceDir("//toolchain/"), "default");
   Settings default_settings(&build_settings, "");
   default_settings.set_toolchain_label(default_toolchain_label);
   default_settings.set_default_toolchain_label(default_toolchain_label);
@@ -764,7 +764,8 @@ TEST(FilesystemUtils, GetSubBuildDir) {
 
   // Secondary toolchain.
   Settings other_settings(&build_settings, "two/");
-  other_settings.set_toolchain_label(Label(SourceDir("//toolchain/"), "two"));
+  other_settings.set_toolchain_label(
+      ToolchainLabel(SourceDir("//toolchain/"), "two"));
   other_settings.set_default_toolchain_label(default_toolchain_label);
   BuildDirContext other_context(&other_settings);
 

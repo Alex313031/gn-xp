@@ -43,13 +43,15 @@ class Toolchain : public Item {
   // We also track the set of build files that may affect this target, please
   // refer to Scope for how this is determined.
   Toolchain(const Settings* settings,
-            const Label& label,
+            ToolchainLabel toolchain_label,
             const SourceFileSet& build_dependency_files = {});
   ~Toolchain() override;
 
   // Item overrides.
   Toolchain* AsToolchain() override;
   const Toolchain* AsToolchain() const override;
+
+  ToolchainLabel toolchain_label() const { return toolchain_label_; }
 
   // Returns null if the tool hasn't been defined.
   Tool* GetTool(const char* name);
@@ -114,6 +116,7 @@ class Toolchain : public Item {
   }
 
  private:
+  ToolchainLabel toolchain_label_;
   std::map<const char*, std::unique_ptr<Tool>> tools_;
 
   bool setup_complete_ = false;

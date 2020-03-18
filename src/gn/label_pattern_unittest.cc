@@ -82,8 +82,9 @@ TEST(LabelPattern, PatternParse) {
     EXPECT_EQ(cur.type, result.type()) << i << " " << cur.input;
     EXPECT_EQ(cur.dir, result.dir().value()) << i << " " << cur.input;
     EXPECT_EQ(cur.name, result.name()) << i << " " << cur.input;
-    EXPECT_EQ(cur.toolchain, result.toolchain().GetUserVisibleName(false))
-        << i << " " << cur.input;
+    EXPECT_EQ(cur.toolchain, result.toolchain().str())
+        << i << " " << cur.input << " expected " << cur.toolchain << " got "
+        << result.toolchain().str();
   }
 }
 

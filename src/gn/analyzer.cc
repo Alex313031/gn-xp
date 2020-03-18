@@ -95,7 +95,7 @@ void WriteString(base::DictionaryValue& dict,
   dict.SetKey(key, base::Value(value));
 };
 
-void WriteLabels(const Label& default_toolchain,
+void WriteLabels(ToolchainLabel default_toolchain,
                  base::DictionaryValue& dict,
                  const std::string& key,
                  const std::set<Label>& labels) {
@@ -108,7 +108,7 @@ void WriteLabels(const Label& default_toolchain,
   dict.SetWithoutPathExpansion(key, std::move(value));
 }
 
-Label AbsoluteOrSourceAbsoluteStringToLabel(const Label& default_toolchain,
+Label AbsoluteOrSourceAbsoluteStringToLabel(ToolchainLabel default_toolchain,
                                             const std::string& s,
                                             Err* err) {
   if (!IsPathSourceAbsolute(s) && !IsPathAbsolute(s)) {
@@ -120,7 +120,7 @@ Label AbsoluteOrSourceAbsoluteStringToLabel(const Label& default_toolchain,
                         Value(nullptr, s), err);
 }
 
-Err JSONToInputs(const Label& default_toolchain,
+Err JSONToInputs(ToolchainLabel default_toolchain,
                  const std::string input,
                  Inputs* inputs) {
   int error_code_out;
@@ -186,7 +186,7 @@ Err JSONToInputs(const Label& default_toolchain,
 }
 
 std::string OutputsToJSON(const Outputs& outputs,
-                          const Label& default_toolchain,
+                          ToolchainLabel default_toolchain,
                           Err* err) {
   std::string output;
   auto value = std::make_unique<base::DictionaryValue>();
@@ -303,7 +303,7 @@ std::string Analyzer::Analyze(const std::string& input, Err* err) const {
     // TODO(crbug.com/667989): Expand analyzer to non-default toolchains when
     // the bug is fixed.
     if (affected_item->AsTarget() &&
-        affected_item->label().GetToolchainLabel() == default_toolchain_)
+        affected_item->label().toolchain() == default_toolchain_)
       affected_targets.insert(affected_item->AsTarget());
   }
 

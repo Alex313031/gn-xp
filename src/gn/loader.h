@@ -37,18 +37,18 @@ class Loader : public base::RefCountedThreadSafe<Loader> {
   // config.
   virtual void Load(const SourceFile& file,
                     const LocationRange& origin,
-                    const Label& toolchain_name) = 0;
+                    ToolchainLabel toolchain_name) = 0;
 
   // Notification that the given toolchain has loaded. This will unblock files
   // waiting on this definition.
   virtual void ToolchainLoaded(const Toolchain* toolchain) = 0;
 
   // Returns the label of the default toolchain.
-  virtual Label GetDefaultToolchain() const = 0;
+  virtual ToolchainLabel GetDefaultToolchain() const = 0;
 
   // Returns information about the toolchain with the given label. Will return
   // false if we haven't processed this toolchain yet.
-  virtual const Settings* GetToolchainSettings(const Label& label) const = 0;
+  virtual const Settings* GetToolchainSettings(ToolchainLabel) const = 0;
 
   // Helper function that extracts the file and toolchain name from the given
   // label, and calls Load().
@@ -83,10 +83,10 @@ class LoaderImpl : public Loader {
   // Loader implementation.
   void Load(const SourceFile& file,
             const LocationRange& origin,
-            const Label& toolchain_name) override;
+            ToolchainLabel toolchain_name) override;
   void ToolchainLoaded(const Toolchain* toolchain) override;
-  Label GetDefaultToolchain() const override;
-  const Settings* GetToolchainSettings(const Label& label) const override;
+  ToolchainLabel GetDefaultToolchain() const override;
+  const Settings* GetToolchainSettings(ToolchainLabel) const override;
 
   // Sets the task runner corresponding to the main thread. By default this
   // class will use the thread active during construction, but there is not
@@ -105,7 +105,7 @@ class LoaderImpl : public Loader {
     async_load_file_ = std::move(cb);
   }
 
-  const Label& default_toolchain_label() const {
+  ToolchainLabel default_toolchain_label() const {
     return default_toolchain_label_;
   }
 
@@ -142,7 +142,7 @@ class LoaderImpl : public Loader {
   // If there is no defauled toolchain loaded yet, we'll assume that the first
   // call to this indicates to the default toolchain, and this function will
   // set the default toolchain name to the given label.
-  void DidLoadBuildConfig(const Label& label);
+  void DidLoadBuildConfig(ToolchainLabel label);
 
   // Decrements the pending_loads_ variable and issues the complete callback if
   // necessary.
@@ -168,10 +168,11 @@ class LoaderImpl : public Loader {
   LoadIDSet invocations_;
 
   const BuildSettings* build_settings_;
-  Label default_toolchain_label_;
+  ToolchainLabel default_toolchain_label_;
 
   // Records for the build config file loads.
-  using ToolchainRecordMap = std::map<Label, std::unique_ptr<ToolchainRecord>>;
+  using ToolchainRecordMap =
+      std::map<ToolchainLabel, std::unique_ptr<ToolchainRecord>>;
   ToolchainRecordMap toolchain_records_;
 };
 

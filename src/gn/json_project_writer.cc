@@ -180,11 +180,11 @@ bool JSONProjectWriter::RunAndWriteFiles(
 std::string JSONProjectWriter::RenderJSON(
     const BuildSettings* build_settings,
     std::vector<const Target*>& all_targets) {
-  Label default_toolchain_label;
+  ToolchainLabel default_toolchain_label;
 
   auto targets = std::make_unique<base::DictionaryValue>();
   for (const auto* target : all_targets) {
-    if (default_toolchain_label.is_null())
+    if (default_toolchain_label.empty())
       default_toolchain_label = target->settings()->default_toolchain_label();
     auto description =
         DescBuilder::DescriptionForTarget(target, "", false, false, false);
@@ -205,9 +205,8 @@ std::string JSONProjectWriter::RenderJSON(
   settings->SetKey("root_path", base::Value(build_settings->root_path_utf8()));
   settings->SetKey("build_dir",
                    base::Value(build_settings->build_dir().value()));
-  settings->SetKey(
-      "default_toolchain",
-      base::Value(default_toolchain_label.GetUserVisibleName(false)));
+  settings->SetKey("default_toolchain",
+                   base::Value(default_toolchain_label.str()));
 
   std::vector<base::FilePath> input_files;
   g_scheduler->input_file_manager()->GetAllPhysicalInputFileNames(&input_files);

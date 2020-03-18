@@ -219,11 +219,12 @@ bool NinjaBuildWriter::RunAndWriteFile(const BuildSettings* build_settings,
   std::unordered_map<const Settings*, const Toolchain*> used_toolchains;
 
   // Find the default toolchain info.
-  Label default_toolchain_label = builder.loader()->GetDefaultToolchain();
+  ToolchainLabel default_toolchain_label =
+      builder.loader()->GetDefaultToolchain();
   const Settings* default_toolchain_settings =
       builder.loader()->GetToolchainSettings(default_toolchain_label);
   const Toolchain* default_toolchain =
-      builder.GetToolchain(default_toolchain_label);
+      builder.GetToolchain(Label(default_toolchain_label));
 
   // Most targets will be in the default toolchain. Add it at the beginning and
   // skip adding it to the list every time in the loop.
@@ -239,7 +240,7 @@ bool NinjaBuildWriter::RunAndWriteFile(const BuildSettings* build_settings,
     } else if (used_toolchains.find(target->settings()) ==
                used_toolchains.end()) {
       used_toolchains[target->settings()] =
-          builder.GetToolchain(target->settings()->toolchain_label());
+          builder.GetToolchain(Label(target->settings()->toolchain_label()));
     }
   }
 
@@ -341,7 +342,7 @@ void NinjaBuildWriter::WriteAllPools() {
   // Write pools sorted by their name, to make output deterministic.
   std::vector<const Pool*> sorted_pools(used_pools.begin(), used_pools.end());
   auto pool_name = [this](const Pool* pool) {
-    return pool->GetNinjaName(default_toolchain_->label());
+    return pool->GetNinjaName(default_toolchain_->toolchain_label());
   };
   std::sort(sorted_pools.begin(), sorted_pools.end(),
             [&pool_name](const Pool* a, const Pool* b) {

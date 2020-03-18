@@ -25,6 +25,37 @@ struct ParseDepStringCase {
   const char* expected_toolchain_name;
 };
 
+bool CompareParseResult(Label::ParseResult& a, const Label::ParseResult& b) {
+  bool success = true;
+
+  // Compare two field values and print a useful error message to stderr
+  // when they differ.
+  auto compare_field = [&](const char* name, std::string_view a_val,
+                           std::string_view b_val) {
+    if (a_val != b_val) {
+      fprintf(stderr, "ParseResult::%s [%s] != [%s]\n", name,
+              std::string(a_val).c_str(), std::string(b_val).c_str());
+      success = false;
+    }
+  };
+
+  compare_field("location", a.location, b.location);
+  compare_field("name", a.name, b.name);
+  compare_field("toolchain", a.toolchain, b.toolchain);
+
+  // The error field is a const char*, not an std::string_view value.
+  if (a.error != b.error) {
+    fprintf(stderr, "ParseResult::error [%s] != [%s]",
+            (a.error ? std::string(a.error).c_str() : "NULL"),
+            (b.error ? std::string(b.error).c_str() : "NULL"));
+    success = false;
+  }
+
+  // NOTE: Field error_text intentionally ignored here.
+
+  return success;
+}
+
 }  // namespace
 
 TEST(Label, Resolve) {
@@ -73,7 +104,7 @@ TEST(Label, Resolve) {
     {"//chrome/", ":bar(t/b)", true, "//chrome/", "bar", "//chrome/t/b/", "b"},
   };
 
-  Label default_toolchain(SourceDir("//t/"), "d");
+  ToolchainLabel default_toolchain(SourceDir("//t/"), "d");
 
   for (size_t i = 0; i < std::size(cases); i++) {
     const ParseDepStringCase& cur = cases[i];
@@ -88,18 +119,82 @@ TEST(Label, Resolve) {
     if (!err.has_error() && cur.success) {
       EXPECT_EQ(cur.expected_dir, result.dir().value()) << i << " " << cur.str;
       EXPECT_EQ(cur.expected_name, result.name()) << i << " " << cur.str;
-      EXPECT_EQ(cur.expected_toolchain_dir, result.toolchain_dir().value())
+      EXPECT_EQ(cur.expected_toolchain_dir, result.toolchain().dir().value())
           << i << " " << cur.str;
-      EXPECT_EQ(cur.expected_toolchain_name, result.toolchain_name())
-          << i << " " << cur.str;
+      EXPECT_EQ(cur.expected_toolchain_name, result.toolchain().name())
+          << i << " " << cur.str << " expected " << cur.expected_toolchain_name
+          << " got " << result.toolchain().name() << " toolchain ["
+          << result.toolchain().str() << "]";
     }
+  }
+}
+
+TEST(Label, ParseLabelString) {
+  const struct {
+    const char* input;
+    Label::ParseResult expected;
+    bool allow_toolchain = false;
+  } kData[] = {
+    // clang-format off
+    // Empty string
+    { "", {} },
+    // Directory only
+    { "//foo/bar", { .location = "//foo/bar" } },
+    { "foo", { .location = "foo" } },
+    { "/foo", { .location = "/foo" } },
+#if defined(OS_WIN)
+    { "C:/foo", { .location = "C:/foo" } },
+    { "/C:foo/bar", { .location = "/C:foo/bar" } },
+#endif
+    // Name only
+    { ":foo", { .name = "foo", } },
+    // Directory and name.
+    { "//foo:bar", { .location = "//foo", .name = "bar" } },
+    { "//foo/bar/zoo:tool", { .location = "//foo/bar/zoo", .name = "tool" } },
+    // Directory + name + toolchain.
+    {
+      "foo/bar:zoo(//build/toolchain)",
+      { .location = "foo/bar", .name = "zoo", .toolchain = "//build/toolchain" },
+      true,
+    },
+    // Name with toolchain
+    { .input = ":foo(toolchain)",
+      .expected = {
+        // NOTE: The error message comes from the fact that this error only
+        // happens in practice when using a toolchain name inside a label
+        // toolchain (because the toolchain named extracted from a first
+        // call to Label::ParseLabelString() is then parsed by a second
+        // call to Label::ParseLabelString().
+        .error = "Toolchain has a toolchain.",
+      },
+      .allow_toolchain = false,
+    },
+    {
+      .input = ":foo(toolchain)",
+      .expected = { .name = "foo", .toolchain = "toolchain" },
+      .allow_toolchain = true,
+    },
+    // Bad toolchain end
+    {
+      "//foo:bar(toolchain",
+      { .error = "Bad toolchain name" },
+      true,
+    }
+    // clang-format on
+  };
+  for (const auto& data : kData) {
+    Label::ParseResult result =
+        Label::ParseLabelString(data.input, data.allow_toolchain);
+    EXPECT_TRUE(CompareParseResult(result, data.expected))
+        << "input [" << data.input
+        << "] allow_toolchain=" << (data.allow_toolchain ? "true" : "false");
   }
 }
 
 // Tests the case where the path resolves to something above "//". It should get
 // converted to an absolute path "/foo/bar".
 TEST(Label, ResolveAboveRootBuildDir) {
-  Label default_toolchain(SourceDir("//t/"), "d");
+  ToolchainLabel default_toolchain(SourceDir("//t/"), "d");
 
   std::string location, name;
   Err err;

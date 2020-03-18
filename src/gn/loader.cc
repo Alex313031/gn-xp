@@ -34,7 +34,7 @@ struct SourceFileAndOrigin {
 // it more than once.
 struct LoaderImpl::LoadID {
   LoadID() = default;
-  LoadID(const SourceFile& f, const Label& tc_name)
+  LoadID(const SourceFile& f, ToolchainLabel tc_name)
       : file(f), toolchain_name(tc_name) {}
 
   bool operator<(const LoadID& other) const {
@@ -44,7 +44,7 @@ struct LoaderImpl::LoadID {
   }
 
   SourceFile file;
-  Label toolchain_name;
+  ToolchainLabel toolchain_name;
 };
 
 // Our tracking information for a toolchain.
@@ -53,8 +53,8 @@ struct LoaderImpl::ToolchainRecord {
   // toolchain is loaded, since we don't know it yet. This will be fixed up
   // later. It should be valid in all other cases.
   ToolchainRecord(const BuildSettings* build_settings,
-                  const Label& toolchain_label,
-                  const Label& default_toolchain_label)
+                  ToolchainLabel toolchain_label,
+                  ToolchainLabel default_toolchain_label)
       : settings(
             build_settings,
             GetOutputSubdirName(toolchain_label,
@@ -82,7 +82,7 @@ Loader::Loader() = default;
 Loader::~Loader() = default;
 
 void Loader::Load(const Label& label, const LocationRange& origin) {
-  Load(BuildFileForLabel(label), origin, label.GetToolchainLabel());
+  Load(BuildFileForLabel(label), origin, label.toolchain());
 }
 
 // static
@@ -103,10 +103,9 @@ LoaderImpl::~LoaderImpl() = default;
 
 void LoaderImpl::Load(const SourceFile& file,
                       const LocationRange& origin,
-                      const Label& in_toolchain_name) {
-  const Label& toolchain_name = in_toolchain_name.is_null()
-                                    ? default_toolchain_label_
-                                    : in_toolchain_name;
+                      ToolchainLabel in_toolchain_name) {
+  ToolchainLabel toolchain_name =
+      in_toolchain_name.empty() ? default_toolchain_label_ : in_toolchain_name;
   LoadID load_id(file, toolchain_name);
   if (!invocations_.insert(load_id).second)
     return;  // Already in set, so this file was already loaded or schedulerd.
@@ -114,12 +113,14 @@ void LoaderImpl::Load(const SourceFile& file,
   if (toolchain_records_.empty()) {
     // Nothing loaded, need to load the default build config. The initial load
     // should not specify a toolchain.
-    DCHECK(toolchain_name.is_null());
+    DCHECK(toolchain_name.empty());
 
     std::unique_ptr<ToolchainRecord> new_record =
-        std::make_unique<ToolchainRecord>(build_settings_, Label(), Label());
+        std::make_unique<ToolchainRecord>(build_settings_, ToolchainLabel(),
+                                          ToolchainLabel());
     ToolchainRecord* record = new_record.get();
-    Label empty_label;  // VS issues spurious warning using ...[Label()].
+    ToolchainLabel
+        empty_label;  // VS issues spurious warning using ...[Label()].
     toolchain_records_[empty_label] = std::move(new_record);
 
     // The default build config is no dependent on the toolchain definition,
@@ -134,13 +135,13 @@ void LoaderImpl::Load(const SourceFile& file,
   }
 
   ToolchainRecord* record;
-  if (toolchain_name.is_null())
+  if (toolchain_name.empty())
     record = toolchain_records_[default_toolchain_label_].get();
   else
     record = toolchain_records_[toolchain_name].get();
 
   if (!record) {
-    DCHECK(!default_toolchain_label_.is_null());
+    DCHECK(!default_toolchain_label_.empty());
 
     // No reference to this toolchain found yet, make one.
     std::unique_ptr<ToolchainRecord> new_record =
@@ -150,7 +151,8 @@ void LoaderImpl::Load(const SourceFile& file,
     toolchain_records_[toolchain_name] = std::move(new_record);
 
     // Schedule a load of the toolchain using the default one.
-    Load(BuildFileForLabel(toolchain_name), origin, default_toolchain_label_);
+    Load(BuildFileForLabel(Label(toolchain_name)), origin,
+         default_toolchain_label_);
   }
 
   if (record->is_config_loaded)
@@ -160,14 +162,16 @@ void LoaderImpl::Load(const SourceFile& file,
 }
 
 void LoaderImpl::ToolchainLoaded(const Toolchain* toolchain) {
-  ToolchainRecord* record = toolchain_records_[toolchain->label()].get();
+  ToolchainRecord* record =
+      toolchain_records_[toolchain->toolchain_label()].get();
   if (!record) {
-    DCHECK(!default_toolchain_label_.is_null());
+    DCHECK(!default_toolchain_label_.empty());
     std::unique_ptr<ToolchainRecord> new_record =
-        std::make_unique<ToolchainRecord>(build_settings_, toolchain->label(),
+        std::make_unique<ToolchainRecord>(build_settings_,
+                                          toolchain->toolchain_label(),
                                           default_toolchain_label_);
     record = new_record.get();
-    toolchain_records_[toolchain->label()] = std::move(new_record);
+    toolchain_records_[toolchain->toolchain_label()] = std::move(new_record);
   }
   record->is_toolchain_loaded = true;
 
@@ -183,14 +187,14 @@ void LoaderImpl::ToolchainLoaded(const Toolchain* toolchain) {
   }
 }
 
-Label LoaderImpl::GetDefaultToolchain() const {
+ToolchainLabel LoaderImpl::GetDefaultToolchain() const {
   return default_toolchain_label_;
 }
 
-const Settings* LoaderImpl::GetToolchainSettings(const Label& label) const {
+const Settings* LoaderImpl::GetToolchainSettings(ToolchainLabel label) const {
   ToolchainRecordMap::const_iterator found_toolchain;
-  if (label.is_null()) {
-    if (default_toolchain_label_.is_null())
+  if (label.empty()) {
+    if (default_toolchain_label_.empty())
       return nullptr;
     found_toolchain = toolchain_records_.find(default_toolchain_label_);
   } else {
@@ -245,9 +249,8 @@ void LoaderImpl::BackgroundLoadFile(const Settings* settings,
   }
 
   if (g_scheduler->verbose_logging()) {
-    g_scheduler->Log("Running",
-                     file_name.value() + " with toolchain " +
-                         settings->toolchain_label().GetUserVisibleName(false));
+    g_scheduler->Log("Running", file_name.value() + " with toolchain " +
+                                    settings->toolchain_label().str());
   }
 
   Scope our_scope(settings->base_config());
@@ -302,9 +305,10 @@ void LoaderImpl::BackgroundLoadBuildConfig(
   base_config->SetProcessingBuildConfig();
 
   // See kDefaultToolchainKey in the header.
-  Label default_toolchain_label;
-  if (settings->is_default())
+  ToolchainLabel default_toolchain_label;
+  if (settings->is_default()) {
     base_config->SetProperty(kDefaultToolchainKey, &default_toolchain_label);
+  }
 
   ScopedTrace trace(TraceItem::TRACE_FILE_EXECUTE,
                     settings->build_settings()->build_config_file().value());
@@ -337,14 +341,14 @@ void LoaderImpl::BackgroundLoadBuildConfig(
   if (settings->is_default()) {
     // The default toolchain must have been set in the default build config
     // file.
-    if (default_toolchain_label.is_null()) {
+    if (default_toolchain_label.empty()) {
       g_scheduler->FailWithError(Err(
           Location(),
           "The default build config file did not call set_default_toolchain()",
           "If you don't call this, I can't figure out what toolchain to use\n"
           "for all of this code."));
     } else {
-      DCHECK(settings->toolchain_label().is_null());
+      DCHECK(settings->toolchain_label().empty());
       settings->set_toolchain_label(default_toolchain_label);
     }
   }
@@ -359,7 +363,7 @@ void LoaderImpl::DidLoadFile() {
   DecrementPendingLoads();
 }
 
-void LoaderImpl::DidLoadBuildConfig(const Label& label) {
+void LoaderImpl::DidLoadBuildConfig(ToolchainLabel label) {
   // Do not return early, we must call DecrementPendingLoads() at the bottom.
 
   ToolchainRecordMap::iterator found_toolchain = toolchain_records_.find(label);
@@ -371,7 +375,8 @@ void LoaderImpl::DidLoadBuildConfig(const Label& label) {
     // In this case, we should have exactly one entry in the map with an empty
     // label. We now need to fix up the naming so it refers to the "real" one.
     CHECK_EQ(1U, toolchain_records_.size());
-    ToolchainRecordMap::iterator empty_label = toolchain_records_.find(Label());
+    ToolchainRecordMap::iterator empty_label =
+        toolchain_records_.find(ToolchainLabel());
     CHECK(empty_label != toolchain_records_.end());
 
     // Fix up the toolchain record.
@@ -383,11 +388,11 @@ void LoaderImpl::DidLoadBuildConfig(const Label& label) {
 
     // Save the default toolchain label.
     default_toolchain_label_ = label;
-    DCHECK(record->settings.default_toolchain_label().is_null());
+    DCHECK(record->settings.default_toolchain_label().empty());
     record->settings.set_default_toolchain_label(label);
 
     // The settings object should have the toolchain label already set.
-    DCHECK(!record->settings.toolchain_label().is_null());
+    DCHECK(!record->settings.toolchain_label().empty());
 
     // Update any stored invocations that refer to the empty toolchain label.
     // This will normally only be one, for the root build file, so brute-force
@@ -395,7 +400,7 @@ void LoaderImpl::DidLoadBuildConfig(const Label& label) {
     LoadIDSet old_loads;
     invocations_.swap(old_loads);
     for (const auto& load : old_loads) {
-      if (load.toolchain_name.is_null()) {
+      if (load.toolchain_name.empty()) {
         // Fix up toolchain label
         invocations_.emplace(load.file, label);
       } else {

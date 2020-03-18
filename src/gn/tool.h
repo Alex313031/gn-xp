@@ -244,7 +244,7 @@ class Tool {
                        Err* err);
   bool ReadLabel(Scope* scope,
                  const char* var,
-                 const Label& current_toolchain,
+                 ToolchainLabel current_toolchain,
                  LabelPtrPair<Pool>* field,
                  Err* err);
   bool ReadOutputExtension(Scope* scope, Err* err);
