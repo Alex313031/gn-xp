@@ -48,6 +48,30 @@
     },
     {
       "key": {
+        "uuid": "9f25488b_7753cf82",
+        "filename": "src/gn/command_outputs.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 20,
+      "author": {
+        "id": 1000014
+      },
+      "writtenOn": "2020-03-19T14:45:43Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "2bf8bb73_1469575a",
+      "range": {
+        "startLine": 20,
+        "startChar": 28,
+        "endLine": 20,
+        "endChar": 51
+      },
+      "revId": "7a26cb912156d01d14212b06530e660c70f624e8",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "b9a0ddd6_76a9d00a",
         "filename": "src/gn/commands.cc",
         "patchSetId": 1
@@ -62,6 +86,24 @@
       "revId": "7a26cb912156d01d14212b06530e660c70f624e8",
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "ebec116b_f014aa82",
+        "filename": "src/gn/commands.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 6,
+      "author": {
+        "id": 1000014
+      },
+      "writtenOn": "2020-03-19T14:45:43Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "b9a0ddd6_76a9d00a",
+      "revId": "7a26cb912156d01d14212b06530e660c70f624e8",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": false
     },
     {
       "key": {
@@ -82,6 +124,24 @@
     },
     {
       "key": {
+        "uuid": "35809776_8a9b073e",
+        "filename": "src/gn/target.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 362,
+      "author": {
+        "id": 1000014
+      },
+      "writtenOn": "2020-03-19T14:45:43Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "7e426146_bf15e2aa",
+      "revId": "7a26cb912156d01d14212b06530e660c70f624e8",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "a76c6d66_3274216f",
         "filename": "src/gn/target_unittest.cc",
         "patchSetId": 1
@@ -96,6 +156,24 @@
       "revId": "7a26cb912156d01d14212b06530e660c70f624e8",
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "9a64595e_300853b3",
+        "filename": "src/gn/target_unittest.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 842,
+      "author": {
+        "id": 1000014
+      },
+      "writtenOn": "2020-03-19T14:45:43Z",
+      "side": 1,
+      "message": "Done. I also added some tests for GetOutputsAsSourceFiles() which I realized were missing.",
+      "parentUuid": "a76c6d66_3274216f",
+      "revId": "7a26cb912156d01d14212b06530e660c70f624e8",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": false
     }
   ]
 }
