@@ -16,6 +16,24 @@
       "revId": "15c6de6a3a3ab202d87a03ebea355a79dd85d3dc",
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "a131c89c_f9fb9216",
+        "filename": "src/gn/compile_commands_writer.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 334,
+      "author": {
+        "id": 1000305
+      },
+      "writtenOn": "2020-03-19T19:43:05Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "80c3a7e0_7e118aea",
+      "revId": "15c6de6a3a3ab202d87a03ebea355a79dd85d3dc",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": false
     }
   ]
 }
