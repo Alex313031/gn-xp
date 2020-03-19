@@ -1,0 +1,101 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "1cbd34d7_286e1ded",
+        "filename": "src/gn/command_outputs.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 1000004
+      },
+      "writtenOn": "2020-03-19T00:08:22Z",
+      "side": 1,
+      "message": "date",
+      "range": {
+        "startLine": 1,
+        "startChar": 13,
+        "endLine": 1,
+        "endChar": 17
+      },
+      "revId": "7a26cb912156d01d14212b06530e660c70f624e8",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "2bf8bb73_1469575a",
+        "filename": "src/gn/command_outputs.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 20,
+      "author": {
+        "id": 1000004
+      },
+      "writtenOn": "2020-03-19T00:08:22Z",
+      "side": 1,
+      "message": "Apparently I used\n\n  gn format [--dump-tree] (--stdin | \u003clist of build_files...\u003e)\n\n(the ... inside \u003c\u003e) to mean many of those things. I\u0027m not sure about other targets for the \u0027*\u0027 syntax. Maybe move it to be attached to the \u003c\u003e.",
+      "range": {
+        "startLine": 20,
+        "startChar": 28,
+        "endLine": 20,
+        "endChar": 51
+      },
+      "revId": "7a26cb912156d01d14212b06530e660c70f624e8",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "b9a0ddd6_76a9d00a",
+        "filename": "src/gn/commands.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 6,
+      "author": {
+        "id": 1000004
+      },
+      "writtenOn": "2020-03-19T00:08:22Z",
+      "side": 1,
+      "message": "#include \u003coptional\u003e",
+      "revId": "7a26cb912156d01d14212b06530e660c70f624e8",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "7e426146_bf15e2aa",
+        "filename": "src/gn/target.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 362,
+      "author": {
+        "id": 1000004
+      },
+      "writtenOn": "2020-03-19T00:08:22Z",
+      "side": 1,
+      "message": "80",
+      "revId": "7a26cb912156d01d14212b06530e660c70f624e8",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "a76c6d66_3274216f",
+        "filename": "src/gn/target_unittest.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 842,
+      "author": {
+        "id": 1000004
+      },
+      "writtenOn": "2020-03-19T00:08:22Z",
+      "side": 1,
+      "message": "Maybe one for copy here?",
+      "revId": "7a26cb912156d01d14212b06530e660c70f624e8",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": true
+    }
+  ]
+}
