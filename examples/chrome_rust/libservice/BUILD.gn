@@ -1,0 +1,10 @@
+static_library("static") {
+  output_name = "libservice_static"
+  sources = [ "service.cc" ]
+  deps = [ "//librust_data_decoder" ]
+}
+
+shared_library("shared") {
+  output_name = "libservice_shared"
+  deps = [ ":static" ]
+}

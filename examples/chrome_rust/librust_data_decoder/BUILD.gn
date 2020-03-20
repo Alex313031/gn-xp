@@ -1,0 +1,4 @@
+static_library("librust_data_decoder") {
+  sources = [ "lib.rs" ]
+  deps = ["//third_party_dep"]
+}
