@@ -1,0 +1,15 @@
+# release build
+executable("chrome") {
+  sources = [ "chrome/chrome.cc" ]
+  deps = [
+    "//libbase:static",
+    "//libservice:static",
+  ]
+}
+
+group("component") {
+  deps = [
+    "//libbase:shared",
+    "//libservice:shared",
+  ]
+}
