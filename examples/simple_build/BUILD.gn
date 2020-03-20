@@ -9,6 +9,8 @@ executable("hello") {
     ":hello_shared",
     ":hello_static",
   ]
+
+  print(configs)
 }
 
 shared_library("hello_shared") {
@@ -24,5 +26,13 @@ static_library("hello_static") {
   sources = [
     "hello_static.cc",
     "hello_static.h",
+  ]
+}
+
+group("tools") {
+  deps = [
+    # This will expand to the name "//tutorial:tutorial" which is the full name
+    # of our new target. Run "gn help labels" for more.
+    "//tutorial",
   ]
 }
