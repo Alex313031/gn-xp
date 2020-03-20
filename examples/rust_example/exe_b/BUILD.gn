@@ -1,0 +1,7 @@
+executable("exe_b") {
+  sources = [ "exe_b.cc" ]
+  deps = [
+    "//native_lib_a",
+    "//native_lib_b",
+  ]
+}

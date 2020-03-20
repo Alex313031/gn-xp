@@ -1,0 +1,4 @@
+static_library("native_lib_a") {
+  sources = [ "native_lib_a.cc" ]
+  deps = [ "//rust_lib_a" ]
+}

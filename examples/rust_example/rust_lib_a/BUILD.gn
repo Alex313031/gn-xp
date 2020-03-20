@@ -1,0 +1,3 @@
+static_library("rust_lib_a") {
+  crate_root = "lib.rs"
+}

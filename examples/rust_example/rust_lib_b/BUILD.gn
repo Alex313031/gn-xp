@@ -1,0 +1,4 @@
+static_library("rust_lib_b") {
+  sources = [ "lib.rs" ]
+  deps = [ "//rust_lib_c" ]
+}
