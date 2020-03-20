@@ -1,0 +1,10 @@
+static_library("static") {
+  output_name = "libbase_static"
+  sources = [ "base.cc" ]
+  deps = [ "//librust_base" ]
+}
+
+shared_library("shared") {
+  output_name = "libbase_shared"
+  deps = [ ":static" ]
+}
