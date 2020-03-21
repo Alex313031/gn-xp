@@ -101,16 +101,12 @@ extern const char kVersion_Help[];
 // This switch is used by several commands. It is here so it can be shared,
 // but it's documented in the individual commands it applies to rather than
 // globally.
-extern const char kAllToolchains[];
-#define ALL_TOOLCHAINS_SWITCH_HELP                                             \
-  "  --all-toolchains\n"                                                       \
-  "      Normally only inputs in the default toolchain will be included.\n"    \
-  "      This switch will turn on matching all toolchains.\n"                  \
-  "\n"                                                                         \
-  "      For example, a file is in a target might be compiled twice:\n"        \
-  "      once in the default toolchain and once in a secondary one. Without\n" \
-  "      this flag, only the default toolchain one will be matched by\n"       \
-  "      wildcards. With this flag, both will be matched.\n"
+extern const char kDefaultToolchain[];
+#define DEFAULT_TOOLCHAIN_SWITCH_HELP                                         \
+  "  --default-toolchain\n"                                                   \
+  "      Normally targets are matched in all toolchains. This switch makes\n" \
+  "      labels with no explicit toolchain reference only match targets in\n" \
+  "      the default toolchain.\n"
 
 }  // namespace switches
 
