@@ -1,0 +1,44 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "17f169e1_7ff54d86",
+        "filename": "docs/quick_start.md",
+        "patchSetId": 4
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1000004
+      },
+      "writtenOn": "2020-03-23T16:19:10Z",
+      "side": 1,
+      "message": "projects",
+      "range": {
+        "startLine": 7,
+        "startChar": 51,
+        "endLine": 7,
+        "endChar": 59
+      },
+      "revId": "101592793ccce6621cdf921dbdf59743ea7dd34d",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "15e7b159_1b874da2",
+        "filename": "examples/simple_build/tutorial/tutorial.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 12,
+      "author": {
+        "id": 1000004
+      },
+      "writtenOn": "2020-03-23T16:19:10Z",
+      "side": 1,
+      "message": "\\n",
+      "revId": "101592793ccce6621cdf921dbdf59743ea7dd34d",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": true
+    }
+  ]
+}
