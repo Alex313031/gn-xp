@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "3dde4938_c0cbb190",
+        "filename": "src/gn/compile_commands_writer.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 300,
+      "author": {
+        "id": 1000030
+      },
+      "writtenOn": "2020-03-26T01:17:26Z",
+      "side": 1,
+      "message": "too long line?",
+      "revId": "25efe7a432c8361a7cf7ac975510c1732dfb97e4",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "9fb2732c_9351db21",
+        "filename": "src/gn/compile_commands_writer.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 337,
+      "author": {
+        "id": 1000030
+      },
+      "writtenOn": "2020-03-26T01:17:26Z",
+      "side": 1,
+      "message": "why not write `VisitDeps(target, \u0026visited);` here?",
+      "revId": "25efe7a432c8361a7cf7ac975510c1732dfb97e4",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": true
+    }
+  ]
+}
