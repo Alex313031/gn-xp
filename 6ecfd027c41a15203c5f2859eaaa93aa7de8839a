@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "d63f676d_4ee765ad",
+        "filename": "src/gn/command_format.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 684,
+      "author": {
+        "id": 1000004
+      },
+      "writtenOn": "2020-03-27T23:32:22Z",
+      "side": 1,
+      "message": "I\u0027d love to add a comment, but I\u0027m not sure I can describe it very well any more unfortunately! Approximately what you said though, yeah.\n\n(I added it in the class declaration where there was some attempt at a comment previously. But that comment claimed it was returning a type not a penalty so that probably wasn\u0027t helping anyone.)",
+      "parentUuid": "4d6a85a4_9dc3ea7f",
+      "revId": "6ecfd027c41a15203c5f2859eaaa93aa7de8839a",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "baa16f37_8bcadc58",
         "filename": "src/gn/command_format.cc",
         "patchSetId": 5
@@ -33,6 +51,24 @@
       "revId": "6ecfd027c41a15203c5f2859eaaa93aa7de8839a",
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "6c8ac14a_e547cd72",
+        "filename": "src/gn/command_format.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 867,
+      "author": {
+        "id": 1000004
+      },
+      "writtenOn": "2020-03-27T23:32:22Z",
+      "side": 1,
+      "message": "Seems like a good idea.\n\n(I claim, somewhat hopefully) that it can\u0027t happen because at the grammar level, an \"if\" couldn\u0027t be inside something parenthesized. But it would be nice to know if we ever got there with parenthesized set.",
+      "parentUuid": "baa16f37_8bcadc58",
+      "revId": "6ecfd027c41a15203c5f2859eaaa93aa7de8839a",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": false
     }
   ]
 }
