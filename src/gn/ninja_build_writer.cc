@@ -280,7 +280,8 @@ void NinjaBuildWriter::WriteNinjaRules() {
   out_ << "ninja_required_version = 1.7.2\n\n";
   out_ << "rule gn\n";
   out_ << "  command = " << GetSelfInvocationCommand(build_settings_) << "\n";
-  out_ << "  description = Regenerating ninja files\n\n";
+  out_ << "  description = Regenerating ninja files\n";
+  out_ << "  restat = 1\n\n";
 
   // This rule will regenerate the ninja files when any input file has changed.
   out_ << "build build.ninja: gn\n"
