@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "4d6a85a4_9dc3ea7f",
+        "filename": "src/gn/command_format.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 684,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2020-03-27T23:18:54Z",
+      "side": 1,
+      "message": "Could you add a short function comment to this that says what this function does and what the `suffix` parameter does?\n\nIt looks like it\u0027ll print `root` to the printer buffer and return the smallest penalty it found for doing so, and it\u0027s going to print \"suffix\" after it.",
+      "revId": "6ecfd027c41a15203c5f2859eaaa93aa7de8839a",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "baa16f37_8bcadc58",
+        "filename": "src/gn/command_format.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 867,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2020-03-27T23:18:54Z",
+      "side": 1,
+      "message": "Should this be preceded by a `CHECK(at_end.empty())`?",
+      "revId": "6ecfd027c41a15203c5f2859eaaa93aa7de8839a",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": true
+    }
+  ]
+}
