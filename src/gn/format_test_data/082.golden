@@ -1,0 +1,11 @@
+# https://crbug.com/gn/156 -----------------------------------------------------
+foo("bar") {
+  if (foo) {
+    if (!is_nacl && !use_libfuzzer &&
+        (target_os == "android" || target_os == "chromeos" ||
+         target_os == "fuchsia" || target_os == "linux" ||
+         target_os == "win")) {
+      cflags += [ "-Wunreachable-code" ]
+    }
+  }
+}
