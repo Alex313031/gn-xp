@@ -740,6 +740,9 @@ int Printer::Expr(const ParseNode* root,
       AddParen(prec_left, outer_prec, &parenthesized);
     }
 
+    if (parenthesized)
+      at_end = ")" + at_end;
+
     int start_line = CurrentLine();
     int start_column = CurrentColumn();
     bool is_assignment = binop->op().value() == "=" ||
@@ -785,9 +788,7 @@ int Printer::Expr(const ParseNode* root,
     Printer sub1;
     InitializeSub(&sub1);
     sub1.Print(" ");
-    int penalty_current_line =
-        sub1.Expr(binop->right(), prec_right, std::string());
-    sub1.Print(suffix);
+    int penalty_current_line = sub1.Expr(binop->right(), prec_right, at_end);
     sub1.PrintSuffixComments(root);
     sub1.FlushComments();
     penalty_current_line += AssessPenalty(sub1.String());
@@ -802,9 +803,7 @@ int Printer::Expr(const ParseNode* root,
     Printer sub2;
     InitializeSub(&sub2);
     sub2.Newline();
-    int penalty_next_line =
-        sub2.Expr(binop->right(), prec_right, std::string());
-    sub2.Print(suffix);
+    int penalty_next_line = sub2.Expr(binop->right(), prec_right, at_end);
     sub2.PrintSuffixComments(root);
     sub2.FlushComments();
     penalty_next_line += AssessPenalty(sub2.String());
@@ -841,7 +840,8 @@ int Printer::Expr(const ParseNode* root,
 
     if (penalty_current_line < penalty_next_line || exceeds_maximum_all_ways) {
       Print(" ");
-      Expr(binop->right(), prec_right, std::string());
+      Expr(binop->right(), prec_right, at_end);
+      at_end = "";
     } else if (tried_rhs_multiline &&
                penalty_multiline_rhs_list < penalty_next_line) {
       // Force a multiline list on the right.
@@ -854,7 +854,8 @@ int Printer::Expr(const ParseNode* root,
       Newline();
       penalty += std::abs(CurrentColumn() - start_column) *
                  kPenaltyHorizontalSeparation;
-      Expr(binop->right(), prec_right, std::string());
+      Expr(binop->right(), prec_right, at_end);
+      at_end = "";
     }
     stack_.pop_back();
     penalty += (CurrentLine() - start_line) * GetPenaltyForLineBreak();
@@ -900,9 +901,6 @@ int Printer::Expr(const ParseNode* root,
   } else {
     CHECK(false) << "Unhandled case in Expr.";
   }
-
-  if (parenthesized)
-    Print(")");
 
   // Defer any end of line comment until we reach the newline.
   if (root->comments() && !root->comments()->suffix().empty()) {
