@@ -717,6 +717,7 @@ int Printer::Expr(const ParseNode* root,
       Expr(accessor->subscript(), kPrecedenceLowest, "]");
     }
   } else if (const BinaryOpNode* binop = root->AsBinaryOp()) {
+    printf("BINOP: %s\n", std::string(binop->op().value().data()).c_str());
     CHECK(precedence_.find(binop->op().value()) != precedence_.end());
 
     SortIfSourcesOrDeps(binop);
@@ -808,6 +809,10 @@ int Printer::Expr(const ParseNode* root,
     sub2.PrintSuffixComments(root);
     sub2.FlushComments();
     penalty_next_line += AssessPenalty(sub2.String());
+    printf("SUB2 (%zu = %d)\n", sub2.String().size(), penalty_next_line);
+    printf("-----------\n");
+    printf("%s\n", sub2.String().c_str());
+    printf("-----------\n");
 
     // Force a list on the RHS that would normally be a single line into
     // multiline.
@@ -840,6 +845,8 @@ int Printer::Expr(const ParseNode* root,
         (!tried_rhs_multiline || ExceedsMaximumWidth(sub3.String()));
 
     if (penalty_current_line < penalty_next_line || exceeds_maximum_all_ways) {
+      printf("hai0: cur=%d, next=%d, exceeds=%d\n", penalty_current_line,
+             penalty_next_line, exceeds_maximum_all_ways);
       Print(" ");
       Expr(binop->right(), prec_right, std::string());
     } else if (tried_rhs_multiline &&
