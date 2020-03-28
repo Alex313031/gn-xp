@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "a1961066_4e2f380a",
+        "filename": "src/gn/toolchain_label.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 5,
+      "author": {
+        "id": 1000014
+      },
+      "writtenOn": "2020-03-28T16:02:16Z",
+      "side": 1,
+      "message": "This should be SRC_GN_...",
+      "revId": "64a7c1c2cc6d2a414cc375bf01402bbbbb236b65",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "fd7be97e_bf170317",
+        "filename": "src/gn/toolchain_label.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 32,
+      "author": {
+        "id": 1000014
+      },
+      "writtenOn": "2020-03-28T16:02:16Z",
+      "side": 1,
+      "message": "Is there a way to avoid adding this function? It seems better to avoid APIs that require certain formats to be parsed or they abort. And the toolchain_label.cc file duplicates a lot of the parsing in the label parser already.\n\nI\u0027d prefer it if all parsing went through the existing label parser and this toolchain label class was just a container for that data.\n\nI can see that some performance was lost creating labels to compare in e.g. Label::GetToolchainLabel() but could this class be implemented as just a SourceDir/string pair and get that win? It could have some optimized comparisons with that, and it\u0027s not clear to be that the storage as a single-string is much of a win, especially since we need to re-parse the string sometimes to extract the SourceDir from it.",
+      "revId": "64a7c1c2cc6d2a414cc375bf01402bbbbb236b65",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": true
+    }
+  ]
+}
