@@ -210,6 +210,10 @@ def WriteGenericNinja(path, static_libraries, executables,
 
   ninja_lines = []
   def build_source(src_file, settings):
+    src_cflags = cflags + settings.get('cflags', [])
+    src_include_dirs = include_dirs + [
+      os.path.join('..', inc_dir)
+      for inc_dir in settings.get('include_dirs', [])]
     ninja_lines.extend([
         'build %s: cxx %s' % (src_to_obj(src_file),
                               escape_path_ninja(
@@ -217,8 +221,8 @@ def WriteGenericNinja(path, static_libraries, executables,
                                       os.path.join(REPO_ROOT, src_file),
                                       os.path.dirname(path)))),
         '  includes = %s' % ' '.join(
-            ['-I' + escape_path_ninja(dirname) for dirname in include_dirs]),
-        '  cflags = %s' % ' '.join(cflags),
+            ['-I' + escape_path_ninja(dirname) for dirname in src_include_dirs]),
+        '  cflags = %s' % ' '.join(src_cflags),
     ])
 
   for library, settings in static_libraries.items():
@@ -409,38 +413,131 @@ def WriteGNNinja(path, platform, host, options):
 
     ldflags.extend(['/DEBUG', '/MACHINE:x64'])
 
+  tcmalloc_cflags = [
+    '-fno-builtin-malloc',
+    '-fno-builtin-free',
+  ]
+
+  common_cflags = []
+
   static_libraries = {
-      'base': {'sources': [
-        'src/base/command_line.cc',
-        'src/base/environment.cc',
-        'src/base/files/file.cc',
-        'src/base/files/file_enumerator.cc',
-        'src/base/files/file_path.cc',
-        'src/base/files/file_path_constants.cc',
-        'src/base/files/file_util.cc',
-        'src/base/files/scoped_file.cc',
-        'src/base/files/scoped_temp_dir.cc',
-        'src/base/json/json_parser.cc',
-        'src/base/json/json_reader.cc',
-        'src/base/json/json_writer.cc',
-        'src/base/json/string_escape.cc',
-        'src/base/logging.cc',
-        'src/base/md5.cc',
-        'src/base/memory/ref_counted.cc',
-        'src/base/memory/weak_ptr.cc',
-        'src/base/sha1.cc',
-        'src/base/strings/string_number_conversions.cc',
-        'src/base/strings/string_split.cc',
-        'src/base/strings/string_util.cc',
-        'src/base/strings/string_util_constants.cc',
-        'src/base/strings/stringprintf.cc',
-        'src/base/strings/utf_string_conversion_utils.cc',
-        'src/base/strings/utf_string_conversions.cc',
-        'src/base/third_party/icu/icu_utf.cc',
-        'src/base/timer/elapsed_timer.cc',
-        'src/base/value_iterators.cc',
-        'src/base/values.cc',
-      ]},
+      'base': {
+          'sources': [
+              'src/base/command_line.cc',
+              'src/base/environment.cc',
+              'src/base/files/file.cc',
+              'src/base/files/file_enumerator.cc',
+              'src/base/files/file_path.cc',
+              'src/base/files/file_path_constants.cc',
+              'src/base/files/file_util.cc',
+              'src/base/files/scoped_file.cc',
+              'src/base/files/scoped_temp_dir.cc',
+              'src/base/json/json_parser.cc',
+              'src/base/json/json_reader.cc',
+              'src/base/json/json_writer.cc',
+              'src/base/json/string_escape.cc',
+              'src/base/logging.cc',
+              'src/base/md5.cc',
+              'src/base/memory/ref_counted.cc',
+              'src/base/memory/weak_ptr.cc',
+              'src/base/sha1.cc',
+              'src/base/strings/string_number_conversions.cc',
+              'src/base/strings/string_split.cc',
+              'src/base/strings/string_util.cc',
+              'src/base/strings/string_util_constants.cc',
+              'src/base/strings/stringprintf.cc',
+              'src/base/strings/utf_string_conversion_utils.cc',
+              'src/base/strings/utf_string_conversions.cc',
+              'src/base/third_party/icu/icu_utf.cc',
+              'src/base/timer/elapsed_timer.cc',
+              'src/base/value_iterators.cc',
+              'src/base/values.cc',
+          ],
+          'cflags': common_cflags,
+      },
+
+      'abseil': {
+          'sources': [
+              'third_party/abseil/absl/base/dynamic_annotations.cc',
+              'third_party/abseil/absl/base/internal/cycleclock.cc',
+              'third_party/abseil/absl/base/internal/low_level_alloc.cc',
+              'third_party/abseil/absl/base/internal/raw_logging.cc',
+              'third_party/abseil/absl/base/internal/spinlock.cc',
+              'third_party/abseil/absl/base/internal/spinlock_wait.cc',
+              'third_party/abseil/absl/base/internal/sysinfo.cc',
+              'third_party/abseil/absl/base/internal/unscaledcycleclock.cc',
+              'third_party/abseil/absl/debugging/internal/address_is_readable.cc',
+              'third_party/abseil/absl/debugging/internal/elf_mem_image.cc',
+              'third_party/abseil/absl/debugging/internal/vdso_support.cc',
+              'third_party/abseil/absl/debugging/stacktrace.cc',
+              'third_party/abseil/absl/hash/internal/hash.cc',
+              'third_party/abseil/absl/hash/internal/city.cc',
+              'third_party/abseil/absl/numeric/int128.cc',
+              'third_party/abseil/absl/strings/str_cat.cc',
+              'third_party/abseil/absl/time/duration.cc',
+              'third_party/abseil/absl/time/clock.cc',
+              'third_party/abseil/absl/strings/numbers.cc',
+              'third_party/abseil/absl/strings/charconv.cc',
+              'third_party/abseil/absl/strings/internal/charconv_bigint.cc',
+              'third_party/abseil/absl/strings/match.cc',
+              'third_party/abseil/absl/strings/ascii.cc',
+              'third_party/abseil/absl/strings/internal/charconv_parse.cc',
+              'third_party/abseil/absl/strings/internal/memutil.cc',
+          ],
+          'include_dirs': [
+              'third_party/abseil',
+          ],
+      },
+      'tcmalloc': {
+          'sources': [
+              'third_party/tcmalloc/arena.cc',
+              'third_party/tcmalloc/central_freelist.cc',
+              'third_party/tcmalloc/common.cc',
+              'third_party/tcmalloc/cpu_cache.cc',
+              'third_party/tcmalloc/experiment.cc',
+              'third_party/tcmalloc/experimental_size_classes.cc',
+              'third_party/tcmalloc/guarded_page_allocator.cc',
+              'third_party/tcmalloc/huge_address_map.cc',
+              'third_party/tcmalloc/huge_allocator.cc',
+              'third_party/tcmalloc/huge_cache.cc',
+              'third_party/tcmalloc/huge_page_aware_allocator.cc',
+              'third_party/tcmalloc/internal/logging.cc',
+              'third_party/tcmalloc/internal/memory_stats.cc',
+              'third_party/tcmalloc/internal/percpu.cc',
+              'third_party/tcmalloc/internal/percpu_rseq_x86_64.S',
+              'third_party/tcmalloc/internal/util.cc',
+              'third_party/tcmalloc/page_allocator.cc',
+              'third_party/tcmalloc/malloc_extension.cc',
+              'third_party/tcmalloc/page_allocator_interface.cc',
+              'third_party/tcmalloc/page_heap.cc',
+              'third_party/tcmalloc/pagemap.cc',
+              'third_party/tcmalloc/parameters.cc',
+              'third_party/tcmalloc/peak_heap_tracker.cc',
+              'third_party/tcmalloc/runtime_size_classes.cc',
+              'third_party/tcmalloc/sampler.cc',
+              'third_party/tcmalloc/size_classes.cc',
+              'third_party/tcmalloc/span.cc',
+              'third_party/tcmalloc/stack_trace_table.cc',
+              'third_party/tcmalloc/static_vars.cc',
+              'third_party/tcmalloc/stats.cc',
+              'third_party/tcmalloc/system-alloc.cc',
+              'third_party/tcmalloc/tcmalloc.cc',
+              'third_party/tcmalloc/thread_cache.cc',
+              'third_party/tcmalloc/transfer_cache.cc',
+              'third_party/tcmalloc/internal/mincore.cc',
+          ],
+          'cflags': tcmalloc_cflags + [
+              '-Wno-sign-compare',
+              '-Wno-deprecated-declarations',
+              '-Wno-implicit-int-float-conversion',
+              '-Wno-ignored-qualifiers',
+          ],
+          'include_dirs': [
+              'third_party',
+              'third_party/abseil',
+          ],
+      },
+
       'gn_lib': {'sources': [
         'src/gn/action_target_generator.cc',
         'src/gn/action_values.cc',
@@ -593,7 +690,7 @@ def WriteGNNinja(path, platform, host, options):
   }
 
   executables = {
-      'gn': {'sources': [ 'src/gn/gn_main.cc' ], 'libs': []},
+      'gn': {'sources': [ 'src/gn/gn_main.cc' ], 'libs': ['tcmalloc']},
 
       'gn_unittests': { 'sources': [
         'src/gn/action_target_generator_unittest.cc',
@@ -675,7 +772,7 @@ def WriteGNNinja(path, platform, host, options):
         'src/gn/xcode_object_unittest.cc',
         'src/gn/xml_element_writer_unittest.cc',
         'src/util/test/gn_test.cc',
-      ], 'libs': []},
+      ], 'libs': ['tcmalloc']},
   }
 
   if platform.is_posix():

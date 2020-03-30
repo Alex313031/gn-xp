@@ -1,0 +1,5 @@
+This directory contains a subset of the sources from the official abseil-cpp
+open source repository at (https://github.com/abseil/abseil-cpp.git) using
+the following commit: 092ed9793a1ad0e7e418f32c057bf3159a71cd04
+
+Only the sources requires to build tcmalloc were copied here.

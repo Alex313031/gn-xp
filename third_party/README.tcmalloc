@@ -1,0 +1,4 @@
+This directory contains copies of the tcmalloc sources, taken from
+the official open source repository at (https://github.com/google/tcmalloc.git)
+using the following commit: 96fe22c936f19ecf3df352c1fa7274910dad96d7
+
