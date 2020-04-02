@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "7bc0cb6b_254b4ac5",
+        "filename": "src/gn/toolchain_label.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 5,
+      "author": {
+        "id": 1000067
+      },
+      "writtenOn": "2020-04-02T11:08:24Z",
+      "side": 1,
+      "message": "I\u0027ve tried to respect the convention used by all the other headers under src/gn/. I can switch toe SRC_GN_ here if you prefer, but I would suggest a CL to mechanically replace them all at once instead.",
+      "parentUuid": "a1961066_4e2f380a",
+      "revId": "64a7c1c2cc6d2a414cc375bf01402bbbbb236b65",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "fd7be97e_bf170317",
         "filename": "src/gn/toolchain_label.h",
         "patchSetId": 2
@@ -30,6 +48,24 @@
       "writtenOn": "2020-03-28T16:02:16Z",
       "side": 1,
       "message": "Is there a way to avoid adding this function? It seems better to avoid APIs that require certain formats to be parsed or they abort. And the toolchain_label.cc file duplicates a lot of the parsing in the label parser already.\n\nI\u0027d prefer it if all parsing went through the existing label parser and this toolchain label class was just a container for that data.\n\nI can see that some performance was lost creating labels to compare in e.g. Label::GetToolchainLabel() but could this class be implemented as just a SourceDir/string pair and get that win? It could have some optimized comparisons with that, and it\u0027s not clear to be that the storage as a single-string is much of a win, especially since we need to re-parse the string sometimes to extract the SourceDir from it.",
+      "revId": "64a7c1c2cc6d2a414cc375bf01402bbbbb236b65",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "e5284330_713ea94c",
+        "filename": "src/gn/toolchain_label.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 32,
+      "author": {
+        "id": 1000067
+      },
+      "writtenOn": "2020-04-02T11:08:24Z",
+      "side": 1,
+      "message": "Thanks. Please take a look at the next patch: I\u0027ve moved the label parsing code to a new static method (Label::ParseLabelString()), which allows it to be independently tested, and reused by ToolchainLabel. Also added relevant unit-tests.\n\nIt turns out that constructing a ToolchainLabel() from an std::string_view is not needed after all, so I\u0027ve removed this constructor. The abort is now a DCHECK() that should only trigger if the toolchain label string computation performed in ToolchainLabel(const SourceDir\u0026, const std::string_view) constructor fails to generate a valid label string (i.e. it is now an assert/sanity check, instead of verifying user input).\n\nImplementing the class as a SourceDir/string pair would negate the benefits of this CL, because that\u0027s exactly how the toolchain label is already stored in the Label class at the moment.\n\nI.e. the benefit of this class is to use a single StringAtom for the whole toolchain label, this makes comparing toolchain labels faster, especially in case of equality and when comparing labels with the same toolchain (which happens often). It also reduces RAM usage a little bit (I\u0027ve measured it at around 30 MiB peak RSS saved on the Fuchsia build, but this is minor compared to the overall 1.1 GiB used).\n\nVery fortunately, extracting the dir and name our of a ToolchainLabel happens very rarely, so string scanning is acceptable in this case.\n\nAn alternative would be to create a new unique/interned pointer to (SourceDir, name) tuples for toolchains, but I don\u0027t think this is worth the complexity.",
+      "parentUuid": "fd7be97e_bf170317",
       "revId": "64a7c1c2cc6d2a414cc375bf01402bbbbb236b65",
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
       "unresolved": true
