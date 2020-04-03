@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "e6fcc1dd_b48ed768",
+        "filename": "src/gn/string_output_buffer.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 63,
+      "author": {
+        "id": 1000004
+      },
+      "writtenOn": "2020-04-03T17:38:44Z",
+      "side": 1,
+      "message": "Can we just change (or add to) src/gn/filesystem_utils to take a string_view instead?",
+      "revId": "d4c09d40abcae43d1c0e039ee070da24a18eb6f0",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "41d57e18_fb875118",
+        "filename": "src/gn/string_output_buffer.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 187,
+      "author": {
+        "id": 1000004
+      },
+      "writtenOn": "2020-04-03T17:38:44Z",
+      "side": 1,
+      "message": "Similarly, could we use this improved implementation in ContentsEqual() there?",
+      "revId": "d4c09d40abcae43d1c0e039ee070da24a18eb6f0",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": true
+    }
+  ]
+}
