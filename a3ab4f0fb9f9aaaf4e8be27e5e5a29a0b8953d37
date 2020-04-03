@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "72c2d948_98a23523",
+        "filename": "src/gn/input_file_manager.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 277,
+      "author": {
+        "id": 1000004
+      },
+      "writtenOn": "2020-04-03T17:45:05Z",
+      "side": 1,
+      "message": "This could probably do with a unittest now that it\u0027s not-quite-trivial.",
+      "revId": "a3ab4f0fb9f9aaaf4e8be27e5e5a29a0b8953d37",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": true
+    }
+  ]
+}
