@@ -69,6 +69,24 @@
       "revId": "64a7c1c2cc6d2a414cc375bf01402bbbbb236b65",
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "f0c97183_968ea20d",
+        "filename": "src/gn/toolchain_label.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 32,
+      "author": {
+        "id": 1000014
+      },
+      "writtenOn": "2020-04-03T16:29:34Z",
+      "side": 1,
+      "message": "Doing the comparison with the Label should be two integer comparisons since both the name and the SourceDir are StringAtoms. Having a ToolchainLabel makes this one comparison instead, but I have a hard time believing 2x integer comparisons on labels makes any observable difference in runtime. Am I missing some other source of performance improvement?",
+      "parentUuid": "e5284330_713ea94c",
+      "revId": "64a7c1c2cc6d2a414cc375bf01402bbbbb236b65",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": true
     }
   ]
 }
