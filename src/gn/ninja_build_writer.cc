@@ -292,25 +292,22 @@ void NinjaBuildWriter::WriteNinjaRules() {
   // exist and will error if they don't. When files are listed in a depfile,
   // missing files are ignored.
   dep_out_ << "build.ninja:";
-  std::vector<base::FilePath> input_files;
-  g_scheduler->input_file_manager()->GetAllPhysicalInputFileNames(&input_files);
 
   // Other files read by the build.
   std::vector<base::FilePath> other_files = g_scheduler->GetGenDependencies();
 
-  // Sort the input files to order them deterministically.
-  // Additionally, remove duplicate filepaths that seem to creep in.
-  std::set<base::FilePath> fileset(input_files.begin(), input_files.end());
-  fileset.insert(other_files.begin(), other_files.end());
+  std::vector<base::FilePath> input_files =
+      g_scheduler->input_file_manager()->GetAllPhysicalInputFileNames(
+          &other_files);
 
   const base::FilePath build_path =
       build_settings_->build_dir().Resolve(build_settings_->root_path());
 
   EscapeOptions depfile_escape;
   depfile_escape.mode = ESCAPE_DEPFILE;
-  for (const auto& other_file : fileset) {
+  for (const auto& input_file : input_files) {
     const base::FilePath file =
-        MakeAbsoluteFilePathRelativeIfPossible(build_path, other_file);
+        MakeAbsoluteFilePathRelativeIfPossible(build_path, input_file);
     dep_out_ << " ";
     EscapeStringToStream(dep_out_,
                          FilePathToUTF8(file.NormalizePathSeparatorsTo('/')),

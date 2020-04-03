@@ -263,13 +263,44 @@ int InputFileManager::GetInputFileCount() const {
   return static_cast<int>(input_files_.size());
 }
 
-void InputFileManager::GetAllPhysicalInputFileNames(
-    std::vector<base::FilePath>* result) const {
+std::vector<base::FilePath> InputFileManager::GetAllPhysicalInputFileNames(
+    const std::vector<base::FilePath>* other_files) const {
+  std::vector<base::FilePath> result;
+  result.reserve(input_files_.size() + (other_files ? other_files->size() : 0));
+  auto callback = [&result](const base::FilePath& file_path) {
+    result.push_back(file_path);
+  };
+  IterateOverAllPhysicalInputFileNames(callback, other_files);
+  return result;
+}
+
+void InputFileManager::IterateOverAllPhysicalInputFileNames(
+    std::function<void(const base::FilePath&)> input_filename_callback,
+    const std::vector<base::FilePath>* other_files) const {
   std::lock_guard<std::mutex> lock(lock_);
-  result->reserve(input_files_.size());
+  std::vector<const base::FilePath*> paths;
+  paths.reserve(input_files_.size() + (other_files ? other_files->size() : 0));
   for (const auto& file : input_files_) {
     if (!file.second->file.physical_name().empty())
-      result->push_back(file.second->file.physical_name());
+      paths.push_back(&file.second->file.physical_name());
+  }
+  if (other_files) {
+    for (const base::FilePath& file : *other_files) {
+      paths.push_back(&file);
+    }
+  }
+
+  std::sort(
+      paths.begin(), paths.end(),
+      [](const base::FilePath* a, const base::FilePath* b) { return *a < *b; });
+
+  // The content of |paths| is now sorted, but may contain duplicates.
+  const base::FilePath* prev_path_ = nullptr;
+  for (const base::FilePath* p : paths) {
+    if (prev_path_ && *p == *prev_path_)
+      continue;
+    input_filename_callback(*p);
+    prev_path_ = p;
   }
 }
 

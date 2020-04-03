@@ -91,8 +91,19 @@ class InputFileManager : public base::RefCountedThreadSafe<InputFileManager> {
   // Does not count dynamic input.
   int GetInputFileCount() const;
 
-  // Fills the vector with all input files.
-  void GetAllPhysicalInputFileNames(std::vector<base::FilePath>* result) const;
+  // Returns the set of physical input file paths as a sorted vector. If
+  // |other_files| is not null, then its file paths will be added to the set
+  // before the sort. Duplicate items are always removed from the result.
+  std::vector<base::FilePath> GetAllPhysicalInputFileNames(
+      const std::vector<base::FilePath>* other_files = nullptr) const;
+
+  // Iterate over the sorted set of all physical input file paths.
+  // |input_filename_callback| will be called for each file path.
+  // If |other_files| is not null, the its file paths will be added to
+  // the set before the sort. Duplicate items never appear in the iteration.
+  void IterateOverAllPhysicalInputFileNames(
+      std::function<void(const base::FilePath&)> input_filename_callback,
+      const std::vector<base::FilePath>* other_files = nullptr) const;
 
   void set_load_file_callback(SyncLoadFileCallback load_file_callback) {
     load_file_callback_ = load_file_callback;
