@@ -1,0 +1,3 @@
+# Crash found by afl-fuzz in import sorting.
+import(sources)
+import("x")
