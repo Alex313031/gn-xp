@@ -38,6 +38,8 @@ const char kSwitchDumpTree[] = "dump-tree";
 const char kSwitchDumpTreeText[] = "text";
 const char kSwitchDumpTreeJSON[] = "json";
 const char kSwitchStdin[] = "stdin";
+const char kSwitchAbortIfColumnLimitExceeded[] =
+    "abort-if-column-limit-exceeded";
 
 const char kFormat[] = "format";
 const char kFormat_HelpShort[] = "format: Format .gn files.";
@@ -73,6 +75,11 @@ Arguments
   --stdin
       Read input from stdin and write to stdout rather than update a file
       in-place.
+
+  --abort-if-column-limit-exceeded
+      Internal flag used to trigger a crash during fuzzing if the formatted
+      output exceeds the maximum width.
+
 
 Examples
   gn format //some/BUILD.gn //some/other/BUILD.gn //and/another/BUILD.gn
@@ -1250,6 +1257,35 @@ bool FormatStringToString(const std::string& input,
   return true;
 }
 
+void AbortIfLineExceedsColumnLimit(const std::string& output) {
+  const bool abort_if_column_limit_exceeded =
+      base::CommandLine::ForCurrentProcess()->HasSwitch(
+          kSwitchAbortIfColumnLimitExceeded);
+  if (!abort_if_column_limit_exceeded) {
+    return;
+  }
+
+  std::vector<std::string_view> lines = base::SplitStringPiece(
+      output, "\n", base::KEEP_WHITESPACE, base::SPLIT_WANT_ALL);
+  for (const auto& line : lines) {
+    if (line.size() > kMaximumWidth) {
+      // This check is more complex than simply checking the length of
+      // each line because there are constructs (for example, an
+      // identifier that's 90 characters long) that are correct to
+      // exceed the 80 column maximum. So, don't abort if the line looks
+      // like a single "thing".
+      std::string_view trimmed =
+          base::TrimString(line, " ", base::TrimPositions::TRIM_LEADING);
+      if (trimmed.find_first_of(' ') != std::string_view::npos) {
+        // Contained spaces other than leading.
+        // TODO:
+        //   a = "very long string with spaces that exceeds 80 col"
+        abort();
+      }
+    }
+  }
+}
+
 int RunFormat(const std::vector<std::string>& args) {
   bool dry_run =
       base::CommandLine::ForCurrentProcess()->HasSwitch(kSwitchDryRun);
@@ -1297,6 +1333,7 @@ int RunFormat(const std::vector<std::string>& args) {
     // Set stdout to binary mode to prevent converting newlines to \r\n.
     _setmode(_fileno(stdout), _O_BINARY);
 #endif
+    AbortIfLineExceedsColumnLimit(output);
     printf("%s", output.c_str());
     return 0;
   }
@@ -1334,6 +1371,7 @@ int RunFormat(const std::vector<std::string>& args) {
     if (!FormatStringToString(original_contents, dump_tree, &output_string)) {
       return 1;
     }
+    AbortIfLineExceedsColumnLimit(output_string);
     if (dump_tree == TreeDumpMode::kInactive) {
       // Update the file in-place.
       if (dry_run)
