@@ -443,9 +443,9 @@ void Printer::SortImports(std::vector<std::unique_ptr<PARSENODE>>& statements) {
       const auto& b_args = b->AsFunctionCall()->args()->contents();
       std::string_view a_name;
       std::string_view b_name;
-      if (!a_args.empty())
+      if (!a_args.empty() && a_args[0]->AsLiteral())
         a_name = a_args[0]->AsLiteral()->value().value();
-      if (!b_args.empty())
+      if (!b_args.empty() && b_args[0]->AsLiteral())
         b_name = b_args[0]->AsLiteral()->value().value();
 
       auto is_absolute = [](std::string_view import) {
