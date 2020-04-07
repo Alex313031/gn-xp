@@ -87,6 +87,24 @@
       "revId": "64a7c1c2cc6d2a414cc375bf01402bbbbb236b65",
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "98d8d7f6_12a348cc",
+        "filename": "src/gn/toolchain_label.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 32,
+      "author": {
+        "id": 1000067
+      },
+      "writtenOn": "2020-04-07T08:36:15Z",
+      "side": 1,
+      "message": "My guess was that there are two performance-related changes in this CL: the first is the faster label comparison implementation, which I\u0027ve extracted into a new, shorted, CL [1]. The second one is the reduced size of each Label instance, which overall can improve cache hit rates when there are tons of label instances and accesses (which is likely since Label::operator\u003c appears high in the perf profile).\n\nTo be sure, I\u0027ve measured all of them: this shows that the changes in [1] are where most of the performance gains are. The CL under review here is still _slightly_ better, but the gains are tiny in comparison (e.g. about 150ms faster in the best case), so I\u0027m now unsure this is worth all the extra complexity.\n\nLet me know if you want to keep this one, submit [1] instead, or refactor this CL to use a (SourceDir,StringAtom) tuple to implement the ToolchainLabel class.\n\n[1] https://gn-review.googlesource.com/c/gn/+/8000",
+      "parentUuid": "f0c97183_968ea20d",
+      "revId": "64a7c1c2cc6d2a414cc375bf01402bbbbb236b65",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": true
     }
   ]
 }
