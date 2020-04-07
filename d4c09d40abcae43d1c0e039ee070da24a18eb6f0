@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "586d0eda_acae8186",
+        "filename": "src/gn/string_output_buffer.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 63,
+      "author": {
+        "id": 1000067
+      },
+      "writtenOn": "2020-04-07T08:45:39Z",
+      "side": 1,
+      "message": "Yes, but that would be out-of-scope for this CL, since the functions provided by filesystem_utils do not allow to perform multiple successive writes to a file (which is why this dedicated class was added in the first place).\n\nOn the other hand, I can turn this into a standalone class and put it in its own header file, so its implementation can be shared with the filesystem_utils functions. Let me know if this is what you\u0027re looking for.",
+      "parentUuid": "e6fcc1dd_b48ed768",
+      "revId": "d4c09d40abcae43d1c0e039ee070da24a18eb6f0",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "41d57e18_fb875118",
         "filename": "src/gn/string_output_buffer.cc",
         "patchSetId": 1
@@ -30,6 +48,24 @@
       "writtenOn": "2020-04-03T17:38:44Z",
       "side": 1,
       "message": "Similarly, could we use this improved implementation in ContentsEqual() there?",
+      "revId": "d4c09d40abcae43d1c0e039ee070da24a18eb6f0",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "40cab2a4_83e0fb3e",
+        "filename": "src/gn/string_output_buffer.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 187,
+      "author": {
+        "id": 1000067
+      },
+      "writtenOn": "2020-04-07T08:45:39Z",
+      "side": 1,
+      "message": "Can you clarify?",
+      "parentUuid": "41d57e18_fb875118",
       "revId": "d4c09d40abcae43d1c0e039ee070da24a18eb6f0",
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
       "unresolved": true
