@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "23124796_14145896",
+        "filename": "src/gn/ninja_build_writer.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 313,
+      "author": {
+        "id": 1000004
+      },
+      "writtenOn": "2020-04-07T17:42:09Z",
+      "side": 1,
+      "message": "I think we prefer explicit capture instead, maybe [this, \u0026build_path, \u0026depfile_escape] or something.",
+      "range": {
+        "startLine": 313,
+        "startChar": 24,
+        "endLine": 313,
+        "endChar": 25
+      },
+      "revId": "726471f3c11feb61610792dea08f2522b66a97a1",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": true
+    }
+  ]
+}
