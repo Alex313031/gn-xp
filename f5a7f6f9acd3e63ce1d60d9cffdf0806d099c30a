@@ -1,0 +1,101 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "cc4757d4_f89de697",
+        "filename": "src/gn/file_writer.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 68,
+      "author": {
+        "id": 1000004
+      },
+      "writtenOn": "2020-04-07T18:18:08Z",
+      "side": 1,
+      "message": "This comment looks obsolete.",
+      "revId": "f5a7f6f9acd3e63ce1d60d9cffdf0806d099c30a",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "771b41f7_30852e41",
+        "filename": "src/gn/file_writer.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 25,
+      "author": {
+        "id": 1000004
+      },
+      "writtenOn": "2020-04-07T18:18:08Z",
+      "side": 1,
+      "message": "I guess fundamentally this is what I was getting at in the previous comments. We have the code to base:: right there, and there\u0027s no reason not to change it other than a bit of updating in other files. So working around it in this directory seems cumbersome.",
+      "range": {
+        "startLine": 24,
+        "startChar": 46,
+        "endLine": 25,
+        "endChar": 33
+      },
+      "revId": "f5a7f6f9acd3e63ce1d60d9cffdf0806d099c30a",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "25494480_fac68d79",
+        "filename": "src/gn/string_output_buffer.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 21,
+      "author": {
+        "id": 1000004
+      },
+      "writtenOn": "2020-04-07T18:18:08Z",
+      "side": 1,
+      "message": "I\u0027m pretty sad to discover that --ide\u003djson became load-bearing for Fuchsia. :( However! Here we are, solving problems.",
+      "revId": "f5a7f6f9acd3e63ce1d60d9cffdf0806d099c30a",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "e96c8331_348f1790",
+        "filename": "src/gn/string_output_buffer_unittest.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 45,
+      "author": {
+        "id": 1000004
+      },
+      "writtenOn": "2020-04-07T18:18:08Z",
+      "side": 1,
+      "message": "Can you add a case that\u0027s an even exact multiple of the size of the pages too?",
+      "revId": "f5a7f6f9acd3e63ce1d60d9cffdf0806d099c30a",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "03933cd5_f3288309",
+        "filename": "src/gn/string_output_buffer_unittest.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 104,
+      "author": {
+        "id": 1000004
+      },
+      "writtenOn": "2020-04-07T18:18:08Z",
+      "side": 1,
+      "message": "\"Also create directory.\"?",
+      "range": {
+        "startLine": 104,
+        "startChar": 33,
+        "endLine": 104,
+        "endChar": 45
+      },
+      "revId": "f5a7f6f9acd3e63ce1d60d9cffdf0806d099c30a",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": true
+    }
+  ]
+}

@@ -55,6 +55,24 @@
     },
     {
       "key": {
+        "uuid": "671c32a3_8f346dc5",
+        "filename": "src/gn/string_output_buffer.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 63,
+      "author": {
+        "id": 1000004
+      },
+      "writtenOn": "2020-04-07T18:18:08Z",
+      "side": 1,
+      "message": "Yeah, that\u0027s what I meant. It just seemed like this is a slightly more general version of the ones in filesystem_utils, and duplicates similar code/comments.",
+      "parentUuid": "08706223_9393c7ad",
+      "revId": "d4c09d40abcae43d1c0e039ee070da24a18eb6f0",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "41d57e18_fb875118",
         "filename": "src/gn/string_output_buffer.cc",
         "patchSetId": 1
@@ -84,6 +102,24 @@
       "side": 1,
       "message": "Can you clarify?",
       "parentUuid": "41d57e18_fb875118",
+      "revId": "d4c09d40abcae43d1c0e039ee070da24a18eb6f0",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "0f20b8f5_70d4c47c",
+        "filename": "src/gn/string_output_buffer.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 187,
+      "author": {
+        "id": 1000004
+      },
+      "writtenOn": "2020-04-07T18:18:08Z",
+      "side": 1,
+      "message": "This just seemed very similar to ::ContentsEqual() from filesystem_utils.h. Perhaps we could improve the other users if this one is more efficient.",
+      "parentUuid": "40cab2a4_83e0fb3e",
       "revId": "d4c09d40abcae43d1c0e039ee070da24a18eb6f0",
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
       "unresolved": true
