@@ -16,6 +16,24 @@
       "revId": "a3ab4f0fb9f9aaaf4e8be27e5e5a29a0b8953d37",
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "b25f3fb9_db942957",
+        "filename": "src/gn/input_file_manager.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 277,
+      "author": {
+        "id": 1000067
+      },
+      "writtenOn": "2020-04-07T13:54:18Z",
+      "side": 1,
+      "message": "The InputFileManager class doesn\u0027t have a unit test, and given its API, it doesn\u0027t seem that adding one would be trivial. I\u0027ve taken a different approach in the next patch, by introducing a new helper template for merging + sorting sets (with unit-tests), and replaced GetAllPhysicalInputFileNames() with a new method that adds the physical input files to the sorter instead.",
+      "parentUuid": "72c2d948_98a23523",
+      "revId": "a3ab4f0fb9f9aaaf4e8be27e5e5a29a0b8953d37",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": true
     }
   ]
 }
