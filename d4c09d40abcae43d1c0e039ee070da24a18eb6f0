@@ -37,6 +37,24 @@
     },
     {
       "key": {
+        "uuid": "08706223_9393c7ad",
+        "filename": "src/gn/string_output_buffer.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 63,
+      "author": {
+        "id": 1000067
+      },
+      "writtenOn": "2020-04-07T13:55:03Z",
+      "side": 1,
+      "message": "For the record, I\u0027ve introduced a new FileWriter class in the next patch that implements multiple-writes, the Windows-specific CreateFile() call, and changed filesystem_utils to use it.",
+      "parentUuid": "586d0eda_acae8186",
+      "revId": "d4c09d40abcae43d1c0e039ee070da24a18eb6f0",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "41d57e18_fb875118",
         "filename": "src/gn/string_output_buffer.cc",
         "patchSetId": 1
