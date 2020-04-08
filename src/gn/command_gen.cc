@@ -11,6 +11,7 @@
 #include "gn/build_settings.h"
 #include "gn/commands.h"
 #include "gn/compile_commands_writer.h"
+#include "gn/rust_project_writer.h"
 #include "gn/eclipse_writer.h"
 #include "gn/json_project_writer.h"
 #include "gn/ninja_target_writer.h"
@@ -52,6 +53,8 @@ const char kSwitchJsonFileName[] = "json-file-name";
 const char kSwitchJsonIdeScript[] = "json-ide-script";
 const char kSwitchJsonIdeScriptArgs[] = "json-ide-script-args";
 const char kSwitchExportCompileCommands[] = "export-compile-commands";
+const char kSwitchExportRustProject[] = "export-rust-project";
+const char kSwitchRustSysroot[] = "rust-sysroot";
 
 // Extracts extra parameters for XcodeWriter from command-line flags.
 XcodeWriter::Options XcodeWriterOptionsFromCommandLine(
@@ -294,6 +297,26 @@ bool RunIdeWriter(const std::string& ide,
   return false;
 }
 
+bool RunRustProjectWriter(const BuildSettings* build_settings,
+                          const Builder& builder,
+                          const base::FilePath& rust_sysroot,
+                          Err* err) {
+  const base::CommandLine* command_line =
+      base::CommandLine::ForCurrentProcess();
+  bool quiet = command_line->HasSwitch(switches::kQuiet);
+  base::ElapsedTimer timer;
+
+  std::string file_name = "rust-project.json";
+  bool res = RustProjectWriter::RunAndWriteFiles(
+      build_settings, builder, file_name, rust_sysroot, quiet, err);
+  if (res && !quiet) {
+    OutputString("Generating rust-project.json took " +
+                 base::Int64ToString(timer.Elapsed().InMilliseconds()) +
+                 "ms\n");
+  }
+  return res;
+}
+
 bool RunCompileCommandsWriter(const BuildSettings* build_settings,
                               const Builder& builder,
                               Err* err) {
@@ -435,6 +458,18 @@ Generic JSON Output
 
 Compilation Database
 
+  --export-rust-project
+      Produces a rust-project.json file in the root of the build directory
+      This is used for various tools in the Rust ecosystem allowing for the
+      replay of individual compilations independent of the build system.
+      This is an unstable format and likely to change without warning.
+
+  --rust-sysroot=<path_to_rust_sysroot>
+      An additional flag that takes the path to the rust sysroot and adds the
+      information to the rust-project.json format. This is necessary for standard
+      library autocompletions. This value can be obtained by invoking
+      `rustc --print sysroot`
+
   --export-compile-commands[=<target_name1,target_name2...>]
       Produces a compile_commands.json file in the root of the build directory
       containing an array of “command objects”, where each command object
@@ -522,6 +557,14 @@ int RunGen(const std::vector<std::string>& args) {
   if (command_line->HasSwitch(kSwitchExportCompileCommands) &&
       !RunCompileCommandsWriter(&setup->build_settings(), setup->builder(),
                                 &err)) {
+    err.PrintToStdout();
+    return 1;
+  }
+
+  if (command_line->HasSwitch(kSwitchExportRustProject) &&
+      !RunRustProjectWriter(&setup->build_settings(), setup->builder(),
+        command_line->GetSwitchValuePath(kSwitchRustSysroot),
+        &err)) {
     err.PrintToStdout();
     return 1;
   }
