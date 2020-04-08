@@ -471,6 +471,7 @@ def WriteGNNinja(path, platform, host, options):
         'src/gn/command_refs.cc',
         'src/gn/commands.cc',
         'src/gn/compile_commands_writer.cc',
+        'src/gn/rust_project_writer.cc',
         'src/gn/config.cc',
         'src/gn/config_values.cc',
         'src/gn/config_values_extractors.cc',
