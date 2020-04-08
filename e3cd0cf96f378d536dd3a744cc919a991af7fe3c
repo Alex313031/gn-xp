@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "c0405e10_6de1bfac",
+        "filename": "src/gn/rust_project_writer.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 74,
+      "author": {
+        "id": 1000067
+      },
+      "writtenOn": "2020-04-08T17:46:08Z",
+      "side": 1,
+      "message": "Ah, the idea was that if LINE_ENDING is a macro you can remove the intermediate \u003c\u003c to let compiler concatenate the string literals (reducing the number of function calls), as in:\n\n  rust_project \u003c\u003c \"    \\\"deps\\\": [\" LINE_ENDING;\n\nEverything looks good to me otherwise. This is great. Keep going and thanks for working on this :)",
+      "revId": "e3cd0cf96f378d536dd3a744cc919a991af7fe3c",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": true
+    }
+  ]
+}
