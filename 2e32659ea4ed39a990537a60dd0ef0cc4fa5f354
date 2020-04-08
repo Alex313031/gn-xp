@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "21a9601e_f0f7bffd",
+        "filename": "src/gn/rust_project_writer.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 21,
+      "author": {
+        "id": 1000288
+      },
+      "writtenOn": "2020-04-08T17:26:58Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "e94a63ec_a651db42",
+      "revId": "2e32659ea4ed39a990537a60dd0ef0cc4fa5f354",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "dd8a4e51_ca911b86",
         "filename": "src/gn/rust_project_writer.cc",
         "patchSetId": 2
@@ -30,6 +48,24 @@
       "writtenOn": "2020-04-08T14:05:26Z",
       "side": 1,
       "message": "As far as I understand, targets are uniquely identified by their address at this stage. Would it make sense to use a |const Target*| instead of an |std::string| as the key in this map? This would avoid making string comparisons during generation, or am I missing something?",
+      "revId": "2e32659ea4ed39a990537a60dd0ef0cc4fa5f354",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "41c258b1_d4f25c4b",
+        "filename": "src/gn/rust_project_writer.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 45,
+      "author": {
+        "id": 1000288
+      },
+      "writtenOn": "2020-04-08T17:26:58Z",
+      "side": 1,
+      "message": "I might switch it to Target*. The last bit that I haven\u0027t done yet is generate the std library lookups which are a little special and a key that I can easily fake seemed straightforward.",
+      "parentUuid": "dd8a4e51_ca911b86",
       "revId": "2e32659ea4ed39a990537a60dd0ef0cc4fa5f354",
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
       "unresolved": true
@@ -50,6 +86,24 @@
       "revId": "2e32659ea4ed39a990537a60dd0ef0cc4fa5f354",
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "4ed5c590_8a902a2c",
+        "filename": "src/gn/rust_project_writer.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 135,
+      "author": {
+        "id": 1000288
+      },
+      "writtenOn": "2020-04-08T17:26:58Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "f8c54d40_f172f3aa",
+      "revId": "2e32659ea4ed39a990537a60dd0ef0cc4fa5f354",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": false
     }
   ]
 }
