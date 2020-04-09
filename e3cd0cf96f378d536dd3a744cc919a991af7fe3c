@@ -16,6 +16,24 @@
       "revId": "e3cd0cf96f378d536dd3a744cc919a991af7fe3c",
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "057c3762_86f0545a",
+        "filename": "src/gn/rust_project_writer.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 74,
+      "author": {
+        "id": 1000288
+      },
+      "writtenOn": "2020-04-09T14:20:34Z",
+      "side": 1,
+      "message": "didn\u0027t know you could do this! very cool.",
+      "parentUuid": "c0405e10_6de1bfac",
+      "revId": "e3cd0cf96f378d536dd3a744cc919a991af7fe3c",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": false
     }
   ]
 }

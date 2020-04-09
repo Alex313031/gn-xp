@@ -72,6 +72,24 @@
     },
     {
       "key": {
+        "uuid": "016829a2_e87d6348",
+        "filename": "src/gn/rust_project_writer.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 45,
+      "author": {
+        "id": 1000288
+      },
+      "writtenOn": "2020-04-09T14:20:34Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "41c258b1_d4f25c4b",
+      "revId": "2e32659ea4ed39a990537a60dd0ef0cc4fa5f354",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "f8c54d40_f172f3aa",
         "filename": "src/gn/rust_project_writer.cc",
         "patchSetId": 2
