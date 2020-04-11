@@ -120,19 +120,26 @@ const Target* ResolveTargetFromCommandLineString(
     Setup* setup,
     const std::string& label_string);
 
+// Item types to match for label patterns with wildcards.
+enum PatternMatchTypes{
+  PATTERN_MATCH_TARGET = 1 << 0,
+  PATTERN_MATCH_CONFIG = 1 << 1
+};
+
 // Resolves a vector of command line inputs and figures out the full set of
 // things they resolve to.
 //
 // On success, returns true and populates the vectors. On failure, prints the
 // error and returns false.
 //
-// Patterns with wildcards will only match targets. The file_matches aren't
-// validated that they are real files or referenced by any targets. They're just
-// the set of things that didn't match anything else.
+// Patterns with wildcards will only match pattern_types. The file_matches
+// aren't validated that they are real files or referenced by any targets.
+// They're just the set of things that didn't match anything else.
 bool ResolveFromCommandLineInput(
     Setup* setup,
     const std::vector<std::string>& input,
     bool default_toolchain_only,
+    int pattern_types,
     UniqueVector<const Target*>* target_matches,
     UniqueVector<const Config*>* config_matches,
     UniqueVector<const Toolchain*>* toolchain_matches,

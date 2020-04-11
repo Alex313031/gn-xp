@@ -240,11 +240,13 @@ class ConfigDescBuilder : public BaseDescBuilder {
     auto res = std::make_unique<base::DictionaryValue>();
     const ConfigValues& values = config_->resolved_values();
 
-    if (what_.empty())
+    if (what_.empty()) {
+      res->SetKey("type", base::Value("config"));
       res->SetKey(
           "toolchain",
           base::Value(
               config_->label().GetToolchainLabel().GetUserVisibleName(false)));
+    }
 
     if (what(variables::kConfigs) && !config_->configs().empty()) {
       auto configs = std::make_unique<base::ListValue>();
