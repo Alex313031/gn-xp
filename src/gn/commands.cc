@@ -27,17 +27,17 @@ namespace commands {
 namespace {
 
 // Like above but the input string can be a pattern that matches multiple
-// targets. If the input does not parse as a pattern, prints and error and
+// items. If the input does not parse as a pattern, prints and error and
 // returns false. If the pattern is valid, fills the vector (which might be
 // empty if there are no matches) and returns true.
 //
 // If default_toolchain_only is true, a pattern with an unspecified toolchain
 // will match the default toolchain only. If true, all toolchains will be
 // matched.
-bool ResolveTargetsFromCommandLinePattern(Setup* setup,
-                                          const std::string& label_pattern,
-                                          bool default_toolchain_only,
-                                          std::vector<const Target*>* matches) {
+bool ResolveItemsFromCommandLinePattern(Setup* setup,
+                                        const std::string& label_pattern,
+                                        bool default_toolchain_only,
+                                        std::vector<const Item*>* matches) {
   Value pattern_value(nullptr, label_pattern);
 
   Err err;
@@ -59,10 +59,12 @@ bool ResolveTargetsFromCommandLinePattern(Setup* setup,
     }
   }
 
-  std::vector<LabelPattern> pattern_vector;
-  pattern_vector.push_back(pattern);
-  FilterTargetsByPatterns(setup->builder().GetAllResolvedTargets(),
-                          pattern_vector, matches);
+  for (auto item : setup->builder().GetAllResolvedItems()) {
+    if (pattern.Matches(item->label())) {
+      matches->push_back(item);
+    }
+  }
+
   return true;
 }
 
@@ -72,20 +74,26 @@ bool ResolveStringFromCommandLineInput(
     const SourceDir& current_dir,
     const std::string& input,
     bool default_toolchain_only,
+    int pattern_types,
     UniqueVector<const Target*>* target_matches,
     UniqueVector<const Config*>* config_matches,
     UniqueVector<const Toolchain*>* toolchain_matches,
     UniqueVector<SourceFile>* file_matches) {
   if (LabelPattern::HasWildcard(input)) {
-    // For now, only match patterns against targets. It might be nice in the
-    // future to allow the user to specify which types of things they want to
-    // match, but it should probably only match targets by default.
-    std::vector<const Target*> target_match_vector;
-    if (!ResolveTargetsFromCommandLinePattern(
-            setup, input, default_toolchain_only, &target_match_vector))
+    std::vector<const Item*> target_match_vector;
+    if (!ResolveItemsFromCommandLinePattern(
+          setup, input, default_toolchain_only, &target_match_vector)) {
       return false;
-    for (const Target* target : target_match_vector)
-      target_matches->push_back(target);
+    }
+    for (auto item : target_match_vector){
+      if (auto as_config = item->AsConfig(); as_config
+      && (pattern_types & PATTERN_MATCH_CONFIG)) {
+        config_matches->push_back(as_config);
+      } else if (auto as_target = item->AsTarget(); as_target
+      && (pattern_types & PATTERN_MATCH_TARGET)) {
+        target_matches->push_back(as_target);
+      }
+    }
     return true;
   }
 
@@ -487,6 +495,7 @@ bool ResolveFromCommandLineInput(
     Setup* setup,
     const std::vector<std::string>& input,
     bool default_toolchain_only,
+    int pattern_types,
     UniqueVector<const Target*>* target_matches,
     UniqueVector<const Config*>* config_matches,
     UniqueVector<const Toolchain*>* toolchain_matches,
@@ -501,8 +510,8 @@ bool ResolveFromCommandLineInput(
       SourceDirForCurrentDirectory(setup->build_settings().root_path());
   for (const auto& cur : input) {
     if (!ResolveStringFromCommandLineInput(
-            setup, cur_dir, cur, default_toolchain_only, target_matches,
-            config_matches, toolchain_matches, file_matches))
+            setup, cur_dir, cur, default_toolchain_only, pattern_types,
+            target_matches, config_matches, toolchain_matches, file_matches))
       return false;
   }
   return true;

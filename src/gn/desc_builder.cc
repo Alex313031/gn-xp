@@ -197,16 +197,48 @@ class BaseDescBuilder {
     return base::Value();
   }
 
+  void PrintConfig(base::ListValue* out, const Config* config, int indent = 0) {
+    std::string name(indent * 2, ' ');
+    name.append(config->label().GetUserVisibleName(GetToolchainLabel()));
+    out->AppendString(name);
+  }
+
+  void RecursivePrintConfigs(base::ListValue* out,
+                             const Config* config,
+                             std::set<const Config*>* seen,
+                             std::optional<int> indent = std::nullopt) {
+    if (seen && !seen->insert(config).second) {return;}
+
+    PrintConfig(out, config, indent.value_or(0));
+    for (auto& child: config->configs()) {
+      RecursivePrintConfigs(out, child.ptr, seen,
+          (indent ? *indent + 1 : indent));
+    }
+  }
+
   template <class VectorType>
   void FillInConfigVector(base::ListValue* out,
-                          const VectorType& configs,
-                          int indent = 0) {
-    for (const auto& config : configs) {
-      std::string name(indent * 2, ' ');
-      name.append(config.label.GetUserVisibleName(GetToolchainLabel()));
-      out->AppendString(name);
-      if (tree_)
-        FillInConfigVector(out, config.ptr->configs(), indent + 1);
+                          const VectorType& configs) {
+    if (tree_) {
+      if (all_) {
+        for (auto& config : configs){
+          RecursivePrintConfigs(out, config.ptr, nullptr, 0);
+        }
+      } else {
+        std::set<const Config*> seen;
+        for (auto& config : configs){
+          RecursivePrintConfigs(out, config.ptr, &seen, 0);
+        }
+      }
+    } else if (all_) {
+      std::set<const Config*> seen;
+      for (auto& config : configs){
+        RecursivePrintConfigs(out, config.ptr, &seen);
+      }
+    } else {
+      for (auto& config: configs) {
+        PrintConfig(out, config.ptr);
+      }
     }
   }
 
@@ -233,18 +265,23 @@ class BaseDescBuilder {
 
 class ConfigDescBuilder : public BaseDescBuilder {
  public:
-  ConfigDescBuilder(const Config* config, const std::set<std::string>& what)
-      : BaseDescBuilder(what, false, false, false), config_(config) {}
+  ConfigDescBuilder(const Config* config,
+                    const std::set<std::string>& what,
+                    bool all,
+                    bool tree)
+      : BaseDescBuilder(what, all, tree, false), config_(config) {}
 
   std::unique_ptr<base::DictionaryValue> BuildDescription() {
     auto res = std::make_unique<base::DictionaryValue>();
     const ConfigValues& values = config_->resolved_values();
 
-    if (what_.empty())
+    if (what_.empty()) {
+      res->SetKey("type", base::Value("config"));
       res->SetKey(
           "toolchain",
           base::Value(
               config_->label().GetToolchainLabel().GetUserVisibleName(false)));
+    }
 
     if (what(variables::kConfigs) && !config_->configs().empty()) {
       auto configs = std::make_unique<base::ListValue>();
@@ -844,10 +881,12 @@ std::unique_ptr<base::DictionaryValue> DescBuilder::DescriptionForTarget(
 
 std::unique_ptr<base::DictionaryValue> DescBuilder::DescriptionForConfig(
     const Config* config,
-    const std::string& what) {
+    const std::string& what,
+    bool all,
+    bool tree) {
   std::set<std::string> w;
   if (!what.empty())
     w.insert(what);
-  ConfigDescBuilder b(config, w);
+  ConfigDescBuilder b(config, w, all, tree);
   return b.BuildDescription();
 }
