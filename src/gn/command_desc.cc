@@ -12,6 +12,7 @@
 #include "base/command_line.h"
 #include "base/json/json_writer.h"
 #include "base/strings/string_number_conversions.h"
+#include <base/strings/string_split.h>
 #include "base/strings/string_util.h"
 #include "gn/commands.h"
 #include "gn/config.h"
@@ -403,9 +404,11 @@ bool PrintTarget(const Target* target,
 bool PrintConfig(const Config* config,
                  const std::string& what,
                  bool single_config,
-                 const std::map<std::string, DescHandlerFunc>& handler_map) {
+                 const std::map<std::string, DescHandlerFunc>& handler_map,
+                 bool all,
+                 bool tree) {
   std::unique_ptr<base::DictionaryValue> dict =
-      DescBuilder::DescriptionForConfig(config, what);
+      DescBuilder::DescriptionForConfig(config, what, all, tree);
   if (!what.empty() && dict->empty()) {
     OutputString("Don't know how to display \"" + what + "\" for a config.\n");
     return false;
@@ -470,8 +473,7 @@ const char kDesc_Help[] =
   will be taken for the build in the given <out_dir>.
 
   The <label or pattern> can be a target label, a config label, or a label
-  pattern (see "gn help label_pattern"). A label pattern will only match
-  targets.
+  pattern (see "gn help label_pattern").
 
 Possibilities for <what to show>
 
@@ -485,7 +487,7 @@ Possibilities for <what to show>
   cflags_c [--blame]
   cflags_cc [--blame]
   check_includes
-  configs [--tree] (see below)
+  configs [--all] [--tree] (see below)
   data_keys
   defines [--blame]
   depfile
@@ -647,22 +649,22 @@ int RunDesc(const std::vector<std::string>& args) {
   if (json) {
     // Convert all targets/configs to JSON, serialize and print them
     auto res = std::make_unique<base::DictionaryValue>();
-    if (!target_matches.empty()) {
-      for (const auto* target : target_matches) {
-        res->SetWithoutPathExpansion(
-            target->label().GetUserVisibleName(
-                target->settings()->default_toolchain_label()),
-            DescBuilder::DescriptionForTarget(
-                target, what_to_print, cmdline->HasSwitch(kAll),
-                cmdline->HasSwitch(kTree), cmdline->HasSwitch(kBlame)));
-      }
-    } else if (!config_matches.empty()) {
-      for (const auto* config : config_matches) {
-        res->SetWithoutPathExpansion(
-            config->label().GetUserVisibleName(false),
-            DescBuilder::DescriptionForConfig(config, what_to_print));
-      }
+    for (const auto* target : target_matches) {
+      res->SetWithoutPathExpansion(
+          target->label().GetUserVisibleName(
+              target->settings()->default_toolchain_label()),
+          DescBuilder::DescriptionForTarget(
+              target, what_to_print, cmdline->HasSwitch(kAll),
+              cmdline->HasSwitch(kTree), cmdline->HasSwitch(kBlame)));
     }
+    for (const auto* config : config_matches) {
+      res->SetWithoutPathExpansion(
+          config->label().GetUserVisibleName(false),
+          DescBuilder::DescriptionForConfig(
+              config, what_to_print, cmdline->HasSwitch(kAll),
+              cmdline->HasSwitch(kTree)));
+    }
+
     std::string s;
     base::JSONWriter::WriteWithOptions(
         *res.get(), base::JSONWriter::OPTIONS_PRETTY_PRINT, &s);
@@ -688,7 +690,8 @@ int RunDesc(const std::vector<std::string>& args) {
         OutputString("\n\n");
       printed_output = true;
 
-      if (!PrintConfig(config, what_to_print, !multiple_outputs, handlers))
+      if (!PrintConfig(config, what_to_print, !multiple_outputs, handlers,
+                       cmdline->HasSwitch(kAll), cmdline->HasSwitch(kTree)))
         return 1;
     }
   }
