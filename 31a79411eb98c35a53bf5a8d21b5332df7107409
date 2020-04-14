@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "8f9ce8e7_26832b2f",
+        "filename": "src/gn/command_gen.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 300,
+      "author": {
+        "id": 1000288
+      },
+      "writtenOn": "2020-04-14T15:41:33Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "72b8ceb9_e4466de2",
+      "range": {
+        "startLine": 300,
+        "startChar": 26,
+        "endLine": 300,
+        "endChar": 30
+      },
+      "revId": "31a79411eb98c35a53bf5a8d21b5332df7107409",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "1afdf720_68ab954b",
         "filename": "src/gn/command_gen.cc",
         "patchSetId": 5
@@ -39,6 +63,24 @@
       "revId": "31a79411eb98c35a53bf5a8d21b5332df7107409",
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "afae4d9c_7a6ad74e",
+        "filename": "src/gn/command_gen.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 462,
+      "author": {
+        "id": 1000288
+      },
+      "writtenOn": "2020-04-14T15:41:33Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "1afdf720_68ab954b",
+      "revId": "31a79411eb98c35a53bf5a8d21b5332df7107409",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": false
     },
     {
       "key": {
@@ -65,6 +107,30 @@
     },
     {
       "key": {
+        "uuid": "a077ad13_544fc306",
+        "filename": "src/gn/rust_project_writer.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 85,
+      "author": {
+        "id": 1000288
+      },
+      "writtenOn": "2020-04-14T15:41:33Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "71f5a587_a962644c",
+      "range": {
+        "startLine": 85,
+        "startChar": 16,
+        "endLine": 85,
+        "endChar": 17
+      },
+      "revId": "31a79411eb98c35a53bf5a8d21b5332df7107409",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "4225b685_6718a5f7",
         "filename": "src/gn/rust_project_writer.cc",
         "patchSetId": 5
@@ -85,6 +151,30 @@
       "revId": "31a79411eb98c35a53bf5a8d21b5332df7107409",
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "094570e6_0dc5ad0b",
+        "filename": "src/gn/rust_project_writer.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 97,
+      "author": {
+        "id": 1000288
+      },
+      "writtenOn": "2020-04-14T15:41:33Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "4225b685_6718a5f7",
+      "range": {
+        "startLine": 97,
+        "startChar": 16,
+        "endLine": 97,
+        "endChar": 17
+      },
+      "revId": "31a79411eb98c35a53bf5a8d21b5332df7107409",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": false
     },
     {
       "key": {
@@ -139,6 +229,24 @@
     },
     {
       "key": {
+        "uuid": "c6f0e15c_bab793e0",
+        "filename": "src/gn/rust_project_writer.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 132,
+      "author": {
+        "id": 1000288
+      },
+      "writtenOn": "2020-04-14T15:41:33Z",
+      "side": 1,
+      "message": "yeah, this is pretty bad. :/",
+      "parentUuid": "28d75566_4ef1ce94",
+      "revId": "31a79411eb98c35a53bf5a8d21b5332df7107409",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "f5f8bc02_80b71f1a",
         "filename": "src/gn/rust_project_writer.cc",
         "patchSetId": 5
@@ -153,6 +261,24 @@
       "revId": "31a79411eb98c35a53bf5a8d21b5332df7107409",
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "a4e255e0_9178f2e6",
+        "filename": "src/gn/rust_project_writer.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 134,
+      "author": {
+        "id": 1000288
+      },
+      "writtenOn": "2020-04-14T15:41:33Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "f5f8bc02_80b71f1a",
+      "revId": "31a79411eb98c35a53bf5a8d21b5332df7107409",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": false
     },
     {
       "key": {
@@ -191,6 +317,24 @@
     },
     {
       "key": {
+        "uuid": "4e9716ce_b9cd705f",
+        "filename": "src/gn/rust_project_writer.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 142,
+      "author": {
+        "id": 1000288
+      },
+      "writtenOn": "2020-04-14T15:41:33Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "156a2aaf_4ae87ce0",
+      "revId": "31a79411eb98c35a53bf5a8d21b5332df7107409",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "1fa6b436_0e27314d",
         "filename": "src/gn/rust_project_writer.cc",
         "patchSetId": 5
@@ -208,6 +352,24 @@
     },
     {
       "key": {
+        "uuid": "a3f107e2_19af5310",
+        "filename": "src/gn/rust_project_writer.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 165,
+      "author": {
+        "id": 1000288
+      },
+      "writtenOn": "2020-04-14T15:41:33Z",
+      "side": 1,
+      "message": "Yeah, this is super fragile. I added a --rust-sysroot\u003d argument to GN and I\u0027m passing it in instead. I was trying to avoid extra args though, but this might be the better option",
+      "parentUuid": "1fa6b436_0e27314d",
+      "revId": "31a79411eb98c35a53bf5a8d21b5332df7107409",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "ab9c3b9d_69a6b0e5",
         "filename": "src/gn/rust_project_writer.cc",
         "patchSetId": 5
@@ -219,6 +381,30 @@
       "writtenOn": "2020-04-14T05:52:36Z",
       "side": 1,
       "message": "Should this be hardcoded? How is this going to get changed when new edition comes out?",
+      "range": {
+        "startLine": 170,
+        "startChar": 40,
+        "endLine": 170,
+        "endChar": 44
+      },
+      "revId": "31a79411eb98c35a53bf5a8d21b5332df7107409",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "10c359a5_2ac3f08b",
+        "filename": "src/gn/rust_project_writer.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 170,
+      "author": {
+        "id": 1000288
+      },
+      "writtenOn": "2020-04-14T15:41:33Z",
+      "side": 1,
+      "message": "We\u0027d need a toml parser to do anything else. It changes very infrequently, but I\u0027m open to suggestions to make this less fragile.",
+      "parentUuid": "ab9c3b9d_69a6b0e5",
       "range": {
         "startLine": 170,
         "startChar": 40,
@@ -254,6 +440,30 @@
     },
     {
       "key": {
+        "uuid": "02ad2823_5454d7fb",
+        "filename": "src/gn/rust_project_writer.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 309,
+      "author": {
+        "id": 1000288
+      },
+      "writtenOn": "2020-04-14T15:41:33Z",
+      "side": 1,
+      "message": "removed in refactor",
+      "parentUuid": "08034c80_141a127f",
+      "range": {
+        "startLine": 309,
+        "startChar": 7,
+        "endLine": 309,
+        "endChar": 41
+      },
+      "revId": "31a79411eb98c35a53bf5a8d21b5332df7107409",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "679a31a7_db2aab83",
         "filename": "src/gn/rust_project_writer.cc",
         "patchSetId": 5
@@ -274,6 +484,30 @@
       "revId": "31a79411eb98c35a53bf5a8d21b5332df7107409",
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "fdd0a9b4_ccebf60c",
+        "filename": "src/gn/rust_project_writer.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 310,
+      "author": {
+        "id": 1000288
+      },
+      "writtenOn": "2020-04-14T15:41:33Z",
+      "side": 1,
+      "message": "I\u0027ve removed the auto-detection logic and am just passing in a --rust-sysroot flag as well now.",
+      "parentUuid": "679a31a7_db2aab83",
+      "range": {
+        "startLine": 310,
+        "startChar": 25,
+        "endLine": 310,
+        "endChar": 36
+      },
+      "revId": "31a79411eb98c35a53bf5a8d21b5332df7107409",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": false
     },
     {
       "key": {
@@ -300,6 +534,30 @@
     },
     {
       "key": {
+        "uuid": "79125a91_a04f77b8",
+        "filename": "src/gn/rust_project_writer.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 328,
+      "author": {
+        "id": 1000288
+      },
+      "writtenOn": "2020-04-14T15:41:33Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ba8b7f3d_d9d27ee9",
+      "range": {
+        "startLine": 326,
+        "startChar": 4,
+        "endLine": 328,
+        "endChar": 15
+      },
+      "revId": "31a79411eb98c35a53bf5a8d21b5332df7107409",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "18eb85e0_497ceda8",
         "filename": "src/gn/rust_project_writer.h",
         "patchSetId": 5
@@ -320,6 +578,30 @@
       "revId": "31a79411eb98c35a53bf5a8d21b5332df7107409",
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "c2d19b61_3945dec6",
+        "filename": "src/gn/rust_project_writer.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 20,
+      "author": {
+        "id": 1000288
+      },
+      "writtenOn": "2020-04-14T15:41:33Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "18eb85e0_497ceda8",
+      "range": {
+        "startLine": 18,
+        "startChar": 0,
+        "endLine": 20,
+        "endChar": 61
+      },
+      "revId": "31a79411eb98c35a53bf5a8d21b5332df7107409",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": false
     }
   ]
 }
