@@ -105,6 +105,23 @@
     },
     {
       "key": {
+        "uuid": "b33068c9_35c21819",
+        "filename": "src/gn/rust_project_writer.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 110,
+      "author": {
+        "id": 1000067
+      },
+      "writtenOn": "2020-04-14T09:26:33Z",
+      "side": 1,
+      "message": "Also please avoid creating global C++ objects with non-trivial constructors (they make the code larger and slower to start).\n\nIn this specific example, using const std::string_view instead, which has a constexpr constructor should be enough.",
+      "revId": "31a79411eb98c35a53bf5a8d21b5332df7107409",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "28d75566_4ef1ce94",
         "filename": "src/gn/rust_project_writer.cc",
         "patchSetId": 5
@@ -150,6 +167,24 @@
       "writtenOn": "2020-04-14T00:40:16Z",
       "side": 1,
       "message": "pass by const ref",
+      "revId": "31a79411eb98c35a53bf5a8d21b5332df7107409",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "156a2aaf_4ae87ce0",
+        "filename": "src/gn/rust_project_writer.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 142,
+      "author": {
+        "id": 1000067
+      },
+      "writtenOn": "2020-04-14T09:26:33Z",
+      "side": 1,
+      "message": "Alternatively, use a std::string_view (by value) or a const std::string_view\u0026 (by const reference) instead of a string.",
+      "parentUuid": "50cd82cf_6e1c5430",
       "revId": "31a79411eb98c35a53bf5a8d21b5332df7107409",
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
       "unresolved": true
