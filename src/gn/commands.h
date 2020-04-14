@@ -126,9 +126,9 @@ const Target* ResolveTargetFromCommandLineString(
 // On success, returns true and populates the vectors. On failure, prints the
 // error and returns false.
 //
-// Patterns with wildcards will only match targets. The file_matches aren't
-// validated that they are real files or referenced by any targets. They're just
-// the set of things that didn't match anything else.
+// Patterns with wildcards will only match targets and configs. The file_matches
+// aren't validated that they are real files or referenced by any targets.
+// They're just the set of things that didn't match anything else.
 bool ResolveFromCommandLineInput(
     Setup* setup,
     const std::vector<std::string>& input,
