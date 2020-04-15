@@ -480,7 +480,7 @@ void PBXContainerItemProxy::Print(std::ostream& out, unsigned indent) const {
 PBXFileReference::PBXFileReference(const std::string& name,
                                    const std::string& path,
                                    const std::string& type)
-    : name_(name), path_(path), type_(type) {}
+    : name_(name == path ? std::string() : name), path_(path), type_(type) {}
 
 PBXFileReference::~PBXFileReference() = default;
 
@@ -489,7 +489,7 @@ PBXObjectClass PBXFileReference::Class() const {
 }
 
 std::string PBXFileReference::Name() const {
-  return name_;
+  return !name_.empty() ? name_ : path_;
 }
 
 void PBXFileReference::Print(std::ostream& out, unsigned indent) const {
