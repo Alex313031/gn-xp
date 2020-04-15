@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "c816e25b_e521b8f0",
+        "filename": "src/gn/xcode_object.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 483,
+      "author": {
+        "id": 1000014
+      },
+      "writtenOn": "2020-04-15T17:48:29Z",
+      "side": 1,
+      "message": "This one seems surprising to me. If I supply parameters to a constructor identical to themembers, I expect them to go through and not be silently changed. And then it\u0027s weird that this transformation has to be undone below.\n\nIf you need the \"tmpey if equal\" behavior, I\u0027d prefer to keep the current values and add a new getter that provides this logic.",
+      "revId": "ceae22e332ee47b826ce3982042386efa48a6e68",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": true
+    }
+  ]
+}
