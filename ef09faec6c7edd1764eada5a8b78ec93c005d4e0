@@ -1,0 +1,72 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "f9f8ca10_af71dfb4",
+        "filename": "src/gn/command_desc.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 15,
+      "author": {
+        "id": 1000014
+      },
+      "writtenOn": "2020-04-15T20:14:36Z",
+      "side": 1,
+      "message": "This should use quotes like the others. We use brackets only for the system includes.",
+      "revId": "ef09faec6c7edd1764eada5a8b78ec93c005d4e0",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "deea189d_ea7a455c",
+        "filename": "src/gn/commands.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 189,
+      "author": {
+        "id": 1000014
+      },
+      "writtenOn": "2020-04-15T20:14:36Z",
+      "side": 1,
+      "message": "I think we need to add \"config\" and \"target\" to this list in this patch (and in the implementation of Filter...(). Although I\u0027m not super paranoid about backwards-compatibility for this command, I do want to be sure we have an answer for anybody whose workflow it breaks (they can specify \"--type\u003dtarget\" to get the old target-only behavior).",
+      "revId": "ef09faec6c7edd1764eada5a8b78ec93c005d4e0",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "c119c286_3bb42786",
+        "filename": "src/gn/desc_builder.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 210,
+      "author": {
+        "id": 1000014
+      },
+      "writtenOn": "2020-04-15T20:14:36Z",
+      "side": 1,
+      "message": "The return should be on a separate line. I\u0027d recommend just doing clang-format as we try to make all files formatted that way.",
+      "revId": "ef09faec6c7edd1764eada5a8b78ec93c005d4e0",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "5f1c2c39_7f4d23fe",
+        "filename": "src/gn/desc_builder.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 215,
+      "author": {
+        "id": 1000014
+      },
+      "writtenOn": "2020-04-15T20:14:36Z",
+      "side": 1,
+      "message": "I suspect clang-format would do this differently as well.",
+      "revId": "ef09faec6c7edd1764eada5a8b78ec93c005d4e0",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": true
+    }
+  ]
+}
