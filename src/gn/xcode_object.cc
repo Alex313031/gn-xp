@@ -710,8 +710,6 @@ PBXProject::PBXProject(const std::string& name,
                        const std::string& source_path,
                        const PBXAttributes& attributes)
     : name_(name), config_name_(config_name), target_for_indexing_(nullptr) {
-  attributes_["BuildIndependentTargetsInParallel"] = "YES";
-
   main_group_.reset(new PBXGroup);
   main_group_->set_autosorted(false);
 
@@ -753,6 +751,8 @@ void PBXProject::AddSourceFile(const std::string& navigator_path,
 void PBXProject::AddAggregateTarget(const std::string& name,
                                     const std::string& shell_script) {
   PBXAttributes attributes;
+  attributes["CLANG_ENABLE_OBJC_WEAK"] = "YES";
+  attributes["CODE_SIGN_IDENTITY"] = "-";
   attributes["CODE_SIGNING_REQUIRED"] = "NO";
   attributes["CONFIGURATION_BUILD_DIR"] = ".";
   attributes["PRODUCT_NAME"] = name;
@@ -764,6 +764,9 @@ void PBXProject::AddAggregateTarget(const std::string& name,
 void PBXProject::AddIndexingTarget() {
   DCHECK(!target_for_indexing_);
   PBXAttributes attributes;
+  attributes["CLANG_ENABLE_OBJC_WEAK"] = "YES";
+  attributes["CODE_SIGN_IDENTITY"] = "-";
+  attributes["CODE_SIGNING_REQUIRED"] = "NO";
   attributes["EXECUTABLE_PREFIX"] = "";
   attributes["HEADER_SEARCH_PATHS"] = sources_->path();
   attributes["PRODUCT_NAME"] = "sources";
@@ -805,8 +808,9 @@ PBXNativeTarget* PBXProject::AddNativeTarget(
                                  : output_basename;
 
   PBXAttributes attributes = extra_attributes;
+  attributes["CLANG_ENABLE_OBJC_WEAK"] = "YES";
+  attributes["CODE_SIGN_IDENTITY"] = "-";
   attributes["CODE_SIGNING_REQUIRED"] = "NO";
-
   attributes["CONFIGURATION_BUILD_DIR"] = output_dir;
   attributes["PRODUCT_NAME"] = product_name;
 
@@ -870,7 +874,8 @@ void PBXProject::Print(std::ostream& out, unsigned indent) const {
   PrintProperty(out, rules, "compatibilityVersion", "Xcode 3.2");
   PrintProperty(out, rules, "developmentRegion", "English");
   PrintProperty(out, rules, "hasScannedForEncodings", 1u);
-  PrintProperty(out, rules, "knownRegions", std::vector<std::string>({"en"}));
+  PrintProperty(out, rules, "knownRegions",
+                std::vector<std::string>({"English", "en"}));
   PrintProperty(out, rules, "mainGroup", main_group_);
   PrintProperty(out, rules, "projectDirPath", project_dir_path_);
   PrintProperty(out, rules, "projectRoot", project_root_);
