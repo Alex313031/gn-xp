@@ -49,6 +49,30 @@
     },
     {
       "key": {
+        "uuid": "edf2d193_8d06187d",
+        "filename": "src/gn/command_gen.cc",
+        "patchSetId": 8
+      },
+      "lineNbr": 471,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-04-16T23:10:06Z",
+      "side": 1,
+      "message": "I like this, thanks for looking into it!",
+      "parentUuid": "1da187a9_3474baea",
+      "range": {
+        "startLine": 467,
+        "startChar": 0,
+        "endLine": 471,
+        "endChar": 29
+      },
+      "revId": "a12d0c0a29e73bf5a518e4863216fdac32dc1956",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "646cd975_62ac30ff",
         "filename": "src/gn/rust_project_writer.cc",
         "patchSetId": 8
