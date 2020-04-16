@@ -1,0 +1,73 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ed9ca749_82b7c5d2",
+        "filename": "src/gn/command_gen.cc",
+        "patchSetId": 8
+      },
+      "lineNbr": 471,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-04-16T05:45:53Z",
+      "side": 1,
+      "message": "This has issues as well. You might have multiple different Rust toolchains, but this only supports one, so for targets using other toolchains this is going to  produce incorrect data. Furthermore, in Fuchsia we also allow overriding the toolchain for testing (see https://fuchsia.googlesource.com/fuchsia/+/refs/heads/master/build/rust/config.gni#22), whenever you use that argument, you have to also change --rust-sysroot accordingly which is error prone.",
+      "range": {
+        "startLine": 467,
+        "startChar": 0,
+        "endLine": 471,
+        "endChar": 29
+      },
+      "revId": "a12d0c0a29e73bf5a518e4863216fdac32dc1956",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "646cd975_62ac30ff",
+        "filename": "src/gn/rust_project_writer.cc",
+        "patchSetId": 8
+      },
+      "lineNbr": 91,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-04-16T05:45:53Z",
+      "side": 1,
+      "message": "This just a formatting nit, but would it be possible to format these so that the NEWLINE is always at the end of the line? That way, it should be also easier to see roughly what fragments you\u0027re generating.\n\nThe same for all the other string fragments below.",
+      "range": {
+        "startLine": 88,
+        "startChar": 0,
+        "endLine": 91,
+        "endChar": 32
+      },
+      "revId": "a12d0c0a29e73bf5a518e4863216fdac32dc1956",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "ccbf477b_0d6e15dd",
+        "filename": "src/gn/rust_project_writer.cc",
+        "patchSetId": 8
+      },
+      "lineNbr": 138,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-04-16T05:45:53Z",
+      "side": 1,
+      "message": "This is potentially fragile, if these change, we need to update GN as well. This is not something we have to solve now, but might be worth leaving a TODO.",
+      "range": {
+        "startLine": 108,
+        "startChar": 0,
+        "endLine": 138,
+        "endChar": 2
+      },
+      "revId": "a12d0c0a29e73bf5a518e4863216fdac32dc1956",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": true
+    }
+  ]
+}
