@@ -212,6 +212,42 @@
     },
     {
       "key": {
+        "uuid": "ba44788a_0d18181e",
+        "filename": "src/gn/rust_project_writer.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 110,
+      "author": {
+        "id": 1000288
+      },
+      "writtenOn": "2020-04-16T12:37:22Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "b33068c9_35c21819",
+      "revId": "31a79411eb98c35a53bf5a8d21b5332df7107409",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "d16a8f20_001f84ba",
+        "filename": "src/gn/rust_project_writer.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 110,
+      "author": {
+        "id": 1000288
+      },
+      "writtenOn": "2020-04-16T12:37:22Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "c566e2e6_10994675",
+      "revId": "31a79411eb98c35a53bf5a8d21b5332df7107409",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "28d75566_4ef1ce94",
         "filename": "src/gn/rust_project_writer.cc",
         "patchSetId": 5
@@ -432,6 +468,30 @@
       "revId": "31a79411eb98c35a53bf5a8d21b5332df7107409",
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "a54855ec_904c1f9e",
+        "filename": "src/gn/rust_project_writer.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 170,
+      "author": {
+        "id": 1000288
+      },
+      "writtenOn": "2020-04-16T12:37:22Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "10c359a5_2ac3f08b",
+      "range": {
+        "startLine": 170,
+        "startChar": 40,
+        "endLine": 170,
+        "endChar": 44
+      },
+      "revId": "31a79411eb98c35a53bf5a8d21b5332df7107409",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": false
     },
     {
       "key": {

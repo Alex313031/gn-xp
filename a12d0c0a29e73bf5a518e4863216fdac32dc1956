@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "1da187a9_3474baea",
+        "filename": "src/gn/command_gen.cc",
+        "patchSetId": 8
+      },
+      "lineNbr": 471,
+      "author": {
+        "id": 1000288
+      },
+      "writtenOn": "2020-04-16T12:37:22Z",
+      "side": 1,
+      "message": "I\u0027ve added an argument to the rust tools in GN to specify them on a per-tool basis now",
+      "parentUuid": "ed9ca749_82b7c5d2",
+      "range": {
+        "startLine": 467,
+        "startChar": 0,
+        "endLine": 471,
+        "endChar": 29
+      },
+      "revId": "a12d0c0a29e73bf5a518e4863216fdac32dc1956",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "646cd975_62ac30ff",
         "filename": "src/gn/rust_project_writer.cc",
         "patchSetId": 8
@@ -48,6 +72,30 @@
     },
     {
       "key": {
+        "uuid": "a785b6b3_3558d065",
+        "filename": "src/gn/rust_project_writer.cc",
+        "patchSetId": 8
+      },
+      "lineNbr": 91,
+      "author": {
+        "id": 1000288
+      },
+      "writtenOn": "2020-04-16T12:37:22Z",
+      "side": 1,
+      "message": "Should be much more readable now!",
+      "parentUuid": "646cd975_62ac30ff",
+      "range": {
+        "startLine": 88,
+        "startChar": 0,
+        "endLine": 91,
+        "endChar": 32
+      },
+      "revId": "a12d0c0a29e73bf5a518e4863216fdac32dc1956",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "ccbf477b_0d6e15dd",
         "filename": "src/gn/rust_project_writer.cc",
         "patchSetId": 8
@@ -68,6 +116,30 @@
       "revId": "a12d0c0a29e73bf5a518e4863216fdac32dc1956",
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "fdebded1_6c76d017",
+        "filename": "src/gn/rust_project_writer.cc",
+        "patchSetId": 8
+      },
+      "lineNbr": 138,
+      "author": {
+        "id": 1000288
+      },
+      "writtenOn": "2020-04-16T12:37:22Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ccbf477b_0d6e15dd",
+      "range": {
+        "startLine": 108,
+        "startChar": 0,
+        "endLine": 138,
+        "endChar": 2
+      },
+      "revId": "a12d0c0a29e73bf5a518e4863216fdac32dc1956",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": false
     }
   ]
 }
