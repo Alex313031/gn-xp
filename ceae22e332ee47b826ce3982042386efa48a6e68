@@ -16,6 +16,24 @@
       "revId": "ceae22e332ee47b826ce3982042386efa48a6e68",
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "a53e6c35_cd9b4318",
+        "filename": "src/gn/xcode_object.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 483,
+      "author": {
+        "id": 1000070
+      },
+      "writtenOn": "2020-04-16T09:36:33Z",
+      "side": 1,
+      "message": "Since the logic is only relevant in Print, I\u0027ve moved the check there. Also I\u0027ve overloaded the Comment to take care of name or path return value since this is where the logic should have been.",
+      "parentUuid": "c816e25b_e521b8f0",
+      "revId": "ceae22e332ee47b826ce3982042386efa48a6e68",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": false
     }
   ]
 }
