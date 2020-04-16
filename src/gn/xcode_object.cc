@@ -374,7 +374,8 @@ PBXTarget::PBXTarget(const std::string& name,
                      const std::string& shell_script,
                      const std::string& config_name,
                      const PBXAttributes& attributes)
-    : configurations_(new XCConfigurationList(config_name, attributes, this)),
+    : configurations_(
+          std::make_unique<XCConfigurationList>(config_name, attributes, this)),
       name_(name) {
   if (!shell_script.empty()) {
     build_phases_.push_back(
@@ -736,7 +737,7 @@ PBXProject::PBXProject(const std::string& name,
     : name_(name), config_name_(config_name), target_for_indexing_(nullptr) {
   attributes_["BuildIndependentTargetsInParallel"] = "YES";
 
-  main_group_.reset(new PBXGroup);
+  main_group_ = std::make_unique<PBXGroup>();
   main_group_->set_autosorted(false);
 
   sources_ = main_group_->CreateChild<PBXGroup>(source_path, "Source");
@@ -744,7 +745,8 @@ PBXProject::PBXProject(const std::string& name,
 
   products_ = main_group_->CreateChild<PBXGroup>(std::string(), "Products");
 
-  configurations_.reset(new XCConfigurationList(config_name, attributes, this));
+  configurations_ =
+      std::make_unique<XCConfigurationList>(config_name, attributes, this);
 }
 
 PBXProject::~PBXProject() = default;
