@@ -10,18 +10,28 @@
 
 class DescBuilder {
  public:
+  enum Flag {
+    NONE = 0,
+    ALL = 1u << 0u,
+    TREE = 1u << 1u,
+    BLAME = 1u << 2u,
+    UNRESOLVED = 1u << 3u
+  };
+  using Flags = unsigned;
+
+  using DictionaryPtr = std::unique_ptr<base::DictionaryValue>;
+
   // Creates Dictionary representation for given target
-  static std::unique_ptr<base::DictionaryValue> DescriptionForTarget(
+  static DictionaryPtr DescriptionForTarget(
       const Target* target,
       const std::string& what,
-      bool all,
-      bool tree,
-      bool blame);
+      Flags flags = NONE);
 
   // Creates Dictionary representation for given config
-  static std::unique_ptr<base::DictionaryValue> DescriptionForConfig(
+  static DictionaryPtr DescriptionForConfig(
       const Config* config,
-      const std::string& what);
+      const std::string& what,
+      Flags flags = NONE);
 };
 
 #endif

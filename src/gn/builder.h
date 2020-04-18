@@ -36,6 +36,12 @@ class Builder {
     resolved_and_generated_callback_ = cb;
   }
 
+  // Controls whether dependant items propagate their properties during
+  // resolution. Records will still be marked as resolved.
+  void set_should_resolve(bool should_resolve) {
+    should_resolve_ = should_resolve;
+  }
+
   Loader* loader() const { return loader_; }
 
   void ItemDefined(std::unique_ptr<Item> item);
@@ -139,6 +145,8 @@ class Builder {
   std::map<Label, std::unique_ptr<BuilderRecord>> records_;
 
   ResolvedGeneratedCallback resolved_and_generated_callback_;
+
+  bool should_resolve_ = true;
 
   DISALLOW_COPY_AND_ASSIGN(Builder);
 };

@@ -30,16 +30,22 @@ struct EscapeOptions;
 //     DoSomething(iter.cur());
 class ConfigValuesIterator {
  public:
-  explicit ConfigValuesIterator(const Target* target) : target_(target) {}
+  explicit ConfigValuesIterator(const Target* target, bool unresolved=false)
+  : target_(target), unresolved_(unresolved) {}
 
   bool done() const {
+    if (unresolved_) {
+      return cur_index_ != -1;
+    }
     return cur_index_ >= static_cast<int>(target_->configs().size());
   }
 
   const ConfigValues& cur() const {
     if (cur_index_ == -1)
       return target_->config_values();
-    return target_->configs()[cur_index_].ptr->resolved_values();
+    return unresolved_
+      ? target_->configs()[cur_index_].ptr->own_values()
+      : target_->configs()[cur_index_].ptr->resolved_values();
   }
 
   // Returns the origin of who added this config, if any. This will always be
@@ -66,6 +72,7 @@ class ConfigValuesIterator {
   // Represents an index into the target_'s configs() or, when -1, the config
   // values on the target itself.
   int cur_index_ = -1;
+  bool unresolved_;
 };
 
 template <typename T, class Writer>
