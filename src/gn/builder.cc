@@ -140,10 +140,14 @@ std::vector<const BuilderRecord*> Builder::GetAllRecords() const {
 std::vector<const Item*> Builder::GetAllResolvedItems() const {
   std::vector<const Item*> result;
   result.reserve(records_.size());
-  for (const auto& record : records_) {
-    if (record.second->type() != BuilderRecord::ITEM_UNKNOWN &&
-        record.second->should_generate() && record.second->item()) {
-      result.push_back(record.second->item());
+  for (const auto& [label, record] : records_) {
+    // Ignore should_generate() for configs as RecursiveSetShouldGenerate
+    // doesn't get called for config dependencies
+    if (record->type() != BuilderRecord::ITEM_UNKNOWN &&
+        (record->should_generate() ||
+         record->type() == BuilderRecord::ITEM_CONFIG) &&
+        record->item()) {
+      result.push_back(record->item());
     }
   }
 

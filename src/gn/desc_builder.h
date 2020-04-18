@@ -21,7 +21,9 @@ class DescBuilder {
   // Creates Dictionary representation for given config
   static std::unique_ptr<base::DictionaryValue> DescriptionForConfig(
       const Config* config,
-      const std::string& what);
+      const std::string& what,
+      bool all,
+      bool tree);
 };
 
 #endif
