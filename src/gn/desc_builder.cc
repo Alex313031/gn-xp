@@ -111,16 +111,20 @@ void RecursiveCollectChildDeps(const Target* target,
     RecursiveCollectDeps(pair.ptr, result);
 }
 
+using Flags = DescBuilder::Flags;
+using DictionaryPtr = DescBuilder::DictionaryPtr;
+
 // Common functionality for target and config description builder
 class BaseDescBuilder {
  public:
   using ValuePtr = std::unique_ptr<base::Value>;
 
-  BaseDescBuilder(const std::set<std::string>& what,
-                  bool all,
-                  bool tree,
-                  bool blame)
-      : what_(what), all_(all), tree_(tree), blame_(blame) {}
+  BaseDescBuilder(const std::set<std::string>& what, Flags flags)
+      : what_(what),
+        all_(flags & DescBuilder::ALL),
+        tree_(flags & DescBuilder::TREE),
+        blame_(flags & DescBuilder::BLAME),
+        unresolved_(flags & DescBuilder::UNRESOLVED) {}
 
  protected:
   virtual Label GetToolchainLabel() const = 0;
@@ -197,16 +201,49 @@ class BaseDescBuilder {
     return base::Value();
   }
 
+  void PrintConfig(base::ListValue* out, const Config* config, int indent = 0) {
+    std::string name(indent * 2, ' ');
+    name.append(config->label().GetUserVisibleName(GetToolchainLabel()));
+    out->AppendString(name);
+  }
+
+  void RecursivePrintConfigs(base::ListValue* out,
+                             const Config* config,
+                             std::set<const Config*>* seen,
+                             std::optional<int> indent = std::nullopt) {
+    if (seen && !seen->insert(config).second) {
+      return;
+    }
+
+    PrintConfig(out, config, indent.value_or(0));
+    for (auto& child : config->configs()) {
+      RecursivePrintConfigs(out, child.ptr, seen,
+                            (indent ? *indent + 1 : indent));
+    }
+  }
+
   template <class VectorType>
-  void FillInConfigVector(base::ListValue* out,
-                          const VectorType& configs,
-                          int indent = 0) {
-    for (const auto& config : configs) {
-      std::string name(indent * 2, ' ');
-      name.append(config.label.GetUserVisibleName(GetToolchainLabel()));
-      out->AppendString(name);
-      if (tree_)
-        FillInConfigVector(out, config.ptr->configs(), indent + 1);
+  void FillInConfigVector(base::ListValue* out, const VectorType& configs) {
+    if (tree_) {
+      if (all_) {
+        for (auto& config : configs) {
+          RecursivePrintConfigs(out, config.ptr, nullptr, 0);
+        }
+      } else {
+        std::set<const Config*> seen;
+        for (auto& config : configs) {
+          RecursivePrintConfigs(out, config.ptr, &seen, 0);
+        }
+      }
+    } else if (all_) {
+      std::set<const Config*> seen;
+      for (auto& config : configs) {
+        RecursivePrintConfigs(out, config.ptr, &seen);
+      }
+    } else {
+      for (auto& config : configs) {
+        PrintConfig(out, config.ptr);
+      }
     }
   }
 
@@ -229,22 +266,28 @@ class BaseDescBuilder {
   bool all_;
   bool tree_;
   bool blame_;
+  bool unresolved_;
 };
 
 class ConfigDescBuilder : public BaseDescBuilder {
  public:
-  ConfigDescBuilder(const Config* config, const std::set<std::string>& what)
-      : BaseDescBuilder(what, false, false, false), config_(config) {}
+  ConfigDescBuilder(const Config* config,
+                    const std::set<std::string>& what,
+                    Flags flags)
+      : BaseDescBuilder(what, flags), config_(config) {}
 
-  std::unique_ptr<base::DictionaryValue> BuildDescription() {
+  DictionaryPtr BuildDescription() {
     auto res = std::make_unique<base::DictionaryValue>();
-    const ConfigValues& values = config_->resolved_values();
+    const ConfigValues& values =
+        unresolved_ ? config_->own_values() : config_->resolved_values();
 
-    if (what_.empty())
+    if (what_.empty()) {
+      res->SetKey("type", base::Value("config"));
       res->SetKey(
           "toolchain",
           base::Value(
               config_->label().GetToolchainLabel().GetUserVisibleName(false)));
+    }
 
     if (what(variables::kConfigs) && !config_->configs().empty()) {
       auto configs = std::make_unique<base::ListValue>();
@@ -273,6 +316,8 @@ class ConfigDescBuilder : public BaseDescBuilder {
     CONFIG_VALUE_ARRAY_HANDLER(ldflags, std::string)
     CONFIG_VALUE_ARRAY_HANDLER(lib_dirs, SourceDir)
     CONFIG_VALUE_ARRAY_HANDLER(libs, LibFile)
+    CONFIG_VALUE_ARRAY_HANDLER(frameworks, std::string)
+    CONFIG_VALUE_ARRAY_HANDLER(framework_dirs, SourceDir)
 
 #undef CONFIG_VALUE_ARRAY_HANDLER
 
@@ -306,12 +351,10 @@ class TargetDescBuilder : public BaseDescBuilder {
  public:
   TargetDescBuilder(const Target* target,
                     const std::set<std::string>& what,
-                    bool all,
-                    bool tree,
-                    bool blame)
-      : BaseDescBuilder(what, all, tree, blame), target_(target) {}
+                    Flags flags)
+      : BaseDescBuilder(what, flags), target_(target) {}
 
-  std::unique_ptr<base::DictionaryValue> BuildDescription() {
+  DictionaryPtr BuildDescription() {
     auto res = std::make_unique<base::DictionaryValue>();
     bool is_binary_output = target_->IsBinary();
 
@@ -388,7 +431,8 @@ class TargetDescBuilder : public BaseDescBuilder {
 
     if (what(variables::kInputs)) {
       std::vector<const SourceFile*> inputs;
-      for (ConfigValuesIterator iter(target_); !iter.done(); iter.Next()) {
+      for (ConfigValuesIterator iter(target_, unresolved_); !iter.done();
+           iter.Next()) {
         for (const auto& input : iter.cur().inputs())
           inputs.push_back(&input);
       }
@@ -483,13 +527,20 @@ class TargetDescBuilder : public BaseDescBuilder {
       CONFIG_VALUE_ARRAY_HANDLER(include_dirs, SourceDir)
       CONFIG_VALUE_ARRAY_HANDLER(inputs, SourceFile)
       CONFIG_VALUE_ARRAY_HANDLER(ldflags, std::string)
+      if (unresolved_) {
+        CONFIG_VALUE_ARRAY_HANDLER(lib_dirs, SourceDir)
+        CONFIG_VALUE_ARRAY_HANDLER(libs, LibFile)
+        CONFIG_VALUE_ARRAY_HANDLER(frameworks, std::string)
+        CONFIG_VALUE_ARRAY_HANDLER(framework_dirs, SourceDir)
+      }
 #undef CONFIG_VALUE_ARRAY_HANDLER
 
       // Libs and lib_dirs are handled specially below.
 
       if (what(variables::kExterns)) {
         base::DictionaryValue externs;
-        for (ConfigValuesIterator iter(target_); !iter.done(); iter.Next()) {
+        for (ConfigValuesIterator iter(target_, unresolved_); !iter.done();
+             iter.Next()) {
           const ConfigValues& cur = iter.cur();
           for (const auto& e : cur.externs()) {
             externs.SetKey(e.first, base::Value(e.second.value()));
@@ -525,59 +576,70 @@ class TargetDescBuilder : public BaseDescBuilder {
       }
     }
 
-    if (what(variables::kDeps))
-      res->SetWithoutPathExpansion(variables::kDeps, RenderDeps());
+    if (what(variables::kDeps)) {
+      if (unresolved_) {
+        RenderUnresolvedDeps(res, variables::kPublicDeps,
+                             target_->public_deps());
+        RenderUnresolvedDeps(res, variables::kDeps, target_->private_deps());
+        RenderUnresolvedDeps(res, variables::kDataDeps, target_->data_deps());
+      } else {
+        res->SetWithoutPathExpansion(variables::kDeps, RenderDeps());
+      }
+    }
 
     // Runtime deps are special, print only when explicitly asked for and not in
     // overview mode.
     if (what_.find("runtime_deps") != what_.end())
       res->SetWithoutPathExpansion("runtime_deps", RenderRuntimeDeps());
 
-    // libs and lib_dirs are special in that they're inherited. We don't
-    // currently implement a blame feature for this since the bottom-up
-    // inheritance makes this difficult.
+    if (!unresolved_) {
+      // libs and lib_dirs are special in that they're inherited. We don't
+      // currently implement a blame feature for this since the bottom-up
+      // inheritance makes this difficult.
 
-    // Libs can be part of any target and get recursively pushed up the chain,
-    // so display them regardless of target type.
-    if (what(variables::kLibs)) {
-      const OrderedSet<LibFile>& all_libs = target_->all_libs();
-      if (!all_libs.empty()) {
-        auto libs = std::make_unique<base::ListValue>();
-        for (size_t i = 0; i < all_libs.size(); i++)
-          libs->AppendString(all_libs[i].value());
-        res->SetWithoutPathExpansion(variables::kLibs, std::move(libs));
+      // Libs can be part of any target and get recursively pushed up the chain,
+      // so display them regardless of target type.
+      if (what(variables::kLibs)) {
+        const OrderedSet<LibFile>& all_libs = target_->all_libs();
+        if (!all_libs.empty()) {
+          auto libs = std::make_unique<base::ListValue>();
+          for (size_t i = 0; i < all_libs.size(); i++)
+            libs->AppendString(all_libs[i].value());
+          res->SetWithoutPathExpansion(variables::kLibs, std::move(libs));
+        }
       }
-    }
 
-    if (what(variables::kLibDirs)) {
-      const OrderedSet<SourceDir>& all_lib_dirs = target_->all_lib_dirs();
-      if (!all_lib_dirs.empty()) {
-        auto lib_dirs = std::make_unique<base::ListValue>();
-        for (size_t i = 0; i < all_lib_dirs.size(); i++)
-          lib_dirs->AppendString(FormatSourceDir(all_lib_dirs[i]));
-        res->SetWithoutPathExpansion(variables::kLibDirs, std::move(lib_dirs));
+      if (what(variables::kLibDirs)) {
+        const OrderedSet<SourceDir>& all_lib_dirs = target_->all_lib_dirs();
+        if (!all_lib_dirs.empty()) {
+          auto lib_dirs = std::make_unique<base::ListValue>();
+          for (size_t i = 0; i < all_lib_dirs.size(); i++)
+            lib_dirs->AppendString(FormatSourceDir(all_lib_dirs[i]));
+          res->SetWithoutPathExpansion(variables::kLibDirs,
+                                       std::move(lib_dirs));
+        }
       }
-    }
 
-    if (what(variables::kFrameworks)) {
-      const auto& all_frameworks = target_->all_frameworks();
-      if (!all_frameworks.empty()) {
-        auto frameworks = std::make_unique<base::ListValue>();
-        for (size_t i = 0; i < all_frameworks.size(); i++)
-          frameworks->AppendString(all_frameworks[i]);
-        res->SetWithoutPathExpansion(variables::kFrameworks,
-                                     std::move(frameworks));
+      if (what(variables::kFrameworks)) {
+        const auto& all_frameworks = target_->all_frameworks();
+        if (!all_frameworks.empty()) {
+          auto frameworks = std::make_unique<base::ListValue>();
+          for (size_t i = 0; i < all_frameworks.size(); i++)
+            frameworks->AppendString(all_frameworks[i]);
+          res->SetWithoutPathExpansion(variables::kFrameworks,
+                                       std::move(frameworks));
+        }
       }
-    }
 
-    if (what(variables::kFrameworkDirs)) {
-      const auto& all_framework_dirs = target_->all_framework_dirs();
-      if (!all_framework_dirs.empty()) {
-        auto framework_dirs = std::make_unique<base::ListValue>();
-        for (size_t i = 0; i < all_framework_dirs.size(); i++)
-          framework_dirs->AppendString(all_framework_dirs[i].value());
-        res->SetWithoutPathExpansion(variables::kFrameworkDirs,
-                                     std::move(framework_dirs));
+      if (what(variables::kFrameworkDirs)) {
+        const auto& all_framework_dirs = target_->all_framework_dirs();
+        if (!all_framework_dirs.empty()) {
+          auto framework_dirs = std::make_unique<base::ListValue>();
+          for (size_t i = 0; i < all_framework_dirs.size(); i++)
+            framework_dirs->AppendString(all_framework_dirs[i].value());
+          res->SetWithoutPathExpansion(variables::kFrameworkDirs,
+                                       std::move(framework_dirs));
+        }
       }
     }
 
@@ -627,6 +689,22 @@ class TargetDescBuilder : public BaseDescBuilder {
       if (print_children)
         RecursivePrintDeps(out, cur_dep, seen_targets, indent_level + 1);
     }
+  }
+
+  void RenderUnresolvedDeps(DictionaryPtr& dictionary,
+                            std::string_view key,
+                            const LabelTargetVector& targets) {
+    if (targets.empty()) {
+      return;
+    }
+    auto res = std::make_unique<base::ListValue>();
+    std::vector<const Target*> deps;
+    deps.reserve(targets.size());
+    for (auto& pair : targets) {
+      deps.push_back(pair.ptr);
+    }
+    commands::FilterAndPrintTargets(&deps, res.get());
+    dictionary->SetWithoutPathExpansion(key, std::move(res));
   }
 
   ValuePtr RenderDeps() {
@@ -779,7 +857,8 @@ class TargetDescBuilder : public BaseDescBuilder {
   ValuePtr RenderConfigValues(const std::vector<T>& (ConfigValues::*getter)()
                                   const) {
     auto res = std::make_unique<base::ListValue>();
-    for (ConfigValuesIterator iter(target_); !iter.done(); iter.Next()) {
+    for (ConfigValuesIterator iter(target_, unresolved_); !iter.done();
+         iter.Next()) {
       const std::vector<T>& vec = (iter.cur().*getter)();
 
       if (vec.empty())
@@ -829,25 +908,22 @@ class TargetDescBuilder : public BaseDescBuilder {
 
 }  // namespace
 
-std::unique_ptr<base::DictionaryValue> DescBuilder::DescriptionForTarget(
-    const Target* target,
-    const std::string& what,
-    bool all,
-    bool tree,
-    bool blame) {
+DictionaryPtr DescBuilder::DescriptionForTarget(const Target* target,
+                                                const std::string& what,
+                                                Flags flags) {
   std::set<std::string> w;
   if (!what.empty())
     w.insert(what);
-  TargetDescBuilder b(target, w, all, tree, blame);
+  TargetDescBuilder b(target, w, flags);
   return b.BuildDescription();
 }
 
-std::unique_ptr<base::DictionaryValue> DescBuilder::DescriptionForConfig(
-    const Config* config,
-    const std::string& what) {
+DictionaryPtr DescBuilder::DescriptionForConfig(const Config* config,
+                                                const std::string& what,
+                                                Flags flags) {
   std::set<std::string> w;
   if (!what.empty())
     w.insert(what);
-  ConfigDescBuilder b(config, w);
+  ConfigDescBuilder b(config, w, flags);
   return b.BuildDescription();
 }

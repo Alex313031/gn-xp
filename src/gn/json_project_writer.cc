@@ -186,11 +186,9 @@ std::string JSONProjectWriter::RenderJSON(
   for (const auto* target : all_targets) {
     if (default_toolchain_label.is_null())
       default_toolchain_label = target->settings()->default_toolchain_label();
-    auto description =
-        DescBuilder::DescriptionForTarget(target, "", false, false, false);
+    auto description = DescBuilder::DescriptionForTarget(target, "");
     // Outputs need to be asked for separately.
-    auto outputs = DescBuilder::DescriptionForTarget(target, "source_outputs",
-                                                     false, false, false);
+    auto outputs = DescBuilder::DescriptionForTarget(target, "source_outputs");
     base::DictionaryValue* outputs_value = nullptr;
     if (outputs->GetDictionary("source_outputs", &outputs_value) &&
         !outputs_value->empty()) {
@@ -221,7 +219,7 @@ std::string JSONProjectWriter::RenderJSON(
   fileset.insert(other_files.begin(), other_files.end());
 
   base::ListValue inputs;
-  const auto &build_path = build_settings->root_path();
+  const auto& build_path = build_settings->root_path();
   for (const auto& other_file : fileset) {
     std::string file;
     if (MakeAbsolutePathRelativeIfPossible(FilePathToUTF8(build_path),
