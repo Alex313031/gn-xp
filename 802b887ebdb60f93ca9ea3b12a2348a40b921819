@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "2e8d1678_d0738bae",
+        "filename": "src/gn/rust_project_writer.cc",
+        "patchSetId": 10
+      },
+      "lineNbr": 19,
+      "author": {
+        "id": 1000288
+      },
+      "writtenOn": "2020-04-20T16:54:53Z",
+      "side": 1,
+      "message": "This is what the json generator code does. I assume anything that consumes this on windows would also like to have \\r, it\u0027s not a restricted # of tools that consumes this.",
+      "parentUuid": "6e4c4198_34540a85",
+      "revId": "802b887ebdb60f93ca9ea3b12a2348a40b921819",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "46cefdfc_f7aee91a",
         "filename": "src/gn/rust_project_writer.cc",
         "patchSetId": 10
@@ -33,6 +51,24 @@
       "revId": "802b887ebdb60f93ca9ea3b12a2348a40b921819",
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "931020bd_78694739",
+        "filename": "src/gn/rust_project_writer.cc",
+        "patchSetId": 10
+      },
+      "lineNbr": 85,
+      "author": {
+        "id": 1000288
+      },
+      "writtenOn": "2020-04-20T16:54:53Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "46cefdfc_f7aee91a",
+      "revId": "802b887ebdb60f93ca9ea3b12a2348a40b921819",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": false
     },
     {
       "key": {
@@ -53,6 +89,24 @@
     },
     {
       "key": {
+        "uuid": "92d82843_aa27dc1b",
+        "filename": "src/gn/rust_project_writer.cc",
+        "patchSetId": 10
+      },
+      "lineNbr": 111,
+      "author": {
+        "id": 1000288
+      },
+      "writtenOn": "2020-04-20T16:54:53Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "e8701ec5_f84535ae",
+      "revId": "802b887ebdb60f93ca9ea3b12a2348a40b921819",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "bba12456_d42e142d",
         "filename": "src/gn/rust_project_writer.h",
         "patchSetId": 10
@@ -67,6 +121,24 @@
       "revId": "802b887ebdb60f93ca9ea3b12a2348a40b921819",
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "1ad7b61c_c0c22eeb",
+        "filename": "src/gn/rust_project_writer.h",
+        "patchSetId": 10
+      },
+      "lineNbr": 14,
+      "author": {
+        "id": 1000288
+      },
+      "writtenOn": "2020-04-20T16:54:53Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "bba12456_d42e142d",
+      "revId": "802b887ebdb60f93ca9ea3b12a2348a40b921819",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": false
     },
     {
       "key": {
@@ -90,6 +162,30 @@
       "revId": "802b887ebdb60f93ca9ea3b12a2348a40b921819",
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "c715129a_092ac414",
+        "filename": "src/gn/rust_project_writer_unittest.cc",
+        "patchSetId": 10
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 1000288
+      },
+      "writtenOn": "2020-04-20T16:54:53Z",
+      "side": 1,
+      "message": "weird. not sure where I copied that from.",
+      "parentUuid": "4594ea54_eb8cbc72",
+      "range": {
+        "startLine": 1,
+        "startChar": 13,
+        "endLine": 1,
+        "endChar": 16
+      },
+      "revId": "802b887ebdb60f93ca9ea3b12a2348a40b921819",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": false
     }
   ]
 }
