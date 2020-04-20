@@ -2,6 +2,57 @@
   "comments": [
     {
       "key": {
+        "uuid": "6e4c4198_34540a85",
+        "filename": "src/gn/rust_project_writer.cc",
+        "patchSetId": 10
+      },
+      "lineNbr": 19,
+      "author": {
+        "id": 1000004
+      },
+      "writtenOn": "2020-04-20T16:12:13Z",
+      "side": 1,
+      "message": "Is this actually required by whatever consumes the json? We don\u0027t generally encourage/tolerate \\rs anywhere.",
+      "revId": "802b887ebdb60f93ca9ea3b12a2348a40b921819",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "46cefdfc_f7aee91a",
+        "filename": "src/gn/rust_project_writer.cc",
+        "patchSetId": 10
+      },
+      "lineNbr": 85,
+      "author": {
+        "id": 1000004
+      },
+      "writtenOn": "2020-04-20T16:12:13Z",
+      "side": 1,
+      "message": "Comments start with capitals and end with . (various places below as well)",
+      "revId": "802b887ebdb60f93ca9ea3b12a2348a40b921819",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "e8701ec5_f84535ae",
+        "filename": "src/gn/rust_project_writer.cc",
+        "patchSetId": 10
+      },
+      "lineNbr": 111,
+      "author": {
+        "id": 1000004
+      },
+      "writtenOn": "2020-04-20T16:12:13Z",
+      "side": 1,
+      "message": "clang-format (80 col)",
+      "revId": "802b887ebdb60f93ca9ea3b12a2348a40b921819",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "bba12456_d42e142d",
         "filename": "src/gn/rust_project_writer.h",
         "patchSetId": 10
@@ -13,6 +64,29 @@
       "writtenOn": "2020-04-20T16:10:47Z",
       "side": 1,
       "message": "Can you add a description here of what a \"Rust project\" is? This isn\u0027t a standard thing so I think we need to be very clear. You can reference the comment in the .cc file where you have the exact format, this comment should answer the \"what is this for?\" quesion.",
+      "revId": "802b887ebdb60f93ca9ea3b12a2348a40b921819",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "4594ea54_eb8cbc72",
+        "filename": "src/gn/rust_project_writer_unittest.cc",
+        "patchSetId": 10
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 1000004
+      },
+      "writtenOn": "2020-04-20T16:12:13Z",
+      "side": 1,
+      "message": "nit; no (c) for consistency with other files.",
+      "range": {
+        "startLine": 1,
+        "startChar": 13,
+        "endLine": 1,
+        "endChar": 16
+      },
       "revId": "802b887ebdb60f93ca9ea3b12a2348a40b921819",
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
       "unresolved": true
