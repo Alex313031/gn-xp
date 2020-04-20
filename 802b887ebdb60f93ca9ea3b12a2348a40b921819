@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "bba12456_d42e142d",
+        "filename": "src/gn/rust_project_writer.h",
+        "patchSetId": 10
+      },
+      "lineNbr": 14,
+      "author": {
+        "id": 1000014
+      },
+      "writtenOn": "2020-04-20T16:10:47Z",
+      "side": 1,
+      "message": "Can you add a description here of what a \"Rust project\" is? This isn\u0027t a standard thing so I think we need to be very clear. You can reference the comment in the .cc file where you have the exact format, this comment should answer the \"what is this for?\" quesion.",
+      "revId": "802b887ebdb60f93ca9ea3b12a2348a40b921819",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": true
+    }
+  ]
+}
