@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "ac574a39_b8ef2924",
+        "filename": "src/gn/file_writer.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 68,
+      "author": {
+        "id": 1000067
+      },
+      "writtenOn": "2020-04-24T14:21:00Z",
+      "side": 1,
+      "message": "I should clarify this comment: it\u0027s here to explain why file_.Take() followed by ::CloseHandle() is used here, because file_.Close() is equivalent except that it cannot return an error condition.",
+      "parentUuid": "cc4757d4_f89de697",
+      "revId": "f5a7f6f9acd3e63ce1d60d9cffdf0806d099c30a",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "771b41f7_30852e41",
         "filename": "src/gn/file_writer.h",
         "patchSetId": 2
@@ -30,6 +48,30 @@
       "writtenOn": "2020-04-07T18:18:08Z",
       "side": 1,
       "message": "I guess fundamentally this is what I was getting at in the previous comments. We have the code to base:: right there, and there\u0027s no reason not to change it other than a bit of updating in other files. So working around it in this directory seems cumbersome.",
+      "range": {
+        "startLine": 24,
+        "startChar": 46,
+        "endLine": 25,
+        "endChar": 33
+      },
+      "revId": "f5a7f6f9acd3e63ce1d60d9cffdf0806d099c30a",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "a680a7c2_d9426b09",
+        "filename": "src/gn/file_writer.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 25,
+      "author": {
+        "id": 1000067
+      },
+      "writtenOn": "2020-04-24T14:21:00Z",
+      "side": 1,
+      "message": "Are you suggesting modifying the content of src/base/ directly? I thought it was rolled from Chromium versions periodically, and that\u0027s why some of the functions in filesystem_utils.cc exist.",
+      "parentUuid": "771b41f7_30852e41",
       "range": {
         "startLine": 24,
         "startChar": 46,
@@ -56,6 +98,24 @@
       "revId": "f5a7f6f9acd3e63ce1d60d9cffdf0806d099c30a",
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "98076e5f_896e4708",
+        "filename": "src/gn/string_output_buffer.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 21,
+      "author": {
+        "id": 1000067
+      },
+      "writtenOn": "2020-04-24T14:21:00Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "25494480_fac68d79",
+      "revId": "f5a7f6f9acd3e63ce1d60d9cffdf0806d099c30a",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": false
     },
     {
       "key": {
