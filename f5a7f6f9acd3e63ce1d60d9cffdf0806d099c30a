@@ -84,6 +84,30 @@
     },
     {
       "key": {
+        "uuid": "3d268216_0551d47c",
+        "filename": "src/gn/file_writer.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 25,
+      "author": {
+        "id": 1000004
+      },
+      "writtenOn": "2020-04-24T15:25:11Z",
+      "side": 1,
+      "message": "Ah, yes, that\u0027s the confusion then. No, src/base is long-forked and stripped when gn was extracted from Chromium.\n\nIdeally it\u0027d be refactored into just the parts of that we needed and we could flatten the source tree into just \"the code for gn\", but it\u0027s not exactly the most high priority work.",
+      "parentUuid": "a680a7c2_d9426b09",
+      "range": {
+        "startLine": 24,
+        "startChar": 46,
+        "endLine": 25,
+        "endChar": 33
+      },
+      "revId": "f5a7f6f9acd3e63ce1d60d9cffdf0806d099c30a",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "25494480_fac68d79",
         "filename": "src/gn/string_output_buffer.h",
         "patchSetId": 2
