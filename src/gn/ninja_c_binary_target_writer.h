@@ -65,6 +65,9 @@ class NinjaCBinaryTargetWriter : public NinjaBinaryTargetWriter {
                               const OutputFile& input_dep,
                               const std::vector<OutputFile>& order_only_deps,
                               std::vector<OutputFile>* object_files);
+  // Writes a command to squash any Rust .rlib files into a single linkable
+  // static library.
+  void WriteRlibSquash(std::vector<OutputFile>* object_files);
 
   // pch_deps are additional dependencies to run before the rule. They are
   // expected to abide by the naming conventions specified by GetPCHOutputFiles.

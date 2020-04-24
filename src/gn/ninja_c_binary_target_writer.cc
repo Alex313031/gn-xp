@@ -22,6 +22,7 @@
 #include "gn/general_tool.h"
 #include "gn/ninja_target_command_util.h"
 #include "gn/ninja_utils.h"
+#include "gn/rust_tool.h"
 #include "gn/scheduler.h"
 #include "gn/settings.h"
 #include "gn/string_utils.h"
@@ -131,6 +132,10 @@ void NinjaCBinaryTargetWriter::Run() {
   obj_files.insert(obj_files.end(), pch_obj_files.begin(), pch_obj_files.end());
   if (!CheckForDuplicateObjectFiles(obj_files))
     return;
+
+  // If we are linking against any Rust libraries (rlibs) we must
+  // convert them to a C++-linkable static library.
+  WriteRlibSquash(&obj_files);
 
   if (target_->output_type() == Target::SOURCE_SET) {
     WriteSourceSetStamp(obj_files);
@@ -440,6 +445,58 @@ void NinjaCBinaryTargetWriter::WriteSources(
     object_files->push_back(tool_outputs[0]);
   }
   out_ << std::endl;
+}
+
+void NinjaCBinaryTargetWriter::WriteRlibSquash(
+    std::vector<OutputFile>* object_files) {
+  UniqueVector<OutputFile> extra_object_files;
+  UniqueVector<const Target*> linkable_deps;
+  UniqueVector<const Target*> non_linkable_deps;
+  UniqueVector<const Target*> framework_deps;
+  GetDeps(&extra_object_files, &linkable_deps, &non_linkable_deps,
+          &framework_deps);
+  UniqueVector<const Target*> rlibs;
+  for (const auto dep: linkable_deps) {
+    if (dep->output_type() == Target::RUST_LIBRARY) {
+      rlibs.push_back(dep);
+    }
+  }
+  if (rlibs.empty())
+    return;
+  std::ostringstream crate_name_builder;
+  crate_name_builder << target_->label().name();
+  crate_name_builder << "_rlibs";
+  std::string crate_name = crate_name_builder.str();
+  OutputFile extra_rlib = GetBuildDirForTargetAsOutputFile(target_, BuildDirType::OBJ);
+  extra_rlib.value().append(crate_name);
+  extra_rlib.value().append(".a");
+  object_files->push_back(extra_rlib);
+
+  // Write the rule
+  out_ << "build ";
+  path_output_.WriteFile(out_, extra_rlib);
+  out_ << ": " << rule_prefix_ << RustTool::kRsToolStaticlib;
+  out_ << " rust_base_instructions.rs";
+  out_ << std::endl;
+  out_ << "  crate_name = " << crate_name << std::endl;
+  out_ << "  externs =";
+  for (const Target* cur : rlibs) {
+    out_ << " --extern " << cur->label().name() << "=";
+    path_output_.WriteFile(out_, cur->link_output_file());
+  }
+  out_ << std::endl;
+  out_ << "  crate_type = staticlib\n";
+  std::vector<OutputFile> transitive_rustlibs;
+  for (const auto* dep :
+       target_->rust_values().transitive_libs().GetOrdered()) {
+    if (dep->source_types_used().RustSourceUsed()) {
+      transitive_rustlibs.push_back(dep->dependency_output_file());
+    }
+  }
+  std::vector<OutputFile> rustdeps;
+  std::vector<OutputFile> nonrustdeps;
+  const Tool* tool = target_->toolchain()->GetTool(RustTool::kRsToolStaticlib);
+  WriteRustdeps(transitive_rustlibs, rustdeps, nonrustdeps, tool);
 }
 
 void NinjaCBinaryTargetWriter::WriteLinkerStuff(

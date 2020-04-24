@@ -309,3 +309,45 @@ void NinjaBinaryTargetWriter::WriteFrameworks(std::ostream& out,
     writer(all_frameworks[i], out);
   }
 }
+
+void NinjaBinaryTargetWriter::WriteRustdeps(
+    const std::vector<OutputFile>& transitive_rustdeps,
+    const std::vector<OutputFile>& rustdeps,
+    const std::vector<OutputFile>& nonrustdeps,
+    const Tool* tool) {
+  out_ << "  rustdeps =";
+
+  // Rust dependencies.
+  for (const auto& rustdep : transitive_rustdeps) {
+    // TODO switch to using --extern priv: after stabilization
+    out_ << " -Ldependency=";
+    path_output_.WriteDir(
+        out_, rustdep.AsSourceFile(settings_->build_settings()).GetDir(),
+        PathOutput::DIR_NO_LAST_SLASH);
+  }
+
+  EscapeOptions lib_escape_opts;
+  lib_escape_opts.mode = ESCAPE_NINJA_COMMAND;
+  const std::string_view lib_prefix("lib");
+
+  // Non-Rust native dependencies.
+  for (const auto& nonrustdep : nonrustdeps) {
+    out_ << " -Lnative=";
+    path_output_.WriteDir(
+        out_, nonrustdep.AsSourceFile(settings_->build_settings()).GetDir(),
+        PathOutput::DIR_NO_LAST_SLASH);
+    std::string_view file = FindFilenameNoExtension(&nonrustdep.value());
+    if (!file.compare(0, lib_prefix.size(), lib_prefix)) {
+      out_ << " -l";
+      EscapeStringToStream(out_, file.substr(lib_prefix.size()),
+                           lib_escape_opts);
+    } else {
+      out_ << " -Clink-arg=";
+      path_output_.WriteFile(out_, nonrustdep);
+    }
+  }
+
+  WriteLinkerFlags(out_, tool, nullptr);
+  WriteLibs(out_, tool);
+  out_ << std::endl;
+}

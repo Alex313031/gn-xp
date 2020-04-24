@@ -64,6 +64,10 @@ class NinjaBinaryTargetWriter : public NinjaTargetWriter {
                         const SourceFile* optional_def_file);
   void WriteLibs(std::ostream& out, const Tool* tool);
   void WriteFrameworks(std::ostream& out, const Tool* tool);
+  void WriteRustdeps(const std::vector<OutputFile>& transitive_rustdeps,
+      const std::vector<OutputFile>& rustdeps,
+      const std::vector<OutputFile>& nonrustdeps,
+      const Tool* tool);
 
   virtual void AddSourceSetFiles(const Target* source_set,
                                  UniqueVector<OutputFile>* obj_files) const;
