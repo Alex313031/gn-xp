@@ -62,57 +62,56 @@ void SetupCompileFlags(const Target* target,
   RecursiveTargetConfigToStream<std::string>(target, &ConfigValues::defines,
                                              DefineWriter(ESCAPE_SPACE, true),
                                              defines_out);
-  base::EscapeJSONString(defines_out.str(), false, &flags.defines);
+  flags.defines.append(defines_out.str());
 
   std::ostringstream framework_dirs_out;
   RecursiveTargetConfigToStream<SourceDir>(
       target, &ConfigValues::framework_dirs,
       FrameworkDirsWriter(path_output, "-F"), framework_dirs_out);
-  base::EscapeJSONString(framework_dirs_out.str(), false,
-                         &flags.framework_dirs);
+  flags.framework_dirs.append(framework_dirs_out.str());
 
   std::ostringstream frameworks_out;
   RecursiveTargetConfigToStream<std::string>(
       target, &ConfigValues::frameworks,
       FrameworksWriter(ESCAPE_SPACE, true, "-framework "), frameworks_out);
-  base::EscapeJSONString(frameworks_out.str(), false, &flags.frameworks);
+  flags.frameworks.append(frameworks_out.str());
 
   std::ostringstream includes_out;
   RecursiveTargetConfigToStream<SourceDir>(target, &ConfigValues::include_dirs,
                                            IncludeWriter(path_output),
                                            includes_out);
-  base::EscapeJSONString(includes_out.str(), false, &flags.includes);
+  flags.includes.append(includes_out.str());
 
   std::ostringstream cflags_out;
   WriteOneFlag(target, &CSubstitutionCFlags, false, Tool::kToolNone,
                &ConfigValues::cflags, opts, path_output, cflags_out,
                /*write_substitution=*/false);
-  base::EscapeJSONString(cflags_out.str(), false, &flags.cflags);
+  flags.cflags.append(cflags_out.str());
 
   std::ostringstream cflags_c_out;
   WriteOneFlag(target, &CSubstitutionCFlagsC, has_precompiled_headers,
                CTool::kCToolCc, &ConfigValues::cflags_c, opts, path_output,
                cflags_c_out, /*write_substitution=*/false);
-  base::EscapeJSONString(cflags_c_out.str(), false, &flags.cflags_c);
+  flags.cflags_c.append(cflags_c_out.str());
 
   std::ostringstream cflags_cc_out;
   WriteOneFlag(target, &CSubstitutionCFlagsCc, has_precompiled_headers,
                CTool::kCToolCxx, &ConfigValues::cflags_cc, opts, path_output,
                cflags_cc_out, /*write_substitution=*/false);
-  base::EscapeJSONString(cflags_cc_out.str(), false, &flags.cflags_cc);
+  flags.cflags_cc.append(cflags_cc_out.str());
 
   std::ostringstream cflags_objc_out;
   WriteOneFlag(target, &CSubstitutionCFlagsObjC, has_precompiled_headers,
                CTool::kCToolObjC, &ConfigValues::cflags_objc, opts, path_output,
                cflags_objc_out,
                /*write_substitution=*/false);
-  base::EscapeJSONString(cflags_objc_out.str(), false, &flags.cflags_objc);
+  flags.cflags_objc.append(cflags_objc_out.str());
 
   std::ostringstream cflags_objcc_out;
   WriteOneFlag(target, &CSubstitutionCFlagsObjCc, has_precompiled_headers,
                CTool::kCToolObjCxx, &ConfigValues::cflags_objcc, opts,
                path_output, cflags_objcc_out, /*write_substitution=*/false);
-  base::EscapeJSONString(cflags_objcc_out.str(), false, &flags.cflags_objcc);
+  flags.cflags_objcc.append(cflags_objcc_out.str());
 }
 
 void WriteFile(const SourceFile& source,
@@ -203,7 +202,7 @@ void WriteCommand(const Target* target,
   }
   compile_commands->append(kPrettyPrintLineEnding);
   compile_commands->append("    \"command\": \"");
-  compile_commands->append(command_out.str());
+  base::EscapeJSONString(command_out.str(), false, compile_commands);
 }
 
 }  // namespace

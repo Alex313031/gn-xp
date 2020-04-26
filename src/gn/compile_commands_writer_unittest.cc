@@ -593,6 +593,59 @@ TEST_F(CompileCommandsTest, EscapedFlags) {
   EXPECT_EQ(expected, out);
 }
 
+TEST_F(CompileCommandsTest, EscapedTool) {
+  Err err;
+
+  std::unique_ptr<Tool> cc = Tool::CreateTool(CTool::kCToolCc);
+  CTool* cc_tool = cc->AsC();
+  TestWithScope::SetCommandForTool(
+      "\"bin\\cc\" {{source}} {{cflags}} {{cflags_c}} {{defines}} {{include_dirs}} "
+      "-o {{output}}",
+      cc_tool);
+  cc_tool->set_outputs(SubstitutionList::MakeForTest(
+      "{{source_out_dir}}/{{target_output_name}}.{{source_name_part}}.o"));
+
+  Toolchain custom_toolchain(settings(), Label(SourceDir("//toolchain/"), "custom"));
+  custom_toolchain.SetTool(std::move(cc));
+  custom_toolchain.ToolchainSetupComplete();
+
+  std::vector<const Target*> targets;
+  Target target(settings(), Label(SourceDir("//foo/"), "bar"));
+  target.set_output_type(Target::SOURCE_SET);
+  target.visibility().SetPublic();
+  target.sources().push_back(SourceFile("//foo/input1.c"));
+  target.SetToolchain(&custom_toolchain);
+  ASSERT_TRUE(target.OnResolved(&err));
+  targets.push_back(&target);
+
+  std::string out;
+  CompileCommandsWriter writer;
+  writer.RenderJSON(build_settings(), targets, &out);
+
+#if defined(OS_WIN)
+  const char expected[] =
+      "[\r\n"
+      "  {\r\n"
+      "    \"file\": \"../../foo/input1.c\",\r\n"
+      "    \"directory\": \"out/Debug\",\r\n"
+      "    \"command\": \"\\\"bin\\\\cc\\\" ../../foo/input1.c     -o  "
+      "obj/foo/bar.input1.o\"\r\n"
+      "  }\r\n"
+      "]\r\n";
+#else
+  const char expected[] =
+      "[\n"
+      "  {\n"
+      "    \"file\": \"../../foo/input1.c\",\n"
+      "    \"directory\": \"out/Debug\",\n"
+      "    \"command\": \"\\\"bin\\\\cc\\\" ../../foo/input1.c     -o  "
+      "obj/foo/bar.input1.o\"\n"
+      "  }\n"
+      "]\n";
+#endif
+  EXPECT_EQ(expected, out);
+}
+
 TEST_F(CompileCommandsTest, CompDBFilter) {
   Err err;
 
