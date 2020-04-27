@@ -122,7 +122,7 @@ void NinjaRustBinaryTargetWriter::Run() {
   // -Ldependency rustdeps, and non-public source_sets get passed in as normal
   // source files
   UniqueVector<OutputFile> deps;
-  AddSourceSetFiles(target_, &deps);
+  AddSourceSetFiles(target_, &deps, &deps);
   if (target_->output_type() == Target::SOURCE_SET) {
     WriteSharedVars(target_->toolchain()->substitution_bits());
     WriteSourceSetStamp(deps.vector());
@@ -131,13 +131,18 @@ void NinjaRustBinaryTargetWriter::Run() {
     UniqueVector<const Target*> linkable_deps;
     UniqueVector<const Target*> non_linkable_deps;
     UniqueVector<const Target*> framework_deps;
-    GetDeps(&deps, &linkable_deps, &non_linkable_deps, &framework_deps);
+    std::vector<OutputFile> nonrustdeps;
+    UniqueVector<OutputFile> extra_obj_files;
+    GetDeps(&extra_obj_files, &linkable_deps, &non_linkable_deps,
+            &framework_deps, &deps);
+    deps.Append(extra_obj_files.begin(), extra_obj_files.end());
+    nonrustdeps.insert(nonrustdeps.end(), extra_obj_files.begin(),
+                       extra_obj_files.end());
 
     if (!input_dep.value().empty())
       order_only_deps.push_back(input_dep);
 
     std::vector<OutputFile> rustdeps;
-    std::vector<OutputFile> nonrustdeps;
     for (const auto* framework_dep : framework_deps) {
       order_only_deps.push_back(framework_dep->dependency_output_file());
     }

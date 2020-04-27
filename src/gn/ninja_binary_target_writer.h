@@ -38,17 +38,20 @@ class NinjaBinaryTargetWriter : public NinjaTargetWriter {
   void GetDeps(UniqueVector<OutputFile>* extra_object_files,
                UniqueVector<const Target*>* linkable_deps,
                UniqueVector<const Target*>* non_linkable_deps,
-               UniqueVector<const Target*>* framework_deps) const;
+               UniqueVector<const Target*>* framework_deps,
+               UniqueVector<OutputFile>* extra_rs_files) const;
 
   // Classifies the dependency as linkable or nonlinkable with the current
   // target, adding it to the appropriate vector. If the dependency is a source
   // set we should link in, the source set's object files will be appended to
-  // |extra_object_files|.
+  // |extra_object_files|. Any extra Rust files in the source set are placed
+  // into |extra_rs_files|.
   void ClassifyDependency(const Target* dep,
                           UniqueVector<OutputFile>* extra_object_files,
                           UniqueVector<const Target*>* linkable_deps,
                           UniqueVector<const Target*>* non_linkable_deps,
-                          UniqueVector<const Target*>* framework_deps) const;
+                          UniqueVector<const Target*>* framework_deps,
+                          UniqueVector<OutputFile>* extra_rs_files) const;
 
   OutputFile WriteStampAndGetDep(const UniqueVector<const SourceFile*>& files,
                                  const std::string& stamp_ext) const;
@@ -65,8 +68,9 @@ class NinjaBinaryTargetWriter : public NinjaTargetWriter {
   void WriteLibs(std::ostream& out, const Tool* tool);
   void WriteFrameworks(std::ostream& out, const Tool* tool);
 
-  virtual void AddSourceSetFiles(const Target* source_set,
-                                 UniqueVector<OutputFile>* obj_files) const;
+  void AddSourceSetFiles(const Target* source_set,
+                         UniqueVector<OutputFile>* obj_files,
+                         UniqueVector<OutputFile>* rs_files) const;
 
   // Cached version of the prefix used for rule types for this toolchain.
   std::string rule_prefix_;
