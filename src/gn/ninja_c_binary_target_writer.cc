@@ -530,6 +530,19 @@ void NinjaCBinaryTargetWriter::WriteLinkerStuff(
   if (!input_dep.value().empty() && object_files.empty())
     implicit_deps.push_back(input_dep);
 
+  // Any C++ target which depends on a Rust .rlib has to depend on its
+  // entire tree of transitive rlibs.
+  std::vector<OutputFile> transitive_rustlibs;
+  if (target_->IsFinal()) {
+    for (const auto* dep :
+         target_->rust_values().transitive_libs().GetOrdered()) {
+      if (dep->output_type() == Target::RUST_LIBRARY) {
+        transitive_rustlibs.push_back(dep->dependency_output_file());
+        implicit_deps.push_back(dep->dependency_output_file());
+      }
+    }
+  }
+
   // Append implicit dependencies collected above.
   if (!implicit_deps.empty()) {
     out_ << " |";
@@ -575,6 +588,11 @@ void NinjaCBinaryTargetWriter::WriteLinkerStuff(
   }
   WriteOutputSubstitutions();
   WriteSolibs(solibs);
+  if (!transitive_rustlibs.empty()) {
+    out_ << "  rlibs =";
+    path_output_.WriteFiles(out_, transitive_rustlibs);
+    out_ << std::endl;
+  }
 }
 
 void NinjaCBinaryTargetWriter::WriteOutputSubstitutions() {
