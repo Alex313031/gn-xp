@@ -127,14 +127,18 @@ void NinjaRustBinaryTargetWriter::Run() {
   UniqueVector<const Target*> linkable_deps;
   UniqueVector<const Target*> non_linkable_deps;
   UniqueVector<const Target*> framework_deps;
+  UniqueVector<OutputFile> extra_obj_files;
   AddSourcesToImplicitDeps(&deps);
-  GetDeps(&deps, &linkable_deps, &non_linkable_deps, &framework_deps);
+  GetDeps(&extra_obj_files, &linkable_deps, &non_linkable_deps, &framework_deps);
 
   if (!input_dep.value().empty())
     order_only_deps.push_back(input_dep);
 
   std::vector<OutputFile> rustdeps;
   std::vector<OutputFile> nonrustdeps;
+  deps.Append(extra_obj_files.begin(), extra_obj_files.end());
+  nonrustdeps.insert(nonrustdeps.end(), extra_obj_files.begin(),
+                     extra_obj_files.end());
   for (const auto* framework_dep : framework_deps) {
     order_only_deps.push_back(framework_dep->dependency_output_file());
   }
