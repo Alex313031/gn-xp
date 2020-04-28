@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "1ffc1fed_c463aca5",
+        "filename": "src/gn/ninja_rust_binary_target_writer.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 130,
+      "author": {
+        "id": 1000014
+      },
+      "writtenOn": "2020-04-28T21:57:26Z",
+      "side": 1,
+      "message": "Is it OK to add this call after the GetDeps() call, and rename it to AppendSources...()? The GetDeps function is silent on whether it appends or replaces, so I think it\u0027s better to treat it like it replaces and be very explicit for things that append.",
+      "revId": "87a56c1262f060f3c8924ffae5a4f3f0d517e801",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": true
+    }
+  ]
+}
