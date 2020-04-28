@@ -16,6 +16,24 @@
       "revId": "87a56c1262f060f3c8924ffae5a4f3f0d517e801",
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "d0441528_e73c9e69",
+        "filename": "src/gn/ninja_rust_binary_target_writer.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 130,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2020-04-28T22:04:01Z",
+      "side": 1,
+      "message": "Yes. This will reorder items in the generated Ninja files, which I don\u0027t think is a concern, but will cause lots of noise changing many unit tests to have the new ordering.",
+      "parentUuid": "1ffc1fed_c463aca5",
+      "revId": "87a56c1262f060f3c8924ffae5a4f3f0d517e801",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": true
     }
   ]
 }
