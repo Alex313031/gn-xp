@@ -34,6 +34,24 @@
       "revId": "87a56c1262f060f3c8924ffae5a4f3f0d517e801",
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "075663ff_19d41f10",
+        "filename": "src/gn/ninja_rust_binary_target_writer.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 130,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2020-04-29T00:45:42Z",
+      "side": 1,
+      "message": "Done. It didn\u0027t require unit test changes as long as I moved the line only just immediately below GetDeps.",
+      "parentUuid": "d0441528_e73c9e69",
+      "revId": "87a56c1262f060f3c8924ffae5a4f3f0d517e801",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": false
     }
   ]
 }
