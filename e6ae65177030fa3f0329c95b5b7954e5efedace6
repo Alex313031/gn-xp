@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "4e80264e_2bc09362",
+        "filename": "src/gn/ninja_c_binary_target_writer_unittest.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 1330,
+      "author": {
+        "id": 1000288
+      },
+      "writtenOn": "2020-04-29T15:09:22Z",
+      "side": 1,
+      "message": "I\u0027d like a test ensuring that transitive rust proc macros don\u0027t wind up in the output",
+      "revId": "e6ae65177030fa3f0329c95b5b7954e5efedace6",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": true
+    }
+  ]
+}
