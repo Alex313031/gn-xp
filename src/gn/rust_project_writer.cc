@@ -73,6 +73,7 @@ using TargetIdxMap = std::unordered_map<const Target*, uint32_t>;
 using SysrootIdxMap =
     std::unordered_map<std::string_view,
                        std::unordered_map<std::string_view, uint32_t>>;
+using KeyValueCfg = std::unordered_map<std::string, std::set<std::string>>;
 
 void WriteDeps(const Target* target,
                TargetIdxMap& lookup,
@@ -257,7 +258,7 @@ void AddTarget(const Target* target,
   std::string cfg_prefix("--cfg=");
   std::string edition_prefix("--edition=");
   std::vector<std::string> atoms;
-  std::vector<std::tuple<std::string, std::string>> kvs;
+  KeyValueCfg kvs;
 
   bool edition_set = false;
   for (ConfigValuesIterator iter(target); !iter.done(); iter.Next()) {
@@ -278,7 +279,7 @@ void AddTarget(const Target* target,
         } else {
           std::string key = cfg.substr(0, idx);
           std::string value = cfg.substr(idx + 1);
-          kvs.push_back(std::make_pair(key, value));
+          kvs[key].insert(value);
         }
       }
     }
@@ -307,8 +308,16 @@ void AddTarget(const Target* target,
       rust_project << ",";
     }
     first_kv = false;
-    rust_project << NEWLINE << "        \"" << std::get<0>(cfg)
-                 << "\" : " << std::get<1>(cfg);
+    rust_project << NEWLINE << "        \"" << std::get<0>(cfg) << "\" : [ ";
+    bool first_entry = true;
+    for (const auto& entry : std::get<1>(cfg)) {
+      if (!first_entry) {
+        rust_project << ",";
+      }
+      first_entry = false;
+      rust_project << entry << " ";
+    }
+    rust_project << "]";
   }
   rust_project << NEWLINE;
   rust_project << "      }" NEWLINE;
