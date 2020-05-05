@@ -69,6 +69,24 @@
       "revId": "dc316357cdb9ae17b6a438fa70612eb4f87699c0",
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "7449872d_4bd722c8",
+        "filename": "src/gn/command_clean.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 133,
+      "author": {
+        "id": 1000014
+      },
+      "writtenOn": "2020-05-05T17:14:58Z",
+      "side": 1,
+      "message": "Whatever is fine, there\u0027s no clear right answer.",
+      "parentUuid": "0d44ff82_a8f226b3",
+      "revId": "dc316357cdb9ae17b6a438fa70612eb4f87699c0",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": false
     }
   ]
 }
