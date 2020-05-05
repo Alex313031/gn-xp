@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "294760db_912b6983",
+        "filename": "src/gn/command_clean.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 131,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2020-05-05T17:11:25Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "a828eca1_71f28ac2",
+      "revId": "dc316357cdb9ae17b6a438fa70612eb4f87699c0",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "473380ce_5e49e36a",
         "filename": "src/gn/command_clean.cc",
         "patchSetId": 1
@@ -30,6 +48,24 @@
       "writtenOn": "2020-05-05T02:48:11Z",
       "side": 1,
       "message": "I wonder if we want to keep going and then return 1 if any of them failed. It seems weird to delete arguments until there\u0027s an error, and then stop, so some subset of the inputs will be handled. If you have a reason to do it this way, it\u0027s fine the way it is.",
+      "revId": "dc316357cdb9ae17b6a438fa70612eb4f87699c0",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "0d44ff82_a8f226b3",
+        "filename": "src/gn/command_clean.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 133,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2020-05-05T17:11:25Z",
+      "side": 1,
+      "message": "It seemed weird to me to keep going after an error. Say we hit the \"failed to find root gn dir\" error (which happens e.g. if you do `gn clean out*` in gn\u0027s build dir, since gn isn\u0027t built with gn) -- printing that several times felt a bit janky to me. I don\u0027t have a strong opinion though, so if you do, I\u0027m happy to change it.",
+      "parentUuid": "473380ce_5e49e36a",
       "revId": "dc316357cdb9ae17b6a438fa70612eb4f87699c0",
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
       "unresolved": true
