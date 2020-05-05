@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "a828eca1_71f28ac2",
+        "filename": "src/gn/command_clean.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 131,
+      "author": {
+        "id": 1000014
+      },
+      "writtenOn": "2020-05-05T02:48:11Z",
+      "side": 1,
+      "message": "Please use {} here since the contents are \u003e1 line.",
+      "revId": "dc316357cdb9ae17b6a438fa70612eb4f87699c0",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "473380ce_5e49e36a",
+        "filename": "src/gn/command_clean.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 133,
+      "author": {
+        "id": 1000014
+      },
+      "writtenOn": "2020-05-05T02:48:11Z",
+      "side": 1,
+      "message": "I wonder if we want to keep going and then return 1 if any of them failed. It seems weird to delete arguments until there\u0027s an error, and then stop, so some subset of the inputs will be handled. If you have a reason to do it this way, it\u0027s fine the way it is.",
+      "revId": "dc316357cdb9ae17b6a438fa70612eb4f87699c0",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": true
+    }
+  ]
+}
