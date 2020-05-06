@@ -25,6 +25,52 @@
     },
     {
       "key": {
+        "uuid": "56248471_f21be4e4",
+        "filename": "build/gen.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 105,
+      "author": {
+        "id": 1000004
+      },
+      "writtenOn": "2020-05-06T23:58:07Z",
+      "side": 1,
+      "message": "Can it be used more than once?",
+      "range": {
+        "startLine": 105,
+        "startChar": 43,
+        "endLine": 105,
+        "endChar": 49
+      },
+      "revId": "2bac975bb8fd922b900753a8cdb3ee579b85d0dd",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "b2f88e50_1ace7750",
+        "filename": "build/gen.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 107,
+      "author": {
+        "id": 1000004
+      },
+      "writtenOn": "2020-05-06T23:58:07Z",
+      "side": 1,
+      "message": "If so, then probably \"a library\" here makes more sense.",
+      "range": {
+        "startLine": 107,
+        "startChar": 31,
+        "endLine": 107,
+        "endChar": 34
+      },
+      "revId": "2bac975bb8fd922b900753a8cdb3ee579b85d0dd",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "f6050ca4_e2888cda",
         "filename": "build/gen.py",
         "patchSetId": 1
@@ -105,6 +151,23 @@
       "writtenOn": "2020-05-06T23:55:18Z",
       "side": 1,
       "message": "Leftover debug print?",
+      "revId": "2bac975bb8fd922b900753a8cdb3ee579b85d0dd",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "08395db3_8c588e42",
+        "filename": "build/gen.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 747,
+      "author": {
+        "id": 1000004
+      },
+      "writtenOn": "2020-05-06T23:58:07Z",
+      "side": 1,
+      "message": "No print.",
       "revId": "2bac975bb8fd922b900753a8cdb3ee579b85d0dd",
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
       "unresolved": true
