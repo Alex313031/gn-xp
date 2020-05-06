@@ -102,6 +102,13 @@ def main(argv):
   parser.add_option('--no-static-libstdc++', action='store_true',
                     default=False, dest='no_static_libstdcpp',
                     help='Don\'t link libstdc++ statically')
+  parser.add_option('--link-with', action='append',
+                    default=[],
+                    help=('Add one library to the final executable link. ' +
+                          'LINK_LIB must be the path to a static or shared ' +
+                          'library, or \'-l<name>\' on Posix systems. Can be ' +
+                          'used multiple times. Useful to link custom malloc ' +
+                          'or cpu profiling libraries.'))
   options, args = parser.parse_args(argv)
 
   if args:
@@ -159,14 +166,17 @@ def WriteGenericNinja(path, static_libraries, executables,
                       cxx, ar, ld, platform, host, options,
                       cflags=[], ldflags=[], libflags=[],
                       include_dirs=[], solibs=[]):
+  args = ' -d' if options.debug else ''
+  if options.link_with:
+    args +=  ''.join(' --link-with='+l for l in options.link_with)
+
   ninja_header_lines = [
     'cxx = ' + cxx,
     'ar = ' + ar,
     'ld = ' + ld,
     '',
     'rule regen',
-    '  command = %s ../build/gen.py%s' % (
-        sys.executable, ' -d' if options.debug else ''),
+    '  command = %s ../build/gen.py%s' % (sys.executable, args),
     '  description = Regenerating ninja files',
     '',
     'build build.ninja: regen',
@@ -733,6 +743,10 @@ def WriteGNNinja(path, platform, host, options):
           '-lshlwapi',
       ])
 
+
+  print repr(options.link_with)
+  if options.link_with:
+    libs.extend(options.link_with)
 
   # we just build static libraries that GN needs
   executables['gn']['libs'].extend(static_libraries.keys())
