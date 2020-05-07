@@ -71,7 +71,7 @@ std::unique_ptr<PBXNativeTarget> GetPBXNativeTargetObject(
     const PBXFileReference* product_reference) {
   std::unique_ptr<PBXNativeTarget> pbx_native_target(new PBXNativeTarget(
       "target_name", "ninja gn_unittests", "config_name", PBXAttributes(),
-      "com.apple.product-type.application", "product_name", product_reference));
+      "com.apple.product-type.application", "product_name", product_reference, {}));
   return pbx_native_target;
 }
 

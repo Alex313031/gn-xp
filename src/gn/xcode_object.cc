@@ -237,12 +237,27 @@ void PrintValue(std::ostream& out,
   IndentRules sub_rule{rules.one_line, rules.level + 1};
   out << "{" << (rules.one_line ? " " : "\n");
   for (const auto& pair : values) {
-    if (!sub_rule.one_line)
-      out << std::string(sub_rule.level, '\t');
+		static bool once = true;
+		if(pair.first == "HEADER_SEARCH_PATHS")
+		{
+			once = false;
+			if (!sub_rule.one_line)
+				out << std::string(sub_rule.level, '\t');
 
-    out << pair.first << " = ";
-    PrintValue(out, sub_rule, pair.second);
-    out << ";" << (rules.one_line ? " " : "\n");
+			out << pair.first << " =  (";
+			out << pair.second;
+			out << "" << (rules.one_line ? " " : ");\n");
+		
+		}
+		else{
+		
+    	if (!sub_rule.one_line)
+      	out << std::string(sub_rule.level, '\t');
+
+    	out << pair.first << " = ";
+    	PrintValue(out, sub_rule, pair.second);
+    	out << ";" << (rules.one_line ? " " : "\n");
+		}
   }
 
   if (!rules.one_line && rules.level)
@@ -711,7 +726,8 @@ PBXNativeTarget::PBXNativeTarget(const std::string& name,
                                  const PBXAttributes& attributes,
                                  const std::string& product_type,
                                  const std::string& product_name,
-                                 const PBXFileReference* product_reference)
+                                 const PBXFileReference* product_reference,
+                                 const std::vector<std::string>& include_paths)
     : PBXTarget(name, shell_script, config_name, attributes),
       product_reference_(product_reference),
       product_type_(product_type),
@@ -725,6 +741,7 @@ PBXNativeTarget::PBXNativeTarget(const std::string& name,
   build_phases_.push_back(std::make_unique<PBXResourcesBuildPhase>());
   resource_build_phase_ =
       static_cast<PBXResourcesBuildPhase*>(build_phases_.back().get());
+  include_paths_ = include_paths;
 }
 
 PBXNativeTarget::~PBXNativeTarget() = default;
@@ -783,15 +800,27 @@ PBXProject::PBXProject(const std::string& name,
 
 PBXProject::~PBXProject() = default;
 
-void PBXProject::AddSourceFileToIndexingTarget(
+void PBXProject::AddSourceFileToTargetForIndexing(
+    const std::string& target_name,
     const std::string& navigator_path,
     const std::string& source_path,
-    const CompilerFlags compiler_flag) {
-  if (!target_for_indexing_) {
+    const CompilerFlags compiler_flag) 
+{
+  if (!target_for_indexing_) 
+  {
     AddIndexingTarget();
   }
-  AddSourceFile(navigator_path, source_path, compiler_flag,
-                target_for_indexing_);
+
+  //if target with this name don't exists, we add source file to special target
+  PBXNativeTarget* target = target_for_indexing_;
+  auto it = find_if(targets_.begin(), targets_.end(), [&target_name](std::unique_ptr<PBXTarget>& target){ return target->Name() == target_name; });
+  if(it != targets_.end() && it->get())
+  {
+    PBXNativeTarget* native_target = static_cast<PBXNativeTarget*>(it->get());
+    if(native_target)
+      target = native_target;
+  }
+  AddSourceFile(navigator_path, source_path, compiler_flag, target);
 }
 
 void PBXProject::AddSourceFile(const std::string& navigator_path,
@@ -838,7 +867,7 @@ void PBXProject::AddIndexingTarget() {
   const char product_type[] = "com.apple.product-type.tool";
   targets_.push_back(std::make_unique<PBXNativeTarget>(
       "sources", std::string(), config_name_, attributes, product_type,
-      "sources", product_reference));
+      "sources", product_reference, std::vector<std::string>()));
   target_for_indexing_ = static_cast<PBXNativeTarget*>(targets_.back().get());
 }
 
@@ -849,7 +878,8 @@ PBXNativeTarget* PBXProject::AddNativeTarget(
     const std::string& output_type,
     const std::string& output_dir,
     const std::string& shell_script,
-    const PBXAttributes& extra_attributes) {
+    const PBXAttributes& extra_attributes,
+    const std::vector<std::string>& include_paths ) {
   std::string_view ext = FindExtension(&output_name);
   PBXFileReference* product = products_->CreateChild<PBXFileReference>(
       std::string(), output_name, type.empty() ? GetSourceType(ext) : type);
@@ -876,7 +906,7 @@ PBXNativeTarget* PBXProject::AddNativeTarget(
 
   targets_.push_back(std::make_unique<PBXNativeTarget>(
       name, shell_script, config_name_, attributes, output_type, product_name,
-      product));
+      product, include_paths));
   return static_cast<PBXNativeTarget*>(targets_.back().get());
 }
 

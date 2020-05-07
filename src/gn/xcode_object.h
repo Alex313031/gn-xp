@@ -324,7 +324,8 @@ class PBXNativeTarget : public PBXTarget {
                   const PBXAttributes& attributes,
                   const std::string& product_type,
                   const std::string& product_name,
-                  const PBXFileReference* product_reference);
+                  const PBXFileReference* product_reference,
+                  const std::vector<std::string>& include_paths);
   ~PBXNativeTarget() override;
 
   void AddResourceFile(const PBXFileReference* file_reference);
@@ -340,6 +341,7 @@ class PBXNativeTarget : public PBXTarget {
   const PBXFileReference* product_reference_ = nullptr;
   std::string product_type_;
   std::string product_name_;
+  std::vector<std::string> include_paths_;
 
   DISALLOW_COPY_AND_ASSIGN(PBXNativeTarget);
 };
@@ -354,7 +356,8 @@ class PBXProject : public PBXObject {
              const PBXAttributes& attributes);
   ~PBXProject() override;
 
-  void AddSourceFileToIndexingTarget(const std::string& navigator_path,
+  void AddSourceFileToTargetForIndexing(const std::string& target_name,
+                                     const std::string& navigator_path,
                                      const std::string& source_path,
                                      const CompilerFlags compiler_flag);
   void AddSourceFile(const std::string& navigator_path,
@@ -371,7 +374,8 @@ class PBXProject : public PBXObject {
       const std::string& output_name,
       const std::string& output_type,
       const std::string& shell_script,
-      const PBXAttributes& extra_attributes = PBXAttributes());
+      const PBXAttributes& extra_attributes = PBXAttributes(),
+      const std::vector<std::string>& include_paths = std::vector<std::string>());
 
   void SetProjectDirPath(const std::string& project_dir_path);
   void SetProjectRoot(const std::string& project_root);
