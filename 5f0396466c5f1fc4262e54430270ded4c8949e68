@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "f9bddd96_30f8b050",
+        "filename": "src/gn/ninja_c_binary_target_writer.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 595,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-05-08T08:40:12Z",
+      "side": 1,
+      "message": "I\u0027d consider extracting this to a method akin to WriteSolibs.",
+      "range": {
+        "startLine": 591,
+        "startChar": 0,
+        "endLine": 595,
+        "endChar": 3
+      },
+      "revId": "5f0396466c5f1fc4262e54430270ded4c8949e68",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": true
+    }
+  ]
+}
