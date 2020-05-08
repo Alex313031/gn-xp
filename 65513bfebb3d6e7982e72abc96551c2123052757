@@ -52,6 +52,24 @@
       "revId": "65513bfebb3d6e7982e72abc96551c2123052757",
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "e7f484f4_8dc539f3",
+        "filename": "src/gn/ninja_rust_binary_target_writer.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 130,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-05-08T08:35:30Z",
+      "side": 1,
+      "message": "I agree with Brett, the flow of the code is a bit confusing. I think it\u0027d be cleaner to first collecting all dependencies, then build deps followed by rustdeps and nonrustdeps. I\u0027d also consider moving the input_dep handling below up to the beginning of this method where input is defined.",
+      "parentUuid": "8c88c195_a057a170",
+      "revId": "65513bfebb3d6e7982e72abc96551c2123052757",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": true
     }
   ]
 }
