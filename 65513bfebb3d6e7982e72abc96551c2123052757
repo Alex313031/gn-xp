@@ -70,6 +70,24 @@
       "revId": "65513bfebb3d6e7982e72abc96551c2123052757",
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "2ab890b2_e0b5924e",
+        "filename": "src/gn/ninja_rust_binary_target_writer.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 130,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2020-05-08T16:29:26Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "e7f484f4_8dc539f3",
+      "revId": "65513bfebb3d6e7982e72abc96551c2123052757",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": false
     }
   ]
 }
