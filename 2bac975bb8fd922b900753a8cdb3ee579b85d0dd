@@ -48,6 +48,54 @@
     },
     {
       "key": {
+        "uuid": "6b8d138a_7e07a702",
+        "filename": "build/gen.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 105,
+      "author": {
+        "id": 1000067
+      },
+      "writtenOn": "2020-05-08T09:49:50Z",
+      "side": 1,
+      "message": "I prefer --link-lib because the option only takes one library at a time, but can be used more than once (as explained in the help text). While \u0027libs\u0027 in GN is a list. This also avoids unsavory parsing when there are multiple library paths with spaces in them. I\u0027ve also updated the CL to properly shell-quote the paths written in the build.ninja.",
+      "parentUuid": "b5bdf1a9_2ce3f60f",
+      "range": {
+        "startLine": 105,
+        "startChar": 21,
+        "endLine": 105,
+        "endChar": 32
+      },
+      "revId": "2bac975bb8fd922b900753a8cdb3ee579b85d0dd",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "c541adf3_c642b22d",
+        "filename": "build/gen.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 105,
+      "author": {
+        "id": 1000067
+      },
+      "writtenOn": "2020-05-08T09:49:50Z",
+      "side": 1,
+      "message": "Yes, as explained in the help text.",
+      "parentUuid": "56248471_f21be4e4",
+      "range": {
+        "startLine": 105,
+        "startChar": 43,
+        "endLine": 105,
+        "endChar": 49
+      },
+      "revId": "2bac975bb8fd922b900753a8cdb3ee579b85d0dd",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "b2f88e50_1ace7750",
         "filename": "build/gen.py",
         "patchSetId": 1
@@ -59,6 +107,30 @@
       "writtenOn": "2020-05-06T23:58:07Z",
       "side": 1,
       "message": "If so, then probably \"a library\" here makes more sense.",
+      "range": {
+        "startLine": 107,
+        "startChar": 31,
+        "endLine": 107,
+        "endChar": 34
+      },
+      "revId": "2bac975bb8fd922b900753a8cdb3ee579b85d0dd",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "5379bf82_053fc6ce",
+        "filename": "build/gen.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 107,
+      "author": {
+        "id": 1000067
+      },
+      "writtenOn": "2020-05-08T09:49:50Z",
+      "side": 1,
+      "message": "Agreed, will update in the next patch.",
+      "parentUuid": "b2f88e50_1ace7750",
       "range": {
         "startLine": 107,
         "startChar": 31,
@@ -94,6 +166,30 @@
     },
     {
       "key": {
+        "uuid": "aecd30c7_ae4ff143",
+        "filename": "build/gen.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 108,
+      "author": {
+        "id": 1000067
+      },
+      "writtenOn": "2020-05-08T09:49:50Z",
+      "side": 1,
+      "message": "Done. thanks.",
+      "parentUuid": "f6050ca4_e2888cda",
+      "range": {
+        "startLine": 108,
+        "startChar": 27,
+        "endLine": 108,
+        "endChar": 35
+      },
+      "revId": "2bac975bb8fd922b900753a8cdb3ee579b85d0dd",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "e81e1e3d_86383a4a",
         "filename": "build/gen.py",
         "patchSetId": 1
@@ -114,6 +210,30 @@
       "revId": "2bac975bb8fd922b900753a8cdb3ee579b85d0dd",
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "86662b16_e78679b4",
+        "filename": "build/gen.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 109,
+      "author": {
+        "id": 1000067
+      },
+      "writtenOn": "2020-05-08T09:49:50Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "e81e1e3d_86383a4a",
+      "range": {
+        "startLine": 109,
+        "startChar": 55,
+        "endLine": 109,
+        "endChar": 60
+      },
+      "revId": "2bac975bb8fd922b900753a8cdb3ee579b85d0dd",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": false
     },
     {
       "key": {
@@ -171,6 +291,42 @@
       "revId": "2bac975bb8fd922b900753a8cdb3ee579b85d0dd",
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "cf0393de_4f0c5de1",
+        "filename": "build/gen.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 747,
+      "author": {
+        "id": 1000067
+      },
+      "writtenOn": "2020-05-08T09:49:50Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "08395db3_8c588e42",
+      "revId": "2bac975bb8fd922b900753a8cdb3ee579b85d0dd",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2b763cd9_ca8dbe63",
+        "filename": "build/gen.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 747,
+      "author": {
+        "id": 1000067
+      },
+      "writtenOn": "2020-05-08T09:49:50Z",
+      "side": 1,
+      "message": "Yes, sorry about that. Removed.",
+      "parentUuid": "05cd66a6_9916d91c",
+      "revId": "2bac975bb8fd922b900753a8cdb3ee579b85d0dd",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": false
     }
   ]
 }
