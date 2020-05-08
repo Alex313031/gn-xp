@@ -1,0 +1,84 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "d70a0baf_ba1f5a3e",
+        "filename": "tools/find_unreachable.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 1000014
+      },
+      "writtenOn": "2020-05-08T19:35:10Z",
+      "side": 1,
+      "message": "Can you add at the top here an example of use, with the GN call and the call to this script?",
+      "revId": "03cfc1beff9d49c3a06b64c0176f37c860eb245b",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "fb3d8e97_c0c51684",
+        "filename": "tools/find_unreachable.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 33,
+      "author": {
+        "id": 1000014
+      },
+      "writtenOn": "2020-05-08T19:35:10Z",
+      "side": 1,
+      "message": "\"useful\"",
+      "range": {
+        "startLine": 33,
+        "startChar": 16,
+        "endLine": 33,
+        "endChar": 23
+      },
+      "revId": "03cfc1beff9d49c3a06b64c0176f37c860eb245b",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "7ddbfa96_9079266b",
+        "filename": "tools/find_unreachable.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 42,
+      "author": {
+        "id": 1000014
+      },
+      "writtenOn": "2020-05-08T19:35:10Z",
+      "side": 1,
+      "message": "Can this help be clarified? I had to read the code to figure this out, since I originally read this as a request to print reachable targets. Maybe \"--from\" would be a better name, and describe it as being the roots where the search begins.\n\nWe should also be explicit that there can be more than one of these roots.",
+      "revId": "03cfc1beff9d49c3a06b64c0176f37c860eb245b",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "96bc0132_a1933beb",
+        "filename": "tools/find_unreachable.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 44,
+      "author": {
+        "id": 1000014
+      },
+      "writtenOn": "2020-05-08T19:35:10Z",
+      "side": 1,
+      "message": "I\u0027m not sure what \"source\" means in this context. How about \"--no-refs\" and describe it as showing targets with no references. This matches the terminology of the \"gn refs\" command.",
+      "range": {
+        "startLine": 44,
+        "startChar": 5,
+        "endLine": 44,
+        "endChar": 18
+      },
+      "revId": "03cfc1beff9d49c3a06b64c0176f37c860eb245b",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": true
+    }
+  ]
+}
