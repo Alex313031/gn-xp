@@ -34,6 +34,24 @@
       "revId": "65513bfebb3d6e7982e72abc96551c2123052757",
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "8c88c195_a057a170",
+        "filename": "src/gn/ninja_rust_binary_target_writer.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 130,
+      "author": {
+        "id": 1000014
+      },
+      "writtenOn": "2020-05-08T04:28:15Z",
+      "side": 1,
+      "message": "I\u0027m OK keeping the extra variable, but I think then we need to reorder everything so there\u0027s some flow.\n\nIt feels like we should do the GetDeps call, then have a blank, then declare deps and build it from both of the sources.",
+      "parentUuid": "b1318837_115d3ecc",
+      "revId": "65513bfebb3d6e7982e72abc96551c2123052757",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": true
     }
   ]
 }
