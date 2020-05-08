@@ -16,6 +16,24 @@
       "revId": "65513bfebb3d6e7982e72abc96551c2123052757",
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "b1318837_115d3ecc",
+        "filename": "src/gn/ninja_rust_binary_target_writer.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 130,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2020-05-08T03:28:36Z",
+      "side": 1,
+      "message": "The net behavior change is this: GetDeps returns a load of object files in its first reference parameter. Previously, they just went into \u0027deps\u0027 (along with a load of other stuff, subsequently appended). They now go into \u0027deps\u0027 but also into \u0027nonrustdeps\u0027.\n\nI could rearrange it to avoid the new variable, and instead insert these things into \u0027nonrustdeps\u0027 immediately after the GetDeps line. Happy to do that if you prefer. However, I thought it was clearer to have a variable called \u0027extra_obj_files\u0027 which matches what we do elsewhere GetDeps is called and I think makes it clearer what exactly is returned in that first parameter. (See https://source.chromium.org/gn/gn/+/master:src/gn/ninja_binary_target_writer.h;l\u003d38?q\u003dGetDeps)\n\nLet me know your preference - I\u0027m happy to make this amendment. The only net effect I\u0027m after is that the extra object files end up in both deps and nonrustdeps.",
+      "parentUuid": "9584060d_85c3b7ca",
+      "revId": "65513bfebb3d6e7982e72abc96551c2123052757",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": true
     }
   ]
 }
