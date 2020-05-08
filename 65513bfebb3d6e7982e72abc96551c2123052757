@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "9584060d_85c3b7ca",
+        "filename": "src/gn/ninja_rust_binary_target_writer.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 130,
+      "author": {
+        "id": 1000014
+      },
+      "writtenOn": "2020-05-08T03:11:46Z",
+      "side": 1,
+      "message": "I don\u0027t understand what\u0027s going on here. You\u0027re making a new variable in addition to the old one, and then appending the new one to the old one. It looks like the only change here is that the files from GetDeps() are now getting added after the ones from AppendSourcesToImplicitDeps(). Could this be kept the way it was?",
+      "revId": "65513bfebb3d6e7982e72abc96551c2123052757",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": true
+    }
+  ]
+}
