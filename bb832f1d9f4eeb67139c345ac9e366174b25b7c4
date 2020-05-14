@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "e893c258_e3b9eb23",
+        "filename": "src/gn/variables.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 707,
+      "author": {
+        "id": 1000014
+      },
+      "writtenOn": "2020-05-14T21:00:23Z",
+      "side": 1,
+      "message": "Can this list which target types this variable is used in?",
+      "revId": "bb832f1d9f4eeb67139c345ac9e366174b25b7c4",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": true
+    }
+  ]
+}
