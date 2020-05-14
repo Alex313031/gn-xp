@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "3c324d96_b0b46d6f",
+        "filename": "src/gn/compile_commands_writer.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 300,
+      "author": {
+        "id": 1000305
+      },
+      "writtenOn": "2020-05-14T22:53:02Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "3dde4938_c0cbb190",
+      "revId": "25efe7a432c8361a7cf7ac975510c1732dfb97e4",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "9fb2732c_9351db21",
         "filename": "src/gn/compile_commands_writer.cc",
         "patchSetId": 3
@@ -30,6 +48,24 @@
       "writtenOn": "2020-03-26T01:17:26Z",
       "side": 1,
       "message": "why not write `VisitDeps(target, \u0026visited);` here?",
+      "revId": "25efe7a432c8361a7cf7ac975510c1732dfb97e4",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "22dfedb0_c904507e",
+        "filename": "src/gn/compile_commands_writer.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 337,
+      "author": {
+        "id": 1000305
+      },
+      "writtenOn": "2020-05-14T22:53:02Z",
+      "side": 1,
+      "message": "I\u0027m not quite sure how to use VisitDeps properly.",
+      "parentUuid": "9fb2732c_9351db21",
       "revId": "25efe7a432c8361a7cf7ac975510c1732dfb97e4",
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
       "unresolved": true
