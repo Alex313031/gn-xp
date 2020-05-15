@@ -126,6 +126,28 @@ void ConfigValuesGenerator::Run() {
 
     config_values_->frameworks().swap(frameworks);
   }
+  const Value* weak_frameworks_value =
+      scope_->GetValue(variables::kWeakFrameworks, true);
+  if (weak_frameworks_value) {
+    std::vector<std::string> weak_frameworks;
+    if (!ExtractListOfStringValues(*weak_frameworks_value, &weak_frameworks,
+                                   err_))
+      return;
+
+    // All strings must end with ".frameworks".
+    for (const std::string& framework : weak_frameworks) {
+      std::string_view framework_name = GetFrameworkName(framework);
+      if (framework_name.empty()) {
+        *err_ = Err(*weak_frameworks_value,
+                    "This frameworks value is wrong."
+                    "All listed frameworks names must not include any\n"
+                    "path component and have \".framework\" extension.");
+        return;
+      }
+    }
+
+    config_values_->weak_frameworks().swap(weak_frameworks);
+  }
 
   // Precompiled headers.
   const Value* precompiled_header_value =
