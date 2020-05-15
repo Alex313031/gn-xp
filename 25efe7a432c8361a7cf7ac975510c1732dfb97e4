@@ -69,6 +69,24 @@
       "revId": "25efe7a432c8361a7cf7ac975510c1732dfb97e4",
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "cfa1b9d3_12bd23eb",
+        "filename": "src/gn/compile_commands_writer.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 337,
+      "author": {
+        "id": 1000030
+      },
+      "writtenOn": "2020-05-15T00:53:17Z",
+      "side": 1,
+      "message": "I meant to say that you don\u0027t need to use |match| variable, if you call VisitDeps(...) here.",
+      "parentUuid": "22dfedb0_c904507e",
+      "revId": "25efe7a432c8361a7cf7ac975510c1732dfb97e4",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": true
     }
   ]
 }
