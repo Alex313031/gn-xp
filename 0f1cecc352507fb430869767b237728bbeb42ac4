@@ -37,6 +37,24 @@
     },
     {
       "key": {
+        "uuid": "70b5cbe1_03cdbd53",
+        "filename": "src/gn/rust_project_writer.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 91,
+      "author": {
+        "id": 1000397
+      },
+      "writtenOn": "2020-05-15T23:27:38Z",
+      "side": 1,
+      "message": "It doesn\u0027t look like we have any at the moment, or we do, they\u0027re RUST_LIBRARY type.",
+      "parentUuid": "f09e1d33_e946e044",
+      "revId": "0f1cecc352507fb430869767b237728bbeb42ac4",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "e5a90c2f_99375f4e",
         "filename": "src/gn/rust_project_writer.cc",
         "patchSetId": 1
