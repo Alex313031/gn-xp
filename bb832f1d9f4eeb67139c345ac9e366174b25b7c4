@@ -16,6 +16,24 @@
       "revId": "bb832f1d9f4eeb67139c345ac9e366174b25b7c4",
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "8a386ca0_7d0adc7e",
+        "filename": "src/gn/variables.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 707,
+      "author": {
+        "id": 1000280
+      },
+      "writtenOn": "2020-05-15T13:28:41Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "e893c258_e3b9eb23",
+      "revId": "bb832f1d9f4eeb67139c345ac9e366174b25b7c4",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": false
     }
   ]
 }
