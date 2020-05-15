@@ -72,15 +72,14 @@ bool RustProjectWriter::RunAndWriteFiles(const BuildSettings* build_settings,
 }
 
 using TargetIdxMap = std::unordered_map<const Target*, uint32_t>;
-using SysrootIdxMap =
-    std::unordered_map<std::string_view,
-                       std::unordered_map<std::string_view, uint32_t>>;
+using SysrootCrateIdxMap = std::unordered_map<std::string_view, uint32_t>;
+using SysrootIdxMap = std::unordered_map<std::string_view, SysrootCrateIdxMap>;
 
 void WriteDeps(const Target* target,
                TargetIdxMap& lookup,
                SysrootIdxMap& sysroot_lookup,
                std::ostream& rust_project) {
-  bool first = true;
+  bool first_dep = true;
 
   rust_project << "      \"deps\": [";
 
@@ -92,26 +91,26 @@ void WriteDeps(const Target* target,
     // TODO(bwb) If this library doesn't depend on std, use core instead
     auto std_idx = sysroot_lookup[current_sysroot].find("std");
     if (std_idx != sysroot_lookup[current_sysroot].end()) {
-      if (!first)
+      if (!first_dep)
         rust_project << ",";
       rust_project << NEWLINE << "        {" NEWLINE
                    << "          \"crate\": " << std::to_string(std_idx->second)
                    << "," NEWLINE << "          \"name\": \"std\"" NEWLINE
                    << "        }";
-      first = false;
+      first_dep = false;
     }
   }
 
   for (const auto& dep : target->rust_values().transitive_libs().GetOrdered()) {
     auto idx = lookup[dep];
-    if (!first)
+    if (!first_dep)
       rust_project << ",";
     rust_project << NEWLINE << "        {" NEWLINE
                  << "          \"crate\": " << std::to_string(idx)
                  << "," NEWLINE << "          \"name\": \""
                  << dep->rust_values().crate_name() << "\"" NEWLINE
                  << "        }";
-    first = false;
+    first_dep = false;
   }
   rust_project << NEWLINE "      ]," NEWLINE;
 }
@@ -142,31 +141,40 @@ const std::string_view sysroot_crates[] = {"std",
                                            "rustc_tsan",
                                            "syntax"};
 
-const std::string_view std_deps[] = {
-    "alloc",
-    "core",
-    "panic_abort",
-    "unwind",
-};
+// Multiple sysroot crates have dependenices on each other.  This provides a
+// mechanism for specifiying that in an extendible manner.
+const std::unordered_map<std::string_view, std::vector<std::string_view>>
+    sysroot_deps_maps = {{"alloc", {"core"}},
+                         {"std", {"alloc", "core", "panic_abort", "unwind"}}};
 
+// Add each of the crates a sysroot has, including their dependencies.
 void AddSysrootCrate(const std::string_view crate,
                      const std::string_view current_sysroot,
                      uint32_t* count,
-                     SysrootIdxMap& sysroot_lookup,
+                     SysrootCrateIdxMap& sysroot_crate_lookup,
                      std::ostream& rust_project,
                      const BuildSettings* build_settings,
-                     bool first) {
-  if (crate == "std") {
-    for (auto dep : std_deps) {
-      AddSysrootCrate(dep, current_sysroot, count, sysroot_lookup, rust_project,
-                      build_settings, first);
-      first = false;
+                     bool first_crate) {
+  if (sysroot_crate_lookup.find(crate) != sysroot_crate_lookup.end()) {
+    // If this sysroot crate is already in the lookup, we don't add it again.
+    return;
+  }
+
+  // Add any crates that this sysroot crate depends on.
+  auto deps_lookup = sysroot_deps_maps.find(crate);
+  if (deps_lookup != sysroot_deps_maps.end()) {
+    auto deps = (*deps_lookup).second;
+    for (auto dep : deps) {
+      AddSysrootCrate(dep, current_sysroot, count, sysroot_crate_lookup,
+                      rust_project, build_settings, first_crate);
+      first_crate = false;
     }
   }
 
-  if (!first)
+  if (!first_crate)
     rust_project << "," NEWLINE;
-  sysroot_lookup[current_sysroot].insert(std::make_pair(crate, *count));
+  first_crate = false;
+  sysroot_crate_lookup.insert(std::make_pair(crate, *count));
 
   base::FilePath rebased_out_dir =
       build_settings->GetFullPath(build_settings->build_dir());
@@ -183,14 +191,15 @@ void AddSysrootCrate(const std::string_view crate,
   rust_project << "      \"edition\": \"2018\"," NEWLINE;
   rust_project << "      \"deps\": [";
   (*count)++;
-  if (crate == "std") {
-    first = true;
-    for (auto dep : std_deps) {
-      auto idx = sysroot_lookup[current_sysroot][dep];
-      if (!first) {
+  if (deps_lookup != sysroot_deps_maps.end()) {
+    auto deps = (*deps_lookup).second;
+    bool first_dep = true;
+    for (auto dep : deps) {
+      auto idx = sysroot_crate_lookup[dep];
+      if (!first_dep) {
         rust_project << ",";
       }
-      first = false;
+      first_dep = false;
       rust_project << NEWLINE "        {" NEWLINE
                    << "          \"crate\": " << std::to_string(idx)
                    << "," NEWLINE "          \"name\": \"" << dep
@@ -204,13 +213,33 @@ void AddSysrootCrate(const std::string_view crate,
   rust_project << "    }";
 }
 
+// Add the given sysroot to the project, if it hasn't already been added.
+void AddSysroot(const std::string_view sysroot,
+                uint32_t* count,
+                SysrootIdxMap& sysroot_lookup,
+                std::ostream& rust_project,
+                const BuildSettings* build_settings,
+                bool first_crate) {
+  // If this sysroot is already in the lookup, we don't add it again.
+  if (sysroot_lookup.find(sysroot) != sysroot_lookup.end()) {
+    return;
+  }
+
+  // Otherwise, add all of its crates
+  for (auto crate : sysroot_crates) {
+    AddSysrootCrate(crate, sysroot, count, sysroot_lookup[sysroot],
+                    rust_project, build_settings, first_crate);
+    first_crate = false;
+  }
+}
+
 void AddTarget(const Target* target,
                uint32_t* count,
                TargetIdxMap& lookup,
                SysrootIdxMap& sysroot_lookup,
                const BuildSettings* build_settings,
                std::ostream& rust_project,
-               bool first) {
+               bool first_crate) {
   if (lookup.find(target) != lookup.end()) {
     // If target is already in the lookup, we don't add it again.
     return;
@@ -221,21 +250,19 @@ void AddTarget(const Target* target,
       target->toolchain()->GetToolForSourceTypeAsRust(SourceFile::SOURCE_RS);
   auto current_sysroot = rust_tool->GetSysroot();
   if (current_sysroot != "" && sysroot_lookup.count(current_sysroot) == 0) {
-    for (const auto& crate : sysroot_crates) {
-      AddSysrootCrate(crate, current_sysroot, count, sysroot_lookup,
-                      rust_project, build_settings, first);
-      first = false;
-    }
+    AddSysroot(current_sysroot, count, sysroot_lookup, rust_project,
+               build_settings, first_crate);
+    first_crate = false;
   }
 
   // Add each dependency first before we write any of the parent target.
   for (const auto& dep : target->rust_values().transitive_libs().GetOrdered()) {
     AddTarget(dep, count, lookup, sysroot_lookup, build_settings, rust_project,
-              first);
-    first = false;
+              first_crate);
+    first_crate = false;
   }
 
-  if (!first) {
+  if (!first_crate) {
     rust_project << "," NEWLINE;
   }
 
