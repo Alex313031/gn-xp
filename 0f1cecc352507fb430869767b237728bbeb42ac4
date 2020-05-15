@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "60eead2e_33e469fc",
+        "filename": "src/gn/rust_project_writer.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 133,
+      "author": {
+        "id": 1000397
+      },
+      "writtenOn": "2020-05-15T16:59:22Z",
+      "side": 1,
+      "message": "I assumed that was the case, given the heavy use of single-line if\u0027s without braces.  This slipped in out of old habits.",
+      "parentUuid": "e5a90c2f_99375f4e",
+      "revId": "0f1cecc352507fb430869767b237728bbeb42ac4",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "4d2b5c9d_fa474d5a",
         "filename": "src/gn/rust_project_writer.cc",
         "patchSetId": 1
@@ -30,6 +48,24 @@
       "writtenOn": "2020-05-15T14:42:05Z",
       "side": 1,
       "message": "nice add",
+      "revId": "0f1cecc352507fb430869767b237728bbeb42ac4",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "493b225a_dda5fd8d",
+        "filename": "src/gn/rust_project_writer.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 282,
+      "author": {
+        "id": 1000397
+      },
+      "writtenOn": "2020-05-15T16:59:22Z",
+      "side": 1,
+      "message": "It made debugging things so, so much easier.",
+      "parentUuid": "4d2b5c9d_fa474d5a",
       "revId": "0f1cecc352507fb430869767b237728bbeb42ac4",
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
       "unresolved": false
