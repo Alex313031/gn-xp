@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "f09e1d33_e946e044",
+        "filename": "src/gn/rust_project_writer.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 91,
+      "author": {
+        "id": 1000397
+      },
+      "writtenOn": "2020-05-15T21:09:52Z",
+      "side": 1,
+      "message": "Do you know how those are classified by GN? (they don\u0027t have their own OutputType, unless just shared/loadable library).  I didn\u0027t see any when I was testing.  One of the changes I have locally is to print the GN Target::OutputType, which I was using to make sense of the dependencies.",
+      "parentUuid": "cebd1e7a_dc0a2d70",
+      "revId": "0f1cecc352507fb430869767b237728bbeb42ac4",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "e5a90c2f_99375f4e",
         "filename": "src/gn/rust_project_writer.cc",
         "patchSetId": 1
