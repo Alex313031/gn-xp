@@ -10,18 +10,25 @@
 
 class DescBuilder {
  public:
+  struct Options {
+    bool all = false;
+    bool tree = false;
+    bool blame = false;
+  };
+
+  using DictionaryPtr = std::unique_ptr<base::DictionaryValue>;
+
   // Creates Dictionary representation for given target
-  static std::unique_ptr<base::DictionaryValue> DescriptionForTarget(
+  static DictionaryPtr DescriptionForTarget(
       const Target* target,
       const std::string& what,
-      bool all,
-      bool tree,
-      bool blame);
+      const Options& options);
 
   // Creates Dictionary representation for given config
-  static std::unique_ptr<base::DictionaryValue> DescriptionForConfig(
+  static DictionaryPtr DescriptionForConfig(
       const Config* config,
-      const std::string& what);
+      const std::string& what,
+      const Options& options);
 };
 
 #endif

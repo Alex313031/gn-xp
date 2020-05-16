@@ -100,8 +100,11 @@ class Setup {
     return check_patterns_.get();
   }
 
+  const BuildSettings& build_settings() const { return build_settings_; }
   BuildSettings& build_settings() { return build_settings_; }
+  const Builder& builder() const { return builder_; }
   Builder& builder() { return builder_; }
+  const LoaderImpl* loader() const { return loader_.get(); }
   LoaderImpl* loader() { return loader_.get(); }
 
   const SourceFile& GetDotFile() const { return dotfile_input_file_->name(); }
