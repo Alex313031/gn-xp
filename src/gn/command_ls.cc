@@ -77,16 +77,13 @@ int RunLs(const std::vector<std::string>& args) {
     // Some patterns or explicit labels were specified.
     std::vector<std::string> inputs(args.begin() + 1, args.end());
 
-    UniqueVector<const Target*> target_matches;
-    UniqueVector<const Config*> config_matches;
-    UniqueVector<const Toolchain*> toolchain_matches;
-    UniqueVector<SourceFile> file_matches;
-    if (!ResolveFromCommandLineInput(setup, inputs, default_toolchain_only,
-                                     &target_matches, &config_matches,
-                                     &toolchain_matches, &file_matches))
+    auto query = LabelQuery(setup);
+    if (!query.ResolveFromCommandLineInput(inputs, default_toolchain_only)) {
       return 1;
-    matches.insert(matches.begin(), target_matches.begin(),
-                   target_matches.end());
+    }
+
+    matches.insert(matches.begin(), query.target_matches.begin(),
+        query.target_matches.end());
   } else if (default_toolchain_only) {
     // List all resolved targets in the default toolchain.
     for (auto* target : setup->builder().GetAllResolvedTargets()) {

@@ -355,10 +355,6 @@
 #### **Command-specific switches**
 
 ```
-  --force
-      Ignores specifications of "check_includes = false" and checks all
-      target's files that match the target label.
-
   --check-generated
       Generated files are normally not checked since they do not exist
       until after a build. With this flag, those generated files that
@@ -367,6 +363,18 @@
   --check-system
      Check system style includes (using <angle brackets>) in addition to
      "double quote" includes.
+
+  --default-toolchain
+      Normally wildcard targets are matched in all toolchains. This
+      switch makes wildcard labels with no explicit toolchain reference
+      only match targets in the default toolchain.
+
+      Non-wildcard inputs with no explicit toolchain specification will
+      always match only a target in the default toolchain if one exists.
+
+  --force
+      Ignores specifications of "check_includes = false" and checks all
+      target's files that match the target label.
 ```
 
 #### **What gets checked**
@@ -481,8 +489,7 @@
   will be taken for the build in the given <out_dir>.
 
   The <label or pattern> can be a target label, a config label, or a label
-  pattern (see "gn help label_pattern"). A label pattern will only match
-  targets.
+  pattern (see "gn help label_pattern").
 ```
 
 #### **Possibilities for &lt;what to show&gt;**
@@ -498,7 +505,7 @@
   cflags_c [--blame]
   cflags_cc [--blame]
   check_includes
-  configs [--tree] (see below)
+  configs [--all] [--tree] (see below)
   data_keys
   defines [--blame]
   depfile
@@ -533,15 +540,15 @@
 ```
 
 #### **Shared flags**
-```
-  --all-toolchains
-      Normally only inputs in the default toolchain will be included.
-      This switch will turn on matching all toolchains.
 
-      For example, a file is in a target might be compiled twice:
-      once in the default toolchain and once in a secondary one. Without
-      this flag, only the default toolchain one will be matched by
-      wildcards. With this flag, both will be matched.
+```
+  --default-toolchain
+      Normally wildcard targets are matched in all toolchains. This
+      switch makes wildcard labels with no explicit toolchain reference
+      only match targets in the default toolchain.
+
+      Non-wildcard inputs with no explicit toolchain specification will
+      always match only a target in the default toolchain if one exists.
 
   --format=json
       Format the output as JSON instead of text.
@@ -584,6 +591,7 @@
   --all
       Collects all recursive dependencies and prints a sorted flat list. Also
       usable with --tree (see below).
+
   --as=(buildfile|label|output)
       How to print targets.
 
@@ -610,10 +618,13 @@
 
       Tree output can not be used with the filtering or output flags: --as,
       --type, --testonly.
+
   --type=(action|copy|executable|group|loadable_module|shared_library|
-          source_set|static_library)
+          source_set|static_library|target|config|toolchain)
       Restrict outputs to targets matching the given type. If
       unspecified, no filtering will be performed.
+      Note: target, config and toolchain are only used for
+      filtering label matches.
 ```
 
 #### **Note**
@@ -842,7 +853,7 @@
   gn help --markdown all
       Dump all help to stdout in markdown format.
 ```
-### <a name="cmd_ls"></a>**gn ls &lt;out_dir&gt; [&lt;label_pattern&gt;] [\--all-toolchains] [\--as=...]**
+### <a name="cmd_ls"></a>**gn ls &lt;out_dir&gt; [&lt;label_pattern&gt;] [\--default-toolchain] [\--as=...]**
 ```
       [--type=...] [--testonly=...]
 
@@ -870,14 +881,13 @@
           Prints the first output file for the target relative to the
           root build directory.
 
-  --all-toolchains
-      Normally only inputs in the default toolchain will be included.
-      This switch will turn on matching all toolchains.
+  --default-toolchain
+      Normally wildcard targets are matched in all toolchains. This
+      switch makes wildcard labels with no explicit toolchain reference
+      only match targets in the default toolchain.
 
-      For example, a file is in a target might be compiled twice:
-      once in the default toolchain and once in a secondary one. Without
-      this flag, only the default toolchain one will be matched by
-      wildcards. With this flag, both will be matched.
+      Non-wildcard inputs with no explicit toolchain specification will
+      always match only a target in the default toolchain if one exists.
 
   --testonly=(true|false)
       Restrict outputs to targets with the testonly flag set
@@ -885,9 +895,11 @@
       ignored.
 
   --type=(action|copy|executable|group|loadable_module|shared_library|
-          source_set|static_library)
+          source_set|static_library|target|config|toolchain)
       Restrict outputs to targets matching the given type. If
       unspecified, no filtering will be performed.
+      Note: target, config and toolchain are only used for
+      filtering label matches.
 ```
 
 #### **Examples**
@@ -910,10 +922,6 @@
 
   gn ls out/Debug "//base/*" --as=output | xargs ninja -C out/Debug
       Builds all targets in //base and all subdirectories.
-
-  gn ls out/Debug //base --all-toolchains
-      Lists all variants of the target //base:base (it may be referenced
-      in multiple toolchains).
 ```
 ### <a name="cmd_meta"></a>**gn meta**
 
@@ -1075,7 +1083,7 @@
 
 ```
   gn refs <out_dir> (<label_pattern>|<label>|<file>|@<response_file>)*
-          [--all] [--all-toolchains] [--as=...] [--testonly=...] [--type=...]
+          [--all] [--default-toolchain] [--as=...] [--testonly=...] [--type=...]
 
   Finds reverse dependencies (which targets reference something). The input is
   a list containing:
@@ -1111,14 +1119,6 @@
       directly or indirectly on that file.
 
       When used with --tree, turns off eliding to show a complete tree.
-  --all-toolchains
-      Normally only inputs in the default toolchain will be included.
-      This switch will turn on matching all toolchains.
-
-      For example, a file is in a target might be compiled twice:
-      once in the default toolchain and once in a secondary one. Without
-      this flag, only the default toolchain one will be matched by
-      wildcards. With this flag, both will be matched.
 
   --as=(buildfile|label|output)
       How to print targets.
@@ -1132,10 +1132,19 @@
           Prints the first output file for the target relative to the
           root build directory.
 
+  --default-toolchain
+      Normally wildcard targets are matched in all toolchains. This
+      switch makes wildcard labels with no explicit toolchain reference
+      only match targets in the default toolchain.
+
+      Non-wildcard inputs with no explicit toolchain specification will
+      always match only a target in the default toolchain if one exists.
+
   -q
      Quiet. If nothing matches, don't print any output. Without this option, if
      there are no matches there will be an informational message printed which
      might interfere with scripts processing the output.
+
   --testonly=(true|false)
       Restrict outputs to targets with the testonly flag set
       accordingly. When unspecified, the target's testonly flags are
@@ -1147,10 +1156,13 @@
 
       Tree output can not be used with the filtering or output flags: --as,
       --type, --testonly.
+
   --type=(action|copy|executable|group|loadable_module|shared_library|
-          source_set|static_library)
+          source_set|static_library|target|config|toolchain)
       Restrict outputs to targets matching the given type. If
       unspecified, no filtering will be performed.
+      Note: target, config and toolchain are only used for
+      filtering label matches.
 ```
 
 #### **Examples (target input)**
