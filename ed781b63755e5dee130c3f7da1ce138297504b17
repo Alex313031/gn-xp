@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "611c3b55_7a0f733c",
+        "filename": "src/gn/rust_project_writer_unittest.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 231,
+      "author": {
+        "id": 1000397
+      },
+      "writtenOn": "2020-05-16T00:40:05Z",
+      "side": 1,
+      "message": "New test to make sure that target groups are inspected for Rust deps, and that both rust libs and proc macro libs are included, and that others (like static libs) are not.",
+      "range": {
+        "startLine": 231,
+        "startChar": 30,
+        "endLine": 231,
+        "endChar": 54
+      },
+      "revId": "ed781b63755e5dee130c3f7da1ce138297504b17",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": true
+    }
+  ]
+}

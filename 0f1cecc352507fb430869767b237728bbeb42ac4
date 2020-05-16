@@ -55,6 +55,24 @@
     },
     {
       "key": {
+        "uuid": "83d84585_bc6169bc",
+        "filename": "src/gn/rust_project_writer.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 91,
+      "author": {
+        "id": 1000397
+      },
+      "writtenOn": "2020-05-16T00:40:05Z",
+      "side": 1,
+      "message": "I went through all the current deps, and by type, and these two are the only ones that result in Rust source files as deps (STATIC_LIBRARY and SHARED_LIBRARY all are C lib deps).  This may be an artifact of not having any Rust dylibs at the moment.  Let\u0027s add those appropriately here  when we have them.",
+      "parentUuid": "70b5cbe1_03cdbd53",
+      "revId": "0f1cecc352507fb430869767b237728bbeb42ac4",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "e5a90c2f_99375f4e",
         "filename": "src/gn/rust_project_writer.cc",
         "patchSetId": 1
@@ -87,6 +105,24 @@
       "revId": "0f1cecc352507fb430869767b237728bbeb42ac4",
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "8a93d37d_51e3c8c7",
+        "filename": "src/gn/rust_project_writer.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 133,
+      "author": {
+        "id": 1000397
+      },
+      "writtenOn": "2020-05-16T00:40:05Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "60eead2e_33e469fc",
+      "revId": "0f1cecc352507fb430869767b237728bbeb42ac4",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": false
     },
     {
       "key": {
