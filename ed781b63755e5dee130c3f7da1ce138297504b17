@@ -22,6 +22,30 @@
       "revId": "ed781b63755e5dee130c3f7da1ce138297504b17",
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "83d11c6e_1f472b4b",
+        "filename": "src/gn/rust_project_writer_unittest.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 231,
+      "author": {
+        "id": 1000168
+      },
+      "writtenOn": "2020-05-18T18:05:20Z",
+      "side": 1,
+      "message": "This would be good to have as a comment.",
+      "parentUuid": "611c3b55_7a0f733c",
+      "range": {
+        "startLine": 231,
+        "startChar": 30,
+        "endLine": 231,
+        "endChar": 54
+      },
+      "revId": "ed781b63755e5dee130c3f7da1ce138297504b17",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": true
     }
   ]
 }

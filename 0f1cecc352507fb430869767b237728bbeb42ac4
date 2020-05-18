@@ -73,6 +73,24 @@
     },
     {
       "key": {
+        "uuid": "c65b4a6e_51f9ea51",
+        "filename": "src/gn/rust_project_writer.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 91,
+      "author": {
+        "id": 1000168
+      },
+      "writtenOn": "2020-05-18T18:05:20Z",
+      "side": 1,
+      "message": "We don\u0027t have Rust dylibs today, but we plan to add them in the next few weeks. They will probably be categorized as SHARED_LIBRARY. If this is a problem to support today, maybe we can change how GN categorizes them after landing this change.",
+      "parentUuid": "83d84585_bc6169bc",
+      "revId": "0f1cecc352507fb430869767b237728bbeb42ac4",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "e5a90c2f_99375f4e",
         "filename": "src/gn/rust_project_writer.cc",
         "patchSetId": 1
