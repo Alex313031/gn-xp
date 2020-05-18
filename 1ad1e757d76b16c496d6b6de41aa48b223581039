@@ -1,0 +1,61 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "59fdd352_a73924ca",
+        "filename": "src/gn/compile_commands_writer.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 90,
+      "author": {
+        "id": 1000070
+      },
+      "writtenOn": "2020-05-18T09:19:13Z",
+      "side": 1,
+      "message": "Typo, this should be \"-weak_framework\"",
+      "range": {
+        "startLine": 90,
+        "startChar": 45,
+        "endLine": 90,
+        "endChar": 58
+      },
+      "revId": "1ad1e757d76b16c496d6b6de41aa48b223581039",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "29b6f56c_2cf0e656",
+        "filename": "src/gn/config_values_generator.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 129,
+      "author": {
+        "id": 1000070
+      },
+      "writtenOn": "2020-05-18T09:19:13Z",
+      "side": 1,
+      "message": "This is duplicated from parsing variables::kFrameworks. Can we extract this to a helper free function and use it from here?\n\n  namespace {\n\n  bool GetFrameworksList(\n      Scope* scope,\n      const char* var_name,\n      ConfigValues* config_values,\n      std::vector\u003cstd::string\u003e\u0026 (ConfigValues::*accessor)(),\n      Err* err) {\n    const Value* value \u003d scope-\u003eGetValue(var_name, true);\n    if (!value)\n      return true;\n\n    std::vector\u003cstd::string\u003e frameworks;\n    if (!ExtractListOfStringValues(*value, \u0026frameworks, err))\n      return false;\n\n    // All strings must end with \".frameworks\".\n    for (const std::string\u0026 framework : frameworks) {\n      std::string_view \u003d framework_name \u003d GetFrameworkName(framework);\n      if (framework_name.empty()) {\n        *err \u003d Err(*value,\n                   \"This frameworks value is wrong. \"\n                   \"All listed frameworks names must not include any\\n\"\n                   \"path component and have \\\".framework\\\" extension.\");\n        return false;\n      }\n    }\n\n    (config_value-\u003e*accessor)().swap(frameworks);\n    return true;\n  }\n\n  }\n\nThen we can use it and above.",
+      "revId": "1ad1e757d76b16c496d6b6de41aa48b223581039",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "b6db749b_1dfc947c",
+        "filename": "src/gn/function_toolchain.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 423,
+      "author": {
+        "id": 1000070
+      },
+      "writtenOn": "2020-05-18T09:19:13Z",
+      "side": 1,
+      "message": "I think the example is incorrect because libs does not support path for framework (never has). Can you instead use the following example?\n\n  If you specified:\n    framework_switch \u003d \"-framework \"\n    weak_framework_switch \u003d \"-weak_framework \"\n    framework_dir_switch \u003d \"-F\"\n  and:\n    framework_dirs \u003d [ \"$root_out_dir\" ]\n    frameworks \u003d [ \"UIKit.framework\", \"Foo.framework\" ]\n    weak_frameworks \u003d [ \"MediaPlayer.framework\" ]\n  would be:\n    \"-F. -framework UIKit -framework Foo -weak_framework MediaPlayer\"\n\nAlso, please regenerate the documentation at the same time (build gn and then run `gn help all --markdown \u003e docs/reference.md`).",
+      "revId": "1ad1e757d76b16c496d6b6de41aa48b223581039",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": true
+    }
+  ]
+}
