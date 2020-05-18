@@ -116,6 +116,24 @@
       "revId": "1ad1e757d76b16c496d6b6de41aa48b223581039",
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ee5e9a79_975df6d1",
+        "filename": "src/gn/function_toolchain.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 423,
+      "author": {
+        "id": 1000070
+      },
+      "writtenOn": "2020-05-18T15:13:49Z",
+      "side": 1,
+      "message": "Yes, it\u0027s okay. People usually forget to regenerate the documentation and there is no automated process to do it. Maybe we should add a presubmit hook (but probably not trivial to do) or have a bot generate it.",
+      "parentUuid": "13583e5f_2badb79f",
+      "revId": "1ad1e757d76b16c496d6b6de41aa48b223581039",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": false
     }
   ]
 }
