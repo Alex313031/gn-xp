@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "97739b9a_84829707",
+        "filename": "src/gn/compile_commands_writer.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 90,
+      "author": {
+        "id": 1000166
+      },
+      "writtenOn": "2020-05-18T15:03:11Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "59fdd352_a73924ca",
+      "range": {
+        "startLine": 90,
+        "startChar": 45,
+        "endLine": 90,
+        "endChar": 58
+      },
+      "revId": "1ad1e757d76b16c496d6b6de41aa48b223581039",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "29b6f56c_2cf0e656",
         "filename": "src/gn/config_values_generator.cc",
         "patchSetId": 1
@@ -42,6 +66,24 @@
     },
     {
       "key": {
+        "uuid": "66f6aeb4_d5acaae5",
+        "filename": "src/gn/config_values_generator.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 129,
+      "author": {
+        "id": 1000166
+      },
+      "writtenOn": "2020-05-18T15:03:11Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "29b6f56c_2cf0e656",
+      "revId": "1ad1e757d76b16c496d6b6de41aa48b223581039",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "b6db749b_1dfc947c",
         "filename": "src/gn/function_toolchain.cc",
         "patchSetId": 1
@@ -56,6 +98,24 @@
       "revId": "1ad1e757d76b16c496d6b6de41aa48b223581039",
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "13583e5f_2badb79f",
+        "filename": "src/gn/function_toolchain.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 423,
+      "author": {
+        "id": 1000166
+      },
+      "writtenOn": "2020-05-18T15:03:11Z",
+      "side": 1,
+      "message": "\u003e I think the example is incorrect because libs does not support path for framework (never has). Can you instead use the following example?\n\u003e \n\u003e   If you specified:\n\u003e     framework_switch \u003d \"-framework \"\n\u003e     weak_framework_switch \u003d \"-weak_framework \"\n\u003e     framework_dir_switch \u003d \"-F\"\n\u003e   and:\n\u003e     framework_dirs \u003d [ \"$root_out_dir\" ]\n\u003e     frameworks \u003d [ \"UIKit.framework\", \"Foo.framework\" ]\n\u003e     weak_frameworks \u003d [ \"MediaPlayer.framework\" ]\n\u003e   would be:\n\u003e     \"-F. -framework UIKit -framework Foo -weak_framework MediaPlayer\"\n\nDone.\n\n\u003e Also, please regenerate the documentation at the same time (build gn and then run `gn help all --markdown \u003e docs/reference.md`).\n\nI did this originally but it pulls in unrelated changes. I suppose that\u0027s OK though.",
+      "parentUuid": "b6db749b_1dfc947c",
+      "revId": "1ad1e757d76b16c496d6b6de41aa48b223581039",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": false
     }
   ]
 }
