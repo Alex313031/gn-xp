@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "1bc12647_b7e4937c",
+        "filename": "src/gn/rust_project_writer_unittest.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 49,
+      "author": {
+        "id": 1000168
+      },
+      "writtenOn": "2020-05-18T18:07:19Z",
+      "side": 1,
+      "message": "Can you add a test which has a cfg present?",
+      "revId": "f6c06c392be1ef7bca029f3d808c44532ff8c8aa",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": true
+    }
+  ]
+}
