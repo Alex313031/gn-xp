@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "3a05af9c_16494631",
+        "filename": "src/gn/desc_builder.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 576,
+      "author": {
+        "id": 1000014
+      },
+      "writtenOn": "2020-05-19T00:17:12Z",
+      "side": 1,
+      "message": "Can this be a range-based for loop?",
+      "revId": "567fcbdbce218ad63fda3c17eeeb788208754152",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "41d4feac_dfc15a95",
+        "filename": "src/gn/ninja_binary_target_writer.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 353,
+      "author": {
+        "id": 1000014
+      },
+      "writtenOn": "2020-05-19T00:17:12Z",
+      "side": 1,
+      "message": "I think this could be a range-based for loop which would be a bit cleaner. Maybe fix the previous one too?",
+      "revId": "567fcbdbce218ad63fda3c17eeeb788208754152",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "8452ad9b_c2061b68",
+        "filename": "src/gn/variables.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 2139,
+      "author": {
+        "id": 1000014
+      },
+      "writtenOn": "2020-05-19T00:17:12Z",
+      "side": 1,
+      "message": "I think it would be helpful here for users to describe what weakly linked frameworks mean, like you did in the CL description.",
+      "revId": "567fcbdbce218ad63fda3c17eeeb788208754152",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": true
+    }
+  ]
+}
