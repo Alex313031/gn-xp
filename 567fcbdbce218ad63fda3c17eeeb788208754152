@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "de869b6c_433b862a",
+        "filename": "src/gn/desc_builder.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 576,
+      "author": {
+        "id": 1000166
+      },
+      "writtenOn": "2020-05-19T16:28:26Z",
+      "side": 1,
+      "message": "No, OrderedSet does not implement the required iterators.",
+      "parentUuid": "3a05af9c_16494631",
+      "revId": "567fcbdbce218ad63fda3c17eeeb788208754152",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "41d4feac_dfc15a95",
         "filename": "src/gn/ninja_binary_target_writer.cc",
         "patchSetId": 2
@@ -36,6 +54,24 @@
     },
     {
       "key": {
+        "uuid": "b0a07c06_2c834ee4",
+        "filename": "src/gn/ninja_binary_target_writer.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 353,
+      "author": {
+        "id": 1000166
+      },
+      "writtenOn": "2020-05-19T16:28:26Z",
+      "side": 1,
+      "message": "Nope unfortunately:\n\nerror: invalid range expression of type \u0027const OrderedSet\u003cstd::__1::basic_string\u003cchar\u003e \u003e\u0027; no viable \u0027begin\u0027 function available",
+      "parentUuid": "41d4feac_dfc15a95",
+      "revId": "567fcbdbce218ad63fda3c17eeeb788208754152",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "8452ad9b_c2061b68",
         "filename": "src/gn/variables.cc",
         "patchSetId": 2
@@ -50,6 +86,24 @@
       "revId": "567fcbdbce218ad63fda3c17eeeb788208754152",
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "2754485d_25e3c89c",
+        "filename": "src/gn/variables.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 2139,
+      "author": {
+        "id": 1000166
+      },
+      "writtenOn": "2020-05-19T16:28:26Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "8452ad9b_c2061b68",
+      "revId": "567fcbdbce218ad63fda3c17eeeb788208754152",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": false
     }
   ]
 }
