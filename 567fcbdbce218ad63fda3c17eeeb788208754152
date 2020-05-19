@@ -37,6 +37,24 @@
     },
     {
       "key": {
+        "uuid": "2090e3b7_11a6ee30",
+        "filename": "src/gn/desc_builder.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 576,
+      "author": {
+        "id": 1000014
+      },
+      "writtenOn": "2020-05-19T16:36:34Z",
+      "side": 1,
+      "message": "Hm, I guess I should add that!",
+      "parentUuid": "de869b6c_433b862a",
+      "revId": "567fcbdbce218ad63fda3c17eeeb788208754152",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "41d4feac_dfc15a95",
         "filename": "src/gn/ninja_binary_target_writer.cc",
         "patchSetId": 2
