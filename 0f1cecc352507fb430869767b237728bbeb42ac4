@@ -91,6 +91,24 @@
     },
     {
       "key": {
+        "uuid": "73634c9e_794e72d0",
+        "filename": "src/gn/rust_project_writer.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 91,
+      "author": {
+        "id": 1000397
+      },
+      "writtenOn": "2020-05-19T00:29:01Z",
+      "side": 1,
+      "message": "After looking at source_types_used(), and comparing that against the output types, I decided to switch it to using that, so it should pick up dylibs if they are SHARED_LIBRARY + RustSourceUsed().",
+      "parentUuid": "c65b4a6e_51f9ea51",
+      "revId": "0f1cecc352507fb430869767b237728bbeb42ac4",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "e5a90c2f_99375f4e",
         "filename": "src/gn/rust_project_writer.cc",
         "patchSetId": 1
