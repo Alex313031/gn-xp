@@ -1,0 +1,433 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "79c6ab16_00af085a",
+        "filename": "src/gn/command_check.cc",
+        "patchSetId": 10
+      },
+      "lineNbr": 206,
+      "author": {
+        "id": 1000014
+      },
+      "writtenOn": "2020-05-20T03:51:54Z",
+      "side": 1,
+      "message": "Can you write all of these as:\n\n  LabelQuery query(setup);\n\nI think this is a more standard way to write this. The way you have it makes the type more obscure (\"LabelQuery()\" looks like a function) and doesn\u0027t even save typing.",
+      "revId": "fa50cafd374d984b2b2fd04dcab160c3feb323f8",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "0a1808be_5d7252e6",
+        "filename": "src/gn/command_desc.cc",
+        "patchSetId": 10
+      },
+      "lineNbr": 651,
+      "author": {
+        "id": 1000014
+      },
+      "writtenOn": "2020-05-20T03:51:54Z",
+      "side": 1,
+      "message": "This should stick with \"const auto*\"",
+      "range": {
+        "startLine": 651,
+        "startChar": 9,
+        "endLine": 651,
+        "endChar": 13
+      },
+      "revId": "fa50cafd374d984b2b2fd04dcab160c3feb323f8",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "cb3966de_3db1803f",
+        "filename": "src/gn/command_desc.cc",
+        "patchSetId": 10
+      },
+      "lineNbr": 657,
+      "author": {
+        "id": 1000014
+      },
+      "writtenOn": "2020-05-20T03:51:54Z",
+      "side": 1,
+      "message": "Ditto",
+      "range": {
+        "startLine": 657,
+        "startChar": 9,
+        "endLine": 657,
+        "endChar": 13
+      },
+      "revId": "fa50cafd374d984b2b2fd04dcab160c3feb323f8",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "7731cec1_7045315a",
+        "filename": "src/gn/command_desc.cc",
+        "patchSetId": 10
+      },
+      "lineNbr": 674,
+      "author": {
+        "id": 1000014
+      },
+      "writtenOn": "2020-05-20T03:51:54Z",
+      "side": 1,
+      "message": "Don\u0027t replace auto",
+      "range": {
+        "startLine": 674,
+        "startChar": 9,
+        "endLine": 674,
+        "endChar": 13
+      },
+      "revId": "fa50cafd374d984b2b2fd04dcab160c3feb323f8",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "be9da7f6_f504eaf4",
+        "filename": "src/gn/command_desc.cc",
+        "patchSetId": 10
+      },
+      "lineNbr": 683,
+      "author": {
+        "id": 1000014
+      },
+      "writtenOn": "2020-05-20T03:51:54Z",
+      "side": 1,
+      "message": "Ditto",
+      "range": {
+        "startLine": 683,
+        "startChar": 9,
+        "endLine": 683,
+        "endChar": 13
+      },
+      "revId": "fa50cafd374d984b2b2fd04dcab160c3feb323f8",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "dd5f2fa4_1a627201",
+        "filename": "src/gn/command_outputs.cc",
+        "patchSetId": 10
+      },
+      "lineNbr": 103,
+      "author": {
+        "id": 1000014
+      },
+      "writtenOn": "2020-05-20T03:51:54Z",
+      "side": 1,
+      "message": "I don\u0027t think we should be replacing type names with \"auto\". The specific Google rules are https://google.github.io/styleguide/cppguide.html#Type_deduction\n\nI\u0027m OK doing it when the type name is duplicated, e.g.\n\n  auto foo \u003d new Foo;\n  auto bar \u003d std::make_unique\u003cBar\u003e();\n\nbut in this case and the for loop below, it\u0027s not obvious what the file name is. Also, in this case you lost the \"const\".\n\nI realize some of the other places use auto more. I\u0027m actually not too picky, but changing them is not something we should be doing.",
+      "revId": "fa50cafd374d984b2b2fd04dcab160c3feb323f8",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "31dff751_6032aa8b",
+        "filename": "src/gn/command_outputs.cc",
+        "patchSetId": 10
+      },
+      "lineNbr": 131,
+      "author": {
+        "id": 1000014
+      },
+      "writtenOn": "2020-05-20T03:51:54Z",
+      "side": 1,
+      "message": "We should put this back as discussed above.",
+      "range": {
+        "startLine": 131,
+        "startChar": 7,
+        "endLine": 131,
+        "endChar": 11
+      },
+      "revId": "fa50cafd374d984b2b2fd04dcab160c3feb323f8",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "e6bf73d5_1ef68e5c",
+        "filename": "src/gn/command_refs.cc",
+        "patchSetId": 10
+      },
+      "lineNbr": 440,
+      "author": {
+        "id": 1000014
+      },
+      "writtenOn": "2020-05-20T03:51:54Z",
+      "side": 1,
+      "message": "Since these blocks have \u003e1 line, can you add braces for them?",
+      "revId": "fa50cafd374d984b2b2fd04dcab160c3feb323f8",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "c31c2db1_19aaf2f7",
+        "filename": "src/gn/commands.cc",
+        "patchSetId": 10
+      },
+      "lineNbr": 62,
+      "author": {
+        "id": 1000014
+      },
+      "writtenOn": "2020-05-20T03:51:54Z",
+      "side": 1,
+      "message": "I\u0027m OK with auto here, but Chrome style says to use \"item*\" (i.e. not use auto to deduce pointers). https://chromium.googlesource.com/chromium/src/+/master/styleguide/c++/c++-dos-and-donts.md#do-not-use-to-deduce-a-raw-pointer",
+      "range": {
+        "startLine": 62,
+        "startChar": 7,
+        "endLine": 62,
+        "endChar": 11
+      },
+      "revId": "fa50cafd374d984b2b2fd04dcab160c3feb323f8",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "5e9e310f_127bc22d",
+        "filename": "src/gn/commands.cc",
+        "patchSetId": 10
+      },
+      "lineNbr": 436,
+      "author": {
+        "id": 1000014
+      },
+      "writtenOn": "2020-05-20T03:51:54Z",
+      "side": 1,
+      "message": "Can you just do\n\n  Err err;",
+      "revId": "fa50cafd374d984b2b2fd04dcab160c3feb323f8",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "e72bf1fb_73dba391",
+        "filename": "src/gn/commands.cc",
+        "patchSetId": 10
+      },
+      "lineNbr": 458,
+      "author": {
+        "id": 1000014
+      },
+      "writtenOn": "2020-05-20T03:51:54Z",
+      "side": 1,
+      "message": "I think this would be more clear to explicitly list the return type:\n\n  template \u003cclass ItemType\u003e\n  const ItemType GetItemAs(const Item* item) {\n\n(I\u0027d also rename the template type \"ItemType\" so it\u0027s a little more obvious what the range of values might be.)",
+      "revId": "fa50cafd374d984b2b2fd04dcab160c3feb323f8",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "7ea3d083_827c0fd7",
+        "filename": "src/gn/commands.cc",
+        "patchSetId": 10
+      },
+      "lineNbr": 459,
+      "author": {
+        "id": 1000014
+      },
+      "writtenOn": "2020-05-20T03:51:54Z",
+      "side": 1,
+      "message": "Since we know we\u0027re explicitly return \"const Target*\" or whatever, I\u0027d remove this and just make it explicit below. I find I have to study this line for a minute to figure out what it\u0027s actually trying to do.",
+      "revId": "fa50cafd374d984b2b2fd04dcab160c3feb323f8",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "4eb617c8_836ac87f",
+        "filename": "src/gn/commands.cc",
+        "patchSetId": 10
+      },
+      "lineNbr": 475,
+      "author": {
+        "id": 1000014
+      },
+      "writtenOn": "2020-05-20T03:51:54Z",
+      "side": 1,
+      "message": "I feel like this would be simpler and clearer as\n\n  template \u003cclass ItemType\u003e\n  void FilterItems(const std::vector\u003cconst Item*\u003e\u0026 inputs, UniqueVector\u003cconst ItemType\u003e outputs) {\n\nso then you don\u0027t need the value_type thing and what to call this function with it is also more clear.",
+      "range": {
+        "startLine": 475,
+        "startChar": 34,
+        "endLine": 475,
+        "endChar": 41
+      },
+      "revId": "fa50cafd374d984b2b2fd04dcab160c3feb323f8",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "681282d6_3241d4ef",
+        "filename": "src/gn/commands.cc",
+        "patchSetId": 10
+      },
+      "lineNbr": 479,
+      "author": {
+        "id": 1000014
+      },
+      "writtenOn": "2020-05-20T03:51:54Z",
+      "side": 1,
+      "message": "Can you explicitly list \"const ItemType*\"",
+      "range": {
+        "startLine": 479,
+        "startChar": 8,
+        "endLine": 479,
+        "endChar": 12
+      },
+      "revId": "fa50cafd374d984b2b2fd04dcab160c3feb323f8",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "942d0a07_64181321",
+        "filename": "src/gn/commands.cc",
+        "patchSetId": 10
+      },
+      "lineNbr": 491,
+      "author": {
+        "id": 1000014
+      },
+      "writtenOn": "2020-05-20T03:51:54Z",
+      "side": 1,
+      "message": "indenting, maybe run this through clang-format just to be sure.",
+      "revId": "fa50cafd374d984b2b2fd04dcab160c3feb323f8",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "23c9c7f7_25ce299f",
+        "filename": "src/gn/commands.cc",
+        "patchSetId": 10
+      },
+      "lineNbr": 500,
+      "author": {
+        "id": 1000014
+      },
+      "writtenOn": "2020-05-20T03:51:54Z",
+      "side": 1,
+      "message": "\"const Item*\"",
+      "range": {
+        "startLine": 500,
+        "startChar": 13,
+        "endLine": 500,
+        "endChar": 17
+      },
+      "revId": "fa50cafd374d984b2b2fd04dcab160c3feb323f8",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "0b003da7_75d703b4",
+        "filename": "src/gn/commands.h",
+        "patchSetId": 10
+      },
+      "lineNbr": 151,
+      "author": {
+        "id": 1000014
+      },
+      "writtenOn": "2020-05-20T03:51:54Z",
+      "side": 1,
+      "message": "Google style says the default values must be always the same: https://google.github.io/styleguide/cppguide.html#Default_Arguments\n\nI think we should be passing this in since I think having this kind of thing reach into the global state to control its behavior leads to mysterious behavior. We can add a helper that callers can use if necessary, but I\u0027d pass in the CommandLine* to use to avoid the global state.",
+      "range": {
+        "startLine": 151,
+        "startChar": 22,
+        "endLine": 151,
+        "endChar": 35
+      },
+      "revId": "fa50cafd374d984b2b2fd04dcab160c3feb323f8",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "9ee01d56_857ad534",
+        "filename": "src/gn/commands.h",
+        "patchSetId": 10
+      },
+      "lineNbr": 219,
+      "author": {
+        "id": 1000014
+      },
+      "writtenOn": "2020-05-20T03:51:54Z",
+      "side": 1,
+      "message": "targets -\u003e items",
+      "range": {
+        "startLine": 219,
+        "startChar": 29,
+        "endLine": 219,
+        "endChar": 36
+      },
+      "revId": "fa50cafd374d984b2b2fd04dcab160c3feb323f8",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "2c5c9c84_2d4051a5",
+        "filename": "src/gn/commands.h",
+        "patchSetId": 10
+      },
+      "lineNbr": 221,
+      "author": {
+        "id": 1000014
+      },
+      "writtenOn": "2020-05-20T03:51:54Z",
+      "side": 1,
+      "message": "It\u0027s not clear to me what this is trying to say here. Maybe it\u0027s not necessary to add this at all?",
+      "revId": "fa50cafd374d984b2b2fd04dcab160c3feb323f8",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "9d0f0344_988b672b",
+        "filename": "src/gn/desc_builder.cc",
+        "patchSetId": 10
+      },
+      "lineNbr": 206,
+      "author": {
+        "id": 1000014
+      },
+      "writtenOn": "2020-05-20T03:51:54Z",
+      "side": 1,
+      "message": "Can you document how the \"indent\" works? I started writing a comment about how you should change it before I realized this is also being used to implement \"all\" mode using this flag.",
+      "revId": "fa50cafd374d984b2b2fd04dcab160c3feb323f8",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "b521b995_2c142707",
+        "filename": "src/gn/desc_builder.cc",
+        "patchSetId": 10
+      },
+      "lineNbr": 311,
+      "author": {
+        "id": 1000014
+      },
+      "writtenOn": "2020-05-20T03:51:54Z",
+      "side": 1,
+      "message": "Glad you noticed these omissions!",
+      "range": {
+        "startLine": 311,
+        "startChar": 31,
+        "endLine": 311,
+        "endChar": 41
+      },
+      "revId": "fa50cafd374d984b2b2fd04dcab160c3feb323f8",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": true
+    }
+  ]
+}
