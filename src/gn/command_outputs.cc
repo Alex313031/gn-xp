@@ -83,17 +83,13 @@ int RunOutputs(const std::vector<std::string>& args) {
 
   std::vector<std::string> inputs(args.begin() + 1, args.end());
 
-  UniqueVector<const Target*> target_matches;
-  UniqueVector<const Config*> config_matches;
-  UniqueVector<const Toolchain*> toolchain_matches;
-  UniqueVector<SourceFile> file_matches;
-  if (!ResolveFromCommandLineInput(setup, inputs, false, &target_matches,
-                                   &config_matches, &toolchain_matches,
-                                   &file_matches))
+  LabelQuery query(setup);
+  if (!query.ResolveFromCommandLineInput(inputs, false, LabelQuery::ALL)) {
     return 1;
+  }
 
   // We only care about targets and files.
-  if (target_matches.empty() && file_matches.empty()) {
+  if (query.target_matches.empty() && query.file_matches.empty()) {
     Err(Location(), "The input matched no targets or files.").PrintToStdout();
     return 1;
   }
@@ -104,7 +100,7 @@ int RunOutputs(const std::vector<std::string>& args) {
   // Files. This must go first because it may add to the "targets" list.
   std::vector<const Target*> all_targets =
       setup->builder().GetAllResolvedTargets();
-  for (const SourceFile& file : file_matches) {
+  for (const SourceFile& file : query.file_matches) {
     std::vector<TargetContainingFile> targets;
     GetTargetsContainingFile(setup, all_targets, file, false, &targets);
     if (targets.empty()) {
@@ -119,7 +115,7 @@ int RunOutputs(const std::vector<std::string>& args) {
     for (const TargetContainingFile& pair : targets) {
       if (pair.second == HowTargetContainsFile::kInputs) {
         // Inputs maps to the target itself. This will be evaluated below.
-        target_matches.push_back(pair.first);
+        query.target_matches.push_back(pair.first);
       } else if (pair.second == HowTargetContainsFile::kSources) {
         // Source file, check it.
         const char* computed_tool = nullptr;
@@ -132,7 +128,7 @@ int RunOutputs(const std::vector<std::string>& args) {
   }
 
   // Targets.
-  for (const Target* target : target_matches) {
+  for (const Target* target : query.target_matches) {
     std::vector<SourceFile> output_files;
     Err err;
     if (!target->GetOutputsAsSourceFiles(LocationRange(), true, &output_files,

@@ -203,21 +203,19 @@ int RunCheck(const std::vector<std::string>& args) {
   if (args.size() > 1) {
     // Compute the targets to check.
     std::vector<std::string> inputs(args.begin() + 1, args.end());
-    UniqueVector<const Target*> target_matches;
-    UniqueVector<const Config*> config_matches;
-    UniqueVector<const Toolchain*> toolchain_matches;
-    UniqueVector<SourceFile> file_matches;
-    if (!ResolveFromCommandLineInput(setup, inputs, default_toolchain_only,
-                                     &target_matches, &config_matches,
-                                     &toolchain_matches, &file_matches))
+    LabelQuery query(setup);
+    if (!query.ResolveFromCommandLineInput(inputs, default_toolchain_only,
+                                           LabelQuery::GetItemType(cmdline))) {
       return 1;
+    }
 
-    if (target_matches.size() == 0) {
+    if (query.target_matches.empty()) {
       OutputString("No matching targets.\n");
       return 1;
     }
-    targets_to_check.insert(targets_to_check.begin(), target_matches.begin(),
-                            target_matches.end());
+    targets_to_check.insert(targets_to_check.begin(),
+                            query.target_matches.begin(),
+                            query.target_matches.end());
   } else {
     // No argument means to check everything allowed by the filter in
     // the build config file.

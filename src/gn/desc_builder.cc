@@ -111,16 +111,16 @@ void RecursiveCollectChildDeps(const Target* target,
     RecursiveCollectDeps(pair.ptr, result);
 }
 
+using Options = DescBuilder::Options;
+using DictionaryPtr = DescBuilder::DictionaryPtr;
+
 // Common functionality for target and config description builder
 class BaseDescBuilder {
  public:
   using ValuePtr = std::unique_ptr<base::Value>;
 
-  BaseDescBuilder(const std::set<std::string>& what,
-                  bool all,
-                  bool tree,
-                  bool blame)
-      : what_(what), all_(all), tree_(tree), blame_(blame) {}
+  BaseDescBuilder(const std::set<std::string>& what, const Options& options)
+      : what_(what), options_(options) {}
 
  protected:
   virtual Label GetToolchainLabel() const = 0;
@@ -197,16 +197,51 @@ class BaseDescBuilder {
     return base::Value();
   }
 
+  void PrintConfig(base::ListValue* out, const Config* config, int indent = 0) {
+    std::string name(indent * 2, ' ');
+    name.append(config->label().GetUserVisibleName(GetToolchainLabel()));
+    out->AppendString(name);
+  }
+
+  // If the indent parameter has a value, each recursion level is indented by
+  // an increasing multiple of two spaces. Otherwise, no indentation is used.
+  void RecursivePrintConfigs(base::ListValue* out,
+                             const Config* config,
+                             std::set<const Config*>* seen,
+                             std::optional<int> indent = std::nullopt) {
+    if (seen && !seen->insert(config).second) {
+      return;
+    }
+
+    PrintConfig(out, config, indent.value_or(0));
+    for (auto& child : config->configs()) {
+      RecursivePrintConfigs(out, child.ptr, seen,
+                            (indent ? *indent + 1 : indent));
+    }
+  }
+
   template <class VectorType>
-  void FillInConfigVector(base::ListValue* out,
-                          const VectorType& configs,
-                          int indent = 0) {
-    for (const auto& config : configs) {
-      std::string name(indent * 2, ' ');
-      name.append(config.label.GetUserVisibleName(GetToolchainLabel()));
-      out->AppendString(name);
-      if (tree_)
-        FillInConfigVector(out, config.ptr->configs(), indent + 1);
+  void FillInConfigVector(base::ListValue* out, const VectorType& configs) {
+    if (options_.tree) {
+      if (options_.all) {
+        for (auto& config : configs) {
+          RecursivePrintConfigs(out, config.ptr, nullptr, 0);
+        }
+      } else {
+        std::set<const Config*> seen;
+        for (auto& config : configs) {
+          RecursivePrintConfigs(out, config.ptr, &seen, 0);
+        }
+      }
+    } else if (options_.all) {
+      std::set<const Config*> seen;
+      for (auto& config : configs) {
+        RecursivePrintConfigs(out, config.ptr, &seen);
+      }
+    } else {
+      for (auto& config : configs) {
+        PrintConfig(out, config.ptr);
+      }
     }
   }
 
@@ -226,25 +261,27 @@ class BaseDescBuilder {
   }
 
   std::set<std::string> what_;
-  bool all_;
-  bool tree_;
-  bool blame_;
+  Options options_;
 };
 
 class ConfigDescBuilder : public BaseDescBuilder {
  public:
-  ConfigDescBuilder(const Config* config, const std::set<std::string>& what)
-      : BaseDescBuilder(what, false, false, false), config_(config) {}
+  ConfigDescBuilder(const Config* config,
+                    const std::set<std::string>& what,
+                    const Options& options)
+      : BaseDescBuilder(what, options), config_(config) {}
 
-  std::unique_ptr<base::DictionaryValue> BuildDescription() {
+  DictionaryPtr BuildDescription() {
     auto res = std::make_unique<base::DictionaryValue>();
     const ConfigValues& values = config_->resolved_values();
 
-    if (what_.empty())
+    if (what_.empty()) {
+      res->SetKey("type", base::Value("config"));
       res->SetKey(
           "toolchain",
           base::Value(
               config_->label().GetToolchainLabel().GetUserVisibleName(false)));
+    }
 
     if (what(variables::kConfigs) && !config_->configs().empty()) {
       auto configs = std::make_unique<base::ListValue>();
@@ -273,6 +310,8 @@ class ConfigDescBuilder : public BaseDescBuilder {
     CONFIG_VALUE_ARRAY_HANDLER(ldflags, std::string)
     CONFIG_VALUE_ARRAY_HANDLER(lib_dirs, SourceDir)
     CONFIG_VALUE_ARRAY_HANDLER(libs, LibFile)
+    CONFIG_VALUE_ARRAY_HANDLER(frameworks, std::string)
+    CONFIG_VALUE_ARRAY_HANDLER(framework_dirs, SourceDir)
 
 #undef CONFIG_VALUE_ARRAY_HANDLER
 
@@ -306,12 +345,10 @@ class TargetDescBuilder : public BaseDescBuilder {
  public:
   TargetDescBuilder(const Target* target,
                     const std::set<std::string>& what,
-                    bool all,
-                    bool tree,
-                    bool blame)
-      : BaseDescBuilder(what, all, tree, blame), target_(target) {}
+                    const Options& options)
+      : BaseDescBuilder(what, options), target_(target) {}
 
-  std::unique_ptr<base::DictionaryValue> BuildDescription() {
+  DictionaryPtr BuildDescription() {
     auto res = std::make_unique<base::DictionaryValue>();
     bool is_binary_output = target_->IsBinary();
 
@@ -643,8 +680,8 @@ class TargetDescBuilder : public BaseDescBuilder {
     auto res = std::make_unique<base::ListValue>();
 
     // Tree mode is separate.
-    if (tree_) {
-      if (all_) {
+    if (options_.tree) {
+      if (options_.all) {
         // Show all tree deps with no eliding.
         RecursivePrintDeps(res.get(), target_, nullptr, 0);
       } else {
@@ -655,7 +692,7 @@ class TargetDescBuilder : public BaseDescBuilder {
     } else {  // not tree
 
       // Collect the deps to display.
-      if (all_) {
+      if (options_.all) {
         // Show all dependencies.
         std::set<const Target*> all_deps;
         RecursiveCollectChildDeps(target_, &all_deps);
@@ -679,7 +716,7 @@ class TargetDescBuilder : public BaseDescBuilder {
     const Target* previous_from = NULL;
     for (const auto& pair : ComputeRuntimeDeps(target_)) {
       std::string str;
-      if (blame_) {
+      if (options_.blame) {
         // Generally a target's runtime deps will be listed sequentially, so
         // group them and don't duplicate the "from" label for two in a row.
         if (previous_from == pair.second) {
@@ -795,7 +832,7 @@ class TargetDescBuilder : public BaseDescBuilder {
       if (vec.empty())
         continue;
 
-      if (blame_) {
+      if (options_.blame) {
         const Config* config = iter.GetCurrentConfig();
         if (config) {
           // Source of this value is a config.
@@ -820,7 +857,7 @@ class TargetDescBuilder : public BaseDescBuilder {
         ValuePtr rendered = RenderValue(val);
         std::string str;
         // Indent string values in blame mode
-        if (blame_ && rendered->GetAsString(&str)) {
+        if (options_.blame && rendered->GetAsString(&str)) {
           str = "  " + str;
           rendered = std::make_unique<base::Value>(str);
         }
@@ -839,25 +876,22 @@ class TargetDescBuilder : public BaseDescBuilder {
 
 }  // namespace
 
-std::unique_ptr<base::DictionaryValue> DescBuilder::DescriptionForTarget(
-    const Target* target,
-    const std::string& what,
-    bool all,
-    bool tree,
-    bool blame) {
+DictionaryPtr DescBuilder::DescriptionForTarget(const Target* target,
+                                                const std::string& what,
+                                                const Options& options) {
   std::set<std::string> w;
   if (!what.empty())
     w.insert(what);
-  TargetDescBuilder b(target, w, all, tree, blame);
+  TargetDescBuilder b(target, w, options);
   return b.BuildDescription();
 }
 
-std::unique_ptr<base::DictionaryValue> DescBuilder::DescriptionForConfig(
-    const Config* config,
-    const std::string& what) {
+DictionaryPtr DescBuilder::DescriptionForConfig(const Config* config,
+                                                const std::string& what,
+                                                const Options& options) {
   std::set<std::string> w;
   if (!what.empty())
     w.insert(what);
-  ConfigDescBuilder b(config, w);
+  ConfigDescBuilder b(config, w, options);
   return b.BuildDescription();
 }

@@ -27,17 +27,17 @@ namespace commands {
 namespace {
 
 // Like above but the input string can be a pattern that matches multiple
-// targets. If the input does not parse as a pattern, prints and error and
+// items. If the input does not parse as a pattern, prints and error and
 // returns false. If the pattern is valid, fills the vector (which might be
 // empty if there are no matches) and returns true.
 //
 // If default_toolchain_only is true, a pattern with an unspecified toolchain
 // will match the default toolchain only. If true, all toolchains will be
 // matched.
-bool ResolveTargetsFromCommandLinePattern(Setup* setup,
-                                          const std::string& label_pattern,
-                                          bool default_toolchain_only,
-                                          std::vector<const Target*>* matches) {
+bool ResolveItemsFromCommandLinePattern(const Setup* setup,
+                                        const std::string& label_pattern,
+                                        bool default_toolchain_only,
+                                        std::vector<const Item*>* matches) {
   Value pattern_value(nullptr, label_pattern);
 
   Err err;
@@ -59,68 +59,9 @@ bool ResolveTargetsFromCommandLinePattern(Setup* setup,
     }
   }
 
-  std::vector<LabelPattern> pattern_vector;
-  pattern_vector.push_back(pattern);
-  FilterTargetsByPatterns(setup->builder().GetAllResolvedTargets(),
-                          pattern_vector, matches);
-  return true;
-}
-
-// If there's an error, it will be printed and false will be returned.
-bool ResolveStringFromCommandLineInput(
-    Setup* setup,
-    const SourceDir& current_dir,
-    const std::string& input,
-    bool default_toolchain_only,
-    UniqueVector<const Target*>* target_matches,
-    UniqueVector<const Config*>* config_matches,
-    UniqueVector<const Toolchain*>* toolchain_matches,
-    UniqueVector<SourceFile>* file_matches) {
-  if (LabelPattern::HasWildcard(input)) {
-    // For now, only match patterns against targets. It might be nice in the
-    // future to allow the user to specify which types of things they want to
-    // match, but it should probably only match targets by default.
-    std::vector<const Target*> target_match_vector;
-    if (!ResolveTargetsFromCommandLinePattern(
-            setup, input, default_toolchain_only, &target_match_vector))
-      return false;
-    for (const Target* target : target_match_vector)
-      target_matches->push_back(target);
-    return true;
-  }
-
-  // Try to figure out what this thing is.
-  Err err;
-  Label label = Label::Resolve(
-      current_dir, setup->build_settings().root_path_utf8(),
-      setup->loader()->default_toolchain_label(), Value(nullptr, input), &err);
-  if (err.has_error()) {
-    // Not a valid label, assume this must be a file.
-    err = Err();
-    file_matches->push_back(current_dir.ResolveRelativeFile(
-        Value(nullptr, input), &err, setup->build_settings().root_path_utf8()));
-    if (err.has_error()) {
-      err.PrintToStdout();
-      return false;
-    }
-    return true;
-  }
-
-  const Item* item = setup->builder().GetItem(label);
-  if (item) {
-    if (const Config* as_config = item->AsConfig())
-      config_matches->push_back(as_config);
-    else if (const Target* as_target = item->AsTarget())
-      target_matches->push_back(as_target);
-    else if (const Toolchain* as_toolchain = item->AsToolchain())
-      toolchain_matches->push_back(as_toolchain);
-  } else {
-    // Not an item, assume this must be a file.
-    file_matches->push_back(current_dir.ResolveRelativeFile(
-        Value(nullptr, input), &err, setup->build_settings().root_path_utf8()));
-    if (err.has_error()) {
-      err.PrintToStdout();
-      return false;
+  for (const Item* item : setup->builder().GetAllResolvedItems()) {
+    if (pattern.Matches(item->label())) {
+      matches->push_back(item);
     }
   }
 
@@ -216,6 +157,12 @@ bool GetTargetTypeFilter(Target::OutputType* type) {
   }
   if (value == "action") {
     *type = Target::ACTION;
+    return true;
+  }
+
+  // Item type filters used in LabelQuery::GetItemType()
+  if (value == "target" || value == "config" || value == "toolchain") {
+    *type = Target::UNKNOWN;
     return true;
   }
 
@@ -483,29 +430,128 @@ const Target* ResolveTargetFromCommandLineString(
   return target;
 }
 
-bool ResolveFromCommandLineInput(
-    Setup* setup,
+std::optional<SourceFile> ResolveFile(const Setup* setup,
+                                      const SourceDir& current_dir,
+                                      const std::string& input) {
+  Err err;
+  auto file = current_dir.ResolveRelativeFile(
+      Value(nullptr, input), &err, setup->build_settings().root_path_utf8());
+  if (err.has_error()) {
+    err.PrintToStdout();
+    return std::nullopt;
+  }
+  return file;
+}
+
+const Item* ResolveItem(const Setup* setup,
+                        const SourceDir& current_dir,
+                        const std::string& input) {
+  Err err;
+  Label label = Label::Resolve(
+      current_dir, setup->build_settings().root_path_utf8(),
+      setup->loader()->default_toolchain_label(), Value(nullptr, input), &err);
+
+  return err.has_error() ? nullptr : setup->builder().GetItem(label);
+}
+
+template <class ItemType>
+const ItemType* GetItemAs(const Item* item) {
+  if constexpr (std::is_same_v<ItemType, Target>) {
+    return item->AsTarget();
+  } else if constexpr (std::is_same_v<ItemType, Config>) {
+    return item->AsConfig();
+  } else if constexpr (std::is_same_v<ItemType, Toolchain>) {
+    return item->AsToolchain();
+  } else {
+    static_assert(std::is_same_v<ItemType, Target>, "Type not supported");
+  }
+}
+
+// Filter Item pointers by type
+template <class ItemType>
+void FilterItems(const std::vector<const Item*>& inputs,
+                 UniqueVector<const ItemType*>& outputs) {
+  for (const Item* input : inputs) {
+    if (const ItemType* item = GetItemAs<ItemType>(input)) {
+      outputs.push_back(item);
+    }
+  }
+}
+
+LabelQuery::LabelQuery(const Setup* setup)
+    : setup_(setup),
+      current_dir_(
+          SourceDirForCurrentDirectory(setup->build_settings().root_path())) {}
+
+bool LabelQuery::ResolveFromCommandLineInput(const std::string& input,
+                                             bool default_toolchain_only,
+                                             int item_type) {
+  std::vector<const Item*> items;
+
+  if (LabelPattern::HasWildcard(input)) {
+    if (!ResolveItemsFromCommandLinePattern(setup_, input,
+                                            default_toolchain_only, &items)) {
+      return false;
+    }
+  } else if (const Item* item = ResolveItem(setup_, current_dir_, input)) {
+    items.push_back(item);
+  }
+
+  if (!items.empty()) {
+    if (item_type & TARGET) {
+      FilterItems(items, target_matches);
+    }
+    if (item_type & CONFIG) {
+      FilterItems(items, config_matches);
+    }
+    if (item_type & TOOLCHAIN) {
+      FilterItems(items, toolchain_matches);
+    }
+    return true;
+  }
+
+  // Not an item, assume this must be a file.
+  if (auto file = ResolveFile(setup_, current_dir_, input)) {
+    file_matches.push_back(std::move(*file));
+    return true;
+  }
+
+  return false;
+}
+
+bool LabelQuery::ResolveFromCommandLineInput(
     const std::vector<std::string>& input,
     bool default_toolchain_only,
-    UniqueVector<const Target*>* target_matches,
-    UniqueVector<const Config*>* config_matches,
-    UniqueVector<const Toolchain*>* toolchain_matches,
-    UniqueVector<SourceFile>* file_matches) {
+    int item_type) {
   if (input.empty()) {
     Err(Location(), "You need to specify a label, file, or pattern.")
         .PrintToStdout();
     return false;
   }
-
-  SourceDir cur_dir =
-      SourceDirForCurrentDirectory(setup->build_settings().root_path());
   for (const auto& cur : input) {
-    if (!ResolveStringFromCommandLineInput(
-            setup, cur_dir, cur, default_toolchain_only, target_matches,
-            config_matches, toolchain_matches, file_matches))
+    if (!ResolveFromCommandLineInput(cur, default_toolchain_only, item_type)) {
       return false;
+    }
   }
   return true;
+}
+
+int LabelQuery::GetItemType(const base::CommandLine* cmdline) {
+  return cmdline ? GetItemType(cmdline->GetSwitchValueASCII("type")) : ALL;
+}
+
+int LabelQuery::GetItemType(std::string_view type) {
+  if (type == "target") {
+    return TARGET;
+  }
+  if (type == "config") {
+    return CONFIG;
+  }
+  if (type == "toolchain") {
+    return TOOLCHAIN;
+  }
+
+  return ALL;
 }
 
 void FilterTargetsByPatterns(const std::vector<const Target*>& input,
