@@ -107,7 +107,8 @@ Variables
   root [optional]
       Label of the root build target. The GN build will start by loading the
       build file containing this target name. This defaults to "//:" which will
-      cause the file //BUILD.gn to be loaded.
+      cause the file //BUILD.gn to be loaded. Note that build_file_extension
+      applies to the default case as well.
 
   script_executable [optional]
       Path to specific Python executable or other interpreter to use in
@@ -137,6 +138,10 @@ Variables
 
       This is intended to be used when subprojects declare arguments with
       default values that need to be changed for whatever reason.
+
+  build_file_extension [optional]
+      String added to the name of build files to load.
+      GN will look for build files named "BUILD.$build_file_extension.gn".
 
 Example .gn file contents
 
@@ -313,7 +318,7 @@ Setup::Setup()
     : build_settings_(),
       loader_(new LoaderImpl(&build_settings_)),
       builder_(loader_.get()),
-      root_build_file_("//BUILD.gn"),
+      root_build_file_("not set yet"),
       dotfile_settings_(&build_settings_, std::string()),
       dotfile_scope_(&dotfile_settings_) {
   dotfile_settings_.set_toolchain_label(Label());
@@ -782,6 +787,31 @@ bool Setup::FillOtherConfig(const base::CommandLine& cmdline) {
         SourceDir(secondary_value->string_value()));
   }
 
+  // Build file names.
+  const Value* build_file_extension_value =
+      dotfile_scope_.GetValue("build_file_extension", true);
+  if (build_file_extension_value) {
+    if (!build_file_extension_value->VerifyTypeIs(Value::STRING, &err)) {
+      err.PrintToStdout();
+      return false;
+    }
+
+    std::string extension = build_file_extension_value->string_value();
+    if (extension.empty()) {
+      Err(Location(), "Build file extension cannot be empty").PrintToStdout();
+      return false;
+    }
+    for (size_t i = 0; i < base::FilePath::kSeparatorsLength - 1; ++i) {
+      base::FilePath::CharType separator = base::FilePath::kSeparators[i];
+      if (extension.find(separator) != std::string::npos) {
+        Err(Location(), "Build file extension '" + extension + "' cannot " +
+            "contain path separator '" + separator + "'").PrintToStdout();
+        return false;
+      }
+    }
+    loader_->set_build_file_extension(extension);
+  }
+
   // Root build file.
   const Value* root_value = dotfile_scope_.GetValue("root", true);
   if (root_value) {
@@ -796,9 +826,10 @@ bool Setup::FillOtherConfig(const base::CommandLine& cmdline) {
       err.PrintToStdout();
       return false;
     }
-
-    root_build_file_ = Loader::BuildFileForLabel(root_target_label);
   }
+  // Set the root build file here in order to take into account the values of
+  // "build_file_extension" and "root".
+  root_build_file_ = loader_->BuildFileForLabel(root_target_label);
   build_settings_.SetRootTargetLabel(root_target_label);
 
   // Build config file.
