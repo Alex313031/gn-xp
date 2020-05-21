@@ -50,12 +50,12 @@ class Loader : public base::RefCountedThreadSafe<Loader> {
   // false if we haven't processed this toolchain yet.
   virtual const Settings* GetToolchainSettings(const Label& label) const = 0;
 
+  // Returns the build file that the given label references.
+  virtual SourceFile BuildFileForLabel(const Label& label) const = 0;
+
   // Helper function that extracts the file and toolchain name from the given
   // label, and calls Load().
   void Load(const Label& label, const LocationRange& origin);
-
-  // Returns the build file that the given label references.
-  static SourceFile BuildFileForLabel(const Label& label);
 
   // When processing the default build config, we want to capture the argument
   // of set_default_build_config. The implementation of that function uses this
@@ -87,6 +87,7 @@ class LoaderImpl : public Loader {
   void ToolchainLoaded(const Toolchain* toolchain) override;
   Label GetDefaultToolchain() const override;
   const Settings* GetToolchainSettings(const Label& label) const override;
+  SourceFile BuildFileForLabel(const Label& label) const override;
 
   // Sets the task runner corresponding to the main thread. By default this
   // class will use the thread active during construction, but there is not
@@ -103,6 +104,11 @@ class LoaderImpl : public Loader {
   // This callback is used when the loader finds it wants to load a file.
   void set_async_load_file(AsyncLoadFileCallback cb) {
     async_load_file_ = std::move(cb);
+  }
+
+  // Sets the name of build files in this build.
+  void set_build_file_name(std::string name) {
+    build_file_name_ = name;
   }
 
   const Label& default_toolchain_label() const {
@@ -173,6 +179,8 @@ class LoaderImpl : public Loader {
   // Records for the build config file loads.
   using ToolchainRecordMap = std::map<Label, std::unique_ptr<ToolchainRecord>>;
   ToolchainRecordMap toolchain_records_;
+
+  std::string build_file_name_;
 };
 
 #endif  // TOOLS_GN_LOADER_H_

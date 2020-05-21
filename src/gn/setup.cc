@@ -138,6 +138,9 @@ Variables
       This is intended to be used when subprojects declare arguments with
       default values that need to be changed for whatever reason.
 
+  build_file_name [optional]
+      String representing the name of build files to load, replacing "BUILD.gn".
+
 Example .gn file contents
 
   buildconfig = "//build/config/BUILDCONFIG.gn"
@@ -313,7 +316,7 @@ Setup::Setup()
     : build_settings_(),
       loader_(new LoaderImpl(&build_settings_)),
       builder_(loader_.get()),
-      root_build_file_("//BUILD.gn"),
+      root_build_file_("not set yet"),
       dotfile_settings_(&build_settings_, std::string()),
       dotfile_scope_(&dotfile_settings_) {
   dotfile_settings_.set_toolchain_label(Label());
@@ -782,6 +785,18 @@ bool Setup::FillOtherConfig(const base::CommandLine& cmdline) {
         SourceDir(secondary_value->string_value()));
   }
 
+  // Build file names.
+  const Value* build_file_name_value =
+      dotfile_scope_.GetValue("build_file_name", true);
+  if (build_file_name_value) {
+    if (!build_file_name_value->VerifyTypeIs(Value::STRING, &err)) {
+      err.PrintToStdout();
+      return false;
+    }
+
+    loader_->set_build_file_name(build_file_name_value->string_value());
+  }
+
   // Root build file.
   const Value* root_value = dotfile_scope_.GetValue("root", true);
   if (root_value) {
@@ -796,9 +811,10 @@ bool Setup::FillOtherConfig(const base::CommandLine& cmdline) {
       err.PrintToStdout();
       return false;
     }
-
-    root_build_file_ = Loader::BuildFileForLabel(root_target_label);
   }
+  // Set the root build file here in order to take into account the values of
+  // "build_file_name" and "root".
+  root_build_file_ = loader_->BuildFileForLabel(root_target_label);
   build_settings_.SetRootTargetLabel(root_target_label);
 
   // Build config file.
