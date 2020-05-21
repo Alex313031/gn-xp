@@ -22,6 +22,9 @@ class Setup;
 class SourceFile;
 class Target;
 class Toolchain;
+namespace base {
+class CommandLine;
+}  // namespace base
 
 // Each "Run" command returns the value we should return from main().
 
@@ -120,23 +123,47 @@ const Target* ResolveTargetFromCommandLineString(
     Setup* setup,
     const std::string& label_string);
 
-// Resolves a vector of command line inputs and figures out the full set of
-// things they resolve to.
-//
-// On success, returns true and populates the vectors. On failure, prints the
-// error and returns false.
-//
-// Patterns with wildcards will only match targets. The file_matches aren't
-// validated that they are real files or referenced by any targets. They're just
-// the set of things that didn't match anything else.
-bool ResolveFromCommandLineInput(
-    Setup* setup,
-    const std::vector<std::string>& input,
-    bool default_toolchain_only,
-    UniqueVector<const Target*>* target_matches,
-    UniqueVector<const Config*>* config_matches,
-    UniqueVector<const Toolchain*>* toolchain_matches,
-    UniqueVector<SourceFile>* file_matches);
+class LabelQuery {
+ public:
+  explicit LabelQuery(const Setup* setup);
+
+  enum ItemType {
+    TARGET = 1 << 0,
+    CONFIG = 1 << 1,
+    TOOLCHAIN = 1 << 2,
+    ALL = TARGET | CONFIG | TOOLCHAIN
+  };
+
+  static int GetItemType(const base::CommandLine* cmdline);
+  static int GetItemType(std::string_view type);
+
+  // Resolves a command line input and figures out the full set of things it
+  // resolves to.
+  //
+  // On success, returns true and populates the vectors. On failure, prints the
+  // error and returns false.
+  //
+  // item_type may be used to restrict the patterns matching item types.
+  // The file_matches aren't validated that they are real files or referenced
+  // by any targets. They're just the set of things that didn't match
+  // anything else.
+  bool ResolveFromCommandLineInput(const std::string& input,
+                                   bool default_toolchain_only,
+                                   int item_type);
+
+  bool ResolveFromCommandLineInput(const std::vector<std::string>& input,
+                                   bool default_toolchain_only,
+                                   int item_type);
+
+  UniqueVector<const Target*> target_matches;
+  UniqueVector<const Config*> config_matches;
+  UniqueVector<const Toolchain*> toolchain_matches;
+  UniqueVector<SourceFile> file_matches;
+
+ private:
+  const Setup* setup_;
+  SourceDir current_dir_;
+};
 
 // Runs the header checker. All targets in the build should be given in
 // all_targets, and the specific targets to check should be in to_check.
@@ -188,8 +215,8 @@ bool FilterPatternsFromString(const BuildSettings* build_settings,
   "          root build directory.\n"
 #define TARGET_TYPE_FILTER_COMMAND_LINE_HELP                                 \
   "  --type=(action|copy|executable|group|loadable_module|shared_library|\n" \
-  "          source_set|static_library)\n"                                   \
-  "      Restrict outputs to targets matching the given type. If\n"          \
+  "          source_set|static_library|target|config|toolchain)\n"           \
+  "      Restrict outputs to items matching the given type. If\n"            \
   "      unspecified, no filtering will be performed.\n"
 #define TARGET_TESTONLY_FILTER_COMMAND_LINE_HELP                           \
   "  --testonly=(true|false)\n"                                            \

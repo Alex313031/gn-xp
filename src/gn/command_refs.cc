@@ -385,14 +385,11 @@ int RunRefs(const std::vector<std::string>& args) {
   }
 
   // Get the matches for the command-line input.
-  UniqueVector<const Target*> target_matches;
-  UniqueVector<const Config*> config_matches;
-  UniqueVector<const Toolchain*> toolchain_matches;
-  UniqueVector<SourceFile> file_matches;
-  if (!ResolveFromCommandLineInput(setup, inputs, default_toolchain_only,
-                                   &target_matches, &config_matches,
-                                   &toolchain_matches, &file_matches))
+  LabelQuery query(setup);
+  if (!query.ResolveFromCommandLineInput(inputs, default_toolchain_only,
+                                         LabelQuery::GetItemType(cmdline))) {
     return 1;
+  }
 
   // When you give a file or config as an input, you want the targets that are
   // associated with it. We don't want to just append this to the
@@ -402,7 +399,7 @@ int RunRefs(const std::vector<std::string>& args) {
   std::vector<const Target*> all_targets =
       setup->builder().GetAllResolvedTargets();
   UniqueVector<const Target*> explicit_target_matches;
-  for (const auto& file : file_matches) {
+  for (const auto& file : query.file_matches) {
     std::vector<TargetContainingFile> target_containing;
     GetTargetsContainingFile(setup, all_targets, file, default_toolchain_only,
                              &target_containing);
@@ -411,7 +408,7 @@ int RunRefs(const std::vector<std::string>& args) {
     for (const TargetContainingFile& pair : target_containing)
       explicit_target_matches.push_back(pair.first);
   }
-  for (auto* config : config_matches) {
+  for (auto* config : query.config_matches) {
     GetTargetsReferencingConfig(setup, all_targets, config,
                                 default_toolchain_only,
                                 &explicit_target_matches);
@@ -423,8 +420,8 @@ int RunRefs(const std::vector<std::string>& args) {
   // converted to targets also, but there could be no targets referencing the
   // config, which is different than no config with that name.
   bool quiet = cmdline->HasSwitch("q");
-  if (!quiet && config_matches.empty() && explicit_target_matches.empty() &&
-      target_matches.empty()) {
+  if (!quiet && query.config_matches.empty() &&
+      explicit_target_matches.empty() && query.target_matches.empty()) {
     OutputString("The input matches no targets, configs, or files.\n",
                  DECORATION_YELLOW);
     return 1;
@@ -435,12 +432,16 @@ int RunRefs(const std::vector<std::string>& args) {
   FillDepMap(setup, &dep_map);
 
   size_t cnt = 0;
-  if (tree)
-    cnt = DoTreeOutput(dep_map, target_matches, explicit_target_matches, all);
-  else if (all)
-    cnt = DoAllListOutput(dep_map, target_matches, explicit_target_matches);
-  else
-    cnt = DoDirectListOutput(dep_map, target_matches, explicit_target_matches);
+  if (tree) {
+    cnt = DoTreeOutput(dep_map, query.target_matches, explicit_target_matches,
+                       all);
+  } else if (all) {
+    cnt =
+        DoAllListOutput(dep_map, query.target_matches, explicit_target_matches);
+  } else {
+    cnt = DoDirectListOutput(dep_map, query.target_matches,
+                             explicit_target_matches);
+  }
 
   // If you ask for the references of a valid target, but that target has
   // nothing referencing it, we'll get here without having printed anything.

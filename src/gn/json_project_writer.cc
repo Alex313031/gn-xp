@@ -429,11 +429,10 @@ StringOutputBuffer JSONProjectWriter::GenerateJSON(
   json_writer.BeginDict("targets");
   {
     for (const auto* target : sorted_targets) {
-      auto description =
-          DescBuilder::DescriptionForTarget(target, "", false, false, false);
+      auto description = DescBuilder::DescriptionForTarget(target, "", {});
       // Outputs need to be asked for separately.
-      auto outputs = DescBuilder::DescriptionForTarget(target, "source_outputs",
-                                                       false, false, false);
+      auto outputs =
+          DescBuilder::DescriptionForTarget(target, "source_outputs", {});
       base::DictionaryValue* outputs_value = nullptr;
       if (outputs->GetDictionary("source_outputs", &outputs_value) &&
           !outputs_value->empty()) {
