@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "8810c4e8_f2143e21",
+        "filename": "src/gn/setup.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 142,
+      "author": {
+        "id": 1000067
+      },
+      "writtenOn": "2020-05-25T10:25:07Z",
+      "side": 1,
+      "message": "nit: Simplify/clarify a little with something like:\n\n  String naming the build files loaded by GN. This defaults to \"BUILD.gn\".\n\n(The issue is that \"build files to load\" could be interpreted as meaning GN would load additional build files if this is defined).\n\nAlso, the documentation needs to be updated as well, I\u0027ve spotted the following locations:\n\n  src/gn/target.cc:\n     kExecution_Help[] should probably mention in item list #3 that BUILD.gn is a default\n     that can be overriden in the .gn file.\n\n  src/gn/setup.cc (this file):\n     Maybe update the section about root [optional] above to mention \"//:BUILD.gn\", unless\n     build_file_name is used to change the name of build files\".",
+      "revId": "16cd55a6db9af96f24796001f7a8af0faa8432b4",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "06827f7d_7e9e07ab",
+        "filename": "src/gn/setup.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 795,
+      "author": {
+        "id": 1000067
+      },
+      "writtenOn": "2020-05-25T10:25:07Z",
+      "side": 1,
+      "message": "I suggest verifying the string is not empty, and that there is no directory separator in it, and provide an error message otherwise.",
+      "revId": "16cd55a6db9af96f24796001f7a8af0faa8432b4",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": true
+    }
+  ]
+}
