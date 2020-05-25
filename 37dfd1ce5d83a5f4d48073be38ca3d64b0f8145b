@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "e63ce09d_6b4a758f",
+        "filename": "src/gn/escape.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 272,
+      "author": {
+        "id": 1000014
+      },
+      "writtenOn": "2020-05-25T22:47:16Z",
+      "side": 1,
+      "message": "Can you clang-format this? We don\u0027t want tabs in the sources.",
+      "revId": "37dfd1ce5d83a5f4d48073be38ca3d64b0f8145b",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "01e96958_826cfc7b",
+        "filename": "src/gn/escape.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 276,
+      "author": {
+        "id": 1000014
+      },
+      "writtenOn": "2020-05-25T22:47:16Z",
+      "side": 1,
+      "message": "The return value on EscapeJSONString seems super confusing (before your patch). It looks like it returns whether there was a replacement made rather than success failure. This seems super confusing and useless. The only place this was used previously is in the implementation of GetQuotedJSONString which is also wrong (!).\n\nWould you mind making EscapeJSONString return void and deleting the GetQuotedJSONString in string_escape.*?\n\nWe should also add a simple test in escape_unittest.cc. It should be straightforward to base it on one of the existing ones.",
+      "revId": "37dfd1ce5d83a5f4d48073be38ca3d64b0f8145b",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": true
+    }
+  ]
+}
