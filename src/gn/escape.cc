@@ -10,6 +10,7 @@
 
 #include "base/compiler_specific.h"
 #include "base/logging.h"
+#include "base/json/string_escape.h"
 #include "util/build_config.h"
 
 namespace {
@@ -265,4 +266,15 @@ void EscapeStringToStream(std::ostream& out,
                           const EscapeOptions& options) {
   StackOrHeapBuffer dest(str.size() * kMaxEscapedCharsPerChar);
   out.write(dest, EscapeStringToString(str, options, dest, nullptr));
+}
+
+void EscapeJSONStringToStream(std::ostream& out,
+															const std::string_view& str,
+															const EscapeOptions& options) {
+	std::string dest;
+	bool needed_quoting = !options.inhibit_quoting;
+	bool ok = base::EscapeJSONString(str, needed_quoting, &dest);
+	DCHECK(ok);
+
+	EscapeStringToStream(out, dest, options);
 }
