@@ -76,4 +76,7 @@ void EscapeStringToStream(std::ostream& out,
                           const std::string_view& str,
                           const EscapeOptions& options);
 
+void EscapeJSONStringToStream(std::ostream& out,
+                          const std::string_view& str);
+
 #endif  // TOOLS_GN_ESCAPE_H_

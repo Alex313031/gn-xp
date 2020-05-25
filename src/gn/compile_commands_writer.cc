@@ -156,7 +156,7 @@ void WriteCommand(const Target* target,
   for (const auto& range : tool->command().ranges()) {
     // TODO: this is emitting a bonus space prior to each substitution.
     if (range.type == &SubstitutionLiteral) {
-      EscapeStringToStream(out, range.literal, no_quoting);
+			EscapeJSONStringToStream(out, EscapeString(range.literal, no_quoting, false));
     } else if (range.type == &SubstitutionOutput) {
       path_output.WriteFiles(out, tool_outputs);
     } else if (range.type == &CSubstitutionDefines) {
@@ -196,10 +196,11 @@ void WriteCommand(const Target* target,
                range.type == &SubstitutionSourceGenDir ||
                range.type == &SubstitutionSourceOutDir ||
                range.type == &SubstitutionSourceTargetRelative) {
-      EscapeStringToStream(out,
-                           SubstitutionWriter::GetCompilerSubstitution(
-                               target, source, range.type),
-                           opts);
+      EscapeJSONStringToStream(out, 
+                           EscapeString(
+														 SubstitutionWriter::GetCompilerSubstitution(target, source, range.type), 
+														 opts, 
+														 false));
     } else {
       // Other flags shouldn't be relevant to compiling C/C++/ObjC/ObjC++
       // source files.

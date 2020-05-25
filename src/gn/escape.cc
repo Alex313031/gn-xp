@@ -9,6 +9,7 @@
 #include <memory>
 
 #include "base/compiler_specific.h"
+#include "base/json/string_escape.h"
 #include "base/logging.h"
 #include "util/build_config.h"
 
@@ -265,4 +266,10 @@ void EscapeStringToStream(std::ostream& out,
                           const EscapeOptions& options) {
   StackOrHeapBuffer dest(str.size() * kMaxEscapedCharsPerChar);
   out.write(dest, EscapeStringToString(str, options, dest, nullptr));
+}
+
+void EscapeJSONStringToStream(std::ostream& out,
+                          const std::string_view& str)
+{
+	out <<base::EscapeBytesAsInvalidJSONString(str, false);
 }
