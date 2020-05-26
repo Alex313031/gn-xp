@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "dc39f9f4_8bf70b34",
+        "filename": "src/gn/setup.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 142,
+      "author": {
+        "id": 1000017
+      },
+      "writtenOn": "2020-05-26T23:00:56Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "8810c4e8_f2143e21",
+      "revId": "16cd55a6db9af96f24796001f7a8af0faa8432b4",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "06827f7d_7e9e07ab",
         "filename": "src/gn/setup.cc",
         "patchSetId": 1
@@ -33,6 +51,24 @@
       "revId": "16cd55a6db9af96f24796001f7a8af0faa8432b4",
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "b61ca416_f1fdf4f0",
+        "filename": "src/gn/setup.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 795,
+      "author": {
+        "id": 1000017
+      },
+      "writtenOn": "2020-05-26T23:00:56Z",
+      "side": 1,
+      "message": "Done, and added matching unit tests.",
+      "parentUuid": "06827f7d_7e9e07ab",
+      "revId": "16cd55a6db9af96f24796001f7a8af0faa8432b4",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": false
     }
   ]
 }
