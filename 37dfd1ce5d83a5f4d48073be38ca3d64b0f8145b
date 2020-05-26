@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "1001bc77_ad8cf073",
+        "filename": "src/gn/compile_commands_writer.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 162,
+      "author": {
+        "id": 1000303
+      },
+      "writtenOn": "2020-05-26T11:31:48Z",
+      "side": 1,
+      "message": "Here EscapeJSONStringToStream do JSON escaping and then call EscapeStringToStream to escape JSON string to stream.",
+      "parentUuid": "ca4d4c81_3286bc6d",
+      "range": {
+        "startLine": 162,
+        "startChar": 6,
+        "endLine": 162,
+        "endChar": 30
+      },
+      "revId": "37dfd1ce5d83a5f4d48073be38ca3d64b0f8145b",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "9e7e6e99_f0a91589",
         "filename": "src/gn/compile_commands_writer.cc",
         "patchSetId": 1
@@ -36,6 +60,30 @@
       "writtenOn": "2020-05-26T08:52:29Z",
       "side": 1,
       "message": "should we add the same escaping here?\n\ndetails here:\nhttps://gn-review.googlesource.com/c/gn/+/8521/1/src/gn/compile_commands_writer.cc#199",
+      "range": {
+        "startLine": 202,
+        "startChar": 0,
+        "endLine": 205,
+        "endChar": 33
+      },
+      "revId": "37dfd1ce5d83a5f4d48073be38ca3d64b0f8145b",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "a73c946b_7b169548",
+        "filename": "src/gn/compile_commands_writer.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 205,
+      "author": {
+        "id": 1000303
+      },
+      "writtenOn": "2020-05-26T11:31:48Z",
+      "side": 1,
+      "message": "I am not sure that we need to change this, this escape the path of source to stream. I will check",
+      "parentUuid": "9e7e6e99_f0a91589",
       "range": {
         "startLine": 202,
         "startChar": 0,
