@@ -2,6 +2,52 @@
   "comments": [
     {
       "key": {
+        "uuid": "ca4d4c81_3286bc6d",
+        "filename": "src/gn/compile_commands_writer.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 162,
+      "author": {
+        "id": 1000422
+      },
+      "writtenOn": "2020-05-26T08:52:29Z",
+      "side": 1,
+      "message": "EscapeStringToStream doing lot of different logic for different escaping.\nIs it ok to remove it here and replace just with JSON escaping? Could it cause any regressions?\n\nhere other solution: it doing old escaping and that JSON escaping:\nhttps://gn-review.googlesource.com/c/gn/+/8521/1/src/gn/compile_commands_writer.cc#159",
+      "range": {
+        "startLine": 162,
+        "startChar": 6,
+        "endLine": 162,
+        "endChar": 30
+      },
+      "revId": "37dfd1ce5d83a5f4d48073be38ca3d64b0f8145b",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "9e7e6e99_f0a91589",
+        "filename": "src/gn/compile_commands_writer.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 205,
+      "author": {
+        "id": 1000422
+      },
+      "writtenOn": "2020-05-26T08:52:29Z",
+      "side": 1,
+      "message": "should we add the same escaping here?\n\ndetails here:\nhttps://gn-review.googlesource.com/c/gn/+/8521/1/src/gn/compile_commands_writer.cc#199",
+      "range": {
+        "startLine": 202,
+        "startChar": 0,
+        "endLine": 205,
+        "endChar": 33
+      },
+      "revId": "37dfd1ce5d83a5f4d48073be38ca3d64b0f8145b",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "e63ce09d_6b4a758f",
         "filename": "src/gn/escape.cc",
         "patchSetId": 1
