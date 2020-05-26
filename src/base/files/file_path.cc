@@ -203,7 +203,7 @@ bool FilePath::operator!=(const FilePath& that) const {
 
 // static
 bool FilePath::IsSeparator(CharType character) {
-  for (size_t i = 0; i < kSeparatorsLength - 1; ++i) {
+  for (size_t i = 0; i < kSeparatorsLength; ++i) {
     if (character == kSeparators[i]) {
       return true;
     }
