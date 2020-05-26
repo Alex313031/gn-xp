@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "fda41806_40cba6de",
+        "filename": "src/base/files/file_path.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 206,
+      "author": {
+        "id": 1000004
+      },
+      "writtenOn": "2020-05-26T23:34:52Z",
+      "side": 1,
+      "message": "kSeparatorsLength is the the size of an array, so the -1 is to not check the \\0, right?",
+      "revId": "b64455b30d703b444313d5695d3541a0206addca",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": true
+    }
+  ]
+}
