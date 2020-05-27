@@ -209,6 +209,24 @@
       "revId": "eabdce2bb6a4ad3c1667771fbc1df8ab447e8a04",
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "bcb80e14_8f4542dc",
+        "filename": "src/gn/setup.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 804,
+      "author": {
+        "id": 1000017
+      },
+      "writtenOn": "2020-05-27T18:21:25Z",
+      "side": 1,
+      "message": "This is failing in Windows because CharType is char16_t and std::string\u0027s find_first_of cannot handle that type. Any preference on how to handle this case? I could for example transform extension into its u16string counterpart before performing the lookup on Windows.",
+      "parentUuid": "84ea490a_b9706050",
+      "revId": "eabdce2bb6a4ad3c1667771fbc1df8ab447e8a04",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": false
     }
   ]
 }
