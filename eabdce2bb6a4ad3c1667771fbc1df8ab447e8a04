@@ -227,6 +227,24 @@
       "revId": "eabdce2bb6a4ad3c1667771fbc1df8ab447e8a04",
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "62b2e3da_6323aa9a",
+        "filename": "src/gn/setup.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 804,
+      "author": {
+        "id": 1000014
+      },
+      "writtenOn": "2020-05-27T20:40:26Z",
+      "side": 1,
+      "message": "😞 I guess do UTF8ToFilePath (in filesystem_utils.h) to get the string to compare. That will avoid any conditional logic.",
+      "parentUuid": "bcb80e14_8f4542dc",
+      "revId": "eabdce2bb6a4ad3c1667771fbc1df8ab447e8a04",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": false
     }
   ]
 }
