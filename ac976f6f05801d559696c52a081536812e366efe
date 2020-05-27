@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "15ae420e_45f2cc87",
+        "filename": "src/gn/xcode_writer.cc",
+        "patchSetId": 6
+      },
+      "lineNbr": 808,
+      "author": {
+        "id": 1000070
+      },
+      "writtenOn": "2020-05-27T14:53:00Z",
+      "side": 1,
+      "message": "Please move to anonymous namespace (at the top of the file).",
+      "revId": "ac976f6f05801d559696c52a081536812e366efe",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": true
+    }
+  ]
+}
