@@ -1,0 +1,141 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "8ca7f0b9_6d62bdc0",
+        "filename": "src/gn/xcode_object.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 802,
+      "author": {
+        "id": 1000070
+      },
+      "writtenOn": "2020-05-27T12:32:39Z",
+      "side": 1,
+      "message": "I personally do not like \"it\" as abbreviation for iterator, but I don\u0027t think the style guide prevents this (if you don\u0027t mind too much, I would prefer to use \"iter\").",
+      "range": {
+        "startLine": 802,
+        "startChar": 7,
+        "endLine": 802,
+        "endChar": 9
+      },
+      "revId": "d8bfb6dcba91affa4da33e2966e5e8c612918e92",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "f5fc422a_8d0e9e20",
+        "filename": "src/gn/xcode_object.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 802,
+      "author": {
+        "id": 1000070
+      },
+      "writtenOn": "2020-05-27T12:32:39Z",
+      "side": 1,
+      "message": "nit: please qualify namespace\n\n  auto it \u003d std::find_if(targets_.begin(), ...",
+      "range": {
+        "startLine": 802,
+        "startChar": 12,
+        "endLine": 802,
+        "endChar": 19
+      },
+      "revId": "d8bfb6dcba91affa4da33e2966e5e8c612918e92",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "5f549c43_3ce22567",
+        "filename": "src/gn/xcode_object.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 808,
+      "author": {
+        "id": 1000070
+      },
+      "writtenOn": "2020-05-27T12:32:39Z",
+      "side": 1,
+      "message": "Since it-\u003eget() is not null (tested just above), this test cannot be false (since static_cast\u003c\u003e does not check that the subclassing is valid). Thus, I think this check does not do what you expect it to do.\n\nInstead, you can use the following:\n\n  if (it !\u003d targets_.end() \u0026\u0026 it-\u003eget()-\u003eClass() \u003d\u003d PBXObjectClass) {\n    target \u003d static_cast\u003cPBXNativeTarget*\u003e(it-\u003eget());\n  }\n\n\nI removed the check that it-\u003eget() is not null since if any of the element in targets_ is null, the find_if above would cause UB.",
+      "revId": "d8bfb6dcba91affa4da33e2966e5e8c612918e92",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "c94ceb96_fa6d0c88",
+        "filename": "src/gn/xcode_object.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 1108,
+      "author": {
+        "id": 1000070
+      },
+      "writtenOn": "2020-05-27T12:32:39Z",
+      "side": 1,
+      "message": "Instead of writing the buildSettings manually, I think we should store the include_paths in attributes_. So probably better to do as a followup (as this would otherwise increase the size of this CL too much).",
+      "revId": "d8bfb6dcba91affa4da33e2966e5e8c612918e92",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "d91d0c77_cc2a11d0",
+        "filename": "src/gn/xcode_object.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 345,
+      "author": {
+        "id": 1000070
+      },
+      "writtenOn": "2020-05-27T12:32:39Z",
+      "side": 1,
+      "message": "As far as I can tell, this is written but never read (only the value in XCBuildConfiguration is read). Can we remove this?",
+      "revId": "d8bfb6dcba91affa4da33e2966e5e8c612918e92",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "704dda8d_432b9ca2",
+        "filename": "src/gn/xcode_writer.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 515,
+      "author": {
+        "id": 1000070
+      },
+      "writtenOn": "2020-05-27T12:32:39Z",
+      "side": 1,
+      "message": "I think this should be a private method of XcodeProject instead of a lambda. Something like this:\n\n  void XcodeProject::TryToAddFileForIndexing(std::string\u0026 target_name,\n                                             const SourceFile\u0026 source) {\n    if (!ShouldIncludeFileInProject(source))\n      return;\n\n    const std::string source_file \u003d RebasePath(\n        source.value(), SourceDir(\"//\"),\n        build_settings_-\u003eroot_path_utf8());\n    project_.AddSourceFileToTargetForIndexing(\n        target_name, source_file, source_file, CompilerFlags::NONE);\n  }",
+      "revId": "d8bfb6dcba91affa4da33e2966e5e8c612918e92",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "3e4a54ba_8c606e69",
+        "filename": "src/gn/xcode_writer.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 811,
+      "author": {
+        "id": 1000070
+      },
+      "writtenOn": "2020-05-27T12:32:39Z",
+      "side": 1,
+      "message": "nit: prefer \"it \u003d target\" for initialisation",
+      "range": {
+        "startLine": 811,
+        "startChar": 28,
+        "endLine": 811,
+        "endChar": 38
+      },
+      "revId": "d8bfb6dcba91affa4da33e2966e5e8c612918e92",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": true
+    }
+  ]
+}
