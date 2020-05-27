@@ -22,6 +22,30 @@
       "revId": "bc3153ccea810c40462947e85e1040e8b50e9f1e",
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "255f8300_8f449a3a",
+        "filename": "src/gn/setup.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 804,
+      "author": {
+        "id": 1000017
+      },
+      "writtenOn": "2020-05-27T21:48:30Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "a64f6b0c_80c8a003",
+      "range": {
+        "startLine": 804,
+        "startChar": 23,
+        "endLine": 804,
+        "endChar": 51
+      },
+      "revId": "bc3153ccea810c40462947e85e1040e8b50e9f1e",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": false
     }
   ]
 }
