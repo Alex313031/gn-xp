@@ -245,6 +245,24 @@
       "revId": "eabdce2bb6a4ad3c1667771fbc1df8ab447e8a04",
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "bc6b8260_39b872c3",
+        "filename": "src/gn/setup.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 804,
+      "author": {
+        "id": 1000017
+      },
+      "writtenOn": "2020-05-27T21:38:56Z",
+      "side": 1,
+      "message": "I _think_ I fixed it, PTAL.",
+      "parentUuid": "62b2e3da_6323aa9a",
+      "revId": "eabdce2bb6a4ad3c1667771fbc1df8ab447e8a04",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": false
     }
   ]
 }
