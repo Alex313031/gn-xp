@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "a64f6b0c_80c8a003",
+        "filename": "src/gn/setup.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 804,
+      "author": {
+        "id": 1000014
+      },
+      "writtenOn": "2020-05-27T21:43:26Z",
+      "side": 1,
+      "message": "This should already be a string of the correct character type, so you should just be able to do\n\n  normalized_extension.find_first_of(base::FilePath::kSeparators)",
+      "range": {
+        "startLine": 804,
+        "startChar": 23,
+        "endLine": 804,
+        "endChar": 51
+      },
+      "revId": "bc3153ccea810c40462947e85e1040e8b50e9f1e",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": true
+    }
+  ]
+}
