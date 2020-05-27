@@ -2,6 +2,23 @@
   "comments": [
     {
       "key": {
+        "uuid": "4fd6ad5c_c0496e4a",
+        "filename": "src/gn/xcode_object.cc",
+        "patchSetId": 6
+      },
+      "lineNbr": 799,
+      "author": {
+        "id": 1000014
+      },
+      "writtenOn": "2020-05-27T17:43:50Z",
+      "side": 1,
+      "message": "Minor nitpick: Google-style says this should be a complete sentence with a capital and a period.",
+      "revId": "ac976f6f05801d559696c52a081536812e366efe",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "15ae420e_45f2cc87",
         "filename": "src/gn/xcode_writer.cc",
         "patchSetId": 6
@@ -13,6 +30,24 @@
       "writtenOn": "2020-05-27T14:53:00Z",
       "side": 1,
       "message": "Please move to anonymous namespace (at the top of the file).",
+      "revId": "ac976f6f05801d559696c52a081536812e366efe",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "729de062_896dbcc1",
+        "filename": "src/gn/xcode_writer.cc",
+        "patchSetId": 6
+      },
+      "lineNbr": 808,
+      "author": {
+        "id": 1000014
+      },
+      "writtenOn": "2020-05-27T17:43:50Z",
+      "side": 1,
+      "message": "Did you forget to upload a new patch? I don\u0027t see this comment addressed.",
+      "parentUuid": "15ae420e_45f2cc87",
       "revId": "ac976f6f05801d559696c52a081536812e366efe",
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
       "unresolved": true
