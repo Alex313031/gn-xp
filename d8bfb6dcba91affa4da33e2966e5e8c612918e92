@@ -48,6 +48,54 @@
     },
     {
       "key": {
+        "uuid": "367ff6f4_1cf98fa9",
+        "filename": "src/gn/xcode_object.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 802,
+      "author": {
+        "id": 1000304
+      },
+      "writtenOn": "2020-05-27T15:25:57Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "8ca7f0b9_6d62bdc0",
+      "range": {
+        "startLine": 802,
+        "startChar": 7,
+        "endLine": 802,
+        "endChar": 9
+      },
+      "revId": "d8bfb6dcba91affa4da33e2966e5e8c612918e92",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "62e9a945_ee0d0495",
+        "filename": "src/gn/xcode_object.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 802,
+      "author": {
+        "id": 1000304
+      },
+      "writtenOn": "2020-05-27T15:25:57Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "f5fc422a_8d0e9e20",
+      "range": {
+        "startLine": 802,
+        "startChar": 12,
+        "endLine": 802,
+        "endChar": 19
+      },
+      "revId": "d8bfb6dcba91affa4da33e2966e5e8c612918e92",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "5f549c43_3ce22567",
         "filename": "src/gn/xcode_object.cc",
         "patchSetId": 5
@@ -65,6 +113,24 @@
     },
     {
       "key": {
+        "uuid": "46ede6c4_78b06303",
+        "filename": "src/gn/xcode_object.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 808,
+      "author": {
+        "id": 1000304
+      },
+      "writtenOn": "2020-05-27T15:25:57Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "5f549c43_3ce22567",
+      "revId": "d8bfb6dcba91affa4da33e2966e5e8c612918e92",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "c94ceb96_fa6d0c88",
         "filename": "src/gn/xcode_object.cc",
         "patchSetId": 5
@@ -76,6 +142,24 @@
       "writtenOn": "2020-05-27T12:32:39Z",
       "side": 1,
       "message": "Instead of writing the buildSettings manually, I think we should store the include_paths in attributes_. So probably better to do as a followup (as this would otherwise increase the size of this CL too much).",
+      "revId": "d8bfb6dcba91affa4da33e2966e5e8c612918e92",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "39b34307_92c90c17",
+        "filename": "src/gn/xcode_object.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 1108,
+      "author": {
+        "id": 1000304
+      },
+      "writtenOn": "2020-05-27T15:25:57Z",
+      "side": 1,
+      "message": "Now attributes is std::map\u003cstd::string, std::string\u003e. Include paths is vector of strings. So, I have to change type of attributes. It will be nice to clarify it before coding. \nWhat do you think about changing attributes to\n\nstruct PBXAttributes : public std::map\u003cstd::string, std::string\u003e{\n    std::vector\u003cstd::string\u003e include_paths_;\n};\n\nThanks.",
+      "parentUuid": "c94ceb96_fa6d0c88",
       "revId": "d8bfb6dcba91affa4da33e2966e5e8c612918e92",
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
       "unresolved": false
@@ -99,6 +183,24 @@
     },
     {
       "key": {
+        "uuid": "a648e53c_b208bc11",
+        "filename": "src/gn/xcode_object.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 345,
+      "author": {
+        "id": 1000304
+      },
+      "writtenOn": "2020-05-27T15:25:57Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "d91d0c77_cc2a11d0",
+      "revId": "d8bfb6dcba91affa4da33e2966e5e8c612918e92",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "704dda8d_432b9ca2",
         "filename": "src/gn/xcode_writer.cc",
         "patchSetId": 5
@@ -116,6 +218,24 @@
     },
     {
       "key": {
+        "uuid": "b2f12f33_379baaac",
+        "filename": "src/gn/xcode_writer.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 515,
+      "author": {
+        "id": 1000304
+      },
+      "writtenOn": "2020-05-27T15:25:57Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "704dda8d_432b9ca2",
+      "revId": "d8bfb6dcba91affa4da33e2966e5e8c612918e92",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "3e4a54ba_8c606e69",
         "filename": "src/gn/xcode_writer.cc",
         "patchSetId": 5
@@ -127,6 +247,30 @@
       "writtenOn": "2020-05-27T12:32:39Z",
       "side": 1,
       "message": "nit: prefer \"it \u003d target\" for initialisation",
+      "range": {
+        "startLine": 811,
+        "startChar": 28,
+        "endLine": 811,
+        "endChar": 38
+      },
+      "revId": "d8bfb6dcba91affa4da33e2966e5e8c612918e92",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "bb3f0e79_6ebfcbfb",
+        "filename": "src/gn/xcode_writer.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 811,
+      "author": {
+        "id": 1000304
+      },
+      "writtenOn": "2020-05-27T15:25:57Z",
+      "side": 1,
+      "message": "ConfigValuesIterator does not have correct operator\u003d\nthanks",
+      "parentUuid": "3e4a54ba_8c606e69",
       "range": {
         "startLine": 811,
         "startChar": 28,
