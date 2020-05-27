@@ -1,0 +1,106 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "7de987e5_fbf57a46",
+        "filename": "src/gn/loader.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 92,
+      "author": {
+        "id": 1000014
+      },
+      "writtenOn": "2020-05-27T17:10:11Z",
+      "side": 1,
+      "message": "I\u0027d just leave this off.",
+      "revId": "eabdce2bb6a4ad3c1667771fbc1df8ab447e8a04",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "34b2ccff_dc016e9c",
+        "filename": "src/gn/setup.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 143,
+      "author": {
+        "id": 1000014
+      },
+      "writtenOn": "2020-05-27T17:10:11Z",
+      "side": 1,
+      "message": "\"If set to a non-empty string, this is added to the name of all build files to load.\"\n\n(based on my comment below about allowing the empty case)",
+      "revId": "eabdce2bb6a4ad3c1667771fbc1df8ab447e8a04",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "8eed9988_215c8180",
+        "filename": "src/gn/setup.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 144,
+      "author": {
+        "id": 1000014
+      },
+      "writtenOn": "2020-05-27T17:10:11Z",
+      "side": 1,
+      "message": "I\u0027d like to add a thing here about what this is actually for. Maybe like:\n\n  This is intended to be used during migrations or other situations where there are two\n  independent GN builds in the same directories.",
+      "revId": "eabdce2bb6a4ad3c1667771fbc1df8ab447e8a04",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "7d95aa04_8c499768",
+        "filename": "src/gn/setup.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 321,
+      "author": {
+        "id": 1000014
+      },
+      "writtenOn": "2020-05-27T17:10:11Z",
+      "side": 1,
+      "message": "I\u0027d just delete this line, I think it\u0027s OK to have it default to empty. It should be just as obvious if you screw up because the file name will still be invalid.",
+      "revId": "eabdce2bb6a4ad3c1667771fbc1df8ab447e8a04",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "4d9d8840_5aacc40e",
+        "filename": "src/gn/setup.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 801,
+      "author": {
+        "id": 1000014
+      },
+      "writtenOn": "2020-05-27T17:10:11Z",
+      "side": 1,
+      "message": "I think it\u0027s OK to have empty give the default behavior and delete this check. Probably in this case it will never come up, but in general we should have the default behavior be settable in a variable because for some conditional cases it can be hard to express \"don\u0027t set this variable\".",
+      "revId": "eabdce2bb6a4ad3c1667771fbc1df8ab447e8a04",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "4b2ef264_d4ae6bac",
+        "filename": "src/gn/setup.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 804,
+      "author": {
+        "id": 1000014
+      },
+      "writtenOn": "2020-05-27T17:10:11Z",
+      "side": 1,
+      "message": "This loop can be replaced with:\n\n  if (extension.find_first_of(base::FilePath::kSeparators) !\u003d std::string::npos) {\n     Err(...)\n  }",
+      "revId": "eabdce2bb6a4ad3c1667771fbc1df8ab447e8a04",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": true
+    }
+  ]
+}
