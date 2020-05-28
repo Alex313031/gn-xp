@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "0250860b_b2c1c69d",
+        "filename": "src/gn/xcode_object.cc",
+        "patchSetId": 6
+      },
+      "lineNbr": 799,
+      "author": {
+        "id": 1000304
+      },
+      "writtenOn": "2020-05-28T12:08:46Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "4fd6ad5c_c0496e4a",
+      "revId": "ac976f6f05801d559696c52a081536812e366efe",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "15ae420e_45f2cc87",
         "filename": "src/gn/xcode_writer.cc",
         "patchSetId": 6
@@ -51,6 +69,24 @@
       "revId": "ac976f6f05801d559696c52a081536812e366efe",
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "78bb7372_5fceff39",
+        "filename": "src/gn/xcode_writer.cc",
+        "patchSetId": 6
+      },
+      "lineNbr": 808,
+      "author": {
+        "id": 1000304
+      },
+      "writtenOn": "2020-05-28T12:08:46Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "729de062_896dbcc1",
+      "revId": "ac976f6f05801d559696c52a081536812e366efe",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": false
     }
   ]
 }
