@@ -809,6 +809,25 @@ bool Setup::FillOtherConfig(const base::CommandLine& cmdline) {
     loader_->set_build_file_extension(extension);
   }
 
+  // Ninja required version.
+  const Value* ninja_required_version_value =
+      dotfile_scope_.GetValue("ninja_required_version", true);
+  if (ninja_required_version_value) {
+    if (!ninja_required_version_value->VerifyTypeIs(Value::STRING, &err)) {
+      err.PrintToStdout();
+      return false;
+    }
+    std::optional<Version> version =
+        Version::FromString(ninja_required_version_value->string_value());
+    if (!version) {
+      Err(Location(), "Invalid Ninja version '" +
+                          ninja_required_version_value->string_value() + "'")
+          .PrintToStdout();
+      return false;
+    }
+    build_settings_.set_ninja_required_version(*version);
+  }
+
   // Root build file.
   const Value* root_value = dotfile_scope_.GetValue("root", true);
   if (root_value) {
