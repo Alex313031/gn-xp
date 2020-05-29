@@ -386,6 +386,8 @@ class Target : public Item {
                                const char** computed_tool_type,
                                std::vector<OutputFile>* outputs) const;
 
+  bool get_hacky_stampy() const { return hacky_stampy_; }
+
  private:
   FRIEND_TEST_ALL_PREFIXES(TargetTest, ResolvePrecompiledHeaders);
 
@@ -482,6 +484,7 @@ class Target : public Item {
   OutputFile link_output_file_;
   OutputFile dependency_output_file_;
   std::vector<OutputFile> runtime_outputs_;
+  bool hacky_stampy_ = false;
 
   Metadata metadata_;
 

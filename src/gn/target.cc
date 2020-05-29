@@ -878,6 +878,13 @@ bool Target::FillOutputFiles(Err* err) {
   for (const SourceFile& out : outputs_as_sources)
     computed_outputs_.push_back(OutputFile(settings()->build_settings(), out));
 
+  // Special case to reduce 1:1 stamp files.
+  if (output_type_ == ACTION && action_values().outputs().list().size() == 1 &&
+      data_deps().empty()) {
+    dependency_output_file_ = OutputFile("<should_have_been_elided>");
+    hacky_stampy_ = true;
+  }
+
   return true;
 }
 
