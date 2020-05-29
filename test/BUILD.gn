@@ -1,0 +1,17 @@
+toolchain("toolchain") {
+  tool("stamp") {
+    command = "touch {{output}}"
+  }
+}
+
+action("testy") {
+  script = "dothing.py"
+  sources = ["BUILD.gn"]
+  outputs = ["$target_gen_dir/output.txt"]
+}
+
+action("second") {
+  script = "dothing.py"
+  deps = [":testy"] 
+  outputs = ["$target_gen_dir/output2.txt"]
+}

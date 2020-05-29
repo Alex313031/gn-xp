@@ -93,7 +93,10 @@ void NinjaActionTargetWriter::Run() {
   std::vector<OutputFile> data_outs;
   for (const auto& dep : target_->data_deps())
     data_outs.push_back(dep.ptr->dependency_output_file());
-  WriteStampForTarget(output_files, data_outs);
+  if (output_files.size() != 1 || !data_outs.empty()) {
+    CHECK(target_->get_hacky_stampy());
+    WriteStampForTarget(output_files, data_outs);
+  }
 }
 
 std::string NinjaActionTargetWriter::WriteRuleDefinition() {
