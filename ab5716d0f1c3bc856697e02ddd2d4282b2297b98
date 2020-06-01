@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "e3163049_c104f448",
+        "filename": "examples/simple_build/build/toolchain/BUILD.gn",
+        "patchSetId": 2
+      },
+      "lineNbr": 27,
+      "author": {
+        "id": 1000004
+      },
+      "writtenOn": "2020-06-01T16:13:03Z",
+      "side": 1,
+      "message": "Does Mac\u0027s `ar` not accept rsp files? I think for this one just remove all the rspfile stuff for all OSs, it\u0027s not really necessary here anyway and just makes things more confusing for an example case.",
+      "revId": "ab5716d0f1c3bc856697e02ddd2d4282b2297b98",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": true
+    }
+  ]
+}
