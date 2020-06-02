@@ -34,6 +34,24 @@
       "revId": "ab5716d0f1c3bc856697e02ddd2d4282b2297b98",
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "37c0a35f_cf41c807",
+        "filename": "examples/simple_build/build/toolchain/BUILD.gn",
+        "patchSetId": 2
+      },
+      "lineNbr": 27,
+      "author": {
+        "id": 1000004
+      },
+      "writtenOn": "2020-06-02T19:36:17Z",
+      "side": 1,
+      "message": "OK, could you make alink unconditionally not use the rsp then?",
+      "parentUuid": "8252be0e_e77f0523",
+      "revId": "ab5716d0f1c3bc856697e02ddd2d4282b2297b98",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": false
     }
   ]
 }
