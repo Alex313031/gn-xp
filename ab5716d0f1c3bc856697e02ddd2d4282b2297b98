@@ -16,6 +16,24 @@
       "revId": "ab5716d0f1c3bc856697e02ddd2d4282b2297b98",
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "8252be0e_e77f0523",
+        "filename": "examples/simple_build/build/toolchain/BUILD.gn",
+        "patchSetId": 2
+      },
+      "lineNbr": 27,
+      "author": {
+        "id": 1000180
+      },
+      "writtenOn": "2020-06-02T19:03:28Z",
+      "side": 1,
+      "message": "That\u0027s right, I tried and macOS\u0027s /usr/bin/ar does not accept response files: https://forums.developer.apple.com/thread/95831\n\nThough if the developer wish, they can install llvm-ar separately.",
+      "parentUuid": "e3163049_c104f448",
+      "revId": "ab5716d0f1c3bc856697e02ddd2d4282b2297b98",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": false
     }
   ]
 }
