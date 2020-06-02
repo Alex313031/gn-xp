@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "4a547f22_ff0793bb",
+        "filename": "examples/simple_build/build/toolchain/BUILD.gn",
+        "patchSetId": 5
+      },
+      "lineNbr": 25,
+      "author": {
+        "id": 1000004
+      },
+      "writtenOn": "2020-06-02T23:02:46Z",
+      "side": 1,
+      "message": "This line can be removed now.",
+      "revId": "8ff489030fdcc7d46d97c9f4e9a30026342bb891",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": true
+    }
+  ]
+}
