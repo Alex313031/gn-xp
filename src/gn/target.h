@@ -165,6 +165,7 @@ class Target : public Item {
                    const SourceDir& rebase_dir,
                    bool deps_only,
                    std::vector<Value>* result,
+                   std::set<std::string>* encountered_keys,
                    std::set<const Target*>* targets_walked,
                    Err* err) const;
 

@@ -1046,6 +1046,7 @@ bool Target::GetMetadata(const std::vector<std::string>& keys_to_extract,
                          const SourceDir& rebase_dir,
                          bool deps_only,
                          std::vector<Value>* result,
+                         std::set<std::string>* encountered_keys,
                          std::set<const Target*>* targets_walked,
                          Err* err) const {
   std::vector<Value> next_walk_keys;
@@ -1061,7 +1062,7 @@ bool Target::GetMetadata(const std::vector<std::string>& keys_to_extract,
     // Otherwise, we walk this target and collect the appropriate data.
     if (!metadata_.WalkStep(settings()->build_settings(), keys_to_extract,
                             keys_to_walk, rebase_dir, &next_walk_keys,
-                            &current_result, err))
+                            &current_result, encountered_keys, err))
       return false;
   }
 
@@ -1082,7 +1083,7 @@ bool Target::GetMetadata(const std::vector<std::string>& keys_to_extract,
         auto pair = targets_walked->insert(dep.ptr);
         if (pair.second) {
           if (!dep.ptr->GetMetadata(keys_to_extract, keys_to_walk, rebase_dir,
-                                    false, result, targets_walked, err))
+                                    false, result, encountered_keys, targets_walked, err))
             return false;
         }
       }
@@ -1111,7 +1112,7 @@ bool Target::GetMetadata(const std::vector<std::string>& keys_to_extract,
         auto pair = targets_walked->insert(dep.ptr);
         if (pair.second) {
           if (!dep.ptr->GetMetadata(keys_to_extract, keys_to_walk, rebase_dir,
-                                    false, result, targets_walked, err))
+                                    false, result, encountered_keys, targets_walked, err))
             return false;
         }
         // We found it, so we can exit this search now.

@@ -150,6 +150,7 @@ bool Metadata::WalkStep(const BuildSettings* settings,
                         const SourceDir& rebase_dir,
                         std::vector<Value>* next_walk_keys,
                         std::vector<Value>* result,
+                        std::set<std::string>* encountered_keys,
                         Err* err) const {
   // If there's no metadata, there's nothing to find, so quick exit.
   if (contents_.empty()) {
@@ -157,12 +158,24 @@ bool Metadata::WalkStep(const BuildSettings* settings,
     return true;
   }
 
+  std::vector<std::string_view> keys_to_inspect;
+  if (keys_to_extract.size() == 1 && keys_to_extract[0] == "*") {
+    // All keys have been requested.
+    for (auto iter = contents_.begin(); iter != contents_.end(); ++iter) {
+      keys_to_inspect.push_back(iter->first);
+    }
+  } else {
+    keys_to_inspect.insert(keys_to_inspect.end(), keys_to_extract.begin(), keys_to_extract.end());
+  }
+
   // Pull the data from each specified key.
-  for (const auto& key : keys_to_extract) {
+  for (const auto& key : keys_to_inspect) {
     auto iter = contents_.find(key);
     if (iter == contents_.end())
       continue;
     assert(iter->second.type() == Value::LIST);
+
+    encountered_keys->insert(std::string(iter->first));
 
     if (!rebase_dir.is_null()) {
       for (const auto& val : iter->second.list_value()) {

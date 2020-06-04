@@ -1310,8 +1310,9 @@ TEST(TargetTest, CollectMetadataNoRecurse) {
 
   Err err;
   std::vector<Value> result;
+  std::set<std::string> encountered_keys;
   std::set<const Target*> targets;
-  one.GetMetadata(data_keys, walk_keys, SourceDir(), false, &result, &targets,
+  one.GetMetadata(data_keys, walk_keys, SourceDir(), false, &result, &encountered_keys, &targets,
                   &err);
   EXPECT_FALSE(err.has_error());
 
@@ -1319,6 +1320,11 @@ TEST(TargetTest, CollectMetadataNoRecurse) {
   expected.push_back(Value(nullptr, "foo"));
   expected.push_back(Value(nullptr, true));
   EXPECT_EQ(result, expected);
+
+  std::set<std::string> expected_encountered_keys;
+  expected_encountered_keys.insert("a");
+  expected_encountered_keys.insert("b");
+  EXPECT_EQ(encountered_keys, expected_encountered_keys);
 }
 
 TEST(TargetTest, CollectMetadataWithRecurse) {
@@ -1351,8 +1357,9 @@ TEST(TargetTest, CollectMetadataWithRecurse) {
 
   Err err;
   std::vector<Value> result;
+  std::set<std::string> encountered_keys;
   std::set<const Target*> targets;
-  one.GetMetadata(data_keys, walk_keys, SourceDir(), false, &result, &targets,
+  one.GetMetadata(data_keys, walk_keys, SourceDir(), false, &result, &encountered_keys, &targets,
                   &err);
   EXPECT_FALSE(err.has_error());
 
@@ -1361,6 +1368,11 @@ TEST(TargetTest, CollectMetadataWithRecurse) {
   expected.push_back(Value(nullptr, "foo"));
   expected.push_back(Value(nullptr, true));
   EXPECT_EQ(result, expected);
+
+  std::set<std::string> expected_encountered_keys;
+  expected_encountered_keys.insert("a");
+  expected_encountered_keys.insert("b");
+  EXPECT_EQ(encountered_keys, expected_encountered_keys);
 }
 
 TEST(TargetTest, CollectMetadataWithBarrier) {
@@ -1400,8 +1412,9 @@ TEST(TargetTest, CollectMetadataWithBarrier) {
 
   Err err;
   std::vector<Value> result;
+  std::set<std::string> encountered_keys;
   std::set<const Target*> targets;
-  one.GetMetadata(data_keys, walk_keys, SourceDir(), false, &result, &targets,
+  one.GetMetadata(data_keys, walk_keys, SourceDir(), false, &result, &encountered_keys, &targets,
                   &err);
   EXPECT_FALSE(err.has_error()) << err.message();
 
@@ -1409,6 +1422,10 @@ TEST(TargetTest, CollectMetadataWithBarrier) {
   expected.push_back(Value(nullptr, "bar"));
   expected.push_back(Value(nullptr, "foo"));
   EXPECT_EQ(result, expected) << result.size();
+
+  std::set<std::string> expected_encountered_keys;
+  expected_encountered_keys.insert("a");
+  EXPECT_EQ(encountered_keys, expected_encountered_keys);
 }
 
 TEST(TargetTest, CollectMetadataWithError) {
@@ -1433,8 +1450,9 @@ TEST(TargetTest, CollectMetadataWithError) {
 
   Err err;
   std::vector<Value> result;
+  std::set<std::string> encountered_keys;
   std::set<const Target*> targets;
-  one.GetMetadata(data_keys, walk_keys, SourceDir(), false, &result, &targets,
+  one.GetMetadata(data_keys, walk_keys, SourceDir(), false, &result, &encountered_keys, &targets,
                   &err);
   EXPECT_TRUE(err.has_error());
   EXPECT_EQ(err.message(),

@@ -21,7 +21,7 @@ const char kMeta_HelpShort[] = "meta: List target metadata collection results.";
 const char kMeta_Help[] =
     R"(gn meta
 
-  gn meta <out_dir> <target>* --data=<key>[,<key>*]* [--walk=<key>[,<key>*]*]
+  gn meta <out_dir> <target>* [--data=<key>[,<key>*]*] [--walk=<key>[,<key>*]*]
           [--rebase=<dest dir>]
 
   Lists collected metaresults of all given targets for the given data key(s),
@@ -34,10 +34,11 @@ Arguments
   <target(s)>
     A list of target labels from which to initiate the walk.
 
-  --data
+  --data (optional)
     A list of keys from which to extract data. In each target walked, its metadata
     scope is checked for the presence of these keys. If present, the contents of
     those variable in the scope are appended to the results list.
+    If absent, all encountered keys are collected.
 
   --walk (optional)
     A list of keys from which to control the walk. In each target walked, its
@@ -75,7 +76,7 @@ Examples
 int RunMeta(const std::vector<std::string>& args) {
   if (args.size() == 0) {
     Err(Location(), "You're holding it wrong.",
-        "Usage: \"gn meta <out_dir> <target>* --data=<key>[,<key>*] "
+        "Usage: \"gn meta <out_dir> <target>* [--data=<key>[,<key>*]] "
         "[--walk=<key>[,<key>*]*] [--rebase=<dest dir>]\"")
         .PrintToStdout();
     return 1;
@@ -108,12 +109,13 @@ int RunMeta(const std::vector<std::string>& args) {
   std::vector<std::string> data_keys = base::SplitString(
       data_keys_str, ",", base::TRIM_WHITESPACE, base::SPLIT_WANT_NONEMPTY);
   if (data_keys.empty()) {
-    return 1;
+    data_keys.push_back("*");
   }
   std::vector<std::string> walk_keys = base::SplitString(
       walk_keys_str, ",", base::TRIM_WHITESPACE, base::SPLIT_WANT_NONEMPTY);
   Err err;
   std::set<const Target*> targets_walked;
+  std::set<std::string> encountered_keys;
   SourceDir rebase_source_dir(rebase_dir);
   // When SourceDir constructor is supplied with an empty string,
   // a trailing slash will be added. This prevent SourceDir::is_null()
@@ -122,7 +124,7 @@ int RunMeta(const std::vector<std::string>& args) {
     rebase_source_dir = SourceDir();
   }
   std::vector<Value> result =
-      WalkMetadata(targets, data_keys, walk_keys, rebase_source_dir,
+      WalkMetadata(targets, data_keys, walk_keys, rebase_source_dir, &encountered_keys,
                    &targets_walked, &err);
   if (err.has_error()) {
     err.PrintToStdout();
@@ -163,6 +165,15 @@ int RunMeta(const std::vector<std::string>& args) {
       }
       OutputString(key + "\n");
     }
+  }
+  OutputString("Encountered keys:\n", DECORATION_DIM);
+  first = true;
+  for (const auto& key : encountered_keys) {
+    if (!first) {
+      first = false;
+      OutputString(", ");
+    }
+    OutputString(key + "\n");
   }
   return 0;
 }

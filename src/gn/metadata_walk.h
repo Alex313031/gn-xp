@@ -20,6 +20,7 @@ std::vector<Value> WalkMetadata(
     const std::vector<std::string>& keys_to_extract,
     const std::vector<std::string>& keys_to_walk,
     const SourceDir& rebase_dir,
+    std::set<std::string>* encountered_keys,
     std::set<const Target*>* targets_walked,
     Err* err);
 

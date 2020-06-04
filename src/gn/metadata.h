@@ -57,6 +57,7 @@ class Metadata {
                 const SourceDir& rebase_dir,
                 std::vector<Value>* next_walk_keys,
                 std::vector<Value>* result,
+                std::set<std::string>* encountered_keys,
                 Err* err) const;
 
  private:

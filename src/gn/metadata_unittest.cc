@@ -48,6 +48,7 @@ TEST(MetadataTest, Walk) {
   std::vector<std::string> walk_keys;
   std::vector<Value> next_walk_keys;
   std::vector<Value> results;
+  std::set<std::string> encountered_keys;
 
   std::vector<Value> expected;
   expected.emplace_back(Value(nullptr, "foo.cpp"));
@@ -56,13 +57,17 @@ TEST(MetadataTest, Walk) {
   std::vector<Value> expected_walk_keys;
   expected_walk_keys.emplace_back(nullptr, "");
 
+  std::set<std::string> expected_encountered_keys;
+  expected_encountered_keys.insert("a");
+
   Err err;
   EXPECT_TRUE(metadata.WalkStep(setup.settings()->build_settings(), data_keys,
                                 walk_keys, SourceDir(), &next_walk_keys,
-                                &results, &err));
+                                &results, &encountered_keys, &err));
   EXPECT_FALSE(err.has_error());
   EXPECT_EQ(next_walk_keys, expected_walk_keys);
   EXPECT_EQ(results, expected);
+  EXPECT_EQ(encountered_keys, expected_encountered_keys);
 }
 
 TEST(MetadataTest, WalkWithRebase) {
@@ -82,6 +87,7 @@ TEST(MetadataTest, WalkWithRebase) {
   std::vector<std::string> walk_keys;
   std::vector<Value> next_walk_keys;
   std::vector<Value> results;
+  std::set<std::string> encountered_keys;
 
   std::vector<Value> expected;
   expected.emplace_back(Value(nullptr, "../home/files/foo.cpp"));
@@ -90,13 +96,17 @@ TEST(MetadataTest, WalkWithRebase) {
   std::vector<Value> expected_walk_keys;
   expected_walk_keys.emplace_back(nullptr, "");
 
+  std::set<std::string> expected_encountered_keys;
+  expected_encountered_keys.insert("a");
+
   Err err;
   EXPECT_TRUE(metadata.WalkStep(setup.settings()->build_settings(), data_keys,
                                 walk_keys, SourceDir("/usr/foo_dir/"),
-                                &next_walk_keys, &results, &err));
+                                &next_walk_keys, &results, &encountered_keys, &err));
   EXPECT_FALSE(err.has_error());
   EXPECT_EQ(next_walk_keys, expected_walk_keys);
   EXPECT_EQ(results, expected);
+  EXPECT_EQ(encountered_keys, expected_encountered_keys);
 }
 
 TEST(MetadataTest, WalkWithRebaseNonString) {
@@ -123,6 +133,7 @@ TEST(MetadataTest, WalkWithRebaseNonString) {
   std::vector<std::string> walk_keys;
   std::vector<Value> next_walk_keys;
   std::vector<Value> results;
+  std::set<std::string> encountered_keys;
 
   std::vector<Value> expected;
   Value inner_list_expected(nullptr, Value::LIST);
@@ -144,13 +155,17 @@ TEST(MetadataTest, WalkWithRebaseNonString) {
   std::vector<Value> expected_walk_keys;
   expected_walk_keys.emplace_back(nullptr, "");
 
+  std::set<std::string> expected_encountered_keys;
+  expected_encountered_keys.insert("a");
+
   Err err;
   EXPECT_TRUE(metadata.WalkStep(setup.settings()->build_settings(), data_keys,
                                 walk_keys, SourceDir("/usr/foo_dir/"),
-                                &next_walk_keys, &results, &err));
+                                &next_walk_keys, &results, &encountered_keys, &err));
   EXPECT_FALSE(err.has_error());
   EXPECT_EQ(next_walk_keys, expected_walk_keys);
   EXPECT_EQ(results, expected);
+  EXPECT_EQ(encountered_keys, expected_encountered_keys);
 }
 
 TEST(MetadataTest, WalkKeysToWalk) {
@@ -169,17 +184,21 @@ TEST(MetadataTest, WalkKeysToWalk) {
   walk_keys.emplace_back("a");
   std::vector<Value> next_walk_keys;
   std::vector<Value> results;
+  std::set<std::string> encountered_keys;
 
   std::vector<Value> expected_walk_keys;
   expected_walk_keys.emplace_back(nullptr, "//target");
 
+  std::set<std::string> expected_encountered_keys;
+
   Err err;
   EXPECT_TRUE(metadata.WalkStep(setup.settings()->build_settings(), data_keys,
                                 walk_keys, SourceDir(), &next_walk_keys,
-                                &results, &err));
+                                &results, &encountered_keys, &err));
   EXPECT_FALSE(err.has_error());
   EXPECT_EQ(next_walk_keys, expected_walk_keys);
   EXPECT_TRUE(results.empty());
+  EXPECT_EQ(encountered_keys, expected_encountered_keys);
 }
 
 TEST(MetadataTest, WalkNoContents) {
@@ -191,6 +210,7 @@ TEST(MetadataTest, WalkNoContents) {
   std::vector<std::string> walk_keys;
   std::vector<Value> next_walk_keys;
   std::vector<Value> results;
+  std::set<std::string> encountered_keys;
 
   std::vector<Value> expected_walk_keys;
   expected_walk_keys.emplace_back(nullptr, "");
@@ -198,10 +218,11 @@ TEST(MetadataTest, WalkNoContents) {
   Err err;
   EXPECT_TRUE(metadata.WalkStep(setup.settings()->build_settings(), data_keys,
                                 walk_keys, SourceDir(), &next_walk_keys,
-                                &results, &err));
+                                &results, &encountered_keys, &err));
   EXPECT_FALSE(err.has_error());
   EXPECT_EQ(next_walk_keys, expected_walk_keys);
   EXPECT_TRUE(results.empty());
+  EXPECT_TRUE(encountered_keys.empty());
 }
 
 TEST(MetadataTest, WalkNoKeysWithContents) {
@@ -219,15 +240,19 @@ TEST(MetadataTest, WalkNoKeysWithContents) {
   std::vector<std::string> walk_keys;
   std::vector<Value> next_walk_keys;
   std::vector<Value> results;
+  std::set<std::string> encountered_keys;
 
   std::vector<Value> expected_walk_keys;
   expected_walk_keys.emplace_back(nullptr, "");
 
+  std::set<std::string> expected_encountered_keys;
+
   Err err;
   EXPECT_TRUE(metadata.WalkStep(setup.settings()->build_settings(), data_keys,
                                 walk_keys, SourceDir(), &next_walk_keys,
-                                &results, &err));
+                                &results, &encountered_keys, &err));
   EXPECT_FALSE(err.has_error());
   EXPECT_EQ(next_walk_keys, expected_walk_keys);
   EXPECT_TRUE(results.empty());
+  EXPECT_EQ(encountered_keys, expected_encountered_keys);
 }

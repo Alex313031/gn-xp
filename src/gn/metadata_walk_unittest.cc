@@ -51,8 +51,9 @@ TEST(MetadataWalkTest, CollectNoRecurse) {
 
   Err err;
   std::set<const Target*> targets_walked;
+  std::set<std::string> encountered_keys;
   std::vector<Value> result = WalkMetadata(targets, data_keys, walk_keys,
-                                           SourceDir(), &targets_walked, &err);
+                                           SourceDir(), &encountered_keys, &targets_walked, &err);
   EXPECT_FALSE(err.has_error());
 
   std::vector<Value> expected;
@@ -66,6 +67,11 @@ TEST(MetadataWalkTest, CollectNoRecurse) {
   expected_walked_targets.insert(&one);
   expected_walked_targets.insert(&two);
   EXPECT_EQ(targets_walked, expected_walked_targets);
+
+  std::set<std::string> expected_encountered_keys;
+  expected_encountered_keys.insert("a");
+  expected_encountered_keys.insert("b");
+  EXPECT_EQ(encountered_keys, expected_encountered_keys);
 }
 
 TEST(MetadataWalkTest, CollectWithRecurse) {
@@ -101,8 +107,9 @@ TEST(MetadataWalkTest, CollectWithRecurse) {
 
   Err err;
   std::set<const Target*> targets_walked;
+  std::set<std::string> encountered_keys;
   std::vector<Value> result = WalkMetadata(targets, data_keys, walk_keys,
-                                           SourceDir(), &targets_walked, &err);
+                                           SourceDir(), &encountered_keys, &targets_walked, &err);
   EXPECT_FALSE(err.has_error());
 
   std::vector<Value> expected;
@@ -115,6 +122,11 @@ TEST(MetadataWalkTest, CollectWithRecurse) {
   expected_walked_targets.insert(&one);
   expected_walked_targets.insert(&two);
   EXPECT_EQ(targets_walked, expected_walked_targets);
+
+  std::set<std::string> expected_encountered_keys;
+  expected_encountered_keys.insert("a");
+  expected_encountered_keys.insert("b");
+  EXPECT_EQ(encountered_keys, expected_encountered_keys);
 }
 
 TEST(MetadataWalkTest, CollectWithBarrier) {
@@ -158,8 +170,9 @@ TEST(MetadataWalkTest, CollectWithBarrier) {
 
   Err err;
   std::set<const Target*> targets_walked;
+  std::set<std::string> encountered_keys;
   std::vector<Value> result = WalkMetadata(targets, data_keys, walk_keys,
-                                           SourceDir(), &targets_walked, &err);
+                                           SourceDir(), &encountered_keys, &targets_walked, &err);
   EXPECT_FALSE(err.has_error()) << err.message();
 
   std::vector<Value> expected;
@@ -171,6 +184,10 @@ TEST(MetadataWalkTest, CollectWithBarrier) {
   expected_walked_targets.insert(&one);
   expected_walked_targets.insert(&two);
   EXPECT_EQ(targets_walked, expected_walked_targets);
+
+  std::set<std::string> expected_encountered_keys;
+  expected_encountered_keys.insert("a");
+  EXPECT_EQ(encountered_keys, expected_encountered_keys);
 }
 
 TEST(MetadataWalkTest, CollectWithError) {
@@ -198,8 +215,9 @@ TEST(MetadataWalkTest, CollectWithError) {
 
   Err err;
   std::set<const Target*> targets_walked;
+  std::set<std::string> encountered_keys;
   std::vector<Value> result = WalkMetadata(targets, data_keys, walk_keys,
-                                           SourceDir(), &targets_walked, &err);
+                                           SourceDir(), &encountered_keys, &targets_walked, &err);
   EXPECT_TRUE(result.empty());
   EXPECT_TRUE(err.has_error());
   EXPECT_EQ(err.message(),

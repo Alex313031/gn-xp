@@ -9,6 +9,7 @@ std::vector<Value> WalkMetadata(
     const std::vector<std::string>& keys_to_extract,
     const std::vector<std::string>& keys_to_walk,
     const SourceDir& rebase_dir,
+    std::set<std::string>* encountered_keys,
     std::set<const Target*>* targets_walked,
     Err* err) {
   std::vector<Value> result;
@@ -16,7 +17,7 @@ std::vector<Value> WalkMetadata(
     auto pair = targets_walked->insert(target);
     if (pair.second) {
       if (!target->GetMetadata(keys_to_extract, keys_to_walk, rebase_dir, false,
-                               &result, targets_walked, err))
+                               &result, encountered_keys, targets_walked, err))
         return std::vector<Value>();
     }
   }
