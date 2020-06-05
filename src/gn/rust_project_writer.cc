@@ -27,7 +27,7 @@
 // Current structure of rust-project.json output file
 //
 // {
-//    "roots": [] // always empty for GN. To be deprecated.
+//    "roots": [] // always set to the base folder of the build
 //    "crates": [
 //        {
 //            "atom_cfgs": [], // atom config options
@@ -355,7 +355,8 @@ void RustProjectWriter::RenderJSON(const BuildSettings* build_settings,
 
   rust_project << "{" NEWLINE;
 
-  rust_project << "  \"roots\": []," NEWLINE;
+  rust_project << "  \"roots\": [\"" << build_settings->root_path_utf8()
+               << "\"]," NEWLINE;
   rust_project << "  \"crates\": [" NEWLINE;
 
   // All the crates defined in the project.
