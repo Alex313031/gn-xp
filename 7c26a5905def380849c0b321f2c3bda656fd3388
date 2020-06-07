@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "7e084c75_15cd2996",
+        "filename": "src/gn/ninja_action_target_writer.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 237,
+      "author": {
+        "id": 1000014
+      },
+      "writtenOn": "2020-06-07T17:02:04Z",
+      "side": 1,
+      "message": "Can you document here why we\u0027re doing this version check and also why we like to specify deps\u003dgcc when possible.",
+      "revId": "7c26a5905def380849c0b321f2c3bda656fd3388",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": true
+    }
+  ]
+}
