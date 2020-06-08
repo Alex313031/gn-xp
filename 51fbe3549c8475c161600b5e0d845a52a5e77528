@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "68b784e5_b797e9fb",
+        "filename": "src/gn/rust_project_writer.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 110,
+      "author": {
+        "id": 1000427
+      },
+      "writtenOn": "2020-06-08T23:26:56Z",
+      "side": 1,
+      "message": "Does the ordering matter, or could this be sorted alphabetically?",
+      "revId": "51fbe3549c8475c161600b5e0d845a52a5e77528",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": true
+    }
+  ]
+}
