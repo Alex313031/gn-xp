@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "b819ee24_49b3d029",
+        "filename": "src/gn/rust_project_writer.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 162,
+      "author": {
+        "id": 1000397
+      },
+      "writtenOn": "2020-06-08T23:14:18Z",
+      "side": 0,
+      "message": "This was a duplicate.",
+      "range": {
+        "startLine": 162,
+        "startChar": 0,
+        "endLine": 162,
+        "endChar": 58
+      },
+      "revId": "eea109b4948a2c4ecb351285d41dd0a9ed98c2cb",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": false
+    }
+  ]
+}
