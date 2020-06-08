@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "3076827d_11dc3b29",
+        "filename": "src/gn/build_settings.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 135,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-06-08T00:42:07Z",
+      "side": 1,
+      "message": "I preserved the current behavior. I looked at https://gn.googlesource.com/gn/+/40045b986a11e2c80b122749bc201519d039b906 where the required version was bumped to 1.7.2 in that decision seems pretty arbitrary, it\u0027s possible that 1.6.0 would be sufficient (which is needed for pools).\n\nThe most notable feature introduced in 1.7.1 and 1.7.2 are implicit outputs which currently aren\u0027t supported by GN (I wasn\u0027t even aware of those until today), but after learning about those I\u0027m thinking about adding support for their use as they could simplify some tool definitions, especially the Rust ones. So maybe keeping the current default is actually better.",
+      "parentUuid": "f9400acf_9076f982",
+      "revId": "ac81d9330d861d5d27507f0259ee53a5bd235232",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "d8fb08d7_72b40781",
         "filename": "src/gn/setup.cc",
         "patchSetId": 1
@@ -66,6 +84,30 @@
     },
     {
       "key": {
+        "uuid": "3ddb5daa_ae3c05aa",
+        "filename": "src/gn/setup.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 814,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-06-08T00:42:07Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "a6b4bdea_d9170027",
+      "range": {
+        "startLine": 814,
+        "startChar": 31,
+        "endLine": 814,
+        "endChar": 53
+      },
+      "revId": "ac81d9330d861d5d27507f0259ee53a5bd235232",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "6d4e4c3e_309cec58",
         "filename": "src/gn/version.cc",
         "patchSetId": 1
@@ -80,6 +122,24 @@
       "revId": "ac81d9330d861d5d27507f0259ee53a5bd235232",
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "41f31abe_14bac598",
+        "filename": "src/gn/version.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-06-08T00:42:07Z",
+      "side": 1,
+      "message": "I need the size and wanted to avoid the use of strlen, so switched to string_view.",
+      "parentUuid": "6d4e4c3e_309cec58",
+      "revId": "ac81d9330d861d5d27507f0259ee53a5bd235232",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": false
     }
   ]
 }
