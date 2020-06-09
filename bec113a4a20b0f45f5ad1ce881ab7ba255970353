@@ -34,6 +34,24 @@
       "revId": "bec113a4a20b0f45f5ad1ce881ab7ba255970353",
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "d95a94e5_2a8d46fb",
+        "filename": "src/gn/rust_project_writer.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 256,
+      "author": {
+        "id": 1000168
+      },
+      "writtenOn": "2020-06-09T02:11:00Z",
+      "side": 1,
+      "message": "The original code would probably be cleaner to write with a regex 😊",
+      "parentUuid": "c522fbf4_91444593",
+      "revId": "bec113a4a20b0f45f5ad1ce881ab7ba255970353",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": true
     }
   ]
 }
