@@ -34,6 +34,40 @@
       "revId": "51fbe3549c8475c161600b5e0d845a52a5e77528",
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "ea0740f8_c189a62b",
+        "filename": "src/gn/rust_project_writer_unittest.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 20,
+      "author": {
+        "id": 1000168
+      },
+      "writtenOn": "2020-06-09T01:23:53Z",
+      "side": 1,
+      "message": "We have a general preference for relative paths instead of absolute, but maybe a relative root will get used if passed to gn gen?",
+      "revId": "51fbe3549c8475c161600b5e0d845a52a5e77528",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "d6f38a78_50031e9e",
+        "filename": "src/gn/rust_project_writer_unittest.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 100,
+      "author": {
+        "id": 1000168
+      },
+      "writtenOn": "2020-06-09T01:23:53Z",
+      "side": 1,
+      "message": "I was kind of expecting there to be a single source root for files in tree (the top-level source dir in GN). Is there a reason we need to emit multiple?",
+      "revId": "51fbe3549c8475c161600b5e0d845a52a5e77528",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": true
     }
   ]
 }
