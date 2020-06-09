@@ -34,6 +34,29 @@
       "revId": "eea109b4948a2c4ecb351285d41dd0a9ed98c2cb",
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "e90a1aaa_9a69fe44",
+        "filename": "src/gn/rust_project_writer.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 253,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-06-09T23:28:29Z",
+      "side": 1,
+      "message": "Minor nit: you use curly braces with some single statement `if` blocks, but not others (you even remove some braces in this patch), this should be consistent. It\u0027s common in GN to not use braces around single statement `if` blocks which is consistent with Google\u0027s C++ Style Guide.",
+      "range": {
+        "startLine": 251,
+        "startChar": 60,
+        "endLine": 253,
+        "endChar": 3
+      },
+      "revId": "eea109b4948a2c4ecb351285d41dd0a9ed98c2cb",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": true
     }
   ]
 }
