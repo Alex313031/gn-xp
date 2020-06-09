@@ -1,0 +1,73 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "f9b3af18_25f4f448",
+        "filename": "src/gn/rust_project_writer.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 313,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-06-09T23:50:43Z",
+      "side": 1,
+      "message": "Nit: you don\u0027t need to repeat `rust_project` on every line.",
+      "range": {
+        "startLine": 313,
+        "startChar": 4,
+        "endLine": 313,
+        "endChar": 16
+      },
+      "revId": "c5351e48b8ce8a34d34fec9b1dff3fb8c46376ad",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "2e572eb5_19341ea0",
+        "filename": "src/gn/rust_project_writer_helpers.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 23,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-06-09T23:50:43Z",
+      "side": 1,
+      "message": "Can we spell it out in full? C++ style guide says \"Minimize the use of abbreviations that would likely be unknown to someone outside your project (especially acronyms and initialisms). Do not abbreviate by deleting letters within a word. As a rule of thumb, an abbreviation is probably OK if it\u0027s listed in Wikipedia.\",see https://google.github.io/styleguide/cppguide.html#General_Naming_Rules",
+      "range": {
+        "startLine": 23,
+        "startChar": 6,
+        "endLine": 23,
+        "endChar": 14
+      },
+      "revId": "c5351e48b8ce8a34d34fec9b1dff3fb8c46376ad",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "c8f63aad_0392d1c3",
+        "filename": "src/gn/rust_project_writer_helpers.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 70,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-06-09T23:50:43Z",
+      "side": 1,
+      "message": "Can we spell it out in full, i.e. `configs_`?",
+      "range": {
+        "startLine": 70,
+        "startChar": 13,
+        "endLine": 70,
+        "endChar": 18
+      },
+      "revId": "c5351e48b8ce8a34d34fec9b1dff3fb8c46376ad",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": true
+    }
+  ]
+}
