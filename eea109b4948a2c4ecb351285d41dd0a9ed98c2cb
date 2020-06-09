@@ -16,6 +16,24 @@
       "revId": "eea109b4948a2c4ecb351285d41dd0a9ed98c2cb",
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "2ce1a6ee_f031216d",
+        "filename": "src/gn/rust_project_writer.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 176,
+      "author": {
+        "id": 1000397
+      },
+      "writtenOn": "2020-06-09T03:01:13Z",
+      "side": 1,
+      "message": "I\u0027m modeling this after what I saw being done with Cargo.toml setups in RA.  Will remove for now until we understand better why it\u0027s done this way.",
+      "parentUuid": "26eccc52_5f438869",
+      "revId": "eea109b4948a2c4ecb351285d41dd0a9ed98c2cb",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": true
     }
   ]
 }
