@@ -134,7 +134,7 @@ const std::string_view sysroot_crates[] = {"std",
 // mechanism for specifiying that in an extendible manner.
 const std::unordered_map<std::string_view, std::vector<std::string_view>>
     sysroot_deps_map = {{"alloc", {"core"}},
-                        {"std", {"alloc", "core", "panic_abort", "unwind"}}};
+                        {"std", {"alloc", "core"}}};
 
 // Add each of the crates a sysroot has, including their dependencies.
 void AddSysrootCrate(const BuildSettings* build_settings,
