@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "26eccc52_5f438869",
+        "filename": "src/gn/rust_project_writer.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 176,
+      "author": {
+        "id": 1000168
+      },
+      "writtenOn": "2020-06-09T01:06:48Z",
+      "side": 1,
+      "message": "I don\u0027t think it depends _directly_ on either panic_abort or panic_unwind, but that gets injected to the final binary at link time. We can leave as-is for now, but does anything break if you remove panic_abort? If not my preference is to leave it out.",
+      "revId": "eea109b4948a2c4ecb351285d41dd0a9ed98c2cb",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": true
+    }
+  ]
+}
