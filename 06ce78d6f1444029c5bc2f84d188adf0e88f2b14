@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "7facc51c_a79ebd94",
+        "filename": "src/gn/rust_project_writer.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 265,
+      "author": {
+        "id": 1000427
+      },
+      "writtenOn": "2020-06-09T15:59:05Z",
+      "side": 1,
+      "message": "`debug_assertion` should also be added to sysroot crates. It\u0027s only `test` that causes the module issue.",
+      "revId": "06ce78d6f1444029c5bc2f84d188adf0e88f2b14",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": true
+    }
+  ]
+}
