@@ -169,6 +169,8 @@ void AddSysrootCrate(const BuildSettings* build_settings,
   Crate sysroot_crate =
       Crate(SourceFile(crate_path), crate_index, std::string(crate), "2018");
 
+  sysroot_crate.AddConfigItem("debug_assertion");
+
   if (deps_lookup != sysroot_deps_map.end()) {
     auto deps = (*deps_lookup).second;
     for (auto dep : deps) {
@@ -250,8 +252,7 @@ void AddTarget(const BuildSettings* build_settings,
         if (idx == std::string::npos) {
           cfgs.push_back(cfg);
         } else {
-          // Strip the double-qoutes around the value of the `key="value"` so
-          // that they can be properly escaped
+          // Strip the double-qoutes around the value of the `key="value"`
           std::string key = cfg.substr(0, idx);
           std::string value = cfg.substr(idx + 2, cfg.length() - idx - 3);
           cfgs.push_back(key + "=\\\"" + value + "\\\"");
@@ -261,6 +262,9 @@ void AddTarget(const BuildSettings* build_settings,
   }
 
   Crate crate = Crate(crate_root, crate_id, crate_label, edition);
+
+  crate.AddConfigItem("test");
+  crate.AddConfigItem("debug_assertion");
 
   for (auto& cfg : cfgs) {
     crate.AddConfigItem(cfg);
