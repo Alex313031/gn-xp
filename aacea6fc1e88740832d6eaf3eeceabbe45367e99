@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "2b73912b_da503f57",
+        "filename": "src/gn/rust_project_writer.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 311,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-06-09T23:20:21Z",
+      "side": 1,
+      "message": "There\u0027s no guarantee that the flag is going to be in the `a\u003d\"b\"` format right? Rather than assuming that, or doing additional checks to infer that format of the flag, wouldn\u0027t it be less error-prone to instead replace all instances of `\"` in the string with `\\\"`?",
+      "range": {
+        "startLine": 305,
+        "startChar": 10,
+        "endLine": 311,
+        "endChar": 9
+      },
+      "revId": "aacea6fc1e88740832d6eaf3eeceabbe45367e99",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": true
+    }
+  ]
+}
