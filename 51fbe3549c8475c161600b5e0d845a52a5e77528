@@ -54,6 +54,24 @@
     },
     {
       "key": {
+        "uuid": "c3b5bebd_7983f42a",
+        "filename": "src/gn/rust_project_writer_unittest.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 20,
+      "author": {
+        "id": 1000397
+      },
+      "writtenOn": "2020-06-09T02:03:28Z",
+      "side": 1,
+      "message": "Here in this test, I just wanted _a_ path, to use to make sure that the roots and root_module paths were including it correctly.",
+      "parentUuid": "ea0740f8_c189a62b",
+      "revId": "51fbe3549c8475c161600b5e0d845a52a5e77528",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "d6f38a78_50031e9e",
         "filename": "src/gn/rust_project_writer_unittest.cc",
         "patchSetId": 3
@@ -65,6 +83,24 @@
       "writtenOn": "2020-06-09T01:23:53Z",
       "side": 1,
       "message": "I was kind of expecting there to be a single source root for files in tree (the top-level source dir in GN). Is there a reason we need to emit multiple?",
+      "revId": "51fbe3549c8475c161600b5e0d845a52a5e77528",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "7ac237f3_285769a9",
+        "filename": "src/gn/rust_project_writer_unittest.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 100,
+      "author": {
+        "id": 1000397
+      },
+      "writtenOn": "2020-06-09T02:03:28Z",
+      "side": 1,
+      "message": "Performance, a single root for the source dir is where I started, and it was just too many files vs. this finer-grained inclusion.",
+      "parentUuid": "d6f38a78_50031e9e",
       "revId": "51fbe3549c8475c161600b5e0d845a52a5e77528",
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
       "unresolved": true
