@@ -20,7 +20,7 @@ TEST_F(RustProjectWriterHelper, WriteCrates) {
   Crate target = Crate(SourceFile("hare/lib.rs"), 1, "//hare:bar", "2015");
   target.AddDependency(0, "tortoise");
   target.AddConfigItem("unix");
-  target.AddConfigItem("feature=\\\"test\\\"");
+  target.AddConfigItem("feature=test");
 
   crates.push_back(dep);
   crates.push_back(target);
@@ -61,7 +61,7 @@ TEST_F(RustProjectWriterHelper, WriteCrates) {
       "      \"edition\": \"2015\",\n"
       "      \"cfg\": [\n"
       "        \"unix\",\n"
-      "        \"feature=\\\"test\\\"\"\n"
+      "        \"feature=test\"\n"
       "      ]\n"
       "    }\n"
       "  ]\n"
