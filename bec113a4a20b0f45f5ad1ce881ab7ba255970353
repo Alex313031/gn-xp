@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "7488242a_4f089520",
+        "filename": "src/gn/rust_project_writer.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 256,
+      "author": {
+        "id": 1000168
+      },
+      "writtenOn": "2020-06-09T01:28:26Z",
+      "side": 1,
+      "message": "rust-analyzer might support this, but I think the general mechanism is that you can set a cfg value to any Rust literal expression (e.g. false in `--cfg foo\u003dfalse` is interpreted as a boolean, not a string). I\u0027m not sure how that would work if we skip the quotes.",
+      "revId": "bec113a4a20b0f45f5ad1ce881ab7ba255970353",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": true
+    }
+  ]
+}
