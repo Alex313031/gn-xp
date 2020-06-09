@@ -16,6 +16,24 @@
       "revId": "51fbe3549c8475c161600b5e0d845a52a5e77528",
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "045dbef7_b23bfe2a",
+        "filename": "src/gn/rust_project_writer.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 110,
+      "author": {
+        "id": 1000397
+      },
+      "writtenOn": "2020-06-09T00:24:21Z",
+      "side": 1,
+      "message": "The order doesn\u0027t matter, except that it changes the test order.  The dependency graph will do some re-ording.",
+      "parentUuid": "68b784e5_b797e9fb",
+      "revId": "51fbe3549c8475c161600b5e0d845a52a5e77528",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": true
     }
   ]
 }
