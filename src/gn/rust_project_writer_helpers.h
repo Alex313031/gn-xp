@@ -6,6 +6,7 @@
 #define TOOLS_GN_RUST_PROJECT_WRITER_HELPERS_H_
 
 #include <fstream>
+#include <optional>
 #include <sstream>
 #include <string>
 #include <tuple>
@@ -47,6 +48,12 @@ class Crate {
     deps_.push_back(std::make_pair(index, name));
   }
 
+  // Set the compiler arguments used to invoke the compilation of this crate
+  void SetCompilerArgs(std::vector<std::string> args) { compiler_args_ = args; }
+
+  // Set the compiler target ("e.g. x86_64-linux-kernel")
+  void SetCompilerTarget(std::string target) { compiler_target_ = target; }
+
   // Returns the root file for the crate.
   SourceFile& root() { return root_; }
 
@@ -65,6 +72,14 @@ class Crate {
   // Return the set of dependencies for this crate.
   DependencyList& dependencies() { return deps_; }
 
+  // Return the compiler arguments used to invoke the compilation of this crate
+  const std::vector<std::string>& CompilerArgs() { return compiler_args_; }
+
+  // Return the compiler target "triple" from the compiler args
+  const std::optional<std::string>& CompilerTarget() {
+    return compiler_target_;
+  }
+
  private:
   SourceFile root_;
   CrateIndex index_;
@@ -72,6 +87,8 @@ class Crate {
   std::string edition_;
   ConfigList configs_;
   DependencyList deps_;
+  std::optional<std::string> compiler_target_;
+  std::vector<std::string> compiler_args_;
 };
 
 using CrateList = std::vector<Crate>;
@@ -96,5 +113,13 @@ void AddSysroot(const BuildSettings* build_settings,
 void WriteCrates(const BuildSettings* build_settings,
                  CrateList& crate_list,
                  std::ostream& rust_project);
+
+// Assemble the compiler arguments for the given GN Target.
+std::vector<std::string> ExtractCompilerArgs(const Target* target);
+
+// Find the compiler --target tuple value from the compiler args for the given
+// GN Target.
+std::optional<std::string> ExtractCompilerTargetTriple(
+    const std::vector<std::string>& args);
 
 #endif  // TOOLS_GN_RUST_PROJECT_WRITER_HELPERS_H_

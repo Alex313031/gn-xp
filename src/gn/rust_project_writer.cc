@@ -5,6 +5,7 @@
 #include "gn/rust_project_writer.h"
 
 #include <fstream>
+#include <optional>
 #include <sstream>
 #include <tuple>
 
@@ -105,8 +106,36 @@ TargetsVector GetRustDeps(const Target* target) {
   return deps;
 }
 
-// TODO(bwb) Parse sysroot structure from toml files. This is fragile and might
-// break if upstream changes the dependency structure.
+std::vector<std::string> ExtractCompilerArgs(const Target* target) {
+  std::vector<std::string> args;
+  for (ConfigValuesIterator iter(target); !iter.done(); iter.Next()) {
+    auto rustflags = iter.cur().rustflags();
+    for (auto flag_iter = rustflags.begin(); flag_iter != rustflags.end(); flag_iter++) {
+      args.push_back(*flag_iter);
+    }
+  }
+  return args;
+}
+
+std::optional<std::string> ExtractCompilerTargetTriple(
+    const std::vector<std::string>& args) {
+  for (auto arg = args.begin(); arg != args.end();) {
+    // capture the current value
+    auto previous = *arg;
+    // and increment
+    arg++;
+
+    // if the previous value wasn "--target", and after the above increment
+    // the end hasn't been reached, then this is the tuple value.
+    if (previous == "--target" && arg != args.end()) {
+      return std::optional<std::string>{*arg};
+    }
+  }
+  return std::nullopt;
+}
+
+// TODO(bwb) Parse sysroot structure from toml files. This is fragile and
+// might break if upstream changes the dependency structure.
 const std::string_view sysroot_crates[] = {"std",
                                            "core",
                                            "alloc",
@@ -209,6 +238,9 @@ void AddTarget(const BuildSettings* build_settings,
     return;
   }
 
+  auto compiler_args = ExtractCompilerArgs(target);
+  auto compiler_target = ExtractCompilerTargetTriple(compiler_args);
+
   // Check what sysroot this target needs.  Add it to the crate list if it
   // hasn't already been added.
   auto rust_tool =
@@ -240,22 +272,29 @@ void AddTarget(const BuildSettings* build_settings,
 
   std::string edition = "2015";  // default to be overridden as needed
 
-  for (ConfigValuesIterator iter(target); !iter.done(); iter.Next()) {
-    for (const auto& flag : iter.cur().rustflags()) {
-      // extract the edition of this target
-      if (!flag.compare(0, edition_prefix.size(), edition_prefix)) {
-        edition = flag.substr(edition_prefix.size());
-      }
-      if (!flag.compare(0, cfg_prefix.size(), cfg_prefix)) {
-        auto cfg = flag.substr(cfg_prefix.size());
-        std::string escaped_config;
-        base::EscapeJSONString(cfg, false, &escaped_config);
-        cfgs.push_back(escaped_config);
-      }
+  auto toolcahin_label = target->settings()->toolchain_label();
+  auto default_toolchain = target->settings()->default_toolchain_label();
+
+  // These are here for testing out target vs. host compilation detection.
+  cfgs.push_back("__toolchain_"+toolcahin_label.name());
+  cfgs.push_back("__default_"+default_toolchain.name());
+
+  for (auto arg : compiler_args)  {
+    // extract the edition of this target
+    if (!arg.compare(0, edition_prefix.size(), edition_prefix)) {
+      edition = arg.substr(edition_prefix.size());
+    }
+    if (!arg.compare(0, cfg_prefix.size(), cfg_prefix)) {
+      auto config = arg.substr(cfg_prefix.size());
+      cfgs.push_back(config);
     }
   }
 
   Crate crate = Crate(crate_root, crate_id, crate_label, edition);
+
+  crate.SetCompilerArgs(compiler_args);
+  if (compiler_target.has_value())
+    crate.SetCompilerTarget(compiler_target.value());
 
   crate.AddConfigItem("test");
   crate.AddConfigItem("debug_assertions");
@@ -285,17 +324,22 @@ void AddTarget(const BuildSettings* build_settings,
 void WriteCrates(const BuildSettings* build_settings,
                  CrateList& crate_list,
                  std::ostream& rust_project) {
+  // produce a de-duplicated set of source roots:
+  std::set<std::string> roots;
+  for (auto& crate : crate_list) {
+    roots.insert(
+        FilePathToUTF8(build_settings->GetFullPath(crate.root().GetDir())));
+  }
+
   rust_project << "{" NEWLINE;
   rust_project << "  \"roots\": [";
   bool first_root = true;
-  for (auto& crate : crate_list) {
+  for (auto& root : roots) {
     if (!first_root)
       rust_project << ",";
     first_root = false;
 
-    std::string root_dir =
-        FilePathToUTF8(build_settings->GetFullPath(crate.root().GetDir()));
-    rust_project << NEWLINE "    \"" << root_dir << "\"";
+    rust_project << NEWLINE "    \"" << root << "\"";
   }
   rust_project << NEWLINE "  ]," NEWLINE;
   rust_project << "  \"crates\": [";
@@ -305,14 +349,36 @@ void WriteCrates(const BuildSettings* build_settings,
       rust_project << ",";
     first_crate = false;
 
-    auto crate_root = FilePathToUTF8(build_settings->GetFullPath(crate.root()));
+    auto crate_module =
+        FilePathToUTF8(build_settings->GetFullPath(crate.root()));
 
     rust_project << NEWLINE << "    {" NEWLINE
                  << "      \"crate_id\": " << crate.index() << "," NEWLINE
-                 << "      \"root_module\": \"" << crate_root << "\"," NEWLINE
-                 << "      \"label\": \"" << crate.label() << "\"," NEWLINE
-                 << "      \"deps\": [";
+                 << "      \"root_module\": \"" << crate_module << "\"," NEWLINE
+                 << "      \"label\": \"" << crate.label() << "\"," NEWLINE;
 
+    auto compiler_target = crate.CompilerTarget();
+    if (compiler_target.has_value()) {
+      rust_project << "      \"target\": \"" << compiler_target.value()
+                   << "\"," NEWLINE;
+    }
+
+    auto compiler_args = crate.CompilerArgs();
+    rust_project << "      \"compiler_args\": [";
+    bool first_arg = true;
+    for( auto& arg : crate.CompilerArgs()) {
+      if (!first_arg)
+        rust_project << ", ";
+      first_arg = false;
+
+      std::string escaped_arg;
+      base::EscapeJSONString(arg, false, &escaped_arg);
+
+      rust_project << "\"" << escaped_arg << "\"";
+    }
+    rust_project << "]," << NEWLINE;
+
+    rust_project << "      \"deps\": [";
     bool first_dep = true;
     for (auto& dep : crate.dependencies()) {
       if (!first_dep)
@@ -335,8 +401,12 @@ void WriteCrates(const BuildSettings* build_settings,
         rust_project << ",";
       first_cfg = false;
 
+
+      std::string escaped_config;
+      base::EscapeJSONString(cfg, false, &escaped_config);
+
       rust_project << NEWLINE;
-      rust_project << "        \"" << cfg << "\"";
+      rust_project << "        \"" << escaped_config << "\"";
     }
     rust_project << NEWLINE;
     rust_project << "      ]" NEWLINE;  // end cfgs
