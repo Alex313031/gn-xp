@@ -16,6 +16,24 @@
       "revId": "d2f5e438ddcf6d51ba47aa71909a1bca9a1555f0",
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "9be9ae7e_5eff187a",
+        "filename": "src/gn/setup_unittest.cc",
+        "patchSetId": 7
+      },
+      "lineNbr": 74,
+      "author": {
+        "id": 1000017
+      },
+      "writtenOn": "2020-06-10T23:53:59Z",
+      "side": 1,
+      "message": "I mentioned that fact in the chat room and folks were ok with it. I\u0027d rather find a way to redirect test output than suppress a valid test for cosmetic reasons.",
+      "parentUuid": "ba86e033_348cb114",
+      "revId": "d2f5e438ddcf6d51ba47aa71909a1bca9a1555f0",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": false
     }
   ]
 }
