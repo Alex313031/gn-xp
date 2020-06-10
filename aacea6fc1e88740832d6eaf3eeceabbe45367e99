@@ -22,6 +22,30 @@
       "revId": "aacea6fc1e88740832d6eaf3eeceabbe45367e99",
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "b49468f1_eec33381",
+        "filename": "src/gn/rust_project_writer.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 311,
+      "author": {
+        "id": 1000397
+      },
+      "writtenOn": "2020-06-10T01:10:49Z",
+      "side": 1,
+      "message": "That\u0027s a good point.  I\u0027ve switched to using the JSON escaping function to handle this, and added a test to make sure that it gets exercised.",
+      "parentUuid": "2b73912b_da503f57",
+      "range": {
+        "startLine": 305,
+        "startChar": 10,
+        "endLine": 311,
+        "endChar": 9
+      },
+      "revId": "aacea6fc1e88740832d6eaf3eeceabbe45367e99",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": true
     }
   ]
 }
