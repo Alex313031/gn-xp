@@ -379,3 +379,64 @@ const char expected_json[] =
 ;
   EXPECT_EQ(expected_json, out);
 }
+
+TEST_F(RustProjectWriterHelper, ExtractCompilerTargetTupleSimple) {
+  TestWithScope setup;
+
+  Target target(setup.settings(), Label(SourceDir("//foo/"), "bar"));
+  target.set_output_type(Target::RUST_LIBRARY);
+  target.visibility().SetPublic();
+  SourceFile lib("//foo/lib.rs");
+  target.sources().push_back(lib);
+  target.source_types_used().Set(SourceFile::SOURCE_RS);
+  target.rust_values().set_crate_root(lib);
+  target.rust_values().crate_name() = "foo";
+  target.config_values().rustflags().push_back("--cfg=feature=\"foo_enabled\"");
+  target.config_values().rustflags().push_back("--target");
+  target.config_values().rustflags().push_back("x86-someos");
+  target.config_values().rustflags().push_back("--edition=2018");
+
+  std::optional<std::string> result = ExtractCompilerTargetTriple(&target);
+  auto expected = std::optional<std::string>{"x86-someos"};
+  EXPECT_EQ(expected, result);
+}
+
+TEST_F(RustProjectWriterHelper, ExtractCompilerTargetTupleMissing) {
+  TestWithScope setup;
+
+  Target target(setup.settings(), Label(SourceDir("//foo/"), "bar"));
+  target.set_output_type(Target::RUST_LIBRARY);
+  target.visibility().SetPublic();
+  SourceFile lib("//foo/lib.rs");
+  target.sources().push_back(lib);
+  target.source_types_used().Set(SourceFile::SOURCE_RS);
+  target.rust_values().set_crate_root(lib);
+  target.rust_values().crate_name() = "foo";
+  target.config_values().rustflags().push_back("--cfg=feature=\"foo_enabled\"");
+  target.config_values().rustflags().push_back("x86-someos");
+  target.config_values().rustflags().push_back("--edition=2018");
+
+  std::optional<std::string> result = ExtractCompilerTargetTriple(&target);
+  auto expected = std::nullopt;
+  EXPECT_EQ(expected, result);
+}
+
+TEST_F(RustProjectWriterHelper, ExtractCompilerTargetTupleDontFallOffEnd) {
+  TestWithScope setup;
+
+  Target target(setup.settings(), Label(SourceDir("//foo/"), "bar"));
+  target.set_output_type(Target::RUST_LIBRARY);
+  target.visibility().SetPublic();
+  SourceFile lib("//foo/lib.rs");
+  target.sources().push_back(lib);
+  target.source_types_used().Set(SourceFile::SOURCE_RS);
+  target.rust_values().set_crate_root(lib);
+  target.rust_values().crate_name() = "foo";
+  target.config_values().rustflags().push_back("--cfg=feature=\"foo_enabled\"");
+  target.config_values().rustflags().push_back("--edition=2018");
+  target.config_values().rustflags().push_back("--target");
+
+  std::optional<std::string> result = ExtractCompilerTargetTriple(&target);
+  auto expected = std::nullopt;
+  EXPECT_EQ(expected, result);
+}

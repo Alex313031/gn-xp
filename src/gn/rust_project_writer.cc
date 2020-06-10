@@ -5,6 +5,7 @@
 #include "gn/rust_project_writer.h"
 
 #include <fstream>
+#include <optional>
 #include <sstream>
 #include <tuple>
 
@@ -105,8 +106,29 @@ TargetsVector GetRustDeps(const Target* target) {
   return deps;
 }
 
-// TODO(bwb) Parse sysroot structure from toml files. This is fragile and might
-// break if upstream changes the dependency structure.
+std::optional<std::string> ExtractCompilerTargetTriple(const Target* target) {
+  for (ConfigValuesIterator iter(target); !iter.done(); iter.Next()) {
+    auto rustflags = iter.cur().rustflags();
+    for (auto flag_iter = rustflags.begin(); flag_iter != rustflags.end();) {
+      // capture the current value
+      auto previous = *flag_iter;
+      // and increment
+      flag_iter++;
+
+      // if the previous value wasn "--target", and after the above increment
+      // the end hasn't been reached, then this is the tuple value.
+      if (previous == "--target" && flag_iter != rustflags.end()) {
+        return std::optional<std::string>{*flag_iter};
+      }
+    }
+  }
+  return std::nullopt;
+}
+
+
+
+// TODO(bwb) Parse sysroot structure from toml files. This is fragile and
+// might break if upstream changes the dependency structure.
 const std::string_view sysroot_crates[] = {"std",
                                            "core",
                                            "alloc",

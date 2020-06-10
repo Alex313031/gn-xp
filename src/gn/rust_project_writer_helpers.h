@@ -8,6 +8,7 @@
 #include <fstream>
 #include <sstream>
 #include <string>
+#include <optional>
 #include <tuple>
 #include <unordered_map>
 #include <vector>
@@ -96,5 +97,8 @@ void AddSysroot(const BuildSettings* build_settings,
 void WriteCrates(const BuildSettings* build_settings,
                  CrateList& crate_list,
                  std::ostream& rust_project);
+
+// Find the compiler --target tuple value for the given GN Target.
+std::optional<std::string> ExtractCompilerTargetTriple(const Target* target);
 
 #endif  // TOOLS_GN_RUST_PROJECT_WRITER_HELPERS_H_
