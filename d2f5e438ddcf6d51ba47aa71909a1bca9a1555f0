@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ba86e033_348cb114",
+        "filename": "src/gn/setup_unittest.cc",
+        "patchSetId": 7
+      },
+      "lineNbr": 74,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2020-06-10T23:48:49Z",
+      "side": 1,
+      "message": "This test changes the previously completely zen and quiet gn_unittests output to contain \"[450/601] SetupTest.NoSeparatorInExtensionERROR Build file extension \u0027hello/world\u0027 cannot contain a path separator\" which looks pretty ugly and is confusing at first since it says ERROR but the test passes.\n\nMaybe we can just delete this test?",
+      "revId": "d2f5e438ddcf6d51ba47aa71909a1bca9a1555f0",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": true
+    }
+  ]
+}
