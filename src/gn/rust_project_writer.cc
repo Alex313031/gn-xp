@@ -68,9 +68,8 @@ bool RustProjectWriter::RunAndWriteFiles(const BuildSettings* build_settings,
 
   RenderJSON(build_settings, all_targets, out);
 
-  if (out_buffer.ContentsEqual(output_path)) {
+  if (out_buffer.ContentsEqual(output_path))
     return true;
-  }
 
   return out_buffer.WriteToFile(output_path, err);
 }
@@ -142,10 +141,9 @@ void AddSysrootCrate(const BuildSettings* build_settings,
                      const std::string_view current_sysroot,
                      SysrootCrateIndexMap& sysroot_crate_lookup,
                      CrateList& crate_list) {
-  if (sysroot_crate_lookup.find(crate) != sysroot_crate_lookup.end()) {
-    // If this sysroot crate is already in the lookup, we don't add it again.
+  // If this sysroot crate is already in the lookup, we don't add it again.
+  if (sysroot_crate_lookup.find(crate) != sysroot_crate_lookup.end())
     return;
-  }
 
   // Add any crates that this sysroot crate depends on.
   auto deps_lookup = sysroot_deps_map.find(crate);
@@ -188,9 +186,8 @@ void AddSysroot(const BuildSettings* build_settings,
                 SysrootIndexMap& sysroot_lookup,
                 CrateList& crate_list) {
   // If this sysroot is already in the lookup, we don't add it again.
-  if (sysroot_lookup.find(sysroot) != sysroot_lookup.end()) {
+  if (sysroot_lookup.find(sysroot) != sysroot_lookup.end())
     return;
-  }
 
   // Otherwise, add all of its crates
   for (auto crate : sysroot_crates) {
@@ -204,19 +201,17 @@ void AddTarget(const BuildSettings* build_settings,
                TargetIndexMap& lookup,
                SysrootIndexMap& sysroot_lookup,
                CrateList& crate_list) {
-  if (lookup.find(target) != lookup.end()) {
-    // If target is already in the lookup, we don't add it again.
+  // If target is already in the lookup, we don't add it again.
+  if (lookup.find(target) != lookup.end())
     return;
-  }
 
   // Check what sysroot this target needs.  Add it to the crate list if it
   // hasn't already been added.
   auto rust_tool =
       target->toolchain()->GetToolForSourceTypeAsRust(SourceFile::SOURCE_RS);
   auto current_sysroot = rust_tool->GetSysroot();
-  if (current_sysroot != "" && sysroot_lookup.count(current_sysroot) == 0) {
+  if (current_sysroot != "" && sysroot_lookup.count(current_sysroot) == 0)
     AddSysroot(build_settings, current_sysroot, sysroot_lookup, crate_list);
-  }
 
   auto crate_deps = GetRustDeps(target);
 
@@ -245,8 +240,7 @@ void AddTarget(const BuildSettings* build_settings,
       // extract the edition of this target
       if (!flag.compare(0, edition_prefix.size(), edition_prefix)) {
         edition = flag.substr(edition_prefix.size());
-      }
-      if (!flag.compare(0, cfg_prefix.size(), cfg_prefix)) {
+      } else if (!flag.compare(0, cfg_prefix.size(), cfg_prefix)) {
         auto cfg = flag.substr(cfg_prefix.size());
         std::string escaped_config;
         base::EscapeJSONString(cfg, false, &escaped_config);
@@ -268,9 +262,8 @@ void AddTarget(const BuildSettings* build_settings,
   if (current_sysroot != "") {
     // TODO(bwb) If this library doesn't depend on std, use core instead
     auto std_idx = sysroot_lookup[current_sysroot].find("std");
-    if (std_idx != sysroot_lookup[current_sysroot].end()) {
+    if (std_idx != sysroot_lookup[current_sysroot].end())
       crate.AddDependency(std_idx->second, "std");
-    }
   }
 
   // Add the rest of the crate dependencies.
