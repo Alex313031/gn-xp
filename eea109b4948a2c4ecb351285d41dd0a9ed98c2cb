@@ -57,6 +57,30 @@
       "revId": "eea109b4948a2c4ecb351285d41dd0a9ed98c2cb",
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "8340e9a3_201b783d",
+        "filename": "src/gn/rust_project_writer.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 253,
+      "author": {
+        "id": 1000397
+      },
+      "writtenOn": "2020-06-10T02:40:11Z",
+      "side": 1,
+      "message": "I\u0027ve been trying to hew to the GN/Google C++ standard on this (I\u0027ve previously been in codebases with it only being optional for a single-line statement).  The removals were to make things consistent.  I\u0027ll do a clean-up pass on this.",
+      "parentUuid": "e90a1aaa_9a69fe44",
+      "range": {
+        "startLine": 251,
+        "startChar": 60,
+        "endLine": 253,
+        "endChar": 3
+      },
+      "revId": "eea109b4948a2c4ecb351285d41dd0a9ed98c2cb",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": true
     }
   ]
 }
