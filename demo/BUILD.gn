@@ -1,0 +1,50 @@
+toolchain("tc") {
+  tool("copy") {
+    command = "cp {{source}} {{output}}"
+  }
+
+  tool("stamp") {
+    command = "touch {{output}}"
+  }
+}
+
+action("foo") {
+  script = "//foo.py"
+  outputs = [ "$root_gen_dir/foo_out.txt" ]
+  args = [ rebase_path(outputs[0], root_out_dir), "foo_cotent" ]
+}
+
+action("bar") {
+  script = "//foo.py"
+  outputs = [ "$root_gen_dir/bar_out.txt" ]
+  args = [ rebase_path(outputs[0], root_out_dir), "bar_content" ]
+
+  data_deps = [ "//:foo" ]
+}
+
+action("baz") {
+  script = "//foo.py"
+  outputs = [ "$root_gen_dir/baz_out.txt" ]
+  args = [ rebase_path(outputs[0], root_out_dir), "baz_content" ]
+
+  data_deps = [ "//:bar" ]
+}
+
+copy("copy") {
+  deps = [
+    "//:foo",
+    "//:bar",
+    "//:baz",
+  ]
+  sources = []
+  foreach(dep, deps) {
+    sources += get_target_outputs(dep)
+  }
+  outputs = [ "$root_gen_dir/cp/{{source_file_part}}" ]
+}
+
+copy("copy2") {
+  data_deps = [ "//:copy" ]
+  sources = [ "//foo.py" ]
+  outputs = [ "$root_gen_dir/cp/{{source_file_part}}" ]
+}
