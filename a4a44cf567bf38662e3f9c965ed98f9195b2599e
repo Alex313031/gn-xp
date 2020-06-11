@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "5b5f0465_151c8a7a",
+        "filename": "src/gn/version.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 8,
+      "author": {
+        "id": 1000467
+      },
+      "writtenOn": "2020-06-11T09:31:27Z",
+      "side": 1,
+      "message": "without this change it fails to build with GCC 8.3.1 on RHEL7\nIt was broken by this commit: https://gn.googlesource.com/gn/+/317fdc1dc20d221e9fe60eb63423d2b736b01a53\nby using std::tie function.",
+      "revId": "a4a44cf567bf38662e3f9c965ed98f9195b2599e",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": false
+    }
+  ]
+}
