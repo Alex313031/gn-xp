@@ -45,7 +45,9 @@ TEST_F(SetupTest, DotGNFileIsGenDep) {
   EXPECT_EQ(gen_deps[0], base::MakeAbsoluteFilePath(dot_gn_name));
 }
 
-static void RunExtensionCheckTest(std::string extension, bool success) {
+static void RunExtensionCheckTest(std::string extension,
+                                  bool success,
+                                  const std::string& expected_error_message) {
   base::CommandLine cmdline(base::CommandLine::NO_PROGRAM);
 
   // Create a temp directory containing a .gn file and a BUILDCONFIG.gn file,
@@ -54,8 +56,10 @@ static void RunExtensionCheckTest(std::string extension, bool success) {
   ASSERT_TRUE(in_temp_dir.CreateUniqueTempDir());
   base::FilePath in_path = in_temp_dir.GetPath();
   base::FilePath dot_gn_name = in_path.Append(FILE_PATH_LITERAL(".gn"));
-  WriteFile(dot_gn_name, "buildconfig = \"//BUILDCONFIG.gn\"\n\
-      build_file_extension = \"" + extension + "\"");
+  WriteFile(dot_gn_name,
+            "buildconfig = \"//BUILDCONFIG.gn\"\n\
+      build_file_extension = \"" +
+                extension + "\"");
   WriteFile(in_path.Append(FILE_PATH_LITERAL("BUILDCONFIG.gn")), "");
   cmdline.AppendSwitchASCII(switches::kRoot, FilePathToUTF8(in_path));
 
@@ -65,16 +69,20 @@ static void RunExtensionCheckTest(std::string extension, bool success) {
 
   // Run setup and check that its status.
   Setup setup;
+  Err err;
   EXPECT_EQ(success,
-      setup.DoSetup(FilePathToUTF8(build_temp_dir.GetPath()), true, cmdline));
+            setup.DoSetupWithErr(FilePathToUTF8(build_temp_dir.GetPath()), true,
+                                 cmdline, &err));
+  EXPECT_EQ(success, !err.has_error());
+  EXPECT_EQ(expected_error_message, err.message());
 }
 
 TEST_F(SetupTest, NoSeparatorInExtension) {
   RunExtensionCheckTest(
-      "hello" + std::string(1, base::FilePath::kSeparators[0]) + "world",
-      false);
+      "hello" + std::string(1, base::FilePath::kSeparators[0]) + "world", false,
+      "Build file extension 'hello/world' cannot contain a path separator");
 }
 
 TEST_F(SetupTest, Extension) {
-  RunExtensionCheckTest("yay", true);
+  RunExtensionCheckTest("yay", true, "");
 }
