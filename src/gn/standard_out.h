@@ -58,4 +58,14 @@ void PrintShortHelp(const std::string& line,
 // be emitted. Used only in markdown mode.
 void PrintLongHelp(const std::string& text, const std::string& tag = "");
 
+// Suppress all writing to stdout while in scope. Used during tests.
+class ScopedSuppressAllStdout {
+ public:
+  ScopedSuppressAllStdout();
+  ~ScopedSuppressAllStdout();
+
+ private:
+  bool was_suppressed_;
+};
+
 #endif  // TOOLS_GN_STANDARD_OUT_H_

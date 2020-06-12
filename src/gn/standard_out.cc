@@ -38,6 +38,8 @@ bool is_markdown = false;
 // True while output is going into a markdown ```...``` code block.
 bool in_body = false;
 
+bool g_suppress_all_stdout = false;
+
 void EnsureInitialized() {
   if (initialized)
     return;
@@ -97,11 +99,23 @@ void OutputMarkdownDec(TextDecoration dec) {
 
 }  // namespace
 
+ScopedSuppressAllStdout::ScopedSuppressAllStdout() {
+  was_suppressed_ = g_suppress_all_stdout;
+  g_suppress_all_stdout = true;
+}
+
+ScopedSuppressAllStdout::~ScopedSuppressAllStdout() {
+  g_suppress_all_stdout = was_suppressed_;
+}
+
 #if defined(OS_WIN)
 
 void OutputString(const std::string& output,
                   TextDecoration dec,
                   HtmlEscaping escaping) {
+  if (g_suppress_all_stdout)
+    return;
+
   EnsureInitialized();
   DWORD written = 0;
 
@@ -161,6 +175,9 @@ void OutputString(const std::string& output,
 void OutputString(const std::string& output,
                   TextDecoration dec,
                   HtmlEscaping escaping) {
+  if (g_suppress_all_stdout)
+    return;
+
   EnsureInitialized();
   if (is_markdown) {
     OutputMarkdownDec(dec);
