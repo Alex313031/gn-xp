@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "0cc37599_ad5b016f",
+        "filename": "src/gn/setup.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 355,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2020-06-12T22:30:07Z",
+      "side": 1,
+      "message": "PrintToStdout() DCHECKs this already.",
+      "revId": "2eb4b63410aebea8f0ceb842cc16cbf8fd1b0771",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": true
+    }
+  ]
+}
