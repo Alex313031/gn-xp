@@ -9,6 +9,7 @@
 #include "base/files/file_util.h"
 #include "base/files/scoped_temp_dir.h"
 #include "gn/filesystem_utils.h"
+#include "gn/standard_out.h"
 #include "gn/switches.h"
 #include "gn/test_with_scheduler.h"
 
@@ -65,6 +66,10 @@ static void RunExtensionCheckTest(std::string extension, bool success) {
 
   // Run setup and check that its status.
   Setup setup;
+
+  // Redirect log to avoid making noise during tests.
+  ScopedSuppressAllStdout suppress_stdout;
+
   EXPECT_EQ(success,
       setup.DoSetup(FilePathToUTF8(build_temp_dir.GetPath()), true, cmdline));
 }
