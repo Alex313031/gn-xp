@@ -52,6 +52,24 @@
       "revId": "d2f5e438ddcf6d51ba47aa71909a1bca9a1555f0",
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "dbe4d6b4_d44bd4c9",
+        "filename": "src/gn/setup_unittest.cc",
+        "patchSetId": 7
+      },
+      "lineNbr": 74,
+      "author": {
+        "id": 1000004
+      },
+      "writtenOn": "2020-06-12T19:52:05Z",
+      "side": 1,
+      "message": "I think everything goes through OutputString() so we can probably just suppress it there. https://gn-review.googlesource.com/c/gn/+/8940",
+      "parentUuid": "b93eb7b4_0bde1f74",
+      "revId": "d2f5e438ddcf6d51ba47aa71909a1bca9a1555f0",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": false
     }
   ]
 }
