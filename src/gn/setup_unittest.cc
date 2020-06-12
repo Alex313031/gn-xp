@@ -9,6 +9,7 @@
 #include "base/files/file_util.h"
 #include "base/files/scoped_temp_dir.h"
 #include "gn/filesystem_utils.h"
+#include "gn/standard_out.h"
 #include "gn/switches.h"
 #include "gn/test_with_scheduler.h"
 
@@ -47,6 +48,9 @@ TEST_F(SetupTest, DotGNFileIsGenDep) {
 
 static void RunExtensionCheckTest(std::string extension, bool success) {
   base::CommandLine cmdline(base::CommandLine::NO_PROGRAM);
+
+  // Redirect log to avoid making noise during tests.
+  ScopedSuppressAllStdout suppress_stdout;
 
   // Create a temp directory containing a .gn file and a BUILDCONFIG.gn file,
   // pass it as --root.
