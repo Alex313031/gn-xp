@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "a7e0bf1d_23d5f83b",
+        "filename": "src/gn/ninja_binary_target_writer.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 70,
+      "author": {
+        "id": 1000014
+      },
+      "writtenOn": "2020-06-15T17:06:53Z",
+      "side": 1,
+      "message": "This needs {} since the enclosing thing is \u003e1 line",
+      "revId": "752ae40d27a477212966d6eaaf46430ec0939c3e",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": true
+    }
+  ]
+}
