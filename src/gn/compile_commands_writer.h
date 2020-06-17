@@ -32,7 +32,7 @@ class CompileCommandsWriter {
 
   static std::vector<const Target*> FilterTargets(
       const std::vector<const Target*>& all_targets,
-      const std::set<std::string>& target_filters_set);
+      const std::set<Label>& target_filters_set);
 
  private:
   // This fuction visits the deps graph of a target in a DFS fashion.

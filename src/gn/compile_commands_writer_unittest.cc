@@ -617,19 +617,19 @@ TEST_F(CompileCommandsTest, CompDBFilter) {
 
   CompileCommandsWriter writer;
 
-  std::set<std::string> filter1;
+  std::set<Label> filter1;
   std::vector<const Target*> test_results1 =
       writer.FilterTargets(targets, filter1);
   ASSERT_TRUE(test_results1.empty());
 
-  std::set<std::string> filter2;
-  filter2.insert(target1.label().name());
+  std::set<Label> filter2;
+  filter2.insert(target1.label());
   std::vector<const Target*> test_results2 =
       writer.FilterTargets(targets, filter2);
   ASSERT_EQ(test_results2, targets);
 
-  std::set<std::string> filter3;
-  filter3.insert(target2.label().name());
+  std::set<Label> filter3;
+  filter3.insert(target2.label());
   std::vector<const Target*> test_result3 =
       writer.FilterTargets(targets, filter3);
   std::vector<const Target*> expected_results3;
