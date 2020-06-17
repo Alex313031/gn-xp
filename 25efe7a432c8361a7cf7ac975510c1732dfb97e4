@@ -37,6 +37,24 @@
     },
     {
       "key": {
+        "uuid": "91271055_11c7be0f",
+        "filename": "src/gn/compile_commands_writer.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 300,
+      "author": {
+        "id": 1000305
+      },
+      "writtenOn": "2020-06-17T20:39:27Z",
+      "side": 1,
+      "message": "Done. In the future, is there any pre-commit style checks I should be running?",
+      "parentUuid": "3c324d96_b0b46d6f",
+      "revId": "25efe7a432c8361a7cf7ac975510c1732dfb97e4",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "9fb2732c_9351db21",
         "filename": "src/gn/compile_commands_writer.cc",
         "patchSetId": 3
@@ -87,6 +105,24 @@
       "revId": "25efe7a432c8361a7cf7ac975510c1732dfb97e4",
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "7ec8b488_49f05fff",
+        "filename": "src/gn/compile_commands_writer.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 337,
+      "author": {
+        "id": 1000305
+      },
+      "writtenOn": "2020-06-17T20:39:27Z",
+      "side": 1,
+      "message": "Done. Not sure why I did it like this before, sorry.",
+      "parentUuid": "cfa1b9d3_12bd23eb",
+      "revId": "25efe7a432c8361a7cf7ac975510c1732dfb97e4",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": false
     }
   ]
 }
