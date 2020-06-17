@@ -305,11 +305,21 @@ bool CompileCommandsWriter::RunAndWriteFiles(
 
   std::vector<const Target*> all_targets = builder.GetAllResolvedTargets();
 
-  std::set<std::string> target_filters_set;
+  std::set<Label> target_filters_set;
+
   for (auto& target :
        base::SplitString(target_filters, ",", base::TRIM_WHITESPACE,
                          base::SPLIT_WANT_NONEMPTY)) {
-    target_filters_set.insert(target);
+    std::vector<std::string> target_split = base::SplitString(
+      target, ":", base::TRIM_WHITESPACE, base::SPLIT_WANT_NONEMPTY);
+    if(target_split.size() > 2) {
+      *err = Err(Location(), "More than one colon detected in a single target.");
+      return false;
+    } else if(target_split.size() == 2) {
+      target_filters_set.insert(Label(SourceDir(target_split[0]), target_split[1]));
+    } else {
+      target_filters_set.insert(Label(SourceDir(), target_split[0]));
+    }
   }
 
   StringOutputBuffer json;
@@ -331,13 +341,19 @@ bool CompileCommandsWriter::RunAndWriteFiles(
 
 std::vector<const Target*> CompileCommandsWriter::FilterTargets(
     const std::vector<const Target*>& all_targets,
-    const std::set<std::string>& target_filters_set) {
+    const std::set<Label>& target_filters_set) {
   std::vector<const Target*> preserved_targets;
 
   std::set<const Target*> visited;
   for (auto& target : all_targets) {
-    if (target_filters_set.count(target->label().name())) {
-      VisitDeps(target, &visited);
+    for(const auto& target_filter_label : target_filters_set) {
+      if(target_filter_label.dir().is_null() ||
+         target_filter_label.dir().value() == target->label().dir().value()) {
+        if(target_filter_label.name() == target->label().name()) {
+          VisitDeps(target, &visited);
+          break;
+        }
+      }
     }
   }
 
