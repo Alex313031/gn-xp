@@ -16,6 +16,24 @@
       "revId": "5bedd8c986510909514ac8f390eacb4c45e284d1",
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "07c48eda_312a8a32",
+        "filename": "src/gn/compile_commands_writer.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 353,
+      "author": {
+        "id": 1000305
+      },
+      "writtenOn": "2020-06-17T21:07:29Z",
+      "side": 1,
+      "message": "Oops. Thanks for spotting that, would have slower this down a lot for no reason. \u003d)",
+      "parentUuid": "80815229_168c1a98",
+      "revId": "5bedd8c986510909514ac8f390eacb4c45e284d1",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": false
     }
   ]
 }
