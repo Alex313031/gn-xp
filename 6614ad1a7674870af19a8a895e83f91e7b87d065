@@ -52,6 +52,24 @@
       "revId": "6614ad1a7674870af19a8a895e83f91e7b87d065",
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "033d9ba9_1e7b5ca0",
+        "filename": "src/gn/command_analyze.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 26,
+      "author": {
+        "id": 1000012
+      },
+      "writtenOn": "2020-06-18T23:21:47Z",
+      "side": 1,
+      "message": "Ah, right, raw string ... I missed the \"R\". It looks like we\u0027ve used R\"*(\" elsewhere where necessary.",
+      "parentUuid": "62c34dc3_21b6e863",
+      "revId": "6614ad1a7674870af19a8a895e83f91e7b87d065",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": true
     }
   ]
 }
