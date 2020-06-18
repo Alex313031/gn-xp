@@ -16,6 +16,24 @@
       "revId": "efa7f6d27ca5e1f4dc17fece1f7c8b18ab1d9aa3",
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "977af03c_f2e1acf2",
+        "filename": "src/gn/xcode_writer.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 870,
+      "author": {
+        "id": 1000070
+      },
+      "writtenOn": "2020-06-18T15:12:46Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "c20e5ce7_9f54477f",
+      "revId": "efa7f6d27ca5e1f4dc17fece1f7c8b18ab1d9aa3",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": false
     }
   ]
 }
