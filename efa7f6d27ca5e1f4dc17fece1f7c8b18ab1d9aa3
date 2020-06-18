@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "c20e5ce7_9f54477f",
+        "filename": "src/gn/xcode_writer.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 870,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2020-06-18T15:03:21Z",
+      "side": 1,
+      "message": "I think tool can be null if the toolchain doesn\u0027t define it, probably want to error out in that case?",
+      "revId": "efa7f6d27ca5e1f4dc17fece1f7c8b18ab1d9aa3",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": true
+    }
+  ]
+}
