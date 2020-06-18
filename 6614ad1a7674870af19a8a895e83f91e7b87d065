@@ -70,6 +70,24 @@
       "revId": "6614ad1a7674870af19a8a895e83f91e7b87d065",
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "9013a6e7_aa519491",
+        "filename": "src/gn/command_analyze.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 26,
+      "author": {
+        "id": 1000004
+      },
+      "writtenOn": "2020-06-18T23:44:49Z",
+      "side": 1,
+      "message": "Ah, ok, I didn\u0027t see this before it landed. If I actually figure out some secondary-toolchain-fixes I\u0027ll include a change to * when I send you a CL.",
+      "parentUuid": "033d9ba9_1e7b5ca0",
+      "revId": "6614ad1a7674870af19a8a895e83f91e7b87d065",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": true
     }
   ]
 }
