@@ -75,7 +75,7 @@ const char kAnalyze_Help[] =
 
        - "Found dependency"
        - "No dependency"
-       - "Found dependency (all) "
+       - "Found dependency (all)"
 
      In the first case, the lists returned in compile_targets and test_targets
      should be passed to ninja to build. In the second case, nothing was
