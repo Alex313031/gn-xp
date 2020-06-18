@@ -16,6 +16,24 @@
       "revId": "6614ad1a7674870af19a8a895e83f91e7b87d065",
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "21caed29_ed69d5d7",
+        "filename": "src/gn/command_analyze.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 26,
+      "author": {
+        "id": 1000004
+      },
+      "writtenOn": "2020-06-18T23:16:51Z",
+      "side": 1,
+      "message": "It was previously\n\n  \"Found dependency (all) \"\n\nso that there wasn\u0027t a literal )\" in the raw string. So when I \u0027fixed\u0027 that to be\n\n  \"Found dependency (all)\"\n\nthe )\" in the middle terminated the string.\n\nRaw string syntax is:\n\n  R\"delimiter( raw_characters )delimiter\"\n\nbut delimiter is optional and normally omitted. It\u0027s useful here to make the status string strictly match what will be in the output json.",
+      "parentUuid": "2d573fdb_bb662d94",
+      "revId": "6614ad1a7674870af19a8a895e83f91e7b87d065",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": true
     }
   ]
 }
