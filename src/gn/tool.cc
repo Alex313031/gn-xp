@@ -205,6 +205,14 @@ bool Tool::InitTool(Scope* scope, Toolchain* toolchain, Err* err) {
       !ReadLabel(scope, "pool", toolchain->label(), &pool_, err)) {
     return false;
   }
+  const bool command_is_required = name_ != GeneralTool::kGeneralToolAction;
+  if (command_.empty() == command_is_required) {
+    *err = Err(defined_from(), "This tools command is bad.",
+               command_is_required
+                   ? "This tools requires \"command\" to be defined."
+                   : "This tools doesn't support \"command\".");
+    return false;
+  }
   return true;
 }
 
