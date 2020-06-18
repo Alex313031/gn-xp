@@ -34,6 +34,24 @@
       "revId": "6614ad1a7674870af19a8a895e83f91e7b87d065",
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "62c34dc3_21b6e863",
+        "filename": "src/gn/command_analyze.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 26,
+      "author": {
+        "id": 1000004
+      },
+      "writtenOn": "2020-06-18T23:18:48Z",
+      "side": 1,
+      "message": "(Maybe just X instead of DOC would be better so that it doesn\u0027t imply there\u0027s something special about it? Whatever you like.)",
+      "parentUuid": "21caed29_ed69d5d7",
+      "revId": "6614ad1a7674870af19a8a895e83f91e7b87d065",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": true
     }
   ]
 }
