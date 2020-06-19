@@ -1,0 +1,21 @@
+toolchain("tgt") {
+  tool("stamp") {
+    command = "touch tgt {{output}}"
+  }
+  tool("link") {
+    command = "link tgt {{output}}"
+    outputs = [ "{{output_dir}}/{{target_output_name}}{{output_extension}}" ]
+  }
+}
+
+toolchain("host") {
+  tool("stamp") {
+    command = "touch host {{output}}"
+  }
+  tool("link") {
+    command = "link host {{output}}"
+    outputs = [ "{{output_dir}}/{{target_output_name}}{{output_extension}}" ]
+  }
+}
+
+

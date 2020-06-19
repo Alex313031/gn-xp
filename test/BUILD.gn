@@ -1,0 +1,10 @@
+group("proj") {
+  deps = [
+    ":mytest",
+    ":mytest(//toolchain:host)",
+  ]
+}
+
+executable("mytest") {
+  sources = [ "x.c" ]
+}
