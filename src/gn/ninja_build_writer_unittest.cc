@@ -253,3 +253,52 @@ TEST_F(NinjaBuildWriterTest, DuplicateOutputs) {
 
   EXPECT_EQ(expected_help_test, err.help_text());
 }
+
+TEST_F(NinjaBuildWriterTest, FullyQualifiedPhonys) {
+  TestWithScope setup;
+  Err err;
+
+  // Create another toolchain.
+  Label other_toolchain_label(SourceDir("//other/"), "toolchain");
+  Toolchain other_toolchain(setup.settings(), other_toolchain_label);
+  TestWithScope::SetupToolchain(&other_toolchain);
+
+  // Set up a dependency chain of |a| -> |b| -> |c| where |a| has a different
+  // toolchain.
+  Target a(setup.settings(),
+           Label(SourceDir("//foo/"), "a", other_toolchain.label().dir(),
+                 other_toolchain.label().name()));
+  a.set_output_type(Target::EXECUTABLE);
+  EXPECT_TRUE(a.SetToolchain(&other_toolchain, &err));
+  TestTarget b(setup, "//foo:b", Target::EXECUTABLE);
+  TestTarget c(setup, "//foo:c", Target::SOURCE_SET);
+  a.private_deps().push_back(LabelTargetPair(&b));
+  b.private_deps().push_back(LabelTargetPair(&c));
+
+  // Settings to go with the other toolchain.
+  Settings other_settings(setup.build_settings(), "other/");
+  other_settings.set_toolchain_label(other_toolchain_label);
+
+  std::unordered_map<const Settings*, const Toolchain*> used_toolchains;
+  used_toolchains[setup.settings()] = setup.toolchain();
+  used_toolchains[&other_settings] = &other_toolchain;
+
+  std::vector<const Target*> targets = {&a, &b, &c};
+
+  std::ostringstream ninja_out;
+  std::ostringstream depfile_out;
+
+  NinjaBuildWriter writer(setup.build_settings(), used_toolchains, targets,
+                          setup.toolchain(), targets, ninja_out, depfile_out);
+  ASSERT_TRUE(writer.Run(&err));
+
+  std::string out_str = ninja_out.str();
+#define EXPECT_CONTAINS(expected)                      \
+  EXPECT_NE(std::string::npos, out_str.find(expected)) \
+      << "Expected to find: " << expected << "\n"      \
+      << "Within: " << out_str
+  EXPECT_CONTAINS("build foo$:a(//other$:toolchain): phony");
+  EXPECT_CONTAINS("build foo$:b(//toolchain$:default): phony");
+  EXPECT_CONTAINS("build foo$:c(//toolchain$:default): phony");
+#undef EXPECT_CONTAINS
+}
