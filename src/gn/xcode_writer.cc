@@ -409,10 +409,11 @@ PBXAttributes ProjectAttributesFromBuildSettings(
 
 // Class representing the workspace embedded in an xcodeproj file used to
 // configure the build settings shared by all targets in the project (used
-// to configure the build system to "Legacy build system").
+// to configure the build system).
 class XcodeWorkspace {
  public:
-  XcodeWorkspace(const BuildSettings* settings);
+  XcodeWorkspace(const BuildSettings* build_settings,
+                 XcodeWriter::Options options);
   ~XcodeWorkspace();
 
   XcodeWorkspace(const XcodeWorkspace&) = delete;
@@ -429,10 +430,12 @@ class XcodeWorkspace {
   bool WriteSettingsFile(const std::string& name, Err* err) const;
 
   const BuildSettings* build_settings_ = nullptr;
+  XcodeWriter::Options options_;
 };
 
-XcodeWorkspace::XcodeWorkspace(const BuildSettings* build_settings)
-    : build_settings_(build_settings) {}
+XcodeWorkspace::XcodeWorkspace(const BuildSettings* build_settings,
+                               XcodeWriter::Options options)
+    : build_settings_(build_settings), options_(options) {}
 
 XcodeWorkspace::~XcodeWorkspace() = default;
 
@@ -475,10 +478,18 @@ bool XcodeWorkspace::WriteSettingsFile(const std::string& name,
       << "<!DOCTYPE plist PUBLIC \"-//Apple//DTD PLIST 1.0//EN\" "
       << "\"http://www.apple.com/DTDs/PropertyList-1.0.dtd\">\n"
       << "<plist version=\"1.0\">\n"
-      << "<dict>\n"
-      << "\t<key>BuildSystemType</key>\n"
-      << "\t<string>Original</string>\n"
-      << "</dict>\n"
+      << "<dict>\n";
+
+  switch (options_.build_system) {
+    case kLegacyBuildSystem:
+      out << "\t<key>BuildSystemType</key>\n"
+          << "\t<string>Original</string>\n";
+      break;
+    case kNewBuildSystem:
+      break;
+  }
+
+  out << "</dict>\n"
       << "</plist>\n";
 
   return WriteFileIfChanged(build_settings_->GetFullPath(source_file),
@@ -803,7 +814,7 @@ bool XcodeProject::WriteFile(Err* err) const {
     return false;
   }
 
-  XcodeWorkspace workspace(build_settings_);
+  XcodeWorkspace workspace(build_settings_, options_);
   return workspace.WriteWorkspace(
       project_.Name() + ".xcodeproj/project.xcworkspace", err);
 }
