@@ -87,15 +87,14 @@ std::string GetNinjaExecutable(const std::string& ninja_executable) {
 std::string GetBuildScript(const std::string& target_name,
                            const std::string& ninja_executable,
                            const std::string& ninja_extra_args,
+                           const std::string& root_src_dir,
                            base::Environment* environment) {
   std::stringstream script;
-  script << "echo note: \"Compile and copy " << target_name << " via ninja\"\n"
-         << "exec ";
+  script << "exec env -i ";
 
   // Launch ninja with a sanitized environment (Xcode sets many environment
   // variable overridding settings, including the SDK, thus breaking hermetic
   // build).
-  script << "env -i ";
   for (const auto& variable : kSafeEnvironmentVariables) {
     script << variable.name << "=\"";
 
@@ -110,12 +109,42 @@ std::string GetBuildScript(const std::string& target_name,
     script << "\" ";
   }
 
-  script << GetNinjaExecutable(ninja_executable) << " -C .";
+  const std::string display_name =
+      target_name.empty() ? std::string("all") : target_name;
+
+  std::stringstream quoter;
+  for (const char ch : root_src_dir) {
+    if (ch == '\\' || ch == '\"') {
+      quoter << '\\' << ch;
+    } else {
+      quoter << ch;
+    }
+  }
+  const std::string quoted_root_src_dir = quoter.str();
+
+  script << "bash -c \""
+         << "echo 'note: \\\"Compile " << display_name << " via ninja\\\"' && "
+         << "REL_ROOT_SRC_DIR=\\\"\\$(echo " << quoted_root_src_dir
+         << "|sed -e 's/\\\\([][\\\\$^./]\\\\)/\\\\\\\\\\\\1/g')\\\" && "
+         << "ABS_ROOT_SRC_DIR=\\\"\\$(cd " << quoted_root_src_dir
+         << " && pwd|sed -e 's/\\\\([][\\\\$^./]\\\\)/\\\\\\\\\\\\1/g')\\\" && "
+         << GetNinjaExecutable(ninja_executable) << " -C . ";
+
+  // TODO: quote extra arguments.
   if (!ninja_extra_args.empty())
-    script << " " << ninja_extra_args;
+    script << ninja_extra_args << " ";
+
+  // TODO: quote target name.
   if (!target_name.empty())
-    script << " " << target_name;
-  script << "\nexit 1\n";
+    script << target_name << " ";
+
+  // TODO: quote path.
+  script << "| sed -e "
+         << "\\\"s/^\\${REL_ROOT_SRC_DIR}/\\${ABS_ROOT_SRC_DIR}\\//\\\" ; "
+         << "exit \\${PIPESTATUS[0]}";
+
+  script << "\"";
+
   return script.str();
 }
 
@@ -653,7 +682,8 @@ bool XcodeProject::AddTargetsFromBuilder(const Builder& builder, Err* err) {
   project_.AddAggregateTarget(
       "All",
       GetBuildScript(options_.root_target_name, options_.ninja_executable,
-                     options_.ninja_extra_args, env.get()));
+                     options_.ninja_extra_args,
+                     SourcePathFromBuildSettings(build_settings_), env.get()));
 
   const std::optional<std::vector<const Target*>> targets =
       GetTargetsFromBuilder(builder, err);
@@ -889,10 +919,10 @@ PBXNativeTarget* XcodeProject::AddBinaryTarget(const Target* target,
       target->label().name(), "compiled.mach-o.executable",
       target->output_name().empty() ? target->label().name()
                                     : target->output_name(),
-      "com.apple.product-type.tool",
-      output_dir,
+      "com.apple.product-type.tool", output_dir,
       GetBuildScript(target->label().name(), options_.ninja_executable,
-                     options_.ninja_extra_args, env));
+                     options_.ninja_extra_args,
+                     SourcePathFromBuildSettings(build_settings_), env));
 }
 
 PBXNativeTarget* XcodeProject::AddBundleTarget(const Target* target,
@@ -919,10 +949,10 @@ PBXNativeTarget* XcodeProject::AddBundleTarget(const Target* target,
       build_settings_->build_dir());
   return project_.AddNativeTarget(
       pbxtarget_name, std::string(), target_output_name,
-      target->bundle_data().product_type(),
-      output_dir,
+      target->bundle_data().product_type(), output_dir,
       GetBuildScript(pbxtarget_name, options_.ninja_executable,
-                     options_.ninja_extra_args, env),
+                     options_.ninja_extra_args,
+                     SourcePathFromBuildSettings(build_settings_), env),
       xcode_extra_attributes);
 }
 
