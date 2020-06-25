@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "2c2a47c1_fddab6ec",
+        "filename": "src/gn/xcode_writer.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 20,
+      "author": {
+        "id": 1000014
+      },
+      "writtenOn": "2020-06-25T20:08:16Z",
+      "side": 1,
+      "message": "Can you make this an \"enum class\"? \"NewBuildSystem\" is a little generic for the global scope. You can probably remove the \"BuildSystem\" from the individual enum names then.",
+      "revId": "0a67f0de391677a39249907443f427b6905e7329",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": true
+    }
+  ]
+}
