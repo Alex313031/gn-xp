@@ -383,8 +383,10 @@
 
 ```
   The .gn file may specify a list of targets to be checked in the list
-  check_targets (see "gn help dotfile"). If a label pattern is specified
-  on the command line, check_targets is not used.
+  check_targets (see "gn help dotfile"). Alternatively, the .gn file may
+  specify a list of targets not to be checked in no_check_targets. If a label
+  pattern is specified on the command line, neither check_targets or
+  no_check_targets is used.
 
   Targets can opt-out from checking with "check_includes = false" (see
   "gn help check_includes").
@@ -6593,9 +6595,18 @@
 
   check_targets [optional]
       A list of labels and label patterns that should be checked when running
-      "gn check" or "gn gen --check". If unspecified, all targets will be
-      checked. If it is the empty list, no targets will be checked. To
-      bypass this list, request an explicit check of targets, like "//*".
+      "gn check" or "gn gen --check". If both check_targets and no_check_targets
+      (see below) are unspecified, all targets will be checked. If it is the
+      empty list, no targets will be checked. To bypass this list, request an
+      explicit check of targets, like "//*".
+
+      The format of this list is identical to that of "visibility" so see "gn
+      help visibility" for examples.
+
+  no_check_targets [optional]
+      A list of labels and label patterns that should *not* be checked when
+      running "gn check" or "gn gen --check". If both check_targets (see above)
+      and no_check_targets are unspecified, all targets will be checked.
 
       The format of this list is identical to that of "visibility" so see "gn
       help visibility" for examples.
