@@ -870,6 +870,27 @@ bool Setup::FillOtherConfig(const base::CommandLine& cmdline, Err* err) {
     }
   }
 
+  // Targets not to check.
+  const Value* no_check_targets_value =
+      dotfile_scope_.GetValue("no_check_targets", true);
+  if (no_check_targets_value) {
+    if (check_targets_value) {
+      Err(Location(), "Conflicting check settings.",
+          "Your .gn file (\"" + FilePathToUTF8(dotfile_name_) +
+              "\")\n"
+              "specified both check_targets and no_check_targets and at most "
+              "one is allowed.")
+          .PrintToStdout();
+      return false;
+    }
+    no_check_patterns_.reset(new std::vector<LabelPattern>);
+    ExtractListOfLabelPatterns(&build_settings_, *no_check_targets_value,
+                               current_dir, no_check_patterns_.get(), err);
+    if (err->has_error()) {
+      return false;
+    }
+  }
+
   const Value* check_system_includes_value =
       dotfile_scope_.GetValue("check_system_includes", true);
   if (check_system_includes_value) {
