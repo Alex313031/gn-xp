@@ -7333,7 +7333,7 @@
     group("a") {
       metadata = {
         my_files = [ "foo.cpp" ]
-        my_files_barrier [ ":b" ]
+        my_files_barrier = [ ":b" ]
       }
 
       deps = [ ":b", ":c" ]
@@ -7353,7 +7353,8 @@
 
     generated_file("metadata") {
       outputs = [ "$root_build_dir/my_files.json" ]
-      data_keys = [ "my_files", "my_extra_files" ]
+      data_keys = [ "my_files" ]
+      walk_keys = [ "my_files_barrier" ]
 
       deps = [ ":a" ]
     }
