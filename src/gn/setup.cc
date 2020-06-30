@@ -862,9 +862,30 @@ bool Setup::FillOtherConfig(const base::CommandLine& cmdline, Err* err) {
   const Value* check_targets_value =
       dotfile_scope_.GetValue("check_targets", true);
   if (check_targets_value) {
-    check_patterns_.reset(new std::vector<LabelPattern>);
+    check_patterns_ = std::make_unique<std::vector<LabelPattern>>();
     ExtractListOfLabelPatterns(&build_settings_, *check_targets_value,
                                current_dir, check_patterns_.get(), err);
+    if (err->has_error()) {
+      return false;
+    }
+  }
+
+  // Targets not to check.
+  const Value* no_check_targets_value =
+      dotfile_scope_.GetValue("no_check_targets", true);
+  if (no_check_targets_value) {
+    if (check_targets_value) {
+      Err(Location(), "Conflicting check settings.",
+          "Your .gn file (\"" + FilePathToUTF8(dotfile_name_) +
+              "\")\n"
+              "specified both check_targets and no_check_targets and at most "
+              "one is allowed.")
+          .PrintToStdout();
+      return false;
+    }
+    no_check_patterns_ = std::make_unique<std::vector<LabelPattern>>();
+    ExtractListOfLabelPatterns(&build_settings_, *no_check_targets_value,
+                               current_dir, no_check_patterns_.get(), err);
     if (err->has_error()) {
       return false;
     }
