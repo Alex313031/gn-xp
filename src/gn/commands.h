@@ -165,6 +165,11 @@ void FilterTargetsByPatterns(const std::vector<const Target*>& input,
                              const std::vector<LabelPattern>& filter,
                              UniqueVector<const Target*>* output);
 
+// Negatively filters the given list of targets by the given pattern list.
+void NegativeFilterTargetsByPatterns(const std::vector<const Target*>& input,
+                                     const std::vector<LabelPattern>& filter,
+                                     std::vector<const Target*>* output);
+
 // Builds a list of pattern from a semicolon-separated list of labels.
 bool FilterPatternsFromString(const BuildSettings* build_settings,
                               const std::string& label_list_string,
