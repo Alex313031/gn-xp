@@ -2,6 +2,29 @@
   "comments": [
     {
       "key": {
+        "uuid": "f9ebdd54_439ce8a4",
+        "filename": "docs/reference.md",
+        "patchSetId": 2
+      },
+      "lineNbr": 6598,
+      "author": {
+        "id": 1000030
+      },
+      "writtenOn": "2020-06-30T06:58:32Z",
+      "side": 1,
+      "message": "better to explain what happen if both configs are specified too?",
+      "range": {
+        "startLine": 6598,
+        "startChar": 38,
+        "endLine": 6598,
+        "endChar": 46
+      },
+      "revId": "f8fc60f7b502447811cb0735ca0187ab01719a2a",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "35b02c61_c622d56d",
         "filename": "src/gn/commands.h",
         "patchSetId": 2
