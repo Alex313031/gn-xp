@@ -1,0 +1,84 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "486f522c_c582923f",
+        "filename": "docs/reference.md",
+        "patchSetId": 4
+      },
+      "lineNbr": 6599,
+      "author": {
+        "id": 1000014
+      },
+      "writtenOn": "2020-06-30T20:28:54Z",
+      "side": 1,
+      "message": "This file is generated from the builtin help, so you\u0027ll need to find where the original for this is and modify that. Then run \"gn help --markdown all \u003e reference.md\" to update this.",
+      "range": {
+        "startLine": 6599,
+        "startChar": 24,
+        "endLine": 6599,
+        "endChar": 27
+      },
+      "revId": "590e21e3df501a3ca5c6042c7ad09d0f9b93cbbf",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "830aa321_f155f623",
+        "filename": "docs/reference.md",
+        "patchSetId": 4
+      },
+      "lineNbr": 6609,
+      "author": {
+        "id": 1000014
+      },
+      "writtenOn": "2020-06-30T20:28:54Z",
+      "side": 1,
+      "message": "Can you add here \"All other targets will be checked.\"",
+      "range": {
+        "startLine": 6609,
+        "startChar": 45,
+        "endLine": 6609,
+        "endChar": 46
+      },
+      "revId": "590e21e3df501a3ca5c6042c7ad09d0f9b93cbbf",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "2bcd1c95_82e9be29",
+        "filename": "src/gn/commands.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 168,
+      "author": {
+        "id": 1000014
+      },
+      "writtenOn": "2020-06-30T20:28:54Z",
+      "side": 1,
+      "message": "\"Negatively filters\" to me is hard to conceptualize. How about something like \"Removes targets from the input that match the given filter list.\"",
+      "revId": "590e21e3df501a3ca5c6042c7ad09d0f9b93cbbf",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "79e77e26_aed1e03f",
+        "filename": "src/gn/commands.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 169,
+      "author": {
+        "id": 1000014
+      },
+      "writtenOn": "2020-06-30T20:28:54Z",
+      "side": 1,
+      "message": "How about \"FilterOutTargetsByPatterns\"? That reads better to me than \"NegativeFilter\"",
+      "revId": "590e21e3df501a3ca5c6042c7ad09d0f9b93cbbf",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": true
+    }
+  ]
+}
