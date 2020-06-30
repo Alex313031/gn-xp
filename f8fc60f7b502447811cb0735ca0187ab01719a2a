@@ -1,0 +1,44 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "35b02c61_c622d56d",
+        "filename": "src/gn/commands.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 172,
+      "author": {
+        "id": 1000030
+      },
+      "writtenOn": "2020-06-30T06:50:01Z",
+      "side": 1,
+      "message": "this function seems not used?",
+      "revId": "f8fc60f7b502447811cb0735ca0187ab01719a2a",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "92362ce3_be8e3cb8",
+        "filename": "src/gn/setup.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 886,
+      "author": {
+        "id": 1000030
+      },
+      "writtenOn": "2020-06-30T06:50:01Z",
+      "side": 1,
+      "message": "better to use std::make_unique?",
+      "range": {
+        "startLine": 886,
+        "startChar": 23,
+        "endLine": 886,
+        "endChar": 28
+      },
+      "revId": "f8fc60f7b502447811cb0735ca0187ab01719a2a",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": true
+    }
+  ]
+}
