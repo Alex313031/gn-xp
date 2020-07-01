@@ -26,6 +26,7 @@ class CTool : public Tool {
   static const char* kCToolObjCxx;
   static const char* kCToolRc;
   static const char* kCToolAsm;
+  static const char* kCToolSwift;
 
   // C linker tools
   static const char* kCToolAlink;
@@ -33,7 +34,7 @@ class CTool : public Tool {
   static const char* kCToolSolinkModule;
   static const char* kCToolLink;
 
-  enum DepsFormat { DEPS_GCC = 0, DEPS_MSVC = 1 };
+  enum DepsFormat { DEPS_GCC = 0, DEPS_MSVC = 1, DEPS_MULTI = 2 };
 
   enum PrecompiledHeaderType { PCH_NONE = 0, PCH_GCC = 1, PCH_MSVC = 2 };
 

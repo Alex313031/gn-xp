@@ -218,6 +218,24 @@ void NinjaBinaryTargetWriter::AddSourceSetFiles(
       obj_files->push_back(tool_outputs[0]);
   }
 
+  // HACK HACK HACK.
+  if (source_set->source_types_used().SwiftSourceUsed()) {
+    const Tool* tool = source_set->toolchain()->GetToolForSourceTypeAsC(
+        SourceFile::SOURCE_SWIFT);
+
+    std::vector<OutputFile> outputs;
+    SubstitutionWriter::ApplyListToSwiftAsOutputFile(source_set, tool,
+                                                     tool->outputs(), &outputs);
+
+    for (const OutputFile& output : outputs) {
+      SourceFile output_as_source =
+          output.AsSourceFile(source_set->settings()->build_settings());
+      if (output_as_source.type() == SourceFile::SOURCE_O) {
+        obj_files->push_back(output);
+      }
+    }
+  }
+
   // Add MSVC precompiled header object files. GCC .gch files are not object
   // files so they are omitted.
   if (source_set->config_values().has_precompiled_headers()) {

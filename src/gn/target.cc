@@ -587,9 +587,11 @@ bool Target::GetOutputFilesForSource(const SourceFile& source,
       return true;
     }
 
-    // Rust generates on a module level, not source.
-    if (file_type == SourceFile::SOURCE_RS)
+    // Rust and Swift generates on a module level, not source.
+    if (file_type == SourceFile::SOURCE_RS ||
+        file_type == SourceFile::SOURCE_SWIFT) {
       return false;
+    }
 
     *computed_tool_type = Tool::GetToolTypeForSourceType(file_type);
     if (*computed_tool_type == Tool::kToolNone)

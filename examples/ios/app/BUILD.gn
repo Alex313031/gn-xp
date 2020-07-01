@@ -27,6 +27,7 @@ ios_app_bundle("hello") {
   ]
 
   deps = [
+    ":foo",
     ":storyboards",
     "//shared:hello_framework",
     "//shared:hello_framework+bundle",
@@ -39,3 +40,20 @@ storyboards("storyboards") {
     "resources/Main.storyboard",
   ]
 }
+
+source_set("foo") {
+  module_name = "Foo"
+  bridge_header = "Foo-Bridging-Header.h"
+  sources = [ "Foo.swift" ]
+}
+# action("foo_action") {
+#   script = "Foo.swift"
+#   depfile = "$target_out_dir/Foo.d"
+#   sources = [ "Foo.swift" ]
+#   outputs = [
+#     "$target_out_dir/Foo.swiftmodule",
+#     "$target_out_dir/Foo.o",
+#     "$target_out_dir/Foo.h",
+#   ]
+#   args = rebase_path(sources, root_out_dir) + [ depfile ]
+# }

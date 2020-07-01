@@ -129,6 +129,33 @@ void NinjaCBinaryTargetWriter::Run() {
   WriteSources(*pch_files, input_deps, order_only_deps, &obj_files,
                &other_files);
 
+  // HACK HACK HACK.
+  if (target_->source_types_used().SwiftSourceUsed()) {
+    const CTool* tool =
+        target_->toolchain()->GetToolForSourceTypeAsC(SourceFile::SOURCE_SWIFT);
+
+    std::vector<OutputFile> outputs;
+    SubstitutionWriter::ApplyListToSwiftAsOutputFile(target_, tool,
+                                                     tool->outputs(), &outputs);
+
+    out_ << "build";
+    path_output_.WriteFiles(out_, outputs);
+    for (const OutputFile& output : outputs) {
+      SourceFile output_as_source =
+          output.AsSourceFile(target_->settings()->build_settings());
+      if (output_as_source.type() == SourceFile::SOURCE_O) {
+        obj_files.push_back(output);
+      }
+    }
+
+    out_ << ": " << rule_prefix_ << tool->name();
+    for (const SourceFile& source : target_->sources()) {
+      out_ << " ";
+      path_output_.WriteFile(out_, source);
+    }
+    out_ << std::endl;
+  }
+
   // Link all MSVC pch object files. The vector will be empty on GCC toolchains.
   obj_files.insert(obj_files.end(), pch_obj_files.begin(), pch_obj_files.end());
   if (!CheckForDuplicateObjectFiles(obj_files))
@@ -224,6 +251,22 @@ void NinjaCBinaryTargetWriter::WriteCompilerVars() {
     WriteOneFlag(target_, &CSubstitutionCFlagsObjCc, has_precompiled_headers,
                  CTool::kCToolObjCxx, &ConfigValues::cflags_objcc, opts,
                  path_output_, out_);
+  }
+  if (target_->source_types_used().SwiftSourceUsed()) {
+    EscapeOptions opts;
+    opts.mode = ESCAPE_NINJA;
+
+    if (subst.used.count(&CSubstitutionSwiftModuleName)) {
+      out_ << CSubstitutionSwiftModuleName.ninja_name << " = ";
+      EscapeStringToStream(out_, target_->swift_values().module_name(), opts);
+      out_ << std::endl;
+    }
+
+    if (subst.used.count(&CSubstitutionSwiftBridgeHeader) && !target_->swift_values().bridge_header().is_null()) {
+      out_ << CSubstitutionSwiftBridgeHeader.ninja_name << " = -import-objc-header ";
+      path_output_.WriteFile(out_, target_->swift_values().bridge_header());
+      out_ << std::endl;
+    }
   }
 
   WriteSharedVars(subst);

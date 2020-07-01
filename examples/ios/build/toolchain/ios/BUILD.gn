@@ -98,6 +98,24 @@ template("ios_toolchain") {
       command = "rm -rf {{output}} && cp -a {{source}} {{output}}"
       description = "COPY_BUNDLE_DATA {{output}}"
     }
+
+    tool("swift") {
+      command =
+          "swiftc {{include_dirs}} -module-name {{module_name}} -emit-object -emit-dependencies -emit-module -emit-module-path {{target_gen_dir}}/{{module_name}}.swiftmodule -emit-objc-header -emit-objc-header-path {{target_gen_dir}}/{{module_name}}.h -output-file-map {{target_out_dir}}/{{module_name}}.rsp -whole-module-optimization {{inputs}} && sed -i '' -n -e '/{{module_name}}.\(swiftmodule\|o\)/p' {{target_out_dir}}/{{module_name}}.d"
+      description = "SWIFT {{output}}"
+
+      depfile = "{{target_out_dir}}/{{module_name}}.d"
+      depsformat = "multi"
+
+      rspfile = "{{target_out_dir}}/{{module_name}}.rsp"
+      rspfile_content = "{\"\": {\"object\": \"{{target_out_dir}}/{{module_name}}.o\", \"dependencies\": \"{{target_out_dir}}/{{module_name}}.d\"} }"
+
+      outputs = [
+        "{{target_out_dir}}/{{module_name}}.o",
+        "{{target_gen_dir}}/{{module_name}}.h",
+        "{{target_gen_dir}}/{{module_name}}.swiftmodule",
+      ]
+    }
   }
 }
 

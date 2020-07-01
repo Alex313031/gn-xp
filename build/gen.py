@@ -16,9 +16,9 @@ import sys
 import tempfile
 
 try:  # py3
-    from shlex import quote as shell_quote
+  from shlex import quote as shell_quote
 except ImportError:  # py2
-    from pipes import quote as shell_quote
+  from pipes import quote as shell_quote
 
 SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))
 REPO_ROOT = os.path.dirname(SCRIPT_DIR)
@@ -218,7 +218,7 @@ def WriteGenericNinja(path, static_libraries, executables,
     object_ext = '.o'
 
   def escape_path_ninja(path):
-      return path.replace('$ ', '$$ ').replace(' ', '$ ').replace(':', '$:')
+    return path.replace('$ ', '$$ ').replace(' ', '$ ').replace(':', '$:')
 
   def src_to_obj(path):
     return escape_path_ninja('%s' % os.path.splitext(path)[0] + object_ext)
@@ -760,6 +760,16 @@ def WriteGNNinja(path, platform, host, options):
   # we just build static libraries that GN needs
   executables['gn']['libs'].extend(static_libraries.keys())
   executables['gn_unittests']['libs'].extend(static_libraries.keys())
+
+  targets = {}
+  targets.update(static_libraries)
+  targets['gn'] = executables['gn']
+
+  for target in targets:
+    targets[target]['sources'].sort()
+
+  import pprint
+  pprint.pprint(targets)
 
   WriteGenericNinja(path, static_libraries, executables, cxx, ar, ld,
                     platform, host, options, cflags, ldflags,

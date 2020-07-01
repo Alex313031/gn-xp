@@ -12,6 +12,7 @@ const char* CTool::kCToolObjC = "objc";
 const char* CTool::kCToolObjCxx = "objcxx";
 const char* CTool::kCToolRc = "rc";
 const char* CTool::kCToolAsm = "asm";
+const char* CTool::kCToolSwift = "swift";
 const char* CTool::kCToolAlink = "alink";
 const char* CTool::kCToolSolink = "solink";
 const char* CTool::kCToolSolinkModule = "solink_module";
@@ -39,8 +40,8 @@ const CTool* CTool::AsC() const {
 
 bool CTool::ValidateName(const char* name) const {
   return name == kCToolCc || name == kCToolCxx || name == kCToolObjC ||
-         name == kCToolObjCxx || name == kCToolRc || name == kCToolAsm ||
-         name == kCToolAlink || name == kCToolSolink ||
+         name == kCToolObjCxx || name == kCToolRc || name == kCToolSwift ||
+         name == kCToolAsm || name == kCToolAlink || name == kCToolSolink ||
          name == kCToolSolinkModule || name == kCToolLink;
 }
 
@@ -131,8 +132,10 @@ bool CTool::ReadDepsFormat(Scope* scope, Err* err) {
     set_depsformat(DEPS_GCC);
   } else if (value->string_value() == "msvc") {
     set_depsformat(DEPS_MSVC);
+  } else if (value->string_value() == "multi") {
+    set_depsformat(DEPS_MULTI);
   } else {
-    *err = Err(*value, "Deps format must be \"gcc\" or \"msvc\".");
+    *err = Err(*value, "Deps format must be \"gcc\", \"msvc\" or \"multi\".");
     return false;
   }
   return true;
@@ -220,6 +223,8 @@ bool CTool::ValidateSubstitution(const Substitution* sub_type) const {
   if (name_ == kCToolCc || name_ == kCToolCxx || name_ == kCToolObjC ||
       name_ == kCToolObjCxx || name_ == kCToolRc || name_ == kCToolAsm)
     return IsValidCompilerSubstitution(sub_type);
+  if (name_ == kCToolSwift)
+    return IsValidSwiftCompilerSubstitution(sub_type);
   else if (name_ == kCToolAlink)
     return IsValidALinkSubstitution(sub_type);
   else if (name_ == kCToolSolink || name_ == kCToolSolinkModule ||
@@ -233,6 +238,8 @@ bool CTool::ValidateOutputSubstitution(const Substitution* sub_type) const {
   if (name_ == kCToolCc || name_ == kCToolCxx || name_ == kCToolObjC ||
       name_ == kCToolObjCxx || name_ == kCToolRc || name_ == kCToolAsm)
     return IsValidCompilerOutputsSubstitution(sub_type);
+  if (name_ == kCToolSwift)
+    return IsValidSwiftCompilerOutputsSubstitution(sub_type);
   // ALink uses the standard output file patterns as other linker tools.
   else if (name_ == kCToolAlink || name_ == kCToolSolink ||
            name_ == kCToolSolinkModule || name_ == kCToolLink)

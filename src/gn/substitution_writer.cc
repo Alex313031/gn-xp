@@ -581,3 +581,72 @@ std::string SubstitutionWriter::GetLinkerSubstitution(
     return std::string();
   }
 }
+
+// static
+OutputFile SubstitutionWriter::ApplyPatternToSwiftAsOutputFile(
+    const Target* target,
+    const Tool* tool,
+    const SubstitutionPattern& pattern) {
+  OutputFile result;
+  for (const auto& subrange : pattern.ranges()) {
+    if (subrange.type == &SubstitutionLiteral) {
+      result.value().append(subrange.literal);
+    } else {
+      result.value().append(GetSwiftSubstitution(target, tool, subrange.type));
+    }
+  }
+  return result;
+}
+
+// static
+void SubstitutionWriter::ApplyListToSwiftAsOutputFile(
+    const Target* target,
+    const Tool* tool,
+    const SubstitutionList& list,
+    std::vector<OutputFile>* output) {
+  for (const auto& item : list.list())
+    output->push_back(ApplyPatternToSwiftAsOutputFile(target, tool, item));
+}
+
+// static
+std::string SubstitutionWriter::GetSwiftSubstitution(const Target* target,
+                                                     const Tool* tool,
+                                                     const Substitution* type) {
+  // First try the common tool ones.
+  std::string result;
+  if (GetTargetSubstitution(target, type, &result))
+    return result;
+
+  // Fall-through to the linker-specific ones.
+  if (type == &SubstitutionOutputDir) {
+    // Use the target's value if there is one (it will have no expansion
+    // patterns since it can directly use GN variables to compute whatever
+    // path it wants), or the tool's default (which will contain further
+    // expansions).
+    if (target->output_dir().is_null()) {
+      return ApplyPatternToLinkerAsOutputFile(target, tool,
+                                              tool->default_output_dir())
+          .value();
+    }
+    SetDirOrDotWithNoSlash(
+        RebasePath(target->output_dir().value(),
+                   target->settings()->build_settings()->build_dir()),
+        &result);
+    return result;
+  } else if (type == &SubstitutionOutputExtension) {
+    // Use the extension provided on the target if specified, otherwise
+    // fall back on the default. Note that the target's output extension
+    // does not include the dot but the tool's does.
+    if (!target->output_extension_set())
+      return tool->default_output_extension();
+    if (target->output_extension().empty())
+      return std::string();  // Explicitly set to no extension.
+    return std::string(".") + target->output_extension();
+  } else if (type == &CSubstitutionSwiftModuleName) {
+    // Only include the toolchain for non-default toolchains.
+    return target->swift_values().module_name();
+  } else {
+    NOTREACHED();
+    return std::string();
+  }
+}

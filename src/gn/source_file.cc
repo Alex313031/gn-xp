@@ -47,6 +47,8 @@ SourceFile::Type GetSourceFileType(const std::string& file) {
     return SourceFile::SOURCE_RS;
   if (extension == "go")
     return SourceFile::SOURCE_GO;
+  if (extension == "swift")
+    return SourceFile::SOURCE_SWIFT;
 
   return SourceFile::SOURCE_UNKNOWN;
 }
@@ -120,8 +122,13 @@ bool SourceFileTypeSet::GoSourceUsed() const {
   return Get(SourceFile::SOURCE_GO);
 }
 
+bool SourceFileTypeSet::SwiftSourceUsed() const {
+  return Get(SourceFile::SOURCE_SWIFT);
+}
+
 bool SourceFileTypeSet::MixedSourceUsed() const {
   return (1 << static_cast<int>(CSourceUsed())
             << static_cast<int>(RustSourceUsed())
-            << static_cast<int>(GoSourceUsed())) > 2;
+            << static_cast<int>(GoSourceUsed())
+            << static_cast<int>(SwiftSourceUsed())) > 2;
 }

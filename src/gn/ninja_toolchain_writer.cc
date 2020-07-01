@@ -99,6 +99,11 @@ void NinjaToolchainWriter::WriteToolRule(Tool* tool,
     } else if (c_tool->depsformat() == CTool::DEPS_MSVC) {
       // MSVC deps don't have a depfile.
       out_ << kIndent << "deps = msvc" << std::endl;
+    } else if (c_tool->depsformat() == CTool::DEPS_MULTI) {
+      // Multi-output deps require a depfile.
+      if (!tool->depfile().empty()) {
+        WriteRulePattern("depfile", tool->depfile(), options);
+      }
     }
   } else if (!tool->depfile().empty()) {
     WriteRulePattern("depfile", tool->depfile(), options);

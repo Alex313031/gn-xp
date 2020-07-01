@@ -40,6 +40,7 @@ class SourceFile {
 
     SOURCE_RS,
     SOURCE_GO,
+    SOURCE_SWIFT,
 
     // Must be last.
     SOURCE_NUMTYPES,
@@ -157,6 +158,7 @@ class SourceFileTypeSet {
   bool CSourceUsed() const;
   bool RustSourceUsed() const;
   bool GoSourceUsed() const;
+  bool SwiftSourceUsed() const;
 
   bool MixedSourceUsed() const;
 
