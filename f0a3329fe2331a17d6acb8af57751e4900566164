@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "7cf6c6bd_461d2791",
+        "filename": "src/gn/command_gen.cc",
+        "patchSetId": 10
+      },
+      "lineNbr": 434,
+      "author": {
+        "id": 1000014
+      },
+      "writtenOn": "2020-07-02T22:38:07Z",
+      "side": 1,
+      "message": "Remove this",
+      "revId": "f0a3329fe2331a17d6acb8af57751e4900566164",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": true
+    }
+  ]
+}
