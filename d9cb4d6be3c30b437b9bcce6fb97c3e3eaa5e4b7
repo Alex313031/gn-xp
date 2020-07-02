@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "b8c34370_ffbaeded",
+        "filename": "src/gn/input_conversion.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 141,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2020-07-02T16:44:15Z",
+      "side": 1,
+      "message": "```\ndict_iterator::reference dict_iterator::operator*() {\n  return {dict_iter_-\u003efirst, *dict_iter_-\u003esecond};\n}\n```\n\ndoes not return a reference, so this warns that the reference binds to a copy",
+      "revId": "d9cb4d6be3c30b437b9bcce6fb97c3e3eaa5e4b7",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": true
+    }
+  ]
+}
