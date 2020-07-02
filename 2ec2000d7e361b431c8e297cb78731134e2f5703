@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "4fdc928b_9713dc21",
+        "filename": "src/gn/xcode_writer.cc",
+        "patchSetId": 9
+      },
+      "lineNbr": 85,
+      "author": {
+        "id": 1000071
+      },
+      "writtenOn": "2020-07-02T16:20:34Z",
+      "side": 1,
+      "message": "This is more complicated then a simple \" ../../\", replace.  Can we add a comment here?  Should we even bother putting comments in an autogen file?\n\nWhile we are on the topic, is this code block going to appear num_targets times in the xcodeproj file?  I wonder if we should pull this out of the xcodeproj file completely?  Or if that\u0027s even possible.  Otherwise we are going to make the file even larger...",
+      "range": {
+        "startLine": 77,
+        "startChar": 0,
+        "endLine": 85,
+        "endChar": 0
+      },
+      "revId": "2ec2000d7e361b431c8e297cb78731134e2f5703",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": true
+    }
+  ]
+}
