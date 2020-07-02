@@ -22,6 +22,30 @@
       "revId": "2ec2000d7e361b431c8e297cb78731134e2f5703",
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "92244f4a_b9f65db3",
+        "filename": "src/gn/xcode_writer.cc",
+        "patchSetId": 9
+      },
+      "lineNbr": 85,
+      "author": {
+        "id": 1000070
+      },
+      "writtenOn": "2020-07-02T17:17:55Z",
+      "side": 1,
+      "message": "I\u0027ve tried to add a comment explaining why I\u0027m using a regular expression, but I\u0027m not sure it is even possible to do much better than just str.replace() as you suggest.\n\nThe script is going to be copied multiple time in the project. It may be possible to generate a reusable script next to the project and to use it (though we\u0027d still need a small bootstrap script in all targets to invoke the external one).\n\nI\u0027m not sure the complexity is worth the trouble.",
+      "parentUuid": "4fdc928b_9713dc21",
+      "range": {
+        "startLine": 77,
+        "startChar": 0,
+        "endLine": 85,
+        "endChar": 0
+      },
+      "revId": "2ec2000d7e361b431c8e297cb78731134e2f5703",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": false
     }
   ]
 }
