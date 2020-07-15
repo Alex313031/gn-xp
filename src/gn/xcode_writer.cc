@@ -978,7 +978,10 @@ PBXNativeTarget* XcodeProject::AddBundleTarget(const Target* target,
   PBXAttributes xcode_extra_attributes =
       target->bundle_data().xcode_extra_attributes();
   if (options_.build_system == XcodeBuildSystem::kLegacy) {
-    xcode_extra_attributes["CODE_SIGN_IDENTITY"] = "";
+    if (xcode_extra_attributes.find("CODE_SIGN_IDENTITY") ==
+        xcode_extra_attributes.end()) {
+      xcode_extra_attributes["CODE_SIGN_IDENTITY"] = "";
+    }
   }
 
   const std::string& target_output_name = RebasePath(
