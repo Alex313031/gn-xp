@@ -2,6 +2,29 @@
   "comments": [
     {
       "key": {
+        "uuid": "e108aaaf_460ed89c",
+        "filename": "src/gn/ninja_rust_binary_target_writer.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 234,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-07-16T23:23:03Z",
+      "side": 1,
+      "message": "Can we call it just `sources`? This is already scoped to `rust_*` rules, so I don\u0027t think we need to repeat `rust_` here again.",
+      "range": {
+        "startLine": 234,
+        "startChar": 13,
+        "endLine": 234,
+        "endChar": 25
+      },
+      "revId": "8ab067751c1f9bbc78279515048bce4f7e8046aa",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "bf92b353_3e8236a4",
         "filename": "src/gn/ninja_rust_binary_target_writer.cc",
         "patchSetId": 1
@@ -13,6 +36,24 @@
       "writtenOn": "2020-07-16T22:59:05Z",
       "side": 1,
       "message": "I\u0027m mixing Rust sources and input (data) sources into the single `rust_sources` variable purely to satisfy my requirements, which don\u0027t need them split up.\n\nIs it worth introducing two variables?",
+      "revId": "8ab067751c1f9bbc78279515048bce4f7e8046aa",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "d9468382_f6123c9f",
+        "filename": "src/gn/ninja_rust_binary_target_writer.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 239,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-07-16T23:23:03Z",
+      "side": 1,
+      "message": "This matches what we do for C++, so unless you need separate variables, I\u0027m fine with just one.",
+      "parentUuid": "bf92b353_3e8236a4",
       "revId": "8ab067751c1f9bbc78279515048bce4f7e8046aa",
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
       "unresolved": true
