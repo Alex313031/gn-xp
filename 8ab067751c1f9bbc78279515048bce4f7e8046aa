@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "9352cbeb_8fe10d4b",
+        "filename": "src/gn/ninja_rust_binary_target_writer_unittest.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 844,
+      "author": {
+        "id": 1000567
+      },
+      "writtenOn": "2020-07-16T22:58:00Z",
+      "side": 1,
+      "message": "This is an order-only dependency, meaning if it changes, it won\u0027t re-trigger the rust build command, correct?\n\nI\u0027m wondering why this is necessary if we\u0027ll be using the inputs as implicit dependencies anyways.",
+      "range": {
+        "startLine": 844,
+        "startChar": 12,
+        "endLine": 844,
+        "endChar": 38
+      },
+      "revId": "8ab067751c1f9bbc78279515048bce4f7e8046aa",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": true
+    }
+  ]
+}
