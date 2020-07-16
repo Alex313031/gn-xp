@@ -2,6 +2,23 @@
   "comments": [
     {
       "key": {
+        "uuid": "bf92b353_3e8236a4",
+        "filename": "src/gn/ninja_rust_binary_target_writer.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 239,
+      "author": {
+        "id": 1000567
+      },
+      "writtenOn": "2020-07-16T22:59:05Z",
+      "side": 1,
+      "message": "I\u0027m mixing Rust sources and input (data) sources into the single `rust_sources` variable purely to satisfy my requirements, which don\u0027t need them split up.\n\nIs it worth introducing two variables?",
+      "revId": "8ab067751c1f9bbc78279515048bce4f7e8046aa",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "9352cbeb_8fe10d4b",
         "filename": "src/gn/ninja_rust_binary_target_writer_unittest.cc",
         "patchSetId": 1
