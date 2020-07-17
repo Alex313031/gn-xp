@@ -22,6 +22,30 @@
       "revId": "70feba5fb5b778ffdb6b5d78d043795b803ac1c5",
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "1cf34e9a_c12df4a4",
+        "filename": "src/gn/ninja_rust_binary_target_writer.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 32,
+      "author": {
+        "id": 1000567
+      },
+      "writtenOn": "2020-07-17T22:21:04Z",
+      "side": 1,
+      "message": "Good catch!",
+      "parentUuid": "71e2476d_37bad096",
+      "range": {
+        "startLine": 32,
+        "startChar": 29,
+        "endLine": 32,
+        "endChar": 41
+      },
+      "revId": "70feba5fb5b778ffdb6b5d78d043795b803ac1c5",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": false
     }
   ]
 }
