@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "8fe64004_608afa0c",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000168
+      },
+      "writtenOn": "2020-07-17T23:17:46Z",
+      "side": 1,
+      "message": "I think the fix ought to happen in RA. As I understand it, feature flags can be booleans (and maybe numbers??) instead of string literals, so you need quotes to differentiate.",
+      "revId": "fd31d0ac1f682b3fff80bff9be6e3f724fdfe6db",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "03849050_08c6c417",
+        "filename": "src/gn/rust_project_writer.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 109,
+      "author": {
+        "id": 1000168
+      },
+      "writtenOn": "2020-07-17T23:17:46Z",
+      "side": 1,
+      "message": "Conflict markers",
+      "revId": "fd31d0ac1f682b3fff80bff9be6e3f724fdfe6db",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": true
+    }
+  ]
+}
