@@ -9,6 +9,7 @@
 #include <tuple>
 
 #include "base/json/string_escape.h"
+#include "base/strings/string_util.h"
 #include "gn/builder.h"
 #include "gn/deps_iterator.h"
 #include "gn/filesystem_utils.h"
@@ -105,8 +106,32 @@ TargetsVector GetRustDeps(const Target* target) {
   return deps;
 }
 
+<<<<<<< HEAD
 // TODO(bwb) Parse sysroot structure from toml files. This is fragile and might
 // break if upstream changes the dependency structure.
+=======
+std::optional<std::string> ExtractCompilerTargetTriple(const Target* target) {
+  for (ConfigValuesIterator iter(target); !iter.done(); iter.Next()) {
+    auto rustflags = iter.cur().rustflags();
+    for (auto flag_iter = rustflags.begin(); flag_iter != rustflags.end();) {
+      // capture the current value
+      auto previous = *flag_iter;
+      // and increment
+      flag_iter++;
+
+      // if the previous value wasn "--target", and after the above increment
+      // the end hasn't been reached, then this is the tuple value.
+      if (previous == "--target" && flag_iter != rustflags.end()) {
+        return std::optional<std::string>{*flag_iter};
+      }
+    }
+  }
+  return std::nullopt;
+}
+
+// TODO(bwb) Parse sysroot structure from toml files. This is fragile and
+// might break if upstream changes the dependency structure.
+>>>>>>> 6e46080e... [rust project] strip double-quotes from feature flags
 const std::string_view sysroot_crates[] = {"std",
                                            "core",
                                            "alloc",
@@ -248,8 +273,10 @@ void AddTarget(const BuildSettings* build_settings,
       }
       if (!flag.compare(0, cfg_prefix.size(), cfg_prefix)) {
         auto cfg = flag.substr(cfg_prefix.size());
+        std::string trimmed_config;
         std::string escaped_config;
-        base::EscapeJSONString(cfg, false, &escaped_config);
+        base::RemoveChars(cfg, "\"", &trimmed_config);
+        base::EscapeJSONString(trimmed_config, false, &escaped_config);
         cfgs.push_back(escaped_config);
       }
     }
