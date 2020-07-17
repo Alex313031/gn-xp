@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "f8f610a3_0a30d909",
+        "filename": "src/gn/ninja_rust_binary_target_writer.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 234,
+      "author": {
+        "id": 1000567
+      },
+      "writtenOn": "2020-07-17T00:23:09Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "e108aaaf_460ed89c",
+      "range": {
+        "startLine": 234,
+        "startChar": 13,
+        "endLine": 234,
+        "endChar": 25
+      },
+      "revId": "8ab067751c1f9bbc78279515048bce4f7e8046aa",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "bf92b353_3e8236a4",
         "filename": "src/gn/ninja_rust_binary_target_writer.cc",
         "patchSetId": 1
@@ -57,6 +81,24 @@
       "revId": "8ab067751c1f9bbc78279515048bce4f7e8046aa",
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "19f292bc_96f34f92",
+        "filename": "src/gn/ninja_rust_binary_target_writer.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 239,
+      "author": {
+        "id": 1000567
+      },
+      "writtenOn": "2020-07-17T00:23:09Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "d9468382_f6123c9f",
+      "revId": "8ab067751c1f9bbc78279515048bce4f7e8046aa",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": false
     },
     {
       "key": {
