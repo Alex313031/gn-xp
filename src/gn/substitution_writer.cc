@@ -581,3 +581,47 @@ std::string SubstitutionWriter::GetLinkerSubstitution(
     return std::string();
   }
 }
+
+// static
+OutputFile SubstitutionWriter::ApplyPatternToSwiftAsOutputFile(
+    const Target* target,
+    const Tool* tool,
+    const SubstitutionPattern& pattern) {
+  OutputFile result;
+  for (const auto& subrange : pattern.ranges()) {
+    if (subrange.type == &SubstitutionLiteral) {
+      result.value().append(subrange.literal);
+    } else {
+      result.value().append(GetSwiftSubstitution(target, tool, subrange.type));
+    }
+  }
+  return result;
+}
+
+// static
+void SubstitutionWriter::ApplyListToSwiftAsOutputFile(
+    const Target* target,
+    const Tool* tool,
+    const SubstitutionList& list,
+    std::vector<OutputFile>* output) {
+  for (const auto& item : list.list())
+    output->push_back(ApplyPatternToSwiftAsOutputFile(target, tool, item));
+}
+
+// static
+std::string SubstitutionWriter::GetSwiftSubstitution(const Target* target,
+                                                     const Tool* tool,
+                                                     const Substitution* type) {
+  // First try the common tool ones.
+  std::string result;
+  if (GetTargetSubstitution(target, type, &result))
+    return result;
+
+  // Fall-through to the swift-specific ones.
+  if (type == &CSubstitutionSwiftModuleName) {
+    return target->swift_values().module_name();
+  } else {
+    NOTREACHED();
+    return std::string();
+  }
+}

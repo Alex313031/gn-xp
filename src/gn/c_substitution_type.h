@@ -36,9 +36,15 @@ extern const Substitution CSubstitutionRlibs;
 // Valid for alink only.
 extern const Substitution CSubstitutionArFlags;
 
+// Valid for swift only.
+extern const Substitution CSubstitutionSwiftModuleName;
+extern const Substitution CSubstitutionSwiftBridgeHeader;
+
 // Both compiler and linker tools.
 bool IsValidCompilerSubstitution(const Substitution* type);
 bool IsValidCompilerOutputsSubstitution(const Substitution* type);
+bool IsValidSwiftCompilerSubstitution(const Substitution* type);
+bool IsValidSwiftCompilerOutputsSubstitution(const Substitution* type);
 bool IsValidLinkerSubstitution(const Substitution* type);
 bool IsValidLinkerOutputsSubstitution(const Substitution* type);
 bool IsValidALinkSubstitution(const Substitution* type);

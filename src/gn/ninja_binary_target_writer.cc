@@ -112,8 +112,9 @@ void NinjaBinaryTargetWriter::WriteSourceSetStamp(
   UniqueVector<const Target*> linkable_deps;
   UniqueVector<const Target*> non_linkable_deps;
   UniqueVector<const Target*> framework_deps;
+  UniqueVector<const Target*> swift_module_deps;
   GetDeps(&extra_object_files, &linkable_deps, &non_linkable_deps,
-          &framework_deps);
+          &framework_deps, &swift_module_deps);
 
   // The classifier should never put extra object files in a source sets: any
   // source sets that we depend on should appear in our non-linkable deps
@@ -124,6 +125,11 @@ void NinjaBinaryTargetWriter::WriteSourceSetStamp(
   for (auto* dep : non_linkable_deps)
     order_only_deps.push_back(dep->dependency_output_file());
 
+  if (target_->source_types_used().SwiftSourceUsed()) {
+    for (auto* dep : swift_module_deps)
+      order_only_deps.push_back(dep->dependency_output_file());
+  }
+
   WriteStampForTarget(object_files, order_only_deps);
 }
 
@@ -131,17 +137,18 @@ void NinjaBinaryTargetWriter::GetDeps(
     UniqueVector<OutputFile>* extra_object_files,
     UniqueVector<const Target*>* linkable_deps,
     UniqueVector<const Target*>* non_linkable_deps,
-    UniqueVector<const Target*>* framework_deps) const {
+    UniqueVector<const Target*>* framework_deps,
+    UniqueVector<const Target*>* swift_module_deps) const {
   // Normal public/private deps.
   for (const auto& pair : target_->GetDeps(Target::DEPS_LINKED)) {
     ClassifyDependency(pair.ptr, extra_object_files, linkable_deps,
-                       non_linkable_deps, framework_deps);
+                       non_linkable_deps, framework_deps, swift_module_deps);
   }
 
   // Inherited libraries.
   for (auto* inherited_target : target_->inherited_libraries().GetOrdered()) {
     ClassifyDependency(inherited_target, extra_object_files, linkable_deps,
-                       non_linkable_deps, framework_deps);
+                       non_linkable_deps, framework_deps, swift_module_deps);
   }
 
   // Data deps.
@@ -154,7 +161,8 @@ void NinjaBinaryTargetWriter::ClassifyDependency(
     UniqueVector<OutputFile>* extra_object_files,
     UniqueVector<const Target*>* linkable_deps,
     UniqueVector<const Target*>* non_linkable_deps,
-    UniqueVector<const Target*>* framework_deps) const {
+    UniqueVector<const Target*>* framework_deps,
+    UniqueVector<const Target*>* swift_module_deps) const {
   // Only the following types of outputs have libraries linked into them:
   //  EXECUTABLE
   //  SHARED_LIBRARY
@@ -164,6 +172,9 @@ void NinjaBinaryTargetWriter::ClassifyDependency(
   // dependency tree until one of these is reached, and source sets
   // don't link at all.
   bool can_link_libs = target_->IsFinal();
+
+  if (dep->source_types_used().SwiftSourceUsed())
+    swift_module_deps->push_back(dep);
 
   if (dep->output_type() == Target::SOURCE_SET ||
       // If a complete static library depends on an incomplete static library,
@@ -216,6 +227,24 @@ void NinjaBinaryTargetWriter::AddSourceSetFiles(
     const char* tool_name = Tool::kToolNone;
     if (source_set->GetOutputFilesForSource(source, &tool_name, &tool_outputs))
       obj_files->push_back(tool_outputs[0]);
+  }
+
+  // HACK HACK HACK.
+  if (source_set->source_types_used().SwiftSourceUsed()) {
+    const Tool* tool = source_set->toolchain()->GetToolForSourceTypeAsC(
+        SourceFile::SOURCE_SWIFT);
+
+    std::vector<OutputFile> outputs;
+    SubstitutionWriter::ApplyListToSwiftAsOutputFile(source_set, tool,
+                                                     tool->outputs(), &outputs);
+
+    for (const OutputFile& output : outputs) {
+      SourceFile output_as_source =
+          output.AsSourceFile(source_set->settings()->build_settings());
+      if (output_as_source.type() == SourceFile::SOURCE_O) {
+        obj_files->push_back(output);
+      }
+    }
   }
 
   // Add MSVC precompiled header object files. GCC .gch files are not object
@@ -282,7 +311,8 @@ void NinjaBinaryTargetWriter::WriteCompilerBuildLine(
 void NinjaBinaryTargetWriter::WriteLinkerFlags(
     std::ostream& out,
     const Tool* tool,
-    const SourceFile* optional_def_file) {
+    const SourceFile* optional_def_file,
+    const std::vector<OutputFile>& swift_modules) {
   if (tool->AsC()) {
     // First the ldflags from the target and its config.
     RecursiveTargetConfigStringsToStream(target_, &ConfigValues::ldflags,
@@ -316,6 +346,19 @@ void NinjaBinaryTargetWriter::WriteLinkerFlags(
       out << " " << tool->framework_dir_switch();
       framework_path_output.WriteDir(out, all_framework_dirs[i],
                                      PathOutput::DIR_NO_LAST_SLASH);
+    }
+  }
+
+  if (!swift_modules.empty()) {
+    // Since we're passing these on the command line to the linker and not
+    // to Ninja, we need to do shell escaping.
+    PathOutput swift_module_path_output(
+        path_output_.current_dir(),
+        settings_->build_settings()->root_path_utf8(), ESCAPE_NINJA_COMMAND);
+
+    for (const OutputFile& swift_module : swift_modules) {
+      out << " -Wl,-add_ast_path,";
+      swift_module_path_output.WriteFile(out, swift_module);
     }
   }
 

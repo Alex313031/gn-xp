@@ -10,18 +10,20 @@
 #include "gn/err.h"
 
 const SubstitutionTypes CSubstitutions = {
-    &CSubstitutionAsmFlags,     &CSubstitutionCFlags,
-    &CSubstitutionCFlagsC,      &CSubstitutionCFlagsCc,
-    &CSubstitutionCFlagsObjC,   &CSubstitutionCFlagsObjCc,
-    &CSubstitutionDefines,      &CSubstitutionFrameworkDirs,
+    &CSubstitutionAsmFlags,        &CSubstitutionCFlags,
+    &CSubstitutionCFlagsC,         &CSubstitutionCFlagsCc,
+    &CSubstitutionCFlagsObjC,      &CSubstitutionCFlagsObjCc,
+    &CSubstitutionDefines,         &CSubstitutionFrameworkDirs,
     &CSubstitutionIncludeDirs,
 
-    &CSubstitutionLinkerInputs, &CSubstitutionLinkerInputsNewline,
-    &CSubstitutionLdFlags,      &CSubstitutionLibs,
-    &CSubstitutionSoLibs,       &CSubstitutionFrameworks,
+    &CSubstitutionLinkerInputs,    &CSubstitutionLinkerInputsNewline,
+    &CSubstitutionLdFlags,         &CSubstitutionLibs,
+    &CSubstitutionSoLibs,          &CSubstitutionFrameworks,
     &CSubstitutionRlibs,
 
     &CSubstitutionArFlags,
+
+    &CSubstitutionSwiftModuleName, &CSubstitutionSwiftBridgeHeader,
 };
 
 // Valid for compiler tools.
@@ -51,6 +53,12 @@ const Substitution CSubstitutionFrameworks = {"{{frameworks}}", "frameworks"};
 // Valid for alink only.
 const Substitution CSubstitutionArFlags = {"{{arflags}}", "arflags"};
 
+// Valid for swift only.
+const Substitution CSubstitutionSwiftModuleName = {"{{module_name}}",
+                                                   "module_name"};
+const Substitution CSubstitutionSwiftBridgeHeader = {"{{bridge_header}}",
+                                                     "bridge_header"};
+
 bool IsValidCompilerSubstitution(const Substitution* type) {
   return IsValidToolSubstitution(type) || IsValidSourceSubstitution(type) ||
          type == &SubstitutionSource || type == &CSubstitutionAsmFlags ||
@@ -64,6 +72,20 @@ bool IsValidCompilerSubstitution(const Substitution* type) {
 bool IsValidCompilerOutputsSubstitution(const Substitution* type) {
   // All tool types except "output" (which would be infinitely recursive).
   return (IsValidToolSubstitution(type) && type != &SubstitutionOutput) ||
+         IsValidSourceSubstitution(type);
+}
+
+bool IsValidSwiftCompilerSubstitution(const Substitution* type) {
+  return IsValidToolSubstitution(type) ||
+         type == &CSubstitutionSwiftModuleName ||
+         type == &CSubstitutionLinkerInputs ||
+         type == &CSubstitutionIncludeDirs ||
+         type == &CSubstitutionSwiftBridgeHeader;
+}
+
+bool IsValidSwiftCompilerOutputsSubstitution(const Substitution* type) {
+  return (IsValidSwiftCompilerSubstitution(type) &&
+          type != &SubstitutionOutput) ||
          IsValidSourceSubstitution(type);
 }
 

@@ -233,6 +233,24 @@ class SubstitutionWriter {
   static std::string GetLinkerSubstitution(const Target* target,
                                            const Tool* tool,
                                            const Substitution* type);
+
+  // Swift substitutions -------------------------------------------------------
+
+  static OutputFile ApplyPatternToSwiftAsOutputFile(
+      const Target* target,
+      const Tool* tool,
+      const SubstitutionPattern& pattern);
+  static void ApplyListToSwiftAsOutputFile(const Target* target,
+                                           const Tool* tool,
+                                           const SubstitutionList& list,
+                                           std::vector<OutputFile>* output);
+
+  // Like GetSourceSubstitution but for strings based on the target or
+  // toolchain. This type of result will always be relative to the build
+  // directory.
+  static std::string GetSwiftSubstitution(const Target* target,
+                                          const Tool* tool,
+                                          const Substitution* type);
 };
 
 #endif  // TOOLS_GN_SUBSTITUTION_WRITER_H_
