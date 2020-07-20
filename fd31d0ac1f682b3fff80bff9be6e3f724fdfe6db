@@ -37,6 +37,24 @@
     },
     {
       "key": {
+        "uuid": "e52c21ad_13a28559",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000397
+      },
+      "writtenOn": "2020-07-20T22:25:22Z",
+      "side": 1,
+      "message": "per matklad@, it was an accidental change, but one that they would like to keep.  I\u0027ll compare what\u0027s in rust-project.json, what RA is doing, and what\u0027s in Cargo, and try to recommend a common syntax for this.",
+      "parentUuid": "b1ff03f2_933716c4",
+      "revId": "fd31d0ac1f682b3fff80bff9be6e3f724fdfe6db",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "03849050_08c6c417",
         "filename": "src/gn/rust_project_writer.cc",
         "patchSetId": 1
