@@ -588,8 +588,9 @@ bool Target::GetOutputFilesForSource(const SourceFile& source,
     }
 
     // Rust generates on a module level, not source.
-    if (file_type == SourceFile::SOURCE_RS)
+    if (file_type == SourceFile::SOURCE_RS) {
       return false;
+    }
 
     *computed_tool_type = Tool::GetToolTypeForSourceType(file_type);
     if (*computed_tool_type == Tool::kToolNone)
@@ -598,9 +599,19 @@ bool Target::GetOutputFilesForSource(const SourceFile& source,
     if (!tool)
       return false;  // Tool does not apply for this toolchain.file.
 
+    // Swift may generate on a module or source level.
+    if (file_type == SourceFile::SOURCE_SWIFT) {
+      if (tool->partial_outputs().list().empty())
+        return false;
+    }
+
+    const SubstitutionList& substitution_list =
+        file_type == SourceFile::SOURCE_SWIFT ? tool->partial_outputs()
+                                              : tool->outputs();
+
     // Figure out what output(s) this compiler produces.
     SubstitutionWriter::ApplyListToCompilerAsOutputFile(
-        this, source, tool->outputs(), outputs);
+        this, source, substitution_list, outputs);
   }
   return !outputs->empty();
 }

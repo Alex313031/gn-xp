@@ -169,6 +169,12 @@ class Tool {
     outputs_ = std::move(out);
   }
 
+  const SubstitutionList& partial_outputs() const { return partial_outputs_; }
+  void set_partial_outputs(SubstitutionList partial_out) {
+    DCHECK(!complete_);
+    partial_outputs_ = std::move(partial_out);
+  }
+
   const SubstitutionList& runtime_outputs() const { return runtime_outputs_; }
   void set_runtime_outputs(SubstitutionList run_out) {
     DCHECK(!complete_);
@@ -273,6 +279,7 @@ class Tool {
   std::string lib_dir_switch_;
   std::string linker_arg_;
   SubstitutionList outputs_;
+  SubstitutionList partial_outputs_;
   SubstitutionList runtime_outputs_;
   std::string output_prefix_;
   bool restat_ = false;

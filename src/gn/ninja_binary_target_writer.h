@@ -42,7 +42,8 @@ class NinjaBinaryTargetWriter : public NinjaTargetWriter {
   void GetDeps(UniqueVector<OutputFile>* extra_object_files,
                UniqueVector<const Target*>* linkable_deps,
                UniqueVector<const Target*>* non_linkable_deps,
-               UniqueVector<const Target*>* framework_deps) const;
+               UniqueVector<const Target*>* framework_deps,
+               UniqueVector<const Target*>* swift_module_deps) const;
 
   // Classifies the dependency as linkable or nonlinkable with the current
   // target, adding it to the appropriate vector. If the dependency is a source
@@ -52,7 +53,8 @@ class NinjaBinaryTargetWriter : public NinjaTargetWriter {
                           UniqueVector<OutputFile>* extra_object_files,
                           UniqueVector<const Target*>* linkable_deps,
                           UniqueVector<const Target*>* non_linkable_deps,
-                          UniqueVector<const Target*>* framework_deps) const;
+                          UniqueVector<const Target*>* framework_deps,
+                          UniqueVector<const Target*>* swift_module_deps) const;
 
   OutputFile WriteStampAndGetDep(const UniqueVector<const SourceFile*>& files,
                                  const std::string& stamp_ext) const;
@@ -65,7 +67,8 @@ class NinjaBinaryTargetWriter : public NinjaTargetWriter {
 
   void WriteLinkerFlags(std::ostream& out,
                         const Tool* tool,
-                        const SourceFile* optional_def_file);
+                        const SourceFile* optional_def_file,
+                        const std::vector<OutputFile>& swift_modules);
   void WriteLibs(std::ostream& out, const Tool* tool);
   void WriteFrameworks(std::ostream& out, const Tool* tool);
 

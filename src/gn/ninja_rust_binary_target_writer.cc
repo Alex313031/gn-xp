@@ -118,12 +118,13 @@ void NinjaRustBinaryTargetWriter::Run() {
   WriteCompilerVars();
 
   // Classify our dependencies.
+  UniqueVector<OutputFile> extra_obj_files;
   UniqueVector<const Target*> linkable_deps;
   UniqueVector<const Target*> non_linkable_deps;
   UniqueVector<const Target*> framework_deps;
-  UniqueVector<OutputFile> extra_obj_files;
-  GetDeps(&extra_obj_files, &linkable_deps, &non_linkable_deps,
-          &framework_deps);
+  UniqueVector<const Target*> swift_module_deps;
+  GetDeps(&extra_obj_files, &linkable_deps, &non_linkable_deps, &framework_deps,
+          &swift_module_deps);
 
   // The input dependencies will be an order-only dependency. This will cause
   // Ninja to make sure the inputs are up to date before compiling this source,
@@ -326,7 +327,7 @@ void NinjaRustBinaryTargetWriter::WriteRustdeps(
     }
   }
 
-  WriteLinkerFlags(out_, tool_, nullptr);
+  WriteLinkerFlags(out_, tool_, nullptr, {});
   WriteLibs(out_, tool_);
   out_ << std::endl;
 }
