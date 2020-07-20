@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "b1ff03f2_933716c4",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000427
+      },
+      "writtenOn": "2020-07-20T14:07:09Z",
+      "side": 1,
+      "message": "I tried looking for the docs on this, but I can\u0027t find anything that says features can be booleans or numbers. This is what the reference says, and it seems limited to strings: https://doc.rust-lang.org/reference/conditional-compilation.html . Internally, RA only seems to care about strings.",
+      "parentUuid": "8fe64004_608afa0c",
+      "revId": "fd31d0ac1f682b3fff80bff9be6e3f724fdfe6db",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "03849050_08c6c417",
         "filename": "src/gn/rust_project_writer.cc",
         "patchSetId": 1
