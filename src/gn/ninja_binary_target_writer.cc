@@ -112,8 +112,9 @@ void NinjaBinaryTargetWriter::WriteSourceSetStamp(
   UniqueVector<const Target*> linkable_deps;
   UniqueVector<const Target*> non_linkable_deps;
   UniqueVector<const Target*> framework_deps;
+  UniqueVector<const Target*> swift_module_deps;
   GetDeps(&extra_object_files, &linkable_deps, &non_linkable_deps,
-          &framework_deps);
+          &framework_deps, &swift_module_deps);
 
   // The classifier should never put extra object files in a source sets: any
   // source sets that we depend on should appear in our non-linkable deps
@@ -124,6 +125,11 @@ void NinjaBinaryTargetWriter::WriteSourceSetStamp(
   for (auto* dep : non_linkable_deps)
     order_only_deps.push_back(dep->dependency_output_file());
 
+  if (target_->source_types_used().SwiftSourceUsed()) {
+    for (auto* dep : swift_module_deps)
+      order_only_deps.push_back(dep->dependency_output_file());
+  }
+
   WriteStampForTarget(object_files, order_only_deps);
 }
 
@@ -131,17 +137,18 @@ void NinjaBinaryTargetWriter::GetDeps(
     UniqueVector<OutputFile>* extra_object_files,
     UniqueVector<const Target*>* linkable_deps,
     UniqueVector<const Target*>* non_linkable_deps,
-    UniqueVector<const Target*>* framework_deps) const {
+    UniqueVector<const Target*>* framework_deps,
+    UniqueVector<const Target*>* swift_module_deps) const {
   // Normal public/private deps.
   for (const auto& pair : target_->GetDeps(Target::DEPS_LINKED)) {
     ClassifyDependency(pair.ptr, extra_object_files, linkable_deps,
-                       non_linkable_deps, framework_deps);
+                       non_linkable_deps, framework_deps, swift_module_deps);
   }
 
   // Inherited libraries.
   for (auto* inherited_target : target_->inherited_libraries().GetOrdered()) {
     ClassifyDependency(inherited_target, extra_object_files, linkable_deps,
-                       non_linkable_deps, framework_deps);
+                       non_linkable_deps, framework_deps, swift_module_deps);
   }
 
   // Data deps.
@@ -154,7 +161,8 @@ void NinjaBinaryTargetWriter::ClassifyDependency(
     UniqueVector<OutputFile>* extra_object_files,
     UniqueVector<const Target*>* linkable_deps,
     UniqueVector<const Target*>* non_linkable_deps,
-    UniqueVector<const Target*>* framework_deps) const {
+    UniqueVector<const Target*>* framework_deps,
+    UniqueVector<const Target*>* swift_module_deps) const {
   // Only the following types of outputs have libraries linked into them:
   //  EXECUTABLE
   //  SHARED_LIBRARY
@@ -164,6 +172,9 @@ void NinjaBinaryTargetWriter::ClassifyDependency(
   // dependency tree until one of these is reached, and source sets
   // don't link at all.
   bool can_link_libs = target_->IsFinal();
+
+  if (dep->swift_values().module_output_file() != OutputFile())
+    swift_module_deps->push_back(dep);
 
   if (dep->output_type() == Target::SOURCE_SET ||
       // If a complete static library depends on an incomplete static library,
@@ -218,6 +229,24 @@ void NinjaBinaryTargetWriter::AddSourceSetFiles(
       obj_files->push_back(tool_outputs[0]);
   }
 
+  // HACK HACK HACK.
+  if (source_set->source_types_used().SwiftSourceUsed()) {
+    const Tool* tool = source_set->toolchain()->GetToolForSourceTypeAsC(
+        SourceFile::SOURCE_SWIFT);
+
+    std::vector<OutputFile> outputs;
+    SubstitutionWriter::ApplyListToSwiftAsOutputFile(source_set, tool,
+                                                     tool->outputs(), &outputs);
+
+    for (const OutputFile& output : outputs) {
+      SourceFile output_as_source =
+          output.AsSourceFile(source_set->settings()->build_settings());
+      if (output_as_source.type() == SourceFile::SOURCE_O) {
+        obj_files->push_back(output);
+      }
+    }
+  }
+
   // Add MSVC precompiled header object files. GCC .gch files are not object
   // files so they are omitted.
   if (source_set->config_values().has_precompiled_headers()) {
@@ -255,7 +284,7 @@ void NinjaBinaryTargetWriter::AddSourceSetFiles(
 }
 
 void NinjaBinaryTargetWriter::WriteCompilerBuildLine(
-    const SourceFile& source,
+    const std::vector<SourceFile>& sources,
     const std::vector<OutputFile>& extra_deps,
     const std::vector<OutputFile>& order_only_deps,
     const char* tool_name,
@@ -264,8 +293,7 @@ void NinjaBinaryTargetWriter::WriteCompilerBuildLine(
   path_output_.WriteFiles(out_, outputs);
 
   out_ << ": " << rule_prefix_ << tool_name;
-  out_ << " ";
-  path_output_.WriteFile(out_, source);
+  path_output_.WriteFiles(out_, sources);
 
   if (!extra_deps.empty()) {
     out_ << " |";
@@ -356,5 +384,21 @@ void NinjaBinaryTargetWriter::WriteFrameworks(std::ostream& out,
   const auto& all_weak_frameworks = target_->all_weak_frameworks();
   for (size_t i = 0; i < all_weak_frameworks.size(); i++) {
     weak_writer(all_weak_frameworks[i], out);
+  }
+}
+
+void NinjaBinaryTargetWriter::WriteModules(
+    std::ostream& out,
+    const Tool* tool,
+    const std::vector<OutputFile>& modules) {
+  // Since we're passing these on the command line to the linker and not
+  // to Ninja, we need to do shell escaping.
+  PathOutput module_path_output(path_output_.current_dir(),
+                                settings_->build_settings()->root_path_utf8(),
+                                ESCAPE_NINJA_COMMAND);
+
+  for (const OutputFile& module : modules) {
+    out << " " << tool->module_switch();
+    module_path_output.WriteFile(out, module);
   }
 }

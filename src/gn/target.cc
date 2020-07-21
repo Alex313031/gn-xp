@@ -388,6 +388,8 @@ bool Target::OnResolved(Err* err) {
   if (!FillOutputFiles(err))
     return false;
 
+  swift_values_.OnTargetResolved(this);
+
   if (!CheckSourceSetLanguages(err))
     return false;
   if (!CheckVisibility(err))
@@ -581,6 +583,7 @@ bool Target::GetOutputFilesForSource(const SourceFile& source,
     SourceFile::Type file_type = source.type();
     if (file_type == SourceFile::SOURCE_UNKNOWN)
       return false;
+
     if (file_type == SourceFile::SOURCE_O) {
       // Object files just get passed to the output and not compiled.
       outputs->emplace_back(OutputFile(settings()->build_settings(), source));
@@ -588,8 +591,9 @@ bool Target::GetOutputFilesForSource(const SourceFile& source,
     }
 
     // Rust generates on a module level, not source.
-    if (file_type == SourceFile::SOURCE_RS)
+    if (file_type == SourceFile::SOURCE_RS) {
       return false;
+    }
 
     *computed_tool_type = Tool::GetToolTypeForSourceType(file_type);
     if (*computed_tool_type == Tool::kToolNone)
@@ -598,9 +602,19 @@ bool Target::GetOutputFilesForSource(const SourceFile& source,
     if (!tool)
       return false;  // Tool does not apply for this toolchain.file.
 
+    // Swift may generate on a module or source level.
+    if (file_type == SourceFile::SOURCE_SWIFT) {
+      if (tool->partial_outputs().list().empty())
+        return false;
+    }
+
+    const SubstitutionList& substitution_list =
+        file_type == SourceFile::SOURCE_SWIFT ? tool->partial_outputs()
+                                              : tool->outputs();
+
     // Figure out what output(s) this compiler produces.
     SubstitutionWriter::ApplyListToCompilerAsOutputFile(
-        this, source, tool->outputs(), outputs);
+        this, source, substitution_list, outputs);
   }
   return !outputs->empty();
 }
