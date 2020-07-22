@@ -1,0 +1,37 @@
+toolchain("toolchain") {
+  tool("cc") {
+    command = "cc -c -o {{output}} {{source}}"
+  }
+
+  tool("alink") {
+    command = "ar rcsD {{output}} {{inputs}}"
+    outputs = [ "{{output_dir}}/{{target_output_name}}{{output_extension}}" ]
+  }
+}
+
+static_library("lib0") {
+  sources = [
+    "a.c"
+  ]
+}
+
+static_library("lib1") {
+  sources = [
+    "b.c"
+    # "b.h"   # If b.h isn't listed anywhere, then a.c including it won't be an error in lib0
+  ]
+}
+
+static_library("lib2") {
+  # I don't know why this isn't an error for the include of <some/stuff.h> when --check-system?
+  # It seems include_dirs = ["."] is necessary.
+  sources = [
+    "c.c"
+  ]
+}
+
+static_library("system") {
+  public = [
+    "some/stuff.h"
+  ]
+}

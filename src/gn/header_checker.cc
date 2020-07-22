@@ -240,7 +240,7 @@ void HeaderChecker::AddTargetToFileMap(const Target* target, FileMap* dest) {
   }
 }
 
-bool HeaderChecker::IsFileInOuputDir(const SourceFile& file) const {
+bool HeaderChecker::IsFileInOutputDir(const SourceFile& file) const {
   const std::string& build_dir = build_settings_->build_dir().value();
   return file.value().compare(0, build_dir.size(), build_dir) == 0;
 }
@@ -280,20 +280,26 @@ bool HeaderChecker::CheckFile(const Target* from_target,
                               std::vector<Err>* errors) const {
   ScopedTrace trace(TraceItem::TRACE_CHECK_HEADER, file.value());
 
+  LOG(ERROR) << "checking: " << file.value();
+
   // Sometimes you have generated source files included as sources in another
   // target. These won't exist at checking time. Since we require all generated
   // files to be somewhere in the output tree, we can just check the name to
   // see if they should be skipped.
-  if (!check_generated_ && IsFileInOuputDir(file))
+  if (!check_generated_ && IsFileInOutputDir(file)) {
+    LOG(ERROR) << "early out for !check_generated_ && IsFileInOutputDir(file)";
     return true;
+  }
 
   base::FilePath path = build_settings_->GetFullPath(file);
   std::string contents;
   if (!base::ReadFileToString(path, &contents)) {
     // A missing (not yet) generated file is an acceptable problem
     // considering this code does not understand conditional includes.
-    if (IsFileInOuputDir(file))
+    if (IsFileInOutputDir(file)) {
+      LOG(ERROR) << "early out for IsFileInOutputDir(file)";
       return true;
+    }
 
     errors->emplace_back(from_target->defined_from(), "Source file not found.",
                          "The target:\n  " +
@@ -322,14 +328,21 @@ bool HeaderChecker::CheckFile(const Target* from_target,
   std::set<std::pair<const Target*, const Target*>> no_dependency_cache;
 
   while (iter.GetNextIncludeString(&include)) {
-    if (include.system_style_include && !check_system_)
+    LOG(ERROR) << "checking " << include.contents;
+    if (include.system_style_include && !check_system_) {
+      LOG(ERROR)
+          << "skipping because include.system_style_include && !check_system_";
       continue;
+    }
 
     Err err;
     SourceFile included_file = SourceFileForInclude(include,
                                                     include_dirs,
                                                     input_file,
                                                     &err);
+    if (included_file.is_null()) {
+      LOG(ERROR) << "included file is null, not checking";
+    }
     if (!included_file.is_null()) {
       CheckInclude(from_target, input_file, included_file, include.location,
                    &no_dependency_cache, errors);
