@@ -608,6 +608,7 @@ Tool variables
     {{cflags_objcc}}
     {{defines}}
     {{include_dirs}}
+    {{swiftflags}}
         Strings correspond that to the processed flags/defines/include
         directories specified for the target.
         Example: "--enable-foo --enable-bar"
