@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "5aa60e4a_c5d652b0",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 6
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000305
+      },
+      "writtenOn": "2020-07-22T23:08:10Z",
+      "side": 1,
+      "message": "Just checking in again if it would be possible to finish the review and merge on this one. \u003d) ",
+      "revId": "55a66d71bd10093b9df543c5890bf27d716b6af3",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": false
+    }
+  ]
+}
