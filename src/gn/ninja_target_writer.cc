@@ -187,6 +187,10 @@ std::vector<OutputFile> NinjaTargetWriter::WriteInputDepsStampAndGetDep(
   CHECK(target_->toolchain()) << "Toolchain not set on target "
                               << target_->label().GetUserVisibleName(true);
 
+  if (target_->label().name() == "foo") {
+    CHECK(target_->toolchain());
+  }
+
   // ----------
   // Collect all input files that are input deps of this target. Knowing the
   // number before writing allows us to either skip writing the input deps

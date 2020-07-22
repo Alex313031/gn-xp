@@ -37,8 +37,6 @@
 #include "gn/variables.h"
 #include "gn/xcode_object.h"
 
-#include <iostream>
-
 namespace {
 
 // This is the template of the script used to build the target. It invokes
