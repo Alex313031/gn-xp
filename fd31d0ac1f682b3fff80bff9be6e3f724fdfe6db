@@ -55,6 +55,23 @@
     },
     {
       "key": {
+        "uuid": "665d6dbe_5d2e7f86",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000168
+      },
+      "writtenOn": "2020-07-22T00:39:07Z",
+      "side": 1,
+      "message": "Ok, per our discussion I\u0027m fine with merging this. I\u0027m slightly worried about RA having to break backward compatibility in the future if rustc decides to accept things besides strings as config values, but not that worried (especially since this format is unstable).",
+      "revId": "fd31d0ac1f682b3fff80bff9be6e3f724fdfe6db",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "03849050_08c6c417",
         "filename": "src/gn/rust_project_writer.cc",
         "patchSetId": 1
@@ -66,6 +83,24 @@
       "writtenOn": "2020-07-17T23:17:46Z",
       "side": 1,
       "message": "Conflict markers",
+      "revId": "fd31d0ac1f682b3fff80bff9be6e3f724fdfe6db",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "bab64e00_7cc417a7",
+        "filename": "src/gn/rust_project_writer.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 109,
+      "author": {
+        "id": 1000168
+      },
+      "writtenOn": "2020-07-22T00:39:07Z",
+      "side": 1,
+      "message": "please fix ;)",
+      "parentUuid": "03849050_08c6c417",
       "revId": "fd31d0ac1f682b3fff80bff9be6e3f724fdfe6db",
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
       "unresolved": true
