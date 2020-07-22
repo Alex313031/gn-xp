@@ -1,0 +1,22 @@
+toolchain("toolchain") {
+  tool("cc") {
+    command = "cc -c -o {{output}} {{source}}"
+  }
+
+  tool("alink") {
+    command = "ar rcsD {{output}} {{inputs}}"
+    outputs = [ "{{output_dir}}/{{target_output_name}}{{output_extension}}" ]
+  }
+}
+
+static_library("lib0") {
+  sources = [
+    "a.c"
+  ]
+}
+
+static_library("lib1") {
+  sources = [
+    "b.c"
+  ]
+}
