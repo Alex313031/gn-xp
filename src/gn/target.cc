@@ -388,6 +388,9 @@ bool Target::OnResolved(Err* err) {
   if (!FillOutputFiles(err))
     return false;
 
+  if (!swift_values_.OnTargetResolved(this, err))
+    return false;
+
   if (!CheckSourceSetLanguages(err))
     return false;
   if (!CheckVisibility(err))
@@ -598,9 +601,19 @@ bool Target::GetOutputFilesForSource(const SourceFile& source,
     if (!tool)
       return false;  // Tool does not apply for this toolchain.file.
 
+    // Swift may generate on a module or source level.
+    if (file_type == SourceFile::SOURCE_SWIFT) {
+      if (tool->partial_outputs().list().empty())
+        return false;
+    }
+
+    const SubstitutionList& substitution_list =
+        file_type == SourceFile::SOURCE_SWIFT ? tool->partial_outputs()
+                                              : tool->outputs();
+
     // Figure out what output(s) this compiler produces.
     SubstitutionWriter::ApplyListToCompilerAsOutputFile(
-        this, source, tool->outputs(), outputs);
+        this, source, substitution_list, outputs);
   }
   return !outputs->empty();
 }
