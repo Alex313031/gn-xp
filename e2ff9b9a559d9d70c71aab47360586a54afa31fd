@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "9c6333f6_06209b9c",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 16
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000070
+      },
+      "writtenOn": "2020-07-22T16:10:50Z",
+      "side": 1,
+      "message": "Could you take a look?\n\nThis is adding support for .swift files.\n\nThis should probably be split in smaller CLs, but I\u0027d like if you could look at the examples to check how the tool is defined, In particular the needs to add {{modules}} to {{link}} and {{solink}} targets, and the partial_ouputs property for the \"swift\" tool to support the different build mode of swift (either whole module optimization where N .swift files are compiled to 1 .o, or regular mode where there is 1:1 mapping between .swift and .o).\n\nIf the usage looks good, then I\u0027ll split the CLs.",
+      "revId": "e2ff9b9a559d9d70c71aab47360586a54afa31fd",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": false
+    }
+  ]
+}
