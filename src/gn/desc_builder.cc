@@ -20,6 +20,7 @@
 #include "gn/settings.h"
 #include "gn/standard_out.h"
 #include "gn/substitution_writer.h"
+#include "gn/swift_variables.h"
 #include "gn/variables.h"
 
 // Example structure of Value for single target
@@ -269,11 +270,14 @@ class ConfigDescBuilder : public BaseDescBuilder {
     CONFIG_VALUE_ARRAY_HANDLER(cflags_objc, std::string)
     CONFIG_VALUE_ARRAY_HANDLER(cflags_objcc, std::string)
     CONFIG_VALUE_ARRAY_HANDLER(defines, std::string)
+    CONFIG_VALUE_ARRAY_HANDLER(frameworks, std::string)
+    CONFIG_VALUE_ARRAY_HANDLER(framework_dirs, SourceDir)
     CONFIG_VALUE_ARRAY_HANDLER(include_dirs, SourceDir)
     CONFIG_VALUE_ARRAY_HANDLER(inputs, SourceFile)
     CONFIG_VALUE_ARRAY_HANDLER(ldflags, std::string)
     CONFIG_VALUE_ARRAY_HANDLER(lib_dirs, SourceDir)
     CONFIG_VALUE_ARRAY_HANDLER(libs, LibFile)
+    CONFIG_VALUE_ARRAY_HANDLER(swiftflags, std::string)
 
 #undef CONFIG_VALUE_ARRAY_HANDLER
 
@@ -335,6 +339,18 @@ class TargetDescBuilder : public BaseDescBuilder {
       if (what(variables::kRustCrateName)) {
         res->SetKey(variables::kRustCrateName,
                     base::Value(target_->rust_values().crate_name()));
+      }
+    }
+
+    if (target_->source_types_used().SwiftSourceUsed()) {
+      if (what(variables::kSwiftBridgeHeader)) {
+        res->SetWithoutPathExpansion(
+            variables::kSwiftBridgeHeader,
+            RenderValue(target_->swift_values().bridge_header()));
+      }
+      if (what(variables::kSwiftModuleName)) {
+        res->SetKey(variables::kSwiftModuleName,
+                    base::Value(target_->swift_values().module_name()));
       }
     }
 
@@ -489,6 +505,7 @@ class TargetDescBuilder : public BaseDescBuilder {
       CONFIG_VALUE_ARRAY_HANDLER(include_dirs, SourceDir)
       CONFIG_VALUE_ARRAY_HANDLER(inputs, SourceFile)
       CONFIG_VALUE_ARRAY_HANDLER(ldflags, std::string)
+      CONFIG_VALUE_ARRAY_HANDLER(swiftflags, std::string)
 #undef CONFIG_VALUE_ARRAY_HANDLER
 
       // Libs and lib_dirs are handled specially below.
