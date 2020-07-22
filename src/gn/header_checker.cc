@@ -150,7 +150,7 @@ bool HeaderChecker::Run(const std::vector<const Target*>& to_check,
 }
 
 void HeaderChecker::RunCheckOverFiles(const FileMap& files, bool force_check) {
-  WorkerPool pool;
+  WorkerPool pool(1);
 
   for (const auto& file : files) {
     // Only check C-like source files (RC files also have includes).
@@ -240,7 +240,7 @@ void HeaderChecker::AddTargetToFileMap(const Target* target, FileMap* dest) {
   }
 }
 
-bool HeaderChecker::IsFileInOuputDir(const SourceFile& file) const {
+bool HeaderChecker::IsFileInOutputDir(const SourceFile& file) const {
   const std::string& build_dir = build_settings_->build_dir().value();
   return file.value().compare(0, build_dir.size(), build_dir) == 0;
 }
@@ -280,20 +280,26 @@ bool HeaderChecker::CheckFile(const Target* from_target,
                               std::vector<Err>* errors) const {
   ScopedTrace trace(TraceItem::TRACE_CHECK_HEADER, file.value());
 
+  LOG(ERROR) << "HEADERCHECKER FOR: " << file.value();
+
   // Sometimes you have generated source files included as sources in another
   // target. These won't exist at checking time. Since we require all generated
   // files to be somewhere in the output tree, we can just check the name to
   // see if they should be skipped.
-  if (!check_generated_ && IsFileInOuputDir(file))
+  if (!check_generated_ && IsFileInOutputDir(file)) {
+    LOG(ERROR) << "  early out for !check_generated_ && IsFileInOutputDir(file)";
     return true;
+  }
 
   base::FilePath path = build_settings_->GetFullPath(file);
   std::string contents;
   if (!base::ReadFileToString(path, &contents)) {
     // A missing (not yet) generated file is an acceptable problem
     // considering this code does not understand conditional includes.
-    if (IsFileInOuputDir(file))
+    if (IsFileInOutputDir(file)) {
+      LOG(ERROR) << "  early out for IsFileInOutputDir(file)";
       return true;
+    }
 
     errors->emplace_back(from_target->defined_from(), "Source file not found.",
                          "The target:\n  " +
@@ -322,14 +328,21 @@ bool HeaderChecker::CheckFile(const Target* from_target,
   std::set<std::pair<const Target*, const Target*>> no_dependency_cache;
 
   while (iter.GetNextIncludeString(&include)) {
-    if (include.system_style_include && !check_system_)
+    LOG(ERROR) << "  checking include " << include.contents;
+    if (include.system_style_include && !check_system_) {
+      LOG(ERROR) << "    skipping because include.system_style_include && "
+                    "!check_system_";
       continue;
+    }
 
     Err err;
     SourceFile included_file = SourceFileForInclude(include,
                                                     include_dirs,
                                                     input_file,
                                                     &err);
+    if (included_file.is_null()) {
+      LOG(ERROR) << "    included file is null, not checking";
+    }
     if (!included_file.is_null()) {
       CheckInclude(from_target, input_file, included_file, include.location,
                    &no_dependency_cache, errors);
@@ -358,8 +371,10 @@ void HeaderChecker::CheckInclude(
   // they're in a #if not executed in the current build. In that case, it's
   // not unusual for the buildfiles to not specify that header at all.
   FileMap::const_iterator found = file_map_.find(include_file);
-  if (found == file_map_.end())
+  if (found == file_map_.end()) {
+    LOG(ERROR) << "    not complaining because source not listed";
     return;
+  }
 
   const TargetVector& targets = found->second;
   Chain chain;  // Prevent reallocating in the loop.
@@ -388,8 +403,10 @@ void HeaderChecker::CheckInclude(
       break;
     }
   }
-  if (!present_in_current_toolchain)
+  if (!present_in_current_toolchain) {
+    LOG(ERROR) << "    not complaining because not in current toolchain";
     return;
+  }
 
   // For all targets containing this file, we require that at least one be
   // a direct or public dependency of the current target, and either (1) the
