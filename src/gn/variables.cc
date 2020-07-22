@@ -5,6 +5,7 @@
 #include "gn/variables.h"
 
 #include "gn/rust_variables.h"
+#include "gn/swift_variables.h"
 
 namespace variables {
 
@@ -2317,6 +2318,7 @@ const VariableInfoMap& GetTargetVariables() {
     INSERT_VARIABLE(WriteRuntimeDeps)
     INSERT_VARIABLE(XcodeExtraAttributes)
     InsertRustVariables(&info_map);
+    InsertSwiftVariables(&info_map);
   }
   return info_map;
 }
