@@ -33,6 +33,23 @@
       "revId": "55a66d71bd10093b9df543c5890bf27d716b6af3",
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8851879f_e0f0203f",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 6
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000014
+      },
+      "writtenOn": "2020-07-23T17:46:50Z",
+      "side": 1,
+      "message": "Your change identifies the fact that the handling of the target names in the compile-commands switch is inconsistent with the rest of the system (it takes \"names\" and matches targets in any directory with that name, which seems super weird to me considering how everything else works).\n\nYour change has to jump through some hoops to preserve this behavior, like duplicating some of the parsing logic. I think we should actually just change this to be a label pattern so you can say stuff like \"//foo/bar/*\" (see FilterTargetsByPatterns to extract the final list).\n\nThe problem is that changing this is a bit more involved since Fuchsia uses this. I\u0027m going to post a to GN dev about this and I\u0027ll CC you.",
+      "revId": "55a66d71bd10093b9df543c5890bf27d716b6af3",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": false
     }
   ]
 }
