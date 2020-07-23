@@ -2,6 +2,23 @@
   "comments": [
     {
       "key": {
+        "uuid": "ada5c809_e6b31f9e",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000014
+      },
+      "writtenOn": "2020-07-23T16:31:01Z",
+      "side": 1,
+      "message": "Of the alternatives, adding the additional tools seems cleanest. Do we really need C and Objective-C modules though? I wouldn\u0027t have expected these could go into C++ modules.",
+      "revId": "9987886e61bb52e827aad9b02be356baf05b64a7",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "98b29be2_2174feb9",
         "filename": "src/gn/ninja_c_binary_target_writer.cc",
         "patchSetId": 1
