@@ -1,0 +1,107 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "741e52a6_0440f94a",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 17
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000014
+      },
+      "writtenOn": "2020-07-23T20:22:56Z",
+      "side": 1,
+      "message": "Just first pass, I\u0027ll need to do another pass when I understand the deps stuff better.",
+      "revId": "0a814486c19475685d52785bf3ddcd114a81ebdf",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "83e4371e_1142b65f",
+        "filename": "src/gn/c_tool.h",
+        "patchSetId": 17
+      },
+      "lineNbr": 37,
+      "author": {
+        "id": 1000014
+      },
+      "writtenOn": "2020-07-23T20:22:56Z",
+      "side": 1,
+      "message": "\"multi\" is pretty mysterious, while \"GCC\" and \"MSVC\" are pretty self-explanatory. Can you document this here?",
+      "range": {
+        "startLine": 37,
+        "startChar": 49,
+        "endLine": 37,
+        "endChar": 59
+      },
+      "revId": "0a814486c19475685d52785bf3ddcd114a81ebdf",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "ab7868e7_3dd742d8",
+        "filename": "src/gn/function_toolchain.cc",
+        "patchSetId": 17
+      },
+      "lineNbr": 371,
+      "author": {
+        "id": 1000014
+      },
+      "writtenOn": "2020-07-23T20:22:56Z",
+      "side": 1,
+      "message": "Looks like this needs to be expanded based on your addition.",
+      "range": {
+        "startLine": 371,
+        "startChar": 36,
+        "endLine": 371,
+        "endChar": 69
+      },
+      "revId": "0a814486c19475685d52785bf3ddcd114a81ebdf",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "879e89b0_4e7fe2ad",
+        "filename": "src/gn/ninja_toolchain_writer.cc",
+        "patchSetId": 17
+      },
+      "lineNbr": 102,
+      "author": {
+        "id": 1000014
+      },
+      "writtenOn": "2020-07-23T20:22:56Z",
+      "side": 1,
+      "message": "Since I don\u0027t understand what multi deps output is, I\u0027m also confused why you need to add stuff to rust, and what effect this has when we\u0027re not telling ninja about the depfile.",
+      "range": {
+        "startLine": 102,
+        "startChar": 4,
+        "endLine": 102,
+        "endChar": 59
+      },
+      "revId": "0a814486c19475685d52785bf3ddcd114a81ebdf",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "82306a53_cd07ab3e",
+        "filename": "src/gn/swift_variables.h",
+        "patchSetId": 17
+      },
+      "lineNbr": 12,
+      "author": {
+        "id": 1000014
+      },
+      "writtenOn": "2020-07-23T20:22:56Z",
+      "side": 1,
+      "message": "I think we can omit this separator.",
+      "revId": "0a814486c19475685d52785bf3ddcd114a81ebdf",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": true
+    }
+  ]
+}
