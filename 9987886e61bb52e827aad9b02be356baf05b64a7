@@ -70,6 +70,30 @@
       "revId": "9987886e61bb52e827aad9b02be356baf05b64a7",
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "6582b067_82479638",
+        "filename": "src/gn/ninja_c_binary_target_writer.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 347,
+      "author": {
+        "id": 1000016
+      },
+      "writtenOn": "2020-07-23T03:10:21Z",
+      "side": 1,
+      "message": "The separate tool is most consistent with the existing GN features.  There is a lot of duplication between link, solink, and solink_module too, and a fair bit between cc and cxx.  I think toolchain writers just have to expect that and write template code and whatnot to manage it, as we\u0027ve all done heretofore.\n\nThat said, being able to do some kinds of substitutions in flags specified outside the tool (i.e. in configs or directly in targets) would probably be useful generally.  But perhaps most useful if the expansions you could use were generalized somehow as a user feature.  That seems like a bigger revamp of GN semantics than you might want to get into as a blocker for the modules support.\n\nI found it hard to follow from either the code, the help text, or the example gn files exactly what the new features are and how they work, so some more thorough explanation of the details somewhere would be helpful.",
+      "parentUuid": "f51b9f97_a4e3fdde",
+      "range": {
+        "startLine": 342,
+        "startChar": 0,
+        "endLine": 347,
+        "endChar": 0
+      },
+      "revId": "9987886e61bb52e827aad9b02be356baf05b64a7",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": true
     }
   ]
 }
