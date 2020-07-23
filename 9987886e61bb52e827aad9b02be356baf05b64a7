@@ -46,6 +46,30 @@
       "revId": "9987886e61bb52e827aad9b02be356baf05b64a7",
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "46f9c2cb_f2378129",
+        "filename": "src/gn/ninja_c_binary_target_writer.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 347,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-07-23T03:08:13Z",
+      "side": 1,
+      "message": "I forgot another idea I also considered which would be to have a toolchain variable akin to     lib_switch or lib_dir_switch, like this:\n\n  module_name_switch \u003d \"-fmodule-name\u003d\"\n\nProblem is that there are other flags like `-fmodule-map-file\u003d` and `-fmodule-file\u003d` which have to be specified for every module dependency, see src/gn/ninja_target_command_util.cc below. We could do:\n\n  module_map_file_switch \u003d \"-fmodule-map-file\u003d\"\n  module_file_switch \u003d \"-fmodule-file\u003d\"\n\nbut it seems a bit verbose, but maybe it\u0027s not so bad?",
+      "parentUuid": "f51b9f97_a4e3fdde",
+      "range": {
+        "startLine": 342,
+        "startChar": 0,
+        "endLine": 347,
+        "endChar": 0
+      },
+      "revId": "9987886e61bb52e827aad9b02be356baf05b64a7",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": true
     }
   ]
 }
