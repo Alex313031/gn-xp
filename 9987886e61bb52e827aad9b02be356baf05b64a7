@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "98b29be2_2174feb9",
+        "filename": "src/gn/ninja_c_binary_target_writer.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 347,
+      "author": {
+        "id": 1000016
+      },
+      "writtenOn": "2020-07-23T02:51:04Z",
+      "side": 1,
+      "message": "Why is any of this built in?  Shouldn\u0027t this all be part of a tool definition?",
+      "range": {
+        "startLine": 342,
+        "startChar": 0,
+        "endLine": 347,
+        "endChar": 0
+      },
+      "revId": "9987886e61bb52e827aad9b02be356baf05b64a7",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": true
+    }
+  ]
+}
