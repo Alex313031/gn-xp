@@ -68,6 +68,23 @@
       "revId": "55a66d71bd10093b9df543c5890bf27d716b6af3",
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "8649b280_9ae3e17a",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 6
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000014
+      },
+      "writtenOn": "2020-07-23T18:04:32Z",
+      "side": 1,
+      "message": "I sent this email:\nhttps://groups.google.com/a/chromium.org/g/gn-dev/c/dos5SYtQakY/m/tZMWQotIAwAJ\n(didn\u0027t CC you since I figured I\u0027d leave that up to you).",
+      "revId": "55a66d71bd10093b9df543c5890bf27d716b6af3",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": false
     }
   ]
 }
