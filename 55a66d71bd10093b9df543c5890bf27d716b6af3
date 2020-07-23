@@ -50,6 +50,24 @@
       "revId": "55a66d71bd10093b9df543c5890bf27d716b6af3",
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "9cdb311c_47e58b46",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 6
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000305
+      },
+      "writtenOn": "2020-07-23T17:59:57Z",
+      "side": 1,
+      "message": "\u003e it takes \"names\" and matches targets in any directory with that name, which seems super weird to me considering how everything else works.\n\nThis is only if no directory is provided. (I think we\u0027re both on the same page here, but wanted to make sure I\u0027m not confused.)\n\n\u003e I think we should actually just change this to be a label pattern so you can say stuff like \"//foo/bar/*\" (see FilterTargetsByPatterns to extract the final list).\n\nThat would be nice. The reason I ignored wildcards was because ninja doesn\u0027t support wildcards either. (Not saying that\u0027s a _good_ reason, but I wanted to provide a simple solution that worked the same as what I was familiar with.)\n\n\u003e The problem is that changing this is a bit more involved since Fuchsia uses this. I\u0027m going to post a to GN dev about this and I\u0027ll CC you.\n\nThanks!",
+      "parentUuid": "8851879f_e0f0203f",
+      "revId": "55a66d71bd10093b9df543c5890bf27d716b6af3",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": true
     }
   ]
 }
