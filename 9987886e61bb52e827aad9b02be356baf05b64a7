@@ -94,6 +94,30 @@
       "revId": "9987886e61bb52e827aad9b02be356baf05b64a7",
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "64fd460e_38e8c3ab",
+        "filename": "src/gn/ninja_c_binary_target_writer.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 347,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-07-23T03:19:00Z",
+      "side": 1,
+      "message": "I agree about the bigger revamp, ideally we would have something like Bazel\u0027s features (https://docs.bazel.build/versions/master/cc-toolchain-config-reference.html) which would allow us to do things like:\n\n  features \u003d [\n    feature(\n        name \u003d \"module_file\",\n        requires \u003d [with_feature_set(features \u003d [\"modules\"])],\n        flag_sets \u003d [\n            flag_set(\n                actions \u003d [\"ACTION_NAMES.c_compile\", \"ACTION_NAMES.cpp_compile\"],\n                flag_groups \u003d [\n                    flag_group (\n                        iterate_over \u003d \"module_files\",\n                        flags \u003d [\"-fmodule-file\u003d%{module_files}\"],\n                    )\n                ],\n            ),\n        ]\n    )\n  ]\n\nThis is quite verbose, but it avoids having to hardcode functionality directly into the build system.",
+      "parentUuid": "6582b067_82479638",
+      "range": {
+        "startLine": 342,
+        "startChar": 0,
+        "endLine": 347,
+        "endChar": 0
+      },
+      "revId": "9987886e61bb52e827aad9b02be356baf05b64a7",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": true
     }
   ]
 }
