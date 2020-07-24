@@ -19,6 +19,23 @@
     },
     {
       "key": {
+        "uuid": "10b13603_bc7723e6",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 17
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000070
+      },
+      "writtenOn": "2020-07-24T09:51:25Z",
+      "side": 1,
+      "message": "Thank you for the first look.\n\nJust replying to the comments.\n\nI think we should resolve the question before I make further changes to the CL.",
+      "revId": "0a814486c19475685d52785bf3ddcd114a81ebdf",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "83e4371e_1142b65f",
         "filename": "src/gn/c_tool.h",
         "patchSetId": 17
@@ -30,6 +47,30 @@
       "writtenOn": "2020-07-23T20:22:56Z",
       "side": 1,
       "message": "\"multi\" is pretty mysterious, while \"GCC\" and \"MSVC\" are pretty self-explanatory. Can you document this here?",
+      "range": {
+        "startLine": 37,
+        "startChar": 49,
+        "endLine": 37,
+        "endChar": 59
+      },
+      "revId": "0a814486c19475685d52785bf3ddcd114a81ebdf",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "e0fded5d_97bbf547",
+        "filename": "src/gn/c_tool.h",
+        "patchSetId": 17
+      },
+      "lineNbr": 37,
+      "author": {
+        "id": 1000070
+      },
+      "writtenOn": "2020-07-24T09:51:25Z",
+      "side": 1,
+      "message": "This is a workaround to use \"depfile\" without \"gn\" writing also \"deps \u003d gcc\". This is required to be able to use \"depfile\" with a target that generates multiple outputs when using old version of ninja.\n\nIn ninja, \"deps \u003d gcc\" enables an optimisation that was not implemented for target generating multiple outputs, so with version of ninja older than 1.9.0, ninja writes an error if using \"depfile\" and \"deps \u003d gcc\" for a target generating multiple output.\n\nMoreover, the \"deps \u003d gcc\" parser was still not parsing correctly depfile until version 1.10.0 when the target generates multiple outputs (https://github.com/ninja-build/ninja/issues/1809).\n\nSo, this settings is to be able to generate the following:\n\n  rule swift\n    command \u003d ...\n    depfile \u003d ...\n\n\ninstead of\n\n  rule swift\n    command \u003d ...\n    depfile \u003d ...\n    deps \u003d gcc\n\nThis is required as swift target generates M outputs from N inputs in the general case (when whole module optimization is disabled and the module is composed of multiple files).\n\nSo I don\u0027t really know which name I could use here. The most clear would be \"DEPS_WORKAROUND_FOR_OLDER_NINJA_WHEN_TARGET_HAS_MULTIPLE_OUTPUT\" but that is quite long.\n\nAlso, I\u0027d like to use the support for Swift in Chrome on iOS (to implements iOS 14 widgets that have to be written in SwiftUI), so I cannot say the support is only working with ninja 1.10.0 or older as Chromium is blocked on an old version of ninja (due to https://bugs.chromium.org/p/chromium/issues/detail?id\u003d931218).\n\nBefore documenting the workaround, I\u0027d like to know if you would be okay with it. The other option is to use a some dummy rules that do nothing if ninja version is unknown or older than 1.10.0.",
+      "parentUuid": "83e4371e_1142b65f",
       "range": {
         "startLine": 37,
         "startChar": 49,
@@ -65,6 +106,30 @@
     },
     {
       "key": {
+        "uuid": "e5ac14d0_e27a5656",
+        "filename": "src/gn/function_toolchain.cc",
+        "patchSetId": 17
+      },
+      "lineNbr": 371,
+      "author": {
+        "id": 1000070
+      },
+      "writtenOn": "2020-07-24T09:51:25Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "ab7868e7_3dd742d8",
+      "range": {
+        "startLine": 371,
+        "startChar": 36,
+        "endLine": 371,
+        "endChar": 69
+      },
+      "revId": "0a814486c19475685d52785bf3ddcd114a81ebdf",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "879e89b0_4e7fe2ad",
         "filename": "src/gn/ninja_toolchain_writer.cc",
         "patchSetId": 17
@@ -88,6 +153,30 @@
     },
     {
       "key": {
+        "uuid": "e64ecef3_702366b5",
+        "filename": "src/gn/ninja_toolchain_writer.cc",
+        "patchSetId": 17
+      },
+      "lineNbr": 102,
+      "author": {
+        "id": 1000070
+      },
+      "writtenOn": "2020-07-24T09:51:25Z",
+      "side": 1,
+      "message": "This is a workaround for a bug in ninja. See my explanation in the other comment. Basically, I want to have a way to tell ninja there is a \"depfile\" but not specify a \"deps\" format.",
+      "parentUuid": "879e89b0_4e7fe2ad",
+      "range": {
+        "startLine": 102,
+        "startChar": 4,
+        "endLine": 102,
+        "endChar": 59
+      },
+      "revId": "0a814486c19475685d52785bf3ddcd114a81ebdf",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "82306a53_cd07ab3e",
         "filename": "src/gn/swift_variables.h",
         "patchSetId": 17
@@ -102,6 +191,24 @@
       "revId": "0a814486c19475685d52785bf3ddcd114a81ebdf",
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "a40c1706_d3b6bc48",
+        "filename": "src/gn/swift_variables.h",
+        "patchSetId": 17
+      },
+      "lineNbr": 12,
+      "author": {
+        "id": 1000070
+      },
+      "writtenOn": "2020-07-24T09:51:25Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "82306a53_cd07ab3e",
+      "revId": "0a814486c19475685d52785bf3ddcd114a81ebdf",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": false
     }
   ]
 }
