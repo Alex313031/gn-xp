@@ -31,6 +31,9 @@ enum EscapingMode {
   // characters which we want to pass to the shell (like when writing tool
   // commands). Only Ninja "$" are escaped.
   ESCAPE_NINJA_PREFORMATTED_COMMAND,
+
+  // Simplified shell escaping described by JSON Compilation Database spec.
+  ESCAPE_COMPILATION_DATABASE,
 };
 
 enum EscapingPlatform {
