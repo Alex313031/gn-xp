@@ -75,8 +75,8 @@ void SetupCompileFlags(const Target* target,
   bool has_precompiled_headers =
       target->config_values().has_precompiled_headers();
 
-  flags.defines = FlagsGetter<std::string>(target, &ConfigValues::defines,
-                                           DefineWriter(ESCAPE_SPACE, true));
+  flags.defines = FlagsGetter<std::string>(
+      target, &ConfigValues::defines, DefineWriter(ESCAPE_COMPILE_COMMANDS));
 
   flags.framework_dirs =
       FlagsGetter<SourceDir>(target, &ConfigValues::framework_dirs,
@@ -84,10 +84,10 @@ void SetupCompileFlags(const Target* target,
 
   flags.frameworks = FlagsGetter<std::string>(
       target, &ConfigValues::frameworks,
-      FrameworksWriter(ESCAPE_SPACE, true, "-framework"));
+      FrameworksWriter(ESCAPE_COMPILE_COMMANDS, "-framework"));
   flags.frameworks += FlagsGetter<std::string>(
       target, &ConfigValues::weak_frameworks,
-      FrameworksWriter(ESCAPE_SPACE, true, "-weak_framework"));
+      FrameworksWriter(ESCAPE_COMPILE_COMMANDS, "-weak_framework"));
 
   flags.includes = FlagsGetter<SourceDir>(target, &ConfigValues::include_dirs,
                                           IncludeWriter(path_output));
