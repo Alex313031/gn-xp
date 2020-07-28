@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "f1f00bea_db10c97c",
+        "filename": "src/gn/ninja_target_command_util_unittest.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 60,
+      "author": {
+        "id": 1000014
+      },
+      "writtenOn": "2020-07-28T19:24:06Z",
+      "side": 0,
+      "message": "This old test seems to be testing the case of writing Windows Ninja commands that\u0027s now removed. Did you mean to remove this? It seems like the new behavior should be in addition to the old tests.",
+      "revId": "3028c6a426a4aaf6da91c4ebafe716ae370225fe",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": true
+    }
+  ]
+}

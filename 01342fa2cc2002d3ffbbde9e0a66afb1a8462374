@@ -1,0 +1,61 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "7f04d1ae_89bd4f29",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000014
+      },
+      "writtenOn": "2020-07-28T19:24:06Z",
+      "side": 1,
+      "message": "In addition to the below comments, I think we should get a standalone test for the escaping behavior in escape_unittest.cc",
+      "revId": "01342fa2cc2002d3ffbbde9e0a66afb1a8462374",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "89b0a8da_0ad6725b",
+        "filename": "src/gn/escape.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 96,
+      "author": {
+        "id": 1000014
+      },
+      "writtenOn": "2020-07-28T19:24:06Z",
+      "side": 1,
+      "message": "These helper functions should probably be renamed to \"CompilationDatabase\" to match the new enum name.",
+      "range": {
+        "startLine": 96,
+        "startChar": 28,
+        "endLine": 96,
+        "endChar": 43
+      },
+      "revId": "01342fa2cc2002d3ffbbde9e0a66afb1a8462374",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "62494132_d15a92b7",
+        "filename": "src/gn/escape.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 35,
+      "author": {
+        "id": 1000014
+      },
+      "writtenOn": "2020-07-28T19:24:06Z",
+      "side": 1,
+      "message": "Can you briefly describe what this escaping is here?",
+      "revId": "01342fa2cc2002d3ffbbde9e0a66afb1a8462374",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": true
+    }
+  ]
+}
