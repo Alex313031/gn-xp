@@ -34,6 +34,24 @@
       "revId": "3028c6a426a4aaf6da91c4ebafe716ae370225fe",
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "98dfe2f3_bfd5d1e6",
+        "filename": "src/gn/ninja_target_command_util_unittest.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 60,
+      "author": {
+        "id": 1000014
+      },
+      "writtenOn": "2020-07-28T20:38:14Z",
+      "side": 0,
+      "message": "Got it, thanks.",
+      "parentUuid": "45f544c8_b1607385",
+      "revId": "3028c6a426a4aaf6da91c4ebafe716ae370225fe",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": false
     }
   ]
 }
