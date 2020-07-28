@@ -34,6 +34,24 @@
       "revId": "f45ab9f9d25d8452f563a96824e4307503f04c23",
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "ff40c66c_14a656fc",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000427
+      },
+      "writtenOn": "2020-07-28T23:35:11Z",
+      "side": 1,
+      "message": "I haven\u0027t been successful in trying to get this to work. I couldn\u0027t even find any other tests in the project that were trying to update a value in `Scope` (what\u0027s need to set rust_sysroot). I talked with Aaron, and we think it\u0027s not worth effort right now.",
+      "parentUuid": "b9bcf43f_b5fe2f06",
+      "revId": "f45ab9f9d25d8452f563a96824e4307503f04c23",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": false
     }
   ]
 }
