@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "48dd0633_3e9f202e",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000070
+      },
+      "writtenOn": "2020-07-28T16:49:26Z",
+      "side": 1,
+      "message": "Please take a look.\n\nFound this bug while working on swift CL.",
+      "revId": "7d2647a8580869ee3a9166c83b45e32b427efc9f",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": false
+    }
+  ]
+}
