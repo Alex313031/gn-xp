@@ -16,6 +16,24 @@
       "revId": "3028c6a426a4aaf6da91c4ebafe716ae370225fe",
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "45f544c8_b1607385",
+        "filename": "src/gn/ninja_target_command_util_unittest.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 60,
+      "author": {
+        "id": 1000587
+      },
+      "writtenOn": "2020-07-28T19:45:34Z",
+      "side": 0,
+      "message": "Agree with leaving current tests in place, however this one was testing a case that was never used in practice (ESCAPE_NINJA_COMMAND with extra JSON escaping), and which is no longer supported. With the boolean argument removed, it\u0027s identical to the previous test and so I removed it.",
+      "parentUuid": "f1f00bea_db10c97c",
+      "revId": "3028c6a426a4aaf6da91c4ebafe716ae370225fe",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": false
     }
   ]
 }

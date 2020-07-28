@@ -42,6 +42,30 @@
     },
     {
       "key": {
+        "uuid": "ea54ec00_08599a5c",
+        "filename": "src/gn/escape.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 96,
+      "author": {
+        "id": 1000587
+      },
+      "writtenOn": "2020-07-28T19:45:34Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "89b0a8da_0ad6725b",
+      "range": {
+        "startLine": 96,
+        "startChar": 28,
+        "endLine": 96,
+        "endChar": 43
+      },
+      "revId": "01342fa2cc2002d3ffbbde9e0a66afb1a8462374",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "62494132_d15a92b7",
         "filename": "src/gn/escape.h",
         "patchSetId": 2
@@ -56,6 +80,24 @@
       "revId": "01342fa2cc2002d3ffbbde9e0a66afb1a8462374",
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "8310a12d_08ab9504",
+        "filename": "src/gn/escape.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 35,
+      "author": {
+        "id": 1000587
+      },
+      "writtenOn": "2020-07-28T19:45:34Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "62494132_d15a92b7",
+      "revId": "01342fa2cc2002d3ffbbde9e0a66afb1a8462374",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": false
     }
   ]
 }
