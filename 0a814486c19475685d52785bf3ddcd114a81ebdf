@@ -83,6 +83,30 @@
     },
     {
       "key": {
+        "uuid": "6a0acd9d_b5bae7a0",
+        "filename": "src/gn/c_tool.h",
+        "patchSetId": 17
+      },
+      "lineNbr": 37,
+      "author": {
+        "id": 1000014
+      },
+      "writtenOn": "2020-07-28T17:42:44Z",
+      "side": 1,
+      "message": "Thanks. It\u0027s been a year and a half for that Ninja bug. It\u0027s not clear to me looking what\u0027s the current problem. Can we just push on that?\n\nA few months ago we had to add some other GN workarounds for Chrome\u0027s old Ninja and I\u0027m not enthusiastic about adding even more.",
+      "parentUuid": "e0fded5d_97bbf547",
+      "range": {
+        "startLine": 37,
+        "startChar": 49,
+        "endLine": 37,
+        "endChar": 59
+      },
+      "revId": "0a814486c19475685d52785bf3ddcd114a81ebdf",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "ab7868e7_3dd742d8",
         "filename": "src/gn/function_toolchain.cc",
         "patchSetId": 17
