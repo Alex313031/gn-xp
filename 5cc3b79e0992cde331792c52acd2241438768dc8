@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "f391a4a9_48359a94",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 16
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000597
+      },
+      "writtenOn": "2020-07-28T11:11:00Z",
+      "side": 1,
+      "message": "\u003e Patch Set 1: Code-Review+2\n\u003e \n\u003e LGTM but see comment above\n\n",
+      "revId": "5cc3b79e0992cde331792c52acd2241438768dc8",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": false
+    }
+  ]
+}
