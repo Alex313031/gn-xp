@@ -107,6 +107,30 @@
     },
     {
       "key": {
+        "uuid": "f6146a4c_51a5d26a",
+        "filename": "src/gn/c_tool.h",
+        "patchSetId": 17
+      },
+      "lineNbr": 37,
+      "author": {
+        "id": 1000070
+      },
+      "writtenOn": "2020-07-29T08:58:39Z",
+      "side": 1,
+      "message": "The reason chromium cannot upgrade is that ninja 1.9.0+ uses the full precision of the file timestamp when available (up to nanoseconds), but some of the tools used to build chromium (most notably python2 `shutil.copyfile` and `cp -a` on macOS) lose some of the timestamp precision (as far as I can tell, truncates at microseconds).\n\nI think the \"fix\" is converting chromium to use python3, stop using `cp` to copy file (on macOS), or change ninja to use only microseconds when comparing timestamps. I\u0027ve been trying to convince my management chain that we should invest effort in migrating to python3, but was not allowed. Changing precision in ninja is probably not going to fly.\n\nDetails are in https://github.com/ninja-build/ninja/issues/1554.\n\nThus, I think I\u0027ll have to write a workaround for ninja anyway if I detect that the version of ninja \u003c 1.10.0 (which is the one containing the fix for depfile).\n\nMy other options for a workaround is to generate ninja files that look like the following (which I think should work but adds lots of \"stamp\" targets that may or not slow the build):\n\n  rule swift\n    command \u003d ...\n    depfile \u003d ...\n    deps \u003d gcc\n\n  obj/Foo/Foo.swiftmodule: swift ../../Foo/file1.swift ../../Foo/file2.swift\n\n  obj/Foo/foo/file1.o: stamp obj/Foo/Foo.swiftmodule\n  obj/Foo/foo/file2.o: stamp obj/Foo/Foo.swiftmodule\n\ninstead of (not the absence of \"deps\")\n\n  rule swift\n    command \u003d ...\n    depfile \u003d ...\n\n  obj/Foo/Foo.swiftmodule obj/Foo/foo/file1.o obj/Foo/foo/file2.o: swift ../../Foo/file1.swift ../../Foo/file2.swift",
+      "parentUuid": "6a0acd9d_b5bae7a0",
+      "range": {
+        "startLine": 37,
+        "startChar": 49,
+        "endLine": 37,
+        "endChar": 59
+      },
+      "revId": "0a814486c19475685d52785bf3ddcd114a81ebdf",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "ab7868e7_3dd742d8",
         "filename": "src/gn/function_toolchain.cc",
         "patchSetId": 17
