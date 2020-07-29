@@ -16,6 +16,24 @@
       "revId": "1e3bbf75996eb1adaf4ae4c1a7b5c7eedc5992c9",
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "61f09edc_fd4cb433",
+        "filename": "src/gn/rust_project_writer_helpers_unittest.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 21,
+      "author": {
+        "id": 1000397
+      },
+      "writtenOn": "2020-07-29T18:39:51Z",
+      "side": 1,
+      "message": "Given the narrow use-case, I think the diff is more useful than the line number (and the test error that fails is printed:\n\n```\n[274/617] RustProjectJSONWriter.OneRustTargetWithEditionSet\nExpected: \u003e\u003e\u003e\n\u003csome expected string\u003e\n\u003c\u003c\u003c\n  Actual: \u003e\u003e\u003e\n\u003cnot the same string\u003e\n\u003c\u003c\u003c\n\n*** FAILURE ../src/gn/rust_project_writer_unittest.cc:22: expected \u003d\u003d actual\n```\n\nThe last line is misleading (it\u0027s always line 22), but the test name and the diff is the really useful bit.\n\nAn actual \"diff\" of the outputs would be better, especially for really big results being compared.",
+      "parentUuid": "7faf0cd8_91860586",
+      "revId": "1e3bbf75996eb1adaf4ae4c1a7b5c7eedc5992c9",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": true
     }
   ]
 }
