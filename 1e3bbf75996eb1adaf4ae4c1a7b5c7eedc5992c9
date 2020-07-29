@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "7faf0cd8_91860586",
+        "filename": "src/gn/rust_project_writer_helpers_unittest.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 21,
+      "author": {
+        "id": 1000427
+      },
+      "writtenOn": "2020-07-29T16:15:37Z",
+      "side": 1,
+      "message": "Will you no longer get the original line the error occurred on? Do you need to log __LINE__ and __FILE__ above? Could this be a macro that does the same so the context is kept?",
+      "revId": "1e3bbf75996eb1adaf4ae4c1a7b5c7eedc5992c9",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": true
+    }
+  ]
+}
