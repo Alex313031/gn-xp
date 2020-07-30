@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "35ee6d1b_7c80f579",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000004
+      },
+      "writtenOn": "2020-07-30T20:05:41Z",
+      "side": 1,
+      "message": "This looks good, I think the tool(\"cxx_module\"), etc. makes sense. I\u0027m going to do some testing now.\n\nSome thoughts/questions (maybe these will become obvious when I actually try it...):\n\n- I don\u0027t understand what \"header_modules\" is for, i.e. could we drop it and have the existence of \"module_name\" \u003d\u003e header_modules\u003dtrue?\n\n- nit; Possibly we should rename the variables to be cc_module_name, cc_module_map (or something) to disambiguate from rust/dart/whatever that probably have modules too.\n\n- Since this is quite large, maybe to make progress it would make sense to start with explicit modulemap only? i.e. the user must provide a manually written modulemap, and then we could exclude all the parts related to generating modulemap files from deps in the first CL. And we could try working on libc++-as-module since that\u0027s probably a tricky one.\n\n- I think we can ignore the warning about instability of modulemap https://clang.llvm.org/docs/Modules.html#module-map-language and add a versioning variable if/when that becomes necessary.\n\n\n",
+      "revId": "a8561ea93720ca5bebdfd15ae2f8522ceacc7b13",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": false
+    }
+  ]
+}
