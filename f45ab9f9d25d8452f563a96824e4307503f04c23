@@ -52,6 +52,29 @@
       "revId": "f45ab9f9d25d8452f563a96824e4307503f04c23",
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "b05232d3_ce08419e",
+        "filename": "src/gn/rust_project_writer.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 206,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-07-30T20:36:31Z",
+      "side": 1,
+      "message": "Nit: you can inline this to reduce the scope of crate_idx:\n\n  if (const auto crate_idx \u003d sysroot.find(crate_name); crate_idx !\u003d sysroot.end())",
+      "range": {
+        "startLine": 205,
+        "startChar": 0,
+        "endLine": 206,
+        "endChar": 35
+      },
+      "revId": "f45ab9f9d25d8452f563a96824e4307503f04c23",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": true
     }
   ]
 }
