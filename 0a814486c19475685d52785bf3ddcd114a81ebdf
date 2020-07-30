@@ -131,6 +131,30 @@
     },
     {
       "key": {
+        "uuid": "f6b02f5d_80763ed9",
+        "filename": "src/gn/c_tool.h",
+        "patchSetId": 17
+      },
+      "lineNbr": 37,
+      "author": {
+        "id": 1000070
+      },
+      "writtenOn": "2020-07-30T10:25:16Z",
+      "side": 1,
+      "message": "I\u0027ve removed enum, and instead added a check for the tool and the version of ninja in ninja_toolchain_writer.cc. Would this be acceptable?",
+      "parentUuid": "f6146a4c_51a5d26a",
+      "range": {
+        "startLine": 37,
+        "startChar": 49,
+        "endLine": 37,
+        "endChar": 59
+      },
+      "revId": "0a814486c19475685d52785bf3ddcd114a81ebdf",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "ab7868e7_3dd742d8",
         "filename": "src/gn/function_toolchain.cc",
         "patchSetId": 17
