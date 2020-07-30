@@ -36,6 +36,24 @@
     },
     {
       "key": {
+        "uuid": "3261b415_f4273251",
+        "filename": "src/gn/rust_project_writer.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 121,
+      "author": {
+        "id": 1000397
+      },
+      "writtenOn": "2020-07-30T21:55:16Z",
+      "side": 1,
+      "message": "Oh, that\u0027s interesting.  I\u0027ll mull on that.",
+      "parentUuid": "c7e36e85_0bd2e32d",
+      "revId": "326e7f22e59c76cbcc72e8000f3005003da26fcf",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "5f1d3cb1_1a99a84d",
         "filename": "src/gn/rust_project_writer.cc",
         "patchSetId": 3
@@ -64,6 +82,24 @@
       "writtenOn": "2020-07-30T20:38:56Z",
       "side": 1,
       "message": "woah this is too rusty to be C++",
+      "revId": "326e7f22e59c76cbcc72e8000f3005003da26fcf",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "45ae93e0_eb6460aa",
+        "filename": "src/gn/rust_project_writer.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 297,
+      "author": {
+        "id": 1000397
+      },
+      "writtenOn": "2020-07-30T21:55:16Z",
+      "side": 1,
+      "message": "But so much tidier than a default value meant to be overridden.",
+      "parentUuid": "3b62a156_05c263d9",
       "revId": "326e7f22e59c76cbcc72e8000f3005003da26fcf",
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
       "unresolved": false
