@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "bb07a209_b0ebe11b",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000427
+      },
+      "writtenOn": "2020-07-30T21:14:19Z",
+      "side": 1,
+      "message": "Could anyone CQ+2 for me? I don\u0027t have Commit-Queue access.",
+      "revId": "43e7c14a720b9261aa98ef36becc560968077bd7",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": false
+    }
+  ]
+}
