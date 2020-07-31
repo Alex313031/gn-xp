@@ -34,6 +34,24 @@
       "revId": "a8561ea93720ca5bebdfd15ae2f8522ceacc7b13",
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "e550405c_39cffa03",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000004
+      },
+      "writtenOn": "2020-07-31T03:35:29Z",
+      "side": 1,
+      "message": "\u003e \u003e This looks good, I think the tool(\"cxx_module\"), etc. makes sense. I\u0027m going to do some testing now.\n\u003e \n\u003e I\u0027m seeing a failure now which is likely due to changes in GN between now and when I originally created this patch:\n\u003e \n\u003e   [140018632689408:0730/133700.563147:FATAL:toolchain.cc(42)] Check failed: name !\u003d Tool::kToolNone.\n\nYeah, I started debugging that but got waylaid, I think NinjaCBinaryTargetWriter::WriteCompilerVars() needs to move the CSubstitutionCFlags cases into the CFlagsC, etc. cases so it knows what tool is in use.\n\n\u003e \n\u003e This needs to debugged before we can proceed with this change.\n\u003e \n\u003e \u003e Some thoughts/questions (maybe these will become obvious when I actually try it...):\n\u003e \u003e \n\u003e \u003e - I don\u0027t understand what \"header_modules\" is for, i.e. could we drop it and have the existence of \"module_name\" \u003d\u003e header_modules\u003dtrue?\n\u003e \u003e \n\u003e \u003e - nit; Possibly we should rename the variables to be cc_module_name, cc_module_map (or something) to disambiguate from rust/dart/whatever that probably have modules too.\n\u003e \u003e \n\u003e \u003e - Since this is quite large, maybe to make progress it would make sense to start with explicit modulemap only? i.e. the user must provide a manually written modulemap, and then we could exclude all the parts related to generating modulemap files from deps in the first CL. And we could try working on libc++-as-module since that\u0027s probably a tricky one.\n\u003e \n\u003e What I considered is to completely eliminate the automatic modulemap generation at gen time (which was inspired by Bazel). Rather, we\u0027d provide a new GN command that could be used to generate the modulemap file, e.g.\n\u003e \n\u003e   gn modulemap \u003cout_dir\u003e \u003ctarget\u003e*\n\u003e \n\u003e Developers would use this to generate modulemap for each target and then commit that. We would then completely eliminate the header_modules variable, instead you\u0027d always have to set the module_map variable which is what enables module for a target.\n\u003e \n\u003e The advantage is that the modulemap file in this case becomes explicit and not something hidden from the developer which would help with debugging. Developers can also manually extend the generated modulemap file and make it more specific/strict if they want to which may be useful for certain libraries.\n\u003e \n\u003e The disadvantage is that you have to maintain the modulemap file manually, but I don\u0027t think that\u0027s such a big problem plus it matches how C++20 modules work anyway.\n\u003e \n\u003e What do you think? We could split the modulemap generation (with the new command) into a separate change which would be easier to land.\n\nI like that it\u0027s explicit for sure, and it seems like a good place to start because then we can avoid the automated decisions for now. Maybe in theory it could almost be outside of GN, in a tool that consumed `gn desc --format\u003djson`.\n\nDo you have time to work further on this CL? I know you\u0027re doing a lot of other probably-higher-priority things as well.\n\n\u003e \n\u003e \u003e - I think we can ignore the warning about instability of modulemap https://clang.llvm.org/docs/Modules.html#module-map-language and add a versioning variable if/when that becomes necessary.\n\u003e \n\u003e Agreed, there\u0027s a number of other formats supported by GN which have similar stability guarantees (e.g. Xcode and Visual Studio projects, compilation database).",
+      "parentUuid": "9de59012_4347b1a9",
+      "revId": "a8561ea93720ca5bebdfd15ae2f8522ceacc7b13",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": false
     }
   ]
 }
