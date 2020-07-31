@@ -16,6 +16,24 @@
       "revId": "a8561ea93720ca5bebdfd15ae2f8522ceacc7b13",
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "9de59012_4347b1a9",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-07-31T03:02:07Z",
+      "side": 1,
+      "message": "\u003e This looks good, I think the tool(\"cxx_module\"), etc. makes sense. I\u0027m going to do some testing now.\n\nI\u0027m seeing a failure now which is likely due to changes in GN between now and when I originally created this patch:\n\n  [140018632689408:0730/133700.563147:FATAL:toolchain.cc(42)] Check failed: name !\u003d Tool::kToolNone.\n\nThis needs to debugged before we can proceed with this change.\n\n\u003e Some thoughts/questions (maybe these will become obvious when I actually try it...):\n\u003e \n\u003e - I don\u0027t understand what \"header_modules\" is for, i.e. could we drop it and have the existence of \"module_name\" \u003d\u003e header_modules\u003dtrue?\n\u003e \n\u003e - nit; Possibly we should rename the variables to be cc_module_name, cc_module_map (or something) to disambiguate from rust/dart/whatever that probably have modules too.\n\u003e \n\u003e - Since this is quite large, maybe to make progress it would make sense to start with explicit modulemap only? i.e. the user must provide a manually written modulemap, and then we could exclude all the parts related to generating modulemap files from deps in the first CL. And we could try working on libc++-as-module since that\u0027s probably a tricky one.\n\nWhat I considered is to completely eliminate the automatic modulemap generation at gen time (which was inspired by Bazel). Rather, we\u0027d provide a new GN command that could be used to generate the modulemap file, e.g.\n\n  gn modulemap \u003cout_dir\u003e \u003ctarget\u003e*\n\nDevelopers would use this to generate modulemap for each target and then commit that. We would then completely eliminate the header_modules variable, instead you\u0027d always have to set the module_map variable which is what enables module for a target.\n\nThe advantage is that the modulemap file in this case becomes explicit and not something hidden from the developer which would help with debugging. Developers can also manually extend the generated modulemap file and make it more specific/strict if they want to which may be useful for certain libraries.\n\nThe disadvantage is that you have to maintain the modulemap file manually, but I don\u0027t think that\u0027s such a big problem plus it matches how C++20 modules work anyway.\n\nWhat do you think? We could split the modulemap generation (with the new command) into a separate change which would be easier to land.\n\n\u003e - I think we can ignore the warning about instability of modulemap https://clang.llvm.org/docs/Modules.html#module-map-language and add a versioning variable if/when that becomes necessary.\n\nAgreed, there\u0027s a number of other formats supported by GN which have similar stability guarantees (e.g. Xcode and Visual Studio projects, compilation database).",
+      "parentUuid": "35ee6d1b_7c80f579",
+      "revId": "a8561ea93720ca5bebdfd15ae2f8522ceacc7b13",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": false
     }
   ]
 }
