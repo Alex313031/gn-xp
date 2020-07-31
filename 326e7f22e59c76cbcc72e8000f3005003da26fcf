@@ -54,6 +54,24 @@
     },
     {
       "key": {
+        "uuid": "893cdc38_f2e4541d",
+        "filename": "src/gn/rust_project_writer.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 121,
+      "author": {
+        "id": 1000397
+      },
+      "writtenOn": "2020-07-31T22:38:37Z",
+      "side": 1,
+      "message": "Done.\n\nSince this adds helpers for both methods, down around line 295 it just invokes one then the other (picking the current way we call rustc as the first one, but with tests for both).",
+      "parentUuid": "3261b415_f4273251",
+      "revId": "326e7f22e59c76cbcc72e8000f3005003da26fcf",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "5f1d3cb1_1a99a84d",
         "filename": "src/gn/rust_project_writer.cc",
         "patchSetId": 3
@@ -68,6 +86,24 @@
       "revId": "326e7f22e59c76cbcc72e8000f3005003da26fcf",
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "b2f25e02_2d31f8ec",
+        "filename": "src/gn/rust_project_writer.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 129,
+      "author": {
+        "id": 1000397
+      },
+      "writtenOn": "2020-07-31T22:38:37Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "5f1d3cb1_1a99a84d",
+      "revId": "326e7f22e59c76cbcc72e8000f3005003da26fcf",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": false
     },
     {
       "key": {
