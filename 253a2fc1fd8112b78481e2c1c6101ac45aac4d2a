@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "d28cd1c8_3b2d077a",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000070
+      },
+      "writtenOn": "2020-08-04T11:18:30Z",
+      "side": 1,
+      "message": "Build on top of the other CLs, this show how the tool can be used to build some Swift.",
+      "revId": "253a2fc1fd8112b78481e2c1c6101ac45aac4d2a",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": false
+    }
+  ]
+}
