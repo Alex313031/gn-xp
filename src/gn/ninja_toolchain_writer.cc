@@ -83,7 +83,8 @@ void NinjaToolchainWriter::WriteToolRule(Tool* tool,
   EscapeOptions options;
   options.mode = ESCAPE_NINJA_PREFORMATTED_COMMAND;
 
-  WriteCommandRulePattern("command", tool->command_launcher(), tool->command(), options);
+  WriteCommandRulePattern("command", tool->command_launcher(), tool->command(),
+                          options);
 
   WriteRulePattern("description", tool->description(), options);
   WriteRulePattern("rspfile", tool->rspfile(), options);
@@ -92,9 +93,20 @@ void NinjaToolchainWriter::WriteToolRule(Tool* tool,
   if (CTool* c_tool = tool->AsC()) {
     if (c_tool->depsformat() == CTool::DEPS_GCC) {
       // GCC-style deps require a depfile.
-      if (!tool->depfile().empty()) {
+      if (!c_tool->depfile().empty()) {
         WriteRulePattern("depfile", tool->depfile(), options);
-        out_ << kIndent << "deps = gcc" << std::endl;
+
+        // Using "deps = gcc" allows Ninja to read and store the depfile content
+        // in its internal database which improves performance, especially for
+        // large depfiles. The use of this feature with depfiles that contain
+        // multiple outputs require Ninja version 1.9.0 or newer. Additionally,
+        // there is a bug in the parser of depfile that was fixed in 1.10.0
+        // only.
+        if (c_tool->name() != CTool::kCToolSwift ||
+            settings_->build_settings()->ninja_required_version() >=
+                Version{1, 10, 0}) {
+          out_ << kIndent << "deps = gcc" << std::endl;
+        }
       }
     } else if (c_tool->depsformat() == CTool::DEPS_MSVC) {
       // MSVC deps don't have a depfile.
