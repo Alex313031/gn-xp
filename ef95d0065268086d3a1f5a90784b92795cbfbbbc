@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "9577e093_74301ace",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000070
+      },
+      "writtenOn": "2020-08-04T11:15:36Z",
+      "side": 1,
+      "message": "Please take a look.\n\nThis would allow to generate the following as discussed via chat:\n\n  build obj/foo/Foo.swiftmodule: swift ../foo/file1.swift ../foo/file2.swift\n  build obj/foo/Foo.h obj/foo/file1.o obj/foo/file2.o: noop obj/foo/Foo.swiftmodule\n\nThis allows expressing that obj/foo/Foo.swiftmodule generates obj/foo/Foo.h, obj/foo/file1.o and obj/foo/file2.h as secondary outputs without changing they timestamp when running the tool. If you do not like this tool, this is optional and I can use \"stamp\" instead.",
+      "revId": "ef95d0065268086d3a1f5a90784b92795cbfbbbc",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": false
+    }
+  ]
+}
