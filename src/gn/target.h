@@ -25,6 +25,7 @@
 #include "gn/output_file.h"
 #include "gn/rust_values.h"
 #include "gn/source_file.h"
+#include "gn/swift_values.h"
 #include "gn/toolchain.h"
 #include "gn/unique_vector.h"
 
@@ -271,6 +272,9 @@ class Target : public Item {
   ActionValues& action_values() { return action_values_; }
   const ActionValues& action_values() const { return action_values_; }
 
+  SwiftValues& swift_values() { return swift_values_; }
+  const SwiftValues& swift_values() const { return swift_values_; }
+
   RustValues& rust_values() { return rust_values_; }
   const RustValues& rust_values() const { return rust_values_; }
 
@@ -473,6 +477,9 @@ class Target : public Item {
 
   // Used for Rust targets.
   RustValues rust_values_;
+
+  // User for Swift targets.
+  SwiftValues swift_values_;
 
   // Toolchain used by this target. Null until target is resolved.
   const Toolchain* toolchain_ = nullptr;
