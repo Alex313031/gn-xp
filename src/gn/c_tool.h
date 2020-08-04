@@ -26,6 +26,7 @@ class CTool : public Tool {
   static const char* kCToolObjCxx;
   static const char* kCToolRc;
   static const char* kCToolAsm;
+  static const char* kCToolSwift;
 
   // C linker tools
   static const char* kCToolAlink;
@@ -107,6 +108,7 @@ class CTool : public Tool {
                                    Err* err);
   bool ReadOutputsPatternList(Scope* scope,
                               const char* var,
+                              bool required,
                               SubstitutionList* field,
                               Err* err);
   bool ReadPrecompiledHeaderType(Scope* scope, Err* err);
