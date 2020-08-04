@@ -21,6 +21,7 @@ class GeneralTool : public Tool {
   static const char* kGeneralToolStamp;
   static const char* kGeneralToolCopy;
   static const char* kGeneralToolAction;
+  static const char* kGeneralToolNoOperation;
 
   // Platform-specific tools
   static const char* kGeneralToolCopyBundleData;
