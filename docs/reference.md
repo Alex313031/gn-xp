@@ -3363,6 +3363,7 @@
       "stamp": Tool for creating stamp files
       "copy": Tool to copy files.
       "action": Defaults for actions
+      "noop": Tool that does nothing
 
     Platform specific tools:
       "copy_bundle_data": [iOS, macOS] Tool to copy files in a bundle.
