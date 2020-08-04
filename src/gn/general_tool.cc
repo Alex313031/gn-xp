@@ -10,6 +10,7 @@ const char* GeneralTool::kGeneralToolCopy = "copy";
 const char* GeneralTool::kGeneralToolCopyBundleData = "copy_bundle_data";
 const char* GeneralTool::kGeneralToolCompileXCAssets = "compile_xcassets";
 const char* GeneralTool::kGeneralToolAction = "action";
+const char* GeneralTool::kGeneralToolNoOperation = "noop";
 
 GeneralTool::GeneralTool(const char* n) : Tool(n) {
   CHECK(ValidateName(n));
@@ -27,7 +28,8 @@ const GeneralTool* GeneralTool::AsGeneral() const {
 bool GeneralTool::ValidateName(const char* name) const {
   return name == kGeneralToolStamp || name == kGeneralToolCopy ||
          name == kGeneralToolCopyBundleData ||
-         name == kGeneralToolCompileXCAssets || name == kGeneralToolAction;
+         name == kGeneralToolCompileXCAssets || name == kGeneralToolAction ||
+         name == kGeneralToolNoOperation;
 }
 
 void GeneralTool::SetComplete() {
@@ -40,7 +42,8 @@ bool GeneralTool::InitTool(Scope* scope, Toolchain* toolchain, Err* err) {
 }
 
 bool GeneralTool::ValidateSubstitution(const Substitution* sub_type) const {
-  if (name_ == kGeneralToolStamp || name_ == kGeneralToolAction)
+  if (name_ == kGeneralToolStamp || name_ == kGeneralToolAction ||
+      name_ == kGeneralToolNoOperation)
     return IsValidToolSubstitution(sub_type);
   else if (name_ == kGeneralToolCopy || name_ == kGeneralToolCopyBundleData)
     return IsValidCopySubstitution(sub_type);
