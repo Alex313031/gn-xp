@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "a2dcc1f4_99383f65",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 25
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000070
+      },
+      "writtenOn": "2020-08-04T11:17:59Z",
+      "side": 1,
+      "message": "Please take another look.\n\nAs discussed via chat, this now generates the following to express the invocation of the compiler generates multiple outputs:\n\n  build obj/foo/Foo.swiftmodule: swift ../file1.swift ../file2.swift\n  build obj/foo/Foo.h obj/foo/file1.o obk/foo/file2.o: noop obj/foo/Foo.swiftmodule\n\nAs said in dependent CL, the \"noop\" tool is not strictly necessary and I could use \"stamp\" tool instead (though I find it cleaner to use a separate tool for that).",
+      "revId": "e7b233dbd2a89c46cda15a9e52d955d86a5e2fbc",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": false
+    }
+  ]
+}
