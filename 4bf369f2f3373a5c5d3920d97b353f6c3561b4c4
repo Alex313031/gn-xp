@@ -16,6 +16,24 @@
       "revId": "4bf369f2f3373a5c5d3920d97b353f6c3561b4c4",
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8cf1c56c_650c1d45",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 8
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000016
+      },
+      "writtenOn": "2020-08-05T23:44:22Z",
+      "side": 1,
+      "message": "I like this split, even long-term.  When we add automagic modulemap generation, that can be `generated_file() { output_conversion \u003d \"modulemap\" }` or something, and then using generated module maps would just be normal use of a `sources \u003d [ \"$target_gen_dir/$output_name.modulemap\" ]` with deps on the generator target.",
+      "parentUuid": "b8ee25f4_dbabd45a",
+      "revId": "4bf369f2f3373a5c5d3920d97b353f6c3561b4c4",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": false
     }
   ]
 }
