@@ -18,6 +18,7 @@ extern const Substitution CSubstitutionAsmFlags;
 extern const Substitution CSubstitutionCFlags;
 extern const Substitution CSubstitutionCFlagsC;
 extern const Substitution CSubstitutionCFlagsCc;
+extern const Substitution CSubstitutionCFlagsCcModuleDeps;
 extern const Substitution CSubstitutionCFlagsObjC;
 extern const Substitution CSubstitutionCFlagsObjCc;
 extern const Substitution CSubstitutionDefines;
