@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "c1f01189_8ba780be",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 27
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000070
+      },
+      "writtenOn": "2020-08-05T09:30:50Z",
+      "side": 1,
+      "message": "I don\u0027t understand why the bot don\u0027t work.\n\nIt looks like they try to build current CL without the CL it depends on (since they fail saying that GeneralTool::kGeneralToolNoOperation is not available when it is added by parent CL).\n\nCould you please review anyway?",
+      "revId": "e6829e1ff5ccf354c000c1e8e925cce47542f8b2",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": false
+    }
+  ]
+}
