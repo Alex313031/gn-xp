@@ -438,11 +438,11 @@ bool Target::IsFinal() const {
 DepsIteratorRange Target::GetDeps(DepsIterationType type) const {
   if (type == DEPS_LINKED) {
     return DepsIteratorRange(
-        DepsIterator(&public_deps_, &private_deps_, nullptr));
+        DepsIterator(&public_deps_, &private_deps_, &module_deps_, nullptr));
   }
   // All deps.
   return DepsIteratorRange(
-      DepsIterator(&public_deps_, &private_deps_, &data_deps_));
+      DepsIterator(&public_deps_, &private_deps_, &module_deps_, &data_deps_));
 }
 
 std::string Target::GetComputedOutputName() const {
@@ -714,6 +714,8 @@ void Target::PullDependentTargetLibs() {
   for (const auto& dep : public_deps_)
     PullDependentTargetLibsFrom(dep.ptr, true);
   for (const auto& dep : private_deps_)
+    PullDependentTargetLibsFrom(dep.ptr, false);
+  for (const auto& dep : module_deps_)
     PullDependentTargetLibsFrom(dep.ptr, false);
 }
 

@@ -85,7 +85,8 @@ source_set("bar") {
   3. `cflags`, `include_dirs`, `defines`, `configs` etc. in whatever
      order makes sense to you.
   4. `public_deps`
-  5. `deps`
+  5. `module_deps`
+  6. `deps`
 
 ### Conditions
 

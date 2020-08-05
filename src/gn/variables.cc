@@ -1445,6 +1445,41 @@ Example
   }
 )";
 
+const char kModuleDeps[] = "module_deps";
+const char kModuleDeps_HelpShort[] =
+    "module_deps: [label list] Declare C++ module dependencies.";
+const char kModuleDeps_Help[] =
+    R"(module_deps: Declare C++ module dependencies.
+
+  A list of target labels.
+
+  Specifies private dependencies of a target that are linked as C++ modules.
+  These are depended upon in the same way as deps, see "gn help deps".
+
+  The difference between deps and module_deps is that {{module_deps}} will be filled with the necessary command line flags -fmodule-map-file
+
+Details of dependency propagation
+
+  Source sets, shared libraries, and non-complete static libraries will be
+  propagated up the dependency tree across groups, non-complete static
+  libraries and source sets.
+
+  Executables, shared libraries, and complete static libraries will link all
+  propagated targets and stop propagation. Actions and copy steps also stop
+  propagation, allowing them to take a library as an input but not force
+  dependents to link to it.
+
+  Propagation of all_dependent_configs and public_configs happens independently
+  of target type. all_dependent_configs are always propagated across all types
+  of targets, and public_configs are always propagated across public deps of
+  all types of targets.
+
+  Data dependencies are propagated differently. See "gn help data_deps" and
+  "gn help runtime_deps".
+
+  See also "public_deps".
+)";
+
 const char kOutputExtension[] = "output_extension";
 const char kOutputExtension_HelpShort[] =
     "output_extension: [string] Value to use for the output's file extension.";
@@ -2289,6 +2324,7 @@ const VariableInfoMap& GetTargetVariables() {
     INSERT_VARIABLE(Libs)
     INSERT_VARIABLE(LibDirs)
     INSERT_VARIABLE(Metadata)
+    INSERT_VARIABLE(ModuleDeps)
     INSERT_VARIABLE(OutputDir)
     INSERT_VARIABLE(OutputExtension)
     INSERT_VARIABLE(OutputName)
