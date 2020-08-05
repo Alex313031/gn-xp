@@ -10,15 +10,23 @@
 #include "gn/err.h"
 
 const SubstitutionTypes CSubstitutions = {
-    &CSubstitutionAsmFlags,     &CSubstitutionCFlags,
-    &CSubstitutionCFlagsC,      &CSubstitutionCFlagsCc,
-    &CSubstitutionCFlagsObjC,   &CSubstitutionCFlagsObjCc,
-    &CSubstitutionDefines,      &CSubstitutionFrameworkDirs,
+    &CSubstitutionAsmFlags,
+    &CSubstitutionCFlags,
+    &CSubstitutionCFlagsC,
+    &CSubstitutionCFlagsCc,
+    &CSubstitutionCFlagsCcModuleDeps,
+    &CSubstitutionCFlagsObjC,
+    &CSubstitutionCFlagsObjCc,
+    &CSubstitutionDefines,
+    &CSubstitutionFrameworkDirs,
     &CSubstitutionIncludeDirs,
 
-    &CSubstitutionLinkerInputs, &CSubstitutionLinkerInputsNewline,
-    &CSubstitutionLdFlags,      &CSubstitutionLibs,
-    &CSubstitutionSoLibs,       &CSubstitutionFrameworks,
+    &CSubstitutionLinkerInputs,
+    &CSubstitutionLinkerInputsNewline,
+    &CSubstitutionLdFlags,
+    &CSubstitutionLibs,
+    &CSubstitutionSoLibs,
+    &CSubstitutionFrameworks,
     &CSubstitutionRlibs,
 
     &CSubstitutionArFlags,
@@ -29,6 +37,8 @@ const Substitution CSubstitutionAsmFlags = {"{{asmflags}}", "asmflags"};
 const Substitution CSubstitutionCFlags = {"{{cflags}}", "cflags"};
 const Substitution CSubstitutionCFlagsC = {"{{cflags_c}}", "cflags_c"};
 const Substitution CSubstitutionCFlagsCc = {"{{cflags_cc}}", "cflags_cc"};
+const Substitution CSubstitutionCFlagsCcModuleDeps = {
+    "{{cflags_cc_module_deps}}", "cflags_cc_module_deps"};
 const Substitution CSubstitutionCFlagsObjC = {"{{cflags_objc}}", "cflags_objc"};
 const Substitution CSubstitutionCFlagsObjCc = {"{{cflags_objcc}}",
                                               "cflags_objcc"};
@@ -55,7 +65,9 @@ bool IsValidCompilerSubstitution(const Substitution* type) {
   return IsValidToolSubstitution(type) || IsValidSourceSubstitution(type) ||
          type == &SubstitutionSource || type == &CSubstitutionAsmFlags ||
          type == &CSubstitutionCFlags || type == &CSubstitutionCFlagsC ||
-         type == &CSubstitutionCFlagsCc || type == &CSubstitutionCFlagsObjC ||
+         type == &CSubstitutionCFlagsCc ||
+         type == &CSubstitutionCFlagsCcModuleDeps ||
+         type == &CSubstitutionCFlagsObjC ||
          type == &CSubstitutionCFlagsObjCc || type == &CSubstitutionDefines ||
          type == &CSubstitutionFrameworkDirs ||
          type == &CSubstitutionIncludeDirs;
