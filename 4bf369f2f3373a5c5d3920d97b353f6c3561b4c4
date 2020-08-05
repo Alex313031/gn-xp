@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "15dd581e_9a50403c",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 8
+      },
+      "lineNbr": 16,
+      "author": {
+        "id": 1000004
+      },
+      "writtenOn": "2020-08-05T23:57:40Z",
+      "side": 1,
+      "message": "Sorry, \"scant\" indeed. Your guesses are all correct though.\n\n`.modulemap` is treated as a C++ source that\u0027s compiled to `.pcm` (and is ar\u0027d just like a `.o`, I wasn\u0027t clear if that was necessary or correct.)\n\nI didn\u0027t have it imply anything more to dependents of the target as for incremental transition as we will want all combinations of {module library, non-module library} having dependencies {module, non-module library}.\n\nAlso, there can only be one .modulemap in a target, and it can\u0027t be mixed in with a target that has non-C/C++ sources.",
+      "parentUuid": "70985e97_3f307c06",
+      "revId": "4bf369f2f3373a5c5d3920d97b353f6c3561b4c4",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "b8ee25f4_dbabd45a",
         "filename": "/PATCHSET_LEVEL",
         "patchSetId": 8
