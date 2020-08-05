@@ -98,6 +98,7 @@ bool BinaryTargetGenerator::FillSources() {
       case SourceFile::SOURCE_GO:
       case SourceFile::SOURCE_RS:
       case SourceFile::SOURCE_RC:
+      case SourceFile::SOURCE_MODULEMAP:
         // These are allowed.
         break;
       case SourceFile::SOURCE_UNKNOWN:
