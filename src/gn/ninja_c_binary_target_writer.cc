@@ -52,6 +52,29 @@ const char* GetPCHLangForToolType(const char* name) {
   return "";
 }
 
+void WriteModuleDeps(std::ostream& out,
+                     const PathOutput& path_output,
+                     const SourceFile& modulemap,
+                     const std::string& target,
+                     const std::string& pcm) {
+  EscapeOptions options;
+  options.mode = ESCAPE_NINJA_COMMAND;
+  out << " ";
+  EscapeStringToStream(out, "-fmodule-map-file=", options);
+  path_output.WriteFile(out, modulemap);
+  out << " ";
+  EscapeStringToStream(out, "-fmodule-file=" + target + "=" + pcm, options);
+}
+
+const SourceFile* GetModuleMapFromTargetSources(const Target* target) {
+  for (const SourceFile& sf : target->sources()) {
+    if (sf.type() == SourceFile::SOURCE_MODULEMAP) {
+      return &sf;
+    }
+  }
+  return nullptr;
+}
+
 }  // namespace
 
 NinjaCBinaryTargetWriter::NinjaCBinaryTargetWriter(const Target* target,
@@ -187,6 +210,28 @@ void NinjaCBinaryTargetWriter::WriteCompilerVars() {
         target_, &ConfigValues::include_dirs,
         IncludeWriter(include_path_output), out_);
     out_ << std::endl;
+  }
+
+  if (!target_->module_deps().empty()) {
+    // TODO(scottmg): Currently clang modules only supported for C++.
+    if (target_->source_types_used().Get(SourceFile::SOURCE_CPP)) {
+      if (target_->toolchain()->substitution_bits().used.count(
+              &CSubstitutionCFlagsCcModuleDeps)) {
+        out_ << CSubstitutionCFlagsCcModuleDeps.ninja_name << " =";
+        for (const LabelTargetPair& module : target_->module_deps()) {
+          const Target* t = module.ptr;
+
+          const SourceFile* modulemap = GetModuleMapFromTargetSources(t);
+          CHECK(modulemap);
+
+          std::string label;
+          CHECK(SubstitutionWriter::GetTargetSubstitution(t, &SubstitutionLabel,
+                                                          &label));
+          WriteModuleDeps(out_, path_output_, *modulemap, label, "!pcm!");
+        }
+        out_ << std::endl;
+      }
+    }
   }
 
   bool has_precompiled_headers =
