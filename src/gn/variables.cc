@@ -1445,6 +1445,23 @@ Example
   }
 )";
 
+const char kModuleDeps[] = "module_deps";
+const char kModuleDeps_HelpShort[] =
+    "module_deps: [label list] Declare C++ module dependencies.";
+const char kModuleDeps_Help[] =
+    R"(module_deps: Declare C++ module dependencies.
+
+  A list of target labels.
+
+  Specifies private dependencies of a target that are linked as C++ modules.
+  These are depended upon in the same way as deps, see "gn help deps".
+
+  The only difference between deps and module_deps is that in addition
+  {{cflags_cc_module_deps}} will be filled with the required flags
+  (-fmodule-map-file and -fmodule-file) to depend on a modulemap and pcm
+  (PreCompiled Module) for the modules listed in module_deps.
+)";
+
 const char kOutputExtension[] = "output_extension";
 const char kOutputExtension_HelpShort[] =
     "output_extension: [string] Value to use for the output's file extension.";
@@ -2289,6 +2306,7 @@ const VariableInfoMap& GetTargetVariables() {
     INSERT_VARIABLE(Libs)
     INSERT_VARIABLE(LibDirs)
     INSERT_VARIABLE(Metadata)
+    INSERT_VARIABLE(ModuleDeps)
     INSERT_VARIABLE(OutputDir)
     INSERT_VARIABLE(OutputExtension)
     INSERT_VARIABLE(OutputName)

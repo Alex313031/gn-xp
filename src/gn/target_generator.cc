@@ -256,6 +256,8 @@ bool TargetGenerator::FillData() {
 bool TargetGenerator::FillDependencies() {
   if (!FillGenericDeps(variables::kDeps, &target_->private_deps()))
     return false;
+  if (!FillGenericDeps(variables::kModuleDeps, &target_->module_deps()))
+    return false;
   if (!FillGenericDeps(variables::kPublicDeps, &target_->public_deps()))
     return false;
   if (!FillGenericDeps(variables::kDataDeps, &target_->data_deps()))
