@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "b8ee25f4_dbabd45a",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 8
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000004
+      },
+      "writtenOn": "2020-08-05T23:38:12Z",
+      "side": 1,
+      "message": "Hi, this is my attempt at coming up with a (very) stripped down version of Petr\u0027s work in https://gn-review.googlesource.com/c/gn/+/7401 so that we can get something landed that\u0027s not too much of an investment and get to try out modules in Fuchsia\u0027s build.\n\nThe main simplifications are:\n1) .modulemap files (which define the module\u0027s public API) have to be written by hand\n2) only C++ is supported (i.e. not C, ObjC, ObjC++)\n\nThis first small CL adds support for .modulemap in \"sources\" which are compiled (to .pcm) by a \"cxx_module\" tool that\u0027s expected to exist.\n\nThe second CL adds support for \"module_deps\", which is like \"deps\" but also builds a helper cflags_cc ninja variable to depend on other module targets.\n\nI believe these two would be sufficient to start incrementally working on modules in the Fuchsia build based on experiments here: https://fuchsia-review.googlesource.com/c/fuchsia/+/412605\n\nDoes this seem OK? I thought I would send it out for a look before I write up a bunch of boilerplate in unittests. (Let me know if I can help walk you through the module building flags, they\u0027re a bit futzy/underdocumented if you\u0027re not familiar with them.)",
+      "revId": "4bf369f2f3373a5c5d3920d97b353f6c3561b4c4",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": false
+    }
+  ]
+}
