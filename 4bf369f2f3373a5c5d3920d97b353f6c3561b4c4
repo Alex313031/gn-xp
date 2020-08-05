@@ -51,6 +51,24 @@
       "revId": "4bf369f2f3373a5c5d3920d97b353f6c3561b4c4",
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e1f5437_726a3f3c",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 8
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-08-05T23:51:04Z",
+      "side": 1,
+      "message": "That looks good to me, thanks for working on this. I think that we\u0027re probably going to need support for C, if anything to build the module for libc. It\u0027s also not clear to me if we really need module_deps, but we can discuss that separately.",
+      "parentUuid": "8cf1c56c_650c1d45",
+      "revId": "4bf369f2f3373a5c5d3920d97b353f6c3561b4c4",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": false
     }
   ]
 }
