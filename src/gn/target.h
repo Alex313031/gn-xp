@@ -222,6 +222,10 @@ class Target : public Item {
   const LabelTargetVector& private_deps() const { return private_deps_; }
   LabelTargetVector& private_deps() { return private_deps_; }
 
+  // Linked private module dependencies.
+  const LabelTargetVector& module_deps() const { return module_deps_; }
+  LabelTargetVector& module_deps() { return module_deps_; }
+
   // Linked public dependencies.
   const LabelTargetVector& public_deps() const { return public_deps_; }
   LabelTargetVector& public_deps() { return public_deps_; }
@@ -431,6 +435,7 @@ class Target : public Item {
   OutputFile write_runtime_deps_output_;
 
   LabelTargetVector private_deps_;
+  LabelTargetVector module_deps_;
   LabelTargetVector public_deps_;
   LabelTargetVector data_deps_;
 
