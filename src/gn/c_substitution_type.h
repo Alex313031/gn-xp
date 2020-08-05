@@ -23,25 +23,26 @@ extern const Substitution CSubstitutionCFlagsObjCc;
 extern const Substitution CSubstitutionDefines;
 extern const Substitution CSubstitutionFrameworkDirs;
 extern const Substitution CSubstitutionIncludeDirs;
+extern const Substitution CSubstitutionModuleDeps;
 
 // Valid for linker tools.
-extern const Substitution CSubstitutionLinkerInputs;
-extern const Substitution CSubstitutionLinkerInputsNewline;
+extern const Substitution CSubstitutionFrameworks;
 extern const Substitution CSubstitutionLdFlags;
 extern const Substitution CSubstitutionLibs;
-extern const Substitution CSubstitutionSoLibs;
-extern const Substitution CSubstitutionFrameworks;
+extern const Substitution CSubstitutionLinkerInputs;
+extern const Substitution CSubstitutionLinkerInputsNewline;
 extern const Substitution CSubstitutionRlibs;
+extern const Substitution CSubstitutionSoLibs;
 extern const Substitution CSubstitutionSwiftModules;
 
 // Valid for alink only.
 extern const Substitution CSubstitutionArFlags;
 
 // Valid for swift only.
-extern const Substitution CSubstitutionSwiftModuleName;
 extern const Substitution CSubstitutionSwiftBridgeHeader;
-extern const Substitution CSubstitutionSwiftModuleDirs;
 extern const Substitution CSubstitutionSwiftFlags;
+extern const Substitution CSubstitutionSwiftModuleDirs;
+extern const Substitution CSubstitutionSwiftModuleName;
 
 // Both compiler and linker tools.
 bool IsValidCompilerSubstitution(const Substitution* type);
