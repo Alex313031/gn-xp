@@ -109,6 +109,23 @@ void TestWithScope::SetupToolchain(Toolchain* toolchain, bool use_toc) {
   cxx_tool->set_command_launcher("launcher");
   toolchain->SetTool(std::move(cxx_tool));
 
+  // CXX_MODULE
+  std::unique_ptr<Tool> cxx_module_tool =
+      Tool::CreateTool(CTool::kCToolCxxModule);
+  SetCommandForTool(
+      "c++ {{source}} {{cflags}} {{cflags_cc}} {{defines}} {{include_dirs}} "
+      // -fmodule-name would be {{label}} in a real toolchain, but in
+      // the test that causes all the (unrelated) golden outputs to add
+      // a new 'label=xyz' variable, so just set to {{output}} since
+      // it's not important for the module tests how these variables are
+      // expanded.
+      "-fmodule-name={{output}} -c -x c++ -Xclang -emit-module -o {{output}}",
+      cxx_module_tool.get());
+  cxx_module_tool->set_outputs(SubstitutionList::MakeForTest(
+      "{{source_out_dir}}/{{target_output_name}}.{{source_name_part}}.pcm"));
+  cxx_module_tool->set_command_launcher("launcher");
+  toolchain->SetTool(std::move(cxx_module_tool));
+
   // OBJC
   std::unique_ptr<Tool> objc_tool = Tool::CreateTool(CTool::kCToolObjC);
   SetCommandForTool(
