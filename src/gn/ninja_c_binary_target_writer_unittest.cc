@@ -1506,3 +1506,52 @@ TEST_F(NinjaCBinaryTargetWriterTest, ModuleMapInStaticLibrary) {
   std::string out_str = out.str();
   EXPECT_EQ(expected, out_str);
 }
+
+TEST_F(NinjaCBinaryTargetWriterTest, DependOnModule) {
+  TestWithScope setup;
+  Err err;
+
+  // CXX
+  std::unique_ptr<Tool> cxx_tool = Tool::CreateTool(CTool::kCToolCxx);
+  TestWithScope::SetCommandForTool(
+      "c++ {{source}} {{cflags}} {{cflags_cc}} {{cflags_cc_module_deps}} "
+      "{{defines}} {{include_dirs}} -o {{output}}",
+      cxx_tool.get());
+  cxx_tool->set_outputs(SubstitutionList::MakeForTest(
+      "{{source_out_dir}}/{{target_output_name}}.{{source_name_part}}.o"));
+  cxx_tool->set_command_launcher("launcher");
+  setup.toolchain()->SetTool(std::move(cxx_tool));
+
+  TestTarget target(setup, "//foo:a", Target::STATIC_LIBRARY);
+  target.sources().push_back(SourceFile("//foo/a.modulemap"));
+  ASSERT_TRUE(target.OnResolved(&err));
+
+  // The library first.
+  {
+    std::ostringstream out;
+    NinjaCBinaryTargetWriter writer(&target, out);
+    writer.Run();
+
+    const char expected[] = "";
+    std::string out_str = out.str();
+    printf("\n\nEXPECTED:\n%s\n\nOUT:\n%s\n\n", expected, out_str.c_str());
+    EXPECT_EQ(expected, out_str);
+  }
+
+  TestTarget depender(setup, "//foo:b", Target::EXECUTABLE);
+  depender.sources().push_back(SourceFile("//foo/x.cc"));
+  depender.module_deps().push_back(LabelTargetPair(&target));
+  ASSERT_TRUE(depender.OnResolved(&err));
+
+  // Then the executable that depends on it.
+  {
+    std::ostringstream out;
+    NinjaCBinaryTargetWriter writer(&depender, out);
+    writer.Run();
+
+    const char expected[] = "";
+    std::string out_str = out.str();
+    printf("\n\nEXPECTED:\n%s\n\nOUT:\n%s\n\n", expected, out_str.c_str());
+    EXPECT_EQ(expected, out_str);
+  }
+}
