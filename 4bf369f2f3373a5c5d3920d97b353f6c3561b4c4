@@ -2,6 +2,23 @@
   "comments": [
     {
       "key": {
+        "uuid": "70985e97_3f307c06",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 8
+      },
+      "lineNbr": 16,
+      "author": {
+        "id": 1000016
+      },
+      "writtenOn": "2020-08-05T23:50:29Z",
+      "side": 1,
+      "message": "Docs seem a bit scant.  Is it the intent that `tool(\"cxx_module\")` is like `tool(\"cxx\")` in all ways except that it handles a different input file extension?\n\nWhat are the semantics for a target that includes `.modulemap` and other kinds of files in a `sources` list?  More generally, what are the semantics of a `.modulemap` input file as a target output?  i.e., `.cc` et al turn into `.o` and that goes into the `{{inputs}}` list for dependent linking targets.  `.modulemap` turns into a `.pcm`, but what does that mean to dependents of the target that did that compilation?",
+      "revId": "4bf369f2f3373a5c5d3920d97b353f6c3561b4c4",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "b8ee25f4_dbabd45a",
         "filename": "/PATCHSET_LEVEL",
         "patchSetId": 8
