@@ -42,6 +42,30 @@
     },
     {
       "key": {
+        "uuid": "d056fba7_55da1574",
+        "filename": "src/gn/c_substitution_type.cc",
+        "patchSetId": 19
+      },
+      "lineNbr": 41,
+      "author": {
+        "id": 1000004
+      },
+      "writtenOn": "2020-08-06T20:50:54Z",
+      "side": 1,
+      "message": "Sure. I thought it belonged with the others since it contains flags, but I guess it\u0027s no different than defines and include_dirs.",
+      "parentUuid": "467c5a09_f88f5caf",
+      "range": {
+        "startLine": 41,
+        "startChar": 7,
+        "endLine": 41,
+        "endChar": 28
+      },
+      "revId": "1c3c5c7928d9ddea6ce1789a0193b8aa53cb8955",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "d0676563_bd7d3e88",
         "filename": "src/gn/ninja_c_binary_target_writer_unittest.cc",
         "patchSetId": 19
