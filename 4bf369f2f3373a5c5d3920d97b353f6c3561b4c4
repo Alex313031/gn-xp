@@ -123,6 +123,24 @@
       "revId": "4bf369f2f3373a5c5d3920d97b353f6c3561b4c4",
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "e5362f02_9130efc0",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 8
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000004
+      },
+      "writtenOn": "2020-08-06T16:50:27Z",
+      "side": 1,
+      "message": "Yup, that would work too. (I generally don\u0027t like relying on templates, but we\u0027re deep in those woods anyway... In practice, the \"half-moduled\" situation might not really come up that often so maybe it\u0027s not worth worrying about. And not needing a new type of \"xyz_deps\" concept is definitely an upside.)\n\nIn any case, this CL is necessary to build the .pcm whichever way we decide to depend upon the modularized targets. So I\u0027ve added unittests here and I think this one is ready to go.",
+      "parentUuid": "74831de9_bdbebf47",
+      "revId": "4bf369f2f3373a5c5d3920d97b353f6c3561b4c4",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": false
     }
   ]
 }
