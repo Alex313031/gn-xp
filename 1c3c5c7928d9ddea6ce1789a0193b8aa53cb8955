@@ -19,6 +19,29 @@
     },
     {
       "key": {
+        "uuid": "467c5a09_f88f5caf",
+        "filename": "src/gn/c_substitution_type.cc",
+        "patchSetId": 19
+      },
+      "lineNbr": 41,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-08-06T20:02:52Z",
+      "side": 1,
+      "message": "Could we call this just module_deps? This is already a C specific substitution so it shouldn\u0027t collide with other languages, and the cflags_cc prefix seems unnecessary.",
+      "range": {
+        "startLine": 41,
+        "startChar": 7,
+        "endLine": 41,
+        "endChar": 28
+      },
+      "revId": "1c3c5c7928d9ddea6ce1789a0193b8aa53cb8955",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "d0676563_bd7d3e88",
         "filename": "src/gn/ninja_c_binary_target_writer_unittest.cc",
         "patchSetId": 19
