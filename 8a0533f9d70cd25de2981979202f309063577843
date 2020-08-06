@@ -51,6 +51,24 @@
       "revId": "8a0533f9d70cd25de2981979202f309063577843",
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "b68d6742_126098cb",
+        "filename": "src/gn/rust_project_writer.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 337,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-08-06T22:12:35Z",
+      "side": 1,
+      "message": "Ideally the tool\u0027s name would be a string_view and so would RustTool::kRsToolMacro so there\u0027s no need to convert anything, but that\u0027s a much larger refactoring.",
+      "parentUuid": "706247fa_a68ea8f1",
+      "revId": "8a0533f9d70cd25de2981979202f309063577843",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": true
     }
   ]
 }
