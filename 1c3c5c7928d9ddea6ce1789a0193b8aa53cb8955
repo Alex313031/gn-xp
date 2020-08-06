@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "beb28961_b20aec37",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 19
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000004
+      },
+      "writtenOn": "2020-08-06T19:55:39Z",
+      "side": 1,
+      "message": "This CL is ready for discussion too now (including having a unittest). Previously (circa patchset 16) I had the module dependencies in a separate new variable `module_deps`.\n\nPer discussion on the previous CL, it\u0027s now in just in normal deps.\n\nThe pros of using module_deps are that it makes it a bit more clear what\u0027s going on in the build file. I thought it might allow for simpler migration too, because the targets that depend on a module can choose whether they depend on it as a normal target, or a snazzy new module target.\n\nPutting it in deps (as now implemented) means that the depender can\u0027t pick -- if it\u0027s a module, then it\u0027s always a module, so the depender has to be \"well-behaved\" which might make some transitions trickier. But, it keeps the concepts down, and avoids introducing yet-another-flavour of deps which is a good thing. It\u0027s likely also better long-term to not have the user choice.\n\nOn the whole though, the quite-a-bit-smaller size of this CL convinces me this is the way to go for now.",
+      "revId": "1c3c5c7928d9ddea6ce1789a0193b8aa53cb8955",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "d0676563_bd7d3e88",
+        "filename": "src/gn/ninja_c_binary_target_writer_unittest.cc",
+        "patchSetId": 19
+      },
+      "lineNbr": 1600,
+      "author": {
+        "id": 1000004
+      },
+      "writtenOn": "2020-08-06T19:55:39Z",
+      "side": 1,
+      "message": "This line (to build the .pcm) ...",
+      "revId": "1c3c5c7928d9ddea6ce1789a0193b8aa53cb8955",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "c74b5312_1ad8a2b4",
+        "filename": "src/gn/ninja_c_binary_target_writer_unittest.cc",
+        "patchSetId": 19
+      },
+      "lineNbr": 1629,
+      "author": {
+        "id": 1000004
+      },
+      "writtenOn": "2020-08-06T19:55:39Z",
+      "side": 1,
+      "message": "... and this line (to depend on a module) are the point of these two changes.",
+      "revId": "1c3c5c7928d9ddea6ce1789a0193b8aa53cb8955",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": true
+    }
+  ]
+}
