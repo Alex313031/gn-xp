@@ -33,6 +33,23 @@
       "revId": "eb1b0b39bfc0e128b81a19256a60ce44157fd262",
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "b95ac8a0_e4e86cfb",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000014
+      },
+      "writtenOn": "2020-08-06T23:42:58Z",
+      "side": 1,
+      "message": "I feel like this tool can create a confusing build graph with rules that don\u0027t do anything. So I\u0027d prefer a stamp.",
+      "revId": "eb1b0b39bfc0e128b81a19256a60ce44157fd262",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": false
     }
   ]
 }
