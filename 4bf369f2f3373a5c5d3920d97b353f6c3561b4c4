@@ -87,6 +87,24 @@
       "revId": "4bf369f2f3373a5c5d3920d97b353f6c3561b4c4",
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "01132f0f_5e7c0121",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 8
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000004
+      },
+      "writtenOn": "2020-08-06T00:06:40Z",
+      "side": 1,
+      "message": "Ah, good point, we\u0027ll probably want to tackle libc early on so maybe C support earlier would be a good idea.\n\nThe reason I thought module_deps was a good idea rather than just \"deps that are themselves compiled as modules become modules_deps\" was that I was imagining we\u0027d need it for incremental transition.\n\nIf a leaf target is built as a module, we don\u0027t want to have to update all dependencies to immediately properly use it as a module.\n\nSo, if \"L\" is a modularized library, \"A\" can use module_deps on it and be a well-behaved user of only public API surface. But then some other \"B\" can normal deps on \"L\" and keep grubbing around in \"L\"s private headers, etc. until we either rejigger \"B\" or \"L\" after negotiating with whomever needs to be coerced.",
+      "parentUuid": "6e1f5437_726a3f3c",
+      "revId": "4bf369f2f3373a5c5d3920d97b353f6c3561b4c4",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": false
     }
   ]
 }
