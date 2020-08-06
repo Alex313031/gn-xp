@@ -33,6 +33,24 @@
       "revId": "8a0533f9d70cd25de2981979202f309063577843",
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "706247fa_a68ea8f1",
+        "filename": "src/gn/rust_project_writer.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 337,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-08-06T22:09:18Z",
+      "side": 1,
+      "message": "I\u0027d prefer the latter which is more idiomatic in C++.",
+      "parentUuid": "46036737_33ddb433",
+      "revId": "8a0533f9d70cd25de2981979202f309063577843",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": true
     }
   ]
 }
