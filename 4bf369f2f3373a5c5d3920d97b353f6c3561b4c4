@@ -105,6 +105,24 @@
       "revId": "4bf369f2f3373a5c5d3920d97b353f6c3561b4c4",
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "74831de9_bdbebf47",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 8
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000016
+      },
+      "writtenOn": "2020-08-06T00:28:32Z",
+      "side": 1,
+      "message": "Only direct deps on `.pcm` should cause passing the switches that say to use it for the named headers.  So in the example if A has L in deps and not public_deps, i.e. doesn\u0027t use L\u0027s headers in A\u0027s public headers, then B should be fine if it doesn\u0027t depend on the same `.pcm` directly.  So we could take another tack for transition just in our own build by having module-friendly libraries export both module-using and non-module-using targets to use in deps.  So then A could have L in deps and B could have L.deprecated-non-modular-library in deps.",
+      "parentUuid": "01132f0f_5e7c0121",
+      "revId": "4bf369f2f3373a5c5d3920d97b353f6c3561b4c4",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": false
     }
   ]
 }
