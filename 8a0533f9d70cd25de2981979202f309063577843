@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "7b7340b1_46538478",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000427
+      },
+      "writtenOn": "2020-08-06T19:47:00Z",
+      "side": 1,
+      "message": "This CL doesn\u0027t have any test updates since we don\u0027t have the framework yet to test the sysroot dep updates. This was the same when \"core\" and \"alloc\" were introduced. This was tested manually by comparing the generated `rust-project.json` before and after this change. Only \"proc_macro\" deps were added, and it was always to a proc macro crate.",
+      "revId": "8a0533f9d70cd25de2981979202f309063577843",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": false
+    }
+  ]
+}
