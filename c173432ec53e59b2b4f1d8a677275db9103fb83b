@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ae62203e_140c913e",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 34
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000004
+      },
+      "writtenOn": "2020-08-07T22:47:01Z",
+      "side": 1,
+      "message": "I also tested in Fuchsia\u0027s build here: https://fuchsia-review.googlesource.com/c/fuchsia/+/414658 which seems correct insofar as the .ninja and resulting errors look correct.\n\nOne thing I realized that\u0027s sort of obvious, but I hadn\u0027t thought about it: the .cc need to depend on the .pcm, and today continue to depend on .h via .d, etc. So the .ninja files are going to get a bit bigger. But if you were fully converted to modules you could completely drop .h and -MF, etc. other than for the building of .pcm which would be pretty cool.",
+      "revId": "c173432ec53e59b2b4f1d8a677275db9103fb83b",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": false
+    }
+  ]
+}
