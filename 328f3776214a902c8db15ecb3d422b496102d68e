@@ -52,6 +52,24 @@
       "revId": "328f3776214a902c8db15ecb3d422b496102d68e",
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6c329180_2d730188",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 27
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-08-07T16:56:54Z",
+      "side": 1,
+      "message": "Clang modules (module.modulemap) files is how you access C/Objective-C headers from Swift to allow interop between these languages, see for example https://theswiftdev.com/how-to-call-c-code-from-swift/ and https://samsymons.com/blog/understanding-objective-c-modules/",
+      "parentUuid": "1c389957_ec8b04d9",
+      "revId": "328f3776214a902c8db15ecb3d422b496102d68e",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": false
     }
   ]
 }
