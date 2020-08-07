@@ -16,6 +16,24 @@
       "revId": "c173432ec53e59b2b4f1d8a677275db9103fb83b",
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "117aa487_5cfd6b22",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 34
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000016
+      },
+      "writtenOn": "2020-08-07T22:56:14Z",
+      "side": 1,
+      "message": "There can always be `#include \"local.h\"` stuff inside sources not covered by module maps.  I don\u0027t think you\u0027ll ever be able get rid of traditional dep files as long as it\u0027s still any kind of C or C++.",
+      "parentUuid": "ae62203e_140c913e",
+      "revId": "c173432ec53e59b2b4f1d8a677275db9103fb83b",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": false
     }
   ]
 }
