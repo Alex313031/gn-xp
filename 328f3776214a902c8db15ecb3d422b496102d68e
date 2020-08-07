@@ -70,6 +70,24 @@
       "revId": "328f3776214a902c8db15ecb3d422b496102d68e",
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "3282bf79_7e8f5a30",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 27
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000070
+      },
+      "writtenOn": "2020-08-07T16:57:20Z",
+      "side": 1,
+      "message": "You can\u0027t have .swift and .cpp/.c/.m/.mm files in the same source_set/executable/... target.",
+      "parentUuid": "1c389957_ec8b04d9",
+      "revId": "328f3776214a902c8db15ecb3d422b496102d68e",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": false
     }
   ]
 }
