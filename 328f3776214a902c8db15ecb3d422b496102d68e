@@ -88,6 +88,24 @@
       "revId": "328f3776214a902c8db15ecb3d422b496102d68e",
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "d2eb0116_2ddf76fc",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 27
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000004
+      },
+      "writtenOn": "2020-08-07T17:30:33Z",
+      "side": 1,
+      "message": "OK, I guess module_deps is fine. We could fill that variable out with the swift compiler\u0027s flags when it\u0027s in a swift target if we later implement modulemap per Petr\u0027s links.",
+      "parentUuid": "3282bf79_7e8f5a30",
+      "revId": "328f3776214a902c8db15ecb3d422b496102d68e",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": false
     }
   ]
 }
