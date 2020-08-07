@@ -34,6 +34,24 @@
       "revId": "328f3776214a902c8db15ecb3d422b496102d68e",
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "1c389957_ec8b04d9",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 27
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000004
+      },
+      "writtenOn": "2020-08-07T16:50:36Z",
+      "side": 1,
+      "message": "OK thanks. Since C++ and swift can\u0027t be mixed in a compile target (I think?) then probably module_dirs/module_name for swift, and module_deps for c++ seems like the best choices, even though it looks a bit subtle at first.",
+      "parentUuid": "61522b7b_448d7bd1",
+      "revId": "328f3776214a902c8db15ecb3d422b496102d68e",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": false
     }
   ]
 }
