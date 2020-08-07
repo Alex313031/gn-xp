@@ -16,6 +16,24 @@
       "revId": "e0b52caaeba27ce1f05824517993001352a3943e",
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "b77b1766_1d652bd6",
+        "filename": "src/gn/ninja_c_binary_target_writer_unittest.cc",
+        "patchSetId": 29
+      },
+      "lineNbr": 1814,
+      "author": {
+        "id": 1000004
+      },
+      "writtenOn": "2020-08-07T22:42:58Z",
+      "side": 1,
+      "message": "\u003e Oh shoot, I just realized this is wrong.\n\u003e \n\u003e I was thinking the dependency of the binary -\u003e lib -\u003e pcm was enough, but every .o that goes into the binary also needs a dependency on the pcm because it\u0027s needed at compile time, not link time, and that isn\u0027t expressed here.\n\nOK, I believe I\u0027ve straightened the dependencies out now. I tried to describe what\u0027s done in both the CL description and unittest.\n\nPTAL",
+      "parentUuid": "b1c6b061_c47c3772",
+      "revId": "e0b52caaeba27ce1f05824517993001352a3943e",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": true
     }
   ]
 }
