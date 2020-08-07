@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "422000b4_feb41a59",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000014
+      },
+      "writtenOn": "2020-08-07T21:41:16Z",
+      "side": 1,
+      "message": "Hi!\n\nSorry it took so long for me to get to this review.\n\nI don\u0027t see your email in the Google CLA system. Can you sign to Google Contributor License Agreement at https://cla.developers.google.com/clas and get back to me when you\u0027ve done that? We need that to accept code.\n\nThanks!",
+      "revId": "2c9297f0c1745d106ca3e72cdd86321eda5fec6d",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": false
+    }
+  ]
+}
