@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "284afb84_79b48fd1",
+        "filename": "src/gn/ninja_c_binary_target_writer.cc",
+        "patchSetId": 36
+      },
+      "lineNbr": 72,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-08-07T23:13:55Z",
+      "side": 1,
+      "message": "We might also consider using -fmodules-embed-all-files to embed all modulemap files into the pcm files and avoid these flags, see https://github.com/llvm/llvm-project/commit/919ce235665865029d754d9b18fad5d0084aaef1.\n\nThat commit explicitly mentions distributed compilation support which reminds me that we should also check which of these flags are supported by Goma.",
+      "range": {
+        "startLine": 72,
+        "startChar": 29,
+        "endLine": 72,
+        "endChar": 47
+      },
+      "revId": "8d4c31f39d4e3cc0273529f0e4188684eafd4379",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "28011a99_85071c6d",
+        "filename": "src/gn/ninja_c_binary_target_writer.cc",
+        "patchSetId": 36
+      },
+      "lineNbr": 75,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-08-07T23:13:55Z",
+      "side": 1,
+      "message": "Would it make sense to have user provide flags as `module_file_switch \u003d \"-fmodule-file\"` (akin to lib_switch and lib_dir_switch) to avoid hardcoding these files into GN?",
+      "range": {
+        "startLine": 75,
+        "startChar": 29,
+        "endLine": 75,
+        "endChar": 43
+      },
+      "revId": "8d4c31f39d4e3cc0273529f0e4188684eafd4379",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": true
+    }
+  ]
+}
