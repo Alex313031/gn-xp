@@ -42,6 +42,30 @@
     },
     {
       "key": {
+        "uuid": "053b17f1_9533574a",
+        "filename": "src/gn/function_toolchain.cc",
+        "patchSetId": 28
+      },
+      "lineNbr": 435,
+      "author": {
+        "id": 1000070
+      },
+      "writtenOn": "2020-08-07T09:52:42Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "47d4cae2_bc3c8bfe",
+      "range": {
+        "startLine": 435,
+        "startChar": 4,
+        "endLine": 435,
+        "endChar": 17
+      },
+      "revId": "a899fba4e5c552b08f200e1ff1a2798e4fc7f43b",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "97fd6ce8_9f50d20e",
         "filename": "src/gn/function_toolchain.cc",
         "patchSetId": 28
@@ -65,6 +89,30 @@
     },
     {
       "key": {
+        "uuid": "54b1bd37_3edaec89",
+        "filename": "src/gn/function_toolchain.cc",
+        "patchSetId": 28
+      },
+      "lineNbr": 485,
+      "author": {
+        "id": 1000070
+      },
+      "writtenOn": "2020-08-07T09:52:42Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "97fd6ce8_9f50d20e",
+      "range": {
+        "startLine": 485,
+        "startChar": 47,
+        "endLine": 485,
+        "endChar": 59
+      },
+      "revId": "a899fba4e5c552b08f200e1ff1a2798e4fc7f43b",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "2da33e72_af6b7851",
         "filename": "src/gn/ninja_c_binary_target_writer.cc",
         "patchSetId": 28
@@ -79,6 +127,24 @@
       "revId": "a899fba4e5c552b08f200e1ff1a2798e4fc7f43b",
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "64b67352_0cdc51c8",
+        "filename": "src/gn/ninja_c_binary_target_writer.cc",
+        "patchSetId": 28
+      },
+      "lineNbr": 490,
+      "author": {
+        "id": 1000070
+      },
+      "writtenOn": "2020-08-07T09:52:42Z",
+      "side": 1,
+      "message": "Done.\n\nAlso added DCHECK that either WriteSources or WriteSwiftSources is called. As you said they are separate and should not both be called for the same target.",
+      "parentUuid": "2da33e72_af6b7851",
+      "revId": "a899fba4e5c552b08f200e1ff1a2798e4fc7f43b",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": false
     }
   ]
 }
