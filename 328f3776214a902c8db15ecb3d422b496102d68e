@@ -16,6 +16,24 @@
       "revId": "328f3776214a902c8db15ecb3d422b496102d68e",
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "61522b7b_448d7bd1",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 27
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000070
+      },
+      "writtenOn": "2020-08-07T16:47:03Z",
+      "side": 1,
+      "message": "Don\u0027t know what a good name would be. However, swiftflags, module_dirs \u0026 module_name are limited to target that contain .swift files and/or \"swift\" tool.\n\n\"swiftmodules\" is the one that will be used by linker tools (\"solink\", \"link\" but not \"alink\") to expand to something like \"-Wl,-add_ast_path,path/to/Foo.swiftmodule\".",
+      "parentUuid": "c4a83b79_41f6b8f8",
+      "revId": "328f3776214a902c8db15ecb3d422b496102d68e",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": false
     }
   ]
 }
