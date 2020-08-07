@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "09b1eacf_becd31a6",
+        "filename": "src/gn/rust_project_writer.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 337,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-08-07T20:19:33Z",
+      "side": 1,
+      "message": "Can you wrap this at 80 columns please?",
+      "revId": "7f3ac512b36e39457b8596a7e5256efaa6fe13b9",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": true
+    }
+  ]
+}
