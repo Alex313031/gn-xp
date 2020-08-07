@@ -34,6 +34,24 @@
       "revId": "c173432ec53e59b2b4f1d8a677275db9103fb83b",
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "cdb04a0a_f4b32c01",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 34
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000004
+      },
+      "writtenOn": "2020-08-07T22:58:07Z",
+      "side": 1,
+      "message": "Hmm, that\u0027s true. I guess maybe clang could not emit to .d the parts that were mapped to modules (or maybe it already does?)",
+      "parentUuid": "117aa487_5cfd6b22",
+      "revId": "c173432ec53e59b2b4f1d8a677275db9103fb83b",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": false
     }
   ]
 }
