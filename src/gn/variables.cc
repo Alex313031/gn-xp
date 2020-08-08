@@ -1946,7 +1946,8 @@ const char kResponseFileContents_Help[] =
   args.
 
   The response file contents will always be quoted and escaped according to
-  Unix shell rules. To parse the response file, the Python script should use
+  Unix shell rules. To parse the response file, the script must unquote and
+  unescape the content. Python scripts for example should use
   "shlex.split(file_contents)".
 
 Example
@@ -1967,14 +1968,26 @@ Example
   }
 )*";
 
+const char kRunner[] = "runner";
+const char kRunner_HelpShort[] =
+    "runner: [string] Script runner name for actions.";
+const char kRunner_Help[] =
+    R"(runner: Script runner name for actions
+
+  The name of a script runner as defined in the BUILDCONFIG "script_runners"
+  to use to run the code signing script (See "gn help script_runners").
+
+  This is used by the action and action_foreach targets to run the script
+  (see "gn help action" and "gn help action_foreach").
+)";
+
 const char kScript[] = "script";
 const char kScript_HelpShort[] = "script: [file name] Script file for actions.";
 const char kScript_Help[] =
     R"(script: Script file for actions.
 
-  An absolute or buildfile-relative file name of a Python script to run for a
-  action and action_foreach targets (see "gn help action" and "gn help
-  action_foreach").
+  An absolute or buildfile-relative file name of a script to run for a action
+  and action_foreach targets (see "gn help action" and "gn help action_foreach").
 )";
 
 const char kSources[] = "sources";
@@ -2319,6 +2332,7 @@ const VariableInfoMap& GetTargetVariables() {
     INSERT_VARIABLE(PublicDeps)
     INSERT_VARIABLE(Rebase)
     INSERT_VARIABLE(ResponseFileContents)
+    INSERT_VARIABLE(Runner)
     INSERT_VARIABLE(Script)
     INSERT_VARIABLE(Sources)
     INSERT_VARIABLE(Swiftflags)

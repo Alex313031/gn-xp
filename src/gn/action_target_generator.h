@@ -23,6 +23,7 @@ class ActionTargetGenerator : public TargetGenerator {
   void DoRun() override;
 
  private:
+  bool FillRunner();
   bool FillScript();
   bool FillScriptArgs();
   bool FillResponseFileContents();

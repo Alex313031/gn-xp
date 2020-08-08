@@ -457,3 +457,73 @@ TEST(Functions, NotNeeded) {
   ASSERT_FALSE(err.has_error())
       << err.message() << err.location().Describe(true);
 }
+
+TEST(Functions, ScriptRunners) {
+  TestParseInput input(R"end(
+    host_os = "linux"
+    script_runners() {
+      bash = "bash"
+      python3 = "/usr/bin/python3"
+      if (host_os == "win") {
+          _private = "//tools/win_private/"
+      } else {
+          _private = "//tools/posix_private/"
+      }
+      custom_tool = "$_private/bar"
+    }
+    )end");
+  ASSERT_FALSE(input.has_error());
+
+  TestWithScope setup;
+  Err err;
+
+  setup.build_settings()->script_runners().set_resolve_runner_path_callback(
+      [](const std::string& value) {
+        return base::FilePath(FILE_PATH_LITERAL("/path/to")).Append(value);
+      });
+
+  // Specifying script runners in an arbitrary build file should be an error.
+  input.parsed()->Execute(setup.scope(), &err);
+  ASSERT_TRUE(err.has_error()) << err.message();
+
+  // It is only allowable to specify script runners in the build config file.
+  err = Err();
+  setup.scope()->SetProcessingBuildConfig();
+  setup.build_settings()->script_runners().set_explicitly_defined(false);
+  input.parsed()->Execute(setup.scope(), &err);
+  ASSERT_FALSE(err.has_error()) << err.message();
+
+  auto& script_runners = setup.build_settings()->script_runners();
+
+  err = Err();
+  base::FilePath bash_path =
+      script_runners.GetPathForRunner(Value(nullptr, "bash"), &err);
+  EXPECT_EQ(bash_path, base::FilePath(FILE_PATH_LITERAL("/path/to/bash")))
+      << bash_path.value();
+  EXPECT_FALSE(err.has_error()) << err.message();
+
+  err = Err();
+  base::FilePath python3_path =
+      script_runners.GetPathForRunner(Value(nullptr, "python3"), &err);
+  EXPECT_EQ(python3_path, base::FilePath(FILE_PATH_LITERAL("/usr/bin/python3")))
+      << python3_path.value();
+  EXPECT_FALSE(err.has_error()) << err.message();
+
+  err = Err();
+  base::FilePath custom_tool_path =
+      script_runners.GetPathForRunner(Value(nullptr, "custom_tool"), &err);
+  EXPECT_EQ(custom_tool_path,
+            base::FilePath(FILE_PATH_LITERAL("//tools/posix_private/bar")))
+      << custom_tool_path.value();
+  EXPECT_FALSE(err.has_error()) << err.message();
+
+  err = Err();
+  base::FilePath private_path =
+      script_runners.GetPathForRunner(Value(nullptr, "_private"), &err);
+  EXPECT_EQ(private_path, base::FilePath()) << private_path.value();
+  EXPECT_TRUE(err.has_error()) << private_path.value();
+
+  // It can only be done once even in the build config file.
+  input.parsed()->Execute(setup.scope(), &err);
+  ASSERT_TRUE(err.has_error()) << err.message();
+}

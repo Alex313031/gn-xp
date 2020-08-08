@@ -106,6 +106,18 @@ bool EnsureNotProcessingBuildConfig(const ParseNode* node,
   return true;
 }
 
+bool EnsureProcessingBuildConfig(const ParseNode* node,
+                                 const Scope* scope,
+                                 Err* err) {
+  if (!scope->IsProcessingBuildConfig()) {
+    *err = Err(node, "Not valid from outside the build config.",
+               "This kind of thing is meant to be configured only from the "
+               "build\nconfig script. Please put it there.");
+    return false;
+  }
+  return true;
+}
+
 bool FillTargetBlockScope(const Scope* scope,
                           const FunctionCallNode* function,
                           const std::string& target_type,
@@ -806,6 +818,112 @@ Value RunNotNeeded(Scope* scope,
   return Value();
 }
 
+// script_runner ---------------------------------------------------------------
+
+const char kScriptRunners[] = "script_runners";
+const char kScriptRunners_HelpShort[] =
+    "script_runner: Set the script interpreters to use.";
+const char kScriptRunners_Help[] =
+    R"(script_runner: Set the script intepreters to use.
+
+  The script runner configuration defines the mapping between script runner
+  names and the binary path to use to run or interpret the script.
+
+  These names are used by scripted targets, such as "action" and
+  "action_foreach". See "gn help create_bundle" and "gn help action_foreach".
+
+  The script runner configuration is special and global, and can ONLY be
+  defined by the BUILDCONFIG. This keeps the definitions of what runners are
+  allowed to be used in one highly visible and central place.
+
+  Each name of each (public) variable defined inside the block is interpreted
+  to the name of the script runner. The value of each variable names the
+  binary to use, and can use an absolute, relative, or as a special case an
+  unadorned binary name such as "python". For the last case, gn will append a
+  ".exe" on Windows, and perform a standard PATH search.
+
+  A more illustrative example
+
+    # Must go in BUILDCONFIG.gn
+    script_runners() = {
+      # Define "bash" as a script runner.
+      if (is_win) {
+        # On Windows, the binary in //buildtools/bin/win/bash.exe binary will
+        # be used
+        bash = "//buildtools/bin/win/bash.exe"
+      } else {
+        # On other targets, a the absolute path "/bin/bash" will be used
+        bash = "/bin/bash"
+      }
+
+      # Define "python" as a script runner.
+      # On Windows, gn will search "Path" for "python.exe" (or as a special
+      # case for Python on Windows, "python.bat").
+      # On other hosts, gn will search "PATH" for "python"
+      python2 = "python"
+
+      # Define "python3" as a script runner.
+      # On Windows, gn will search "Path" for "python3.exe" (or as a special
+      # case for Python on Windows, "python3.bat").
+      # On other hosts, gn will search "PATH" for "python3"
+      python3 = "python3"
+    }
+
+  If the no script runners are defined in BUILDCONFIG, for backwards
+  compatability gn assumes that "python" is defined as a script runner, and it
+  uses "python_path" for the binary path. This legacy support may be removed
+  in a future version, at which point script runners will be need to be
+  explicitly defined before they can be used.
+
+  Note that "set_defaults" can also be used to set the default runner name for the
+  built-in build targets.
+
+    set_defaults("action") {
+      # "action" will use the python3 runner for the script named in its
+      # "script" variable.
+      runner = "python3"
+    }
+)";
+
+Value RunScriptRunners(Scope* scope,
+                       const FunctionCallNode* function,
+                       const std::vector<Value>& args,
+                       BlockNode* block,
+                       Err* err) {
+  NonNestableBlock non_nestable(scope, function, "script_runners");
+  if (!non_nestable.Enter(err))
+    return Value();
+
+  if (!EnsureProcessingBuildConfig(function, scope, err))
+    return Value();
+
+  Scope block_scope(scope);
+  block->Execute(&block_scope, err);
+  if (err->has_error())
+    return Value();
+
+  // Detect if we've already explicitly defined the script_runners
+  if (scope->settings()
+          ->build_settings()
+          ->script_runners()
+          .explicitly_defined()) {
+    *err = Err(function,
+               "script_runner() was already used to define script runners.");
+  }
+
+  // Process the public values from the scope, defining them as script runners.
+  block_scope.RemovePrivateIdentifiers();
+  Scope::KeyValueMap values;
+  block_scope.GetCurrentScopeValues(&values);
+
+  // As a special case, this function sets the script runner data.
+  ScriptRunners& script_runners = const_cast<ScriptRunners&>(
+      scope->settings()->build_settings()->script_runners());
+  script_runners.DefineScriptRunnersFromScope(values, *scope, err);
+  script_runners.set_explicitly_defined(true);
+  return Value();
+}
+
 // set_sources_assignment_filter -----------------------------------------------
 
 const char kSetSourcesAssignmentFilter[] = "set_sources_assignment_filter";
@@ -1445,6 +1563,7 @@ struct FunctionInfoInitializer {
     INSERT_FUNCTION(ProcessFileTemplate, false)
     INSERT_FUNCTION(ReadFile, false)
     INSERT_FUNCTION(RebasePath, false)
+    INSERT_FUNCTION(ScriptRunners, false)
     INSERT_FUNCTION(SetDefaults, false)
     INSERT_FUNCTION(SetDefaultToolchain, false)
     INSERT_FUNCTION(SetSourcesAssignmentFilter, false)

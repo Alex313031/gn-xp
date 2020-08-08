@@ -21,7 +21,8 @@ BuildSettings::BuildSettings(const BuildSettings& other)
       build_config_file_(other.build_config_file_),
       arg_file_template_path_(other.arg_file_template_path_),
       build_dir_(other.build_dir_),
-      build_args_(other.build_args_) {}
+      build_args_(other.build_args_),
+      script_runners_(other.script_runners_) {}
 
 void BuildSettings::SetRootTargetLabel(const Label& r) {
   root_target_label_ = r;

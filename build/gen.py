@@ -574,6 +574,7 @@ def WriteGNNinja(path, platform, host, options):
         'src/gn/scheduler.cc',
         'src/gn/scope.cc',
         'src/gn/scope_per_file_provider.cc',
+        'src/gn/script_runners.cc',
         'src/gn/settings.cc',
         'src/gn/setup.cc',
         'src/gn/source_dir.cc',

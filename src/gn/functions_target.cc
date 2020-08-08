@@ -67,12 +67,12 @@ Value ExecuteGenericTarget(const char* target_type,
 // Common help paragraph on script runtime execution directories.
 #define SCRIPT_EXECUTION_CONTEXT                                              \
   "\n"                                                                        \
-  "  The script will be executed with the given arguments with the current\n" \
-  "  directory being that of the root build directory. If you pass files\n"   \
-  "  to your script, see \"gn help rebase_path\" for how to convert\n"        \
-  "  file names to be relative to the build directory (file names in the\n"   \
-  "  sources, outputs, and inputs will be all treated as relative to the\n"   \
-  "  current build file and converted as needed automatically).\n"            \
+  "  The script will be executed with the given runner and with the given\n"  \
+  "  arguments. The current directory will be the root build directory. If\n" \
+  "  you pass files to your script, see \"gn help rebase_path\" for how to\n" \
+  "  convert file names to be relative to the build directory (file names\n"  \
+  "  in the sources, outputs, and inputs will be all treated as relative\n"   \
+  "  to the current build file and converted as needed automatically).\n"     \
   "\n"                                                                        \
   "  GN sets Ninja's flag 'restat = 1` for all action commands. This means\n" \
   "  that Ninja will check the timestamp of the output after the action\n"    \
@@ -161,12 +161,13 @@ File name handling
 Variables
 
   args, data, data_deps, depfile, deps, inputs, metadata, outputs*, pool,
-  response_file_contents, script*, sources
+  response_file_contents, runner*, script*, sources
   * = required
 
 Example
 
   action("run_this_guy_once") {
+    runner = "python"
     script = "doprocessing.py"
     sources = [ "my_configuration.txt" ]
     outputs = [ "$target_gen_dir/insightful_output.txt" ]
@@ -231,7 +232,7 @@ File name handling
 Variables
 
   args, data, data_deps, depfile, deps, inputs, metadata, outputs*, pool,
-  response_file_contents, script*, sources*
+  response_file_contents, runner*, script*, sources*
   * = required
 
 Example
@@ -239,6 +240,7 @@ Example
   # Runs the script over each IDL file. The IDL script will generate both a .cc
   # and a .h file for each input.
   action_foreach("my_idl") {
+    runner = "python"
     script = "idl_processor.py"
     sources = [ "foo.idl", "bar.idl" ]
 
