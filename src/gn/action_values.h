@@ -8,6 +8,7 @@
 #include <string>
 #include <vector>
 
+#include "base/files/file_path.h"
 #include "base/macros.h"
 #include "gn/label_ptr.h"
 #include "gn/source_file.h"
@@ -22,6 +23,10 @@ class ActionValues {
  public:
   ActionValues();
   ~ActionValues();
+
+  // Script runner path for executing the script
+  const base::FilePath& runner_path() const { return runner_path_; }
+  void set_runner_path(const base::FilePath& p) { runner_path_ = p; }
 
   // Filename of the script to execute.
   const SourceFile& script() const { return script_; }
@@ -57,6 +62,7 @@ class ActionValues {
   void set_pool(LabelPtrPair<Pool> pool) { pool_ = std::move(pool); }
 
  private:
+  base::FilePath runner_path_;
   SourceFile script_;
   SubstitutionList args_;
   SubstitutionList outputs_;

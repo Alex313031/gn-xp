@@ -306,6 +306,10 @@ extern const char kResponseFileContents[];
 extern const char kResponseFileContents_HelpShort[];
 extern const char kResponseFileContents_Help[];
 
+extern const char kRunner[];
+extern const char kRunner_HelpShort[];
+extern const char kRunner_Help[];
+
 extern const char kScript[];
 extern const char kScript_HelpShort[];
 extern const char kScript_Help[];

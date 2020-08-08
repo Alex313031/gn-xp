@@ -16,6 +16,7 @@
 #include "gn/args.h"
 #include "gn/label.h"
 #include "gn/scope.h"
+#include "gn/script_runners.h"
 #include "gn/source_dir.h"
 #include "gn/source_file.h"
 #include "gn/version.h"
@@ -83,6 +84,11 @@ class BuildSettings {
   Args& build_args() { return build_args_; }
   const Args& build_args() const { return build_args_; }
 
+  // The script runners are normally set by the build config file, but some
+  // implicit defaults are also first set on init by setup.cc.
+  ScriptRunners& script_runners() { return script_runners_; }
+  const ScriptRunners& script_runners() const { return script_runners_; }
+
   // Returns the full absolute OS path cooresponding to the given file in the
   // root source tree.
   base::FilePath GetFullPath(const SourceFile& file) const;
@@ -140,6 +146,7 @@ class BuildSettings {
   SourceFile arg_file_template_path_;
   SourceDir build_dir_;
   Args build_args_;
+  ScriptRunners script_runners_;
 
   ItemDefinedCallback item_defined_callback_;
   PrintCallback print_callback_;

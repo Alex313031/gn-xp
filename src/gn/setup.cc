@@ -25,6 +25,7 @@
 #include "gn/input_file.h"
 #include "gn/parse_tree.h"
 #include "gn/parser.h"
+#include "gn/script_runners.h"
 #include "gn/source_dir.h"
 #include "gn/source_file.h"
 #include "gn/standard_out.h"
@@ -228,107 +229,6 @@ void ItemDefinedCallback(MsgLoop* task_runner,
 void DecrementWorkCount() {
   g_scheduler->DecrementWorkCount();
 }
-
-#if defined(OS_WIN)
-
-std::u16string SysMultiByteTo16(std::string_view mb) {
-  if (mb.empty())
-    return std::u16string();
-
-  int mb_length = static_cast<int>(mb.length());
-  // Compute the length of the buffer.
-  int charcount = MultiByteToWideChar(CP_ACP, 0, mb.data(), mb_length, NULL, 0);
-  if (charcount == 0)
-    return std::u16string();
-
-  std::u16string wide;
-  wide.resize(charcount);
-  MultiByteToWideChar(CP_ACP, 0, mb.data(), mb_length, base::ToWCharT(&wide[0]),
-                      charcount);
-
-  return wide;
-}
-
-// Given the path to a batch file that runs Python, extracts the name of the
-// executable actually implementing Python. Generally people write a batch file
-// to put something named "python" on the path, which then just redirects to
-// a python.exe somewhere else. This step decodes that setup. On failure,
-// returns empty path.
-base::FilePath PythonBatToExe(const base::FilePath& bat_path) {
-  // Note exciting double-quoting to allow spaces. The /c switch seems to check
-  // for quotes around the whole thing and then deletes them. If you want to
-  // quote the first argument in addition (to allow for spaces in the Python
-  // path, you need *another* set of quotes around that, likewise, we need
-  // two quotes at the end.
-  std::u16string command = u"cmd.exe /c \"\"";
-  command.append(bat_path.value());
-  command.append(u"\" -c \"import sys; print sys.executable\"\"");
-
-  std::string python_path;
-  std::string std_err;
-  int exit_code;
-  base::FilePath cwd;
-  GetCurrentDirectory(&cwd);
-  if (internal::ExecProcess(command, cwd, &python_path, &std_err, &exit_code) &&
-      exit_code == 0 && std_err.empty()) {
-    base::TrimWhitespaceASCII(python_path, base::TRIM_ALL, &python_path);
-
-    // Python uses the system multibyte code page for sys.executable.
-    base::FilePath exe_path(SysMultiByteTo16(python_path));
-
-    // Check for reasonable output, cmd may have output an error message.
-    if (base::PathExists(exe_path))
-      return exe_path;
-  }
-  return base::FilePath();
-}
-
-const char16_t kPythonExeName[] = u"python.exe";
-const char16_t kPythonBatName[] = u"python.bat";
-
-base::FilePath FindWindowsPython() {
-  char16_t current_directory[MAX_PATH];
-  ::GetCurrentDirectory(MAX_PATH, reinterpret_cast<LPWSTR>(current_directory));
-
-  // First search for python.exe in the current directory.
-  base::FilePath cur_dir_candidate_exe =
-      base::FilePath(current_directory).Append(kPythonExeName);
-  if (base::PathExists(cur_dir_candidate_exe))
-    return cur_dir_candidate_exe;
-
-  // Get the path.
-  const char16_t kPathEnvVarName[] = u"Path";
-  DWORD path_length = ::GetEnvironmentVariable(
-      reinterpret_cast<LPCWSTR>(kPathEnvVarName), nullptr, 0);
-  if (path_length == 0)
-    return base::FilePath();
-  std::unique_ptr<char16_t[]> full_path(new char16_t[path_length]);
-  DWORD actual_path_length = ::GetEnvironmentVariable(
-      reinterpret_cast<LPCWSTR>(kPathEnvVarName),
-      reinterpret_cast<LPWSTR>(full_path.get()), path_length);
-  CHECK_EQ(path_length, actual_path_length + 1);
-
-  // Search for python.exe in the path.
-  for (const auto& component : base::SplitStringPiece(
-           std::u16string_view(full_path.get(), path_length), u";",
-           base::TRIM_WHITESPACE, base::SPLIT_WANT_NONEMPTY)) {
-    base::FilePath candidate_exe =
-        base::FilePath(component).Append(kPythonExeName);
-    if (base::PathExists(candidate_exe))
-      return candidate_exe;
-
-    // Also allow python.bat, but convert into the .exe.
-    base::FilePath candidate_bat =
-        base::FilePath(component).Append(kPythonBatName);
-    if (base::PathExists(candidate_bat)) {
-      base::FilePath python_exe = PythonBatToExe(candidate_bat);
-      if (!python_exe.empty())
-        return python_exe;
-    }
-  }
-  return base::FilePath();
-}
-#endif
 
 }  // namespace
 
@@ -724,28 +624,26 @@ bool Setup::FillPythonPath(const base::CommandLine& cmdline, Err* err) {
   ScopedTrace setup_trace(TraceItem::TRACE_SETUP, "Fill Python Path");
   const Value* value = dotfile_scope_.GetValue("script_executable", true);
   if (cmdline.HasSwitch(switches::kScriptExecutable)) {
-    build_settings_.set_python_path(
-        cmdline.GetSwitchValuePath(switches::kScriptExecutable));
+    // Setting an already defined path.
+    build_settings_.script_runners().AddScriptRunner(
+        "python", cmdline.GetSwitchValuePath(switches::kScriptExecutable));
   } else if (value) {
     if (!value->VerifyTypeIs(Value::STRING, err)) {
       return false;
     }
-    build_settings_.set_python_path(
-        base::FilePath(UTF8ToFilePath(value->string_value())));
+    // Setting an already defined path.
+    build_settings_.script_runners().AddScriptRunner(
+        "python", base::FilePath(UTF8ToFilePath(value->string_value())));
   } else {
-#if defined(OS_WIN)
-    base::FilePath python_path = FindWindowsPython();
-    if (python_path.empty()) {
-      scheduler_.Log("WARNING",
-                     "Could not find python on path, using "
-                     "just \"python.exe\"");
-      python_path = base::FilePath(kPythonExeName);
-    }
-    build_settings_.set_python_path(python_path.NormalizePathSeparatorsTo('/'));
-#else
-    build_settings_.set_python_path(base::FilePath("python"));
-#endif
+    // Setting without a path, so a PATH search may occur.
+    build_settings_.script_runners().AddScriptRunner(
+        "python", base::FilePath(FILE_PATH_LITERAL("python")));
   }
+
+  build_settings_.set_python_path(
+      build_settings_.script_runners().GetPathForRunner(
+          Value(nullptr, "python"), err));
+
   return true;
 }
 

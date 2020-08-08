@@ -14,10 +14,13 @@ TEST_F(ActionTargetGenerator, ActionOutputSubstitutions) {
   TestWithScope setup;
   Scope::ItemVector items_;
   setup.scope()->set_item_collector(&items_);
+  setup.build_settings()->script_runners().AddScriptRunner(
+      "python", base::FilePath("/usr/bin/python"));
 
   // First test one with no substitutions, this should be valid.
   TestParseInput input_good(
       R"(action("foo") {
+           runner = "python"
            script = "//foo.py"
            sources = [ "//bar.txt" ]
            outputs = [ "//out/Debug/one.txt" ]
@@ -32,6 +35,7 @@ TEST_F(ActionTargetGenerator, ActionOutputSubstitutions) {
   // Same thing with a pattern in the output should fail.
   TestParseInput input_bad(
       R"(action("foo") {
+           runner = "python"
            script = "//foo.py"
            sources = [ "//bar.txt" ]
            outputs = [ "//out/Debug/{{source_name_part}}.txt" ]
@@ -49,11 +53,14 @@ TEST_F(ActionTargetGenerator, ActionForeachSubstitutions) {
   TestWithScope setup;
   Scope::ItemVector items_;
   setup.scope()->set_item_collector(&items_);
+  setup.build_settings()->script_runners().AddScriptRunner(
+      "python", base::FilePath("/usr/bin/python"));
 
   // Args listing a response file but missing a response file definition should
   // fail.
   TestParseInput input_missing_resp_file(
       R"(action_foreach("foo") {
+           runner = "python"
            script = "//foo.py"
            sources = [ "//bar.txt" ]
            outputs = [ "//out/Debug/{{source_name_part}}" ]
@@ -68,6 +75,7 @@ TEST_F(ActionTargetGenerator, ActionForeachSubstitutions) {
   err = Err();
   TestParseInput input_resp_file(
       R"(action_foreach("foo") {
+           runner = "python"
            script = "//foo.py"
            sources = [ "//bar.txt" ]
            outputs = [ "//out/Debug/{{source_name_part}}" ]
@@ -82,6 +90,7 @@ TEST_F(ActionTargetGenerator, ActionForeachSubstitutions) {
   err = Err();
   TestParseInput input_missing_rsp_args(
       R"(action_foreach("foo") {
+           runner = "python"
            script = "//foo.py"
            sources = [ "//bar.txt" ]
            outputs = [ "//out/Debug/{{source_name_part}}" ]
@@ -96,6 +105,7 @@ TEST_F(ActionTargetGenerator, ActionForeachSubstitutions) {
   err = Err();
   TestParseInput input_bad_args(
       R"(action_foreach("foo") {
+           runner = "python"
            script = "//foo.py"
            sources = [ "//bar.txt" ]
            outputs = [ "//out/Debug/{{source_name_part}}" ]
@@ -110,6 +120,7 @@ TEST_F(ActionTargetGenerator, ActionForeachSubstitutions) {
   err = Err();
   TestParseInput input_bad_rsp(
       R"(action_foreach("foo") {
+           runner = "python"
            script = "//foo.py"
            sources = [ "//bar.txt" ]
            outputs = [ "//out/Debug/{{source_name_part}}" ]

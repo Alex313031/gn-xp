@@ -42,6 +42,9 @@ void ActionTargetGenerator::DoRun() {
   if (!FillInputs())
     return;
 
+  if (!FillRunner())
+    return;
+
   if (!FillScript())
     return;
 
@@ -91,6 +94,24 @@ void ActionTargetGenerator::DoRun() {
         "will be empty.");
     return;
   }
+}
+
+bool ActionTargetGenerator::FillRunner() {
+  // If this gets called, the target type requires a runner, so error out
+  // if it doesn't have one.
+  const Value* value = scope_->GetValue(variables::kRunner, true);
+  if (!value) {
+    *err_ = Err(function_call_, "This target type requires a \"runner\".");
+    return false;
+  }
+
+  base::FilePath runner_path =
+      scope_->settings()->build_settings()->script_runners().GetPathForRunner(
+          *value, err_);
+  if (err_->has_error())
+    return false;
+  target_->action_values().set_runner_path(runner_path);
+  return true;
 }
 
 bool ActionTargetGenerator::FillScript() {

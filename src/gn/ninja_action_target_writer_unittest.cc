@@ -44,6 +44,8 @@ TEST(NinjaActionTargetWriter, ActionNoSources) {
   Target target(setup.settings(), Label(SourceDir("//foo/"), "bar"));
   target.set_output_type(Target::ACTION);
 
+  target.action_values().set_runner_path(
+      base::FilePath(FILE_PATH_LITERAL("/usr/bin/python")));
   target.action_values().set_script(SourceFile("//foo/script.py"));
   target.config_values().inputs().push_back(SourceFile("//foo/included.txt"));
 
@@ -53,8 +55,6 @@ TEST(NinjaActionTargetWriter, ActionNoSources) {
   target.SetToolchain(setup.toolchain());
   ASSERT_TRUE(target.OnResolved(&err));
 
-  setup.build_settings()->set_python_path(
-      base::FilePath(FILE_PATH_LITERAL("/usr/bin/python")));
 
   std::ostringstream out;
   NinjaActionTargetWriter writer(&target, out);
@@ -80,6 +80,8 @@ TEST(NinjaActionTargetWriter, ActionNoSourcesConsole) {
   Target target(setup.settings(), Label(SourceDir("//foo/"), "bar"));
   target.set_output_type(Target::ACTION);
 
+  target.action_values().set_runner_path(
+      base::FilePath(FILE_PATH_LITERAL("/usr/bin/python")));
   target.action_values().set_script(SourceFile("//foo/script.py"));
   target.config_values().inputs().push_back(SourceFile("//foo/included.txt"));
 
@@ -94,9 +96,6 @@ TEST(NinjaActionTargetWriter, ActionNoSourcesConsole) {
 
   target.SetToolchain(setup.toolchain());
   ASSERT_TRUE(target.OnResolved(&err));
-
-  setup.build_settings()->set_python_path(
-      base::FilePath(FILE_PATH_LITERAL("/usr/bin/python")));
 
   std::ostringstream out;
   NinjaActionTargetWriter writer(&target, out);
@@ -126,6 +125,8 @@ TEST(NinjaActionTargetWriter, ActionWithSources) {
   Target target(setup.settings(), Label(SourceDir("//foo/"), "bar"));
   target.set_output_type(Target::ACTION);
 
+  target.action_values().set_runner_path(
+      base::FilePath(FILE_PATH_LITERAL("/usr/bin/python")));
   target.action_values().set_script(SourceFile("//foo/script.py"));
 
   target.sources().push_back(SourceFile("//foo/source.txt"));
@@ -136,9 +137,6 @@ TEST(NinjaActionTargetWriter, ActionWithSources) {
 
   target.SetToolchain(setup.toolchain());
   ASSERT_TRUE(target.OnResolved(&err));
-
-  setup.build_settings()->set_python_path(
-      base::FilePath(FILE_PATH_LITERAL("/usr/bin/python")));
 
   std::ostringstream out;
   NinjaActionTargetWriter writer(&target, out);
@@ -185,6 +183,8 @@ TEST(NinjaActionTargetWriter, ForEach) {
   target.sources().push_back(SourceFile("//foo/input1.txt"));
   target.sources().push_back(SourceFile("//foo/input2.txt"));
 
+  target.action_values().set_runner_path(
+      base::FilePath(FILE_PATH_LITERAL("/usr/bin/python")));
   target.action_values().set_script(SourceFile("//foo/script.py"));
 
   target.action_values().args() = SubstitutionList::MakeForTest(
@@ -196,9 +196,6 @@ TEST(NinjaActionTargetWriter, ForEach) {
 
   target.SetToolchain(setup.toolchain());
   ASSERT_TRUE(target.OnResolved(&err));
-
-  setup.build_settings()->set_python_path(
-      base::FilePath(FILE_PATH_LITERAL("/usr/bin/python")));
 
   std::ostringstream out;
   NinjaActionTargetWriter writer(&target, out);
@@ -245,6 +242,8 @@ TEST(NinjaActionTargetWriter, ForEachWithDepfile) {
   target.sources().push_back(SourceFile("//foo/input1.txt"));
   target.sources().push_back(SourceFile("//foo/input2.txt"));
 
+  target.action_values().set_runner_path(
+      base::FilePath(FILE_PATH_LITERAL("/usr/bin/python")));
   target.action_values().set_script(SourceFile("//foo/script.py"));
 
   target.SetToolchain(setup.toolchain());
@@ -262,8 +261,6 @@ TEST(NinjaActionTargetWriter, ForEachWithDepfile) {
 
   target.config_values().inputs().push_back(SourceFile("//foo/included.txt"));
 
-  setup.build_settings()->set_python_path(
-      base::FilePath(FILE_PATH_LITERAL("/usr/bin/python")));
   setup.build_settings()->set_ninja_required_version(Version{1, 9, 0});
 
   std::ostringstream out;
@@ -306,6 +303,8 @@ TEST(NinjaActionTargetWriter, ForEachWithResponseFile) {
   target.set_output_type(Target::ACTION_FOREACH);
 
   target.sources().push_back(SourceFile("//foo/input1.txt"));
+  target.action_values().set_runner_path(
+      base::FilePath(FILE_PATH_LITERAL("/usr/bin/python")));
   target.action_values().set_script(SourceFile("//foo/script.py"));
 
   target.SetToolchain(setup.toolchain());
@@ -319,9 +318,6 @@ TEST(NinjaActionTargetWriter, ForEachWithResponseFile) {
       SubstitutionList::MakeForTest("-j", "{{source_name_part}}");
   target.action_values().outputs() =
       SubstitutionList::MakeForTest("//out/Debug/{{source_name_part}}.out");
-
-  setup.build_settings()->set_python_path(
-      base::FilePath(FILE_PATH_LITERAL("/usr/bin/python")));
 
   std::ostringstream out;
   NinjaActionTargetWriter writer(&target, out);
@@ -360,6 +356,8 @@ TEST(NinjaActionTargetWriter, ForEachWithPool) {
   target.set_output_type(Target::ACTION_FOREACH);
 
   target.sources().push_back(SourceFile("//foo/input1.txt"));
+  target.action_values().set_runner_path(
+      base::FilePath(FILE_PATH_LITERAL("/usr/bin/python")));
   target.action_values().set_script(SourceFile("//foo/script.py"));
 
   Pool pool(setup.settings(),
@@ -377,9 +375,6 @@ TEST(NinjaActionTargetWriter, ForEachWithPool) {
       SubstitutionList::MakeForTest("{{source}}", "{{source_file_part}}");
   target.action_values().outputs() =
       SubstitutionList::MakeForTest("//out/Debug/{{source_name_part}}.out");
-
-  setup.build_settings()->set_python_path(
-      base::FilePath(FILE_PATH_LITERAL("/usr/bin/python")));
 
   std::ostringstream out;
   NinjaActionTargetWriter writer(&target, out);
@@ -407,9 +402,6 @@ TEST(NinjaActionTargetWriter, NoTransitiveHardDeps) {
   Err err;
   TestWithScope setup;
 
-  setup.build_settings()->set_python_path(
-      base::FilePath(FILE_PATH_LITERAL("/usr/bin/python")));
-
   Target dep(setup.settings(), Label(SourceDir("//foo/"), "dep"));
   dep.set_output_type(Target::ACTION);
   dep.visibility().SetPublic();
@@ -420,6 +412,8 @@ TEST(NinjaActionTargetWriter, NoTransitiveHardDeps) {
   foo.set_output_type(Target::ACTION);
   foo.visibility().SetPublic();
   foo.sources().push_back(SourceFile("//foo/input1.txt"));
+  foo.action_values().set_runner_path(
+      base::FilePath(FILE_PATH_LITERAL("/usr/bin/python")));
   foo.action_values().set_script(SourceFile("//foo/script.py"));
   foo.private_deps().push_back(LabelTargetPair(&dep));
   foo.SetToolchain(setup.toolchain());
@@ -449,6 +443,8 @@ TEST(NinjaActionTargetWriter, NoTransitiveHardDeps) {
   Target bar(setup.settings(), Label(SourceDir("//bar/"), "bar"));
   bar.set_output_type(Target::ACTION);
   bar.sources().push_back(SourceFile("//bar/input1.txt"));
+  bar.action_values().set_runner_path(
+      base::FilePath(FILE_PATH_LITERAL("/usr/bin/python")));
   bar.action_values().set_script(SourceFile("//bar/script.py"));
   bar.private_deps().push_back(LabelTargetPair(&foo));
   bar.SetToolchain(setup.toolchain());

@@ -311,6 +311,15 @@ Value RunRustProcMacro(Scope* scope,
                    BlockNode* block,
                    Err* err);
 
+extern const char kScriptRunners[];
+extern const char kScriptRunners_HelpShort[];
+extern const char kScriptRunners_Help[];
+Value RunScriptRunners(Scope* scope,
+                       const FunctionCallNode* function,
+                       const std::vector<Value>& args,
+                       BlockNode* block,
+                       Err* err);
+
 extern const char kSetDefaults[];
 extern const char kSetDefaults_HelpShort[];
 extern const char kSetDefaults_Help[];
