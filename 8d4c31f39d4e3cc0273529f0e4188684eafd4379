@@ -73,6 +73,30 @@
     },
     {
       "key": {
+        "uuid": "03c4ecb6_9b0d9721",
+        "filename": "src/gn/ninja_c_binary_target_writer.cc",
+        "patchSetId": 36
+      },
+      "lineNbr": 72,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-08-08T00:27:27Z",
+      "side": 1,
+      "message": "That\u0027s my understanding, but we should also confirm that.",
+      "parentUuid": "3d7158d2_c968806a",
+      "range": {
+        "startLine": 72,
+        "startChar": 29,
+        "endLine": 72,
+        "endChar": 47
+      },
+      "revId": "8d4c31f39d4e3cc0273529f0e4188684eafd4379",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "28011a99_85071c6d",
         "filename": "src/gn/ninja_c_binary_target_writer.cc",
         "patchSetId": 36
@@ -108,6 +132,30 @@
       "side": 1,
       "message": "Yeah, I figured we could do that later if we wanted it, but it could make sense to make it configurable in the same way.\n\n-fmodule-file is a bit tricky though since the value itself is \"\u003cname\u003e\u003d\u003cpcm\u003e\", not just the name of a plain file or plain name or something, so it seemed less likely that another compiler would have an option just like that and not call it the same thing.",
       "parentUuid": "28011a99_85071c6d",
+      "range": {
+        "startLine": 75,
+        "startChar": 29,
+        "endLine": 75,
+        "endChar": 43
+      },
+      "revId": "8d4c31f39d4e3cc0273529f0e4188684eafd4379",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "5c0b41d3_028995cc",
+        "filename": "src/gn/ninja_c_binary_target_writer.cc",
+        "patchSetId": 36
+      },
+      "lineNbr": 75,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-08-08T00:27:27Z",
+      "side": 1,
+      "message": "The `\u003cname\u003e\u003d` part is optional, it\u0027s just an optimization. When you provide it, Clang will know that if it encounters module \u003cname\u003e, it has to load \u003cpcm\u003e, otherwise it just always has to load the module to figure out what\u0027s inside of it.",
+      "parentUuid": "73bec662_9a6fa6c5",
       "range": {
         "startLine": 75,
         "startChar": 29,
