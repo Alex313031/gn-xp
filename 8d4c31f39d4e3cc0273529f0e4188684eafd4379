@@ -49,6 +49,30 @@
     },
     {
       "key": {
+        "uuid": "3d7158d2_c968806a",
+        "filename": "src/gn/ninja_c_binary_target_writer.cc",
+        "patchSetId": 36
+      },
+      "lineNbr": 72,
+      "author": {
+        "id": 1000004
+      },
+      "writtenOn": "2020-08-08T00:12:44Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "1fdf615e_fa430761",
+      "range": {
+        "startLine": 72,
+        "startChar": 29,
+        "endLine": 72,
+        "endChar": 47
+      },
+      "revId": "8d4c31f39d4e3cc0273529f0e4188684eafd4379",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "28011a99_85071c6d",
         "filename": "src/gn/ninja_c_binary_target_writer.cc",
         "patchSetId": 36
