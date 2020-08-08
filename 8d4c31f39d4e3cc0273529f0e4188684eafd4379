@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "1fdf615e_fa430761",
+        "filename": "src/gn/ninja_c_binary_target_writer.cc",
+        "patchSetId": 36
+      },
+      "lineNbr": 72,
+      "author": {
+        "id": 1000004
+      },
+      "writtenOn": "2020-08-08T00:05:44Z",
+      "side": 1,
+      "message": "I can change to that if you think it\u0027s better or better supported. So that means we would:\n- never use -fmodule-map-file\n- use -fmodules-embed-all-files and -fmodule-file when compiling the modulemap to pcm\n- dependents only need -fmodule-file, and they pull the modulemap out of the .pcm\n\nIs that your understanding?",
+      "parentUuid": "284afb84_79b48fd1",
+      "range": {
+        "startLine": 72,
+        "startChar": 29,
+        "endLine": 72,
+        "endChar": 47
+      },
+      "revId": "8d4c31f39d4e3cc0273529f0e4188684eafd4379",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "28011a99_85071c6d",
         "filename": "src/gn/ninja_c_binary_target_writer.cc",
         "patchSetId": 36
@@ -36,6 +60,30 @@
       "writtenOn": "2020-08-07T23:13:55Z",
       "side": 1,
       "message": "Would it make sense to have user provide flags as `module_file_switch \u003d \"-fmodule-file\"` (akin to lib_switch and lib_dir_switch) to avoid hardcoding these files into GN?",
+      "range": {
+        "startLine": 75,
+        "startChar": 29,
+        "endLine": 75,
+        "endChar": 43
+      },
+      "revId": "8d4c31f39d4e3cc0273529f0e4188684eafd4379",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "73bec662_9a6fa6c5",
+        "filename": "src/gn/ninja_c_binary_target_writer.cc",
+        "patchSetId": 36
+      },
+      "lineNbr": 75,
+      "author": {
+        "id": 1000004
+      },
+      "writtenOn": "2020-08-08T00:05:44Z",
+      "side": 1,
+      "message": "Yeah, I figured we could do that later if we wanted it, but it could make sense to make it configurable in the same way.\n\n-fmodule-file is a bit tricky though since the value itself is \"\u003cname\u003e\u003d\u003cpcm\u003e\", not just the name of a plain file or plain name or something, so it seemed less likely that another compiler would have an option just like that and not call it the same thing.",
+      "parentUuid": "28011a99_85071c6d",
       "range": {
         "startLine": 75,
         "startChar": 29,
