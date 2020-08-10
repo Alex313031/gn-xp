@@ -223,7 +223,7 @@ TEST_F(LoaderTest, Foo) {
   // builder would do this).
   const Settings* default_settings = loader->GetToolchainSettings(Label());
   Toolchain second_tc_object(default_settings, second_tc);
-  loader->ToolchainLoaded(&second_tc_object);
+  loader->ToolchainLoaded(&second_tc_object, LocationRange());
   EXPECT_TRUE(mock_ifm_.HasOnePending(build_config));
 
   // Scheduling a second file to load in that toolchain should not make it
@@ -381,7 +381,7 @@ TEST_F(LoaderTest, NonDefaultBuildFileName) {
   // builder would do this).
   const Settings* default_settings = loader->GetToolchainSettings(Label());
   Toolchain second_tc_object(default_settings, second_tc);
-  loader->ToolchainLoaded(&second_tc_object);
+  loader->ToolchainLoaded(&second_tc_object, LocationRange());
   EXPECT_TRUE(mock_ifm_.HasOnePending(build_config));
 
   // Running the build config file should make our second file pending.

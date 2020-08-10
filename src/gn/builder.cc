@@ -294,7 +294,8 @@ bool Builder::ToolchainDefined(BuilderRecord* record, Err* err) {
       toolchain->settings()->default_toolchain_label() == toolchain->label())
     RecursiveSetShouldGenerate(record, true);
 
-  loader_->ToolchainLoaded(toolchain);
+  loader_->ToolchainLoaded(toolchain,
+                           record->item()->defined_from()->GetRange());
   return true;
 }
 
