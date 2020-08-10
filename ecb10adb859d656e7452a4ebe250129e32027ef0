@@ -16,6 +16,29 @@
       "revId": "ecb10adb859d656e7452a4ebe250129e32027ef0",
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "a73ce9e9_dde236b5",
+        "filename": "src/gn/ninja_c_binary_target_writer.cc",
+        "patchSetId": 41
+      },
+      "lineNbr": 33,
+      "author": {
+        "id": 1000014
+      },
+      "writtenOn": "2020-08-10T18:31:49Z",
+      "side": 1,
+      "message": "I get nervous about uninitialized bare pointers. We could default-initialize this to null, but it looks like you only create this in one place. Maybe create a real constructor (with no default constructor) that sets the values so we don\u0027t have to worry about uninitialized ones? The you can even do emplace_back in the call site and I think it becomes much shorter.",
+      "range": {
+        "startLine": 33,
+        "startChar": 20,
+        "endLine": 33,
+        "endChar": 29
+      },
+      "revId": "ecb10adb859d656e7452a4ebe250129e32027ef0",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": true
     }
   ]
 }
