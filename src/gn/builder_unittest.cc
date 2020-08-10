@@ -22,7 +22,8 @@ class MockLoader : public Loader {
             const Label& toolchain_name) override {
     files_.push_back(file);
   }
-  void ToolchainLoaded(const Toolchain* toolchain) override {}
+  void ToolchainLoaded(const Toolchain* toolchain,
+                       const LocationRange& origin) override {}
   Label GetDefaultToolchain() const override { return Label(); }
   const Settings* GetToolchainSettings(const Label& label) const override {
     return nullptr;
