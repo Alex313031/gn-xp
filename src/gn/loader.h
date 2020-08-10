@@ -41,7 +41,8 @@ class Loader : public base::RefCountedThreadSafe<Loader> {
 
   // Notification that the given toolchain has loaded. This will unblock files
   // waiting on this definition.
-  virtual void ToolchainLoaded(const Toolchain* toolchain) = 0;
+  virtual void ToolchainLoaded(const Toolchain* toolchain,
+                               const LocationRange& origin) = 0;
 
   // Returns the label of the default toolchain.
   virtual Label GetDefaultToolchain() const = 0;
@@ -84,7 +85,8 @@ class LoaderImpl : public Loader {
   void Load(const SourceFile& file,
             const LocationRange& origin,
             const Label& toolchain_name) override;
-  void ToolchainLoaded(const Toolchain* toolchain) override;
+  void ToolchainLoaded(const Toolchain* toolchain,
+                       const LocationRange& origin) override;
   Label GetDefaultToolchain() const override;
   const Settings* GetToolchainSettings(const Label& label) const override;
   SourceFile BuildFileForLabel(const Label& label) const override;
@@ -161,6 +163,9 @@ class LoaderImpl : public Loader {
                      const SourceFile& file_name,
                      std::function<void(const ParseNode*)> callback,
                      Err* err);
+
+  // Append an error message that identifies the current toolchain.
+  void AppendToolchainSubErr(const Settings* settings, Err* err);
 
   MsgLoop* task_runner_;
 

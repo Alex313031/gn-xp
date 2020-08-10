@@ -66,6 +66,7 @@ struct LoaderImpl::ToolchainRecord {
   }
 
   Settings settings;
+  LocationRange origin;
 
   bool is_toolchain_loaded;
   bool is_config_loaded;
@@ -154,7 +155,8 @@ void LoaderImpl::Load(const SourceFile& file,
     record->waiting_on_me.push_back(SourceFileAndOrigin(file, origin));
 }
 
-void LoaderImpl::ToolchainLoaded(const Toolchain* toolchain) {
+void LoaderImpl::ToolchainLoaded(const Toolchain* toolchain,
+                                 const LocationRange& origin) {
   ToolchainRecord* record = toolchain_records_[toolchain->label()].get();
   if (!record) {
     DCHECK(!default_toolchain_label_.is_null());
@@ -165,6 +167,7 @@ void LoaderImpl::ToolchainLoaded(const Toolchain* toolchain) {
     toolchain_records_[toolchain->label()] = std::move(new_record);
   }
   record->is_toolchain_loaded = true;
+  record->origin = origin;
 
   // The default build config is loaded first, then its toolchain. Secondary
   // ones are loaded in the opposite order so we can pass toolchain parameters
@@ -270,6 +273,10 @@ void LoaderImpl::BackgroundLoadFile(const Settings* settings,
   if (err.has_error()) {
     if (!origin.is_null())
       err.AppendSubErr(Err(origin, "which caused the file to be included."));
+
+    if (!settings->is_default())
+      AppendToolchainSubErr(settings, &err);
+
     g_scheduler->FailWithError(err);
   }
 
@@ -330,8 +337,12 @@ void LoaderImpl::BackgroundLoadBuildConfig(
 
   trace.Done();
 
-  if (err.has_error())
+  if (err.has_error()) {
+    if (!settings->is_default())
+      AppendToolchainSubErr(settings, &err);
+
     g_scheduler->FailWithError(err);
+  }
 
   base_config->ClearProcessingBuildConfig();
   if (settings->is_default()) {
@@ -437,4 +448,15 @@ bool LoaderImpl::AsyncLoadFile(const LocationRange& origin,
   }
   return g_scheduler->input_file_manager()->AsyncLoadFile(
       origin, build_settings, file_name, std::move(callback), err);
+}
+
+void LoaderImpl::AppendToolchainSubErr(const Settings* settings, Err* err) {
+  ToolchainRecordMap::iterator found_toolchain =
+      toolchain_records_.find(settings->toolchain_label());
+  DCHECK(found_toolchain != toolchain_records_.end());
+  ToolchainRecord* record = found_toolchain->second.get();
+  std::string toolchain_name =
+      settings->toolchain_label().GetUserVisibleName(false);
+  err->AppendSubErr(Err(
+      record->origin, "which defined the current toolchain " + toolchain_name));
 }
