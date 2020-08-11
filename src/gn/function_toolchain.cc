@@ -647,6 +647,12 @@ Tool variables
         prefixed by "-I" (these work with Posix tools as well as Microsoft
         ones).
 
+    {{module_deps}}
+    {{module_deps_no_self}}
+        Strings correspond to the flags necessary to depend upon the modules
+        referenced by the current target. _no_self doesn't include the module
+        for the current target, and can be used to compile the pcm itself.
+
     {{source}}
         The relative path and name of the current input file.
         Example: "../../base/my_file.cc"
