@@ -16,6 +16,24 @@
       "revId": "4d9a9201b242e9bde0e9027f1e1de95c5cd4d922",
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "cea15213_b9f63497",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000587
+      },
+      "writtenOn": "2020-08-11T22:19:31Z",
+      "side": 1,
+      "message": "Sure, that scratches my itch, done. Agree the declaration is not so useful.",
+      "parentUuid": "5078edab_16d6bccd",
+      "revId": "4d9a9201b242e9bde0e9027f1e1de95c5cd4d922",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": false
     }
   ]
 }
