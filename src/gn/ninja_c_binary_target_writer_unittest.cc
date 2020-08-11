@@ -1772,7 +1772,7 @@ TEST_F(NinjaCBinaryTargetWriterTest, DependOnModule) {
 
     const char expected[] = R"(defines =
 include_dirs =
-module_deps = -fmodules-embed-all-files -fmodule-file=//blah$:a=obj/blah/liba.a.pcm
+module_deps = -Xclang -fmodules-embed-all-files -fmodule-file=//blah$:a=obj/blah/liba.a.pcm
 cflags =
 cflags_cc =
 label = //blah$:a
@@ -1812,7 +1812,7 @@ build obj/blah/liba.a: alink obj/blah/liba.a.o
 
     const char expected[] = R"(defines =
 include_dirs =
-module_deps = -fmodules-embed-all-files -fmodule-file=//stuff$:b=obj/stuff/libb.b.pcm
+module_deps = -Xclang -fmodules-embed-all-files -fmodule-file=//stuff$:b=obj/stuff/libb.b.pcm
 cflags =
 cflags_cc =
 label = //stuff$:b
@@ -1851,7 +1851,7 @@ build obj/stuff/libb.a: alink obj/stuff/libb.b.o
 
     const char expected[] = R"(defines =
 include_dirs =
-module_deps = -fmodules-embed-all-files -fmodule-file=//blah$:a=obj/blah/liba.a.pcm -fmodule-file=//stuff$:b=obj/stuff/libb.b.pcm
+module_deps = -Xclang -fmodules-embed-all-files -fmodule-file=//blah$:a=obj/blah/liba.a.pcm -fmodule-file=//stuff$:b=obj/stuff/libb.b.pcm
 cflags =
 cflags_cc =
 label = //zap$:c
