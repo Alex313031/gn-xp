@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "a179da56_f6f8e870",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000012
+      },
+      "writtenOn": "2020-08-11T20:29:34Z",
+      "side": 1,
+      "message": "For what it\u0027s worth, I\u0027ve been working on the py2-\u003epy3 migration for Chromium lately and I\u0027m adopting the approach that brettw@ suggested in his last sentence of \n",
+      "revId": "31ebb0335ee5b0f5723ca1990beb6d8868da8e83",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": false
+    }
+  ]
+}
