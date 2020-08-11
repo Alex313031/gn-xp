@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "b0827c97_97abf759",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000628
+      },
+      "writtenOn": "2020-08-11T09:01:15Z",
+      "side": 1,
+      "message": "Hi Brett! I saw your comments on CL in February, when I recently looked into what it would take to have gn allow a project to migrate to Python 3.\n\nOne big difference is that you asked that script runners be a new *variable*. However it seemed to me to work better if it were a *function*, so that is what I implemented it as.\n\nI went much further than this with some local changes I haven\u0027t yet uploaded, such as updating exec_script() to itself take a \"runner\" argument (while remaining backwards compatible!), and otherwise entirely eliminating BuildSettings::{set_}python_path(). Those other changes were ... interesting, so to start I kept it simple. Only action and action_foreach can specify a runner other than \"python\" (and can be constrained to not allow \"python\" at all). Everything else is unaffected.\n\nPTAL.",
+      "revId": "d6d7c2226676180df3a36547770d581f755df94a",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": false
+    }
+  ]
+}
