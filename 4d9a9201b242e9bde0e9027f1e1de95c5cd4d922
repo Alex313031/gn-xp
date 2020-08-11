@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "5078edab_16d6bccd",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000014
+      },
+      "writtenOn": "2020-08-11T16:09:35Z",
+      "side": 1,
+      "message": "I don\u0027t think referencing the declaration of the current toolchain is that useful and I think the extra block at the bottom makes it a bit harder to see the actual error. I think the toolchain name should be enough, unless you had a specific problem you\u0027re trying to solve by showing the declaration.\n\nLike \n\n  ERROR at //BUILD.gn:39:1 (//build/toolchain:host_x64-asan): Assertion failed.\n    ...\n\n  ERROR at //BUILD.gn:39:1 in toolchain //build/toolchain:host_x64-asan: Assertion failed.\n    ...\n\nor something along those lines. What do you think?",
+      "revId": "4d9a9201b242e9bde0e9027f1e1de95c5cd4d922",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": false
+    }
+  ]
+}
