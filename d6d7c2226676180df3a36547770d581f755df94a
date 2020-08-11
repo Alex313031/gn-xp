@@ -16,6 +16,29 @@
       "revId": "d6d7c2226676180df3a36547770d581f755df94a",
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "e0d050b3_2fe7e5b7",
+        "filename": "src/gn/functions.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 834,
+      "author": {
+        "id": 1000628
+      },
+      "writtenOn": "2020-08-11T18:29:36Z",
+      "side": 1,
+      "message": "Oops, removed this, and a few other things.",
+      "range": {
+        "startLine": 833,
+        "startChar": 20,
+        "endLine": 834,
+        "endChar": 24
+      },
+      "revId": "d6d7c2226676180df3a36547770d581f755df94a",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": false
     }
   ]
 }
