@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "22e80a48_c3eb1cc6",
+        "filename": "src/gn/err.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 171,
+      "author": {
+        "id": 1000014
+      },
+      "writtenOn": "2020-08-12T17:07:38Z",
+      "side": 1,
+      "message": "To help my OCD, can you omit this colon when there\u0027s a toolchain label?",
+      "revId": "dbcaf67beb3963b9bdcef4ae5a8c20ab12b90757",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": true
+    }
+  ]
+}
