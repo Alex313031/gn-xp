@@ -16,6 +16,24 @@
       "revId": "4214119ebca60390aaaa5463e9b763e69c90fe09",
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "fce3cb93_16cf16e8",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000627
+      },
+      "writtenOn": "2020-08-12T18:00:48Z",
+      "side": 1,
+      "message": "Hi Brett,\n\nThis is for msys2.org, I can add the fixes for native mingw64 and mingw32 and create packages for that, however since gn is programming tool like cmake, bash, sed or git which the native compilers can use with disregard of what runtimes they link to, it makes sense to just have an msys version as that one would cover the 3 use cases msys(posix layer), mingw32 and mingw64.",
+      "parentUuid": "7a8a2754_2e872a14",
+      "revId": "4214119ebca60390aaaa5463e9b763e69c90fe09",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": false
     }
   ]
 }
