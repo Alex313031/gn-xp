@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "7a8a2754_2e872a14",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000014
+      },
+      "writtenOn": "2020-08-12T16:58:57Z",
+      "side": 1,
+      "message": "I don\u0027t have an objection to this since it seems pretty straightforward and just adds ifdefs where we already have them. But I\u0027m wondering what is the advantage of compiling in msys on Windows when you could compile natively?",
+      "revId": "4214119ebca60390aaaa5463e9b763e69c90fe09",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": false
+    }
+  ]
+}
