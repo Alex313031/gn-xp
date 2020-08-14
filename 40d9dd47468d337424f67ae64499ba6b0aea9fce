@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "155c49fa_a9d5702b",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 8
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000004
+      },
+      "writtenOn": "2020-08-14T21:33:50Z",
+      "side": 1,
+      "message": "Kind of a grab bag of tweaks here, but now can actually compile C++ std lib in https://fuchsia-review.googlesource.com/c/fuchsia/+/414658",
+      "revId": "40d9dd47468d337424f67ae64499ba6b0aea9fce",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "88097b03_c2760cb6",
+        "filename": "src/gn/ninja_c_binary_target_writer_unittest.cc",
+        "patchSetId": 8
+      },
+      "lineNbr": 1857,
+      "author": {
+        "id": 1000004
+      },
+      "writtenOn": "2020-08-14T21:33:50Z",
+      "side": 1,
+      "message": "This has C and A (for building .cc in C), and the next line has only A, for building C.pcm (module_deps can\u0027t be used then because it references C.pcm as an input)",
+      "revId": "40d9dd47468d337424f67ae64499ba6b0aea9fce",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": true
+    }
+  ]
+}
