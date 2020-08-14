@@ -34,6 +34,41 @@
       "revId": "31ebb0335ee5b0f5723ca1990beb6d8868da8e83",
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "1531c3a3_745e5cb5",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000012
+      },
+      "writtenOn": "2020-08-14T22:55:11Z",
+      "side": 1,
+      "message": "whoops, rest of the comment should follow.",
+      "revId": "31ebb0335ee5b0f5723ca1990beb6d8868da8e83",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "60745ad1_928150ce",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000012
+      },
+      "writtenOn": "2020-08-14T22:55:11Z",
+      "side": 1,
+      "message": "[ argh, somehow hit send accidentally ... ]\n\nhttps://gn-review.googlesource.com/c/gn/+/7302/1#message-e316aa175b5d244e68b7e066444b29c9ebeb8e8c :\n\n\"Have you considered writing a Python 2 program that runs the final script in Python 3?\"\n\nexcept that I have a script that will unconditionally run things in python2 regardless of whether the main script_executable is python2 or python3.\n\nYou can see https://crrev.com/c/2333868 for the work-in-progress; it defines a \u0027python2_action()\u0027 template.\n\nAs to this particular approach, I can see some merit to it. I have always liked the \"just use one language for script\" philosophy, but even in Chromium today we do have some wrappers that turn around and execute something else (notably //build/util/java_action.py).",
+      "parentUuid": "a179da56_f6f8e870",
+      "revId": "31ebb0335ee5b0f5723ca1990beb6d8868da8e83",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": false
     }
   ]
 }
