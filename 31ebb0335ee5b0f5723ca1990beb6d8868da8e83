@@ -16,6 +16,24 @@
       "revId": "31ebb0335ee5b0f5723ca1990beb6d8868da8e83",
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4f93f60c_4266af7c",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000014
+      },
+      "writtenOn": "2020-08-14T22:32:12Z",
+      "side": 1,
+      "message": "It got cut off and I forgot what I said. Can you continue this thought?\n\nIf an approach is working for Chromium, I\u0027d rather not mess with it.",
+      "parentUuid": "a179da56_f6f8e870",
+      "revId": "31ebb0335ee5b0f5723ca1990beb6d8868da8e83",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": false
     }
   ]
 }
