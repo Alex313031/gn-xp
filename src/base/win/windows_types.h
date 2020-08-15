@@ -126,42 +126,74 @@ struct CHROME_CONDITION_VARIABLE {
 // Work around there being two slightly different definitions in the SDK.
 #define INVALID_HANDLE_VALUE ((HANDLE)(LONG_PTR)-1)
 #endif
+#undef TLS_OUT_OF_INDEXES
 #define TLS_OUT_OF_INDEXES ((DWORD)0xFFFFFFFF)
+#undef HTNOWHERE
 #define HTNOWHERE 0
+#undef MAX_PATH
 #define MAX_PATH 260
+#undef CS_GLOBALCLASS
 #define CS_GLOBALCLASS 0x4000
 
+#undef ERROR_SUCCESS
 #define ERROR_SUCCESS 0L
+#undef ERROR_FILE_NOT_FOUND
 #define ERROR_FILE_NOT_FOUND 2L
+#undef ERROR_ACCESS_DENIED
 #define ERROR_ACCESS_DENIED 5L
+#undef ERROR_INVALID_HANDLE
 #define ERROR_INVALID_HANDLE 6L
+#undef ERROR_SHARING_VIOLATION
 #define ERROR_SHARING_VIOLATION 32L
+#undef ERROR_LOCK_VIOLATION
 #define ERROR_LOCK_VIOLATION 33L
+#undef REG_BINARY
 #define REG_BINARY ( 3ul )
 
+#undef STATUS_PENDING
 #define STATUS_PENDING ((DWORD   )0x00000103L)
+#undef STILL_ACTIVE
 #define STILL_ACTIVE STATUS_PENDING
+#undef SUCCEEDED
 #define SUCCEEDED(hr) (((HRESULT)(hr)) >= 0)
+#undef FAILED
 #define FAILED(hr) (((HRESULT)(hr)) < 0)
 
+#undef HKEY_CLASSES_ROOT
 #define HKEY_CLASSES_ROOT (( HKEY ) (ULONG_PTR)((LONG)0x80000000) )
+#undef HKEY_LOCAL_MACHINE
 #define HKEY_LOCAL_MACHINE (( HKEY ) (ULONG_PTR)((LONG)0x80000002) )
+#undef HKEY_CURRENT_USER
 #define HKEY_CURRENT_USER (( HKEY ) (ULONG_PTR)((LONG)0x80000001) )
+#undef KEY_QUERY_VALUE
 #define KEY_QUERY_VALUE (0x0001)
+#undef KEY_SET_VALUE
 #define KEY_SET_VALUE (0x0002)
+#undef KEY_CREATE_SUB_KEY
 #define KEY_CREATE_SUB_KEY (0x0004)
+#undef KEY_ENUMERATE_SUB_KEYS
 #define KEY_ENUMERATE_SUB_KEYS (0x0008)
+#undef KEY_NOTIFY
 #define KEY_NOTIFY (0x0010)
+#undef KEY_CREATE_LINK
 #define KEY_CREATE_LINK (0x0020)
+#undef KEY_WOW64_32KEY
 #define KEY_WOW64_32KEY (0x0200)
+#undef KEY_WOW64_64KEY
 #define KEY_WOW64_64KEY (0x0100)
+#undef KEY_WOW64_RES
 #define KEY_WOW64_RES (0x0300)
 
+#undef READ_CONTROL
 #define READ_CONTROL (0x00020000L)
+#undef SYNCHRONIZE
 #define SYNCHRONIZE (0x00100000L)
 
+#undef STANDARD_RIGHTS_READ
 #define STANDARD_RIGHTS_READ (READ_CONTROL)
+#undef STANDARD_RIGHTS_WRITE
 #define STANDARD_RIGHTS_WRITE (READ_CONTROL)
+#undef STANDARD_RIGHTS_ALL
 #define STANDARD_RIGHTS_ALL (0x001F0000L)
 
 #define KEY_READ                ((STANDARD_RIGHTS_READ       |\
@@ -190,10 +222,15 @@ struct CHROME_CONDITION_VARIABLE {
 
 // Define some macros needed when prototyping Windows functions.
 
+#undef DECLSPEC_IMPORT
 #define DECLSPEC_IMPORT __declspec(dllimport)
+#undef WINBASEAPI
 #define WINBASEAPI DECLSPEC_IMPORT
+#undef WINUSERAPI
 #define WINUSERAPI DECLSPEC_IMPORT
+#undef WINAPI
 #define WINAPI __stdcall
+#undef CALLBACK
 #define CALLBACK __stdcall
 
 // clang-format on
@@ -227,29 +264,53 @@ WINBASEAPI VOID WINAPI SetLastError(_In_ DWORD dwErrCode);
 // ensures that the same renaming will happen everywhere. Includes of this file
 // can be added wherever needed to ensure this consistent renaming.
 
+#undef CopyFile
 #define CopyFile CopyFileW
+#undef CreateDirectory
 #define CreateDirectory CreateDirectoryW
+#undef CreateEvent
 #define CreateEvent CreateEventW
+#undef CreateFile
 #define CreateFile CreateFileW
+#undef CreateService
 #define CreateService CreateServiceW
+#undef DeleteFile
 #define DeleteFile DeleteFileW
+#undef DispatchMessage
 #define DispatchMessage DispatchMessageW
+#undef DrawText
 #define DrawText DrawTextW
+#undef GetComputerName
 #define GetComputerName GetComputerNameW
+#undef GetCurrentDirectory
 #define GetCurrentDirectory GetCurrentDirectoryW
+#undef GetCurrentTime
 #define GetCurrentTime() GetTickCount()
+#undef GetFileAttributes
 #define GetFileAttributes GetFileAttributesW
+#undef GetMessage
 #define GetMessage GetMessageW
+#undef GetUserName
 #define GetUserName GetUserNameW
+#undef LoadIcon
 #define LoadIcon LoadIconW
+#undef LoadImage
 #define LoadImage LoadImageW
+#undef PostMessage
 #define PostMessage PostMessageW
+#undef ReplaceFile
 #define ReplaceFile ReplaceFileW
+#undef ReportEvent
 #define ReportEvent ReportEventW
+#undef SendMessage
 #define SendMessage SendMessageW
+#undef SendMessageCallback
 #define SendMessageCallback SendMessageCallbackW
+#undef SetCurrentDirectory
 #define SetCurrentDirectory SetCurrentDirectoryW
+#undef StartService
 #define StartService StartServiceW
+#undef StrCat
 #define StrCat StrCatW
 
 #endif  // BASE_WIN_WINDOWS_TYPES_H
