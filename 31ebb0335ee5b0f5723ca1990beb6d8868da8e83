@@ -69,6 +69,23 @@
       "revId": "31ebb0335ee5b0f5723ca1990beb6d8868da8e83",
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "24ab731e_b484df95",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000628
+      },
+      "writtenOn": "2020-08-15T01:16:21Z",
+      "side": 1,
+      "message": "Hi Brett and Dirk,\n\nI was aware of the Chromium change, and that\u0027s why I cc\u0027d Dirk on this.\n\nThe only theoretical problems I\u0027m aware of with that approach are:\n\n1) Passing \"--script-executable\u003dpython3\" on the command line (or setting the value via .gn) doesn\u0027t do the path search that is done by default for python on Windows.\n2) You pay a small penalty for launching python3 only to turn about and launch python2 for the cases that still need the older version.\n\nI don\u0027t know of those will be actual problems for Chromium.\n\nI\u0027m working on my own Chromium CL that adds/uses a \"python3_action\", for the reverse of what Dirk is doing, to kind of incrementally opt in to Python 3, at least for my CL.\n\nI thought a change to gn itself to support either version (and potentially both for a gradual migration) was nicer, so I put this together after looking around a bit.\n",
+      "revId": "31ebb0335ee5b0f5723ca1990beb6d8868da8e83",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": false
     }
   ]
 }
