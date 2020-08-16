@@ -338,6 +338,9 @@ bool Target::OnResolved(Err* err) {
   ScopedTrace trace(TraceItem::TRACE_ON_RESOLVED, label());
   trace.SetToolchain(settings()->toolchain_label());
 
+  // Check visibility for this target's own configs.
+  if (!CheckConfigVisibility(err))
+    return false;
   // Copy this target's own dependent and public configs to the list of configs
   // applying to it.
   configs_.Append(all_dependent_configs_.begin(), all_dependent_configs_.end());
@@ -957,6 +960,17 @@ bool Target::ResolvePrecompiledHeaders(Err* err) {
 bool Target::CheckVisibility(Err* err) const {
   for (const auto& pair : GetDeps(DEPS_ALL)) {
     if (!Visibility::CheckItemVisibility(this, pair.ptr, err))
+      return false;
+  }
+  return true;
+}
+
+bool Target::CheckConfigVisibility(Err* err) const {
+  for (ConfigValuesIterator iter(this); !iter.done(); iter.Next()) {
+    const Config* config = iter.GetCurrentConfig();
+    if (!config)
+      continue;
+    if (!Visibility::CheckItemVisibility(this, config, err))
       return false;
   }
   return true;
