@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "e3b6a42f_743a1b9a",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000313
+      },
+      "writtenOn": "2020-08-16T00:39:29Z",
+      "side": 1,
+      "message": "My first GN change! Plz be gentle. :)\nI ran into the issue that config visibility is not respected, then found bug 22, so here\u0027s a fix hopefully.\nMy motivating example is a config that suppresses a compiler warning. Suppose one\u0027s code is clean as far as this warning is concerned, but they might want to allow deps on this config from their //third_party/* subtree.\nCheers!",
+      "revId": "4181460c52c545fdbd91ddbc2af5fc8aa13690f3",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": false
+    }
+  ]
+}
