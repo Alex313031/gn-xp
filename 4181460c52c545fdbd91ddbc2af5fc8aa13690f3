@@ -16,6 +16,23 @@
       "revId": "4181460c52c545fdbd91ddbc2af5fc8aa13690f3",
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "c445efc4_1fcd393a",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000014
+      },
+      "writtenOn": "2020-08-16T02:41:04Z",
+      "side": 1,
+      "message": "Cool!\n\nDoes this run on the Fuchsia tree with no errors? We have to be careful making things more strict because we don\u0027t want to prevent a GN roll into the main projects that use it.\n\nIf Fuchsia actually runs with no errors from this change, maybe that\u0027s a promising sign and I\u0027ll check it with Chrome (if you have a Chrome checkout, you could also do this). If there are problems, we will either have to track them down and fix them in Fuchsia and Chrome before landing, or do some kind of opt-in checking of config visibility. (The annoyance of doing all of the above is why we\u0027ve never implemented this.)",
+      "revId": "4181460c52c545fdbd91ddbc2af5fc8aa13690f3",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": false
     }
   ]
 }
