@@ -959,6 +959,13 @@ bool Target::CheckVisibility(Err* err) const {
     if (!Visibility::CheckItemVisibility(this, pair.ptr, err))
       return false;
   }
+  for (ConfigValuesIterator iter(this); !iter.done(); iter.Next()) {
+    const Config* config = iter.GetCurrentConfig();
+    if (!config)
+      continue;
+    if (!Visibility::CheckItemVisibility(this, config, err))
+      return false;
+  }
   return true;
 }
 
