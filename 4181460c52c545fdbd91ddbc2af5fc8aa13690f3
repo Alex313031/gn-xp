@@ -33,6 +33,24 @@
       "revId": "4181460c52c545fdbd91ddbc2af5fc8aa13690f3",
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "e43c44d3_37dafb13",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000313
+      },
+      "writtenOn": "2020-08-16T03:00:42Z",
+      "side": 1,
+      "message": "Good idea. No, this fails to gen Fuchsia in very much the manner that you\u0027d expect. I\u0027ll try to trip all the visibility issues throughout the tree and send a change to fix them.",
+      "parentUuid": "c445efc4_1fcd393a",
+      "revId": "4181460c52c545fdbd91ddbc2af5fc8aa13690f3",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": true
     }
   ]
 }
