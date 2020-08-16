@@ -51,6 +51,24 @@
       "revId": "4181460c52c545fdbd91ddbc2af5fc8aa13690f3",
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "864dc3b2_ef06d554",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000313
+      },
+      "writtenOn": "2020-08-16T03:34:59Z",
+      "side": 1,
+      "message": "I think I ran into a problem. Consider the following:\n\n```\nexecutable(\"a\") {\n  deps \u003d [ \":b\" ]\n  ...\n}\n\nsource_set(\"b\") {\n  public_configs \u003d [ \":c\" ]\n  ...\n}\n\nconfig(\"c\") {\n  visibility \u003d [ \":b\" ]\n  ...\n}\n```\n\nBefore my change this gens, of course, because config.visibility does nothing. After my change this fails to gen with an error that \"a\" is not in the visibility of \"c\". I think this error is unexpected. What do you think?\n\nTo fix this I\u0027d have to significantly change Target::OnResolved(), or how it uses MergePublicConfigsFrom() and PullDependentTargetConfigs(). O_o",
+      "parentUuid": "e43c44d3_37dafb13",
+      "revId": "4181460c52c545fdbd91ddbc2af5fc8aa13690f3",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": true
     }
   ]
 }
