@@ -34,6 +34,23 @@
       "revId": "f42f1685c0cb71f7cc7172dc4e967ba74e4e46f5",
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "cf5d1a1a_f360ad0a",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000016
+      },
+      "writtenOn": "2020-08-17T18:34:40Z",
+      "side": 1,
+      "message": "For compatible roll-out we have taken two approaches in GN:\n1. Just change it incompatibly.  Projects update their code before they roll to the new GN.\n2. Add a feature gate in .gn.  Projects opt in to new behavior by setting a new variable.\n\nFor this change #1 feels appropriate to me.",
+      "revId": "f42f1685c0cb71f7cc7172dc4e967ba74e4e46f5",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": false
     }
   ]
 }
