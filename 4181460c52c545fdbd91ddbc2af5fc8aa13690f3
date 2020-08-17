@@ -69,6 +69,23 @@
       "revId": "4181460c52c545fdbd91ddbc2af5fc8aa13690f3",
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "f218bbf5_19103246",
+        "filename": "src/gn/target.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 340,
+      "author": {
+        "id": 1000014
+      },
+      "writtenOn": "2020-08-17T17:17:46Z",
+      "side": 1,
+      "message": "Maybe try adding a separate CheckConfigVisibility() function and call it here? I think this is before the various dependent configs and such have been expanded so you should see the exact ones set explicitly on the target.",
+      "revId": "4181460c52c545fdbd91ddbc2af5fc8aa13690f3",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": true
     }
   ]
 }
