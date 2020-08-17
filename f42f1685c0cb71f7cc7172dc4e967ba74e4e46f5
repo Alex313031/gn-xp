@@ -51,6 +51,29 @@
       "revId": "f42f1685c0cb71f7cc7172dc4e967ba74e4e46f5",
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ca621424_5c36bb1d",
+        "filename": "src/gn/target.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 972,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-08-17T18:43:22Z",
+      "side": 1,
+      "message": "Super minor nit, you can save two lines:\n\n  if (const Config* config \u003d iter.GetCurrentConfig())\n    if (!Visibility::CheckItemVisibility(this, config, err))\n      return false;",
+      "range": {
+        "startLine": 971,
+        "startChar": 0,
+        "endLine": 972,
+        "endChar": 15
+      },
+      "revId": "f42f1685c0cb71f7cc7172dc4e967ba74e4e46f5",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": true
     }
   ]
 }
