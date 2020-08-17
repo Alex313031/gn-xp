@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "2e825a6c_f45b97fd",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000012
+      },
+      "writtenOn": "2020-08-17T21:21:06Z",
+      "side": 1,
+      "message": "I would prefer to avoid having to do a feature check for this if we can, so I\u0027d be curious to see how far away we are from having this Just Work in Chromium.\n\nMy gut feeling is that this should not be a big deal, so I\u0027d be okay with landing this in GN and trying to roll it into Chromium and seeing if we can just make that work.\n\n(and reverting if it turns out to be a huge hassle to make it work).",
+      "revId": "6e262efab658ff47ff8051e3c1a84b9fc480eb86",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": false
+    }
+  ]
+}
