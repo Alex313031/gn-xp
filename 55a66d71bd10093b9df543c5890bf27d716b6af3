@@ -85,6 +85,24 @@
       "revId": "55a66d71bd10093b9df543c5890bf27d716b6af3",
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "f9e4f6a0_1edf4eec",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 6
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000305
+      },
+      "writtenOn": "2020-08-17T19:54:23Z",
+      "side": 1,
+      "message": "Thanks! Were you planning on rolling out that proposal? \u003d)",
+      "parentUuid": "8649b280_9ae3e17a",
+      "revId": "55a66d71bd10093b9df543c5890bf27d716b6af3",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": false
     }
   ]
 }
