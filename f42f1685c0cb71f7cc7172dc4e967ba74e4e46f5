@@ -54,6 +54,57 @@
     },
     {
       "key": {
+        "uuid": "267c531a_6e93abf8",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000014
+      },
+      "writtenOn": "2020-08-17T19:39:59Z",
+      "side": 1,
+      "message": "I don\u0027t think we can break Chromium without at least getting their buy-in since they will need to fix the issues and roll \"soon.\" If somebody else checks something in to GN and wants to roll into Chromium, it\u0027s unfair to force them behind a big change.",
+      "revId": "f42f1685c0cb71f7cc7172dc4e967ba74e4e46f5",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ef3058df_87e35234",
+        "filename": "src/gn/target.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 341,
+      "author": {
+        "id": 1000014
+      },
+      "writtenOn": "2020-08-17T19:39:59Z",
+      "side": 1,
+      "message": "Can you add to this comment why it needs to go here in particular? The comment you added mostly just duplicates the function name which isn\u0027t that helpful.",
+      "revId": "f42f1685c0cb71f7cc7172dc4e967ba74e4e46f5",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "062f9b53_3befedf0",
+        "filename": "src/gn/target.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 344,
+      "author": {
+        "id": 1000014
+      },
+      "writtenOn": "2020-08-17T19:39:59Z",
+      "side": 1,
+      "message": "Please put a blank before here to keep this next block separate.",
+      "revId": "f42f1685c0cb71f7cc7172dc4e967ba74e4e46f5",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "ca621424_5c36bb1d",
         "filename": "src/gn/target.cc",
         "patchSetId": 3
