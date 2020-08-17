@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "3be09e93_f1ef8ac2",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000014
+      },
+      "writtenOn": "2020-08-17T19:36:37Z",
+      "side": 1,
+      "message": "I didn\u0027t even know this windows_types thing existed! I guess it\u0027s something inherited from Chromium. I\u0027d rather delete it than fix it with this complexity. I expect there are only a couple of places that need a\n\n  #include \u003cwindows.h\u003e\n\nadded and we can delete this whole file.",
+      "revId": "48f43700d7f3697730c803cf78c558ecae7af14e",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": false
+    }
+  ]
+}
