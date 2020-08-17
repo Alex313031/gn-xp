@@ -107,6 +107,24 @@
     },
     {
       "key": {
+        "uuid": "68f59fba_605897f7",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000313
+      },
+      "writtenOn": "2020-08-17T22:11:59Z",
+      "side": 1,
+      "message": "And I verified that this is no accident by adding a visibility list on some config that\u0027s too narrow and observing a gen error. So, you know, the tests are good.",
+      "parentUuid": "6299f402_656428ab",
+      "revId": "f42f1685c0cb71f7cc7172dc4e967ba74e4e46f5",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "ef3058df_87e35234",
         "filename": "src/gn/target.cc",
         "patchSetId": 3
