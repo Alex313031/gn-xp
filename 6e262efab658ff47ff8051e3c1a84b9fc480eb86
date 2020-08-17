@@ -16,6 +16,23 @@
       "revId": "6e262efab658ff47ff8051e3c1a84b9fc480eb86",
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "f0889d9f_d4436ac4",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000014
+      },
+      "writtenOn": "2020-08-17T23:22:29Z",
+      "side": 1,
+      "message": "Okay, if Dirk is on board then we should be fine.\n\nI would expect Chrome to have some errors but that they\u0027re trivial to fix (can always just remove the visibility worst-case). The only problem I can see is if there are errors in DEPS-ed in code and there needs to be some complicated chain of updates.",
+      "revId": "6e262efab658ff47ff8051e3c1a84b9fc480eb86",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": false
     }
   ]
 }
