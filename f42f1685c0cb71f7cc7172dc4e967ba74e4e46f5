@@ -71,6 +71,24 @@
     },
     {
       "key": {
+        "uuid": "cf6edc6b_f0a49c20",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000313
+      },
+      "writtenOn": "2020-08-17T21:17:53Z",
+      "side": 1,
+      "message": "SGTM!\nI can take care of the cleanup in Fuchsia tree separately.",
+      "parentUuid": "cf5d1a1a_f360ad0a",
+      "revId": "f42f1685c0cb71f7cc7172dc4e967ba74e4e46f5",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "ef3058df_87e35234",
         "filename": "src/gn/target.cc",
         "patchSetId": 3
@@ -82,6 +100,24 @@
       "writtenOn": "2020-08-17T19:39:59Z",
       "side": 1,
       "message": "Can you add to this comment why it needs to go here in particular? The comment you added mostly just duplicates the function name which isn\u0027t that helpful.",
+      "revId": "f42f1685c0cb71f7cc7172dc4e967ba74e4e46f5",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "2433743c_5d14f864",
+        "filename": "src/gn/target.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 341,
+      "author": {
+        "id": 1000313
+      },
+      "writtenOn": "2020-08-17T21:17:53Z",
+      "side": 1,
+      "message": "Good feedback. Better now?",
+      "parentUuid": "ef3058df_87e35234",
       "revId": "f42f1685c0cb71f7cc7172dc4e967ba74e4e46f5",
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
       "unresolved": true
@@ -105,6 +141,24 @@
     },
     {
       "key": {
+        "uuid": "9e097b6d_b2f18d2a",
+        "filename": "src/gn/target.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 344,
+      "author": {
+        "id": 1000313
+      },
+      "writtenOn": "2020-08-17T21:17:53Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "062f9b53_3befedf0",
+      "revId": "f42f1685c0cb71f7cc7172dc4e967ba74e4e46f5",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "ca621424_5c36bb1d",
         "filename": "src/gn/target.cc",
         "patchSetId": 3
@@ -125,6 +179,30 @@
       "revId": "f42f1685c0cb71f7cc7172dc4e967ba74e4e46f5",
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "ffd349bd_d180b63e",
+        "filename": "src/gn/target.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 972,
+      "author": {
+        "id": 1000313
+      },
+      "writtenOn": "2020-08-17T21:17:53Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ca621424_5c36bb1d",
+      "range": {
+        "startLine": 971,
+        "startChar": 0,
+        "endLine": 972,
+        "endChar": 15
+      },
+      "revId": "f42f1685c0cb71f7cc7172dc4e967ba74e4e46f5",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": false
     }
   ]
 }
