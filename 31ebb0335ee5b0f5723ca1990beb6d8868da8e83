@@ -86,6 +86,23 @@
       "revId": "31ebb0335ee5b0f5723ca1990beb6d8868da8e83",
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "789e521a_8a8b5281",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000012
+      },
+      "writtenOn": "2020-08-17T18:36:37Z",
+      "side": 1,
+      "message": "I think there\u0027s some merit in evaluating this regardless of what may or may not work for Chrome.\n\nAs noted, Chrome already has workarounds for actions run in other languages, Java and Node/JS being two obvious examples, and that need isn\u0027t going away.\n\nAt some point we might ideally want GN to have more things properly baked into the language (iOS targets, Android targets, Web/Node targets), but there\u0027s likely always going to be things that aren\u0027t baked in, and having better support for non-baked-in things seems like it might be a good idea.",
+      "revId": "31ebb0335ee5b0f5723ca1990beb6d8868da8e83",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": false
     }
   ]
 }
