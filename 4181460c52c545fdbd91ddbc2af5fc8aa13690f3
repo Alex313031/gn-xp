@@ -72,6 +72,24 @@
     },
     {
       "key": {
+        "uuid": "81217487_ecd7b33c",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000313
+      },
+      "writtenOn": "2020-08-17T17:58:18Z",
+      "side": 1,
+      "message": "Applied your fix from elsewhere.",
+      "parentUuid": "864dc3b2_ef06d554",
+      "revId": "4181460c52c545fdbd91ddbc2af5fc8aa13690f3",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "f218bbf5_19103246",
         "filename": "src/gn/target.cc",
         "patchSetId": 1
@@ -86,6 +104,24 @@
       "revId": "4181460c52c545fdbd91ddbc2af5fc8aa13690f3",
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "620460a0_1031b0b9",
+        "filename": "src/gn/target.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 340,
+      "author": {
+        "id": 1000313
+      },
+      "writtenOn": "2020-08-17T17:58:18Z",
+      "side": 1,
+      "message": "Fabulous!",
+      "parentUuid": "f218bbf5_19103246",
+      "revId": "4181460c52c545fdbd91ddbc2af5fc8aa13690f3",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": false
     }
   ]
 }
