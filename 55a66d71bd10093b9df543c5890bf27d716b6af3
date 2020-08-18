@@ -121,6 +121,24 @@
       "revId": "55a66d71bd10093b9df543c5890bf27d716b6af3",
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "7ce0e3af_7c7ce281",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 6
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000305
+      },
+      "writtenOn": "2020-08-18T21:47:58Z",
+      "side": 1,
+      "message": "Sorry, which switch? Not sure if I follow.",
+      "parentUuid": "502a4be3_a4f335a3",
+      "revId": "55a66d71bd10093b9df543c5890bf27d716b6af3",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": false
     }
   ]
 }
