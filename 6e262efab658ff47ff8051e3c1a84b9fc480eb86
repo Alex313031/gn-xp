@@ -33,6 +33,24 @@
       "revId": "6e262efab658ff47ff8051e3c1a84b9fc480eb86",
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4c504159_4d2721fe",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000012
+      },
+      "writtenOn": "2020-08-18T02:05:23Z",
+      "side": 1,
+      "message": "So far I\u0027ve hit errors in DEPS-ed in code (in v8 and dawn) plus chrome proper, but, as you say, they don\u0027t look too hard to fix and I\u0027ve got CLs out for them.",
+      "parentUuid": "f0889d9f_d4436ac4",
+      "revId": "6e262efab658ff47ff8051e3c1a84b9fc480eb86",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": false
     }
   ]
 }
