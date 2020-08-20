@@ -34,6 +34,24 @@
       "revId": "6f13aaac55a977e1948910942675c69f2b4f7a94",
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "a18cccb9_a6f0dd55",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000159
+      },
+      "writtenOn": "2020-08-20T19:31:33Z",
+      "side": 1,
+      "message": "Thats correct, so latest GN should be used only with V8 master at moment.\nThanks for your help.",
+      "parentUuid": "e26054ad_0f31c36c",
+      "revId": "6f13aaac55a977e1948910942675c69f2b4f7a94",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": false
     }
   ]
 }
