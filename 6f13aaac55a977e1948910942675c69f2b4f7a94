@@ -16,6 +16,24 @@
       "revId": "6f13aaac55a977e1948910942675c69f2b4f7a94",
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "e26054ad_0f31c36c",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000012
+      },
+      "writtenOn": "2020-08-20T16:38:29Z",
+      "side": 1,
+      "message": "Are you running the latest GN against the older V8? That likely won\u0027t work and I would encourage you not to do that.\n\nThat said, you might try backporting https://crrev.com/c/2360909 to your local v8 copy. That looks like one of the errors my change might\u0027ve addressed, but I don\u0027t remember exactly.",
+      "parentUuid": "db9be62f_dea81018",
+      "revId": "6f13aaac55a977e1948910942675c69f2b4f7a94",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": false
     }
   ]
 }
