@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "db9be62f_dea81018",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000159
+      },
+      "writtenOn": "2020-08-20T15:31:43Z",
+      "side": 1,
+      "message": "Hello,\n\nAfter this CL, I cannot run gn on the V8 stable branch (8.5 as of now), do I need to backport any changes from V8 master? here is my command and the error message:\n\ngn gen out/x64.release --args\u003d\u0027is_component_build \u003d false is_debug \u003d false target_cpu \u003d \"x64\" v8_target_cpu \u003d \"x64\" use_goma \u003d false goma_dir \u003d \"None\" v8_enable_backtrace \u003d true v8_enable_disassembler \u003d true v8_enable_object_print \u003d true v8_enable_verify_heap \u003d true\u0027\nERROR at //gni/v8.gni:196:3: Dependency not allowed.\n  source_set(target_name) {\n  ^------------------------\nThe item //test/cctest:cctest_headers\ncan not depend on //:features\nbecause it is not in //:features\u0027s visibility list: [\n  //.:*\n]",
+      "revId": "6f13aaac55a977e1948910942675c69f2b4f7a94",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": false
+    }
+  ]
+}
