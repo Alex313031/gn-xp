@@ -52,6 +52,23 @@
       "revId": "6f13aaac55a977e1948910942675c69f2b4f7a94",
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "3d7a04e1_c0cffef7",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000012
+      },
+      "writtenOn": "2020-08-21T17:40:40Z",
+      "side": 1,
+      "message": "I\u0027ve rolled the latest GN (with this change) into Chrome. I had to fix a few files in a few\ndifferent projects, but it wasn\u0027t too bad.",
+      "revId": "6f13aaac55a977e1948910942675c69f2b4f7a94",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": false
     }
   ]
 }
