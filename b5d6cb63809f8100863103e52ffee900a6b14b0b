@@ -16,6 +16,69 @@
       "revId": "b5d6cb63809f8100863103e52ffee900a6b14b0b",
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "78957cd6_cf65aa1b",
+        "filename": "src/gn/command_format.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 408,
+      "author": {
+        "id": 1000004
+      },
+      "writtenOn": "2020-08-21T19:47:11Z",
+      "side": 1,
+      "message": "Merge this into an || with \"deps\" condition above.",
+      "range": {
+        "startLine": 408,
+        "startChar": 13,
+        "endLine": 408,
+        "endChar": 32
+      },
+      "revId": "b5d6cb63809f8100863103e52ffee900a6b14b0b",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "b0394181_a14ac711",
+        "filename": "src/gn/command_format.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 409,
+      "author": {
+        "id": 1000004
+      },
+      "writtenOn": "2020-08-21T19:47:11Z",
+      "side": 1,
+      "message": "Can you rename this to SortAsTargetList() please, since it\u0027s not just used for deps now?",
+      "range": {
+        "startLine": 409,
+        "startChar": 35,
+        "endLine": 409,
+        "endChar": 49
+      },
+      "revId": "b5d6cb63809f8100863103e52ffee900a6b14b0b",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "9631e336_09193d2f",
+        "filename": "src/gn/format_test_data/063.gn",
+        "patchSetId": 2
+      },
+      "lineNbr": 46,
+      "author": {
+        "id": 1000004
+      },
+      "writtenOn": "2020-08-21T19:47:11Z",
+      "side": 1,
+      "message": "Since visibility can include wildcard *s please add some of those too to codify what happens (I don\u0027t think it really matters whether they go before or after non-* ones.)",
+      "revId": "b5d6cb63809f8100863103e52ffee900a6b14b0b",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": true
     }
   ]
 }
