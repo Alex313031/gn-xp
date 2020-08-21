@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "7270add3_d174550a",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000313
+      },
+      "writtenOn": "2020-08-21T17:54:56Z",
+      "side": 1,
+      "message": "Hi Brett,\nShould I send changes like this to you by default, or is there another procedure for picking code reviewers?",
+      "revId": "c45c9220bbfa45edbfaad6c4a3eaae6e04911021",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": false
+    }
+  ]
+}
