@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "012d4b44_78bf61e7",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000004
+      },
+      "writtenOn": "2020-08-21T20:25:01Z",
+      "side": 1,
+      "message": "Noice, thanks.",
+      "revId": "606b1cc5832e3a871ef66a9ca3e8bcebde035df8",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4911f4f3_db6ef1f5",
+        "filename": "src/gn/format_test_data/063.gn",
+        "patchSetId": 4
+      },
+      "lineNbr": 45,
+      "author": {
+        "id": 1000004
+      },
+      "writtenOn": "2020-08-21T20:25:01Z",
+      "side": 1,
+      "message": "Can you add a \"//b:*\" too?",
+      "revId": "606b1cc5832e3a871ef66a9ca3e8bcebde035df8",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": true
+    }
+  ]
+}
