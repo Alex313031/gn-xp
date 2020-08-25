@@ -808,7 +808,7 @@ TEST_F(TargetTest, GetOutputFilesForSource_Binary) {
   EXPECT_TRUE(target.GetOutputsAsSourceFiles(LocationRange(), true,
                                              &computed_outputs, &err));
   ASSERT_EQ(1u, computed_outputs.size());
-  EXPECT_EQ("//out/Debug/obj/a/a.stamp", computed_outputs[0].value());
+  EXPECT_EQ("//out/Debug/obj/a/a", computed_outputs[0].value());
 }
 
 // Tests Target::GetOutputFilesForSource for action_foreach targets (these, like
