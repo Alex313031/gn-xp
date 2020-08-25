@@ -141,6 +141,18 @@ int RunOutputs(const std::vector<std::string>& args) {
       return 1;
     }
 
+    // It is possible that the target has no output files. This should only
+    // occur when the target is an omitted phony rule. In this case, since
+    // there's nothing that could be passed to ninja for building, it is best to
+    // report an error rather than empty output.
+    if (output_files.empty()) {
+      Err(Location(),
+          base::StringPrintf("No output files generated for target '%s'.",
+                             target->label().GetUserVisibleName(false).c_str()))
+          .PrintToStdout();
+      return 1;
+    }
+
     // Convert to OutputFiles.
     for (const SourceFile& file : output_files)
       outputs.emplace_back(&setup->build_settings(), file);
