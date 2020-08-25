@@ -11,6 +11,7 @@
 #include "gn/target.h"
 
 const char* Tool::kToolNone = "";
+const char* Tool::kToolPhony = "phony";
 
 Tool::Tool(const char* n) : name_(n) {}
 
@@ -392,7 +393,7 @@ const char* Tool::GetToolTypeForTargetFinalOutput(const Target* target) {
     case Target::STATIC_LIBRARY:
       return CTool::kCToolAlink;
     case Target::SOURCE_SET:
-      return GeneralTool::kGeneralToolStamp;
+      return kToolPhony;
     case Target::ACTION:
     case Target::ACTION_FOREACH:
     case Target::BUNDLE_DATA:

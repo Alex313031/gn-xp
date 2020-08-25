@@ -31,6 +31,7 @@ class RustTool;
 class Tool {
  public:
   static const char* kToolNone;
+  static const char* kToolPhony;
 
   virtual ~Tool();
 
