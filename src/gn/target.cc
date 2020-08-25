@@ -5,6 +5,7 @@
 #include "gn/target.h"
 
 #include <stddef.h>
+#include <algorithm>
 
 #include "base/stl_util.h"
 #include "base/strings/string_util.h"
@@ -777,14 +778,46 @@ void Target::PullRecursiveBundleData() {
   bundle_data_.OnTargetResolved(this);
 }
 
+bool Target::CheckForRealInputs() {
+  CHECK(!phony_dependency_output_.value().empty());
+
+  // If any of this target's dependencies is non-phony target or a phony target
+  // with real inputs, then this target should be considered to have inputs.
+  for (const auto& pair : GetDeps(DEPS_ALL)) {
+    if (!pair.ptr->is_phony_with_no_inputs()) {
+      return true;
+    }
+  }
+
+  // If any of this target's sources will result in output files, then this
+  // target should be considered to have real inputs.
+  std::vector<OutputFile> tool_outputs;
+  return std::any_of(
+      sources().begin(), sources().end(), [&, this](const auto& source) {
+        const char* tool_name = Tool::kToolNone;
+        return GetOutputFilesForSource(source, &tool_name, &tool_outputs);
+      });
+}
+
 bool Target::FillOutputFiles(Err* err) {
   const Tool* tool = toolchain_->GetToolForTargetFinalOutput(this);
   bool check_tool_outputs = false;
   switch (output_type_) {
+    case SOURCE_SET: {
+      phony_dependency_output_ =
+          GetBuildDirForTargetAsOutputFile(this, BuildDirType::OBJ);
+      phony_dependency_output_.value().append(GetComputedOutputName());
+
+      if (!CheckForRealInputs()) {
+        is_phony_with_no_inputs_ = true;
+      } else {
+        dependency_output_file_ = phony_dependency_output_;
+      }
+      break;
+    }
     case GROUP:
     case BUNDLE_DATA:
     case CREATE_BUNDLE:
-    case SOURCE_SET:
     case COPY_FILES:
     case ACTION:
     case ACTION_FOREACH:

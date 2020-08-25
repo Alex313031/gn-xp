@@ -8,6 +8,7 @@
 
 #include "base/files/file_util.h"
 #include "base/strings/string_util.h"
+#include "gn/builtin_tool.h"
 #include "gn/config_values_extractors.h"
 #include "gn/err.h"
 #include "gn/escape.h"
@@ -325,6 +326,24 @@ void NinjaTargetWriter::WriteStampForTarget(
 
   out_ << ": " << GetNinjaRulePrefixForToolchain(settings_)
        << GeneralTool::kGeneralToolStamp;
+  path_output_.WriteFiles(out_, files);
+
+  if (!order_only_deps.empty()) {
+    out_ << " ||";
+    path_output_.WriteFiles(out_, order_only_deps);
+  }
+  out_ << std::endl;
+}
+
+void NinjaTargetWriter::WritePhonyForTarget(
+    const std::vector<OutputFile>& files,
+    const std::vector<OutputFile>& order_only_deps) {
+  const OutputFile& phony_target = target_->phony_dependency_output();
+
+  out_ << "build ";
+  path_output_.WriteFile(out_, phony_target);
+
+  out_ << ": " << BuiltinTool::kBuiltinToolPhony;
   path_output_.WriteFiles(out_, files);
 
   if (!order_only_deps.empty()) {

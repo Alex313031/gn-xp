@@ -200,7 +200,7 @@ void NinjaCBinaryTargetWriter::Run() {
     return;
 
   if (target_->output_type() == Target::SOURCE_SET) {
-    WriteSourceSetStamp(obj_files);
+    WriteSourceSetPhony(obj_files);
 #ifndef NDEBUG
     // Verify that the function that separately computes a source set's object
     // files match the object files just computed.
