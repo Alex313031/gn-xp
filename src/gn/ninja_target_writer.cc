@@ -333,3 +333,21 @@ void NinjaTargetWriter::WriteStampForTarget(
   }
   out_ << std::endl;
 }
+
+void NinjaTargetWriter::WritePhonyForTarget(
+    const std::vector<OutputFile>& files,
+    const std::vector<OutputFile>& order_only_deps) {
+  const OutputFile& phony_target = target_->phony_dependency_output();
+
+  out_ << "build ";
+  path_output_.WriteFile(out_, phony_target);
+
+  out_ << ": " << GeneralTool::kGeneralToolPhony;
+  path_output_.WriteFiles(out_, files);
+
+  if (!order_only_deps.empty()) {
+    out_ << " ||";
+    path_output_.WriteFiles(out_, order_only_deps);
+  }
+  out_ << std::endl;
+}

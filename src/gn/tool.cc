@@ -280,6 +280,8 @@ std::unique_ptr<Tool> Tool::CreateTool(const std::string& name) {
     return std::make_unique<GeneralTool>(GeneralTool::kGeneralToolAction);
   else if (name == GeneralTool::kGeneralToolStamp)
     return std::make_unique<GeneralTool>(GeneralTool::kGeneralToolStamp);
+  else if (name == GeneralTool::kGeneralToolPhony)
+    return std::make_unique<GeneralTool>(GeneralTool::kGeneralToolPhony);
   else if (name == GeneralTool::kGeneralToolCopy)
     return std::make_unique<GeneralTool>(GeneralTool::kGeneralToolCopy);
   else if (name == GeneralTool::kGeneralToolCopyBundleData)
@@ -392,7 +394,7 @@ const char* Tool::GetToolTypeForTargetFinalOutput(const Target* target) {
     case Target::STATIC_LIBRARY:
       return CTool::kCToolAlink;
     case Target::SOURCE_SET:
-      return GeneralTool::kGeneralToolStamp;
+      return GeneralTool::kGeneralToolPhony;
     case Target::ACTION:
     case Target::ACTION_FOREACH:
     case Target::BUNDLE_DATA:

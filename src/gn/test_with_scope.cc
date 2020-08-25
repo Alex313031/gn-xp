@@ -202,6 +202,12 @@ void TestWithScope::SetupToolchain(Toolchain* toolchain, bool use_toc) {
   SetCommandForTool("touch {{output}}", stamp_tool.get());
   toolchain->SetTool(std::move(stamp_tool));
 
+  // PHONY
+  std::unique_ptr<Tool> phony_tool =
+      Tool::CreateTool(GeneralTool::kGeneralToolPhony);
+  SetCommandForTool("phony {{output}}", phony_tool.get());
+  toolchain->SetTool(std::move(phony_tool));
+
   // COPY
   std::unique_ptr<Tool> copy_tool =
       Tool::CreateTool(GeneralTool::kGeneralToolCopy);

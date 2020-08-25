@@ -195,6 +195,10 @@ class Target : public Item {
     write_runtime_deps_output_ = value;
   }
 
+  bool is_phony_with_no_inputs() const {
+    return is_phony_with_no_inputs_;
+  }
+
   // Runtime dependencies. These are "file-like things" that can either be
   // directories or files. They do not need to exist, these are just passed as
   // runtime dependencies to external test systems as necessary.
@@ -342,6 +346,9 @@ class Target : public Item {
   const OutputFile& dependency_output_file() const {
     return dependency_output_file_;
   }
+  const OutputFile& phony_dependency_output() const {
+    return phony_dependency_output_;
+  }
 
   // The subset of computed_outputs that are considered runtime outputs.
   const std::vector<OutputFile>& runtime_outputs() const {
@@ -402,6 +409,10 @@ class Target : public Item {
   void PullRecursiveHardDeps();
   void PullRecursiveBundleData();
 
+  // Checks to see whether this target or any of its dependencies have real
+  // inputs. If not, this target should be omitted as a dependency.
+  bool CheckForRealInputs();
+
   // Fills the link and dependency output files when a target is resolved.
   bool FillOutputFiles(Err* err);
 
@@ -434,6 +445,7 @@ class Target : public Item {
   std::vector<std::string> data_;
   BundleData bundle_data_;
   OutputFile write_runtime_deps_output_;
+  bool is_phony_with_no_inputs_ = false;
 
   LabelTargetVector private_deps_;
   LabelTargetVector public_deps_;
@@ -489,6 +501,7 @@ class Target : public Item {
   std::vector<OutputFile> computed_outputs_;
   OutputFile link_output_file_;
   OutputFile dependency_output_file_;
+  OutputFile phony_dependency_output_;
   std::vector<OutputFile> runtime_outputs_;
 
   Metadata metadata_;
