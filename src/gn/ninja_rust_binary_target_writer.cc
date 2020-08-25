@@ -144,14 +144,17 @@ void NinjaRustBinaryTargetWriter::Run() {
                      classified_deps.extra_object_files.begin(),
                      classified_deps.extra_object_files.end());
   for (const auto* framework_dep : classified_deps.framework_deps) {
-    order_only_deps.push_back(framework_dep->dependency_output_file());
+    if (framework_dep->dependency_output_file())
+      order_only_deps.push_back(*framework_dep->dependency_output_file());
   }
   for (const auto* non_linkable_dep : classified_deps.non_linkable_deps) {
-    if (non_linkable_dep->source_types_used().RustSourceUsed() &&
-        non_linkable_dep->output_type() != Target::SOURCE_SET) {
-      rustdeps.push_back(non_linkable_dep->dependency_output_file());
+    if (non_linkable_dep->dependency_output_file()) {
+      if (non_linkable_dep->source_types_used().RustSourceUsed() &&
+          non_linkable_dep->output_type() != Target::SOURCE_SET) {
+        rustdeps.push_back(*non_linkable_dep->dependency_output_file());
+      }
+      order_only_deps.push_back(*non_linkable_dep->dependency_output_file());
     }
-    order_only_deps.push_back(non_linkable_dep->dependency_output_file());
   }
   for (const auto* linkable_dep : classified_deps.linkable_deps) {
     if (linkable_dep->source_types_used().RustSourceUsed()) {
@@ -159,7 +162,8 @@ void NinjaRustBinaryTargetWriter::Run() {
     } else {
       nonrustdeps.push_back(linkable_dep->link_output_file());
     }
-    implicit_deps.push_back(linkable_dep->dependency_output_file());
+    DCHECK(linkable_dep->dependency_output_file());
+    implicit_deps.push_back(*linkable_dep->dependency_output_file());
   }
 
   // Rust libraries specified by paths.
@@ -177,8 +181,9 @@ void NinjaRustBinaryTargetWriter::Run() {
   std::vector<OutputFile> transitive_rustlibs;
   for (const auto* dep :
        target_->rust_values().transitive_libs().GetOrdered()) {
-    if (dep->source_types_used().RustSourceUsed()) {
-      transitive_rustlibs.push_back(dep->dependency_output_file());
+    if (dep->source_types_used().RustSourceUsed() &&
+        dep->dependency_output_file()) {
+      transitive_rustlibs.push_back(*dep->dependency_output_file());
     }
   }
 
@@ -249,6 +254,7 @@ void NinjaRustBinaryTargetWriter::WriteExterns(
   for (const Target* target : deps) {
     if (target->output_type() == Target::RUST_LIBRARY ||
         target->output_type() == Target::RUST_PROC_MACRO) {
+      DCHECK(target->dependency_output_file());
       out_ << " --extern ";
       const auto& renamed_dep =
           target_->rust_values().aliased_deps().find(target->label());
@@ -257,7 +263,7 @@ void NinjaRustBinaryTargetWriter::WriteExterns(
       } else {
         out_ << std::string(target->rust_values().crate_name()) << "=";
       }
-      path_output_.WriteFile(out_, target->dependency_output_file());
+      path_output_.WriteFile(out_, *target->dependency_output_file());
     }
   }
 

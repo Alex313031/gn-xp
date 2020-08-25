@@ -595,8 +595,10 @@ bool NinjaBuildWriter::WritePhonyAndAllRules(Err* err) {
     EscapeOptions ninja_escape;
     ninja_escape.mode = ESCAPE_NINJA;
     for (const Target* target : default_toolchain_targets_) {
-      out_ << " $\n    ";
-      path_output_.WriteFile(out_, target->dependency_output_file());
+      if (target->dependency_output_file()) {
+        out_ << " $\n    ";
+        path_output_.WriteFile(out_, *target->dependency_output_file());
+      }
     }
   }
   out_ << std::endl;
@@ -606,8 +608,16 @@ bool NinjaBuildWriter::WritePhonyAndAllRules(Err* err) {
     if (written_rules.find("default") != written_rules.end()) {
       out_ << "\ndefault default" << std::endl;
     } else {
+      // If the default target doesn't have a dependency_output_file, we should
+      // fall back on using the phony. The only case where the phony would be
+      // set, but the file would not be would be if the target has no real
+      // inputs and ninja will treat it as always dirty.
+      OutputFile output_file = default_target->dependency_output_file()
+                                   ? *default_target->dependency_output_file()
+                                   : default_target->dependency_output_phony();
+      CHECK(!output_file.value().empty());
       out_ << "\ndefault ";
-      path_output_.WriteFile(out_, default_target->dependency_output_file());
+      path_output_.WriteFile(out_, output_file);
       out_ << std::endl;
     }
   } else if (!default_toolchain_targets_.empty()) {
@@ -625,7 +635,15 @@ void NinjaBuildWriter::WritePhonyRule(const Target* target,
   // Escape for special chars Ninja will handle.
   std::string escaped = EscapeString(phony_name, ninja_escape, nullptr);
 
+  // If the target doesn't have a dependency_output_file, we should fall back on
+  // using the phony. The only case where the phony would be set, but the file
+  // would not be would be if the target has no real inputs and ninja will treat
+  // it as always dirty.
+  OutputFile output_file = target->dependency_output_file()
+                               ? *target->dependency_output_file()
+                               : target->dependency_output_phony();
+  CHECK(!output_file.value().empty());
   out_ << "build " << escaped << ": phony ";
-  path_output_.WriteFile(out_, target->dependency_output_file());
+  path_output_.WriteFile(out_, output_file);
   out_ << std::endl;
 }

@@ -207,7 +207,7 @@ void NinjaCBinaryTargetWriter::Run() {
     return;
 
   if (target_->output_type() == Target::SOURCE_SET) {
-    WriteSourceSetStamp(obj_files);
+    WriteSourceSetPhony(obj_files);
 #ifndef NDEBUG
     // Verify that the function that separately computes a source set's object
     // files match the object files just computed.
@@ -667,8 +667,10 @@ void NinjaCBinaryTargetWriter::WriteSwiftSources(
     swift_order_only_deps.Append(order_only_deps.begin(),
                                  order_only_deps.end());
 
-    for (const Target* swiftmodule : target_->swift_values().modules())
-      swift_order_only_deps.push_back(swiftmodule->dependency_output_file());
+    for (const Target* swiftmodule : target_->swift_values().modules()) {
+      if (swiftmodule->dependency_output_file())
+        swift_order_only_deps.push_back(*swiftmodule->dependency_output_file());
+    }
 
     WriteCompilerBuildLine(target_->sources(), input_deps,
                            swift_order_only_deps.vector(), tool->name(),
@@ -719,11 +721,12 @@ void NinjaCBinaryTargetWriter::WriteLinkerStuff(
         cur->output_type() == Target::RUST_PROC_MACRO)
       continue;
 
-    if (cur->dependency_output_file().value() !=
-        cur->link_output_file().value()) {
+    if (cur->dependency_output_file() &&
+        (cur->dependency_output_file()->value() !=
+         cur->link_output_file().value())) {
       // This is a shared library with separate link and deps files. Save for
       // later.
-      implicit_deps.push_back(cur->dependency_output_file());
+      implicit_deps.push_back(*cur->dependency_output_file());
       solibs.push_back(cur->link_output_file());
     } else {
       // Normal case, just link to this target.
@@ -759,7 +762,8 @@ void NinjaCBinaryTargetWriter::WriteLinkerStuff(
   // is regenerated, but it ensure that if one of the framework API changes,
   // any dependent target will relink it (see crbug.com/1037607).
   for (const Target* dep : classified_deps.framework_deps) {
-    implicit_deps.push_back(dep->dependency_output_file());
+    if (dep->dependency_output_file())
+      implicit_deps.push_back(*dep->dependency_output_file());
   }
 
   // The input dependency is only needed if there are no object files, as the
@@ -774,8 +778,9 @@ void NinjaCBinaryTargetWriter::WriteLinkerStuff(
     for (const auto* dep :
          target_->rust_values().transitive_libs().GetOrdered()) {
       if (dep->output_type() == Target::RUST_LIBRARY) {
-        transitive_rustlibs.push_back(dep->dependency_output_file());
-        implicit_deps.push_back(dep->dependency_output_file());
+        DCHECK(dep->dependency_output_file());
+        transitive_rustlibs.push_back(*dep->dependency_output_file());
+        implicit_deps.push_back(*dep->dependency_output_file());
       }
     }
   }
@@ -873,8 +878,11 @@ void NinjaCBinaryTargetWriter::WriteOrderOnlyDependencies(
 
     // Non-linkable targets.
     for (auto* non_linkable_dep : non_linkable_deps) {
-      out_ << " ";
-      path_output_.WriteFile(out_, non_linkable_dep->dependency_output_file());
+      if (non_linkable_dep->dependency_output_file()) {
+        out_ << " ";
+        path_output_.WriteFile(out_,
+                               *non_linkable_dep->dependency_output_file());
+      }
     }
   }
 }
