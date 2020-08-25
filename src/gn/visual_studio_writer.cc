@@ -906,9 +906,9 @@ void VisualStudioWriter::ResolveSolutionFolders() {
 
 std::string VisualStudioWriter::GetNinjaTarget(const Target* target) {
   std::ostringstream ninja_target_out;
-  DCHECK(!target->dependency_output_file().value().empty());
+  DCHECK(!target->dependency_output_file()->value().empty());
   ninja_path_output_.WriteFile(ninja_target_out,
-                               target->dependency_output_file());
+                               *target->dependency_output_file());
   std::string s = ninja_target_out.str();
   if (s.compare(0, 2, "./") == 0)
     s = s.substr(2);
