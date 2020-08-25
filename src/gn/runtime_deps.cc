@@ -185,11 +185,12 @@ bool CollectRuntimeDepsFromFlag(const BuildSettings* build_settings,
       CHECK(!target->computed_outputs().empty());
       output_file =
           OutputFile(target->computed_outputs()[0].value() + extension);
-    } else {
+    } else if (target->dependency_output_file()) {
       output_file =
           OutputFile(target->dependency_output_file().value() + extension);
     }
-    files_to_write->push_back(std::make_pair(output_file, target));
+    if (output_file)
+      files_to_write->push_back(std::make_pair(output_file, target));
   }
   return true;
 }

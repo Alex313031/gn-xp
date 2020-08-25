@@ -595,8 +595,10 @@ bool NinjaBuildWriter::WritePhonyAndAllRules(Err* err) {
     EscapeOptions ninja_escape;
     ninja_escape.mode = ESCAPE_NINJA;
     for (const Target* target : default_toolchain_targets_) {
-      out_ << " $\n    ";
-      path_output_.WriteFile(out_, target->dependency_output_file());
+      if (target->dependency_output_file()) {
+        out_ << " $\n    ";
+        path_output_.WriteFile(out_, target->dependency_output_file());
+      }
     }
   }
   out_ << std::endl;
@@ -605,7 +607,7 @@ bool NinjaBuildWriter::WritePhonyAndAllRules(Err* err) {
     // Use the short name when available
     if (written_rules.find("default") != written_rules.end()) {
       out_ << "\ndefault default" << std::endl;
-    } else {
+    } else if (default_target->dependency_output_file()) {
       out_ << "\ndefault ";
       path_output_.WriteFile(out_, default_target->dependency_output_file());
       out_ << std::endl;
@@ -619,6 +621,9 @@ bool NinjaBuildWriter::WritePhonyAndAllRules(Err* err) {
 
 void NinjaBuildWriter::WritePhonyRule(const Target* target,
                                       const std::string& phony_name) {
+  if (!target->dependency_output_file())
+    return;
+
   EscapeOptions ninja_escape;
   ninja_escape.mode = ESCAPE_NINJA;
 

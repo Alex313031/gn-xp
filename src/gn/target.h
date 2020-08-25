@@ -342,6 +342,9 @@ class Target : public Item {
   const OutputFile& dependency_output_file() const {
     return dependency_output_file_;
   }
+  const OutputFile& phony_dependency_output() const {
+    return phony_dependency_output_;
+  }
 
   // The subset of computed_outputs that are considered runtime outputs.
   const std::vector<OutputFile>& runtime_outputs() const {
@@ -401,6 +404,10 @@ class Target : public Item {
   void PullDependentTargetLibs();
   void PullRecursiveHardDeps();
   void PullRecursiveBundleData();
+
+  // Checks to see whether this target or any of its dependencies have real
+  // inputs. If not, this target should be omitted as a dependency.
+  bool CheckForRealInputs();
 
   // Fills the link and dependency output files when a target is resolved.
   bool FillOutputFiles(Err* err);
@@ -490,6 +497,7 @@ class Target : public Item {
   std::vector<OutputFile> computed_outputs_;
   OutputFile link_output_file_;
   OutputFile dependency_output_file_;
+  OutputFile phony_dependency_output_;
   std::vector<OutputFile> runtime_outputs_;
 
   Metadata metadata_;
