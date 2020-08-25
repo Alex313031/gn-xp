@@ -8,6 +8,7 @@
 
 #include "base/files/file_util.h"
 #include "base/strings/string_util.h"
+#include "gn/builtin_tool.h"
 #include "gn/config_values_extractors.h"
 #include "gn/err.h"
 #include "gn/escape.h"
@@ -268,7 +269,8 @@ std::vector<OutputFile> NinjaTargetWriter::WriteInputDepsStampAndGetDep(
         OutputFile(settings_->build_settings(), *input_deps_sources[0])};
   if (input_deps_sources.size() == 0 && input_deps_targets.size() == 1) {
     const OutputFile& dep = input_deps_targets[0]->dependency_output_file();
-    DCHECK(!dep.value().empty());
+    if (!dep)
+      return std::vector<OutputFile>();
     return std::vector<OutputFile>{dep};
   }
 
@@ -283,8 +285,8 @@ std::vector<OutputFile> NinjaTargetWriter::WriteInputDepsStampAndGetDep(
       input_deps_targets.begin(), input_deps_targets.end(),
       [](const Target* a, const Target* b) { return a->label() < b->label(); });
   for (auto* dep : input_deps_targets) {
-    DCHECK(!dep->dependency_output_file().value().empty());
-    outs.push_back(dep->dependency_output_file());
+    if (dep->dependency_output_file())
+      outs.push_back(dep->dependency_output_file());
   }
 
   // If there are multiple inputs, but the stamp file would be referenced only
@@ -312,6 +314,7 @@ void NinjaTargetWriter::WriteStampForTarget(
     const std::vector<OutputFile>& files,
     const std::vector<OutputFile>& order_only_deps) {
   const OutputFile& stamp_file = target_->dependency_output_file();
+  DCHECK(stamp_file);
 
   // First validate that the target's dependency is a stamp file. Otherwise,
   // we shouldn't have gotten here!
@@ -325,6 +328,24 @@ void NinjaTargetWriter::WriteStampForTarget(
 
   out_ << ": " << GetNinjaRulePrefixForToolchain(settings_)
        << GeneralTool::kGeneralToolStamp;
+  path_output_.WriteFiles(out_, files);
+
+  if (!order_only_deps.empty()) {
+    out_ << " ||";
+    path_output_.WriteFiles(out_, order_only_deps);
+  }
+  out_ << std::endl;
+}
+
+void NinjaTargetWriter::WritePhonyForTarget(
+    const std::vector<OutputFile>& files,
+    const std::vector<OutputFile>& order_only_deps) {
+  const OutputFile& phony_target = target_->dependency_output_phony();
+
+  out_ << "build ";
+  path_output_.WriteFile(out_, phony_target);
+
+  out_ << ": " << BuiltinTool::kBuiltinToolPhony;
   path_output_.WriteFiles(out_, files);
 
   if (!order_only_deps.empty()) {

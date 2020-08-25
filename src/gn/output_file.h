@@ -34,6 +34,8 @@ class OutputFile {
   SourceFile AsSourceFile(const BuildSettings* build_settings) const;
   SourceDir AsSourceDir(const BuildSettings* build_settings) const;
 
+  explicit operator bool() const { return !value_.empty(); }
+
   bool operator==(const OutputFile& other) const {
     return value_ == other.value_;
   }
