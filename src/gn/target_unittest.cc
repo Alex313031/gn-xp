@@ -787,6 +787,7 @@ TEST_F(TargetTest, GetOutputFilesForSource_Binary) {
 
   Target target(setup.settings(), Label(SourceDir("//a/"), "a"));
   target.set_output_type(Target::SOURCE_SET);
+  target.sources().push_back(SourceFile("//a/source_file1.cc"));
   target.SetToolchain(&toolchain);
   Err err;
   ASSERT_TRUE(target.OnResolved(&err));
@@ -808,7 +809,7 @@ TEST_F(TargetTest, GetOutputFilesForSource_Binary) {
   EXPECT_TRUE(target.GetOutputsAsSourceFiles(LocationRange(), true,
                                              &computed_outputs, &err));
   ASSERT_EQ(1u, computed_outputs.size());
-  EXPECT_EQ("//out/Debug/obj/a/a.stamp", computed_outputs[0].value());
+  EXPECT_EQ("//out/Debug/obj/a/a", computed_outputs[0].value());
 }
 
 // Tests Target::GetOutputFilesForSource for action_foreach targets (these, like
