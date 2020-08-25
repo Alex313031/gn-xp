@@ -335,12 +335,29 @@ class Target : public Item {
   // could be the same or different than the link output file, depending on the
   // system. For actions this will be the stamp file.
   //
+  // The dependency output phony is only set when the target does not have an
+  // output file and is using a phony alias to represent it. The exception to
+  // this is for phony targets without any real inputs. Ninja treats empty phony
+  // targets as always dirty, so no other targets should depend on that target.
+  // In that scenario, both dependency_output_phony or dependency_output_file
+  // will be std::nullopt.
+  //
+  // Callers that do not care whether the dependency is represented by a file or
+  // a phony should use dependency_output_file_or_phony().
+  //
   // These are only known once the target is resolved and will be empty before
   // that. This is a cache of the files to prevent every target that depends on
   // a given library from recomputing the same pattern.
   const OutputFile& link_output_file() const { return link_output_file_; }
-  const OutputFile& dependency_output_file() const {
+  const std::optional<OutputFile>& dependency_output_file() const {
     return dependency_output_file_;
+  }
+  const std::optional<OutputFile>& dependency_output_phony() const {
+    return dependency_output_phony_;
+  }
+  const std::optional<OutputFile>& dependency_output_file_or_phony() const {
+    return dependency_output_file_ ? dependency_output_file_
+                                   : dependency_output_phony_;
   }
 
   // The subset of computed_outputs that are considered runtime outputs.
@@ -401,6 +418,11 @@ class Target : public Item {
   void PullDependentTargetLibs();
   void PullRecursiveHardDeps();
   void PullRecursiveBundleData();
+
+  // Checks to see whether this target or any of its dependencies have real
+  // inputs. If not, this target should be omitted as a dependency. This check
+  // only applies to targets that will result in a phony rule.
+  bool HasRealInputs() const;
 
   // Fills the link and dependency output files when a target is resolved.
   bool FillOutputFiles(Err* err);
@@ -489,7 +511,8 @@ class Target : public Item {
   // Output files. Empty until the target is resolved.
   std::vector<OutputFile> computed_outputs_;
   OutputFile link_output_file_;
-  OutputFile dependency_output_file_;
+  std::optional<OutputFile> dependency_output_file_;
+  std::optional<OutputFile> dependency_output_phony_;
   std::vector<OutputFile> runtime_outputs_;
 
   Metadata metadata_;
