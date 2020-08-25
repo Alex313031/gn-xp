@@ -102,9 +102,9 @@ std::vector<OutputFile> NinjaBinaryTargetWriter::WriteInputsStampAndGetDep(
   return {stamp_file};
 }
 
-void NinjaBinaryTargetWriter::WriteSourceSetStamp(
+void NinjaBinaryTargetWriter::WriteSourceSetPhony(
     const std::vector<OutputFile>& object_files) {
-  // The stamp rule for source sets is generally not used, since targets that
+  // The phony rule for source sets is generally not used, since targets that
   // depend on this will reference the object files directly. However, writing
   // this rule allows the user to type the name of the target and get a build
   // which can be convenient for development.
@@ -119,7 +119,7 @@ void NinjaBinaryTargetWriter::WriteSourceSetStamp(
   for (auto* dep : classified_deps.non_linkable_deps)
     order_only_deps.push_back(dep->dependency_output_file());
 
-  WriteStampForTarget(object_files, order_only_deps);
+  WritePhonyForTarget(object_files, order_only_deps);
 }
 
 NinjaBinaryTargetWriter::ClassifiedDeps
@@ -177,7 +177,7 @@ void NinjaBinaryTargetWriter::ClassifyDependency(
       AddSourceSetFiles(dep, &classified_deps->extra_object_files);
 
     // Add the source set itself as a non-linkable dependency on the current
-    // target. This will make sure that anything the source set's stamp file
+    // target. This will make sure that anything the source set's phony target
     // depends on (like data deps) are also built before the current target
     // can be complete. Otherwise, these will be skipped since this target
     // will depend only on the source set's object files.
