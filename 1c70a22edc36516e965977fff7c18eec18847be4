@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "fdec6182_9d7a01e7",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 8
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000633
+      },
+      "writtenOn": "2020-08-27T16:47:31Z",
+      "side": 1,
+      "message": "Hi Brett,\n\nI\u0027m working with phosek@ on attempting to switch out stamp files with phony targets. So far I\u0027ve experimented with source_sets and groups, and the expected behavior lines up, but there is one semantic difference. Phony targets that have no inputs are treated by ninja as always dirty and rebuilt every time. So far, I\u0027ve only encountered this with header only source_sets that have no object files or additional dependencies. Since any targets that depend on this phony target would pick up the header dependency through depfiles, it seems like the best approach is to omit the dependency on the phony target in that case. \n\nI could use some implementation advice on the best way to omit the dependency. The initial approach I\u0027ve taken is to just to not set target.dependency_output_file_ when the target will be a phony with no real inputs. This works, but I\u0027m not sure it is ideal. Some other options I see:\n\n  1. When a target is resolved, walk through the dependency lists and remove any that would result in phony targets. While the most obvious downside is removal from vector, I was also concerned that we would also omit the dependency when using other GN commands like desc.\n  2. In the ninja_*_writers, check whether a dependency should be omitted before calling path_output_.WriteFile. This seems reasonable, if a bit challenging to cover all spots.\n  3. Make OutputFile aware that it is a phony and whether it should be omitted from printing. We could then check that in PathOutput::WriteFile(s) and the handful of bespoke output writes.\n\nIs there a better approach? Thanks!",
+      "revId": "1c70a22edc36516e965977fff7c18eec18847be4",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": false
+    }
+  ]
+}
