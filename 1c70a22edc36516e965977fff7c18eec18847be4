@@ -16,6 +16,24 @@
       "revId": "1c70a22edc36516e965977fff7c18eec18847be4",
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "1c276da6_598c3976",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 8
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000014
+      },
+      "writtenOn": "2020-08-29T16:30:50Z",
+      "side": 1,
+      "message": "Hi, thanks for the well-explained question. I kind of like keeping the dependency output file empty to indicate there is none. Code using this should check for empty and then not output a dependency. I think that\u0027s the semantics that we want, right?\n\nThe problem is likely that a bunch of places use this and expect it to be nonempty. But it sounds like we will need to update all of these places anyway. Maybe start and see if this change looks tractable?\n\nI don\u0027t think we should change the dependency graph for the reasons you were concerned about (confusing \"desc\" for example).",
+      "parentUuid": "fdec6182_9d7a01e7",
+      "revId": "1c70a22edc36516e965977fff7c18eec18847be4",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": false
     }
   ]
 }
