@@ -1,0 +1,44 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "7c12e2a8_e1c83674",
+        "filename": "src/gn/ninja_build_writer.cc",
+        "patchSetId": 10
+      },
+      "lineNbr": 610,
+      "author": {
+        "id": 1000633
+      },
+      "writtenOn": "2020-09-02T18:14:50Z",
+      "side": 1,
+      "message": "This is probably not the right thing to do here. If the user specifies a default target that has no dependency_output_file, we probably still want to output a rule. Perhaps it would be best to just emit the phony target anyways even if it is always dirty? Ie:\n\n  const OutputFile\u0026 output_file \u003d bool(default_target-\u003edependency_output_file()) \n      ? default_target-\u003edependency_output_file() \n      : default_target-\u003edependency_output_phony();",
+      "range": {
+        "startLine": 610,
+        "startChar": 11,
+        "endLine": 610,
+        "endChar": 56
+      },
+      "revId": "446796955e19534fc75b80071fc9b82013ee3d35",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "035e44fa_a5a49f8f",
+        "filename": "src/gn/ninja_build_writer.cc",
+        "patchSetId": 10
+      },
+      "lineNbr": 624,
+      "author": {
+        "id": 1000633
+      },
+      "writtenOn": "2020-09-02T18:14:50Z",
+      "side": 1,
+      "message": "This is another spot where we might want to print the phony target anyways.",
+      "revId": "446796955e19534fc75b80071fc9b82013ee3d35",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": true
+    }
+  ]
+}

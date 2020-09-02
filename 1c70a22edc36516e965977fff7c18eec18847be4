@@ -34,6 +34,24 @@
       "revId": "1c70a22edc36516e965977fff7c18eec18847be4",
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "c2bf69fa_548ed361",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 8
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000633
+      },
+      "writtenOn": "2020-09-02T18:14:50Z",
+      "side": 1,
+      "message": "Yes, those are the semantics we are after. I think I\u0027ve tracked down all the relevant uses of dependency_output_file() and added bool checks for those cases. I\u0027ve been testing this with Fuchsia and Chromium builds. So far, I haven\u0027t run into any issues. Are there any other clients you would recommend testing with? Due to the impact, I want to make sure I\u0027m not missing anything.",
+      "parentUuid": "1c276da6_598c3976",
+      "revId": "1c70a22edc36516e965977fff7c18eec18847be4",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": false
     }
   ]
 }
