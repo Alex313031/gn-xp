@@ -115,6 +115,24 @@
       "revId": "446796955e19534fc75b80071fc9b82013ee3d35",
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "e2672f3d_baaeb10c",
+        "filename": "src/gn/target.h",
+        "patchSetId": 10
+      },
+      "lineNbr": 509,
+      "author": {
+        "id": 1000633
+      },
+      "writtenOn": "2020-09-02T19:43:13Z",
+      "side": 1,
+      "message": "std::optional would be my preference, but I assumed GN was on C++14 like Chromium. Now I see that it is on 17 (and even has other uses of std::optional), I\u0027ll switch to that. That\u0027s definitely better than creating this additional state for OutputFile.",
+      "parentUuid": "d3b9570c_3a355be6",
+      "revId": "446796955e19534fc75b80071fc9b82013ee3d35",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": true
     }
   ]
 }
