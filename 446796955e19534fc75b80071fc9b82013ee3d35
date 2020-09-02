@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "1521467e_79d781c2",
+        "filename": "src/gn/ninja_build_writer.cc",
+        "patchSetId": 10
+      },
+      "lineNbr": 610,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-09-02T19:21:44Z",
+      "side": 1,
+      "message": "Yes, default is a special case where we want always emit the the phony target.",
+      "parentUuid": "7c12e2a8_e1c83674",
+      "range": {
+        "startLine": 610,
+        "startChar": 11,
+        "endLine": 610,
+        "endChar": 56
+      },
+      "revId": "446796955e19534fc75b80071fc9b82013ee3d35",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "035e44fa_a5a49f8f",
         "filename": "src/gn/ninja_build_writer.cc",
         "patchSetId": 10
@@ -36,6 +60,58 @@
       "writtenOn": "2020-09-02T18:14:50Z",
       "side": 1,
       "message": "This is another spot where we might want to print the phony target anyways.",
+      "revId": "446796955e19534fc75b80071fc9b82013ee3d35",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "d181b793_359cc3a6",
+        "filename": "src/gn/ninja_build_writer.cc",
+        "patchSetId": 10
+      },
+      "lineNbr": 624,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-09-02T19:21:44Z",
+      "side": 1,
+      "message": "Agreed.",
+      "parentUuid": "035e44fa_a5a49f8f",
+      "revId": "446796955e19534fc75b80071fc9b82013ee3d35",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "c201bbd4_af486528",
+        "filename": "src/gn/target.cc",
+        "patchSetId": 10
+      },
+      "lineNbr": 827,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-09-02T19:21:44Z",
+      "side": 1,
+      "message": "I\u0027d prefer to omit the .phony extension and improve the logic that generates build.ninja to omit top-level phony targets that aren\u0027t needed because they\u0027ve been already generated elsewhere.",
+      "revId": "446796955e19534fc75b80071fc9b82013ee3d35",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "d3b9570c_3a355be6",
+        "filename": "src/gn/target.h",
+        "patchSetId": 10
+      },
+      "lineNbr": 509,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-09-02T19:21:44Z",
+      "side": 1,
+      "message": "Have you considered changing the type to std::optional\u003cOutputFile\u003e and omitting both the bool conversion as well as dependency_output_phony(), the logic to populate dependency_output_phony_ would be moved to WritePhonyForTarget which is the only place where it\u0027s used right now.",
       "revId": "446796955e19534fc75b80071fc9b82013ee3d35",
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
       "unresolved": true
