@@ -1,0 +1,95 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "57d5c928_f4d2a497",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 11
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000004
+      },
+      "writtenOn": "2020-09-03T22:10:46Z",
+      "side": 1,
+      "message": "Brett is definitely the .stamp expert, but I took a look. The idea seems fine to me from re-reading about ninja phony.",
+      "revId": "d490a01afbcaf669c94aafea5405a42090d61750",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "11d8881c_8d9a023a",
+        "filename": "src/gn/builtin_tool.h",
+        "patchSetId": 11
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 1000004
+      },
+      "writtenOn": "2020-09-03T22:10:46Z",
+      "side": 1,
+      "message": "This could go in the .cc I think.",
+      "revId": "d490a01afbcaf669c94aafea5405a42090d61750",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "29c35215_697ccd1a",
+        "filename": "src/gn/builtin_tool.h",
+        "patchSetId": 11
+      },
+      "lineNbr": 23,
+      "author": {
+        "id": 1000004
+      },
+      "writtenOn": "2020-09-03T22:10:46Z",
+      "side": 1,
+      "message": "explicit",
+      "revId": "d490a01afbcaf669c94aafea5405a42090d61750",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "72c3783e_43fb12db",
+        "filename": "src/gn/ninja_c_binary_target_writer.cc",
+        "patchSetId": 11
+      },
+      "lineNbr": 671,
+      "author": {
+        "id": 1000004
+      },
+      "writtenOn": "2020-09-03T22:10:46Z",
+      "side": 1,
+      "message": "Swift and Rust can\u0027t have this situation can they (of an empty output)? Maybe it\u0027d be better to leave out the condition on these ones or CHECK that instead of if-gating it.",
+      "range": {
+        "startLine": 671,
+        "startChar": 23,
+        "endLine": 671,
+        "endChar": 45
+      },
+      "revId": "d490a01afbcaf669c94aafea5405a42090d61750",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "c26075c0_85408b9d",
+        "filename": "src/gn/target.cc",
+        "patchSetId": 11
+      },
+      "lineNbr": 556,
+      "author": {
+        "id": 1000004
+      },
+      "writtenOn": "2020-09-03T22:10:46Z",
+      "side": 1,
+      "message": "nit; can you add braces here due to the multiline body?",
+      "revId": "d490a01afbcaf669c94aafea5405a42090d61750",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": true
+    }
+  ]
+}
