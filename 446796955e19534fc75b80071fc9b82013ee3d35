@@ -49,6 +49,30 @@
     },
     {
       "key": {
+        "uuid": "285f29aa_f46b70e1",
+        "filename": "src/gn/ninja_build_writer.cc",
+        "patchSetId": 10
+      },
+      "lineNbr": 610,
+      "author": {
+        "id": 1000633
+      },
+      "writtenOn": "2020-09-03T18:33:14Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "1521467e_79d781c2",
+      "range": {
+        "startLine": 610,
+        "startChar": 11,
+        "endLine": 610,
+        "endChar": 56
+      },
+      "revId": "446796955e19534fc75b80071fc9b82013ee3d35",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "035e44fa_a5a49f8f",
         "filename": "src/gn/ninja_build_writer.cc",
         "patchSetId": 10
@@ -84,6 +108,24 @@
     },
     {
       "key": {
+        "uuid": "3b92d1e0_d7ff33bf",
+        "filename": "src/gn/ninja_build_writer.cc",
+        "patchSetId": 10
+      },
+      "lineNbr": 624,
+      "author": {
+        "id": 1000633
+      },
+      "writtenOn": "2020-09-03T18:33:14Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "d181b793_359cc3a6",
+      "revId": "446796955e19534fc75b80071fc9b82013ee3d35",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "c201bbd4_af486528",
         "filename": "src/gn/target.cc",
         "patchSetId": 10
@@ -95,6 +137,24 @@
       "writtenOn": "2020-09-02T19:21:44Z",
       "side": 1,
       "message": "I\u0027d prefer to omit the .phony extension and improve the logic that generates build.ninja to omit top-level phony targets that aren\u0027t needed because they\u0027ve been already generated elsewhere.",
+      "revId": "446796955e19534fc75b80071fc9b82013ee3d35",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "bab08ff0_5a19f713",
+        "filename": "src/gn/target.cc",
+        "patchSetId": 10
+      },
+      "lineNbr": 827,
+      "author": {
+        "id": 1000633
+      },
+      "writtenOn": "2020-09-03T18:33:14Z",
+      "side": 1,
+      "message": "It looks like I misunderstood the issue I ran into. It wasn\u0027t an issue with the top level phony, but rather an output name collision between two different GN targets. The issue manifested after I also switched groups to use phony rules. Specifically, in Fuchsia\u0027s ZN build, the zx_host_tool template generates two targets: a group(\"\u003ctarget_name\u003e\") and an executable(\"\u003ctarget_name\u003e._build\"). The problem was that the executable target created an output name that matched \u003ctarget_name\u003e. The .stamp suffix on groups had prevented this being an error.\n\nAt Roland\u0027s suggestion, I removed the .phony extension and added a \"BuildDirType::PHONY\" instead. So instead of targets being generated as \"obj/foo/bar\", they\u0027ll be \"phony/foo/bar\". It removes possible conflicts with real outputs, but it does mean we\u0027re reserving that directory name.",
+      "parentUuid": "c201bbd4_af486528",
       "revId": "446796955e19534fc75b80071fc9b82013ee3d35",
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
       "unresolved": true
@@ -130,6 +190,24 @@
       "side": 1,
       "message": "std::optional would be my preference, but I assumed GN was on C++14 like Chromium. Now I see that it is on 17 (and even has other uses of std::optional), I\u0027ll switch to that. That\u0027s definitely better than creating this additional state for OutputFile.",
       "parentUuid": "d3b9570c_3a355be6",
+      "revId": "446796955e19534fc75b80071fc9b82013ee3d35",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "69273fd0_7c036639",
+        "filename": "src/gn/target.h",
+        "patchSetId": 10
+      },
+      "lineNbr": 509,
+      "author": {
+        "id": 1000633
+      },
+      "writtenOn": "2020-09-03T18:33:14Z",
+      "side": 1,
+      "message": "The switch to std::optional is done. The logic to populate dependency_output_phony_ remains in FillOutputFiles, because we still need to set dependency_output_file_ \u003d dependency_output_phony_ if the phony has real inputs. We could potentially get rid of dependency_output_phony_ if we decide we don\u0027t want to output empty phony targets at all. Right now a header only source_set with no deps might look like this:\n\n  phony/foo/source_set: phony\n\nShould we omit this rule entirely?",
+      "parentUuid": "e2672f3d_baaeb10c",
       "revId": "446796955e19534fc75b80071fc9b82013ee3d35",
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
       "unresolved": true
