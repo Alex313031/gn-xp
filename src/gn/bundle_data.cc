@@ -39,6 +39,7 @@ bool IsSourceFileFromAssetsCatalog(std::string_view source,
     is_file_from_asset_catalog = true;
   } else if (base::EndsWith(dir, ".appiconset", base::CompareCase::SENSITIVE) ||
              base::EndsWith(dir, ".imageset", base::CompareCase::SENSITIVE) ||
+             base::EndsWith(dir, ".symbolset", base::CompareCase::SENSITIVE) ||
              base::EndsWith(dir, ".launchimage",
                             base::CompareCase::SENSITIVE) ||
              base::EndsWith(dir, ".colorset", base::CompareCase::SENSITIVE) ||
