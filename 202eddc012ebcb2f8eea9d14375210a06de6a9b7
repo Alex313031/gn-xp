@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "528750ab_8a055283",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000070
+      },
+      "writtenOn": "2020-09-03T15:33:47Z",
+      "side": 1,
+      "message": "You probably want to update description ;-)",
+      "revId": "202eddc012ebcb2f8eea9d14375210a06de6a9b7",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "d7f97c85_80d2e777",
+        "filename": "src/gn/bundle_data.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 32,
+      "author": {
+        "id": 1000070
+      },
+      "writtenOn": "2020-09-03T15:33:47Z",
+      "side": 1,
+      "message": "Please add the following to this list (and sort entries alphabetically).\n\n  .*\\.xcassets/[^/]*\\.symbolset/[^/]*",
+      "revId": "202eddc012ebcb2f8eea9d14375210a06de6a9b7",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "64546b63_eca53e08",
+        "filename": "src/gn/bundle_data.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 42,
+      "author": {
+        "id": 1000070
+      },
+      "writtenOn": "2020-09-03T15:33:47Z",
+      "side": 1,
+      "message": "nit: can you sort alphabetically",
+      "revId": "202eddc012ebcb2f8eea9d14375210a06de6a9b7",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": true
+    }
+  ]
+}
