@@ -22,13 +22,50 @@ DEPS = [
 ]
 
 PROPERTIES = {
-    'repository': Property(kind=str, default='https://gn.googlesource.com/gn'),
+    'repository':
+        Property(kind=str, default='https://gn.googlesource.com/gn'),
+
+    # On select platforms, link the GN executable against rpmalloc for a
+    # small 10% speed boost.
+    'rpmalloc_git':
+        Property(kind=str, default='https://github.com/mjansson/rpmalloc.git'),
 }
 
 
-def RunSteps(api, repository):
+def get_compilation_environment(api, cipd_dir):
+  if api.platform.is_linux:
+    sysroot = '--sysroot=%s' % cipd_dir.join('sysroot')
+    env = {
+        'CC': cipd_dir.join('bin', 'clang'),
+        'CXX': cipd_dir.join('bin', 'clang++'),
+        'AR': cipd_dir.join('bin', 'llvm-ar'),
+        'CFLAGS': sysroot,
+        'LDFLAGS': sysroot,
+    }
+  elif api.platform.is_mac:
+    sysroot = '--sysroot=%s' % api.step(
+        'xcrun', ['xcrun', '--show-sdk-path'],
+        stdout=api.raw_io.output(name='sdk-path', add_output_log=True),
+        step_test_data=lambda: api.raw_io.test_api.stream_output(
+            '/some/xcode/path')).stdout.strip()
+    stdlib = '-nostdlib++ %s' % cipd_dir.join('lib', 'libc++.a')
+    env = {
+        'CC': cipd_dir.join('bin', 'clang'),
+        'CXX': cipd_dir.join('bin', 'clang++'),
+        'AR': cipd_dir.join('bin', 'llvm-ar'),
+        'CFLAGS': sysroot,
+        'LDFLAGS': '%s %s' % (sysroot, stdlib),
+    }
+  else:
+    env = {}
+
+  return env
+
+
+def RunSteps(api, repository, rpmalloc_git):
   src_dir = api.path['start_dir'].join('gn')
 
+  use_rpmalloc = api.platform.is_linux
   with api.step.nest('git'), api.context(infra_steps=True):
     api.step('init', ['git', 'init', src_dir])
 
@@ -62,6 +99,35 @@ def RunSteps(api, repository):
                        'sysroot')
     api.cipd.ensure(cipd_dir, pkgs)
 
+  if use_rpmalloc:
+    rpmalloc_src_dir = api.path['start_dir'].join('rpmalloc')
+    with api.step.nest('rpmalloc'):
+      api.step('init', ['git', 'init', rpmalloc_src_dir])
+      with api.context(cwd=rpmalloc_src_dir, infra_steps=True):
+        api.step('fetch',
+                 ['git', 'fetch', '--tags', rpmalloc_git, 'refs/tags/1.4.1'])
+        api.step('checkout', ['git', 'checkout', 'FETCH_HEAD'])
+
+      with api.macos_sdk(), api.windows_sdk():
+        # Adjust compilation environment to build the library properly.
+        env = get_compilation_environment(api, cipd_dir)
+
+        with api.step.nest('build'), api.context(env=env, cwd=rpmalloc_src_dir):
+          # Only the minimal static library named libtcmalloc_minimal.a is needed
+          # here, so configure the build accordingly, and invoke make to only
+          # build it, by invoking the right libtool-specific target name
+          # (libtcmalloc_minimal.la) which is a text file pointing to the real
+          # library under .libs/libtcmalloc_minimal.a
+          api.python(
+              'configure',
+              rpmalloc_src_dir.join('configure.py'),
+              args=['-c', 'release'])
+          api.step('ninja', [cipd_dir.join('ninja')])
+
+        rpmalloc_static_lib = rpmalloc_src_dir.join('lib', 'linux', 'release',
+                                                    'x86-64',
+                                                    'librpmallocwrap.a')
+
   # The order is important since release build will get uploaded to CIPD.
   configs = [
       {
@@ -75,34 +141,13 @@ def RunSteps(api, repository):
   ]
 
   with api.macos_sdk(), api.windows_sdk():
-    if api.platform.is_linux:
-      sysroot = '--sysroot=%s' % cipd_dir.join('sysroot')
-      env = {
-          'CC': cipd_dir.join('bin', 'clang'),
-          'CXX': cipd_dir.join('bin', 'clang++'),
-          'AR': cipd_dir.join('bin', 'llvm-ar'),
-          'CFLAGS': sysroot,
-          'LDFLAGS': sysroot,
-      }
-    elif api.platform.is_mac:
-      sysroot = '--sysroot=%s' % api.step(
-          'xcrun', ['xcrun', '--show-sdk-path'],
-          stdout=api.raw_io.output(name='sdk-path', add_output_log=True),
-          step_test_data=
-          lambda: api.raw_io.test_api.stream_output('/some/xcode/path')
-      ).stdout.strip()
-      stdlib = '-nostdlib++ %s' % cipd_dir.join('lib', 'libc++.a')
-      env = {
-          'CC': cipd_dir.join('bin', 'clang'),
-          'CXX': cipd_dir.join('bin', 'clang++'),
-          'AR': cipd_dir.join('bin', 'llvm-ar'),
-          'CFLAGS': sysroot,
-          'LDFLAGS': '%s %s' % (sysroot, stdlib),
-      }
-    else:
-      env = {}
+    env = get_compilation_environment(api, cipd_dir)
 
     for config in configs:
+      # Ensure `gn` will be linked with the tcmalloc static library when needed.
+      if use_rpmalloc:
+        config['args'].append('--link-lib=%s' % rpmalloc_static_lib)
+
       with api.step.nest(config['name']):
         with api.step.nest('build'), api.context(env=env, cwd=src_dir):
           api.python(
@@ -174,9 +219,10 @@ def GenTests(api):
       git_repo='gn.googlesource.com/gn',
       revision='a' * 40,
   ) + api.step_data('rev-parse', api.raw_io.stream_output('a' * 40)) +
-         api.step_data('cipd search gn/gn/${platform} git_revision:' + 'a' * 40,
-                       api.cipd.example_search('gn/gn/linux-amd64',
-                                               ['git_revision:' + 'a' * 40])))
+         api.step_data(
+             'cipd search gn/gn/${platform} git_revision:' + 'a' * 40,
+             api.cipd.example_search('gn/gn/linux-amd64',
+                                     ['git_revision:' + 'a' * 40])))
 
   yield (api.test('cipd_register') + api.buildbucket.ci_build(
       project='infra-internal',
