@@ -16,6 +16,23 @@
       "revId": "e3cbc0f2a21368e5f71b5f3d82af6b3503983f0c",
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "3afe883f_b1332047",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-09-07T21:34:48Z",
+      "side": 1,
+      "message": "We should perhaps first have a discussion on which of the alternative allocators we want to choose. I\u0027ve been experimenting with various allocators recently after a similar discussion in Clang and these are the numbers I measured for GN:\n\nout: 11342ms\njemalloc: 9074ms\nmimalloc: 9488ms\nrpmalloc: 8705ms\nscudo: 11520ms\nsnmalloc: 9334ms\ntcmalloc: 9245ms\n\nThis is a mean of 10 runs in Fuchsia on Linux host (Z840). tcmalloc never came out on top, the fastest allocator is consistently rpmalloc followed by jemalloc which matches results we\u0027ve seen in Clang.",
+      "revId": "e3cbc0f2a21368e5f71b5f3d82af6b3503983f0c",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": false
     }
   ]
 }
