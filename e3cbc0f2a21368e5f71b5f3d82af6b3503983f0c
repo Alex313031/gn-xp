@@ -51,6 +51,24 @@
       "revId": "e3cbc0f2a21368e5f71b5f3d82af6b3503983f0c",
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "9e1e53c2_3a79e846",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-09-07T21:57:25Z",
+      "side": 1,
+      "message": "I also wanted to include the new TCMalloc, but I couldn\u0027t get it to work. Bazel cannot produce static libraries so it\u0027s really infeasible to use the output of the Bazel build with GN.\n\n\u003e \u003e We should perhaps first have a discussion on which of the alternative allocators we want to choose. I\u0027ve been experimenting with various allocators recently after a similar discussion in Clang and these are the numbers I measured for GN:\n\u003e \u003e \n\u003e \u003e out: 11342ms\n\u003e \n\u003e This is the default system (glibc) allocator.\n\u003e \n\u003e \u003e jemalloc: 9074ms\n\u003e \u003e mimalloc: 9488ms\n\u003e \u003e rpmalloc: 8705ms\n\u003e \u003e scudo: 11520ms\n\u003e \u003e snmalloc: 9334ms\n\u003e \u003e tcmalloc: 9245ms\n\u003e \u003e \n\u003e \u003e This is a mean of 10 runs in Fuchsia on Linux host (Z840). tcmalloc never came out on top, the fastest allocator is consistently rpmalloc followed by jemalloc which matches results we\u0027ve seen in Clang.\n\nI meant median, not mean.",
+      "parentUuid": "50b7aeca_6690cef0",
+      "revId": "e3cbc0f2a21368e5f71b5f3d82af6b3503983f0c",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": false
     }
   ]
 }
