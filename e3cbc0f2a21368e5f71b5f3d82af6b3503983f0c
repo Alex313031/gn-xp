@@ -33,6 +33,24 @@
       "revId": "e3cbc0f2a21368e5f71b5f3d82af6b3503983f0c",
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "50b7aeca_6690cef0",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-09-07T21:35:38Z",
+      "side": 1,
+      "message": "\u003e We should perhaps first have a discussion on which of the alternative allocators we want to choose. I\u0027ve been experimenting with various allocators recently after a similar discussion in Clang and these are the numbers I measured for GN:\n\u003e \n\u003e out: 11342ms\n\nThis is the default system (glibc) allocator.\n\n\u003e jemalloc: 9074ms\n\u003e mimalloc: 9488ms\n\u003e rpmalloc: 8705ms\n\u003e scudo: 11520ms\n\u003e snmalloc: 9334ms\n\u003e tcmalloc: 9245ms\n\u003e \n\u003e This is a mean of 10 runs in Fuchsia on Linux host (Z840). tcmalloc never came out on top, the fastest allocator is consistently rpmalloc followed by jemalloc which matches results we\u0027ve seen in Clang.",
+      "parentUuid": "3afe883f_b1332047",
+      "revId": "e3cbc0f2a21368e5f71b5f3d82af6b3503983f0c",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": false
     }
   ]
 }
