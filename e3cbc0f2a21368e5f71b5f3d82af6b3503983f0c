@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "952adab9_abe628fb",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000067
+      },
+      "writtenOn": "2020-09-07T19:19:48Z",
+      "side": 1,
+      "message": "This is my first real LUCI recipe, and I\u0027m not sure how to properly test this. Any help welcomed :-)",
+      "revId": "e3cbc0f2a21368e5f71b5f3d82af6b3503983f0c",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": false
+    }
+  ]
+}
