@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "9ee9bc59_58dd9fca",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 11
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000633
+      },
+      "writtenOn": "2020-09-08T17:35:51Z",
+      "side": 1,
+      "message": "Thanks for the review!",
+      "parentUuid": "57d5c928_f4d2a497",
+      "revId": "d490a01afbcaf669c94aafea5405a42090d61750",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "11d8881c_8d9a023a",
         "filename": "src/gn/builtin_tool.h",
         "patchSetId": 11
@@ -36,6 +54,24 @@
     },
     {
       "key": {
+        "uuid": "90d7d686_73276e07",
+        "filename": "src/gn/builtin_tool.h",
+        "patchSetId": 11
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 1000633
+      },
+      "writtenOn": "2020-09-08T17:35:51Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "11d8881c_8d9a023a",
+      "revId": "d490a01afbcaf669c94aafea5405a42090d61750",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "29c35215_697ccd1a",
         "filename": "src/gn/builtin_tool.h",
         "patchSetId": 11
@@ -50,6 +86,24 @@
       "revId": "d490a01afbcaf669c94aafea5405a42090d61750",
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "02babccb_3a5e5653",
+        "filename": "src/gn/builtin_tool.h",
+        "patchSetId": 11
+      },
+      "lineNbr": 23,
+      "author": {
+        "id": 1000633
+      },
+      "writtenOn": "2020-09-08T17:35:51Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "29c35215_697ccd1a",
+      "revId": "d490a01afbcaf669c94aafea5405a42090d61750",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": false
     },
     {
       "key": {
@@ -76,6 +130,30 @@
     },
     {
       "key": {
+        "uuid": "55e8d89f_556d2e11",
+        "filename": "src/gn/ninja_c_binary_target_writer.cc",
+        "patchSetId": 11
+      },
+      "lineNbr": 671,
+      "author": {
+        "id": 1000633
+      },
+      "writtenOn": "2020-09-08T17:35:51Z",
+      "side": 1,
+      "message": "My understanding matches yours. I\u0027ve switched swift and rust to have CHECKs for where I think it makes sense.",
+      "parentUuid": "72c3783e_43fb12db",
+      "range": {
+        "startLine": 671,
+        "startChar": 23,
+        "endLine": 671,
+        "endChar": 45
+      },
+      "revId": "d490a01afbcaf669c94aafea5405a42090d61750",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "c26075c0_85408b9d",
         "filename": "src/gn/target.cc",
         "patchSetId": 11
@@ -90,6 +168,24 @@
       "revId": "d490a01afbcaf669c94aafea5405a42090d61750",
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "8854454f_d3203083",
+        "filename": "src/gn/target.cc",
+        "patchSetId": 11
+      },
+      "lineNbr": 556,
+      "author": {
+        "id": 1000633
+      },
+      "writtenOn": "2020-09-08T17:35:51Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "c26075c0_85408b9d",
+      "revId": "d490a01afbcaf669c94aafea5405a42090d61750",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": false
     }
   ]
 }
