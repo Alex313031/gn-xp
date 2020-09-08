@@ -16,6 +16,155 @@
       "revId": "4eaa16f8c0cc23a67f4ee45d2e06e839c30cc7dd",
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "7eaf2ebd_17b4c3a4",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 12
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000014
+      },
+      "writtenOn": "2020-09-08T20:32:42Z",
+      "side": 1,
+      "message": "Thanks, fortunately this change doesn\u0027t look nearly as complex as it could be!",
+      "revId": "4eaa16f8c0cc23a67f4ee45d2e06e839c30cc7dd",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "b5887551_5ac0279f",
+        "filename": "src/gn/ninja_c_binary_target_writer.cc",
+        "patchSetId": 12
+      },
+      "lineNbr": 881,
+      "author": {
+        "id": 1000014
+      },
+      "writtenOn": "2020-09-08T20:32:42Z",
+      "side": 1,
+      "message": "I haven\u0027t thought deeply about this so I don\u0027t actually know: does this need to fallback on the phony rule? There are a couple of other similar cases in the *_writer.cc files.",
+      "revId": "4eaa16f8c0cc23a67f4ee45d2e06e839c30cc7dd",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "226e6118_04e43b3e",
+        "filename": "src/gn/target.cc",
+        "patchSetId": 12
+      },
+      "lineNbr": 555,
+      "author": {
+        "id": 1000014
+      },
+      "writtenOn": "2020-09-08T20:32:42Z",
+      "side": 1,
+      "message": "Are you sure this is the expected behavior of all the callers? I imagine most callers will expect at least one result from this function and I don\u0027t think this is guaranteed any more.",
+      "range": {
+        "startLine": 554,
+        "startChar": 4,
+        "endLine": 555,
+        "endChar": 66
+      },
+      "revId": "4eaa16f8c0cc23a67f4ee45d2e06e839c30cc7dd",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "cf6dd5d4_b6902031",
+        "filename": "src/gn/target.cc",
+        "patchSetId": 12
+      },
+      "lineNbr": 795,
+      "author": {
+        "id": 1000014
+      },
+      "writtenOn": "2020-09-08T20:32:42Z",
+      "side": 1,
+      "message": "Can you write \"bug 194\" here instead? Just the number looks strange, especially since it\u0027s so low!",
+      "range": {
+        "startLine": 795,
+        "startChar": 10,
+        "endLine": 795,
+        "endChar": 13
+      },
+      "revId": "4eaa16f8c0cc23a67f4ee45d2e06e839c30cc7dd",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "ed0eb7c0_8ae9bef0",
+        "filename": "src/gn/target.cc",
+        "patchSetId": 12
+      },
+      "lineNbr": 801,
+      "author": {
+        "id": 1000014
+      },
+      "writtenOn": "2020-09-08T20:32:42Z",
+      "side": 1,
+      "message": "Does this work recursively? Like if a target depended on a group or something with a phony rule, but that group in turn depended on a static library. I think you would need that static library to be \"real\", but I think this code is just computing the first level of dependency.\n\nIf true, we should figure out what to do. We shouldn\u0027t be recursively walking the dependency tree from this code.",
+      "range": {
+        "startLine": 800,
+        "startChar": 2,
+        "endLine": 801,
+        "endChar": 76
+      },
+      "revId": "4eaa16f8c0cc23a67f4ee45d2e06e839c30cc7dd",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "465ff686_44391f39",
+        "filename": "src/gn/target.h",
+        "patchSetId": 12
+      },
+      "lineNbr": 420,
+      "author": {
+        "id": 1000014
+      },
+      "writtenOn": "2020-09-08T20:32:42Z",
+      "side": 1,
+      "message": "Can you rename this to \"HasRealInputs\" and mark const? \"Check\" has some implication to me that it has side-effects rather than just a function that computes a value.",
+      "range": {
+        "startLine": 420,
+        "startChar": 7,
+        "endLine": 420,
+        "endChar": 25
+      },
+      "revId": "4eaa16f8c0cc23a67f4ee45d2e06e839c30cc7dd",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "bb479cf6_d1120ce0",
+        "filename": "src/gn/visual_studio_writer.cc",
+        "patchSetId": 12
+      },
+      "lineNbr": 909,
+      "author": {
+        "id": 1000014
+      },
+      "writtenOn": "2020-09-08T20:32:42Z",
+      "side": 1,
+      "message": "What guarantees that the target has a dependency output file here?",
+      "range": {
+        "startLine": 909,
+        "startChar": 18,
+        "endLine": 909,
+        "endChar": 40
+      },
+      "revId": "4eaa16f8c0cc23a67f4ee45d2e06e839c30cc7dd",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": true
     }
   ]
 }
