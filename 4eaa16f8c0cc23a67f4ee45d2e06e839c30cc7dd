@@ -36,6 +36,24 @@
     },
     {
       "key": {
+        "uuid": "731c7dfc_80717add",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 12
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000633
+      },
+      "writtenOn": "2020-09-09T19:58:35Z",
+      "side": 1,
+      "message": "I really appreciate the review. I left a few comments unresolved because I think I need a bit more input. Thanks!",
+      "parentUuid": "7eaf2ebd_17b4c3a4",
+      "revId": "4eaa16f8c0cc23a67f4ee45d2e06e839c30cc7dd",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "b5887551_5ac0279f",
         "filename": "src/gn/ninja_c_binary_target_writer.cc",
         "patchSetId": 12
@@ -53,6 +71,47 @@
     },
     {
       "key": {
+        "uuid": "13f7e6ee_61c570ef",
+        "filename": "src/gn/ninja_c_binary_target_writer.cc",
+        "patchSetId": 12
+      },
+      "lineNbr": 881,
+      "author": {
+        "id": 1000633
+      },
+      "writtenOn": "2020-09-09T19:58:35Z",
+      "side": 1,
+      "message": "No, the current behavior is that dependency_output_file can be populated with a phony target if it has \"real\" dependencies. I realize now that might not have been what you expected based on your previous suggestion. We essentially have three possible states for dependencies:\n\n  Real file target \n    - dependency_output_file is set to a file path\n    - dependency_output_phony is empty\n    - should be used as a dependency in build steps\n  Phony target with real dependencies\n    - dependency_output_file is set to phony target\n    - dependency_output_phony is set to phony target\n    - should be used as a dependency in build steps\n  Phony target with no real dependencies (always dirty)\n    - dependency_output_file is nullopt\n    - dependency_output_phony is set to phony target\n    - should not be used as a dependency in build steps (except top-level phony targets) \n\nPerhaps it would be more clear to make both dependency_output_file and dependency_output_phony to be std::optionals, and also have a \"std::optional\u003cOutputFile\u003e Target::dependency_output()\" helper that would select the right one or none. WDYT?",
+      "parentUuid": "b5887551_5ac0279f",
+      "revId": "4eaa16f8c0cc23a67f4ee45d2e06e839c30cc7dd",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "5a899c22_f04a07c2",
+        "filename": "src/gn/target.cc",
+        "patchSetId": 12
+      },
+      "lineNbr": 522,
+      "author": {
+        "id": 1000633
+      },
+      "writtenOn": "2020-09-09T19:58:35Z",
+      "side": 1,
+      "message": "This is unrelated to the CL, but it looks like GENERATED_FILE is in both this case and the above case. Is this supposed to be BUNDLE_DATA?",
+      "range": {
+        "startLine": 522,
+        "startChar": 13,
+        "endLine": 522,
+        "endChar": 52
+      },
+      "revId": "4eaa16f8c0cc23a67f4ee45d2e06e839c30cc7dd",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "226e6118_04e43b3e",
         "filename": "src/gn/target.cc",
         "patchSetId": 12
@@ -64,6 +123,30 @@
       "writtenOn": "2020-09-08T20:32:42Z",
       "side": 1,
       "message": "Are you sure this is the expected behavior of all the callers? I imagine most callers will expect at least one result from this function and I don\u0027t think this is guaranteed any more.",
+      "range": {
+        "startLine": 554,
+        "startChar": 4,
+        "endLine": 555,
+        "endChar": 66
+      },
+      "revId": "4eaa16f8c0cc23a67f4ee45d2e06e839c30cc7dd",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "004887a8_144c1402",
+        "filename": "src/gn/target.cc",
+        "patchSetId": 12
+      },
+      "lineNbr": 555,
+      "author": {
+        "id": 1000633
+      },
+      "writtenOn": "2020-09-09T19:58:35Z",
+      "side": 1,
+      "message": "Good question. From what I gather, we only get to this case if (build_complete \u003d\u003d true) AND (output_type is either GROUP, SOURCE_SET, or BUNDLE_DATA). \n\nTaking a look at the callers:\n\n  target.cc:584 - Target::GetOutputFilesForSource\n    This is called with build_complete \u003d\u003d false, so it currently returns an empty list and treats that as an error for GetOutputFilesForSource.\n\n  command_outputs.cc:138 - RunOutputs\n    The caller walks the resulting list and converts them back to OutputFiles before printing them. I would assume it would be okay if the list was empty.\n\n  desc_builder.cc:785 - TargetDescBuilder::FillInOutputs\n    It looks like this would just result in an empty list being added to the dictionary, so I think this would be okay.\n\n  function_get_target_outputs.cc:127 - RunGetTargetOutputs\n    This is also called with build_complete \u003d\u003d false, so it already is returning an empty list and error.\n\nIt seems like the relevant cases here are informational in nature. We really don\u0027t have an actual file to output here, but we could fall back on the phony alias. I haven\u0027t dug into the ramifications of a phony SourceFile, but that might be okay for the use case. I don\u0027t think we want to return an error, as that will trip up outputs and desc and this really isn\u0027t an error. WDYT?",
+      "parentUuid": "226e6118_04e43b3e",
       "range": {
         "startLine": 554,
         "startChar": 4,
@@ -99,6 +182,30 @@
     },
     {
       "key": {
+        "uuid": "078bf7ad_f26f6838",
+        "filename": "src/gn/target.cc",
+        "patchSetId": 12
+      },
+      "lineNbr": 795,
+      "author": {
+        "id": 1000633
+      },
+      "writtenOn": "2020-09-09T19:58:35Z",
+      "side": 1,
+      "message": "Done.",
+      "parentUuid": "cf6dd5d4_b6902031",
+      "range": {
+        "startLine": 795,
+        "startChar": 10,
+        "endLine": 795,
+        "endChar": 13
+      },
+      "revId": "4eaa16f8c0cc23a67f4ee45d2e06e839c30cc7dd",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "ed0eb7c0_8ae9bef0",
         "filename": "src/gn/target.cc",
         "patchSetId": 12
@@ -110,6 +217,30 @@
       "writtenOn": "2020-09-08T20:32:42Z",
       "side": 1,
       "message": "Does this work recursively? Like if a target depended on a group or something with a phony rule, but that group in turn depended on a static library. I think you would need that static library to be \"real\", but I think this code is just computing the first level of dependency.\n\nIf true, we should figure out what to do. We shouldn\u0027t be recursively walking the dependency tree from this code.",
+      "range": {
+        "startLine": 800,
+        "startChar": 2,
+        "endLine": 801,
+        "endChar": 76
+      },
+      "revId": "4eaa16f8c0cc23a67f4ee45d2e06e839c30cc7dd",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "2399eafe_28030cdb",
+        "filename": "src/gn/target.cc",
+        "patchSetId": 12
+      },
+      "lineNbr": 801,
+      "author": {
+        "id": 1000633
+      },
+      "writtenOn": "2020-09-09T19:58:35Z",
+      "side": 1,
+      "message": "If I understand target resolution correctly (this is still new to me, so big IF), the targets are \"resolved\" in a bottom up manner so that when Target::OnResolved is called, all of its dependencies have already been resolved and their output files filled. This is why we\u0027re only checking the first level. If a dependency does not have a dependency_output_file, then it doesn\u0027t have a target we can depend on. In the example you describe, if the group depended on a static library, the group would still wind up with a dependency_output_file containing the phony target, we\u0027d return true at line 804 and this target would set their dependency_output_file.\n\nIf my understanding is incorrect, then I agree we need to figure out a solution.",
+      "parentUuid": "ed0eb7c0_8ae9bef0",
       "range": {
         "startLine": 800,
         "startChar": 2,
@@ -145,6 +276,30 @@
     },
     {
       "key": {
+        "uuid": "f0cf175f_55ee95e6",
+        "filename": "src/gn/target.h",
+        "patchSetId": 12
+      },
+      "lineNbr": 420,
+      "author": {
+        "id": 1000633
+      },
+      "writtenOn": "2020-09-09T19:58:35Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "465ff686_44391f39",
+      "range": {
+        "startLine": 420,
+        "startChar": 7,
+        "endLine": 420,
+        "endChar": 25
+      },
+      "revId": "4eaa16f8c0cc23a67f4ee45d2e06e839c30cc7dd",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "bb479cf6_d1120ce0",
         "filename": "src/gn/visual_studio_writer.cc",
         "patchSetId": 12
@@ -165,6 +320,30 @@
       "revId": "4eaa16f8c0cc23a67f4ee45d2e06e839c30cc7dd",
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "b54d1d9c_4071ede4",
+        "filename": "src/gn/visual_studio_writer.cc",
+        "patchSetId": 12
+      },
+      "lineNbr": 909,
+      "author": {
+        "id": 1000633
+      },
+      "writtenOn": "2020-09-09T19:58:35Z",
+      "side": 1,
+      "message": "Nothing actually, I misunderstood the usage. I\u0027ve updated this to fall back on the phony if present and also return an additional bool indicating whether the target is a phony. I don\u0027t know much about VisualStudio project files, but it seemed like one usage of ninja_target should be omitted in the phony case and the other should still be there.",
+      "parentUuid": "bb479cf6_d1120ce0",
+      "range": {
+        "startLine": 909,
+        "startChar": 18,
+        "endLine": 909,
+        "endChar": 40
+      },
+      "revId": "4eaa16f8c0cc23a67f4ee45d2e06e839c30cc7dd",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": false
     }
   ]
 }
