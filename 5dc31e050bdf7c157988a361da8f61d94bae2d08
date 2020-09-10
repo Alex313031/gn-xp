@@ -33,6 +33,23 @@
       "revId": "5dc31e050bdf7c157988a361da8f61d94bae2d08",
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "72eff019_e4a106bc",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000262
+      },
+      "writtenOn": "2020-09-10T09:52:43Z",
+      "side": 1,
+      "message": "Brett, could you review this CL regarding other platforms? If it\u0027s ok, please send it to CQ, I have no sufficient rights.",
+      "revId": "5dc31e050bdf7c157988a361da8f61d94bae2d08",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": false
     }
   ]
 }
