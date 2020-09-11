@@ -39,6 +39,30 @@
       "revId": "ac375413e41a1c175762603b2d0a608c8a538b47",
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "6a14c401_a42d834b",
+        "filename": "infra/recipes/gn.py",
+        "patchSetId": 2
+      },
+      "lineNbr": 31,
+      "author": {
+        "id": 1000067
+      },
+      "writtenOn": "2020-09-11T10:05:15Z",
+      "side": 1,
+      "message": "Very nice, thanks!",
+      "parentUuid": "5bd1f0f4_db1e9de7",
+      "range": {
+        "startLine": 31,
+        "startChar": 36,
+        "endLine": 31,
+        "endChar": 76
+      },
+      "revId": "ac375413e41a1c175762603b2d0a608c8a538b47",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": true
     }
   ]
 }
