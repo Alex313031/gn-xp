@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "a43e615d_70b22032",
+        "filename": "src/gn/compile_commands_writer.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 247,
+      "author": {
+        "id": 1000004
+      },
+      "writtenOn": "2020-09-11T17:19:30Z",
+      "side": 1,
+      "message": "I guess in theory if the toolchain\u0027s \"asm\" tool wasn\u0027t clang, this might cause problems? But I don\u0027t think there\u0027s any way to tell that without pattern matching on the \"command\" of the tool, which wouldn\u0027t be great.\n\nSo I think this is probably fine, and we could probably add some configurability if we needed it later.\n\nCould you add a short test to compile_commands_writer_test.cc too please?",
+      "revId": "c952e4491b54d0e3179d1b8c77ec0b770b339d32",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": true
+    }
+  ]
+}
