@@ -249,6 +249,7 @@ void OutputJSON(const BuildSettings* build_settings,
       SourceFile::Type source_type = source.type();
       if (source_type != SourceFile::SOURCE_CPP &&
           source_type != SourceFile::SOURCE_C &&
+          source_type != SourceFile::SOURCE_S &&
           source_type != SourceFile::SOURCE_M &&
           source_type != SourceFile::SOURCE_MM)
         continue;
