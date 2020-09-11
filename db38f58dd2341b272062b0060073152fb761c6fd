@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "bbb953e0_c8caa95d",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000014
+      },
+      "writtenOn": "2020-09-11T17:03:03Z",
+      "side": 1,
+      "message": "Sorry in advance...\n\n  - I don\u0027t really understand what purpose the \"restat\" call has. Won\u0027t that happen automatically when Ninja runs next? Can the description go into more detail?\n\n  - How much difference does the \"recompact\" call make? Does Ninja do this automatically on some schedule? My mental model of this is like a language GC where it\u0027s easy to make things worse trying to manage it too carefully. If Ninja needs to do this more, can we update Ninja\u0027s algorithm?\n\n  - The \"cleandead\" call makes me nervous since I don\u0027t think gen should delete anything by default. From what I understand this would need to happen before the other two calls, but then I think it should be a separate option since this could be destructive.\n\n  - Do we really need to dotfile option? It seems really weird to me to hardcode paths in the dotfile when everybody will have a build in a different place. The only other path we support in the dotfile is the script executable which will normally be an absolute system path. With the current implementation, supplying anything but an absolute system path will be wrong because it looks like it will be taken as relative to the CWD, and GN can run in any directory in your build.\n\nI wouldn\u0027t expect just providing a Ninja binary would have all of these side effects. And it looks like --ninja-executable is already used by xcode project generation. I think xcode users might be surprised that they suddenly opted-in to all of these options, and many projects use the Ninja binary on the path. So I\u0027m thinking it would be better to separate these out:\n\n  --ninja-executable\u003d...: Provide a path, otherwise just use \"ninja\" on the path.\n  --cleandead: opt-in to old stuff deleting.\n  --compact: opt-in to recompact (and maybe restat whatever that does).\n\nWe should update the xcode project code to use the new global switch constant, and update the help (this is probably just removing the xcode-specific mention of this flag in deference to the global one).",
+      "revId": "db38f58dd2341b272062b0060073152fb761c6fd",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": false
+    }
+  ]
+}
