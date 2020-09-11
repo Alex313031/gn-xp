@@ -158,6 +158,10 @@ Variables
       This is intended to be used during migrations or other situations where
       there are two independent GN builds in the same directories.
 
+  ninja_executable [optional]
+      When set specifies the Ninja executable that will be used to perform some
+      post-processing on the generated files for more consistent builds.
+
   ninja_required_version [optional]
       When set specifies the minimum required version of Ninja. The default
       required version is 1.7.2. Specifying a higher version might enable the
@@ -819,6 +823,20 @@ bool Setup::FillOtherConfig(const base::CommandLine& cmdline, Err* err) {
       return false;
     }
     loader_->set_build_file_extension(extension);
+  }
+
+  // Ninja executable.
+  const Value* ninja_executable_value =
+      dotfile_scope_.GetValue("ninja_executable", true);
+  if (cmdline.HasSwitch(switches::kNinjaExecutable)) {
+    build_settings_.set_ninja_executable(
+        cmdline.GetSwitchValuePath(switches::kNinjaExecutable));
+  } else if (ninja_executable_value) {
+    if (!ninja_executable_value->VerifyTypeIs(Value::STRING, err)) {
+      return false;
+    }
+    build_settings_.set_ninja_executable(
+        base::FilePath(ninja_executable_value->string_value()));
   }
 
   // Ninja required version.

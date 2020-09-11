@@ -56,6 +56,10 @@ class BuildSettings {
   base::FilePath python_path() const { return python_path_; }
   void set_python_path(const base::FilePath& p) { python_path_ = p; }
 
+  // Path of the Ninja executable to use.
+  base::FilePath ninja_executable() const { return ninja_executable_; }
+  void set_ninja_executable(const base::FilePath& e) { ninja_executable_ = e; }
+
   // Required Ninja version.
   const Version& ninja_required_version() const {
     return ninja_required_version_;
@@ -133,6 +137,7 @@ class BuildSettings {
   base::FilePath secondary_source_path_;
   base::FilePath python_path_;
 
+  base::FilePath ninja_executable_;
   // See 40045b9 for the reason behind using 1.7.2 as the default version.
   Version ninja_required_version_{1, 7, 2};
 

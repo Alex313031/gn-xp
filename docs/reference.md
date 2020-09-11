@@ -6782,6 +6782,10 @@
       This is intended to be used during migrations or other situations where
       there are two independent GN builds in the same directories.
 
+  ninja_executable [optional]
+      When set specifies the Ninja executable that will be used to perform some
+      post-processing on the generated files for more consistent builds.
+
   ninja_required_version [optional]
       When set specifies the minimum required version of Ninja. The default
       required version is 1.7.2. Specifying a higher version might enable the
@@ -7789,6 +7793,7 @@
     *   --dotfile: Override the name of the ".gn" file.
     *   --fail-on-unused-args: Treat unused build args as fatal errors.
     *   --markdown: Write help output in the Markdown format.
+    *   --ninja-executable: Set the Ninja executable.
     *   --nocolor: Force non-colored output.
     *   -q: Quiet mode. Don't print output on success.
     *   --root: Explicitly specify source root.

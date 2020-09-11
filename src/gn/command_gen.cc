@@ -12,6 +12,8 @@
 #include "gn/commands.h"
 #include "gn/compile_commands_writer.h"
 #include "gn/eclipse_writer.h"
+#include "gn/exec_process.h"
+#include "gn/filesystem_utils.h"
 #include "gn/json_project_writer.h"
 #include "gn/ninja_target_writer.h"
 #include "gn/ninja_writer.h"
@@ -352,6 +354,54 @@ bool RunCompileCommandsWriter(const BuildSettings* build_settings,
   return res;
 }
 
+bool RunNinjaTool(const BuildSettings* build_settings,
+                  const std::string& tool,
+                  Err* err) {
+  const base::FilePath& ninja_executable = build_settings->ninja_executable();
+  base::CommandLine cmdline(ninja_executable);
+  cmdline.SetParseSwitches(false);
+  cmdline.AppendArg("-t");
+  cmdline.AppendArg(tool);
+
+  base::FilePath startup_dir =
+      build_settings->GetFullPath(build_settings->build_dir());
+
+  std::string output;
+  std::string stderr_output;
+
+  int exit_code = 0;
+  if (!internal::ExecProcess(cmdline, startup_dir, &output, &stderr_output,
+                             &exit_code)) {
+    *err =
+      Err(Location(), "Could not execute Ninja.",
+          "I was trying to execute \"" + FilePathToUTF8(ninja_executable) +
+          "\".");
+    return false;
+  }
+
+  if (exit_code != 0) {
+    *err = Err(Location(), "Ninja has quit with exit code " +
+               base::IntToString(exit_code) + ".");
+    return false;
+  }
+
+  return true;
+}
+
+bool RecompactNinjaDatabase(const BuildSettings* build_settings,
+                            Err* err) {
+  if (!RunNinjaTool(build_settings, "cleandead", err)) {
+    return false;
+  }
+  if (!RunNinjaTool(build_settings, "recompact", err)) {
+    return false;
+  }
+  if (!RunNinjaTool(build_settings, "restat", err)) {
+    return false;
+  }
+  return true;
+}
+
 }  // namespace
 
 const char kGen[] = "gen";
@@ -548,6 +598,14 @@ int RunGen(const std::vector<std::string>& args) {
   // Write the root ninja files.
   if (!NinjaWriter::RunAndWriteFiles(&setup->build_settings(), setup->builder(),
                                      write_info.rules, &err)) {
+    err.PrintToStdout();
+    return 1;
+  }
+
+  if (const BuildSettings* build_settings = &setup->build_settings();
+      !build_settings->ninja_executable().empty() &&
+      build_settings->ninja_required_version() >= Version{1, 10, 0} &&
+      !RecompactNinjaDatabase(build_settings, &err)) {
     err.PrintToStdout();
     return 1;
   }
