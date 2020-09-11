@@ -89,6 +89,24 @@
     },
     {
       "key": {
+        "uuid": "f5faf5ae_bebad87a",
+        "filename": "src/gn/ninja_c_binary_target_writer.cc",
+        "patchSetId": 12
+      },
+      "lineNbr": 881,
+      "author": {
+        "id": 1000633
+      },
+      "writtenOn": "2020-09-11T21:38:52Z",
+      "side": 1,
+      "message": "I\u0027ve updated the behavior as follows:\n\n  Real file target:\n   - dependency_output_file_ is populated\n   - dependency_output_phony_ is nullopt\n  Phony target with real deps:\n   - dependency_output_file_ is nullopt\n   - dependency_output_phony_ is populated\n  Phony target with no real deps:\n   - dependency_output_file_ is nullopt\n   - dependency_output_phony_ is nullopt\n\nI also added a helper for \"dependency_output_file_or_phony\" for when the caller wants to fall back on the phony. I\u0027m not sure whether this is what you originally meant, but it is definitely more explicit. This particular spot will fall back on the phony.",
+      "parentUuid": "13f7e6ee_61c570ef",
+      "revId": "4eaa16f8c0cc23a67f4ee45d2e06e839c30cc7dd",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "5a899c22_f04a07c2",
         "filename": "src/gn/target.cc",
         "patchSetId": 12

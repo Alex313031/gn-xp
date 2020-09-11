@@ -161,6 +161,24 @@
     },
     {
       "key": {
+        "uuid": "32249821_6b8dd98b",
+        "filename": "src/gn/target.cc",
+        "patchSetId": 10
+      },
+      "lineNbr": 827,
+      "author": {
+        "id": 1000633
+      },
+      "writtenOn": "2020-09-11T21:38:52Z",
+      "side": 1,
+      "message": "The top-level phony targets are still in place so that users can still do \"ninja \u003cgn_target\u003e\" for all GN targets. In the case where they need to be omitted, we just have an empty phony target like:\n\n  build some_gn_target: phony",
+      "parentUuid": "bab08ff0_5a19f713",
+      "revId": "446796955e19534fc75b80071fc9b82013ee3d35",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "d3b9570c_3a355be6",
         "filename": "src/gn/target.h",
         "patchSetId": 10
@@ -211,6 +229,24 @@
       "revId": "446796955e19534fc75b80071fc9b82013ee3d35",
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "a55efe9e_5b3c418c",
+        "filename": "src/gn/target.h",
+        "patchSetId": 10
+      },
+      "lineNbr": 509,
+      "author": {
+        "id": 1000633
+      },
+      "writtenOn": "2020-09-11T21:38:52Z",
+      "side": 1,
+      "message": "I went ahead and omitted this build rule. I had left it in place so that the build.ninja phony targets had something to alias to, but now those will just be empty phony rules.",
+      "parentUuid": "69273fd0_7c036639",
+      "revId": "446796955e19534fc75b80071fc9b82013ee3d35",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": false
     }
   ]
 }
