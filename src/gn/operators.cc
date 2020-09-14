@@ -14,6 +14,10 @@
 #include "gn/token.h"
 #include "gn/value.h"
 
+#include <iostream>
+#include "gn/source_dir.h"
+#include "gn/source_file.h"
+
 namespace {
 
 const char kSourcesName[] = "sources";
@@ -351,10 +355,19 @@ Value ExecuteEquals(Scope* exec_scope,
   // Optionally apply the assignment filter in-place.
   const PatternList* filter = dest->GetAssignmentFilter(exec_scope);
   if (filter && written_value->type() == Value::LIST) {
+    const SourceDir scope_dir = exec_scope->GetSourceDir();
     std::vector<Value>& list_value = written_value->list_value();
     auto first_deleted = std::remove_if(
         list_value.begin(), list_value.end(),
-        [filter](const Value& v) { return filter->MatchesValue(v); });
+        [filter, scope_dir](const Value& v) {
+          if (!filter->MatchesValue(v))
+            return false;
+
+          Err err;
+          SourceFile source_file = scope_dir.ResolveRelativeFile(v, &err);
+          std::cout << "Filtering: " << source_file.value() << std::endl;
+          return true;
+        });
     list_value.erase(first_deleted, list_value.end());
   }
   return Value();
