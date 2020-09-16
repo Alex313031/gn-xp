@@ -244,7 +244,7 @@ TEST_F(NinjaRustBinaryTargetWriterTest, RlibDepsAcrossGroups) {
         "\n"
         "build obj/bar/libmylib.rlib: rust_rlib ../../bar/lib.rs | "
         "../../bar/mylib.rs ../../bar/lib.rs obj/bar/libmymacro.so || "
-        "obj/baz/group.stamp\n"
+        "phony/baz/group\n"
         "  externs = --extern mymacro=obj/bar/libmymacro.so\n"
         "  rustdeps = -Ldependency=obj/bar\n"
         "  sources = ../../bar/mylib.rs ../../bar/lib.rs\n";
@@ -748,7 +748,7 @@ TEST_F(NinjaRustBinaryTargetWriterTest, GroupDeps) {
         "target_output_name = bar\n"
         "\n"
         "build ./foo_bar: rust_bin ../../foo/main.rs | ../../foo/source.rs "
-        "../../foo/main.rs obj/bar/libmylib.rlib || obj/baz/group.stamp\n"
+        "../../foo/main.rs obj/bar/libmylib.rlib || phony/baz/group\n"
         "  externs = --extern mylib=obj/bar/libmylib.rlib\n"
         "  rustdeps = -Ldependency=obj/bar\n"
         "  sources = ../../foo/source.rs ../../foo/main.rs\n";

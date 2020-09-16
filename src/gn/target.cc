@@ -818,6 +818,7 @@ bool Target::FillOutputFiles(Err* err) {
   const Tool* tool = toolchain_->GetToolForTargetFinalOutput(this);
   bool check_tool_outputs = false;
   switch (output_type_) {
+    case GROUP:
     case SOURCE_SET: {
       if (HasRealInputs()) {
         dependency_output_phony_ =
@@ -826,7 +827,6 @@ bool Target::FillOutputFiles(Err* err) {
       }
       break;
     }
-    case GROUP:
     case BUNDLE_DATA:
     case CREATE_BUNDLE:
     case COPY_FILES:
