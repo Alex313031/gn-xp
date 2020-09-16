@@ -31,5 +31,5 @@ void NinjaBundleDataTargetWriter::Run() {
       order_only_deps.push_back(*pair.ptr->dependency_output_file_or_phony());
   }
 
-  WriteStampForTarget(output_files, order_only_deps);
+  WritePhonyForTarget(output_files, order_only_deps);
 }
