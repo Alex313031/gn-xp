@@ -389,8 +389,6 @@ const char* Tool::GetToolTypeForTargetFinalOutput(const Target* target) {
     }
   }
   switch (target->output_type()) {
-    case Target::GROUP:
-      return GeneralTool::kGeneralToolStamp;
     case Target::EXECUTABLE:
       return CTool::kCToolLink;
     case Target::SHARED_LIBRARY:
@@ -399,6 +397,7 @@ const char* Tool::GetToolTypeForTargetFinalOutput(const Target* target) {
       return CTool::kCToolSolinkModule;
     case Target::STATIC_LIBRARY:
       return CTool::kCToolAlink;
+    case Target::GROUP:
     case Target::SOURCE_SET:
       return BuiltinTool::kBuiltinToolPhony;
     case Target::ACTION:

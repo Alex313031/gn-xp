@@ -1656,7 +1656,7 @@ TEST_F(NinjaCBinaryTargetWriterTest, SwiftModule) {
         " || phony/foo/foo\n"
         "\n"
         "build phony/bar/bar: phony obj/bar/bar.o "
-        "|| obj/bar/group.stamp phony/foo/foo\n";
+        "|| phony/bar/group phony/foo/foo\n";
 
     const std::string out_str = out.str();
     EXPECT_EQ(expected, out_str) << expected << "\n" << out_str;
