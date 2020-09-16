@@ -76,7 +76,7 @@ TEST(NinjaCreateBundleTargetWriter, Run) {
 
   const char expected[] =
       "build phony/baz/bar.inputdeps: phony obj/foo/bar.stamp "
-      "obj/foo/data.stamp\n"
+      "phony/foo/data\n"
       "build bar.bundle/Contents/Resources/input1.txt: copy_bundle_data "
       "../../foo/input1.txt || phony/baz/bar.inputdeps\n"
       "build bar.bundle/Contents/Resources/input2.txt: copy_bundle_data "
@@ -125,7 +125,7 @@ TEST(NinjaCreateBundleTargetWriter, InSubDirectory) {
 
   const char expected[] =
       "build phony/baz/bar.inputdeps: phony obj/foo/bar.stamp "
-      "obj/foo/data.stamp\n"
+      "phony/foo/data\n"
       "build gen/bar.bundle/Contents/Resources/input1.txt: copy_bundle_data "
       "../../foo/input1.txt || phony/baz/bar.inputdeps\n"
       "build gen/bar.bundle/Contents/Resources/input2.txt: copy_bundle_data "
@@ -226,9 +226,9 @@ TEST(NinjaCreateBundleTargetWriter, AssetCatalog) {
 
   const char expected[] =
       "build phony/baz/bar.inputdeps: phony obj/foo/bar.stamp "
-      "obj/foo/data.stamp\n"
+      "phony/foo/data\n"
       "build bar.bundle/Contents/Resources/Assets.car: compile_xcassets "
-      "../../foo/Foo.xcassets | obj/foo/data.stamp || "
+      "../../foo/Foo.xcassets | phony/foo/data || "
       "phony/baz/bar.inputdeps\n"
       "  product_type = com.apple.product-type\n"
       "  xcasset_compiler_flags = --app-icon foo\n"
@@ -376,9 +376,9 @@ TEST(NinjaCreateBundleTargetWriter, Complex) {
   writer.Run();
 
   const char expected[] =
-      "build phony/baz/bar.inputdeps: phony obj/biz/assets.stamp "
-      "obj/foo/assets.stamp obj/foo/bar.stamp obj/foo/data.stamp "
-      "obj/qux/info_plist.stamp obj/quz/assets.stamp\n"
+      "build phony/baz/bar.inputdeps: phony phony/biz/assets "
+      "phony/foo/assets obj/foo/bar.stamp phony/foo/data "
+      "phony/qux/info_plist phony/quz/assets\n"
       "build bar.bundle/Contents/Info.plist: copy_bundle_data "
       "../../qux/qux-Info.plist || phony/baz/bar.inputdeps\n"
       "build bar.bundle/Contents/Resources/input1.txt: copy_bundle_data "
@@ -386,8 +386,8 @@ TEST(NinjaCreateBundleTargetWriter, Complex) {
       "build bar.bundle/Contents/Resources/input2.txt: copy_bundle_data "
       "../../foo/input2.txt || phony/baz/bar.inputdeps\n"
       "build obj/baz/bar.xcassets.inputdeps.stamp: stamp "
-      "obj/foo/assets.stamp "
-      "obj/quz/assets.stamp obj/biz/assets.stamp\n"
+      "phony/foo/assets "
+      "phony/quz/assets phony/biz/assets\n"
       "build bar.bundle/Contents/Resources/Assets.car | "
       "baz/bar/bar_partial_info.plist: compile_xcassets "
       "../../foo/Foo.xcassets ../../quz/Quz.xcassets "
@@ -459,7 +459,7 @@ TEST(NinjaCreateBundleTargetWriter, CodeSigning) {
 
   const char expected[] =
       "build phony/baz/bar.inputdeps: phony ./quz obj/foo/bar.stamp "
-      "obj/foo/data.stamp\n"
+      "phony/foo/data\n"
       "rule __baz_bar___toolchain_default__code_signing_rule\n"
       "  command =  ../../build/codesign.py -b=quz bar.bundle\n"
       "  description = CODE SIGNING //baz:bar(//toolchain:default)\n"
