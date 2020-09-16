@@ -188,16 +188,16 @@ void NinjaTargetWriter::WriteSharedVars(const SubstitutionBits& bits) {
     out_ << std::endl;
 }
 
-std::vector<OutputFile> NinjaTargetWriter::WriteInputDepsStampAndGetDep(
+std::vector<OutputFile> NinjaTargetWriter::WriteInputDepsPhonyAndGetDep(
     const std::vector<const Target*>& extra_hard_deps,
-    size_t num_stamp_uses) const {
+    size_t num_output_uses) const {
   CHECK(target_->toolchain()) << "Toolchain not set on target "
                               << target_->label().GetUserVisibleName(true);
 
   // ----------
   // Collect all input files that are input deps of this target. Knowing the
   // number before writing allows us to either skip writing the input deps
-  // stamp or optimize it. Use pointers to avoid copies here.
+  // phony or optimize it. Use pointers to avoid copies here.
   std::vector<const SourceFile*> input_deps_sources;
   input_deps_sources.reserve(32);
 
@@ -292,23 +292,22 @@ std::vector<OutputFile> NinjaTargetWriter::WriteInputDepsStampAndGetDep(
 
   // If there are multiple inputs, but the stamp file would be referenced only
   // once, don't write it but depend on the inputs directly.
-  if (num_stamp_uses == 1u)
+  if (num_output_uses == 1u)
     return outs;
 
-  // Make a stamp file.
-  OutputFile input_stamp_file =
-      GetBuildDirForTargetAsOutputFile(target_, BuildDirType::OBJ);
-  input_stamp_file.value().append(target_->label().name());
-  input_stamp_file.value().append(".inputdeps.stamp");
+  // Make a phony target
+  OutputFile input_phony_file =
+      GetBuildDirForTargetAsOutputFile(target_, BuildDirType::PHONY);
+  input_phony_file.value().append(target_->label().name());
+  input_phony_file.value().append(".inputdeps");
 
   out_ << "build ";
-  path_output_.WriteFile(out_, input_stamp_file);
-  out_ << ": " << GetNinjaRulePrefixForToolchain(settings_)
-       << GeneralTool::kGeneralToolStamp;
+  path_output_.WriteFile(out_, input_phony_file);
+  out_ << ": " << BuiltinTool::kBuiltinToolPhony;
   path_output_.WriteFiles(out_, outs);
 
   out_ << "\n";
-  return std::vector<OutputFile>{input_stamp_file};
+  return std::vector<OutputFile>{input_phony_file};
 }
 
 void NinjaTargetWriter::WriteStampForTarget(

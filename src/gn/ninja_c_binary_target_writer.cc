@@ -132,10 +132,10 @@ void NinjaCBinaryTargetWriter::Run() {
 
   WriteCompilerVars(module_dep_info);
 
-  size_t num_stamp_uses = target_->sources().size();
+  size_t num_output_uses = target_->sources().size();
 
   std::vector<OutputFile> input_deps = WriteInputsStampAndGetDep(
-      num_stamp_uses);
+      num_output_uses);
 
   // The input dependencies will be an order-only dependency. This will cause
   // Ninja to make sure the inputs are up to date before compiling this source,
@@ -164,11 +164,11 @@ void NinjaCBinaryTargetWriter::Run() {
   // The order only deps are referenced by each source file compile,
   // but also by PCH compiles.  The latter are annoying to count, so omit
   // them here.  This means that binary targets with a single source file
-  // that also use PCH files won't have a stamp file even though having
+  // that also use PCH files won't have a phony target even though having
   // one would make output ninja file size a bit lower. That's ok, binary
   // targets with a single source are rare.
-  std::vector<OutputFile> order_only_deps = WriteInputDepsStampAndGetDep(
-      std::vector<const Target*>(), num_stamp_uses);
+  std::vector<OutputFile> order_only_deps = WriteInputDepsPhonyAndGetDep(
+      std::vector<const Target*>(), num_output_uses);
 
   // For GCC builds, the .gch files are not object files, but still need to be
   // added as explicit dependencies below. The .gch output files are placed in
