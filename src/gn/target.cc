@@ -543,9 +543,9 @@ bool Target::GetOutputsAsSourceFiles(const LocationRange& loc_for_error,
           output_file.AsSourceFile(settings()->build_settings()));
     }
   } else {
-    // Everything else (like a group or something) has a stamp or phony output.
-    // The dependency output file should have computed what this is. This won't
-    // be valid unless the build is complete.
+    // Everything else (like a group or something) has a phony output. The
+    // dependency output phony should have computed what this is. This won't be
+    // valid unless the build is complete.
     if (!build_complete) {
       *err = Err(loc_for_error, kBuildIncompleteMsg);
       return false;
@@ -804,6 +804,10 @@ bool Target::HasRealInputs() const {
     }
   }
 
+  if (output_type() == BUNDLE_DATA) {
+    return !sources().empty();
+  }
+
   // If any of this target's sources will result in output files, then this
   // target should be considered to have real inputs.
   std::vector<OutputFile> tool_outputs;
@@ -818,6 +822,7 @@ bool Target::FillOutputFiles(Err* err) {
   const Tool* tool = toolchain_->GetToolForTargetFinalOutput(this);
   bool check_tool_outputs = false;
   switch (output_type_) {
+    case BUNDLE_DATA:
     case GENERATED_FILE:
     case GROUP:
     case SOURCE_SET: {
@@ -828,7 +833,6 @@ bool Target::FillOutputFiles(Err* err) {
       }
       break;
     }
-    case BUNDLE_DATA:
     case CREATE_BUNDLE:
     case COPY_FILES:
     case ACTION:
