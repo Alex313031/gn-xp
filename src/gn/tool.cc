@@ -397,6 +397,7 @@ const char* Tool::GetToolTypeForTargetFinalOutput(const Target* target) {
       return CTool::kCToolSolinkModule;
     case Target::STATIC_LIBRARY:
       return CTool::kCToolAlink;
+    case Target::GENERATED_FILE:
     case Target::GROUP:
     case Target::SOURCE_SET:
       return BuiltinTool::kBuiltinToolPhony;
@@ -405,7 +406,6 @@ const char* Tool::GetToolTypeForTargetFinalOutput(const Target* target) {
     case Target::BUNDLE_DATA:
     case Target::CREATE_BUNDLE:
     case Target::COPY_FILES:
-    case Target::GENERATED_FILE:
       return GeneralTool::kGeneralToolStamp;
     default:
       NOTREACHED();

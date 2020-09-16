@@ -817,6 +817,7 @@ bool Target::FillOutputFiles(Err* err) {
   const Tool* tool = toolchain_->GetToolForTargetFinalOutput(this);
   bool check_tool_outputs = false;
   switch (output_type_) {
+    case GENERATED_FILE:
     case GROUP:
     case SOURCE_SET: {
       if (HasRealInputs()) {
@@ -830,8 +831,7 @@ bool Target::FillOutputFiles(Err* err) {
     case CREATE_BUNDLE:
     case COPY_FILES:
     case ACTION:
-    case ACTION_FOREACH:
-    case GENERATED_FILE: {
+    case ACTION_FOREACH: {
       // These don't get linked to and use stamps which should be the first
       // entry in the outputs. These stamps are named
       // "<target_out_dir>/<targetname>.stamp".
