@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "11540a82_19b7b3c4",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000633
+      },
+      "writtenOn": "2020-09-16T20:29:42Z",
+      "side": 1,
+      "message": "This change exposed an interesting issue, manifesting in the Fuchsia build. The short version is that neither GN or Ninja will explicitly generate an output directory for a depfile. Fuchsia\u0027s host_tool_action was specifying a depfile as part of a generated_file output, but the depfile\u0027s directory was not created because there was no longer a stamp output file.\n\nI\u0027ll create a bug on Ninja for not generating output directories for depfiles, but Fuchsia has a workaround in flight here: https://fuchsia-review.googlesource.com/c/fuchsia/+/427929. ",
+      "revId": "ff67ea57acd2d83d920a1582e1ad078d0d576988",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": false
+    }
+  ]
+}
