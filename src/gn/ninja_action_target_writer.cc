@@ -39,12 +39,12 @@ void NinjaActionTargetWriter::Run() {
     extra_hard_deps.push_back(pair.ptr);
 
   // For ACTIONs, the input deps appear only once in the generated ninja
-  // file, so WriteInputDepsStampAndGetDep() won't create a stamp file
+  // file, so WriteInputDepsPhonyAndGetDep() won't create a phony rule
   // and the action will just depend on all the input deps directly.
-  size_t num_stamp_uses =
+  size_t num_output_uses =
       target_->output_type() == Target::ACTION ? 1u : target_->sources().size();
   std::vector<OutputFile> input_deps =
-      WriteInputDepsStampAndGetDep(extra_hard_deps, num_stamp_uses);
+      WriteInputDepsPhonyAndGetDep(extra_hard_deps, num_output_uses);
   out_ << std::endl;
 
   // Collects all output files for writing below.

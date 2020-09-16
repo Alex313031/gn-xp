@@ -77,11 +77,11 @@ void NinjaCreateBundleTargetWriter::Run() {
   if (!EnsureAllToolsAvailable(target_))
     return;
 
-  // Stamp users are CopyBundleData, CompileAssetsCatalog, CodeSigning and
+  // Output users are CopyBundleData, CompileAssetsCatalog, CodeSigning and
   // StampForTarget.
-  size_t num_stamp_uses = 4;
-  std::vector<OutputFile> order_only_deps = WriteInputDepsStampAndGetDep(
-      std::vector<const Target*>(), num_stamp_uses);
+  size_t num_output_uses = 4;
+  std::vector<OutputFile> order_only_deps = WriteInputDepsPhonyAndGetDep(
+      std::vector<const Target*>(), num_output_uses);
 
   std::string code_signing_rule_name = WriteCodeSigningRuleDefinition();
 
