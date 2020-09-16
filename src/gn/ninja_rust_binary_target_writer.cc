@@ -112,8 +112,8 @@ void NinjaRustBinaryTargetWriter::Run() {
 
   size_t num_output_uses = target_->sources().size();
 
-  std::vector<OutputFile> input_deps = WriteInputsStampAndGetDep(
-      num_output_uses);
+  std::vector<OutputFile> input_deps =
+      WriteInputsPhonyAndGetDep(num_output_uses);
 
   WriteCompilerVars();
 

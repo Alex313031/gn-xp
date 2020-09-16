@@ -828,7 +828,7 @@ TEST_F(NinjaRustBinaryTargetWriterTest, Inputs) {
     writer.Run();
 
     const char expected[] =
-        "build obj/foo/bar.inputs.stamp: stamp ../../foo/config.json ../../foo/template.h\n"
+        "build phony/foo/bar.inputs: phony ../../foo/config.json ../../foo/template.h\n"
         "crate_name = foo_bar\n"
         "crate_type = bin\n"
         "output_extension = \n"
@@ -841,7 +841,7 @@ TEST_F(NinjaRustBinaryTargetWriterTest, Inputs) {
         "\n"
         "build ./foo_bar: rust_bin ../../foo/main.rs | ../../foo/source.rs "
         "../../foo/main.rs ../../foo/config.json ../../foo/template.h "
-        "|| obj/foo/bar.inputs.stamp\n"
+        "|| phony/foo/bar.inputs\n"
         "  externs =\n"
         "  rustdeps =\n"
         "  sources = ../../foo/source.rs ../../foo/main.rs "
