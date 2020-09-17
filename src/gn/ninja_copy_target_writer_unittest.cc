@@ -118,7 +118,7 @@ TEST(NinjaCopyTargetWriter, DataDeps) {
   writer.Run();
 
   const char expected_linux[] =
-      "build input1.out: copy ../../foo/input1.txt || obj/foo/datadep.stamp\n"
+      "build input1.out: copy ../../foo/input1.txt || phony/foo/datadep\n"
       "\n"
       "build phony/foo/bar: phony input1.out\n";
   std::string out_str = out.str();
