@@ -350,7 +350,7 @@ const char* Tool::GetToolTypeForSourceType(SourceFile::Type type) {
 
 // static
 const char* Tool::GetToolTypeForTargetFinalOutput(const Target* target) {
-  // The contents of this list might be suprising (i.e. stamp tool for copy
+  // The contents of this list might be suprising (i.e. phony tool for copy
   // rules). See the header for why.
   // TODO(crbug.com/gn/39): Don't emit stamp files for single-output targets.
   if (target->source_types_used().RustSourceUsed()) {
@@ -398,6 +398,7 @@ const char* Tool::GetToolTypeForTargetFinalOutput(const Target* target) {
     case Target::STATIC_LIBRARY:
       return CTool::kCToolAlink;
     case Target::BUNDLE_DATA:
+    case Target::COPY_FILES:
     case Target::GENERATED_FILE:
     case Target::GROUP:
     case Target::SOURCE_SET:
@@ -405,7 +406,6 @@ const char* Tool::GetToolTypeForTargetFinalOutput(const Target* target) {
     case Target::ACTION:
     case Target::ACTION_FOREACH:
     case Target::CREATE_BUNDLE:
-    case Target::COPY_FILES:
       return GeneralTool::kGeneralToolStamp;
     default:
       NOTREACHED();
