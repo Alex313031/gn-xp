@@ -518,7 +518,7 @@ bool Target::GetOutputsAsSourceFiles(const LocationRange& loc_for_error,
       output_type() == Target::GENERATED_FILE) {
     action_values().GetOutputsAsSourceFiles(this, outputs);
   } else if (output_type() == Target::CREATE_BUNDLE ||
-             output_type() == Target::GENERATED_FILE) {
+             output_type() == Target::BUNDLE_DATA) {
     if (!bundle_data().GetOutputsAsSourceFiles(settings(), this, outputs, err))
       return false;
   } else if (IsBinary() && output_type() != Target::SOURCE_SET) {
