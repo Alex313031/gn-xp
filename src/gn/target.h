@@ -333,7 +333,7 @@ class Target : public Item {
   // a dependency on this one. It could be the same as the link output file
   // (this will be the case for static libraries). For shared libraries it
   // could be the same or different than the link output file, depending on the
-  // system. For actions this will be the stamp file.
+  // system.
   //
   // The dependency output phony is only set when the target does not have an
   // output file and is using a phony alias to represent it. The exception to
