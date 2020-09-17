@@ -83,17 +83,17 @@ void NinjaActionTargetWriter::Run() {
   }
   out_ << std::endl;
 
-  // Write the stamp, which also depends on all data deps. These are needed at
+  // Write the phony, which also depends on all data deps. These are needed at
   // runtime and should be compiled when the action is, but don't need to be
   // done before we run the action.
   // TODO(thakis): If the action has just a single output, make things depend
-  // on that output directly without writing a stamp file.
+  // on that output directly without writing a phony target.
   std::vector<OutputFile> data_outs;
   for (const auto& dep : target_->data_deps()) {
     if (dep.ptr->dependency_output_file_or_phony())
       data_outs.push_back(*dep.ptr->dependency_output_file_or_phony());
   }
-  WriteStampForTarget(output_files, data_outs);
+  WritePhonyForTarget(output_files, data_outs);
 }
 
 std::string NinjaActionTargetWriter::WriteRuleDefinition() {

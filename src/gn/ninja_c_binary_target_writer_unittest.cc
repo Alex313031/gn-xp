@@ -329,15 +329,15 @@ TEST_F(NinjaCBinaryTargetWriterTest, OutputExtensionAndInputDeps) {
       "target_output_name = libshlib\n"
       "\n"
       "build obj/foo/libshlib.input1.o: cxx ../../foo/input1.cc"
-      " || obj/foo/action.stamp\n"
+      " || phony/foo/action\n"
       "build obj/foo/libshlib.input2.o: cxx ../../foo/input2.cc"
-      " || obj/foo/action.stamp\n"
+      " || phony/foo/action\n"
       "\n"
       "build ./libshlib.so.6: solink obj/foo/libshlib.input1.o "
       // The order-only dependency here is stricly unnecessary since the
       // sources list this as an order-only dep. See discussion in the code
       // that writes this.
-      "obj/foo/libshlib.input2.o || obj/foo/action.stamp\n"
+      "obj/foo/libshlib.input2.o || phony/foo/action\n"
       "  ldflags =\n"
       "  libs =\n"
       "  frameworks =\n"
@@ -392,12 +392,12 @@ TEST_F(NinjaCBinaryTargetWriterTest, NoHardDepsToNoPublicHeaderTarget) {
       "target_output_name = gen_obj\n"
       "\n"
       "build obj/out/Debug/gen_obj.generated.o: cxx generated.cc"
-      " || obj/foo/generate.stamp\n"
+      " || phony/foo/generate\n"
       "\n"
       "build phony/foo/gen_obj: phony obj/out/Debug/gen_obj.generated.o"
       // The order-only dependency here is strictly unnecessary since the
       // sources list this as an order-only dep.
-      " || obj/foo/generate.stamp\n";
+      " || phony/foo/generate\n";
 
   std::string obj_str = obj_out.str();
   EXPECT_EQ(obj_expected, obj_str);
