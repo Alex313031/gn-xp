@@ -823,6 +823,7 @@ bool Target::FillOutputFiles(Err* err) {
   bool check_tool_outputs = false;
   switch (output_type_) {
     case BUNDLE_DATA:
+    case COPY_FILES:
     case GENERATED_FILE:
     case GROUP:
     case SOURCE_SET: {
@@ -834,7 +835,6 @@ bool Target::FillOutputFiles(Err* err) {
       break;
     }
     case CREATE_BUNDLE:
-    case COPY_FILES:
     case ACTION:
     case ACTION_FOREACH: {
       // These don't get linked to and use stamps which should be the first
