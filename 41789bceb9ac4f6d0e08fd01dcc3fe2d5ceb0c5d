@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6ced5846_87d62451",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000014
+      },
+      "writtenOn": "2020-09-17T23:26:46Z",
+      "side": 1,
+      "message": "Hi Sylvain, RJ noticed a duplicated condition. We thing the code meant BUNDLE_DATA for this case, but I\u0027m not vary familiar with how BUNDLE_DATA targets work. Can you confirm that the code in this condition is correct for BUNDLE_DATA targets? This is just for the command-line UI, so should match what people would expect to see.",
+      "revId": "41789bceb9ac4f6d0e08fd01dcc3fe2d5ceb0c5d",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": false
+    }
+  ]
+}
