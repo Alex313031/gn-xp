@@ -107,6 +107,24 @@
     },
     {
       "key": {
+        "uuid": "e4933a1a_36eab6d7",
+        "filename": "src/gn/ninja_c_binary_target_writer.cc",
+        "patchSetId": 12
+      },
+      "lineNbr": 881,
+      "author": {
+        "id": 1000014
+      },
+      "writtenOn": "2020-09-17T23:16:10Z",
+      "side": 1,
+      "message": "I think the new function helps, thanks.",
+      "parentUuid": "f5faf5ae_bebad87a",
+      "revId": "4eaa16f8c0cc23a67f4ee45d2e06e839c30cc7dd",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "5a899c22_f04a07c2",
         "filename": "src/gn/target.cc",
         "patchSetId": 12
@@ -127,6 +145,30 @@
       "revId": "4eaa16f8c0cc23a67f4ee45d2e06e839c30cc7dd",
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "c3aa0e66_295e99ea",
+        "filename": "src/gn/target.cc",
+        "patchSetId": 12
+      },
+      "lineNbr": 522,
+      "author": {
+        "id": 1000014
+      },
+      "writtenOn": "2020-09-17T23:16:10Z",
+      "side": 1,
+      "message": "Thanks for noticing! I need to study this...",
+      "parentUuid": "5a899c22_f04a07c2",
+      "range": {
+        "startLine": 522,
+        "startChar": 13,
+        "endLine": 522,
+        "endChar": 52
+      },
+      "revId": "4eaa16f8c0cc23a67f4ee45d2e06e839c30cc7dd",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": false
     },
     {
       "key": {
@@ -165,6 +207,30 @@
       "side": 1,
       "message": "Good question. From what I gather, we only get to this case if (build_complete \u003d\u003d true) AND (output_type is either GROUP, SOURCE_SET, or BUNDLE_DATA). \n\nTaking a look at the callers:\n\n  target.cc:584 - Target::GetOutputFilesForSource\n    This is called with build_complete \u003d\u003d false, so it currently returns an empty list and treats that as an error for GetOutputFilesForSource.\n\n  command_outputs.cc:138 - RunOutputs\n    The caller walks the resulting list and converts them back to OutputFiles before printing them. I would assume it would be okay if the list was empty.\n\n  desc_builder.cc:785 - TargetDescBuilder::FillInOutputs\n    It looks like this would just result in an empty list being added to the dictionary, so I think this would be okay.\n\n  function_get_target_outputs.cc:127 - RunGetTargetOutputs\n    This is also called with build_complete \u003d\u003d false, so it already is returning an empty list and error.\n\nIt seems like the relevant cases here are informational in nature. We really don\u0027t have an actual file to output here, but we could fall back on the phony alias. I haven\u0027t dug into the ramifications of a phony SourceFile, but that might be okay for the use case. I don\u0027t think we want to return an error, as that will trip up outputs and desc and this really isn\u0027t an error. WDYT?",
       "parentUuid": "226e6118_04e43b3e",
+      "range": {
+        "startLine": 554,
+        "startChar": 4,
+        "endLine": 555,
+        "endChar": 66
+      },
+      "revId": "4eaa16f8c0cc23a67f4ee45d2e06e839c30cc7dd",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "c1242a4a_ed5d29d9",
+        "filename": "src/gn/target.cc",
+        "patchSetId": 12
+      },
+      "lineNbr": 555,
+      "author": {
+        "id": 1000014
+      },
+      "writtenOn": "2020-09-17T23:16:10Z",
+      "side": 1,
+      "message": "I think these are all OK except for the command_outputs.cc one. That one was designed for people to use to cause things to be built, for example:\n\n  gn outputs out/x64 //src/foo:bar | xargs ninja\n\nAnd returning nothing will be a weird special case for that tooling. Can you add a special-case in the command_outputs callsite for this, and make the \"empty set\" behavior clear in the declaration for GetTargetOutputs for the case of these phony ones?",
+      "parentUuid": "004887a8_144c1402",
       "range": {
         "startLine": 554,
         "startChar": 4,
@@ -268,6 +334,30 @@
       "revId": "4eaa16f8c0cc23a67f4ee45d2e06e839c30cc7dd",
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "518bd743_ac5dd9aa",
+        "filename": "src/gn/target.cc",
+        "patchSetId": 12
+      },
+      "lineNbr": 801,
+      "author": {
+        "id": 1000014
+      },
+      "writtenOn": "2020-09-17T23:16:10Z",
+      "side": 1,
+      "message": "I think you\u0027re correct, thanks for clarifying.",
+      "parentUuid": "2399eafe_28030cdb",
+      "range": {
+        "startLine": 800,
+        "startChar": 2,
+        "endLine": 801,
+        "endChar": 76
+      },
+      "revId": "4eaa16f8c0cc23a67f4ee45d2e06e839c30cc7dd",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": false
     },
     {
       "key": {
