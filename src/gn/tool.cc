@@ -398,6 +398,7 @@ const char* Tool::GetToolTypeForTargetFinalOutput(const Target* target) {
     case Target::STATIC_LIBRARY:
       return CTool::kCToolAlink;
     case Target::BUNDLE_DATA:
+    case Target::COPY_FILES:
     case Target::GENERATED_FILE:
     case Target::GROUP:
     case Target::SOURCE_SET:
@@ -405,7 +406,6 @@ const char* Tool::GetToolTypeForTargetFinalOutput(const Target* target) {
     case Target::ACTION:
     case Target::ACTION_FOREACH:
     case Target::CREATE_BUNDLE:
-    case Target::COPY_FILES:
       return GeneralTool::kGeneralToolStamp;
     default:
       NOTREACHED();

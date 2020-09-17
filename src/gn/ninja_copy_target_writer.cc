@@ -33,28 +33,13 @@ void NinjaCopyTargetWriter::Run() {
     return;
   }
 
-  const Tool* stamp_tool = target_->toolchain()->GetTool(GeneralTool::kGeneralToolStamp);
-  if (!stamp_tool) {
-    g_scheduler->FailWithError(Err(
-        nullptr, "Copy tool not defined",
-        "The toolchain " +
-            target_->toolchain()->label().GetUserVisibleName(false) +
-            "\n used by target " + target_->label().GetUserVisibleName(false) +
-            "\n doesn't define a \"stamp\" tool."));
-    return;
-  }
-
-  // Figure out the substitutions used by the copy and stamp tools.
-  SubstitutionBits required_bits = copy_tool->substitution_bits();
-  required_bits.MergeFrom(stamp_tool->substitution_bits());
-
-  // General target-related substitutions needed by both tools.
-  WriteSharedVars(required_bits);
+  // General target-related substitutions needed by the copy tool.
+  WriteSharedVars(copy_tool->substitution_bits());
 
   std::vector<OutputFile> output_files;
   WriteCopyRules(&output_files);
   out_ << std::endl;
-  WriteStampForTarget(output_files, std::vector<OutputFile>());
+  WritePhonyForTarget(output_files, std::vector<OutputFile>());
 }
 
 void NinjaCopyTargetWriter::WriteCopyRules(
