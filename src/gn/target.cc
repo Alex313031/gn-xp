@@ -808,6 +808,12 @@ bool Target::HasRealInputs() const {
     return !sources().empty();
   }
 
+  if (output_type() == ACTION || output_type() == ACTION_FOREACH) {
+    // Actions always have at least one input file: the script used to execute
+    // the action.
+    return true;
+  }
+
   // If any of this target's sources will result in output files, then this
   // target should be considered to have real inputs.
   std::vector<OutputFile> tool_outputs;
@@ -822,6 +828,8 @@ bool Target::FillOutputFiles(Err* err) {
   const Tool* tool = toolchain_->GetToolForTargetFinalOutput(this);
   bool check_tool_outputs = false;
   switch (output_type_) {
+    case ACTION:
+    case ACTION_FOREACH:
     case BUNDLE_DATA:
     case COPY_FILES:
     case GENERATED_FILE:
@@ -834,9 +842,7 @@ bool Target::FillOutputFiles(Err* err) {
       }
       break;
     }
-    case CREATE_BUNDLE:
-    case ACTION:
-    case ACTION_FOREACH: {
+    case CREATE_BUNDLE: {
       // These don't get linked to and use stamps which should be the first
       // entry in the outputs. These stamps are named
       // "<target_out_dir>/<targetname>.stamp".

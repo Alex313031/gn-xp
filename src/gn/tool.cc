@@ -397,14 +397,14 @@ const char* Tool::GetToolTypeForTargetFinalOutput(const Target* target) {
       return CTool::kCToolSolinkModule;
     case Target::STATIC_LIBRARY:
       return CTool::kCToolAlink;
+    case Target::ACTION:
+    case Target::ACTION_FOREACH:
     case Target::BUNDLE_DATA:
     case Target::COPY_FILES:
     case Target::GENERATED_FILE:
     case Target::GROUP:
     case Target::SOURCE_SET:
       return BuiltinTool::kBuiltinToolPhony;
-    case Target::ACTION:
-    case Target::ACTION_FOREACH:
     case Target::CREATE_BUNDLE:
       return GeneralTool::kGeneralToolStamp;
     default:
