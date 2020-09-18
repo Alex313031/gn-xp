@@ -243,6 +243,30 @@
     },
     {
       "key": {
+        "uuid": "18e939a4_1c70266a",
+        "filename": "src/gn/target.cc",
+        "patchSetId": 12
+      },
+      "lineNbr": 555,
+      "author": {
+        "id": 1000633
+      },
+      "writtenOn": "2020-09-18T20:30:49Z",
+      "side": 1,
+      "message": "I see now, thank you for the explanation. I\u0027ve added a check for the empty set in command_outputs. It will return an error if any of the specified targets have an empty output set.",
+      "parentUuid": "c1242a4a_ed5d29d9",
+      "range": {
+        "startLine": 554,
+        "startChar": 4,
+        "endLine": 555,
+        "endChar": 66
+      },
+      "revId": "4eaa16f8c0cc23a67f4ee45d2e06e839c30cc7dd",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "cf6dd5d4_b6902031",
         "filename": "src/gn/target.cc",
         "patchSetId": 12
