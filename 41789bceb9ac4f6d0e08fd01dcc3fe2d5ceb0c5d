@@ -50,6 +50,24 @@
       "revId": "41789bceb9ac4f6d0e08fd01dcc3fe2d5ceb0c5d",
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "65f5aed1_e4aa7b5b",
+        "filename": "src/gn/target.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 521,
+      "author": {
+        "id": 1000633
+      },
+      "writtenOn": "2020-09-18T15:44:29Z",
+      "side": 1,
+      "message": "+1. My original suggestion on whether it was meant to be BUNDLE_DATA was limited solely to the naming of it without a good understanding of its actual outputs. This makes more sense.",
+      "parentUuid": "cadfdffb_9894120f",
+      "revId": "41789bceb9ac4f6d0e08fd01dcc3fe2d5ceb0c5d",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": true
     }
   ]
 }
