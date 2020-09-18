@@ -16,6 +16,40 @@
       "revId": "41789bceb9ac4f6d0e08fd01dcc3fe2d5ceb0c5d",
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "1d648f45_395210f3",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000070
+      },
+      "writtenOn": "2020-09-18T08:38:24Z",
+      "side": 1,
+      "message": "TL;DR: just remove the Target::GENERATE_FILE instead of replacing with Target::BUNDLE_DATA.",
+      "revId": "41789bceb9ac4f6d0e08fd01dcc3fe2d5ceb0c5d",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "cadfdffb_9894120f",
+        "filename": "src/gn/target.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 521,
+      "author": {
+        "id": 1000070
+      },
+      "writtenOn": "2020-09-18T08:38:24Z",
+      "side": 1,
+      "message": "BUNDLE_DATA target have no output. I think the duplication was introduced in https://gn-review.googlesource.com/c/gn/+/7740.\n\nTarget::GetOutputsAsSourceFiles was introduced by moving some code around, and there were two code paths that tested for GENERATED_FILE. One in FillInOutputs:\n\n  -    } else if (target_-\u003eoutput_type() \u003d\u003d Target::CREATE_BUNDLE ||\n  -               target_-\u003eoutput_type() \u003d\u003d Target::GENERATED_FILE) {\n  -      Err err;\n  -      std::vector\u003cSourceFile\u003e output_files;\n  -      if (!target_-\u003ebundle_data().GetOutputsAsSourceFiles(\n  -              target_-\u003esettings(), target_, \u0026output_files, \u0026err)) {\n  -        err.PrintToStdout();\n  -      }\n\nand one in RunGetTargetOutputs:\n\n  -  if (target-\u003eoutput_type() \u003d\u003d Target::ACTION ||\n  -      target-\u003eoutput_type() \u003d\u003d Target::COPY_FILES ||\n  -      target-\u003eoutput_type() \u003d\u003d Target::ACTION_FOREACH ||\n  -      target-\u003eoutput_type() \u003d\u003d Target::GENERATED_FILE) {\n  -    target-\u003eaction_values().GetOutputsAsSourceFiles(target, \u0026files);\n  -  } else {\n\nMy understanding is that the first code path should only have tested Target::CREATE_BUNDLE (because it is the only target that can meaningfully use bundle_data().GetOutputsAsSourceFiles).\n\nThus, I think the correct fix is to just remove the Target::GENERATED_FILE here. Thus the code should become:\n\n    ...\n  } else if (output_type() \u003d\u003d Target::CREATE_BUNDLE) {\n    ...\n\nThe Target::BUNDLE_DATA will fall back to the default which is a stamp file (which is correct, bundle_data target only have a stamp file as output).",
+      "revId": "41789bceb9ac4f6d0e08fd01dcc3fe2d5ceb0c5d",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": true
     }
   ]
 }
