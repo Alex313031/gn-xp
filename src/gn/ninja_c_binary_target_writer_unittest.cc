@@ -537,6 +537,8 @@ TEST_F(NinjaCBinaryTargetWriterTest, FrameworksAndFrameworkDirs) {
   Target framework(setup.settings(), Label(SourceDir("//bar"), "framework"));
   framework.set_output_type(Target::CREATE_BUNDLE);
   framework.bundle_data().product_type() = "com.apple.product-type.framework";
+  framework.bundle_data().set_partial_info_plist(
+      SourceFile("//out/Debug/bar/framework/framework_partial_info.plist"));
   framework.public_configs().push_back(LabelConfigPair(&framework_config));
   framework.SetToolchain(setup.toolchain());
   framework.visibility().SetPublic();
@@ -563,7 +565,7 @@ TEST_F(NinjaCBinaryTargetWriterTest, FrameworksAndFrameworkDirs) {
       "target_output_name = libshlib\n"
       "\n"
       "\n"
-      "build ./libshlib.so: solink | obj/bar/framework.stamp\n"
+      "build ./libshlib.so: solink | phony/bar/framework\n"
       "  ldflags = -F.\n"
       "  libs =\n"
       "  frameworks = -framework System -framework Bar "
