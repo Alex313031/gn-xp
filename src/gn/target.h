@@ -320,7 +320,7 @@ class Target : public Item {
   // action or a copy step, and the output library or executable file(s) from
   // binary targets.
   //
-  // It will NOT include stamp files, phony targets or object files.
+  // It will NOT include phony targets or object files.
   const std::vector<OutputFile>& computed_outputs() const {
     return computed_outputs_;
   }

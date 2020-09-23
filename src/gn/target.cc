@@ -791,11 +791,6 @@ bool Target::HasRealInputs() const {
   // This check is only necessary if this target will result in a phony target.
   // Phony targets with no real inputs are treated as always dirty.
 
-  // TODO(bug 194): This method is currently just checking the relevant inputs
-  // for the current list of output types that result in phony targets. As the
-  // list of phony targets expands, this method should be updated to properly
-  // account for which inputs matter for the given output type.
-
   // Actions always have at least one input file: the script used to execute
   // the action. As such, they will never have an input-less phony target. We
   // check this first to elide the common checks.
@@ -813,6 +808,13 @@ bool Target::HasRealInputs() const {
 
   if (output_type() == BUNDLE_DATA) {
     return !sources().empty();
+  }
+  if (output_type() == CREATE_BUNDLE) {
+    // create_bundle targets pick up most of their inputs in the form of
+    // dependencies on bundle_data targets, which would have been checked above.
+    return !bundle_data().assets_catalog_sources().empty() ||
+           !bundle_data().partial_info_plist().is_null() ||
+           !bundle_data().code_signing_script().is_null();
   }
 
   // If any of this target's sources will result in output files, then this
@@ -833,6 +835,7 @@ bool Target::FillOutputFiles(Err* err) {
     case ACTION_FOREACH:
     case BUNDLE_DATA:
     case COPY_FILES:
+    case CREATE_BUNDLE:
     case GENERATED_FILE:
     case GROUP:
     case SOURCE_SET: {
@@ -841,16 +844,6 @@ bool Target::FillOutputFiles(Err* err) {
             GetBuildDirForTargetAsOutputFile(this, BuildDirType::PHONY);
         dependency_output_phony_->value().append(GetComputedOutputName());
       }
-      break;
-    }
-    case CREATE_BUNDLE: {
-      // These don't get linked to and use stamps which should be the first
-      // entry in the outputs. These stamps are named
-      // "<target_out_dir>/<targetname>.stamp".
-      dependency_output_file_ =
-          GetBuildDirForTargetAsOutputFile(this, BuildDirType::OBJ);
-      dependency_output_file_->value().append(GetComputedOutputName());
-      dependency_output_file_->value().append(".stamp");
       break;
     }
     case EXECUTABLE:

@@ -51,12 +51,6 @@ class NinjaTargetWriter {
       const std::vector<const Target*>& extra_hard_deps,
       size_t num_output_uses) const;
 
-  // Writes to the output file a final stamp rule for the target that stamps
-  // the given list of files. This function assumes the stamp is for the target
-  // as a whole so the stamp file is set as the target's dependency output.
-  void WriteStampForTarget(const std::vector<OutputFile>& deps,
-                           const std::vector<OutputFile>& order_only_deps);
-
   // Writes to the output file a final phony rule for the target that aliases
   // the given list of files.
   void WritePhonyForTarget(const std::vector<OutputFile>& deps,
