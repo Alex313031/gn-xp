@@ -401,12 +401,11 @@ const char* Tool::GetToolTypeForTargetFinalOutput(const Target* target) {
     case Target::ACTION_FOREACH:
     case Target::BUNDLE_DATA:
     case Target::COPY_FILES:
+    case Target::CREATE_BUNDLE:
     case Target::GENERATED_FILE:
     case Target::GROUP:
     case Target::SOURCE_SET:
       return BuiltinTool::kBuiltinToolPhony;
-    case Target::CREATE_BUNDLE:
-      return GeneralTool::kGeneralToolStamp;
     default:
       NOTREACHED();
       return kToolNone;
