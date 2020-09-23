@@ -312,33 +312,6 @@ std::vector<OutputFile> NinjaTargetWriter::WriteInputDepsPhonyAndGetDep(
   return std::vector<OutputFile>{input_phony_file};
 }
 
-void NinjaTargetWriter::WriteStampForTarget(
-    const std::vector<OutputFile>& files,
-    const std::vector<OutputFile>& order_only_deps) {
-  CHECK(target_->dependency_output_file());
-  const OutputFile& stamp_file = *target_->dependency_output_file();
-
-  // First validate that the target's dependency is a stamp file. Otherwise,
-  // we shouldn't have gotten here!
-  CHECK(base::EndsWith(stamp_file.value(), ".stamp",
-                       base::CompareCase::INSENSITIVE_ASCII))
-      << "Output should end in \".stamp\" for stamp file output. Instead got: "
-      << "\"" << stamp_file.value() << "\"";
-
-  out_ << "build ";
-  path_output_.WriteFile(out_, stamp_file);
-
-  out_ << ": " << GetNinjaRulePrefixForToolchain(settings_)
-       << GeneralTool::kGeneralToolStamp;
-  path_output_.WriteFiles(out_, files);
-
-  if (!order_only_deps.empty()) {
-    out_ << " ||";
-    path_output_.WriteFiles(out_, order_only_deps);
-  }
-  out_ << std::endl;
-}
-
 void NinjaTargetWriter::WritePhonyForTarget(
     const std::vector<OutputFile>& files,
     const std::vector<OutputFile>& order_only_deps) {
