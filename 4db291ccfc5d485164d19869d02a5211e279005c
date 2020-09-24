@@ -33,6 +33,24 @@
       "revId": "4db291ccfc5d485164d19869d02a5211e279005c",
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "f10ef8ab_d9479cc6",
+        "filename": "src/gn/command_outputs.cc",
+        "patchSetId": 17
+      },
+      "lineNbr": 146,
+      "author": {
+        "id": 1000633
+      },
+      "writtenOn": "2020-09-24T21:31:29Z",
+      "side": 1,
+      "message": "\u003e is there anything we can emit here that would make sense?\n\nNo, not really. The phony targets are only omitted when they have no inputs or dependencies. There is no work to do.\n\n\u003e I think the target outputs already emits phony rules if there is one that can be emitted, right?\n\nCorrect, we\u0027ll provide a phony target here so long as there is at least one input or dependency. Ninja can use that phony to trigger those inputs to be built.\n\nI\u0027ve removed this error check.",
+      "parentUuid": "8ec9197d_2a33e236",
+      "revId": "4db291ccfc5d485164d19869d02a5211e279005c",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": false
     }
   ]
 }
