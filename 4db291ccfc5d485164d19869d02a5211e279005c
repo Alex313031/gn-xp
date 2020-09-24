@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "c7cd3bba_4ec578b1",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 17
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000014
+      },
+      "writtenOn": "2020-09-24T17:57:48Z",
+      "side": 1,
+      "message": "Sorry for the delay, a bunch of perf stuff is happening this week.",
+      "revId": "4db291ccfc5d485164d19869d02a5211e279005c",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8ec9197d_2a33e236",
+        "filename": "src/gn/command_outputs.cc",
+        "patchSetId": 17
+      },
+      "lineNbr": 146,
+      "author": {
+        "id": 1000014
+      },
+      "writtenOn": "2020-09-24T17:57:48Z",
+      "side": 1,
+      "message": "In my previous comments I assumed that we could emit some phony rule name that would build that target so the caller doesn\u0027t need to special-case \"no output\". Then you could always just pipe the output of \"gn outputs\" to ninja or some other tool and it would do what you wanted.\n\nI guess I was mistaken because in the case of the omitted rule, is there anything we can emit here that would make sense? I think the target outputs already emits phony rules if there is one that can be emitted, right?\n\nI guess that\u0027s the best we can do. In that case, I think it would be less problematic for integration scripts to have no output than have an error message.",
+      "revId": "4db291ccfc5d485164d19869d02a5211e279005c",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": true
+    }
+  ]
+}
