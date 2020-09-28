@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "2b33c7fc_bcf73e1d",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000633
+      },
+      "writtenOn": "2020-09-28T21:41:23Z",
+      "side": 1,
+      "message": "The next batch of these are fairly straight forward. PTAL.",
+      "revId": "e5b160845ab16fe4461f410c6fa67a680b148bb2",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": false
+    }
+  ]
+}
