@@ -16,6 +16,24 @@
       "revId": "ff67ea57acd2d83d920a1582e1ad078d0d576988",
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "02d7494f_f1cb28cf",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000633
+      },
+      "writtenOn": "2020-09-28T21:43:13Z",
+      "side": 1,
+      "message": "The above workaround has landed in Fuchsia\u0027s build, so this change is now unblocked. I submitted an issue and sent a pull request to Ninja to have it generate the depfile output directory, but have thus far not heard back.",
+      "parentUuid": "11540a82_19b7b3c4",
+      "revId": "ff67ea57acd2d83d920a1582e1ad078d0d576988",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": false
     }
   ]
 }
