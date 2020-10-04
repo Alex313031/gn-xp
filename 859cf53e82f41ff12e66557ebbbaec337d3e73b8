@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "f426721b_9430e0ff",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000014
+      },
+      "writtenOn": "2020-10-04T16:44:02Z",
+      "side": 1,
+      "message": "If you\u0027re thinking you\u0027re going to submit patches regularly let me know and we can add you to the committers (if you\u0027re not already).",
+      "revId": "859cf53e82f41ff12e66557ebbbaec337d3e73b8",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": false
+    }
+  ]
+}
