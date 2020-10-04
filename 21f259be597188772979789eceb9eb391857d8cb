@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "c68075a3_5539a333",
+        "filename": "src/gn/desc_builder.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 257,
+      "author": {
+        "id": 1000014
+      },
+      "writtenOn": "2020-10-04T05:11:20Z",
+      "side": 1,
+      "message": "I try to always use {} when there\u0027s more than one line in a block.",
+      "revId": "21f259be597188772979789eceb9eb391857d8cb",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
+      "unresolved": true
+    }
+  ]
+}
