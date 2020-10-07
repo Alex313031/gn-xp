@@ -18,6 +18,24 @@
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "01610d55_cd98175b",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000633
+      },
+      "writtenOn": "2020-10-07T17:04:01Z",
+      "side": 1,
+      "message": "That sounds like a good plan. Fuchsia\u0027s GN roller is on a 12 hr cadence, but it looks like I have permissions to manually trigger it. I would assume Chromium has a similar GN roller, but I can\u0027t seem to find it. \n\nShould we also send out a PSA to users? While it seems like no one has really noticed the source_set phony targets yet (it has been used in Fuchsia for over a week now), this one will be more noticeable. In particular, the amount of ninja actions drops dramatically. Depending on the build config, the build will have about 40-60% less actions.",
+      "parentUuid": "9d43e2a8_fadf0dc4",
+      "revId": "bc4dabfcced9966d9c16c939c442aee77dd993ad",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "35c735ad_2371ffd8",
@@ -31,6 +49,24 @@
       "writtenOn": "2020-10-07T04:01:42Z",
       "side": 1,
       "message": "Can this be clarified a bit? I think you\u0027re saying that most calls for CREATE_BUNDLE will be handled by the loop above, but this comment leaves it a little bit unclear. If my understanding is correct, maybe append \"This code handles the remaining uncommon CREATE_BUNDLE cases.\" or something",
+      "revId": "bc4dabfcced9966d9c16c939c442aee77dd993ad",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "6b539d2f_6d93b16a",
+        "filename": "src/gn/target.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 813,
+      "author": {
+        "id": 1000633
+      },
+      "writtenOn": "2020-10-07T17:04:01Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "35c735ad_2371ffd8",
       "revId": "bc4dabfcced9966d9c16c939c442aee77dd993ad",
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
     }
