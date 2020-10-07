@@ -90,6 +90,24 @@
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "173a2598_4a137365",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000633
+      },
+      "writtenOn": "2020-10-07T20:17:09Z",
+      "side": 1,
+      "message": "This has now landed in Fuchsia GI.",
+      "parentUuid": "b56f76ba_87f633f1",
+      "revId": "bc4dabfcced9966d9c16c939c442aee77dd993ad",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "35c735ad_2371ffd8",
