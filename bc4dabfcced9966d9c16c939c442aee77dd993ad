@@ -54,6 +54,24 @@
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "226709c3_7285210a",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000014
+      },
+      "writtenOn": "2020-10-07T17:12:53Z",
+      "side": 1,
+      "message": "12 hours is actually fine with me, I didn\u0027t realize it was automatic. If it\u0027s easy to trigger, that\u0027s also great. I think Chrome is more manual. When the Fuchsia roll sticks, we\u0027ll reach out to dpranke@ for Chrome.\n\nI don\u0027t think a PSA is necessary personally but I\u0027ll let you decide.",
+      "parentUuid": "01610d55_cd98175b",
+      "revId": "bc4dabfcced9966d9c16c939c442aee77dd993ad",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "35c735ad_2371ffd8",
