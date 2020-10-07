@@ -36,6 +36,24 @@
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "6c16fdbf_fd1eec6e",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000004
+      },
+      "writtenOn": "2020-10-07T17:11:04Z",
+      "side": 1,
+      "message": "I believe GN is still rolled semi-manually by //tools/gn/roll_gn.py in the Chromium tree (it automates the build steps on bots, but isn\u0027t scheduled or run on a bot anywhere I don\u0027t think.)",
+      "parentUuid": "01610d55_cd98175b",
+      "revId": "bc4dabfcced9966d9c16c939c442aee77dd993ad",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "35c735ad_2371ffd8",
