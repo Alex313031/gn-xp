@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "9d43e2a8_fadf0dc4",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000014
+      },
+      "writtenOn": "2020-10-07T04:01:42Z",
+      "side": 1,
+      "message": "We should roll Fuchsia ASAP after landing and then Chromium so we can revert if there are problems before other GN changes go in.",
+      "revId": "bc4dabfcced9966d9c16c939c442aee77dd993ad",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "35c735ad_2371ffd8",
+        "filename": "src/gn/target.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 813,
+      "author": {
+        "id": 1000014
+      },
+      "writtenOn": "2020-10-07T04:01:42Z",
+      "side": 1,
+      "message": "Can this be clarified a bit? I think you\u0027re saying that most calls for CREATE_BUNDLE will be handled by the loop above, but this comment leaves it a little bit unclear. If my understanding is correct, maybe append \"This code handles the remaining uncommon CREATE_BUNDLE cases.\" or something",
+      "revId": "bc4dabfcced9966d9c16c939c442aee77dd993ad",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    }
+  ]
+}
