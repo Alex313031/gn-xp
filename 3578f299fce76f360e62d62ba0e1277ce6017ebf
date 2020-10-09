@@ -58,6 +58,24 @@
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "f2836105_6866b69a",
+        "filename": "infra/recipes/gn.py",
+        "patchSetId": 3
+      },
+      "lineNbr": 111,
+      "author": {
+        "id": 1000067
+      },
+      "writtenOn": "2020-10-09T14:06:33Z",
+      "side": 1,
+      "message": "Didn\u0027t know that. Done.",
+      "parentUuid": "d67fc43f_32c30a29",
+      "revId": "3578f299fce76f360e62d62ba0e1277ce6017ebf",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "41ae8745_b6802797",
@@ -81,6 +99,30 @@
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "32d18986_1c9864bb",
+        "filename": "infra/recipes/gn.py",
+        "patchSetId": 3
+      },
+      "lineNbr": 147,
+      "author": {
+        "id": 1000067
+      },
+      "writtenOn": "2020-10-09T14:06:33Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "41ae8745_b6802797",
+      "range": {
+        "startLine": 147,
+        "startChar": 44,
+        "endLine": 147,
+        "endChar": 52
+      },
+      "revId": "3578f299fce76f360e62d62ba0e1277ce6017ebf",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "bf8490b6_49ed3a21",
@@ -94,6 +136,30 @@
       "writtenOn": "2020-10-09T02:33:17Z",
       "side": 1,
       "message": "I\u0027d do this only for the release build, we don\u0027t care about performance for the debug build and that way we would also test GN behavior with both the system malloc and rpmalloc.",
+      "range": {
+        "startLine": 148,
+        "startChar": 0,
+        "endLine": 150,
+        "endChar": 0
+      },
+      "revId": "3578f299fce76f360e62d62ba0e1277ce6017ebf",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d6852f37_a238779b",
+        "filename": "infra/recipes/gn.py",
+        "patchSetId": 3
+      },
+      "lineNbr": 150,
+      "author": {
+        "id": 1000067
+      },
+      "writtenOn": "2020-10-09T14:06:33Z",
+      "side": 1,
+      "message": "Sure. Done.",
+      "parentUuid": "bf8490b6_49ed3a21",
       "range": {
         "startLine": 148,
         "startChar": 0,
