@@ -1,6 +1,23 @@
 {
   "comments": [
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "92c3959e_e2baedde",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000014
+      },
+      "writtenOn": "2020-10-09T03:22:17Z",
+      "side": 1,
+      "message": "Removing myself as I don\u0027t know how the infra stuff works.",
+      "revId": "3578f299fce76f360e62d62ba0e1277ce6017ebf",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "fa933206_2bdfde87",
