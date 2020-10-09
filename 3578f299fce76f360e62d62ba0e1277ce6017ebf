@@ -1,0 +1,90 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "fa933206_2bdfde87",
+        "filename": "infra/recipes/gn.py",
+        "patchSetId": 3
+      },
+      "lineNbr": 31,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-10-09T02:33:17Z",
+      "side": 1,
+      "message": "I\u0027d just make it a constant, we don\u0027t want people to override this (in fact we\u0027re going to remove the repository property as well since that\u0027s a legacy and no longer needed).",
+      "range": {
+        "startLine": 28,
+        "startChar": 0,
+        "endLine": 31,
+        "endChar": 109
+      },
+      "revId": "3578f299fce76f360e62d62ba0e1277ce6017ebf",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d67fc43f_32c30a29",
+        "filename": "infra/recipes/gn.py",
+        "patchSetId": 3
+      },
+      "lineNbr": 111,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-10-09T02:33:17Z",
+      "side": 1,
+      "message": "Can we setup this context just once? This is an expensive operation and we want to avoid doing it repeatedly.",
+      "revId": "3578f299fce76f360e62d62ba0e1277ce6017ebf",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "41ae8745_b6802797",
+        "filename": "infra/recipes/gn.py",
+        "patchSetId": 3
+      },
+      "lineNbr": 147,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-10-09T02:33:17Z",
+      "side": 1,
+      "message": "rpmalloc",
+      "range": {
+        "startLine": 147,
+        "startChar": 44,
+        "endLine": 147,
+        "endChar": 52
+      },
+      "revId": "3578f299fce76f360e62d62ba0e1277ce6017ebf",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "bf8490b6_49ed3a21",
+        "filename": "infra/recipes/gn.py",
+        "patchSetId": 3
+      },
+      "lineNbr": 150,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-10-09T02:33:17Z",
+      "side": 1,
+      "message": "I\u0027d do this only for the release build, we don\u0027t care about performance for the debug build and that way we would also test GN behavior with both the system malloc and rpmalloc.",
+      "range": {
+        "startLine": 148,
+        "startChar": 0,
+        "endLine": 150,
+        "endChar": 0
+      },
+      "revId": "3578f299fce76f360e62d62ba0e1277ce6017ebf",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    }
+  ]
+}
