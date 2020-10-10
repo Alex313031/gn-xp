@@ -74,6 +74,10 @@ extern const char kRoot[];
 extern const char kRoot_HelpShort[];
 extern const char kRoot_Help[];
 
+extern const char kRootBuildFileDir[];
+extern const char kRootBuildFileDir_HelpShort[];
+extern const char kRootBuildFileDir_Help[];
+
 extern const char kRuntimeDepsListFile[];
 extern const char kRuntimeDepsListFile_HelpShort[];
 extern const char kRuntimeDepsListFile_Help[];

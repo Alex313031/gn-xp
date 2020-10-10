@@ -840,16 +840,31 @@ bool Setup::FillOtherConfig(const base::CommandLine& cmdline, Err* err) {
   }
 
   // Root build file.
-  const Value* root_value = dotfile_scope_.GetValue("root", true);
-  if (root_value) {
-    if (!root_value->VerifyTypeIs(Value::STRING, err)) {
-      return false;
-    }
-
+  if (cmdline.HasSwitch(switches::kRootBuildFileDir)) {
+    auto switch_value =
+        cmdline.GetSwitchValueASCII(switches::kRootBuildFileDir);
+    Value root_value(nullptr, switch_value);
     root_target_label = Label::Resolve(current_dir, std::string_view(), Label(),
-                                       *root_value, err);
+                                       root_value, err);
     if (err->has_error()) {
       return false;
+    }
+    if (dotfile_scope_.GetValue("root", true)) {
+      // The "kRootBuildFileDir" switch overwrites the "root" variable in ".gn".
+      dotfile_scope_.MarkUsed("root");
+    }
+  } else {
+    const Value* root_value = dotfile_scope_.GetValue("root", true);
+    if (root_value) {
+      if (!root_value->VerifyTypeIs(Value::STRING, err)) {
+        return false;
+      }
+
+      root_target_label = Label::Resolve(current_dir, std::string_view(),
+                                         Label(), *root_value, err);
+      if (err->has_error()) {
+        return false;
+      }
     }
   }
   // Set the root build file here in order to take into account the values of
