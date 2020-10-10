@@ -175,6 +175,37 @@ Examples
   gn desc //out/Default --root="C:\Users\BObama\My Documents\foo"
 )";
 
+const char kRootBuildFileDir[] = "root-target";
+const char kRootBuildFileDir_HelpShort[] =
+    "--root-target: Override the root target.";
+const char kRootBuildFileDir_Help[] =
+    R"(--root-target: Override the root target.
+
+  The root target is the target initially loaded to begin population of the
+  build graph. It defaults to "//:" which normally causes the "//BUILD.gn" file
+  to be loaded. It can be specified in the .gn file via the "root" variable (see
+  "gn help dotfile").
+
+  If specified, the value of this switch will be take precedence over the value
+  in ".gn". The target name (after the colon) is ignored, only the directory
+  name is required. Relative paths will be resolved relative to the current "//"
+  directory.
+
+  Specifying a different initial BUILD.gn file does not change the meaning of
+  the source root (the "//" directory) which can be independently set via the
+  --root switch. It also does not prevent the build file located at "//BUILD.gn"
+  from being loaded if a target in the build references that directory.
+
+  One use-case of this feature is to load a different set of initial targets
+  from project that uses GN without modifying any files.
+
+Examples
+
+  gn gen //out/Default --root-target="//third_party/icu"
+
+  gn gen //out/Default --root-target="//third_party/grpc"
+)";
+
 const char kRuntimeDepsListFile[] = "runtime-deps-list-file";
 const char kRuntimeDepsListFile_HelpShort[] =
     "--runtime-deps-list-file: Save runtime dependencies for targets in file.";
@@ -296,6 +327,7 @@ const SwitchInfoMap& GetSwitches() {
     INSERT_VARIABLE(Markdown)
     INSERT_VARIABLE(NoColor)
     INSERT_VARIABLE(Root)
+    INSERT_VARIABLE(RootBuildFileDir)
     INSERT_VARIABLE(Quiet)
     INSERT_VARIABLE(RuntimeDepsListFile)
     INSERT_VARIABLE(ScriptExecutable)
