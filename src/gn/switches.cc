@@ -175,6 +175,33 @@ Examples
   gn desc //out/Default --root="C:\Users\BObama\My Documents\foo"
 )";
 
+const char kRootBuildFileDir[] = "root-build-file-dir";
+const char kRootBuildFileDir_HelpShort[] =
+    "--root-build-file-dir: Explicitly specify the root build file dir.";
+const char kRootBuildFileDir_Help[] =
+    R"(--root-build-file-dir: Explicitly specify the dir of root build file.
+
+  Normally the first build file loaded by GN will be "//BUILD.gn". This option
+  allows specifying a different directory for the initial build file. The value
+  is a GN-style path taken as relative to the current working directory.
+
+  Specifying a different initial BUILD.gn file does not change the meaning of
+  the source root (the "//" directory) which can be independently set via the
+  --root switch. It also does not prevent the build file located at "//BUILD.gn"
+  from being loaded if a target in the build references that directory.
+
+  One use-case of this feature is to load a different set of initial targets
+  from project that uses GN without modifying any files.
+
+  This option will overwrite the `root` variable defined in `.gn`.
+
+Examples
+
+  gn gen //out/Default --root_build_file_dir="//third_party/icu"
+
+  gn gen //out/Default --root_build_file_dir="//third_party/grpc"
+)";
+
 const char kRuntimeDepsListFile[] = "runtime-deps-list-file";
 const char kRuntimeDepsListFile_HelpShort[] =
     "--runtime-deps-list-file: Save runtime dependencies for targets in file.";
@@ -296,6 +323,7 @@ const SwitchInfoMap& GetSwitches() {
     INSERT_VARIABLE(Markdown)
     INSERT_VARIABLE(NoColor)
     INSERT_VARIABLE(Root)
+    INSERT_VARIABLE(RootBuildFileDir)
     INSERT_VARIABLE(Quiet)
     INSERT_VARIABLE(RuntimeDepsListFile)
     INSERT_VARIABLE(ScriptExecutable)
