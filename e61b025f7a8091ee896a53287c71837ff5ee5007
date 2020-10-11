@@ -51,6 +51,23 @@
       "parentUuid": "478e0edb_30981015",
       "revId": "e61b025f7a8091ee896a53287c71837ff5ee5007",
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "1b18fbbc_bc2ac399",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000803
+      },
+      "writtenOn": "2020-10-11T09:41:24Z",
+      "side": 1,
+      "message": "Hi Brett,\n\nPlease let me explain a bit more on why this feature is useful for us:\n\n1. \"share icu library\": One current big issue for CrOS is that the free space of the rootfs is very small. And icu is a big library, most of which is a data file (in chrome it is 10MB whereas by default it is \u003e30MB). So we decide to share this data file between Chrome and CrOS. But to use this data file, we must keep CrOS\u0027s icu and Chromium\u0027s icu in lock step. So directly compiling a libicu.a is from Chrome in CrOS is a straight-forward solution.\n   Another goodness of sharing libicu is that we save developers effort to uprev icu in CrOS. libicu needs regular major uprev every 6 months and minor bug fixes from time to time. By sharing the code, CrOS can enjoy such uprev for free.\n\n2. (The CrOS build team proposed this) In the long term, we may share more code between chrome and CrOS. For example, we may even share libchrome/libmojo etc. directly by the way similar to icu rather than the current mechanism (which is effort consuming and hard to make the code up-to-date). \"Sharing icu\" is treated as a template for sharing code between chrome and CrOS. And we want to find a standard and generic way to do this.\n\n3. In compiling libicu.{a,so} from chromium repo, if GN does not support \"partial configuration\", we have to configure the whole chromium to run \"gn gen\". This is very error-prone and brings lots of unnecessary complexity to the icu ebuild in CrOS.\n\nConsidering the benefit the new switch \"root_build_file_dir\", I feel the extra complexity added to GN is relatively not very big (just one extra switch affecting one global/starting variable \"root\"). What do you think? If the idea of this CL is really not acceptable, could you please provide some other suggestions, which will be highly appreciated?\n\nThanks!\n\nBest,\nHonglin\n",
+      "revId": "e61b025f7a8091ee896a53287c71837ff5ee5007",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
     }
   ]
 }
