@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e54e81c1_d52e7385",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000803
+      },
+      "writtenOn": "2020-10-11T00:46:17Z",
+      "side": 1,
+      "message": "Hi all,\n\nFollowing the discussion from https://groups.google.com/a/chromium.org/forum/#!topic/gn-dev/QDvOuquATJE, would you please help review this CL on exposing a command line switch to tell GN where to find the top-level BUILD.gn to load first? From experiments, it seems this will perfectly fit our needs (achieving kind of \"partial configuration\" of chromium to share the icu library between Chrome and CrOS). Thanks!\n\nBest,\nHonglin",
+      "revId": "e61b025f7a8091ee896a53287c71837ff5ee5007",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    }
+  ]
+}
