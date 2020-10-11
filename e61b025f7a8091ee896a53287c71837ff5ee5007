@@ -33,6 +33,24 @@
       "message": "We used to have this to support NaCl and it was removed because we didn\u0027t need it anymore and it added extra complexity. Needless to say, I\u0027m not super enthusiastic about adding it back.\n\nCan you please follow up on the email thread? Dirk had some good suggestions that you did not reply to.",
       "revId": "e61b025f7a8091ee896a53287c71837ff5ee5007",
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "7a71a34b_6c115a9a",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000803
+      },
+      "writtenOn": "2020-10-11T05:34:16Z",
+      "side": 1,
+      "message": "Hi Brett,\n\nThanks for the super quick reply! Dirk and I have had a long discussion after that. I will forward those emails to you. This CL was actually inspired from one of his suggestions (otherwise, I will never notice that we can do this). \n\nBest,\nHonglin",
+      "parentUuid": "478e0edb_30981015",
+      "revId": "e61b025f7a8091ee896a53287c71837ff5ee5007",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
     }
   ]
 }
