@@ -1,6 +1,7 @@
 {
   "comments": [
     {
+      "unresolved": false,
       "key": {
         "uuid": "bbb953e0_c8caa95d",
         "filename": "/PATCHSET_LEVEL",
@@ -14,8 +15,25 @@
       "side": 1,
       "message": "Sorry in advance...\n\n  - I don\u0027t really understand what purpose the \"restat\" call has. Won\u0027t that happen automatically when Ninja runs next? Can the description go into more detail?\n\n  - How much difference does the \"recompact\" call make? Does Ninja do this automatically on some schedule? My mental model of this is like a language GC where it\u0027s easy to make things worse trying to manage it too carefully. If Ninja needs to do this more, can we update Ninja\u0027s algorithm?\n\n  - The \"cleandead\" call makes me nervous since I don\u0027t think gen should delete anything by default. From what I understand this would need to happen before the other two calls, but then I think it should be a separate option since this could be destructive.\n\n  - Do we really need to dotfile option? It seems really weird to me to hardcode paths in the dotfile when everybody will have a build in a different place. The only other path we support in the dotfile is the script executable which will normally be an absolute system path. With the current implementation, supplying anything but an absolute system path will be wrong because it looks like it will be taken as relative to the CWD, and GN can run in any directory in your build.\n\nI wouldn\u0027t expect just providing a Ninja binary would have all of these side effects. And it looks like --ninja-executable is already used by xcode project generation. I think xcode users might be surprised that they suddenly opted-in to all of these options, and many projects use the Ninja binary on the path. So I\u0027m thinking it would be better to separate these out:\n\n  --ninja-executable\u003d...: Provide a path, otherwise just use \"ninja\" on the path.\n  --cleandead: opt-in to old stuff deleting.\n  --compact: opt-in to recompact (and maybe restat whatever that does).\n\nWe should update the xcode project code to use the new global switch constant, and update the help (this is probably just removing the xcode-specific mention of this flag in deference to the global one).",
       "revId": "db38f58dd2341b272062b0060073152fb761c6fd",
-      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
-      "unresolved": false
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e092dfc8_ef6179f5",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000633
+      },
+      "writtenOn": "2020-10-12T17:59:56Z",
+      "side": 1,
+      "message": "Hi Brett, I\u0027m going to update this patchset with your feedback, but I wanted to push the discussion along (and write down what I\u0027ve learned). \n\n\u003e - I don\u0027t really understand what purpose the \"restat\" call has. Won\u0027t that happen automatically when Ninja runs next? Can the description go into more detail?\n\nThe restat call should actually be `ninja -t restat build.ninja`. This is a workaround to prevent ninja from triggering regeneration after a gn gen command. There is a good motivating example in https://bugs.chromium.org/p/gn/issues/detail?id\u003d136. My understanding is that ninja will rely on the mtime that is recorded in the .ninja_log if one exists rather than restating build.ninja. You could repro this on Fuchsia like this:\n \n  # Initial build\n  fx set core.x64 \u0026\u0026 fx build\n  # Make Ninja re-gen so there\u0027s a build.ninja action in log\n  touch BUILD.gn \u0026\u0026 fx build\n  # Manual re-gen\n  fx set core.x64\n  # We just wrote build.ninja, but the following command will re-run gn gen\n  fx build \n\nI would prefer that Ninja always restats generator outputs, but that has been suggested and `ninja -t restat` was the outcome.\nhttps://github.com/ninja-build/ninja/pull/1527\n\n\u003e  - How much difference does the \"recompact\" call make? Does Ninja do this automatically on some schedule? My mental model of this is like a language GC where it\u0027s easy to make things worse trying to manage it too carefully. If Ninja needs to do this more, can we update Ninja\u0027s algorithm?\n\nI\u0027m still taking some measurements to measure the impact of \"cleandead\" and \"recompact\", but Ninja does attempt to recompact automatically. The algorithms are fairly simple:\n - .ninja_log is recompacted when total_entries \u003e 100 \u0026\u0026 total_entries \u003e 3x active_entries\n - .ninja_deps is recompacted when total_entries \u003e 1000 \u0026\u0026 total_entries \u003e 3x active_entries\n\nThe downside here is that ninja will not ever automatically \"cleandead\", so the recompact on the .ninja_log won\u0027t remove old entries. From my reading of the code, it seems like it if the old entries grow far enough to trigger the recompact, but then will never be able to actually delete the entries and would thus just keep growing. I could be missing something though. The .ninja_deps will still be pruned, as it does not check files to determine whether it can prune entries.\n\n\u003e - The \"cleandead\" call makes me nervous since I don\u0027t think gen should delete anything by default. From what I understand this would need to happen before the other two calls, but then I think it should be a separate option since this could be destructive.\n\nI think that is reasonable. The cleandead \u0026\u0026 recompact \u0026\u0026 restat pipeline was suggested by the ninja maintainer and adopted by cmake, but I think it might make sense to separate the cleandead \u0026\u0026 recompact from restat. What do you think about making the cleandead \u0026\u0026 recompact a separate GN command entirely? Perhaps `gn clean_stale`? We could also potentially just make this an fx command for Fuchsia.\n\n\u003e - Do we really need to dotfile option?\n\nI\u0027ll remove this.\n\n\u003e I wouldn\u0027t expect just providing a Ninja binary would have all of these side effects.\n\nThat definitely makes sense for cleandead and recompact, but I think we should consider having the `restat build.ninja` run by default if we can. Given the above explanation, what do you think?",
+      "parentUuid": "bbb953e0_c8caa95d",
+      "revId": "db38f58dd2341b272062b0060073152fb761c6fd",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
     }
   ]
 }
