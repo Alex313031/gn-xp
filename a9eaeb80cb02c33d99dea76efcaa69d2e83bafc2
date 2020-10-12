@@ -16,6 +16,23 @@
       "message": "\\o/",
       "revId": "a9eaeb80cb02c33d99dea76efcaa69d2e83bafc2",
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "07e5a4a8_a3923155",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000633
+      },
+      "writtenOn": "2020-10-12T16:54:47Z",
+      "side": 1,
+      "message": "The change has been active in Fuchsia since 10/07. Thus far, there have been two issues brought to my attention:\n\nhttp://fxbug.dev/61759 - Affected test analysis broken\n  - Affected tests analysis relied on the generated stamp files to detect if changes to particular sources affect any known test targets. IMO, this analysis was relying on an implementation detail of GN and should be updated, but I\u0027ll work with shayba@ to figure out how this can best be resolved.\n\nhttp://fxbug.dev/61784 - Mac builders occasionally fail to converge to no-op build\n  - This is a flaky issue with an odd `ninja explain` reason. It claims that `/usr/bin/env` is a phony output. I don\u0027t see how this CL could have caused such a phony target to be created (or why this would be non-deterministic).",
+      "revId": "a9eaeb80cb02c33d99dea76efcaa69d2e83bafc2",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
     }
   ]
 }
