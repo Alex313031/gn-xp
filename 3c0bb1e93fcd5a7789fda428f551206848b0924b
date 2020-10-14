@@ -1,6 +1,29 @@
 {
   "comments": [
     {
+      "unresolved": true,
+      "key": {
+        "uuid": "c5808c35_e4bf8039",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 4
+      },
+      "lineNbr": 19,
+      "author": {
+        "id": 1000004
+      },
+      "writtenOn": "2020-10-14T20:55:24Z",
+      "side": 1,
+      "message": "It looks like this was addressed.",
+      "range": {
+        "startLine": 18,
+        "startChar": 0,
+        "endLine": 19,
+        "endChar": 66
+      },
+      "revId": "3c0bb1e93fcd5a7789fda428f551206848b0924b",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
       "unresolved": false,
       "key": {
         "uuid": "f8062764_ff363a3d",
@@ -14,6 +37,40 @@
       "writtenOn": "2020-10-14T20:48:30Z",
       "side": 1,
       "message": "Friendly ping",
+      "revId": "3c0bb1e93fcd5a7789fda428f551206848b0924b",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "0270ad98_69bd1f47",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000004
+      },
+      "writtenOn": "2020-10-14T20:55:24Z",
+      "side": 1,
+      "message": "Looks fine to me based on the .json changes.",
+      "revId": "3c0bb1e93fcd5a7789fda428f551206848b0924b",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b3b4c579_4747cfe6",
+        "filename": "infra/recipes/gn.py",
+        "patchSetId": 4
+      },
+      "lineNbr": 140,
+      "author": {
+        "id": 1000004
+      },
+      "writtenOn": "2020-10-14T20:55:24Z",
+      "side": 1,
+      "message": "80col",
       "revId": "3c0bb1e93fcd5a7789fda428f551206848b0924b",
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
     }
