@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "2028f2d0_f951dded",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000633
+      },
+      "writtenOn": "2020-10-14T22:38:21Z",
+      "side": 1,
+      "message": "I ran into a stumbling block with runtime_deps when trying to roll GN in Chromium. Chromium has a tool that is looking for .stamp.runtime_deps files, which fails because we don\u0027t have the stamp files. This made me realize we were writing runtime_deps files to the out/phony directory, which we probably don\u0027t actually want to do.\n\nHere\u0027s the attempted Chromium roll: https://chromium-review.googlesource.com/c/chromium/src/+/2472601",
+      "revId": "35a5100f1800f53756f604118b8ffd0928d03249",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    }
+  ]
+}
