@@ -60,6 +60,69 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "538683ba_4f6d597b",
+        "filename": "infra/recipes/gn.py",
+        "patchSetId": 4
+      },
+      "lineNbr": 30,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-10-14T21:02:37Z",
+      "side": 1,
+      "message": "Can we use tip-of-tree, for example 9c030f7a5efed87e3d036440e753c31342f9f909? 1.4.1 contains a critical bug that was addressed in bc1923f436539327707b08ef9751a7a87bdd9d2f and manifested in various projects (for example we saw it LLVM where it occasionally caused a hang).",
+      "range": {
+        "startLine": 30,
+        "startChar": 22,
+        "endLine": 30,
+        "endChar": 37
+      },
+      "revId": "3c0bb1e93fcd5a7789fda428f551206848b0924b",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8f52d649_4c280016",
+        "filename": "infra/recipes/gn.py",
+        "patchSetId": 4
+      },
+      "lineNbr": 66,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-10-14T21:02:37Z",
+      "side": 1,
+      "message": "Please leave a TODO to also enable this for Windows and macOS where the benefits should be even larger than on Linux.",
+      "revId": "3c0bb1e93fcd5a7789fda428f551206848b0924b",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c512629b_10488241",
+        "filename": "infra/recipes/gn.py",
+        "patchSetId": 4
+      },
+      "lineNbr": 131,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-10-14T21:02:37Z",
+      "side": 1,
+      "message": "9c030f7a5efed87e3d036440e753c31342f9f909 introduced a support for LTO which we should also turn on.",
+      "range": {
+        "startLine": 131,
+        "startChar": 16,
+        "endLine": 131,
+        "endChar": 38
+      },
+      "revId": "3c0bb1e93fcd5a7789fda428f551206848b0924b",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "b3b4c579_4747cfe6",
         "filename": "infra/recipes/gn.py",
         "patchSetId": 4
