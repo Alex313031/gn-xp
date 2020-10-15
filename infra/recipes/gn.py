@@ -26,10 +26,55 @@ PROPERTIES = {
     'repository': Property(kind=str, default='https://gn.googlesource.com/gn'),
 }
 
+# On select platforms, link the GN executable against rpmalloc for a small 10% speed boost.
+RPMALLOC_GIT_URL = 'https://fuchsia.googlesource.com/third_party/github.com/mjansson/rpmalloc'
+RPMALLOC_REVISION = '6bb6ca97a8d6a72d626153fd8431ef8477a21145'
+
+# Used to convert os and arch strings to rpmalloc format
+RPMALLOC_MAP = {
+    'amd64': 'x86-64',
+    'mac': 'macos',
+}
+
+
+def _get_compilation_environment(api, target, cipd_dir):
+  if target.is_linux:
+    triple = '--target=%s' % target.triple
+    sysroot = '--sysroot=%s' % cipd_dir.join('sysroot')
+    env = {
+        'CC': cipd_dir.join('bin', 'clang'),
+        'CXX': cipd_dir.join('bin', 'clang++'),
+        'AR': cipd_dir.join('bin', 'llvm-ar'),
+        'CFLAGS': '%s %s' % (triple, sysroot),
+        'LDFLAGS': '%s %s -static-libstdc++' % (triple, sysroot),
+    }
+  elif target.is_mac:
+    triple = '--target=%s' % target.triple
+    sysroot = '--sysroot=%s' % api.step(
+        'xcrun', ['xcrun', '--show-sdk-path'],
+        stdout=api.raw_io.output(name='sdk-path', add_output_log=True),
+        step_test_data=lambda: api.raw_io.test_api.stream_output(
+            '/some/xcode/path')).stdout.strip()
+    stdlib = cipd_dir.join('lib', 'libc++.a')
+    env = {
+        'CC': cipd_dir.join('bin', 'clang'),
+        'CXX': cipd_dir.join('bin', 'clang++'),
+        'AR': cipd_dir.join('bin', 'llvm-ar'),
+        'CFLAGS': '%s %s' % (triple, sysroot),
+        'LDFLAGS': '%s %s -nostdlib++ %s' % (triple, sysroot, stdlib),
+    }
+  else:
+    env = {}
+
+  return env
+
 
 def RunSteps(api, repository):
   src_dir = api.path['start_dir'].join('gn')
 
+  # TODO: Verify that building and linking rpmalloc works on OS X and Windows as
+  # well.
+  use_rpmalloc = api.platform.is_linux
   with api.step.nest('git'), api.context(infra_steps=True):
     api.step('init', ['git', 'init', src_dir])
 
@@ -73,58 +118,106 @@ def RunSteps(api, repository):
           'targets': [api.target.host],
       },
       {
-          'name': 'release',
+          'name':
+              'release',
           'args': ['--use-lto', '--use-icf'],
-          'targets': [api.target('linux-amd64'),
-                      api.target('linux-arm64')]
+          'targets': [api.target('linux-arm64'),
+                      api.target('linux-amd64')]
                      if api.platform.is_linux else [api.target.host],
+
+          # TODO: Enable this for OS X and Windows.
+          'use_rpmalloc':
+              api.platform.is_linux,
       },
   ]
 
+  # True if any config uses rpmalloc.
+  use_rpmalloc = any(c.get('use_rpmalloc', False) for c in configs)
+
   with api.macos_sdk(), api.windows_sdk():
+    # Build the rpmalloc static libraries if needed.
+    if use_rpmalloc:
+      # Maps a target.platform string to the location of the corresponding
+      # rpmalloc static library.
+      rpmalloc_static_libs = {}
+
+      # Get the list of all target platforms that are listed in `configs`
+      # above. Note that this is a list of Target instances, some of them
+      # may refer to the same platform string (e.g. linux-amd64).
+      #
+      # For each platform, a version of rpmalloc will be built if necessary,
+      # but doing this properly requires having a valid target instance to
+      # call _get_compilation_environment. So create a { platform -> Target }
+      # map to do that later.
+      all_config_platforms = {}
+      for c in configs:
+        if not c.get('use_rpmalloc', False):
+          continue
+        for t in c['targets']:
+          if t.platform not in all_config_platforms:
+            all_config_platforms[t.platform] = t
+
+      rpmalloc_src_dir = api.path['start_dir'].join('rpmalloc')
+      with api.step.nest('rpmalloc'):
+        api.step('init', ['git', 'init', rpmalloc_src_dir])
+        with api.context(cwd=rpmalloc_src_dir, infra_steps=True):
+          api.step(
+              'fetch',
+              ['git', 'fetch', '--tags', RPMALLOC_GIT_URL, RPMALLOC_REVISION])
+          api.step('checkout', ['git', 'checkout', 'FETCH_HEAD'])
+
+        for platform in all_config_platforms:
+          # Convert target architecture and os to rpmalloc format.
+          rpmalloc_os, rpmalloc_arch = platform.split('-')
+          rpmalloc_os = RPMALLOC_MAP.get(rpmalloc_os, rpmalloc_os)
+          rpmalloc_arch = RPMALLOC_MAP.get(rpmalloc_arch, rpmalloc_arch)
+
+          # The rpmalloc build system doesn't support out-of-tree builds, and
+          # trying to build binaries for multiple target architectures doesn't
+          # work unless one cleans the build. To work around these issues,
+          # simply copy the source tree into a new clean directory.
+          rpmalloc_build_dir = api.path['cleanup'].join('rpmalloc-' + platform)
+          api.file.rmtree('remove sources ' + platform, rpmalloc_build_dir)
+          api.file.copytree('copy sources ' + platform, rpmalloc_src_dir,
+                            rpmalloc_build_dir)
+
+          env = _get_compilation_environment(api,
+                                             all_config_platforms[platform],
+                                             cipd_dir)
+          with api.step.nest('build rpmalloc-' + platform), api.context(
+              env=env, cwd=rpmalloc_build_dir):
+            api.python(
+                'configure',
+                rpmalloc_build_dir.join('configure.py'),
+                args=['-c', 'release', '-a', rpmalloc_arch, '--lto'])
+
+            # NOTE: Only build the static library.
+            rpmalloc_static_lib = api.path.join('lib', rpmalloc_os, 'release',
+                                                rpmalloc_arch,
+                                                'librpmallocwrap.a')
+            api.step('ninja', [cipd_dir.join('ninja'), rpmalloc_static_lib])
+
+          rpmalloc_static_libs[platform] = rpmalloc_build_dir.join(
+              rpmalloc_static_lib)
+
     for config in configs:
       with api.step.nest(config['name']):
         for target in config['targets']:
-          with api.step.nest(target.platform):
-            if target.is_linux:
-              triple = '--target=%s' % target.triple
-              sysroot = '--sysroot=%s' % cipd_dir.join('sysroot')
-              env = {
-                  'CC': cipd_dir.join('bin', 'clang'),
-                  'CXX': cipd_dir.join('bin', 'clang++'),
-                  'AR': cipd_dir.join('bin', 'llvm-ar'),
-                  'CFLAGS': '%s %s' % (triple, sysroot),
-                  'LDFLAGS': '%s %s -static-libstdc++' % (triple, sysroot),
-              }
-            elif target.is_mac:
-              triple = '--target=%s' % target.triple
-              sysroot = '--sysroot=%s' % api.step(
-                  'xcrun', ['xcrun', '--show-sdk-path'],
-                  stdout=api.raw_io.output(
-                      name='sdk-path', add_output_log=True),
-                  step_test_data=lambda: api.raw_io.test_api.stream_output(
-                      '/some/xcode/path')).stdout.strip()
-              stdlib = cipd_dir.join('lib', 'libc++.a')
-              env = {
-                  'CC': cipd_dir.join('bin', 'clang'),
-                  'CXX': cipd_dir.join('bin', 'clang++'),
-                  'AR': cipd_dir.join('bin', 'llvm-ar'),
-                  'CFLAGS': '%s %s' % (triple, sysroot),
-                  'LDFLAGS': '%s %s -nostdlib++ %s' % (triple, sysroot, stdlib),
-              }
-            else:
-              env = {}
+          env = _get_compilation_environment(api, target, cipd_dir)
+          with api.step.nest(target.platform), api.context(
+              env=env, cwd=src_dir):
+            args = config['args']
+            if config.get('use_rpmalloc', False):
+              args = args[:] + [
+                  '--link-lib=%s' % rpmalloc_static_libs[target.platform]
+              ]
 
-            with api.context(env=env, cwd=src_dir):
-              api.python(
-                  'generate',
-                  src_dir.join('build', 'gen.py'),
-                  args=config['args'])
+            api.python('generate', src_dir.join('build', 'gen.py'), args=args)
 
-              # Windows requires the environment modifications when building too.
-              api.step('build',
-                       [cipd_dir.join('ninja'), '-C',
-                        src_dir.join('out')])
+            # Windows requires the environment modifications when building too.
+            api.step('build',
+                     [cipd_dir.join('ninja'), '-C',
+                      src_dir.join('out')])
 
             if target.is_host:
               api.step('test', [src_dir.join('out', 'gn_unittests')])
