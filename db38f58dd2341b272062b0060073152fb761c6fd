@@ -34,6 +34,24 @@
       "parentUuid": "bbb953e0_c8caa95d",
       "revId": "db38f58dd2341b272062b0060073152fb761c6fd",
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9ededafb_91598b22",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000014
+      },
+      "writtenOn": "2020-10-15T22:05:13Z",
+      "side": 1,
+      "message": "- gn clean_stale sounds good\n\n- I have also been annoyed by the redundant re-gen when running Ninja so I\u0027m sold on the restat. I can see how we wouldn\u0027t want to run this unless the user provides a ninja binary because there might be multiple versions. We should just make that clear I guess.\n\n- I\u0027m unclear on your current proposal for recompact. Do you think we need a separate command for that. Should cleandead do it automatically and that might be sufficient?",
+      "parentUuid": "e092dfc8_ef6179f5",
+      "revId": "db38f58dd2341b272062b0060073152fb761c6fd",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
     }
   ]
 }
