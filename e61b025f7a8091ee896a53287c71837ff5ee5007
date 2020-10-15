@@ -85,6 +85,86 @@
       "message": "Friendly ping, shall we discuss more about this? After more thinking, I really feel this small change will be a game changer for our project. Thanks!",
       "revId": "e61b025f7a8091ee896a53287c71837ff5ee5007",
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d08889fa_62259c01",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000014
+      },
+      "writtenOn": "2020-10-15T01:03:43Z",
+      "side": 1,
+      "message": "Sorry I\u0027ve been so late...\n\nThe switch behaves differently than I expected and I wonder if it does what you need. I was expecting you would need to maintain the same definition of the \"//\" directory so that \"//third_party/icu\" is still the same, just replace the file. In this case you don\u0027t want to define the source root at all, you just need to supply a different BUILD file to load initially. This also means there\u0027s no interaction with the \"--root\" flag.\n\n(This is the behavior we had before that was removed.)\n\nI wrote the suggested documentation below assuming this new behavior. If you think you need to affect the definition of \"//\" we should discuss further. Can that be done by combining the two flags?",
+      "revId": "e61b025f7a8091ee896a53287c71837ff5ee5007",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c0172876_feaeb5c0",
+        "filename": "src/gn/switches.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 178,
+      "author": {
+        "id": 1000014
+      },
+      "writtenOn": "2020-10-15T01:03:43Z",
+      "side": 1,
+      "message": "The existing switches use hyphens so we should be consistent.",
+      "range": {
+        "startLine": 178,
+        "startChar": 34,
+        "endLine": 178,
+        "endChar": 53
+      },
+      "revId": "e61b025f7a8091ee896a53287c71837ff5ee5007",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b9390b23_fd710fe8",
+        "filename": "src/gn/switches.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 180,
+      "author": {
+        "id": 1000014
+      },
+      "writtenOn": "2020-10-15T01:03:43Z",
+      "side": 1,
+      "message": "We should avoid the term \"source root\" which is the name of the \"//\" directory. Probably just stick with \"root build file\" like the flag name as in other places.",
+      "range": {
+        "startLine": 180,
+        "startChar": 47,
+        "endLine": 180,
+        "endChar": 58
+      },
+      "revId": "e61b025f7a8091ee896a53287c71837ff5ee5007",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5e7be7c8_56c12448",
+        "filename": "src/gn/switches.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 184,
+      "author": {
+        "id": 1000014
+      },
+      "writtenOn": "2020-10-15T01:03:43Z",
+      "side": 1,
+      "message": "Here is a suggested rewording of the help. See the patch-level comment I have about the behavior also:\n\nNormally the first build file loaded by GN will be \"//BUILD.gn\". This option allows specifying a different directory for the initial build file. The value is a GN-style path taken as relative to the current working directory.\n\nSpecifying a different initial BUILD.gn file does not change the meaning of the source root (the \"//\" directory) which can be independently set via the --root switch. It also does not prevent the build file located at \"//BUILD.gn\" from being loaded if a target in the build references that directory.\n\nOne use-case of this feature is to load a different set of initial targets from project that uses GN without modifying any files.",
+      "revId": "e61b025f7a8091ee896a53287c71837ff5ee5007",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
     }
   ]
 }
