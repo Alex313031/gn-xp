@@ -16,6 +16,24 @@
       "message": "Does this change the sysroot or target requirements? Fine for Fuchsia either way I guess, but maybe wait for Dirk to confirm if it changes something other than what hosts it\u0027s running on.",
       "revId": "f503978a00d39c0b70083ebee70a780d2fa91705",
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "93ca0f39_000865a6",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-10-15T20:09:10Z",
+      "side": 1,
+      "message": "We always build against hermetic Linux sysroot which is equivalent to Ubuntu 14.04/Debian Jessie so in theory the host machine should be irrelevant. This change is just to keep our bots up to date since Ubuntu 16.04 is going be EOL in April 2021.",
+      "parentUuid": "4641cb25_1dd6b168",
+      "revId": "f503978a00d39c0b70083ebee70a780d2fa91705",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
     }
   ]
 }
