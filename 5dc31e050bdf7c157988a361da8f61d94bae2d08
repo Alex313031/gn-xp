@@ -1,6 +1,7 @@
 {
   "comments": [
     {
+      "unresolved": false,
       "key": {
         "uuid": "4b7c7e94_f24ef423",
         "filename": "/PATCHSET_LEVEL",
@@ -14,10 +15,10 @@
       "side": 1,
       "message": "Sylvain, could you review this CL?",
       "revId": "5dc31e050bdf7c157988a361da8f61d94bae2d08",
-      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
-      "unresolved": false
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
     },
     {
+      "unresolved": false,
       "key": {
         "uuid": "dd4b0cf8_03575464",
         "filename": "/PATCHSET_LEVEL",
@@ -31,10 +32,10 @@
       "side": 1,
       "message": "lgtm\n\nSorry for the delay.",
       "revId": "5dc31e050bdf7c157988a361da8f61d94bae2d08",
-      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
-      "unresolved": false
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
     },
     {
+      "unresolved": false,
       "key": {
         "uuid": "72eff019_e4a106bc",
         "filename": "/PATCHSET_LEVEL",
@@ -48,8 +49,24 @@
       "side": 1,
       "message": "Brett, could you review this CL regarding other platforms? If it\u0027s ok, please send it to CQ, I have no sufficient rights.",
       "revId": "5dc31e050bdf7c157988a361da8f61d94bae2d08",
-      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
-      "unresolved": false
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "6a33abea_8d86925c",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000014
+      },
+      "writtenOn": "2020-10-15T20:47:51Z",
+      "side": 1,
+      "message": "Just noticed I missed this. Do we still want to land this?",
+      "revId": "5dc31e050bdf7c157988a361da8f61d94bae2d08",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
     }
   ]
 }
