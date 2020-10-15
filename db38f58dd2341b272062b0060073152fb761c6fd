@@ -52,6 +52,24 @@
       "parentUuid": "e092dfc8_ef6179f5",
       "revId": "db38f58dd2341b272062b0060073152fb761c6fd",
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "34fd9e66_5426b834",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000633
+      },
+      "writtenOn": "2020-10-15T22:25:20Z",
+      "side": 1,
+      "message": "\u003e I\u0027m unclear on your current proposal for recompact. Do you think we need a separate command for that. Should cleandead do it automatically and that might be sufficient?\n\nI think we should have \"gn clean_stale\" perform the combination of \"ninja -t cleandead \u0026\u0026 ninja -t recompact\". That would be the only place I suggest we call recompact.",
+      "parentUuid": "9ededafb_91598b22",
+      "revId": "db38f58dd2341b272062b0060073152fb761c6fd",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
     }
   ]
 }
