@@ -70,6 +70,24 @@
       "parentUuid": "9ededafb_91598b22",
       "revId": "db38f58dd2341b272062b0060073152fb761c6fd",
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "85dbf6e0_9f2a9a94",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-10-15T22:34:16Z",
+      "side": 1,
+      "message": "\u003e \u003e Do we really need to dotfile option?\n\u003e I\u0027ll remove this.\n\nThe motivation for the dotfile option was to avoid having to use either wrapper or always pass a flag when invoking GN. I agree that today it wouldn\u0027t be very useful because you cannot access target_os and target_cpu in dotfile but I was hoping that this is something we could change since we have other use cases for it, but it\u0027s fine to pursue that separately in a follow up change.",
+      "parentUuid": "34fd9e66_5426b834",
+      "revId": "db38f58dd2341b272062b0060073152fb761c6fd",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
     }
   ]
 }
