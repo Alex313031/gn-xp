@@ -124,6 +124,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "52652e38_a7e6cb94",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000803
+      },
+      "writtenOn": "2020-10-15T03:10:43Z",
+      "side": 1,
+      "message": "In my experiment, after specifying this switch, only \u003c70 targets are configured. The configuration succeeded even I manually create some errors in some unrelated folder\u0027s build file. And I can compile the icu library from it too. So I think this will satisfy our purpose (avoid configuring unrelated folders in chrome). But I am far not an expert of GN, May I ask if you have any concerns on whether this will achieve our goal? Thanks!",
+      "parentUuid": "7fe5e744_feafe6c6",
+      "revId": "e61b025f7a8091ee896a53287c71837ff5ee5007",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "c0172876_feaeb5c0",
         "filename": "src/gn/switches.cc",
         "patchSetId": 4
