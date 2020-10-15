@@ -144,23 +144,23 @@
     "name": "debug"
   },
   {
-    "cmd": [],
-    "name": "debug.mac-amd64",
-    "~followup_annotations": [
-      "@@@STEP_NEST_LEVEL@1@@@"
-    ]
-  },
-  {
     "cmd": [
       "xcrun",
       "--show-sdk-path"
     ],
-    "name": "debug.mac-amd64.xcrun",
+    "name": "debug.xcrun",
     "stdout": "/path/to/tmp/",
     "~followup_annotations": [
-      "@@@STEP_NEST_LEVEL@2@@@",
+      "@@@STEP_NEST_LEVEL@1@@@",
       "@@@STEP_LOG_LINE@raw_io.output[sdk-path]@/some/xcode/path@@@",
       "@@@STEP_LOG_END@raw_io.output[sdk-path]@@@"
+    ]
+  },
+  {
+    "cmd": [],
+    "name": "debug.mac-amd64",
+    "~followup_annotations": [
+      "@@@STEP_NEST_LEVEL@1@@@"
     ]
   },
   {
@@ -206,6 +206,14 @@
     "cmd": [
       "[START_DIR]/gn/out/gn_unittests"
     ],
+    "cwd": "[START_DIR]/gn",
+    "env": {
+      "AR": "[START_DIR]/cipd/bin/llvm-ar",
+      "CC": "[START_DIR]/cipd/bin/clang",
+      "CFLAGS": "--target=x86_64-apple-darwin --sysroot=/some/xcode/path",
+      "CXX": "[START_DIR]/cipd/bin/clang++",
+      "LDFLAGS": "--target=x86_64-apple-darwin --sysroot=/some/xcode/path -nostdlib++ [START_DIR]/cipd/lib/libc++.a"
+    },
     "name": "debug.mac-amd64.test",
     "~followup_annotations": [
       "@@@STEP_NEST_LEVEL@2@@@"
@@ -216,23 +224,23 @@
     "name": "release"
   },
   {
-    "cmd": [],
-    "name": "release.mac-amd64",
-    "~followup_annotations": [
-      "@@@STEP_NEST_LEVEL@1@@@"
-    ]
-  },
-  {
     "cmd": [
       "xcrun",
       "--show-sdk-path"
     ],
-    "name": "release.mac-amd64.xcrun",
+    "name": "release.xcrun",
     "stdout": "/path/to/tmp/",
     "~followup_annotations": [
-      "@@@STEP_NEST_LEVEL@2@@@",
+      "@@@STEP_NEST_LEVEL@1@@@",
       "@@@STEP_LOG_LINE@raw_io.output[sdk-path]@/some/xcode/path@@@",
       "@@@STEP_LOG_END@raw_io.output[sdk-path]@@@"
+    ]
+  },
+  {
+    "cmd": [],
+    "name": "release.mac-amd64",
+    "~followup_annotations": [
+      "@@@STEP_NEST_LEVEL@1@@@"
     ]
   },
   {
@@ -279,6 +287,14 @@
     "cmd": [
       "[START_DIR]/gn/out/gn_unittests"
     ],
+    "cwd": "[START_DIR]/gn",
+    "env": {
+      "AR": "[START_DIR]/cipd/bin/llvm-ar",
+      "CC": "[START_DIR]/cipd/bin/clang",
+      "CFLAGS": "--target=x86_64-apple-darwin --sysroot=/some/xcode/path",
+      "CXX": "[START_DIR]/cipd/bin/clang++",
+      "LDFLAGS": "--target=x86_64-apple-darwin --sysroot=/some/xcode/path -nostdlib++ [START_DIR]/cipd/lib/libc++.a"
+    },
     "name": "release.mac-amd64.test",
     "~followup_annotations": [
       "@@@STEP_NEST_LEVEL@2@@@"
@@ -304,6 +320,14 @@
       "-json-output",
       "/path/to/tmp/json"
     ],
+    "cwd": "[START_DIR]/gn",
+    "env": {
+      "AR": "[START_DIR]/cipd/bin/llvm-ar",
+      "CC": "[START_DIR]/cipd/bin/clang",
+      "CFLAGS": "--target=x86_64-apple-darwin --sysroot=/some/xcode/path",
+      "CXX": "[START_DIR]/cipd/bin/clang++",
+      "LDFLAGS": "--target=x86_64-apple-darwin --sysroot=/some/xcode/path -nostdlib++ [START_DIR]/cipd/lib/libc++.a"
+    },
     "name": "release.mac-amd64.upload.build gn/gn/mac-amd64",
     "~followup_annotations": [
       "@@@STEP_NEST_LEVEL@3@@@",
