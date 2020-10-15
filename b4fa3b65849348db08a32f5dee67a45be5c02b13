@@ -33,6 +33,24 @@
       "message": "Hum. Looks like mac build is broken. As my CL only changes support files for third-party text editor, I don\u0027t think this is related. ",
       "revId": "b4fa3b65849348db08a32f5dee67a45be5c02b13",
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "cacd7203_4af78e73",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000070
+      },
+      "writtenOn": "2020-10-15T16:15:50Z",
+      "side": 1,
+      "message": "Reported as https://bugs.chromium.org/p/gn/issues/detail?id\u003d207",
+      "parentUuid": "0e6dc923_704f0938",
+      "revId": "b4fa3b65849348db08a32f5dee67a45be5c02b13",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
     }
   ]
 }
