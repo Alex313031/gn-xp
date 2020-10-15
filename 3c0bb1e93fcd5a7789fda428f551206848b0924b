@@ -81,6 +81,30 @@
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "7fe3073c_46fc7e52",
+        "filename": "infra/recipes/gn.py",
+        "patchSetId": 4
+      },
+      "lineNbr": 30,
+      "author": {
+        "id": 1000067
+      },
+      "writtenOn": "2020-10-15T21:56:42Z",
+      "side": 1,
+      "message": "Sure, done.",
+      "parentUuid": "538683ba_4f6d597b",
+      "range": {
+        "startLine": 30,
+        "startChar": 22,
+        "endLine": 30,
+        "endChar": 37
+      },
+      "revId": "3c0bb1e93fcd5a7789fda428f551206848b0924b",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "8f52d649_4c280016",
@@ -98,6 +122,24 @@
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "df945d0f_11dc8b7f",
+        "filename": "infra/recipes/gn.py",
+        "patchSetId": 4
+      },
+      "lineNbr": 66,
+      "author": {
+        "id": 1000067
+      },
+      "writtenOn": "2020-10-15T21:56:42Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "8f52d649_4c280016",
+      "revId": "3c0bb1e93fcd5a7789fda428f551206848b0924b",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "c512629b_10488241",
@@ -111,6 +153,30 @@
       "writtenOn": "2020-10-14T21:02:37Z",
       "side": 1,
       "message": "9c030f7a5efed87e3d036440e753c31342f9f909 introduced a support for LTO which we should also turn on.",
+      "range": {
+        "startLine": 131,
+        "startChar": 16,
+        "endLine": 131,
+        "endChar": 38
+      },
+      "revId": "3c0bb1e93fcd5a7789fda428f551206848b0924b",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e7c0fa44_ad375eb6",
+        "filename": "infra/recipes/gn.py",
+        "patchSetId": 4
+      },
+      "lineNbr": 131,
+      "author": {
+        "id": 1000067
+      },
+      "writtenOn": "2020-10-15T21:56:42Z",
+      "side": 1,
+      "message": "Done, I\u0027ve also rebased on top of recent changes to get the linux-arm64 build working as well.\n\nMeasurements show no significant improvement from enabled --lto in rpmalloc, but it\u0027s still on anyway ;)",
+      "parentUuid": "c512629b_10488241",
       "range": {
         "startLine": 131,
         "startChar": 16,
