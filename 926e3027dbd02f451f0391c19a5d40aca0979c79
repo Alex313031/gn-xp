@@ -16,6 +16,63 @@
       "message": "Hi Brett,\n\nThanks for the review! I have updated the CL accordingly. And please see my response.\n\nBest,\nHonglin",
       "revId": "926e3027dbd02f451f0391c19a5d40aca0979c79",
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "7b0fa627_6c998e9e",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 6
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000014
+      },
+      "writtenOn": "2020-10-15T18:23:32Z",
+      "side": 1,
+      "message": "Can you add to the \"gc help dotfile\" help for \"root\":\n\n  The command-line switch --root-target will override this value (see \"gn help --root-target\").",
+      "revId": "926e3027dbd02f451f0391c19a5d40aca0979c79",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "86c501dd_8841422a",
+        "filename": "src/gn/switches.cc",
+        "patchSetId": 6
+      },
+      "lineNbr": 178,
+      "author": {
+        "id": 1000014
+      },
+      "writtenOn": "2020-10-15T18:23:32Z",
+      "side": 1,
+      "message": "I realize the source of confusion in my last patch was that I was confusing the variable \"root\" in the .gn file with the source_root. There\u0027s also a comment-line flag \"--root\" which defines the source root :-/ so this is all kind of confusing.\n\nI realize the way you\u0027ve written the code here is that the command-line value is actually a label, not a directory. So we should rename everything accordingly. I\u0027d suggest --root-target",
+      "range": {
+        "startLine": 178,
+        "startChar": 11,
+        "endLine": 178,
+        "endChar": 28
+      },
+      "revId": "926e3027dbd02f451f0391c19a5d40aca0979c79",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c14b4c9c_75057f77",
+        "filename": "src/gn/switches.cc",
+        "patchSetId": 6
+      },
+      "lineNbr": 182,
+      "author": {
+        "id": 1000014
+      },
+      "writtenOn": "2020-10-15T18:23:32Z",
+      "side": 1,
+      "message": "New suggested documentation:\n\n--root-target: Override the root target.\n\nThe root target is the target initially loaded to begin population of the build graph. It defaults to \"//:\" which normally causes the \"//BUILD.gn\" file to be loaded. It can be specified in the .gn file via the \"root\" variable (see \"gn help dotfile\").\n\nIf specified, the value of this switch will be take precedence overthe value in \".gn\". The target name (after the colon) is ignored, only the directory name is required. Relative paths will be resolved relative to the current directory.\n\nSpecifying a different initial BUILD.gn file does not change the meaning of\nthe source root (the \"//\" directory) which can be independently set via the\n--root switch. It also does not prevent the build file located at \"//BUILD.gn\"\nfrom being loaded if a target in the build references that directory.\n\nOne use-case of this feature is to load a different set of initial targets\nfrom project that uses GN without modifying any files.",
+      "revId": "926e3027dbd02f451f0391c19a5d40aca0979c79",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
     }
   ]
 }
