@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "56f1daf3_d6c93437",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000004
+      },
+      "writtenOn": "2020-10-15T20:31:38Z",
+      "side": 1,
+      "message": "I really have no idea what this is, but it looks like you followed what the machine told you to do from the error messages. :)",
+      "revId": "cf1f029d03792a46df6ef908f8bb743545e8302a",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    }
+  ]
+}
