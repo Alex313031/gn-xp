@@ -58,6 +58,30 @@
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "4f8ec851_bb287ae1",
+        "filename": "src/gn/switches.cc",
+        "patchSetId": 6
+      },
+      "lineNbr": 178,
+      "author": {
+        "id": 1000803
+      },
+      "writtenOn": "2020-10-15T22:38:49Z",
+      "side": 1,
+      "message": "Got it! Agreed that this is confusing. I have updated the the CL accordingly, thanks!",
+      "parentUuid": "86c501dd_8841422a",
+      "range": {
+        "startLine": 178,
+        "startChar": 11,
+        "endLine": 178,
+        "endChar": 28
+      },
+      "revId": "926e3027dbd02f451f0391c19a5d40aca0979c79",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "c14b4c9c_75057f77",
@@ -71,6 +95,24 @@
       "writtenOn": "2020-10-15T18:23:32Z",
       "side": 1,
       "message": "New suggested documentation:\n\n--root-target: Override the root target.\n\nThe root target is the target initially loaded to begin population of the build graph. It defaults to \"//:\" which normally causes the \"//BUILD.gn\" file to be loaded. It can be specified in the .gn file via the \"root\" variable (see \"gn help dotfile\").\n\nIf specified, the value of this switch will be take precedence overthe value in \".gn\". The target name (after the colon) is ignored, only the directory name is required. Relative paths will be resolved relative to the current directory.\n\nSpecifying a different initial BUILD.gn file does not change the meaning of\nthe source root (the \"//\" directory) which can be independently set via the\n--root switch. It also does not prevent the build file located at \"//BUILD.gn\"\nfrom being loaded if a target in the build references that directory.\n\nOne use-case of this feature is to load a different set of initial targets\nfrom project that uses GN without modifying any files.",
+      "revId": "926e3027dbd02f451f0391c19a5d40aca0979c79",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "604e4931_d5076673",
+        "filename": "src/gn/switches.cc",
+        "patchSetId": 6
+      },
+      "lineNbr": 182,
+      "author": {
+        "id": 1000803
+      },
+      "writtenOn": "2020-10-15T22:38:49Z",
+      "side": 1,
+      "message": "Cool, thanks! I have updated the doc accordingly, except for one small change: \"Relative paths will be resolved relative to the current directory.\" -\u003e \"Relative paths will be resolved relative to the current \"//\" directory.\" (i.e. adding \"//\").",
+      "parentUuid": "c14b4c9c_75057f77",
       "revId": "926e3027dbd02f451f0391c19a5d40aca0979c79",
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
     }
