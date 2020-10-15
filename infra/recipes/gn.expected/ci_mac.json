@@ -64,7 +64,7 @@
       "-root",
       "[START_DIR]/cipd",
       "-ensure-file",
-      "infra/ninja/${platform} version:1.8.2\nfuchsia/clang/${platform} git_revision:b920a7f65b13237dc4d5b2b836b29a954fff440a",
+      "infra/ninja/${platform} version:1.8.2\nfuchsia/third_party/clang/${platform} integration",
       "-json-output",
       "/path/to/tmp/json"
     ],
@@ -75,8 +75,8 @@
       "@@@STEP_LOG_LINE@json.output@  \"result\": {@@@",
       "@@@STEP_LOG_LINE@json.output@    \"\": [@@@",
       "@@@STEP_LOG_LINE@json.output@      {@@@",
-      "@@@STEP_LOG_LINE@json.output@        \"instance_id\": \"resolved-instance_id-of-git_revision:b92\", @@@",
-      "@@@STEP_LOG_LINE@json.output@        \"package\": \"fuchsia/clang/resolved-platform\"@@@",
+      "@@@STEP_LOG_LINE@json.output@        \"instance_id\": \"resolved-instance_id-of-integration-----\", @@@",
+      "@@@STEP_LOG_LINE@json.output@        \"package\": \"fuchsia/third_party/clang/resolved-platform\"@@@",
       "@@@STEP_LOG_LINE@json.output@      }, @@@",
       "@@@STEP_LOG_LINE@json.output@      {@@@",
       "@@@STEP_LOG_LINE@json.output@        \"instance_id\": \"resolved-instance_id-of-version:1.8.2---\", @@@",
@@ -144,23 +144,23 @@
     "name": "debug"
   },
   {
-    "cmd": [],
-    "name": "debug.mac-amd64",
-    "~followup_annotations": [
-      "@@@STEP_NEST_LEVEL@1@@@"
-    ]
-  },
-  {
     "cmd": [
       "xcrun",
       "--show-sdk-path"
     ],
-    "name": "debug.mac-amd64.xcrun",
+    "name": "debug.xcrun",
     "stdout": "/path/to/tmp/",
     "~followup_annotations": [
-      "@@@STEP_NEST_LEVEL@2@@@",
+      "@@@STEP_NEST_LEVEL@1@@@",
       "@@@STEP_LOG_LINE@raw_io.output[sdk-path]@/some/xcode/path@@@",
       "@@@STEP_LOG_END@raw_io.output[sdk-path]@@@"
+    ]
+  },
+  {
+    "cmd": [],
+    "name": "debug.mac-amd64",
+    "~followup_annotations": [
+      "@@@STEP_NEST_LEVEL@1@@@"
     ]
   },
   {
@@ -216,23 +216,23 @@
     "name": "release"
   },
   {
-    "cmd": [],
-    "name": "release.mac-amd64",
-    "~followup_annotations": [
-      "@@@STEP_NEST_LEVEL@1@@@"
-    ]
-  },
-  {
     "cmd": [
       "xcrun",
       "--show-sdk-path"
     ],
-    "name": "release.mac-amd64.xcrun",
+    "name": "release.xcrun",
     "stdout": "/path/to/tmp/",
     "~followup_annotations": [
-      "@@@STEP_NEST_LEVEL@2@@@",
+      "@@@STEP_NEST_LEVEL@1@@@",
       "@@@STEP_LOG_LINE@raw_io.output[sdk-path]@/some/xcode/path@@@",
       "@@@STEP_LOG_END@raw_io.output[sdk-path]@@@"
+    ]
+  },
+  {
+    "cmd": [],
+    "name": "release.mac-amd64",
+    "~followup_annotations": [
+      "@@@STEP_NEST_LEVEL@1@@@"
     ]
   },
   {
