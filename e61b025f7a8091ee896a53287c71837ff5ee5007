@@ -104,6 +104,24 @@
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "7fe5e744_feafe6c6",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000803
+      },
+      "writtenOn": "2020-10-15T01:38:52Z",
+      "side": 1,
+      "message": "Thank you very much for the review! The helper message has been improved a lot. And it is not late at all (P.S. I think it is very quick considering everyone must be very busy at the beginning of a new quarter).\n\nYes, \"not affecting the definition of //\" is indeed what I expected. And I feel this is necessary because if we change the \"//\" to, say, \"//third_party/icu\", maybe we can not see the files/dependencies outside of that folder (and we need to define a new \".gn\" in that folder too). \n\nI think this CL should do nothing more than \"just exposing a way to designate the `root` variable in `.gn` from command line, to avoid modifying the `.gn` file if we want to define/change `root` variable\". So the effect should be exactly the same as defining a same `root` variable in `.gn`. In this sense I think \"--root\" and the new flag can be used together.\n\nThanks again!",
+      "parentUuid": "d08889fa_62259c01",
+      "revId": "e61b025f7a8091ee896a53287c71837ff5ee5007",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "c0172876_feaeb5c0",
@@ -117,6 +135,30 @@
       "writtenOn": "2020-10-15T01:03:43Z",
       "side": 1,
       "message": "The existing switches use hyphens so we should be consistent.",
+      "range": {
+        "startLine": 178,
+        "startChar": 34,
+        "endLine": 178,
+        "endChar": 53
+      },
+      "revId": "e61b025f7a8091ee896a53287c71837ff5ee5007",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "fac2f049_99864dbf",
+        "filename": "src/gn/switches.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 178,
+      "author": {
+        "id": 1000803
+      },
+      "writtenOn": "2020-10-15T01:38:52Z",
+      "side": 1,
+      "message": "Sorry that I should have used hyphens, thanks for pointing this out!",
+      "parentUuid": "c0172876_feaeb5c0",
       "range": {
         "startLine": 178,
         "startChar": 34,
@@ -150,6 +192,30 @@
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "a2eaf4f7_6574639c",
+        "filename": "src/gn/switches.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 180,
+      "author": {
+        "id": 1000803
+      },
+      "writtenOn": "2020-10-15T01:38:52Z",
+      "side": 1,
+      "message": "Good point, modified as suggested (I change it to \"build file DIR\" because it must be a folder not the specific BUILD.gn file). Thanks",
+      "parentUuid": "b9390b23_fd710fe8",
+      "range": {
+        "startLine": 180,
+        "startChar": 47,
+        "endLine": 180,
+        "endChar": 58
+      },
+      "revId": "e61b025f7a8091ee896a53287c71837ff5ee5007",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "5e7be7c8_56c12448",
@@ -163,6 +229,24 @@
       "writtenOn": "2020-10-15T01:03:43Z",
       "side": 1,
       "message": "Here is a suggested rewording of the help. See the patch-level comment I have about the behavior also:\n\nNormally the first build file loaded by GN will be \"//BUILD.gn\". This option allows specifying a different directory for the initial build file. The value is a GN-style path taken as relative to the current working directory.\n\nSpecifying a different initial BUILD.gn file does not change the meaning of the source root (the \"//\" directory) which can be independently set via the --root switch. It also does not prevent the build file located at \"//BUILD.gn\" from being loaded if a target in the build references that directory.\n\nOne use-case of this feature is to load a different set of initial targets from project that uses GN without modifying any files.",
+      "revId": "e61b025f7a8091ee896a53287c71837ff5ee5007",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ece8c896_3500f8c7",
+        "filename": "src/gn/switches.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 184,
+      "author": {
+        "id": 1000803
+      },
+      "writtenOn": "2020-10-15T01:38:52Z",
+      "side": 1,
+      "message": "Thanks! This is indeed much better. I have updated the message accordingly. And I have added another sentence \"This option will overwrite the `root` variable defined in `.gn`.\".",
+      "parentUuid": "5e7be7c8_56c12448",
       "revId": "e61b025f7a8091ee896a53287c71837ff5ee5007",
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
     }

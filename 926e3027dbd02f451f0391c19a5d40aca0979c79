@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "506dc912_f2665068",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 6
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000803
+      },
+      "writtenOn": "2020-10-15T01:38:52Z",
+      "side": 1,
+      "message": "Hi Brett,\n\nThanks for the review! I have updated the CL accordingly. And please see my response.\n\nBest,\nHonglin",
+      "revId": "926e3027dbd02f451f0391c19a5d40aca0979c79",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    }
+  ]
+}
