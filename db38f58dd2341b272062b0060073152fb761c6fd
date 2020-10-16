@@ -88,6 +88,23 @@
       "parentUuid": "34fd9e66_5426b834",
       "revId": "db38f58dd2341b272062b0060073152fb761c6fd",
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b0d06d6f_5d1fd856",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000014
+      },
+      "writtenOn": "2020-10-16T02:20:47Z",
+      "side": 1,
+      "message": "\"gn clean_stale\" SGTM",
+      "revId": "db38f58dd2341b272062b0060073152fb761c6fd",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
     }
   ]
 }
