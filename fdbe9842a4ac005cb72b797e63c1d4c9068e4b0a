@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "89b6cb4b_3f1a7fb2",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000067
+      },
+      "writtenOn": "2020-10-16T06:40:28Z",
+      "side": 1,
+      "message": "FYI: Patch 6 is just a reformat using the yapf tool.",
+      "revId": "fdbe9842a4ac005cb72b797e63c1d4c9068e4b0a",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    }
+  ]
+}
