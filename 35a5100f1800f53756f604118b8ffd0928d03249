@@ -33,6 +33,24 @@
       "message": "Can you also please run\n\n  ./out/gn help --markdown all \u003edocs/reference.md\n\nto update the reference documentation?",
       "revId": "35a5100f1800f53756f604118b8ffd0928d03249",
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d4897657_661ee91e",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000633
+      },
+      "writtenOn": "2020-10-16T15:49:45Z",
+      "side": 1,
+      "message": "Done. Sorry that I missed that in the previous CL.",
+      "parentUuid": "8beb1b34_9903c835",
+      "revId": "35a5100f1800f53756f604118b8ffd0928d03249",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
     }
   ]
 }
