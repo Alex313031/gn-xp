@@ -67,6 +67,24 @@
       "message": "Just noticed I missed this. Do we still want to land this?",
       "revId": "5dc31e050bdf7c157988a361da8f61d94bae2d08",
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "91c5f7d6_477379bb",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000262
+      },
+      "writtenOn": "2020-10-16T17:33:31Z",
+      "side": 1,
+      "message": "Yes, this is still actual! BUNDLE_DATA target should not appear as input dependency for action, generated file and group. It should be in order only dependencies instead.\nI\u0027ve rebased CL on head of master and slightly changed tests by adding single source to bundle_data.\nPTAL",
+      "parentUuid": "6a33abea_8d86925c",
+      "revId": "5dc31e050bdf7c157988a361da8f61d94bae2d08",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
     }
   ]
 }
