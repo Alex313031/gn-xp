@@ -35,6 +35,24 @@
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "442340cf_92a390b6",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 6
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000803
+      },
+      "writtenOn": "2020-10-16T03:33:46Z",
+      "side": 1,
+      "message": "Sorry, I missed this patch-level comment. I have done this (also fixed a small typo). Thanks!",
+      "parentUuid": "7b0fa627_6c998e9e",
+      "revId": "926e3027dbd02f451f0391c19a5d40aca0979c79",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "86c501dd_8841422a",

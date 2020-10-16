@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "396c3157_046a5bb0",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 9
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000803
+      },
+      "writtenOn": "2020-10-16T03:33:46Z",
+      "side": 1,
+      "message": "Hi Brett,\n\nSorry that I missed your patch-level comment. I have fixed that. Please take a look.\n\nThanks,\n\nBest,\nHonglin",
+      "revId": "2d32880b925ae599c710524bc46ef8a4c42dd505",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    }
+  ]
+}
