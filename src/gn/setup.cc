@@ -821,6 +821,12 @@ bool Setup::FillOtherConfig(const base::CommandLine& cmdline, Err* err) {
     loader_->set_build_file_extension(extension);
   }
 
+  // Ninja executable.
+  if (cmdline.HasSwitch(switches::kNinjaExecutable)) {
+    build_settings_.set_ninja_executable(
+        cmdline.GetSwitchValuePath(switches::kNinjaExecutable));
+  }
+
   // Ninja required version.
   const Value* ninja_required_version_value =
       dotfile_scope_.GetValue("ninja_required_version", true);

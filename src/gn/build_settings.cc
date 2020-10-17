@@ -17,6 +17,7 @@ BuildSettings::BuildSettings(const BuildSettings& other)
       root_path_utf8_(other.root_path_utf8_),
       secondary_source_path_(other.secondary_source_path_),
       python_path_(other.python_path_),
+      ninja_executable_(other.ninja_executable_),
       ninja_required_version_(other.ninja_required_version_),
       build_config_file_(other.build_config_file_),
       arg_file_template_path_(other.arg_file_template_path_),
