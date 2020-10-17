@@ -121,7 +121,7 @@ bool ReadFileToStringWithMaxSize(const FilePath& path,
     contents->clear();
   if (path.ReferencesParent())
     return false;
-  FILE* file = OpenFile(path, "rb");
+  FILE* file = OpenFile(path, "r");
   if (!file) {
     return false;
   }
