@@ -124,6 +124,24 @@ std::string GetWindowsKitsIncludeDirs(const std::string& win_kit) {
   return kit_prefix + "shared;" + kit_prefix + "um;" + kit_prefix + "winrt;";
 }
 
+std::string GetWindowsKitDefaultVersion() {
+#if defined(OS_WIN)
+  const char16_t* const subkeys[] = {
+    u"SOFTWARE\\Wow6432Node\\Microsoft\\Microsoft SDKs\\Windows\\v10.0"};
+
+  std::u16string value_name = base::ASCIIToUTF16("ProductVersion");
+
+  for (const char16_t* subkey : subkeys) {
+    base::win::RegKey key(HKEY_LOCAL_MACHINE, subkey, KEY_READ);
+    std::u16string value;
+    if (key.ReadValue(value_name.c_str(), &value) == ERROR_SUCCESS) {
+      return base::UTF16ToUTF8(value);
+    }
+  }
+#endif  // OS_WIN
+  return kWindowsKitsDefaultVersion;
+}
+
 std::string GetConfigurationType(const Target* target, Err* err) {
   switch (target->output_type()) {
     case Target::EXECUTABLE:
@@ -329,7 +347,7 @@ bool VisualStudioWriter::RunAndWriteFiles(const BuildSettings* build_settings,
   if (!FilterTargets(build_settings, builder, filters, no_deps, &targets, err))
     return false;
 
-  std::string win_kit = kWindowsKitsDefaultVersion;
+  std::string win_kit = GetWindowsKitDefaultVersion();
   if (!win_sdk.empty())
     win_kit = win_sdk;
 
