@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "feb3ed56_82971cc7",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000110
+      },
+      "writtenOn": "2020-10-19T15:55:56Z",
+      "side": 1,
+      "message": "PTAL. Not extensively tested but works for me locally on VS2019. Otherwise installing the right SDK is quite difficult and a barrier for new users.",
+      "revId": "f2b8a6665cf30ba5448bcc157f62ed6e0d035596",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    }
+  ]
+}
