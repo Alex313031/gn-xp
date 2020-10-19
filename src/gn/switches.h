@@ -58,6 +58,10 @@ extern const char kMetaRebaseFiles[];
 extern const char kMetaRebaseFiles_HelpShort[];
 extern const char kMetaRebaseFiles_Help[];
 
+extern const char kNinjaExecutable[];
+extern const char kNinjaExecutable_HelpShort[];
+extern const char kNinjaExecutable_Help[];
+
 extern const char kNoColor[];
 extern const char kNoColor_HelpShort[];
 extern const char kNoColor_Help[];

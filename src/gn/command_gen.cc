@@ -12,8 +12,10 @@
 #include "gn/commands.h"
 #include "gn/compile_commands_writer.h"
 #include "gn/eclipse_writer.h"
+#include "gn/filesystem_utils.h"
 #include "gn/json_project_writer.h"
 #include "gn/ninja_target_writer.h"
+#include "gn/ninja_tools.h"
 #include "gn/ninja_writer.h"
 #include "gn/qt_creator_writer.h"
 #include "gn/runtime_deps.h"
@@ -352,6 +354,30 @@ bool RunCompileCommandsWriter(const BuildSettings* build_settings,
   return res;
 }
 
+bool RunNinjaPostProcessTools(base::FilePath ninja_executable,
+                              const base::FilePath& build_dir,
+                              Err* err) {
+  // If the user did not specify an executable, make a best effort attempt at
+  // finding one in the path.
+  if (ninja_executable.empty()) {
+    ninja_executable = base::FilePath{"ninja"};
+  }
+
+  std::optional<Version> ninja_version = GetNinjaVersion(ninja_executable);
+
+  // If we have a ninja version that supports restat, we should restat the
+  // build.ninja file so the next ninja invocation will use the right mtime.
+  if (ninja_version.has_value() && *ninja_version >= Version{1, 10, 0}) {
+    std::vector<base::FilePath> files_to_restat = {
+        base::FilePath{"build.ninja"}};
+    if (!InvokeNinjaRestatTool(ninja_executable, build_dir, files_to_restat,
+                               err)) {
+      return false;
+    }
+  }
+  return true;
+}
+
 }  // namespace
 
 const char kGen[] = "gen";
@@ -372,6 +398,14 @@ const char kGen_Help[] =
   documentation on that mode.
 
   See "gn help switches" for the common command-line switches.
+
+General options
+
+  --ninja-executable=<string>
+      Can be used to specify the ninja executable to use. This executable will
+      be used as an IDE option to indicate which ninja to use for building. This
+      executable will also be used as part of the gen process for triggering a
+      restat on generated ninja files.
 
 IDE options
 
@@ -548,6 +582,15 @@ int RunGen(const std::vector<std::string>& args) {
   // Write the root ninja files.
   if (!NinjaWriter::RunAndWriteFiles(&setup->build_settings(), setup->builder(),
                                      write_info.rules, &err)) {
+    err.PrintToStdout();
+    return 1;
+  }
+
+  if (!RunNinjaPostProcessTools(
+          command_line->GetSwitchValuePath(switches::kNinjaExecutable),
+          setup->build_settings().GetFullPath(
+              setup->build_settings().build_dir()),
+          &err)) {
     err.PrintToStdout();
     return 1;
   }
