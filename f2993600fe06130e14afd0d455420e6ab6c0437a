@@ -16,6 +16,23 @@
       "message": "Brett: Please try again.",
       "revId": "f2993600fe06130e14afd0d455420e6ab6c0437a",
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "9c12234f_1f7abb46",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000110
+      },
+      "writtenOn": "2020-10-19T17:56:28Z",
+      "side": 1,
+      "message": "rpmalloc/rpmalloc.c:1457:29: error: implicit conversion changes signedness: \u0027int\u0027 to \u0027size_t\u0027 (aka \u0027unsigned long\u0027) [-Werror,-Wsign-conversion]\n        size_t list_idx \u003d heap-\u003eid % HEAP_ARRAY_SIZE;\n               ~~~~~~~~   ~~~~~~~~~^~~~~~~~~~~~~~~~~\nrpmalloc/rpmalloc.c:1640:29: error: implicit conversion changes signedness: \u0027int\u0027 to \u0027size_t\u0027 (aka \u0027unsigned long\u0027) [-Werror,-Wsign-conversion]\n        size_t list_idx \u003d heap-\u003eid % HEAP_ARRAY_SIZE;\n               ~~~~~~~~   ~~~~~~~~~^~~~~~~~~~~~~~~~~\n\nNot sure what\u0027s up with that?",
+      "revId": "f2993600fe06130e14afd0d455420e6ab6c0437a",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
     }
   ]
 }
