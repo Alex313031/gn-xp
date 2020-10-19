@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "594b96c0_e81a5371",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 7
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000070
+      },
+      "writtenOn": "2020-10-19T16:44:31Z",
+      "side": 1,
+      "message": "I think this is causing build failures on try bots.\n\nFor example https://gn-review.googlesource.com/c/gn/+/10242 is failing with the following error:\nrpmalloc/rpmalloc.c:1457:29: error: implicit conversion changes signedness: \u0027int\u0027 to \u0027size_t\u0027 (aka \u0027unsigned long\u0027) [-Werror,-Wsign-conversion]\n        size_t list_idx \u003d heap-\u003eid % HEAP_ARRAY_SIZE;\n               ~~~~~~~~   ~~~~~~~~~^~~~~~~~~~~~~~~~~\n",
+      "revId": "4323e7015d8a7f74208962dd11f2d1065ae8aa15",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    }
+  ]
+}
