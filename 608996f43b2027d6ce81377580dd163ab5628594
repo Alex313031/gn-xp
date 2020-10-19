@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "6257258c_6bea9f1e",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000110
+      },
+      "writtenOn": "2020-10-19T15:55:14Z",
+      "side": 1,
+      "message": "PTAL. Not extensively tested but makes the tests pass for me locally on Windows.",
+      "revId": "608996f43b2027d6ce81377580dd163ab5628594",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    }
+  ]
+}
