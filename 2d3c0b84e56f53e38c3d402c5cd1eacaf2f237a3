@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "485a6727_9382f491",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000633
+      },
+      "writtenOn": "2020-10-19T22:27:35Z",
+      "side": 1,
+      "message": "My apologies for the churn. My previous attempt to fix the runtime deps fixed most of the Chromium roll failures, but not all. Here\u0027s a link to my last attempt at a roll:\n\nhttps://chromium-review.googlesource.com/c/chromium/src/+/2485444\n\nI\u0027ve locally verified that linux-rel should be fixed with this patch. I lack the hardware to check mac-rel or win10_chromium_x64_rel_ng. The former looks like a similar failure as linux-rel, so I think this patch should fix it. The latter is showing a less obvious error, so if it is not fixed by this patch, I\u0027ll probably need some help from Chromium folks to resolve.",
+      "revId": "2d3c0b84e56f53e38c3d402c5cd1eacaf2f237a3",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    }
+  ]
+}
