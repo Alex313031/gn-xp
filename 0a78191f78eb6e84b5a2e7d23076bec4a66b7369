@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a0dd24c5_b5d0c59b",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000633
+      },
+      "writtenOn": "2020-10-20T16:33:29Z",
+      "side": 1,
+      "message": "This CL differs from Petr\u0027s CL in a few ways:\n\n  * This is stripped down to just the restat portion. clean_stale is a separate CL\n  * We only have the command-line switch for --ninja-executable, but we will also attempt to fall back to a ninja binary in the path. This was based on Brett\u0027s comment in the previous CL.\n  * We run the ninja binary to determine the version instead of relying on the build configuration\u0027s required version. I worry about relying on the ninja output, but it means the subset of users that don\u0027t require 1.10, but actually use it can benefit from the restat.",
+      "revId": "0a78191f78eb6e84b5a2e7d23076bec4a66b7369",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    }
+  ]
+}
