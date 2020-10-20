@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "794374cf_62f11049",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000070
+      },
+      "writtenOn": "2020-10-20T10:20:57Z",
+      "side": 1,
+      "message": "I looks like this breaks Chromium.\n\nSee failures in:\nhttps://chromium-review.googlesource.com/c/chromium/src/+/2485109\n\nExemple failure:\nMBErr: Did not find any of obj///chrome/test/telemetry_unittests.stamp.runtime_deps, telemetry_unittests.runtime_deps\n",
+      "revId": "c808630cea75d153382df3b29e0ddbc2798e1b4a",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    }
+  ]
+}
