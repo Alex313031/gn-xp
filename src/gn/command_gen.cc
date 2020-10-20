@@ -33,6 +33,7 @@ namespace commands {
 namespace {
 
 const char kSwitchCheck[] = "check";
+const char kSwitchCleanStale[] = "clean-stale";
 const char kSwitchFilters[] = "filters";
 const char kSwitchIde[] = "ide";
 const char kSwitchIdeValueEclipse[] = "eclipse";
@@ -356,6 +357,7 @@ bool RunCompileCommandsWriter(const BuildSettings* build_settings,
 
 bool RunNinjaPostProcessTools(base::FilePath ninja_executable,
                               const base::FilePath& build_dir,
+                              bool clean_stale,
                               Err* err) {
   // If the user did not specify an executable, make a best effort attempt at
   // finding one in the path.
@@ -364,6 +366,31 @@ bool RunNinjaPostProcessTools(base::FilePath ninja_executable,
   }
 
   std::optional<Version> ninja_version = GetNinjaVersion(ninja_executable);
+
+  if (clean_stale) {
+    if (!ninja_version.has_value()) {
+      *err =
+          Err(Location(), "Could not determine ninja version.",
+              "--clean-stale requires a ninja executable to run. You can "
+              "either provide one on the command line via --ninja-executable "
+              "or by having the executable in your path.");
+      return false;
+    }
+    if (*ninja_version < Version{1, 10, 0}) {
+      *err = Err(Location(), "Need a ninja executable at least version 1.10.0.",
+                 "--clean-stale requires a ninja executable of version 1.10.0 "
+                 "or later.");
+      return false;
+    }
+
+    if (!InvokeNinjaCleanDeadTool(ninja_executable, build_dir, err)) {
+      return false;
+    }
+
+    if(!InvokeNinjaRecompactTool(ninja_executable, build_dir, err)) {
+      return false;
+    }
+  }
 
   // If we have a ninja version that supports restat, we should restat the
   // build.ninja file so the next ninja invocation will use the right mtime.
@@ -405,7 +432,15 @@ General options
       Can be used to specify the ninja executable to use. This executable will
       be used as an IDE option to indicate which ninja to use for building. This
       executable will also be used as part of the gen process for triggering a
-      restat on generated ninja files.
+      restat on generated ninja files and for use with --clean-stale.
+
+  --clean-stale
+      This option will cause no longer needed output files to be removed from
+      the build directory, and their records pruned from the ninja build log and
+      dependency database after the ninja build graph has been generated. This
+      option requires a ninja executable of at least version 1.10.0. It can be
+      provided by the --ninja-executable switch or exist on the path. Also see
+      "gn help clean_stale".
 
 IDE options
 
@@ -590,7 +625,7 @@ int RunGen(const std::vector<std::string>& args) {
           command_line->GetSwitchValuePath(switches::kNinjaExecutable),
           setup->build_settings().GetFullPath(
               setup->build_settings().build_dir()),
-          &err)) {
+          command_line->HasSwitch(kSwitchCleanStale), &err)) {
     err.PrintToStdout();
     return 1;
   }
