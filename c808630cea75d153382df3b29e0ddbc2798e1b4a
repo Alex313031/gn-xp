@@ -16,6 +16,24 @@
       "message": "I looks like this breaks Chromium.\n\nSee failures in:\nhttps://chromium-review.googlesource.com/c/chromium/src/+/2485109\n\nExemple failure:\nMBErr: Did not find any of obj///chrome/test/telemetry_unittests.stamp.runtime_deps, telemetry_unittests.runtime_deps\n",
       "revId": "c808630cea75d153382df3b29e0ddbc2798e1b4a",
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "73691794_037ff45e",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000633
+      },
+      "writtenOn": "2020-10-20T14:30:27Z",
+      "side": 1,
+      "message": "Ack. I believe the below CL should fix it, but I\u0027m unable to test on Chromium CQ before it lands in GN. There are also changes to the mb script to that need to go in with the roll at the same time.\n\nGN Fix CL: https://gn-review.googlesource.com/c/gn/+/10380\nPrevious Chromium roll attempt CL: https://chromium-review.googlesource.com/c/chromium/src/+/2485444",
+      "parentUuid": "794374cf_62f11049",
+      "revId": "c808630cea75d153382df3b29e0ddbc2798e1b4a",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
     }
   ]
 }
