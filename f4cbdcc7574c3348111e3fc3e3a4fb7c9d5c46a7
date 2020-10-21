@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "bcb8a60f_f03fdd4d",
+        "filename": "src/gn/ninja_build_writer.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 284,
+      "author": {
+        "id": 1000014
+      },
+      "writtenOn": "2020-10-21T16:54:59Z",
+      "side": 1,
+      "message": "Can you add a comment about why this is here? It doesn\u0027t seem necessary at first glance.",
+      "range": {
+        "startLine": 284,
+        "startChar": 2,
+        "endLine": 284,
+        "endChar": 31
+      },
+      "revId": "f4cbdcc7574c3348111e3fc3e3a4fb7c9d5c46a7",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    }
+  ]
+}
