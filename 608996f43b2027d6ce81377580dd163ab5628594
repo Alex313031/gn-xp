@@ -33,6 +33,24 @@
       "message": "Can you clarify the behavior change in the CL description? Say I had a file with Windows line endings or non-Windows line endings, what will happen both before and after this patch?",
       "revId": "608996f43b2027d6ce81377580dd163ab5628594",
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "2f1c6a16_37a90e17",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000110
+      },
+      "writtenOn": "2020-10-21T01:08:25Z",
+      "side": 1,
+      "message": "Done. Ended up a bit long-winded. I think the change is safe. If you\u0027d rather not land it to avoid any risk that\u0027s fine too. This fixed the unittests for me locally. No idea how/why they pass on the CI.",
+      "parentUuid": "7a4316a3_e87caed8",
+      "revId": "608996f43b2027d6ce81377580dd163ab5628594",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
     }
   ]
 }
