@@ -1,0 +1,188 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3cbf4bdf_be60e7a3",
+        "filename": "infra/recipes/gn.py",
+        "patchSetId": 2
+      },
+      "lineNbr": 30,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-10-21T08:04:34Z",
+      "side": 1,
+      "message": "Super minor nit: recipes are not regular Python scripts (it\u0027s more of a Python DSL akin to Starlark), it\u0027s not possible to import this file from elsewhere, so using the leading `_` for global variables is unnecessary.",
+      "range": {
+        "startLine": 30,
+        "startChar": 0,
+        "endLine": 30,
+        "endChar": 1
+      },
+      "revId": "65d9ac0eadfbeff96162b3181326472cf2fd25a8",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "06d79bd4_ac5c1f8f",
+        "filename": "infra/recipes/gn.py",
+        "patchSetId": 2
+      },
+      "lineNbr": 99,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-10-21T08:04:34Z",
+      "side": 1,
+      "message": "Is this intentional?",
+      "range": {
+        "startLine": 98,
+        "startChar": 0,
+        "endLine": 99,
+        "endChar": 54
+      },
+      "revId": "65d9ac0eadfbeff96162b3181326472cf2fd25a8",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3b06bc74_19a1c182",
+        "filename": "infra/recipes/gn.py",
+        "patchSetId": 2
+      },
+      "lineNbr": 131,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-10-21T08:04:34Z",
+      "side": 1,
+      "message": "s/stastic/static/",
+      "range": {
+        "startLine": 131,
+        "startChar": 25,
+        "endLine": 131,
+        "endChar": 32
+      },
+      "revId": "65d9ac0eadfbeff96162b3181326472cf2fd25a8",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5042b2c4_163e6bc3",
+        "filename": "infra/recipes/gn.py",
+        "patchSetId": 2
+      },
+      "lineNbr": 149,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-10-21T08:04:34Z",
+      "side": 1,
+      "message": "Note that this is potentially building more than what we need, for example if we had two different targets for debug and release, this would build rpmalloc for both, but we only need the release. Not that we\u0027re ever likely to do that.",
+      "range": {
+        "startLine": 145,
+        "startChar": 0,
+        "endLine": 149,
+        "endChar": 48
+      },
+      "revId": "65d9ac0eadfbeff96162b3181326472cf2fd25a8",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f2fa65f9_f7ae6971",
+        "filename": "infra/recipes/gn.py",
+        "patchSetId": 2
+      },
+      "lineNbr": 159,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-10-21T08:04:34Z",
+      "side": 1,
+      "message": "I\u0027d consider moving this up to the other Git logic and doing it unconditionally. rpmalloc repo is tiny compared to even GN and we eventually like to use it on all platforms anyway.",
+      "range": {
+        "startLine": 151,
+        "startChar": 0,
+        "endLine": 159,
+        "endChar": 0
+      },
+      "revId": "65d9ac0eadfbeff96162b3181326472cf2fd25a8",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "69f76a9b_858abbf7",
+        "filename": "infra/recipes/gn.py",
+        "patchSetId": 2
+      },
+      "lineNbr": 167,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-10-21T08:04:34Z",
+      "side": 1,
+      "message": "It seems like rpmalloc build system places outputs for different targets into different directories (e.g. lib/linux/release/x86-64), do we need this workaround then?",
+      "range": {
+        "startLine": 165,
+        "startChar": 0,
+        "endLine": 167,
+        "endChar": 63
+      },
+      "revId": "65d9ac0eadfbeff96162b3181326472cf2fd25a8",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "317160a5_6052673b",
+        "filename": "infra/recipes/gn.py",
+        "patchSetId": 2
+      },
+      "lineNbr": 197,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-10-21T08:04:34Z",
+      "side": 1,
+      "message": "Nit: these can be combined into a single `with` statements (separated by commas) to reduce nesting.",
+      "range": {
+        "startLine": 196,
+        "startChar": 0,
+        "endLine": 197,
+        "endChar": 51
+      },
+      "revId": "65d9ac0eadfbeff96162b3181326472cf2fd25a8",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3f2c55a6_c54310be",
+        "filename": "infra/recipes/gn.py",
+        "patchSetId": 2
+      },
+      "lineNbr": 202,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-10-21T08:04:34Z",
+      "side": 1,
+      "message": "I\u0027d consider moving `use_rpmalloc` into the configs array so all configuration decisions are made in one location and then use `config[\u0027use_rpmalloc\u0027]` here. This might also simplify some of the rpmalloc build logic above.",
+      "range": {
+        "startLine": 202,
+        "startChar": 14,
+        "endLine": 202,
+        "endChar": 62
+      },
+      "revId": "65d9ac0eadfbeff96162b3181326472cf2fd25a8",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    }
+  ]
+}
