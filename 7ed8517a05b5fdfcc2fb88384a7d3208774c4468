@@ -16,6 +16,24 @@
       "message": "Dang. Do you want me to land all 4 of these reverts RJ?\n\nShai: I think there was something in the build/test-eliding that was updated when this landed, will that need to be changed from phony back to stamp if this is reverted?",
       "revId": "7ed8517a05b5fdfcc2fb88384a7d3208774c4468",
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "5efff90a_3c60fccd",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000633
+      },
+      "writtenOn": "2020-10-23T20:00:17Z",
+      "side": 1,
+      "message": "Ah, sorry I should have left a comment explaining. There were a couple issues that we were tracking down. One was the Chromium roll was failing, which I think is now resolved:\nhttps://chromium-review.googlesource.com/c/chromium/src/+/2485444\n\nThe other is a flake on fuchsia mac-host os builder:\nhttps://bugs.fuchsia.dev/p/fuchsia/issues/detail?id\u003d61784\n\nThat flake started the same day we landed the \"remaining stamps -\u003e phony\" CL. I\u0027m trying to root cause it, but I don\u0027t want to hold up other GN changes from rolling into fuchsia/chromium. I was planning to push the reverts by end of day (though I totally forgot that I actually submit here), but you make a good point about affected tests being updated.",
+      "parentUuid": "455ed942_147b2a70",
+      "revId": "7ed8517a05b5fdfcc2fb88384a7d3208774c4468",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
     }
   ]
 }
