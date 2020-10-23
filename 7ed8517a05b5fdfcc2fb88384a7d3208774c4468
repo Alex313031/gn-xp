@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "455ed942_147b2a70",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000004
+      },
+      "writtenOn": "2020-10-23T19:50:03Z",
+      "side": 1,
+      "message": "Dang. Do you want me to land all 4 of these reverts RJ?\n\nShai: I think there was something in the build/test-eliding that was updated when this landed, will that need to be changed from phony back to stamp if this is reverted?",
+      "revId": "7ed8517a05b5fdfcc2fb88384a7d3208774c4468",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    }
+  ]
+}
