@@ -329,15 +329,15 @@ TEST_F(NinjaCBinaryTargetWriterTest, OutputExtensionAndInputDeps) {
       "target_output_name = libshlib\n"
       "\n"
       "build obj/foo/libshlib.input1.o: cxx ../../foo/input1.cc"
-      " || phony/foo/action\n"
+      " || obj/foo/action.stamp\n"
       "build obj/foo/libshlib.input2.o: cxx ../../foo/input2.cc"
-      " || phony/foo/action\n"
+      " || obj/foo/action.stamp\n"
       "\n"
       "build ./libshlib.so.6: solink obj/foo/libshlib.input1.o "
       // The order-only dependency here is stricly unnecessary since the
       // sources list this as an order-only dep. See discussion in the code
       // that writes this.
-      "obj/foo/libshlib.input2.o || phony/foo/action\n"
+      "obj/foo/libshlib.input2.o || obj/foo/action.stamp\n"
       "  ldflags =\n"
       "  libs =\n"
       "  frameworks =\n"
@@ -392,12 +392,12 @@ TEST_F(NinjaCBinaryTargetWriterTest, NoHardDepsToNoPublicHeaderTarget) {
       "target_output_name = gen_obj\n"
       "\n"
       "build obj/out/Debug/gen_obj.generated.o: cxx generated.cc"
-      " || phony/foo/generate\n"
+      " || obj/foo/generate.stamp\n"
       "\n"
       "build phony/foo/gen_obj: phony obj/out/Debug/gen_obj.generated.o"
       // The order-only dependency here is strictly unnecessary since the
       // sources list this as an order-only dep.
-      " || phony/foo/generate\n";
+      " || obj/foo/generate.stamp\n";
 
   std::string obj_str = obj_out.str();
   EXPECT_EQ(obj_expected, obj_str);
@@ -537,8 +537,6 @@ TEST_F(NinjaCBinaryTargetWriterTest, FrameworksAndFrameworkDirs) {
   Target framework(setup.settings(), Label(SourceDir("//bar"), "framework"));
   framework.set_output_type(Target::CREATE_BUNDLE);
   framework.bundle_data().product_type() = "com.apple.product-type.framework";
-  framework.bundle_data().set_partial_info_plist(
-      SourceFile("//out/Debug/bar/framework/framework_partial_info.plist"));
   framework.public_configs().push_back(LabelConfigPair(&framework_config));
   framework.SetToolchain(setup.toolchain());
   framework.visibility().SetPublic();
@@ -565,7 +563,7 @@ TEST_F(NinjaCBinaryTargetWriterTest, FrameworksAndFrameworkDirs) {
       "target_output_name = libshlib\n"
       "\n"
       "\n"
-      "build ./libshlib.so: solink | phony/bar/framework\n"
+      "build ./libshlib.so: solink | obj/bar/framework.stamp\n"
       "  ldflags = -F.\n"
       "  libs =\n"
       "  frameworks = -framework System -framework Bar "
@@ -1204,12 +1202,12 @@ TEST_F(NinjaCBinaryTargetWriterTest, InputFiles) {
         "target_out_dir = obj/foo\n"
         "target_output_name = bar\n"
         "\n"
-        "build phony/foo/bar.inputs: phony"
+        "build obj/foo/bar.inputs.stamp: stamp"
         " ../../foo/input1.data ../../foo/input2.data\n"
         "build obj/foo/bar.input1.o: cxx ../../foo/input1.cc"
-        " | phony/foo/bar.inputs\n"
+        " | obj/foo/bar.inputs.stamp\n"
         "build obj/foo/bar.input2.o: cxx ../../foo/input2.cc"
-        " | phony/foo/bar.inputs\n"
+        " | obj/foo/bar.inputs.stamp\n"
         "\n"
         "build phony/foo/bar: phony obj/foo/bar.input1.o "
         "obj/foo/bar.input2.o\n";
@@ -1254,12 +1252,12 @@ TEST_F(NinjaCBinaryTargetWriterTest, InputFiles) {
         "target_out_dir = obj/foo\n"
         "target_output_name = bar\n"
         "\n"
-        "build phony/foo/bar.inputs: phony"
+        "build obj/foo/bar.inputs.stamp: stamp"
         " ../../foo/input1.data ../../foo/input2.data ../../foo/input3.data\n"
         "build obj/foo/bar.input1.o: cxx ../../foo/input1.cc"
-        " | phony/foo/bar.inputs\n"
+        " | obj/foo/bar.inputs.stamp\n"
         "build obj/foo/bar.input2.o: cxx ../../foo/input2.cc"
-        " | phony/foo/bar.inputs\n"
+        " | obj/foo/bar.inputs.stamp\n"
         "\n"
         "build phony/foo/bar: phony obj/foo/bar.input1.o "
         "obj/foo/bar.input2.o\n";
@@ -1658,7 +1656,7 @@ TEST_F(NinjaCBinaryTargetWriterTest, SwiftModule) {
         " || phony/foo/foo\n"
         "\n"
         "build phony/bar/bar: phony obj/bar/bar.o "
-        "|| phony/bar/group phony/foo/foo\n";
+        "|| obj/bar/group.stamp phony/foo/foo\n";
 
     const std::string out_str = out.str();
     EXPECT_EQ(expected, out_str) << expected << "\n" << out_str;
