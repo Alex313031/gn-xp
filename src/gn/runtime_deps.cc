@@ -176,7 +176,7 @@ bool CollectRuntimeDepsFromFlag(const BuildSettings* build_settings,
       return false;
     }
 
-    std::optional<OutputFile> output_file;
+    OutputFile output_file;
     const char extension[] = ".runtime_deps";
     if (target->output_type() == Target::SHARED_LIBRARY ||
         target->output_type() == Target::LOADABLE_MODULE) {
@@ -185,12 +185,11 @@ bool CollectRuntimeDepsFromFlag(const BuildSettings* build_settings,
       CHECK(!target->computed_outputs().empty());
       output_file =
           OutputFile(target->computed_outputs()[0].value() + extension);
-    } else if (target->dependency_output_file_or_phony()) {
-      output_file = OutputFile(
-          target->dependency_output_file_or_phony()->value() + extension);
+    } else {
+      output_file =
+          OutputFile(target->dependency_output_file().value() + extension);
     }
-    if (output_file)
-      files_to_write->push_back(std::make_pair(*output_file, target));
+    files_to_write->push_back(std::make_pair(output_file, target));
   }
   return true;
 }
