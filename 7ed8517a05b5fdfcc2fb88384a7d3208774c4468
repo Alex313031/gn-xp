@@ -34,6 +34,24 @@
       "parentUuid": "455ed942_147b2a70",
       "revId": "7ed8517a05b5fdfcc2fb88384a7d3208774c4468",
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0ee782b9_40bf84c1",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000313
+      },
+      "writtenOn": "2020-10-23T20:18:11Z",
+      "side": 1,
+      "message": "Answering the question that was directed at me - yes, but it\u0027s no big deal if that temporarily breaks. I\u0027ll keep an eye out.",
+      "parentUuid": "5efff90a_3c60fccd",
+      "revId": "7ed8517a05b5fdfcc2fb88384a7d3208774c4468",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
     }
   ]
 }
