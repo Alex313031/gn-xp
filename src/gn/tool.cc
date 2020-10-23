@@ -4,7 +4,6 @@
 
 #include "gn/tool.h"
 
-#include "gn/builtin_tool.h"
 #include "gn/c_tool.h"
 #include "gn/general_tool.h"
 #include "gn/rust_tool.h"
@@ -50,13 +49,6 @@ RustTool* Tool::AsRust() {
   return nullptr;
 }
 const RustTool* Tool::AsRust() const {
-  return nullptr;
-}
-
-BuiltinTool* Tool::AsBuiltin() {
-  return nullptr;
-}
-const BuiltinTool* Tool::AsBuiltin() const {
   return nullptr;
 }
 
@@ -400,7 +392,7 @@ const char* Tool::GetToolTypeForTargetFinalOutput(const Target* target) {
     case Target::STATIC_LIBRARY:
       return CTool::kCToolAlink;
     case Target::SOURCE_SET:
-      return BuiltinTool::kBuiltinToolPhony;
+      return GeneralTool::kGeneralToolStamp;
     case Target::ACTION:
     case Target::ACTION_FOREACH:
     case Target::BUNDLE_DATA:

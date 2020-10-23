@@ -30,17 +30,13 @@ void NinjaGeneratedFileTargetWriter::Run() {
   // on each of the deps and data_deps in the target. The actual collection is
   // done at gen time, and so ninja doesn't need to know about it.
   std::vector<OutputFile> output_files;
-  for (const auto& pair : target_->GetDeps(Target::DEPS_LINKED)) {
-    if (pair.ptr->dependency_output_file_or_phony())
-      output_files.push_back(*pair.ptr->dependency_output_file_or_phony());
-  }
+  for (const auto& pair : target_->GetDeps(Target::DEPS_LINKED))
+    output_files.push_back(pair.ptr->dependency_output_file());
 
   std::vector<OutputFile> data_output_files;
   const LabelTargetVector& data_deps = target_->data_deps();
-  for (const auto& pair : data_deps) {
-    if (pair.ptr->dependency_output_file_or_phony())
-      data_output_files.push_back(*pair.ptr->dependency_output_file_or_phony());
-  }
+  for (const auto& pair : data_deps)
+    data_output_files.push_back(pair.ptr->dependency_output_file());
 
   WriteStampForTarget(output_files, data_output_files);
 }

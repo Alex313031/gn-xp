@@ -90,10 +90,8 @@ void NinjaCreateBundleTargetWriter::Run() {
   WriteCompileAssetsCatalogStep(order_only_deps, &output_files);
   WriteCodeSigningStep(code_signing_rule_name, order_only_deps, &output_files);
 
-  for (const auto& pair : target_->data_deps()) {
-    if (pair.ptr->dependency_output_file_or_phony())
-      order_only_deps.push_back(*pair.ptr->dependency_output_file_or_phony());
-  }
+  for (const auto& pair : target_->data_deps())
+    order_only_deps.push_back(pair.ptr->dependency_output_file());
   WriteStampForTarget(output_files, order_only_deps);
 
   // Write a phony target for the outer bundle directory. This allows other
@@ -104,9 +102,7 @@ void NinjaCreateBundleTargetWriter::Run() {
       out_,
       OutputFile(settings_->build_settings(),
                  target_->bundle_data().GetBundleRootDirOutput(settings_)));
-  CHECK(target_->dependency_output_file_or_phony());
-  out_ << ": " << BuiltinTool::kBuiltinToolPhony << " ";
-  out_ << target_->dependency_output_file_or_phony()->value();
+  out_ << ": phony " << target_->dependency_output_file().value();
   out_ << std::endl;
 }
 
@@ -285,11 +281,8 @@ OutputFile
 NinjaCreateBundleTargetWriter::WriteCompileAssetsCatalogInputDepsStamp(
     const std::vector<const Target*>& dependencies) {
   DCHECK(!dependencies.empty());
-  if (dependencies.size() == 1) {
-    return dependencies[0]->dependency_output_file_or_phony()
-               ? *dependencies[0]->dependency_output_file_or_phony()
-               : OutputFile{};
-  }
+  if (dependencies.size() == 1)
+    return dependencies[0]->dependency_output_file();
 
   OutputFile xcassets_input_stamp_file =
       GetBuildDirForTargetAsOutputFile(target_, BuildDirType::OBJ);
@@ -302,10 +295,8 @@ NinjaCreateBundleTargetWriter::WriteCompileAssetsCatalogInputDepsStamp(
        << GeneralTool::kGeneralToolStamp;
 
   for (const Target* target : dependencies) {
-    if (target->dependency_output_file_or_phony()) {
-      out_ << " ";
-      path_output_.WriteFile(out_, *target->dependency_output_file_or_phony());
-    }
+    out_ << " ";
+    path_output_.WriteFile(out_, target->dependency_output_file());
   }
   out_ << std::endl;
   return xcassets_input_stamp_file;
