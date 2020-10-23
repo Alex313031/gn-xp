@@ -47,6 +47,30 @@
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "0b4eeccc_b508252d",
+        "filename": "infra/recipes/gn.py",
+        "patchSetId": 2
+      },
+      "lineNbr": 99,
+      "author": {
+        "id": 1000067
+      },
+      "writtenOn": "2020-10-23T06:57:15Z",
+      "side": 1,
+      "message": "No, looks like the merge/rebase didn\u0027t go so well. Thanks for spotting this. Fixed.",
+      "parentUuid": "06d79bd4_ac5c1f8f",
+      "range": {
+        "startLine": 98,
+        "startChar": 0,
+        "endLine": 99,
+        "endChar": 54
+      },
+      "revId": "65d9ac0eadfbeff96162b3181326472cf2fd25a8",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "3b06bc74_19a1c182",
@@ -70,6 +94,30 @@
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "972c5c58_02e339f8",
+        "filename": "infra/recipes/gn.py",
+        "patchSetId": 2
+      },
+      "lineNbr": 131,
+      "author": {
+        "id": 1000067
+      },
+      "writtenOn": "2020-10-23T06:57:15Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "3b06bc74_19a1c182",
+      "range": {
+        "startLine": 131,
+        "startChar": 25,
+        "endLine": 131,
+        "endChar": 32
+      },
+      "revId": "65d9ac0eadfbeff96162b3181326472cf2fd25a8",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "5042b2c4_163e6bc3",
@@ -83,6 +131,30 @@
       "writtenOn": "2020-10-21T08:04:34Z",
       "side": 1,
       "message": "Note that this is potentially building more than what we need, for example if we had two different targets for debug and release, this would build rpmalloc for both, but we only need the release. Not that we\u0027re ever likely to do that.",
+      "range": {
+        "startLine": 145,
+        "startChar": 0,
+        "endLine": 149,
+        "endChar": 48
+      },
+      "revId": "65d9ac0eadfbeff96162b3181326472cf2fd25a8",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "dc49234e_256c55d0",
+        "filename": "infra/recipes/gn.py",
+        "patchSetId": 2
+      },
+      "lineNbr": 149,
+      "author": {
+        "id": 1000067
+      },
+      "writtenOn": "2020-10-23T06:57:15Z",
+      "side": 1,
+      "message": "I have moved the `use_rpmalloc` flag as a config field, based on your feedback, and updated this code to take care of this, so this issue should no longer exist in the patch after this one. Thanks you.",
+      "parentUuid": "5042b2c4_163e6bc3",
       "range": {
         "startLine": 145,
         "startChar": 0,
@@ -139,6 +211,30 @@
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "7610995a_a42bd702",
+        "filename": "infra/recipes/gn.py",
+        "patchSetId": 2
+      },
+      "lineNbr": 167,
+      "author": {
+        "id": 1000067
+      },
+      "writtenOn": "2020-10-23T06:57:15Z",
+      "side": 1,
+      "message": "This is correct, but when I tried to build a linux-arm64 build after a linux-x64, I got strange linker errors, so I\u0027m not sure this use case is well supported. I\u0027ve clarified the comment to explain this too.",
+      "parentUuid": "69f76a9b_858abbf7",
+      "range": {
+        "startLine": 165,
+        "startChar": 0,
+        "endLine": 167,
+        "endChar": 63
+      },
+      "revId": "65d9ac0eadfbeff96162b3181326472cf2fd25a8",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "317160a5_6052673b",
@@ -162,6 +258,30 @@
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "887ef9f8_cf21c678",
+        "filename": "infra/recipes/gn.py",
+        "patchSetId": 2
+      },
+      "lineNbr": 197,
+      "author": {
+        "id": 1000067
+      },
+      "writtenOn": "2020-10-23T06:57:15Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "317160a5_6052673b",
+      "range": {
+        "startLine": 196,
+        "startChar": 0,
+        "endLine": 197,
+        "endChar": 51
+      },
+      "revId": "65d9ac0eadfbeff96162b3181326472cf2fd25a8",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "3f2c55a6_c54310be",
@@ -175,6 +295,30 @@
       "writtenOn": "2020-10-21T08:04:34Z",
       "side": 1,
       "message": "I\u0027d consider moving `use_rpmalloc` into the configs array so all configuration decisions are made in one location and then use `config[\u0027use_rpmalloc\u0027]` here. This might also simplify some of the rpmalloc build logic above.",
+      "range": {
+        "startLine": 202,
+        "startChar": 14,
+        "endLine": 202,
+        "endChar": 62
+      },
+      "revId": "65d9ac0eadfbeff96162b3181326472cf2fd25a8",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "7acf2e53_bfa31247",
+        "filename": "infra/recipes/gn.py",
+        "patchSetId": 2
+      },
+      "lineNbr": 202,
+      "author": {
+        "id": 1000067
+      },
+      "writtenOn": "2020-10-23T06:57:15Z",
+      "side": 1,
+      "message": "Done!",
+      "parentUuid": "3f2c55a6_c54310be",
       "range": {
         "startLine": 202,
         "startChar": 14,
