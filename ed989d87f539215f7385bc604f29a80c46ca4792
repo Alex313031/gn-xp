@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f811f11b_0729d292",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000633
+      },
+      "writtenOn": "2020-10-26T19:36:04Z",
+      "side": 1,
+      "message": "I lack the hardware to actually test whether this resolves the mac builder flake, but I did test by removing the #if MAC_OS and checking that `/usr/bin/env` remained an absolute path in Fuchsia\u0027s build.ninja.d.",
+      "revId": "ed989d87f539215f7385bc604f29a80c46ca4792",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    }
+  ]
+}
