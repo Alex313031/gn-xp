@@ -60,6 +60,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "e7a1a873_f7065f23",
+        "filename": "src/gn/filesystem_utils.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 483,
+      "author": {
+        "id": 1000633
+      },
+      "writtenOn": "2020-10-26T22:02:31Z",
+      "side": 1,
+      "message": "Ack, will do.",
+      "parentUuid": "19cbc240_8dac501a",
+      "range": {
+        "startLine": 483,
+        "startChar": 5,
+        "endLine": 483,
+        "endChar": 30
+      },
+      "revId": "ed989d87f539215f7385bc604f29a80c46ca4792",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "4bc9c396_9790e4ce",
         "filename": "src/gn/filesystem_utils.cc",
         "patchSetId": 1
@@ -71,6 +95,30 @@
       "writtenOn": "2020-10-26T21:36:50Z",
       "side": 1,
       "message": "I don\u0027t think it\u0027s just `/usr/bin`, I have managed to reproduce this issue for `/usr/lib` and even `/bin`.\n\nmacOS Catalina and newer uses two different volumes (https://support.apple.com/en-us/HT210650): read-only system volume mounted at `/` and a writable data volume that\u0027s mounted at `/System/Volumes/Data` and used as an overlay (so for example `/usr/local` is really `/System/Volumes/Data/usr/local`).\n\nFrom what I can tell in my testing I\u0027ve done so far, the ENOENT issue is manifesting for all files on the read-only system volume, but not for the writable data volume.",
+      "range": {
+        "startLine": 484,
+        "startChar": 5,
+        "endLine": 484,
+        "endChar": 42
+      },
+      "revId": "ed989d87f539215f7385bc604f29a80c46ca4792",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "38271cde_64e5c351",
+        "filename": "src/gn/filesystem_utils.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 484,
+      "author": {
+        "id": 1000633
+      },
+      "writtenOn": "2020-10-26T22:02:31Z",
+      "side": 1,
+      "message": "I\u0027m glad there is a little less mystery around why it was impacting /usr/bin/ and no other input files. On the other hand, that certainly makes it more difficult to work around. It seems like testing for !/usr/local would likely be too wide of a net, and listing all of the directories in the read-only volume would be fragile. \n\nAny better ideas on how to check?",
+      "parentUuid": "4bc9c396_9790e4ce",
       "range": {
         "startLine": 484,
         "startChar": 5,
