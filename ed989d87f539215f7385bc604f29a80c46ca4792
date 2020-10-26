@@ -56,6 +56,29 @@
       },
       "revId": "ed989d87f539215f7385bc604f29a80c46ca4792",
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4bc9c396_9790e4ce",
+        "filename": "src/gn/filesystem_utils.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 484,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-10-26T21:36:50Z",
+      "side": 1,
+      "message": "I don\u0027t think it\u0027s just `/usr/bin`, I have managed to reproduce this issue for `/usr/lib` and even `/bin`.\n\nmacOS Catalina and newer uses two different volumes (https://support.apple.com/en-us/HT210650): read-only system volume mounted at `/` and a writable data volume that\u0027s mounted at `/System/Volumes/Data` and used as an overlay (so for example `/usr/local` is really `/System/Volumes/Data/usr/local`).\n\nFrom what I can tell in my testing I\u0027ve done so far, the ENOENT issue is manifesting for all files on the read-only system volume, but not for the writable data volume.",
+      "range": {
+        "startLine": 484,
+        "startChar": 5,
+        "endLine": 484,
+        "endChar": 42
+      },
+      "revId": "ed989d87f539215f7385bc604f29a80c46ca4792",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
     }
   ]
 }
