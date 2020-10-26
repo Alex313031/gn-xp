@@ -162,14 +162,19 @@ void NinjaBinaryTargetWriter::ClassifyDependency(
   if (can_link_libs && dep->swift_values().builds_module())
     classified_deps->swiftmodule_deps.push_back(dep);
 
-  if (dep->output_type() == Target::SOURCE_SET ||
-      // If a complete static library depends on an incomplete static library,
-      // manually link in the object files of the dependent library as if it
-      // were a source set. This avoids problems with braindead tools such as
-      // ar which don't properly link dependent static libraries.
-      (target_->complete_static_lib() &&
-       (dep->output_type() == Target::STATIC_LIBRARY &&
-        !dep->complete_static_lib()))) {
+  if (dep->output_type() == Target::STATIC_LIBRARY &&
+      target_->source_types_used().RustSourceUsed()) {
+    // For Rust targets, we need to include (even incomplete) static libraries.
+    classified_deps->linkable_deps.push_back(dep);
+  } else if (dep->output_type() == Target::SOURCE_SET ||
+             // If a complete static library depends on an incomplete static
+             // library, manually link in the object files of the dependent
+             // library as if it were a source set. This avoids problems with
+             // braindead tools such as ar which don't properly link dependent
+             // static libraries.
+             (target_->complete_static_lib() &&
+              (dep->output_type() == Target::STATIC_LIBRARY &&
+               !dep->complete_static_lib()))) {
     // Source sets have their object files linked into final targets
     // (shared libraries, executables, loadable modules, and complete static
     // libraries). Intermediate static libraries and other source sets
