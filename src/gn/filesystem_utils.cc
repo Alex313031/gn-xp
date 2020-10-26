@@ -478,6 +478,16 @@ base::FilePath MakeAbsoluteFilePathRelativeIfPossible(
   // "C:/foo/..." and "C:\foo\..." are computed correctly.
   target_components[1] = base_components[1];
 #endif
+
+#if defined(OS_MAC)
+  // In some versions of macOS, there is a bug whereby calling `stat` on a
+  // relative path to a file in `/usr/bin` will occasionally return ENOENT. To
+  // workaround this issue, any absolute paths that refer to /usr/bin should
+  // remain absolute paths.
+  if (target_components[1] == "usr" && target_components[2] == "bin")
+    return target;
+#endif
+
   size_t i;
   for (i = 0; i < base_components.size() && i < target_components.size(); i++) {
     if (base_components[i] != target_components[i])
