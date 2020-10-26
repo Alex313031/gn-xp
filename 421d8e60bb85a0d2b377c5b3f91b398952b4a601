@@ -16,6 +16,24 @@
       "message": "I\u0027m uncomfortable doing this because this function will corrupt binary data on Windows. I would expect ReadFileToString* will work on any file type. Since GN deals in text files maybe this hasn\u0027t come up, but I\u0027ve certainly used this function before in Chrome and Fuchsia for random binary files to get it into memory.\n\nI think a better change would be to be more consistent for the GN format output code path.",
       "revId": "421d8e60bb85a0d2b377c5b3f91b398952b4a601",
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b04a302a_d55f6492",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000110
+      },
+      "writtenOn": "2020-10-26T22:49:06Z",
+      "side": 1,
+      "message": "Sure, can you clarify what you mean by be more consistent?",
+      "parentUuid": "6986d7c7_65798e78",
+      "revId": "421d8e60bb85a0d2b377c5b3f91b398952b4a601",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
     }
   ]
 }
