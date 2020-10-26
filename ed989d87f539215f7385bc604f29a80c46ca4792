@@ -16,6 +16,46 @@
       "message": "I lack the hardware to actually test whether this resolves the mac builder flake, but I did test by removing the #if MAC_OS and checking that `/usr/bin/env` remained an absolute path in Fuchsia\u0027s build.ninja.d.",
       "revId": "ed989d87f539215f7385bc604f29a80c46ca4792",
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "1883b5aa_060e053a",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000014
+      },
+      "writtenOn": "2020-10-26T21:20:25Z",
+      "side": 1,
+      "message": "I\u0027ll defer to Scott for this review.",
+      "revId": "ed989d87f539215f7385bc604f29a80c46ca4792",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "19cbc240_8dac501a",
+        "filename": "src/gn/filesystem_utils.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 483,
+      "author": {
+        "id": 1000014
+      },
+      "writtenOn": "2020-10-26T21:20:25Z",
+      "side": 1,
+      "message": "Can we reference a bug here?",
+      "range": {
+        "startLine": 483,
+        "startChar": 5,
+        "endLine": 483,
+        "endChar": 30
+      },
+      "revId": "ed989d87f539215f7385bc604f29a80c46ca4792",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
     }
   ]
 }
