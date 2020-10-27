@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f7863772_1ad23830",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000080
+      },
+      "writtenOn": "2020-10-27T17:39:06Z",
+      "side": 1,
+      "message": "I\u0027m not sure how to add a unit test, there is no code coverage for testing RunCommand() at the moment.\n\nI manually confirmed that it solves the bug. It currently causes \"gn format\" step to always be green because the first file listed is correctly formatted.\n\nUpstream bug is http://fxbug.dev/55378",
+      "revId": "5c07e637b74bcd4f1202d2e0de4e2cb1f517fa09",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    }
+  ]
+}
