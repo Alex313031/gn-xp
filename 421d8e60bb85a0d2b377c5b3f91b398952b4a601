@@ -34,6 +34,24 @@
       "parentUuid": "6986d7c7_65798e78",
       "revId": "421d8e60bb85a0d2b377c5b3f91b398952b4a601",
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "44dd8f43_b51f3970",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000014
+      },
+      "writtenOn": "2020-10-27T00:27:35Z",
+      "side": 1,
+      "message": "I was just thinking that output would match whatever the golden files are, so Unix line endings.",
+      "parentUuid": "b04a302a_d55f6492",
+      "revId": "421d8e60bb85a0d2b377c5b3f91b398952b4a601",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
     }
   ]
 }
