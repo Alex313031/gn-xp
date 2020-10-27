@@ -1320,12 +1320,13 @@ int RunFormat(const std::vector<std::string>& args) {
 
   // TODO(scottmg): Eventually, this list of files should be processed in
   // parallel.
+  int exit = 0;
   for (const auto& arg : args) {
     Err err;
     SourceFile file = source_dir.ResolveRelativeFile(Value(nullptr, arg), &err);
     if (err.has_error()) {
       err.PrintToStdout();
-      return 1;
+      exit = 1;
     }
 
     base::FilePath to_format = setup.build_settings().GetFullPath(file);
@@ -1334,35 +1335,37 @@ int RunFormat(const std::vector<std::string>& args) {
       Err(Location(),
           std::string("Couldn't read \"") + FilePathToUTF8(to_format))
           .PrintToStdout();
-      return 1;
+      exit = 1;
     }
 
     std::string output_string;
     if (!FormatStringToString(original_contents, dump_tree, &output_string)) {
-      return 1;
+      exit = 1;
     }
     if (dump_tree == TreeDumpMode::kInactive) {
       // Update the file in-place.
-      if (dry_run)
-        return original_contents == output_string ? 0 : 2;
-      if (original_contents != output_string) {
-        if (base::WriteFile(to_format, output_string.data(),
-                            static_cast<int>(output_string.size())) == -1) {
-          Err(Location(),
-              std::string("Failed to write formatted output back to \"") +
-                  FilePathToUTF8(to_format) + std::string("\"."))
-              .PrintToStdout();
-          return 1;
-        }
-        if (!quiet) {
-          printf("Wrote formatted to '%s'.\n",
-                 FilePathToUTF8(to_format).c_str());
+      if (dry_run) {
+        exit = original_contents == output_string ? 0 : 2;
+      } else {
+        if (original_contents != output_string) {
+          if (base::WriteFile(to_format, output_string.data(),
+                              static_cast<int>(output_string.size())) == -1) {
+            Err(Location(),
+                std::string("Failed to write formatted output back to \"") +
+                    FilePathToUTF8(to_format) + std::string("\"."))
+                .PrintToStdout();
+            exit = 1;
+          }
+          if (!quiet) {
+            printf("Wrote formatted to '%s'.\n",
+                  FilePathToUTF8(to_format).c_str());
+          }
         }
       }
     }
   }
 
-  return 0;
+  return exit;
 }
 
 }  // namespace commands
