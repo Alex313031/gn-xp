@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6bddaaae_1b07c053",
+        "filename": "src/gn/ninja_binary_target_writer.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 167,
+      "author": {
+        "id": 1000014
+      },
+      "writtenOn": "2020-10-27T02:53:53Z",
+      "side": 1,
+      "message": "I don\u0027t quite understand what\u0027s going on here. Can this mention why Rust needs all static libraries of dependencies? What about source sets? Coming from a C++ perspective, needing to link static libraries but not source sets doesn\u0027t make any sense.\n\nAlso, I found the wording here confusing. Can you remove \"(even incomplete)\" and use \"all\". This is misleading because complete-vs-incomplete never matters when linking a static library into something else like an executable, they all get added. The only reason a complete static library will matter is when it\u0027s the type of target_ in this class.",
+      "revId": "e5b8d5f594e17dad622d6500fb04277633a18553",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    }
+  ]
+}
