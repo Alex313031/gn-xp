@@ -151,6 +151,30 @@
       },
       "revId": "ed989d87f539215f7385bc604f29a80c46ca4792",
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6fe10de2_52dde9c8",
+        "filename": "src/gn/filesystem_utils.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 484,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-10-28T17:46:52Z",
+      "side": 1,
+      "message": "\u003e Thanks for that pointer Petr. I guess we\u0027d need to have it actually check which volume the target path is on, which seems pretty horrible (and assuming there\u0027s even a reasonable api for doing so).\n\nI experimented with this a bit and one solution I came up with is to use statfs and compare f_mntonname of the file with the one of the build directory. That seems to work in this case but I don\u0027t know how well does it generalize.\n\n\u003e While it wouldn\u0027t help for GN-on-Catalina in general, I wonder if we should pursue something different in Fuchsia then. For example, in a jiri runhooks, we could make copies of the binaries that would otherwise be outside the source tree (which would implicitly move them to the data volume).\n\nWe could consider providing a prebuilt of toybox (or equivalent that supports all host platforms we want to support) and use that in our build which would also help hermeticity.\n\n\u003e I\u0027ll take a look at the ninja files on a Mac build now and see how many there are, but I\u0027m hoping it\u0027s not really that many since we try to keep our toolchain/etc all hermetic and shiny (ish?)",
+      "parentUuid": "92c77c9c_3a36019e",
+      "range": {
+        "startLine": 484,
+        "startChar": 5,
+        "endLine": 484,
+        "endChar": 42
+      },
+      "revId": "ed989d87f539215f7385bc604f29a80c46ca4792",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
     }
   ]
 }
