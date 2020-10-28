@@ -1,0 +1,73 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8e442a06_e7e924c5",
+        "filename": "src/gn/command_format.cc",
+        "patchSetId": 6
+      },
+      "lineNbr": 61,
+      "author": {
+        "id": 1000014
+      },
+      "writtenOn": "2020-10-28T18:47:46Z",
+      "side": 1,
+      "message": "We should document the file name outputting behavior here.",
+      "range": {
+        "startLine": 61,
+        "startChar": 2,
+        "endLine": 61,
+        "endChar": 11
+      },
+      "revId": "4b21fa4d98a76e80fd37e8e194bba9bc24436a3b",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3d8e0741_e2da3a49",
+        "filename": "src/gn/command_format.cc",
+        "patchSetId": 6
+      },
+      "lineNbr": 1323,
+      "author": {
+        "id": 1000014
+      },
+      "writtenOn": "2020-10-28T18:47:46Z",
+      "side": 1,
+      "message": "Can you rename this exit_code? I read this initially as a bool to cause an exit.",
+      "range": {
+        "startLine": 1323,
+        "startChar": 6,
+        "endLine": 1323,
+        "endChar": 10
+      },
+      "revId": "4b21fa4d98a76e80fd37e8e194bba9bc24436a3b",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ae8c1258_7fcebcdd",
+        "filename": "src/gn/command_format.cc",
+        "patchSetId": 6
+      },
+      "lineNbr": 1352,
+      "author": {
+        "id": 1000014
+      },
+      "writtenOn": "2020-10-28T18:47:46Z",
+      "side": 1,
+      "message": "I feel like we should change this to be more neutral since GN isn\u0027t actually recommending you format anything, that\u0027s the surrounding infrastructure making that requirement. So maybe say something about the files being unformatted instead of making a request to format them.",
+      "range": {
+        "startLine": 1352,
+        "startChar": 27,
+        "endLine": 1352,
+        "endChar": 40
+      },
+      "revId": "4b21fa4d98a76e80fd37e8e194bba9bc24436a3b",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    }
+  ]
+}
