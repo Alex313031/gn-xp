@@ -24,6 +24,30 @@
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "e56ed282_f368c182",
+        "filename": "src/gn/command_format.cc",
+        "patchSetId": 6
+      },
+      "lineNbr": 61,
+      "author": {
+        "id": 1000080
+      },
+      "writtenOn": "2020-10-28T19:39:26Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "8e442a06_e7e924c5",
+      "range": {
+        "startLine": 61,
+        "startChar": 2,
+        "endLine": 61,
+        "endChar": 11
+      },
+      "revId": "4b21fa4d98a76e80fd37e8e194bba9bc24436a3b",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "3d8e0741_e2da3a49",
@@ -47,6 +71,30 @@
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "a8d00856_2fc0b8a8",
+        "filename": "src/gn/command_format.cc",
+        "patchSetId": 6
+      },
+      "lineNbr": 1323,
+      "author": {
+        "id": 1000080
+      },
+      "writtenOn": "2020-10-28T19:39:26Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "3d8e0741_e2da3a49",
+      "range": {
+        "startLine": 1323,
+        "startChar": 6,
+        "endLine": 1323,
+        "endChar": 10
+      },
+      "revId": "4b21fa4d98a76e80fd37e8e194bba9bc24436a3b",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "ae8c1258_7fcebcdd",
@@ -60,6 +108,30 @@
       "writtenOn": "2020-10-28T18:47:46Z",
       "side": 1,
       "message": "I feel like we should change this to be more neutral since GN isn\u0027t actually recommending you format anything, that\u0027s the surrounding infrastructure making that requirement. So maybe say something about the files being unformatted instead of making a request to format them.",
+      "range": {
+        "startLine": 1352,
+        "startChar": 27,
+        "endLine": 1352,
+        "endChar": 40
+      },
+      "revId": "4b21fa4d98a76e80fd37e8e194bba9bc24436a3b",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a49d1ba1_344a2e41",
+        "filename": "src/gn/command_format.cc",
+        "patchSetId": 6
+      },
+      "lineNbr": 1352,
+      "author": {
+        "id": 1000080
+      },
+      "writtenOn": "2020-10-28T19:39:26Z",
+      "side": 1,
+      "message": "Removed all headers, just list the files.\n\nI decided to print the argument as-is, because otherwise it would print the full path, which is not useful on a CQ; the user will be confused by the base directory where the sources are checked out on a bot and they don\u0027t know anything about it. Even when using locally, the absolute path is not a great UX.\n\nI\u0027m not sure what would be the right way to print it in a \"relative to base directory\" way. The challenge is that setup.build_settings().root_path() is empty.\n\nOn the other hand source_dir is set, so this works:\n\n  int l \u003d FilePathToUTF8(source_dir.value()).length();\n  printf(\"%s\\n\", FilePathToUTF8(to_format).substr(l).c_str());\n\nThe manual path manipulation still felt a bit clunky to me. Tell me what you prefer.",
+      "parentUuid": "ae8c1258_7fcebcdd",
       "range": {
         "startLine": 1352,
         "startChar": 27,
