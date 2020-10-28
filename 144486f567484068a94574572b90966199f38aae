@@ -1,0 +1,44 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d3d49e2b_8aad2174",
+        "filename": "src/gn/ninja_action_target_writer.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 40,
+      "author": {
+        "id": 1000014
+      },
+      "writtenOn": "2020-10-28T21:57:07Z",
+      "side": 1,
+      "message": "Rather than hard-coding BUNDLE_DATA in all of these places, I\u0027d prefer a getter on Target by IsFinal(), like say IsDataOnly() or something that we check in these places. This gives us one place to document this weird exception. Maybe write something like:\n\n  // Set when this target type should normally be treated as a data dependency. These do not need to be treated as inputs or hard dependencies for normal build steps, but need to be kept in the dependency tree to properly propagate. Treating these as data only decreases superfluous rebuilds and increases parallelism.\n  bool IsDataOnly() const;\n\n  bool Target::IsDataOnly() const {\n    // BUNDLE_DATA exists only to declare inputs to subsequent CREATE_BUNDLE targets. Changing \nonly the bundle data should not cause a binary to be re-linked; it should affect only the \nCREATE_BUNDLE steps. As a result, normal targets should treat this as a data dependency.\n    return output_type_ \u003d\u003d BUNDLE_DATA;\n  }\n\nStyle nit also: this needs {} to match the \"else\" (same for the other cases).",
+      "revId": "144486f567484068a94574572b90966199f38aae",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e55cb33a_97744a2b",
+        "filename": "src/gn/ninja_target_writer.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 238,
+      "author": {
+        "id": 1000014
+      },
+      "writtenOn": "2020-10-28T21:57:07Z",
+      "side": 1,
+      "message": "How about something like:\n\n  // BUNDLE_DATA should normally be treated as a data-only dependency (see Target::IsDataOnly()). Only the CREATE_BUNDLE target that actually consumes this data needs to have the BUNDLE_DATA as a dependency.",
+      "range": {
+        "startLine": 237,
+        "startChar": 7,
+        "endLine": 238,
+        "endChar": 76
+      },
+      "revId": "144486f567484068a94574572b90966199f38aae",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    }
+  ]
+}
