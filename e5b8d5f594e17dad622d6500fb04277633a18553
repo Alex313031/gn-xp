@@ -34,6 +34,24 @@
       "parentUuid": "6bddaaae_1b07c053",
       "revId": "e5b8d5f594e17dad622d6500fb04277633a18553",
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d2d83565_62a6dfa1",
+        "filename": "src/gn/ninja_binary_target_writer.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 167,
+      "author": {
+        "id": 1000014
+      },
+      "writtenOn": "2020-10-30T20:15:38Z",
+      "side": 1,
+      "message": "This would also confuse me, since a source set just means \"compile the obj files and link them into where needed\" that we would not be specifying every dependent obj file in all source sets on every compile line.\n\nIt seems like maybe we need to clarify the rules for Rust at a broader level. Like if this change is correct, maybe Rust source sets shouldn\u0027t be a thing.",
+      "parentUuid": "26045f47_0dc5701d",
+      "revId": "e5b8d5f594e17dad622d6500fb04277633a18553",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
     }
   ]
 }
