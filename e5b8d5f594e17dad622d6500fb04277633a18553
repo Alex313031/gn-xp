@@ -52,6 +52,24 @@
       "parentUuid": "26045f47_0dc5701d",
       "revId": "e5b8d5f594e17dad622d6500fb04277633a18553",
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2f09083b_313689b4",
+        "filename": "src/gn/ninja_binary_target_writer.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 167,
+      "author": {
+        "id": 1000168
+      },
+      "writtenOn": "2020-10-30T21:02:20Z",
+      "side": 1,
+      "message": "I was imagining C/C++ source sets. I also don\u0027t know that Rust source sets should be a thing, I\u0027m not sure how they would be used.\n\nThough after reading your above comment again, I realized that I don\u0027t actually know what effect this change has.",
+      "parentUuid": "d2d83565_62a6dfa1",
+      "revId": "e5b8d5f594e17dad622d6500fb04277633a18553",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
     }
   ]
 }
