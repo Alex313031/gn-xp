@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d7e3a251_4053d68b",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000877
+      },
+      "writtenOn": "2020-10-31T04:48:33Z",
+      "side": 1,
+      "message": "The build breaks should be fixed now, but I don\u0027t have permissions to run try jobs or submit. Please do.",
+      "revId": "d4a05506f67ca914bfea9bf954036939a6646cb7",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    }
+  ]
+}
