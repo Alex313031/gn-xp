@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f1cedbb9_c4137ade",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000877
+      },
+      "writtenOn": "2020-10-31T01:04:46Z",
+      "side": 1,
+      "message": "Possible improvement to get gn to better work with Python 3. PTAL.",
+      "revId": "66cf1613280394cf289982425c56191617607341",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    }
+  ]
+}
