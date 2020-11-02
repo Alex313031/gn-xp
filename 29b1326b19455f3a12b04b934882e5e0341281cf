@@ -16,6 +16,24 @@
       "message": "Should we be able to make this happen for automatic re-gen?",
       "revId": "29b1326b19455f3a12b04b934882e5e0341281cf",
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a4a8af74_7246d7bb",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000633
+      },
+      "writtenOn": "2020-11-02T16:59:50Z",
+      "side": 1,
+      "message": "Yes, I think so. We could add the --clean-stale flag to the build.ninja command. We\u0027d need to think through which ninja-executable to use, so we don\u0027t have a mismatch between the ninja that invoked the re-gen and the ninja that is used for cleaning.\n\nbrettw@ - WDYT?\n\nThere\u0027s also some relevant discussion on a previous CL from phosek@: https://gn-review.googlesource.com/c/gn/+/9960",
+      "parentUuid": "8f36e86e_4fcfd636",
+      "revId": "29b1326b19455f3a12b04b934882e5e0341281cf",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
     }
   ]
 }
