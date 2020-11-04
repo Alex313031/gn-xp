@@ -16,6 +16,24 @@
       "message": "Hmm ... if I\u0027m understanding the code correctly, this\u0027ll handle the case where `--script-executable\u003dc:\\src\\depot_tools\\python3.bat` (as you note), but it won\u0027t handle `--script-executable\u003dpython3` if python3.bat is in the path, right? Because the PythonBatToExe logic won\u0027t be called in the latter case?\n\nIf so, we still can\u0027t set script_executable in the dotfile a la https://crrev.com/c/2515787; that would need a subsequent patch to either do something like allow for host_os to be used in a conditional during dotfile processing or to do a path search/converstion if the script executable is missing an extension, right?\n\nAnyone have thoughts on which of these is preferable? Or both?",
       "revId": "0310dbe8411c76e7f17643fbe28436cf1391c2ec",
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "3527f51a_9e3fc7de",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000877
+      },
+      "writtenOn": "2020-11-04T02:52:32Z",
+      "side": 1,
+      "message": "You understand correctly. Applying similar search logic (searching the path) plus adding .bat and .exe extensions while searching would seem like a pretty reasonable extension to gn. I\u0027d be happy to code that up.",
+      "parentUuid": "73538baf_382c0cc1",
+      "revId": "0310dbe8411c76e7f17643fbe28436cf1391c2ec",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
     }
   ]
 }
