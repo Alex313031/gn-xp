@@ -16,6 +16,29 @@
       "message": "Thanks for noticing that. I fixed it and tested with python.exe first in the path and it was found correctly (now).",
       "revId": "5d0c471127b4102c87366eaf3dcfd4caa0364165",
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f13058a5_2f714710",
+        "filename": "src/gn/setup.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 289,
+      "author": {
+        "id": 1000014
+      },
+      "writtenOn": "2020-11-04T21:16:31Z",
+      "side": 1,
+      "message": "Style-wise, these should be python_exe_name, and python_bad_name. And I think we should be passing these as FilePath.",
+      "range": {
+        "startLine": 289,
+        "startChar": 49,
+        "endLine": 289,
+        "endChar": 62
+      },
+      "revId": "5d0c471127b4102c87366eaf3dcfd4caa0364165",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
     }
   ]
 }
