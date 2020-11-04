@@ -34,6 +34,24 @@
       "parentUuid": "ff9842dd_8f440667",
       "revId": "e1ac69b17da0c6d4f5e34e686690ff70c6a43e6f",
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "1dbcda8f_b3e6383b",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 10
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000070
+      },
+      "writtenOn": "2020-11-04T10:01:57Z",
+      "side": 1,
+      "message": "I create https://gn-review.googlesource.com/c/gn/+/10580 to rename --root-target for Xcode/QtCreator project generators.",
+      "parentUuid": "c4a6433c_ca5866ef",
+      "revId": "e1ac69b17da0c6d4f5e34e686690ff70c6a43e6f",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
     }
   ]
 }
