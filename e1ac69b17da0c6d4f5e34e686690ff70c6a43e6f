@@ -16,6 +16,24 @@
       "message": "The command-line argument --root-target was already defined in src/gn/command_gen.cc and used by Xcode project generator and QtCreator with a different meaning.\n\nFrom `gn help gen`:\n\n  Xcode Flags\n\n    ...\n\n    --root-target\u003d\u003ctarget_name\u003e\n        Name of the target corresponding to \"All\" target in Xcode. If unset,\n        \"All\" invokes ninja without any target and builds everything.\n\n  QtCreator Flags\n\n    --root-target\u003d\u003ctarget_name\u003e\n        Name of the root target for which the QtCreator project will be generated\n        to contain files of it and its dependencies. If unset, the whole build\n        graph will be emitted.\n\nCan we rename this new flag to something else?",
       "revId": "e1ac69b17da0c6d4f5e34e686690ff70c6a43e6f",
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c4a6433c_ca5866ef",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 10
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000803
+      },
+      "writtenOn": "2020-11-04T09:37:49Z",
+      "side": 1,
+      "message": "Thanks for pointing this out, Sylvain. We also noticed this and I will write a CL to rename it and let you and Brett review it.",
+      "parentUuid": "ff9842dd_8f440667",
+      "revId": "e1ac69b17da0c6d4f5e34e686690ff70c6a43e6f",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
     }
   ]
 }
