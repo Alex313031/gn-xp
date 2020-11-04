@@ -33,6 +33,24 @@
       "message": "should this be \".exe\" ?",
       "revId": "255cb7687b6c6a8ca4bc2fd8e03f6932b1686f56",
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c1643eed_d93b3b33",
+        "filename": "src/gn/setup.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 737,
+      "author": {
+        "id": 1000877
+      },
+      "writtenOn": "2020-11-04T18:06:15Z",
+      "side": 1,
+      "message": "D\u0027oh! Yes.",
+      "parentUuid": "452e9676_10764b2c",
+      "revId": "255cb7687b6c6a8ca4bc2fd8e03f6932b1686f56",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
     }
   ]
 }

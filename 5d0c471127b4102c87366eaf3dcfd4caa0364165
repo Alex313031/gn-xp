@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "4de69af7_7f787369",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000877
+      },
+      "writtenOn": "2020-11-04T18:06:15Z",
+      "side": 1,
+      "message": "Thanks for noticing that. I fixed it and tested with python.exe first in the path and it was found correctly (now).",
+      "revId": "5d0c471127b4102c87366eaf3dcfd4caa0364165",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    }
+  ]
+}
