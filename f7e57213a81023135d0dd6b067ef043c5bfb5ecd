@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "14cd1986_b47373dc",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000633
+      },
+      "writtenOn": "2020-11-05T00:09:10Z",
+      "side": 1,
+      "message": "I think we should revert this time. Incremental builds were broken on Chromium, though I\u0027m not sure why we have not seen similar issues with Fuchsia. There are several other changes that Chromium team is waiting to pick up.",
+      "revId": "f7e57213a81023135d0dd6b067ef043c5bfb5ecd",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    }
+  ]
+}
