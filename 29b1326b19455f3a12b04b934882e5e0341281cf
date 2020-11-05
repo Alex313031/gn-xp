@@ -70,6 +70,24 @@
       "parentUuid": "1aeca4f4_6283825f",
       "revId": "29b1326b19455f3a12b04b934882e5e0341281cf",
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f41f6ce1_3db8eeda",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000587
+      },
+      "writtenOn": "2020-11-05T16:20:09Z",
+      "side": 1,
+      "message": "BTW, this is a much worse issue for projects that can\u0027t reduce their #include paths to the list\n\n  //\n  $root_gen_dir\n\nin that order. Chromium incremental builds work as well as they do in part because rooting all the #includes from the same directory mitigates the issue.\n\nIn cast, I ended up landing an exec_script() to delete the files at gen time.",
+      "parentUuid": "c81b28ce_05789ca8",
+      "revId": "29b1326b19455f3a12b04b934882e5e0341281cf",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
     }
   ]
 }
