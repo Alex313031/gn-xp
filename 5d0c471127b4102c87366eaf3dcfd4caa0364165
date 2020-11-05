@@ -39,6 +39,30 @@
       },
       "revId": "5d0c471127b4102c87366eaf3dcfd4caa0364165",
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "9a8406fa_6c7b3a9d",
+        "filename": "src/gn/setup.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 289,
+      "author": {
+        "id": 1000877
+      },
+      "writtenOn": "2020-11-05T19:14:24Z",
+      "side": 1,
+      "message": "Good points. Done. This triggers some name and type changes in the callers but I think they\u0027ve all been done reasonably.\n\nPTAL (and land if it looks good).",
+      "parentUuid": "f13058a5_2f714710",
+      "range": {
+        "startLine": 289,
+        "startChar": 49,
+        "endLine": 289,
+        "endChar": 62
+      },
+      "revId": "5d0c471127b4102c87366eaf3dcfd4caa0364165",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
     }
   ]
 }
