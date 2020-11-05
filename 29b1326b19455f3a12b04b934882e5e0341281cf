@@ -52,6 +52,24 @@
       "parentUuid": "a4a8af74_7246d7bb",
       "revId": "29b1326b19455f3a12b04b934882e5e0341281cf",
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c81b28ce_05789ca8",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000587
+      },
+      "writtenOn": "2020-11-05T16:05:15Z",
+      "side": 1,
+      "message": "What\u0027s more important, correctness or performance? Can we have an opt-in in the dotfile?\n\nDoing this automatically reduces the support burden. I am still getting questions about an instance of stale files breaking the build 2 weeks after the change landed (in a non-chromium project).",
+      "parentUuid": "1aeca4f4_6283825f",
+      "revId": "29b1326b19455f3a12b04b934882e5e0341281cf",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
     }
   ]
 }
