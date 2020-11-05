@@ -34,6 +34,24 @@
       "parentUuid": "8f36e86e_4fcfd636",
       "revId": "29b1326b19455f3a12b04b934882e5e0341281cf",
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "1aeca4f4_6283825f",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000014
+      },
+      "writtenOn": "2020-11-05T03:43:37Z",
+      "side": 1,
+      "message": "I\u0027m paranoid about deleting stuff unless explicitly asked. I also wonder how much performance overhead this will add to ninja incremental rebuilds, which is the main number we should be watching. So I would lean against adding that to the Ninja command line.",
+      "parentUuid": "a4a8af74_7246d7bb",
+      "revId": "29b1326b19455f3a12b04b934882e5e0341281cf",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
     }
   ]
 }
