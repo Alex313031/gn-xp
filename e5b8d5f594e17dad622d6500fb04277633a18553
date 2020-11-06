@@ -70,6 +70,24 @@
       "parentUuid": "d2d83565_62a6dfa1",
       "revId": "e5b8d5f594e17dad622d6500fb04277633a18553",
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "81f4b72d_a92b6659",
+        "filename": "src/gn/ninja_binary_target_writer.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 167,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-11-06T08:33:38Z",
+      "side": 1,
+      "message": "I have updated the code and combined the Rust library and static library cases since they\u0027re the same, hopefully it makes more sense now. We don\u0027t support Rust source sets so that\u0027s not an issue and C/C++ source sets are handled differently in that they aren\u0027t supported directly by Rust, rather we pass the object files directly to the linker which is only necessary for binary targets.",
+      "parentUuid": "2f09083b_313689b4",
+      "revId": "e5b8d5f594e17dad622d6500fb04277633a18553",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
     }
   ]
 }
