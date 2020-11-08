@@ -18,6 +18,24 @@
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "3fae491c_475ca1e3",
+        "filename": "src/gn/ninja_action_target_writer.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 40,
+      "author": {
+        "id": 1000262
+      },
+      "writtenOn": "2020-11-08T13:10:10Z",
+      "side": 1,
+      "message": "Done. I used your comments with tiny changes. Code style\u0027s fixed.",
+      "parentUuid": "d3d49e2b_8aad2174",
+      "revId": "144486f567484068a94574572b90966199f38aae",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "e55cb33a_97744a2b",
@@ -31,6 +49,30 @@
       "writtenOn": "2020-10-28T21:57:07Z",
       "side": 1,
       "message": "How about something like:\n\n  // BUNDLE_DATA should normally be treated as a data-only dependency (see Target::IsDataOnly()). Only the CREATE_BUNDLE target that actually consumes this data needs to have the BUNDLE_DATA as a dependency.",
+      "range": {
+        "startLine": 237,
+        "startChar": 7,
+        "endLine": 238,
+        "endChar": 76
+      },
+      "revId": "144486f567484068a94574572b90966199f38aae",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "2624200f_3c98cab8",
+        "filename": "src/gn/ninja_target_writer.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 238,
+      "author": {
+        "id": 1000262
+      },
+      "writtenOn": "2020-11-08T13:10:10Z",
+      "side": 1,
+      "message": "Done. Thanks.",
+      "parentUuid": "e55cb33a_97744a2b",
       "range": {
         "startLine": 237,
         "startChar": 7,
