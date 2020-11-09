@@ -33,6 +33,46 @@
       "message": "Gentle ping on this CL. Any concerns with adding the restat?",
       "revId": "0a78191f78eb6e84b5a2e7d23076bec4a66b7369",
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "0ca5b6ff_24657f1f",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000014
+      },
+      "writtenOn": "2020-11-09T19:53:04Z",
+      "side": 1,
+      "message": "Thanks for the ping, sorry.",
+      "revId": "0a78191f78eb6e84b5a2e7d23076bec4a66b7369",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6e19aca2_11f2f65e",
+        "filename": "src/gn/command_gen.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 366,
+      "author": {
+        "id": 1000014
+      },
+      "writtenOn": "2020-11-09T19:53:04Z",
+      "side": 1,
+      "message": "Do you know how much this slows down GN for a gen run? I\u0027m especially worried about Windows.\n\nWe have ninja_required_version in the .gn file. Can we use that value instead of running GN? The reason against would be that maybe I have the new version of Ninja installed but the current project doesn\u0027t require it. But Chrome uses an older Ninja and it won\u0027t work with the new one, and Fuchsia uses the newer one and I don\u0027t think it works with the older one. I suspect at least across the versions we\u0027re talking about, Ninja isn\u0027t very compatible. So that maybe indicates this reason against just using the required version isn\u0027t important.",
+      "range": {
+        "startLine": 366,
+        "startChar": 41,
+        "endLine": 366,
+        "endChar": 56
+      },
+      "revId": "0a78191f78eb6e84b5a2e7d23076bec4a66b7369",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
     }
   ]
 }
