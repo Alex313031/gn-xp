@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c880c095_38315891",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000917
+      },
+      "writtenOn": "2020-11-09T10:53:12Z",
+      "side": 1,
+      "message": "Hey,\n\nI noted a typo in the documentation.\n\nNot sure who to add as reviewers, so I chose you two based on recent reviewing activity.\nPlease reassign to someone else if appropriate.\n\nKind regards,\nDaco",
+      "revId": "7520a98de96fed8ed91054957db07ebf7e8ba4f3",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    }
+  ]
+}
