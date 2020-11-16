@@ -22,6 +22,30 @@
       },
       "revId": "f4cbdcc7574c3348111e3fc3e3a4fb7c9d5c46a7",
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "85832c3c_9eac9ae2",
+        "filename": "src/gn/ninja_build_writer.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 284,
+      "author": {
+        "id": 1000280
+      },
+      "writtenOn": "2020-11-16T10:53:25Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "bcb8a60f_f03fdd4d",
+      "range": {
+        "startLine": 284,
+        "startChar": 2,
+        "endLine": 284,
+        "endChar": 31
+      },
+      "revId": "f4cbdcc7574c3348111e3fc3e3a4fb7c9d5c46a7",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
     }
   ]
 }
