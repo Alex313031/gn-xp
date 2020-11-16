@@ -171,6 +171,30 @@
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "1386beb4_5ac2d6c1",
+        "filename": "src/gn/command_gen.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 366,
+      "author": {
+        "id": 1000047
+      },
+      "writtenOn": "2020-11-16T07:42:51Z",
+      "side": 1,
+      "message": "If I can chime in from the sidelines, I don\u0027t think gating this strictly on ninja_required_version is 100% correct. That\u0027s fundamentally the minimum required version, and the fact that the Chromium build has some issues with newer ninja in some circumstances is not inherent to gn.\n\nWhile switching between distant-enough ninja versions is quite destructive (requires a re-gen), I believe even in Chromium it\u0027s actually quite alright to just use newer ninja, at least in the Linux build. I\u0027ve been doing that without any issues on a linux-only fork, for quite a while now, but granted, in a limited fashion. Precise info on what breaks with the newer ninja is a bit scarce and I wasn\u0027t intentionally looking to break things.\n\nI think gn should work well with projects that specify a conservative min ninja version and are fine with newer versions. IIRC that\u0027s the route cmake took with this, accepting the version check overhead, because the redundant-regen behavior is far more noticeable. Perhaps this is version check can be acceptable if it happens only on explicit gn gen and not regen, per the other comment thread?",
+      "parentUuid": "565e7f56_cfb8d9ac",
+      "range": {
+        "startLine": 366,
+        "startChar": 41,
+        "endLine": 366,
+        "endChar": 56
+      },
+      "revId": "0a78191f78eb6e84b5a2e7d23076bec4a66b7369",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "c0023ad6_e9f71a3e",
