@@ -10,6 +10,7 @@
 
 #include "base/command_line.h"
 #include "base/files/file_util.h"
+#include "base/json/json_reader.h"
 #include "base/json/json_writer.h"
 #include "base/macros.h"
 #include "base/strings/string_split.h"
@@ -38,6 +39,7 @@ const char kSwitchDumpTree[] = "dump-tree";
 const char kSwitchDumpTreeText[] = "text";
 const char kSwitchDumpTreeJSON[] = "json";
 const char kSwitchStdin[] = "stdin";
+const char kSwitchReconstructFromJson[] = "reconstruct-from-json";
 
 const char kFormat[] = "format";
 const char kFormat_HelpShort[] = "format: Format .gn files.";
@@ -74,11 +76,17 @@ Arguments
       Read input from stdin and write to stdout rather than update a file
       in-place.
 
+  --reconstruct-from-json
+      Reads json AST from stdin in the format output by --dump-tree=json, and
+      uses that as the parse tree. The given .gn file will be overwritten. This
+      can be used to programmatically transform .gn files.
+
 Examples
   gn format //some/BUILD.gn //some/other/BUILD.gn //and/another/BUILD.gn
   gn format some\\BUILD.gn
   gn format /abspath/some/BUILD.gn
   gn format --stdin
+  gn format --reconstruct-from-json //rewritten/BUILD.gn
 )";
 
 namespace {
@@ -518,7 +526,7 @@ int SuffixCommentTreeWalk(const ParseNode* node) {
     RETURN_IF_SET(SuffixCommentTreeWalk(binop->right()));
   } else if (const BlockNode* block = node->AsBlock()) {
     RETURN_IF_SET(SuffixCommentTreeWalk(block->End()));
-  } else if (const ConditionNode* condition = node->AsConditionNode()) {
+  } else if (const ConditionNode* condition = node->AsCondition()) {
     RETURN_IF_SET(SuffixCommentTreeWalk(condition->if_false()));
     RETURN_IF_SET(SuffixCommentTreeWalk(condition->if_true()));
     RETURN_IF_SET(SuffixCommentTreeWalk(condition->condition()));
@@ -868,7 +876,7 @@ int Printer::Expr(const ParseNode* root,
   } else if (const BlockNode* block = root->AsBlock()) {
     Sequence(kSequenceStyleBracedBlock, block->statements(), block->End(),
              false);
-  } else if (const ConditionNode* condition = root->AsConditionNode()) {
+  } else if (const ConditionNode* condition = root->AsCondition()) {
     Print("if (");
     CHECK(at_end.empty());
     Expr(condition->condition(), kPrecedenceLowest, ") {");
@@ -1315,6 +1323,41 @@ int RunFormat(const std::vector<std::string>& args) {
   Setup setup;
   SourceDir source_dir =
       SourceDirForCurrentDirectory(setup.build_settings().root_path());
+
+  if (base::CommandLine::ForCurrentProcess()->HasSwitch(
+          kSwitchReconstructFromJson)) {
+    if (args.size() != 1) {
+      Err(Location(),
+          "Expect exactly one .gn when reconstructing from json on stdin.\n")
+          .PrintToStdout();
+      return 1;
+    }
+    Err err;
+    SourceFile file =
+        source_dir.ResolveRelativeFile(Value(nullptr, args[0]), &err);
+    if (err.has_error()) {
+      err.PrintToStdout();
+      return 1;
+    }
+    base::FilePath to_format = setup.build_settings().GetFullPath(file);
+    base::JSONReader reader;
+    std::unique_ptr<base::Value> json_root = reader.Read(ReadStdin());
+    std::unique_ptr<ParseNode> root = ParseNode::BuildFromJSON(*json_root);
+    std::string output;
+    DoFormat(root.get(), TreeDumpMode::kInactive, &output);
+    if (base::WriteFile(to_format, output.data(),
+                        static_cast<int>(output.size())) == -1) {
+      Err(Location(), std::string("Failed to write output to \"") +
+                          FilePathToUTF8(to_format) + std::string("\"."))
+          .PrintToStdout();
+      return 1;
+    }
+    if (!quiet) {
+      printf("Wrote reconstructed output to '%s'.\n",
+             FilePathToUTF8(to_format).c_str());
+    }
+    return 0;
+  }
 
   // TODO(scottmg): Eventually, this list of files should be processed in
   // parallel.
