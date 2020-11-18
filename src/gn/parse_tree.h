@@ -83,7 +83,7 @@ class ParseNode {
   virtual const BinaryOpNode* AsBinaryOp() const;
   virtual const BlockCommentNode* AsBlockComment() const;
   virtual const BlockNode* AsBlock() const;
-  virtual const ConditionNode* AsConditionNode() const;
+  virtual const ConditionNode* AsCondition() const;
   virtual const EndNode* AsEnd() const;
   virtual const FunctionCallNode* AsFunctionCall() const;
   virtual const IdentifierNode* AsIdentifier() const;
@@ -107,6 +107,8 @@ class ParseNode {
 
   const Comments* comments() const { return comments_.get(); }
   Comments* comments_mutable();
+
+  static std::unique_ptr<ParseNode> BuildFromJSON(const base::Value& value);
 
  protected:
   // Helper functions for GetJSONNode. Creates and fills a Value object with
@@ -161,6 +163,7 @@ class AccessorNode : public ParseNode {
       const std::string& msg,
       const std::string& help = std::string()) const override;
   base::Value GetJSONNode() const override;
+  static std::unique_ptr<AccessorNode> NewFromJSON(const base::Value& value);
 
   // Base is the thing on the left of the [] or dot, currently always required
   // to be an identifier token.
@@ -223,6 +226,7 @@ class BinaryOpNode : public ParseNode {
       const std::string& msg,
       const std::string& help = std::string()) const override;
   base::Value GetJSONNode() const override;
+  static std::unique_ptr<BinaryOpNode> NewFromJSON(const base::Value& value);
 
   const Token& op() const { return op_; }
   void set_op(const Token& t) { op_ = t; }
@@ -268,6 +272,7 @@ class BlockNode : public ParseNode {
       const std::string& msg,
       const std::string& help = std::string()) const override;
   base::Value GetJSONNode() const override;
+  static std::unique_ptr<BlockNode> NewFromJSON(const base::Value& value);
 
   void set_begin_token(const Token& t) { begin_token_ = t; }
   void set_end(std::unique_ptr<EndNode> e) { end_ = std::move(e); }
@@ -302,13 +307,14 @@ class ConditionNode : public ParseNode {
   ConditionNode();
   ~ConditionNode() override;
 
-  const ConditionNode* AsConditionNode() const override;
+  const ConditionNode* AsCondition() const override;
   Value Execute(Scope* scope, Err* err) const override;
   LocationRange GetRange() const override;
   Err MakeErrorDescribing(
       const std::string& msg,
       const std::string& help = std::string()) const override;
   base::Value GetJSONNode() const override;
+  static std::unique_ptr<ConditionNode> NewFromJSON(const base::Value& value);
 
   void set_if_token(const Token& token) { if_token_ = token; }
 
@@ -350,6 +356,8 @@ class FunctionCallNode : public ParseNode {
       const std::string& msg,
       const std::string& help = std::string()) const override;
   base::Value GetJSONNode() const override;
+  static std::unique_ptr<FunctionCallNode> NewFromJSON(
+      const base::Value& value);
 
   const Token& function() const { return function_; }
   void set_function(Token t) { function_ = t; }
@@ -385,6 +393,7 @@ class IdentifierNode : public ParseNode {
       const std::string& msg,
       const std::string& help = std::string()) const override;
   base::Value GetJSONNode() const override;
+  static std::unique_ptr<IdentifierNode> NewFromJSON(const base::Value& value);
 
   const Token& value() const { return value_; }
   void set_value(const Token& t) { value_ = t; }
@@ -411,6 +420,7 @@ class ListNode : public ParseNode {
       const std::string& msg,
       const std::string& help = std::string()) const override;
   base::Value GetJSONNode() const override;
+  static std::unique_ptr<ListNode> NewFromJSON(const base::Value& value);
 
   void set_begin_token(const Token& t) { begin_token_ = t; }
   const Token& Begin() const { return begin_token_; }
@@ -464,6 +474,7 @@ class LiteralNode : public ParseNode {
       const std::string& msg,
       const std::string& help = std::string()) const override;
   base::Value GetJSONNode() const override;
+  static std::unique_ptr<LiteralNode> NewFromJSON(const base::Value& value);
 
   const Token& value() const { return value_; }
   void set_value(const Token& t) { value_ = t; }
@@ -490,6 +501,7 @@ class UnaryOpNode : public ParseNode {
       const std::string& msg,
       const std::string& help = std::string()) const override;
   base::Value GetJSONNode() const override;
+  static std::unique_ptr<UnaryOpNode> NewFromJSON(const base::Value& value);
 
   const Token& op() const { return op_; }
   void set_op(const Token& t) { op_ = t; }
@@ -525,6 +537,8 @@ class BlockCommentNode : public ParseNode {
       const std::string& msg,
       const std::string& help = std::string()) const override;
   base::Value GetJSONNode() const override;
+  static std::unique_ptr<BlockCommentNode> NewFromJSON(
+      const base::Value& value);
 
   const Token& comment() const { return comment_; }
   void set_comment(const Token& t) { comment_ = t; }
@@ -553,6 +567,7 @@ class EndNode : public ParseNode {
       const std::string& msg,
       const std::string& help = std::string()) const override;
   base::Value GetJSONNode() const override;
+  static std::unique_ptr<EndNode> NewFromJSON(const base::Value& value);
 
   const Token& value() const { return value_; }
   void set_value(const Token& t) { value_ = t; }
