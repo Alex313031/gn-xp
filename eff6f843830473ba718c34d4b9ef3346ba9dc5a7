@@ -1,0 +1,176 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "442f8751_c80b2d66",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 17
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000014
+      },
+      "writtenOn": "2020-11-20T18:34:51Z",
+      "side": 1,
+      "message": "Exciting! Mostly I think we should have more shared string constants to help keep things in sync.",
+      "revId": "eff6f843830473ba718c34d4b9ef3346ba9dc5a7",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "11304e9b_ee601e82",
+        "filename": "src/gn/command_format.cc",
+        "patchSetId": 17
+      },
+      "lineNbr": 42,
+      "author": {
+        "id": 1000014
+      },
+      "writtenOn": "2020-11-20T18:34:51Z",
+      "side": 1,
+      "message": "How about something like --read-tree\u003djson to mirror --dump-tree? Then we can potentially add a new format for input and output for both options.",
+      "range": {
+        "startLine": 42,
+        "startChar": 43,
+        "endLine": 42,
+        "endChar": 64
+      },
+      "revId": "eff6f843830473ba718c34d4b9ef3346ba9dc5a7",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "03cc2bd2_5243330e",
+        "filename": "src/gn/command_format.cc",
+        "patchSetId": 17
+      },
+      "lineNbr": 1274,
+      "author": {
+        "id": 1000014
+      },
+      "writtenOn": "2020-11-20T18:34:51Z",
+      "side": 1,
+      "message": "Is this how clang-format indents this?",
+      "revId": "eff6f843830473ba718c34d4b9ef3346ba9dc5a7",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6c1e22a0_c62a97da",
+        "filename": "src/gn/command_format.cc",
+        "patchSetId": 17
+      },
+      "lineNbr": 1398,
+      "author": {
+        "id": 1000014
+      },
+      "writtenOn": "2020-11-20T18:34:51Z",
+      "side": 1,
+      "message": "I think this can just be printf",
+      "range": {
+        "startLine": 1398,
+        "startChar": 4,
+        "endLine": 1398,
+        "endChar": 11
+      },
+      "revId": "eff6f843830473ba718c34d4b9ef3346ba9dc5a7",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4333f2dc_562121bc",
+        "filename": "src/gn/parse_tree.cc",
+        "patchSetId": 17
+      },
+      "lineNbr": 255,
+      "author": {
+        "id": 1000014
+      },
+      "writtenOn": "2020-11-20T18:34:51Z",
+      "side": 1,
+      "message": "I feel like we should have constants for these type strings at the top of the file since they need to match across at least two places.",
+      "range": {
+        "startLine": 255,
+        "startChar": 18,
+        "endLine": 255,
+        "endChar": 28
+      },
+      "revId": "eff6f843830473ba718c34d4b9ef3346ba9dc5a7",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "dfa689fd_db28fd8d",
+        "filename": "src/gn/parse_tree.cc",
+        "patchSetId": 17
+      },
+      "lineNbr": 515,
+      "author": {
+        "id": 1000014
+      },
+      "writtenOn": "2020-11-20T18:34:51Z",
+      "side": 1,
+      "message": "Will this hit if the input format is invalid? I\u0027d rather not crash for invalid input.",
+      "range": {
+        "startLine": 515,
+        "startChar": 2,
+        "endLine": 515,
+        "endChar": 26
+      },
+      "revId": "eff6f843830473ba718c34d4b9ef3346ba9dc5a7",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "eba27b60_4d9a79af",
+        "filename": "src/gn/parse_tree.cc",
+        "patchSetId": 17
+      },
+      "lineNbr": 606,
+      "author": {
+        "id": 1000014
+      },
+      "writtenOn": "2020-11-20T18:34:51Z",
+      "side": 1,
+      "message": "I think constants for this and its possible values would also be good.",
+      "range": {
+        "startLine": 606,
+        "startChar": 16,
+        "endLine": 606,
+        "endChar": 29
+      },
+      "revId": "eff6f843830473ba718c34d4b9ef3346ba9dc5a7",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "fa80d0d1_7ca934e3",
+        "filename": "src/gn/parse_tree.cc",
+        "patchSetId": 17
+      },
+      "lineNbr": 1183,
+      "author": {
+        "id": 1000014
+      },
+      "writtenOn": "2020-11-20T18:34:51Z",
+      "side": 1,
+      "message": "I see this a bunch of times.",
+      "range": {
+        "startLine": 1183,
+        "startChar": 50,
+        "endLine": 1183,
+        "endChar": 57
+      },
+      "revId": "eff6f843830473ba718c34d4b9ef3346ba9dc5a7",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    }
+  ]
+}
