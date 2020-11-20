@@ -195,6 +195,30 @@
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "dba57d40_63e46491",
+        "filename": "src/gn/command_gen.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 366,
+      "author": {
+        "id": 1000633
+      },
+      "writtenOn": "2020-11-20T20:40:09Z",
+      "side": 1,
+      "message": "While testing the previous patchset with Chromium, I found that using 1.10 ninja to run restat inserted a higher resolution timestamp into the .ninja_log for build.ninja. On the next ninja(1.8) build run, this timestamp was seemingly ignored and another re-gen was triggered, thus nullifying the benefit of the restat. I would guess that if the build execution ninja was 1.9 (when high resolution timestamps were introduced), that restat would work, but I have not confirmed.\n\nI think the root of my concern is ensuring that the ninja version used for \u0027tool\u0027 execution is the same as the version used for \u0027build\u0027 execution. If there is a mismatch between those two, we could create weird ping pong behavior, where the \u0027tool\u0027 execution writes the .ninja_log in one format and then the \u0027build\u0027 execution writes it in another format. Since the ninja used for \u0027build\u0027 execution is unknown to GN, I was concerned this could be a potential foot gun for users. \n\nIf it is reasonable to say \"if --ninja-executable doesn\u0027t match the ninja used for builds, things might break in odd ways\", then I think we could help some of those projects that have a conservative min version but use a newer version at runtime. However, I would also point out that the documentation for \u0027ninja_required_version\u0027 does encourage users to specify newer versions to benefit from additional optimizations.",
+      "parentUuid": "1386beb4_5ac2d6c1",
+      "range": {
+        "startLine": 366,
+        "startChar": 41,
+        "endLine": 366,
+        "endChar": 56
+      },
+      "revId": "0a78191f78eb6e84b5a2e7d23076bec4a66b7369",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "c0023ad6_e9f71a3e",
