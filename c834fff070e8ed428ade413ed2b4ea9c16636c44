@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "2b9f7ca4_2ae47885",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000067
+      },
+      "writtenOn": "2020-11-20T12:28:50Z",
+      "side": 1,
+      "message": "Adding Adrian Taylor on CC since he worked on a similar issue for https://gn-review.googlesource.com/c/gn/+/7020",
+      "revId": "c834fff070e8ed428ade413ed2b4ea9c16636c44",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    }
+  ]
+}
