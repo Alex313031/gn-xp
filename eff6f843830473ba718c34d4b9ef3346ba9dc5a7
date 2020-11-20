@@ -41,6 +41,30 @@
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "13571d98_0fd3662e",
+        "filename": "src/gn/command_format.cc",
+        "patchSetId": 17
+      },
+      "lineNbr": 42,
+      "author": {
+        "id": 1000004
+      },
+      "writtenOn": "2020-11-20T19:32:45Z",
+      "side": 1,
+      "message": "Yeah, good idea.",
+      "parentUuid": "11304e9b_ee601e82",
+      "range": {
+        "startLine": 42,
+        "startChar": 43,
+        "endLine": 42,
+        "endChar": 64
+      },
+      "revId": "eff6f843830473ba718c34d4b9ef3346ba9dc5a7",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "03cc2bd2_5243330e",
@@ -58,6 +82,24 @@
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "9f36a745_5f30fd27",
+        "filename": "src/gn/command_format.cc",
+        "patchSetId": 17
+      },
+      "lineNbr": 1274,
+      "author": {
+        "id": 1000004
+      },
+      "writtenOn": "2020-11-20T19:32:45Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "03cc2bd2_5243330e",
+      "revId": "eff6f843830473ba718c34d4b9ef3346ba9dc5a7",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "6c1e22a0_c62a97da",
@@ -71,6 +113,30 @@
       "writtenOn": "2020-11-20T18:34:51Z",
       "side": 1,
       "message": "I think this can just be printf",
+      "range": {
+        "startLine": 1398,
+        "startChar": 4,
+        "endLine": 1398,
+        "endChar": 11
+      },
+      "revId": "eff6f843830473ba718c34d4b9ef3346ba9dc5a7",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "fff2a1ea_ea688c85",
+        "filename": "src/gn/command_format.cc",
+        "patchSetId": 17
+      },
+      "lineNbr": 1398,
+      "author": {
+        "id": 1000004
+      },
+      "writtenOn": "2020-11-20T19:32:45Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "6c1e22a0_c62a97da",
       "range": {
         "startLine": 1398,
         "startChar": 4,
@@ -104,6 +170,30 @@
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "a22f0024_fca1f87b",
+        "filename": "src/gn/parse_tree.cc",
+        "patchSetId": 17
+      },
+      "lineNbr": 255,
+      "author": {
+        "id": 1000004
+      },
+      "writtenOn": "2020-11-20T19:32:45Z",
+      "side": 1,
+      "message": "Yup! I made most of them members of the concrete node class.",
+      "parentUuid": "4333f2dc_562121bc",
+      "range": {
+        "startLine": 255,
+        "startChar": 18,
+        "endLine": 255,
+        "endChar": 28
+      },
+      "revId": "eff6f843830473ba718c34d4b9ef3346ba9dc5a7",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "dfa689fd_db28fd8d",
@@ -117,6 +207,30 @@
       "writtenOn": "2020-11-20T18:34:51Z",
       "side": 1,
       "message": "Will this hit if the input format is invalid? I\u0027d rather not crash for invalid input.",
+      "range": {
+        "startLine": 515,
+        "startChar": 2,
+        "endLine": 515,
+        "endChar": 26
+      },
+      "revId": "eff6f843830473ba718c34d4b9ef3346ba9dc5a7",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ecb1b91f_d61e123d",
+        "filename": "src/gn/parse_tree.cc",
+        "patchSetId": 17
+      },
+      "lineNbr": 515,
+      "author": {
+        "id": 1000004
+      },
+      "writtenOn": "2020-11-20T19:32:45Z",
+      "side": 1,
+      "message": "I fixed these ones... I think in general we\u0027d probably want a fuzzer given the flexibility of json/base::Value since there\u0027s a lot of possibly-missing-fields and keys here.\n\nThat\u0027ll also likely need some restructuring into a way of constructing the tree that\u0027s more like treating the input json as if it\u0027s being handled as a parser (so it can gracefully abort at arbitrary locations) rather than just a \"builder\" like it is here.",
+      "parentUuid": "dfa689fd_db28fd8d",
       "range": {
         "startLine": 515,
         "startChar": 2,
@@ -150,6 +264,30 @@
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "0296700d_e935ea3e",
+        "filename": "src/gn/parse_tree.cc",
+        "patchSetId": 17
+      },
+      "lineNbr": 606,
+      "author": {
+        "id": 1000004
+      },
+      "writtenOn": "2020-11-20T19:32:45Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "eba27b60_4d9a79af",
+      "range": {
+        "startLine": 606,
+        "startChar": 16,
+        "endLine": 606,
+        "endChar": 29
+      },
+      "revId": "eff6f843830473ba718c34d4b9ef3346ba9dc5a7",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "fa80d0d1_7ca934e3",
@@ -163,6 +301,30 @@
       "writtenOn": "2020-11-20T18:34:51Z",
       "side": 1,
       "message": "I see this a bunch of times.",
+      "range": {
+        "startLine": 1183,
+        "startChar": 50,
+        "endLine": 1183,
+        "endChar": 57
+      },
+      "revId": "eff6f843830473ba718c34d4b9ef3346ba9dc5a7",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "32414129_a60e4bdb",
+        "filename": "src/gn/parse_tree.cc",
+        "patchSetId": 17
+      },
+      "lineNbr": 1183,
+      "author": {
+        "id": 1000004
+      },
+      "writtenOn": "2020-11-20T19:32:45Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "fa80d0d1_7ca934e3",
       "range": {
         "startLine": 1183,
         "startChar": 50,
