@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c206b37c_4fa2df11",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000067
+      },
+      "writtenOn": "2020-11-20T20:28:49Z",
+      "side": 1,
+      "message": "Sorry, forgot to update the unit-tests in patch 2.",
+      "revId": "afbdbc3e8263d65b7a336968c1e8b560b03ffc53",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    }
+  ]
+}
