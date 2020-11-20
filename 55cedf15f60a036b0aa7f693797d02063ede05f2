@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6bc07e81_6d6683d2",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 3
+      },
+      "lineNbr": 57,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-11-20T20:30:30Z",
+      "side": 1,
+      "message": "https://bugs.chromium.org/p/gn/issues/detail?id\u003d217",
+      "range": {
+        "startLine": 57,
+        "startChar": 5,
+        "endLine": 57,
+        "endChar": 9
+      },
+      "revId": "55cedf15f60a036b0aa7f693797d02063ede05f2",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    }
+  ]
+}
