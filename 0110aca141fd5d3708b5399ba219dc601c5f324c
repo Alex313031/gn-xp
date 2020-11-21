@@ -33,6 +33,24 @@
       "message": "In case it\u0027s easier, could we do separate arm64 and arm64 binaries instead of universal for now? At least for the llvm/gn build\u0027s get.py script, that\u0027s kind of more natural anyways. (Eventually, it\u0027d be nice to have intel-only, arm-only, and universal binaries -- see your email for possible ideas with libc++.)",
       "revId": "0110aca141fd5d3708b5399ba219dc601c5f324c",
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f394b8c6_8fd4d0ff",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-11-21T03:35:52Z",
+      "side": 1,
+      "message": "This change implements the separate one but both alternatives have the same issue since you need the arm64 version libc++ which we don\u0027t have right now.",
+      "parentUuid": "60ab2383_4e0aa6aa",
+      "revId": "0110aca141fd5d3708b5399ba219dc601c5f324c",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
     }
   ]
 }
