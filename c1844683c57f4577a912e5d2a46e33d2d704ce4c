@@ -18,6 +18,24 @@
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "7661a2a0_65098817",
+        "filename": "infra/recipes/gn.py",
+        "patchSetId": 3
+      },
+      "lineNbr": 114,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-11-21T05:42:07Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "d0b594a4_e0a98b51",
+      "revId": "c1844683c57f4577a912e5d2a46e33d2d704ce4c",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "9b4ae625_6d49e0a7",
@@ -31,6 +49,24 @@
       "writtenOn": "2020-11-21T04:27:06Z",
       "side": 1,
       "message": "nit; did a formatter do this wrapping?",
+      "revId": "c1844683c57f4577a912e5d2a46e33d2d704ce4c",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b3da6e2d_406a1a1d",
+        "filename": "infra/recipes/gn.py",
+        "patchSetId": 3
+      },
+      "lineNbr": 134,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-11-21T05:42:07Z",
+      "side": 1,
+      "message": "Yes, do you want me to format it manually?",
+      "parentUuid": "9b4ae625_6d49e0a7",
       "revId": "c1844683c57f4577a912e5d2a46e33d2d704ce4c",
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
     }
