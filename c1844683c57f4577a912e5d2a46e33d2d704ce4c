@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d0b594a4_e0a98b51",
+        "filename": "infra/recipes/gn.py",
+        "patchSetId": 3
+      },
+      "lineNbr": 114,
+      "author": {
+        "id": 1000004
+      },
+      "writtenOn": "2020-11-21T04:27:06Z",
+      "side": 1,
+      "message": "I don\u0027t immediately see what this is doing, could it go in a function with a name?",
+      "revId": "c1844683c57f4577a912e5d2a46e33d2d704ce4c",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9b4ae625_6d49e0a7",
+        "filename": "infra/recipes/gn.py",
+        "patchSetId": 3
+      },
+      "lineNbr": 134,
+      "author": {
+        "id": 1000004
+      },
+      "writtenOn": "2020-11-21T04:27:06Z",
+      "side": 1,
+      "message": "nit; did a formatter do this wrapping?",
+      "revId": "c1844683c57f4577a912e5d2a46e33d2d704ce4c",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    }
+  ]
+}
