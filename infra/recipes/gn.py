@@ -65,6 +65,14 @@ def RunSteps(api, repository):
                        'sysroot')
     api.cipd.ensure(cipd_dir, pkgs)
 
+  def release_targets():
+    if api.platform.is_linux:
+      return [api.target('linux-amd64'), api.target('linux-arm64')]
+    elif api.platform.is_mac:
+      return [api.target('mac-amd64'), api.target('mac-arm64')]
+    else:
+      return [api.target.host]
+
   # The order is important since release build will get uploaded to CIPD.
   configs = [
       {
@@ -75,9 +83,7 @@ def RunSteps(api, repository):
       {
           'name': 'release',
           'args': ['--use-lto', '--use-icf'],
-          'targets': [api.target('linux-amd64'),
-                      api.target('linux-arm64')]
-                     if api.platform.is_linux else [api.target.host],
+          'targets': release_targets(),
       },
   ]
 
@@ -110,7 +116,9 @@ def RunSteps(api, repository):
                   'CXX': cipd_dir.join('bin', 'clang++'),
                   'AR': cipd_dir.join('bin', 'llvm-ar'),
                   'CFLAGS': '%s %s' % (triple, sysroot),
-                  'LDFLAGS': '%s %s -nostdlib++ %s' % (triple, sysroot, stdlib),
+                  # TODO(phosek): remove -nostdlib++ temporarily until we have
+                  # fat libc++.a for macOS that supports x86_64 and arm64.
+                  'LDFLAGS': '%s %s' % (triple, sysroot),
               }
             else:
               env = {}
