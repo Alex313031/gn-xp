@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "919fa8e9_3436b265",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2020-11-22T18:54:27Z",
+      "side": 1,
+      "message": "Nice, thanks!",
+      "revId": "7bda6d9ee62516c500dec40b77aa84ebab16e987",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d32e7acd_84a58a5c",
+        "filename": "infra/recipes/gn.py",
+        "patchSetId": 5
+      },
+      "lineNbr": 91,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2020-11-22T18:54:27Z",
+      "side": 1,
+      "message": "FWIW in chromium we pull a hermetic sdk from cipd and use that everywhere (https://source.chromium.org/chromium/chromium/src/+/master:build/mac_toolchain.py;l\u003d34?q\u003dmac_toolchain.py\u0026ss\u003dchromium) instead of relying on system xcode. That\u0027s been a good experience for us so far (way smaller cipd than full xcode so it\u0027s quick to install, it\u0027s versioned with the source, etc.)",
+      "revId": "7bda6d9ee62516c500dec40b77aa84ebab16e987",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7cbe45a0_c5e95e30",
+        "filename": "infra/recipes/gn.py",
+        "patchSetId": 5
+      },
+      "lineNbr": 143,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2020-11-22T18:54:27Z",
+      "side": 1,
+      "message": "Maybe have a link to a tracking bug for doing this here?",
+      "revId": "7bda6d9ee62516c500dec40b77aa84ebab16e987",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    }
+  ]
+}
