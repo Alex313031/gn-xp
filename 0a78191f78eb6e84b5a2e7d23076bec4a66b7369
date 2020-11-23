@@ -219,6 +219,30 @@
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "c95d8ebd_fa321675",
+        "filename": "src/gn/command_gen.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 366,
+      "author": {
+        "id": 1000047
+      },
+      "writtenOn": "2020-11-23T07:43:28Z",
+      "side": 1,
+      "message": "I see how things could get \u0027interesting\u0027 if someone carefully uses a non-default ninja to build one project, and gn has no way of knowing at initial gn gen time what that ninja would be. Perhaps \u0027do this if ninja is specified OR when ninja_required_version is large enough\u0027 would be agreeable? We can probably assume that if someone passes the actual ninja version they will be careful enough not to mix and match (switching ninja versions that are distant enough clobbers the entire build with \"ninja: warning: bad deps log signature or version; starting over).",
+      "parentUuid": "dba57d40_63e46491",
+      "range": {
+        "startLine": 366,
+        "startChar": 41,
+        "endLine": 366,
+        "endChar": 56
+      },
+      "revId": "0a78191f78eb6e84b5a2e7d23076bec4a66b7369",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "c0023ad6_e9f71a3e",
