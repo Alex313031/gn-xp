@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5fd454d8_f8bfa372",
+        "filename": "infra/recipes/gn.py",
+        "patchSetId": 3
+      },
+      "lineNbr": 77,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-11-23T20:16:11Z",
+      "side": 1,
+      "message": "This shouldn\u0027t be needed anymore.",
+      "revId": "78cec1b6eb885fe4d7002eba54aa5c09b6c1085d",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    }
+  ]
+}
