@@ -88,6 +88,24 @@
       "parentUuid": "c81b28ce_05789ca8",
       "revId": "29b1326b19455f3a12b04b934882e5e0341281cf",
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "cf878cdd_b426ff86",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000014
+      },
+      "writtenOn": "2020-11-25T18:41:47Z",
+      "side": 1,
+      "message": "What we can do is see how this is working and reconsider adding it by default later. If we have some months of clean_stale running on the bots and by use in some projects with good performance, then I would feel better about it.",
+      "parentUuid": "f41f6ce1_3db8eeda",
+      "revId": "29b1326b19455f3a12b04b934882e5e0341281cf",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
     }
   ]
 }
