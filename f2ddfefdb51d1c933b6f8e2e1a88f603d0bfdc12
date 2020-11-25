@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "19826003_150ce311",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 6
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2020-11-25T17:15:24Z",
+      "side": 1,
+      "message": "Thanks much! I added this build to the builds downloaded by llvm/utils/gn/get.py . For others who want to download this file: Remember that you have to explicitly rm the dest gn path before unzipping, because of macOS now requiring signatures and caching the signature with the inode (so unzipping on top of an existing file will reuse the existing file\u0027s inode and cache entry). See http://reviews.llvm.org/rG9595a7ff55b6f3bf316ae182390fc74da65dda51 for an example, and for the link to the apple FB that describes the bug.",
+      "revId": "f2ddfefdb51d1c933b6f8e2e1a88f603d0bfdc12",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    }
+  ]
+}
