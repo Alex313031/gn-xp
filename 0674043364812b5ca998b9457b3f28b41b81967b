@@ -22,6 +22,30 @@
       },
       "revId": "0674043364812b5ca998b9457b3f28b41b81967b",
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5beada41_4d2c9423",
+        "filename": "docs/reference.md",
+        "patchSetId": 2
+      },
+      "lineNbr": 3059,
+      "author": {
+        "id": 1000962
+      },
+      "writtenOn": "2020-11-27T14:15:03Z",
+      "side": 1,
+      "message": "Ah - this is my first try at committing something to the GN project. Thanks for letting me know that this file is generated. \n\nFor source includes, I totally agree with your standpoint. There could perhaps be other more complex use cases of set_sources_assignment_filter. For example it could be used in tandem with get_target_outputs inside of a template - and that would make it hard to replace with an explicit list. \n\nWould a corrected version of this patch be accepted, or should I drop it?",
+      "parentUuid": "aea8afb8_f4a70f3b",
+      "range": {
+        "startLine": 3059,
+        "startChar": 10,
+        "endLine": 3059,
+        "endChar": 18
+      },
+      "revId": "0674043364812b5ca998b9457b3f28b41b81967b",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
     }
   ]
 }
