@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "94e30f9f_8fcb6153",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000067
+      },
+      "writtenOn": "2020-11-27T11:39:36Z",
+      "side": 1,
+      "message": "Petr, I rebased on top of your change to build for mac-arm64, can you take another look at the CL just in case (I don\u0027t have such a machine anyway).",
+      "revId": "a15940043aee1a2eb93da1ea4cd1d0030e800442",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    }
+  ]
+}
