@@ -3055,6 +3055,8 @@
 ```
   This feature is deprecated. It will be removed once all usages have been
   removed. Only supports a single argument that needs to be an empty list.
+
+  See the function filter_exclude for similar functionality.
 ```
 ### <a name="func_split_list"></a>**split_list**: Splits a list into N different sub-lists.
 
