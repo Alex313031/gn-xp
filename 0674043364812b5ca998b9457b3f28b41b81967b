@@ -70,6 +70,30 @@
       },
       "revId": "0674043364812b5ca998b9457b3f28b41b81967b",
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "10e65269_27ef25ca",
+        "filename": "docs/reference.md",
+        "patchSetId": 2
+      },
+      "lineNbr": 3059,
+      "author": {
+        "id": 1000962
+      },
+      "writtenOn": "2020-11-27T15:38:04Z",
+      "side": 1,
+      "message": "My experience with GN is perhaps still a bit too small to give strong opinions on this matter, but I\u0027ll at least try and reflect on it. \n\nI can see how adding information on these functions inside the FAQ might increase usage of these functions going forward. It is perhaps up to you as maintainers to decide on if you want to see more usage of \"filter_*\" functions since usage of them possibly makes them harder to deprecate and/or change. \n\nAny which way you as maintainers decide upon going forward, it is nice to reference intended replacements/best practice functions and/or patterns for now deprecated functionality. If there is no replacement pattern and the use case is no longer an intended one, that might be worth a mention as well. \n\nMy intention with this patch was to explicitly state that there is a function which can provide similar functionality. The intention was to avoid unnecessary work for developers with existing code bases that have been previously using set_sources_assignment_filter, informing existing them of an alternative method now that the function behavior is changed in preparation of removal.  \n\nThanks for including me in your thought process. Feel free make a decision that fits you as maintainers regarding this. If you decide that these functions provide a usage pattern that you\u0027d like to support, I can of course take the time to supply a patch which includes some documentation along the lines you are suggesting.",
+      "parentUuid": "9a92ce04_b9ff668a",
+      "range": {
+        "startLine": 3059,
+        "startChar": 10,
+        "endLine": 3059,
+        "endChar": 18
+      },
+      "revId": "0674043364812b5ca998b9457b3f28b41b81967b",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
     }
   ]
 }
