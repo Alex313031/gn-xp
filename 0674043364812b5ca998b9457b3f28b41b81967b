@@ -46,6 +46,30 @@
       },
       "revId": "0674043364812b5ca998b9457b3f28b41b81967b",
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9a92ce04_b9ff668a",
+        "filename": "docs/reference.md",
+        "patchSetId": 2
+      },
+      "lineNbr": 3059,
+      "author": {
+        "id": 1000070
+      },
+      "writtenOn": "2020-11-27T14:49:08Z",
+      "side": 1,
+      "message": "Using set_sources_assignment_filter to filter other things that sources was already a hack that was not really recommended. It is true that filter_exclude was added to properly support that use case.\n\nThe function set_sources_assignment_filter will eventually be removed. When this happen, the documentation will also be removed. I think a better location for the information may be docs/faq.md in a new point. Something like:\n\n  ## How to work with list/strings?\n\n  gn provides some intrinsics functions to perform operations on list and\n  strings.\n\n  -   `filter_include` takes a list of strings and a list of patterns and\n      returns a list with all the elements matching any of the patterns\n\n  -   `filter_exclude` takes a list of strings and a list of patterns and\n      returns a list with all the elements matching none of the patterns\n\n  -  `string_replace` takes a string, a pattern and a substitution and\n     returns a new string with all occurrence of the pattern replaced by\n     the substitution\n\n  -  `foreach` allow you to iterate over a list.\n\n  For more information, consult `gn help $function`.\n\nWhat do you think?\n\nI think brettw should be involved in the discussion (since they were initially reluctant to adding those functions, so I\u0027m not sure whether adding emphasis on them would be accepted).",
+      "parentUuid": "5beada41_4d2c9423",
+      "range": {
+        "startLine": 3059,
+        "startChar": 10,
+        "endLine": 3059,
+        "endChar": 18
+      },
+      "revId": "0674043364812b5ca998b9457b3f28b41b81967b",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
     }
   ]
 }
