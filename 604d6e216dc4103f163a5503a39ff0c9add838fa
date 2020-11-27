@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "62c18eec_616edd9f",
+        "filename": "infra/recipes/gn.py",
+        "patchSetId": 6
+      },
+      "lineNbr": 210,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2020-11-27T23:09:08Z",
+      "side": 1,
+      "message": "By the way, I was going to file an upstream issue so I tried reproducing this issue locally, but it seems to be working. I used `configure.py -c release -a x86-64` `configure.py -c release -a arm64` with the appropriate --target in CFLAGS and LDFLAGS and I see lib/linux/release/x86-64/librpmallocwrap.a and lib/linux/release/arm64/librpmallocwrap.a and both appear to be compiled correctly. Was there some other issue you encountered?",
+      "range": {
+        "startLine": 207,
+        "startChar": 1,
+        "endLine": 210,
+        "endChar": 67
+      },
+      "revId": "604d6e216dc4103f163a5503a39ff0c9add838fa",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    }
+  ]
+}
