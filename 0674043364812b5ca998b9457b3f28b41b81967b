@@ -1,6 +1,23 @@
 {
   "comments": [
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "45c5f7bf_e29a9149",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000070
+      },
+      "writtenOn": "2020-11-30T14:02:27Z",
+      "side": 1,
+      "message": "+brettw\n\nDo you think we should add some information in docs/faq.md about filter_include, filter_exclude, string_replace, ... functions? Or information on how to deal with conditional inclusion of sources file per platform?\n\nI think recommending to use filter_include/filter_exclude in `gn help set_sources_assignment_filter` is not really helpful (for once, it will disappear once the function is removed), especially when the recommended way to filter is to just use conditional assignments.\n\nWDYT?",
+      "revId": "0674043364812b5ca998b9457b3f28b41b81967b",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "aea8afb8_f4a70f3b",
