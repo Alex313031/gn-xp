@@ -14,6 +14,7 @@
 #include "gn/ninja_utils.h"
 #include "gn/rust_substitution_type.h"
 #include "gn/substitution_writer.h"
+#include "gn/rust_values.h"
 #include "gn/target.h"
 
 namespace {
@@ -248,7 +249,11 @@ void NinjaRustBinaryTargetWriter::WriteExterns(
 
   for (const Target* target : deps) {
     if (target->output_type() == Target::RUST_LIBRARY ||
-        target->output_type() == Target::RUST_PROC_MACRO) {
+        target->output_type() == Target::RUST_PROC_MACRO ||
+        (target->source_types_used().RustSourceUsed() &&
+         target->rust_values().InferredCrateType(target) ==
+             RustValues::CRATE_DYLIB)) {
+      CHECK(target->dependency_output_file());
       out_ << " --extern ";
       const auto& renamed_dep =
           target_->rust_values().aliased_deps().find(target->label());
