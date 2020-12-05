@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "659f8509_1697d010",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000221
+      },
+      "writtenOn": "2020-12-05T20:12:48Z",
+      "side": 1,
+      "message": "I took an hour or so and hobby-hacked this together; feel free to ignore it if it\u0027s against the GN philosophy or there\u0027s no appetite for it 😊\n\nIMO it makes some common get_label_info work much more pleasant; we find ourselves calling get_label_info multiple times and adding a string together from its parts, this lets us call get_label_info once and then use GN\u0027s variable expansion inside of format strings.",
+      "revId": "a4f51bcc22c9f882eb60a2e5a69eaf34b7c72efc",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    }
+  ]
+}
