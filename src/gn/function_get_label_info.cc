@@ -11,6 +11,61 @@
 
 namespace functions {
 
+namespace {
+
+Value GetName(const FunctionCallNode* function, const Label& label) {
+  return Value(function, label.name());
+}
+
+Value GetDir(const FunctionCallNode* function, const Label& label) {
+  return Value(function, DirectoryWithNoLastSlash(label.dir()));
+}
+
+Value GetTargetGenDir(const FunctionCallNode* function,
+                      const Scope* scope,
+                      const Label& label) {
+  return Value(function, DirectoryWithNoLastSlash(GetSubBuildDirAsSourceDir(
+    BuildDirContext(scope, label.GetToolchainLabel()), label.dir(),
+    BuildDirType::GEN)));
+}
+
+Value GetRootGenDir(const FunctionCallNode* function,
+                    const Scope* scope,
+                    const Label& label) {
+  return Value(function, DirectoryWithNoLastSlash(GetBuildDirAsSourceDir(
+    BuildDirContext(scope, label.GetToolchainLabel()), BuildDirType::GEN)));
+}
+
+Value GetTargetOutDir(const FunctionCallNode* function,
+                      const Scope* scope,
+                      const Label& label) {
+  return Value(function, DirectoryWithNoLastSlash(GetSubBuildDirAsSourceDir(
+    BuildDirContext(scope, label.GetToolchainLabel()), label.dir(),
+    BuildDirType::OBJ)));
+}
+
+Value GetRootOutDir(const FunctionCallNode* function,
+                    const Scope* scope,
+                    const Label& label) {
+  return Value(function, DirectoryWithNoLastSlash(GetBuildDirAsSourceDir(
+    BuildDirContext(scope, label.GetToolchainLabel()),
+    BuildDirType::TOOLCHAIN_ROOT)));
+}
+
+Value GetToolchain(const FunctionCallNode* function, const Label& label) {
+  return Value(function, label.GetToolchainLabel().GetUserVisibleName(false));
+}
+
+Value GetLabelNoToolchain(const FunctionCallNode* function, const Label& label) {
+  return Value(function, label.GetWithNoToolchain().GetUserVisibleName(false));
+}
+
+Value GetLabelWithToolchain(const FunctionCallNode* function, const Label& label) {
+  return Value(function, label.GetUserVisibleName(true));
+}
+
+}
+
 const char kGetLabelInfo[] = "get_label_info";
 const char kGetLabelInfo_HelpShort[] =
     "get_label_info: Get an attribute from a target's label.";
@@ -45,7 +100,7 @@ Possible values for the "what" parameter
       value of the "root_gen_dir" variable when inside that target's
       declaration.
 
-  "target_out_dir
+  "target_out_dir"
       The output directory for the target. This will match the value of the
       "target_out_dir" variable when inside that target's declaration.
 
@@ -66,6 +121,10 @@ Possible values for the "what" parameter
       The label of the toolchain. This will match the value of the
       "current_toolchain" variable when inside that target's declaration.
 
+  "all"
+      All of the above values, named by keys matching the "what" parameters,
+      returned in a scope object.
+
 Examples
 
   get_label_info(":foo", "name")
@@ -73,6 +132,9 @@ Examples
 
   get_label_info("//foo/bar:baz", "target_gen_dir")
   # Returns string "//out/Debug/gen/foo/bar".
+
+  parts = get_label_info("//foo/bar:baz(//some:toolchain)", "all")
+  # Returns { "name": "baz", "dir": "//foo/bar", ... }
 )*";
 
 Value RunGetLabelInfo(Scope* scope,
@@ -97,48 +159,54 @@ Value RunGetLabelInfo(Scope* scope,
     return Value();
   const std::string& what = args[1].string_value();
 
-  Value result(function, Value::STRING);
   if (what == "name") {
-    result.string_value() = label.name();
+    return GetName(function, label);
 
   } else if (what == "dir") {
-    result.string_value() = DirectoryWithNoLastSlash(label.dir());
+    return GetDir(function, label);
 
   } else if (what == "target_gen_dir") {
-    result.string_value() = DirectoryWithNoLastSlash(GetSubBuildDirAsSourceDir(
-        BuildDirContext(scope, label.GetToolchainLabel()), label.dir(),
-        BuildDirType::GEN));
+    return GetTargetGenDir(function, scope, label);
 
   } else if (what == "root_gen_dir") {
-    result.string_value() = DirectoryWithNoLastSlash(GetBuildDirAsSourceDir(
-        BuildDirContext(scope, label.GetToolchainLabel()), BuildDirType::GEN));
+    return GetRootGenDir(function, scope, label);
 
   } else if (what == "target_out_dir") {
-    result.string_value() = DirectoryWithNoLastSlash(GetSubBuildDirAsSourceDir(
-        BuildDirContext(scope, label.GetToolchainLabel()), label.dir(),
-        BuildDirType::OBJ));
+    return GetTargetOutDir(function, scope, label);
 
   } else if (what == "root_out_dir") {
-    result.string_value() = DirectoryWithNoLastSlash(GetBuildDirAsSourceDir(
-        BuildDirContext(scope, label.GetToolchainLabel()),
-        BuildDirType::TOOLCHAIN_ROOT));
+    return GetRootOutDir(function, scope, label);
 
   } else if (what == "toolchain") {
-    result.string_value() = label.GetToolchainLabel().GetUserVisibleName(false);
+    return GetToolchain(function, label);
 
   } else if (what == "label_no_toolchain") {
-    result.string_value() =
-        label.GetWithNoToolchain().GetUserVisibleName(false);
+    return GetLabelNoToolchain(function, label);
 
   } else if (what == "label_with_toolchain") {
-    result.string_value() = label.GetUserVisibleName(true);
+    return GetLabelWithToolchain(function, label);
 
-  } else {
-    *err = Err(args[1], "Unknown value for \"what\" parameter.");
-    return Value();
+  } else if (what == "all") {
+    auto s = std::make_unique<Scope>(scope->settings());
+    s->SetValue("name", GetName(function, label), function);
+    s->SetValue("dir", GetDir(function, label), function);
+    s->SetValue("target_gen_dir", GetTargetGenDir(function, scope, label),
+      function);
+    s->SetValue("root_gen_dir", GetRootGenDir(function, scope, label), function);
+    s->SetValue("target_out_dir", GetTargetOutDir(function, scope, label),
+      function);
+    s->SetValue("root_out_dir", GetRootOutDir(function, scope, label), function);
+    s->SetValue("toolchain", GetToolchain(function, label), function);
+    s->SetValue("label_no_toolchain", GetLabelNoToolchain(function, label),
+      function);
+    s->SetValue("label_with_toolchain", GetLabelWithToolchain(function, label),
+      function);
+    return Value(function, std::move(s));
+
   }
 
-  return result;
+  *err = Err(args[1], "Unknown value for \"what\" parameter.");
+  return Value();
 }
 
 }  // namespace functions

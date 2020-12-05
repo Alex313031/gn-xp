@@ -16,15 +16,13 @@ class GetLabelInfoTest : public testing::Test {
 
   // Convenience wrapper to call GetLabelInfo.
   std::string Call(const std::string& label, const std::string& what) {
-    FunctionCallNode function;
-
     std::vector<Value> args;
     args.push_back(Value(nullptr, label));
     args.push_back(Value(nullptr, what));
 
     Err err;
     Value result =
-        functions::RunGetLabelInfo(setup_.scope(), &function, args, &err);
+        functions::RunGetLabelInfo(setup_.scope(), &function_, args, &err);
     if (err.has_error()) {
       EXPECT_TRUE(result.type() == Value::NONE);
       return std::string();
@@ -36,6 +34,7 @@ class GetLabelInfoTest : public testing::Test {
   // Note: TestWithScope's default toolchain is "//toolchain:default" and
   // output dir is "//out/Debug".
   TestWithScope setup_;
+  FunctionCallNode function_;
 };
 
 }  // namespace
@@ -104,4 +103,34 @@ TEST_F(GetLabelInfoTest, Toolchain) {
   EXPECT_EQ("//toolchain:default", Call(":name", "toolchain"));
   EXPECT_EQ("//toolchain:random",
             Call(":name(//toolchain:random)", "toolchain"));
+}
+
+TEST_F(GetLabelInfoTest, All) {
+  const std::string label = "//src/foo:baz(//toolchain:random)";
+  std::vector<Value> args = { Value(nullptr, label), Value(nullptr, "all") };
+
+  Err err;
+  const Value result =
+      functions::RunGetLabelInfo(setup_.scope(), &function_, args, &err);
+
+  EXPECT_EQ(Value::SCOPE, result.type());
+  const Scope* scope = result.scope_value();
+  EXPECT_TRUE(scope != nullptr);
+
+  EXPECT_EQ(Call(label, "name"), scope->GetValue("name")->string_value());
+  EXPECT_EQ(Call(label, "dir"), scope->GetValue("dir")->string_value());
+  EXPECT_EQ(Call(label, "root_out_dir"),
+            scope->GetValue("root_out_dir")->string_value());
+  EXPECT_EQ(Call(label, "root_gen_dir"),
+            scope->GetValue("root_gen_dir")->string_value());
+  EXPECT_EQ(Call(label, "target_out_dir"),
+            scope->GetValue("target_out_dir")->string_value());
+  EXPECT_EQ(Call(label, "target_gen_dir"),
+            scope->GetValue("target_gen_dir")->string_value());
+  EXPECT_EQ(Call(label, "toolchain"),
+            scope->GetValue("toolchain")->string_value());
+  EXPECT_EQ(Call(label, "label_with_toolchain"),
+            scope->GetValue("label_with_toolchain")->string_value());
+  EXPECT_EQ(Call(label, "label_no_toolchain"),
+            scope->GetValue("label_no_toolchain")->string_value());
 }
