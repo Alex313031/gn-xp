@@ -45,6 +45,10 @@ class RustValues {
   CrateType crate_type() const { return crate_type_; }
   void set_crate_type(CrateType s) { crate_type_ = s; }
 
+  // Same as crate_type(), except attempt to resolve CRATE_AUTO based on the
+  // target type.
+  CrateType InferredCrateType(const Target* target) const;
+
   // Any renamed dependencies for the `extern` flags.
   const std::map<Label, std::string>& aliased_deps() const {
     return aliased_deps_;
