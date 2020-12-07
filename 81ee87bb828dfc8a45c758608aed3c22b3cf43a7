@@ -50,6 +50,23 @@
       "message": "Yeah sorry. I\u0027m not really a fan of this approach...",
       "revId": "81ee87bb828dfc8a45c758608aed3c22b3cf43a7",
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "7ddd1307_7d779752",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 6
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000221
+      },
+      "writtenOn": "2020-12-07T17:58:08Z",
+      "side": 1,
+      "message": "Not at all, it was fun poking around the codebase, and I opened the CL without any pre-design-approval from the GN team, so it\u0027s all good 😊",
+      "revId": "81ee87bb828dfc8a45c758608aed3c22b3cf43a7",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
     }
   ]
 }
