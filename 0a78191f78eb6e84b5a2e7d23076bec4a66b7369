@@ -243,6 +243,30 @@
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "a76868e1_264f5d7f",
+        "filename": "src/gn/command_gen.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 366,
+      "author": {
+        "id": 1000633
+      },
+      "writtenOn": "2020-12-07T18:12:27Z",
+      "side": 1,
+      "message": "Sorry for the delayed response.\n\nI\u0027m not sure I follow the logic of \u0027do this if ninja is specified OR when ninja_required_version is large enough\u0027. If ninja-executable is not specified, we won\u0027t attempt anything (because falling back to a PATH provided ninja would be hazardous), so the latter condition would never be used. \n\nThe problem with just using the former condition is that `--ninja-executable` is not a new variable. IIRC, it is also used in the generation of project files for XCode and Visual Studio. Inserting a requirement that `ninja-executable` be at least 1.10 without any version check could break those use cases.\n\nI could see the argument that now that we\u0027ve eliminated the use of a PATH-based ninja, we could    do a runtime version check of the provided `ninja-executable`. We could elide it so that it is only done if not a regen and the ninja_required_version is not deemed sufficient. In other words:\n\n  if (!is_regeneration \u0026\u0026\n      (build_settings-\u003eninja_required_version() \u003e\u003d Version{1, 10, 0} ||\n       GetNinjaVersion(ninja_executable) \u003e\u003d Version{1, 10, 0})) {\n    // Do the restat\n  }\n\nThis is definitely getting a bit convoluted here. If the user is specifying the ninja-executable and that ninja-executable supports the restat command, I don\u0027t think gn will be introducing any risk of clobbering builds. The only way it would be clobbered would be if the user than uses a different ninja for building, which, IMO, falls into user error territory.\nThe downside is the cost of the runtime check. \n\nBrett, WDYT?",
+      "parentUuid": "c95d8ebd_fa321675",
+      "range": {
+        "startLine": 366,
+        "startChar": 41,
+        "endLine": 366,
+        "endChar": 56
+      },
+      "revId": "0a78191f78eb6e84b5a2e7d23076bec4a66b7369",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "c0023ad6_e9f71a3e",
