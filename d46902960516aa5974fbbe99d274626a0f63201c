@@ -16,6 +16,23 @@
       "message": "Can you have somebody knowledgeable about Rust look at the CL? If they\u0027re not a GN committer I can stamp afterward. I feel like I\u0027m not qualified to know if this is right or not.",
       "revId": "d46902960516aa5974fbbe99d274626a0f63201c",
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "58a2c5d1_367e8077",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000067
+      },
+      "writtenOn": "2020-12-09T19:27:48Z",
+      "side": 1,
+      "message": "Adding Benjamin as reviewer, I\u0027m sorry, but my knowledge of Rust compilation is too tiny to help here.",
+      "revId": "d46902960516aa5974fbbe99d274626a0f63201c",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
     }
   ]
 }
