@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "3a68c1cf_2b61b11e",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000014
+      },
+      "writtenOn": "2020-12-09T18:21:28Z",
+      "side": 1,
+      "message": "Can you have somebody knowledgeable about Rust look at the CL? If they\u0027re not a GN committer I can stamp afterward. I feel like I\u0027m not qualified to know if this is right or not.",
+      "revId": "d46902960516aa5974fbbe99d274626a0f63201c",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    }
+  ]
+}
