@@ -16,6 +16,23 @@
       "message": "This never landed because of failed Windows trybot. I believe I\u0027ve fixed that. Could someone give me dry run privileges? 😊",
       "revId": "24aa70047d5a91e6451975d3f4aa16ee56f91768",
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "5aaba705_9264afbb",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000014
+      },
+      "writtenOn": "2020-12-09T22:57:07Z",
+      "side": 1,
+      "message": "Hi! I added you to the committers list. See if it works.",
+      "revId": "24aa70047d5a91e6451975d3f4aa16ee56f91768",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
     }
   ]
 }
