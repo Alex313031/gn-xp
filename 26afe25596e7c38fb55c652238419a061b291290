@@ -22,6 +22,30 @@
       },
       "revId": "26afe25596e7c38fb55c652238419a061b291290",
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d0fb9383_0247d3d6",
+        "filename": "src/gn/command_gen.cc",
+        "patchSetId": 6
+      },
+      "lineNbr": 379,
+      "author": {
+        "id": 1000633
+      },
+      "writtenOn": "2020-12-10T22:52:42Z",
+      "side": 1,
+      "message": "Done. Thanks!",
+      "parentUuid": "ddc7769d_40eff550",
+      "range": {
+        "startLine": 379,
+        "startChar": 63,
+        "endLine": 379,
+        "endChar": 76
+      },
+      "revId": "26afe25596e7c38fb55c652238419a061b291290",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
     }
   ]
 }
