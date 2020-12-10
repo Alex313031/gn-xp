@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "2fd56e2c_09cd0650",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000168
+      },
+      "writtenOn": "2020-12-10T02:40:09Z",
+      "side": 1,
+      "message": "No worries, but Ben isn\u0027t on the project anymore so I\u0027m adding Aaron and Dan in hopes that either of them can back up what I say here.\n\nCorrectness of this patch hinges on the claim:\n\n\u003e Rust dylibs are handled pretty much exactly like rlibs\n\nThe code changes are just making it so they\u0027re handled the same.\n\nUnfortunately I can\u0027t find a lot of documentation for this, but the compiler source itself is documented[1]. Inside the compiler they are handled differently, but the interface strives to make them equivalent, even to the point of automatically choosing between an rlib and dylib form of the same crate for you, if you use -l flags. (I don\u0027t know why. We never let rustc choose since we use --extern flags to point to the file directly, yay for being explicit!)\n\nI forgot to mention this in the commit message but I actually tested this in the fuchsia tree and was able to build and link against a dylib crate, which never worked before.\n\n[1]: https://doc.rust-lang.org/nightly/nightly-rustc/rustc_metadata/locator/index.html#rlibs-and-dylibs",
+      "revId": "5cc468f611a70ca3dc1802a7dac81e947cc8c35c",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    }
+  ]
+}
