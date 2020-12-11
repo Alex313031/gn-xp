@@ -625,13 +625,13 @@ TEST_F(CompileCommandsTest, CompDBFilter) {
   ASSERT_TRUE(test_results1.empty());
 
   std::set<std::string> filter2;
-  filter2.insert(target1.label().name());
+  filter2.insert(target1.label().GetUserVisibleName(toolchain()));
   std::vector<const Target*> test_results2 =
       writer.FilterTargets(targets, filter2);
   ASSERT_EQ(test_results2, targets);
 
   std::set<std::string> filter3;
-  filter3.insert(target2.label().name());
+  filter3.insert(target2.label().GetUserVisibleName(toolchain()));
   std::vector<const Target*> test_result3 =
       writer.FilterTargets(targets, filter3);
   std::vector<const Target*> expected_results3;

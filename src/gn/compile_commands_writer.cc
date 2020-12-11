@@ -3,6 +3,7 @@
 // found in the LICENSE file.
 
 #include "gn/compile_commands_writer.h"
+#include <iostream>
 
 #include <sstream>
 
@@ -311,6 +312,7 @@ bool CompileCommandsWriter::RunAndWriteFiles(
   for (auto& target :
        base::SplitString(target_filters, ",", base::TRIM_WHITESPACE,
                          base::SPLIT_WANT_NONEMPTY)) {
+    std::cout << "filter: " << target << "\n";
     target_filters_set.insert(target);
   }
 
@@ -335,10 +337,11 @@ std::vector<const Target*> CompileCommandsWriter::FilterTargets(
     const std::vector<const Target*>& all_targets,
     const std::set<std::string>& target_filters_set) {
   std::vector<const Target*> preserved_targets;
+  auto default_toolchain_label = all_targets[0]->settings()->default_toolchain_label();
 
   std::set<const Target*> visited;
   for (auto& target : all_targets) {
-    if (target_filters_set.count(target->label().name())) {
+    if (target_filters_set.count(target->label().GetUserVisibleName(default_toolchain_label))) {
       VisitDeps(target, &visited);
     }
   }
