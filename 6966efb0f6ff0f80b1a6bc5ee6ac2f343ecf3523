@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "3e837d92_8dbbb92f",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 8
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000633
+      },
+      "writtenOn": "2020-12-16T17:05:36Z",
+      "side": 1,
+      "message": "Restat usage has landed in Fuchsia: http://fxrev.dev/461355\n\nI\u0027ll give that a day or so before landing clean_stale to make sure we don\u0027t have to revert both. 😊",
+      "revId": "6966efb0f6ff0f80b1a6bc5ee6ac2f343ecf3523",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    }
+  ]
+}
