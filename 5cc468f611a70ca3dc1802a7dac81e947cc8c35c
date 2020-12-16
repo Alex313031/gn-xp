@@ -39,6 +39,30 @@
       },
       "revId": "5cc468f611a70ca3dc1802a7dac81e947cc8c35c",
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e58254a8_4fceb71a",
+        "filename": "src/gn/rust_values.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 25,
+      "author": {
+        "id": 1000168
+      },
+      "writtenOn": "2020-12-16T00:03:58Z",
+      "side": 1,
+      "message": "The comment is still correct. InferredCrateType is more of a utility function that duplicates the same (implicit) logic already followed by GN for CRATE_AUTO.",
+      "parentUuid": "2261765c_b6c1554d",
+      "range": {
+        "startLine": 22,
+        "startChar": 2,
+        "endLine": 25,
+        "endChar": 53
+      },
+      "revId": "5cc468f611a70ca3dc1802a7dac81e947cc8c35c",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
     }
   ]
 }
