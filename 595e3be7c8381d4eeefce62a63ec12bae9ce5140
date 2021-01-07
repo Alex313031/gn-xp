@@ -34,6 +34,24 @@
       "parentUuid": "2cc018ec_98cf9548",
       "revId": "595e3be7c8381d4eeefce62a63ec12bae9ce5140",
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0efa66c2_9648c7ed",
+        "filename": "src/gn/setup.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 777,
+      "author": {
+        "id": 1000012
+      },
+      "writtenOn": "2021-01-07T20:41:03Z",
+      "side": 1,
+      "message": "Sure, if you felt like it. I\u0027d be happy to make the change as well.",
+      "parentUuid": "42821f1c_bf9133c3",
+      "revId": "595e3be7c8381d4eeefce62a63ec12bae9ce5140",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
     }
   ]
 }
