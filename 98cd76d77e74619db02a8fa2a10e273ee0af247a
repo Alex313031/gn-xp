@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "90035018_b8e677dd",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000877
+      },
+      "writtenOn": "2021-01-07T06:55:54Z",
+      "side": 1,
+      "message": "PTAL. I tested this with both methods of specifying python3 (dotfile and command line) and they both work. Anything else we could have missed?",
+      "revId": "98cd76d77e74619db02a8fa2a10e273ee0af247a",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    }
+  ]
+}
