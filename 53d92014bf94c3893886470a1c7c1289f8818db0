@@ -16,6 +16,24 @@
       "message": "Unfortunately, it turns out that this is only doing the path search if the value was passed via --script-executable (as per line 728), and not if the value was set in the dotfile. If the value is set in the dotfile, we take the branch on line 745 and don\u0027t do any searching :(.",
       "revId": "53d92014bf94c3893886470a1c7c1289f8818db0",
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "51eef940_19a68121",
+        "filename": "src/gn/setup.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 738,
+      "author": {
+        "id": 1000877
+      },
+      "writtenOn": "2021-01-07T06:49:00Z",
+      "side": 1,
+      "message": "Oops.\n\nI\u0027ve created https://gn-review.googlesource.com/c/gn/+/10900 to fix that.",
+      "parentUuid": "d0340a7a_c9dc0570",
+      "revId": "53d92014bf94c3893886470a1c7c1289f8818db0",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
     }
   ]
 }
