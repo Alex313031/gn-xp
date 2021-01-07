@@ -16,6 +16,24 @@
       "message": "It seems like it\u0027d be a bit safer to replace 750-777 with something like:\n\nbase::FilePath path_value \u003d cmdline.HasSwitch(switches::kScriptExecutable);\nif (!path_value)\n  path_value \u003d dotfile_scope_.GetValue(\"script_executable\", true);\nif (!path_value)\n  path_value \u003d \"python\";\nbuild_settings_.set_python_path(ProcessFileExtensions(path_value));\n\nand move the NormalizePathSeparatorsTo(\u0027/\u0027) line into ProcessFileExtensions ...\n\nThat way the search logic is guaranteed to be the same regardless of how the value is found.",
       "revId": "595e3be7c8381d4eeefce62a63ec12bae9ce5140",
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "42821f1c_bf9133c3",
+        "filename": "src/gn/setup.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 777,
+      "author": {
+        "id": 1000877
+      },
+      "writtenOn": "2021-01-07T20:39:16Z",
+      "side": 1,
+      "message": "That makes sense. I could check that out if you\u0027d like.",
+      "parentUuid": "2cc018ec_98cf9548",
+      "revId": "595e3be7c8381d4eeefce62a63ec12bae9ce5140",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
     }
   ]
 }
