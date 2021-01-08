@@ -88,6 +88,24 @@
       "parentUuid": "a5339b55_c727feb6",
       "revId": "595e3be7c8381d4eeefce62a63ec12bae9ce5140",
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d41b3c57_7f6ccdc6",
+        "filename": "src/gn/setup.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 777,
+      "author": {
+        "id": 1000014
+      },
+      "writtenOn": "2021-01-08T03:51:30Z",
+      "side": 1,
+      "message": "I added your (Bruce\u0027s) Chromium account as a GN committer so you can do tries and CQ.",
+      "parentUuid": "c95e555a_05447974",
+      "revId": "595e3be7c8381d4eeefce62a63ec12bae9ce5140",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
     }
   ]
 }
