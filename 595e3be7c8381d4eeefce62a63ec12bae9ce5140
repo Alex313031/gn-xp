@@ -52,6 +52,24 @@
       "parentUuid": "42821f1c_bf9133c3",
       "revId": "595e3be7c8381d4eeefce62a63ec12bae9ce5140",
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a5339b55_c727feb6",
+        "filename": "src/gn/setup.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 777,
+      "author": {
+        "id": 1000877
+      },
+      "writtenOn": "2021-01-08T02:18:38Z",
+      "side": 1,
+      "message": "I\u0027ll do it, since I\u0027m in there anyway.\n\nI\u0027m going to clean up a few things in that area, and take my time. Feel free to integrate the current gn.exe with this fix into Chromium. I\u0027ll leave that to you.",
+      "parentUuid": "0efa66c2_9648c7ed",
+      "revId": "595e3be7c8381d4eeefce62a63ec12bae9ce5140",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
     }
   ]
 }
