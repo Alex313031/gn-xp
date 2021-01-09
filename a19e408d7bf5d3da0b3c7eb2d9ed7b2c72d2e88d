@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "7b698a76_4ad6b1ca",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000877
+      },
+      "writtenOn": "2021-01-09T01:33:25Z",
+      "side": 1,
+      "message": "I started this with the plan of calling ProcessFileExtensions from set_python_path, but set_python_path is just a setter and is in a different class. Doing so would prevent the validity check that is in the default path and just didn\u0027t \"feel\" right.\n\nBut! I dramatically cleaned up the code - fixing several bugs in the process - so that I don\u0027t think the duplicate calls to ProcessFileExtensions are really a problem anymore.\n\nNone of the bugs that I fixed are serious - they are in edge cases that will normally not be hit or that are harmless. So, take a look when you get a chance and let me know what you think.\n",
+      "revId": "a19e408d7bf5d3da0b3c7eb2d9ed7b2c72d2e88d",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    }
+  ]
+}
