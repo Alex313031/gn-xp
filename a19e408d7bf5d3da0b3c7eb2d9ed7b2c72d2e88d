@@ -50,6 +50,24 @@
       "message": "Nit: you probably want to remove the printfs.",
       "revId": "a19e408d7bf5d3da0b3c7eb2d9ed7b2c72d2e88d",
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "9dc52695_c9ba342b",
+        "filename": "src/gn/setup.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 746,
+      "author": {
+        "id": 1000877
+      },
+      "writtenOn": "2021-01-09T02:10:29Z",
+      "side": 1,
+      "message": "Sorry, yes. That is definitely the plan. They were very helpful for confirming that everything is working so I wanted to leave them in as long as possible. I\u0027ve taken them out now.",
+      "parentUuid": "53088bf8_d5fd8561",
+      "revId": "a19e408d7bf5d3da0b3c7eb2d9ed7b2c72d2e88d",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
     }
   ]
 }
