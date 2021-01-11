@@ -71,6 +71,24 @@
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "74fb2631_dc76d409",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000877
+      },
+      "writtenOn": "2021-01-11T20:50:55Z",
+      "side": 1,
+      "message": "I believe we do support other languages. I tried with --script-executable\u003dperl (and perl.exe) and those both work. The variable names inside the gn source are a bit odd in that context, but it does work (the gn part - obviously Chromium fails to build when it tries to run Python scripts through perl).\n\nSupporting .bat file translation would require special-case code for each scripting language but that can easily be added as needed.\n\nSo, I\u0027m not even sure we need a bug, unless there is a specific language that you want to add support for right now.",
+      "parentUuid": "ab8e448f_b30c8d6f",
+      "revId": "a19e408d7bf5d3da0b3c7eb2d9ed7b2c72d2e88d",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "53088bf8_d5fd8561",
