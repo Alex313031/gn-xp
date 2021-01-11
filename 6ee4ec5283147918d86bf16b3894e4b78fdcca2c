@@ -16,6 +16,23 @@
       "message": "Thanks for the try-bot access. It is handy to be able to run them. Almost all of the code was Windows only so I wasn\u0027t _particularly_ worried, but still. Handy.",
       "revId": "6ee4ec5283147918d86bf16b3894e4b78fdcca2c",
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "fdb731b8_5be24763",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000877
+      },
+      "writtenOn": "2021-01-11T23:50:14Z",
+      "side": 1,
+      "message": "Is this good to go?\n\nI\u0027d be happy to rename the variables and functions that unnecessarily mention python_exe/python_bat, etc. to make it clearer that other scripts are allowed, and doing .bat translation can be added as needed.\n\nOr I could land it as-is.",
+      "revId": "6ee4ec5283147918d86bf16b3894e4b78fdcca2c",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
     }
   ]
 }
