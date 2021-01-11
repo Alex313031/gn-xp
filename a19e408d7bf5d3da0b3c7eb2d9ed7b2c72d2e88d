@@ -35,6 +35,24 @@
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "9b68b6fe_1a39e87d",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000014
+      },
+      "writtenOn": "2021-01-11T19:15:37Z",
+      "side": 1,
+      "message": "Yeah, I think we ideally would want to support other languanges (that\u0027s why this is called \"script\" executable). But I don\u0027t think this change really makes it better or worse so I don\u0027t think we should be worrying about it here. And since nobody has complained, it\u0027s probably pretty low priority. Maybe just file a bug to track?",
+      "parentUuid": "c4a2fbf3_869a860d",
+      "revId": "a19e408d7bf5d3da0b3c7eb2d9ed7b2c72d2e88d",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "53088bf8_d5fd8561",
