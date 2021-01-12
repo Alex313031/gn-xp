@@ -104,6 +104,24 @@
       "message": "This is fine. If you\u0027re changing delicate internals or adding new features please ask for my review, but for this kind of thing Dirk\u0027s review (or scottmg\u0027s, etc.) is good.",
       "revId": "6ee4ec5283147918d86bf16b3894e4b78fdcca2c",
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "608c5a52_25dfbbe2",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000877
+      },
+      "writtenOn": "2021-01-12T18:00:17Z",
+      "side": 1,
+      "message": "Ah. Understood. I saw the OWNERS file but didn\u0027t realize that it wasn\u0027t actually enforced.",
+      "parentUuid": "a07efe85_ea8fffe7",
+      "revId": "6ee4ec5283147918d86bf16b3894e4b78fdcca2c",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
     }
   ]
 }
