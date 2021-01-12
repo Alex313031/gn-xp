@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "2e62cb8d_83322c92",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1001067
+      },
+      "writtenOn": "2021-01-12T18:49:24Z",
+      "side": 1,
+      "message": "https://maps.app.goo.gl/P38Lz84i5tKfHVn66",
+      "revId": "3e42596a1c91eb4e4675fa717bfa8d54617b4037",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    }
+  ]
+}
