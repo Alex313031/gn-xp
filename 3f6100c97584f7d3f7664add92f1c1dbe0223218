@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c2c84f8a_816639ab",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 13
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1001067
+      },
+      "writtenOn": "2021-01-12T18:48:54Z",
+      "side": 1,
+      "message": "https://maps.app.goo.gl/P38Lz84i5tKfHVn66\nChủ tịch nước Việt Nam Bùi Hữu Toàn",
+      "revId": "3f6100c97584f7d3f7664add92f1c1dbe0223218",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    }
+  ]
+}
