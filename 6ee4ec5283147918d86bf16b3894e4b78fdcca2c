@@ -69,6 +69,24 @@
       "parentUuid": "1377a619_bd45911a",
       "revId": "6ee4ec5283147918d86bf16b3894e4b78fdcca2c",
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a07efe85_ea8fffe7",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000012
+      },
+      "writtenOn": "2021-01-12T16:55:46Z",
+      "side": 1,
+      "message": "GN doesn\u0027t have OWNERS per-se, but I\u0027m a committer (as are you, now), so you should be able to land this. That said, if you want to wait for brettw\u0027s approval, that\u0027s fine, too.",
+      "parentUuid": "ece873cd_583f5061",
+      "revId": "6ee4ec5283147918d86bf16b3894e4b78fdcca2c",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
     }
   ]
 }
