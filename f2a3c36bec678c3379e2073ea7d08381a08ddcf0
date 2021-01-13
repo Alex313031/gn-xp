@@ -41,6 +41,30 @@
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "0df609a0_8e3f1839",
+        "filename": "src/gn/json_project_writer.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 429,
+      "author": {
+        "id": 1000031
+      },
+      "writtenOn": "2021-01-13T08:42:11Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "3b8f6b3d_e62e13b3",
+      "range": {
+        "startLine": 429,
+        "startChar": 11,
+        "endLine": 429,
+        "endChar": 22
+      },
+      "revId": "f2a3c36bec678c3379e2073ea7d08381a08ddcf0",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "cf19189a_393b9e8a",
@@ -54,6 +78,30 @@
       "writtenOn": "2021-01-13T04:15:43Z",
       "side": 1,
       "message": "Did you find the toolchain was null? I would have expected the toolchain to be set for every target by the time this is called. If so, we should remove the conditional.",
+      "range": {
+        "startLine": 449,
+        "startChar": 10,
+        "endLine": 449,
+        "endChar": 29
+      },
+      "revId": "f2a3c36bec678c3379e2073ea7d08381a08ddcf0",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "2e7aebf0_e1ea4eb9",
+        "filename": "src/gn/json_project_writer.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 449,
+      "author": {
+        "id": 1000031
+      },
+      "writtenOn": "2021-01-13T08:42:11Z",
+      "side": 1,
+      "message": "Nope, but I wanted to be on the safe side. Anyway I removed the condition.",
+      "parentUuid": "cf19189a_393b9e8a",
       "range": {
         "startLine": 449,
         "startChar": 10,
@@ -87,6 +135,30 @@
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "76fff08f_084decc3",
+        "filename": "src/gn/json_project_writer.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 458,
+      "author": {
+        "id": 1000031
+      },
+      "writtenOn": "2021-01-13T08:42:11Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "817af242_441ab59d",
+      "range": {
+        "startLine": 458,
+        "startChar": 15,
+        "endLine": 458,
+        "endChar": 21
+      },
+      "revId": "f2a3c36bec678c3379e2073ea7d08381a08ddcf0",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "b60e4b17_2ed8bf76",
@@ -110,6 +182,30 @@
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "b1591bfd_0aeba13f",
+        "filename": "src/gn/json_project_writer.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 462,
+      "author": {
+        "id": 1000031
+      },
+      "writtenOn": "2021-01-13T08:42:11Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "b60e4b17_2ed8bf76",
+      "range": {
+        "startLine": 462,
+        "startChar": 20,
+        "endLine": 462,
+        "endChar": 28
+      },
+      "revId": "f2a3c36bec678c3379e2073ea7d08381a08ddcf0",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "028f8608_69ed3884",
@@ -123,6 +219,30 @@
       "writtenOn": "2021-01-13T04:15:43Z",
       "side": 1,
       "message": "Space before this colon.",
+      "range": {
+        "startLine": 471,
+        "startChar": 28,
+        "endLine": 471,
+        "endChar": 29
+      },
+      "revId": "f2a3c36bec678c3379e2073ea7d08381a08ddcf0",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "9d1145fc_f7381dad",
+        "filename": "src/gn/json_project_writer.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 471,
+      "author": {
+        "id": 1000031
+      },
+      "writtenOn": "2021-01-13T08:42:11Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "028f8608_69ed3884",
       "range": {
         "startLine": 471,
         "startChar": 28,
