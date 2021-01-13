@@ -1,0 +1,136 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "92d76476_8d7be4f7",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000014
+      },
+      "writtenOn": "2021-01-13T04:15:43Z",
+      "side": 1,
+      "message": "Thanks! I have a number of style nits but overall looks good. If you have access to clang-format it would be good to run it through there to fix the stuff that\u0027s not related to naming.",
+      "revId": "f2a3c36bec678c3379e2073ea7d08381a08ddcf0",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3b8f6b3d_e62e13b3",
+        "filename": "src/gn/json_project_writer.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 429,
+      "author": {
+        "id": 1000014
+      },
+      "writtenOn": "2021-01-13T04:15:43Z",
+      "side": 1,
+      "message": "Is it possible to make this a Label instead? Although they can be converted, I feel like the label is really what identifies the toolchain, and the user visible name is what the user sees.  This also prevents us from making a user-visible string for every target in the loop.",
+      "range": {
+        "startLine": 429,
+        "startChar": 11,
+        "endLine": 429,
+        "endChar": 22
+      },
+      "revId": "f2a3c36bec678c3379e2073ea7d08381a08ddcf0",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "cf19189a_393b9e8a",
+        "filename": "src/gn/json_project_writer.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 449,
+      "author": {
+        "id": 1000014
+      },
+      "writtenOn": "2021-01-13T04:15:43Z",
+      "side": 1,
+      "message": "Did you find the toolchain was null? I would have expected the toolchain to be set for every target by the time this is called. If so, we should remove the conditional.",
+      "range": {
+        "startLine": 449,
+        "startChar": 10,
+        "endLine": 449,
+        "endChar": 29
+      },
+      "revId": "f2a3c36bec678c3379e2073ea7d08381a08ddcf0",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "817af242_441ab59d",
+        "filename": "src/gn/json_project_writer.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 458,
+      "author": {
+        "id": 1000014
+      },
+      "writtenOn": "2021-01-13T04:15:43Z",
+      "side": 1,
+      "message": "Our style is to put the \"\u0026\" next to the \"auto\". Same in multiple places below.",
+      "range": {
+        "startLine": 458,
+        "startChar": 15,
+        "endLine": 458,
+        "endChar": 21
+      },
+      "revId": "f2a3c36bec678c3379e2073ea7d08381a08ddcf0",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b60e4b17_2ed8bf76",
+        "filename": "src/gn/json_project_writer.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 462,
+      "author": {
+        "id": 1000014
+      },
+      "writtenOn": "2021-01-13T04:15:43Z",
+      "side": 1,
+      "message": "Style: variable naming (here and elsewhere) should be lower_case_with_underscores.",
+      "range": {
+        "startLine": 462,
+        "startChar": 20,
+        "endLine": 462,
+        "endChar": 28
+      },
+      "revId": "f2a3c36bec678c3379e2073ea7d08381a08ddcf0",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "028f8608_69ed3884",
+        "filename": "src/gn/json_project_writer.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 471,
+      "author": {
+        "id": 1000014
+      },
+      "writtenOn": "2021-01-13T04:15:43Z",
+      "side": 1,
+      "message": "Space before this colon.",
+      "range": {
+        "startLine": 471,
+        "startChar": 28,
+        "endLine": 471,
+        "endChar": 29
+      },
+      "revId": "f2a3c36bec678c3379e2073ea7d08381a08ddcf0",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    }
+  ]
+}
