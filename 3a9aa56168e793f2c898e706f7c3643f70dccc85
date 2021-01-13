@@ -1,0 +1,44 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9ca1df9e_ea52799a",
+        "filename": "src/gn/json_project_writer.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 461,
+      "author": {
+        "id": 1000004
+      },
+      "writtenOn": "2021-01-13T17:04:03Z",
+      "side": 1,
+      "message": "setIfNotEmpty",
+      "range": {
+        "startLine": 461,
+        "startChar": 13,
+        "endLine": 461,
+        "endChar": 27
+      },
+      "revId": "3a9aa56168e793f2c898e706f7c3643f70dccc85",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f316e3c6_38bff0d4",
+        "filename": "src/gn/json_project_writer.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 499,
+      "author": {
+        "id": 1000004
+      },
+      "writtenOn": "2021-01-13T17:04:03Z",
+      "side": 1,
+      "message": "80 col in code (the R() strings are fine to leave)",
+      "revId": "3a9aa56168e793f2c898e706f7c3643f70dccc85",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    }
+  ]
+}
