@@ -16,6 +16,24 @@
       "message": "If you say so! :)",
       "revId": "a18da3ae2a1b9a3b99a137486a38a4493a4ab926",
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "7e9432d5_3b8ff792",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000012
+      },
+      "writtenOn": "2021-01-14T22:11:55Z",
+      "side": 1,
+      "message": "I\u0027m told by the LUCI folks that the internal builders have moved from \u0027kitchen\u0027 to \u0027bbagent\u0027, and the latter needs a newer recipe bundle. The public builders are still on \u0027kitchen\u0027, which is why they\u0027re still working.",
+      "parentUuid": "65745ded_432064b4",
+      "revId": "a18da3ae2a1b9a3b99a137486a38a4493a4ab926",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
     }
   ]
 }
