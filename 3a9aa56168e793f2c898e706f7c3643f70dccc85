@@ -1,6 +1,23 @@
 {
   "comments": [
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "d3a619ca_ac774ff9",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1001127
+      },
+      "writtenOn": "2021-01-19T21:11:47Z",
+      "side": 1,
+      "message": "I think the documentation at the beginning of src/gn/json_project_writer.cc needs to be updated with the new schema:)",
+      "revId": "3a9aa56168e793f2c898e706f7c3643f70dccc85",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "9ca1df9e_ea52799a",
