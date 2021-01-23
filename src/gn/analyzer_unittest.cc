@@ -98,6 +98,8 @@ class AnalyzerTest : public testing::Test {
     std::string actual_output = analyzer.Analyze(input, &err);
     EXPECT_EQ(err.has_error(), false);
     EXPECT_EQ(expected_output, actual_output);
+    printf("expected = '%s'\n", expected_output.c_str());
+    printf("actual = '%s'\n", actual_output.c_str());
   }
 
  protected:
@@ -221,6 +223,36 @@ TEST_F(AnalyzerTest, TargetRefersToInputs) {
        })",
       "{"
       R"("compile_targets":["all"],)"
+      R"/("status":"Found dependency",)/"
+      R"("test_targets":["//dir:target_name"])"
+      "}");
+}
+
+// Tests that a target is marked as affected if a sub-config is modified.
+TEST_F(AnalyzerTest, SubConfigIsModified) {
+  std::unique_ptr<Config> sc = MakeConfig("//dir2", "subconfig_name");
+  Config* sc_raw = sc.get();
+  sc_raw->build_dependency_files().insert(SourceFile("//dir2/BUILD.gn"));
+
+  std::unique_ptr<Config> c = MakeConfig("//dir", "config_name");
+  Config* c_raw = c.get();
+  c_raw->configs().push_back(LabelConfigPair(sc.get()));
+
+  std::unique_ptr<Target> t = MakeTarget("//dir", "target_name");
+  Target* t_raw = t.get();
+  t_raw->configs().push_back(LabelConfigPair(c.get()));
+
+  //builder_.ItemDefined(std::move(sc));
+  builder_.ItemDefined(std::move(c));
+  builder_.ItemDefined(std::move(t));
+  RunAnalyzerTest(
+      R"({
+       "files": [ "//dir2/BUILD.gn" ],
+       "additional_compile_targets": [],
+       "test_targets": [ "//dir:target_name" ]
+       })",
+      "{"
+      R"("compile_targets":[],)"
       R"/("status":"Found dependency",)/"
       R"("test_targets":["//dir:target_name"])"
       "}");

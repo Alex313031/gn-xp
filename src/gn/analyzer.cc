@@ -404,6 +404,14 @@ bool Analyzer::ItemRefersToFile(const Item* item,
       return true;
   }
 
+  if (item->AsConfig()) {
+    const Config* config = item->AsConfig();
+    for (const auto& config_pair: config->configs()) {
+      if (ItemRefersToFile(config_pair.ptr, file))
+        return true;
+    }
+  }
+
   if (!item->AsTarget())
     return false;
 
