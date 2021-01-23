@@ -26,6 +26,47 @@
     {
       "unresolved": false,
       "key": {
+        "uuid": "9ce942bb_f5b14f06",
+        "filename": "src/gn/analyzer.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 408,
+      "author": {
+        "id": 1000012
+      },
+      "writtenOn": "2021-01-23T02:16:59Z",
+      "side": 1,
+      "message": "I don\u0027t know either. I\u0027ll leave as-is for consistency with other code in the file (e.g. line 418) for now.",
+      "parentUuid": "3628bb45_146494df",
+      "range": {
+        "startLine": 407,
+        "startChar": 1,
+        "endLine": 408,
+        "endChar": 44
+      },
+      "revId": "b347d7846c613dbebd5c4c66c35c70b3b0ce52b3",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "656e0734_b5a9bdb4",
+        "filename": "src/gn/analyzer_unittest.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 102,
+      "author": {
+        "id": 1000012
+      },
+      "writtenOn": "2021-01-23T02:16:59Z",
+      "side": 1,
+      "message": "Whoops. Forgot to remove these ...",
+      "revId": "b347d7846c613dbebd5c4c66c35c70b3b0ce52b3",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
+      "unresolved": false,
+      "key": {
         "uuid": "e6dc591d_dd2f411d",
         "filename": "src/gn/analyzer_unittest.cc",
         "patchSetId": 1
@@ -49,6 +90,30 @@
     {
       "unresolved": false,
       "key": {
+        "uuid": "84dbd2ec_135535d7",
+        "filename": "src/gn/analyzer_unittest.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 235,
+      "author": {
+        "id": 1000012
+      },
+      "writtenOn": "2021-01-23T02:16:59Z",
+      "side": 1,
+      "message": "Thanks, done.\n\nI\u0027ll post another CL to clean up the other cases of this pattern in this file.",
+      "parentUuid": "e6dc591d_dd2f411d",
+      "range": {
+        "startLine": 234,
+        "startChar": 2,
+        "endLine": 235,
+        "endChar": 10
+      },
+      "revId": "b347d7846c613dbebd5c4c66c35c70b3b0ce52b3",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
+      "unresolved": false,
+      "key": {
         "uuid": "b2103834_b9d1c49a",
         "filename": "src/gn/analyzer_unittest.cc",
         "patchSetId": 1
@@ -60,6 +125,30 @@
       "writtenOn": "2021-01-23T01:59:35Z",
       "side": 1,
       "message": "This seems a strange thing to use string concatenation here rather than a single raw string.\nThe syntax allows R\"\"\"(...)\"\"\" or any other separator you like between R and ( so as not to coincide with anything inside the string like `\")`.  Or maybe this is just to insert some whitespace in the source where none is in the string?  Even then I think picking a uniform raw string separator that works for all cases and using that for every line (even the trivial ones where plain quotes work) would be easier to read.",
+      "range": {
+        "startLine": 254,
+        "startChar": 6,
+        "endLine": 258,
+        "endChar": 9
+      },
+      "revId": "b347d7846c613dbebd5c4c66c35c70b3b0ce52b3",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f90daae8_bd81286e",
+        "filename": "src/gn/analyzer_unittest.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 258,
+      "author": {
+        "id": 1000012
+      },
+      "writtenOn": "2021-01-23T02:16:59Z",
+      "side": 1,
+      "message": "Agreed. This was apparently done way back in https://crrev.com/c/693196 (which I didn\u0027t stare at enough, I guess) and cargo-culted forward.\n\nI\u0027ll clean this up in a separate CL.",
+      "parentUuid": "b2103834_b9d1c49a",
       "range": {
         "startLine": 254,
         "startChar": 6,
