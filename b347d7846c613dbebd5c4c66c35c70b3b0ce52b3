@@ -1,0 +1,73 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "3628bb45_146494df",
+        "filename": "src/gn/analyzer.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 408,
+      "author": {
+        "id": 1000016
+      },
+      "writtenOn": "2021-01-23T01:59:35Z",
+      "side": 1,
+      "message": "dunno if gn is presuming modern enough C++ for this (and I forget which version it is), but if so can be `if (const Config* config \u003d item-\u003eAsConfig()) {`.",
+      "range": {
+        "startLine": 407,
+        "startChar": 1,
+        "endLine": 408,
+        "endChar": 44
+      },
+      "revId": "b347d7846c613dbebd5c4c66c35c70b3b0ce52b3",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e6dc591d_dd2f411d",
+        "filename": "src/gn/analyzer_unittest.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 235,
+      "author": {
+        "id": 1000016
+      },
+      "writtenOn": "2021-01-23T01:59:35Z",
+      "side": 1,
+      "message": "`sc-\u003ebuild_dependency_files()` et al should work fine.",
+      "range": {
+        "startLine": 234,
+        "startChar": 2,
+        "endLine": 235,
+        "endChar": 10
+      },
+      "revId": "b347d7846c613dbebd5c4c66c35c70b3b0ce52b3",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b2103834_b9d1c49a",
+        "filename": "src/gn/analyzer_unittest.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 258,
+      "author": {
+        "id": 1000016
+      },
+      "writtenOn": "2021-01-23T01:59:35Z",
+      "side": 1,
+      "message": "This seems a strange thing to use string concatenation here rather than a single raw string.\nThe syntax allows R\"\"\"(...)\"\"\" or any other separator you like between R and ( so as not to coincide with anything inside the string like `\")`.  Or maybe this is just to insert some whitespace in the source where none is in the string?  Even then I think picking a uniform raw string separator that works for all cases and using that for every line (even the trivial ones where plain quotes work) would be easier to read.",
+      "range": {
+        "startLine": 254,
+        "startChar": 6,
+        "endLine": 258,
+        "endChar": 9
+      },
+      "revId": "b347d7846c613dbebd5c4c66c35c70b3b0ce52b3",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    }
+  ]
+}
