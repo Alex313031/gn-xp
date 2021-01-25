@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e07d9855_b9aa627b",
+        "filename": "src/gn/analyzer_unittest.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 235,
+      "author": {
+        "id": 1000012
+      },
+      "writtenOn": "2021-01-25T21:08:45Z",
+      "side": 1,
+      "message": "Changing this from a Config() to a Label() appears to have fixed the assert that was firing (which was checking that the ptr was null in c-\u003econfigs(), but I don\u0027t understand why \nthat\u0027d be the right fix.)\n\nThoughts?",
+      "revId": "86aa6eeb2e61b7368003eb928a084d2380f9581c",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    }
+  ]
+}
