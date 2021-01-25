@@ -50,6 +50,30 @@
     {
       "unresolved": false,
       "key": {
+        "uuid": "491ba9cf_e4139571",
+        "filename": "src/gn/analyzer.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 408,
+      "author": {
+        "id": 1000012
+      },
+      "writtenOn": "2021-01-25T18:55:59Z",
+      "side": 1,
+      "message": "Per brettw\u0027s comment on patchset2, I\u0027ll change this. \n\nLooks like initializers in if statements were part of C++-17, which we require.",
+      "parentUuid": "9ce942bb_f5b14f06",
+      "range": {
+        "startLine": 407,
+        "startChar": 1,
+        "endLine": 408,
+        "endChar": 44
+      },
+      "revId": "b347d7846c613dbebd5c4c66c35c70b3b0ce52b3",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
+      "unresolved": false,
+      "key": {
         "uuid": "656e0734_b5a9bdb4",
         "filename": "src/gn/analyzer_unittest.cc",
         "patchSetId": 1

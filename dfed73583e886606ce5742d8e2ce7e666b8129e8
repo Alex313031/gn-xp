@@ -16,6 +16,24 @@
       "message": "I would do the new way Roland suggested, personally. If you want to keep these lines separate, I think they should be switched (the fact that it\u0027s not a lower-cased getter implies you maybe don\u0027t want to call it willy-nilly, in this case because it\u0027s a virtual function. And if we\u0027re going to be calling AsConfig more than once, you might as well inline it in the single use in the for loop.",
       "revId": "dfed73583e886606ce5742d8e2ce7e666b8129e8",
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "bfbe7769_78c399f0",
+        "filename": "src/gn/analyzer.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 407,
+      "author": {
+        "id": 1000012
+      },
+      "writtenOn": "2021-01-25T18:55:59Z",
+      "side": 1,
+      "message": "Ok, changed. It wasn\u0027t clear to me if we could assume that syntax; I agree it\u0027s clearer if we can.",
+      "parentUuid": "c6171dcc_46a94f37",
+      "revId": "dfed73583e886606ce5742d8e2ce7e666b8129e8",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
     }
   ]
 }
