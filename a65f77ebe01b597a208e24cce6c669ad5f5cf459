@@ -16,6 +16,23 @@
       "message": "Happy to update the versioning advice if you change anything, but I want to document the current state better.",
       "revId": "a65f77ebe01b597a208e24cce6c669ad5f5cf459",
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d2497741_f6324e35",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2021-01-26T14:02:05Z",
+      "side": 1,
+      "message": "This is great! Thanks for writing it.",
+      "revId": "a65f77ebe01b597a208e24cce6c669ad5f5cf459",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
     }
   ]
 }
