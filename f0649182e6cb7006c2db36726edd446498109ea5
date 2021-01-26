@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "fad0da94_842e7706",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000014
+      },
+      "writtenOn": "2021-01-26T00:17:41Z",
+      "side": 1,
+      "message": "If you didn\u0027t write this patch, do we have the ability to take patches from the person who did? I believe they would need to sign the CLA.",
+      "revId": "f0649182e6cb7006c2db36726edd446498109ea5",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    }
+  ]
+}
