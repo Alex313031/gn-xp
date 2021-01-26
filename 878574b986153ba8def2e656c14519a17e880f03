@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "0edce237_c4f615d9",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1001192
+      },
+      "writtenOn": "2021-01-26T04:18:04Z",
+      "side": 1,
+      "message": "Hi Petr, I\u0027m not sure who should review this. Can you take a look? Please add anyone else who might want to comment. Thanks!",
+      "revId": "878574b986153ba8def2e656c14519a17e880f03",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    }
+  ]
+}
