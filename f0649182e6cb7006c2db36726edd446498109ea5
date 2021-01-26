@@ -16,6 +16,24 @@
       "message": "If you didn\u0027t write this patch, do we have the ability to take patches from the person who did? I believe they would need to sign the CLA.",
       "revId": "f0649182e6cb7006c2db36726edd446498109ea5",
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c8d448f4_c152f763",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1001182
+      },
+      "writtenOn": "2021-01-26T09:31:24Z",
+      "side": 1,
+      "message": "Hi Brett\n\nThe patch is the result of fixing lintian warnings (debian package tester tool):\n\n```\nribalda@alco:/tmp/gn-debian (master *%)$ lintian ../generate-ninja_0.0~git20201124.53d9201-1.1*changes --pedantic --display-info --display-experimental --no-tag-display-limit\nW: generate-ninja: groff-message usr/share/man/man1/gn.1.gz command exited with status 2: /usr/lib/man-db/zsoelim | /usr/lib/man-db/manconv -f UTF-8:ISO-8859-1 -t UTF-8//IGNORE | preconv -e UTF-8 | groff -mandoc -Z -rLL\u003d117n -rLT\u003d117n -wmac -Tutf8\nW: generate-ninja: groff-message usr/share/man/man1/gn.1.gz troff: Signal 11\nW: generate-ninja: hardening-no-pie usr/bin/gn\nW: generate-ninja source: newer-standards-version 4.5.1 (current is 4.5.0)\nI: generate-ninja source: debian-watch-file-is-missing\nI: generate-ninja: spelling-error-in-binary usr/bin/gn \"allows to\" \"allows one to\"\nI: generate-ninja: spelling-error-in-binary usr/bin/gn Verfication Verification\nI: generate-ninja: spelling-error-in-binary usr/bin/gn appropiate appropriate\nI: generate-ninja: spelling-error-in-binary usr/bin/gn defaut default\nI: generate-ninja: spelling-error-in-binary usr/bin/gn dependant dependent\nI: generate-ninja: spelling-error-in-binary usr/bin/gn occurence occurrence\nI: generate-ninja: spelling-error-in-binary usr/bin/gn ouput output\nI: generate-ninja: spelling-error-in-binary usr/bin/gn ouputs outputs\nI: generate-ninja: spelling-error-in-binary usr/bin/gn overriden overridden\nP: generate-ninja source: maintainer-manual-page debian/gn.1\nX: generate-ninja source: non-consecutive-debian-revision 0.0~git20201124.53d9201-1 -\u003e 0.0~git20201124.53d9201-1.1\n```\n\n\nI added the link to credit the first patch that I have seen related to this. \n\nI can change the commit message to reflect this. Will that be enough? Or to do we need to go through the original developer signing the CLA, and he does not want to sign it, will that mean that will never be able to fix the typos?\n\nThanks!",
+      "parentUuid": "fad0da94_842e7706",
+      "revId": "f0649182e6cb7006c2db36726edd446498109ea5",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
     }
   ]
 }
