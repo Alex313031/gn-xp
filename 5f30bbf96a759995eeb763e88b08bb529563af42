@@ -1,0 +1,89 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c8d99f84_ab6d1360",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000012
+      },
+      "writtenOn": "2021-01-26T23:10:48Z",
+      "side": 1,
+      "message": "Thanks for adding this! A few minor comments ...",
+      "revId": "5f30bbf96a759995eeb763e88b08bb529563af42",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d510809d_1dfcf678",
+        "filename": "README.md",
+        "patchSetId": 3
+      },
+      "lineNbr": 62,
+      "author": {
+        "id": 1000012
+      },
+      "writtenOn": "2021-01-26T23:10:48Z",
+      "side": 1,
+      "message": "s/build/building",
+      "revId": "5f30bbf96a759995eeb763e88b08bb529563af42",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "97624770_3a5680ce",
+        "filename": "README.md",
+        "patchSetId": 3
+      },
+      "lineNbr": 77,
+      "author": {
+        "id": 1000012
+      },
+      "writtenOn": "2021-01-26T23:10:48Z",
+      "side": 1,
+      "message": "Maybe add something about also being able to run build actions in Python and, indirectly, in other languages like JavaScript and TypeScript as well?",
+      "revId": "5f30bbf96a759995eeb763e88b08bb529563af42",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6cd75952_af09cc40",
+        "filename": "README.md",
+        "patchSetId": 3
+      },
+      "lineNbr": 90,
+      "author": {
+        "id": 1000012
+      },
+      "writtenOn": "2021-01-26T23:10:48Z",
+      "side": 1,
+      "message": "Thanks for adding this :).",
+      "revId": "5f30bbf96a759995eeb763e88b08bb529563af42",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5896f0b2_8e11547f",
+        "filename": "README.md",
+        "patchSetId": 3
+      },
+      "lineNbr": 176,
+      "author": {
+        "id": 1000012
+      },
+      "writtenOn": "2021-01-26T23:10:48Z",
+      "side": 1,
+      "message": "s/Most projects/Most open source projects/ maybe? People might think this refers to \"Most GN projects\" and then get confused by the next sentence.",
+      "revId": "5f30bbf96a759995eeb763e88b08bb529563af42",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    }
+  ]
+}
