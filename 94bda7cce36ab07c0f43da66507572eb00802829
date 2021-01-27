@@ -16,6 +16,24 @@
       "message": "I don\u0027t follow this change. I don\u0027t recall seeing R\"gn( before and certainly never used it. It looks weird to me and in this case seems to hurt readability.\n\nI thought the old code was fine. There are a couple of cases where the )\" collides and these use a raw string annotation thing that\u0027s different. It uses \"/\" which is OK and more readable to me than \"gn\" which looks to me like part of the string. Personally, I use a \"*\" in these cases but / is fine.",
       "revId": "94bda7cce36ab07c0f43da66507572eb00802829",
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "850089c6_1c8feb1e",
+        "filename": "src/gn/analyzer_unittest.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 123,
+      "author": {
+        "id": 1000012
+      },
+      "writtenOn": "2021-01-27T19:17:38Z",
+      "side": 0,
+      "message": "This change comes up because Roland thought the mix of regular string literals and R\"( and R\"/( was hard to read.\n\nI am fairly indifferent here, but I thought at least using one tag for everything made it easier to read. Grepping through the code base `R\"gn(` seemed to be the most common tag (from function_unittest), but I\u0027d be happy to switch to `R\"*(` or `R\"_(` if that was better.\n\nOr I can just abandon this CL and leave as-is.",
+      "parentUuid": "c7d0ad72_a96c4588",
+      "revId": "94bda7cce36ab07c0f43da66507572eb00802829",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
     }
   ]
 }
