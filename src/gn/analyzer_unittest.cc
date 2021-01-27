@@ -120,29 +120,29 @@ TEST_F(AnalyzerTest, TargetRefersToSources) {
   Target* t_raw = t.get();
   builder_.ItemDefined(std::move(t));
   RunAnalyzerTest(
-      R"({
+      R"gn({
        "files": [ "//dir/file_name.cc" ],
        "additional_compile_targets": [ "all" ],
        "test_targets": [ "//dir:target_name" ]
-       })",
-      "{"
-      R"("compile_targets":[],)"
-      R"/("status":"No dependency",)/"
-      R"("test_targets":[])"
-      "}");
+       })gn",
+      R"gn({)gn"
+      R"gn("compile_targets":[],)gn"
+      R"gn("status":"No dependency",)gn"
+      R"gn("test_targets":[])gn"
+      R"gn(})gn");
 
   t_raw->sources().push_back(SourceFile("//dir/file_name.cc"));
   RunAnalyzerTest(
-      R"({
+      R"gn({
        "files": [ "//dir/file_name.cc" ],
        "additional_compile_targets": [ "all" ],
        "test_targets": [ "//dir:target_name" ]
-       })",
-      "{"
-      R"("compile_targets":["all"],)"
-      R"/("status":"Found dependency",)/"
-      R"("test_targets":["//dir:target_name"])"
-      "}");
+       })gn",
+      R"gn({)gn"
+      R"gn("compile_targets":["all"],)gn"
+      R"gn("status":"Found dependency",)gn"
+      R"gn("test_targets":["//dir:target_name"])gn"
+      R"gn(})gn");
 }
 
 // Tests that a target is marked as affected if its public headers are modified.
@@ -151,29 +151,29 @@ TEST_F(AnalyzerTest, TargetRefersToPublicHeaders) {
   Target* t_raw = t.get();
   builder_.ItemDefined(std::move(t));
   RunAnalyzerTest(
-      R"({
+      R"gn({
        "files": [ "//dir/header_name.h" ],
        "additional_compile_targets": [ "all" ],
        "test_targets": [ "//dir:target_name" ]
-       })",
-      "{"
-      R"("compile_targets":[],)"
-      R"/("status":"No dependency",)/"
-      R"("test_targets":[])"
-      "}");
+       })gn",
+      R"gn({)gn"
+      R"gn("compile_targets":[],)gn"
+      R"gn("status":"No dependency",)gn"
+      R"gn("test_targets":[])gn"
+      R"gn(})gn");
 
   t_raw->public_headers().push_back(SourceFile("//dir/header_name.h"));
   RunAnalyzerTest(
-      R"({
+      R"gn({
        "files": [ "//dir/header_name.h" ],
        "additional_compile_targets": [ "all" ],
        "test_targets": [ "//dir:target_name" ]
-       })",
-      "{"
-      R"("compile_targets":["all"],)"
-      R"/("status":"Found dependency",)/"
-      R"("test_targets":["//dir:target_name"])"
-      "}");
+       })gn",
+      R"gn({)gn"
+      R"gn("compile_targets":["all"],)gn"
+      R"gn("status":"Found dependency",)gn"
+      R"gn("test_targets":["//dir:target_name"])gn"
+      R"gn(})gn");
 }
 
 // Tests that a target is marked as affected if its inputs are modified.
@@ -182,30 +182,30 @@ TEST_F(AnalyzerTest, TargetRefersToInputs) {
   Target* t_raw = t.get();
   builder_.ItemDefined(std::move(t));
   RunAnalyzerTest(
-      R"({
+      R"gn({
        "files": [ "//dir/extra_input.cc" ],
        "additional_compile_targets": [ "all" ],
        "test_targets": [ "//dir:target_name" ]
-       })",
-      "{"
-      R"("compile_targets":[],)"
-      R"/("status":"No dependency",)/"
-      R"("test_targets":[])"
-      "}");
+       })gn",
+      R"gn({)gn"
+      R"gn("compile_targets":[],)gn"
+      R"gn("status":"No dependency",)gn"
+      R"gn("test_targets":[])gn"
+      R"gn(})gn");
 
   SourceFile extra_input(SourceFile("//dir/extra_input.cc"));
   t_raw->config_values().inputs().push_back(extra_input);
   RunAnalyzerTest(
-      R"({
+      R"gn({
        "files": [ "//dir/extra_input.cc" ],
        "additional_compile_targets": [ "all" ],
        "test_targets": [ "//dir:target_name" ]
-       })",
-      "{"
-      R"("compile_targets":["all"],)"
-      R"/("status":"Found dependency",)/"
-      R"("test_targets":["//dir:target_name"])"
-      "}");
+       })gn",
+      R"gn({)gn"
+      R"gn("compile_targets":["all"],)gn"
+      R"gn("status":"Found dependency",)gn"
+      R"gn("test_targets":["//dir:target_name"])gn"
+      R"gn(})gn");
 
   t_raw->config_values().inputs().clear();
   std::unique_ptr<Config> c = MakeConfig("//dir", "config_name");
@@ -214,16 +214,16 @@ TEST_F(AnalyzerTest, TargetRefersToInputs) {
   builder_.ItemDefined(std::move(c));
 
   RunAnalyzerTest(
-      R"({
+      R"gn({
        "files": [ "//dir/extra_input.cc" ],
        "additional_compile_targets": [ "all" ],
        "test_targets": [ "//dir:target_name" ]
-       })",
-      "{"
-      R"("compile_targets":["all"],)"
-      R"/("status":"Found dependency",)/"
-      R"("test_targets":["//dir:target_name"])"
-      "}");
+       })gn",
+      R"gn({)gn"
+      R"gn("compile_targets":["all"],)gn"
+      R"gn("status":"Found dependency",)gn"
+      R"gn("test_targets":["//dir:target_name"])gn"
+      R"gn(})gn");
 }
 
 // Tests that a target is marked as affected if a sub-config is modified.
@@ -248,16 +248,16 @@ TEST_F(AnalyzerTest, SubConfigIsModified) {
   builder_.ItemDefined(std::move(c));
   builder_.ItemDefined(std::move(t));
   RunAnalyzerTest(
-      R"({
+      R"gn({
        "files": [ "//dir3/BUILD.gn" ],
        "additional_compile_targets": [],
        "test_targets": [ "//dir:target_name" ]
-       })",
-      "{"
-      R"("compile_targets":[],)"
-      R"/("status":"Found dependency",)/"
-      R"("test_targets":["//dir:target_name"])"
-      "}");
+       })gn",
+      R"gn({)gn"
+      R"gn("compile_targets":[],)gn"
+      R"gn("status":"Found dependency",)gn"
+      R"gn("test_targets":["//dir:target_name"])gn"
+      R"gn(})gn");
 }
 
 // Tests that a target is marked as affected if its data are modified.
@@ -266,29 +266,29 @@ TEST_F(AnalyzerTest, TargetRefersToData) {
   Target* t_raw = t.get();
   builder_.ItemDefined(std::move(t));
   RunAnalyzerTest(
-      R"({
+      R"gn({
        "files": [ "//dir/data.html" ],
        "additional_compile_targets": [ "all" ],
        "test_targets": [ "//dir:target_name" ]
-       })",
-      "{"
-      R"("compile_targets":[],)"
-      R"/("status":"No dependency",)/"
-      R"("test_targets":[])"
-      "}");
+       })gn",
+      R"gn({)gn"
+      R"gn("compile_targets":[],)gn"
+      R"gn("status":"No dependency",)gn"
+      R"gn("test_targets":[])gn"
+      R"gn(})gn");
 
   t_raw->data().push_back("//dir/data.html");
   RunAnalyzerTest(
-      R"({
+      R"gn({
        "files": [ "//dir/data.html" ],
        "additional_compile_targets": [ "all" ],
        "test_targets": [ "//dir:target_name" ]
-       })",
-      "{"
-      R"("compile_targets":["all"],)"
-      R"/("status":"Found dependency",)/"
-      R"("test_targets":["//dir:target_name"])"
-      "}");
+       })gn",
+      R"gn({)gn"
+      R"gn("compile_targets":["all"],)gn"
+      R"gn("status":"Found dependency",)gn"
+      R"gn("test_targets":["//dir:target_name"])gn"
+      R"gn(})gn");
 }
 
 // Tests that a target is marked as affected if the target is an action and its
@@ -299,29 +299,29 @@ TEST_F(AnalyzerTest, TargetRefersToActionScript) {
   t->set_output_type(Target::ACTION);
   builder_.ItemDefined(std::move(t));
   RunAnalyzerTest(
-      R"({
+      R"gn({
        "files": [ "//dir/script.py" ],
        "additional_compile_targets": [ "all" ],
        "test_targets": [ "//dir:target_name" ]
-       })",
-      "{"
-      R"("compile_targets":[],)"
-      R"/("status":"No dependency",)/"
-      R"("test_targets":[])"
-      "}");
+       })gn",
+      R"gn({)gn"
+      R"gn("compile_targets":[],)gn"
+      R"gn("status":"No dependency",)gn"
+      R"gn("test_targets":[])gn"
+      R"gn(})gn");
 
   t_raw->action_values().set_script(SourceFile("//dir/script.py"));
   RunAnalyzerTest(
-      R"({
+      R"gn({
        "files": [ "//dir/script.py" ],
        "additional_compile_targets": [ "all" ],
        "test_targets": [ "//dir:target_name" ]
-       })",
-      "{"
-      R"("compile_targets":["all"],)"
-      R"/("status":"Found dependency",)/"
-      R"("test_targets":["//dir:target_name"])"
-      "}");
+       })gn",
+      R"gn({)gn"
+      R"gn("compile_targets":["all"],)gn"
+      R"gn("status":"Found dependency",)gn"
+      R"gn("test_targets":["//dir:target_name"])gn"
+      R"gn(})gn");
 }
 
 // Tests that a target is marked as affected if its build dependency files are
@@ -331,29 +331,29 @@ TEST_F(AnalyzerTest, TargetRefersToBuildDependencyFiles) {
   Target* t_raw = t.get();
   builder_.ItemDefined(std::move(t));
   RunAnalyzerTest(
-      R"({
+      R"gn({
        "files": [ "//dir/BUILD.gn" ],
        "additional_compile_targets": [ "all" ],
        "test_targets": [ "//dir:target_name" ]
-       })",
-      "{"
-      R"("compile_targets":[],)"
-      R"/("status":"No dependency",)/"
-      R"("test_targets":[])"
-      "}");
+       })gn",
+      R"gn({)gn"
+      R"gn("compile_targets":[],)gn"
+      R"gn("status":"No dependency",)gn"
+      R"gn("test_targets":[])gn"
+      R"gn(})gn");
 
   t_raw->build_dependency_files().insert(SourceFile("//dir/BUILD.gn"));
   RunAnalyzerTest(
-      R"({
+      R"gn({
        "files": [ "//dir/BUILD.gn" ],
        "additional_compile_targets": [ "all" ],
        "test_targets": [ "//dir:target_name" ]
-       })",
-      "{"
-      R"("compile_targets":["all"],)"
-      R"/("status":"Found dependency",)/"
-      R"("test_targets":["//dir:target_name"])"
-      "}");
+       })gn",
+      R"gn({)gn"
+      R"gn("compile_targets":["all"],)gn"
+      R"gn("status":"Found dependency",)gn"
+      R"gn("test_targets":["//dir:target_name"])gn"
+      R"gn(})gn");
 }
 
 // Tests that if a target is marked as affected, then it propagates to dependent
@@ -371,29 +371,29 @@ TEST_F(AnalyzerTest, AffectedTargetpropagatesToDependentTargets) {
   builder_.ItemDefined(std::move(t3));
 
   RunAnalyzerTest(
-      R"({
+      R"gn({
        "files": [ "//dir/BUILD.gn" ],
        "additional_compile_targets": [ "all" ],
        "test_targets": [ "//dir:target_name1", "//dir:target_name2" ]
-       })",
-      "{"
-      R"("compile_targets":[],)"
-      R"/("status":"No dependency",)/"
-      R"("test_targets":[])"
-      "}");
+       })gn",
+      R"gn({)gn"
+      R"gn("compile_targets":[],)gn"
+      R"gn("status":"No dependency",)gn"
+      R"gn("test_targets":[])gn"
+      R"gn(})gn");
 
   t3_raw->build_dependency_files().insert(SourceFile("//dir/BUILD.gn"));
   RunAnalyzerTest(
-      R"({
+      R"gn({
        "files": [ "//dir/BUILD.gn" ],
        "additional_compile_targets": [ "all" ],
        "test_targets": [ "//dir:target_name1", "//dir:target_name2" ]
-       })",
-      "{"
-      R"("compile_targets":["all"],)"
-      R"/("status":"Found dependency",)/"
-      R"("test_targets":["//dir:target_name1","//dir:target_name2"])"
-      "}");
+       })gn",
+      R"gn({)gn"
+      R"gn("compile_targets":["all"],)gn"
+      R"gn("status":"Found dependency",)gn"
+      R"gn("test_targets":["//dir:target_name1","//dir:target_name2"])gn"
+      R"gn(})gn");
 }
 
 // Tests that if a config is marked as affected, then it propagates to dependent
@@ -406,29 +406,29 @@ TEST_F(AnalyzerTest, AffectedConfigpropagatesToDependentTargets) {
   builder_.ItemDefined(std::move(t));
   builder_.ItemDefined(std::move(c));
   RunAnalyzerTest(
-      R"({
+      R"gn({
        "files": [ "//dir/BUILD.gn" ],
        "additional_compile_targets": [ "all" ],
        "test_targets": [ "//dir:target_name" ]
-       })",
-      "{"
-      R"("compile_targets":[],)"
-      R"/("status":"No dependency",)/"
-      R"("test_targets":[])"
-      "}");
+       })gn",
+      R"gn({)gn"
+      R"gn("compile_targets":[],)gn"
+      R"gn("status":"No dependency",)gn"
+      R"gn("test_targets":[])gn"
+      R"gn(})gn");
 
   c_raw->build_dependency_files().insert(SourceFile("//dir/BUILD.gn"));
   RunAnalyzerTest(
-      R"({
+      R"gn({
        "files": [ "//dir/BUILD.gn" ],
        "additional_compile_targets": [ "all" ],
        "test_targets": [ "//dir:target_name" ]
-       })",
-      "{"
-      R"("compile_targets":["all"],)"
-      R"/("status":"Found dependency",)/"
-      R"("test_targets":["//dir:target_name"])"
-      "}");
+       })gn",
+      R"gn({)gn"
+      R"gn("compile_targets":["all"],)gn"
+      R"gn("status":"Found dependency",)gn"
+      R"gn("test_targets":["//dir:target_name"])gn"
+      R"gn(})gn");
 }
 
 // Tests that if toolchain is marked as affected, then it propagates to
@@ -448,29 +448,29 @@ TEST_F(AnalyzerTest, AffectedToolchainpropagatesToDependentTargets) {
   builder_.ItemDefined(std::unique_ptr<Item>(toolchain));
 
   RunAnalyzerTest(
-      R"({
+      R"gn({
          "files": [ "//tc/BUILD.gn" ],
          "additional_compile_targets": [ "all" ],
          "test_targets": [ "//dir:target_name" ]
-         })",
-      "{"
-      R"("compile_targets":[],)"
-      R"/("status":"No dependency",)/"
-      R"("test_targets":[])"
-      "}");
+         })gn",
+      R"gn({)gn"
+      R"gn("compile_targets":[],)gn"
+      R"gn("status":"No dependency",)gn"
+      R"gn("test_targets":[])gn"
+      R"gn(})gn");
 
   toolchain->build_dependency_files().insert(SourceFile("//tc/BUILD.gn"));
   RunAnalyzerTest(
-      R"({
+      R"gn({
        "files": [ "//tc/BUILD.gn" ],
        "additional_compile_targets": [ "all" ],
        "test_targets": [ "//dir:target_name" ]
-       })",
-      "{"
-      R"("compile_targets":["all"],)"
-      R"/("status":"Found dependency",)/"
-      R"("test_targets":["//dir:target_name"])"
-      "}");
+       })gn",
+      R"gn({)gn"
+      R"gn("compile_targets":["all"],)gn"
+      R"gn("status":"Found dependency",)gn"
+      R"gn("test_targets":["//dir:target_name"])gn"
+      R"gn(})gn");
 }
 
 // Tests that if a pool is marked as affected, then it propagates to dependent
@@ -486,29 +486,29 @@ TEST_F(AnalyzerTest, AffectedPoolpropagatesToDependentTargets) {
   builder_.ItemDefined(std::move(p));
 
   RunAnalyzerTest(
-      R"({
+      R"gn({
        "files": [ "//dir/BUILD.gn" ],
        "additional_compile_targets": [ "all" ],
        "test_targets": [ "//dir:target_name" ]
-       })",
-      "{"
-      R"("compile_targets":[],)"
-      R"/("status":"No dependency",)/"
-      R"("test_targets":[])"
-      "}");
+       })gn",
+      R"gn({)gn"
+      R"gn("compile_targets":[],)gn"
+      R"gn("status":"No dependency",)gn"
+      R"gn("test_targets":[])gn"
+      R"gn(})gn");
 
   p_raw->build_dependency_files().insert(SourceFile("//dir/BUILD.gn"));
   RunAnalyzerTest(
-      R"({
+      R"gn({
        "files": [ "//dir/BUILD.gn" ],
        "additional_compile_targets": [ "all" ],
        "test_targets": [ "//dir:target_name" ]
-       })",
-      "{"
-      R"("compile_targets":["all"],)"
-      R"/("status":"Found dependency",)/"
-      R"("test_targets":["//dir:target_name"])"
-      "}");
+       })gn",
+      R"gn({)gn"
+      R"gn("compile_targets":["all"],)gn"
+      R"gn("status":"Found dependency",)gn"
+      R"gn("test_targets":["//dir:target_name"])gn"
+      R"gn(})gn");
 }
 
 // Tests that when dependency was found, the "compile_targets" in the output is
@@ -521,16 +521,16 @@ TEST_F(AnalyzerTest, CompileTargetsAllWasPruned) {
   builder_.ItemDefined(std::move(t2));
 
   RunAnalyzerTest(
-      R"({
+      R"gn({
        "files": [ "//dir/BUILD.gn" ],
        "additional_compile_targets": [ "all" ],
        "test_targets": []
-       })",
-      "{"
-      R"("compile_targets":["//dir:target_name2"],)"
-      R"/("status":"Found dependency",)/"
-      R"("test_targets":[])"
-      "}");
+       })gn",
+      R"gn({)gn"
+      R"gn("compile_targets":["//dir:target_name2"],)gn"
+      R"gn("status":"Found dependency",)gn"
+      R"gn("test_targets":[])gn"
+      R"gn(})gn");
 }
 
 // Tests that output is "No dependency" when no dependency is found.
@@ -539,63 +539,63 @@ TEST_F(AnalyzerTest, NoDependency) {
   builder_.ItemDefined(std::move(t));
 
   RunAnalyzerTest(
-      R"({
+      R"gn({
        "files": [ "//dir/BUILD.gn" ],
        "additional_compile_targets": [ "all" ],
        "test_targets": []
-       })",
-      "{"
-      R"("compile_targets":[],)"
-      R"/("status":"No dependency",)/"
-      R"("test_targets":[])"
-      "}");
+       })gn",
+      R"gn({)gn"
+      R"gn("compile_targets":[],)gn"
+      R"gn("status":"No dependency",)gn"
+      R"gn("test_targets":[])gn"
+      R"gn(})gn");
 }
 
 // Tests that output is "No dependency" when no files or targets are provided.
 TEST_F(AnalyzerTest, NoFilesNoTargets) {
   RunAnalyzerTest(
-      R"({
+      R"gn({
        "files": [],
        "additional_compile_targets": [],
        "test_targets": []
-      })",
-      "{"
-      R"("compile_targets":[],)"
-      R"("status":"No dependency",)"
-      R"("test_targets":[])"
-      "}");
+      })gn",
+      R"gn({)gn"
+      R"gn("compile_targets":[],)gn"
+      R"gn("status":"No dependency",)gn"
+      R"gn("test_targets":[])gn"
+      R"gn(})gn");
 }
 
 // Tests that output displays proper error message when given files aren't
 // source-absolute or absolute path.
 TEST_F(AnalyzerTest, FilesArentSourceAbsolute) {
   RunAnalyzerTest(
-      R"({
+      R"gn({
        "files": [ "a.cc" ],
        "additional_compile_targets": [],
        "test_targets": [ "//dir:target_name" ]
-      })",
-      "{"
-      R"("error":)"
-      R"("\"a.cc\" is not a source-absolute or absolute path.",)"
-      R"("invalid_targets":[])"
-      "}");
+      })gn",
+      R"gn({)gn"
+      R"gn("error":)gn"
+      R"gn("\"a.cc\" is not a source-absolute or absolute path.",)gn"
+      R"gn("invalid_targets":[])gn"
+      R"gn(})gn");
 }
 
 // Tests that output displays proper error message when input is ill-formed.
 TEST_F(AnalyzerTest, WrongInputFields) {
   RunAnalyzerTest(
-      R"({
+      R"gn({
        "files": [ "//a.cc" ],
        "compile_targets": [],
        "test_targets": [ "//dir:target_name" ]
-      })",
-      "{"
-      R"("error":)"
-      R"("Input does not have a key named )"
-      R"(\"additional_compile_targets\" with a list value.",)"
-      R"("invalid_targets":[])"
-      "}");
+      })gn",
+      R"gn({)gn"
+      R"gn("error":)gn"
+      R"gn("Input does not have a key named )gn"
+      R"gn(\"additional_compile_targets\" with a list value.",)gn"
+      R"gn("invalid_targets":[])gn"
+      R"gn(})gn");
 }
 
 // Bails out early with "Found dependency (all)" if dot file is modified.
@@ -604,16 +604,16 @@ TEST_F(AnalyzerTest, DotFileWasModified) {
   builder_.ItemDefined(std::move(t));
 
   RunAnalyzerTest(
-      R"({
+      R"gn({
        "files": [ "//.gn" ],
        "additional_compile_targets": [],
        "test_targets": [ "//dir:target_name" ]
-      })",
-      "{"
-      R"("compile_targets":["//dir:target_name"],)"
-      R"/("status":"Found dependency (all)",)/"
-      R"("test_targets":["//dir:target_name"])"
-      "}");
+      })gn",
+      R"gn({)gn"
+      R"gn("compile_targets":["//dir:target_name"],)gn"
+      R"gn("status":"Found dependency (all)",)gn"
+      R"gn("test_targets":["//dir:target_name"])gn"
+      R"gn(})gn");
 }
 
 // Bails out early with "Found dependency (all)" if master build config file is
@@ -623,16 +623,16 @@ TEST_F(AnalyzerTest, BuildConfigFileWasModified) {
   builder_.ItemDefined(std::move(t));
 
   RunAnalyzerTest(
-      R"({
+      R"gn({
        "files": [ "//build/config/BUILDCONFIG.gn" ],
        "additional_compile_targets": [],
        "test_targets": [ "//dir:target_name" ]
-      })",
-      "{"
-      R"("compile_targets":["//dir:target_name"],)"
-      R"/("status":"Found dependency (all)",)/"
-      R"("test_targets":["//dir:target_name"])"
-      "}");
+      })gn",
+      R"gn({)gn"
+      R"gn("compile_targets":["//dir:target_name"],)gn"
+      R"gn("status":"Found dependency (all)",)gn"
+      R"gn("test_targets":["//dir:target_name"])gn"
+      R"gn(})gn");
 }
 
 // Bails out early with "Found dependency (all)" if a build args dependency file
@@ -642,16 +642,16 @@ TEST_F(AnalyzerTest, BuildArgsDependencyFileWasModified) {
   builder_.ItemDefined(std::move(t));
 
   RunAnalyzerTest(
-      R"({
+      R"gn({
        "files": [ "//build/default_args.gn" ],
        "additional_compile_targets": [],
        "test_targets": [ "//dir:target_name" ]
-      })",
-      "{"
-      R"("compile_targets":["//dir:target_name"],)"
-      R"/("status":"Found dependency (all)",)/"
-      R"("test_targets":["//dir:target_name"])"
-      "}");
+      })gn",
+      R"gn({)gn"
+      R"gn("compile_targets":["//dir:target_name"],)gn"
+      R"gn("status":"Found dependency (all)",)gn"
+      R"gn("test_targets":["//dir:target_name"])gn"
+      R"gn(})gn");
 }
 
 // Tests that targets in explicitly labelled with the default toolchain are
@@ -663,30 +663,30 @@ TEST_F(AnalyzerTest, TargetToolchainSpecifiedRefersToSources) {
   builder_.ItemDefined(std::move(t));
 
   RunAnalyzerTest(
-      R"/({
+      R"gn({
        "files": [ "//dir/file_name.cc" ],
        "additional_compile_targets": ["all"],
        "test_targets": [ "//dir:target_name(//tc:default)" ]
-       })/",
-      "{"
-      R"("compile_targets":[],)"
-      R"/("status":"No dependency",)/"
-      R"("test_targets":[])"
-      "}");
+       })gn",
+      R"gn({)gn"
+      R"gn("compile_targets":[],)gn"
+      R"gn("status":"No dependency",)gn"
+      R"gn("test_targets":[])gn"
+      R"gn(})gn");
 
   t_raw->sources().push_back(SourceFile("//dir/file_name.cc"));
 
   RunAnalyzerTest(
-      R"*({
+      R"gn({
        "files": [ "//dir/file_name.cc" ],
        "additional_compile_targets": [],
        "test_targets": [ "//dir:target_name(//tc:default)" ]
-       })*",
-      "{"
-      R"("compile_targets":[],)"
-      R"/("status":"Found dependency",)/"
-      R"/("test_targets":["//dir:target_name"])/"
-      "}");
+       })gn",
+      R"gn({)gn"
+      R"gn("compile_targets":[],)gn"
+      R"gn("status":"Found dependency",)gn"
+      R"gn("test_targets":["//dir:target_name"])gn"
+      R"gn(})gn");
 }
 
 // Tests that targets in alternate toolchains are affected when their sources
@@ -701,55 +701,55 @@ TEST_F(AnalyzerTest, TargetAlternateToolchainRefersToSources) {
   builder_.ItemDefined(std::move(t_alt));
 
   RunAnalyzerTest(
-      R"/({
+      R"gn({
        "files": [ "//dir/file_name.cc" ],
        "additional_compile_targets": ["all"],
        "test_targets": [ "//dir:target_name", "//dir:target_name(//other:tc)" ]
-       })/",
-      "{"
-      R"("compile_targets":[],)"
-      R"/("status":"No dependency",)/"
-      R"("test_targets":[])"
-      "}");
+       })gn",
+      R"gn({)gn"
+      R"gn("compile_targets":[],)gn"
+      R"gn("status":"No dependency",)gn"
+      R"gn("test_targets":[])gn"
+      R"gn(})gn");
 
   t_raw->sources().push_back(SourceFile("//dir/file_name.cc"));
   t_alt_raw->sources().push_back(SourceFile("//dir/alt_file_name.cc"));
 
   RunAnalyzerTest(
-      R"*({
+      R"gn({
        "files": [ "//dir/file_name.cc" ],
        "additional_compile_targets": [],
        "test_targets": [ "//dir:target_name", "//dir:target_name(//other:tc)" ]
-       })*",
-      "{"
-      R"("compile_targets":[],)"
-      R"/("status":"Found dependency",)/"
-      R"("test_targets":["//dir:target_name"])"
-      "}");
+       })gn",
+      R"gn({)gn"
+      R"gn("compile_targets":[],)gn"
+      R"gn("status":"Found dependency",)gn"
+      R"gn("test_targets":["//dir:target_name"])gn"
+      R"gn(})gn");
 
   RunAnalyzerTest(
-      R"*({
+      R"gn({
        "files": [ "//dir/alt_file_name.cc" ],
        "additional_compile_targets": [],
        "test_targets": [ "//dir:target_name", "//dir:target_name(//other:tc)" ]
-       })*",
-      "{"
-      R"("compile_targets":[],)"
-      R"/("status":"Found dependency",)/"
-      R"/("test_targets":["//dir:target_name(//other:tc)"])/"
-      "}");
+       })gn",
+      R"gn({)gn"
+      R"gn("compile_targets":[],)gn"
+      R"gn("status":"Found dependency",)gn"
+      R"gn("test_targets":["//dir:target_name(//other:tc)"])gn"
+      R"gn(})gn");
 
   RunAnalyzerTest(
-      R"*({
+      R"gn({
        "files": [ "//dir/file_name.cc", "//dir/alt_file_name.cc" ],
        "additional_compile_targets": [],
        "test_targets": [ "//dir:target_name", "//dir:target_name(//other:tc)" ]
-       })*",
-      "{"
-      R"("compile_targets":[],)"
-      R"/("status":"Found dependency",)/"
-      R"/("test_targets":["//dir:target_name","//dir:target_name(//other:tc)"])/"
-      "}");
+       })gn",
+      R"gn({)gn"
+      R"gn("compile_targets":[],)gn"
+      R"gn("status":"Found dependency",)gn"
+      R"gn("test_targets":["//dir:target_name","//dir:target_name(//other:tc)"])gn"
+      R"gn(})gn");
 }
 
 }  // namespace gn_analyzer_unittest
