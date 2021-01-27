@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f760eef6_cf66dbb9",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000012
+      },
+      "writtenOn": "2021-01-27T02:10:41Z",
+      "side": 1,
+      "message": "fyi ... if you\u0027d prefer I use a different tag, let me know.\n\nThis is a bit awkward because the output string can\u0027t have embedded whitespace, \nso I have to repeat the raw literals on each line. \n\nAlternatively, we could use single-line raw literals, but some of them will be \u003e 80 cols.\n\nLMK if you have a preference.\n",
+      "revId": "6cbc0a15fa63219f904896d6513bdc9d96bcedc7",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    }
+  ]
+}
