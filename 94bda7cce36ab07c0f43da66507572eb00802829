@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c7d0ad72_a96c4588",
+        "filename": "src/gn/analyzer_unittest.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 123,
+      "author": {
+        "id": 1000014
+      },
+      "writtenOn": "2021-01-27T18:45:56Z",
+      "side": 0,
+      "message": "I don\u0027t follow this change. I don\u0027t recall seeing R\"gn( before and certainly never used it. It looks weird to me and in this case seems to hurt readability.\n\nI thought the old code was fine. There are a couple of cases where the )\" collides and these use a raw string annotation thing that\u0027s different. It uses \"/\" which is OK and more readable to me than \"gn\" which looks to me like part of the string. Personally, I use a \"*\" in these cases but / is fine.",
+      "revId": "94bda7cce36ab07c0f43da66507572eb00802829",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    }
+  ]
+}
