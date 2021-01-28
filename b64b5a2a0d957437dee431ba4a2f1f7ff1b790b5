@@ -16,6 +16,24 @@
       "message": "Whole build error in case you are interested:\n\nhttps://buildd.debian.org/status/fetch.php?pkg\u003dgenerate-ninja\u0026arch\u003driscv64\u0026ver\u003d0.0%7Egit20210126.5f30bbf-2\u0026stamp\u003d1611766122\u0026raw\u003d0\n\nAnd how it builds after the patch:\n\nhttps://buildd.debian.org/status/fetch.php?pkg\u003dgenerate-ninja\u0026arch\u003driscv64\u0026ver\u003d0.0%7Egit20210126.94bda7c-1\u0026stamp\u003d1611855800\u0026raw\u003d0",
       "revId": "b64b5a2a0d957437dee431ba4a2f1f7ff1b790b5",
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c2051080_db50a450",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1001182
+      },
+      "writtenOn": "2021-01-28T18:01:36Z",
+      "side": 1,
+      "message": "comment for the wrong CL, sorry :)",
+      "parentUuid": "0f9edad3_faf8cde0",
+      "revId": "b64b5a2a0d957437dee431ba4a2f1f7ff1b790b5",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
     }
   ]
 }
