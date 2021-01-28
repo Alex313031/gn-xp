@@ -34,6 +34,40 @@
       "parentUuid": "0f9edad3_faf8cde0",
       "revId": "b64b5a2a0d957437dee431ba4a2f1f7ff1b790b5",
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "57b8d7e3_be5b3ad6",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2021-01-28T18:47:20Z",
+      "side": 1,
+      "message": "can you also `out/gn help --markdown all \u003e docs/reference.md` after buildling a gn binary with these changes?",
+      "revId": "b64b5a2a0d957437dee431ba4a2f1f7ff1b790b5",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "cb15527a_199b05d9",
+        "filename": "src/gn/functions_target.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 281,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2021-01-28T18:47:20Z",
+      "side": 1,
+      "message": "not a native speaker, but the lhs reads better to me (also in the other file where you added a \"one\")",
+      "revId": "b64b5a2a0d957437dee431ba4a2f1f7ff1b790b5",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
     }
   ]
 }
