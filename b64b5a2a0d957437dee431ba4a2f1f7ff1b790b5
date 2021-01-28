@@ -68,6 +68,24 @@
       "message": "not a native speaker, but the lhs reads better to me (also in the other file where you added a \"one\")",
       "revId": "b64b5a2a0d957437dee431ba4a2f1f7ff1b790b5",
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "578234f1_2aa02e08",
+        "filename": "src/gn/functions_target.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 281,
+      "author": {
+        "id": 1001182
+      },
+      "writtenOn": "2021-01-28T18:58:15Z",
+      "side": 1,
+      "message": "Not a native speaker either, they sound equally good.\n\nI have found:\nhttps://forum.wordreference.com/threads/allow-let-without-object.2748616/\nwhich makes me believe that we should put the subject unless the next sentence is passive....\n\nBut I have also found examples otherwise.\n\nAny native we can bother to review this?",
+      "parentUuid": "cb15527a_199b05d9",
+      "revId": "b64b5a2a0d957437dee431ba4a2f1f7ff1b790b5",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
     }
   ]
 }
