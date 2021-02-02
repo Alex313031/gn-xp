@@ -16,6 +16,23 @@
       "message": "I signed the Contributor License Agreement and reply this commit.",
       "revId": "9edf46122c086bedb780d3487a652c773d90e408",
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f0ef4bd2_6188ec01",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000014
+      },
+      "writtenOn": "2021-02-02T03:17:39Z",
+      "side": 1,
+      "message": "Thanks!",
+      "revId": "9edf46122c086bedb780d3487a652c773d90e408",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
     }
   ]
 }
