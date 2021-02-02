@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "24277df4_98e47240",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1001257
+      },
+      "writtenOn": "2021-02-02T03:13:06Z",
+      "side": 1,
+      "message": "I signed the Contributor License Agreement and reply this commit.",
+      "revId": "9edf46122c086bedb780d3487a652c773d90e408",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    }
+  ]
+}
