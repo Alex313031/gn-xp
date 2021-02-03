@@ -34,6 +34,24 @@
       "parentUuid": "c7d0ad72_a96c4588",
       "revId": "94bda7cce36ab07c0f43da66507572eb00802829",
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "84dff371_e4900232",
+        "filename": "src/gn/analyzer_unittest.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 123,
+      "author": {
+        "id": 1000014
+      },
+      "writtenOn": "2021-02-03T00:53:08Z",
+      "side": 0,
+      "message": "I would prefer to leave as-is. The \"gn\" strings you refer to were written by one person in one patch. I find it quite unreadable, and having a random character in front of a couple of strings that happen to end in a paren doesn\u0027t bother me.",
+      "parentUuid": "850089c6_1c8feb1e",
+      "revId": "94bda7cce36ab07c0f43da66507572eb00802829",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
     }
   ]
 }
