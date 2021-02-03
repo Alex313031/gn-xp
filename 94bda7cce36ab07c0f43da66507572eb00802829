@@ -52,6 +52,24 @@
       "parentUuid": "850089c6_1c8feb1e",
       "revId": "94bda7cce36ab07c0f43da66507572eb00802829",
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "da675671_69a3d157",
+        "filename": "src/gn/analyzer_unittest.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 123,
+      "author": {
+        "id": 1000012
+      },
+      "writtenOn": "2021-02-03T00:54:19Z",
+      "side": 0,
+      "message": "Okey doke.",
+      "parentUuid": "84dff371_e4900232",
+      "revId": "94bda7cce36ab07c0f43da66507572eb00802829",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
     }
   ]
 }
