@@ -10,6 +10,7 @@
 #include <map>
 #include <mutex>
 #include <set>
+#include <string>
 #include <string_view>
 #include <vector>
 
@@ -20,6 +21,7 @@
 #include "gn/c_include_iterator.h"
 #include "gn/err.h"
 #include "gn/source_dir.h"
+#include "gn/standard_out.h"
 
 class BuildSettings;
 class InputFile;
@@ -100,11 +102,45 @@ class HeaderChecker : public base::RefCountedThreadSafe<HeaderChecker> {
   using FileMap = std::map<SourceFile, TargetVector>;
   using PathExistsCallback = std::function<bool(const base::FilePath& path)>;
 
+  class CheckSummary {
+   public:
+    void AddUnreachable(std::string target) {
+      std::lock_guard<std::mutex> lock(lock_);
+      unreachable_.insert(target);
+    }
+
+    void AddNotPermitted(std::string target) {
+      std::lock_guard<std::mutex> lock(lock_);
+      not_permitted_.insert(target);
+    }
+
+    void Print() {
+      if (!unreachable_.empty())
+        PrintShortHelp("Unreachable Targets:");
+      for (const auto& target : unreachable_)
+        OutputString("  \"" + target + "\",\n");
+
+      if (!not_permitted_.empty())
+        PrintShortHelp("Not Permitted Targets:");
+      for (const auto& target : not_permitted_)
+        OutputString("  \"" + target + "\",\n");
+    }
+
+   private:
+    mutable std::mutex lock_;
+    std::set<std::string> unreachable_;
+    std::set<std::string> not_permitted_;
+  };
+
   // Backend for Run() that takes the list of files to check. The errors_ list
   // will be populate on failure.
-  void RunCheckOverFiles(const FileMap& flies, bool force_check);
+  void RunCheckOverFiles(const FileMap& flies,
+                         bool force_check,
+                         CheckSummary* summary);
 
-  void DoWork(const Target* target, const SourceFile& file);
+  void DoWork(const Target* target,
+              const SourceFile& file,
+              CheckSummary* summary);
 
   // Adds the sources and public files from the given target to the given map.
   static void AddTargetToFileMap(const Target* target, FileMap* dest);
@@ -122,7 +158,8 @@ class HeaderChecker : public base::RefCountedThreadSafe<HeaderChecker> {
   // error messages.
   bool CheckFile(const Target* from_target,
                  const SourceFile& file,
-                 std::vector<Err>* err) const;
+                 std::vector<Err>* err,
+                 CheckSummary* summary) const;
 
   // Checks that the given file in the given target can include the
   // given include file. If disallowed, adds the error or errors to
@@ -136,7 +173,8 @@ class HeaderChecker : public base::RefCountedThreadSafe<HeaderChecker> {
       const SourceFile& include_file,
       const LocationRange& range,
       std::set<std::pair<const Target*, const Target*>>* no_dependency_cache,
-      std::vector<Err>* errors) const;
+      std::vector<Err>* errors,
+      CheckSummary* summary = nullptr) const;
 
   // Returns true if the given search_for target is a dependency of
   // search_from.
@@ -171,7 +209,8 @@ class HeaderChecker : public base::RefCountedThreadSafe<HeaderChecker> {
   static Err MakeUnreachableError(const InputFile& source_file,
                                   const LocationRange& range,
                                   const Target* from_target,
-                                  const TargetVector& targets);
+                                  const TargetVector& targets,
+                                  CheckSummary* summary = nullptr);
 
   // Non-locked variables ------------------------------------------------------
   //

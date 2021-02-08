@@ -30,7 +30,7 @@ struct PublicGeneratedPair {
 };
 
 // This class makes InputFiles on the stack as it reads files to check. When
-// we throw an error, the Err indicates a locatin which has a pointer to
+// we throw an error, the Err indicates a location which has a pointer to
 // an InputFile that must persist as long as the Err does.
 //
 // To make this work, this function creates a clone of the InputFile managed
@@ -131,17 +131,24 @@ HeaderChecker::HeaderChecker(const BuildSettings* build_settings,
 
 HeaderChecker::~HeaderChecker() = default;
 
-bool HeaderChecker::Run(const std::vector<const Target*>& to_check,
+bool HeaderChecker::Run(const std::vector<const Target*>& targets_to_check,
                         bool force_check,
                         std::vector<Err>* errors) {
-  FileMap files_to_check;
-  for (auto* check : to_check) {
+  for (auto* target : targets_to_check) {
     // This function will get called with all target types, but check only
     // applies to binary targets.
-    if (check->IsBinary())
-      AddTargetToFileMap(check, &files_to_check);
+    if (target->IsBinary()) {
+      FileMap files_to_check;
+      CheckSummary summary;
+      AddTargetToFileMap(target, &files_to_check);
+      RunCheckOverFiles(files_to_check, force_check, &summary);
+      PrintShortHelp("***************************************");
+      PrintShortHelp("Summary for target " +
+                     target->label().GetUserVisibleName(false));
+      summary.Print();
+      PrintShortHelp("***************************************");
+    }
   }
-  RunCheckOverFiles(files_to_check, force_check);
 
   if (errors_.empty())
     return true;
@@ -149,7 +156,9 @@ bool HeaderChecker::Run(const std::vector<const Target*>& to_check,
   return false;
 }
 
-void HeaderChecker::RunCheckOverFiles(const FileMap& files, bool force_check) {
+void HeaderChecker::RunCheckOverFiles(const FileMap& files,
+                                      bool force_check,
+                                      CheckSummary* summary) {
   WorkerPool pool;
 
   for (const auto& file : files) {
@@ -174,9 +183,8 @@ void HeaderChecker::RunCheckOverFiles(const FileMap& files, bool force_check) {
     for (const auto& vect_i : file.second) {
       if (vect_i.target->check_includes()) {
         task_count_.Increment();
-        pool.PostTask([this, target = vect_i.target, file = file.first]() {
-          DoWork(target, file);
-        });
+        pool.PostTask([this, target = vect_i.target, file = file.first,
+                       summary]() { DoWork(target, file, summary); });
       }
     }
   }
@@ -187,9 +195,11 @@ void HeaderChecker::RunCheckOverFiles(const FileMap& files, bool force_check) {
     task_count_cv_.wait(auto_lock);
 }
 
-void HeaderChecker::DoWork(const Target* target, const SourceFile& file) {
+void HeaderChecker::DoWork(const Target* target,
+                           const SourceFile& file,
+                           CheckSummary* summary) {
   std::vector<Err> errors;
-  if (!CheckFile(target, file, &errors)) {
+  if (!CheckFile(target, file, &errors, summary)) {
     std::lock_guard<std::mutex> lock(lock_);
     errors_.insert(errors_.end(), errors.begin(), errors.end());
   }
@@ -277,7 +287,8 @@ SourceFile HeaderChecker::SourceFileForInclude(
 
 bool HeaderChecker::CheckFile(const Target* from_target,
                               const SourceFile& file,
-                              std::vector<Err>* errors) const {
+                              std::vector<Err>* errors,
+                              CheckSummary* summary) const {
   ScopedTrace trace(TraceItem::TRACE_CHECK_HEADER, file.value());
 
   // Sometimes you have generated source files included as sources in another
@@ -332,7 +343,7 @@ bool HeaderChecker::CheckFile(const Target* from_target,
                                                     &err);
     if (!included_file.is_null()) {
       CheckInclude(from_target, input_file, included_file, include.location,
-                   &no_dependency_cache, errors);
+                   &no_dependency_cache, errors, summary);
     }
   }
 
@@ -351,7 +362,8 @@ void HeaderChecker::CheckInclude(
     const SourceFile& include_file,
     const LocationRange& range,
     std::set<std::pair<const Target*, const Target*>>* no_dependency_cache,
-    std::vector<Err>* errors) const {
+    std::vector<Err>* errors,
+    CheckSummary* summary) const {
   // Assume if the file isn't declared in our sources that we don't need to
   // check it. It would be nice if we could give an error if this happens, but
   // our include finder is too primitive and returns all includes, even if
@@ -443,10 +455,12 @@ void HeaderChecker::CheckInclude(
                          "Including a private header.",
                          "This file is private to the target " +
                              target.target->label().GetUserVisibleName(false));
+        summary->AddNotPermitted("1: " + target.target->label().GetShortName());
       } else if (!is_permitted_chain) {
         last_error = Err(CreatePersistentRange(source_file, range),
                          "Can't include this header from here.",
                          GetDependencyChainPublicError(chain));
+        summary->AddNotPermitted(target.target->label().GetShortName());
       } else {
         NOTREACHED();
       }
@@ -467,7 +481,8 @@ void HeaderChecker::CheckInclude(
   if (!found_dependency || last_error.has_error()) {
     if (!found_dependency) {
       DCHECK(!last_error.has_error());
-      Err err = MakeUnreachableError(source_file, range, from_target, targets);
+      Err err = MakeUnreachableError(source_file, range, from_target, targets,
+                                     summary);
       errors->push_back(std::move(err));
     } else {
       // Found at least one dependency chain above, but it had an error.
@@ -586,7 +601,8 @@ bool HeaderChecker::IsDependencyOf(const Target* search_for,
 Err HeaderChecker::MakeUnreachableError(const InputFile& source_file,
                                         const LocationRange& range,
                                         const Target* from_target,
-                                        const TargetVector& targets) {
+                                        const TargetVector& targets,
+                                        CheckSummary* summary) {
   // Normally the toolchains will all match, but when cross-compiling, we can
   // get targets with more than one toolchain in the list of possibilities.
   std::vector<const Target*> targets_with_matching_toolchains;
@@ -626,10 +642,16 @@ Err HeaderChecker::MakeUnreachableError(const InputFile& source_file,
   std::string msg = "It is not in any dependency of\n  " +
                     from_target->label().GetUserVisibleName(include_toolchain);
   msg += "\nThe include file is in the target(s):\n";
-  for (auto* target : targets_with_matching_toolchains)
+  for (auto* target : targets_with_matching_toolchains) {
     msg += "  " + target->label().GetUserVisibleName(include_toolchain) + "\n";
-  for (auto* target : targets_with_other_toolchains)
+    if (summary)
+      summary->AddUnreachable(target->label().GetShortName());
+  }
+  for (auto* target : targets_with_other_toolchains) {
     msg += "  " + target->label().GetUserVisibleName(include_toolchain) + "\n";
+    if (summary)
+      summary->AddUnreachable(target->label().GetShortName());
+  }
   if (targets_with_other_toolchains.size() +
           targets_with_matching_toolchains.size() >
       1)

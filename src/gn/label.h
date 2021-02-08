@@ -63,6 +63,10 @@ class Label {
   // toolchain is optionally included.
   std::string GetUserVisibleName(bool include_toolchain) const;
 
+  // Same as GetUserVisibleName(), except that it would use the short form of
+  // the name is possible, e.g. //foo instead of //foo:foo
+  std::string GetShortName() const;
+
   // Like the above version, but automatically includes the toolchain if it's
   // not the default one. Normally the user only cares about the toolchain for
   // non-default ones, so this can make certain output more clear.

@@ -324,6 +324,27 @@ std::string Label::GetUserVisibleName(bool include_toolchain) const {
   return ret;
 }
 
+std::string Label::GetShortName() const {
+  std::string ret;
+  ret.reserve(dir_.value().size() + name_.str().size() + 1);
+
+  if (dir_.is_null())
+    return ret;
+
+  std::string last_dir;
+  // if (dir_.is_source_absolute())
+  ret = DirWithNoTrailingSlash(dir_);
+  auto pos = ret.find_last_of("/");
+  if (pos != std::string::npos)
+    last_dir = ret.substr(pos + 1);
+  if (last_dir != name_.str()) {
+    ret.push_back(':');
+    ret.append(name_.str());
+  }
+
+  return ret;
+}
+
 std::string Label::GetUserVisibleName(const Label& default_toolchain) const {
   bool include_toolchain = default_toolchain.dir() != toolchain_dir_ ||
                            default_toolchain.name_atom() != toolchain_name_;
