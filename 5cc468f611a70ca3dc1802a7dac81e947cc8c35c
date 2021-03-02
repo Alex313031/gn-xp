@@ -37,6 +37,23 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "bd114f2b_3bcbe008",
+        "filename": "src/gn/rust_values.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 13,
+      "author": {
+        "id": 1000067
+      },
+      "writtenOn": "2021-03-02T15:26:05Z",
+      "side": 1,
+      "message": "nit: Correct me if I\u0027m wrong, but it looks like this method should receive the |target| value that this RustValue instance is created from to work properly. In this case, what do you think about turning this into a static method as in:\n\n  // static\n  RustValues::CrateType RustValues::InferredCrateType(const Target* target) const {\n    CrateType crate_type \u003d target-\u003erust_values().crate_type();\n    if (crate_type !\u003d CRATE_AUTO) {\n      return crate_type;\n    }\n    switch (target-\u003eoutput_type()) {\n       ...\n     }\n  }\n\nThis would simplify call sites and be slightly less error prone, i.e.:\n\n  RustValues::InferredCrateType(target)\n\nInstead of:\n\n  target-\u003erust_values().InferredCrateType(target)",
+      "revId": "5cc468f611a70ca3dc1802a7dac81e947cc8c35c",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "14007a61_c822692c",
         "filename": "src/gn/rust_values.cc",
         "patchSetId": 3
@@ -101,6 +118,47 @@
         "endLine": 25,
         "endChar": 53
       },
+      "revId": "5cc468f611a70ca3dc1802a7dac81e947cc8c35c",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "acb52c3c_d24e3fae",
+        "filename": "src/gn/rust_values.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 25,
+      "author": {
+        "id": 1000067
+      },
+      "writtenOn": "2021-03-02T15:26:05Z",
+      "side": 1,
+      "message": "nit: I find the use of the word \"specified\" twice to mean two different things a little bit annoying in the comment. What about clarifying it as in:\n\n  // Library crate types. The default value CRATE_AUTO means the type should\n  // be deduced from the target type (see InferredCrateType() below).",
+      "parentUuid": "e58254a8_4fceb71a",
+      "range": {
+        "startLine": 22,
+        "startChar": 2,
+        "endLine": 25,
+        "endChar": 53
+      },
+      "revId": "5cc468f611a70ca3dc1802a7dac81e947cc8c35c",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "37c5a00a_40beb2ae",
+        "filename": "src/gn/rust_values.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 49,
+      "author": {
+        "id": 1000067
+      },
+      "writtenOn": "2021-03-02T15:26:05Z",
+      "side": 1,
+      "message": "nit: Maybe clarify that CRAT_AUTO will translate RUST_LIBRARY target types to CRATE_DYLIB by default, and that cdylib targets should call set_crate_type(CRATE_CDYLIB) explicitly?\n\nAlso mention that this will return CRATE_AUTO for unsupported target types (e.g. GROUP or ACTION).",
       "revId": "5cc468f611a70ca3dc1802a7dac81e947cc8c35c",
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
     },
