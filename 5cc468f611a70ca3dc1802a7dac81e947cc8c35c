@@ -37,6 +37,29 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "14007a61_c822692c",
+        "filename": "src/gn/rust_values.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 30,
+      "author": {
+        "id": 1000288
+      },
+      "writtenOn": "2021-03-02T14:34:31Z",
+      "side": 1,
+      "message": "related to my other comment, is there a scenario where this is a valid output or is this a failure case?",
+      "range": {
+        "startLine": 30,
+        "startChar": 0,
+        "endLine": 30,
+        "endChar": 24
+      },
+      "revId": "5cc468f611a70ca3dc1802a7dac81e947cc8c35c",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "2261765c_b6c1554d",
         "filename": "src/gn/rust_values.h",
         "patchSetId": 3
@@ -77,6 +100,29 @@
         "startChar": 2,
         "endLine": 25,
         "endChar": 53
+      },
+      "revId": "5cc468f611a70ca3dc1802a7dac81e947cc8c35c",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f5417667_a61e8ba1",
+        "filename": "src/gn/tool.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 362,
+      "author": {
+        "id": 1000288
+      },
+      "writtenOn": "2021-03-02T14:34:31Z",
+      "side": 1,
+      "message": "shouldn\u0027t this cause an error if the type has been inferred?",
+      "range": {
+        "startLine": 362,
+        "startChar": 0,
+        "endLine": 362,
+        "endChar": 34
       },
       "revId": "5cc468f611a70ca3dc1802a7dac81e947cc8c35c",
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
