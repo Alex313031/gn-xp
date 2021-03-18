@@ -61,9 +61,6 @@ TEST_F(NinjaGeneratedFileTargetWriterTest, Run) {
   std::ostringstream out;
   NinjaGeneratedFileTargetWriter writer(&target, out);
   writer.Run();
-
-  const char expected[] =
-      "build obj/foo/bar.stamp: stamp obj/foo/dep.stamp obj/foo/dep2.stamp || "
-      "obj/foo/bundle_data_dep.stamp obj/foo/datadep.stamp\n";
+  const char expected[] = "build obj/foo/bar.stamp: stamp foo.json\n";
   EXPECT_EQ(expected, out.str());
 }

@@ -561,6 +561,7 @@ bool HeaderChecker::IsDependencyOf(const Target* search_for,
       return true;
     }
 
+    if (target->output_type() != Target::OutputType::GENERATED_FILE) {
     // Always consider public dependencies as possibilities.
     for (const auto& dep : target->public_deps()) {
       if (breadcrumbs.insert(std::make_pair(dep.ptr, cur_link)).second)
@@ -577,6 +578,7 @@ bool HeaderChecker::IsDependencyOf(const Target* search_for,
         if (breadcrumbs.insert(std::make_pair(dep.ptr, cur_link)).second)
           work_queue.push(ChainLink(dep.ptr, false));
       }
+    }
     }
   }
 
