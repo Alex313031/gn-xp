@@ -425,3 +425,44 @@ TEST_F(HeaderCheckerTest, Friend) {
                         &errors);
   EXPECT_EQ(errors.size(), 0);
 }
+
+TEST_F(HeaderCheckerTest, GeneratedFile) {
+  // Add a generated_file target G that public_deps on C.
+  Err err;
+  Target g(setup_.settings(), Label(SourceDir("//g/"), "g"));
+  g.set_output_type(Target::GENERATED_FILE);
+  g.SetToolchain(setup_.toolchain(), &err);
+  EXPECT_FALSE(err.has_error());
+  g.visibility().SetPublic();
+  g.public_deps().push_back(LabelTargetPair(&c_));
+  targets_.push_back(&g);
+
+  // Add a target S that depends on G
+  Target s(setup_.settings(), Label(SourceDir("//s/"), "s"));
+  s.set_output_type(Target::SOURCE_SET);
+  s.SetToolchain(setup_.toolchain(), &err);
+  EXPECT_FALSE(err.has_error());
+  s.visibility().SetPublic();
+  s.private_deps().push_back(LabelTargetPair(&g));
+  s.OnResolved(&err);
+  EXPECT_FALSE(err.has_error());
+  targets_.push_back(&s);
+
+  // So now we have S -> G -> C, but G -> C should not be treated a dependency
+  // for header checking.
+
+  auto checker = CreateChecker();
+  bool is_permitted = false;
+  HeaderChecker::Chain chain;
+
+  // C should not be a dependency of S
+  EXPECT_FALSE(checker->IsDependencyOf(&c_, &s, true,  &chain));
+  EXPECT_FALSE(is_permitted);
+
+  // C should not be a dependency of G
+  EXPECT_FALSE(checker->IsDependencyOf(&c_, &g, true, &chain));
+  EXPECT_FALSE(is_permitted);
+
+  // G should be a dependency of S
+  EXPECT_TRUE(checker->IsDependencyOf(&g, &s, true, &chain));
+}

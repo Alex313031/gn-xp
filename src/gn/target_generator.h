@@ -54,7 +54,7 @@ class TargetGenerator {
   bool FillCheckIncludes();
   bool FillOutputExtension();
 
-  // Rrturns true if the given pattern will expand to a file in the output
+  // Returns true if the given pattern will expand to a file in the output
   // directory. If not, returns false and sets the error, blaming the given
   // Value.
   bool EnsureSubstitutionIsInOutputDir(const SubstitutionPattern& pattern,

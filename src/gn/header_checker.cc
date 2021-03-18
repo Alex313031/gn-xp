@@ -561,21 +561,23 @@ bool HeaderChecker::IsDependencyOf(const Target* search_for,
       return true;
     }
 
-    // Always consider public dependencies as possibilities.
-    for (const auto& dep : target->public_deps()) {
-      if (breadcrumbs.insert(std::make_pair(dep.ptr, cur_link)).second)
-        work_queue.push(ChainLink(dep.ptr, true));
-    }
-
-    if (first_time || !require_permitted) {
-      // Consider all dependencies since all target paths are allowed, so add
-      // in private ones. Also do this the first time through the loop, since
-      // a target can include headers from its direct deps regardless of
-      // public/private-ness.
-      first_time = false;
-      for (const auto& dep : target->private_deps()) {
+    if (target->output_type() != Target::OutputType::GENERATED_FILE) {
+      // Always consider public dependencies as possibilities.
+      for (const auto& dep : target->public_deps()) {
         if (breadcrumbs.insert(std::make_pair(dep.ptr, cur_link)).second)
-          work_queue.push(ChainLink(dep.ptr, false));
+          work_queue.push(ChainLink(dep.ptr, true));
+      }
+
+      if (first_time || !require_permitted) {
+        // Consider all dependencies since all target paths are allowed, so add
+        // in private ones. Also do this the first time through the loop, since
+        // a target can include headers from its direct deps regardless of
+        // public/private-ness.
+        first_time = false;
+        for (const auto& dep : target->private_deps()) {
+          if (breadcrumbs.insert(std::make_pair(dep.ptr, cur_link)).second)
+            work_queue.push(ChainLink(dep.ptr, false));
+        }
       }
     }
   }

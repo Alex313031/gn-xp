@@ -12,6 +12,7 @@
 #include "gn/scheduler.h"
 #include "gn/settings.h"
 #include "gn/string_utils.h"
+#include "gn/substitution_writer.h"
 #include "gn/target.h"
 #include "gn/trace.h"
 
@@ -26,24 +27,13 @@ void NinjaGeneratedFileTargetWriter::Run() {
   // Write the file.
   GenerateFile();
 
-  // A generated_file target should generate a stamp file with dependencies
-  // on each of the deps and data_deps in the target. The actual collection is
-  // done at gen time, and so ninja doesn't need to know about it.
   std::vector<OutputFile> output_files;
-  std::vector<OutputFile> data_output_files;
-  for (const auto& pair : target_->GetDeps(Target::DEPS_LINKED)) {
-    if (pair.ptr->IsDataOnly()) {
-      data_output_files.push_back(pair.ptr->dependency_output_file());
-    } else {
-      output_files.push_back(pair.ptr->dependency_output_file());
-    }
-  }
+  std::vector<OutputFile> empty;
 
-  const LabelTargetVector& data_deps = target_->data_deps();
-  for (const auto& pair : data_deps)
-    data_output_files.push_back(pair.ptr->dependency_output_file());
+  SubstitutionWriter::GetListAsOutputFiles(
+      settings_, target_->action_values().outputs(), &output_files);
 
-  WriteStampForTarget(output_files, data_output_files);
+  WriteStampForTarget(output_files, empty);
 }
 
 void NinjaGeneratedFileTargetWriter::GenerateFile() {
