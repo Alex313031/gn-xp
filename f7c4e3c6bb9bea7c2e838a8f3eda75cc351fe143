@@ -1,0 +1,118 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6a37d8fc_15a4087b",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 1000004
+      },
+      "writtenOn": "2021-03-19T16:24:08Z",
+      "side": 1,
+      "message": "nit; delete",
+      "range": {
+        "startLine": 9,
+        "startChar": 29,
+        "endLine": 9,
+        "endChar": 32
+      },
+      "revId": "f7c4e3c6bb9bea7c2e838a8f3eda75cc351fe143",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a60f02e9_49879b40",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000004
+      },
+      "writtenOn": "2021-03-19T16:24:08Z",
+      "side": 1,
+      "message": "Haven\u0027t fully digested the chat thread yet on whether the general idea is good, but maybe if Brett\u0027s convinced I can skip that. :P\n\nI think only Fuchsia uses this feature that we know of? So at least it shouldn\u0027t be too troublesome to try.",
+      "revId": "f7c4e3c6bb9bea7c2e838a8f3eda75cc351fe143",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8c0b6f0f_d5070bac",
+        "filename": "src/gn/header_checker.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 582,
+      "author": {
+        "id": 1000004
+      },
+      "writtenOn": "2021-03-19T16:24:08Z",
+      "side": 1,
+      "message": "reindent",
+      "revId": "f7c4e3c6bb9bea7c2e838a8f3eda75cc351fe143",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6729ad6b_d0feac39",
+        "filename": "src/gn/header_checker_unittest.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 449,
+      "author": {
+        "id": 1000004
+      },
+      "writtenOn": "2021-03-19T16:24:08Z",
+      "side": 1,
+      "message": "|s| I think?",
+      "range": {
+        "startLine": 449,
+        "startChar": 22,
+        "endLine": 449,
+        "endChar": 23
+      },
+      "revId": "f7c4e3c6bb9bea7c2e838a8f3eda75cc351fe143",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3034cb2f_cdb7b160",
+        "filename": "src/gn/header_checker_unittest.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 451,
+      "author": {
+        "id": 1000004
+      },
+      "writtenOn": "2021-03-19T16:24:08Z",
+      "side": 1,
+      "message": "80col",
+      "revId": "f7c4e3c6bb9bea7c2e838a8f3eda75cc351fe143",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7f43792d_8e0c9258",
+        "filename": "src/gn/target.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 451,
+      "author": {
+        "id": 1000004
+      },
+      "writtenOn": "2021-03-19T16:24:08Z",
+      "side": 1,
+      "message": "Maybe flip this around so that the \"All deps\" case return isn\u0027t duplicated here. (i.e. early out with empty when we\u0027re output_type_ GENERATED and type !\u003d METADATA.",
+      "revId": "f7c4e3c6bb9bea7c2e838a8f3eda75cc351fe143",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    }
+  ]
+}
