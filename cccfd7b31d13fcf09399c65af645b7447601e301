@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "3ccbe644_6d597820",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000004
+      },
+      "writtenOn": "2021-03-19T17:23:51Z",
+      "side": 1,
+      "message": "I started looking through uses of generated_file in our build, but I\u0027m afraid I don\u0027t understand how generated_file is used enough to know if something\u0027s going to break.\n\nDoes it mean anything to put a public_deps in a generated_file? Maybe that should be disallowed? (I don\u0027t see anything that would make it error out right now.)\n\n",
+      "revId": "cccfd7b31d13fcf09399c65af645b7447601e301",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    }
+  ]
+}
