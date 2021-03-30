@@ -16,6 +16,63 @@
       "message": "lgtm but I\u0027m not that familiar w/ lucicfg, so let\u0027s make sure iannucci reviews as well.",
       "revId": "946693bc3b62857a1a5f4d4571fd57ea336c606f",
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ff07c1a7_58b7b520",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000021
+      },
+      "writtenOn": "2021-03-30T15:59:08Z",
+      "side": 1,
+      "message": "lgtm",
+      "revId": "946693bc3b62857a1a5f4d4571fd57ea336c606f",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0476754c_b2509900",
+        "filename": "infra/config/main.star",
+        "patchSetId": 2
+      },
+      "lineNbr": 64,
+      "author": {
+        "id": 1000021
+      },
+      "writtenOn": "2021-03-30T15:59:08Z",
+      "side": 1,
+      "message": "this is defunct, you can remove it",
+      "revId": "946693bc3b62857a1a5f4d4571fd57ea336c606f",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b0a769ea_f4a5de75",
+        "filename": "infra/config/main.star",
+        "patchSetId": 2
+      },
+      "lineNbr": 116,
+      "author": {
+        "id": 1000021
+      },
+      "writtenOn": "2021-03-30T15:59:08Z",
+      "side": 1,
+      "message": "ditto",
+      "range": {
+        "startLine": 116,
+        "startChar": 41,
+        "endLine": 116,
+        "endChar": 47
+      },
+      "revId": "946693bc3b62857a1a5f4d4571fd57ea336c606f",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
     }
   ]
 }
