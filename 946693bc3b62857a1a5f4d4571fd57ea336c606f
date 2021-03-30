@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "96577702_fa44d033",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000012
+      },
+      "writtenOn": "2021-03-30T15:34:58Z",
+      "side": 1,
+      "message": "lgtm but I\u0027m not that familiar w/ lucicfg, so let\u0027s make sure iannucci reviews as well.",
+      "revId": "946693bc3b62857a1a5f4d4571fd57ea336c606f",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    }
+  ]
+}
