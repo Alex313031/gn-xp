@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "79006100_c6477bb3",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-03-30T08:51:49Z",
+      "side": 1,
+      "message": "IIRC Dirk expressed preference to keep infra configuration in the infra/config subdirectory rather than on the infra/config branch so I think we can use this opportunity to do the transition.",
+      "revId": "74b0b4ccabe58b68568742b9908ffeb10a536a2e",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    }
+  ]
+}
