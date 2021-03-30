@@ -1,0 +1,157 @@
+#!/usr/bin/env lucicfg
+
+lucicfg.config(
+    config_dir = "generated",
+    tracked_files = [
+        "commit-queue.cfg",
+        "cr-buildbucket.cfg",
+        "project.cfg",
+        "luci-logdog.cfg",
+        "luci-milo.cfg",
+        "luci-scheduler.cfg",
+    ],
+    fail_on_warnings = True,
+)
+
+luci.project(
+    name = "gn",
+    buildbucket = "cr-buildbucket.appspot.com",
+    logdog = "luci-logdog",
+    milo = "luci-milo",
+    scheduler = "luci-scheduler",
+    swarming = "chromium-swarm.appspot.com",
+    acls = [
+        acl.entry(
+            [
+                acl.BUILDBUCKET_READER,
+                acl.LOGDOG_READER,
+                acl.PROJECT_CONFIGS_READER,
+                acl.SCHEDULER_READER,
+            ],
+            groups = ["all"],
+        ),
+        acl.entry([acl.SCHEDULER_OWNER], groups = ["group:project-gn-committers"]),
+        acl.entry([acl.LOGDOG_WRITER], groups = ["luci-logdog-chromium-writers"]),
+    ],
+)
+
+luci.logdog(
+    gs_bucket = "chromium-luci-logdog",
+)
+
+luci.bucket(name = "ci", acls = [
+    acl.entry(
+        [acl.BUILDBUCKET_TRIGGERER],
+        users = [
+            "luci-scheduler@appspot.gserviceaccount.com",
+        ],
+    ),
+])
+
+def ci_builder(name, os, caches = []):
+    luci.builder(
+        name = name,
+        bucket = "ci",
+        executable = luci.recipe(
+            name = "gn",
+            cipd_package = "infra/recipe_bundles/gn.googlesource.com/gn",
+            cipd_version = "refs/heads/master",
+        ),
+        caches = caches,
+        service_account = "gn-ci-builder@chops-service-accounts.iam.gserviceaccount.com",
+        execution_timeout = 1 * time.hour,
+        dimensions = {"cpu": "x86-64", "os": os, "pool": "luci.flex.ci"},
+        swarming_tags = ["vpython:native-python-wrapper"],
+        triggered_by = ["gn-trigger"],
+    )
+    luci.console_view_entry(
+        console_view = "gn",
+        builder = "ci/" + name,
+        short_name = name,
+    )
+
+ci_builder("linux", "Ubuntu-16.04")
+ci_builder("mac", "Mac-10.15", caches = [swarming.cache("macos_sdk")])
+ci_builder("win", "Windows-10", caches = [swarming.cache("windows_sdk")])
+
+luci.milo(
+    logo = "https://storage.googleapis.com/chrome-infra-public/logo/gn-logo.png",
+)
+
+luci.console_view(
+    name = "gn",
+    title = "gn",
+    repo = "https://chromium.googlesource.com/external/github.com/llvm/llvm-project",
+    refs = ["refs/heads/master"],
+    favicon = "https://storage.googleapis.com/chrome-infra-public/logo/favicon.ico",
+)
+
+luci.gitiles_poller(
+    name = "gn-trigger",
+    bucket = "ci",
+    repo = "https://gn.googlesource.com/gn",
+    refs = ["refs/heads/master"],
+)
+
+luci.bucket(name = "try", acls = [
+    acl.entry(
+        [acl.BUILDBUCKET_TRIGGERER],
+        groups = ["project-gn-tryjob-access", "service-account-cq"],
+    ),
+])
+
+def try_builder(name, os, caches = []):
+    luci.builder(
+        name = name,
+        bucket = "try",
+        executable = luci.recipe(
+            name = "gn",
+            cipd_package = "infra/recipe_bundles/gn.googlesource.com/gn",
+            cipd_version = "refs/heads/master",
+        ),
+        service_account = "gn-try-builder@chops-service-accounts.iam.gserviceaccount.com",
+        caches = caches,
+        execution_timeout = 1 * time.hour,
+        dimensions = {"cpu": "x86-64", "os": os, "pool": "luci.flex.try"},
+        swarming_tags = ["vpython:native-python-wrapper"],
+    )
+
+try_builder("linux", "Ubuntu-16.04")
+try_builder("mac", "Mac-10.15", caches = [swarming.cache("macos_sdk")])
+try_builder("win", "Windows-10", caches = [swarming.cache("windows_sdk")])
+
+luci.cq(
+    submit_max_burst = 4,
+    submit_burst_delay = 8 * time.minute,
+)
+
+luci.cq_group(
+    name = "gn",
+    watch = cq.refset(
+        repo = "https://gn.googlesource.com/gn",
+        refs = ["refs/heads/master"],
+    ),
+    acls = [
+        acl.entry(
+            [acl.CQ_COMMITTER],
+            groups = ["project-gn-committers"],
+        ),
+        acl.entry(
+            [acl.CQ_DRY_RUNNER],
+            groups = ["project-gn-tryjob-access"],
+        ),
+    ],
+    retry_config = cq.retry_config(
+        single_quota = 1,
+        global_quota = 2,
+        failure_weight = 1,
+        transient_failure_weight = 1,
+        timeout_weight = 2,
+    ),
+    verifiers = [
+        luci.cq_tryjob_verifier(
+            builder = "try/" + builder,
+        )
+        for builder in ["linux", "mac", "win"]
+    ],
+)
