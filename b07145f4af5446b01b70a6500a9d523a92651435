@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c41673e7_f0bd8f62",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2021-04-03T17:05:41Z",
+      "side": 1,
+      "message": "The thread on testing on gn-dev reminded me of https://github.com/nico/hack/blob/master/llvmgnsyncbot/syncbot.py#L124 so I figured I\u0027d try to change this.",
+      "revId": "b07145f4af5446b01b70a6500a9d523a92651435",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    }
+  ]
+}
