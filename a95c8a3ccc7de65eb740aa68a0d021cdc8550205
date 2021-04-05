@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "5ddb456c_e783b9ac",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000012
+      },
+      "writtenOn": "2021-04-05T17:20:24Z",
+      "side": 1,
+      "message": "Erroring out on unknown keys make sense, but you didn\u0027t explain why you think the other keys\nshould be optional?\n\nI suppose I\u0027m okay with it, but you should\u0027ve updated the help text accordingly ...",
+      "revId": "a95c8a3ccc7de65eb740aa68a0d021cdc8550205",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    }
+  ]
+}
