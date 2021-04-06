@@ -16,6 +16,24 @@
       "message": "Erroring out on unknown keys make sense, but you didn\u0027t explain why you think the other keys\nshould be optional?\n\nI suppose I\u0027m okay with it, but you should\u0027ve updated the help text accordingly ...",
       "revId": "a95c8a3ccc7de65eb740aa68a0d021cdc8550205",
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "1558785f_439e57bf",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2021-04-06T12:59:15Z",
+      "side": 1,
+      "message": "I tried to explain it here: https://gn-review.googlesource.com/c/gn/+/11340/3#message-f7ba5225dc1b43172dd064821395d73984df6a5e\n\nDoc update here: Also, re-run `out/gn --markdown help all \u003e docs/reference.md`, which",
+      "parentUuid": "5ddb456c_e783b9ac",
+      "revId": "a95c8a3ccc7de65eb740aa68a0d021cdc8550205",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
     }
   ]
 }
