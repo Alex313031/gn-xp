@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e4dbf4c5_5002f1c2",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1001702
+      },
+      "writtenOn": "2021-04-15T17:54:30Z",
+      "side": 1,
+      "message": "Hey, would you mind taking a look at this patch? Adding you based on other patches you\u0027ve reviewed recently. Thanks!",
+      "revId": "96c2c512aa7278691cbd7569aeb73092af33f097",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    }
+  ]
+}
