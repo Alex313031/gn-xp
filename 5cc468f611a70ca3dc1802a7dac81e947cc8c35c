@@ -1,6 +1,29 @@
 {
   "comments": [
     {
+      "unresolved": true,
+      "key": {
+        "uuid": "25836d36_ef9fce8c",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 3
+      },
+      "lineNbr": 12,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-04-21T17:05:13Z",
+      "side": 1,
+      "message": "Should we consider introducing rust_dynamic_library?",
+      "range": {
+        "startLine": 11,
+        "startChar": 64,
+        "endLine": 12,
+        "endChar": 33
+      },
+      "revId": "5cc468f611a70ca3dc1802a7dac81e947cc8c35c",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
       "unresolved": false,
       "key": {
         "uuid": "2fd56e2c_09cd0650",
@@ -48,6 +71,29 @@
       "writtenOn": "2021-03-02T15:26:05Z",
       "side": 1,
       "message": "nit: Correct me if I\u0027m wrong, but it looks like this method should receive the |target| value that this RustValue instance is created from to work properly. In this case, what do you think about turning this into a static method as in:\n\n  // static\n  RustValues::CrateType RustValues::InferredCrateType(const Target* target) const {\n    CrateType crate_type \u003d target-\u003erust_values().crate_type();\n    if (crate_type !\u003d CRATE_AUTO) {\n      return crate_type;\n    }\n    switch (target-\u003eoutput_type()) {\n       ...\n     }\n  }\n\nThis would simplify call sites and be slightly less error prone, i.e.:\n\n  RustValues::InferredCrateType(target)\n\nInstead of:\n\n  target-\u003erust_values().InferredCrateType(target)",
+      "revId": "5cc468f611a70ca3dc1802a7dac81e947cc8c35c",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2bc22ec2_89b5334b",
+        "filename": "src/gn/rust_values.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 16,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-04-21T17:05:13Z",
+      "side": 1,
+      "message": "FYI I was hoping we would eventually eliminate crate_type altogether, I think exposing that variable was a mistake because it allows things like:\n\nexecutable(\"foo\") {\n  crate_type \u003d \"rlib\"\n}\n\nIt\u0027s unclear what should be the result of that.\n\nCan you leave a TODO comment here that mentions that?",
+      "range": {
+        "startLine": 14,
+        "startChar": 0,
+        "endLine": 16,
+        "endChar": 3
+      },
       "revId": "5cc468f611a70ca3dc1802a7dac81e947cc8c35c",
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
     },
