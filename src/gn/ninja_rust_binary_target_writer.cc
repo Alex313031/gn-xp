@@ -111,10 +111,10 @@ NinjaRustBinaryTargetWriter::~NinjaRustBinaryTargetWriter() = default;
 void NinjaRustBinaryTargetWriter::Run() {
   DCHECK(target_->output_type() != Target::SOURCE_SET);
 
-  size_t num_stamp_uses = target_->sources().size();
+  size_t num_output_uses = target_->sources().size();
 
-  std::vector<OutputFile> input_deps = WriteInputsStampAndGetDep(
-      num_stamp_uses);
+  std::vector<OutputFile> input_deps =
+      WriteInputsPhonyAndGetDep(num_output_uses);
 
   WriteCompilerVars();
 
@@ -125,8 +125,8 @@ void NinjaRustBinaryTargetWriter::Run() {
   // Ninja to make sure the inputs are up to date before compiling this source,
   // but changes in the inputs deps won't cause the file to be recompiled. See
   // the comment on NinjaCBinaryTargetWriter::Run for more detailed explanation.
-  std::vector<OutputFile> order_only_deps = WriteInputDepsStampAndGetDep(
-      std::vector<const Target*>(), num_stamp_uses);
+  std::vector<OutputFile> order_only_deps = WriteInputDepsPhonyAndGetDep(
+      std::vector<const Target*>(), num_output_uses);
   std::copy(input_deps.begin(), input_deps.end(),
             std::back_inserter(order_only_deps));
 
@@ -145,14 +145,19 @@ void NinjaRustBinaryTargetWriter::Run() {
                      classified_deps.extra_object_files.begin(),
                      classified_deps.extra_object_files.end());
   for (const auto* framework_dep : classified_deps.framework_deps) {
-    order_only_deps.push_back(framework_dep->dependency_output_file());
+    CHECK(framework_dep->dependency_output_file());
+    order_only_deps.push_back(*framework_dep->dependency_output_file());
   }
   for (const auto* non_linkable_dep : classified_deps.non_linkable_deps) {
-    if (non_linkable_dep->source_types_used().RustSourceUsed() &&
-        non_linkable_dep->output_type() != Target::SOURCE_SET) {
-      rustdeps.push_back(non_linkable_dep->dependency_output_file());
+    if (non_linkable_dep->dependency_output_file_or_phony()) {
+      if (non_linkable_dep->source_types_used().RustSourceUsed() &&
+          non_linkable_dep->output_type() != Target::SOURCE_SET) {
+        rustdeps.push_back(
+            *non_linkable_dep->dependency_output_file_or_phony());
+      }
+      order_only_deps.push_back(
+          *non_linkable_dep->dependency_output_file_or_phony());
     }
-    order_only_deps.push_back(non_linkable_dep->dependency_output_file());
   }
   for (const auto* linkable_dep : classified_deps.linkable_deps) {
     // Rust cdylibs are treated as non-Rust dependencies for linking purposes.
@@ -162,7 +167,8 @@ void NinjaRustBinaryTargetWriter::Run() {
     } else {
       nonrustdeps.push_back(linkable_dep->link_output_file());
     }
-    implicit_deps.push_back(linkable_dep->dependency_output_file());
+    CHECK(linkable_dep->dependency_output_file());
+    implicit_deps.push_back(*linkable_dep->dependency_output_file());
   }
 
   // Rust libraries specified by paths.
@@ -181,7 +187,8 @@ void NinjaRustBinaryTargetWriter::Run() {
   for (const auto* dep :
        target_->rust_values().transitive_libs().GetOrdered()) {
     if (dep->source_types_used().RustSourceUsed()) {
-      transitive_rustlibs.push_back(dep->dependency_output_file());
+      CHECK(dep->dependency_output_file());
+      transitive_rustlibs.push_back(*dep->dependency_output_file());
     }
   }
 
@@ -257,6 +264,7 @@ void NinjaRustBinaryTargetWriter::WriteExterns(
         (target->source_types_used().RustSourceUsed() &&
          target->rust_values().InferredCrateType(target) ==
              RustValues::CRATE_DYLIB)) {
+      CHECK(target->dependency_output_file());
       out_ << " --extern ";
       const auto& renamed_dep =
           target_->rust_values().aliased_deps().find(target->label());
@@ -265,7 +273,7 @@ void NinjaRustBinaryTargetWriter::WriteExterns(
       } else {
         out_ << std::string(target->rust_values().crate_name()) << "=";
       }
-      path_output_.WriteFile(out_, target->dependency_output_file());
+      path_output_.WriteFile(out_, *target->dependency_output_file());
     }
   }
 

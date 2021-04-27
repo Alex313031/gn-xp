@@ -55,7 +55,7 @@ TEST_F(NinjaCBinaryTargetWriterTest, SourceSet) {
         "build obj/foo/bar.input1.o: cxx ../../foo/input1.cc\n"
         "build obj/foo/bar.input2.o: cxx ../../foo/input2.cc\n"
         "\n"
-        "build obj/foo/bar.stamp: stamp obj/foo/bar.input1.o "
+        "build phony/foo/bar: phony obj/foo/bar.input1.o "
         "obj/foo/bar.input2.o ../../foo/input3.o ../../foo/input4.obj\n";
     std::string out_str = out.str();
     EXPECT_EQ(expected, out_str) << expected << "\n" << out_str;
@@ -86,7 +86,7 @@ TEST_F(NinjaCBinaryTargetWriterTest, SourceSet) {
         // order.
         "build ./libshlib.so: solink obj/foo/bar.input1.o "
         "obj/foo/bar.input2.o ../../foo/input3.o ../../foo/input4.obj "
-        "|| obj/foo/bar.stamp\n"
+        "|| phony/foo/bar\n"
         "  ldflags =\n"
         "  libs =\n"
         "  frameworks =\n"
@@ -119,7 +119,7 @@ TEST_F(NinjaCBinaryTargetWriterTest, SourceSet) {
         "\n"
         // There are no sources so there are no params to alink. (In practice
         // this will probably fail in the archive tool.)
-        "build obj/foo/libstlib.a: alink || obj/foo/bar.stamp\n"
+        "build obj/foo/libstlib.a: alink || phony/foo/bar\n"
         "  arflags =\n"
         "  output_extension = \n"
         "  output_dir = \n";
@@ -147,7 +147,7 @@ TEST_F(NinjaCBinaryTargetWriterTest, SourceSet) {
         // order.
         "build obj/foo/libstlib.a: alink obj/foo/bar.input1.o "
         "obj/foo/bar.input2.o ../../foo/input3.o ../../foo/input4.obj "
-        "|| obj/foo/bar.stamp\n"
+        "|| phony/foo/bar\n"
         "  arflags =\n"
         "  output_extension = \n"
         "  output_dir = \n";
@@ -329,15 +329,15 @@ TEST_F(NinjaCBinaryTargetWriterTest, OutputExtensionAndInputDeps) {
       "target_output_name = libshlib\n"
       "\n"
       "build obj/foo/libshlib.input1.o: cxx ../../foo/input1.cc"
-      " || obj/foo/action.stamp\n"
+      " || phony/foo/action\n"
       "build obj/foo/libshlib.input2.o: cxx ../../foo/input2.cc"
-      " || obj/foo/action.stamp\n"
+      " || phony/foo/action\n"
       "\n"
       "build ./libshlib.so.6: solink obj/foo/libshlib.input1.o "
       // The order-only dependency here is stricly unnecessary since the
       // sources list this as an order-only dep. See discussion in the code
       // that writes this.
-      "obj/foo/libshlib.input2.o || obj/foo/action.stamp\n"
+      "obj/foo/libshlib.input2.o || phony/foo/action\n"
       "  ldflags =\n"
       "  libs =\n"
       "  frameworks =\n"
@@ -392,12 +392,12 @@ TEST_F(NinjaCBinaryTargetWriterTest, NoHardDepsToNoPublicHeaderTarget) {
       "target_output_name = gen_obj\n"
       "\n"
       "build obj/out/Debug/gen_obj.generated.o: cxx generated.cc"
-      " || obj/foo/generate.stamp\n"
+      " || phony/foo/generate\n"
       "\n"
-      "build obj/foo/gen_obj.stamp: stamp obj/out/Debug/gen_obj.generated.o"
+      "build phony/foo/gen_obj: phony obj/out/Debug/gen_obj.generated.o"
       // The order-only dependency here is strictly unnecessary since the
       // sources list this as an order-only dep.
-      " || obj/foo/generate.stamp\n";
+      " || phony/foo/generate\n";
 
   std::string obj_str = obj_out.str();
   EXPECT_EQ(obj_expected, obj_str);
@@ -429,8 +429,8 @@ TEST_F(NinjaCBinaryTargetWriterTest, NoHardDepsToNoPublicHeaderTarget) {
       "build ./libgen_lib.so: solink obj/out/Debug/gen_obj.generated.o"
       // The order-only dependency here is strictly unnecessary since
       // obj/out/Debug/gen_obj.generated.o has dependency to
-      // obj/foo/gen_obj.stamp
-      " || obj/foo/gen_obj.stamp\n"
+      // phony/foo/gen_obj
+      " || phony/foo/gen_obj\n"
       "  ldflags =\n"
       "  libs =\n"
       "  frameworks =\n"
@@ -542,6 +542,8 @@ TEST_F(NinjaCBinaryTargetWriterTest, FrameworksAndFrameworkDirs) {
   Target framework(setup.settings(), Label(SourceDir("//bar"), "framework"));
   framework.set_output_type(Target::CREATE_BUNDLE);
   framework.bundle_data().product_type() = "com.apple.product-type.framework";
+  framework.bundle_data().set_partial_info_plist(
+      SourceFile("//out/Debug/bar/framework/framework_partial_info.plist"));
   framework.public_configs().push_back(LabelConfigPair(&framework_config));
   framework.SetToolchain(setup.toolchain());
   framework.visibility().SetPublic();
@@ -568,7 +570,7 @@ TEST_F(NinjaCBinaryTargetWriterTest, FrameworksAndFrameworkDirs) {
       "target_output_name = libshlib\n"
       "\n"
       "\n"
-      "build ./libshlib.so: solink | obj/bar/framework.stamp\n"
+      "build ./libshlib.so: solink | phony/bar/framework\n"
       "  ldflags = -F.\n"
       "  libs =\n"
       "  frameworks = -framework System -framework Bar "
@@ -654,7 +656,7 @@ TEST_F(NinjaCBinaryTargetWriterTest, SourceSetDataDeps) {
   NinjaCBinaryTargetWriter inter_writer(&inter, inter_out);
   inter_writer.Run();
 
-  // The intermediate source set will be a stamp file that depends on the
+  // The intermediate source set will be a phony target that depends on the
   // object files, and will have an order-only dependency on its data dep and
   // data file.
   const char inter_expected[] =
@@ -668,7 +670,7 @@ TEST_F(NinjaCBinaryTargetWriterTest, SourceSetDataDeps) {
       "\n"
       "build obj/foo/inter.inter.o: cxx ../../foo/inter.cc\n"
       "\n"
-      "build obj/foo/inter.stamp: stamp obj/foo/inter.inter.o || "
+      "build phony/foo/inter: phony obj/foo/inter.inter.o || "
       "./data_target\n";
   EXPECT_EQ(inter_expected, inter_out.str());
 
@@ -687,7 +689,7 @@ TEST_F(NinjaCBinaryTargetWriterTest, SourceSetDataDeps) {
 
   // The final output depends on both object files (one from the final target,
   // one from the source set) and has an order-only dependency on the source
-  // set's stamp file and the final target's data file. The source set stamp
+  // set's phony target and the final target's data file. The source set phony
   // dependency will create an implicit order-only dependency on the data
   // target.
   const char final_expected[] =
@@ -702,7 +704,7 @@ TEST_F(NinjaCBinaryTargetWriterTest, SourceSetDataDeps) {
       "build obj/foo/exe.final.o: cxx ../../foo/final.cc\n"
       "\n"
       "build ./exe: link obj/foo/exe.final.o obj/foo/inter.inter.o || "
-      "obj/foo/inter.stamp\n"
+      "phony/foo/inter\n"
       "  ldflags =\n"
       "  libs =\n"
       "  frameworks =\n"
@@ -891,8 +893,8 @@ TEST_F(NinjaCBinaryTargetWriterTest, WinPrecompiledHeaders) {
         "build withpch/obj/foo/no_pch_target.input2.o: "
         "withpch_cc ../../foo/input2.c\n"
         "\n"
-        "build withpch/obj/foo/no_pch_target.stamp: "
-        "withpch_stamp withpch/obj/foo/no_pch_target.input1.o "
+        "build withpch/phony/foo/no_pch_target: "
+        "phony withpch/obj/foo/no_pch_target.input1.o "
         "withpch/obj/foo/no_pch_target.input2.o\n";
     EXPECT_EQ(no_pch_expected, out.str());
   }
@@ -945,7 +947,7 @@ TEST_F(NinjaCBinaryTargetWriterTest, WinPrecompiledHeaders) {
         // Explicit dependency on the PCH build step.
         "withpch/obj/build/pch_target.precompile.c.o\n"
         "\n"
-        "build withpch/obj/foo/pch_target.stamp: withpch_stamp "
+        "build withpch/phony/foo/pch_target: phony "
         "withpch/obj/foo/pch_target.input1.o "
         "withpch/obj/foo/pch_target.input2.o "
         // The precompiled object files were added to the outputs.
@@ -1025,8 +1027,8 @@ TEST_F(NinjaCBinaryTargetWriterTest, GCCPrecompiledHeaders) {
         "build withpch/obj/foo/no_pch_target.input2.o: "
         "withpch_cc ../../foo/input2.c\n"
         "\n"
-        "build withpch/obj/foo/no_pch_target.stamp: "
-        "withpch_stamp withpch/obj/foo/no_pch_target.input1.o "
+        "build withpch/phony/foo/no_pch_target: "
+        "phony withpch/obj/foo/no_pch_target.input1.o "
         "withpch/obj/foo/no_pch_target.input2.o\n";
     EXPECT_EQ(no_pch_expected, out.str());
   }
@@ -1077,8 +1079,8 @@ TEST_F(NinjaCBinaryTargetWriterTest, GCCPrecompiledHeaders) {
         // Explicit dependency on the PCH build step.
         "withpch/obj/build/pch_target.precompile.h-c.gch\n"
         "\n"
-        "build withpch/obj/foo/pch_target.stamp: "
-        "withpch_stamp withpch/obj/foo/pch_target.input1.o "
+        "build withpch/phony/foo/pch_target: "
+        "phony withpch/obj/foo/pch_target.input1.o "
         "withpch/obj/foo/pch_target.input2.o\n";
     EXPECT_EQ(pch_gcc_expected, out.str());
   }
@@ -1143,7 +1145,7 @@ TEST_F(NinjaCBinaryTargetWriterTest, InputFiles) {
         "build obj/foo/bar.input2.o: cxx ../../foo/input2.cc"
         " | ../../foo/input.data\n"
         "\n"
-        "build obj/foo/bar.stamp: stamp obj/foo/bar.input1.o "
+        "build phony/foo/bar: phony obj/foo/bar.input1.o "
         "obj/foo/bar.input2.o\n";
 
     EXPECT_EQ(expected, out.str());
@@ -1207,14 +1209,14 @@ TEST_F(NinjaCBinaryTargetWriterTest, InputFiles) {
         "target_out_dir = obj/foo\n"
         "target_output_name = bar\n"
         "\n"
-        "build obj/foo/bar.inputs.stamp: stamp"
+        "build phony/foo/bar.inputs: phony"
         " ../../foo/input1.data ../../foo/input2.data\n"
         "build obj/foo/bar.input1.o: cxx ../../foo/input1.cc"
-        " | obj/foo/bar.inputs.stamp\n"
+        " | phony/foo/bar.inputs\n"
         "build obj/foo/bar.input2.o: cxx ../../foo/input2.cc"
-        " | obj/foo/bar.inputs.stamp\n"
+        " | phony/foo/bar.inputs\n"
         "\n"
-        "build obj/foo/bar.stamp: stamp obj/foo/bar.input1.o "
+        "build phony/foo/bar: phony obj/foo/bar.input1.o "
         "obj/foo/bar.input2.o\n";
 
     EXPECT_EQ(expected, out.str());
@@ -1257,14 +1259,14 @@ TEST_F(NinjaCBinaryTargetWriterTest, InputFiles) {
         "target_out_dir = obj/foo\n"
         "target_output_name = bar\n"
         "\n"
-        "build obj/foo/bar.inputs.stamp: stamp"
+        "build phony/foo/bar.inputs: phony"
         " ../../foo/input1.data ../../foo/input2.data ../../foo/input3.data\n"
         "build obj/foo/bar.input1.o: cxx ../../foo/input1.cc"
-        " | obj/foo/bar.inputs.stamp\n"
+        " | phony/foo/bar.inputs\n"
         "build obj/foo/bar.input2.o: cxx ../../foo/input2.cc"
-        " | obj/foo/bar.inputs.stamp\n"
+        " | phony/foo/bar.inputs\n"
         "\n"
-        "build obj/foo/bar.stamp: stamp obj/foo/bar.input1.o "
+        "build phony/foo/bar: phony obj/foo/bar.input1.o "
         "obj/foo/bar.input2.o\n";
 
     EXPECT_EQ(expected, out.str());
@@ -1576,7 +1578,7 @@ TEST_F(NinjaCBinaryTargetWriterTest, SwiftModule) {
         "\n"
         "build obj/foo/file1.o obj/foo/file2.o: stamp obj/foo/Foo.swiftmodule\n"
         "\n"
-        "build obj/foo/foo.stamp: stamp"
+        "build phony/foo/foo: phony"
         " obj/foo/file1.o obj/foo/file2.o\n";
 
     const std::string out_str = out.str();
@@ -1609,13 +1611,13 @@ TEST_F(NinjaCBinaryTargetWriterTest, SwiftModule) {
         "target_output_name = bar\n"
         "\n"
         "build obj/bar/Bar.swiftmodule: swift ../../bar/bar.swift"
-        " || obj/foo/foo.stamp\n"
+        " || phony/foo/foo\n"
         "\n"
         "build obj/bar/bar.o: stamp obj/bar/Bar.swiftmodule"
-        " || obj/foo/foo.stamp\n"
+        " || phony/foo/foo\n"
         "\n"
-        "build obj/bar/bar.stamp: stamp obj/bar/bar.o "
-        "|| obj/foo/foo.stamp\n";
+        "build phony/bar/bar: phony obj/bar/bar.o "
+        "|| phony/foo/foo\n";
 
     const std::string out_str = out.str();
     EXPECT_EQ(expected, out_str) << expected << "\n" << out_str;
@@ -1655,13 +1657,13 @@ TEST_F(NinjaCBinaryTargetWriterTest, SwiftModule) {
         "target_output_name = bar\n"
         "\n"
         "build obj/bar/Bar.swiftmodule: swift ../../bar/bar.swift"
-        " || obj/foo/foo.stamp\n"
+        " || phony/foo/foo\n"
         "\n"
         "build obj/bar/bar.o: stamp obj/bar/Bar.swiftmodule"
-        " || obj/foo/foo.stamp\n"
+        " || phony/foo/foo\n"
         "\n"
-        "build obj/bar/bar.stamp: stamp obj/bar/bar.o "
-        "|| obj/bar/group.stamp obj/foo/foo.stamp\n";
+        "build phony/bar/bar: phony obj/bar/bar.o "
+        "|| phony/bar/group phony/foo/foo\n";
 
     const std::string out_str = out.str();
     EXPECT_EQ(expected, out_str) << expected << "\n" << out_str;
@@ -1690,7 +1692,7 @@ TEST_F(NinjaCBinaryTargetWriterTest, SwiftModule) {
         "\n"
         "build ./bar: link obj/foo/file1.o obj/foo/file2.o "
         "| obj/foo/Foo.swiftmodule "
-        "|| obj/foo/foo.stamp\n"
+        "|| phony/foo/foo\n"
         "  ldflags =\n"
         "  libs =\n"
         "  frameworks =\n"

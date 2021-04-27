@@ -76,11 +76,11 @@ void NinjaCreateBundleTargetWriter::Run() {
   if (!EnsureAllToolsAvailable(target_))
     return;
 
-  // Stamp users are CopyBundleData, CompileAssetsCatalog, CodeSigning and
-  // StampForTarget.
-  size_t num_stamp_uses = 4;
-  std::vector<OutputFile> order_only_deps = WriteInputDepsStampAndGetDep(
-      std::vector<const Target*>(), num_stamp_uses);
+  // Output users are CopyBundleData, CompileAssetsCatalog, CodeSigning and
+  // PhonyForTarget.
+  size_t num_output_uses = 4;
+  std::vector<OutputFile> order_only_deps = WriteInputDepsPhonyAndGetDep(
+      std::vector<const Target*>(), num_output_uses);
 
   std::string code_signing_rule_name = WriteCodeSigningRuleDefinition();
 
@@ -89,9 +89,17 @@ void NinjaCreateBundleTargetWriter::Run() {
   WriteCompileAssetsCatalogStep(order_only_deps, &output_files);
   WriteCodeSigningStep(code_signing_rule_name, order_only_deps, &output_files);
 
-  for (const auto& pair : target_->data_deps())
-    order_only_deps.push_back(pair.ptr->dependency_output_file());
-  WriteStampForTarget(output_files, order_only_deps);
+  for (const auto& pair : target_->data_deps()) {
+    if (pair.ptr->dependency_output_file_or_phony())
+      order_only_deps.push_back(*pair.ptr->dependency_output_file_or_phony());
+  }
+
+  // If the target does not have a phony target to write, then we have nothing
+  // left to do.
+  if (!target_->dependency_output_file_or_phony())
+    return;
+
+  WritePhonyForTarget(output_files, order_only_deps);
 
   // Write a phony target for the outer bundle directory. This allows other
   // targets to treat the entire bundle as a single unit, even though it is
@@ -101,7 +109,8 @@ void NinjaCreateBundleTargetWriter::Run() {
       out_,
       OutputFile(settings_->build_settings(),
                  target_->bundle_data().GetBundleRootDirOutput(settings_)));
-  out_ << ": phony " << target_->dependency_output_file().value();
+  out_ << ": " << BuiltinTool::kBuiltinToolPhony << " ";
+  out_ << target_->dependency_output_file_or_phony()->value();
   out_ << std::endl;
 }
 
@@ -217,7 +226,7 @@ void NinjaCreateBundleTargetWriter::WriteCompileAssetsCatalogStep(
     return;
   }
 
-  OutputFile input_dep = WriteCompileAssetsCatalogInputDepsStamp(
+  OutputFile input_dep = WriteCompileAssetsCatalogInputDepsPhony(
       target_->bundle_data().assets_catalog_deps());
   DCHECK(!input_dep.value().empty());
 
@@ -277,28 +286,32 @@ void NinjaCreateBundleTargetWriter::WriteCompileAssetsCatalogStep(
 }
 
 OutputFile
-NinjaCreateBundleTargetWriter::WriteCompileAssetsCatalogInputDepsStamp(
+NinjaCreateBundleTargetWriter::WriteCompileAssetsCatalogInputDepsPhony(
     const std::vector<const Target*>& dependencies) {
   DCHECK(!dependencies.empty());
-  if (dependencies.size() == 1)
-    return dependencies[0]->dependency_output_file();
+  if (dependencies.size() == 1) {
+    return dependencies[0]->dependency_output_file_or_phony()
+               ? *dependencies[0]->dependency_output_file_or_phony()
+               : OutputFile{};
+  }
 
-  OutputFile xcassets_input_stamp_file =
-      GetBuildDirForTargetAsOutputFile(target_, BuildDirType::OBJ);
-  xcassets_input_stamp_file.value().append(target_->label().name());
-  xcassets_input_stamp_file.value().append(".xcassets.inputdeps.stamp");
+  OutputFile xcassets_input_phony =
+      GetBuildDirForTargetAsOutputFile(target_, BuildDirType::PHONY);
+  xcassets_input_phony.value().append(target_->label().name());
+  xcassets_input_phony.value().append(".xcassets.inputdeps");
 
   out_ << "build ";
-  path_output_.WriteFile(out_, xcassets_input_stamp_file);
-  out_ << ": " << GetNinjaRulePrefixForToolchain(settings_)
-       << GeneralTool::kGeneralToolStamp;
+  path_output_.WriteFile(out_, xcassets_input_phony);
+  out_ << ": " << BuiltinTool::kBuiltinToolPhony;
 
   for (const Target* target : dependencies) {
-    out_ << " ";
-    path_output_.WriteFile(out_, target->dependency_output_file());
+    if (target->dependency_output_file_or_phony()) {
+      out_ << " ";
+      path_output_.WriteFile(out_, *target->dependency_output_file_or_phony());
+    }
   }
   out_ << std::endl;
-  return xcassets_input_stamp_file;
+  return xcassets_input_phony;
 }
 
 void NinjaCreateBundleTargetWriter::WriteCodeSigningStep(
@@ -308,9 +321,9 @@ void NinjaCreateBundleTargetWriter::WriteCodeSigningStep(
   if (code_signing_rule_name.empty())
     return;
 
-  OutputFile code_signing_input_stamp_file =
-      WriteCodeSigningInputDepsStamp(order_only_deps, output_files);
-  DCHECK(!code_signing_input_stamp_file.value().empty());
+  OutputFile code_signing_input_phony =
+      WriteCodeSigningInputDepsPhony(order_only_deps, output_files);
+  DCHECK(!code_signing_input_phony.value().empty());
 
   out_ << "build";
   std::vector<OutputFile> code_signing_output_files;
@@ -320,17 +333,17 @@ void NinjaCreateBundleTargetWriter::WriteCodeSigningStep(
   path_output_.WriteFiles(out_, code_signing_output_files);
 
   // Since the code signature step depends on all the files from the bundle,
-  // the create_bundle stamp can just depends on the output of the signature
+  // the create_bundle phony can just depends on the output of the signature
   // script (dependencies are transitive).
   *output_files = std::move(code_signing_output_files);
 
   out_ << ": " << code_signing_rule_name;
   out_ << " | ";
-  path_output_.WriteFile(out_, code_signing_input_stamp_file);
+  path_output_.WriteFile(out_, code_signing_input_phony);
   out_ << std::endl;
 }
 
-OutputFile NinjaCreateBundleTargetWriter::WriteCodeSigningInputDepsStamp(
+OutputFile NinjaCreateBundleTargetWriter::WriteCodeSigningInputDepsPhony(
     const std::vector<OutputFile>& order_only_deps,
     std::vector<OutputFile>* output_files) {
   std::vector<SourceFile> code_signing_input_files;
@@ -349,15 +362,14 @@ OutputFile NinjaCreateBundleTargetWriter::WriteCodeSigningInputDepsStamp(
   if (code_signing_input_files.size() == 1 && order_only_deps.empty())
     return OutputFile(settings_->build_settings(), code_signing_input_files[0]);
 
-  OutputFile code_signing_input_stamp_file =
-      GetBuildDirForTargetAsOutputFile(target_, BuildDirType::OBJ);
-  code_signing_input_stamp_file.value().append(target_->label().name());
-  code_signing_input_stamp_file.value().append(".codesigning.inputdeps.stamp");
+  OutputFile code_signing_input_phony =
+      GetBuildDirForTargetAsOutputFile(target_, BuildDirType::PHONY);
+  code_signing_input_phony.value().append(target_->label().name());
+  code_signing_input_phony.value().append(".codesigning.inputdeps");
 
   out_ << "build ";
-  path_output_.WriteFile(out_, code_signing_input_stamp_file);
-  out_ << ": " << GetNinjaRulePrefixForToolchain(settings_)
-       << GeneralTool::kGeneralToolStamp;
+  path_output_.WriteFile(out_, code_signing_input_phony);
+  out_ << ": " << BuiltinTool::kBuiltinToolPhony;
 
   for (const SourceFile& source : code_signing_input_files) {
     out_ << " ";
@@ -368,5 +380,5 @@ OutputFile NinjaCreateBundleTargetWriter::WriteCodeSigningInputDepsStamp(
     path_output_.WriteFiles(out_, order_only_deps);
   }
   out_ << std::endl;
-  return code_signing_input_stamp_file;
+  return code_signing_input_phony;
 }
