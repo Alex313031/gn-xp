@@ -7,10 +7,10 @@
 #include <sstream>
 
 #include "base/strings/string_util.h"
+#include "gn/builtin_tool.h"
 #include "gn/config_values_extractors.h"
 #include "gn/deps_iterator.h"
 #include "gn/filesystem_utils.h"
-#include "gn/general_tool.h"
 #include "gn/ninja_c_binary_target_writer.h"
 #include "gn/ninja_rust_binary_target_writer.h"
 #include "gn/ninja_target_command_util.h"
@@ -50,8 +50,8 @@ void NinjaBinaryTargetWriter::Run() {
   writer.Run();
 }
 
-std::vector<OutputFile> NinjaBinaryTargetWriter::WriteInputsStampAndGetDep(
-    size_t num_stamp_uses) const {
+std::vector<OutputFile> NinjaBinaryTargetWriter::WriteInputsPhonyAndGetDep(
+    size_t num_output_uses) const {
   CHECK(target_->toolchain()) << "Toolchain not set on target "
                               << target_->label().GetUserVisibleName(true);
 
@@ -65,8 +65,8 @@ std::vector<OutputFile> NinjaBinaryTargetWriter::WriteInputsStampAndGetDep(
   if (inputs.size() == 0)
     return std::vector<OutputFile>();  // No inputs
 
-  // If we only have one input, return it directly instead of writing a stamp
-  // file for it.
+  // If we only have one input, return it directly instead of writing a phony
+  // target for it.
   if (inputs.size() == 1) {
     return std::vector<OutputFile>{
       OutputFile(settings_->build_settings(), *inputs[0])};
@@ -76,21 +76,22 @@ std::vector<OutputFile> NinjaBinaryTargetWriter::WriteInputsStampAndGetDep(
   for (const SourceFile* source : inputs)
     outs.push_back(OutputFile(settings_->build_settings(), *source));
 
-  // If there are multiple inputs, but the stamp file would be referenced only
+  // If there are multiple inputs, but the phony target would be referenced only
   // once, don't write it but depend on the inputs directly.
-  if (num_stamp_uses == 1u)
+  if (num_output_uses == 1u)
     return outs;
 
-  // Make a stamp file.
-  OutputFile stamp_file =
-      GetBuildDirForTargetAsOutputFile(target_, BuildDirType::OBJ);
-  stamp_file.value().append(target_->label().name());
-  stamp_file.value().append(".inputs.stamp");
+  // Make a phony target. We don't need to worry about an empty phony target, as
+  // those would have been peeled off already.
+  CHECK(!inputs.empty());
+  OutputFile phony_file =
+      GetBuildDirForTargetAsOutputFile(target_, BuildDirType::PHONY);
+  phony_file.value().append(target_->label().name());
+  phony_file.value().append(".inputs");
 
   out_ << "build ";
-  path_output_.WriteFile(out_, stamp_file);
-  out_ << ": " << GetNinjaRulePrefixForToolchain(settings_)
-       << GeneralTool::kGeneralToolStamp;
+  path_output_.WriteFile(out_, phony_file);
+  out_ << ": " << BuiltinTool::kBuiltinToolPhony;
 
   // File inputs.
   for (const auto* input : inputs) {
@@ -99,12 +100,12 @@ std::vector<OutputFile> NinjaBinaryTargetWriter::WriteInputsStampAndGetDep(
   }
 
   out_ << std::endl;
-  return {stamp_file};
+  return {phony_file};
 }
 
-void NinjaBinaryTargetWriter::WriteSourceSetStamp(
+void NinjaBinaryTargetWriter::WriteSourceSetPhony(
     const std::vector<OutputFile>& object_files) {
-  // The stamp rule for source sets is generally not used, since targets that
+  // The phony rule for source sets is generally not used, since targets that
   // depend on this will reference the object files directly. However, writing
   // this rule allows the user to type the name of the target and get a build
   // which can be convenient for development.
@@ -116,10 +117,12 @@ void NinjaBinaryTargetWriter::WriteSourceSetStamp(
   DCHECK(classified_deps.extra_object_files.empty());
 
   std::vector<OutputFile> order_only_deps;
-  for (auto* dep : classified_deps.non_linkable_deps)
-    order_only_deps.push_back(dep->dependency_output_file());
+  for (auto* dep : classified_deps.non_linkable_deps) {
+    if (dep->dependency_output_file_or_phony())
+      order_only_deps.push_back(*dep->dependency_output_file_or_phony());
+  }
 
-  WriteStampForTarget(object_files, order_only_deps);
+  WritePhonyForTarget(object_files, order_only_deps);
 }
 
 NinjaBinaryTargetWriter::ClassifiedDeps
@@ -185,7 +188,7 @@ void NinjaBinaryTargetWriter::ClassifyDependency(
       AddSourceSetFiles(dep, &classified_deps->extra_object_files);
 
     // Add the source set itself as a non-linkable dependency on the current
-    // target. This will make sure that anything the source set's stamp file
+    // target. This will make sure that anything the source set's phony target
     // depends on (like data deps) are also built before the current target
     // can be complete. Otherwise, these will be skipped since this target
     // will depend only on the source set's object files.
