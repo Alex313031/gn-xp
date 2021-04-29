@@ -33,6 +33,23 @@
       "message": "Hi, this code looks fine to me but since I don\u0027t know Rust I\u0027d like to get somebody that does know it who can verify that the high-level feature request is the correct new behavior. Added Tyler.",
       "revId": "96c2c512aa7278691cbd7569aeb73092af33f097",
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "84c38f4e_f2372b10",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1001702
+      },
+      "writtenOn": "2021-04-29T19:11:13Z",
+      "side": 1,
+      "message": "Thanks for the review Tyler.\n\nHow do I get this committed? I haven\u0027t used Gerrit before, but I assume one of you has to actually do that?",
+      "revId": "96c2c512aa7278691cbd7569aeb73092af33f097",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
     }
   ]
 }
