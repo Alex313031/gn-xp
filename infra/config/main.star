@@ -42,7 +42,7 @@ def builder(name, bucket, os, caches = None, triggered_by = None):
         executable = luci.recipe(
             name = "gn",
             cipd_package = "infra/recipe_bundles/gn.googlesource.com/gn",
-            cipd_version = "refs/heads/master",
+            cipd_version = "refs/heads/main",
         ),
         caches = caches,
         service_account = "gn-%s-builder@chops-service-accounts.iam.gserviceaccount.com" % bucket,
@@ -63,7 +63,7 @@ luci.console_view(
     name = "gn",
     title = "gn",
     repo = "https://chromium.googlesource.com/external/github.com/llvm/llvm-project",
-    refs = ["refs/heads/master"],
+    refs = ["refs/heads/main"],
     favicon = "https://storage.googleapis.com/chrome-infra-public/logo/favicon.ico",
 )
 
@@ -71,7 +71,7 @@ luci.gitiles_poller(
     name = "gn-trigger",
     bucket = "ci",
     repo = "https://gn.googlesource.com/gn",
-    refs = ["refs/heads/master"],
+    refs = ["refs/heads/main"],
 )
 
 luci.bucket(name = "ci", acls = [
@@ -104,7 +104,7 @@ luci.cq_group(
     name = "gn",
     watch = cq.refset(
         repo = "https://gn.googlesource.com/gn",
-        refs = ["refs/heads/master"],
+        refs = ["refs/heads/main"],
     ),
     acls = [
         acl.entry(
