@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "1d853f0d_be677421",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000070
+      },
+      "writtenOn": "2021-05-06T13:28:30Z",
+      "side": 1,
+      "message": "I\u0027m not sure whether this is worth it or not.",
+      "revId": "fb331f28822b2ae27e017d1a51f00f1e9909a31a",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    }
+  ]
+}
