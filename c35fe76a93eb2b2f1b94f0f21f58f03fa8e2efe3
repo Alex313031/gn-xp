@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d24b1758_2836d7f5",
+        "filename": "infra/config/main.star",
+        "patchSetId": 4
+      },
+      "lineNbr": 72,
+      "author": {
+        "id": 1000007
+      },
+      "writtenOn": "2021-05-06T19:43:05Z",
+      "side": 1,
+      "message": "btw, is this intentionally like this? I expected \"https://gn.googlesource.com/gn\" tbh.\n\nSee https://ci.chromium.org/p/gn/g/gn/console",
+      "range": {
+        "startLine": 72,
+        "startChar": 12,
+        "endLine": 72,
+        "endChar": 83
+      },
+      "revId": "c35fe76a93eb2b2f1b94f0f21f58f03fa8e2efe3",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    }
+  ]
+}
