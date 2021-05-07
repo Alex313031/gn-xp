@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "5f4417d3_2953ecdc",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000166
+      },
+      "writtenOn": "2021-05-07T21:59:25Z",
+      "side": 1,
+      "message": "Sigh, once more.\n\n(Is there any way I can get CQ+1 here?)",
+      "revId": "e2ba84413ecaf2f1a07e7290109a88fcd05bbd17",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    }
+  ]
+}
