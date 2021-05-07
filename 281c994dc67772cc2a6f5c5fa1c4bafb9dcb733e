@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "dea21ab9_494564d4",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2021-05-07T17:01:37Z",
+      "side": 1,
+      "message": "Does this have any measurable effect on either runtime or heap mem usage (as reported by `/usr/bin/time -r gn gen` on macos or `/usr/bin/time -v gn gen` on linux)?",
+      "revId": "281c994dc67772cc2a6f5c5fa1c4bafb9dcb733e",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    }
+  ]
+}
