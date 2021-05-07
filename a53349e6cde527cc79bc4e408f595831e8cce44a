@@ -16,6 +16,23 @@
       "message": "PTAL; I think this fixes windows",
       "revId": "a53349e6cde527cc79bc4e408f595831e8cce44a",
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "96b6a601_4dea0001",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000012
+      },
+      "writtenOn": "2021-05-07T21:44:04Z",
+      "side": 1,
+      "message": "still lgtm.",
+      "revId": "a53349e6cde527cc79bc4e408f595831e8cce44a",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
     }
   ]
 }
