@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "3f532a85_603a8823",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000166
+      },
+      "writtenOn": "2021-05-07T20:37:21Z",
+      "side": 1,
+      "message": "(I also don’t have CQ powers here, so if this LGTY please CQ).",
+      "revId": "6129021f114a2519cc284c771c77e7eb7574b2c8",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    }
+  ]
+}
