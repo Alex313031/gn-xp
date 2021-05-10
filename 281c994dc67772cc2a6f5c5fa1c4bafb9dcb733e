@@ -16,6 +16,24 @@
       "message": "Does this have any measurable effect on either runtime or heap mem usage (as reported by `/usr/bin/time -r gn gen` on macos or `/usr/bin/time -v gn gen` on linux)?",
       "revId": "281c994dc67772cc2a6f5c5fa1c4bafb9dcb733e",
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f80e7f65_c8e8080c",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000070
+      },
+      "writtenOn": "2021-05-10T11:04:30Z",
+      "side": 1,
+      "message": "I don\u0027t see anything really measurable on my machine. This is why I said that I was not sure whether it was worth the change or not. If it has negative impact on other platforms, I don\u0027t mind reverting.",
+      "parentUuid": "dea21ab9_494564d4",
+      "revId": "281c994dc67772cc2a6f5c5fa1c4bafb9dcb733e",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
     }
   ]
 }
