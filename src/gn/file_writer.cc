@@ -17,6 +17,10 @@
 #include "base/posix/eintr_wrapper.h"
 #endif
 
+#if defined(OS_ZOS)
+#include "base/files/file_util.h"
+#endif
+
 FileWriter::~FileWriter() = default;
 
 #if defined(OS_WIN)
