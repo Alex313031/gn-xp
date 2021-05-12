@@ -204,7 +204,12 @@ class ThreadLocalCache {
   KeySet local_set_;
 };
 
+#if !defined(OS_ZOS)
 thread_local ThreadLocalCache s_local_cache;
+#else
+// TODO(gabylb) - zos: thread_local not yet supported.
+ThreadLocalCache s_local_cache;
+#endif
 
 }  // namespace
 

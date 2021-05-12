@@ -345,6 +345,14 @@ enum FileSystemType {
 bool GetFileSystemType(const FilePath& path, FileSystemType* type);
 #endif
 
+#if defined(OS_ZOS)
+// Used to tag generated files; ccsid = coded character set identifier;
+// 819 is the ASCII encoding for ISO8859-1 character set.
+const unsigned short CCSID_ASCII = 819;
+int ChangeFileCCSID(int fd, unsigned short ccsid);
+int ChangeFileCCSID(const char *pathname, unsigned short ccsid);
+#endif
+
 }  // namespace base
 
 #endif  // BASE_FILES_FILE_UTIL_H_
