@@ -8,6 +8,9 @@
 #include <memory>
 
 #include "base/files/file_path.h"
+#if defined(OS_ZOS)
+#include "base/files/file_util.h"
+#endif
 #include "gn/builder.h"
 #include "gn/config_values_extractors.h"
 #include "gn/filesystem_utils.h"
@@ -55,17 +58,18 @@ bool EclipseWriter::RunAndWriteFile(const BuildSettings* build_settings,
                                     Err* err) {
   base::FilePath file = build_settings->GetFullPath(build_settings->build_dir())
                             .AppendASCII("eclipse-cdt-settings.xml");
-  std::ofstream file_out;
-  file_out.open(FilePathToUTF8(file).c_str(),
-                std::ios_base::out | std::ios_base::binary);
-  if (file_out.fail()) {
-    *err =
-        Err(Location(), "Couldn't open eclipse-cdt-settings.xml for writing");
-    return false;
+  {
+    std::ofstream file_out;
+    file_out.open(FilePathToUTF8(file).c_str(),
+                  std::ios_base::out | std::ios_base::binary);
+    if (file_out.fail()) {
+      *err =
+          Err(Location(), "Couldn't open eclipse-cdt-settings.xml for writing");
+      return false;
+    }
+    EclipseWriter gen(build_settings, builder, file_out);
+    gen.Run();
   }
-
-  EclipseWriter gen(build_settings, builder, file_out);
-  gen.Run();
   return true;
 }
 
