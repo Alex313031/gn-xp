@@ -8,6 +8,9 @@
 #include "base/logging.h"
 #include "base/strings/string_util.h"
 #include "util/build_config.h"
+#if defined(OS_ZOS)
+#include "util/zos_util.h"
+#endif
 
 #if defined(OS_MACOSX)
 #include <mach-o/dyld.h>
@@ -102,6 +105,16 @@ base::FilePath GetExePath() {
     return base::FilePath();
   }
   return base::FilePath(raw);
+}
+
+#elif defined(OS_ZOS)
+
+base::FilePath GetExePath() {
+  char exepath[PATH_MAX];
+  if (getexepath(exepath, sizeof(exepath), getpid())) {
+    return base::FilePath();
+  }
+  return base::FilePath(exepath);
 }
 
 #else

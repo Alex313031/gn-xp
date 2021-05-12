@@ -14,7 +14,9 @@
 #include <stdlib.h>
 #include <string.h>
 #include <sys/mman.h>
+#if !defined(OS_ZOS)
 #include <sys/param.h>
+#endif
 #include <sys/stat.h>
 #include <sys/time.h>
 #include <sys/types.h>
@@ -58,7 +60,8 @@ namespace base {
 namespace {
 
 #if defined(OS_BSD) || defined(OS_MACOSX) || defined(OS_NACL) || \
-    defined(OS_HAIKU) || defined(OS_MSYS) || defined(OS_ANDROID) && __ANDROID_API__ < 21
+    defined(OS_HAIKU) || defined(OS_MSYS) || defined(OS_ZOS) || \
+    defined(OS_ANDROID) && __ANDROID_API__ < 21
 int CallStat(const char* path, stat_wrapper_t* sb) {
   return stat(path, sb);
 }
@@ -143,6 +146,7 @@ bool CopyFileContents(File* infile, File* outfile) {
 // Appends |mode_char| to |mode| before the optional character set encoding; see
 // https://www.gnu.org/software/libc/manual/html_node/Opening-Streams.html for
 // details.
+#if !defined(OS_ZOS)
 std::string AppendModeCharacter(std::string_view mode, char mode_char) {
   std::string result(mode);
   size_t comma_pos = result.find(',');
@@ -150,8 +154,9 @@ std::string AppendModeCharacter(std::string_view mode, char mode_char) {
                 mode_char);
   return result;
 }
-#endif
+#endif  // !OS_ZOS
 
+#endif  // !OS_MACOSX
 }  // namespace
 
 FilePath MakeAbsoluteFilePath(const FilePath& input) {
@@ -382,11 +387,25 @@ static bool CreateTemporaryDirInDirImpl(const FilePath& base_dir,
 
   // this should be OK since mkdtemp just replaces characters in place
   char* buffer = const_cast<char*>(sub_dir_string.c_str());
+#if !defined(OS_ZOS)
   char* dtemp = mkdtemp(buffer);
   if (!dtemp) {
     DPLOG(ERROR) << "mkdtemp";
     return false;
   }
+#else
+  // TODO(gabylb) - zos: currently no mkdtemp on z/OS.
+  // Get a unique temp filename, which should also be unique as a directory name
+  char* dtemp = mktemp(buffer);
+  if (!dtemp) {
+    DPLOG(ERROR) << "mktemp";
+    return false;
+  }
+  if (mkdir(dtemp, S_IRWXU)) {
+    DPLOG(ERROR) << "mkdir";
+    return false;
+  }
+#endif
   *new_dir = FilePath(dtemp);
   return true;
 }
@@ -482,7 +501,7 @@ FILE* OpenFile(const FilePath& filename, const char* mode) {
       strchr(mode, 'e') == nullptr ||
       (strchr(mode, ',') != nullptr && strchr(mode, 'e') > strchr(mode, ',')));
   FILE* result = nullptr;
-#if defined(OS_MACOSX)
+#if defined(OS_MACOSX) || defined(OS_ZOS)
   // macOS does not provide a mode character to set O_CLOEXEC; see
   // https://developer.apple.com/legacy/library/documentation/Darwin/Reference/ManPages/man3/fopen.3.html.
   const char* the_mode = mode;
@@ -493,10 +512,15 @@ FILE* OpenFile(const FilePath& filename, const char* mode) {
   do {
     result = fopen(filename.value().c_str(), the_mode);
   } while (!result && errno == EINTR);
-#if defined(OS_MACOSX)
+#if defined(OS_MACOSX) || defined(OS_ZOS)
   // Mark the descriptor as close-on-exec.
-  if (result)
+  if (result) {
     SetCloseOnExec(fileno(result));
+#if defined(OS_ZOS)
+    if (strchr(the_mode, 'a') || strchr(the_mode, 'w'))
+      ChangeFileCCSID(fileno(result), CCSID_ASCII);
+#endif
+  }
 #endif
   return result;
 }
@@ -524,6 +548,10 @@ int WriteFile(const FilePath& filename, const char* data, int size) {
   if (fd < 0)
     return -1;
 
+#if defined(OS_ZOS)
+  ChangeFileCCSID(fd, CCSID_ASCII);
+#endif
+
   int bytes_written = WriteFileDescriptor(fd, data, size) ? size : -1;
   if (IGNORE_EINTR(close(fd)) < 0)
     return -1;
@@ -546,6 +574,9 @@ bool WriteFileDescriptor(const int fd, const char* data, int size) {
 
 bool AppendToFile(const FilePath& filename, const char* data, int size) {
   bool ret = true;
+#if defined(OS_ZOS)
+  bool created_ = (access(filename.value().c_str(), F_OK) != 0);
+#endif
   int fd = HANDLE_EINTR(open(filename.value().c_str(), O_WRONLY | O_APPEND));
   if (fd < 0) {
     return false;
@@ -555,6 +586,11 @@ bool AppendToFile(const FilePath& filename, const char* data, int size) {
   if (!WriteFileDescriptor(fd, data, size)) {
     ret = false;
   }
+
+#if defined(OS_ZOS)
+  if (created_)
+    ChangeFileCCSID(fd, CCSID_ASCII);
+#endif
 
   if (IGNORE_EINTR(close(fd)) < 0) {
     return false;
@@ -661,4 +697,31 @@ bool CopyFile(const FilePath& from_path, const FilePath& to_path) {
 }
 #endif  // !defined(OS_MACOSX)
 
+#if defined(OS_ZOS)
+
+int ChangeFileCCSID(int fd, unsigned short ccsid) {
+  attrib_t attr;
+  memset(&attr, 0, sizeof(attr));
+  attr.att_filetagchg = 1;
+  attr.att_filetag.ft_ccsid = ccsid;
+  if (ccsid != FT_BINARY)
+    attr.att_filetag.ft_txtflag = 1;
+
+  return HANDLE_EINTR(__fchattr(fd, &attr, sizeof(attr)));
+}
+
+int ChangeFileCCSID(const char *pathname, unsigned short ccsid) {
+  int flags = O_RDWR;
+  int mode = S_IRUSR | S_IWUSR;
+  int fd = HANDLE_EINTR(open(pathname, flags, mode));
+  if (fd < 0)
+    return -1;
+  if (ChangeFileCCSID(fd, ccsid))
+    return -1;
+  if (IGNORE_EINTR(close(fd)) < 0)
+    return -1;
+  return 0;
+}
+
+#endif  // defined(OS_ZOS)
 }  // namespace base

@@ -17,6 +17,10 @@
 #include "base/posix/eintr_wrapper.h"
 #endif
 
+#if defined(OS_ZOS)
+#include "base/files/file_util.h"
+#endif
+
 FileWriter::~FileWriter() = default;
 
 #if defined(OS_WIN)
@@ -80,6 +84,10 @@ bool FileWriter::Create(const base::FilePath& file_path) {
   if (!valid_) {
     PLOG(ERROR) << "creat() failed for path " << file_path.value();
   }
+#if defined(OS_ZOS)
+  base::ChangeFileCCSID(fd_.get(), base::CCSID_ASCII);
+#endif
+
   return valid_;
 }
 
