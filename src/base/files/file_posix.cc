@@ -15,6 +15,10 @@
 #include "base/strings/utf_string_conversions.h"
 #include "util/build_config.h"
 
+#if defined(OS_ZOS)
+#include "base/files/file_util.h"
+#endif
+
 namespace base {
 
 // Make sure our Whence mappings match the system headers.
@@ -25,7 +29,9 @@ static_assert(File::FROM_BEGIN == SEEK_SET && File::FROM_CURRENT == SEEK_CUR &&
 namespace {
 
 #if defined(OS_BSD) || defined(OS_MACOSX) || defined(OS_NACL) || \
-    defined(OS_HAIKU) || defined(OS_MSYS) || defined(OS_ANDROID) && __ANDROID_API__ < 21
+    defined(OS_HAIKU) || defined(OS_MSYS) || defined(OS_ZOS) || \
+    defined(OS_ANDROID) && __ANDROID_API__ < 21
+// TODO(gabylb) - zos: switch to fstat64() once Woz supports it.
 int CallFstat(int fd, stat_wrapper_t* sb) {
   return fstat(fd, sb);
 }
@@ -93,7 +99,7 @@ void File::Info::FromStat(const stat_wrapper_t& stat_info) {
   int64_t last_accessed_nsec = stat_info.st_atimespec.tv_nsec;
   time_t creation_time_sec = stat_info.st_ctimespec.tv_sec;
   int64_t creation_time_nsec = stat_info.st_ctimespec.tv_nsec;
-#elif defined(OS_AIX)
+#elif defined(OS_AIX) || defined(OS_ZOS)
   time_t last_modified_sec = stat_info.st_mtime;
   int64_t last_modified_nsec = 0;
   time_t last_accessed_sec = stat_info.st_atime;
@@ -352,7 +358,11 @@ void File::DoInitialize(const FilePath& path, uint32_t flags) {
     NOTREACHED();
   }
 
+#if defined(OS_ZOS)
+  static_assert(O_RDONLY == 2, "O_RDONLY must equal two");
+#else
   static_assert(O_RDONLY == 0, "O_RDONLY must equal zero");
+#endif
 
   int mode = S_IRUSR | S_IWUSR;
   int descriptor = HANDLE_EINTR(open(path.value().c_str(), open_flags, mode));
@@ -362,8 +372,12 @@ void File::DoInitialize(const FilePath& path, uint32_t flags) {
     return;
   }
 
-  if (flags & FLAG_CREATE_ALWAYS)
+  if (flags & FLAG_CREATE_ALWAYS) {
     created_ = true;
+#if defined(OS_ZOS)
+    ChangeFileCCSID(descriptor, CCSID_ASCII);
+#endif
+  }
 
   error_details_ = FILE_OK;
   file_.reset(descriptor);

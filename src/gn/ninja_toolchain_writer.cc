@@ -63,15 +63,19 @@ bool NinjaToolchainWriter::RunAndWriteFile(
   ScopedTrace trace(TraceItem::TRACE_FILE_WRITE, FilePathToUTF8(ninja_file));
 
   base::CreateDirectory(ninja_file.DirName());
+  {
+    std::ofstream file;
+    file.open(FilePathToUTF8(ninja_file).c_str(),
+              std::ios_base::out | std::ios_base::binary);
+    if (file.fail())
+      return false;
 
-  std::ofstream file;
-  file.open(FilePathToUTF8(ninja_file).c_str(),
-            std::ios_base::out | std::ios_base::binary);
-  if (file.fail())
-    return false;
-
-  NinjaToolchainWriter gen(settings, toolchain, file);
-  gen.Run(rules);
+    NinjaToolchainWriter gen(settings, toolchain, file);
+    gen.Run(rules);
+  }
+#if defined(OS_ZOS)
+  base::ChangeFileCCSID(FilePathToUTF8(ninja_file).c_str(), base::CCSID_ASCII);
+#endif
   return true;
 }
 

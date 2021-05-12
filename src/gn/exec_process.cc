@@ -30,6 +30,10 @@
 #include "base/posix/file_descriptor_shuffle.h"
 #endif
 
+#if defined(OS_ZOS)
+#include <sys/time.h>
+#endif
+
 namespace internal {
 
 #if defined(OS_WIN)
