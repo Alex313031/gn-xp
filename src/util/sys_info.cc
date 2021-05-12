@@ -36,6 +36,8 @@ std::string OperatingSystemArchitecture() {
     arch = "x86_64";
   } else if (os == "AIX" || os == "OS400") {
     arch = "ppc64";
+  } else if (std::string(info.sysname) == "OS/390") {
+    arch = "s390x";
   }
   return arch;
 #elif defined(OS_WIN)
@@ -56,7 +58,30 @@ std::string OperatingSystemArchitecture() {
 }
 
 int NumberOfProcessors() {
-#if defined(OS_POSIX)
+#if defined(OS_ZOS)
+  // The following offsets are from the MVS Data Areas Volumes 1 & 3:
+  // Volume 1: https://www-01.ibm.com/servers/resourcelink/svc00100.nsf/pages/zosv2r3ga320935/$file/iead100_v2r3.pdf
+  // Volume 3: https://www-01.ibm.com/servers/resourcelink/svc00100.nsf/pages/zosv2r3ga320938/$file/iead300_v2r3.pdf
+  //
+  // In Vol 1, CSD_NUMBER_ONLINE_CPUS is at decimal offset 212 in CSD Mapping
+  // (also Vol 1), which is pointed to by CVTCSD.
+  //
+  // CVTCSD is at decimal offset 660 in CVT Mapping (Vol 1), which is pointed
+  // to by FLCCVT field of the PSA data area.
+  //
+  // FLCCVT is at decimal offset 16 in PSA Mapping (Vol 3), and PSA is at
+  // address 0.
+  //
+  // So, with the 32-bit pointer casts, CSD_NUMBER_ONLINE_CPUS is at
+  // 0[16/4][660/4][212/4] which is 0[4][165][53].
+  //
+  // Note: z/OS is always upward compatible, so these offsets won't change.
+  // TODO(gabylb) - zos: rewrite once z/OS provides a macro/API for this in
+  // all supported versions.
+
+  return (int)(((char *__ptr32 *__ptr32 *__ptr32 *)0)[4][165][53]);
+
+#elif defined(OS_POSIX)
   // sysconf returns the number of "logical" (not "physical") processors on both
   // Mac and Linux.  So we get the number of max available "logical" processors.
   //

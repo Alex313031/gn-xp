@@ -17,6 +17,26 @@
 #error Port.
 #endif
 
+#if defined(OS_ZOS)
+typedef enum {
+  CLOCK_REALTIME,
+  CLOCK_MONOTONIC,
+  CLOCK_HIGHRES,
+  CLOCK_THREAD_CPUTIME_ID
+} clockid_t;
+
+static int clock_gettime(clockid_t clk_id, struct timespec* tp) {
+  // TODO(gabylb) - zos: the following implements only CLOCK_REALTIME, but
+  // should be sufficient as it's used only to get elapsed time (begin/end
+  // calls to TicksNow()). Remove when clock_gettime() is available on z/OS.
+  unsigned long long value;
+  __stckf(&value);
+  tp->tv_sec = (value / 4096000000UL) - 2208988800UL;
+  tp->tv_nsec = (value % 4096000000UL) * 1000 / 4096;
+  return 0;
+}
+#endif
+
 namespace {
 
 bool g_initialized;
