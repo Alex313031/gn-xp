@@ -28,7 +28,9 @@
 
 #if defined(OS_POSIX) || defined(OS_FUCHSIA)
 #include <errno.h>
+#if !defined(OS_ZOS)
 #include <paths.h>
+#endif
 #include <pthread.h>
 #include <stdio.h>
 #include <stdlib.h>

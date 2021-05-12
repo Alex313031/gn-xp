@@ -926,10 +926,22 @@ TEST_F(NinjaRustBinaryTargetWriterTest, Externs) {
   target.source_types_used().Set(SourceFile::SOURCE_RS);
   target.rust_values().set_crate_root(main);
   target.rust_values().crate_name() = "foo_bar";
+#if defined(OS_ZOS)
+  // TODO(gabylb) - zos: workaround for Woz compiler, otherwise it fails:
+  // no viable constructor or deduction guide for deduction of template
+  // arguments of 'pair'.
+  const char* lib = "lib1";
+  target.config_values().externs().push_back(
+      std::pair(lib, LibFile(SourceFile("//foo/lib1.rlib"))));
+  lib = "lib2";
+  target.config_values().externs().push_back(
+      std::pair(lib, LibFile("lib2.rlib")));
+#else
   target.config_values().externs().push_back(
       std::pair("lib1", LibFile(SourceFile("//foo/lib1.rlib"))));
   target.config_values().externs().push_back(
       std::pair("lib2", LibFile("lib2.rlib")));
+#endif
   target.SetToolchain(setup.toolchain());
   ASSERT_TRUE(target.OnResolved(&err));
 
