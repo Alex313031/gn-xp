@@ -54,6 +54,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "d87bef05_4baa69ff",
+        "filename": "src/util/sys_info.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 84,
+      "author": {
+        "id": 1000602
+      },
+      "writtenOn": "2021-05-13T14:06:55Z",
+      "side": 1,
+      "message": "Please see the comments above that explain what those offsets are, and obtained from, along with the TODO comemnt.",
+      "parentUuid": "2f66e6df_df87da10",
+      "revId": "6551c5351434080e18124672bb517a25c7dcf263",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "41919f25_daa9151c",
         "filename": "src/util/zos_util.h",
         "patchSetId": 2
