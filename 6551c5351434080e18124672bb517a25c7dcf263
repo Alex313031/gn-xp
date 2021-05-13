@@ -35,6 +35,23 @@
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "a6e79276_6ca4317d",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000014
+      },
+      "writtenOn": "2021-05-13T16:58:44Z",
+      "side": 1,
+      "message": "For me, this patch is too invasive for supporting such a minor platform.\n\nHow necessary are the CCSID tags? Without those, I think we could probably get the complexity down on the rest so that it could be acceptable, but I don\u0027t like having to write a ZOS ifdef after every time we write a file.\n\nIf those are necessary, I am fine with you maintaining a zos branch in the GN repository that you maintain so it\u0027s easy to merge changes from mainline yet doesn\u0027t affect the rest of the code.",
+      "revId": "6551c5351434080e18124672bb517a25c7dcf263",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "2f66e6df_df87da10",
