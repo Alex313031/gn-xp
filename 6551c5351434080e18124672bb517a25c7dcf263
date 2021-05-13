@@ -16,6 +16,57 @@
       "message": "Hi Nico and Scott,\n\nWould you please help review this CL, thank you.",
       "revId": "6551c5351434080e18124672bb517a25c7dcf263",
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "02a608a2_337f8d63",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2021-05-13T02:23:45Z",
+      "side": 1,
+      "message": "This should probably be reviewed by Brett.\n\nIt\u0027d be nice if there was some way to opt in the zOS libc to use ascii by default in a process, so that this could be done early in main instead of all over the place. And it\u0027d be nice if things in general were more posix compliant.",
+      "revId": "6551c5351434080e18124672bb517a25c7dcf263",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2f66e6df_df87da10",
+        "filename": "src/util/sys_info.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 84,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2021-05-13T02:23:45Z",
+      "side": 1,
+      "message": "!",
+      "revId": "6551c5351434080e18124672bb517a25c7dcf263",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "41919f25_daa9151c",
+        "filename": "src/util/zos_util.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 2,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2021-05-13T02:23:45Z",
+      "side": 1,
+      "message": "This looks like you shouldn\u0027t check it in here?",
+      "revId": "6551c5351434080e18124672bb517a25c7dcf263",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
     }
   ]
 }
