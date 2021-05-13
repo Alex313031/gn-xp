@@ -1,9 +1,6 @@
-///////////////////////////////////////////////////////////////////////////////
-// Licensed Materials - Property of IBM
-// (C) Copyright IBM Corp. 2021. All Rights Reserved.
-// US Government Users Restricted Rights - Use, duplication
-// or disclosure restricted by GSA ADP Schedule Contract with IBM Corp.
-///////////////////////////////////////////////////////////////////////////////
+// Copyright 2021 The Chromium Authors. All rights reserved.
+// Use of this source code is governed by a BSD-style license that can be
+// found in the LICENSE file.
 
 #include "util/zos_util.h"
 
