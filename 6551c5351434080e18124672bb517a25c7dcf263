@@ -54,6 +54,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "db79a118_f1f03a87",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000602
+      },
+      "writtenOn": "2021-05-13T19:45:02Z",
+      "side": 1,
+      "message": "Without setting CCSID tag, an untagged file containing ASCII cannot be read (by say ninja, or vim).\n\nI\u0027ll remove all those CCSID changes, user would then manually have to run a `chtag -tc819 \u003cfile\u003e` command after gn is run, to set the generated files\u0027 tag.\n\nbtw I have requested an LE feature to have open() or fopen() auto-set the CCSID: http://www.ibm.com/developerworks/rfe/execute?use_case\u003dviewRfe\u0026CR_ID\u003d150490, so that manual step won\u0027t be necessary if/when the change is made.",
+      "parentUuid": "a6e79276_6ca4317d",
+      "revId": "6551c5351434080e18124672bb517a25c7dcf263",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "2f66e6df_df87da10",
         "filename": "src/util/sys_info.cc",
         "patchSetId": 2
