@@ -516,10 +516,6 @@ FILE* OpenFile(const FilePath& filename, const char* mode) {
   // Mark the descriptor as close-on-exec.
   if (result) {
     SetCloseOnExec(fileno(result));
-#if defined(OS_ZOS)
-    if (strchr(the_mode, 'a') || strchr(the_mode, 'w'))
-      ChangeFileCCSID(fileno(result), CCSID_ASCII);
-#endif
   }
 #endif
   return result;
@@ -548,10 +544,6 @@ int WriteFile(const FilePath& filename, const char* data, int size) {
   if (fd < 0)
     return -1;
 
-#if defined(OS_ZOS)
-  ChangeFileCCSID(fd, CCSID_ASCII);
-#endif
-
   int bytes_written = WriteFileDescriptor(fd, data, size) ? size : -1;
   if (IGNORE_EINTR(close(fd)) < 0)
     return -1;
@@ -574,9 +566,6 @@ bool WriteFileDescriptor(const int fd, const char* data, int size) {
 
 bool AppendToFile(const FilePath& filename, const char* data, int size) {
   bool ret = true;
-#if defined(OS_ZOS)
-  bool created_ = (access(filename.value().c_str(), F_OK) != 0);
-#endif
   int fd = HANDLE_EINTR(open(filename.value().c_str(), O_WRONLY | O_APPEND));
   if (fd < 0) {
     return false;
@@ -586,11 +575,6 @@ bool AppendToFile(const FilePath& filename, const char* data, int size) {
   if (!WriteFileDescriptor(fd, data, size)) {
     ret = false;
   }
-
-#if defined(OS_ZOS)
-  if (created_)
-    ChangeFileCCSID(fd, CCSID_ASCII);
-#endif
 
   if (IGNORE_EINTR(close(fd)) < 0) {
     return false;
@@ -697,31 +681,4 @@ bool CopyFile(const FilePath& from_path, const FilePath& to_path) {
 }
 #endif  // !defined(OS_MACOSX)
 
-#if defined(OS_ZOS)
-
-int ChangeFileCCSID(int fd, unsigned short ccsid) {
-  attrib_t attr;
-  memset(&attr, 0, sizeof(attr));
-  attr.att_filetagchg = 1;
-  attr.att_filetag.ft_ccsid = ccsid;
-  if (ccsid != FT_BINARY)
-    attr.att_filetag.ft_txtflag = 1;
-
-  return HANDLE_EINTR(__fchattr(fd, &attr, sizeof(attr)));
-}
-
-int ChangeFileCCSID(const char *pathname, unsigned short ccsid) {
-  int flags = O_RDWR;
-  int mode = S_IRUSR | S_IWUSR;
-  int fd = HANDLE_EINTR(open(pathname, flags, mode));
-  if (fd < 0)
-    return -1;
-  if (ChangeFileCCSID(fd, ccsid))
-    return -1;
-  if (IGNORE_EINTR(close(fd)) < 0)
-    return -1;
-  return 0;
-}
-
-#endif  // defined(OS_ZOS)
 }  // namespace base

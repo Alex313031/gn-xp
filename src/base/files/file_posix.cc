@@ -15,10 +15,6 @@
 #include "base/strings/utf_string_conversions.h"
 #include "util/build_config.h"
 
-#if defined(OS_ZOS)
-#include "base/files/file_util.h"
-#endif
-
 namespace base {
 
 // Make sure our Whence mappings match the system headers.
@@ -372,12 +368,8 @@ void File::DoInitialize(const FilePath& path, uint32_t flags) {
     return;
   }
 
-  if (flags & FLAG_CREATE_ALWAYS) {
+  if (flags & FLAG_CREATE_ALWAYS)
     created_ = true;
-#if defined(OS_ZOS)
-    ChangeFileCCSID(descriptor, CCSID_ASCII);
-#endif
-  }
 
   error_details_ = FILE_OK;
   file_.reset(descriptor);
