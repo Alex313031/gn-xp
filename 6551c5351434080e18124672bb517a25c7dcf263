@@ -85,6 +85,24 @@
       "message": "This looks like you shouldn\u0027t check it in here?",
       "revId": "6551c5351434080e18124672bb517a25c7dcf263",
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "13797a78_232ac423",
+        "filename": "src/util/zos_util.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 2,
+      "author": {
+        "id": 1000602
+      },
+      "writtenOn": "2021-05-13T15:34:53Z",
+      "side": 1,
+      "message": "I changed the copyright header to that used in the existing source files (but with year set to 2021).",
+      "parentUuid": "41919f25_daa9151c",
+      "revId": "6551c5351434080e18124672bb517a25c7dcf263",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
     }
   ]
 }
