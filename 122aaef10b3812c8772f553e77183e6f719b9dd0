@@ -103,6 +103,24 @@
       "message": "This change is not safe and will cause data corruption and probably crashes.\n\nSome minor compiler workarounds are OK with me (the pair emplace change you made is OK with me). But we require a generally compliant C++17 compiler and I don\u0027t want to accumulate workarounds for such fundamental things as thread_local, especially as in this case when the workarounds are relatively complicated.\n\nGN will not be usable on zos with the current code so I\u0027m reluctant to land anything in this state.",
       "revId": "122aaef10b3812c8772f553e77183e6f719b9dd0",
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3a2b1c44_e98efa6a",
+        "filename": "src/gn/string_atom.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 211,
+      "author": {
+        "id": 1000602
+      },
+      "writtenOn": "2021-05-14T15:15:56Z",
+      "side": 1,
+      "message": "I removed the ifdef for thread_local, and worked around it in build/gen.py (https://gn-review.googlesource.com/c/gn/+/11600/2) to reduce the clutter.\n\nAbout \"GN will not be usable on zos with the current code\": in all my runs of \u0027gn gen\u0027 to build V8 (the reason for porting GN to z/OS, as we are porting standalone V8), gn never crashed in any of my many runs, including running out/gn_unittests. Yes it could be by luck, but we have been able to use this ported GN successfully on z/OS - otherwise I wouldn\u0027t checkin code that crashes :)",
+      "parentUuid": "0e0413c7_b62c4549",
+      "revId": "122aaef10b3812c8772f553e77183e6f719b9dd0",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
     }
   ]
 }
