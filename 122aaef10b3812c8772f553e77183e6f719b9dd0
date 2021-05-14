@@ -1,0 +1,72 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "35b56382_b9a46ff4",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000014
+      },
+      "writtenOn": "2021-05-14T04:20:43Z",
+      "side": 1,
+      "message": "Thanks for the updates and sorry for the headaches. For the big picture, I\u0027m trying to see if we can get the complexity down to the point where I think this is worth having in the tree. From my perspective zOS is an extremely obscure platform and so far it is adding more platform-specific ifdefs than anything but Windows.\n\nThe CCSID calls should just be removed from this patch so we don\u0027t check them in at all. We can re-evaluate when this patch then becomes smaller. But I\u0027m also concerned about the lack of thread_local support as I discuss in the comment below, and adding a whole implementation of thread_local for this one platform again adds complexity to this patch where I\u0027m not sure it\u0027s worth it. Maybe the compiler team can implement this first?",
+      "revId": "122aaef10b3812c8772f553e77183e6f719b9dd0",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9185b096_6e01a082",
+        "filename": "src/gn/exec_process.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 34,
+      "author": {
+        "id": 1000014
+      },
+      "writtenOn": "2021-05-14T04:20:43Z",
+      "side": 1,
+      "message": "If we need this include, just make it unconditional and move up to the top group since it will work on all platforms.",
+      "revId": "122aaef10b3812c8772f553e77183e6f719b9dd0",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c068ca06_7ab439e8",
+        "filename": "src/gn/ninja_rust_binary_target_writer_unittest.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 813,
+      "author": {
+        "id": 1000014
+      },
+      "writtenOn": "2021-05-14T04:20:43Z",
+      "side": 1,
+      "message": "Since the zos version of the code works either way, I think we can just use it and remove the ifdef.",
+      "revId": "122aaef10b3812c8772f553e77183e6f719b9dd0",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0e0413c7_b62c4549",
+        "filename": "src/gn/string_atom.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 211,
+      "author": {
+        "id": 1000014
+      },
+      "writtenOn": "2021-05-14T04:20:43Z",
+      "side": 1,
+      "message": "This change is not safe and will cause data corruption and probably crashes.\n\nSome minor compiler workarounds are OK with me (the pair emplace change you made is OK with me). But we require a generally compliant C++17 compiler and I don\u0027t want to accumulate workarounds for such fundamental things as thread_local, especially as in this case when the workarounds are relatively complicated.\n\nGN will not be usable on zos with the current code so I\u0027m reluctant to land anything in this state.",
+      "revId": "122aaef10b3812c8772f553e77183e6f719b9dd0",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    }
+  ]
+}
