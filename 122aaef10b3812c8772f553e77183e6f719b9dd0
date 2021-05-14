@@ -70,6 +70,24 @@
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "47956b4d_e50b775a",
+        "filename": "src/gn/ninja_rust_binary_target_writer_unittest.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 813,
+      "author": {
+        "id": 1000602
+      },
+      "writtenOn": "2021-05-14T15:06:55Z",
+      "side": 1,
+      "message": "Done, in https://gn-review.googlesource.com/c/gn/+/11600/2",
+      "parentUuid": "c068ca06_7ab439e8",
+      "revId": "122aaef10b3812c8772f553e77183e6f719b9dd0",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "0e0413c7_b62c4549",
