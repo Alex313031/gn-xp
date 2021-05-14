@@ -8,12 +8,7 @@
 
 namespace {
 
-#if !defined(OS_ZOS)
 thread_local MsgLoop* g_current;
-#else
-// TODO(gabylb) - zos: thread_local not yet supported.
-MsgLoop* g_current;
-#endif
 }
 
 MsgLoop::MsgLoop() {
