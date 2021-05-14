@@ -55,6 +55,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "a9886da0_dda04def",
+        "filename": "src/gn/exec_process.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 34,
+      "author": {
+        "id": 1000014
+      },
+      "writtenOn": "2021-05-14T22:49:00Z",
+      "side": 1,
+      "message": "We should just apply those changes to this patch so we only have one patch going.",
+      "parentUuid": "d8382ba4_1196f375",
+      "revId": "122aaef10b3812c8772f553e77183e6f719b9dd0",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "c068ca06_7ab439e8",
         "filename": "src/gn/ninja_rust_binary_target_writer_unittest.cc",
         "patchSetId": 3
@@ -119,6 +137,24 @@
       "side": 1,
       "message": "I removed the ifdef for thread_local, and worked around it in build/gen.py (https://gn-review.googlesource.com/c/gn/+/11600/2) to reduce the clutter.\n\nAbout \"GN will not be usable on zos with the current code\": in all my runs of \u0027gn gen\u0027 to build V8 (the reason for porting GN to z/OS, as we are porting standalone V8), gn never crashed in any of my many runs, including running out/gn_unittests. Yes it could be by luck, but we have been able to use this ported GN successfully on z/OS - otherwise I wouldn\u0027t checkin code that crashes :)",
       "parentUuid": "0e0413c7_b62c4549",
+      "revId": "122aaef10b3812c8772f553e77183e6f719b9dd0",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "cd2e3144_90c6c9d7",
+        "filename": "src/gn/string_atom.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 211,
+      "author": {
+        "id": 1000014
+      },
+      "writtenOn": "2021-05-14T22:49:00Z",
+      "side": 1,
+      "message": "I think you\u0027re getting lucky because (if I recall) V8 only has the one build file. But this is being called from multiple threads with no locking, so any builds files are executed in parallel (the normal case for almost all of the projects that use GN), I believe this will crash fairly quickly.",
+      "parentUuid": "3a2b1c44_e98efa6a",
       "revId": "122aaef10b3812c8772f553e77183e6f719b9dd0",
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
     }
