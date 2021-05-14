@@ -416,6 +416,7 @@ def WriteGNNinja(path, platform, host, options):
       cflags.append('-fzos-le-char-mode=ascii')
       cflags.append('-D_OPEN_SYS_FILE_EXT')
       cflags.append('-DPATH_MAX=1024')
+      cflags.append('-Dthread_local=') # TODO(gabylb): till it's supported
 
     if platform.is_posix() and not platform.is_haiku():
       ldflags.append('-pthread')

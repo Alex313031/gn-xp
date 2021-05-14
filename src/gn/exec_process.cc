@@ -24,15 +24,13 @@
 #include <fcntl.h>
 #include <signal.h>
 #include <sys/wait.h>
+#include <sys/time.h>
 #include <unistd.h>
 
 #include "base/posix/eintr_wrapper.h"
 #include "base/posix/file_descriptor_shuffle.h"
 #endif
 
-#if defined(OS_ZOS)
-#include <sys/time.h>
-#endif
 
 namespace internal {
 
