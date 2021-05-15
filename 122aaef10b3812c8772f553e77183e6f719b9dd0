@@ -36,6 +36,23 @@
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "f6f91d91_bd57ae14",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000014
+      },
+      "writtenOn": "2021-05-15T15:11:36Z",
+      "side": 1,
+      "message": "I was thinking about this some more. Even outside of the thread_local changes, I think there is too much platform complexity for the benefit to the entire project. But I\u0027m still fine if you want to have a zos branch in the repo.\n\nIf it\u0027s a branch, I\u0027m not worried about the amount of changes so you can keep the ASCII tags and also have a proper thread local implementation for the places where it\u0027s used. This seems like the best solution.\n\nI\u0027ve not used branches in Gerrit before, hopefully that \"just works\" or is easy to figure out.",
+      "revId": "122aaef10b3812c8772f553e77183e6f719b9dd0",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "9185b096_6e01a082",
