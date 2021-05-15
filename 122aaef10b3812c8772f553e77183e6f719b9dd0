@@ -18,6 +18,24 @@
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "c8ed50ea_dbcf78c4",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000602
+      },
+      "writtenOn": "2021-05-15T04:33:11Z",
+      "side": 1,
+      "message": "About \"The CCSID calls should just be removed\", please note that I already removed all of them (in https://gn-review.googlesource.com/c/gn/+/11580/1).",
+      "parentUuid": "35b56382_b9a46ff4",
+      "revId": "122aaef10b3812c8772f553e77183e6f719b9dd0",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "9185b096_6e01a082",
@@ -67,6 +85,24 @@
       "side": 1,
       "message": "We should just apply those changes to this patch so we only have one patch going.",
       "parentUuid": "d8382ba4_1196f375",
+      "revId": "122aaef10b3812c8772f553e77183e6f719b9dd0",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c769fc97_0aef6895",
+        "filename": "src/gn/exec_process.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 34,
+      "author": {
+        "id": 1000602
+      },
+      "writtenOn": "2021-05-15T04:33:11Z",
+      "side": 1,
+      "message": "How do I git commit/push to apply a change to this patch (https://gn-review.googlesource.com/c/gn/+/11520/1) ? Do I specify:\nChange-Id: Id06e12c9ca88424a9495a5a2d1ed4e2575185196\n(this patch\u0027s) at the bottom of the commit message?\n\nIf so, will the message in the new commit become this patch\u0027s commit message?",
+      "parentUuid": "a9886da0_dda04def",
       "revId": "122aaef10b3812c8772f553e77183e6f719b9dd0",
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
     },
