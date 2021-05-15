@@ -193,6 +193,24 @@
       "parentUuid": "3a2b1c44_e98efa6a",
       "revId": "122aaef10b3812c8772f553e77183e6f719b9dd0",
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1143a0c3_7558bbad",
+        "filename": "src/gn/string_atom.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 211,
+      "author": {
+        "id": 1000602
+      },
+      "writtenOn": "2021-05-15T04:48:37Z",
+      "side": 1,
+      "message": "According to https://v8.dev/docs/build-gn, before a V8 build, I run with something like \u0027gn gen out/zos_s390x.release ...\u0027 only once. It generates several (95) .ninja files and 1 .ninja.d file. This gn step never crashed for me (and I ran it many times). After that I run ninja to start the build.\n\nI do have a custom implementation for thread_local, but didn\u0027t add it to avoid cluttering the code, especially since (so far) I didn\u0027t see a need for it.\n\nI can add the implementation-specific code in zos_util.cc, and in the 2 places where thread_local is used, I\u0027d have a ifdef with an extra line of code.\n\nPlease advise on whether I should make this change; another option is to leave it as is, and if an issue was encountered, then we can revisit it.",
+      "parentUuid": "cd2e3144_90c6c9d7",
+      "revId": "122aaef10b3812c8772f553e77183e6f719b9dd0",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
     }
   ]
 }
