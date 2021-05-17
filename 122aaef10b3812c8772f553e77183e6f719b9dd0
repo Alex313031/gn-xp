@@ -71,6 +71,24 @@
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "40f629c2_0cc18b4b",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000014
+      },
+      "writtenOn": "2021-05-17T18:53:30Z",
+      "side": 1,
+      "message": "I want to avoid licencing complexity so I don\u0027t want third party libraries checked in, but on your own branch I\u0027m fine if you require users to download something else.\n\nIn your branch I\u0027d add a README_zos.md in the root directory with the extra setup requirements.",
+      "parentUuid": "30bb560d_e97106bf",
+      "revId": "122aaef10b3812c8772f553e77183e6f719b9dd0",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "9185b096_6e01a082",
@@ -138,6 +156,24 @@
       "side": 1,
       "message": "How do I git commit/push to apply a change to this patch (https://gn-review.googlesource.com/c/gn/+/11520/1) ? Do I specify:\nChange-Id: Id06e12c9ca88424a9495a5a2d1ed4e2575185196\n(this patch\u0027s) at the bottom of the commit message?\n\nIf so, will the message in the new commit become this patch\u0027s commit message?",
       "parentUuid": "a9886da0_dda04def",
+      "revId": "122aaef10b3812c8772f553e77183e6f719b9dd0",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "aac908d8_32c5dd3a",
+        "filename": "src/gn/exec_process.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 34,
+      "author": {
+        "id": 1000014
+      },
+      "writtenOn": "2021-05-17T18:53:30Z",
+      "side": 1,
+      "message": "I was also confused about this when I started using Gerrit. If you want future changes to go into the same patch, do \"git commit --amend\" so you only have the one commit in your local branch. I used to like to have multiple commits locally but this workflow doesn\u0027t make Gerrit happy.\n\nGerrit uses the Change-Id line you identified, so to get back to this state, somehow (squash merge or whatever you can make work) get one local commit on top of gn HEAD with this line at the bottom.\n\nI unfortunately don\u0027t know how to make an upstream branch in Gerrit so you may have to do some research on that.",
+      "parentUuid": "c769fc97_0aef6895",
       "revId": "122aaef10b3812c8772f553e77183e6f719b9dd0",
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
     },

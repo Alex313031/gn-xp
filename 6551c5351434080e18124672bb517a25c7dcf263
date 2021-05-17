@@ -125,6 +125,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "296c0538_40d17346",
+        "filename": "src/util/sys_info.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 84,
+      "author": {
+        "id": 1000014
+      },
+      "writtenOn": "2021-05-17T18:53:30Z",
+      "side": 1,
+      "message": "Your comments are good but I think Nico was expressing surprise that this pattern is valid at all.\n\nI tried to open the links and couldn\u0027t get them to work. I think something got messed up with the wrapping and comment annotations. I would just not wrap long URLs at all so they stay together.",
+      "parentUuid": "d87bef05_4baa69ff",
+      "revId": "6551c5351434080e18124672bb517a25c7dcf263",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "41919f25_daa9151c",
         "filename": "src/util/zos_util.h",
         "patchSetId": 2
