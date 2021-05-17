@@ -53,6 +53,24 @@
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "30bb560d_e97106bf",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000602
+      },
+      "writtenOn": "2021-05-17T17:27:25Z",
+      "side": 1,
+      "message": "OK, I\u0027ll work on moving this patch to a zos branch. I\u0027ll also delete zos_util.* in the GN patch and instead use the functionality there from a \u0027zoslib\u0027 repo (https://github.com/ibmruntimes/zoslib), which also includes a workaround implementation for thread_local (but still requires an extra line of code where thread_local is used). Using zoslib repo will reduce the complexity in GN due to z/OS support. Is it OK for the zos branch of GN to have a dependency on zoslib repo?",
+      "parentUuid": "f6f91d91_bd57ae14",
+      "revId": "122aaef10b3812c8772f553e77183e6f719b9dd0",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "9185b096_6e01a082",
