@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "9dffc3fd_1e49c970",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1001787
+      },
+      "writtenOn": "2021-06-03T00:25:18Z",
+      "side": 1,
+      "message": "Hi Scott :) Small change to allow using wrappers around ninja.exe from Visual Studio IDE.  Thanks!",
+      "revId": "9f5865c873597b78b030aa338155591150149675",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    }
+  ]
+}
