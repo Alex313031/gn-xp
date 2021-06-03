@@ -16,6 +16,40 @@
       "message": "Hi Scott :) Small change to allow using wrappers around ninja.exe from Visual Studio IDE.  Thanks!",
       "revId": "9f5865c873597b78b030aa338155591150149675",
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ed542739_429c09f4",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000004
+      },
+      "writtenOn": "2021-06-03T02:16:22Z",
+      "side": 1,
+      "message": "Hey, long time!",
+      "revId": "9f5865c873597b78b030aa338155591150149675",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0f818aa3_cd8d6e17",
+        "filename": "src/gn/visual_studio_writer.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 244,
+      "author": {
+        "id": 1000004
+      },
+      "writtenOn": "2021-06-03T02:16:22Z",
+      "side": 1,
+      "message": "getenv() seems a bit grubby here. It looks like the Xcode generator has a --ninja-executable flag that it passes in from command_gen.cc, could we do the same here?",
+      "revId": "9f5865c873597b78b030aa338155591150149675",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
     }
   ]
 }
