@@ -241,6 +241,11 @@ bool UnicodeTarget(const Target* target) {
   return true;
 }
 
+std::string GetNinjaExe() {
+  const char* ninja_exe_ptr = getenv("GN_NINJA_EXE");
+  return ninja_exe_ptr ? ninja_exe_ptr : "ninja.exe";
+}
+
 }  // namespace
 
 VisualStudioWriter::SolutionEntry::SolutionEntry(const std::string& _name,
@@ -526,6 +531,7 @@ bool VisualStudioWriter::WriteProjectFileContents(
   project.SubElement("PropertyGroup", XmlAttributes("Label", "UserMacros"));
 
   std::string ninja_target = GetNinjaTarget(target);
+  std::string ninja_exe = GetNinjaExe();
 
   {
     std::unique_ptr<XmlElementWriter> properties =
@@ -621,9 +627,9 @@ bool VisualStudioWriter::WriteProjectFileContents(
         compile_type = "CustomBuild";
         std::unique_ptr<XmlElementWriter> build = group->SubElement(
             compile_type, "Include", SourceFileWriter(path_output, file));
-        build->SubElement("Command")->Text("call ninja.exe -C $(OutDir) " +
-                                           ninja_extra_args + " " +
-                                           tool_outputs[0].value());
+        build->SubElement("Command")->Text("call " + ninja_exe +
+                                           " -C $(OutDir) " + ninja_extra_args +
+                                           " " + tool_outputs[0].value());
         build->SubElement("Outputs")->Text("$(OutDir)" +
                                            tool_outputs[0].value());
       } else {
@@ -649,7 +655,7 @@ bool VisualStudioWriter::WriteProjectFileContents(
         project.SubElement("Target", XmlAttributes("Name", "Build"));
     build->SubElement(
         "Exec",
-        XmlAttributes("Command", "call ninja.exe -C $(OutDir) " +
+        XmlAttributes("Command", "call " + ninja_exe + " -C $(OutDir) " +
                                      ninja_extra_args + " " + ninja_target));
   }
 
@@ -659,7 +665,8 @@ bool VisualStudioWriter::WriteProjectFileContents(
     clean->SubElement(
         "Exec",
         XmlAttributes("Command",
-                      "call ninja.exe -C $(OutDir) -tclean " + ninja_target));
+                      "call " + ninja_exe + " -C $(OutDir) -tclean " +
+                      ninja_target));
   }
 
   return true;
