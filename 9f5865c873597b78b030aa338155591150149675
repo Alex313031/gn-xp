@@ -50,6 +50,24 @@
       "message": "getenv() seems a bit grubby here. It looks like the Xcode generator has a --ninja-executable flag that it passes in from command_gen.cc, could we do the same here?",
       "revId": "9f5865c873597b78b030aa338155591150149675",
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "89f6cd8d_e27409d1",
+        "filename": "src/gn/visual_studio_writer.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 244,
+      "author": {
+        "id": 1001787
+      },
+      "writtenOn": "2021-06-03T03:17:28Z",
+      "side": 1,
+      "message": "Oh awesome, I didn\u0027t realize there was already a flag for it.  I\u0027ve updated the code to use the flag and also added a test.  Thanks!",
+      "parentUuid": "0f818aa3_cd8d6e17",
+      "revId": "9f5865c873597b78b030aa338155591150149675",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
     }
   ]
 }
