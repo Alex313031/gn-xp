@@ -33,6 +33,24 @@
       "message": "nit; {} around multi-line block",
       "revId": "ac62575c925f9d140ecafcdb09c322195bc08e45",
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f1714022_fd9ab97b",
+        "filename": "src/gn/command_gen.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 236,
+      "author": {
+        "id": 1001787
+      },
+      "writtenOn": "2021-06-03T03:30:43Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "e143bdb1_85209711",
+      "revId": "ac62575c925f9d140ecafcdb09c322195bc08e45",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
     }
   ]
 }
