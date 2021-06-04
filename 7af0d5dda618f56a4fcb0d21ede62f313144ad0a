@@ -16,6 +16,23 @@
       "message": "Hi James, can you please take a look? Thanks!",
       "revId": "7af0d5dda618f56a4fcb0d21ede62f313144ad0a",
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "930a49fb_d952e051",
+        "filename": "src/gn/header_checker.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 82,
+      "author": {
+        "id": 1000034
+      },
+      "writtenOn": "2021-06-04T20:37:24Z",
+      "side": 1,
+      "message": "This will produce a pretty long error message and gn check is already pretty verbose. I wonder if we could make the scanner look for #ifs preceding #includes and then emit this part of the error string if we\u0027ve seen a #if, but omit it otherwise.",
+      "revId": "7af0d5dda618f56a4fcb0d21ede62f313144ad0a",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
     }
   ]
 }
