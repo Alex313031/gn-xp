@@ -79,6 +79,12 @@ std::string GetDependencyChainPublicError(const HeaderChecker::Chain& chain) {
         "should depend publicly on the destination to forward the ability\n"
         "to include headers.\n"
         "\n"
+        "Please note that the GN header checker does not fully understand the\n"
+        "C preprocessor, crbug.com/1125897 for more details.\n"
+        "Check https://gn.googlesource.com/gn/+/refs/heads/main/docs/reference.md#advice-on-fixing-problems\n"
+        "and https://gn.googlesource.com/gn/+/refs/heads/main/docs/reference.md#nogncheck\n"
+        "to resolve this type of error with conditional includes.\n"
+        "\n"
         "Dependency chain (there may also be others):\n";
 
     for (int i = static_cast<int>(chain.size()) - 1; i >= 0; i--) {
