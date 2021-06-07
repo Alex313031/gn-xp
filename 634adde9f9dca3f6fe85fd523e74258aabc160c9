@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "34962fd3_32798862",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000004
+      },
+      "writtenOn": "2021-06-07T20:53:00Z",
+      "side": 1,
+      "message": "Hey Shezan, I can\u0027t figure out a way to retarget this to \"main\" from \"master\", but I did confirm that if it\u0027s on main then the CQ works properly.\n\nWould you mind abandoning this one, and pushing to \"refs/for/main\" instead (on a new CL)? I\u0027m pretty sure that should make things go properly.",
+      "revId": "634adde9f9dca3f6fe85fd523e74258aabc160c9",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    }
+  ]
+}
