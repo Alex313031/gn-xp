@@ -16,6 +16,24 @@
       "message": "Hi Petr and Andrii,\n\nThe trybots don\u0027t seem to start for gn-review any more.\n\nI see a few infra/ changes from you both in https://gn.googlesource.com/gn/+log/refs/heads/main/infra\n\naround the beginning of May, which is around when\n\nhttps://ci.chromium.org/p/gn/builders/try/win\nhttps://ci.chromium.org/p/gn/builders/try/linux\nhttps://ci.chromium.org/p/gn/builders/try/mac\n\nseem to have last run. Do either of you happen to see something obvious that\u0027s wrong?\n",
       "revId": "f928eaf1135f0192d931a0a63ac027362d6d1209",
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "5737acef_e3e27ee3",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-06-07T20:44:13Z",
+      "side": 1,
+      "message": "Your change was pushed against master branch but we have migrated to main at the beginning of May. Gerrit should rewrite your push request from master to main but it seems like that\u0027s not happening for some reason. I could look into it, but it may be easier to just delete master altogether since at this point all developers should be using main.",
+      "parentUuid": "dcc50cac_e74b715a",
+      "revId": "f928eaf1135f0192d931a0a63ac027362d6d1209",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
     }
   ]
 }
