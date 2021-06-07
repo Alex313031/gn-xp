@@ -34,6 +34,24 @@
       "parentUuid": "cedaeb3d_6fdab6e4",
       "revId": "f7c44de6ce709c9534530c4cc6aa6b379b48e907",
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "033afbe5_58400f6f",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000007
+      },
+      "writtenOn": "2021-06-07T21:32:38Z",
+      "side": 1,
+      "message": "you can first use gerrit move API to change branch of existing change, and then you can push to gerrit with the usual `git push gerrit head:refs/for/refs/heads/main`",
+      "parentUuid": "a595442d_166c69d5",
+      "revId": "f7c44de6ce709c9534530c4cc6aa6b379b48e907",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
     }
   ]
 }
