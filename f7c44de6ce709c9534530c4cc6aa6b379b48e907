@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "cedaeb3d_6fdab6e4",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000004
+      },
+      "writtenOn": "2021-06-07T20:43:46Z",
+      "side": 1,
+      "message": "Ah, was just that it was on branch \"master\" not \"main\" as https://gn-review.googlesource.com/c/gn/+/11662 seems to work.\n\nIs it possible to \"reparent\" when pushing? I couldn\u0027t out the syntax, in particular for https://gn-review.googlesource.com/c/gn/+/11620.",
+      "revId": "f7c44de6ce709c9534530c4cc6aa6b379b48e907",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    }
+  ]
+}
