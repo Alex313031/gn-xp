@@ -15,6 +15,8 @@
 #include "gn/value_extractors.h"
 #include "gn/variables.h"
 
+#error
+
 ActionTargetGenerator::ActionTargetGenerator(
     Target* target,
     Scope* scope,
