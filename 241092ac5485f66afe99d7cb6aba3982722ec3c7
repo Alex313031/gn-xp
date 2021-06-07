@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "397732d9_c47b9f61",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1001787
+      },
+      "writtenOn": "2021-06-07T20:19:25Z",
+      "side": 1,
+      "message": "Hi Scott, would you be able to submit this for me?  It says I don\u0027t have permission to submit.  Thanks!",
+      "revId": "241092ac5485f66afe99d7cb6aba3982722ec3c7",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    }
+  ]
+}
