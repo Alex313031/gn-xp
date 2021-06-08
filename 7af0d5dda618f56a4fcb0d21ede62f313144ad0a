@@ -33,6 +33,24 @@
       "message": "This will produce a pretty long error message and gn check is already pretty verbose. I wonder if we could make the scanner look for #ifs preceding #includes and then emit this part of the error string if we\u0027ve seen a #if, but omit it otherwise.",
       "revId": "7af0d5dda618f56a4fcb0d21ede62f313144ad0a",
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "92835e2c_e7c5a8a6",
+        "filename": "src/gn/header_checker.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 82,
+      "author": {
+        "id": 1001792
+      },
+      "writtenOn": "2021-06-08T19:42:13Z",
+      "side": 1,
+      "message": "Yeah, GN error message is verbose, but it does not notify developers that GN tool might be wrong and what to do in this case. There are 443 usages of `// nogncheck` across Chromium codebase, so probably this tool produce a lot of false positives and developers might waste a lot of time trying to understand that tool is wrong:\nhttps://source.chromium.org/search?q\u003d%22%2F%2F%20nogncheck%22\n\nUnfortunately, I don\u0027t have time to check whether include is under #ifs. If someone from GN team can take it soon, then it makes sense to abandon this CL.",
+      "parentUuid": "930a49fb_d952e051",
+      "revId": "7af0d5dda618f56a4fcb0d21ede62f313144ad0a",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
     }
   ]
 }
