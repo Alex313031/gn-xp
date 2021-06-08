@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "89d2352e_26f3e136",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1001787
+      },
+      "writtenOn": "2021-06-08T09:16:06Z",
+      "side": 1,
+      "message": "Duplicate of https://gn-review.googlesource.com/c/gn/+/11620\nalso updated the README to refer to main branch instead of master",
+      "revId": "57e2c1c1e0d044edb6396b670fbf4f01a2137aad",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    }
+  ]
+}
