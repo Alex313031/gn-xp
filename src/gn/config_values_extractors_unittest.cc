@@ -124,7 +124,8 @@ TEST(ConfigValuesExtractors, IncludeOrdering) {
   std::ostringstream flag_out;
   FlagWriter flag_writer;
   RecursiveTargetConfigToStream<std::string, FlagWriter>(
-      &target, &ConfigValues::cflags, flag_writer, flag_out);
+      kRecursiveWriterKeepDuplicates, &target, &ConfigValues::cflags,
+      flag_writer, flag_out);
   EXPECT_EQ(flag_out.str(),
             "--target --target-config --target-all --target-direct "
             "--dep1-all --dep1-all-sub --dep2-all --dep1-direct ");
@@ -133,7 +134,8 @@ TEST(ConfigValuesExtractors, IncludeOrdering) {
   std::ostringstream include_out;
   IncludeWriter include_writer;
   RecursiveTargetConfigToStream<SourceDir, IncludeWriter>(
-      &target, &ConfigValues::include_dirs, include_writer, include_out);
+      kRecursiveWriterSkipDuplicates, &target, &ConfigValues::include_dirs,
+      include_writer, include_out);
   EXPECT_EQ(include_out.str(),
             "//target/ //target/config/ //target/all/ //target/direct/ "
             "//dep1/all/ //dep2/all/ //dep1/direct/ ");
