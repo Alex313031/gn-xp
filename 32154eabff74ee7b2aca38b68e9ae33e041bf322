@@ -16,6 +16,23 @@
       "message": "Please take a look.",
       "revId": "32154eabff74ee7b2aca38b68e9ae33e041bf322",
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "23f918aa_9653cf41",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000070
+      },
+      "writtenOn": "2021-06-09T11:32:18Z",
+      "side": 1,
+      "message": "Build failures on linux are unrelated (they are due to rpmalloc defining symbols starting with `_` which are flagged as reserved by `-Wreserved-identifier`).\n\nPlease ignore those build failures when reviewing as the CL only changes the definition of the example toolchain for iOS which is not build as part of building `gn`.",
+      "revId": "32154eabff74ee7b2aca38b68e9ae33e041bf322",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
     }
   ]
 }
