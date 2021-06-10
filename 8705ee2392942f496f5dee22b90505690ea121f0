@@ -85,6 +85,24 @@
       "parentUuid": "42221f25_afaabdbb",
       "revId": "8705ee2392942f496f5dee22b90505690ea121f0",
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f76bbf46_0ffbcc5f",
+        "filename": "infra/recipes/gn.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 161,
+      "author": {
+        "id": 1000067
+      },
+      "writtenOn": "2021-06-10T13:01:48Z",
+      "side": 1,
+      "message": "I believe one needs to force-submit these patches to make infra use the fix, but don\u0027t trust me 100% on that, other reviewers might now better.\n\nAnother alterantive is to commit the fix to our copy of the upstream repository on fuchsia.googlesource.com/, and pull the right revision from it. Whatever you prefer.",
+      "parentUuid": "05e20709_ddda3586",
+      "revId": "8705ee2392942f496f5dee22b90505690ea121f0",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
     }
   ]
 }
