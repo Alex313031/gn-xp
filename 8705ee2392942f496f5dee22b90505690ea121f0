@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e119edc3_8dd79d86",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000070
+      },
+      "writtenOn": "2021-06-10T12:03:27Z",
+      "side": 1,
+      "message": "This temporarily disable rpmalloc which no longer build and prevents other CLs from landing.",
+      "revId": "8705ee2392942f496f5dee22b90505690ea121f0",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    }
+  ]
+}
