@@ -159,7 +159,7 @@ def RunSteps(api, repository):
           'args': ['--use-lto', '--use-icf'],
           'targets': release_targets(),
           # TODO: Enable this for OS X and Windows.
-          'use_rpmalloc': api.platform.is_linux
+          'use_rpmalloc': False,
       },
   ]
 
