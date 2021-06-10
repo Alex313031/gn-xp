@@ -22,6 +22,30 @@
       },
       "revId": "eac38be205c2037ff9e914fb37a1e69640f9e4c4",
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d4a02a75_04ab21ea",
+        "filename": "src/gn/compile_commands_writer.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 79,
+      "author": {
+        "id": 1000070
+      },
+      "writtenOn": "2021-06-10T14:57:08Z",
+      "side": 1,
+      "message": "They do not matter. Good catch.",
+      "parentUuid": "32b49aa3_0de2e625",
+      "range": {
+        "startLine": 79,
+        "startChar": 6,
+        "endLine": 79,
+        "endChar": 36
+      },
+      "revId": "eac38be205c2037ff9e914fb37a1e69640f9e4c4",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
     }
   ]
 }
