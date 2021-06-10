@@ -33,6 +33,23 @@
       "message": "See https://ci.chromium.org/ui/p/gn/builders/try/linux/b8844888173147564256/steps for an example of failure (not caused by the CL, since the CL only changes exemple iOS project and is not build on the bots).",
       "revId": "8705ee2392942f496f5dee22b90505690ea121f0",
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "42221f25_afaabdbb",
+        "filename": "infra/recipes/gn.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 161,
+      "author": {
+        "id": 1000067
+      },
+      "writtenOn": "2021-06-10T12:05:27Z",
+      "side": 1,
+      "message": "Can you add a link to https://github.com/mjansson/rpmalloc/pull/246 which is the upstream pull request to disable the warning? We\u0027ll know when to re-enable this when it is merged.",
+      "revId": "8705ee2392942f496f5dee22b90505690ea121f0",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
     }
   ]
 }
