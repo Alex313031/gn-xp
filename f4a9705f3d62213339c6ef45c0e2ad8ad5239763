@@ -50,6 +50,24 @@
       "message": "Could push this back twice so that there\u0027s some actual test coverage for the deduping 😊",
       "revId": "f4a9705f3d62213339c6ef45c0e2ad8ad5239763",
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "bd41ae0e_5c8ba073",
+        "filename": "src/gn/config_values_extractors_unittest.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 40,
+      "author": {
+        "id": 1000070
+      },
+      "writtenOn": "2021-06-10T12:41:13Z",
+      "side": 1,
+      "message": "Done (with tests that duplicate values are kept for cflags too).",
+      "parentUuid": "ce4c9c8b_a4faf072",
+      "revId": "f4a9705f3d62213339c6ef45c0e2ad8ad5239763",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
     }
   ]
 }
