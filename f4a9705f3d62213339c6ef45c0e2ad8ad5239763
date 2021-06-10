@@ -16,6 +16,40 @@
       "message": "Please take a look.",
       "revId": "f4a9705f3d62213339c6ef45c0e2ad8ad5239763",
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e27bac81_b9bf0f8e",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000102
+      },
+      "writtenOn": "2021-06-10T10:46:07Z",
+      "side": 1,
+      "message": "Thanks much! That seems like a great idea to me that will neatly solve the problem described at https://groups.google.com/a/chromium.org/forum/?oldui\u003d1#!msg/gn-dev/0S7KRGIXcDI/E4ahA1jQFQAJ\n\nThe change lgtm, but Brett should probably approve.\n\nI did patch this in and verified that llvm still builds with it applied.\n\n\n\n\n(\nIn out/gn/obj/clang/lib/Basic/Basic.ninja , we go from\n\ninclude_dirs \u003d -I../../clang/lib/Basic -I../../llvm/include -Igen/llvm/include -I../../clang/include -Igen/clang/include -Igen/clang/include/clang/Basic -Igen/clang/include/clang/Basic -Igen/clang/include/clang/Basic -Igen/clang/include/clang/Basic -Igen/clang/include/clang/Basic -Igen/clang/include/clang/Basic -Igen/clang/include/clang/Basic -Igen/clang/include/clang/Basic -Igen/clang/include/clang/Basic -Igen/clang/include/clang/Basic -Igen/clang/include/clang/Basic -Igen/clang/include/clang/Basic -Igen/clang/include/clang/Basic -Igen/clang/include/clang/Basic -Igen/clang/include/clang/Basic -Igen/clang/include/clang/Basic -Igen/clang/include/clang/Basic -Igen/clang/include/clang/Basic -Igen/clang/include/clang/Basic -Igen/clang/include/clang/Basic -Igen/clang/include/clang/Sema -Igen/llvm/include/llvm/Frontend/OpenMP -Igen/llvm/include/llvm/Frontend/OpenMP -Igen/clang/lib/Basic -Igen/clang/include/clang/Basic -Igen/clang/include/clang/Basic -Igen/clang/include/clang/Basic -Igen/clang/include/clang/Config/clang/include -Igen/clang/include/clang/Sema -Igen/clang/include/clang/Sema\n\nto\n\ninclude_dirs \u003d -I../../clang/lib/Basic -I../../llvm/include -Igen/llvm/include -I../../clang/include -Igen/clang/include -Igen/clang/include/clang/Basic -Igen/clang/include/clang/Sema -Igen/llvm/include/llvm/Frontend/OpenMP -Igen/clang/lib/Basic -Igen/clang/include/clang/Config/clang/include\n)",
+      "revId": "f4a9705f3d62213339c6ef45c0e2ad8ad5239763",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ce4c9c8b_a4faf072",
+        "filename": "src/gn/config_values_extractors_unittest.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 40,
+      "author": {
+        "id": 1000102
+      },
+      "writtenOn": "2021-06-10T10:46:07Z",
+      "side": 1,
+      "message": "Could push this back twice so that there\u0027s some actual test coverage for the deduping 😊",
+      "revId": "f4a9705f3d62213339c6ef45c0e2ad8ad5239763",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
     }
   ]
 }
