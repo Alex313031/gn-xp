@@ -2186,7 +2186,7 @@ const char kWriteOutputConversion_Help[] =
     R"(output_conversion: Data format for generated_file targets.
 
   Controls how the "contents" of a generated_file target is formatted.
-  See "gn help io_conversion".
+  See `gn help io_conversion`.
 )";
 
 const char kWriteRuntimeDeps[] = "write_runtime_deps";
@@ -2211,6 +2211,16 @@ const char kWriteRuntimeDeps_Help[] =
   be the main output file of the target itself. The file contents will be the
   same as requesting the runtime deps be written on the command line (see "gn
   help --runtime-deps-list-file").
+)";
+
+const char kReadInputConversion[] = "input_conversion";
+const char kReadInputConversion_HelpShort[] =
+    "input_conversion: Data format for exec_script and read_file functions.";
+const char kReadInputConversion_Help[] =
+    R"(input_conversion: Data format for exec_script and read_file functions.
+
+  Controls how the "output" of a script or the "contents" of a file target is
+  parsed. See `gn help io_conversion`.
 )";
 
 const char kXcodeExtraAttributes[] = "xcode_extra_attributes";
@@ -2328,6 +2338,7 @@ const VariableInfoMap& GetTargetVariables() {
     INSERT_VARIABLE(WalkKeys)
     INSERT_VARIABLE(WeakFrameworks)
     INSERT_VARIABLE(WriteOutputConversion)
+    INSERT_VARIABLE(ReadInputConversion)
     INSERT_VARIABLE(WriteValueContents)
     INSERT_VARIABLE(WriteRuntimeDeps)
     INSERT_VARIABLE(XcodeExtraAttributes)
