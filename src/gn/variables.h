@@ -350,6 +350,10 @@ extern const char kWriteRuntimeDeps[];
 extern const char kWriteRuntimeDeps_HelpShort[];
 extern const char kWriteRuntimeDeps_Help[];
 
+extern const char kReadInputConversion[];
+extern const char kReadInputConversion_HelpShort[];
+extern const char kReadInputConversion_Help[];
+
 extern const char kXcodeExtraAttributes[];
 extern const char kXcodeExtraAttributes_HelpShort[];
 extern const char kXcodeExtraAttributes_Help[];
