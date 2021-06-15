@@ -125,6 +125,7 @@
     *   [frameworks: [name list] Name of frameworks that must be linked.](#var_frameworks)
     *   [friend: [label pattern list] Allow targets to include private headers.](#var_friend)
     *   [include_dirs: [directory list] Additional include directories.](#var_include_dirs)
+    *   [input_conversion: Data format for exec_script and read_file functions.](#var_input_conversion)
     *   [inputs: [file list] Additional compile-time dependencies.](#var_inputs)
     *   [ldflags: [string list] Flags passed to the linker.](#var_ldflags)
     *   [lib_dirs: [directory list] Additional library directories.](#var_lib_dirs)
@@ -1748,7 +1749,7 @@
   specifying the intended location of the output file.
 
   The `output_conversion` variable specified the format to write the
-  value. See `gn help output_conversion`.
+  value. See `gn help io_conversion`.
 
   One of `contents` or `data_keys` must be specified; use of `data` will write
   the contents of that value to file, while use of `data_keys` will trigger a
@@ -5602,6 +5603,12 @@
 
 ```
   include_dirs = [ "src/include", "//third_party/foo" ]
+```
+### <a name="var_input_conversion"></a>**input_conversion**: Data format for exec_script and read_file functions.
+
+```
+  Controls how the "output" of a script or the "contents" of a file target is
+  parsed. See "gn help io_conversion".
 ```
 ### <a name="var_inputs"></a>**inputs**: Additional compile-time dependencies.
 

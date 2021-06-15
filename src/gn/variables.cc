@@ -2213,6 +2213,16 @@ const char kWriteRuntimeDeps_Help[] =
   help --runtime-deps-list-file").
 )";
 
+const char kReadInputConversion[] = "input_conversion";
+const char kReadInputConversion_HelpShort[] =
+    "input_conversion: Data format for exec_script and read_file functions.";
+const char kReadInputConversion_Help[] =
+    R"(input_conversion: Data format for exec_script and read_file functions.
+
+  Controls how the "output" of a script or the "contents" of a file target is
+  parsed. See "gn help io_conversion".
+)";
+
 const char kXcodeExtraAttributes[] = "xcode_extra_attributes";
 const char kXcodeExtraAttributes_HelpShort[] =
     "xcode_extra_attributes: [scope] Extra attributes for Xcode projects.";
@@ -2328,6 +2338,7 @@ const VariableInfoMap& GetTargetVariables() {
     INSERT_VARIABLE(WalkKeys)
     INSERT_VARIABLE(WeakFrameworks)
     INSERT_VARIABLE(WriteOutputConversion)
+    INSERT_VARIABLE(ReadInputConversion)
     INSERT_VARIABLE(WriteValueContents)
     INSERT_VARIABLE(WriteRuntimeDeps)
     INSERT_VARIABLE(XcodeExtraAttributes)
