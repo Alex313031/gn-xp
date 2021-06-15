@@ -16,6 +16,23 @@
       "message": "Please take a look.",
       "revId": "ffa30eeabb121abe630ff9f82b93c60a7a6da791",
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4ae31007_38375427",
+        "filename": "src/gn/variables.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 2220,
+      "author": {
+        "id": 1000014
+      },
+      "writtenOn": "2021-06-15T14:48:34Z",
+      "side": 1,
+      "message": "Is this just for the function parameter? I haven\u0027t been documenting those separately. The name of the section in help is \"Variables you set in targets\" and there\u0027s no help for any other function parameters. If my understanding is correct, can you remove this?",
+      "revId": "ffa30eeabb121abe630ff9f82b93c60a7a6da791",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
     }
   ]
 }
