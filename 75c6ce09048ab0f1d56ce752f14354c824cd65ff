@@ -1,0 +1,44 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "3e065db4_36a6fac1",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000070
+      },
+      "writtenOn": "2021-06-17T13:32:55Z",
+      "side": 1,
+      "message": "lgtm",
+      "revId": "75c6ce09048ab0f1d56ce752f14354c824cd65ff",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "746c4fa2_b91e2b1c",
+        "filename": "src/gn/ninja_binary_target_writer.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 348,
+      "author": {
+        "id": 1000070
+      },
+      "writtenOn": "2021-06-17T13:32:55Z",
+      "side": 1,
+      "message": "I think the code can use a const reference here:\n\n  const UniqueVector\u003cLibFile\u003e\u0026 all_libs \u003d target_-\u003eall_libs();",
+      "range": {
+        "startLine": 348,
+        "startChar": 2,
+        "endLine": 348,
+        "endChar": 30
+      },
+      "revId": "75c6ce09048ab0f1d56ce752f14354c824cd65ff",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    }
+  ]
+}
