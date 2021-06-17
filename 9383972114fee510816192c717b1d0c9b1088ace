@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "37c47371_f291e594",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000067
+      },
+      "writtenOn": "2021-06-17T13:23:41Z",
+      "side": 1,
+      "message": "I assume this does not commit because this was created against the \"master\" branch, instead of the new \"main\" one. Patchset 2 was rebased on top of \"main\" but that doesn\u0027t seem to impact Gerrit. I plan to re-upload these changes with different Change-Ids then to work around this.",
+      "revId": "9383972114fee510816192c717b1d0c9b1088ace",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    }
+  ]
+}
