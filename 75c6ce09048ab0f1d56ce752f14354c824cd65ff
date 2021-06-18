@@ -35,6 +35,24 @@
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "b5bb3091_c4a5e0ef",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000067
+      },
+      "writtenOn": "2021-06-18T18:53:37Z",
+      "side": 1,
+      "message": "Yes, the original CLs are on top of the now-deprecated master branch and would not submit through Gerrit, so I cherry-picked then on the main one.",
+      "parentUuid": "fac88f01_6582d279",
+      "revId": "75c6ce09048ab0f1d56ce752f14354c824cd65ff",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "746c4fa2_b91e2b1c",
