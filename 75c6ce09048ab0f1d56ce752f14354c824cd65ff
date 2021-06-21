@@ -71,6 +71,24 @@
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "f6518570_3ceb88a6",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000067
+      },
+      "writtenOn": "2021-06-21T08:38:21Z",
+      "side": 1,
+      "message": "That\u0027s actually what I tried first, but it didn\u0027t work for some reason, hence the new uploads (triggered by changing the Change-Id in the commit message) :-/\n\nI have no idea why. I\u0027ve used this technique in the past with other repos in Gerrit with success though",
+      "parentUuid": "0d58885c_60a099db",
+      "revId": "75c6ce09048ab0f1d56ce752f14354c824cd65ff",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "746c4fa2_b91e2b1c",
