@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "81c44ef6_8f04521a",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000046
+      },
+      "writtenOn": "2021-06-25T19:13:13Z",
+      "side": 1,
+      "message": "Background: When we upgraded to Chromium v92 at least one of our Mac developers hit problems with linking components builds, which turned out to be due to a new GN dependency that added a framework dir to the list of libraries for that helper target.\n\nWhen we upgraded our GN fork to include the current GN version used for v92, which had a fix \u003chttps://gn-review.googlesource.com/c/gn/+/11500\u003efor the Mac issue, we hit the same issue on our autobuilders, which have Python installed for all users in the \"C:\\Program Files\" folder.\n\nThe specific problem we hit was in the Windows \"asm\" tool, and the reason was that the wrapper script invokes Python deeper down. It might be that these scripts should use the sys.executable Python variable instead, but that assumes that they are never supposed to call other commands as well.\n\nI found that the problem was introduced by \u003chttps://gn-review.googlesource.com/c/gn/+/10900\u003e which added a path search for the python command when specified by the dotGN file.\n\nAfter various testing I concluded adding quotes around the python_path variable when it was set was the best solution. Using quotes on the result from the search causes commands to fail, because the quotes are not stripped before the command is launched.\n\nI also added ninja-escaping of the command when writing the action targets.",
+      "revId": "f453b23dcaa8963a8c6df74b1c784b7776d8b723",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    }
+  ]
+}
