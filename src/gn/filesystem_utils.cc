@@ -229,6 +229,14 @@ base::FilePath UTF8ToFilePath(std::string_view sp) {
 #endif
 }
 
+std::string MaybeQuotePath(const std::string_view path_in) {
+  std::string path(path_in);
+  if (path[0] != '\"' && path.find_first_of(' ') != std::string_view::npos) {
+    return "\"" + path + "\"";
+  }
+  return path;
+}
+
 size_t FindExtensionOffset(const std::string& path) {
   for (int i = static_cast<int>(path.size()); i >= 0; i--) {
     if (IsSlash(path[i]))
