@@ -298,7 +298,7 @@ void NinjaBinaryTargetWriter::WriteLinkerFlags(
     std::ostream& out,
     const Tool* tool,
     const SourceFile* optional_def_file) {
-  if (tool->AsC()) {
+  if (tool->AsC() || (tool->AsRust() && tool->AsRust()->MayLink())) {
     // First the ldflags from the target and its config.
     RecursiveTargetConfigStringsToStream(kRecursiveWriterKeepDuplicates,
                                          target_, &ConfigValues::ldflags,

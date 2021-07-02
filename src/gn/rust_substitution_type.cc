@@ -9,6 +9,7 @@
 
 #include "gn/err.h"
 #include "gn/substitution_type.h"
+#include "gn/c_substitution_type.h"
 
 const SubstitutionTypes RustSubstitutions = {
     &kRustSubstitutionCrateName,       &kRustSubstitutionCrateType,
@@ -38,5 +39,7 @@ bool IsValidRustSubstitution(const Substitution* type) {
          type == &kRustSubstitutionRustDeps ||
          type == &kRustSubstitutionRustEnv ||
          type == &kRustSubstitutionRustFlags ||
-         type == &kRustSubstitutionSources;
+         type == &kRustSubstitutionSources ||
+         IsValidLinkerSubstitution(type); // Rust toolchain may need to know
+          // about linker options e.g. where to find libraries
 }

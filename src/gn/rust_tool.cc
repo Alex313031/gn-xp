@@ -38,6 +38,11 @@ bool RustTool::ValidateName(const char* name) const {
          name == kRsToolStaticlib;
 }
 
+bool RustTool::MayLink() const {
+  return name_ == kRsToolBin || name_ == kRsToolCDylib || name_ == kRsToolDylib ||
+         name_ == kRsToolMacro;
+}
+
 void RustTool::SetComplete() {
   SetToolComplete();
 }
