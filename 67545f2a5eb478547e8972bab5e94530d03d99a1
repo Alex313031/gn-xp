@@ -16,6 +16,23 @@
       "message": "Similar issue can be seen on this github post:\nhttps://github.com/protocolbuffers/protobuf/issues/3203",
       "revId": "67545f2a5eb478547e8972bab5e94530d03d99a1",
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "069c626d_051f3326",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000014
+      },
+      "writtenOn": "2021-07-05T15:45:24Z",
+      "side": 1,
+      "message": "Ugh, macros! Thanks for the patch.",
+      "revId": "67545f2a5eb478547e8972bab5e94530d03d99a1",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
     }
   ]
 }
