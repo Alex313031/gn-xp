@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7133ad9f_d2a07ca2",
+        "filename": "src/gn/ninja_binary_target_writer.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 312,
+      "author": {
+        "id": 1000014
+      },
+      "writtenOn": "2021-07-08T14:56:38Z",
+      "side": 1,
+      "message": "I think you meant \"Write\" followed by a space.",
+      "range": {
+        "startLine": 312,
+        "startChar": 5,
+        "endLine": 312,
+        "endChar": 10
+      },
+      "revId": "75024e31aa2116eff8570e79615b9c004b2cb441",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    }
+  ]
+}
