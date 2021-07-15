@@ -316,6 +316,9 @@ void NinjaRustBinaryTargetWriter::WriteRustdeps(
     out_ << " -Lnative=";
     path_output_.WriteDir(out_, nonrustdep_dir, PathOutput::DIR_NO_LAST_SLASH);
   }
+  if (nonrustdeps.size() > 0) {
+    out_ << " -Clink-arg=-Bdynamic";
+  }
   for (const auto& nonrustdep : nonrustdeps) {
     out_ << " -Clink-arg=";
     path_output_.WriteFile(out_, nonrustdep);
