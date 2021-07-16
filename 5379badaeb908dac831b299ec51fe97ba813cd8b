@@ -33,6 +33,24 @@
       "message": "We should have a comment about what this means and why it\u0027s necessary (as with -Lnative above)",
       "revId": "5379badaeb908dac831b299ec51fe97ba813cd8b",
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "8736cdd1_30e01994",
+        "filename": "src/gn/ninja_rust_binary_target_writer.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 319,
+      "author": {
+        "id": 1001702
+      },
+      "writtenOn": "2021-07-16T17:58:08Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "7e0500e0_52d27b5e",
+      "revId": "5379badaeb908dac831b299ec51fe97ba813cd8b",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
     }
   ]
 }
