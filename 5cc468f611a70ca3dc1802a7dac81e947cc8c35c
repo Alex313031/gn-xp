@@ -24,6 +24,30 @@
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
     },
     {
+      "unresolved": true,
+      "key": {
+        "uuid": "58498d10_070b6a13",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 3
+      },
+      "lineNbr": 12,
+      "author": {
+        "id": 1000168
+      },
+      "writtenOn": "2021-07-16T21:30:31Z",
+      "side": 1,
+      "message": "We certainly could.. it would be nice if we did the same for executable and static_library then.\n\nThis makes it easier in the build to specialize behavior on the language being compiled. I\u0027m not sure if it has any advantages over making a function available that returns the language of a target, though.",
+      "parentUuid": "25836d36_ef9fce8c",
+      "range": {
+        "startLine": 11,
+        "startChar": 64,
+        "endLine": 12,
+        "endChar": 33
+      },
+      "revId": "5cc468f611a70ca3dc1802a7dac81e947cc8c35c",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
       "unresolved": false,
       "key": {
         "uuid": "2fd56e2c_09cd0650",
@@ -75,6 +99,24 @@
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "6ee3da8a_d02bdbb3",
+        "filename": "src/gn/rust_values.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 13,
+      "author": {
+        "id": 1000168
+      },
+      "writtenOn": "2021-07-16T21:30:31Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "bd114f2b_3bcbe008",
+      "revId": "5cc468f611a70ca3dc1802a7dac81e947cc8c35c",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "2bc22ec2_89b5334b",
@@ -98,6 +140,30 @@
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "756d6e76_5812fbdc",
+        "filename": "src/gn/rust_values.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 16,
+      "author": {
+        "id": 1000168
+      },
+      "writtenOn": "2021-07-16T21:30:31Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "2bc22ec2_89b5334b",
+      "range": {
+        "startLine": 14,
+        "startChar": 0,
+        "endLine": 16,
+        "endChar": 3
+      },
+      "revId": "5cc468f611a70ca3dc1802a7dac81e947cc8c35c",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "14007a61_c822692c",
@@ -111,6 +177,30 @@
       "writtenOn": "2021-03-02T14:34:31Z",
       "side": 1,
       "message": "related to my other comment, is there a scenario where this is a valid output or is this a failure case?",
+      "range": {
+        "startLine": 30,
+        "startChar": 0,
+        "endLine": 30,
+        "endChar": 24
+      },
+      "revId": "5cc468f611a70ca3dc1802a7dac81e947cc8c35c",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "44a0ce07_1fd57af2",
+        "filename": "src/gn/rust_values.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 30,
+      "author": {
+        "id": 1000168
+      },
+      "writtenOn": "2021-07-16T21:30:31Z",
+      "side": 1,
+      "message": "Failure case; this is now documented.",
+      "parentUuid": "14007a61_c822692c",
       "range": {
         "startLine": 30,
         "startChar": 0,
@@ -192,6 +282,30 @@
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "6290e613_f582bee0",
+        "filename": "src/gn/rust_values.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 25,
+      "author": {
+        "id": 1000168
+      },
+      "writtenOn": "2021-07-16T21:30:31Z",
+      "side": 1,
+      "message": "I like that. Done.",
+      "parentUuid": "acb52c3c_d24e3fae",
+      "range": {
+        "startLine": 22,
+        "startChar": 2,
+        "endLine": 25,
+        "endChar": 53
+      },
+      "revId": "5cc468f611a70ca3dc1802a7dac81e947cc8c35c",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "37c5a00a_40beb2ae",
@@ -209,6 +323,24 @@
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "56f944b4_c78e5e32",
+        "filename": "src/gn/rust_values.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 49,
+      "author": {
+        "id": 1000168
+      },
+      "writtenOn": "2021-07-16T21:30:31Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "37c5a00a_40beb2ae",
+      "revId": "5cc468f611a70ca3dc1802a7dac81e947cc8c35c",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "f5417667_a61e8ba1",
@@ -222,6 +354,30 @@
       "writtenOn": "2021-03-02T14:34:31Z",
       "side": 1,
       "message": "shouldn\u0027t this cause an error if the type has been inferred?",
+      "range": {
+        "startLine": 362,
+        "startChar": 0,
+        "endLine": 362,
+        "endChar": 34
+      },
+      "revId": "5cc468f611a70ca3dc1802a7dac81e947cc8c35c",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "544a7456_50d8d750",
+        "filename": "src/gn/tool.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 362,
+      "author": {
+        "id": 1000168
+      },
+      "writtenOn": "2021-07-16T21:30:31Z",
+      "side": 1,
+      "message": "Maybe, but this behavior is pre-existing.",
+      "parentUuid": "f5417667_a61e8ba1",
       "range": {
         "startLine": 362,
         "startChar": 0,
