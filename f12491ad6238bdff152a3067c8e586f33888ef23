@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "478f8f8c_d7cc8700",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000014
+      },
+      "writtenOn": "2021-07-16T16:32:46Z",
+      "side": 1,
+      "message": "This looks fine, will rubberstamp after a Rust person double-checks.",
+      "revId": "f12491ad6238bdff152a3067c8e586f33888ef23",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    }
+  ]
+}
