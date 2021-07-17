@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "8f98999d_316944b7",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 9
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000168
+      },
+      "writtenOn": "2021-07-17T00:33:17Z",
+      "side": 1,
+      "message": "Rebased. I also tweaked the logic around copying native libraries from transitive_libs to inherited_libraries, as I realized it was no longer correct.",
+      "revId": "e27079a791a984ff06516a7c1ad43c85da8f16a5",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    }
+  ]
+}
