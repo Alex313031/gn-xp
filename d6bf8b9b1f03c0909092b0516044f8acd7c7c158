@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "7514d97b_be6e678a",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1001702
+      },
+      "writtenOn": "2021-07-19T18:30:24Z",
+      "side": 1,
+      "message": "This code doesn\u0027t have unit tests, but I confirmed it compiles, and `gn desc` and `gn desc --format\u003djson` both list the `rustenv` field with the correct data.",
+      "revId": "d6bf8b9b1f03c0909092b0516044f8acd7c7c158",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    }
+  ]
+}
