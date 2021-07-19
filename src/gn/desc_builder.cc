@@ -44,9 +44,10 @@
 //   "depfile : "file name for action input dependencies",
 //   "outputs" : [ list of target outputs ],
 //   "arflags", "asmflags", "cflags", "cflags_c",
-//   "clfags_cc", "cflags_objc", "clfags_objcc" : [ list of flags],
+//   "cflags_cc", "cflags_objc", "cflags_objcc", "rustflags" : [ list of flags],
 //   "defines" : [ list of preprocessor definitions ],
 //   "include_dirs" : [ list of include directories ],
+//   "rustenv" : [ list of Rust environment variables ],
 //   "precompiled_header" : "name of precompiled header file",
 //   "precompiled_source" : "path to precompiled source",
 //   "deps : [ list of target dependencies ],
@@ -513,6 +514,8 @@ class TargetDescBuilder : public BaseDescBuilder {
       CONFIG_VALUE_ARRAY_HANDLER(cflags_objcc, std::string,
                                  kRecursiveWriterKeepDuplicates)
       CONFIG_VALUE_ARRAY_HANDLER(rustflags, std::string,
+                                 kRecursiveWriterKeepDuplicates)
+      CONFIG_VALUE_ARRAY_HANDLER(rustenv, std::string,
                                  kRecursiveWriterKeepDuplicates)
       CONFIG_VALUE_ARRAY_HANDLER(defines, std::string,
                                  kRecursiveWriterSkipDuplicates)
