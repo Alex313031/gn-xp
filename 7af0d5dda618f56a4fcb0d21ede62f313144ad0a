@@ -18,6 +18,23 @@
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "a727dcbb_945033ff",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1001792
+      },
+      "writtenOn": "2021-07-20T20:50:41Z",
+      "side": 1,
+      "message": "Hi James, friendly ping",
+      "revId": "7af0d5dda618f56a4fcb0d21ede62f313144ad0a",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "930a49fb_d952e051",
