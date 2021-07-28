@@ -4004,7 +4004,7 @@
 
     1. Loads the file with the toolchain definition in it (as determined by the
        toolchain label).
-    2. Re-runs the master build configuration file, applying the arguments
+    2. Re-runs the main build configuration file, applying the arguments
        specified by the toolchain_args section of the toolchain definition.
     3. Loads the destination build file in the context of the configuration file
        in the previous step.
@@ -4030,7 +4030,7 @@
     This is a variable of type "scope" where the variable names correspond to
     variables in declare_args() blocks.
 
-    When you specify a target using an alternate toolchain, the master build
+    When you specify a target using an alternate toolchain, the main build
     configuration file is re-interpreted in the context of that toolchain.
     toolchain_args allows you to control the arguments passed into this
     alternate invocation of the build.
@@ -4724,8 +4724,7 @@
   non-distributable code).
 
   See "gn help label_pattern" for the format of the entries in the list. These
-  patterns allow blacklisting individual targets or whole directory
-  hierarchies.
+  patterns allow blocklisting individual targets or whole directory hierarchies.
 
   Sometimes it is desirable to enforce that many targets have no dependencies
   on a target or set of targets. One efficient way to express this is to create
@@ -6115,7 +6114,7 @@
   If no public files are declared, other targets (assuming they have visibility
   to depend on this target) can include any file in the sources list. If this
   variable is defined on a target, dependent targets may only include files on
-  this whitelist unless that target is marked as a friend (see "gn help
+  this allowlist unless that target is marked as a friend (see "gn help
   friend").
 
   Header file permissions are also subject to visibility. A target must be
@@ -7565,7 +7564,7 @@
   GN's header checker helps validate that the includes match the build
   dependency graph. Sometimes an include might be conditional or otherwise
   problematic, but you want to specifically allow it. In this case, it can be
-  whitelisted.
+  allowlisted.
 
   Include lines containing the substring "nogncheck" will be excluded from
   header checking. The most common case is a conditional include:
