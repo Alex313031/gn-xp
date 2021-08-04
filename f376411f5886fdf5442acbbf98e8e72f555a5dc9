@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "904f813f_1fa73c52",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 8
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000602
+      },
+      "writtenOn": "2021-08-04T18:57:40Z",
+      "side": 1,
+      "message": "Hello Brett, I made the following changes to address the review feedback and applied them to the initial Change Id Id06e12c9ca88424a9495a5a2d1ed4e2575185196:\n\n- update gen.py to depend on zoslib (https://github.com/ibmruntimes/zoslib)\n- remove z/OS-specific code and use APIs from zoslib instead\n- remove all CCSID-related changes\n- use zoslib\u0027s implementation of thread_local\n- remove no-longer needed zos-util.* files\n- update README.md\n\nCan you please review when you have a chance. Thanks.",
+      "revId": "f376411f5886fdf5442acbbf98e8e72f555a5dc9",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    }
+  ]
+}

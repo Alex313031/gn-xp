@@ -161,6 +161,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "b85faa74_a0a870cc",
+        "filename": "src/util/sys_info.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 84,
+      "author": {
+        "id": 1000602
+      },
+      "writtenOn": "2021-08-04T18:57:40Z",
+      "side": 1,
+      "message": "In the latest commit, I replaced the code (with offsets) by a call to __get_num_online_cpus() from zoslib.",
+      "parentUuid": "ba4ac151_9ca7b6ef",
+      "revId": "6551c5351434080e18124672bb517a25c7dcf263",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "41919f25_daa9151c",
         "filename": "src/util/zos_util.h",
         "patchSetId": 2
