@@ -16,6 +16,233 @@
       "message": "Hello Brett, I made the following changes to address the review feedback and applied them to the initial Change Id Id06e12c9ca88424a9495a5a2d1ed4e2575185196:\n\n- update gen.py to depend on zoslib (https://github.com/ibmruntimes/zoslib)\n- remove z/OS-specific code and use APIs from zoslib instead\n- remove all CCSID-related changes\n- use zoslib\u0027s implementation of thread_local\n- remove no-longer needed zos-util.* files\n- update README.md\n\nCan you please review when you have a chance. Thanks.",
       "revId": "f376411f5886fdf5442acbbf98e8e72f555a5dc9",
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "6f068198_8e37685b",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 8
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000014
+      },
+      "writtenOn": "2021-08-09T23:45:04Z",
+      "side": 1,
+      "message": "Hi!\n\nI think you got the complexity down enough so this would be OK to land. Thanks! I left a bunch of minor style comments.",
+      "revId": "f376411f5886fdf5442acbbf98e8e72f555a5dc9",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2ce1c013_940f934c",
+        "filename": "src/base/files/file_posix.cc",
+        "patchSetId": 8
+      },
+      "lineNbr": 19,
+      "author": {
+        "id": 1000014
+      },
+      "writtenOn": "2021-08-09T23:45:04Z",
+      "side": 1,
+      "message": "I don\u0027t see your new code using this. If it\u0027s needed for something it should probably just be unconditional.",
+      "revId": "f376411f5886fdf5442acbbf98e8e72f555a5dc9",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c4114228_f036f4c0",
+        "filename": "src/base/files/file_posix.cc",
+        "patchSetId": 8
+      },
+      "lineNbr": 364,
+      "author": {
+        "id": 1000014
+      },
+      "writtenOn": "2021-08-09T23:45:04Z",
+      "side": 1,
+      "message": "I think the intention of this check is that the above code doesn\u0027t set O_RDONLY when neither read nor write is set, so for it to be correct, the value must be 0. If that\u0027s not the case for you, I think we should delete this assert and handle that case above so it\u0027s set properly.",
+      "revId": "f376411f5886fdf5442acbbf98e8e72f555a5dc9",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "46a94ac0_ccbe5701",
+        "filename": "src/base/files/file_posix.cc",
+        "patchSetId": 8
+      },
+      "lineNbr": 375,
+      "author": {
+        "id": 1000014
+      },
+      "writtenOn": "2021-08-09T23:45:04Z",
+      "side": 1,
+      "message": "You don\u0027t need this part of the change.",
+      "revId": "f376411f5886fdf5442acbbf98e8e72f555a5dc9",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a3e45cd4_5d1705bd",
+        "filename": "src/base/files/file_util_posix.cc",
+        "patchSetId": 8
+      },
+      "lineNbr": 17,
+      "author": {
+        "id": 1000014
+      },
+      "writtenOn": "2021-08-09T23:45:04Z",
+      "side": 1,
+      "message": "Put the conditional includes after all of the non-conditional ones.",
+      "revId": "f376411f5886fdf5442acbbf98e8e72f555a5dc9",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "de8eb8a1_20ad3b5f",
+        "filename": "src/base/files/file_util_posix.cc",
+        "patchSetId": 8
+      },
+      "lineNbr": 517,
+      "author": {
+        "id": 1000014
+      },
+      "writtenOn": "2021-08-09T23:45:04Z",
+      "side": 1,
+      "message": "The GN code doesn\u0027t usually use {} for single-line conditionals, so I would\u0027t add them.",
+      "range": {
+        "startLine": 517,
+        "startChar": 13,
+        "endLine": 517,
+        "endChar": 15
+      },
+      "revId": "f376411f5886fdf5442acbbf98e8e72f555a5dc9",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "58e7d779_d475f830",
+        "filename": "src/base/logging.cc",
+        "patchSetId": 8
+      },
+      "lineNbr": 31,
+      "author": {
+        "id": 1000014
+      },
+      "writtenOn": "2021-08-09T23:45:04Z",
+      "side": 1,
+      "message": "Can you move this to the bottom of the POSIX section?",
+      "revId": "f376411f5886fdf5442acbbf98e8e72f555a5dc9",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "86e5753b_7229f278",
+        "filename": "src/gn/eclipse_writer.cc",
+        "patchSetId": 8
+      },
+      "lineNbr": 11,
+      "author": {
+        "id": 1000014
+      },
+      "writtenOn": "2021-08-09T23:45:04Z",
+      "side": 1,
+      "message": "Do you need this? If we need it, unconditionally include it, otherwise delete it.",
+      "revId": "f376411f5886fdf5442acbbf98e8e72f555a5dc9",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d93396b1_c344dee8",
+        "filename": "src/gn/eclipse_writer.cc",
+        "patchSetId": 8
+      },
+      "lineNbr": 61,
+      "author": {
+        "id": 1000014
+      },
+      "writtenOn": "2021-08-09T23:45:04Z",
+      "side": 1,
+      "message": "I don\u0027t follow why this change affects anything. If it\u0027s required, we should have a comment above the extra block.",
+      "revId": "f376411f5886fdf5442acbbf98e8e72f555a5dc9",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "81e2015a_785efd2f",
+        "filename": "src/gn/exec_process.cc",
+        "patchSetId": 8
+      },
+      "lineNbr": 28,
+      "author": {
+        "id": 1000014
+      },
+      "writtenOn": "2021-08-09T23:45:04Z",
+      "side": 1,
+      "message": "Sort these (should go higher).",
+      "revId": "f376411f5886fdf5442acbbf98e8e72f555a5dc9",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f0611138_dcd9c766",
+        "filename": "src/gn/file_writer.cc",
+        "patchSetId": 8
+      },
+      "lineNbr": 21,
+      "author": {
+        "id": 1000014
+      },
+      "writtenOn": "2021-08-09T23:45:04Z",
+      "side": 1,
+      "message": "If necessary, this should just be included unconditionally, otherwise removed.",
+      "revId": "f376411f5886fdf5442acbbf98e8e72f555a5dc9",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5a9aaf0c_c5a8cdf3",
+        "filename": "src/gn/ninja_rust_binary_target_writer_unittest.cc",
+        "patchSetId": 8
+      },
+      "lineNbr": 933,
+      "author": {
+        "id": 1000014
+      },
+      "writtenOn": "2021-08-09T23:45:04Z",
+      "side": 1,
+      "message": "Since this code should work on any compiler, let\u0027s just always use your version and delete the ifdefs.",
+      "revId": "f376411f5886fdf5442acbbf98e8e72f555a5dc9",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "71824ae0_9683878d",
+        "filename": "src/gn/ninja_toolchain_writer.cc",
+        "patchSetId": 8
+      },
+      "lineNbr": 66,
+      "author": {
+        "id": 1000014
+      },
+      "writtenOn": "2021-08-09T23:45:04Z",
+      "side": 1,
+      "message": "I don\u0027t follow this change.",
+      "revId": "f376411f5886fdf5442acbbf98e8e72f555a5dc9",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
     }
   ]
 }
