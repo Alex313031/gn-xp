@@ -336,6 +336,24 @@
       "parentUuid": "1143a0c3_7558bbad",
       "revId": "122aaef10b3812c8772f553e77183e6f719b9dd0",
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "7ca6e71a_408e1bae",
+        "filename": "src/gn/string_atom.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 211,
+      "author": {
+        "id": 1000602
+      },
+      "writtenOn": "2021-08-11T15:31:57Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "59dac704_0441a57f",
+      "revId": "122aaef10b3812c8772f553e77183e6f719b9dd0",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
     }
   ]
 }

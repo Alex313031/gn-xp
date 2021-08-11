@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "00cde450_2eed3922",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 9
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000602
+      },
+      "writtenOn": "2021-08-11T15:31:57Z",
+      "side": 1,
+      "message": "Just realised the following replies are draft. Please review, thanks.",
+      "revId": "b6a70f82ff968d7da9919109460dcd6c12889ff0",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    }
+  ]
+}

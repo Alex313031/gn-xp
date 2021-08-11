@@ -52,6 +52,24 @@
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "5087867e_d4781940",
+        "filename": "src/base/files/file_posix.cc",
+        "patchSetId": 8
+      },
+      "lineNbr": 19,
+      "author": {
+        "id": 1000602
+      },
+      "writtenOn": "2021-08-11T15:31:57Z",
+      "side": 1,
+      "message": "Thanks Brett for your feedback. Most of the code I left was from the CCSID-related changes I had made earlier, but missed undoing some when I removed that support (e.g. the change here and those extra {}), now cleaned up.",
+      "parentUuid": "2ce1c013_940f934c",
+      "revId": "f376411f5886fdf5442acbbf98e8e72f555a5dc9",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "c4114228_f036f4c0",
@@ -65,6 +83,24 @@
       "writtenOn": "2021-08-09T23:45:04Z",
       "side": 1,
       "message": "I think the intention of this check is that the above code doesn\u0027t set O_RDONLY when neither read nor write is set, so for it to be correct, the value must be 0. If that\u0027s not the case for you, I think we should delete this assert and handle that case above so it\u0027s set properly.",
+      "revId": "f376411f5886fdf5442acbbf98e8e72f555a5dc9",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c39b862d_a211bb2f",
+        "filename": "src/base/files/file_posix.cc",
+        "patchSetId": 8
+      },
+      "lineNbr": 364,
+      "author": {
+        "id": 1000602
+      },
+      "writtenOn": "2021-08-11T15:31:57Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "c4114228_f036f4c0",
       "revId": "f376411f5886fdf5442acbbf98e8e72f555a5dc9",
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
     },
@@ -86,6 +122,24 @@
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "affb5e20_7f190527",
+        "filename": "src/base/files/file_posix.cc",
+        "patchSetId": 8
+      },
+      "lineNbr": 375,
+      "author": {
+        "id": 1000602
+      },
+      "writtenOn": "2021-08-11T15:31:57Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "46a94ac0_ccbe5701",
+      "revId": "f376411f5886fdf5442acbbf98e8e72f555a5dc9",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "a3e45cd4_5d1705bd",
@@ -99,6 +153,24 @@
       "writtenOn": "2021-08-09T23:45:04Z",
       "side": 1,
       "message": "Put the conditional includes after all of the non-conditional ones.",
+      "revId": "f376411f5886fdf5442acbbf98e8e72f555a5dc9",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "5faa5958_6f8844bb",
+        "filename": "src/base/files/file_util_posix.cc",
+        "patchSetId": 8
+      },
+      "lineNbr": 17,
+      "author": {
+        "id": 1000602
+      },
+      "writtenOn": "2021-08-11T15:31:57Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "a3e45cd4_5d1705bd",
       "revId": "f376411f5886fdf5442acbbf98e8e72f555a5dc9",
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
     },
@@ -126,6 +198,30 @@
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "c0e66096_b2d0eae2",
+        "filename": "src/base/files/file_util_posix.cc",
+        "patchSetId": 8
+      },
+      "lineNbr": 517,
+      "author": {
+        "id": 1000602
+      },
+      "writtenOn": "2021-08-11T15:31:57Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "de8eb8a1_20ad3b5f",
+      "range": {
+        "startLine": 517,
+        "startChar": 13,
+        "endLine": 517,
+        "endChar": 15
+      },
+      "revId": "f376411f5886fdf5442acbbf98e8e72f555a5dc9",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "58e7d779_d475f830",
@@ -139,6 +235,24 @@
       "writtenOn": "2021-08-09T23:45:04Z",
       "side": 1,
       "message": "Can you move this to the bottom of the POSIX section?",
+      "revId": "f376411f5886fdf5442acbbf98e8e72f555a5dc9",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "1ed1d2ec_850b9702",
+        "filename": "src/base/logging.cc",
+        "patchSetId": 8
+      },
+      "lineNbr": 31,
+      "author": {
+        "id": 1000602
+      },
+      "writtenOn": "2021-08-11T15:31:57Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "58e7d779_d475f830",
       "revId": "f376411f5886fdf5442acbbf98e8e72f555a5dc9",
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
     },
@@ -160,6 +274,24 @@
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "963e6e11_0d7b654f",
+        "filename": "src/gn/eclipse_writer.cc",
+        "patchSetId": 8
+      },
+      "lineNbr": 11,
+      "author": {
+        "id": 1000602
+      },
+      "writtenOn": "2021-08-11T15:31:57Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "86e5753b_7229f278",
+      "revId": "f376411f5886fdf5442acbbf98e8e72f555a5dc9",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "d93396b1_c344dee8",
@@ -173,6 +305,24 @@
       "writtenOn": "2021-08-09T23:45:04Z",
       "side": 1,
       "message": "I don\u0027t follow why this change affects anything. If it\u0027s required, we should have a comment above the extra block.",
+      "revId": "f376411f5886fdf5442acbbf98e8e72f555a5dc9",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "7a0104bc_3305cf65",
+        "filename": "src/gn/eclipse_writer.cc",
+        "patchSetId": 8
+      },
+      "lineNbr": 61,
+      "author": {
+        "id": 1000602
+      },
+      "writtenOn": "2021-08-11T15:31:57Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "d93396b1_c344dee8",
       "revId": "f376411f5886fdf5442acbbf98e8e72f555a5dc9",
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
     },
@@ -194,6 +344,24 @@
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "a340efa7_304d80f9",
+        "filename": "src/gn/exec_process.cc",
+        "patchSetId": 8
+      },
+      "lineNbr": 28,
+      "author": {
+        "id": 1000602
+      },
+      "writtenOn": "2021-08-11T15:31:57Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "81e2015a_785efd2f",
+      "revId": "f376411f5886fdf5442acbbf98e8e72f555a5dc9",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "f0611138_dcd9c766",
@@ -207,6 +375,24 @@
       "writtenOn": "2021-08-09T23:45:04Z",
       "side": 1,
       "message": "If necessary, this should just be included unconditionally, otherwise removed.",
+      "revId": "f376411f5886fdf5442acbbf98e8e72f555a5dc9",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "213c1ecf_fd274333",
+        "filename": "src/gn/file_writer.cc",
+        "patchSetId": 8
+      },
+      "lineNbr": 21,
+      "author": {
+        "id": 1000602
+      },
+      "writtenOn": "2021-08-11T15:31:57Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "f0611138_dcd9c766",
       "revId": "f376411f5886fdf5442acbbf98e8e72f555a5dc9",
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
     },
@@ -228,6 +414,24 @@
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "729f7183_df1e5a4a",
+        "filename": "src/gn/ninja_rust_binary_target_writer_unittest.cc",
+        "patchSetId": 8
+      },
+      "lineNbr": 933,
+      "author": {
+        "id": 1000602
+      },
+      "writtenOn": "2021-08-11T15:31:57Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "5a9aaf0c_c5a8cdf3",
+      "revId": "f376411f5886fdf5442acbbf98e8e72f555a5dc9",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "71824ae0_9683878d",
@@ -241,6 +445,24 @@
       "writtenOn": "2021-08-09T23:45:04Z",
       "side": 1,
       "message": "I don\u0027t follow this change.",
+      "revId": "f376411f5886fdf5442acbbf98e8e72f555a5dc9",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "062953cf_32a64068",
+        "filename": "src/gn/ninja_toolchain_writer.cc",
+        "patchSetId": 8
+      },
+      "lineNbr": 66,
+      "author": {
+        "id": 1000602
+      },
+      "writtenOn": "2021-08-11T15:31:57Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "71824ae0_9683878d",
       "revId": "f376411f5886fdf5442acbbf98e8e72f555a5dc9",
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
     }
