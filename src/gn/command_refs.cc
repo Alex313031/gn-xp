@@ -325,7 +325,6 @@ Examples (target input)
 
 Examples (file input)
 
-  gn refs out/Debug //base/macros.h
       Print target(s) listing //base/macros.h as a source.
 
   gn refs out/Debug //base/macros.h --tree
