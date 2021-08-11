@@ -22,6 +22,30 @@
       },
       "revId": "01f8c0790c691f554b58ceb27289748b1ccde784",
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e722d6ae_5dc013e5",
+        "filename": "src/base/logging.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 182,
+      "author": {
+        "id": 1000014
+      },
+      "writtenOn": "2021-08-11T20:12:48Z",
+      "side": 0,
+      "message": "I didn\u0027t think these stdio functions had unused result requirements so I just removed it and the compiler seemed happy. The fflush below has the same return value and no annotation. This came from Chrome and not even Chrome has the annotation for all fwrite calls.",
+      "parentUuid": "98b75635_0067e04b",
+      "range": {
+        "startLine": 182,
+        "startChar": 2,
+        "endLine": 182,
+        "endChar": 15
+      },
+      "revId": "01f8c0790c691f554b58ceb27289748b1ccde784",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
     }
   ]
 }
