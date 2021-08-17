@@ -142,6 +142,10 @@ def main(argv):
                             'with <ZOSLIB_DIR>/install/lib/libzoslib.a, and ' +
                             'add -I<ZOSLIB_DIR>/install/include to the compile ' +
                             'commands. See README.md for details.'))
+  parser.add_option('--disable-unittests',
+                    action='store_true',
+                    dest='disable_unittests',
+                    help='Do not build gn_unittests')
 
   options, args = parser.parse_args(argv)
 
@@ -678,8 +682,11 @@ def WriteGNNinja(path, platform, host, options):
 
   executables = {
       'gn': {'sources': [ 'src/gn/gn_main.cc' ], 'libs': []},
+  }
 
-      'gn_unittests': { 'sources': [
+  if not options.disable_unittests:
+    executables['gn_unittests'] = {
+      'sources': [
         'src/gn/action_target_generator_unittest.cc',
         'src/gn/analyzer_unittest.cc',
         'src/gn/args_unittest.cc',
@@ -766,7 +773,7 @@ def WriteGNNinja(path, platform, host, options):
         'src/gn/xcode_object_unittest.cc',
         'src/gn/xml_element_writer_unittest.cc',
         'src/util/test/gn_test.cc',
-      ], 'libs': []},
+      ], 'libs': [],
   }
 
   if platform.is_posix() or platform.is_zos():
@@ -825,7 +832,8 @@ def WriteGNNinja(path, platform, host, options):
 
   # we just build static libraries that GN needs
   executables['gn']['libs'].extend(static_libraries.keys())
-  executables['gn_unittests']['libs'].extend(static_libraries.keys())
+  if not options.disable_unittests:
+    executables['gn_unittests']['libs'].extend(static_libraries.keys())
 
   WriteGenericNinja(path, static_libraries, executables, cxx, ar, ld,
                     platform, host, options, cflags, ldflags,
