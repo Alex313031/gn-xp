@@ -130,7 +130,7 @@ ninja -C out tutorial
 out/tutorial
 ```
 
-You should see "Hello, world." output to the console.
+You should see "Hello from the tutorial." output to the console.
 
 Side note: GN encourages target names for static libraries that aren't globally
 unique. To build one of these, you can pass the label with its path (but no leading
