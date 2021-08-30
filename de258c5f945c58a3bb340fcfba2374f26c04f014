@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "99c20ab4_d461c48c",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000070
+      },
+      "writtenOn": "2021-08-30T08:26:16Z",
+      "side": 1,
+      "message": "Is this CL redundant? Can it be closed?",
+      "revId": "de258c5f945c58a3bb340fcfba2374f26c04f014",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    }
+  ]
+}
