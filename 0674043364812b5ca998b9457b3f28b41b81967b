@@ -18,6 +18,23 @@
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "fc3c3788_9258db5e",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000070
+      },
+      "writtenOn": "2021-08-30T08:25:52Z",
+      "side": 1,
+      "message": "set_source_assignment_filter has been removed.\n\nI think this CL is now obsolete and can be closed.",
+      "revId": "0674043364812b5ca998b9457b3f28b41b81967b",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "aea8afb8_f4a70f3b",
