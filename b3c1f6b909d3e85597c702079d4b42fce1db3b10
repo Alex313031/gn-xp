@@ -105,6 +105,24 @@
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "29995ba3_c247b845",
+        "filename": "src/gn/config_values_generator.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 44,
+      "author": {
+        "id": 1000313
+      },
+      "writtenOn": "2021-09-03T16:29:54Z",
+      "side": 1,
+      "message": "ack ty",
+      "parentUuid": "bfaba728_73177865",
+      "revId": "b3c1f6b909d3e85597c702079d4b42fce1db3b10",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "25abfbab_c3bd3e14",
