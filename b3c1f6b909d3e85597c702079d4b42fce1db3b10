@@ -69,6 +69,42 @@
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "fe887a0b_270e84c1",
+        "filename": "src/gn/config_values_generator.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 44,
+      "author": {
+        "id": 1000047
+      },
+      "writtenOn": "2021-09-03T07:15:50Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "d7ef6e98_cc21aa43",
+      "revId": "b3c1f6b909d3e85597c702079d4b42fce1db3b10",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "bfaba728_73177865",
+        "filename": "src/gn/config_values_generator.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 44,
+      "author": {
+        "id": 1000047
+      },
+      "writtenOn": "2021-09-03T07:15:50Z",
+      "side": 1,
+      "message": "Done -- assuming \"yes\"",
+      "parentUuid": "5f7191ff_fcdab7c3",
+      "revId": "b3c1f6b909d3e85597c702079d4b42fce1db3b10",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "25abfbab_c3bd3e14",
