@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "8a2df982_0fd7632e",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000313
+      },
+      "writtenOn": "2021-09-03T03:55:14Z",
+      "side": 1,
+      "message": "Thank you!",
+      "revId": "b3c1f6b909d3e85597c702079d4b42fce1db3b10",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "4be6eef5_56682edb",
+        "filename": "src/gn/config_values_generator.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 44,
+      "author": {
+        "id": 1000313
+      },
+      "writtenOn": "2021-09-03T03:55:14Z",
+      "side": 1,
+      "message": "Nice catch!",
+      "revId": "b3c1f6b909d3e85597c702079d4b42fce1db3b10",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "25abfbab_c3bd3e14",
+        "filename": "src/gn/target.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 401,
+      "author": {
+        "id": 1000313
+      },
+      "writtenOn": "2021-09-03T03:55:14Z",
+      "side": 1,
+      "message": "Is this still needed?",
+      "revId": "b3c1f6b909d3e85597c702079d4b42fce1db3b10",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    }
+  ]
+}
