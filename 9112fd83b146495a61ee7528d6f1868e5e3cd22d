@@ -33,6 +33,24 @@
       "message": "Tomasz, do you have committer permissions? If not then I\u0027m happy to vote CQ+2 on your behalf.",
       "revId": "9112fd83b146495a61ee7528d6f1868e5e3cd22d",
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7d0acc47_96c01aee",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000047
+      },
+      "writtenOn": "2021-09-03T18:38:16Z",
+      "side": 1,
+      "message": "Oh, right. I have the committer bit in chromium but that doesn\u0027t seem to translate to here and I\u0027m seeing a \"you don\u0027t have permission to submit\". I\u0027d appreciate it if you pushed this along, thanks.",
+      "parentUuid": "b5b5afaf_e6f8deb8",
+      "revId": "9112fd83b146495a61ee7528d6f1868e5e3cd22d",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
     }
   ]
 }
