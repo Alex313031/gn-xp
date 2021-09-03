@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a9d3873d_046418fa",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000047
+      },
+      "writtenOn": "2021-09-03T07:15:14Z",
+      "side": 1,
+      "message": "PTAL after doc fix",
+      "revId": "6524db30cbe6176e21a72a879671b88dc295c11a",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    }
+  ]
+}
