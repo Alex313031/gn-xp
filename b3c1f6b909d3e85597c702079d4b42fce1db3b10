@@ -37,6 +37,40 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "d7ef6e98_cc21aa43",
+        "filename": "src/gn/config_values_generator.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 44,
+      "author": {
+        "id": 1000047
+      },
+      "writtenOn": "2021-09-03T06:26:43Z",
+      "side": 1,
+      "message": "this seemed like a good idea but it causes the generated docs to repeat \"visibility\" in two sections for a bunch of target types like so:\n\n  ### \u003ca name\u003d\"func_loadable_module\"\u003e\u003c/a\u003e**loadable_module**: Declare a loadable module target.\n  [...]\n  #### **Variables**\n\n```\n  Flags: cflags, cflags_c, cflags_cc, cflags_objc, cflags_objcc,\n         asmflags, defines, include_dirs, inputs, ldflags, lib_dirs,\n         libs, precompiled_header, precompiled_source, rustflags,\n         rustenv, swiftflags, visibility   \u003c-- ### Gets added here\n  Deps: data_deps, deps, public_deps\n  Dependent configs: all_dependent_configs, public_configs\n  General: check_includes, configs, data, friend, inputs, metadata,\n           output_name, output_extension, public, sources, testonly,\n           visibility   \u003c-- ### Was here already\n           \nWill need to fix in a different way or fix docs separately later",
+      "revId": "b3c1f6b909d3e85597c702079d4b42fce1db3b10",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5f7191ff_fcdab7c3",
+        "filename": "src/gn/config_values_generator.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 44,
+      "author": {
+        "id": 1000047
+      },
+      "writtenOn": "2021-09-03T06:26:43Z",
+      "side": 1,
+      "message": "As a separate question, should I regenerate docs/reference.md here in this CL if a make a change like this?",
+      "revId": "b3c1f6b909d3e85597c702079d4b42fce1db3b10",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "25abfbab_c3bd3e14",
         "filename": "src/gn/target.cc",
         "patchSetId": 1
@@ -48,6 +82,24 @@
       "writtenOn": "2021-09-03T03:55:14Z",
       "side": 1,
       "message": "Is this still needed?",
+      "revId": "b3c1f6b909d3e85597c702079d4b42fce1db3b10",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0a29781f_1a2eb82d",
+        "filename": "src/gn/target.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 401,
+      "author": {
+        "id": 1000047
+      },
+      "writtenOn": "2021-09-03T06:26:43Z",
+      "side": 1,
+      "message": "yes, this deals with target-target visibility checks (and removing it makes  TargetTest.VisibilityFails fail)",
+      "parentUuid": "25abfbab_c3bd3e14",
       "revId": "b3c1f6b909d3e85597c702079d4b42fce1db3b10",
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
     }
