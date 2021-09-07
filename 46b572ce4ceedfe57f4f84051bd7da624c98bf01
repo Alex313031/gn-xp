@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "987fa5fd_3fc14056",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000842
+      },
+      "writtenOn": "2021-09-07T16:38:43Z",
+      "side": 1,
+      "message": "Hello,\n\nUsing the latest gn build (which includes this patch) generates this error on most platforms when used on V8:\n```\nERROR at //testing/gmock/BUILD.gn:11:1: Dependency not allowed.\nsource_set(\"gmock\") {\n^--------------------\nThe item //testing/gmock:gmock\ncan not depend on //third_party/googletest:gtest_config\nbecause it is not in //third_party/googletest:gtest_config\u0027s visibility list: [\n  //third_party/googletest:*\n]\n```\nAre there additional changes that need to be made on the chromium/v8 side?",
+      "revId": "46b572ce4ceedfe57f4f84051bd7da624c98bf01",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    }
+  ]
+}
