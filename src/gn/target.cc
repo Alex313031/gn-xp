@@ -673,6 +673,14 @@ void Target::PullDependentTargetLibsFrom(const Target* dep, bool is_public) {
     rust_values().transitive_libs().AppendInherited(
         dep->rust_values().transitive_libs(), is_public);
 
+    // Propagate public_deps from a rust_library to its dependents.
+    for (const auto& inherited :
+         dep->inherited_libraries().GetOrderedAndPublicFlag()) {
+      if (inherited.second) {
+        inherited_libraries_.Append(inherited.first, is_public);
+      }
+    }
+
     // If there is a transitive dependency that is not a rust library, place it
     // in the normal location
     for (const auto& inherited :
