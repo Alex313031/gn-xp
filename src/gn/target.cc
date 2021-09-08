@@ -751,10 +751,13 @@ void Target::PullDependentTargetLibsFrom(const Target* dep, bool is_public) {
 }
 
 void Target::PullDependentTargetLibs() {
-  for (const auto& dep : public_deps_)
+  for (const auto& dep : public_deps_) {
     PullDependentTargetLibsFrom(dep.ptr, true);
-  for (const auto& dep : private_deps_)
-    PullDependentTargetLibsFrom(dep.ptr, false);
+  }
+  for (const auto& dep : private_deps_) {
+    // Private dependencies in groups should behave as public dependencies.
+    PullDependentTargetLibsFrom(dep.ptr, output_type_ == GROUP);
+  }
 }
 
 void Target::PullRecursiveHardDeps() {
