@@ -70,6 +70,23 @@
       "parentUuid": "6207bfb9_b8de953a",
       "revId": "46b572ce4ceedfe57f4f84051bd7da624c98bf01",
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ac44f269_af0ec457",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000102
+      },
+      "writtenOn": "2021-09-11T01:54:33Z",
+      "side": 1,
+      "message": "What\u0027s the incremental rollout plan for this? As-is, it makes it impossible to roll GN in Chromium: https://chromium-review.googlesource.com/c/chromium/src/+/3155644",
+      "revId": "46b572ce4ceedfe57f4f84051bd7da624c98bf01",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
     }
   ]
 }
