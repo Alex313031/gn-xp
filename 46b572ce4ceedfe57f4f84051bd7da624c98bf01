@@ -87,6 +87,24 @@
       "message": "What\u0027s the incremental rollout plan for this? As-is, it makes it impossible to roll GN in Chromium: https://chromium-review.googlesource.com/c/chromium/src/+/3155644",
       "revId": "46b572ce4ceedfe57f4f84051bd7da624c98bf01",
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e2ed4aa0_7bc1133c",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000047
+      },
+      "writtenOn": "2021-09-11T11:17:25Z",
+      "side": 1,
+      "message": "I had a look prior to making this gn change and it seemed like there\u0027s only a handful of violations of this in chromium. Two I managed to get fixed already (see gn bug 252), the webrtc one is a bit less obvious due to webrtc\u0027s... opinionated approach to gn, aka no public_deps. I should have something workable next week.",
+      "parentUuid": "ac44f269_af0ec457",
+      "revId": "46b572ce4ceedfe57f4f84051bd7da624c98bf01",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
     }
   ]
 }
