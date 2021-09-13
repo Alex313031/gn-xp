@@ -176,6 +176,24 @@
       "parentUuid": "2b6db8d0_3a2a5b27",
       "revId": "46b572ce4ceedfe57f4f84051bd7da624c98bf01",
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "36fab167_08b1b27e",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000047
+      },
+      "writtenOn": "2021-09-13T16:49:55Z",
+      "side": 1,
+      "message": "heh, I failed to spot the typo :) (the error message is reused from dep visibility checks btw)",
+      "parentUuid": "2e4b6ec4_6745e6ae",
+      "revId": "46b572ce4ceedfe57f4f84051bd7da624c98bf01",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
     }
   ]
 }
