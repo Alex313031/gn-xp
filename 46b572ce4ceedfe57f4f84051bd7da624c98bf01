@@ -123,6 +123,23 @@
       "parentUuid": "e2ed4aa0_7bc1133c",
       "revId": "46b572ce4ceedfe57f4f84051bd7da624c98bf01",
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "2b6db8d0_3a2a5b27",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000102
+      },
+      "writtenOn": "2021-09-13T16:41:39Z",
+      "side": 1,
+      "message": "Another unrelated question about this change. It complains about LLVM\u0027s gn build like so:\n\n```\n[0/1] Regenerating ninja files\nERROR at //llvm/utils/gn/build/write_vcsrevision.gni:21:3: Dependency not allowed.\n  action(target_name) {\n  ^--------------------\nThe item //clang/lib/Basic:write_vcsversion\ncan not depend on //clang/lib/Basic:write_vcsrevision_config\nbecause it is not in //clang/lib/Basic:write_vcsrevision_config\u0027s visibility list: [\n  //clang/lib/Basic:write_vcsrevision\n]\n```\n\nhttps://github.com/llvm/llvm-project/blob/main/llvm/utils/gn/secondary/clang/lib/Basic/BUILD.gn#L6 adds `//clang/lib/Basic:write_vcsrevision` to the config\u0027s visibility list as far as I can tell, and this tries to forward the visibility https://github.com/llvm/llvm-project/blob/main/llvm/utils/gn/build/write_vcsrevision.gni#L49\n\nIs that working as expected? Do I have to change my build file? If so, how? Or is this a bug?\n",
+      "revId": "46b572ce4ceedfe57f4f84051bd7da624c98bf01",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
     }
   ]
 }
