@@ -58,6 +58,30 @@
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "0df913df_06ecda3a",
+        "filename": "src/gn/target.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 471,
+      "author": {
+        "id": 1000562
+      },
+      "writtenOn": "2021-09-24T01:52:41Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "8b4c503e_b968ab10",
+      "range": {
+        "startLine": 462,
+        "startChar": 2,
+        "endLine": 471,
+        "endChar": 3
+      },
+      "revId": "607abd485394499d8254b1b27ff52dff5acc3ff3",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "eb912f02_a913dac5",
@@ -71,6 +95,30 @@
       "writtenOn": "2021-09-24T01:47:10Z",
       "side": 1,
       "message": "This can just use label().name().",
+      "range": {
+        "startLine": 824,
+        "startChar": 45,
+        "endLine": 824,
+        "endChar": 65
+      },
+      "revId": "607abd485394499d8254b1b27ff52dff5acc3ff3",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "7eeba829_c76dcdf2",
+        "filename": "src/gn/target.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 824,
+      "author": {
+        "id": 1000562
+      },
+      "writtenOn": "2021-09-24T01:52:41Z",
+      "side": 1,
+      "message": "Great!",
+      "parentUuid": "eb912f02_a913dac5",
       "range": {
         "startLine": 824,
         "startChar": 45,
