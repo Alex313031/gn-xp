@@ -1,0 +1,67 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "6e0d2f66_85488864",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000016
+      },
+      "writtenOn": "2021-09-24T01:47:10Z",
+      "side": 1,
+      "message": "I don\u0027t think this could ever come up since output_prefix is only used on target types that don\u0027t use a stamp file like this, I\u0027m pretty sure.  But it doesn\u0027t make sense in the abstract to combine output_prefix with target_name.",
+      "revId": "607abd485394499d8254b1b27ff52dff5acc3ff3",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8b4c503e_b968ab10",
+        "filename": "src/gn/target.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 471,
+      "author": {
+        "id": 1000016
+      },
+      "writtenOn": "2021-09-24T01:47:10Z",
+      "side": 1,
+      "message": "This logic only applies when you\u0027re using output_name.",
+      "range": {
+        "startLine": 462,
+        "startChar": 2,
+        "endLine": 471,
+        "endChar": 3
+      },
+      "revId": "607abd485394499d8254b1b27ff52dff5acc3ff3",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "eb912f02_a913dac5",
+        "filename": "src/gn/target.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 824,
+      "author": {
+        "id": 1000016
+      },
+      "writtenOn": "2021-09-24T01:47:10Z",
+      "side": 1,
+      "message": "This can just use label().name().",
+      "range": {
+        "startLine": 824,
+        "startChar": 45,
+        "endLine": 824,
+        "endChar": 65
+      },
+      "revId": "607abd485394499d8254b1b27ff52dff5acc3ff3",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    }
+  ]
+}
