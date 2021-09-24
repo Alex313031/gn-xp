@@ -108,6 +108,10 @@ class Target : public Item {
   // have been set before calling.
   std::string GetComputedOutputName() const;
 
+  // Returns the target label.   Similar to GetComputedOutputName() above, but
+  // doesn't get overridden by output_name.
+  std::string GetComputedStampName() const;
+
   bool output_prefix_override() const { return output_prefix_override_; }
   void set_output_prefix_override(bool prefix_override) {
     output_prefix_override_ = prefix_override;
@@ -398,6 +402,8 @@ class Target : public Item {
 
  private:
   FRIEND_TEST_ALL_PREFIXES(TargetTest, ResolvePrecompiledHeaders);
+
+  std::string GetComputedName(const std::string& base_name) const;
 
   // Pulls necessary information from dependencies to this one when all
   // dependencies have been resolved.

@@ -457,13 +457,7 @@ DepsIteratorRange Target::GetDeps(DepsIterationType type) const {
       DepsIterator(&public_deps_, &private_deps_, &data_deps_));
 }
 
-std::string Target::GetComputedOutputName() const {
-  DCHECK(toolchain_)
-      << "Toolchain must be specified before getting the computed output name.";
-
-  const std::string& name =
-      output_name_.empty() ? label().name() : output_name_;
-
+std::string Target::GetComputedName(const std::string& name) const {
   std::string result;
   const Tool* tool = toolchain_->GetToolForTargetFinalOutput(this);
   if (tool) {
@@ -476,6 +470,18 @@ std::string Target::GetComputedOutputName() const {
   }
   result.append(name);
   return result;
+}
+
+std::string Target::GetComputedOutputName() const {
+  DCHECK(toolchain_)
+      << "Toolchain must be specified before getting the computed output name.";
+  return GetComputedName(output_name_.empty() ? label().name() : output_name_);
+}
+
+std::string Target::GetComputedStampName() const {
+  DCHECK(toolchain_)
+      << "Toolchain must be specified before getting the computed output name.";
+  return GetComputedName(label().name());
 }
 
 bool Target::SetToolchain(const Toolchain* toolchain, Err* err) {
@@ -810,10 +816,12 @@ bool Target::FillOutputFiles(Err* err) {
     case GENERATED_FILE: {
       // These don't get linked to and use stamps which should be the first
       // entry in the outputs. These stamps are named
-      // "<target_out_dir>/<targetname>.stamp".
+      // "<target_out_dir>/<targetname>.stamp". Setting "output_name" does not
+      // affect the stamp file name: it is always based on the original target
+      // name.
       dependency_output_file_ =
           GetBuildDirForTargetAsOutputFile(this, BuildDirType::OBJ);
-      dependency_output_file_.value().append(GetComputedOutputName());
+      dependency_output_file_.value().append(GetComputedStampName());
       dependency_output_file_.value().append(".stamp");
       break;
     }
