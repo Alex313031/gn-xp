@@ -16,6 +16,23 @@
       "message": "I\u0027ll wait for Tyler\u0027s review on whether this is a correct fix (probably just by looking at the test) since I don\u0027t have any expectation of how Rust should be linked.",
       "revId": "3be29c4c75d031121ba453a181252de18d4bf7d2",
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "26da96f5_31126642",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000168
+      },
+      "writtenOn": "2021-10-01T01:38:02Z",
+      "side": 1,
+      "message": "I\u0027m not necessarily opposed to this change (it makes Rust targets behave consistently with the rest of GN). But I\u0027m curious, what use cases does it enable?",
+      "revId": "3be29c4c75d031121ba453a181252de18d4bf7d2",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
     }
   ]
 }
