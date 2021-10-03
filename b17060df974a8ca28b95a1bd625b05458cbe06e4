@@ -22,6 +22,30 @@
       },
       "revId": "b17060df974a8ca28b95a1bd625b05458cbe06e4",
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2381dff2_9b1c24d6",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 32,
+      "author": {
+        "id": 1000014
+      },
+      "writtenOn": "2021-10-03T02:09:33Z",
+      "side": 1,
+      "message": "Groups require \"public_deps\" to behave like public deps, not as you describe here. If there is documentation referencing the behavior you describe, please let me know. It worked like you describe at the very beginning of GN development but the inconsistency caused problems.",
+      "parentUuid": "7aa058f3_331e863d",
+      "range": {
+        "startLine": 29,
+        "startChar": 51,
+        "endLine": 32,
+        "endChar": 28
+      },
+      "revId": "b17060df974a8ca28b95a1bd625b05458cbe06e4",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
     }
   ]
 }
