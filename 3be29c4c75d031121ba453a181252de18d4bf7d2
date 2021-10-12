@@ -33,6 +33,23 @@
       "message": "I\u0027m not necessarily opposed to this change (it makes Rust targets behave consistently with the rest of GN). But I\u0027m curious, what use cases does it enable?",
       "revId": "3be29c4c75d031121ba453a181252de18d4bf7d2",
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c5ba1a33_863d8848",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000014
+      },
+      "writtenOn": "2021-10-12T23:49:59Z",
+      "side": 1,
+      "message": "(Coming back around to this.) If we want this, can you provide more background about why? In other cases the dependencies aren\u0027t promoted like this so I\u0027d like to understand why this is necessary for the rust library case.\n\nMarking -1 just so this doesn\u0027t get accidentally submitted in the meantime.",
+      "revId": "3be29c4c75d031121ba453a181252de18d4bf7d2",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
     }
   ]
 }
