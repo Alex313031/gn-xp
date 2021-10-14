@@ -774,7 +774,8 @@ TEST_F(TargetTest, LinkAndDepOutputs) {
   ASSERT_TRUE(target.OnResolved(&err));
 
   EXPECT_EQ("./liba.so", target.link_output_file().value());
-  EXPECT_EQ("./liba.so.TOC", target.dependency_output_file().value());
+  ASSERT_TRUE(target.dependency_output_file());
+  EXPECT_EQ("./liba.so.TOC", target.dependency_output_file()->value());
 
   ASSERT_EQ(1u, target.runtime_outputs().size());
   EXPECT_EQ("./liba.so", target.runtime_outputs()[0].value());
@@ -820,7 +821,8 @@ TEST_F(TargetTest, RuntimeOuputs) {
   ASSERT_TRUE(target.OnResolved(&err));
 
   EXPECT_EQ("./a.dll.lib", target.link_output_file().value());
-  EXPECT_EQ("./a.dll.lib", target.dependency_output_file().value());
+  ASSERT_TRUE(target.dependency_output_file());
+  EXPECT_EQ("./a.dll.lib", target.dependency_output_file()->value());
 
   ASSERT_EQ(2u, target.runtime_outputs().size());
   EXPECT_EQ("./a.dll", target.runtime_outputs()[0].value());
@@ -850,6 +852,7 @@ TEST_F(TargetTest, GetOutputFilesForSource_Binary) {
 
   Target target(setup.settings(), Label(SourceDir("//a/"), "a"));
   target.set_output_type(Target::SOURCE_SET);
+  target.sources().push_back(SourceFile("//a/source_file1.cc"));
   target.SetToolchain(&toolchain);
   Err err;
   ASSERT_TRUE(target.OnResolved(&err));

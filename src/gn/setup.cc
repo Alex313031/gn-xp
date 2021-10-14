@@ -1024,5 +1024,16 @@ bool Setup::FillOtherConfig(const base::CommandLine& cmdline, Err* err) {
     build_settings_.set_arg_file_template_path(path);
   }
 
+  // Replace stamp with phony
+  const Value* replace_stamp_with_phony_value =
+      dotfile_scope_.GetValue("replace_stamp_with_phony", true);
+  if (replace_stamp_with_phony_value) {
+    if (!replace_stamp_with_phony_value->VerifyTypeIs(Value::BOOLEAN, err)) {
+      return false;
+    }
+    build_settings_.set_replace_stamp_with_phony(
+        replace_stamp_with_phony_value->boolean_value());
+  }
+
   return true;
 }

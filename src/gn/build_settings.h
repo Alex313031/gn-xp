@@ -61,6 +61,13 @@ class BuildSettings {
   }
   void set_ninja_required_version(Version v) { ninja_required_version_ = v; }
 
+  bool replace_stamp_with_phony() const {
+    return replace_stamp_with_phony_;
+  }
+  void set_replace_stamp_with_phony(bool replace_stamp_with_phony) {
+    replace_stamp_with_phony_ = replace_stamp_with_phony;
+  }
+
   const SourceFile& build_config_file() const { return build_config_file_; }
   void set_build_config_file(const SourceFile& f) { build_config_file_ = f; }
 
@@ -134,6 +141,7 @@ class BuildSettings {
 
   // See 40045b9 for the reason behind using 1.7.2 as the default version.
   Version ninja_required_version_{1, 7, 2};
+  bool replace_stamp_with_phony_ = false;
 
   SourceFile build_config_file_;
   SourceFile arg_file_template_path_;
