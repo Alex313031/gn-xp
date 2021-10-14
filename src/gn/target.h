@@ -237,6 +237,9 @@ class Target : public Item {
   const LabelTargetVector& data_deps() const { return data_deps_; }
   LabelTargetVector& data_deps() { return data_deps_; }
 
+  const LabelTargetVector& gen_deps() const { return gen_deps_; }
+  LabelTargetVector& gen_deps() { return gen_deps_; }
+
   // List of configs that this class inherits settings from. Once a target is
   // resolved, this will also list all-dependent and public configs.
   const UniqueVector<LabelConfigPair>& configs() const { return configs_; }
@@ -444,6 +447,7 @@ class Target : public Item {
   LabelTargetVector private_deps_;
   LabelTargetVector public_deps_;
   LabelTargetVector data_deps_;
+  LabelTargetVector gen_deps_;
 
   // See getters for more info.
   UniqueVector<LabelConfigPair> configs_;
