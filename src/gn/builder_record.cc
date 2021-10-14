@@ -58,6 +58,12 @@ BuilderRecord::ItemType BuilderRecord::TypeOfItem(const Item* item) {
   return ITEM_UNKNOWN;
 }
 
+// records don't have to wait on resolution of their gen deps, since all they
+// need to do is propagate should_generate to them.
+void BuilderRecord::AddGenDep(BuilderRecord* record) {
+  all_deps_.insert(record);
+}
+
 void BuilderRecord::AddDep(BuilderRecord* record) {
   all_deps_.insert(record);
   if (!record->resolved()) {

@@ -238,6 +238,7 @@ bool Builder::TargetDefined(BuilderRecord* record, Err* err) {
       !AddDeps(record, target->configs().vector(), err) ||
       !AddDeps(record, target->all_dependent_configs(), err) ||
       !AddDeps(record, target->public_configs(), err) ||
+      !AddGenDeps(record, target->gen_deps(), err) ||
       !AddActionValuesDep(record, target->action_values(), err) ||
       !AddToolchainDep(record, target, err))
     return false;
@@ -400,6 +401,19 @@ bool Builder::AddDeps(BuilderRecord* record,
     if (!dep_record)
       return false;
     record->AddDep(dep_record);
+  }
+  return true;
+}
+
+bool Builder::AddGenDeps(BuilderRecord* record,
+                         const LabelTargetVector& targets,
+                         Err* err) {
+  for (const auto& target : targets) {
+    BuilderRecord* dep_record = GetOrCreateRecordOfType(
+        target.label, target.origin, BuilderRecord::ITEM_TARGET, err);
+    if (!dep_record)
+      return false;
+    record->AddGenDep(dep_record);
   }
   return true;
 }
@@ -592,7 +606,8 @@ std::string Builder::CheckForCircularDependencies(
 
   std::string ret;
   for (size_t i = 0; i < cycle.size(); i++) {
-    ret += "  " + cycle[i]->label().GetUserVisibleName(loader_->GetDefaultToolchain());
+    ret += "  " +
+           cycle[i]->label().GetUserVisibleName(loader_->GetDefaultToolchain());
     if (i != cycle.size() - 1)
       ret += " ->";
     ret += "\n";
