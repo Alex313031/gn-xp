@@ -32,6 +32,7 @@
 //   "visibility" : [ list of visibility pattern descriptions ],
 //   "test_only" : true or false,
 //   "check_includes": true or false,
+//   "always_generate": true or false,
 //   "allow_circular_includes_from": [ list of target names ],
 //   "sources" : [ list of source files ],
 //   "public" : either "*" or [ list of public headers],
@@ -376,6 +377,10 @@ class TargetDescBuilder : public BaseDescBuilder {
 
     if (what(variables::kTestonly))
       res->SetKey(variables::kTestonly, base::Value(target_->testonly()));
+
+    if (what(variables::kAlwaysGenerate))
+      res->SetKey(variables::kAlwaysGenerate,
+                  base::Value(target_->always_generate()));
 
     if (is_binary_output) {
       if (what(variables::kCheckIncludes))
