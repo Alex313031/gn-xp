@@ -89,6 +89,7 @@ class BuilderRecord {
     return waiting_on_resolution_;
   }
 
+  void AddGenDep(BuilderRecord* record);
   void AddDep(BuilderRecord* record);
 
  private:
