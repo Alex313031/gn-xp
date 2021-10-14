@@ -246,7 +246,8 @@ bool Builder::TargetDefined(BuilderRecord* record, Err* err) {
   // check if this target was previously marked as "required" and force setting
   // the bit again so the target's dependencies (which we now know) get the
   // required bit pushed to them.
-  if (record->should_generate() || target->settings()->is_default())
+  if (record->should_generate() || target->settings()->is_default() ||
+      target->always_generate())
     RecursiveSetShouldGenerate(record, true);
 
   return true;
@@ -592,7 +593,8 @@ std::string Builder::CheckForCircularDependencies(
 
   std::string ret;
   for (size_t i = 0; i < cycle.size(); i++) {
-    ret += "  " + cycle[i]->label().GetUserVisibleName(loader_->GetDefaultToolchain());
+    ret += "  " +
+           cycle[i]->label().GetUserVisibleName(loader_->GetDefaultToolchain());
     if (i != cycle.size() - 1)
       ret += " ->";
     ret += "\n";

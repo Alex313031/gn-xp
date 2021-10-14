@@ -193,6 +193,9 @@ class Target : public Item {
   bool testonly() const { return testonly_; }
   void set_testonly(bool value) { testonly_ = value; }
 
+  bool always_generate() const { return always_generate_; }
+  void set_always_generate(bool value) { always_generate_ = value; }
+
   OutputFile write_runtime_deps_output() const {
     return write_runtime_deps_output_;
   }
@@ -437,6 +440,7 @@ class Target : public Item {
   bool check_includes_ = true;
   bool complete_static_lib_ = false;
   bool testonly_ = false;
+  bool always_generate_ = false;
   std::vector<std::string> data_;
   BundleData bundle_data_;
   OutputFile write_runtime_deps_output_;
