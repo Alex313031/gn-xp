@@ -509,6 +509,19 @@ Example
   }
 )";
 
+const char kAlwaysGenerate[] = "always_generate";
+const char kAlwaysGenerate_HelpShort[] =
+    "always_generate: [label list] Declares targets that should always generate.";
+const char kAlwaysGenerate_Help[] =
+    R"(always_generate: Declares targets that should always generate
+
+  A list of target labels.
+
+  Not all GN targets that are evaluated in build files get turned into ninja
+  targets (see "gn help execution"). If this target is generated, then any
+  targets in this list will also be generated.
+)";
+
 const char kArflags[] = "arflags";
 const char kArflags_HelpShort[] =
     "arflags: [string list] Arguments passed to static_library archiver.";
@@ -2265,6 +2278,7 @@ const VariableInfoMap& GetTargetVariables() {
   if (info_map.empty()) {
     INSERT_VARIABLE(AllDependentConfigs)
     INSERT_VARIABLE(AllowCircularIncludesFrom)
+    INSERT_VARIABLE(AlwaysGenerate)
     INSERT_VARIABLE(Arflags)
     INSERT_VARIABLE(Args)
     INSERT_VARIABLE(Asmflags)

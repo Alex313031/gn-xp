@@ -32,6 +32,7 @@
 //   "visibility" : [ list of visibility pattern descriptions ],
 //   "test_only" : true or false,
 //   "check_includes": true or false,
+//   "always_generate": [ list of target names ]
 //   "allow_circular_includes_from": [ list of target names ],
 //   "sources" : [ list of source files ],
 //   "public" : either "*" or [ list of public headers],
@@ -376,6 +377,18 @@ class TargetDescBuilder : public BaseDescBuilder {
 
     if (what(variables::kTestonly))
       res->SetKey(variables::kTestonly, base::Value(target_->testonly()));
+
+    if (what(variables::kAlwaysGenerate)) {
+      auto pairs = target_->always_generate();
+      if (!pairs.empty()) {
+        auto gen = std::make_unique<base::ListValue>();
+        for (auto p : pairs) {
+          gen->AppendString(p.label.GetUserVisibleName(GetToolchainLabel()));
+        }
+        res->SetWithoutPathExpansion(variables::kAlwaysGenerate,
+                                     std::move(gen));
+      }
+    }
 
     if (is_binary_output) {
       if (what(variables::kCheckIncludes))
