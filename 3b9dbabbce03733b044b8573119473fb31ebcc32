@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "7fe6aed8_45ccc57b",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000633
+      },
+      "writtenOn": "2021-10-14T23:59:03Z",
+      "side": 1,
+      "message": "Hey Petr, this isn\u0027t really ready for review, but I wanted to check with you whether you thought adding the conditional \u0027replace_stamp_with_phony\u0027 to the dotfile was the right approach. Ultimately want to replace that with ninja_required_version, but there\u0027s no release yet.",
+      "revId": "3b9dbabbce03733b044b8573119473fb31ebcc32",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    }
+  ]
+}
