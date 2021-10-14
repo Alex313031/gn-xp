@@ -1024,5 +1024,15 @@ bool Setup::FillOtherConfig(const base::CommandLine& cmdline, Err* err) {
     build_settings_.set_arg_file_template_path(path);
   }
 
+  // No stamp files.
+  const Value* no_stamp_files_value =
+      dotfile_scope_.GetValue("no_stamp_files", true);
+  if (no_stamp_files_value) {
+    if (!no_stamp_files_value->VerifyTypeIs(Value::BOOLEAN, err)) {
+      return false;
+    }
+    build_settings_.set_no_stamp_files(no_stamp_files_value->boolean_value());
+  }
+
   return true;
 }

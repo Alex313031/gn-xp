@@ -363,7 +363,7 @@ class Target : public Item {
   // action or a copy step, and the output library or executable file(s) from
   // binary targets.
   //
-  // It will NOT include stamp files and object files.
+  // It will NOT include phony targets or object files.
   const std::vector<OutputFile>& computed_outputs() const {
     return computed_outputs_;
   }
@@ -376,14 +376,46 @@ class Target : public Item {
   // a dependency on this one. It could be the same as the link output file
   // (this will be the case for static libraries). For shared libraries it
   // could be the same or different than the link output file, depending on the
-  // system. For actions this will be the stamp file.
+  // system.
+  //
+  // The dependency output phony is only set when the target does not have an
+  // output file and is using a phony alias to represent it. The exception to
+  // this is for phony targets without any real inputs. Ninja treats empty phony
+  // targets as always dirty, so no other targets should depend on that target.
+  // In that scenario, both dependency_output_phony or dependency_output_file
+  // will be std::nullopt.
+  //
+  // Callers that do not care whether the dependency is represented by a file or
+  // a phony should use dependency_output_any().
   //
   // These are only known once the target is resolved and will be empty before
   // that. This is a cache of the files to prevent every target that depends on
   // a given library from recomputing the same pattern.
   const OutputFile& link_output_file() const { return link_output_file_; }
+
+  // Returns true if there is an output dependency file or phony alias.
+  bool has_dependency_output() const {
+    return has_dependency_output_file() || has_dependency_output_alias();
+  }
+  const OutputFile& dependency_output() const {
+    return has_dependency_output_file() ? dependency_output_file_
+                                        : dependency_output_alias_;
+  }
+
+  bool has_dependency_output_file() const {
+    return !dependency_output_file_.value().empty();
+    ;
+  }
   const OutputFile& dependency_output_file() const {
     return dependency_output_file_;
+  }
+
+  bool has_dependency_output_alias() const {
+    return !dependency_output_alias_.value().empty();
+    ;
+  }
+  const OutputFile& dependency_output_alias() const {
+    return dependency_output_alias_;
   }
 
   // The subset of computed_outputs that are considered runtime outputs.
@@ -409,6 +441,11 @@ class Target : public Item {
   // The |loc_for_error| is used to blame a location for any errors produced. It
   // can be empty if there is no range (like this is being called based on the
   // command-line.
+  //
+  // It is possible for |outputs| to be returned empty without an error being
+  // reported. This can occur when the output type will result in a phony alias
+  // target (like a source_set) that is omitted from build files when they have
+  // no real inputs.
   bool GetOutputsAsSourceFiles(const LocationRange& loc_for_error,
                                bool build_complete,
                                std::vector<SourceFile>* outputs,
@@ -444,6 +481,11 @@ class Target : public Item {
   void PullDependentTargetLibs();
   void PullRecursiveHardDeps();
   void PullRecursiveBundleData();
+
+  // Checks to see whether this target or any of its dependencies have real
+  // inputs. If not, this target should be omitted as a dependency. This check
+  // only applies to targets that will result in a phony rule.
+  bool HasRealInputs() const;
 
   // Fills the link and dependency output files when a target is resolved.
   bool FillOutputFiles(Err* err);
@@ -537,6 +579,7 @@ class Target : public Item {
   std::vector<OutputFile> computed_outputs_;
   OutputFile link_output_file_;
   OutputFile dependency_output_file_;
+  OutputFile dependency_output_alias_;
   std::vector<OutputFile> runtime_outputs_;
 
   std::unique_ptr<Metadata> metadata_;
