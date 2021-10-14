@@ -193,6 +193,9 @@ class Target : public Item {
   bool testonly() const { return testonly_; }
   void set_testonly(bool value) { testonly_ = value; }
 
+  const LabelTargetVector& always_generate() const { return always_generate_; }
+  LabelTargetVector& always_generate() { return always_generate_; }
+
   OutputFile write_runtime_deps_output() const {
     return write_runtime_deps_output_;
   }
@@ -440,6 +443,7 @@ class Target : public Item {
   std::vector<std::string> data_;
   BundleData bundle_data_;
   OutputFile write_runtime_deps_output_;
+  LabelTargetVector always_generate_;
 
   LabelTargetVector private_deps_;
   LabelTargetVector public_deps_;

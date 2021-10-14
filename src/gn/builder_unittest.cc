@@ -223,6 +223,47 @@ TEST_F(BuilderTest, ShouldGenerate) {
   EXPECT_TRUE(b_record->should_generate());
 }
 
+// Test that the "always_generate" variable forces targets to be generated.
+TEST_F(BuilderTest, AlwaysGenerate) {
+  DefineToolchain();
+
+  // Define another toolchain
+  Settings settings2(&build_settings_, "alternate/");
+  Label alt_tc(SourceDir("//tc/"), "alternate");
+  settings2.set_toolchain_label(alt_tc);
+  Toolchain* tc2 = new Toolchain(&settings2, alt_tc);
+  TestWithScope::SetupToolchain(tc2);
+  builder_.ItemDefined(std::unique_ptr<Item>(tc2));
+
+  // Construct some unrelated targets, A is in the default toolchain, but
+  // B and C are not. A puts B in its "always_generate" list so B should
+  // get generated, but C shouldn't.
+  Label a_label(SourceDir("//a/"), "a", settings_.toolchain_label().dir(),
+                settings_.toolchain_label().name());
+  Label b_label(SourceDir("//b/"), "b", alt_tc.dir(), alt_tc.name());
+  Label c_label(SourceDir("//c/"), "c", alt_tc.dir(), alt_tc.name());
+
+  Target* a = new Target(&settings_, a_label);
+  a->set_output_type(Target::EXECUTABLE);
+  a->always_generate().push_back(LabelTargetPair(b_label));
+  builder_.ItemDefined(std::unique_ptr<Item>(a));
+
+  Target* b = new Target(&settings2, b_label);
+  b->set_output_type(Target::EXECUTABLE);
+  builder_.ItemDefined(std::unique_ptr<Item>(b));
+
+  Target* c = new Target(&settings2, c_label);
+  c->set_output_type(Target::EXECUTABLE);
+  builder_.ItemDefined(std::unique_ptr<Item>(c));
+
+  BuilderRecord* a_record = builder_.GetRecord(a_label);
+  BuilderRecord* b_record = builder_.GetRecord(b_label);
+  BuilderRecord* c_record = builder_.GetRecord(c_label);
+  EXPECT_TRUE(a_record->should_generate());
+  EXPECT_TRUE(b_record->should_generate());
+  EXPECT_FALSE(c_record->should_generate());
+}
+
 // Tests that configs applied to a config get loaded (bug 536844).
 TEST_F(BuilderTest, ConfigLoad) {
   SourceDir toolchain_dir = settings_.toolchain_label().dir();

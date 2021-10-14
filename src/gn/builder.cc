@@ -450,6 +450,24 @@ void Builder::RecursiveSetShouldGenerate(BuilderRecord* record, bool force) {
       RecursiveSetShouldGenerate(cur, false);
     }
   }
+
+  Item* item = record->item();
+  if (record->type() == BuilderRecord::ITEM_TARGET && item) {
+    Target* target = record->item()->AsTarget();
+    for (auto cur : target->always_generate()) {
+      Err err;
+      BuilderRecord* rec = GetOrCreateRecordOfType(
+          cur.label, cur.origin, BuilderRecord::ITEM_TARGET, &err);
+      if (!record) {
+        g_scheduler->FailWithError(err);
+        return;
+      }
+      if (!rec->should_generate()) {
+        ScheduleItemLoadIfNecessary(rec);
+        RecursiveSetShouldGenerate(rec, false);
+      }
+    }
+  }
 }
 
 void Builder::ScheduleItemLoadIfNecessary(BuilderRecord* record) {
@@ -592,7 +610,8 @@ std::string Builder::CheckForCircularDependencies(
 
   std::string ret;
   for (size_t i = 0; i < cycle.size(); i++) {
-    ret += "  " + cycle[i]->label().GetUserVisibleName(loader_->GetDefaultToolchain());
+    ret += "  " +
+           cycle[i]->label().GetUserVisibleName(loader_->GetDefaultToolchain());
     if (i != cycle.size() - 1)
       ret += " ->";
     ret += "\n";

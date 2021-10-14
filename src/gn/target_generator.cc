@@ -58,6 +58,9 @@ void TargetGenerator::Run() {
   if (!FillTestonly())
     return;
 
+  if (!FillAlwaysGenerate())
+    return;
+
   if (!FillAssertNoDeps())
     return;
 
@@ -309,6 +312,16 @@ bool TargetGenerator::FillTestonly() {
     target_->set_testonly(value->boolean_value());
   }
   return true;
+}
+
+bool TargetGenerator::FillAlwaysGenerate() {
+  const Value* value = scope_->GetValue(variables::kAlwaysGenerate, true);
+  if (value) {
+    ExtractListOfLabels(scope_->settings()->build_settings(), *value,
+                        scope_->GetSourceDir(), ToolchainLabelForScope(scope_),
+                        &target_->always_generate(), err_);
+  }
+  return !err_->has_error();
 }
 
 bool TargetGenerator::FillAssertNoDeps() {
