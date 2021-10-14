@@ -23,6 +23,7 @@ class Toolchain;
 class CTool;
 class GeneralTool;
 class RustTool;
+class BuiltinTool;
 
 // To add a new Tool category, create a subclass implementing SetComplete()
 // Add a new category to ToolCategories
@@ -62,6 +63,8 @@ class Tool {
   virtual const GeneralTool* AsGeneral() const;
   virtual RustTool* AsRust();
   virtual const RustTool* AsRust() const;
+  virtual BuiltinTool* AsBuiltin();
+  virtual const BuiltinTool* AsBuiltin() const;
 
   // Basic information ---------------------------------------------------------
 
@@ -233,7 +236,8 @@ class Tool {
                                           Err* err);
 
   static const char* GetToolTypeForSourceType(SourceFile::Type type);
-  static const char* GetToolTypeForTargetFinalOutput(const Target* target);
+  static const char* GetToolTypeForTargetFinalOutput(const Target* target,
+                                                     bool no_stamp_files);
 
  protected:
   explicit Tool(const char* t);

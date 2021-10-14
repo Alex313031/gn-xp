@@ -932,7 +932,8 @@ PBXNativeTarget* XcodeProject::AddBinaryTarget(const Target* target,
   if (output_dir.empty()) {
     const Tool* tool = target->toolchain()->GetToolForTargetFinalOutput(target);
     if (!tool) {
-      std::string tool_name = Tool::GetToolTypeForTargetFinalOutput(target);
+      std::string tool_name = Tool::GetToolTypeForTargetFinalOutput(
+          target, /*no_stamp_files=*/ false);
       *err = Err(nullptr, tool_name + " tool not defined",
                  "The toolchain " +
                      target->toolchain()->label().GetUserVisibleName(false) +
