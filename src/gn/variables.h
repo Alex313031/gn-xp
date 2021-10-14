@@ -354,6 +354,10 @@ extern const char kXcodeExtraAttributes[];
 extern const char kXcodeExtraAttributes_HelpShort[];
 extern const char kXcodeExtraAttributes_Help[];
 
+extern const char kAlwaysGenerate[];
+extern const char kAlwaysGenerate_HelpShort[];
+extern const char kAlwaysGenerate_Help[];
+
 // -----------------------------------------------------------------------------
 
 struct VariableInfo {

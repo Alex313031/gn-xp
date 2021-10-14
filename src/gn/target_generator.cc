@@ -58,6 +58,9 @@ void TargetGenerator::Run() {
   if (!FillTestonly())
     return;
 
+  if (!FillAlwaysGenerate())
+    return;
+
   if (!FillAssertNoDeps())
     return;
 
@@ -307,6 +310,16 @@ bool TargetGenerator::FillTestonly() {
     if (!value->VerifyTypeIs(Value::BOOLEAN, err_))
       return false;
     target_->set_testonly(value->boolean_value());
+  }
+  return true;
+}
+
+bool TargetGenerator::FillAlwaysGenerate() {
+  const Value* value = scope_->GetValue(variables::kAlwaysGenerate, true);
+  if (value) {
+    if (!value->VerifyTypeIs(Value::BOOLEAN, err_))
+      return false;
+    target_->set_always_generate(value->boolean_value());
   }
   return true;
 }
