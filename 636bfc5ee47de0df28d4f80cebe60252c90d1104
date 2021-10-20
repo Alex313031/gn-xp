@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "20471d24_21b8e4fe",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000014
+      },
+      "writtenOn": "2021-10-20T02:50:38Z",
+      "side": 1,
+      "message": "Hi Petr, I got tired of answering this question every couple of months in chat. Does this answer cover everything and is correct to your knowledge? Is there anything else you can think of that I should add?",
+      "revId": "636bfc5ee47de0df28d4f80cebe60252c90d1104",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    }
+  ]
+}
