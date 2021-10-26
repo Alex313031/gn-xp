@@ -57,6 +57,30 @@
       },
       "revId": "636bfc5ee47de0df28d4f80cebe60252c90d1104",
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "cba683fa_7f1c6082",
+        "filename": "docs/faq.md",
+        "patchSetId": 1
+      },
+      "lineNbr": 72,
+      "author": {
+        "id": 1000014
+      },
+      "writtenOn": "2021-10-26T16:55:59Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "fed3db95_86dd0763",
+      "range": {
+        "startLine": 72,
+        "startChar": 36,
+        "endLine": 72,
+        "endChar": 70
+      },
+      "revId": "636bfc5ee47de0df28d4f80cebe60252c90d1104",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
     }
   ]
 }
