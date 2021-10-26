@@ -16,6 +16,47 @@
       "message": "Hi Petr, I got tired of answering this question every couple of months in chat. Does this answer cover everything and is correct to your knowledge? Is there anything else you can think of that I should add?",
       "revId": "636bfc5ee47de0df28d4f80cebe60252c90d1104",
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "fedf3433_060cbd6b",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-10-26T07:08:10Z",
+      "side": 1,
+      "message": "This is great, thank you for writing this.",
+      "parentUuid": "20471d24_21b8e4fe",
+      "revId": "636bfc5ee47de0df28d4f80cebe60252c90d1104",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "fed3db95_86dd0763",
+        "filename": "docs/faq.md",
+        "patchSetId": 1
+      },
+      "lineNbr": 72,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-10-26T07:08:10Z",
+      "side": 1,
+      "message": "Maybe say \"are likely going to be incorrect if you do this\" since you mention below that \"almost no filesystems\" so there\u0027s still a small chance that someone might use such a filesystem.",
+      "range": {
+        "startLine": 72,
+        "startChar": 36,
+        "endLine": 72,
+        "endChar": 70
+      },
+      "revId": "636bfc5ee47de0df28d4f80cebe60252c90d1104",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
     }
   ]
 }
