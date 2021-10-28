@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "2c391c8d_347a58dd",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 7
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2021-10-28T21:03:57Z",
+      "side": 1,
+      "message": "As we discussed, I think this should be renamed `gen_deps` and we describe this as \"generator dependencies\" that propagate the should_generate flag. I think this is a little more coherent with the rest of the design.\n\nI\u0027d also like some additional tests, first, where there is a circular dependency between \"deps\" and \"gen_deps\". I\u0027d like it if this were allowed since I think it would be common to want some related thing that depends on your target to always go with it.\n\nSecond, I\u0027d like there to be a test (could add these extra steps to the current one since it should be a superset of what you have) where:\n  A --deps--\u003e B --gen_deps--\u003e C --gen_deps--\u003e D\nWhere A is in the default toolchain but B, C, and D are not. C would be in the gen_deps of B, and D would be in the gen_deps of C. This will cover the case where the source of the gen dependency is itself inherited, first from a regular dependency, and then from C to D via a gen_deps dependency.\n\n\n\nAdditionally, your test defines them in A, B, C order but I\u0027d like also to test the C, B, A, D load order since this will mean the gen dependency will get propagated after the load which might be different. You could probably combine this setup with the circular test I suggested at the top to avoid setting things up again.\n\nI suggested specifically D at the end because I would like to have a check that this gen dependency actually causes files to be loaded. I think you would call HasLoadedOne (search for another test) to validate that when the should_generate flag is propagated to C, that the file containing D is actually loaded even though it wouldn\u0027t be otherwise.\n\n",
+      "revId": "1d24eb63c6ae891af14577fdd9b5500fbc436dd9",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    }
+  ]
+}
