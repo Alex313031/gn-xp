@@ -16,6 +16,24 @@
       "message": "Looks good, thanks! I see that you signed the Google CLA but haven\u0027t contributed to GN before. Can you also add yourself to the AUTORS file in this change?",
       "revId": "411217815f15a07e63553e8d3c526ed43fab7375",
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "5f5116b8_d5c9ee01",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1001967
+      },
+      "writtenOn": "2021-11-03T19:39:16Z",
+      "side": 1,
+      "message": "Thanks for review. Added myself.",
+      "parentUuid": "63c42691_c12545db",
+      "revId": "411217815f15a07e63553e8d3c526ed43fab7375",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
     }
   ]
 }
