@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e21f7fd2_31b55935",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000012
+      },
+      "writtenOn": "2021-11-05T20:12:55Z",
+      "side": 1,
+      "message": "I\u0027m probably not a good person to review this; I\u0027m way too swamped at the moment. \n\nEither brettw@ or brucedawson@ (if brettw@ is unavailable) would be better picks.",
+      "revId": "694665f9bff853401f93ede9a2e9a908ae682443",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    }
+  ]
+}
