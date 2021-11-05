@@ -52,6 +52,24 @@
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "4bd8f654_3e91e86c",
+        "filename": "src/gn/binary_target_generator.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 96,
+      "author": {
+        "id": 1000067
+      },
+      "writtenOn": "2021-11-05T22:40:41Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "d32b4579_683f1514",
+      "revId": "694665f9bff853401f93ede9a2e9a908ae682443",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "6bd38961_3cf44204",
@@ -65,6 +83,24 @@
       "writtenOn": "2021-11-05T21:41:28Z",
       "side": 1,
       "message": "const?",
+      "revId": "694665f9bff853401f93ede9a2e9a908ae682443",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a9588040_91b25426",
+        "filename": "src/gn/compile_commands_writer.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 255,
+      "author": {
+        "id": 1000067
+      },
+      "writtenOn": "2021-11-05T22:40:41Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "6bd38961_3cf44204",
       "revId": "694665f9bff853401f93ede9a2e9a908ae682443",
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
     }
