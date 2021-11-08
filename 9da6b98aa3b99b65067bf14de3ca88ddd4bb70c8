@@ -16,6 +16,23 @@
       "message": "This looks fine and the commit message seems to accurately describe it, but I don\u0027t know the gn internals enough to know whether it is a good idea, so deferring to Petr",
       "revId": "9da6b98aa3b99b65067bf14de3ca88ddd4bb70c8",
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "dd127d79_508e3ad5",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000012
+      },
+      "writtenOn": "2021-11-08T19:09:59Z",
+      "side": 1,
+      "message": "I think this makes sense, approved.",
+      "revId": "9da6b98aa3b99b65067bf14de3ca88ddd4bb70c8",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
     }
   ]
 }
