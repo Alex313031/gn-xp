@@ -33,6 +33,29 @@
       "message": "I think this makes sense, approved.",
       "revId": "9da6b98aa3b99b65067bf14de3ca88ddd4bb70c8",
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "94b29fd6_dd0129b9",
+        "filename": "src/gn/target.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 658,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-11-08T19:15:55Z",
+      "side": 1,
+      "message": "Can we use rust_transitive_libs_ directly without going through the getter? The same below.",
+      "range": {
+        "startLine": 658,
+        "startChar": 4,
+        "endLine": 658,
+        "endChar": 26
+      },
+      "revId": "9da6b98aa3b99b65067bf14de3ca88ddd4bb70c8",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
     }
   ]
 }
