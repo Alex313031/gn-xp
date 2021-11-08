@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "1608c87e_bd4076e7",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000877
+      },
+      "writtenOn": "2021-11-08T18:28:47Z",
+      "side": 1,
+      "message": "This looks fine and the commit message seems to accurately describe it, but I don\u0027t know the gn internals enough to know whether it is a good idea, so deferring to Petr",
+      "revId": "9da6b98aa3b99b65067bf14de3ca88ddd4bb70c8",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    }
+  ]
+}
