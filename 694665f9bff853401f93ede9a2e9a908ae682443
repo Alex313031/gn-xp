@@ -103,6 +103,24 @@
       "parentUuid": "6bd38961_3cf44204",
       "revId": "694665f9bff853401f93ede9a2e9a908ae682443",
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "7c5a651e_9c2224dd",
+        "filename": "src/gn/compile_commands_writer.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 255,
+      "author": {
+        "id": 1000067
+      },
+      "writtenOn": "2021-11-08T22:53:47Z",
+      "side": 1,
+      "message": "Mmm, sorry, I thought this was changed. I have uploaded Patchset 4 to fix this!",
+      "parentUuid": "a9588040_91b25426",
+      "revId": "694665f9bff853401f93ede9a2e9a908ae682443",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
     }
   ]
 }
