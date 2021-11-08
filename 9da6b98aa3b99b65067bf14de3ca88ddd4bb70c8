@@ -56,6 +56,30 @@
       },
       "revId": "9da6b98aa3b99b65067bf14de3ca88ddd4bb70c8",
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "34ce70b4_a4c61c8e",
+        "filename": "src/gn/target.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 658,
+      "author": {
+        "id": 1000067
+      },
+      "writtenOn": "2021-11-08T22:54:22Z",
+      "side": 1,
+      "message": "Yes, it is possible in target.cc. I\u0027ve changed the code to do just that.",
+      "parentUuid": "94b29fd6_dd0129b9",
+      "range": {
+        "startLine": 658,
+        "startChar": 4,
+        "endLine": 658,
+        "endChar": 26
+      },
+      "revId": "9da6b98aa3b99b65067bf14de3ca88ddd4bb70c8",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
     }
   ]
 }
