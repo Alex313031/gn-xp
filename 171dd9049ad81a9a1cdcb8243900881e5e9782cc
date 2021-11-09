@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "68d7ac4a_3739aeff",
+        "filename": "src/gn/target.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 1228,
+      "author": {
+        "id": 1000014
+      },
+      "writtenOn": "2021-11-09T23:34:02Z",
+      "side": 1,
+      "message": "I think this is correct today but it makes me nervous that if the \"const\" is ever removed from `GetMetadata()` this will suddenly start doing a lot more work. I think it would be safer to add to the \"else\" above:\n\n  } else if (has_metadata()) {",
+      "revId": "171dd9049ad81a9a1cdcb8243900881e5e9782cc",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0980ac0c_3d6f426e",
+        "filename": "src/gn/target.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 166,
+      "author": {
+        "id": 1000014
+      },
+      "writtenOn": "2021-11-09T23:34:02Z",
+      "side": 1,
+      "message": "These `_ptr()` functions look like they\u0027re only ever used to compare to null. This, plus the semantics of these being a little weird makes me thing that we should just change these all to the equivalent of:\n\n  bool has_metadata() const { return metadata_.get(); }",
+      "revId": "171dd9049ad81a9a1cdcb8243900881e5e9782cc",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    }
+  ]
+}
