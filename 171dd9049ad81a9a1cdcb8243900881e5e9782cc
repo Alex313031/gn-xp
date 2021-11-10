@@ -18,6 +18,24 @@
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "bac5c582_a9a7ec85",
+        "filename": "src/gn/target.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 1228,
+      "author": {
+        "id": 1000067
+      },
+      "writtenOn": "2021-11-10T17:20:32Z",
+      "side": 1,
+      "message": "I agree. Done!",
+      "parentUuid": "68d7ac4a_3739aeff",
+      "revId": "171dd9049ad81a9a1cdcb8243900881e5e9782cc",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "0980ac0c_3d6f426e",
@@ -31,6 +49,24 @@
       "writtenOn": "2021-11-09T23:34:02Z",
       "side": 1,
       "message": "These `_ptr()` functions look like they\u0027re only ever used to compare to null. This, plus the semantics of these being a little weird makes me thing that we should just change these all to the equivalent of:\n\n  bool has_metadata() const { return metadata_.get(); }",
+      "revId": "171dd9049ad81a9a1cdcb8243900881e5e9782cc",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "aa2526ac_2d908eea",
+        "filename": "src/gn/target.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 166,
+      "author": {
+        "id": 1000067
+      },
+      "writtenOn": "2021-11-10T17:20:32Z",
+      "side": 1,
+      "message": "Good idea, done!",
+      "parentUuid": "0980ac0c_3d6f426e",
       "revId": "171dd9049ad81a9a1cdcb8243900881e5e9782cc",
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
     }
