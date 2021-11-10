@@ -16,6 +16,24 @@
       "message": "For me, this lambda is hurting readability more than helping. I think this should be just as good:\n\n  if (EndsWithExtension(file, \"swift\"))\n    return SourceFile::SOURCE_SWIFT;\n\nI think trying to make a StringView in advance and sharing it among each caller won\u0027t help since this is passing by value anyway (probably the right thing) and the values come right out of the string.",
       "revId": "5ccc4f2b94255b00c21218d3d8b7df479f946464",
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "87cc36a6_b8e24c35",
+        "filename": "src/gn/source_file.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 104,
+      "author": {
+        "id": 1000067
+      },
+      "writtenOn": "2021-11-10T17:19:18Z",
+      "side": 1,
+      "message": "I\u0027ve changed the code to use EndsWithExtension(). I also confirm that after LTO optimization, this generates the exact same code as using the lambda anyway. Thanks.",
+      "parentUuid": "85d6088b_041f6673",
+      "revId": "5ccc4f2b94255b00c21218d3d8b7df479f946464",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
     }
   ]
 }
