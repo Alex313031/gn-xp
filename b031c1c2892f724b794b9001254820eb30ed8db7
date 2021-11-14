@@ -16,6 +16,29 @@
       "message": "This is a pre-existing variable that I only found out about through asking people on chat. I\u0027m not responsible for the variable or its semantics - I aim just to document its existing semantics for the benefit of future travelers like me.",
       "revId": "b031c1c2892f724b794b9001254820eb30ed8db7",
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "fbc52386_3dd9bfec",
+        "filename": "src/gn/function_toolchain.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 590,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2021-11-14T04:01:48Z",
+      "side": 1,
+      "message": "For this part, can you just say \"A path relative to root_out_dir.\" I first read this and thought it was saying the path *would* be rebased, but I suspect it\u0027s supposed to already be relative.",
+      "range": {
+        "startLine": 590,
+        "startChar": 15,
+        "endLine": 590,
+        "endChar": 28
+      },
+      "revId": "b031c1c2892f724b794b9001254820eb30ed8db7",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
     }
   ]
 }
