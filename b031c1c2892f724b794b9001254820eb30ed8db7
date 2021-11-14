@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "10604668_7a086f39",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2021-11-14T00:53:33Z",
+      "side": 1,
+      "message": "This is a pre-existing variable that I only found out about through asking people on chat. I\u0027m not responsible for the variable or its semantics - I aim just to document its existing semantics for the benefit of future travelers like me.",
+      "revId": "b031c1c2892f724b794b9001254820eb30ed8db7",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    }
+  ]
+}
