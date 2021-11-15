@@ -16,6 +16,24 @@
       "message": "It looks like this still needs an OWNER approver !?",
       "revId": "fe1281f3891ecb72451ee11b09ac878eadd2e7cf",
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "783cce49_f7c81fc1",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000012
+      },
+      "writtenOn": "2021-11-15T17:27:48Z",
+      "side": 1,
+      "message": "Hm. I thought I was an owner, but I think I took myself out at some point ...",
+      "parentUuid": "3066cbaf_05bdb725",
+      "revId": "fe1281f3891ecb72451ee11b09ac878eadd2e7cf",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
     }
   ]
 }
