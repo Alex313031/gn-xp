@@ -229,6 +229,7 @@ void TestWithScope::SetupToolchain(Toolchain* toolchain, bool use_toc) {
       rustc_tool.get());
   rustc_tool->set_outputs(SubstitutionList::MakeForTest(
       "{{root_out_dir}}/{{crate_name}}{{output_extension}}"));
+  static_cast<RustTool*>(rustc_tool.get())->set_dynamic_link_switch("-Clink-arg=-Bdynamic");
   toolchain->SetTool(std::move(rustc_tool));
 
   // SWIFT
@@ -242,7 +243,7 @@ void TestWithScope::SetupToolchain(Toolchain* toolchain, bool use_toc) {
       "{{target_out_dir}}/{{source_name_part}}.o"));
   toolchain->SetTool(std::move(swift_tool));
 
-  // CDYLIB
+  // RUST CDYLIB
   std::unique_ptr<Tool> cdylib_tool = Tool::CreateTool(RustTool::kRsToolCDylib);
   SetCommandForTool(
       "{{rustenv}} rustc --crate-name {{crate_name}} {{source}} "
@@ -253,9 +254,10 @@ void TestWithScope::SetupToolchain(Toolchain* toolchain, bool use_toc) {
   cdylib_tool->set_default_output_extension(".so");
   cdylib_tool->set_outputs(SubstitutionList::MakeForTest(
       "{{target_out_dir}}/{{target_output_name}}{{output_extension}}"));
+  static_cast<RustTool*>(cdylib_tool.get())->set_dynamic_link_switch("-Clink-arg=-Bdynamic");
   toolchain->SetTool(std::move(cdylib_tool));
 
-  // DYLIB
+  // RUST DYLIB
   std::unique_ptr<Tool> dylib_tool = Tool::CreateTool(RustTool::kRsToolDylib);
   SetCommandForTool(
       "{{rustenv}} rustc --crate-name {{crate_name}} {{source}} "
@@ -266,6 +268,7 @@ void TestWithScope::SetupToolchain(Toolchain* toolchain, bool use_toc) {
   dylib_tool->set_default_output_extension(".so");
   dylib_tool->set_outputs(SubstitutionList::MakeForTest(
       "{{target_out_dir}}/{{target_output_name}}{{output_extension}}"));
+  static_cast<RustTool*>(dylib_tool.get())->set_dynamic_link_switch("-Clink-arg=-Bdynamic");
   toolchain->SetTool(std::move(dylib_tool));
 
   // RUST_PROC_MACRO
@@ -280,6 +283,7 @@ void TestWithScope::SetupToolchain(Toolchain* toolchain, bool use_toc) {
   rust_proc_macro_tool->set_default_output_extension(".so");
   rust_proc_macro_tool->set_outputs(SubstitutionList::MakeForTest(
       "{{target_out_dir}}/{{target_output_name}}{{output_extension}}"));
+  static_cast<RustTool*>(rust_proc_macro_tool.get())->set_dynamic_link_switch("-Clink-arg=-Bdynamic");
   toolchain->SetTool(std::move(rust_proc_macro_tool));
 
   // RLIB
@@ -295,7 +299,7 @@ void TestWithScope::SetupToolchain(Toolchain* toolchain, bool use_toc) {
       "{{target_out_dir}}/{{target_output_name}}{{output_extension}}"));
   toolchain->SetTool(std::move(rlib_tool));
 
-  // STATICLIB
+  // RUST STATICLIB
   std::unique_ptr<Tool> staticlib_tool =
       Tool::CreateTool(RustTool::kRsToolStaticlib);
   SetCommandForTool(
@@ -307,6 +311,7 @@ void TestWithScope::SetupToolchain(Toolchain* toolchain, bool use_toc) {
   staticlib_tool->set_default_output_extension(".a");
   staticlib_tool->set_outputs(SubstitutionList::MakeForTest(
       "{{target_out_dir}}/{{target_output_name}}{{output_extension}}"));
+  static_cast<RustTool*>(staticlib_tool.get())->set_dynamic_link_switch("-Clink-arg=-Bdynamic");
   toolchain->SetTool(std::move(staticlib_tool));
 
   toolchain->ToolchainSetupComplete();
