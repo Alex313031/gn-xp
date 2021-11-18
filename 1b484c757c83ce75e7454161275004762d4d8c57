@@ -1,0 +1,89 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "87a90c0b_86c74928",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 9
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000168
+      },
+      "writtenOn": "2021-11-18T22:59:42Z",
+      "side": 1,
+      "message": "LGTM modulo comments",
+      "revId": "1b484c757c83ce75e7454161275004762d4d8c57",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b93e0a23_ead9b3ac",
+        "filename": "src/gn/builder.cc",
+        "patchSetId": 9
+      },
+      "lineNbr": 610,
+      "author": {
+        "id": 1000168
+      },
+      "writtenOn": "2021-11-18T22:59:42Z",
+      "side": 1,
+      "message": "just a style change, intentional?",
+      "revId": "1b484c757c83ce75e7454161275004762d4d8c57",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9e0bfa0c_c31066d5",
+        "filename": "src/gn/builder_record.cc",
+        "patchSetId": 9
+      },
+      "lineNbr": 62,
+      "author": {
+        "id": 1000168
+      },
+      "writtenOn": "2021-11-18T22:59:42Z",
+      "side": 1,
+      "message": "nit: I\u0027d expect comments about the implementation to go in the function body\n\n(\"static\" comments above are actually commenting on the function signature)",
+      "revId": "1b484c757c83ce75e7454161275004762d4d8c57",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "134a2131_50d7794b",
+        "filename": "src/gn/builder_unittest.cc",
+        "patchSetId": 9
+      },
+      "lineNbr": 6,
+      "author": {
+        "id": 1000168
+      },
+      "writtenOn": "2021-11-18T22:59:42Z",
+      "side": 1,
+      "message": "put this above all the gn includes",
+      "revId": "1b484c757c83ce75e7454161275004762d4d8c57",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f3af681a_25011407",
+        "filename": "src/gn/builder_unittest.cc",
+        "patchSetId": 9
+      },
+      "lineNbr": 312,
+      "author": {
+        "id": 1000168
+      },
+      "writtenOn": "2021-11-18T22:59:42Z",
+      "side": 1,
+      "message": "might as well check b-\u003eshould_generate() here, since it\u0027s possible this is \"allowed\" but the feature breaks somehow",
+      "revId": "1b484c757c83ce75e7454161275004762d4d8c57",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    }
+  ]
+}
