@@ -3679,6 +3679,13 @@
         process, but may be used when generating metadata for rust-analyzer.
         (See --export-rust-project). It enables such metadata to include
         information about the Rust standard library.
+
+    dynamic_link_switch
+        Valid for: Rust tools which link
+
+        A switch to be optionally inserted into linker command lines
+        to indicate that subsequent items may be dynamically linked.
+        For ld-like linkers, -Bdynamic may be a good choice.
 ```
 
 #### **Expansions for tool variables**

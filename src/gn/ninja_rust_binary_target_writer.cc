@@ -324,7 +324,7 @@ void NinjaRustBinaryTargetWriter::WriteRustdeps(
   // that allows dynamic linking, as rustc may have previously put it into
   // static-only mode.
   if (nonrustdeps.size() > 0) {
-    out_ << " -Clink-arg=-Bdynamic";
+    out_ << " " << tool_->dynamic_link_switch();
   }
   for (const auto& nonrustdep : nonrustdeps) {
     out_ << " -Clink-arg=";
