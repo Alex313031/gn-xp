@@ -725,6 +725,60 @@ TEST_F(NinjaRustBinaryTargetWriterTest, LibsAndLibDirs) {
   }
 }
 
+TEST_F(NinjaRustBinaryTargetWriterTest, LibsOverrideFlag) {
+  Err err;
+  TestWithScope setup;
+
+  Target target(setup.settings(), Label(SourceDir("//foo/"), "bar"));
+  target.set_output_type(Target::EXECUTABLE);
+  target.visibility().SetPublic();
+  SourceFile main("//foo/main.rs");
+  target.sources().push_back(SourceFile("//foo/input.rs"));
+  target.sources().push_back(main);
+  target.source_types_used().Set(SourceFile::SOURCE_RS);
+  target.set_output_dir(SourceDir("//out/Debug/foo/"));
+  target.config_values().libs().push_back(LibFile("quux"));
+  target.config_values().lib_dirs().push_back(SourceDir("//baz/"));
+  target.rust_values().set_crate_root(main);
+  target.rust_values().crate_name() = "foo_bar";
+  Toolchain toolchain_overriding_flags(
+      setup.settings(),
+      Label(SourceDir("//toolchain_overriding_flags/"), "overriding_flags"));
+  toolchain_overriding_flags.GetTool("rust_binary")
+      ->set_lib_dir_switch("-Lmodified-native=");
+  toolchain_overriding_flags.GetTool("rust_binary")
+      ->set_lib_switch("-lmodified-flag=");
+  TestWithScope::SetupToolchain(&toolchain_overriding_flags);
+  target.SetToolchain(&toolchain_overriding_flags);
+  ASSERT_TRUE(target.OnResolved(&err));
+
+  {
+    std::ostringstream out;
+    NinjaRustBinaryTargetWriter writer(&target, out);
+    writer.Run();
+
+    const char expected[] =
+        "crate_name = foo_bar\n"
+        "crate_type = bin\n"
+        "output_extension = \n"
+        "output_dir = foo\n"
+        "rustflags =\n"
+        "rustenv =\n"
+        "root_out_dir = .\n"
+        "target_out_dir = obj/foo\n"
+        "target_output_name = bar\n"
+        "\n"
+        "build ./foo_bar: rust_bin ../../foo/main.rs | ../../foo/input.rs "
+        "../../foo/main.rs\n"
+        "  externs =\n"
+        "  rustdeps = -Lmodified-native=../../baz -lmodified-flag=quux\n"
+        "  ldflags =\n"
+        "  sources = ../../foo/input.rs ../../foo/main.rs\n";
+    std::string out_str = out.str();
+    EXPECT_EQ(expected, out_str) << expected << "\n" << out_str;
+  }
+}
+
 TEST_F(NinjaRustBinaryTargetWriterTest, RustProcMacro) {
   Err err;
   TestWithScope setup;
