@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e50d123e_88869879",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 8
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1001942
+      },
+      "writtenOn": "2021-11-18T19:55:13Z",
+      "side": 1,
+      "message": "Currently Target::GetDeps doesn\u0027t return gen_deps regardless of whether you ask it for \"LINKED\" or \"ALL\" deps. I think this is correct, as we don\u0027t want gen_deps to show up in things like compile_commands.json which use DEPS_ALL. I wanted to confirm that this was the desired behavior though (it means that `gn refs` won\u0027t consider gen_deps).",
+      "revId": "4182a29d805d632c651f5138ea170418ae45ab68",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    }
+  ]
+}
