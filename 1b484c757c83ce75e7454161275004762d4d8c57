@@ -35,6 +35,24 @@
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "d2d08994_a2ec2b4d",
+        "filename": "src/gn/builder.cc",
+        "patchSetId": 9
+      },
+      "lineNbr": 610,
+      "author": {
+        "id": 1001942
+      },
+      "writtenOn": "2021-11-19T00:43:07Z",
+      "side": 1,
+      "message": "nope good catch, I always forget to turn off clang-format in projects that don\u0027t enforce it.",
+      "parentUuid": "b93e0a23_ead9b3ac",
+      "revId": "1b484c757c83ce75e7454161275004762d4d8c57",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "9e0bfa0c_c31066d5",
@@ -48,6 +66,24 @@
       "writtenOn": "2021-11-18T22:59:42Z",
       "side": 1,
       "message": "nit: I\u0027d expect comments about the implementation to go in the function body\n\n(\"static\" comments above are actually commenting on the function signature)",
+      "revId": "1b484c757c83ce75e7454161275004762d4d8c57",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "48c4da11_65f478bc",
+        "filename": "src/gn/builder_record.cc",
+        "patchSetId": 9
+      },
+      "lineNbr": 62,
+      "author": {
+        "id": 1001942
+      },
+      "writtenOn": "2021-11-19T00:43:07Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "9e0bfa0c_c31066d5",
       "revId": "1b484c757c83ce75e7454161275004762d4d8c57",
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
     },
@@ -69,6 +105,24 @@
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "9e4d8ddc_d801a518",
+        "filename": "src/gn/builder_unittest.cc",
+        "patchSetId": 9
+      },
+      "lineNbr": 6,
+      "author": {
+        "id": 1001942
+      },
+      "writtenOn": "2021-11-19T00:43:07Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "134a2131_50d7794b",
+      "revId": "1b484c757c83ce75e7454161275004762d4d8c57",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "f3af681a_25011407",
@@ -82,6 +136,24 @@
       "writtenOn": "2021-11-18T22:59:42Z",
       "side": 1,
       "message": "might as well check b-\u003eshould_generate() here, since it\u0027s possible this is \"allowed\" but the feature breaks somehow",
+      "revId": "1b484c757c83ce75e7454161275004762d4d8c57",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "3e3d3220_59b73635",
+        "filename": "src/gn/builder_unittest.cc",
+        "patchSetId": 9
+      },
+      "lineNbr": 312,
+      "author": {
+        "id": 1001942
+      },
+      "writtenOn": "2021-11-19T00:43:07Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "f3af681a_25011407",
       "revId": "1b484c757c83ce75e7454161275004762d4d8c57",
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
     }
