@@ -16,6 +16,23 @@
       "message": "PTAL",
       "revId": "f480ce2ac5d05931583640bfd4434f0b1e244c50",
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "6b4c31e0_a88fe8c8",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000004
+      },
+      "writtenOn": "2021-11-22T04:26:19Z",
+      "side": 1,
+      "message": "I don\u0027t have 2022 installed to check, but this looks fine to me.",
+      "revId": "f480ce2ac5d05931583640bfd4434f0b1e244c50",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
     }
   ]
 }

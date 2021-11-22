@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2a06eee8_6d162177",
+        "filename": "src/gn/visual_studio_writer.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 314,
+      "author": {
+        "id": 1000004
+      },
+      "writtenOn": "2021-11-22T04:26:19Z",
+      "side": 0,
+      "message": "Did the default trigger a warning?",
+      "revId": "4aa9bdfa05b688c58d3d7d3e496f3f18cbb3d89e",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    }
+  ]
+}
