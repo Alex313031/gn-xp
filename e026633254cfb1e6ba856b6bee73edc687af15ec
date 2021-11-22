@@ -18,6 +18,23 @@
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "a265e019_08e9d7f7",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 10
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000014
+      },
+      "writtenOn": "2021-11-22T21:18:31Z",
+      "side": 1,
+      "message": "Oh: We also need to update command_desc.cc. Things to double-check:\n\n  gn desc out/default //foo\n  \nlists a section with it (if there are any, can be omitted otherwise),\n\n  gn desc out/default //foo gen_deps\n\nlists just the gen_deps, and \"--format\u003djson\" works also. I would not use the existing deps printing machinery because we don\u0027t want recursive and \"--all\" to work for these.",
+      "revId": "e026633254cfb1e6ba856b6bee73edc687af15ec",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "d91416e1_e2ecff9d",
