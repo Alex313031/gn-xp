@@ -16,6 +16,24 @@
       "message": "Did the default trigger a warning?",
       "revId": "4aa9bdfa05b688c58d3d7d3e496f3f18cbb3d89e",
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "071a6c38_594323a7",
+        "filename": "src/gn/visual_studio_writer.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 314,
+      "author": {
+        "id": 1001972
+      },
+      "writtenOn": "2021-11-22T18:06:02Z",
+      "side": 0,
+      "message": "no, but it\u0027s better not to have a default, then we get a compile error if we forget to add a case: rather than a runtime DCHECK.",
+      "parentUuid": "2a06eee8_6d162177",
+      "revId": "4aa9bdfa05b688c58d3d7d3e496f3f18cbb3d89e",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
     }
   ]
 }
