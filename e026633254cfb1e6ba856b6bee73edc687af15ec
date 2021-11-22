@@ -1,0 +1,169 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d889881c_1a6dae10",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 10
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000014
+      },
+      "writtenOn": "2021-11-22T21:15:04Z",
+      "side": 1,
+      "message": "Thanks, the implementation looks good! I just have comment and documentation requests.",
+      "revId": "e026633254cfb1e6ba856b6bee73edc687af15ec",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d91416e1_e2ecff9d",
+        "filename": "src/gn/builder.cc",
+        "patchSetId": 10
+      },
+      "lineNbr": 451,
+      "author": {
+        "id": 1000014
+      },
+      "writtenOn": "2021-11-22T21:15:04Z",
+      "side": 1,
+      "message": "Here, can you add a note that this code must work in the presence of cycles because gen_deps are not a DAG and the should_generate but must be set before iterating to avoid infinite recursion.",
+      "revId": "e026633254cfb1e6ba856b6bee73edc687af15ec",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0a1ffcf9_abb6144b",
+        "filename": "src/gn/builder_record.cc",
+        "patchSetId": 10
+      },
+      "lineNbr": 62,
+      "author": {
+        "id": 1000014
+      },
+      "writtenOn": "2021-11-22T21:15:04Z",
+      "side": 1,
+      "message": "Nit: capitalize \"record\"",
+      "range": {
+        "startLine": 62,
+        "startChar": 5,
+        "endLine": 62,
+        "endChar": 12
+      },
+      "revId": "e026633254cfb1e6ba856b6bee73edc687af15ec",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a93bf778_75c75e77",
+        "filename": "src/gn/builder_record.h",
+        "patchSetId": 10
+      },
+      "lineNbr": 77,
+      "author": {
+        "id": 1000014
+      },
+      "writtenOn": "2021-11-22T21:15:04Z",
+      "side": 1,
+      "message": "Can you add:\n\n  Note that this includes gen_deps for targets which can have cycles.",
+      "revId": "e026633254cfb1e6ba856b6bee73edc687af15ec",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6a61681f_bc33a326",
+        "filename": "src/gn/target.h",
+        "patchSetId": 10
+      },
+      "lineNbr": 240,
+      "author": {
+        "id": 1000014
+      },
+      "writtenOn": "2021-11-22T21:15:04Z",
+      "side": 1,
+      "message": "Can you add a comment here like:\n\n  gen_deps propagate the \"should_generate\" bit. These dependencies can have cycles so care should be taken if iterating them recursively.",
+      "revId": "e026633254cfb1e6ba856b6bee73edc687af15ec",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a5aebb10_61a3c040",
+        "filename": "src/gn/variables.cc",
+        "patchSetId": 10
+      },
+      "lineNbr": 513,
+      "author": {
+        "id": 1000014
+      },
+      "writtenOn": "2021-11-22T21:15:04Z",
+      "side": 1,
+      "message": "How about\n\n  \"gen_deps: [label list] Declares targets that should generate when this one does.\"",
+      "revId": "e026633254cfb1e6ba856b6bee73edc687af15ec",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "fd6ebfe4_61af6450",
+        "filename": "src/gn/variables.cc",
+        "patchSetId": 10
+      },
+      "lineNbr": 515,
+      "author": {
+        "id": 1000014
+      },
+      "writtenOn": "2021-11-22T21:15:04Z",
+      "side": 1,
+      "message": "Same with this line.",
+      "revId": "e026633254cfb1e6ba856b6bee73edc687af15ec",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0898f46b_d340f510",
+        "filename": "src/gn/variables.cc",
+        "patchSetId": 10
+      },
+      "lineNbr": 520,
+      "author": {
+        "id": 1000014
+      },
+      "writtenOn": "2021-11-22T21:15:04Z",
+      "side": 1,
+      "message": "Speaking of this, can you update the \"which targets are built\" section of the referenced help page (in target.cc) to describe this new behavior?\n\nHow about something like this paragraph above the \"See also \"gn help ninja_rules\"\" line:\n\n  Some targets might be associated but without a formal build dependency (for\n  example, related tools or optional variants). A target that is marked as\n  \"generated\" can propagate its generated state to an associated target using\n  \"gen_deps\". This will make the referenced dependency have Ninja rules\n  generated in the same cases the source target has but without a build-time\n  dependency and even in non-default toolchains.",
+      "range": {
+        "startLine": 520,
+        "startChar": 6,
+        "endLine": 520,
+        "endChar": 25
+      },
+      "revId": "e026633254cfb1e6ba856b6bee73edc687af15ec",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "24408b4b_b54a13be",
+        "filename": "src/gn/variables.cc",
+        "patchSetId": 10
+      },
+      "lineNbr": 522,
+      "author": {
+        "id": 1000014
+      },
+      "writtenOn": "2021-11-22T21:15:04Z",
+      "side": 1,
+      "message": "Can you also add here something like:\n\n  Since \"gen_deps\" is not a build-time dependency, there can be cycles between\n  \"deps\" and \"gen_deps\" or within \"gen_deps\" itself.",
+      "revId": "e026633254cfb1e6ba856b6bee73edc687af15ec",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    }
+  ]
+}
