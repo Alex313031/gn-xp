@@ -340,6 +340,7 @@ void Args::SetSystemVarsLocked(Scope* dest) const {
   static const char kRISCV32[] = "riscv32";
   static const char kRISCV64[] = "riscv64";
   static const char kE2K[] = "e2k";
+  static const char kLA64[] = "loong64";
   const char* arch = nullptr;
 
   // Set the host CPU architecture based on the underlying OS, not
@@ -360,10 +361,12 @@ void Args::SetSystemVarsLocked(Scope* dest) const {
   else if (os_arch == "s390x")
     arch = kS390X;
   else if (os_arch == "ppc64" || os_arch == "ppc64le")
+    arch = kPPC64;
+  else if (os_arch == "loongarch64")
+    arch = kLA64;
     // We handle the endianness inside //build/config/host_byteorder.gni.
     // This allows us to use the same toolchain as ppc64 BE
     // and specific flags are included using the host_byteorder logic.
-    arch = kPPC64;
   else if (os_arch == "riscv32")
     arch = kRISCV32;
   else if (os_arch == "riscv64")
