@@ -1223,7 +1223,7 @@ bool Target::GetMetadata(const std::vector<std::string>& keys_to_extract,
     // Origin is null because this isn't declared anywhere, and should never
     // trigger any errors.
     next_walk_keys.push_back(Value(nullptr, ""));
-  } else if (has_metadata()) {
+  } else {
     // Otherwise, we walk this target and collect the appropriate data.
     if (!metadata().WalkStep(settings()->build_settings(), keys_to_extract,
                              keys_to_walk, rebase_dir, &next_walk_keys,
