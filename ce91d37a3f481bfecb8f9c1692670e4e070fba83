@@ -16,6 +16,24 @@
       "message": "I can guess at the problem but neither this code nor the CL description says what it is. I would suggest adding in a comment here about why we always need to walk so we don\u0027t accidentally \"optimize\" this later.",
       "revId": "ce91d37a3f481bfecb8f9c1692670e4e070fba83",
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "8ae9d8f4_2d903a98",
+        "filename": "src/gn/target.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 1227,
+      "author": {
+        "id": 1000067
+      },
+      "writtenOn": "2021-11-24T19:46:47Z",
+      "side": 0,
+      "message": "Great idea, done!",
+      "parentUuid": "cd67e46b_708fe6ca",
+      "revId": "ce91d37a3f481bfecb8f9c1692670e4e070fba83",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
     }
   ]
 }
