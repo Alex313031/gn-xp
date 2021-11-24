@@ -33,6 +33,24 @@
       "message": "This looks fine. I\u0027ll trigger a dry run to make sure everything compiles.\n\nIn the meantime, can you please upload a new version of this patch where you\u0027ve added yourself to the AUTHORS file? I think this is your first contribution to GN.",
       "revId": "803a75e8af2a3c4b22f57b8abdb01595c6eca161",
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f2641566_fe2be217",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1001983
+      },
+      "writtenOn": "2021-11-24T01:47:46Z",
+      "side": 1,
+      "message": "name added to AUTHORS,thanks.",
+      "parentUuid": "1dfee727_13cb96cd",
+      "revId": "803a75e8af2a3c4b22f57b8abdb01595c6eca161",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
     }
   ]
 }
