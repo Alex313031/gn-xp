@@ -34,6 +34,24 @@
       "parentUuid": "0b256024_1b7210ce",
       "revId": "67af85d0fb3446aa1aff452cafd28346355cfcd6",
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9b6a0430_7d244ef0",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 18,
+      "author": {
+        "id": 1000102
+      },
+      "writtenOn": "2021-11-24T19:58:03Z",
+      "side": 1,
+      "message": "`:` is the correct official syntax fwiw (see e.g. https://chromium.googlesource.com/angle/angle/+/6c172e4b87f2d9a3d781c07da75dbb542d46007d and many other examples)",
+      "parentUuid": "70be44c1_5bf6892b",
+      "revId": "67af85d0fb3446aa1aff452cafd28346355cfcd6",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
     }
   ]
 }
