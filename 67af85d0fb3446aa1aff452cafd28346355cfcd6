@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0b256024_1b7210ce",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 18,
+      "author": {
+        "id": 1000102
+      },
+      "writtenOn": "2021-11-24T19:23:16Z",
+      "side": 1,
+      "message": "nit: if you spell it `Bug: chromium:1273069` then it\u0027ll be autolinkified, added as a comment on that bug, etc",
+      "revId": "67af85d0fb3446aa1aff452cafd28346355cfcd6",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    }
+  ]
+}
