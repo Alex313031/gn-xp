@@ -16,6 +16,24 @@
       "message": "nit: if you spell it `Bug: chromium:1273069` then it\u0027ll be autolinkified, added as a comment on that bug, etc",
       "revId": "67af85d0fb3446aa1aff452cafd28346355cfcd6",
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "70be44c1_5bf6892b",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 18,
+      "author": {
+        "id": 1000067
+      },
+      "writtenOn": "2021-11-24T19:49:59Z",
+      "side": 1,
+      "message": "Well, that doesn\u0027t seem to work for me, I\u0027ve replaced it with `Bug: chromium/1273069` instead because that\u0027s what already appears in the git log.",
+      "parentUuid": "0b256024_1b7210ce",
+      "revId": "67af85d0fb3446aa1aff452cafd28346355cfcd6",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
     }
   ]
 }
