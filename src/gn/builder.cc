@@ -34,7 +34,9 @@ using BuilderRecordSet = BuilderRecord::BuilderRecordSet;
 bool RecursiveFindCycle(const BuilderRecord* search_in,
                         std::vector<const BuilderRecord*>* path) {
   path->push_back(search_in);
-  for (auto* cur : search_in->unresolved_deps()) {
+  BuilderRecordSet unresolved_deps = search_in->GetUnresolvedDeps();
+  for (auto it = unresolved_deps.begin(); it.valid(); ++it) {
+    const BuilderRecord* cur = *it;
     std::vector<const BuilderRecord*>::iterator found =
         std::find(path->begin(), path->end(), cur);
     if (found != path->end()) {
@@ -192,7 +194,9 @@ bool Builder::CheckForBadItems(Err* err) const {
       bad_records.push_back(src);
 
       // Check dependencies.
-      for (auto* dest : src->unresolved_deps()) {
+      BuilderRecordSet unresolved_deps = src->GetUnresolvedDeps();
+      for (auto it = unresolved_deps.begin(); it.valid(); ++it) {
+        const BuilderRecord* dest = *it;
         if (!dest->item()) {
           depstring += src->label().GetUserVisibleName(true) + "\n  needs " +
                        dest->label().GetUserVisibleName(true) + "\n";
@@ -265,8 +269,9 @@ bool Builder::ConfigDefined(BuilderRecord* record, Err* err) {
   // anything they depend on is actually written, the "generate" flag isn't
   // relevant and means extra book keeping. Just force load any deps of this
   // config.
-  for (auto* cur : record->all_deps())
-    ScheduleItemLoadIfNecessary(cur);
+  for (auto it = record->all_deps().begin(); it.valid(); ++it) {
+    ScheduleItemLoadIfNecessary(*it);
+  }
 
   return true;
 }
@@ -306,8 +311,8 @@ BuilderRecord* Builder::GetOrCreateRecordOfType(const Label& label,
   BuilderRecord* record = GetRecord(label);
   if (!record) {
     // Not seen this record yet, create a new one.
-    auto new_record = std::make_unique<BuilderRecord>(type, label);
-    new_record->set_originally_referenced_from(request_from);
+    auto new_record =
+        std::make_unique<BuilderRecord>(type, label, request_from);
     record = new_record.get();
     records_[label] = std::move(new_record);
     return record;
@@ -461,7 +466,8 @@ void Builder::RecursiveSetShouldGenerate(BuilderRecord* record, bool force) {
     return;  // Already set and we're not required to iterate dependencies.
   }
 
-  for (auto* cur : record->all_deps()) {
+  for (auto it = record->all_deps().begin(); it.valid(); ++it) {
+    BuilderRecord* cur = *it;
     if (!cur->should_generate()) {
       ScheduleItemLoadIfNecessary(cur);
       RecursiveSetShouldGenerate(cur, false);
@@ -508,17 +514,14 @@ bool Builder::ResolveItem(BuilderRecord* record, Err* err) {
     resolved_and_generated_callback_(record);
 
   // Recursively update everybody waiting on this item to be resolved.
-  for (BuilderRecord* waiting : record->waiting_on_resolution()) {
-    DCHECK(waiting->unresolved_deps().find(record) !=
-           waiting->unresolved_deps().end());
-    waiting->unresolved_deps().erase(record);
-
-    if (waiting->can_resolve()) {
+  BuilderRecordSet waiting_deps = std::move(record->waiting_on_resolution());
+  for (auto it = waiting_deps.begin(); it.valid(); ++it) {
+    BuilderRecord* waiting = *it;
+    if (waiting->OnResolvedDep(record)) {
       if (!ResolveItem(waiting, err))
         return false;
     }
   }
-  record->waiting_on_resolution().clear();
   return true;
 }
 
