@@ -58,10 +58,25 @@ BuilderRecord::ItemType BuilderRecord::TypeOfItem(const Item* item) {
   return ITEM_UNKNOWN;
 }
 
+bool BuilderRecord::OnResolvedDep(const BuilderRecord* dep) {
+  DCHECK(all_deps_.contains(const_cast<BuilderRecord*>(dep)));
+  DCHECK(unresolved_count_ > 0);
+  return --unresolved_count_ == 0;
+}
+
+BuilderRecord::BuilderRecordSet BuilderRecord::GetUnresolvedDeps() const {
+  BuilderRecordSet result;
+  for (auto it = all_deps_.begin(); it.valid(); ++it) {
+    BuilderRecord* dep = *it;
+    if (dep->waiting_on_resolution_.contains(const_cast<BuilderRecord*>(this)))
+      result.add(dep);
+  }
+  return result;
+}
+
 void BuilderRecord::AddDep(BuilderRecord* record) {
-  all_deps_.insert(record);
-  if (!record->resolved()) {
-    unresolved_deps_.insert(record);
-    record->waiting_on_resolution_.insert(this);
+  if (all_deps_.add(record) && !record->resolved()) {
+    unresolved_count_ += 1;
+    record->waiting_on_resolution_.add(this);
   }
 }
