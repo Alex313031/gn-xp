@@ -171,6 +171,7 @@
 //        delete node->foo;
 //        node->foo = Node::kTombstone;
 //        UpdateAfterDeletion().
+//        return true;
 //      }
 //
 //      static size_t MakeHash(const Foo& foo) {
@@ -294,6 +295,9 @@ class HashTableBase {
       ++(*this);
       return result;
     }
+
+    // Returns true iff the iterator points to a valid node.
+    bool valid() const { return node_ != node_limit_; }
 
     Node* node_ = nullptr;
     Node* node_limit_ = nullptr;
