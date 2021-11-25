@@ -31,6 +31,8 @@ class DepsIteratorRange;
 class Settings;
 class Toolchain;
 
+using TargetSet = std::set<const Target*>;
+
 class Target : public Item {
  public:
   enum OutputType {
@@ -172,7 +174,7 @@ class Target : public Item {
                    const SourceDir& rebase_dir,
                    bool deps_only,
                    std::vector<Value>* result,
-                   std::set<const Target*>* targets_walked,
+                   TargetSet* targets_walked,
                    Err* err) const;
 
   // GeneratedFile-related methods.
@@ -328,9 +330,7 @@ class Target : public Item {
     return all_weak_frameworks_;
   }
 
-  const std::set<const Target*>& recursive_hard_deps() const {
-    return recursive_hard_deps_;
-  }
+  const TargetSet& recursive_hard_deps() const { return recursive_hard_deps_; }
 
   std::vector<LabelPattern>& friends() { return friends_; }
   const std::vector<LabelPattern>& friends() const { return friends_; }
@@ -500,7 +500,7 @@ class Target : public Item {
 
   // All hard deps from this target and all dependencies. Filled in when this
   // target is marked resolved. This will not include the current target.
-  std::set<const Target*> recursive_hard_deps_;
+  TargetSet recursive_hard_deps_;
 
   std::vector<LabelPattern> friends_;
   std::vector<LabelPattern> assert_no_deps_;
