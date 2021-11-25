@@ -21,6 +21,7 @@
 #include "gn/lib_file.h"
 #include "gn/metadata.h"
 #include "gn/output_file.h"
+#include "gn/pointer_set.h"
 #include "gn/rust_values.h"
 #include "gn/source_file.h"
 #include "gn/swift_values.h"
@@ -31,7 +32,7 @@ class DepsIteratorRange;
 class Settings;
 class Toolchain;
 
-using TargetSet = std::set<const Target*>;
+using TargetSet = PointerSet<const Target>;
 
 class Target : public Item {
  public:
