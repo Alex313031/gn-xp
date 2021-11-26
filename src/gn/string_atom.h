@@ -119,6 +119,8 @@ class StringAtom {
 
   size_t hash() const { return std::hash<std::string>()(value_); }
 
+  size_t ptr_hash() const { return std::hash<const std::string*>()(&value_); }
+
   // Use the following structs to implement containers that use StringAtom
   // values as keys, but only compare/hash the pointer values for speed.
   // E.g.:
@@ -130,7 +132,7 @@ class StringAtom {
   //
   struct PtrHash {
     size_t operator()(const StringAtom& key) const noexcept {
-      return std::hash<const std::string*>()(&key.value_);
+      return key.ptr_hash();
     }
   };
 
