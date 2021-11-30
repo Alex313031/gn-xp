@@ -16,6 +16,24 @@
       "message": "This series of CLs appears to be poking pretty closely at the guts of GN, and that\u0027s the sort of thing I think brettw@ likes to review himself, so I\u0027d like to defer the review to him.\n\nI think he\u0027s OOO this week, though. Can this wait until next week?",
       "revId": "996e0356f02eaa1875f12b02355e110f52eb0cfc",
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a1289765_dcea0d5d",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000067
+      },
+      "writtenOn": "2021-11-30T16:57:24Z",
+      "side": 1,
+      "message": "Yes, this can wait, and Brett actually contacted me by email to warn me that he was away this week (thanks), which is fine since there is nothing urgent here.",
+      "parentUuid": "1a8f3f23_730c11c3",
+      "revId": "996e0356f02eaa1875f12b02355e110f52eb0cfc",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
     }
   ]
 }
