@@ -55,6 +55,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "44494895_ab4a1ccd",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 10
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1001942
+      },
+      "writtenOn": "2021-11-30T21:56:51Z",
+      "side": 1,
+      "message": "Actually I\u0027ve gone back and swapped this. Now gen_deps doesn\u0027t show up in the output if there aren\u0027t any gen_deps, and when you ask for gen_deps specifically from desc when there are none for a given target, it gives the slightly misleading error message.\n\nI realized that there are many other variables (such as \"frameworks\") that exhibit this behavior, so if I wanted to change it I\u0027d do that as a separate bugfix.",
+      "parentUuid": "19aad685_5208f84e",
+      "revId": "e026633254cfb1e6ba856b6bee73edc687af15ec",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "d91416e1_e2ecff9d",
         "filename": "src/gn/builder.cc",
         "patchSetId": 10
