@@ -37,6 +37,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "19aad685_5208f84e",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 10
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1001942
+      },
+      "writtenOn": "2021-11-30T21:54:37Z",
+      "side": 1,
+      "message": "Implementing the \"Omitting them otherwise\" behavior would change the output for some other variables.\n\nAfter the desc command goes through the list of stuff that should always get printed with HandleProperty, it loops over any remaining keys and emits them. In practice that means that a bunch of stuff like \"output_extension\", \"externs\", and now \"gen_deps\" will get printed even if they\u0027re empty.\n\nI thought that the solution would be to not add the gen_deps key to the dict at all if there are none, but when you specifically request gen_deps from the desc command that would make it fail with \"Don\u0027t know how to display gen_deps for executable\" when there are none rather than returning an empty list.\n\nSo the solution would be to have the loop at the end check if the value is empty and not print it if so, but since this would affect variables other than gen_deps I didn\u0027t think I should make the change here. For now it just prints gen_deps all the time like the other variables.\n\nOther than that I\u0027ve checked that it works in json format.",
+      "parentUuid": "a265e019_08e9d7f7",
+      "revId": "e026633254cfb1e6ba856b6bee73edc687af15ec",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "d91416e1_e2ecff9d",
         "filename": "src/gn/builder.cc",
         "patchSetId": 10
@@ -48,6 +66,24 @@
       "writtenOn": "2021-11-22T21:15:04Z",
       "side": 1,
       "message": "Here, can you add a note that this code must work in the presence of cycles because gen_deps are not a DAG and the should_generate but must be set before iterating to avoid infinite recursion.",
+      "revId": "e026633254cfb1e6ba856b6bee73edc687af15ec",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "eec32793_a4799c82",
+        "filename": "src/gn/builder.cc",
+        "patchSetId": 10
+      },
+      "lineNbr": 451,
+      "author": {
+        "id": 1001942
+      },
+      "writtenOn": "2021-11-30T21:54:37Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "d91416e1_e2ecff9d",
       "revId": "e026633254cfb1e6ba856b6bee73edc687af15ec",
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
     },
@@ -75,6 +111,30 @@
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "d190450f_c8145f69",
+        "filename": "src/gn/builder_record.cc",
+        "patchSetId": 10
+      },
+      "lineNbr": 62,
+      "author": {
+        "id": 1001942
+      },
+      "writtenOn": "2021-11-30T21:54:37Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "0a1ffcf9_abb6144b",
+      "range": {
+        "startLine": 62,
+        "startChar": 5,
+        "endLine": 62,
+        "endChar": 12
+      },
+      "revId": "e026633254cfb1e6ba856b6bee73edc687af15ec",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "a93bf778_75c75e77",
@@ -88,6 +148,24 @@
       "writtenOn": "2021-11-22T21:15:04Z",
       "side": 1,
       "message": "Can you add:\n\n  Note that this includes gen_deps for targets which can have cycles.",
+      "revId": "e026633254cfb1e6ba856b6bee73edc687af15ec",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "11769f77_18597611",
+        "filename": "src/gn/builder_record.h",
+        "patchSetId": 10
+      },
+      "lineNbr": 77,
+      "author": {
+        "id": 1001942
+      },
+      "writtenOn": "2021-11-30T21:54:37Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "a93bf778_75c75e77",
       "revId": "e026633254cfb1e6ba856b6bee73edc687af15ec",
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
     },
@@ -109,6 +187,24 @@
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "5fc9a5da_a82abdba",
+        "filename": "src/gn/target.h",
+        "patchSetId": 10
+      },
+      "lineNbr": 240,
+      "author": {
+        "id": 1001942
+      },
+      "writtenOn": "2021-11-30T21:54:37Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "6a61681f_bc33a326",
+      "revId": "e026633254cfb1e6ba856b6bee73edc687af15ec",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "a5aebb10_61a3c040",
@@ -126,6 +222,24 @@
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "6661d4ef_2772fab9",
+        "filename": "src/gn/variables.cc",
+        "patchSetId": 10
+      },
+      "lineNbr": 513,
+      "author": {
+        "id": 1001942
+      },
+      "writtenOn": "2021-11-30T21:54:37Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "a5aebb10_61a3c040",
+      "revId": "e026633254cfb1e6ba856b6bee73edc687af15ec",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "fd6ebfe4_61af6450",
@@ -139,6 +253,24 @@
       "writtenOn": "2021-11-22T21:15:04Z",
       "side": 1,
       "message": "Same with this line.",
+      "revId": "e026633254cfb1e6ba856b6bee73edc687af15ec",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "8fd639b6_e0e588a3",
+        "filename": "src/gn/variables.cc",
+        "patchSetId": 10
+      },
+      "lineNbr": 515,
+      "author": {
+        "id": 1001942
+      },
+      "writtenOn": "2021-11-30T21:54:37Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "fd6ebfe4_61af6450",
       "revId": "e026633254cfb1e6ba856b6bee73edc687af15ec",
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
     },
@@ -166,6 +298,30 @@
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "d8858f83_dec2c625",
+        "filename": "src/gn/variables.cc",
+        "patchSetId": 10
+      },
+      "lineNbr": 520,
+      "author": {
+        "id": 1001942
+      },
+      "writtenOn": "2021-11-30T21:54:37Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "0898f46b_d340f510",
+      "range": {
+        "startLine": 520,
+        "startChar": 6,
+        "endLine": 520,
+        "endChar": 25
+      },
+      "revId": "e026633254cfb1e6ba856b6bee73edc687af15ec",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "24408b4b_b54a13be",
@@ -179,6 +335,24 @@
       "writtenOn": "2021-11-22T21:15:04Z",
       "side": 1,
       "message": "Can you also add here something like:\n\n  Since \"gen_deps\" is not a build-time dependency, there can be cycles between\n  \"deps\" and \"gen_deps\" or within \"gen_deps\" itself.",
+      "revId": "e026633254cfb1e6ba856b6bee73edc687af15ec",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "10de40ba_72dcdfe3",
+        "filename": "src/gn/variables.cc",
+        "patchSetId": 10
+      },
+      "lineNbr": 522,
+      "author": {
+        "id": 1001942
+      },
+      "writtenOn": "2021-11-30T21:54:37Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "24408b4b_b54a13be",
       "revId": "e026633254cfb1e6ba856b6bee73edc687af15ec",
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
     }
