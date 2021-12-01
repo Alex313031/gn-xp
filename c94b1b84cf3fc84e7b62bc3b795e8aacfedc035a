@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "715c0c09_8b4b911e",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000168
+      },
+      "writtenOn": "2021-12-01T01:24:21Z",
+      "side": 1,
+      "message": "I\u0027m not opposed to this change but I\u0027m wondering if we really want to expose the option.\n\nPassing -Bdynamic feels a bit hackish, are there other ways that might be possible/preferable in the future (like going through rustc itself)?\n\nWould hard coding the switch based on the target platform be better or worse than adding a new option?",
+      "revId": "c94b1b84cf3fc84e7b62bc3b795e8aacfedc035a",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    }
+  ]
+}
