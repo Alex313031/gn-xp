@@ -52,6 +52,23 @@
       "parentUuid": "7a8c0bcb_9d8e78a1",
       "revId": "c94b1b84cf3fc84e7b62bc3b795e8aacfedc035a",
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c3ca8600_70c7cdf6",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000014
+      },
+      "writtenOn": "2021-12-01T23:28:31Z",
+      "side": 1,
+      "message": "Can this just be added to the ldflags? We don\u0027t have special built-in switches that control hardcoded flags for any other feature and I would prefer not to start adding them. I suspect this was only added manually because we thought we would always need it.",
+      "revId": "c94b1b84cf3fc84e7b62bc3b795e8aacfedc035a",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
     }
   ]
 }
