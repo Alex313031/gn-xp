@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c9ca02fe_9f7da47a",
+        "filename": "src/gn/string_atom.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 122,
+      "author": {
+        "id": 1000014
+      },
+      "writtenOn": "2021-12-02T15:46:10Z",
+      "side": 1,
+      "message": "I was originally confused seeing this since it\u0027s kind of weird to hash on a pointer. Maybe move this below the big comment that follows and rephrase the comment slightly so that it could apply to both the getter and the struct?",
+      "revId": "2eda04dd139f6cac1c5af8869a85ed6867f6cf67",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    }
+  ]
+}
