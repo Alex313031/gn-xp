@@ -69,6 +69,24 @@
       "message": "Can this just be added to the ldflags? We don\u0027t have special built-in switches that control hardcoded flags for any other feature and I would prefer not to start adding them. I suspect this was only added manually because we thought we would always need it.",
       "revId": "c94b1b84cf3fc84e7b62bc3b795e8aacfedc035a",
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2f841dfd_b271ab18",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2021-12-02T00:33:42Z",
+      "side": 1,
+      "message": "The problem is that it needs to go here in the ninja file:\n  rustdeps \u003d \u003cSOME STUFF GN GENERATES\u003e -Bydnamic \u003cSOME OTHER STUFF GN GENERATES\u003e\n  ldflags \u003d \u003cOTHER STUFF\u003e\n\nso I don\u0027t think we can use ldflags here.",
+      "parentUuid": "c3ca8600_70c7cdf6",
+      "revId": "c94b1b84cf3fc84e7b62bc3b795e8aacfedc035a",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
     }
   ]
 }
