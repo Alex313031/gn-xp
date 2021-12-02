@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e6db965c_dea0a9c1",
+        "filename": "src/gn/target.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 34,
+      "author": {
+        "id": 1000014
+      },
+      "writtenOn": "2021-12-02T15:51:47Z",
+      "side": 1,
+      "message": "Theoretically I think this shouldn\u0027t compile because Target hasn\u0027t been declared yet. I assume one of the headers above forward-declared it. I think we should forward-declare it above in this file just for complete correctness.",
+      "revId": "28dd7b7bba8ac7c25176d5c6640e315b50a5b29a",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    }
+  ]
+}
