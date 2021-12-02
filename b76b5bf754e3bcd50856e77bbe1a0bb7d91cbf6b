@@ -1,0 +1,44 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "0baeb60a_6a8625e6",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000014
+      },
+      "writtenOn": "2021-12-02T15:58:20Z",
+      "side": 1,
+      "message": "I think we should get some unit tests for this. The add/remove code with the \"Update\" calls and the toumbstoning is non-trivial, and I think the \"intersect\" call is new too (over the hash_table_base implementation which has its own tests).",
+      "revId": "b76b5bf754e3bcd50856e77bbe1a0bb7d91cbf6b",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "869824eb_a0b98bec",
+        "filename": "src/gn/hash_table_base.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 299,
+      "author": {
+        "id": 1000014
+      },
+      "writtenOn": "2021-12-02T15:58:20Z",
+      "side": 1,
+      "message": "I have a weird pet-peeve about \"iff\" in source comments because it makes things harder to read IMO and doesn\u0027t actually clarify anything (you never mean \"if but maybe in some other cases too in this kind of context). Do you mind changing this to just \"if\"?",
+      "range": {
+        "startLine": 299,
+        "startChar": 20,
+        "endLine": 299,
+        "endChar": 23
+      },
+      "revId": "b76b5bf754e3bcd50856e77bbe1a0bb7d91cbf6b",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    }
+  ]
+}
