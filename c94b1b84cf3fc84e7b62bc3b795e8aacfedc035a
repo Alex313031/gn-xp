@@ -104,6 +104,24 @@
       "message": "Can you give more detail about what the things are the need to go before and after? I see this at the end of a function but I\u0027m not clear on what is supposed to come after.",
       "revId": "c94b1b84cf3fc84e7b62bc3b795e8aacfedc035a",
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "50c92be4_f563b3c8",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2021-12-02T23:41:16Z",
+      "side": 1,
+      "message": "Preface: I am not defending the current arrangement, and if gn wished to clear it up, we\u0027d be happy to accept the compatibility break over in Chrome-land.\n\nBut here\u0027s what\u0027s going on.\n\nLots of dependencies propagate through the gn dependency tree to end up in this final target which is going to be linked by rustc. Some of those dependencies are Rust dependencies, usually in the form of .rlib files. Some of them will be non-Rust dependencies, in the form of .o, .a, .so etc.\n\nHere\u0027s how this stuff gets laid out in ninja files:\n\n  externs\u003d\u003call direct, non-transitive, Rust dependencies\u003e\n  rustdeps\u003d\u003c*directories* containing all transitive Rust dependencies, each prefixed with -Ldependency\u003e \u003c*directories* containing all non-Rust dependencies, each prefixed with -Lnative\u003e -Clink-arg\u003d-Bdynamic \u003clist of all non-Rust dependencies, each prefixed with -Clink-arg\u003e\n  \nrustc uses all this information to assemble a command line to pass to the linker. How exactly rustc builds this linker command line is opaque and beyond our control. It uses -Bstatic or -Bdynamic at will as it decides to link the various *Rust* dependencies.\n\nItems prefixed with -Clink-arg are passed through rustc directly to the linker. This is how we pass through non-Rust dependencies. As some of the non-Rust dependencies may be shared objects, we can\u0027t be in -Bstatic mode. That\u0027s why the -Clink-arg\u003d-Bdynamic is there.\n\nIt MIGHT be possible that toolchain .gn files could arrange to put {{ldflags}} early in the rustc command line, before {{externs}}, and to include -Bdynamic in ldflags. If we are lucky, rustc might end up building a linker command line like this:\n\n   ld \u003cstuff from {{externs}} relating to Rust dependencies\u003e \u003cldflags, including -Bdynamic\u003e \u003cstuff from {{externs}} with -Clink-arg relating to non-Rust dependencies\u003e\n\nbut even if rustc does behave that way, it seems unwise to rely on it.\n\n(One possible cleanup would be to make all three of the lists under \u0027externs\u0027 into separate ninja variables; obviously this is a breaking change, but then the toolchain .gn file could lay out the command line as it wants).\n\nHistory:\nhttps://source.chromium.org/gn/gn/+/c46f0d71c492e58b2c5d0f151d085065982b8430\nhttps://source.chromium.org/gn/gn/+/646a62e029de4827e384c8517dc62fd3c7f85207",
+      "parentUuid": "c604ab86_c400deda",
+      "revId": "c94b1b84cf3fc84e7b62bc3b795e8aacfedc035a",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
     }
   ]
 }
