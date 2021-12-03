@@ -18,6 +18,24 @@
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "befdbb21_2fc66070",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000067
+      },
+      "writtenOn": "2021-12-03T17:22:09Z",
+      "side": 1,
+      "message": "Sure, I added unit tests in patch set 2.",
+      "parentUuid": "0baeb60a_6a8625e6",
+      "revId": "b76b5bf754e3bcd50856e77bbe1a0bb7d91cbf6b",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "869824eb_a0b98bec",
@@ -31,6 +49,30 @@
       "writtenOn": "2021-12-02T15:58:20Z",
       "side": 1,
       "message": "I have a weird pet-peeve about \"iff\" in source comments because it makes things harder to read IMO and doesn\u0027t actually clarify anything (you never mean \"if but maybe in some other cases too in this kind of context). Do you mind changing this to just \"if\"?",
+      "range": {
+        "startLine": 299,
+        "startChar": 20,
+        "endLine": 299,
+        "endChar": 23
+      },
+      "revId": "b76b5bf754e3bcd50856e77bbe1a0bb7d91cbf6b",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "80aaa1db_b0faf4f4",
+        "filename": "src/gn/hash_table_base.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 299,
+      "author": {
+        "id": 1000067
+      },
+      "writtenOn": "2021-12-03T17:22:09Z",
+      "side": 1,
+      "message": "No problem, I\u0027ve removed them in the newest patch.",
+      "parentUuid": "869824eb_a0b98bec",
       "range": {
         "startLine": 299,
         "startChar": 20,
