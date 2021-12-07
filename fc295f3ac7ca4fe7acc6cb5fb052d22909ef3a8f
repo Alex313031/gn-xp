@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d214343b_103a80a4",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 12
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000012
+      },
+      "writtenOn": "2021-12-07T17:18:22Z",
+      "side": 1,
+      "message": "I\u0027m not entirely sure I understand what this change is for (I can guess, but ...).\n\nWas there some public discussion where this came up? Or can we add a motivating example somewhere, or something?\n\nAlso, should the generated docs have been updated as part of this CL?",
+      "revId": "fc295f3ac7ca4fe7acc6cb5fb052d22909ef3a8f",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    }
+  ]
+}
