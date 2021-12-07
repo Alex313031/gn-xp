@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "acccd1f0_9f1edc06",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 11
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000014
+      },
+      "writtenOn": "2021-12-07T00:45:10Z",
+      "side": 1,
+      "message": "Thanks! (Sorry for the delay, was out last week).",
+      "revId": "bfafa1bb721b4229d89c6ee10327957780ff0e49",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    }
+  ]
+}
