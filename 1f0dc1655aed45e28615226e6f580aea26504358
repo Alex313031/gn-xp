@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "580979ff_dac113cd",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000067
+      },
+      "writtenOn": "2021-12-08T12:31:02Z",
+      "side": 1,
+      "message": "Also, I didn\u0027t change the commit message\u0027s measurements, but I checked locally that they still hold.",
+      "revId": "1f0dc1655aed45e28615226e6f580aea26504358",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    }
+  ]
+}

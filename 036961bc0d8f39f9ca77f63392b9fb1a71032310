@@ -24,6 +24,30 @@
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "8d59d6a1_ab39f7f4",
+        "filename": "src/gn/builder.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 490,
+      "author": {
+        "id": 1000067
+      },
+      "writtenOn": "2021-12-08T12:31:02Z",
+      "side": 1,
+      "message": "Actually, the move is needed to avoid a copy, because the function returns a non-rvalue reference.\n\nOnly when a function returns a non-reference value, or an rvalue reference would the expression qualified as an rvalue (prvalue or xvalue, respectively). Yes C++ is tricky like that :-)\n\nApart from that, a move is used to clear record-\u003ewaiting_on_resolution_ at the same time, which is subtle, so I\u0027ve added a comment to clarify that.",
+      "parentUuid": "70ca9a5f_b4f4aa21",
+      "range": {
+        "startLine": 490,
+        "startChar": 34,
+        "endLine": 490,
+        "endChar": 43
+      },
+      "revId": "036961bc0d8f39f9ca77f63392b9fb1a71032310",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "8c2981d3_846202a2",
@@ -37,6 +61,30 @@
       "writtenOn": "2021-12-06T23:47:38Z",
       "side": 1,
       "message": "If it\u0027s not too hard, can you just add this parameter to the constructor? I\u0027m not sure why it was an extra \"set\" call.",
+      "range": {
+        "startLine": 55,
+        "startChar": 43,
+        "endLine": 55,
+        "endChar": 55
+      },
+      "revId": "036961bc0d8f39f9ca77f63392b9fb1a71032310",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "db957a2b_721ebfa2",
+        "filename": "src/gn/builder_record_map.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 55,
+      "author": {
+        "id": 1000067
+      },
+      "writtenOn": "2021-12-08T12:31:02Z",
+      "side": 1,
+      "message": "Sure, I noticed the same thing but didn\u0027t want to change the code too much. Done!",
+      "parentUuid": "8c2981d3_846202a2",
       "range": {
         "startLine": 55,
         "startChar": 43,
