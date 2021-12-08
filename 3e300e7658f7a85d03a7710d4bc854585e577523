@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "4bb5b92f_bab60322",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000067
+      },
+      "writtenOn": "2021-12-08T14:36:47Z",
+      "side": 1,
+      "message": "It looks like an Access Violation that only happens on Windows/arm64. Uploading a few patches to experiment and determine where this comes from, since I don\u0027t have such a machine here.",
+      "revId": "3e300e7658f7a85d03a7710d4bc854585e577523",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    }
+  ]
+}
