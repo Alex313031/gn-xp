@@ -48,6 +48,30 @@
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "83eabe0f_0057de2a",
+        "filename": "src/gn/builder.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 490,
+      "author": {
+        "id": 1000014
+      },
+      "writtenOn": "2021-12-08T16:00:00Z",
+      "side": 1,
+      "message": "Oh sorry, I thought waiting_on_resolution() was returning a direct object and not a reference.",
+      "parentUuid": "8d59d6a1_ab39f7f4",
+      "range": {
+        "startLine": 490,
+        "startChar": 34,
+        "endLine": 490,
+        "endChar": 43
+      },
+      "revId": "036961bc0d8f39f9ca77f63392b9fb1a71032310",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "8c2981d3_846202a2",
