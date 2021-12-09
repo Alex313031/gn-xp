@@ -68,6 +68,24 @@
       "parentUuid": "1c439e1c_db08d8fb",
       "revId": "552f8ea026bbdf68cfa64c1e9d86631465389fd6",
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "9f6f0bad_8a521d48",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 10
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000067
+      },
+      "writtenOn": "2021-12-09T11:27:46Z",
+      "side": 1,
+      "message": "And that was it, confirmed by CQ. Wow, thanks again!",
+      "parentUuid": "c1a8d841_06a8931f",
+      "revId": "552f8ea026bbdf68cfa64c1e9d86631465389fd6",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
     }
   ]
 }
