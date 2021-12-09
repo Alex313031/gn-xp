@@ -33,6 +33,23 @@
       "message": "I\u0027ll try on my Windows machine when I get home today.",
       "revId": "552f8ea026bbdf68cfa64c1e9d86631465389fd6",
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "1c439e1c_db08d8fb",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 10
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000014
+      },
+      "writtenOn": "2021-12-09T03:44:05Z",
+      "side": 1,
+      "message": "That was very confusing! It\u0027s crashing initializing a static:\n\n\u003e\t`anonymous namespace\u0027::KeyNode::is_null() Line 51\tC++\tSymbols loaded.\n \tHashTableBase\u003c`anonymous namespace\u0027::KeyNode\u003e::NodeLookup\u003cbool \u003clambda\u003e(const `anonymous-namespace\u0027::KeyNode *)\u003e(unsigned __int64 hash\u003d13708407063574621040, `anonymous-namespace\u0027::KeySet::Lookup::__l2::bool \u003clambda\u003e(const `anonymous-namespace\u0027::KeyNode *) node_equal\u003dbool \u003clambda\u003e(const `anonymous-namespace\u0027::KeyNode * node){...}) Line 461\tC++\tSymbols loaded.\n \t`anonymous namespace\u0027::KeySet::Lookup(unsigned __int64 hash\u003d13708407063574621040, std::basic_string_view\u003cchar,std::char_traits\u003cchar\u003e\u003e str\u003d{...}) Line 99\tC++\tSymbols loaded.\n \t`anonymous namespace\u0027::ThreadLocalCache::find(std::basic_string_view\u003cchar,std::char_traits\u003cchar\u003e\u003e key\u003d{...}) Line 194\tC++\tSymbols loaded.\n \tStringAtom::StringAtom(std::basic_string_view\u003cchar,std::char_traits\u003cchar\u003e\u003e str\u003d{...}) Line 222\tC++\tSymbols loaded.\n \t`anonymous namespace\u0027::SourceDirStringAtom(std::basic_string_view\u003cchar,std::char_traits\u003cchar\u003e\u003e s\u003d{...}) Line 70\tC++\tSymbols loaded.\n \tSourceDir::SourceDir(std::basic_string_view\u003cchar,std::char_traits\u003cchar\u003e\u003e s\u003d{...}) Line 75\tC++\tSymbols loaded.\n \t`dynamic initializer for \u0027kLabel1\u0027\u0027() Line 10\tC++\tSymbols loaded.\n",
+      "revId": "552f8ea026bbdf68cfa64c1e9d86631465389fd6",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
     }
   ]
 }
