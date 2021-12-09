@@ -16,6 +16,23 @@
       "message": "I was curious if this makes a difference for chromium. I ran gn 5 times with and without this change in a normal linux release build and compared times with `ministat`:\n\n```\nthakis@thakis:~/src/chrome/src$ ministat gn_before.txt gn_after.txt \nx gn_before.txt\n+ gn_after.txt\n+----------------------------------------------------------------------------------------------------------------------------+\n|x                                                        +                            +     xxx      + +  +      x          |\n|                                  |___________________________________|_______A____________A_M_______M_________|___________||\n+----------------------------------------------------------------------------------------------------------------------------+\n    N           Min           Max        Median           Avg        Stddev\nx   5     6.0999482     6.4297416     6.3707993     6.3289123    0.13046022\n+   5     6.2659156     6.4108636     6.3962557     6.3648468   0.060054064\nNo difference proven at 95.0% confidence\n```\n\nSo apparently no effect for Chromium, at least on my machine, in the config I tried.",
       "revId": "a754274e2bb5c67349fa78451e8b6a8cdf94a078",
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a5d5e359_0a1e5f27",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 13
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000102
+      },
+      "writtenOn": "2021-12-09T16:54:31Z",
+      "side": 1,
+      "message": "Turns out I failed at actually downloading the old gn binary before this change. If I actually compare gn before and after this version (this time with 10 runs each), it\u0027s a (small) win:\n\n```\nthakis@thakis:~/src/chrome/src$ ministat gn_before.txt gn_after.txt \nx gn_before.txt\n+ gn_after.txt\n+----------------------------------------------------------------------------------------------------------------------------+\n|                                                +                      x                    x                               |\n|+                   +       x   x     + +   +   +         +            x   +x  +        x   x x                            x|\n|                     |_______________________A__M___________________|________A__________M________________|                  |\n+----------------------------------------------------------------------------------------------------------------------------+\n    N           Min           Max        Median           Avg        Stddev\nx  10     6.1447179     6.7983904     6.5576789     6.4788159    0.19761204\n+  10     5.9508722     6.4947851     6.2788508      6.260378    0.16188029\nDifference at 95.0% confidence\n\t-0.218438 +/- 0.169721\n\t-3.37157% +/- 2.61963%\n\t(Student\u0027s t, pooled s \u003d 0.180632)\n```",
+      "revId": "a754274e2bb5c67349fa78451e8b6a8cdf94a078",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
     }
   ]
 }
