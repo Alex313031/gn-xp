@@ -16,6 +16,46 @@
       "message": "Can\u0027t comment on the code, but both without and with this patch I:\n* ran `gn gen out/gn1` and `gn gen out/gn2` in a chrome checkout\n* compared out/gn1/build.ninja and out/gn2/build.ninja\n\nI can confirm that build.ninja contents are different between the two build dirs without this patch, but identical with it.",
       "revId": "b5bfe9c0d1b63725bb5af11ecbba1597bec35b15",
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "64c39c85_740ac3c3",
+        "filename": "src/gn/builder.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 138,
+      "author": {
+        "id": 1000014
+      },
+      "writtenOn": "2021-12-10T17:59:56Z",
+      "side": 1,
+      "message": "Can you add a comment here like you do below about why this is necessary? Just looking at this implementation it looks unnecessary.",
+      "revId": "b5bfe9c0d1b63725bb5af11ecbba1597bec35b15",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0ce01339_6e9cb31d",
+        "filename": "src/gn/builder_record.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 101,
+      "author": {
+        "id": 1000014
+      },
+      "writtenOn": "2021-12-10T17:59:56Z",
+      "side": 1,
+      "message": "I think this should be called `LabelCompare`. The other place we have `PtrCompare` it\u0027s sorting by pointers. The fact that this takes pointer parameters I think is OK to ignore.",
+      "range": {
+        "startLine": 101,
+        "startChar": 14,
+        "endLine": 101,
+        "endChar": 17
+      },
+      "revId": "b5bfe9c0d1b63725bb5af11ecbba1597bec35b15",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
     }
   ]
 }
