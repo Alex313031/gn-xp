@@ -69,6 +69,24 @@
       "parentUuid": "cd9f4625_7acef6cb",
       "revId": "a754274e2bb5c67349fa78451e8b6a8cdf94a078",
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "42c4f623_f029783b",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 13
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000102
+      },
+      "writtenOn": "2021-12-10T13:35:03Z",
+      "side": 1,
+      "message": "\u003e `gn gen` on my win laptop (!) does take around 3.4s, comparable to your times. I wonder why my linux box takes \u003e 6s consistently.\n\nI figured out the difference. The linux build was doing a release build of chrome (i.e. `is_debug\u003dfalse` in args.gn -- the gn binary itself is an optimized one in both cases), while the win build was doing a debug build. Looks like `gn gen` time for a release build is almost twice that of for a debug build. (The reason is that debug builds do component builds by default. A release component build has a `gn gen` time that\u0027s much closer to the debug build `gn gen` time, and maybe equal to it.\n\nI guess shared_libraries need fewer resources inside gn than static_libraries (?)",
+      "parentUuid": "b42f359a_b5cf26bf",
+      "revId": "a754274e2bb5c67349fa78451e8b6a8cdf94a078",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
     }
   ]
 }
