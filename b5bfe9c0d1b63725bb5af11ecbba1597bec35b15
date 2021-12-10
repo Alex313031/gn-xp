@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ed439a04_e8f521ed",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000102
+      },
+      "writtenOn": "2021-12-10T14:22:03Z",
+      "side": 1,
+      "message": "Can\u0027t comment on the code, but both without and with this patch I:\n* ran `gn gen out/gn1` and `gn gen out/gn2` in a chrome checkout\n* compared out/gn1/build.ninja and out/gn2/build.ninja\n\nI can confirm that build.ninja contents are different between the two build dirs without this patch, but identical with it.",
+      "revId": "b5bfe9c0d1b63725bb5af11ecbba1597bec35b15",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    }
+  ]
+}
