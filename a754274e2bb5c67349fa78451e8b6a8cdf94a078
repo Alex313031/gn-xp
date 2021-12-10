@@ -87,6 +87,24 @@
       "parentUuid": "b42f359a_b5cf26bf",
       "revId": "a754274e2bb5c67349fa78451e8b6a8cdf94a078",
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f5e8ef2c_abc3ab00",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 13
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000012
+      },
+      "writtenOn": "2021-12-10T15:36:13Z",
+      "side": 1,
+      "message": "That\u0027s interesting. I can\u0027t think of a reason offhand why that would be true, but I admit I\u0027m not that close to the guts of GN these days.",
+      "parentUuid": "42c4f623_f029783b",
+      "revId": "a754274e2bb5c67349fa78451e8b6a8cdf94a078",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
     }
   ]
 }
