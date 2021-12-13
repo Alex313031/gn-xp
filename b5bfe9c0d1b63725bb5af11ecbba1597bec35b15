@@ -35,6 +35,24 @@
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "b256d5d9_81e9faa5",
+        "filename": "src/gn/builder.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 138,
+      "author": {
+        "id": 1000067
+      },
+      "writtenOn": "2021-12-13T16:18:50Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "64c39c85_740ac3c3",
+      "revId": "b5bfe9c0d1b63725bb5af11ecbba1597bec35b15",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "0ce01339_6e9cb31d",
@@ -48,6 +66,30 @@
       "writtenOn": "2021-12-10T17:59:56Z",
       "side": 1,
       "message": "I think this should be called `LabelCompare`. The other place we have `PtrCompare` it\u0027s sorting by pointers. The fact that this takes pointer parameters I think is OK to ignore.",
+      "range": {
+        "startLine": 101,
+        "startChar": 14,
+        "endLine": 101,
+        "endChar": 17
+      },
+      "revId": "b5bfe9c0d1b63725bb5af11ecbba1597bec35b15",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f3946512_9afffb11",
+        "filename": "src/gn/builder_record.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 101,
+      "author": {
+        "id": 1000067
+      },
+      "writtenOn": "2021-12-13T16:18:50Z",
+      "side": 1,
+      "message": "Good idea. Done.",
+      "parentUuid": "0ce01339_6e9cb31d",
       "range": {
         "startLine": 101,
         "startChar": 14,
