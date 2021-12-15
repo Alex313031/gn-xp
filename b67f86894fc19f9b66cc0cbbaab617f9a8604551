@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "2c6ada5d_e12e79fd",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000067
+      },
+      "writtenOn": "2021-12-15T18:15:00Z",
+      "side": 1,
+      "message": "Ah, it looks like our recipes run this script with Python2, even if its first line invokes python3. Tricky! Updated.",
+      "revId": "b67f86894fc19f9b66cc0cbbaab617f9a8604551",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    }
+  ]
+}
