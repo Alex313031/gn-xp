@@ -34,6 +34,23 @@
       "parentUuid": "2c6ada5d_e12e79fd",
       "revId": "b67f86894fc19f9b66cc0cbbaab617f9a8604551",
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "71e89c1d_f0351ca7",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000067
+      },
+      "writtenOn": "2021-12-15T18:43:57Z",
+      "side": 1,
+      "message": "I\u0027ve added a comment in the latest patch to warn about the fact that script needs to be runnable with python2 as well.",
+      "revId": "b67f86894fc19f9b66cc0cbbaab617f9a8604551",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
     }
   ]
 }
