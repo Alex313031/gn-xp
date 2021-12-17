@@ -58,22 +58,21 @@ Scope::Scope(Scope* parent)
       mutable_containing_(parent),
       settings_(parent->settings()),
       mode_flags_(0),
-      item_collector_(nullptr),
-      build_dependency_files_(parent->build_dependency_files_) {}
+      item_collector_(nullptr) {}
 
 Scope::Scope(const Scope* parent)
     : const_containing_(parent),
       mutable_containing_(nullptr),
       settings_(parent->settings()),
       mode_flags_(0),
-      item_collector_(nullptr),
-      build_dependency_files_(parent->build_dependency_files_) {}
+      item_collector_(nullptr) {}
 
 Scope::~Scope() = default;
 
 void Scope::DetachFromContaining() {
   const_containing_ = nullptr;
   mutable_containing_ = nullptr;
+  build_dependency_files_ = GetBuildDependencyFiles();
 }
 
 bool Scope::HasValues(SearchNested search_nested) const {
@@ -207,6 +206,20 @@ const Template* Scope::GetTemplate(const std::string& name) const {
   if (containing())
     return containing()->GetTemplate(name);
   return nullptr;
+}
+
+SourceFileSet Scope::GetBuildDependencyFiles() const {
+  // Collect build dependency files from this scope and all its parents.
+  SourceFileSet result = build_dependency_files_;
+  const Scope* scope = this;
+  while (scope) {
+    scope = scope->containing();
+    if (!scope)
+      break;
+    result.insert(scope->build_dependency_files_.begin(),
+                  scope->build_dependency_files_.end());
+  }
+  return result;
 }
 
 void Scope::MarkUsed(std::string_view ident) {
