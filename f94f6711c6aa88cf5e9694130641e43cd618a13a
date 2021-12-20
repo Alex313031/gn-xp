@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ac9c74aa_4a963562",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000014
+      },
+      "writtenOn": "2021-12-20T18:55:57Z",
+      "side": 1,
+      "message": "This is fine but I just added a question in the bug about the use-case since it\u0027s not obvious to me.",
+      "revId": "f94f6711c6aa88cf5e9694130641e43cd618a13a",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    }
+  ]
+}
