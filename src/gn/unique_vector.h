@@ -6,6 +6,7 @@
 #define TOOLS_GN_UNIQUE_VECTOR_H_
 
 #include <stddef.h>
+#include <stdint.h>
 
 #include <algorithm>
 #include <vector>
@@ -17,10 +18,10 @@
 // to follow the HashTableBase requirements (i.e. zero-initializable null
 // value).
 struct UniqueVectorNode {
-  size_t hash;
-  size_t index_plus1;
+  uint32_t hash32;
+  uint32_t index_plus1;
 
-  size_t hash_value() const { return hash; }
+  size_t hash_value() const { return hash32; }
 
   bool is_valid() const { return !is_null(); }
 
@@ -32,9 +33,11 @@ struct UniqueVectorNode {
   // Return vector index.
   size_t index() const { return index_plus1 - 1u; }
 
+  static uint32_t ToHash32(size_t hash) { return static_cast<uint32_t>(hash); }
+
   // Create new instance from hash value and vector index.
   static UniqueVectorNode Make(size_t hash, size_t index) {
-    return {hash, index + 1u};
+    return {ToHash32(hash), static_cast<uint32_t>(index + 1u)};
   }
 };
 
@@ -54,8 +57,9 @@ class UniqueVectorHashSet : public UniqueVectorHashTableBase {
   // Returns a non-null mutable Node pointer.
   template <typename T>
   Node* Lookup(size_t hash, const T& item, const std::vector<T>& vector) const {
-    return BaseType::NodeLookup(hash, [&](const Node* node) {
-      return node->hash == hash && vector[node->index()] == item;
+    uint32_t hash32 = Node::ToHash32(hash);
+    return BaseType::NodeLookup(hash32, [&](const Node* node) {
+      return hash32 == node->hash32 && vector[node->index()] == item;
     });
   }
 
@@ -130,13 +134,21 @@ class UniqueVector {
     Append(other.begin(), other.end());
   }
 
+  // Returns true if the item is already in the vector.
+  bool Contains(const T& t) const {
+    size_t hash = std::hash<T>()(t);
+    return set_.Lookup(hash, t, vector_)->is_valid();
+  }
+
   // Returns the index of the item matching the given value in the list, or
-  // (size_t)(-1) if it's not found.
+  // kIndexNone if it's not found.
   size_t IndexOf(const T& t) const {
     size_t hash = std::hash<T>()(t);
     auto* node = set_.Lookup(hash, t, vector_);
     return node->index();
   }
+
+  static constexpr size_t kIndexNone = 0xffffffffu;
 
  private:
   Vector vector_;

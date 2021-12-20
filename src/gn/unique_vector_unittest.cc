@@ -28,7 +28,8 @@ TEST(UniqueVector, PushBack) {
   EXPECT_EQ(0u, foo.IndexOf(1));
   EXPECT_EQ(1u, foo.IndexOf(2));
   EXPECT_EQ(2u, foo.IndexOf(0));
-  EXPECT_EQ(static_cast<size_t>(-1), foo.IndexOf(99));
+  EXPECT_FALSE(foo.Contains(98));
+  EXPECT_EQ(foo.kIndexNone, foo.IndexOf(99));
 }
 
 TEST(UniqueVector, PushBackMove) {

@@ -213,7 +213,7 @@ void NinjaCBinaryTargetWriter::Run() {
     AddSourceSetFiles(target_, &computed_obj);
     DCHECK_EQ(obj_files.size(), computed_obj.size());
     for (const auto& obj : obj_files)
-      DCHECK_NE(static_cast<size_t>(-1), computed_obj.IndexOf(obj));
+      DCHECK(computed_obj.Contains(obj));
 #endif
   } else {
     WriteLinkerStuff(obj_files, other_files, input_deps);
