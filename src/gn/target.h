@@ -100,8 +100,6 @@ class Target : public Item {
   // increases parallelism.
   bool IsDataOnly() const;
 
-  bool NeedsBinaryData() const;
-
   // Will be the empty string to use the target label as the output name.
   // See GetComputedOutputName().
   const std::string& output_name() const { return output_name_; }
@@ -453,6 +451,8 @@ class Target : public Item {
   // A struct to group all fields that are only relevant to binary targets
   // and their dependencies (even if they are not binaries themselves).
   struct BinaryData {
+    bool resolved_ = false;
+
     // See getters for more info.
     UniqueVector<LabelConfigPair> configs_;
     UniqueVector<LabelConfigPair> public_configs_;
@@ -499,7 +499,11 @@ class Target : public Item {
     void PullDependentTargetLibsFrom(const Target* dep, bool is_public);
     void PullDependentTargetLibs(const Target* target);
     void PullRecursiveBundleData(Target* target);
-    bool FillLinkOutputFiles(Target*, Err* err);
+
+    // Fills the link and runtime output files when a target is resolved.
+    // Note that this also sets dependency_output_file_ and may populate
+    // computed_outputs_ as well in the target.
+    bool FillLinkOutputFiles(Target* target, Err* err);
   };
 
   static const BinaryData kEmptyBinaryData;
@@ -513,11 +517,20 @@ class Target : public Item {
 
   BinaryData& binary_data();
 
+  // Returns true if this target needs a BinaryData instance
+  // created at resolution time.
+  bool NeedsBinaryData() const;
+
   void PullRecursiveHardDeps();
 
   // Checks precompiled headers from configs and makes sure the resulting
   // values are in config_values_.
   bool ResolvePrecompiledHeaders(Err* err);
+
+  // Ensure dependency_output_file and computed_outputs_ are set.
+  // Must be called after BinaryData::FillLinkOutputFiles() for
+  // binary targets.
+  void FillOutputFiles();
 
   // Validates the given thing when a target is resolved.
   bool CheckVisibility(Err* err) const;
