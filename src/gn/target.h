@@ -100,6 +100,8 @@ class Target : public Item {
   // increases parallelism.
   bool IsDataOnly() const;
 
+  bool NeedsBinaryData() const;
+
   // Will be the empty string to use the target label as the output name.
   // See GetComputedOutputName().
   const std::string& output_name() const { return output_name_; }
@@ -269,25 +271,25 @@ class Target : public Item {
 
   // List of configs that this class inherits settings from. Once a target is
   // resolved, this will also list all-dependent and public configs.
-  const UniqueVector<LabelConfigPair>& configs() const { return configs_; }
-  UniqueVector<LabelConfigPair>& configs() { return configs_; }
+  const UniqueVector<LabelConfigPair>& configs() const { return binary_data().configs_; }
+  UniqueVector<LabelConfigPair>& configs() { return binary_data().configs_; }
 
   // List of configs that all dependencies (direct and indirect) of this
   // target get. These configs are not added to this target. Note that due
   // to the way this is computed, there may be duplicates in this list.
   const UniqueVector<LabelConfigPair>& all_dependent_configs() const {
-    return all_dependent_configs_;
+    return binary_data().all_dependent_configs_;
   }
   UniqueVector<LabelConfigPair>& all_dependent_configs() {
-    return all_dependent_configs_;
+    return binary_data().all_dependent_configs_;
   }
 
   // List of configs that targets depending directly on this one get. These
   // configs are also added to this target.
   const UniqueVector<LabelConfigPair>& public_configs() const {
-    return public_configs_;
+    return binary_data().public_configs_;
   }
-  UniqueVector<LabelConfigPair>& public_configs() { return public_configs_; }
+  UniqueVector<LabelConfigPair>& public_configs() { return binary_data().public_configs_; }
 
   // Dependencies that can include files from this target.
   const std::set<Label>& allow_circular_includes_from() const {
@@ -298,13 +300,15 @@ class Target : public Item {
   }
 
   const InheritedLibraries& inherited_libraries() const {
-    return inherited_libraries_;
+    return binary_data().inherited_libraries_;
   }
 
   // This config represents the configuration set directly on this target.
   ConfigValues& config_values();
   const ConfigValues& config_values() const;
-  bool has_config_values() const { return config_values_.get(); }
+  bool has_config_values() const {
+    return binary_data_ && binary_data_->config_values_.get();
+  }
 
   ActionValues& action_values();
   const ActionValues& action_values() const;
@@ -312,29 +316,33 @@ class Target : public Item {
 
   SwiftValues& swift_values();
   const SwiftValues& swift_values() const;
-  bool has_swift_values() const { return swift_values_.get(); }
+  bool has_swift_values() const {
+    return binary_data_ && binary_data_->swift_values_.get();
+  }
 
   RustValues& rust_values();
   const RustValues& rust_values() const;
-  bool has_rust_values() const { return rust_values_.get(); }
+  bool has_rust_values() const {
+    return binary_data_ && binary_data_->rust_values_.get();
+  }
 
   // Transitive closure of libraries that are depended on by this target
-  InheritedLibraries& rust_transitive_libs() { return rust_transitive_libs_; }
+  InheritedLibraries& rust_transitive_libs() { return binary_data().rust_transitive_libs_; }
   const InheritedLibraries& rust_transitive_libs() const {
-    return rust_transitive_libs_;
+    return binary_data().rust_transitive_libs_;
   }
 
-  const UniqueVector<SourceDir>& all_lib_dirs() const { return all_lib_dirs_; }
-  const UniqueVector<LibFile>& all_libs() const { return all_libs_; }
+  const UniqueVector<SourceDir>& all_lib_dirs() const { return binary_data().all_lib_dirs_; }
+  const UniqueVector<LibFile>& all_libs() const { return binary_data().all_libs_; }
 
   const UniqueVector<SourceDir>& all_framework_dirs() const {
-    return all_framework_dirs_;
+    return binary_data().all_framework_dirs_;
   }
   const UniqueVector<std::string>& all_frameworks() const {
-    return all_frameworks_;
+    return binary_data().all_frameworks_;
   }
   const UniqueVector<std::string>& all_weak_frameworks() const {
-    return all_weak_frameworks_;
+    return binary_data().all_weak_frameworks_;
   }
 
   const TargetSet& recursive_hard_deps() const { return recursive_hard_deps_; }
@@ -381,14 +389,19 @@ class Target : public Item {
   // These are only known once the target is resolved and will be empty before
   // that. This is a cache of the files to prevent every target that depends on
   // a given library from recomputing the same pattern.
-  const OutputFile& link_output_file() const { return link_output_file_; }
+  const OutputFile& link_output_file() const { return binary_data().link_output_file_; }
+  OutputFile& link_output_file() { return binary_data().link_output_file_; }
+
   const OutputFile& dependency_output_file() const {
     return dependency_output_file_;
   }
 
   // The subset of computed_outputs that are considered runtime outputs.
   const std::vector<OutputFile>& runtime_outputs() const {
-    return runtime_outputs_;
+    return binary_data().runtime_outputs_;
+  }
+  std::vector<OutputFile>& runtime_outputs() {
+    return binary_data().runtime_outputs_;
   }
 
   // Computes and returns the outputs of this target expressed as SourceFiles.
@@ -437,16 +450,70 @@ class Target : public Item {
  private:
   FRIEND_TEST_ALL_PREFIXES(TargetTest, ResolvePrecompiledHeaders);
 
-  // Pulls necessary information from dependencies to this one when all
-  // dependencies have been resolved.
-  void PullDependentTargetConfigs();
-  void PullDependentTargetLibsFrom(const Target* dep, bool is_public);
-  void PullDependentTargetLibs();
-  void PullRecursiveHardDeps();
-  void PullRecursiveBundleData();
+  // A struct to group all fields that are only relevant to binary targets
+  // and their dependencies (even if they are not binaries themselves).
+  struct BinaryData {
+    // See getters for more info.
+    UniqueVector<LabelConfigPair> configs_;
+    UniqueVector<LabelConfigPair> public_configs_;
+    UniqueVector<LabelConfigPair> all_dependent_configs_;
 
-  // Fills the link and dependency output files when a target is resolved.
-  bool FillOutputFiles(Err* err);
+    // Used for all binary targets, and for inputs in regular targets. The
+    // precompiled header values in this struct will be resolved to the ones to
+    // use for this target, if precompiled headers are used.
+    std::unique_ptr<ConfigValues> config_values_;
+
+    // Used for Swift targets.
+    std::unique_ptr<SwiftValues> swift_values_;
+
+    // Used for Rust targets.
+    std::unique_ptr<RustValues> rust_values_;
+
+    // Static libraries, shared libraries, and source sets from transitive deps
+    // that need to be linked.
+    InheritedLibraries inherited_libraries_;
+
+    // These libs and dirs are inherited from statically linked deps and all
+    // configs applying to this target.
+    UniqueVector<SourceDir> all_lib_dirs_;
+    UniqueVector<LibFile> all_libs_;
+
+    // These frameworks and dirs are inherited from statically linked deps and
+    // all configs applying to this target.
+    UniqueVector<SourceDir> all_framework_dirs_;
+    UniqueVector<std::string> all_frameworks_;
+    UniqueVector<std::string> all_weak_frameworks_;
+
+    // Used by all targets, only useful to generate Rust targets though.
+    InheritedLibraries rust_transitive_libs_;
+
+    OutputFile link_output_file_;
+    std::vector<OutputFile> runtime_outputs_;
+
+    // Called when a binary or final target is resolved.
+    bool OnResolved(Target* target, Err* err);
+
+    // Pulls necessary information from dependencies to this one when all
+    // dependencies have been resolved.
+    void PullDependentTargetConfigs(const Target* target);
+    void PullDependentTargetLibsFrom(const Target* dep, bool is_public);
+    void PullDependentTargetLibs(const Target* target);
+    void PullRecursiveBundleData(Target* target);
+    bool FillLinkOutputFiles(Target*, Err* err);
+  };
+
+  static const BinaryData kEmptyBinaryData;
+
+  // Returns true to indicate that this target has data related to
+  bool has_binary_data() const { return binary_data_.get(); }
+
+  const BinaryData& binary_data() const {
+    return binary_data_ ? *binary_data_ : kEmptyBinaryData;
+  }
+
+  BinaryData& binary_data();
+
+  void PullRecursiveHardDeps();
 
   // Checks precompiled headers from configs and makes sure the resulting
   // values are in config_values_.
@@ -484,60 +551,26 @@ class Target : public Item {
   LabelTargetVector data_deps_;
   LabelTargetVector gen_deps_;
 
-  // See getters for more info.
-  UniqueVector<LabelConfigPair> configs_;
-  UniqueVector<LabelConfigPair> all_dependent_configs_;
-  UniqueVector<LabelConfigPair> public_configs_;
+  std::unique_ptr<BinaryData> binary_data_;
 
   std::set<Label> allow_circular_includes_from_;
 
-  // Static libraries, shared libraries, and source sets from transitive deps
-  // that need to be linked.
-  InheritedLibraries inherited_libraries_;
-
-  // These libs and dirs are inherited from statically linked deps and all
-  // configs applying to this target.
-  UniqueVector<SourceDir> all_lib_dirs_;
-  UniqueVector<LibFile> all_libs_;
-
-  // These frameworks and dirs are inherited from statically linked deps and
-  // all configs applying to this target.
-  UniqueVector<SourceDir> all_framework_dirs_;
-  UniqueVector<std::string> all_frameworks_;
-  UniqueVector<std::string> all_weak_frameworks_;
+  std::vector<LabelPattern> friends_;
+  std::vector<LabelPattern> assert_no_deps_;
 
   // All hard deps from this target and all dependencies. Filled in when this
   // target is marked resolved. This will not include the current target.
   TargetSet recursive_hard_deps_;
 
-  std::vector<LabelPattern> friends_;
-  std::vector<LabelPattern> assert_no_deps_;
-
-  // Used for all binary targets, and for inputs in regular targets. The
-  // precompiled header values in this struct will be resolved to the ones to
-  // use for this target, if precompiled headers are used.
-  std::unique_ptr<ConfigValues> config_values_;
-
   // Used for action[_foreach] targets.
   std::unique_ptr<ActionValues> action_values_;
-
-  // Used for Rust targets.
-  std::unique_ptr<RustValues> rust_values_;
-
-  // Used by all targets, only useful to generate Rust targets though.
-  InheritedLibraries rust_transitive_libs_;
-
-  // User for Swift targets.
-  std::unique_ptr<SwiftValues> swift_values_;
 
   // Toolchain used by this target. Null until target is resolved.
   const Toolchain* toolchain_ = nullptr;
 
   // Output files. Empty until the target is resolved.
   std::vector<OutputFile> computed_outputs_;
-  OutputFile link_output_file_;
   OutputFile dependency_output_file_;
-  std::vector<OutputFile> runtime_outputs_;
 
   std::unique_ptr<Metadata> metadata_;
 

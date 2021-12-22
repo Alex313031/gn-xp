@@ -316,6 +316,16 @@ Target::~Target() = default;
 // in the second branch.
 //
 
+// static
+const Target::BinaryData Target::kEmptyBinaryData;
+
+Target::BinaryData& Target::binary_data() {
+  if (!binary_data_) {
+    binary_data_ = std::make_unique<BinaryData>();
+  }
+  return *binary_data_;
+}
+
 static const BundleData kEmptyBundleData;
 
 const BundleData& Target::bundle_data() const {
@@ -331,13 +341,15 @@ BundleData& Target::bundle_data() {
 static ConfigValues kEmptyConfigValues;
 
 const ConfigValues& Target::config_values() const {
-  return config_values_ ? *config_values_ : kEmptyConfigValues;
+  return binary_data_ && binary_data_->config_values_
+             ? *binary_data_->config_values_
+             : kEmptyConfigValues;
 }
 
 ConfigValues& Target::config_values() {
-  if (!config_values_)
-    config_values_ = std::make_unique<ConfigValues>();
-  return *config_values_;
+  if (!binary_data_ || !binary_data_->config_values_)
+    binary_data().config_values_ = std::make_unique<ConfigValues>();
+  return *binary_data_->config_values_;
 }
 
 static const ActionValues kEmptyActionValues;
@@ -355,25 +367,29 @@ ActionValues& Target::action_values() {
 static const RustValues kEmptyRustValues;
 
 const RustValues& Target::rust_values() const {
-  return rust_values_ ? *rust_values_ : kEmptyRustValues;
+  return (binary_data_ && binary_data_->rust_values_)
+             ? *binary_data_->rust_values_
+             : kEmptyRustValues;
 }
 
 RustValues& Target::rust_values() {
-  if (!rust_values_)
-    rust_values_ = std::make_unique<RustValues>();
-  return *rust_values_;
+  if (!binary_data_ || !binary_data_->rust_values_)
+    binary_data().rust_values_ = std::make_unique<RustValues>();
+  return *binary_data_->rust_values_;
 }
 
 static const SwiftValues kEmptySwiftValues;
 
 const SwiftValues& Target::swift_values() const {
-  return swift_values_ ? *swift_values_ : kEmptySwiftValues;
+  return (binary_data_ && binary_data_->swift_values_)
+             ? *binary_data_->swift_values_
+             : kEmptySwiftValues;
 }
 
 SwiftValues& Target::swift_values() {
-  if (!swift_values_)
-    swift_values_ = std::make_unique<SwiftValues>();
-  return *swift_values_;
+  if (!binary_data_ || !binary_data_->swift_values_)
+    binary_data().swift_values_ = std::make_unique<SwiftValues>();
+  return *binary_data_->swift_values_;
 }
 
 static const Metadata kEmptyMetadata;
@@ -446,34 +462,28 @@ const Target* Target::AsTarget() const {
   return this;
 }
 
-bool Target::OnResolved(Err* err) {
-  DCHECK(output_type_ != UNKNOWN);
-  DCHECK(toolchain_) << "Toolchain should have been set before resolving.";
-
-  ScopedTrace trace(TraceItem::TRACE_ON_RESOLVED, label());
-  trace.SetToolchain(settings()->toolchain_label());
-
+bool Target::BinaryData::OnResolved(Target* target, Err* err) {
   // Copy this target's own dependent and public configs to the list of configs
   // applying to it.
   configs_.Append(all_dependent_configs_.begin(), all_dependent_configs_.end());
-  MergePublicConfigsFrom(this, &configs_);
+  MergePublicConfigsFrom(target, &configs_);
 
   // Check visibility for just this target's own configs, before dependents are
   // added, but after public_configs and all_dependent_configs are merged.
-  if (!CheckConfigVisibility(err))
+  if (!target->CheckConfigVisibility(err))
     return false;
 
   // Copy public configs from all dependencies into the list of configs
   // applying to this target (configs_).
-  PullDependentTargetConfigs();
+  PullDependentTargetConfigs(target);
 
   // Copies public dependencies' public configs to this target's public
   // configs. These configs have already been applied to this target by
   // PullDependentTargetConfigs above, along with the public configs from
   // private deps. This step re-exports them as public configs for targets that
   // depend on this one.
-  for (const auto& dep : public_deps_) {
-    if (dep.ptr->toolchain() == toolchain() ||
+  for (const auto& dep : target->public_deps_) {
+    if (dep.ptr->toolchain() == target->toolchain() ||
         dep.ptr->toolchain()->propagates_configs())
       public_configs_.Append(dep.ptr->public_configs().begin(),
                              dep.ptr->public_configs().end());
@@ -487,7 +497,7 @@ bool Target::OnResolved(Err* err) {
   // public config's libs to be included here. And it needs to happen
   // before pulling the dependent target libs so the libs are in the correct
   // order (local ones first, then the dependency's).
-  for (ConfigValuesIterator iter(this); !iter.done(); iter.Next()) {
+  for (ConfigValuesIterator iter(target); !iter.done(); iter.Next()) {
     const ConfigValues& cur = iter.cur();
     all_lib_dirs_.Append(cur.lib_dirs().begin(), cur.lib_dirs().end());
     all_libs_.Append(cur.libs().begin(), cur.libs().end());
@@ -499,17 +509,37 @@ bool Target::OnResolved(Err* err) {
                                 cur.weak_frameworks().end());
   }
 
-  PullRecursiveBundleData();
-  PullDependentTargetLibs();
+  if (!FillLinkOutputFiles(target, err))
+    return false;
+
+  PullRecursiveBundleData(target);
+  PullDependentTargetLibs(target);
+
+  if (!SwiftValues::OnTargetResolved(target, err))
+    return false;
+
+  if (!target->ResolvePrecompiledHeaders(err))
+    return false;
+
+  return true;
+}
+
+bool Target::OnResolved(Err* err) {
+  DCHECK(output_type_ != UNKNOWN);
+  DCHECK(toolchain_) << "Toolchain should have been set before resolving.";
+
+  ScopedTrace trace(TraceItem::TRACE_ON_RESOLVED, label());
+  trace.SetToolchain(settings()->toolchain_label());
+
+  // Pull recursive hard deps. Call this before pulling swift-related values
+  // from dependents (by calling SwiftValues::OnTargetResolved()), because
+  // this uses hard_dep() which probes has_swift_values().
   PullRecursiveHardDeps();
-  if (!ResolvePrecompiledHeaders(err))
+
+  if (!binary_data().OnResolved(this, err))
     return false;
 
-  if (!FillOutputFiles(err))
-    return false;
-
-  if (!SwiftValues::OnTargetResolved(this, err))
-    return false;
+  FillOutputFiles();
 
   if (!CheckSourceSetLanguages(err))
     return false;
@@ -741,21 +771,21 @@ bool Target::GetOutputFilesForSource(const SourceFile& source,
   return !outputs->empty();
 }
 
-void Target::PullDependentTargetConfigs() {
-  for (const auto& pair : GetDeps(DEPS_LINKED)) {
-    if (pair.ptr->toolchain() == toolchain() ||
+void Target::BinaryData::PullDependentTargetConfigs(const Target* target) {
+  for (const auto& pair : target->GetDeps(DEPS_LINKED)) {
+    if (pair.ptr->toolchain() == target->toolchain() ||
         pair.ptr->toolchain()->propagates_configs())
       MergeAllDependentConfigsFrom(pair.ptr, &configs_,
                                    &all_dependent_configs_);
   }
-  for (const auto& pair : GetDeps(DEPS_LINKED)) {
-    if (pair.ptr->toolchain() == toolchain() ||
+  for (const auto& pair : target->GetDeps(DEPS_LINKED)) {
+    if (pair.ptr->toolchain() == target->toolchain() ||
         pair.ptr->toolchain()->propagates_configs())
       MergePublicConfigsFrom(pair.ptr, &configs_);
   }
 }
 
-void Target::PullDependentTargetLibsFrom(const Target* dep, bool is_public) {
+void Target::BinaryData::PullDependentTargetLibsFrom(const Target* dep, bool is_public) {
   // Direct dependent libraries.
   if (dep->output_type() == STATIC_LIBRARY ||
       dep->output_type() == SHARED_LIBRARY ||
@@ -774,7 +804,7 @@ void Target::PullDependentTargetLibsFrom(const Target* dep, bool is_public) {
 
     // Propagate public dependent libraries.
     for (const auto& transitive :
-         dep->rust_transitive_libs_.GetOrderedAndPublicFlag()) {
+         dep->rust_transitive_libs().GetOrderedAndPublicFlag()) {
       if (transitive.second) {
         rust_transitive_libs_.Append(transitive.first, is_public);
       }
@@ -785,7 +815,7 @@ void Target::PullDependentTargetLibsFrom(const Target* dep, bool is_public) {
   // handled the same way, whether static or dynamic.
   if (dep->output_type() == RUST_LIBRARY ||
       RustValues::InferredCrateType(dep) == RustValues::CRATE_DYLIB) {
-    rust_transitive_libs_.AppendInherited(dep->rust_transitive_libs_,
+    rust_transitive_libs_.AppendInherited(dep->rust_transitive_libs(),
                                           is_public);
 
     // If there is a transitive dependency that is not a rust library, place it
@@ -828,7 +858,7 @@ void Target::PullDependentTargetLibsFrom(const Target* dep, bool is_public) {
     // The current target isn't linked, so propagate linked deps and
     // libraries up the dependency tree.
     inherited_libraries_.AppendInherited(dep->inherited_libraries(), is_public);
-    rust_transitive_libs_.AppendInherited(dep->rust_transitive_libs_,
+    rust_transitive_libs_.AppendInherited(dep->rust_transitive_libs(),
                                           is_public);
   } else if (dep->complete_static_lib()) {
     // Inherit only final targets through _complete_ static libraries.
@@ -857,10 +887,10 @@ void Target::PullDependentTargetLibsFrom(const Target* dep, bool is_public) {
   }
 }
 
-void Target::PullDependentTargetLibs() {
-  for (const auto& dep : public_deps_)
+void Target::BinaryData::PullDependentTargetLibs(const Target* target) {
+  for (const auto& dep : target->public_deps_)
     PullDependentTargetLibsFrom(dep.ptr, true);
-  for (const auto& dep : private_deps_)
+  for (const auto& dep : target->private_deps_)
     PullDependentTargetLibsFrom(dep.ptr, false);
 }
 
@@ -889,35 +919,123 @@ void Target::PullRecursiveHardDeps() {
   }
 }
 
-void Target::PullRecursiveBundleData() {
-  for (const auto& pair : GetDeps(DEPS_LINKED)) {
+void Target::BinaryData::PullRecursiveBundleData(Target* target) {
+  for (const auto& pair : target->GetDeps(DEPS_LINKED)) {
     // Don't propagate bundle_data once they are added to a bundle.
     if (pair.ptr->output_type() == CREATE_BUNDLE)
       continue;
 
     // Don't propagate across toolchain.
-    if (pair.ptr->toolchain() != toolchain())
+    if (pair.ptr->toolchain() != target->toolchain())
       continue;
 
     // Direct dependency on a bundle_data target.
     if (pair.ptr->output_type() == BUNDLE_DATA) {
-      bundle_data().AddBundleData(pair.ptr);
+      target->bundle_data().AddBundleData(pair.ptr);
     }
 
     // Recursive bundle_data informations from all dependencies.
     if (pair.ptr->has_bundle_data()) {
-      for (auto* target : pair.ptr->bundle_data().bundle_deps())
-        bundle_data().AddBundleData(target);
+      for (auto* dep : pair.ptr->bundle_data().bundle_deps())
+        target->bundle_data().AddBundleData(dep);
     }
   }
 
-  if (has_bundle_data())
-    bundle_data().OnTargetResolved(this);
+  if (target->has_bundle_data())
+    target->bundle_data().OnTargetResolved(target);
 }
 
-bool Target::FillOutputFiles(Err* err) {
-  const Tool* tool = toolchain_->GetToolForTargetFinalOutput(this);
-  bool check_tool_outputs = false;
+bool Target::BinaryData::FillLinkOutputFiles(Target* target, Err* err) {
+  const Tool* tool = target->toolchain_->GetToolForTargetFinalOutput(target);
+  switch (target->output_type_) {
+    case EXECUTABLE:
+    case LOADABLE_MODULE:
+      // Executables and loadable modules don't get linked to, but the first
+      // output is used for dependency management.
+      CHECK_GE(tool->outputs().list().size(), 1u);
+      target->dependency_output_file_ =
+          SubstitutionWriter::ApplyPatternToLinkerAsOutputFile(
+              target, tool, tool->outputs().list()[0]);
+
+      if (tool->runtime_outputs().list().empty()) {
+        // Default to the first output for the runtime output.
+        runtime_outputs_.push_back(target->dependency_output_file_);
+      } else {
+        SubstitutionWriter::ApplyListToLinkerAsOutputFile(
+            target, tool, tool->runtime_outputs(), &runtime_outputs_);
+      }
+      break;
+    case RUST_LIBRARY:
+    case STATIC_LIBRARY:
+      // Static libraries both have dependencies and linking going off of the
+      // first output.
+      CHECK(tool->outputs().list().size() >= 1);
+      link_output_file_ = target->dependency_output_file_ =
+          SubstitutionWriter::ApplyPatternToLinkerAsOutputFile(
+              target, tool, tool->outputs().list()[0]);
+      break;
+    case RUST_PROC_MACRO:
+    case SHARED_LIBRARY:
+      CHECK(tool->outputs().list().size() >= 1);
+      if (const CTool* ctool = tool->AsC()) {
+        if (ctool->link_output().empty() && ctool->depend_output().empty()) {
+          // Default behavior, use the first output file for both.
+          link_output_file_ = target->dependency_output_file_ =
+              SubstitutionWriter::ApplyPatternToLinkerAsOutputFile(
+                  target, tool, tool->outputs().list()[0]);
+        } else {
+          // Use the tool-specified ones.
+          if (!ctool->link_output().empty()) {
+            link_output_file_ =
+                SubstitutionWriter::ApplyPatternToLinkerAsOutputFile(
+                    target, tool, ctool->link_output());
+          }
+          if (!ctool->depend_output().empty()) {
+            target->dependency_output_file_ =
+                SubstitutionWriter::ApplyPatternToLinkerAsOutputFile(
+                    target, tool, ctool->depend_output());
+          }
+        }
+        if (tool->runtime_outputs().list().empty()) {
+          // Default to the link output for the runtime output.
+          runtime_outputs_.push_back(link_output_file_);
+        } else {
+          SubstitutionWriter::ApplyListToLinkerAsOutputFile(
+              target, tool, tool->runtime_outputs(), &runtime_outputs_);
+        }
+      } else if (const RustTool* rstool = tool->AsRust()) {
+        // Default behavior, use the first output file for both.
+        link_output_file_ = target->dependency_output_file_ =
+            SubstitutionWriter::ApplyPatternToLinkerAsOutputFile(
+                target, tool, tool->outputs().list()[0]);
+      }
+      break;
+    case CREATE_BUNDLE:
+      // Count anything generated from bundle_data dependencies.
+      return target->bundle_data().GetOutputFiles(
+          target->settings(), target, &target->computed_outputs_, err);
+    default:
+      // target->dependency_output_file_ will be set by
+      // Target::FillOutputFiles()
+      return true;
+  }
+
+  // Count all outputs from this tool as something generated by this target.
+  SubstitutionWriter::ApplyListToLinkerAsOutputFile(
+      target, tool, tool->outputs(), &target->computed_outputs_);
+
+  // Output names aren't canonicalized in the same way that source files
+  // are. For example, the tool outputs often use
+  // {{some_var}}/{{output_name}} which expands to "./foo", but this won't
+  // match "foo" which is what we'll compute when converting a SourceFile to
+  // an OutputFile.
+  for (auto& out : target->computed_outputs_)
+    NormalizePath(&out.value());
+
+  return true;
+}
+
+void Target::FillOutputFiles() {
   switch (output_type_) {
     case GROUP:
     case BUNDLE_DATA:
@@ -938,107 +1056,20 @@ bool Target::FillOutputFiles(Err* err) {
       dependency_output_file_.value().append(".stamp");
       break;
     }
-    case EXECUTABLE:
-    case LOADABLE_MODULE:
-      // Executables and loadable modules don't get linked to, but the first
-      // output is used for dependency management.
-      CHECK_GE(tool->outputs().list().size(), 1u);
-      check_tool_outputs = true;
-      dependency_output_file_ =
-          SubstitutionWriter::ApplyPatternToLinkerAsOutputFile(
-              this, tool, tool->outputs().list()[0]);
-
-      if (tool->runtime_outputs().list().empty()) {
-        // Default to the first output for the runtime output.
-        runtime_outputs_.push_back(dependency_output_file_);
-      } else {
-        SubstitutionWriter::ApplyListToLinkerAsOutputFile(
-            this, tool, tool->runtime_outputs(), &runtime_outputs_);
-      }
-      break;
-    case RUST_LIBRARY:
-    case STATIC_LIBRARY:
-      // Static libraries both have dependencies and linking going off of the
-      // first output.
-      CHECK(tool->outputs().list().size() >= 1);
-      check_tool_outputs = true;
-      link_output_file_ = dependency_output_file_ =
-          SubstitutionWriter::ApplyPatternToLinkerAsOutputFile(
-              this, tool, tool->outputs().list()[0]);
-      break;
-    case RUST_PROC_MACRO:
-    case SHARED_LIBRARY:
-      CHECK(tool->outputs().list().size() >= 1);
-      check_tool_outputs = true;
-      if (const CTool* ctool = tool->AsC()) {
-        if (ctool->link_output().empty() && ctool->depend_output().empty()) {
-          // Default behavior, use the first output file for both.
-          link_output_file_ = dependency_output_file_ =
-              SubstitutionWriter::ApplyPatternToLinkerAsOutputFile(
-                  this, tool, tool->outputs().list()[0]);
-        } else {
-          // Use the tool-specified ones.
-          if (!ctool->link_output().empty()) {
-            link_output_file_ =
-                SubstitutionWriter::ApplyPatternToLinkerAsOutputFile(
-                    this, tool, ctool->link_output());
-          }
-          if (!ctool->depend_output().empty()) {
-            dependency_output_file_ =
-                SubstitutionWriter::ApplyPatternToLinkerAsOutputFile(
-                    this, tool, ctool->depend_output());
-          }
-        }
-        if (tool->runtime_outputs().list().empty()) {
-          // Default to the link output for the runtime output.
-          runtime_outputs_.push_back(link_output_file_);
-        } else {
-          SubstitutionWriter::ApplyListToLinkerAsOutputFile(
-              this, tool, tool->runtime_outputs(), &runtime_outputs_);
-        }
-      } else if (const RustTool* rstool = tool->AsRust()) {
-        // Default behavior, use the first output file for both.
-        link_output_file_ = dependency_output_file_ =
-            SubstitutionWriter::ApplyPatternToLinkerAsOutputFile(
-                this, tool, tool->outputs().list()[0]);
-      }
-      break;
-    case UNKNOWN:
     default:
-      NOTREACHED();
+      // Should have been set by BinaryData::FillLinkOutputFiles()
+      DCHECK(!dependency_output_file_.value().empty());
+      break;
   }
-
-  // Count anything generated from bundle_data dependencies.
-  if (output_type_ == CREATE_BUNDLE) {
-    if (!bundle_data().GetOutputFiles(settings(), this, &computed_outputs_,
-                                      err))
-      return false;
-  }
-
-  // Count all outputs from this tool as something generated by this target.
-  if (check_tool_outputs) {
-    SubstitutionWriter::ApplyListToLinkerAsOutputFile(
-        this, tool, tool->outputs(), &computed_outputs_);
-
-    // Output names aren't canonicalized in the same way that source files
-    // are. For example, the tool outputs often use
-    // {{some_var}}/{{output_name}} which expands to "./foo", but this won't
-    // match "foo" which is what we'll compute when converting a SourceFile to
-    // an OutputFile.
-    for (auto& out : computed_outputs_)
-      NormalizePath(&out.value());
-  }
-
   // Also count anything the target has declared to be an output.
   if (action_values_.get()) {
     std::vector<SourceFile> outputs_as_sources;
     action_values_->GetOutputsAsSourceFiles(this, &outputs_as_sources);
-    for (const SourceFile& out : outputs_as_sources)
+    for (const SourceFile& out : outputs_as_sources) {
       computed_outputs_.push_back(
           OutputFile(settings()->build_settings(), out));
+    }
   }
-
-  return true;
 }
 
 bool Target::ResolvePrecompiledHeaders(Err* err) {
@@ -1054,7 +1085,7 @@ bool Target::ResolvePrecompiledHeaders(Err* err) {
 
   // Track where the current settings came from for issuing errors.
   bool has_precompiled_headers =
-      config_values_.get() && config_values_->has_precompiled_headers();
+      has_config_values() && config_values().has_precompiled_headers();
   const Label* pch_header_settings_from = NULL;
   if (has_precompiled_headers)
     pch_header_settings_from = &label();
@@ -1070,8 +1101,8 @@ bool Target::ResolvePrecompiledHeaders(Err* err) {
 
     if (has_precompiled_headers) {
       // Already have a precompiled header values, the settings must match.
-      if (config_values_->precompiled_header() != cur.precompiled_header() ||
-          config_values_->precompiled_source() != cur.precompiled_source()) {
+      if (config_values().precompiled_header() != cur.precompiled_header() ||
+          config_values().precompiled_source() != cur.precompiled_source()) {
         *err = Err(
             defined_from(), "Precompiled header setting conflict.",
             "The target " + label().GetUserVisibleName(false) +
@@ -1080,8 +1111,8 @@ bool Target::ResolvePrecompiledHeaders(Err* err) {
                 "\n"
                 "From " +
                 pch_header_settings_from->GetUserVisibleName(false) +
-                "\n  header: " + config_values_->precompiled_header() +
-                "\n  source: " + config_values_->precompiled_source().value() +
+                "\n  header: " + config_values().precompiled_header() +
+                "\n  source: " + config_values().precompiled_source().value() +
                 "\n\n"
                 "From " +
                 config->label().GetUserVisibleName(false) +
