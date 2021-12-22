@@ -463,6 +463,52 @@ const Target* Target::AsTarget() const {
 }
 
 bool Target::BinaryData::OnResolved(Target* target, Err* err) {
+  if (resolved_)
+    return true;
+
+  // Ensure that all link dependencies of the current target do have their
+  // own binary data properly resolved first, even if they are not binary
+  // targets themselves. To understand why this is needed, consider
+  // the following dependency chain:
+  //
+  //    executable(A) --> group(B) --> source_set(C)
+  //
+  // Since targets are resolved in reverse dependency order, the following
+  // will happen:
+  //
+  //   1) Target C is resolved first, and gets a BinaryData() instance
+  //      since it is a binary target (see Target::OnResolved()).
+  //
+  //   2) Target B is resolved next, and does not get a BinaryData()
+  //      instance at that point, since it is not a binary target.
+  //
+  //   3) Target A is resolved last, and gets a BinaryData() instance,
+  //      initialized by this function, which invokes
+  //      B.binary_data().OnResolved() due to the loop below. This creates the
+  //      BinaryData for target B and ensures it pulls the right values from C.
+  //
+  //      This allows A's BinaryData() instance to then pull the values
+  //      from B transitively.
+  //
+  // This scheme is implemented to limit upstream propagation of BinaryData
+  // in the build graph to only binary target that need it. For example,
+  // The Fuchsia build has a large number of group() and action() targets
+  // at the top of its hierarchy, with binary targets (e.g. executables)
+  // only appearing at 4 or 5 lower levels in the tree from //:default.
+  //
+  // Unconditional upstream propagation created a lot of un-necessary work
+  // that resulted in longer generation time and increased RAM usage, for
+  // no good practical reason.
+  //
+  for (const auto& dep : target->GetDeps(Target::DEPS_LINKED)) {
+    if (dep.ptr->binary_data().resolved_)
+      continue;
+
+    Target* dep_target = const_cast<Target*>(dep.ptr);
+    if (!dep_target->binary_data().OnResolved(dep_target, err))
+      return false;
+  }
+
   // Copy this target's own dependent and public configs to the list of configs
   // applying to it.
   configs_.Append(all_dependent_configs_.begin(), all_dependent_configs_.end());
@@ -509,9 +555,6 @@ bool Target::BinaryData::OnResolved(Target* target, Err* err) {
                                 cur.weak_frameworks().end());
   }
 
-  if (!FillLinkOutputFiles(target, err))
-    return false;
-
   PullRecursiveBundleData(target);
   PullDependentTargetLibs(target);
 
@@ -521,6 +564,10 @@ bool Target::BinaryData::OnResolved(Target* target, Err* err) {
   if (!target->ResolvePrecompiledHeaders(err))
     return false;
 
+  if (!FillLinkOutputFiles(target, err))
+    return false;
+
+  resolved_ = true;
   return true;
 }
 
@@ -536,8 +583,11 @@ bool Target::OnResolved(Err* err) {
   // this uses hard_dep() which probes has_swift_values().
   PullRecursiveHardDeps();
 
-  if (!binary_data().OnResolved(this, err))
-    return false;
+  // Only create binary_data for targets that need it here.
+  if (NeedsBinaryData()) {
+    if (!binary_data().OnResolved(this, err))
+      return false;
+  }
 
   FillOutputFiles();
 
@@ -581,6 +631,10 @@ bool Target::IsFinal() const {
          output_type_ == ACTION_FOREACH || output_type_ == COPY_FILES ||
          output_type_ == CREATE_BUNDLE || output_type_ == RUST_PROC_MACRO ||
          (output_type_ == STATIC_LIBRARY && complete_static_lib_);
+}
+
+bool Target::NeedsBinaryData() const {
+  return IsBinary() || (output_type_ == CREATE_BUNDLE);
 }
 
 bool Target::IsDataOnly() const {
@@ -915,8 +969,7 @@ void Target::PullRecursiveHardDeps() {
     }
 
     // Recursive hard dependencies of all dependencies.
-    recursive_hard_deps_.insert(pair.ptr->recursive_hard_deps().begin(),
-                                pair.ptr->recursive_hard_deps().end());
+    recursive_hard_deps_.insert(pair.ptr->recursive_hard_deps());
   }
 }
 
@@ -1062,6 +1115,7 @@ void Target::FillOutputFiles() {
       DCHECK(!dependency_output_file_.value().empty());
       break;
   }
+
   // Also count anything the target has declared to be an output.
   if (action_values_.get()) {
     std::vector<SourceFile> outputs_as_sources;

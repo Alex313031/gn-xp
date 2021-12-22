@@ -100,8 +100,6 @@ class Target : public Item {
   // increases parallelism.
   bool IsDataOnly() const;
 
-  bool NeedsBinaryData() const;
-
   // Will be the empty string to use the target label as the output name.
   // See GetComputedOutputName().
   const std::string& output_name() const { return output_name_; }
@@ -465,6 +463,8 @@ class Target : public Item {
   // A struct to group all fields that are only relevant to binary targets
   // and their dependencies (even if they are not binaries themselves).
   struct BinaryData {
+    bool resolved_ = false;
+
     // See getters for more info.
     UniqueVector<LabelConfigPair> configs_;
     UniqueVector<LabelConfigPair> public_configs_;
@@ -528,6 +528,10 @@ class Target : public Item {
   }
 
   BinaryData& binary_data();
+
+  // Returns true if this target needs a BinaryData instance
+  // created at resolution time.
+  bool NeedsBinaryData() const;
 
   void PullRecursiveHardDeps();
 
