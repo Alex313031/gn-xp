@@ -16,6 +16,24 @@
       "message": "This is fine but I just added a question in the bug about the use-case since it\u0027s not obvious to me.",
       "revId": "f94f6711c6aa88cf5e9694130641e43cd618a13a",
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "8a301a1d_5c7becc7",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000313
+      },
+      "writtenOn": "2022-01-05T19:42:53Z",
+      "side": 1,
+      "message": "Thanks for looking.\nClarified use case here:\nhttps://bugs.chromium.org/p/gn/issues/detail?id\u003d214#c5",
+      "parentUuid": "ac9c74aa_4a963562",
+      "revId": "f94f6711c6aa88cf5e9694130641e43cd618a13a",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
     }
   ]
 }
