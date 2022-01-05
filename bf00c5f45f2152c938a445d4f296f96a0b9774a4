@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "11b7307d_e81ed61b",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000014
+      },
+      "writtenOn": "2022-01-05T22:39:33Z",
+      "side": 1,
+      "message": "Oops, I forgot to actually add the reviewer. I was on the fence about whether I should add a constant \"empty\" value to avoid a null pointer on mis-use, happy for opinions.",
+      "revId": "bf00c5f45f2152c938a445d4f296f96a0b9774a4",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    }
+  ]
+}
