@@ -1,0 +1,61 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f97efbca_bb97fd3e",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000014
+      },
+      "writtenOn": "2022-01-05T21:36:03Z",
+      "side": 1,
+      "message": "Wow, 10%!",
+      "revId": "a4ae60af3d2377920a2bf5238af724a45345061d",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f0320c95_800b96b6",
+        "filename": "src/gn/inherited_libraries.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 37,
+      "author": {
+        "id": 1000014
+      },
+      "writtenOn": "2022-01-05T21:36:03Z",
+      "side": 1,
+      "message": "Can you just use `i` for a random loop counter? This will match the rest of the code.",
+      "revId": "a4ae60af3d2377920a2bf5238af724a45345061d",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b574cee2_99746909",
+        "filename": "src/gn/inherited_libraries.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 45,
+      "author": {
+        "id": 1000014
+      },
+      "writtenOn": "2022-01-05T21:36:03Z",
+      "side": 1,
+      "message": "Ditto",
+      "range": {
+        "startLine": 45,
+        "startChar": 14,
+        "endLine": 45,
+        "endChar": 16
+      },
+      "revId": "a4ae60af3d2377920a2bf5238af724a45345061d",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    }
+  ]
+}
