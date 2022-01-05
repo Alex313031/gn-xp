@@ -18,6 +18,24 @@
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "77b98b00_16e6cb47",
+        "filename": "src/gn/target.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 324,
+      "author": {
+        "id": 1000014
+      },
+      "writtenOn": "2022-01-05T22:06:26Z",
+      "side": 1,
+      "message": "From the other patch, I understand how this works now and why we can\u0027t do this.",
+      "parentUuid": "c80cbb34_b8496727",
+      "revId": "3745977f932901cfd85b31e5e2f0413a89e2a20c",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "df151606_38aa06dc",
@@ -48,6 +66,30 @@
       "writtenOn": "2022-01-05T21:59:07Z",
       "side": 1,
       "message": "Can you add a comment here about when this will be set and also that users should go through the binary_data() lazy accessor rather than using directly?",
+      "range": {
+        "startLine": 575,
+        "startChar": 2,
+        "endLine": 575,
+        "endChar": 43
+      },
+      "revId": "3745977f932901cfd85b31e5e2f0413a89e2a20c",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6cd72cc8_4479eaf2",
+        "filename": "src/gn/target.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 575,
+      "author": {
+        "id": 1000014
+      },
+      "writtenOn": "2022-01-05T22:06:26Z",
+      "side": 1,
+      "message": "This should also mention the fact that this can be created for non-binary targets to avoid my confusion from the previous round.",
+      "parentUuid": "7c863347_0197e63d",
       "range": {
         "startLine": 575,
         "startChar": 2,
