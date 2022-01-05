@@ -1,6 +1,23 @@
 {
   "comments": [
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "e0ab1dc4_2564456d",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000014
+      },
+      "writtenOn": "2022-01-05T23:37:14Z",
+      "side": 1,
+      "message": "The BinaryData changes are, for me, getting to be too subtle to justify a ~10% performance improvement.\n\nTarget resolution is already super complicated and critical. Adding more complexity and optimization makes it harder to understand and to implement future changes (say, something like adding Rust support or, in the future, better built-in support for Fuchsia packaging).\n\nGN runtime improvements are nice (I sent a change to improve the Err object along these lines) but incremental performance improvements in GN wouldn\u0027t be on my list of the most important problems we have with the build that I would want to spend a \"complexity budget\" on.\n\nIf you want, maybe we should have a meeting next week with more people variously involved in the build to discuss where we think the bar for this kind of thing should be. I\u0027m also interested in a broader discussion (this might already be happening without me -- feel free to point me to any notes) about where GN work falls into overall build work. There are a bunch of things that I can think of that could be done, and some of them might be helped by changes in the GN tool.",
+      "revId": "3745977f932901cfd85b31e5e2f0413a89e2a20c",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "c80cbb34_b8496727",
