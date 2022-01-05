@@ -16,6 +16,24 @@
       "message": "I have updated RJ\u0027s previous CL to make it work with current GN and simplify it a little. I have also performed measurements to see how this improves the situation. Sadly, that does not seem to speed up the build *at all* on my workstation. More precisely:\n\n- clean build time seems totally unaffected on my workstation, either with a cold or hot file system cache (I\u0027m using \"echo 3 | sudo tee /proc/sys/vm/drop_caches\"). I\u0027d like to try on my CloudTop (which is notorious for hideous I/O) though.\n\n- \"gn gen\" mean time is slightly faster (e.g. 13.7s -\u003e 12.9s)\n- Generated .ninja files are slightly smaller (i.e. 768 MiB -\u003e 736 MiB).\n- Mean \"ninja -C out/default -n\" time is slightly smaller (8.85s -\u003e 8.13s).\n- Max \"ninja -C out/default -n\" RSS peak is slightly smaller (1.047 GiB -\u003e 1.034 GiB).\n\nKeep in mind that still requires a custom Ninja binary built from upstream HEAD since there is no official release, and setting \"no_stamp_files \u003d true\" in the //.gn file, so it\u0027s not something we can roll to the Fuchsia build yet.\n\nTell me what you think about this. I will clean up this mega-CL into 3 separate ones for better review. I\u0027m still not sure it\u0027s worth it.\n",
       "revId": "1e8e5c242daa4f02483ff4dfd90909e327ac3e23",
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c456c4dd_8d32d698",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000633
+      },
+      "writtenOn": "2022-01-05T20:29:12Z",
+      "side": 1,
+      "message": "This is in line with what I found in my experiments on my Z840. I also didn\u0027t find much performance difference on cloudtop either. The one open question on performance I had left was build execution on CQ/CI bots. This was not an easy experiment to perform at the time (not sure if it is different now), but I recall seeing a performance improvement and degradation in Fuchsia CQ/CI ninja build time that correlated with the time that this patch was active in the Fuchsia build. Correlation may not be causation in this case, but I think it\u0027s still worth checking.\n\nMy apologies for dropping the ball on this, I had hoped to wrap it up a long time ago. I think the outstanding work on this CL is likely to scrub documentation and add test cases for when phony is used.",
+      "parentUuid": "14b41282_5caf4132",
+      "revId": "1e8e5c242daa4f02483ff4dfd90909e327ac3e23",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
     }
   ]
 }
