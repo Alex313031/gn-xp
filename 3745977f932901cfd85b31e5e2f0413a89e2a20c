@@ -36,6 +36,24 @@
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "611400d2_a6c6f297",
+        "filename": "src/gn/target.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 324,
+      "author": {
+        "id": 1000014
+      },
+      "writtenOn": "2022-01-05T22:34:30Z",
+      "side": 1,
+      "message": "Actually, I realize I\u0027m wrong again. I\u0027m worried some of this stuff is getting a little too subtle, let me start an email thread.",
+      "parentUuid": "77b98b00_16e6cb47",
+      "revId": "3745977f932901cfd85b31e5e2f0413a89e2a20c",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "df151606_38aa06dc",
