@@ -18,6 +18,24 @@
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "d15608be_bf9d117e",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000067
+      },
+      "writtenOn": "2022-01-06T11:24:36Z",
+      "side": 1,
+      "message": "Yes, and one reason for this is that target resolution pushes inherited libraries merges upwards unconditionally :-(\n\nThis means the //:default group() target will inherit _all_ libraries that appear in the build graph, even if that doesn\u0027t make any practical sense (hence the other CLs to limit binary data upstream propagation, which gain another 10%).",
+      "parentUuid": "f97efbca_bb97fd3e",
+      "revId": "a4ae60af3d2377920a2bf5238af724a45345061d",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "f0320c95_800b96b6",
@@ -35,6 +53,24 @@
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "4434c43b_07eb01f5",
+        "filename": "src/gn/inherited_libraries.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 37,
+      "author": {
+        "id": 1000067
+      },
+      "writtenOn": "2022-01-06T11:24:36Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "f0320c95_800b96b6",
+      "revId": "a4ae60af3d2377920a2bf5238af724a45345061d",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "b574cee2_99746909",
@@ -48,6 +84,30 @@
       "writtenOn": "2022-01-05T21:36:03Z",
       "side": 1,
       "message": "Ditto",
+      "range": {
+        "startLine": 45,
+        "startChar": 14,
+        "endLine": 45,
+        "endChar": 16
+      },
+      "revId": "a4ae60af3d2377920a2bf5238af724a45345061d",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "9e4bfdfe_f2614919",
+        "filename": "src/gn/inherited_libraries.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 45,
+      "author": {
+        "id": 1000067
+      },
+      "writtenOn": "2022-01-06T11:24:36Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "b574cee2_99746909",
       "range": {
         "startLine": 45,
         "startChar": 14,
