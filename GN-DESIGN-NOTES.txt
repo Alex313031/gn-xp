@@ -1,0 +1,333 @@
+GN Design Notes:
+----------------
+
+List of important GN C++ classes. Note that in nearly all
+cases, The FooBar class will be defined in "foo_bar.h" and
+implemented by "foo_bar.cc":
+
+StringAtom:
+  An immutable interned string, used heavily to save RAM
+  usage and speed up some comparisons and hashing.
+
+SourceDir:
+  A directory path for input files, implemented as a
+  StringAtom for faster comparisons, and which always
+  contains a trailing directory separator at the end.
+  Also provides a few helper methods.
+
+SourceFile:
+  A file path to an input file. Implemented as a
+  StringAtom. Also provides a few methods to check
+  the file's extension.
+
+SourceFileSet:
+  A set of SourceFile instances, used heavily at runtime
+  by GN to reference other files.
+
+Label:
+  A (dir, name, toolchain_dir, toolchain_name) tuple of
+  StringAtom used to identify a build graph item.
+  'toolchain_dir' and 'toolchain_name' can both be empty.
+
+InputFile:
+  A class that models a (file_path, contents) pair, which also
+  provides convenience methods to get the file directory and name.
+
+Location:
+  An (InputFile*, line_number, column_number) tuple used to
+  model the location of a given input token. Used heavily to
+  report meaningful errors.
+
+LocationRange (see location.h)
+  A (begin, end) pair of Location values, which must share the
+  same InputFile* pointer, describing a range of input characters.
+  Used to highlight specific parts of the input when reporting
+  errors.
+
+Err:
+  A class used to an error message, an optional secondary "help"
+  message (which gives more information about the main error),
+  as well as a Location and optional LocationRanges.
+
+  Each instance can also nest sub-errors, which allows GN to
+  print a "call stack" of sort in certain cases.
+
+  The Err() constructor can take a Location or LocationRange
+  as its first parameter. There are also constructor variants
+  that take a Value, or a ParseNode* pointer as well (see
+  below).
+
+Token:
+  A (location,string_view,type) describing an input token
+  from a given input file. The 'type' value is an enum
+  describing the type of token.
+
+Tokenizer:
+  A class that reads an InputFile can produces a simple
+  vector of Tokens.
+
+ParseNode: (see parse_tree.h)
+  A node in the GN abstract syntax tree. There is only a
+  very small number of node types (see parse_tree.h):
+
+     IdentifierNode
+     LiteralNode
+     ListNode
+     AccessorNode
+     UnaryOpNode
+     BinaryOpNode
+     ConditionNode
+     FunctionCallNode
+     BlockNode
+     CommentBlockNode
+     EndNode
+
+  ParseNodes are immutable and only point to other ParseNode
+  instances and/or Token values. E.g. a LiteralNode does not
+  store any specific value, it just points to the token
+  defining the literal.
+
+  Each ParseNode implements a GetRange() method that returns
+  a corresponding LocationRange, which will be used when
+  creating error messages. An Err constructor takes a
+  ParseNode* pointer has its first argument and will call
+  this method.
+
+Parser:
+  The class that converts a vector of Tokens into a parse
+  tree, returned as a pointer to its root ParseNode instance.
+
+InputFileManager:
+  A small class that maps InputFile* pointers to a vector
+  of Token, and the corresponding tree or ParseNode instances.
+  Used to cache the result of tokenizing / parsing a given
+  BUILD.gn or *.gni file, since many are re-evaluated
+  several times with different Settings (toolchain contexts).
+
+  It works by simply running the tokenizer, then feeding
+  the resulting Token list to the Parser.
+
+Value:
+  A class that contains a GN runtime value, which can be
+  empty (NONE), a boolean, an integer, a string, a list of
+  Values, or a Scope, which similar to a Python dict (with
+  a lot more extra baggage attached, as described later).
+
+  Note that each Value also holds a ParseNode* pointer,
+  called its 'origin', that indicates where it was defined
+  in the input. This can be nullptr if this cannot be
+  determined (e.g. for programmatic values like 'current_os').
+
+  Due to this, an Err constructor takes a Value reference
+  as its first argument and will use the origin pointer
+  to get a corresponding LocationRange.
+
+Scope:
+  A class that models a GN execution context for parse
+  trees (identified by a root ParseNode pointer, and
+  all its sub-nodes). It is first and foremost a dictionary
+  that maps identifier keys to (used, value) pairs, where
+  'value' is a Value instance, and 'used' is a flag that
+  is set when the value has been read from the scope.
+  This is crucial to detected unsued args at runtime.
+
+  Scope also carry much more data (see scope.h).
+
+  A Scope can point to a parent scope, that will be
+  used to perform lookups for keys that are not defined
+  in the current one. The parent scope can have its
+  own parent as well, thus forming a chain.
+
+  The parent scope can be referenced as immutable, and
+  shared by several mutable scopes. An immutable scope
+  can only have an immutable parent, or none at all.
+  A mutable scope can have either a mutable or immutable
+  parent, or none at all.
+
+  Immutable scopes are generally the result of evaluating
+  input files that are reused multiple times (i.e.
+  the .gn file, as well as BUILDCONFIG.gn and .gni files
+  in the context of a given GN toolchain).
+
+  The Scope::MakeClosure() function can be used to
+  "flatten" a chain of mutable scopes, keeping the
+  immutable parents in the chain. For example,
+  calling D->MakeClosure() on the following chain:
+
+     Scope-A
+       ^
+       | immutable
+       |
+     Scope-B
+       ^
+       | immutable
+       |
+     Scope-C
+       ^
+       | mutable
+       |
+     Scope-D
+
+  Would result in a new Scope E that contains the
+  keys of both C and D, and which references B as
+  its immutable parent:
+
+     Scope-A
+       ^
+       | immutable
+       |
+     Scope-B
+       ^
+       | immutable
+       |
+     Scope-E    (contains data from both C and D)
+
+  In this example, Scopes C and D have been merged,
+  a complex operation performed by the
+  Scope::NonRecursiveMergeTo() function.
+
+  Keep in mind that Scopes are really heavy objects,
+  and that Value instances with SCOPE types actually
+  carry a full Scope instance, and not a reduced
+  { name -> Value } map.
+
+Item:
+  This class models any fully labeled object that appears
+  in the build graph. It is a base class for several
+  other objects: Config, Target, Pool and Toolchain.
+
+  Note that Item and its derived classes do not contain
+  Value instances, instead, the values obtained by
+  merging scopes when executing parse trees are
+  transformed into more compact representations that
+  are stored by the Item depending on its type.
+
+  For example, the values in a config() declaration
+  will be first evaluated into a Scope, whose content
+  is later stored in a ConfigValues object.
+
+  Another example is the 'metadata' scope of a given
+  target will be stored in a more compact form in
+  a Metadata class instance.
+
+Config:
+  This Item-derived class models a config() instance
+  in the build graph. The values extracted from the
+  scope at parse time are copied into a ConfigValues
+  object.
+
+ConfigValues:
+  A class that models the values stored in a Config
+  object, in a way that is more compact than a Scope
+  and can be used/queried later more efficiently.
+
+Target:
+  This Item-derived class models a target() instance
+  in the build graph (including source_set(),
+  executable(), etc).
+
+  Note that there is a single Target class, that
+  contains members to hold data for any kind of
+  target, which makes the class definition quite
+  large, instead of splitting it into several
+  derived classes. Due to this, each Target instance
+  is quite large (and was more than 24 KiB *each*
+  until recent changes moved several members to
+  std::unique_ptr<> to save RAM).
+
+  Finally, each Target has a number of fields that
+  come directly from the content of the corresponding
+  declaration in BUILD.gn files, as well as others
+  that are computed later by propagating information
+  from their dependencies (see Target Resolution
+  below).
+
+TargetGenerator:
+  This class takes an execution Scope, a ParseNode
+  pointing to the declaration of a given target()
+  in a BUILD.gn file, and converts it into a Target
+  instance.
+
+Pool:
+  A derived Item class modelling a pool() instance.
+
+Toolchain:
+  A derived Item class modelling a toolchain()
+  instance.
+
+BuildSettings:
+  The result of parsing the top-level .gn file, as well
+  as the args.gn one, which are only read once by GN.
+  Once loaded, the result is immutable and can be shared
+  between threads.
+
+Settings:
+  The result of parsing BUILDCONFIG.gn in a specific GN
+  toolchain context. Immutable once loaded. There can be
+  multiple instances, all referencing the same BuildSettings
+  instance.
+
+MsgLoop:
+  A simple message loop abstraction, i.e. a queue
+  of std::function<void(void)> instances that will be
+  invoked in sequence.
+
+WorkerPool:
+  A simple worker thread pool based on MsgLoop.
+
+Scheduler:
+  A global scheduler used to push work tasks to
+  work pools. Accessed as `g_scheduler` in many parts
+  of the code. Also used to record various things globally
+  during build graph construction.
+
+Loader:
+  A class that uses the scheduler to load input files
+  and evaluate them using the Scheduler's parallel worker
+  threads. Note that the result of evaluating an input
+  file is a vector of Item instances.
+
+Builder:
+  This class builds and maintains the global graph of Items,
+  a.k.a. the "build graph". It uses the Loader to retrieve
+  the collected Items from input BUILD.gn files, and merges
+  them into the global graph.
+
+  It also keeps tracks of which Target items have dependencies
+  that are not in the graph yet, and will call the Loader
+  appropriately until they are all in it.
+
+  A Target that has no dependencies is "resolved" immediately
+  when it is added to the build graph. This computes a number
+  of derived values from the original Target declaration. For
+  example, all 'configs', 'public_configs' and config-specific
+  values (e.g. 'include_dirs', 'cflags', etc...) defined in
+  the target itself will be merged. Other checks are also
+  performed at this time (e.g. visibility or testonly).
+
+  A Target that has dependencies that are not in the build
+  graph yet is not resolved until all its dependencies are
+  (which happens later). This also allows the target to pull
+  information from its dependencies and compute more values
+  out of them (e.g. the "all_libs" fields lists of the
+  library directories that appear in "libs" entries defined
+  for the target, its configs, or any of its public
+  dependencies).
+
+  This is one of the more complex pieces of GN, due to very
+  different rules and information to be propagated. See
+  Target::OnResolved() for more details.
+
+  During the "gn gen" command, a resolved Target will also
+  push a task to the scheduler to generate the corresponding
+  Ninja build command fragment in memory. These are grouped
+  per toolchain, and later used to generate toolchain-specific
+  .ninja files.
+
+BuilderRecord:
+  This class models a simple node in the graph built by the
+  Builder class. It maps a Label to an Item instance, and
+  also keeps track of how many unresolved dependencies the
+  item has, whether the item (if a Target) has been resolved
+  or not, etc.
+
