@@ -68,6 +68,17 @@ int RunLs(const std::vector<std::string>& args) {
   if (!setup->DoSetup(args[0], false) || !setup->Run())
     return 1;
 
+  return RunLs(args, setup);
+}
+
+int RunLs(const std::vector<std::string>& args, Setup* setup) {
+  if (args.size() == 0) {
+    Err(Location(), "Unknown command format. See \"gn help ls\"",
+        "Usage: \"gn ls <build dir> [<label_pattern>]*\"")
+        .PrintToStdout();
+    return 1;
+  }
+
   bool default_toolchain_only = CommandSwitches::Get().has_default_toolchain();
 
   std::vector<const Target*> matches;
