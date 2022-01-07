@@ -33,6 +33,16 @@ const char kBlame[] = "blame";
 const char kTree[] = "tree";
 const char kAll[] = "all";
 
+int global_client_stdout_fd;
+
+// Stub out OutputString from standard_out.h so we can construct a string
+// response instead of printing to server's stdout.
+void OutputStringStub(const std::string& output,
+                      TextDecoration dec = DECORATION_NONE,
+                      HtmlEscaping = DEFAULT_ESCAPING) {
+  dprintf(global_client_stdout_fd, "%s", output.c_str());
+}
+
 void PrintDictValue(const base::Value* value,
                     int indentLevel,
                     bool use_first_indent) {
@@ -43,39 +53,39 @@ void PrintDictValue(const base::Value* value,
   bool bool_value = false;
   int int_value = 0;
   if (use_first_indent)
-    OutputString(indent);
+    OutputStringStub(indent);
   if (value->GetAsList(&list_value)) {
-    OutputString("[\n");
+    OutputStringStub("[\n");
     bool first = true;
     for (const auto& v : *list_value) {
       if (!first)
-        OutputString(",\n");
+        OutputStringStub(",\n");
       PrintDictValue(&v, indentLevel + 1, true);
       first = false;
     }
-    OutputString("\n" + indent + "]");
+    OutputStringStub("\n" + indent + "]");
   } else if (value->GetAsString(&string_value)) {
-    OutputString("\"" + string_value + "\"");
+    OutputStringStub("\"" + string_value + "\"");
   } else if (value->GetAsBoolean(&bool_value)) {
-    OutputString(bool_value ? "true" : "false");
+    OutputStringStub(bool_value ? "true" : "false");
   } else if (value->GetAsDictionary(&dict_value)) {
-    OutputString("{\n");
+    OutputStringStub("{\n");
     std::string indent_plus_one((indentLevel + 1) * 2, ' ');
     base::DictionaryValue::Iterator iter(*dict_value);
     bool first = true;
     while (!iter.IsAtEnd()) {
       if (!first)
-        OutputString(",\n");
-      OutputString(indent_plus_one + iter.key() + " = ");
+        OutputStringStub(",\n");
+      OutputStringStub(indent_plus_one + iter.key() + " = ");
       PrintDictValue(&iter.value(), indentLevel + 1, false);
       iter.Advance();
       first = false;
     }
-    OutputString("\n" + indent + "}");
+    OutputStringStub("\n" + indent + "}");
   } else if (value->GetAsInteger(&int_value)) {
-    OutputString(base::IntToString(int_value));
+    OutputStringStub(base::IntToString(int_value));
   } else if (value->is_none()) {
-    OutputString("<null>");
+    OutputStringStub("<null>");
   }
 }
 
@@ -92,26 +102,26 @@ void PrintValue(const base::Value* value, int indentLevel) {
       PrintValue(&v, indentLevel);
     }
   } else if (value->GetAsString(&string_value)) {
-    OutputString(indent);
-    OutputString(string_value);
-    OutputString("\n");
+    OutputStringStub(indent);
+    OutputStringStub(string_value);
+    OutputStringStub("\n");
   } else if (value->GetAsBoolean(&bool_value)) {
-    OutputString(indent);
-    OutputString(bool_value ? "true" : "false");
-    OutputString("\n");
+    OutputStringStub(indent);
+    OutputStringStub(bool_value ? "true" : "false");
+    OutputStringStub("\n");
   } else if (value->GetAsDictionary(&dict_value)) {
     base::DictionaryValue::Iterator iter(*dict_value);
     while (!iter.IsAtEnd()) {
-      OutputString(indent + iter.key() + "\n");
+      OutputStringStub(indent + iter.key() + "\n");
       PrintValue(&iter.value(), indentLevel + 1);
       iter.Advance();
     }
   } else if (value->GetAsInteger(&int_value)) {
-    OutputString(indent);
-    OutputString(base::IntToString(int_value));
-    OutputString("\n");
+    OutputStringStub(indent);
+    OutputStringStub(base::IntToString(int_value));
+    OutputStringStub("\n");
   } else if (value->is_none()) {
-    OutputString(indent + "<null>\n");
+    OutputStringStub(indent + "<null>\n");
   }
 }
 
@@ -123,9 +133,9 @@ void DefaultHandler(const std::string& name,
     PrintValue(value, 0);
     return;
   }
-  OutputString("\n");
-  OutputString(name);
-  OutputString("\n");
+  OutputStringStub("\n");
+  OutputStringStub(name);
+  OutputStringStub("\n");
   PrintValue(value, 1);
 }
 
@@ -137,14 +147,14 @@ void MetadataHandler(const std::string& name,
                      bool value_only) {
   if (value_only) {
     PrintDictValue(value, 0, true);
-    OutputString("\n");
+    OutputStringStub("\n");
     return;
   }
-  OutputString("\n");
-  OutputString(name);
-  OutputString("\n");
+  OutputStringStub("\n");
+  OutputStringStub(name);
+  OutputStringStub("\n");
   PrintDictValue(value, 1, true);
-  OutputString("\n");
+  OutputStringStub("\n");
 }
 
 // Prints label and property value on one line, capitalizing the label.
@@ -159,8 +169,8 @@ void LabelHandler(const std::string& name,
   label[0] = base::ToUpperASCII(label[0]);
   std::string string_value;
   if (value->GetAsString(&string_value)) {
-    OutputString(name + ": ", DECORATION_YELLOW);
-    OutputString(string_value + "\n");
+    OutputStringStub(name + ": ", DECORATION_YELLOW);
+    OutputStringStub(string_value + "\n");
   }
 }
 
@@ -240,17 +250,17 @@ void ProcessOutputs(base::DictionaryValue* target, bool files_only) {
   int indent = 0;
   if (outputs || patterns) {
     if (!files_only) {
-      OutputString("\noutputs\n");
+      OutputStringStub("\noutputs\n");
       indent = 1;
     }
     if (patterns) {
       if (!files_only) {
-        OutputString("  Output patterns\n");
+        OutputStringStub("  Output patterns\n");
         indent = 2;
       }
       PrintValue(patterns, indent);
       if (!files_only)
-        OutputString("\n  Resolved output file list\n");
+        OutputStringStub("\n  Resolved output file list\n");
     }
     if (outputs)
       PrintValue(outputs, indent);
@@ -332,9 +342,9 @@ bool PrintTarget(const Target* target,
   std::unique_ptr<base::DictionaryValue> dict =
       DescBuilder::DescriptionForTarget(target, what, all, tree, blame);
   if (!what.empty() && dict->empty()) {
-    OutputString("Don't know how to display \"" + what + "\" for \"" +
-                 Target::GetStringForOutputType(target->output_type()) +
-                 "\".\n");
+    OutputStringStub("Don't know how to display \"" + what + "\" for \"" +
+                     Target::GetStringForOutputType(target->output_type()) +
+                     "\".\n");
     return false;
   }
   // Print single value
@@ -350,9 +360,9 @@ bool PrintTarget(const Target* target,
     return true;
   }
 
-  OutputString("Target ", DECORATION_YELLOW);
-  OutputString(target->label().GetUserVisibleName(false));
-  OutputString("\n");
+  OutputStringStub("Target ", DECORATION_YELLOW);
+  OutputStringStub(target->label().GetUserVisibleName(false));
+  OutputStringStub("\n");
 
   std::unique_ptr<base::Value> v;
   // Entries with DefaultHandler are present to enforce order
@@ -421,7 +431,8 @@ bool PrintConfig(const Config* config,
   std::unique_ptr<base::DictionaryValue> dict =
       DescBuilder::DescriptionForConfig(config, what);
   if (!what.empty() && dict->empty()) {
-    OutputString("Don't know how to display \"" + what + "\" for a config.\n");
+    OutputStringStub("Don't know how to display \"" + what +
+                     "\" for a config.\n");
     return false;
   }
   // Print single value
@@ -433,14 +444,14 @@ bool PrintConfig(const Config* config,
     return true;
   }
 
-  OutputString("Config: ", DECORATION_YELLOW);
-  OutputString(config->label().GetUserVisibleName(false));
-  OutputString("\n");
+  OutputStringStub("Config: ", DECORATION_YELLOW);
+  OutputStringStub(config->label().GetUserVisibleName(false));
+  OutputStringStub("\n");
 
   std::unique_ptr<base::Value> v;
   HandleProperty("toolchain", handler_map, v, dict);
   if (!config->configs().empty()) {
-    OutputString(
+    OutputStringStub(
         "(This is a composite config, the values below are after the\n"
         "expansion of the child configs.)\n");
   }
@@ -619,21 +630,13 @@ Examples
       each one was set from.
 )";
 
-int RunDesc(const std::vector<std::string>& args) {
-  if (args.size() != 2 && args.size() != 3) {
-    Err(Location(), "Unknown command format. See \"gn help desc\"",
-        "Usage: \"gn desc <out_dir> <target_name> [<what to display>]\"")
-        .PrintToStdout();
-    return 1;
-  }
-  const base::CommandLine* cmdline = base::CommandLine::ForCurrentProcess();
+int RunDescWithSetup(const std::vector<std::string>& args,
+                     Setup* setup,
+                     int client_stdout_fd,
+                     int client_stderr_fd) {
+  global_client_stdout_fd = client_stdout_fd;
 
-  // Deliberately leaked to avoid expensive process teardown.
-  Setup* setup = new Setup;
-  if (!setup->DoSetup(args[0], false))
-    return 1;
-  if (!setup->Run())
-    return 1;
+  const base::CommandLine* cmdline = base::CommandLine::ForCurrentProcess();
 
   // Resolve target(s) and config from inputs.
   UniqueVector<const Target*> target_matches;
@@ -656,7 +659,7 @@ int RunDesc(const std::vector<std::string>& args) {
   bool json = cmdline->GetSwitchValueASCII("format") == "json";
 
   if (target_matches.empty() && config_matches.empty()) {
-    OutputString(
+    OutputStringStub(
         "The input " + args[1] + " matches no targets, configs or files.\n",
         DECORATION_YELLOW);
     return 1;
@@ -684,7 +687,7 @@ int RunDesc(const std::vector<std::string>& args) {
     std::string s;
     base::JSONWriter::WriteWithOptions(
         *res.get(), base::JSONWriter::OPTIONS_PRETTY_PRINT, &s);
-    OutputString(s);
+    OutputStringStub(s);
   } else {
     // Regular (non-json) formatted output
     bool multiple_outputs = (target_matches.size() + config_matches.size()) > 1;
@@ -693,25 +696,42 @@ int RunDesc(const std::vector<std::string>& args) {
     bool printed_output = false;
     for (const Target* target : target_matches) {
       if (printed_output)
-        OutputString("\n\n");
+        OutputStringStub("\n\n");
       printed_output = true;
 
       if (!PrintTarget(target, what_to_print, !multiple_outputs, handlers,
                        cmdline->HasSwitch(kAll), cmdline->HasSwitch(kTree),
                        cmdline->HasSwitch(kBlame)))
-        return 1;
+        return 0;
     }
     for (const Config* config : config_matches) {
       if (printed_output)
-        OutputString("\n\n");
+        OutputStringStub("\n\n");
       printed_output = true;
 
       if (!PrintConfig(config, what_to_print, !multiple_outputs, handlers))
-        return 1;
+        return 0;
     }
   }
 
   return 0;
+}
+
+int RunDesc(const std::vector<std::string>& args) {
+  if (args.size() != 2 && args.size() != 3) {
+    Err(Location(), "Unknown command format. See \"gn help desc\"",
+        "Usage: \"gn desc <out_dir> <target_name> [<what to display>]\"")
+        .PrintToStdout();
+    return 1;
+  }
+
+  auto setup = std::make_unique<Setup>();
+  if (!setup->DoSetup(args[0], false))
+    return 1;
+  if (!setup->Run())
+    return 1;
+
+  return RunDescWithSetup(args, setup.get(), STDOUT_FILENO, STDERR_FILENO);
 }
 
 }  // namespace commands
