@@ -99,6 +99,37 @@ const char kAnalyze_Help[] =
   errors that way rather than via return codes.
 )*";
 
+namespace {
+
+int RunAnalyze(const std::vector<std::string>& args,
+               const std::string& input,
+               Setup* setup) {
+  Err err;
+  Analyzer analyzer(
+      setup->builder(), setup->build_settings().build_config_file(),
+      setup->GetDotFile(),
+      setup->build_settings().build_args().build_args_dependency_files());
+  std::string output = analyzer.Analyze(input, &err);
+  if (err.has_error()) {
+    err.PrintToStdout();
+    return 1;
+  }
+
+  if (args[2] == "-") {
+    OutputString(output + "\n");
+  } else {
+    WriteFile(UTF8ToFilePath(args[2]), output, &err);
+    if (err.has_error()) {
+      err.PrintToStdout();
+      return 1;
+    }
+  }
+
+  return 0;
+}
+
+}  // namespace
+
 int RunAnalyze(const std::vector<std::string>& args) {
   if (args.size() != 3) {
     Err(Location(), "Unknown command format. See \"gn help analyze\"",
@@ -123,28 +154,29 @@ int RunAnalyze(const std::vector<std::string>& args) {
   if (!setup->DoSetup(args[0], false) || !setup->Run())
     return 1;
 
-  Err err;
-  Analyzer analyzer(
-      setup->builder(), setup->build_settings().build_config_file(),
-      setup->GetDotFile(),
-      setup->build_settings().build_args().build_args_dependency_files());
-  std::string output = analyzer.Analyze(input, &err);
-  if (err.has_error()) {
-    err.PrintToStdout();
+  return RunAnalyze(args, input, setup);
+}
+
+int RunAnalyze(const std::vector<std::string>& args, Setup* setup) {
+  if (args.size() != 3) {
+    Err(Location(), "Unknown command format. See \"gn help analyze\"",
+        "Usage: \"gn analyze <out_dir> <input_path> <output_path>")
+        .PrintToStdout();
     return 1;
   }
 
-  if (args[2] == "-") {
-    OutputString(output + "\n");
+  std::string input;
+  if (args[1] == "-") {
+    input = ReadStdin();
   } else {
-    WriteFile(UTF8ToFilePath(args[2]), output, &err);
-    if (err.has_error()) {
-      err.PrintToStdout();
+    bool ret = base::ReadFileToString(UTF8ToFilePath(args[1]), &input);
+    if (!ret) {
+      Err(Location(), "Input file " + args[1] + " not found.").PrintToStdout();
       return 1;
     }
   }
 
-  return 0;
+  return RunAnalyze(args, input, setup);
 }
 
 }  // namespace commands

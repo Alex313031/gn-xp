@@ -340,3 +340,14 @@ void PrintLongHelp(const std::string& text, const std::string& tag) {
   if (is_markdown && in_body)
     OutputString("```\n");
 }
+
+bool IsStandardOutputConsole() {
+  EnsureInitialized();
+  return is_console;
+}
+
+bool SetStandardOutputConsole(bool is_console_value) {
+  bool result = is_console;
+  is_console = is_console_value;
+  return result;
+}
