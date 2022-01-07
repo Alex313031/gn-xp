@@ -438,7 +438,10 @@ const CommandInfoMap& GetCommands() {
     INSERT_COMMAND(Outputs)
     INSERT_COMMAND(Path)
     INSERT_COMMAND(Refs)
-    INSERT_COMMAND(CleanStale);
+    INSERT_COMMAND(CleanStale)
+
+    INSERT_COMMAND(StartServer)
+    INSERT_COMMAND(Desc2)
 
 #undef INSERT_COMMAND
   }

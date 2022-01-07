@@ -52,6 +52,7 @@ int RunClean(const std::vector<std::string>& args);
 extern const char kDesc[];
 extern const char kDesc_HelpShort[];
 extern const char kDesc_Help[];
+std::string RunDescWithSetup(const std::vector<std::string>& args, Setup* setup);
 int RunDesc(const std::vector<std::string>& args);
 
 extern const char kGen[];
@@ -98,6 +99,26 @@ extern const char kCleanStale[];
 extern const char kCleanStale_HelpShort[];
 extern const char kCleanStale_Help[];
 int RunCleanStale(const std::vector<std::string>& args);
+
+// GN query server commands.
+
+// A leading null byte indicates this is an abstract socket address, which is
+// not mapped to any filesystem paths, so we don't have to worry about clean
+// ups.
+//
+// See "abstract socket address" from
+// https://man7.org/linux/man-pages/man7/unix.7.html
+const char kServerSockPath[] = "\0gn_start_server_sock";
+
+extern const char kStartServer[];
+extern const char kStartServer_HelpShort[];
+extern const char kStartServer_Help[];
+int RunStartServer(const std::vector<std::string>& args);
+
+extern const char kDesc2[];
+extern const char kDesc2_HelpShort[];
+extern const char kDesc2_Help[];
+int RunDesc2(const std::vector<std::string>& args);
 
 // -----------------------------------------------------------------------------
 
