@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "bb62564c_91afb42c",
+        "filename": "src/gn/err.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 8,
+      "author": {
+        "id": 1000014
+      },
+      "writtenOn": "2022-01-07T20:24:07Z",
+      "side": 1,
+      "message": "This should have already been fixed by\nhttps://gn-review.googlesource.com/c/gn/+/12760\nIf the other change is still required, can you rebase on trunk?",
+      "range": {
+        "startLine": 8,
+        "startChar": 10,
+        "endLine": 8,
+        "endChar": 16
+      },
+      "revId": "3637d45a7471c9bf9d2effc5c8bd2f21e58f1677",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    }
+  ]
+}
