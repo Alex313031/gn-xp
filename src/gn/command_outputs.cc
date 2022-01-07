@@ -81,6 +81,18 @@ int RunOutputs(const std::vector<std::string>& args) {
   if (!setup->Run())
     return 1;
 
+  return RunOutputs(args, setup);
+}
+
+int RunOutputs(const std::vector<std::string>& args, Setup* setup) {
+  if (args.size() < 2) {
+    Err(Location(),
+        "Expected a build dir and one or more input files or targets.\n"
+        "Usage: \"gn outputs <out_dir> <target-or-file>*\"")
+        .PrintToStdout();
+    return 1;
+  }
+
   std::vector<std::string> inputs(args.begin() + 1, args.end());
 
   UniqueVector<const Target*> target_matches;

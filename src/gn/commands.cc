@@ -386,6 +386,7 @@ const CommandInfoMap& GetCommands() {
     INSERT_COMMAND(Path)
     INSERT_COMMAND(Refs)
     INSERT_COMMAND(CleanStale)
+    INSERT_COMMAND(Query)
 
 #undef INSERT_COMMAND
   }

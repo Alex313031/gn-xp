@@ -37,6 +37,7 @@ extern const char kAnalyze[];
 extern const char kAnalyze_HelpShort[];
 extern const char kAnalyze_Help[];
 int RunAnalyze(const std::vector<std::string>& args);
+int RunAnalyze(const std::vector<std::string>& args, Setup* setup);
 
 extern const char kArgs[];
 extern const char kArgs_HelpShort[];
@@ -57,6 +58,7 @@ extern const char kDesc[];
 extern const char kDesc_HelpShort[];
 extern const char kDesc_Help[];
 int RunDesc(const std::vector<std::string>& args);
+int RunDesc(const std::vector<std::string>& args, Setup* setup);
 
 extern const char kGen[];
 extern const char kGen_HelpShort[];
@@ -77,31 +79,41 @@ extern const char kMeta[];
 extern const char kMeta_HelpShort[];
 extern const char kMeta_Help[];
 int RunMeta(const std::vector<std::string>& args);
+int RunMeta(const std::vector<std::string>& args, Setup* setup);
 
 extern const char kLs[];
 extern const char kLs_HelpShort[];
 extern const char kLs_Help[];
 int RunLs(const std::vector<std::string>& args);
+int RunLs(const std::vector<std::string>& args, Setup* setup);
 
 extern const char kOutputs[];
 extern const char kOutputs_HelpShort[];
 extern const char kOutputs_Help[];
 int RunOutputs(const std::vector<std::string>& args);
+int RunOutputs(const std::vector<std::string>& args, Setup* setup);
 
 extern const char kPath[];
 extern const char kPath_HelpShort[];
 extern const char kPath_Help[];
 int RunPath(const std::vector<std::string>& args);
+int RunPath(const std::vector<std::string>& args, Setup* setup);
 
 extern const char kRefs[];
 extern const char kRefs_HelpShort[];
 extern const char kRefs_Help[];
 int RunRefs(const std::vector<std::string>& args);
+int RunRefs(const std::vector<std::string>& args, Setup* setup);
 
 extern const char kCleanStale[];
 extern const char kCleanStale_HelpShort[];
 extern const char kCleanStale_Help[];
 int RunCleanStale(const std::vector<std::string>& args);
+
+extern const char kQuery[];
+extern const char kQuery_HelpShort[];
+extern const char kQuery_Help[];
+int RunQuery(const std::vector<std::string>& args);
 
 // -----------------------------------------------------------------------------
 

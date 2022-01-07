@@ -59,4 +59,12 @@ void PrintShortHelp(const std::string& line,
 // be emitted. Used only in markdown mode.
 void PrintLongHelp(const std::string& text, const std::string& tag = "");
 
+// Return true if the current output is a console (and can display
+// colors through ANSI escape sequences).
+bool IsStandardOutputConsole();
+
+// Change the value returned by IsConsoleOuput(). This function
+// returns the previous setting, so it can be restored later.
+bool SetStandardOutputConsole(bool is_console);
+
 #endif  // TOOLS_GN_STANDARD_OUT_H_
