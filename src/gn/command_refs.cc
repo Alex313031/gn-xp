@@ -345,15 +345,26 @@ int RunRefs(const std::vector<std::string>& args) {
     return 1;
   }
 
-  const auto& switches = CommandSwitches::Get();
-  bool tree = switches.has_tree();
-  bool all = switches.has_all();
-  bool default_toolchain_only = switches.has_default_toolchain();
-
   // Deliberately leaked to avoid expensive process teardown.
   Setup* setup = new Setup;
   if (!setup->DoSetup(args[0], false) || !setup->Run())
     return 1;
+
+  return RunRefs(args, setup);
+}
+
+int RunRefs(const std::vector<std::string>& args, Setup* setup) {
+  if (args.size() <= 1) {
+    Err(Location(), "Unknown command format. See \"gn help refs\"",
+        "Usage: \"gn refs <out_dir> (<label_pattern>|<file>)*\"")
+        .PrintToStdout();
+    return 1;
+  }
+
+  const auto& switches = CommandSwitches::Get();
+  bool tree = switches.has_tree();
+  bool all = switches.has_all();
+  bool default_toolchain_only = switches.has_default_toolchain();
 
   // The inputs are everything but the first arg (which is the build dir).
   std::vector<std::string> inputs;
