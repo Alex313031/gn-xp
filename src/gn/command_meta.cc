@@ -85,6 +85,18 @@ int RunMeta(const std::vector<std::string>& args) {
   if (!setup->DoSetup(args[0], false) || !setup->Run())
     return 1;
 
+  return RunMeta(args, setup);
+}
+
+int RunMeta(const std::vector<std::string>& args, Setup* setup) {
+  if (args.size() == 0) {
+    Err(Location(), "Unknown command format. See \"gn help meta\"",
+        "Usage: \"gn meta <out_dir> <target>* --data=<key>[,<key>*] "
+        "[--walk=<key>[,<key>*]*] [--rebase=<dest dir>]\"")
+        .PrintToStdout();
+    return 1;
+  }
+
   const auto& switches = CommandSwitches::Get();
   std::string rebase_dir = switches.meta_rebase_dir();
   std::string data_keys_str = switches.meta_data_keys();

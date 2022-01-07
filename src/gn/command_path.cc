@@ -323,6 +323,17 @@ int RunPath(const std::vector<std::string>& args) {
   if (!setup->Run())
     return 1;
 
+  return RunPath(args, setup);
+}
+
+int RunPath(const std::vector<std::string>& args, Setup* setup) {
+  if (args.size() != 3) {
+    Err(Location(), "Unknown command format. See \"gn help path\"",
+        "Usage: \"gn path <out_dir> <target_one> <target_two>\"")
+        .PrintToStdout();
+    return 1;
+  }
+
   const Target* target1 = ResolveTargetFromCommandLineString(setup, args[1]);
   if (!target1)
     return 1;

@@ -618,20 +618,13 @@ Examples
       each one was set from.
 )";
 
-int RunDesc(const std::vector<std::string>& args) {
+int RunDesc(const std::vector<std::string>& args, Setup* setup) {
   if (args.size() != 2 && args.size() != 3) {
     Err(Location(), "Unknown command format. See \"gn help desc\"",
         "Usage: \"gn desc <out_dir> <target_name> [<what to display>]\"")
         .PrintToStdout();
     return 1;
   }
-
-  // Deliberately leaked to avoid expensive process teardown.
-  Setup* setup = new Setup;
-  if (!setup->DoSetup(args[0], false))
-    return 1;
-  if (!setup->Run())
-    return 1;
 
   // Resolve target(s) and config from inputs.
   UniqueVector<const Target*> target_matches;
@@ -709,6 +702,16 @@ int RunDesc(const std::vector<std::string>& args) {
   }
 
   return 0;
+}
+
+int RunDesc(const std::vector<std::string>& args) {
+  auto setup = std::make_unique<Setup>();
+  if (!setup->DoSetup(args[0], false))
+    return 1;
+  if (!setup->Run())
+    return 1;
+
+  return RunDesc(args, setup.get());
 }
 
 }  // namespace commands
