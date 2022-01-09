@@ -22,6 +22,30 @@
       },
       "revId": "3637d45a7471c9bf9d2effc5c8bd2f21e58f1677",
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "23458927_35c77a99",
+        "filename": "src/gn/err.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 8,
+      "author": {
+        "id": 1000842
+      },
+      "writtenOn": "2022-01-09T18:25:10Z",
+      "side": 1,
+      "message": "Thanks for reviewing. I\u0027ve removed the `err.h` change and have rebased on top of main.",
+      "parentUuid": "bb62564c_91afb42c",
+      "range": {
+        "startLine": 8,
+        "startChar": 10,
+        "endLine": 8,
+        "endChar": 16
+      },
+      "revId": "3637d45a7471c9bf9d2effc5c8bd2f21e58f1677",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
     }
   ]
 }
