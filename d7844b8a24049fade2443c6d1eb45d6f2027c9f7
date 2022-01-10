@@ -16,6 +16,24 @@
       "message": "Thanks! I notice you\u0027re not in the AUTHORS file. Can you also add your info to that in this patch? Sorry for not noticing this last time.",
       "revId": "d7844b8a24049fade2443c6d1eb45d6f2027c9f7",
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "2f42ef29_4a31235d",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 6
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000842
+      },
+      "writtenOn": "2022-01-10T13:42:38Z",
+      "side": 1,
+      "message": "Not a problem, I have added `Red Hat` to the list, same as how it\u0027s on V8: https://chromium.googlesource.com/v8/v8.git/+/refs/heads/main/AUTHORS#28 , please let me know if that\u0027s ok?",
+      "parentUuid": "a27cbdfb_8792a825",
+      "revId": "d7844b8a24049fade2443c6d1eb45d6f2027c9f7",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
     }
   ]
 }
