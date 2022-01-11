@@ -18,6 +18,24 @@
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "60938742_9f291cc1",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000067
+      },
+      "writtenOn": "2022-01-11T15:40:32Z",
+      "side": 1,
+      "message": "Hi Brett,\n\nI would love to discuss GN evolution with you, because we have some drastic requirements for the Fuchsia build that are not currently met by GN. Also I\u0027m interested in any way to improve Rust supportin the tool.\n\nRegarding target resolution, I agree that the code is very complicated. My understanding is that this comes from the fact that Target::OnResolved() must pull a lot of different bits of information upwards in the build graph, in a way that is consistent with what later high level operations (i.e. analysis and ninja generation) expect, and keeping everything in sync in incredibly difficult (and makes changing behaviour even more difficult), since there are some many target types and special cases to consider.\n\nI do not think that my CL makes this complexity much worse, it just avoids a ton of un-necessary work and doesn\u0027t even touch the upper layers, but I respect your judgement here.\n\nLonger term, what would you think about changing the way dependent data is collected? For example, it should be possible to perform it on demand (e.g. at analysis / generation time), which would simplify a lot of code. The drawback would be that it _may_ be slower, though the work could be performed in parallel threads and some amount of memoization could be used to avoid repeated work (it\u0027s hard to tell in advance).",
+      "parentUuid": "e0ab1dc4_2564456d",
+      "revId": "3745977f932901cfd85b31e5e2f0413a89e2a20c",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "c80cbb34_b8496727",
