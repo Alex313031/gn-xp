@@ -1,0 +1,61 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "3102bcca_9c8532b8",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 9
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000004
+      },
+      "writtenOn": "2022-01-14T01:19:20Z",
+      "side": 1,
+      "message": "(I know this is super-ancient, was just here looking for something else and noticed a couple minor things.)",
+      "revId": "a14138674f6a9d3d5dc4f0b288cd65229ffe6a57",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "90c2ae0f_a3dfc3cf",
+        "filename": "docs/reference.md",
+        "patchSetId": 9
+      },
+      "lineNbr": 5198,
+      "author": {
+        "id": 1000004
+      },
+      "writtenOn": "2022-01-14T01:19:20Z",
+      "side": 1,
+      "message": "No , here.",
+      "range": {
+        "startLine": 5198,
+        "startChar": 26,
+        "endLine": 5198,
+        "endChar": 27
+      },
+      "revId": "a14138674f6a9d3d5dc4f0b288cd65229ffe6a57",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0379b7f7_b066f355",
+        "filename": "src/gn/config_values.h",
+        "patchSetId": 9
+      },
+      "lineNbr": 93,
+      "author": {
+        "id": 1000004
+      },
+      "writtenOn": "2022-01-14T01:19:20Z",
+      "side": 1,
+      "message": "Should externs_ be updated in AppendValues() in .cc? Maybe a comment there if no.",
+      "revId": "a14138674f6a9d3d5dc4f0b288cd65229ffe6a57",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    }
+  ]
+}
