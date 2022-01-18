@@ -16,6 +16,23 @@
       "message": "Regarding the copy-constructor behaviour, I cannot find the exact C++ reference to it, but I checked with https://godbolt.org/z/Pc817Ts7q that the default base constructor is indeed called in the copy constructor implicitly.",
       "revId": "02aa2a03d2b6ebc0507ed1094b8f741bd45cf727",
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b94e8553_58825b75",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000012
+      },
+      "writtenOn": "2022-01-18T17:34:32Z",
+      "side": 1,
+      "message": "I defer to brettw@ here.",
+      "revId": "02aa2a03d2b6ebc0507ed1094b8f741bd45cf727",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
     }
   ]
 }
