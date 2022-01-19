@@ -72,6 +72,24 @@
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "797bed98_1330a390",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000313
+      },
+      "writtenOn": "2022-01-19T20:14:36Z",
+      "side": 1,
+      "message": "Totally understandable that you don\u0027t have the time to get this past the finish line. David, can you take it from here? Up to you how to measure.",
+      "parentUuid": "99a944d8_f768231e",
+      "revId": "1e8e5c242daa4f02483ff4dfd90909e327ac3e23",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "8c8dcd0b_c6f40fe2",
