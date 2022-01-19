@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c7c118af_61e04041",
+        "filename": "src/gn/command_desc.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 637,
+      "author": {
+        "id": 1000067
+      },
+      "writtenOn": "2022-01-19T12:20:51Z",
+      "side": 1,
+      "message": "nit: since this is modifying a global, it\u0027 simpler to let the caller deal with the fd redirection itself. Also RunDesc() could simply have an extra `Setup* setup \u003d nullptr` parameter, and only allocate a new Setup object if `nullptr` was passed. That would avoid introducing a new function, which is nicer since we plan to do the same for other read-only query commands (e.g. `refs`, `path`, `outputs`).",
+      "revId": "f53e023766a7bb4f2a8fed24d18e6c00d144127b",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7dc0bc18_95745682",
+        "filename": "src/gn/commands.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 114,
+      "author": {
+        "id": 1000067
+      },
+      "writtenOn": "2022-01-19T12:20:51Z",
+      "side": 1,
+      "message": "Long term, it\u0027s probably a better idea to use a path that ends with a small hash of the current directory\u0027s absolute path. This will allow several servers to run concurrently, when used from different workspaces.\n\nI recommend moving the socket connection / binding to a dedicated class, in order to make it easier to later improve to support non-Linux systems (i.e. using a NamedPipe on Win32, or a Unix pipe on OSX/BSDs with a $HOME/.config/var/xxx filesystem entry, and possibly a `.pid` file to check for liveliness in case of server crash).",
+      "revId": "f53e023766a7bb4f2a8fed24d18e6c00d144127b",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    }
+  ]
+}

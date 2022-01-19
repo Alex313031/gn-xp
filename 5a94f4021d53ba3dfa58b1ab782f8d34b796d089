@@ -160,6 +160,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "11669e2d_bdec20d8",
+        "filename": "src/gn/command_desc.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 44,
+      "author": {
+        "id": 1000067
+      },
+      "writtenOn": "2022-01-19T12:20:51Z",
+      "side": 1,
+      "message": "Requiring `sudo` is indeed a real annoyance, and sending the fd through sendmsg() should be just as reliable, so it\u0027s probably a better way. stderr would need to be redirected as well. This is probably better encapsulated in a dedicated C++ class though.\n\nConsider using dup2() to change what file descriptors 1 and 2 point to, this will make OutputString() and _anything_ _else_ send stdout/stderr to the right file descriptors. For example:\n\n```\n// Create a RedirectStandardOutputAndError() instance to\n// temporarily redirect stdout and stderr to known file descriptors.\n// The previous output and error descriptors are saved in the\n// constructor, and restored by the destructor.\nclass RedirectStandardOutputAndError {\n public:\n  RedirectStandardOutputAndError(int out_fd, int err_fd)\n    : prev_out_fd_(dup(1)), prev_err_fd_(dup(2)) {\n    dup2(out_fd, 1);\n    dup2(err_fd, 2);\n  }\n\n  ~RedirectStandardOutputAndError() {\n    dup2(prev_out_fd_, 1);\n    dup2(prev_err_fd_, 2);\n  }\n\n private:\n  int prev_out_fd_;\n  int prev_err_fd_;\n};\n```\n\nSomething else is needed for Windows though, i.e. this would need SetStdHandle() and writing to `stdout` and `stderr` variables directly. See [1] and [2] for inspiration (though I suggest leaving this out of this POC for now) :-)\n\n[1] https://stackoverflow.com/questions/54094127/redirecting-stdout-in-win32-does-not-redirect-stdout/54096218\n[2] https://www.asawicki.info/news_1326_redirecting_standard_io_to_windows_console",
+      "parentUuid": "7c55ebef_6a8f9f80",
+      "revId": "5a94f4021d53ba3dfa58b1ab782f8d34b796d089",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "467aef74_677b703d",
         "filename": "src/gn/command_desc.cc",
         "patchSetId": 1
@@ -276,6 +294,24 @@
       "side": 1,
       "message": "It\u0027s intentional given the current format",
       "parentUuid": "418b1e76_b663b953",
+      "revId": "5a94f4021d53ba3dfa58b1ab782f8d34b796d089",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c83b4975_4c669245",
+        "filename": "src/gn/command_start_server.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 28,
+      "author": {
+        "id": 1000067
+      },
+      "writtenOn": "2022-01-19T12:20:51Z",
+      "side": 1,
+      "message": "Ok, a comment would be welcome to explain this subtle issue then :-)",
+      "parentUuid": "48e48ceb_4fd8a975",
       "revId": "5a94f4021d53ba3dfa58b1ab782f8d34b796d089",
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
     },
