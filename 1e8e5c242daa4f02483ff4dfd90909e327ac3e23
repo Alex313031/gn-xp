@@ -52,6 +52,93 @@
       "parentUuid": "c456c4dd_8d32d698",
       "revId": "1e8e5c242daa4f02483ff4dfd90909e327ac3e23",
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "99a944d8_f768231e",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000633
+      },
+      "writtenOn": "2022-01-19T18:28:07Z",
+      "side": 1,
+      "message": "I did a pass through David\u0027s changes and only had some minor nits. Overall, I think they simplify the patch set quite a bit. \n\nIdeally, the next step would be to gather numbers on whether this change impacts performance on CQ/CI bots. IIRC, phosek@ had an idea on how we could test an experimental GN on Fuchsia bots, but there were some changes needed to make that happen.\n\nAlternatively, we could try to land this first and then collect CQ/CI performance data. I would assume that is brettw@\u0027s call on whether that would be okay to do.\n\nI would really like to push this over the finish line, but I\u0027m a bit over-committed at the moment. I might be able to try to get docs and tests updated in the next couple weeks, unless someone else comes free first.",
+      "parentUuid": "d4932361_e931233f",
+      "revId": "1e8e5c242daa4f02483ff4dfd90909e327ac3e23",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8c8dcd0b_c6f40fe2",
+        "filename": "src/gn/target.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 389,
+      "author": {
+        "id": 1000633
+      },
+      "writtenOn": "2022-01-19T18:28:07Z",
+      "side": 1,
+      "message": "This is just dependency_output() now.",
+      "range": {
+        "startLine": 389,
+        "startChar": 41,
+        "endLine": 389,
+        "endChar": 45
+      },
+      "revId": "1e8e5c242daa4f02483ff4dfd90909e327ac3e23",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ff7e557f_500a23eb",
+        "filename": "src/gn/target.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 407,
+      "author": {
+        "id": 1000633
+      },
+      "writtenOn": "2022-01-19T18:28:07Z",
+      "side": 1,
+      "message": "Can remove.",
+      "range": {
+        "startLine": 407,
+        "startChar": 0,
+        "endLine": 407,
+        "endChar": 5
+      },
+      "revId": "1e8e5c242daa4f02483ff4dfd90909e327ac3e23",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "846b25a7_639ba51f",
+        "filename": "src/gn/target.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 415,
+      "author": {
+        "id": 1000633
+      },
+      "writtenOn": "2022-01-19T18:28:07Z",
+      "side": 1,
+      "message": "Can remove.",
+      "range": {
+        "startLine": 415,
+        "startChar": 0,
+        "endLine": 415,
+        "endChar": 5
+      },
+      "revId": "1e8e5c242daa4f02483ff4dfd90909e327ac3e23",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
     }
   ]
 }
