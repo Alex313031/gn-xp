@@ -18,6 +18,24 @@
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "0fb354ec_4ffe5f91",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1001267
+      },
+      "writtenOn": "2022-01-19T11:25:20Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "5c0d5f8a_886d3d9f",
+      "revId": "5a94f4021d53ba3dfa58b1ab782f8d34b796d089",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "d2bb6e88_bb091a08",
@@ -35,6 +53,24 @@
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "fadf1eb5_5f5c290e",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 21,
+      "author": {
+        "id": 1001267
+      },
+      "writtenOn": "2022-01-19T11:25:20Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "d2bb6e88_bb091a08",
+      "revId": "5a94f4021d53ba3dfa58b1ab782f8d34b796d089",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "ba56535c_a160e972",
@@ -48,6 +84,24 @@
       "writtenOn": "2022-01-10T16:05:34Z",
       "side": 1,
       "message": "Please clarify that this is Linux specific (abstract socket namespaces do not exist in other operating systems, which makes things a little bit more painful to implement there, i.e. you essentially need a filesystem entry like $HOME/.local/\u003cmy-socket\u003e, and a PID file that will indicate whether a server process is actually bound to it (unlike abstract ones, they do not get killed when the process crashes or stops unexpectedly, etc..). Updating the PID file atomically is also a fun operation :-/ And then there is Windows.",
+      "revId": "5a94f4021d53ba3dfa58b1ab782f8d34b796d089",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "90b26e77_e23bfb36",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 23,
+      "author": {
+        "id": 1001267
+      },
+      "writtenOn": "2022-01-19T11:25:20Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ba56535c_a160e972",
       "revId": "5a94f4021d53ba3dfa58b1ab782f8d34b796d089",
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
     },
@@ -88,6 +142,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "7c55ebef_6a8f9f80",
+        "filename": "src/gn/command_desc.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 44,
+      "author": {
+        "id": 1001267
+      },
+      "writtenOn": "2022-01-19T11:25:20Z",
+      "side": 1,
+      "message": "TIL about pidfd_getfd and is using it to get a FD to client\u0027s stdout. It requires Linux 5.6 and PTRACE_MODE_ATTACH_REALCREDS. But is suppose to be more reliable than sending FD directly through sendmsg. I\u0027m using `sudo` to get PTRACE_MODE_ATTACH_REALCREDS, not sure whether there\u0027s a better way. We can always switch to send FD directly also.\n\nThat said I still think we\u0027ll need to change `OutputString` so it can print to arbitrary FDs, same for error propagation.",
+      "parentUuid": "1db7823d_f74fa5ac",
+      "revId": "5a94f4021d53ba3dfa58b1ab782f8d34b796d089",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "467aef74_677b703d",
         "filename": "src/gn/command_desc.cc",
         "patchSetId": 1
@@ -105,6 +177,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "717613b9_0f838dfe",
+        "filename": "src/gn/command_desc.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 638,
+      "author": {
+        "id": 1001267
+      },
+      "writtenOn": "2022-01-19T11:25:20Z",
+      "side": 1,
+      "message": "Some function down the call chain asks for a `Setup*` instead of a constant reference, to be figured out later 😊",
+      "parentUuid": "467aef74_677b703d",
+      "revId": "5a94f4021d53ba3dfa58b1ab782f8d34b796d089",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "4596b19d_0d28a7b8",
         "filename": "src/gn/command_desc.cc",
         "patchSetId": 1
@@ -116,6 +206,24 @@
       "writtenOn": "2022-01-10T16:05:34Z",
       "side": 1,
       "message": "I recommend using `auto setup \u003d std::make_unique\u003cSetup\u003e()` here, since normally the setup object is leaked by GN to speed up process exit, which is not really a worry in the case of the query server.",
+      "revId": "5a94f4021d53ba3dfa58b1ab782f8d34b796d089",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "18ea0380_307fa2dc",
+        "filename": "src/gn/command_desc.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 731,
+      "author": {
+        "id": 1001267
+      },
+      "writtenOn": "2022-01-19T11:25:20Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "4596b19d_0d28a7b8",
       "revId": "5a94f4021d53ba3dfa58b1ab782f8d34b796d089",
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
     },
@@ -156,6 +264,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "48e48ceb_4fd8a975",
+        "filename": "src/gn/command_start_server.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 28,
+      "author": {
+        "id": 1001267
+      },
+      "writtenOn": "2022-01-19T11:25:20Z",
+      "side": 1,
+      "message": "It\u0027s intentional given the current format",
+      "parentUuid": "418b1e76_b663b953",
+      "revId": "5a94f4021d53ba3dfa58b1ab782f8d34b796d089",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "39ef0ef0_657ee4da",
         "filename": "src/gn/command_start_server.cc",
         "patchSetId": 1
@@ -167,6 +293,24 @@
       "writtenOn": "2022-01-10T16:05:34Z",
       "side": 1,
       "message": "nit: also use `auto setup \u003d std::unique_ptr\u003cSetup\u003e()` here instead, it\u0027s cleaner :-)",
+      "revId": "5a94f4021d53ba3dfa58b1ab782f8d34b796d089",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e61a48d5_1d18595c",
+        "filename": "src/gn/command_start_server.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 117,
+      "author": {
+        "id": 1001267
+      },
+      "writtenOn": "2022-01-19T11:25:20Z",
+      "side": 1,
+      "message": "I get a weird segfault if I try to do this. To be figured out ... :P",
+      "parentUuid": "39ef0ef0_657ee4da",
       "revId": "5a94f4021d53ba3dfa58b1ab782f8d34b796d089",
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
     },
