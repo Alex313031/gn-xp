@@ -178,6 +178,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "c06b984c_0aabb892",
+        "filename": "src/gn/command_desc.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 44,
+      "author": {
+        "id": 1001267
+      },
+      "writtenOn": "2022-01-20T08:32:43Z",
+      "side": 1,
+      "message": "TIL dup2, very nice! Changed to use sendmsg to pass FDs directly, and dup2 to redirect server writes, much cleaner now! Thanks!",
+      "parentUuid": "11669e2d_bdec20d8",
+      "revId": "5a94f4021d53ba3dfa58b1ab782f8d34b796d089",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "467aef74_677b703d",
         "filename": "src/gn/command_desc.cc",
         "patchSetId": 1

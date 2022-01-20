@@ -20,6 +20,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "1c5d69f7_9ce5e32a",
+        "filename": "src/gn/command_desc.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 637,
+      "author": {
+        "id": 1001267
+      },
+      "writtenOn": "2022-01-20T08:32:43Z",
+      "side": 1,
+      "message": "the top-level function signature needs to match:\n\n  using CommandRunner \u003d int (*)(const std::vector\u003cstd::string\u003e\u0026);\n\nIIUC (with limited C++ knowledge) we can\u0027t do this easily, unless we change CommandRunner and everyone else",
+      "parentUuid": "c7c118af_61e04041",
+      "revId": "f53e023766a7bb4f2a8fed24d18e6c00d144127b",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "7dc0bc18_95745682",
         "filename": "src/gn/commands.h",
         "patchSetId": 2
