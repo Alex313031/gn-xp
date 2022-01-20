@@ -38,6 +38,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "488bf9c8_d66c069b",
+        "filename": "src/gn/command_desc.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 637,
+      "author": {
+        "id": 1000067
+      },
+      "writtenOn": "2022-01-20T14:22:17Z",
+      "side": 1,
+      "message": "Oh I see, yes two functions should be ok then. No need to modify all commands for this then :-)",
+      "parentUuid": "1c5d69f7_9ce5e32a",
+      "revId": "f53e023766a7bb4f2a8fed24d18e6c00d144127b",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "7dc0bc18_95745682",
         "filename": "src/gn/commands.h",
         "patchSetId": 2

@@ -194,6 +194,24 @@
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "91b1d8db_94deda9d",
+        "filename": "src/gn/command_desc.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 44,
+      "author": {
+        "id": 1000067
+      },
+      "writtenOn": "2022-01-20T14:22:17Z",
+      "side": 1,
+      "message": "Nice!!",
+      "parentUuid": "c06b984c_0aabb892",
+      "revId": "5a94f4021d53ba3dfa58b1ab782f8d34b796d089",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "467aef74_677b703d",
@@ -225,6 +243,24 @@
       "side": 1,
       "message": "Some function down the call chain asks for a `Setup*` instead of a constant reference, to be figured out later 😊",
       "parentUuid": "467aef74_677b703d",
+      "revId": "5a94f4021d53ba3dfa58b1ab782f8d34b796d089",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "1a13f51b_7465349e",
+        "filename": "src/gn/command_desc.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 638,
+      "author": {
+        "id": 1000067
+      },
+      "writtenOn": "2022-01-20T14:22:17Z",
+      "side": 1,
+      "message": "Damn :-(",
+      "parentUuid": "717613b9_0f838dfe",
       "revId": "5a94f4021d53ba3dfa58b1ab782f8d34b796d089",
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
     },
