@@ -4,7 +4,6 @@
 
 #include <stddef.h>
 
-#include "base/command_line.h"
 #include "base/strings/stringprintf.h"
 #include "gn/commands.h"
 #include "gn/header_checker.h"
@@ -194,8 +193,8 @@ int RunCheck(const std::vector<std::string>& args) {
   if (!setup->Run())
     return 1;
 
-  const base::CommandLine* cmdline = base::CommandLine::ForCurrentProcess();
-  bool default_toolchain_only = cmdline->HasSwitch(switches::kDefaultToolchain);
+  const auto& switches = CommandSwitches::Get();
+  bool default_toolchain_only = switches.has_default_toolchain();
 
   std::vector<const Target*> all_targets =
       setup->builder().GetAllResolvedTargets();
@@ -237,17 +236,17 @@ int RunCheck(const std::vector<std::string>& args) {
     }
   }
 
-  bool force = cmdline->HasSwitch("force");
-  bool check_generated = cmdline->HasSwitch("check-generated");
+  bool force = switches.has_force();
+  bool check_generated = switches.has_check_generated();
   bool check_system =
-      setup->check_system_includes() || cmdline->HasSwitch("check-system");
+      setup->check_system_includes() || switches.has_check_system();
 
   if (!CheckPublicHeaders(&setup->build_settings(), all_targets,
                           targets_to_check, force, check_generated,
                           check_system))
     return 1;
 
-  if (!base::CommandLine::ForCurrentProcess()->HasSwitch(switches::kQuiet)) {
+  if (!switches.has_quiet()) {
     if (filtered_by_build_config) {
       // Tell the user about the implicit filtering since this is obscure.
       OutputString(base::StringPrintf(
