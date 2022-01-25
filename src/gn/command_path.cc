@@ -6,7 +6,6 @@
 
 #include <algorithm>
 
-#include "base/command_line.h"
 #include "base/strings/stringprintf.h"
 #include "gn/commands.h"
 #include "gn/setup.h"
@@ -331,14 +330,11 @@ int RunPath(const std::vector<std::string>& args) {
   if (!target2)
     return 1;
 
+  const auto& switches = CommandSwitches::Get();
   Options options;
-  options.print_what = base::CommandLine::ForCurrentProcess()->HasSwitch("all")
-                           ? PrintWhat::ALL
-                           : PrintWhat::ONE;
-  options.public_only =
-      base::CommandLine::ForCurrentProcess()->HasSwitch("public");
-  options.with_data =
-      base::CommandLine::ForCurrentProcess()->HasSwitch("with-data");
+  options.print_what = switches.has_all() ? PrintWhat::ALL : PrintWhat::ONE;
+  options.public_only = switches.has_public();
+  options.with_data = switches.has_with_data();
   if (options.public_only && options.with_data) {
     Err(Location(), "Can't use --public with --with-data for 'gn path'.",
         "Your zealous over-use of arguments has inevitably resulted in an "
