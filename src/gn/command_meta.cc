@@ -5,7 +5,6 @@
 #include <algorithm>
 #include <set>
 
-#include "base/command_line.h"
 #include "base/strings/string_split.h"
 #include "gn/commands.h"
 #include "gn/metadata_walk.h"
@@ -86,10 +85,10 @@ int RunMeta(const std::vector<std::string>& args) {
   if (!setup->DoSetup(args[0], false) || !setup->Run())
     return 1;
 
-  const base::CommandLine* cmdline = base::CommandLine::ForCurrentProcess();
-  std::string rebase_dir = cmdline->GetSwitchValueString("rebase");
-  std::string data_keys_str = cmdline->GetSwitchValueString("data");
-  std::string walk_keys_str = cmdline->GetSwitchValueString("walk");
+  const auto& switches = CommandSwitches::Get();
+  std::string rebase_dir = switches.meta_rebase_dir();
+  std::string data_keys_str = switches.meta_data_keys();
+  std::string walk_keys_str = switches.meta_walk_keys();
 
   std::vector<std::string> inputs(args.begin() + 1, args.end());
 

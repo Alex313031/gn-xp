@@ -9,7 +9,6 @@
 #include <set>
 #include <sstream>
 
-#include "base/command_line.h"
 #include "base/json/json_writer.h"
 #include "base/strings/string_number_conversions.h"
 #include "base/strings/string_util.h"
@@ -27,11 +26,6 @@
 namespace commands {
 
 namespace {
-
-// Desc-specific command line switches.
-const char kBlame[] = "blame";
-const char kTree[] = "tree";
-const char kAll[] = "all";
 
 void PrintDictValue(const base::Value* value,
                     int indentLevel,
@@ -203,7 +197,7 @@ void PublicHandler(const std::string& name,
 void ConfigsHandler(const std::string& name,
                     const base::Value* value,
                     bool value_only) {
-  bool tree = base::CommandLine::ForCurrentProcess()->HasSwitch(kTree);
+  bool tree = CommandSwitches::Get().has_tree();
   if (tree)
     DefaultHandler(name + " tree (in order applying)", value, value_only);
   else
@@ -214,8 +208,9 @@ void ConfigsHandler(const std::string& name,
 void DepsHandler(const std::string& name,
                  const base::Value* value,
                  bool value_only) {
-  bool tree = base::CommandLine::ForCurrentProcess()->HasSwitch(kTree);
-  bool all = base::CommandLine::ForCurrentProcess()->HasSwitch(kTree);
+  const auto& switches = CommandSwitches::Get();
+  bool tree = switches.has_tree();
+  bool all = switches.has_all();
   if (tree) {
     DefaultHandler("Dependency tree", value, value_only);
   } else {
@@ -630,7 +625,6 @@ int RunDesc(const std::vector<std::string>& args) {
         .PrintToStdout();
     return 1;
   }
-  const base::CommandLine* cmdline = base::CommandLine::ForCurrentProcess();
 
   // Deliberately leaked to avoid expensive process teardown.
   Setup* setup = new Setup;
@@ -648,16 +642,15 @@ int RunDesc(const std::vector<std::string>& args) {
   std::vector<std::string> target_list;
   target_list.push_back(args[1]);
 
+  const auto& switches = CommandSwitches::Get();
   if (!ResolveFromCommandLineInput(
-          setup, target_list, cmdline->HasSwitch(switches::kDefaultToolchain),
-          &target_matches, &config_matches, &toolchain_matches, &file_matches))
+          setup, target_list, switches.has_default_toolchain(), &target_matches,
+          &config_matches, &toolchain_matches, &file_matches))
     return 1;
 
   std::string what_to_print;
   if (args.size() == 3)
     what_to_print = args[2];
-
-  bool json = cmdline->GetSwitchValueString("format") == "json";
 
   if (target_matches.empty() && config_matches.empty()) {
     OutputString(
@@ -666,7 +659,7 @@ int RunDesc(const std::vector<std::string>& args) {
     return 1;
   }
 
-  if (json) {
+  if (switches.has_format_json()) {
     // Convert all targets/configs to JSON, serialize and print them
     auto res = std::make_unique<base::DictionaryValue>();
     if (!target_matches.empty()) {
@@ -675,8 +668,8 @@ int RunDesc(const std::vector<std::string>& args) {
             target->label().GetUserVisibleName(
                 target->settings()->default_toolchain_label()),
             DescBuilder::DescriptionForTarget(
-                target, what_to_print, cmdline->HasSwitch(kAll),
-                cmdline->HasSwitch(kTree), cmdline->HasSwitch(kBlame)));
+                target, what_to_print, switches.has_all(), switches.has_tree(),
+                switches.has_blame()));
       }
     } else if (!config_matches.empty()) {
       for (const auto* config : config_matches) {
@@ -701,8 +694,8 @@ int RunDesc(const std::vector<std::string>& args) {
       printed_output = true;
 
       if (!PrintTarget(target, what_to_print, !multiple_outputs, handlers,
-                       cmdline->HasSwitch(kAll), cmdline->HasSwitch(kTree),
-                       cmdline->HasSwitch(kBlame)))
+                       switches.has_all(), switches.has_tree(),
+                       switches.has_blame()))
         return 1;
     }
     for (const Config* config : config_matches) {
