@@ -7,7 +7,6 @@
 #include <map>
 #include <set>
 
-#include "base/command_line.h"
 #include "base/files/file_util.h"
 #include "base/strings/string_split.h"
 #include "base/strings/string_util.h"
@@ -346,10 +345,10 @@ int RunRefs(const std::vector<std::string>& args) {
     return 1;
   }
 
-  const base::CommandLine* cmdline = base::CommandLine::ForCurrentProcess();
-  bool tree = cmdline->HasSwitch("tree");
-  bool all = cmdline->HasSwitch("all");
-  bool default_toolchain_only = cmdline->HasSwitch(switches::kDefaultToolchain);
+  const auto& switches = CommandSwitches::Get();
+  bool tree = switches.has_tree();
+  bool all = switches.has_all();
+  bool default_toolchain_only = switches.has_default_toolchain();
 
   // Deliberately leaked to avoid expensive process teardown.
   Setup* setup = new Setup;
@@ -418,7 +417,7 @@ int RunRefs(const std::vector<std::string>& args) {
   // have been converted to targets at this point. Configs will have been
   // converted to targets also, but there could be no targets referencing the
   // config, which is different than no config with that name.
-  bool quiet = cmdline->HasSwitch("q");
+  bool quiet = switches.has_quiet();
   if (!quiet && config_matches.empty() && explicit_target_matches.empty() &&
       target_matches.empty()) {
     OutputString("The input matches no targets, configs, or files.\n",
