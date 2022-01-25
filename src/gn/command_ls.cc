@@ -5,7 +5,6 @@
 #include <algorithm>
 #include <set>
 
-#include "base/command_line.h"
 #include "gn/commands.h"
 #include "gn/label_pattern.h"
 #include "gn/setup.h"
@@ -69,8 +68,7 @@ int RunLs(const std::vector<std::string>& args) {
   if (!setup->DoSetup(args[0], false) || !setup->Run())
     return 1;
 
-  const base::CommandLine* cmdline = base::CommandLine::ForCurrentProcess();
-  bool default_toolchain_only = cmdline->HasSwitch(switches::kDefaultToolchain);
+  bool default_toolchain_only = CommandSwitches::Get().has_default_toolchain();
 
   std::vector<const Target*> matches;
   if (args.size() > 1) {
