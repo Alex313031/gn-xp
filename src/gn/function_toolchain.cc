@@ -826,12 +826,17 @@ Tool variables
         under compilation.
 
     {{externs}}
+    {{externs_newline}}
         Expands to the list of --extern flags needed to include addition Rust
         libraries in this target. Includes any specified renamed dependencies.
+        See {{inputs_newline}} for an explanation of the
+        _newline variant.
 
     {{rustdeps}}
+    {{rustdeps_newline}}
         Expands to the list of -Ldependency=<path> strings needed to compile
-        this target.
+        this target. See {{inputs_newline}} for an explanation of the
+        _newline variant.
 
     {{rustenv}}
         Expands to the list of environment variables.

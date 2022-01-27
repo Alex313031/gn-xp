@@ -24,7 +24,10 @@ const Substitution kRustSubstitutionCrateName = {"{{crate_name}}",
 const Substitution kRustSubstitutionCrateType = {"{{crate_type}}",
                                                  "crate_type"};
 const Substitution kRustSubstitutionExterns = {"{{externs}}", "externs"};
+const Substitution kRustSubstitutionExternsNewline = {"{{externs_newline}}", "externs_newline"};
 const Substitution kRustSubstitutionRustDeps = {"{{rustdeps}}", "rustdeps"};
+const Substitution kRustSubstitutionRustDepsNewline = {"{{rustdeps_newline}}",
+                                                       "rustdeps_newline"};
 const Substitution kRustSubstitutionRustEnv = {"{{rustenv}}", "rustenv"};
 const Substitution kRustSubstitutionRustFlags = {"{{rustflags}}", "rustflags"};
 const Substitution kRustSubstitutionSources = {"{{sources}}", "sources"};
@@ -36,7 +39,9 @@ bool IsValidRustSubstitution(const Substitution* type) {
          type == &kRustSubstitutionCrateName ||
          type == &kRustSubstitutionCrateType ||
          type == &kRustSubstitutionExterns ||
+         type == &kRustSubstitutionExternsNewline ||
          type == &kRustSubstitutionRustDeps ||
+         type == &kRustSubstitutionRustDepsNewline ||
          type == &kRustSubstitutionRustEnv ||
          type == &kRustSubstitutionRustFlags ||
          type == &kRustSubstitutionSources;
