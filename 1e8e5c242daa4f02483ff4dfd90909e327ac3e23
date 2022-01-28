@@ -90,6 +90,24 @@
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "04f61fe8_2ce492b2",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-01-28T08:28:56Z",
+      "side": 1,
+      "message": "Another positive impact from this change is more accurate representation of build progress. In Fuchsia, ~55% of build targets are stamps, so if you see:\n\n  [1/252125] ...\n\nit doesn\u0027t mean you\u0027re going to actually build 252125 targets, in practice it\u0027s closer to 115000, the rest is just noise. The same applies to logs collected from bots, if you look at https://logs.chromium.org/logs/fuchsia/buildbucket/cr-buildbucket/8823812404606362721/+/u/build/ninja/stdout for example, more than half of that output are stamps which makes searching through logs increasingly painful as the size of that log increases.\n\nInterestingly, you wouldn\u0027t find the same noise in the output of a CMake build such as https://logs.chromium.org/logs/fuchsia/buildbucket/cr-buildbucket/8823810627321930977/+/u/clang/build/stdout because CMake doesn\u0027t use stamps, it uses phony.\n\nFor me, this UX improvement alone makes this change worth it.",
+      "parentUuid": "797bed98_1330a390",
+      "revId": "1e8e5c242daa4f02483ff4dfd90909e327ac3e23",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "8c8dcd0b_c6f40fe2",
