@@ -40,19 +40,19 @@ void NinjaActionTargetWriter::Run() {
 
   for (const Target* dep : target_deps.linked_deps()) {
     if (dep->IsDataOnly()) {
-      data_outs.push_back(dep->dependency_output_file());
+      data_outs.push_back(dep->dependency_output());
     } else {
       additional_hard_deps.push_back(dep);
     }
   }
 
   // For ACTIONs, the input deps appear only once in the generated ninja
-  // file, so WriteInputDepsStampAndGetDep() won't create a stamp file
+  // file, so WriteInputDepsStampOrPhonyAndGetDep() won't create a phony rule
   // and the action will just depend on all the input deps directly.
-  size_t num_stamp_uses =
+  size_t num_output_uses =
       target_->output_type() == Target::ACTION ? 1u : target_->sources().size();
-  std::vector<OutputFile> input_deps =
-      WriteInputDepsStampAndGetDep(additional_hard_deps, num_stamp_uses);
+  std::vector<OutputFile> input_deps = WriteInputDepsStampOrPhonyAndGetDep(
+      additional_hard_deps, num_output_uses);
   out_ << std::endl;
 
   // Collects all output files for writing below.
@@ -94,14 +94,16 @@ void NinjaActionTargetWriter::Run() {
   }
   out_ << std::endl;
 
-  // Write the stamp, which also depends on all data deps. These are needed at
+  // Write the phony, which also depends on all data deps. These are needed at
   // runtime and should be compiled when the action is, but don't need to be
   // done before we run the action.
   // TODO(thakis): If the action has just a single output, make things depend
-  // on that output directly without writing a stamp file.
-  for (const Target* data_dep : target_deps.data_deps())
-    data_outs.push_back(data_dep->dependency_output_file());
-  WriteStampForTarget(output_files, data_outs);
+  // on that output directly without writing a phony target.
+  for (const Target* data_dep : target_deps.data_deps()) {
+    if (data_dep->has_dependency_output())
+      data_outs.push_back(data_dep->dependency_output());
+  }
+  WriteStampOrPhonyForTarget(output_files, data_outs);
 }
 
 std::string NinjaActionTargetWriter::WriteRuleDefinition() {
