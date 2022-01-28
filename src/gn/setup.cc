@@ -1032,7 +1032,6 @@ bool Setup::FillOtherConfig(const base::CommandLine& cmdline, Err* err) {
       return false;
     }
     build_settings_.set_no_stamp_files(no_stamp_files_value->boolean_value());
-    CHECK(!build_settings_.no_stamp_files()) << "no_stamp_files does not work yet!";
   }
 
   return true;
