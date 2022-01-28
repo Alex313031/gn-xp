@@ -208,6 +208,17 @@ class CommandSwitches {
   // the previous value.
   static CommandSwitches Set(CommandSwitches new_switches);
 
+  // A type used to serialize the instance into something that
+  // can be sent "over the wire" (i.e. through a pipe, or even
+  // written to disk).
+  using WireValue = std::string;
+
+  // Serialize the instance.
+  WireValue ToWire() const;
+
+  // Create instance from serialized value.
+  static CommandSwitches FromWire(const WireValue& wire);
+
  private:
   bool is_initialized() const { return initialized_; }
 
