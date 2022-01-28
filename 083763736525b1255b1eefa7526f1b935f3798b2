@@ -1,0 +1,96 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5a8723ad_464e1eb9",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 12,
+      "author": {
+        "id": 1000633
+      },
+      "writtenOn": "2022-01-28T18:56:36Z",
+      "side": 1,
+      "message": "Only one of these",
+      "range": {
+        "startLine": 12,
+        "startChar": 8,
+        "endLine": 12,
+        "endChar": 21
+      },
+      "revId": "083763736525b1255b1eefa7526f1b935f3798b2",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2f11ad9d_fa888722",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 16,
+      "author": {
+        "id": 1000633
+      },
+      "writtenOn": "2022-01-28T18:56:36Z",
+      "side": 1,
+      "message": "of",
+      "range": {
+        "startLine": 16,
+        "startChar": 33,
+        "endLine": 16,
+        "endChar": 35
+      },
+      "revId": "083763736525b1255b1eefa7526f1b935f3798b2",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a381eeea_dce47698",
+        "filename": "src/gn/target.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 404,
+      "author": {
+        "id": 1000633
+      },
+      "writtenOn": "2022-01-28T18:56:36Z",
+      "side": 1,
+      "message": "Can remove.",
+      "range": {
+        "startLine": 404,
+        "startChar": 4,
+        "endLine": 404,
+        "endChar": 5
+      },
+      "revId": "083763736525b1255b1eefa7526f1b935f3798b2",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "bf77e4a3_68ad6329",
+        "filename": "src/gn/target.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 412,
+      "author": {
+        "id": 1000633
+      },
+      "writtenOn": "2022-01-28T18:56:36Z",
+      "side": 1,
+      "message": "Can remove.",
+      "range": {
+        "startLine": 412,
+        "startChar": 4,
+        "endLine": 412,
+        "endChar": 5
+      },
+      "revId": "083763736525b1255b1eefa7526f1b935f3798b2",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    }
+  ]
+}
