@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2164399f_4739b745",
+        "filename": "src/gn/ninja_copy_target_writer.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 45,
+      "author": {
+        "id": 1000633
+      },
+      "writtenOn": "2022-01-28T18:57:28Z",
+      "side": 0,
+      "message": "I think we probably want to bring back this check if `no_stamp_files \u003d\u003d false`.",
+      "range": {
+        "startLine": 36,
+        "startChar": 0,
+        "endLine": 45,
+        "endChar": 3
+      },
+      "revId": "083763736525b1255b1eefa7526f1b935f3798b2",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    }
+  ]
+}

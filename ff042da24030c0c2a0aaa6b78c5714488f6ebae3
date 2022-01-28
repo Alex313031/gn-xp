@@ -1,0 +1,44 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "703fd92d_06b21b7f",
+        "filename": "src/gn/function_get_target_outputs.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 49,
+      "author": {
+        "id": 1000633
+      },
+      "writtenOn": "2022-01-28T18:57:28Z",
+      "side": 1,
+      "message": "A general comment: a lot of the docs and comments still reflect the original patchset of converting all stamps to phony targets. Should we update them to use the generic \"alias\" term?",
+      "range": {
+        "startLine": 49,
+        "startChar": 2,
+        "endLine": 49,
+        "endChar": 15
+      },
+      "revId": "ff042da24030c0c2a0aaa6b78c5714488f6ebae3",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3dd1ae6b_0103bb09",
+        "filename": "src/gn/setup.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 61,
+      "author": {
+        "id": 1000633
+      },
+      "writtenOn": "2022-01-28T18:57:28Z",
+      "side": 1,
+      "message": "We should document the usage of `no_stamp_files` here in the dotfile help. We should probably also mark it as experimental and probably reference the required ninja change that is necessary.",
+      "revId": "ff042da24030c0c2a0aaa6b78c5714488f6ebae3",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    }
+  ]
+}
