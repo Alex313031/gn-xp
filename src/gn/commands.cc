@@ -418,32 +418,151 @@ CommandSwitches CommandSwitches::Set(CommandSwitches new_switches) {
   return result;
 }
 
-bool CommandSwitches::InitFrom(const base::CommandLine& cmdline) {
-  CommandSwitches result;
-  result.initialized_ = true;
-  result.has_quiet_ = cmdline.HasSwitch("a");
-  result.has_force_ = cmdline.HasSwitch("force");
-  result.has_all_ = cmdline.HasSwitch("all");
-  result.has_blame_ = cmdline.HasSwitch("blame");
-  result.has_tree_ = cmdline.HasSwitch("tree");
-  result.has_format_json_ = cmdline.GetSwitchValueString("format") == "json";
-  result.has_default_toolchain_ =
-      cmdline.HasSwitch(switches::kDefaultToolchain);
+namespace {
 
-  result.has_check_generated_ = cmdline.HasSwitch("check-generated");
-  result.has_check_system_ = cmdline.HasSwitch("check-system");
-  result.has_public_ = cmdline.HasSwitch("public");
-  result.has_with_data_ = cmdline.HasSwitch("with-data");
+// Simple class used to serialize a CommandSwitches value.
+class SimpleEncoder {
+ public:
+  SimpleEncoder() = default;
+  void AddByte(uint8_t v) { result_.push_back(static_cast<char>(v)); }
+  void AddBytes(const void* in, size_t count) {
+    size_t pos = result_.size();
+    result_.resize(pos + count);
+    memcpy(&result_[pos], in, count);
+  }
+  std::string GetResult() { return std::move(result_); }
 
-  std::string_view target_print_switch = "as";
-  if (cmdline.HasSwitch(target_print_switch)) {
-    std::string value = cmdline.GetSwitchValueString(target_print_switch);
+ private:
+  std::string result_;
+};
+
+// Simple class to de-serialize a CommandSwitches values.
+class SimpleDecoder {
+ public:
+  SimpleDecoder(const std::string& input) : input_(input) {}
+  uint8_t GetByte() { return static_cast<uint8_t>(input_[pos_++]); }
+  const uint8_t* GetBytes(size_t count) {
+    const char* result = &input_[pos_];
+    pos_ += count;
+    return reinterpret_cast<const uint8_t*>(result);
+  }
+
+ private:
+  const std::string& input_;
+  size_t pos_ = 0;
+};
+
+// The list of CommandSwitches member.
+// MEMBER should be a macro with the following signature:
+//
+//   MEMBER(name, switch, value_type)
+//
+// Where |name| is a CommandSwitches member name, |switch| is a string
+// for the command-line switch or option, and |value_type| is a type
+// that determines how the switch value will be parsed and serialized
+// through a CmdTraits<value_type> struct type (described below).
+//
+#define LIST_COMMAND_SWITCHES(MEMBER)                               \
+  MEMBER(has_quiet_, "a", bool)                                     \
+  MEMBER(has_force_, "force", bool)                                 \
+  MEMBER(has_all_, "all", bool)                                     \
+  MEMBER(has_blame_, "blame", bool)                                 \
+  MEMBER(has_tree_, "tree", bool)                                   \
+  MEMBER(has_format_json_, "format", FormatJsonBool)                \
+  MEMBER(has_default_toolchain_, switches::kDefaultToolchain, bool) \
+  MEMBER(has_check_generated_, "check-generated", bool)             \
+  MEMBER(has_check_system_, "check-system", bool)                   \
+  MEMBER(has_public_, "public", bool)                               \
+  MEMBER(has_with_data_, "with-data", bool)                         \
+  MEMBER(target_print_mode_, "as", TargetPrintMode)                 \
+  MEMBER(target_type_, "type", Target::OutputType)                  \
+  MEMBER(testonly_mode_, "testonly", TestonlyMode)                  \
+  MEMBER(meta_rebase_dir_, "rebase", std::string)                   \
+  MEMBER(meta_data_keys_, "data", std::string)                      \
+  MEMBER(meta_walk_keys_, "walk", std::string)
+
+// CmdTraits is a template struct type that provide static
+// methods to act on CommandSwitches members as lsited in
+// LIST_COMMAND_SWITCHES.
+//
+// Each template expansion should provide the following
+// static methods:
+//
+//    // Parse switch |name| from |cmdline|. On success
+//    // return true and sets |*member|. On failure,
+//    // print error message and return false.
+//    bool Parse(const base::CommandLine& cmdline,
+//               const char* name,
+//               T* member);
+//
+//    // Serialize the member value.
+//    void Encode(T value, SimpleEncoder& encoder);
+//
+//    // Deserialize the member value.
+//    T Decode(SimpleDecoder& decoder);
+//
+template <typename T>
+struct CmdTraits {};
+
+template <>
+struct CmdTraits<bool> {
+  using Type = bool;
+  static bool Parse(const base::CommandLine& cmdline,
+                    const char* name,
+                    Type* member) {
+    *member = cmdline.HasSwitch(name);
+    return true;
+  }
+  static void Encode(bool b, SimpleEncoder& encoder) {
+    encoder.AddByte(b ? 1 : 0);
+  }
+  static bool Decode(SimpleDecoder& decoder) { return decoder.GetByte() == 1; }
+};
+
+// For the --format switch, only care about --format=json since
+// that's what the query code does at the moment. Use a struct tag type
+// to derive from CmdTraits<bool> to share the same Encode()/Decode()
+// methods, and provide a custom Parse() method.
+struct FormatJsonBool {};
+
+template <>
+struct CmdTraits<FormatJsonBool> : public CmdTraits<bool> {
+  using Type = bool;
+  static bool Parse(const base::CommandLine& cmdline,
+                    const char* name,
+                    Type* member) {
+    *member = cmdline.GetSwitchValueString(name) == "format";
+    return true;
+  }
+};
+
+template <typename T>
+struct CmdEnumTraits {
+  static void Encode(T v, SimpleEncoder& encoder) {
+    encoder.AddByte(static_cast<uint8_t>(v));
+  }
+  static T Decode(SimpleDecoder& decoder) {
+    return static_cast<T>(decoder.GetByte());
+  }
+};
+
+using TargetPrintMode = CommandSwitches::TargetPrintMode;
+
+template <>
+struct CmdTraits<TargetPrintMode> : public CmdEnumTraits<TargetPrintMode> {
+  using Type = TargetPrintMode;
+  static bool Parse(const base::CommandLine& cmdline,
+                    const char* name,
+                    Type* member) {
+    if (!cmdline.HasSwitch(name))
+      return true;
+    std::string value = cmdline.GetSwitchValueString(name);
     if (value == "buildfile") {
-      result.target_print_mode_ = TARGET_PRINT_BUILDFILE;
+      *member = CommandSwitches::TARGET_PRINT_BUILDFILE;
     } else if (value == "label") {
-      result.target_print_mode_ = TARGET_PRINT_LABEL;
+      *member = CommandSwitches::TARGET_PRINT_LABEL;
     } else if (value == "output") {
-      result.target_print_mode_ = TARGET_PRINT_OUTPUT;
+      *member = CommandSwitches::TARGET_PRINT_OUTPUT;
     } else {
       Err(Location(), "Invalid value for \"--as\".",
           "I was expecting \"buildfile\", \"label\", or \"output\" but you\n"
@@ -452,11 +571,20 @@ bool CommandSwitches::InitFrom(const base::CommandLine& cmdline) {
           .PrintToStdout();
       return false;
     }
+    return true;
   }
+};
 
-  std::string_view target_type_switch = "type";
-  if (cmdline.HasSwitch(target_type_switch)) {
-    std::string value = cmdline.GetSwitchValueString(target_type_switch);
+template <>
+struct CmdTraits<Target::OutputType>
+    : public CmdEnumTraits<Target::OutputType> {
+  using Type = Target::OutputType;
+  static bool Parse(const base::CommandLine& cmdline,
+                    const char* name,
+                    Type* member) {
+    if (!cmdline.HasSwitch(name))
+      return true;
+    std::string value = cmdline.GetSwitchValueString(name);
     static const struct {
       const char* name;
       Target::OutputType type;
@@ -470,39 +598,100 @@ bool CommandSwitches::InitFrom(const base::CommandLine& cmdline) {
         {"copy", Target::COPY_FILES},
         {"action", Target::ACTION},
     };
-    bool found = false;
     for (const auto& type : kTypes) {
       if (value == type.name) {
-        result.target_type_ = type.type;
-        found = true;
-        break;
+        *member = type.type;
+        return true;
       }
     }
-    if (!found) {
-      Err(Location(), "Invalid value for \"--type\".").PrintToStdout();
-      return false;
-    }
+    Err(Location(), "Invalid value for \"--type\".").PrintToStdout();
+    return false;
   }
-  std::string_view testonly_switch = "testonly";
-  if (cmdline.HasSwitch(testonly_switch)) {
-    std::string value = cmdline.GetSwitchValueString(testonly_switch);
+};
+
+using TestonlyMode = CommandSwitches::TestonlyMode;
+
+template <>
+struct CmdTraits<TestonlyMode> : public CmdEnumTraits<TestonlyMode> {
+  using Type = TestonlyMode;
+  static bool Parse(const base::CommandLine& cmdline,
+                    const char* name,
+                    Type* member) {
+    if (!cmdline.HasSwitch(name))
+      return true;
+    std::string value = cmdline.GetSwitchValueString(name);
     if (value == "true") {
-      result.testonly_mode_ = TESTONLY_TRUE;
+      *member = CommandSwitches::TESTONLY_TRUE;
     } else if (value == "false") {
-      result.testonly_mode_ = TESTONLY_FALSE;
+      *member = CommandSwitches::TESTONLY_FALSE;
     } else {
       Err(Location(), "Bad value for --testonly.",
           "I was expecting --testonly=true or --testonly=false.")
           .PrintToStdout();
       return false;
     }
+    return true;
+  }
+};
+
+template <>
+struct CmdTraits<std::string> {
+  using Type = std::string;
+  static bool Parse(const base::CommandLine& cmdline,
+                    const char* name,
+                    Type* member) {
+    *member = cmdline.GetSwitchValueString(name);
+    return true;
   }
 
-  result.meta_rebase_dir_ = cmdline.GetSwitchValueString("rebase");
-  result.meta_data_keys_ = cmdline.GetSwitchValueString("data");
-  result.meta_walk_keys_ = cmdline.GetSwitchValueString("walk");
+  static void Encode(const std::string& v, SimpleEncoder& encoder) {
+    size_t size = v.size();
+    encoder.AddBytes(&size, sizeof(size));
+    encoder.AddBytes(v.data(), size);
+  }
+
+  static std::string Decode(SimpleDecoder& decoder) {
+    size_t size = 0;
+    memcpy(&size, decoder.GetBytes(sizeof(size)), sizeof(size));
+    std::string result;
+    result.resize(size);
+    memcpy(&result[0], decoder.GetBytes(size), size);
+    return result;
+  }
+};
+
+}  // namespace
+
+bool CommandSwitches::InitFrom(const base::CommandLine& cmdline) {
+  CommandSwitches result;
+  result.initialized_ = true;
+#define MEMBER(name, switch, type)                            \
+  if (!CmdTraits<type>::Parse(cmdline, switch, &result.name)) \
+    return false;
+  LIST_COMMAND_SWITCHES(MEMBER)
+#undef MEMBER
   *this = result;
   return true;
+}
+
+CommandSwitches::WireValue CommandSwitches::ToWire() const {
+  SimpleEncoder encoder;
+#define MEMBER(name, switch, type) CmdTraits<type>::Encode(name, encoder);
+  LIST_COMMAND_SWITCHES(MEMBER)
+#undef MEMBER
+  return encoder.GetResult();
+}
+
+// static
+CommandSwitches CommandSwitches::FromWire(const WireValue& wire) {
+  SimpleDecoder decoder(wire);
+  CommandSwitches result;
+  result.initialized_ = true;
+#define MEMBER(name, switch, type) \
+  result.name = CmdTraits<type>::Decode(decoder);
+  LIST_COMMAND_SWITCHES(MEMBER)
+#undef MEMBER
+  return result;
 }
 
 bool PrepareForRegeneration(const BuildSettings* settings) {
