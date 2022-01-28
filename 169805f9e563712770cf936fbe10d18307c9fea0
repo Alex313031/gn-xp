@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c410d86c_06833a7b",
+        "filename": "src/gn/ninja_toolchain_writer.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 48,
+      "author": {
+        "id": 1000633
+      },
+      "writtenOn": "2022-01-28T18:56:28Z",
+      "side": 1,
+      "message": "Would it make sense to just skip all BuiltinTools? Ie, `tool.second-\u003eAsBuiltin()`.",
+      "range": {
+        "startLine": 48,
+        "startChar": 8,
+        "endLine": 48,
+        "endChar": 61
+      },
+      "revId": "169805f9e563712770cf936fbe10d18307c9fea0",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    }
+  ]
+}
