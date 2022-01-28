@@ -108,6 +108,41 @@
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "6fc50da4_f736fc9a",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000067
+      },
+      "writtenOn": "2022-01-28T17:45:37Z",
+      "side": 1,
+      "message": "I agree, anything that improves our Ninja files and our Ninja logs is good. I will rework this CL to split it into smaller chunks for easier review.",
+      "parentUuid": "04f61fe8_2ce492b2",
+      "revId": "1e8e5c242daa4f02483ff4dfd90909e327ac3e23",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e262a193_0d3b53de",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000067
+      },
+      "writtenOn": "2022-01-28T17:45:37Z",
+      "side": 1,
+      "message": "For the record, this is now available as 3 CLs, the top-level one at https://gn-review.googlesource.com/c/gn/+/12866/ on Gerrit.",
+      "revId": "1e8e5c242daa4f02483ff4dfd90909e327ac3e23",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "8c8dcd0b_c6f40fe2",
