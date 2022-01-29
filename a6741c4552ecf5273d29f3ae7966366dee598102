@@ -33,6 +33,24 @@
       "message": "I tested it on Windows and it works both with and without this patch. Do you know what it\u0027s supposed to do? I\u0027m fine removing if we can it but I want to understand why we had it in the first place and why we don\u0027t need it any more.",
       "revId": "a6741c4552ecf5273d29f3ae7966366dee598102",
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "fbde1d9b_162756e6",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000067
+      },
+      "writtenOn": "2022-01-29T14:19:08Z",
+      "side": 1,
+      "message": "I found the corresponding code at https://github.com/ninja-build/ninja/blob/master/src/msvc_helper_main-win32.cc\n\nApparently, it is a way to customize the cl.exe invocation that isn\u0027t needed by the GN build here (i.e. custom environment block, localized prefix for /showIncludes and generating a dependency .d file).\n\nCuriously, this is only compiled when Ninja is built with the CL.exe itself, i.e. the code that defines it in ninja.cc looks like:\n\n```\n#if defined(_MSC_VER)\n    { \"msvc\", \"build helper for MSVC cl.exe (EXPERIMENTAL)\",\n      Tool::RUN_AFTER_FLAGS, \u0026NinjaMain::ToolMSVC },\n#endif\n```\nWhile `#ifdef _WIN32` is used in the rest of the code to target Windows. Git history shows it was introduced in 2012, tagged as experimental, lasted significant change in msvc_helper_main-win32.c was in 2013, and since then Ninja has gained support for `deps \u003d msvc` which is already used here. I guess GN doesn\u0027t need this.",
+      "parentUuid": "7f45504b_e3e2f489",
+      "revId": "a6741c4552ecf5273d29f3ae7966366dee598102",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
     }
   ]
 }
