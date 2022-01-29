@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "15ee15a2_3d08a341",
+        "filename": "src/gn/command_meta.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 38,
+      "author": {
+        "id": 1000014
+      },
+      "writtenOn": "2022-01-29T00:14:08Z",
+      "side": 1,
+      "message": "Did you mean \"comma\"?",
+      "range": {
+        "startLine": 38,
+        "startChar": 6,
+        "endLine": 38,
+        "endChar": 13
+      },
+      "revId": "bd3444afc0993d890242e9cabc0d2ba0279e5387",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d479781b_aa2b68a0",
+        "filename": "src/gn/command_meta.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 44,
+      "author": {
+        "id": 1000014
+      },
+      "writtenOn": "2022-01-29T00:14:08Z",
+      "side": 1,
+      "message": "Ditto",
+      "range": {
+        "startLine": 44,
+        "startChar": 6,
+        "endLine": 44,
+        "endChar": 12
+      },
+      "revId": "bd3444afc0993d890242e9cabc0d2ba0279e5387",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    }
+  ]
+}
