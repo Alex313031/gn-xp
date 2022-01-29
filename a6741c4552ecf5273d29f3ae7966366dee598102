@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e3276164_7ce51b53",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000014
+      },
+      "writtenOn": "2022-01-29T01:19:00Z",
+      "side": 1,
+      "message": "I forget with \"-t msvc\" does but I think it\u0027s still in Ninja. It looks like its conditionally included when building Ninja on Windows only.",
+      "revId": "a6741c4552ecf5273d29f3ae7966366dee598102",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    }
+  ]
+}
