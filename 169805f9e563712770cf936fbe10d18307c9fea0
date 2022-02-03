@@ -3,6 +3,40 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "825322fd_a755f690",
+        "filename": "src/gn/build_settings.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 64,
+      "author": {
+        "id": 1000014
+      },
+      "writtenOn": "2022-02-03T19:21:45Z",
+      "side": 1,
+      "message": "Can you add a comment above here about what this flag means and why it would be set one way or another?",
+      "revId": "169805f9e563712770cf936fbe10d18307c9fea0",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7141f74c_70777db9",
+        "filename": "src/gn/builtin_tool.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 21,
+      "author": {
+        "id": 1000014
+      },
+      "writtenOn": "2022-02-03T19:21:45Z",
+      "side": 1,
+      "message": "Can you make clear above here that the input must be one of the constants (i.e. it does pointer comparisons rather than string comparisons).",
+      "revId": "169805f9e563712770cf936fbe10d18307c9fea0",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "c410d86c_06833a7b",
         "filename": "src/gn/ninja_toolchain_writer.cc",
         "patchSetId": 1
@@ -19,6 +53,70 @@
         "startChar": 8,
         "endLine": 48,
         "endChar": 61
+      },
+      "revId": "169805f9e563712770cf936fbe10d18307c9fea0",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "180cd6d7_8b24edef",
+        "filename": "src/gn/ninja_toolchain_writer.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 48,
+      "author": {
+        "id": 1000014
+      },
+      "writtenOn": "2022-02-03T19:21:45Z",
+      "side": 1,
+      "message": "Good idea.",
+      "parentUuid": "c410d86c_06833a7b",
+      "range": {
+        "startLine": 48,
+        "startChar": 8,
+        "endLine": 48,
+        "endChar": 61
+      },
+      "revId": "169805f9e563712770cf936fbe10d18307c9fea0",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ba6c7fa3_4bedd698",
+        "filename": "src/gn/tool.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 240,
+      "author": {
+        "id": 1000014
+      },
+      "writtenOn": "2022-02-03T19:21:45Z",
+      "side": 1,
+      "message": "Having the caller extract the no-stamp-files setting and pass it here feels a little finicky to me. I think a call like the following would be cleaner from the call site and more flexible in the future:\n\n  static const char* GetToolTypeForTargetFinalOutput(\n    const Settings* settings, const Target* target);",
+      "revId": "169805f9e563712770cf936fbe10d18307c9fea0",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8b1b7160_40dadac5",
+        "filename": "src/gn/toolchain.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 1000014
+      },
+      "writtenOn": "2022-02-03T19:21:45Z",
+      "side": 1,
+      "message": "I feel like SetComplete() should be implicitly called by the BuiltinTool constructor. The normal tools use a phased construction since they\u0027re read from a build file, but builtin tools should never need this and should always be ready to go.\n\nI\u0027d use emplace rather than try_emplace here also since try_emplace seems to be saying you\u0027re going out of your way to avoid overwriting existing values but this shouldn\u0027t come up.\n\nThen this whole block can be:\n\n  const char* phony_name \u003d BuiltinTool::kBuiltinToolPhony;\n  tools_.emplace(phony_name, std::make_unique\u003cBuiltinTool\u003e(phony_name));",
+      "range": {
+        "startLine": 24,
+        "startChar": 14,
+        "endLine": 24,
+        "endChar": 25
       },
       "revId": "169805f9e563712770cf936fbe10d18307c9fea0",
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
