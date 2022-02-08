@@ -221,3 +221,15 @@ bool ActionTargetGenerator::FillInputs() {
   target_->config_values().inputs().swap(dest_inputs);
   return true;
 }
+
+bool ActionTargetGenerator::FillRestat() {
+  const Value* value = scope_->GetValue(variables::kRestat, true);
+  if (!value)
+    return true;
+
+  if (!value->VerifyTypeIs(Value::BOOLEAN, err_))
+    return false;
+
+  target_->action_values().set_restat(value->boolean_value());
+  return true;
+}

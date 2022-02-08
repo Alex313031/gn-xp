@@ -51,6 +51,10 @@ class ActionValues {
   }
   bool uses_rsp_file() const { return !rsp_file_contents_.list().empty(); }
 
+  // Whether the action set `restat = 1` or not.
+  bool restat() const { return restat_; }
+  void set_restat(bool value) { restat_ = value; }
+
   // Pool option
   const LabelPtrPair<Pool>& pool() const { return pool_; }
   void set_pool(LabelPtrPair<Pool> pool) { pool_ = std::move(pool); }
@@ -62,6 +66,7 @@ class ActionValues {
   SubstitutionPattern depfile_;
   SubstitutionList rsp_file_contents_;
   LabelPtrPair<Pool> pool_;
+  bool restat_ = true;
 
   ActionValues(const ActionValues&) = delete;
   ActionValues& operator=(const ActionValues&) = delete;
