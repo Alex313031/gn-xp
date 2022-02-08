@@ -49,6 +49,40 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "dba455de_1908aee6",
+        "filename": "src/gn/target.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 938,
+      "author": {
+        "id": 1000014
+      },
+      "writtenOn": "2022-02-08T20:54:38Z",
+      "side": 1,
+      "message": "Can you add a unit test for this function? Some of the cases like ACTION are trivial and I don\u0027t think a test is that useful, but I think it\u0027s useful to cover:\n  - Empty inputs, empty deps.\n  - Inputs but they are all TOOL_NONE, empty deps.\n  - That plus dep with dependency_output file\n  - That plus dep with no dependency output file.",
+      "revId": "083763736525b1255b1eefa7526f1b935f3798b2",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b9529ace_a43c46dd",
+        "filename": "src/gn/target.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 979,
+      "author": {
+        "id": 1000014
+      },
+      "writtenOn": "2022-02-08T20:54:38Z",
+      "side": 1,
+      "message": "Can you add a unit test for the different cases here? This is sort of subtle.",
+      "revId": "083763736525b1255b1eefa7526f1b935f3798b2",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "a381eeea_dce47698",
         "filename": "src/gn/target.h",
         "patchSetId": 1
@@ -66,6 +100,23 @@
         "endLine": 404,
         "endChar": 5
       },
+      "revId": "083763736525b1255b1eefa7526f1b935f3798b2",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ef757014_dfd98f7a",
+        "filename": "src/gn/target.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 410,
+      "author": {
+        "id": 1000014
+      },
+      "writtenOn": "2022-02-08T20:54:38Z",
+      "side": 1,
+      "message": "Can you add a comment above here referencing the documentation above link_output_file() about what this is?",
       "revId": "083763736525b1255b1eefa7526f1b935f3798b2",
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
     },
