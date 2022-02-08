@@ -1990,6 +1990,24 @@ Example
   }
 )*";
 
+const char kRestat[] = "restat";
+const char kRestat_HelpShort[] =
+    "restat: [bool] Whether Ninja should recheck the output timestamp.";
+const char kRestat_Help[] =
+    R"(restat: [bool] Whether Ninja should recheck the output timestamp.
+
+  Requests that Ninja check the outputs timestamp after this tool has run to
+  determine if anything changed. If true (the default if not set), GN sets
+  Ninja's flag 'restat = 1` for the action.
+
+  This means that Ninja will check the timestamp of the output after the action
+  completes. If output timestamp is unchanged, the step will be treated as if
+  it never needed to be rebuilt, potentially eliminating some downstream steps
+  for incremental builds. Scripts can improve build performance by taking care
+  not to change the timestamp of the output file(s) if the contents have not
+  changed.
+)";
+
 const char kScript[] = "script";
 const char kScript_HelpShort[] = "script: [file name] Script file for actions.";
 const char kScript_Help[] =
@@ -2342,6 +2360,7 @@ const VariableInfoMap& GetTargetVariables() {
     INSERT_VARIABLE(PublicConfigs)
     INSERT_VARIABLE(PublicDeps)
     INSERT_VARIABLE(Rebase)
+    INSERT_VARIABLE(Restat)
     INSERT_VARIABLE(ResponseFileContents)
     INSERT_VARIABLE(Script)
     INSERT_VARIABLE(Sources)

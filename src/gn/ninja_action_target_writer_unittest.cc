@@ -117,6 +117,42 @@ build obj/foo/bar.stamp: stamp foo.out
   EXPECT_EQ(expected, out.str());
 }
 
+// Tests an action with no sources.
+TEST(NinjaActionTargetWriter, ActionNoSourcesNoRestat) {
+  Err err;
+  TestWithScope setup;
+
+  Target target(setup.settings(), Label(SourceDir("//foo/"), "bar"));
+  target.set_output_type(Target::ACTION);
+
+  target.action_values().set_restat(false);
+  target.action_values().set_script(SourceFile("//foo/script.py"));
+  target.config_values().inputs().push_back(SourceFile("//foo/included.txt"));
+
+  target.action_values().outputs() =
+      SubstitutionList::MakeForTest("//out/Debug/foo.out");
+
+  target.SetToolchain(setup.toolchain());
+  ASSERT_TRUE(target.OnResolved(&err));
+
+  setup.build_settings()->set_python_path(
+      base::FilePath(FILE_PATH_LITERAL("/usr/bin/python")));
+
+  std::ostringstream out;
+  NinjaActionTargetWriter writer(&target, out);
+  writer.Run();
+
+  const char* expected = R"(rule __foo_bar___rule
+  command = /usr/bin/python ../../foo/script.py
+  description = ACTION //foo:bar()
+
+build foo.out: __foo_bar___rule | ../../foo/script.py ../../foo/included.txt
+
+build obj/foo/bar.stamp: stamp foo.out
+)";
+  EXPECT_EQ(expected, out.str()) << expected << "--" << out.str();
+}
+
 // Makes sure that we write sources as input dependencies for actions with
 // both sources and inputs (ACTION_FOREACH treats the sources differently).
 TEST(NinjaActionTargetWriter, ActionWithSources) {

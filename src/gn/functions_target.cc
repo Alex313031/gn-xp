@@ -79,7 +79,7 @@ Value ExecuteGenericTarget(const char* target_type,
   "  completes. If output timestamp is unchanged, the step will be treated\n" \
   "  as if it never needed to be rebuilt, potentially eliminating some\n"     \
   "  downstream steps for incremental builds. Scripts can improve build\n"    \
-  "  performance by taking care not to change the timstamp of the output\n"   \
+  "  performance by taking care not to change the timestamp of the output\n"  \
   "  file(s) if the contents have not changed.\n"
 
 // Common help paragraph on script output directories.
@@ -161,7 +161,7 @@ File name handling
 Variables
 
   args, data, data_deps, depfile, deps, inputs, metadata, outputs*, pool,
-  response_file_contents, script*, sources
+  response_file_contents, restat, script*, sources
   * = required
 
 Example

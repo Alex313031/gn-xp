@@ -124,6 +124,7 @@
     *   [framework_dirs: [directory list] Additional framework search directories.](#var_framework_dirs)
     *   [frameworks: [name list] Name of frameworks that must be linked.](#var_frameworks)
     *   [friend: [label pattern list] Allow targets to include private headers.](#var_friend)
+    *   [gen_deps: [label list] Declares targets that should generate when this one does.](#var_gen_deps)
     *   [include_dirs: [directory list] Additional include directories.](#var_include_dirs)
     *   [inputs: [file list] Additional compile-time dependencies.](#var_inputs)
     *   [ldflags: [string list] Flags passed to the linker.](#var_ldflags)
@@ -148,6 +149,7 @@
     *   [public_deps: [label list] Declare public dependencies.](#var_public_deps)
     *   [rebase: [boolean] Rebase collected metadata as files.](#var_rebase)
     *   [response_file_contents: [string list] Contents of .rsp file for actions.](#var_response_file_contents)
+    *   [restat: [bool] Whether Ninja should recheck the output timestamp.](#var_restat)
     *   [script: [file name] Script file for actions.](#var_script)
     *   [sources: [file list] Source files for a target.](#var_sources)
     *   [swiftflags: [string list] Flags passed to the swift compiler.](#var_swiftflags)
@@ -777,6 +779,7 @@
       "vs2015" - Visual Studio 2015 project/solution files.
       "vs2017" - Visual Studio 2017 project/solution files.
       "vs2019" - Visual Studio 2019 project/solution files.
+      "vs2022" - Visual Studio 2022 project/solution files.
       "xcode" - Xcode workspace/solution files.
       "qtcreator" - QtCreator project files.
       "json" - JSON file containing target information
@@ -1013,17 +1016,18 @@
     A list of target labels from which to initiate the walk.
 
   --data
-    A list of keys from which to extract data. In each target walked, its metadata
-    scope is checked for the presence of these keys. If present, the contents of
-    those variable in the scope are appended to the results list.
+    A comma-separated list of keys from which to extract data. In each target
+    walked, its metadata scope is checked for the presence of these keys. If
+    present, the contents of those variable in the scope are appended to the
+    results list.
 
   --walk (optional)
-    A list of keys from which to control the walk. In each target walked, its
-    metadata scope is checked for the presence of any of these keys. If present,
-    the contents of those variables is checked to ensure that it is a label of
-    a valid dependency of the target and then added to the set of targets to walk.
-    If the empty string ("") is present in any of these keys, all deps and data_deps
-    are added to the walk set.
+    A comma-separated list of keys from which to control the walk. In each
+    target walked, its metadata scope is checked for the presence of any of
+    these keys. If present, the contents of those variables is checked to ensure
+    that it is a label of a valid dependency of the target and then added to the
+    set of targets to walk. If the empty string ("") is present in any of these
+    keys, all deps and data_deps are added to the walk set.
 
   --rebase (optional)
     A destination directory onto which to rebase any paths found. If set, all
@@ -1038,7 +1042,7 @@
       Lists collected metaresults for the `files` key in the //base/foo:foo
       target and all of its dependency tree.
 
-  gn meta out/Debug "//base/foo" --data=files --data=other
+  gn meta out/Debug "//base/foo" --data=files,other
       Lists collected metaresults for the `files` and `other` keys in the
       //base/foo:foo target and all of its dependency tree.
 
@@ -1335,7 +1339,7 @@
   completes. If output timestamp is unchanged, the step will be treated
   as if it never needed to be rebuilt, potentially eliminating some
   downstream steps for incremental builds. Scripts can improve build
-  performance by taking care not to change the timstamp of the output
+  performance by taking care not to change the timestamp of the output
   file(s) if the contents have not changed.
 ```
 
@@ -1352,7 +1356,7 @@
 
 ```
   args, data, data_deps, depfile, deps, inputs, metadata, outputs*, pool,
-  response_file_contents, script*, sources
+  response_file_contents, restat, script*, sources
   * = required
 ```
 
@@ -1424,7 +1428,7 @@
   completes. If output timestamp is unchanged, the step will be treated
   as if it never needed to be rebuilt, potentially eliminating some
   downstream steps for incremental builds. Scripts can improve build
-  performance by taking care not to change the timstamp of the output
+  performance by taking care not to change the timestamp of the output
   file(s) if the contents have not changed.
 ```
 
@@ -1731,7 +1735,7 @@
   Flags: cflags, cflags_c, cflags_cc, cflags_objc, cflags_objcc,
          asmflags, defines, include_dirs, inputs, ldflags, lib_dirs,
          libs, precompiled_header, precompiled_source, rustflags,
-         rustenv, swiftflags
+         rustenv, swiftflags, testonly
   Deps: data_deps, deps, public_deps
   Dependent configs: all_dependent_configs, public_configs
   General: check_includes, configs, data, friend, inputs, metadata,
@@ -1925,7 +1929,7 @@
   Flags: cflags, cflags_c, cflags_cc, cflags_objc, cflags_objcc,
          asmflags, defines, include_dirs, inputs, ldflags, lib_dirs,
          libs, precompiled_header, precompiled_source, rustflags,
-         rustenv, swiftflags
+         rustenv, swiftflags, testonly
   Deps: data_deps, deps, public_deps
   Dependent configs: all_dependent_configs, public_configs
   General: check_includes, configs, data, friend, inputs, metadata,
@@ -1957,7 +1961,7 @@
   Flags: cflags, cflags_c, cflags_cc, cflags_objc, cflags_objcc,
          asmflags, defines, include_dirs, inputs, ldflags, lib_dirs,
          libs, precompiled_header, precompiled_source, rustflags,
-         rustenv, swiftflags
+         rustenv, swiftflags, testonly
   Deps: data_deps, deps, public_deps
   Dependent configs: all_dependent_configs, public_configs
   General: check_includes, configs, data, friend, inputs, metadata,
@@ -1992,7 +1996,7 @@
   Flags: cflags, cflags_c, cflags_cc, cflags_objc, cflags_objcc,
          asmflags, defines, include_dirs, inputs, ldflags, lib_dirs,
          libs, precompiled_header, precompiled_source, rustflags,
-         rustenv, swiftflags
+         rustenv, swiftflags, testonly
   Deps: data_deps, deps, public_deps
   Dependent configs: all_dependent_configs, public_configs
   General: check_includes, configs, data, friend, inputs, metadata,
@@ -2026,7 +2030,7 @@
   Flags: cflags, cflags_c, cflags_cc, cflags_objc, cflags_objcc,
          asmflags, defines, include_dirs, inputs, ldflags, lib_dirs,
          libs, precompiled_header, precompiled_source, rustflags,
-         rustenv, swiftflags
+         rustenv, swiftflags, testonly
   Deps: data_deps, deps, public_deps
   Dependent configs: all_dependent_configs, public_configs
   General: check_includes, configs, data, friend, inputs, metadata,
@@ -2071,7 +2075,7 @@
   Flags: cflags, cflags_c, cflags_cc, cflags_objc, cflags_objcc,
          asmflags, defines, include_dirs, inputs, ldflags, lib_dirs,
          libs, precompiled_header, precompiled_source, rustflags,
-         rustenv, swiftflags
+         rustenv, swiftflags, testonly
   Deps: data_deps, deps, public_deps
   Dependent configs: all_dependent_configs, public_configs
   General: check_includes, configs, data, friend, inputs, metadata,
@@ -2095,7 +2099,7 @@
   Flags: cflags, cflags_c, cflags_cc, cflags_objc, cflags_objcc,
          asmflags, defines, include_dirs, inputs, ldflags, lib_dirs,
          libs, precompiled_header, precompiled_source, rustflags,
-         rustenv, swiftflags
+         rustenv, swiftflags, testonly
   Deps: data_deps, deps, public_deps
   Dependent configs: all_dependent_configs, public_configs
   General: check_includes, configs, data, friend, inputs, metadata,
@@ -2204,7 +2208,7 @@
   Flags: cflags, cflags_c, cflags_cc, cflags_objc, cflags_objcc,
          asmflags, defines, include_dirs, inputs, ldflags, lib_dirs,
          libs, precompiled_header, precompiled_source, rustflags,
-         rustenv, swiftflags
+         rustenv, swiftflags, testonly
   Nested configs: configs
   General: visibility
 ```
@@ -4377,6 +4381,13 @@
   - "arm"
   - "arm64"
   - "mipsel"
+  - "mips64el"
+  - "s390x"
+  - "ppc64"
+  - "riscv32"
+  - "riscv64"
+  - "e2k"
+  - "loong64"
 ```
 ### <a name="var_target_gen_dir"></a>**target_gen_dir**: Directory for a target's generated files.
 
@@ -5583,6 +5594,18 @@
     ]
   }
 ```
+### <a name="var_gen_deps"></a>**gen_deps**: Declares targets that should generate when this one does.
+
+```
+  A list of target labels.
+
+  Not all GN targets that get evaluated are actually turned into ninja targets
+  (see "gn help execution"). If this target is generated, then any targets in
+  the "gen_deps" list will also be generated, regardless of the usual critera.
+
+  Since "gen_deps" are not build time dependencies, there can be cycles between
+  "deps" and "gen_deps" or within "gen_deps" itself.
+```
 ### <a name="var_include_dirs"></a>**include_dirs**: Additional include directories.
 
 ```
@@ -6364,6 +6387,20 @@
     ]
   }
 ```
+### <a name="var_restat"></a>**restat**: [bool] Whether Ninja should recheck the output timestamp.
+
+```
+  Requests that Ninja check the outputs timestamp after this tool has run to
+  determine if anything changed. If true (the default if not set), GN sets
+  Ninja's flag 'restat = 1` for the action.
+  
+  This means that Ninja will check the timestamp of the output after the action
+  completes. If output timestamp is unchanged, the step will be treated as if
+  it never needed to be rebuilt, potentially eliminating some downstream steps
+  for incremental builds. Scripts can improve build performance by taking care
+  not to change the timestamp of the output file(s) if the contents have not
+  changed.
+```
 ### <a name="var_script"></a>**script**: Script file for actions.
 
 ```
@@ -6902,6 +6939,13 @@
   Targets in non-default toolchains will only be generated when they are
   required (directly or transitively) to build a target in the default
   toolchain.
+
+  Some targets might be associated but without a formal build dependency (for
+  example, related tools or optional variants). A target that is marked as
+  "generated" can propagate its generated state to an associated target using
+  "gen_deps". This will make the referenced dependency have Ninja rules
+  generated in the same cases the source target has but without a build-time
+  dependency and even in non-default toolchains.
 
   See also "gn help ninja_rules".
 ```

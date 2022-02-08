@@ -302,6 +302,10 @@ extern const char kRebase[];
 extern const char kRebase_HelpShort[];
 extern const char kRebase_Help[];
 
+extern const char kRestat[];
+extern const char kRestat_HelpShort[];
+extern const char kRestat_Help[];
+
 extern const char kResponseFileContents[];
 extern const char kResponseFileContents_HelpShort[];
 extern const char kResponseFileContents_Help[];
