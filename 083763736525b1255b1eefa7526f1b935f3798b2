@@ -24,6 +24,30 @@
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "c9f6a37c_4f7088cc",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 12,
+      "author": {
+        "id": 1000067
+      },
+      "writtenOn": "2022-02-11T20:12:29Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "5a8723ad_464e1eb9",
+      "range": {
+        "startLine": 12,
+        "startChar": 8,
+        "endLine": 12,
+        "endChar": 21
+      },
+      "revId": "083763736525b1255b1eefa7526f1b935f3798b2",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "2f11ad9d_fa888722",
@@ -47,6 +71,30 @@
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "fda251a2_d471f994",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 16,
+      "author": {
+        "id": 1000067
+      },
+      "writtenOn": "2022-02-11T20:12:29Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "2f11ad9d_fa888722",
+      "range": {
+        "startLine": 16,
+        "startChar": 33,
+        "endLine": 16,
+        "endChar": 35
+      },
+      "revId": "083763736525b1255b1eefa7526f1b935f3798b2",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "dba455de_1908aee6",
@@ -60,6 +108,24 @@
       "writtenOn": "2022-02-08T20:54:38Z",
       "side": 1,
       "message": "Can you add a unit test for this function? Some of the cases like ACTION are trivial and I don\u0027t think a test is that useful, but I think it\u0027s useful to cover:\n  - Empty inputs, empty deps.\n  - Inputs but they are all TOOL_NONE, empty deps.\n  - That plus dep with dependency_output file\n  - That plus dep with no dependency output file.",
+      "revId": "083763736525b1255b1eefa7526f1b935f3798b2",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "17f34796_63440ea2",
+        "filename": "src/gn/target.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 938,
+      "author": {
+        "id": 1000067
+      },
+      "writtenOn": "2022-02-11T20:12:29Z",
+      "side": 1,
+      "message": "Done, but please take a look because I\u0027m not completely sure I did what you had in mind.",
+      "parentUuid": "dba455de_1908aee6",
       "revId": "083763736525b1255b1eefa7526f1b935f3798b2",
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
     },
@@ -104,6 +170,30 @@
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "fbcc21d5_d9f113d2",
+        "filename": "src/gn/target.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 404,
+      "author": {
+        "id": 1000067
+      },
+      "writtenOn": "2022-02-11T20:12:29Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "a381eeea_dce47698",
+      "range": {
+        "startLine": 404,
+        "startChar": 4,
+        "endLine": 404,
+        "endChar": 5
+      },
+      "revId": "083763736525b1255b1eefa7526f1b935f3798b2",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "ef757014_dfd98f7a",
@@ -121,6 +211,24 @@
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "5501fe38_9485cc4e",
+        "filename": "src/gn/target.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 410,
+      "author": {
+        "id": 1000067
+      },
+      "writtenOn": "2022-02-11T20:12:29Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ef757014_dfd98f7a",
+      "revId": "083763736525b1255b1eefa7526f1b935f3798b2",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "bf77e4a3_68ad6329",
@@ -134,6 +242,30 @@
       "writtenOn": "2022-01-28T18:56:36Z",
       "side": 1,
       "message": "Can remove.",
+      "range": {
+        "startLine": 412,
+        "startChar": 4,
+        "endLine": 412,
+        "endChar": 5
+      },
+      "revId": "083763736525b1255b1eefa7526f1b935f3798b2",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "2f4a55ed_7b3d243a",
+        "filename": "src/gn/target.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 412,
+      "author": {
+        "id": 1000067
+      },
+      "writtenOn": "2022-02-11T20:12:29Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "bf77e4a3_68ad6329",
       "range": {
         "startLine": 412,
         "startChar": 4,
