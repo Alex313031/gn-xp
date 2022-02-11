@@ -18,6 +18,24 @@
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "207d2703_5a88ea2c",
+        "filename": "src/gn/build_settings.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 64,
+      "author": {
+        "id": 1000067
+      },
+      "writtenOn": "2022-02-11T21:01:08Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "825322fd_a755f690",
+      "revId": "169805f9e563712770cf936fbe10d18307c9fea0",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "7141f74c_70777db9",
@@ -31,6 +49,24 @@
       "writtenOn": "2022-02-03T19:21:45Z",
       "side": 1,
       "message": "Can you make clear above here that the input must be one of the constants (i.e. it does pointer comparisons rather than string comparisons).",
+      "revId": "169805f9e563712770cf936fbe10d18307c9fea0",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "fb93ce02_0e7c6739",
+        "filename": "src/gn/builtin_tool.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 21,
+      "author": {
+        "id": 1000067
+      },
+      "writtenOn": "2022-02-11T21:01:08Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "7141f74c_70777db9",
       "revId": "169805f9e563712770cf936fbe10d18307c9fea0",
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
     },
@@ -82,6 +118,30 @@
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "29100c1f_0f742821",
+        "filename": "src/gn/ninja_toolchain_writer.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 48,
+      "author": {
+        "id": 1000067
+      },
+      "writtenOn": "2022-02-11T21:01:08Z",
+      "side": 1,
+      "message": "Yes, that\u0027s a sensible idea.",
+      "parentUuid": "c410d86c_06833a7b",
+      "range": {
+        "startLine": 48,
+        "startChar": 8,
+        "endLine": 48,
+        "endChar": 61
+      },
+      "revId": "169805f9e563712770cf936fbe10d18307c9fea0",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "ba6c7fa3_4bedd698",
@@ -99,6 +159,24 @@
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "06abda57_503ccc21",
+        "filename": "src/gn/tool.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 240,
+      "author": {
+        "id": 1000067
+      },
+      "writtenOn": "2022-02-11T21:01:08Z",
+      "side": 1,
+      "message": "In that case it is simpler to remove the |settings| parameter entirely.\n\nThe |no_stamp_files| here was added to ensure this function could be called with an explicit value of `false` in target.cc and xcode_writer.cc in order to avoid changing previous behavior. But since we assert() that the flag is always false here, that is not necessary.",
+      "parentUuid": "ba6c7fa3_4bedd698",
+      "revId": "169805f9e563712770cf936fbe10d18307c9fea0",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "8b1b7160_40dadac5",
@@ -112,6 +190,30 @@
       "writtenOn": "2022-02-03T19:21:45Z",
       "side": 1,
       "message": "I feel like SetComplete() should be implicitly called by the BuiltinTool constructor. The normal tools use a phased construction since they\u0027re read from a build file, but builtin tools should never need this and should always be ready to go.\n\nI\u0027d use emplace rather than try_emplace here also since try_emplace seems to be saying you\u0027re going out of your way to avoid overwriting existing values but this shouldn\u0027t come up.\n\nThen this whole block can be:\n\n  const char* phony_name \u003d BuiltinTool::kBuiltinToolPhony;\n  tools_.emplace(phony_name, std::make_unique\u003cBuiltinTool\u003e(phony_name));",
+      "range": {
+        "startLine": 24,
+        "startChar": 14,
+        "endLine": 24,
+        "endChar": 25
+      },
+      "revId": "169805f9e563712770cf936fbe10d18307c9fea0",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "750f2903_b8c4ea99",
+        "filename": "src/gn/toolchain.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 1000067
+      },
+      "writtenOn": "2022-02-11T21:01:08Z",
+      "side": 1,
+      "message": "Done and done :)",
+      "parentUuid": "8b1b7160_40dadac5",
       "range": {
         "startLine": 24,
         "startChar": 14,
