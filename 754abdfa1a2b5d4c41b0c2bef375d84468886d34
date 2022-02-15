@@ -16,6 +16,23 @@
       "message": "Please take a look.",
       "revId": "754abdfa1a2b5d4c41b0c2bef375d84468886d34",
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "500467fe_b8a50334",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000070
+      },
+      "writtenOn": "2022-02-15T09:23:45Z",
+      "side": 1,
+      "message": "phosek: please take a look.",
+      "revId": "754abdfa1a2b5d4c41b0c2bef375d84468886d34",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
     }
   ]
 }
