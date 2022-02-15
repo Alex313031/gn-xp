@@ -1,6 +1,23 @@
 {
   "comments": [
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "0189a6f5_3d0e874d",
+        "filename": "docs/reference.md",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000168
+      },
+      "writtenOn": "2022-02-15T19:56:48Z",
+      "side": 1,
+      "message": "This also contains some previous docs updates that didn\u0027t regenerate this file.",
+      "revId": "b4d07bf85ae08ef03443f6d62b27393a93042fbd",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "740fee24_a29b78bc",
@@ -41,6 +58,52 @@
         "startLine": 7167,
         "startChar": 22,
         "endLine": 7169,
+        "endChar": 44
+      },
+      "revId": "b4d07bf85ae08ef03443f6d62b27393a93042fbd",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "4771efab_c09d605f",
+        "filename": "src/gn/parser.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 192,
+      "author": {
+        "id": 1000168
+      },
+      "writtenOn": "2022-02-15T19:56:48Z",
+      "side": 1,
+      "message": "Unchanged, rewrapping",
+      "range": {
+        "startLine": 186,
+        "startChar": 56,
+        "endLine": 192,
+        "endChar": 36
+      },
+      "revId": "b4d07bf85ae08ef03443f6d62b27393a93042fbd",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c99ebfaf_0c7bc6a5",
+        "filename": "src/gn/parser.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 212,
+      "author": {
+        "id": 1000168
+      },
+      "writtenOn": "2022-02-15T19:56:48Z",
+      "side": 1,
+      "message": "Unchanged, rewrapping",
+      "range": {
+        "startLine": 210,
+        "startChar": 22,
+        "endLine": 212,
         "endChar": 44
       },
       "revId": "b4d07bf85ae08ef03443f6d62b27393a93042fbd",
