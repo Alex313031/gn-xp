@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1872c5fd_ee5def3f",
+        "filename": "src/gn/ninja_rust_binary_target_writer.cc",
+        "patchSetId": 8
+      },
+      "lineNbr": 205,
+      "author": {
+        "id": 1002072
+      },
+      "writtenOn": "2022-03-02T20:19:48Z",
+      "side": 1,
+      "message": "These are combined because public deps are written to externs section, but private deps are currently written to the rustdeps section (as -Ldependency)",
+      "range": {
+        "startLine": 205,
+        "startChar": 2,
+        "endLine": 205,
+        "endChar": 21
+      },
+      "revId": "4a4571270228a0b4cb45665e3a826371f4f8b010",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    }
+  ]
+}

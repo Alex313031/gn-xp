@@ -1,0 +1,89 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b94f5433_e6c45b1c",
+        "filename": "src/gn/ninja_rust_binary_target_writer.cc",
+        "patchSetId": 8
+      },
+      "lineNbr": 240,
+      "author": {
+        "id": 1002072
+      },
+      "writtenOn": "2022-03-02T20:19:48Z",
+      "side": 0,
+      "message": "Was \u003e 80 col",
+      "revId": "6109f626c04ab6955563da1a496cc44ebf6f7dd8",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7af71741_11eed071",
+        "filename": "src/gn/ninja_rust_binary_target_writer.cc",
+        "patchSetId": 9
+      },
+      "lineNbr": 307,
+      "author": {
+        "id": 1002072
+      },
+      "writtenOn": "2022-03-02T20:19:48Z",
+      "side": 0,
+      "message": "This was unused code.",
+      "revId": "6109f626c04ab6955563da1a496cc44ebf6f7dd8",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "cb4edf1e_11f4ac9d",
+        "filename": "src/gn/ninja_rust_binary_target_writer.h",
+        "patchSetId": 10
+      },
+      "lineNbr": 11,
+      "author": {
+        "id": 1002072
+      },
+      "writtenOn": "2022-03-02T20:19:48Z",
+      "side": 0,
+      "message": "Dead code.",
+      "revId": "6109f626c04ab6955563da1a496cc44ebf6f7dd8",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2991af8f_a59b140b",
+        "filename": "src/gn/target.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 788,
+      "author": {
+        "id": 1002072
+      },
+      "writtenOn": "2022-03-02T20:19:48Z",
+      "side": 0,
+      "message": "RUST_LIBRARY and DYLIBs (via SHARED_LIBRARY) already do this above, so removed.",
+      "revId": "6109f626c04ab6955563da1a496cc44ebf6f7dd8",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "69e03906_6ac4af5f",
+        "filename": "src/gn/target.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 831,
+      "author": {
+        "id": 1002072
+      },
+      "writtenOn": "2022-03-02T20:19:48Z",
+      "side": 0,
+      "message": "A non-final target is a library, which is already doing this above, so removed it here.",
+      "revId": "6109f626c04ab6955563da1a496cc44ebf6f7dd8",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    }
+  ]
+}

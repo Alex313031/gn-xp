@@ -1,0 +1,44 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9da2e01f_71432524",
+        "filename": "src/gn/target.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 787,
+      "author": {
+        "id": 1002072
+      },
+      "writtenOn": "2022-03-02T20:19:48Z",
+      "side": 1,
+      "message": "Moved this up from below, so we set the transitive stuff all in one place.",
+      "revId": "4b2aebe28f82de4d264562dd39ea7929505442fa",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f6d0d30e_7aec48dd",
+        "filename": "src/gn/target.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 797,
+      "author": {
+        "id": 1002072
+      },
+      "writtenOn": "2022-03-02T20:19:48Z",
+      "side": 1,
+      "message": "This is to match the current behaviour, which is to read the bool that was just written to the transitive libs, which was `is_public`. The \"inherited\" libs would list the dependency as always public, instead.",
+      "range": {
+        "startLine": 797,
+        "startChar": 9,
+        "endLine": 797,
+        "endChar": 42
+      },
+      "revId": "4b2aebe28f82de4d264562dd39ea7929505442fa",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    }
+  ]
+}
