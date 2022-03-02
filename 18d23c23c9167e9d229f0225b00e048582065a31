@@ -16,6 +16,23 @@
       "message": "Hi Brett, could you please have a look? I\u0027ve left some CL comments to further explain what I was doing when it wasn\u0027t something you\u0027d explain in a comment in the code itself.",
       "revId": "18d23c23c9167e9d229f0225b00e048582065a31",
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "0d346674_0ed5d005",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 10
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1002072
+      },
+      "writtenOn": "2022-03-02T22:03:40Z",
+      "side": 1,
+      "message": "There\u0027s an issue with this CL, I removed -Ldependency when a --extern was added to the command line, but that\u0027s incorrect. If you have:\n\nA -\u003e B -\u003e C\n  -\u003e C\n  \nAnd you write `extern crate C` in B\u0027s lib.rs.\n\nThen when compiling A, rustc still needs -Ldependency for C, or it can\u0027t satisfy the requirement from B.\n\nI will put this back adjust the tests.\n\nBut I am also seeing in Chromium that it fails to build if we don\u0027t also add the -Ldependency for B, and I don\u0027t fully get that. I will work on that tomorrow.",
+      "revId": "18d23c23c9167e9d229f0225b00e048582065a31",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
     }
   ]
 }
