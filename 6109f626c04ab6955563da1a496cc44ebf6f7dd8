@@ -54,6 +54,29 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "70de4af8_adfbe6cc",
+        "filename": "src/gn/ninja_rust_binary_target_writer_unittest.cc",
+        "patchSetId": 11
+      },
+      "lineNbr": 1086,
+      "author": {
+        "id": 1002072
+      },
+      "writtenOn": "2022-03-03T17:46:35Z",
+      "side": 0,
+      "message": "This is now the only removed -Ldependency, and that\u0027s because //bar is a CDYLIB, which has no metadata for rustc to consume - it\u0027s like a C++ generated .a, and -Ldependency won\u0027t find anything useful there.",
+      "range": {
+        "startLine": 1086,
+        "startChar": 22,
+        "endLine": 1086,
+        "endChar": 43
+      },
+      "revId": "6109f626c04ab6955563da1a496cc44ebf6f7dd8",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "2991af8f_a59b140b",
         "filename": "src/gn/target.cc",
         "patchSetId": 5
@@ -82,6 +105,24 @@
       "writtenOn": "2022-03-02T20:19:48Z",
       "side": 0,
       "message": "A non-final target is a library, which is already doing this above, so removed it here.",
+      "revId": "6109f626c04ab6955563da1a496cc44ebf6f7dd8",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "cd6fb5c2_96c49f69",
+        "filename": "src/gn/target.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 831,
+      "author": {
+        "id": 1002072
+      },
+      "writtenOn": "2022-03-03T17:46:35Z",
+      "side": 0,
+      "message": "This was supporting GROUP, so adding that explicitly above.",
+      "parentUuid": "69e03906_6ac4af5f",
       "revId": "6109f626c04ab6955563da1a496cc44ebf6f7dd8",
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
     }
