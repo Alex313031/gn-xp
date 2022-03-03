@@ -16,6 +16,23 @@
       "message": "Please take a look. Can you also send to CQ+2 if it looks good to you? I\u0027d like my team to have the change as soon as possible.",
       "revId": "a57211aa0ffc0627ca56fb007e15b169cfc770be",
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "bc6d7d3e_9ffd6b77",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000070
+      },
+      "writtenOn": "2022-03-03T14:16:22Z",
+      "side": 1,
+      "message": "phosek: ping",
+      "revId": "a57211aa0ffc0627ca56fb007e15b169cfc770be",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
     }
   ]
 }
