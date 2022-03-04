@@ -1,0 +1,95 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "44c66461_9415ff36",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 14
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000168
+      },
+      "writtenOn": "2022-03-04T23:08:18Z",
+      "side": 1,
+      "message": "Rust logic LGTM after comments.",
+      "revId": "2e20fb6700384ba6136bacc7a53a720d556abb67",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1c0631b6_ee88e1c5",
+        "filename": "src/gn/ninja_rust_binary_target_writer.cc",
+        "patchSetId": 14
+      },
+      "lineNbr": 185,
+      "author": {
+        "id": 1000168
+      },
+      "writtenOn": "2022-03-04T23:08:18Z",
+      "side": 1,
+      "message": "dependent?",
+      "range": {
+        "startLine": 185,
+        "startChar": 61,
+        "endLine": 185,
+        "endChar": 71
+      },
+      "revId": "2e20fb6700384ba6136bacc7a53a720d556abb67",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "53300045_17b08973",
+        "filename": "src/gn/ninja_rust_binary_target_writer.cc",
+        "patchSetId": 14
+      },
+      "lineNbr": 188,
+      "author": {
+        "id": 1000168
+      },
+      "writtenOn": "2022-03-04T23:08:18Z",
+      "side": 1,
+      "message": "staticlib crates also don\u0027t have metadata. IIRC what you want here is IsRustLibrary()",
+      "revId": "2e20fb6700384ba6136bacc7a53a720d556abb67",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b7a113ba_fa277a06",
+        "filename": "src/gn/ninja_rust_binary_target_writer_unittest.cc",
+        "patchSetId": 14
+      },
+      "lineNbr": 269,
+      "author": {
+        "id": 1000168
+      },
+      "writtenOn": "2022-03-04T23:08:18Z",
+      "side": 1,
+      "message": "fyi, I don\u0027t think all the tests need additional sources like this. In fact it\u0027s supported to only list the crate_root and rely on depfiles, and we used to do this in the Fuchsia build.",
+      "revId": "2e20fb6700384ba6136bacc7a53a720d556abb67",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "55f7456f_d67308d6",
+        "filename": "src/gn/ninja_rust_binary_target_writer_unittest.cc",
+        "patchSetId": 14
+      },
+      "lineNbr": 377,
+      "author": {
+        "id": 1000168
+      },
+      "writtenOn": "2022-03-04T23:08:18Z",
+      "side": 1,
+      "message": "nit/preexisting: it would be easier to follow here if the obj dirs were derived from the names of the libraries they correspond to",
+      "revId": "2e20fb6700384ba6136bacc7a53a720d556abb67",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    }
+  ]
+}
