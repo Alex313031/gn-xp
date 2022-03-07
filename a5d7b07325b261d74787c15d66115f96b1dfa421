@@ -16,6 +16,23 @@
       "message": "PTAL brettw",
       "revId": "a5d7b07325b261d74787c15d66115f96b1dfa421",
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "52bff700_f6c1aaef",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 15
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1002072
+      },
+      "writtenOn": "2022-03-07T14:31:04Z",
+      "side": 1,
+      "message": "(I also don\u0027t think I have submit privileges)",
+      "revId": "a5d7b07325b261d74787c15d66115f96b1dfa421",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
     }
   ]
 }
