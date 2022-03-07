@@ -769,8 +769,7 @@ void Target::PullDependentTargetLibsFrom(const Target* dep, bool is_public) {
 
   if (dep->output_type() == STATIC_LIBRARY ||
       dep->output_type() == SHARED_LIBRARY ||
-      dep->output_type() == RUST_LIBRARY ||
-      dep->output_type() == GROUP) {
+      dep->output_type() == RUST_LIBRARY || dep->output_type() == GROUP) {
     // Here we have: `this` --[depends-on]--> `dep`
     //
     // The `this` target has direct access to `dep` since its a direct
@@ -791,6 +790,16 @@ void Target::PullDependentTargetLibsFrom(const Target* dep, bool is_public) {
     // the target (as it's only used during compilation).
     rust_transitive_inherited_libs_.Append(dep, true);
     rust_transitive_inheritable_libs_.Append(dep, is_public);
+  }
+  if (!dep->IsFinal()) {
+    // No need to append `dep` when it IsFinal(), as an rlib is never final, so
+    // not adding final `dep`s breaks nothing, even though the final `dep` is
+    // really part of the current linking target.
+    rust_linkable_inherited_libs_.Append(dep, true);
+    // Gathers the set of rlibs that are part of the current target's final
+    // linking target.
+    rust_linkable_inherited_libs_.AppendInherited(
+        dep->rust_linkable_inherited_libs(), true);
   }
 
   if (dep->output_type() == RUST_LIBRARY ||
