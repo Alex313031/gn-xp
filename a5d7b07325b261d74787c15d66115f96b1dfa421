@@ -50,6 +50,24 @@
       "message": "Not sure what\u0027s going on with rpmalloc, is that an ongoing issue on ToT?\n\n[3/5] CC rpmalloc/rpmalloc.c\nFAILED: build/ninja/linux/release/x86-64/rpmalloc-a8e50b6/rpmalloc-65d008a.o \n/b/s/w/ir/x/w/cipd/bin/clang -MMD -MT build/ninja/linux/release/x86-64/rpmalloc-a8e50b6/rpmalloc-65d008a.o -MF build/ninja/linux/release/x86-64/rpmalloc-a8e50b6/rpmalloc-65d008a.o.d -I.  -DRPMALLOC_COMPILE\u003d1 -funit-at-a-time -fstrict-aliasing -fvisibility\u003dhidden -fno-stack-protector -fomit-frame-pointer -fno-math-errno -ffinite-math-only -funsafe-math-optimizations -fno-trapping-math -ffast-math -D_GNU_SOURCE\u003d1 -W -Werror -pedantic -Wall -Weverything -Wno-c++98-compat -Wno-padded -Wno-documentation-unknown-command -Wno-implicit-fallthrough -Wno-static-in-inline -Wno-reserved-id-macro -Wno-disabled-macro-expansion -std\u003dc11 -m64 -g -DBUILD_RELEASE\u003d1 -O3 -funroll-loops -DENABLE_PRELOAD\u003d1 -DENABLE_OVERRIDE\u003d1 --target\u003dx86_64-linux-gnu --sysroot\u003d/b/s/w/ir/x/w/cipd/sysroot -c rpmalloc/rpmalloc.c -o build/ninja/linux/release/x86-64/rpmalloc-a8e50b6/rpmalloc-65d008a.o\nrpmalloc/rpmalloc.c:869:6: error: mixing declarations and code is incompatible with standards before C99 [-Werror,-Wdeclaration-after-statement]\n        int flags \u003d MAP_PRIVATE | MAP_ANONYMOUS | MAP_UNINITIALIZED;\n            ^\nrpmalloc/rpmalloc.c:1108:11: error: mixing declarations and code is incompatible with standards before C99 [-Werror,-Wdeclaration-after-statement]\n                        size_t remain_count \u003d reserved_count - _memory_heap_reserve_count;\n                               ^",
       "revId": "a5d7b07325b261d74787c15d66115f96b1dfa421",
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "4c69734b_15081e81",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 15
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1002072
+      },
+      "writtenOn": "2022-03-08T18:32:07Z",
+      "side": 1,
+      "message": "Ah yes. Looks like https://gn-review.googlesource.com/c/gn/+/13040/1 broke the build: https://ci.chromium.org/p/gn/builders/try/linux",
+      "parentUuid": "c67d1ed5_964527fb",
+      "revId": "a5d7b07325b261d74787c15d66115f96b1dfa421",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
     }
   ]
 }
