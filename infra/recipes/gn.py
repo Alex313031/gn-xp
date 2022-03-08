@@ -166,6 +166,10 @@ def RunSteps(api, repository):
   # True if any config uses rpmalloc.
   use_rpmalloc = any(c.get('use_rpmalloc', False) for c in configs)
 
+  # TODO: REMOVE LINE BELOW ONCE THIS BUG IS FIXED (SORRY):
+  # https://bugs.chromium.org/p/gn/issues/detail?id=278#c5
+  use_rpmalloc = False
+
   with api.macos_sdk(), api.windows_sdk():
     # Build the rpmalloc static libraries if needed.
     if use_rpmalloc:
