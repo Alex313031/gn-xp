@@ -98,6 +98,30 @@
       },
       "revId": "23aec90fe98e09aa35c59e9c187e6e407127c0d2",
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0de30db4_56189501",
+        "filename": "src/gn/target.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 797,
+      "author": {
+        "id": 1000168
+      },
+      "writtenOn": "2022-03-08T20:38:36Z",
+      "side": 1,
+      "message": "Yeah I see what you\u0027re getting at, I just think the comment is confusing. The way I worded it above seems like a more straightforward way of saying it, maybe it\u0027s missing some nuance though.",
+      "parentUuid": "ff604eaf_0187d8d8",
+      "range": {
+        "startLine": 796,
+        "startChar": 47,
+        "endLine": 797,
+        "endChar": 48
+      },
+      "revId": "23aec90fe98e09aa35c59e9c187e6e407127c0d2",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
     }
   ]
 }
