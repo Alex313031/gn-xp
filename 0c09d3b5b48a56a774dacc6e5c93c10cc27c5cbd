@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "40f1931d_770ecef3",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000067
+      },
+      "writtenOn": "2022-03-08T14:59:45Z",
+      "side": 1,
+      "message": "Ah, LUCI recipe code coverage strikes again, it\u0027s simpler to remove all the rpmalloc-specific code paths then.",
+      "revId": "0c09d3b5b48a56a774dacc6e5c93c10cc27c5cbd",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    }
+  ]
+}
