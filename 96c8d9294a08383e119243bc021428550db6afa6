@@ -16,6 +16,23 @@
       "message": "Thank you.",
       "revId": "96c8d9294a08383e119243bc021428550db6afa6",
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "9d6c4172_cf4b340d",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000067
+      },
+      "writtenOn": "2022-03-08T15:30:27Z",
+      "side": 1,
+      "message": "Ohh, the build failure seems to happen because the bots are still building with the old recipes/gn.py, I believe we need a force-submit here IIRC. Adding @phosek which is familiar with this.",
+      "revId": "96c8d9294a08383e119243bc021428550db6afa6",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
     }
   ]
 }
