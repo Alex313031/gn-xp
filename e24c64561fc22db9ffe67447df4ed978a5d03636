@@ -50,6 +50,23 @@
       "message": "No problem, thanks :)",
       "revId": "e24c64561fc22db9ffe67447df4ed978a5d03636",
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "496b2119_a2611989",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000067
+      },
+      "writtenOn": "2022-03-08T15:33:22Z",
+      "side": 1,
+      "message": "It looks like brettw@chromium.org is a code owner, but not brettw@google.com!",
+      "revId": "e24c64561fc22db9ffe67447df4ed978a5d03636",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
     }
   ]
 }
