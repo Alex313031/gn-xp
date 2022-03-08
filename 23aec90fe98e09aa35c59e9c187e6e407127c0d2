@@ -1,0 +1,44 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ed43a431_7d3a3b6c",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000168
+      },
+      "writtenOn": "2022-03-08T19:11:25Z",
+      "side": 1,
+      "message": "I didn\u0027t realize GN already explicitly links transitive rlibs to C++ final targets. Is that new? Anyway I think this change seems reasonable given that behavior.",
+      "revId": "23aec90fe98e09aa35c59e9c187e6e407127c0d2",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0662f072_3c349e9e",
+        "filename": "src/gn/target.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 797,
+      "author": {
+        "id": 1000168
+      },
+      "writtenOn": "2022-03-08T19:11:25Z",
+      "side": 1,
+      "message": "I don\u0027t understand this comment.\n\nSeems like the point of this code is that we want to break the chain of transitive deps at final targets, which makes sense to me.",
+      "range": {
+        "startLine": 796,
+        "startChar": 47,
+        "endLine": 797,
+        "endChar": 48
+      },
+      "revId": "23aec90fe98e09aa35c59e9c187e6e407127c0d2",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    }
+  ]
+}
