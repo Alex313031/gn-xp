@@ -122,6 +122,30 @@
       },
       "revId": "23aec90fe98e09aa35c59e9c187e6e407127c0d2",
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "4ee9454e_efc58483",
+        "filename": "src/gn/target.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 797,
+      "author": {
+        "id": 1002072
+      },
+      "writtenOn": "2022-03-08T20:46:49Z",
+      "side": 1,
+      "message": "Ok great. I am working on a better comment with an example then. Thanks for raising it!",
+      "parentUuid": "0de30db4_56189501",
+      "range": {
+        "startLine": 796,
+        "startChar": 47,
+        "endLine": 797,
+        "endChar": 48
+      },
+      "revId": "23aec90fe98e09aa35c59e9c187e6e407127c0d2",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
     }
   ]
 }
