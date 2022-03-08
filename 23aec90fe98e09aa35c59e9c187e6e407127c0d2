@@ -18,6 +18,24 @@
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "6f917773_8d486323",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1002072
+      },
+      "writtenOn": "2022-03-08T19:34:16Z",
+      "side": 1,
+      "message": "https://gn-review.googlesource.com/c/gn/+/8260 did this. We would need to replace this with the output of --emit\u003dsomething instead of the .rlibs however, eventually.",
+      "parentUuid": "ed43a431_7d3a3b6c",
+      "revId": "23aec90fe98e09aa35c59e9c187e6e407127c0d2",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "0662f072_3c349e9e",
@@ -31,6 +49,30 @@
       "writtenOn": "2022-03-08T19:11:25Z",
       "side": 1,
       "message": "I don\u0027t understand this comment.\n\nSeems like the point of this code is that we want to break the chain of transitive deps at final targets, which makes sense to me.",
+      "range": {
+        "startLine": 796,
+        "startChar": 47,
+        "endLine": 797,
+        "endChar": 48
+      },
+      "revId": "23aec90fe98e09aa35c59e9c187e6e407127c0d2",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ff604eaf_0187d8d8",
+        "filename": "src/gn/target.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 797,
+      "author": {
+        "id": 1002072
+      },
+      "writtenOn": "2022-03-08T19:34:16Z",
+      "side": 1,
+      "message": "If the direct dependency `dep` is final, then it\u0027s part of the `target_`\u0027s linking graph. Like exe -\u003e a -\u003e so -\u003e a, the so is part of exe\u0027s linking graph. But the so is not an rlib (since rlibs aren\u0027t final) so we don\u0027t need to inherit the `dep` here.",
+      "parentUuid": "0662f072_3c349e9e",
       "range": {
         "startLine": 796,
         "startChar": 47,
