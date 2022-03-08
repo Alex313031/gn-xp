@@ -26,6 +26,8 @@ PROPERTIES = {
     'repository': Property(kind=str, default='https://gn.googlesource.com/gn'),
 }
 
+# IMPORTANT: RPMALLOC TEMPORARILY DISABLED, SEE
+# https://bugs.chromium.org/p/gn/issues/detail?id=278
 # On select platforms, link the GN executable against rpmalloc for a small 10% speed boost.
 RPMALLOC_GIT_URL = 'https://fuchsia.googlesource.com/third_party/github.com/mjansson/rpmalloc'
 RPMALLOC_REVISION = 'f4b7c52c858675f732a76bd1c73447e0fcf84b1e'
@@ -102,8 +104,6 @@ def _get_compilation_environment(api, target, cipd_dir):
 def RunSteps(api, repository):
   src_dir = api.path['start_dir'].join('gn')
 
-  # TODO: Verify that building and linking rpmalloc works on OS X and Windows as
-  # well.
   with api.step.nest('git'), api.context(infra_steps=True):
     api.step('init', ['git', 'init', src_dir])
 
@@ -163,66 +163,7 @@ def RunSteps(api, repository):
       },
   ]
 
-  # True if any config uses rpmalloc.
-  use_rpmalloc = any(c.get('use_rpmalloc', False) for c in configs)
-
   with api.macos_sdk(), api.windows_sdk():
-    # Build the rpmalloc static libraries if needed.
-    if use_rpmalloc:
-      # Maps a target.platform string to the location of the corresponding
-      # rpmalloc static library.
-      rpmalloc_static_libs = {}
-
-      # Get the list of all target platforms that are listed in `configs`
-      # above. Note that this is a list of Target instances, some of them
-      # may refer to the same platform string (e.g. linux-amd64).
-      #
-      # For each platform, a version of rpmalloc will be built if necessary,
-      # but doing this properly requires having a valid target instance to
-      # call _get_compilation_environment. So create a { platform -> Target }
-      # map to do that later.
-      all_config_platforms = {}
-      for c in configs:
-        if not c.get('use_rpmalloc', False):
-          continue
-        for t in c['targets']:
-          if t.platform not in all_config_platforms:
-            all_config_platforms[t.platform] = t
-
-      rpmalloc_src_dir = api.path['start_dir'].join('rpmalloc')
-      with api.step.nest('rpmalloc'):
-        api.step('init', ['git', 'init', rpmalloc_src_dir])
-        with api.context(cwd=rpmalloc_src_dir, infra_steps=True):
-          api.step(
-              'fetch',
-              ['git', 'fetch', '--tags', RPMALLOC_GIT_URL, RPMALLOC_REVISION])
-          api.step('checkout', ['git', 'checkout', 'FETCH_HEAD'])
-
-        for platform in all_config_platforms:
-          # Convert target architecture and os to rpmalloc format.
-          rpmalloc_os, rpmalloc_arch = platform.split('-')
-          rpmalloc_os = RPMALLOC_MAP.get(rpmalloc_os, rpmalloc_os)
-          rpmalloc_arch = RPMALLOC_MAP.get(rpmalloc_arch, rpmalloc_arch)
-
-          env = _get_compilation_environment(api,
-                                             all_config_platforms[platform],
-                                             cipd_dir)
-          with api.step.nest('build rpmalloc-' + platform), api.context(
-              env=env, cwd=rpmalloc_src_dir):
-            api.python(
-                'configure',
-                rpmalloc_src_dir.join('configure.py'),
-                args=['-c', 'release', '-a', rpmalloc_arch, '--lto'])
-
-            # NOTE: Only build the static library.
-            rpmalloc_static_lib = api.path.join('lib', rpmalloc_os, 'release',
-                                                rpmalloc_arch,
-                                                'librpmallocwrap.a')
-            api.step('ninja', [cipd_dir.join('ninja'), rpmalloc_static_lib])
-
-          rpmalloc_static_libs[platform] = rpmalloc_src_dir.join(
-              rpmalloc_static_lib)
-
     for config in configs:
       with api.step.nest(config['name']):
         for target in config['targets']:
@@ -230,10 +171,6 @@ def RunSteps(api, repository):
           with api.step.nest(target.platform), api.context(
               env=env, cwd=src_dir):
             args = config['args']
-            if config.get('use_rpmalloc', False):
-              args = args[:] + [
-                  '--link-lib=%s' % rpmalloc_static_libs[target.platform]
-              ]
 
             api.python('generate', src_dir.join('build', 'gen.py'), args=args)
 
