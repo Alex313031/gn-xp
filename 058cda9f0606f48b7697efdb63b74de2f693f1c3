@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "5d0a475c_dae02227",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000067
+      },
+      "writtenOn": "2022-03-09T10:20:20Z",
+      "side": 1,
+      "message": "This is an alternative to https://gn-review.googlesource.com/c/gn/+/13100 that does not disable rpmalloc, but patches the configure script in-place.\n\nI know that this is generally frowned upon by infra, but this looks easier than maintaining a branch on a fuchsia.googlesource.com or chromium.googlsource.com repository for this specific issue (which hopefully will be fixed by upstream after some time).\n\nNOTE: It will likely fail to build due to the fact that the CQ bots are using the old recipe to perform the Gerrit checks. I tested locally that this works though.",
+      "revId": "058cda9f0606f48b7697efdb63b74de2f693f1c3",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    }
+  ]
+}
