@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f0b970fe_bd24441e",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000070
+      },
+      "writtenOn": "2022-03-09T16:09:43Z",
+      "side": 1,
+      "message": "Submitting manually as\n1. this is an OWNERS only change\n2. Linux builder is broken due to issue #278",
+      "revId": "ac6e3a6fb0947cc71f9727c0804206fb7016b7ff",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    }
+  ]
+}
