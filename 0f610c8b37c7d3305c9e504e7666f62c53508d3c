@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6826b20d_1cd00021",
+        "filename": "src/gn/ninja_rust_binary_target_writer_unittest.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 562,
+      "author": {
+        "id": 1002072
+      },
+      "writtenOn": "2022-03-09T22:47:35Z",
+      "side": 0,
+      "message": "I don\u0027t know stamps well, but presumably this is because our dependency (mylib) no longer links anything through the group.",
+      "range": {
+        "startLine": 562,
+        "startChar": 9,
+        "endLine": 562,
+        "endChar": 28
+      },
+      "revId": "0f610c8b37c7d3305c9e504e7666f62c53508d3c",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    }
+  ]
+}

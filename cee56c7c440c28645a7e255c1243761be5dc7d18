@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "7ae57baf_f4259900",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1002072
+      },
+      "writtenOn": "2022-03-09T22:47:35Z",
+      "side": 1,
+      "message": "tmandry: PTAL for Rust changes\n\nI did verify that proc macros continue to work fine in Chromium with these changes as well, so as to verify my mental model.",
+      "revId": "cee56c7c440c28645a7e255c1243761be5dc7d18",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    }
+  ]
+}
