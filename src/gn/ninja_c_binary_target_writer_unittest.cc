@@ -1604,6 +1604,170 @@ TEST_F(NinjaCBinaryTargetWriterTest, RustDepsOverDynamicLinking) {
   EXPECT_EQ(expected, out_str) << expected << "\n" << out_str;
 }
 
+TEST_F(NinjaCBinaryTargetWriterTest, LinkingWithRustLibraryDepsOnCdylib) {
+  Err err;
+  TestWithScope setup;
+
+  // A non-rust shared library.
+  Target cc_shlib(setup.settings(), Label(SourceDir("//cc_shlib"), "cc_shlib"));
+  cc_shlib.set_output_type(Target::SHARED_LIBRARY);
+  cc_shlib.set_output_name("cc_shlib");
+  cc_shlib.SetToolchain(setup.toolchain());
+  cc_shlib.visibility().SetPublic();
+  ASSERT_TRUE(cc_shlib.OnResolved(&err));
+
+  // A Rust CDYLIB shared library.
+  Target rust_shlib(setup.settings(),
+                    Label(SourceDir("//rust_shlib/"), "rust_shlib"));
+  rust_shlib.set_output_type(Target::SHARED_LIBRARY);
+  rust_shlib.visibility().SetPublic();
+  SourceFile rust_shlib_rs("//rust_shlib/lib.rs");
+  rust_shlib.sources().push_back(rust_shlib_rs);
+  rust_shlib.source_types_used().Set(SourceFile::SOURCE_RS);
+  rust_shlib.rust_values().set_crate_type(RustValues::CRATE_CDYLIB);
+  rust_shlib.rust_values().set_crate_root(rust_shlib_rs);
+  rust_shlib.rust_values().crate_name() = "dylib";
+  rust_shlib.SetToolchain(setup.toolchain());
+  ASSERT_TRUE(rust_shlib.OnResolved(&err));
+
+  // An rlib that depends on both shared libraries.
+  Target rlib(setup.settings(),
+              Label(SourceDir("//rlib/"), "rlib"));
+  rlib.set_output_type(Target::RUST_LIBRARY);
+  rlib.visibility().SetPublic();
+  SourceFile rlib_rs("//rlib/lib.rs");
+  rlib.sources().push_back(rlib_rs);
+  rlib.source_types_used().Set(SourceFile::SOURCE_RS);
+  rlib.rust_values().set_crate_root(rlib_rs);
+  rlib.rust_values().crate_name() = "rlib";
+  rlib.private_deps().push_back(LabelTargetPair(&rust_shlib));
+  rlib.private_deps().push_back(LabelTargetPair(&cc_shlib));
+  rlib.SetToolchain(setup.toolchain());
+  ASSERT_TRUE(rlib.OnResolved(&err));
+
+  Target target(setup.settings(), Label(SourceDir("//exe/"), "binary"));
+  target.set_output_type(Target::EXECUTABLE);
+  target.visibility().SetPublic();
+  target.sources().push_back(SourceFile("//exe/main.cc"));
+  target.source_types_used().Set(SourceFile::SOURCE_CPP);
+  target.private_deps().push_back(LabelTargetPair(&rlib));
+  target.SetToolchain(setup.toolchain());
+  ASSERT_TRUE(target.OnResolved(&err));
+
+  std::ostringstream out;
+  NinjaCBinaryTargetWriter writer(&target, out);
+  writer.Run();
+
+  const char expected[] =
+      "defines =\n"
+      "include_dirs =\n"
+      "cflags =\n"
+      "cflags_cc =\n"
+      "root_out_dir = .\n"
+      "target_out_dir = obj/exe\n"
+      "target_output_name = binary\n"
+      "\n"
+      "build obj/exe/binary.main.o: cxx ../../exe/main.cc\n"
+      "\n"
+      "build ./binary: link obj/exe/binary.main.o "
+      "obj/rust_shlib/librust_shlib.so "
+      "./libcc_shlib.so "
+      "| "
+      "obj/rlib/librlib.rlib\n"
+      "  ldflags =\n"
+      "  libs =\n"
+      "  frameworks =\n"
+      "  swiftmodules =\n"
+      "  output_extension = \n"
+      "  output_dir = \n"
+      "  rlibs = obj/rlib/librlib.rlib\n";
+
+  std::string out_str = out.str();
+  EXPECT_EQ(expected, out_str) << expected << "\n" << out_str;
+}
+
+TEST_F(NinjaCBinaryTargetWriterTest, LinkingWithRustLibraryDepsOnDylib) {
+  Err err;
+  TestWithScope setup;
+
+  // A non-rust shared library.
+  Target cc_shlib(setup.settings(), Label(SourceDir("//cc_shlib"), "cc_shlib"));
+  cc_shlib.set_output_type(Target::SHARED_LIBRARY);
+  cc_shlib.set_output_name("cc_shlib");
+  cc_shlib.SetToolchain(setup.toolchain());
+  cc_shlib.visibility().SetPublic();
+  ASSERT_TRUE(cc_shlib.OnResolved(&err));
+
+  // A Rust DYLIB shared library.
+  Target rust_shlib(setup.settings(),
+                    Label(SourceDir("//rust_shlib/"), "rust_shlib"));
+  rust_shlib.set_output_type(Target::SHARED_LIBRARY);
+  rust_shlib.visibility().SetPublic();
+  SourceFile rust_shlib_rs("//rust_shlib/lib.rs");
+  rust_shlib.sources().push_back(rust_shlib_rs);
+  rust_shlib.source_types_used().Set(SourceFile::SOURCE_RS);
+  rust_shlib.rust_values().set_crate_type(RustValues::CRATE_DYLIB);
+  rust_shlib.rust_values().set_crate_root(rust_shlib_rs);
+  rust_shlib.rust_values().crate_name() = "dylib";
+  rust_shlib.SetToolchain(setup.toolchain());
+  ASSERT_TRUE(rust_shlib.OnResolved(&err));
+
+  // An rlib that depends on both shared libraries.
+  Target rlib(setup.settings(),
+              Label(SourceDir("//rlib/"), "rlib"));
+  rlib.set_output_type(Target::RUST_LIBRARY);
+  rlib.visibility().SetPublic();
+  SourceFile rlib_rs("//rlib/lib.rs");
+  rlib.sources().push_back(rlib_rs);
+  rlib.source_types_used().Set(SourceFile::SOURCE_RS);
+  rlib.rust_values().set_crate_root(rlib_rs);
+  rlib.rust_values().crate_name() = "rlib";
+  rlib.private_deps().push_back(LabelTargetPair(&rust_shlib));
+  rlib.private_deps().push_back(LabelTargetPair(&cc_shlib));
+  rlib.SetToolchain(setup.toolchain());
+  ASSERT_TRUE(rlib.OnResolved(&err));
+
+  Target target(setup.settings(), Label(SourceDir("//exe/"), "binary"));
+  target.set_output_type(Target::EXECUTABLE);
+  target.visibility().SetPublic();
+  target.sources().push_back(SourceFile("//exe/main.cc"));
+  target.source_types_used().Set(SourceFile::SOURCE_CPP);
+  target.private_deps().push_back(LabelTargetPair(&rlib));
+  target.SetToolchain(setup.toolchain());
+  ASSERT_TRUE(target.OnResolved(&err));
+
+  std::ostringstream out;
+  NinjaCBinaryTargetWriter writer(&target, out);
+  writer.Run();
+
+  const char expected[] =
+      "defines =\n"
+      "include_dirs =\n"
+      "cflags =\n"
+      "cflags_cc =\n"
+      "root_out_dir = .\n"
+      "target_out_dir = obj/exe\n"
+      "target_output_name = binary\n"
+      "\n"
+      "build obj/exe/binary.main.o: cxx ../../exe/main.cc\n"
+      "\n"
+      "build ./binary: link obj/exe/binary.main.o "
+      "obj/rust_shlib/librust_shlib.so "
+      "./libcc_shlib.so "
+      "| "
+      "obj/rlib/librlib.rlib\n"
+      "  ldflags =\n"
+      "  libs =\n"
+      "  frameworks =\n"
+      "  swiftmodules =\n"
+      "  output_extension = \n"
+      "  output_dir = \n"
+      "  rlibs = obj/rlib/librlib.rlib\n";
+
+  std::string out_str = out.str();
+  EXPECT_EQ(expected, out_str) << expected << "\n" << out_str;
+}
+
 TEST_F(NinjaCBinaryTargetWriterTest, ModuleMapInStaticLibrary) {
   TestWithScope setup;
   Err err;
