@@ -163,7 +163,9 @@ bool IsValidSourceSubstitution(const Substitution* type) {
 }
 
 bool IsValidScriptArgsSubstitution(const Substitution* type) {
-  return IsValidSourceSubstitution(type) || type == &SubstitutionRspFileName;
+  return IsValidSourceSubstitution(type) || type == &SubstitutionRspFileName ||
+         type == &CSubstitutionDefines || type == &CSubstitutionIncludeDirs ||
+         type == &kRustSubstitutionRustEnv;
 }
 
 bool IsValidToolSubstitution(const Substitution* type) {
