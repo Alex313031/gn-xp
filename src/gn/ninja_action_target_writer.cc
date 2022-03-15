@@ -6,11 +6,16 @@
 
 #include <stddef.h>
 
+#include "base/stl_util.h"
 #include "base/strings/string_util.h"
+#include "gn/c_substitution_type.h"
 #include "gn/deps_iterator.h"
 #include "gn/err.h"
 #include "gn/general_tool.h"
+#include "gn/ninja_target_command_util.h"
+#include "gn/path_output.h"
 #include "gn/pool.h"
+#include "gn/rust_substitution_type.h"
 #include "gn/settings.h"
 #include "gn/string_utils.h"
 #include "gn/substitution_writer.h"
@@ -80,6 +85,9 @@ void NinjaActionTargetWriter::Run() {
     if (target_->action_values().has_depfile()) {
       WriteDepfile(SourceFile());
     }
+
+    WriteNinjaVariablesForAction();
+
     if (target_->action_values().pool().ptr) {
       out_ << "  pool = ";
       out_ << target_->action_values().pool().ptr->GetNinjaName(
@@ -149,7 +157,8 @@ std::string NinjaActionTargetWriter::WriteRuleDefinition() {
   out_ << std::endl;
   out_ << "  description = ACTION " << target_label << std::endl;
   out_ << "  restat = 1" << std::endl;
-  const Tool* tool = target_->toolchain()->GetTool(GeneralTool::kGeneralToolAction);
+  const Tool* tool =
+      target_->toolchain()->GetTool(GeneralTool::kGeneralToolAction);
   if (tool && tool->pool().ptr) {
     out_ << "  pool = ";
     out_ << tool->pool().ptr->GetNinjaName(
@@ -204,6 +213,7 @@ void NinjaActionTargetWriter::WriteSourceRules(
         target_, settings_, sources[i],
         target_->action_values().rsp_file_contents().required_types(),
         args_escape_options, out_);
+    WriteNinjaVariablesForAction();
 
     if (target_->action_values().has_depfile()) {
       WriteDepfile(sources[i]);
@@ -246,5 +256,44 @@ void NinjaActionTargetWriter::WriteDepfile(const SourceFile& source) {
   if (settings_->build_settings()->ninja_required_version() >=
       Version{1, 9, 0}) {
     out_ << "  deps = gcc" << std::endl;
+  }
+}
+
+void NinjaActionTargetWriter::WriteNinjaVariablesForAction() {
+  EscapeOptions args_escape_options;
+  args_escape_options.mode = ESCAPE_NINJA_COMMAND;
+  // We're writing the substitution values, these should not be quoted since
+  // they will get pasted into the real command line.
+  args_escape_options.inhibit_quoting = true;
+
+  const SubstitutionTypes& required_args_substitutions =
+      target_->action_values().args().required_types();
+  if (base::ContainsValue(required_args_substitutions,
+                          &kRustSubstitutionRustEnv)) {
+    out_ << "  ";
+    WriteOneFlag(kRecursiveWriterKeepDuplicates, target_,
+                 &kRustSubstitutionRustEnv, false, Tool::kToolNone,
+                 &ConfigValues::rustenv, args_escape_options, path_output_,
+                 out_);
+  }
+
+  if (base::ContainsValue(required_args_substitutions,
+                          &CSubstitutionIncludeDirs)) {
+    out_ << "  " << CSubstitutionIncludeDirs.ninja_name << " =";
+    PathOutput include_path_output(
+        path_output_.current_dir(),
+        settings_->build_settings()->root_path_utf8(), ESCAPE_NINJA_COMMAND);
+    RecursiveTargetConfigToStream<SourceDir>(
+        kRecursiveWriterSkipDuplicates, target_, &ConfigValues::include_dirs,
+        IncludeWriter(include_path_output), out_);
+    out_ << std::endl;
+  }
+
+  if (base::ContainsValue(required_args_substitutions, &CSubstitutionDefines)) {
+    out_ << "  " << CSubstitutionDefines.ninja_name << " =";
+    RecursiveTargetConfigToStream<std::string>(kRecursiveWriterSkipDuplicates,
+                                               target_, &ConfigValues::defines,
+                                               DefineWriter(), out_);
+    out_ << std::endl;
   }
 }

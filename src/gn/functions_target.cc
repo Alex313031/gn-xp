@@ -138,6 +138,12 @@ Inputs
   It is recommended you put inputs to your script in the "sources" variable,
   and stuff like other Python files required to run your script in the "inputs"
   variable.
+
+  A small number of variables are deduced from the configs applicable to this
+  target (rustenv, include_dirs, defines). These variables are typically only
+  useful for actions which run some code generation tool that depends upon
+  the surrounding Rust or C++ toolchain configuration, e.g. needing to know
+  where to find header files.
 )"
 
     ACTION_DEPS
@@ -160,8 +166,8 @@ File name handling
     R"(
 Variables
 
-  args, data, data_deps, depfile, deps, inputs, metadata, outputs*, pool,
-  response_file_contents, script*, sources
+  args, configs, data, data_deps, defines, depfile, deps, include_dirs, inputs,
+  metadata, outputs*, pool, response_file_contents, rustenv, script*, sources
   * = required
 
 Example
@@ -230,8 +236,8 @@ File name handling
     R"(
 Variables
 
-  args, data, data_deps, depfile, deps, inputs, metadata, outputs*, pool,
-  response_file_contents, script*, sources*
+  args, configs, data, data_deps, depfile, defines, deps, include_dirs, inputs,
+  metadata, outputs*, pool, response_file_contents, rustenv, script*, sources*
   * = required
 
 Example

@@ -1312,6 +1312,12 @@
   and stuff like other Python files required to run your script in the "inputs"
   variable.
 
+  A small number of variables are deduced from the configs applicable to this
+  target (rustenv, include_dirs, defines). These variables are typically only
+  useful for actions which run some code generation tool that depends upon
+  the surrounding Rust or C++ toolchain configuration, e.g. needing to know
+  where to find header files.
+
   The "deps" and "public_deps" for an action will always be
   completed before any part of the action is run so it can depend on
   the output of previous steps. The "data_deps" will be built if the
@@ -1354,8 +1360,8 @@
 #### **Variables**
 
 ```
-  args, data, data_deps, depfile, deps, inputs, metadata, outputs*, pool,
-  response_file_contents, script*, sources
+  args, configs, data, data_deps, defines, depfile, deps, include_dirs, inputs,
+  metadata, outputs*, pool, response_file_contents, rustenv, script*, sources
   * = required
 ```
 
@@ -1443,8 +1449,8 @@
 #### **Variables**
 
 ```
-  args, data, data_deps, depfile, deps, inputs, metadata, outputs*, pool,
-  response_file_contents, script*, sources*
+  args, configs, data, data_deps, depfile, defines, deps, include_dirs, inputs,
+  metadata, outputs*, pool, response_file_contents, rustenv, script*, sources*
   * = required
 ```
 
