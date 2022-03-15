@@ -1,0 +1,44 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ae40a7a9_d60cb643",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 10
+      },
+      "lineNbr": 47,
+      "author": {
+        "id": 1000168
+      },
+      "writtenOn": "2022-03-15T20:29:29Z",
+      "side": 1,
+      "message": "I\u0027m a little confused what you mean when you say linking. The rustc flags that look like linker flags (-L) are search paths for the frontend to load Rust API metadata for transitive dependencies.\n\nmylib is now listed as an -Ldependency search path for transitive deps, which makes sense because in addition to being a direct dep it is also a transitive dep.\n\nAs a direct dep the key thing for the rustc frontend was listing it as an --extern which was already done.\n\nThe library is now also listed as an implicit dep in the ninja file, which doesn\u0027t affect the command line at all. It\u0027s also technically redundant with the dep on direct, but no harm done (a number of redundant deps were also removed in these tests, which is good, but a bit surprising that it went both ways).",
+      "range": {
+        "startLine": 47,
+        "startChar": 6,
+        "endLine": 47,
+        "endChar": 12
+      },
+      "revId": "c8a5c2ffbc5fc5df2fbd3b4517a57f93c58e02f6",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d5ce8be4_6d45e2d7",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 10
+      },
+      "lineNbr": 53,
+      "author": {
+        "id": 1000168
+      },
+      "writtenOn": "2022-03-15T20:29:29Z",
+      "side": 1,
+      "message": "You\u0027re using test output change (implicit deps) to express related-but-not-semantically-equivalent changes in internal GN state. These particular changes are benign, but it\u0027s misleading to say there are changes in linking semantics. That only gets actually tested in the NinjaCBinaryTargetWriterTest you added.",
+      "revId": "c8a5c2ffbc5fc5df2fbd3b4517a57f93c58e02f6",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    }
+  ]
+}

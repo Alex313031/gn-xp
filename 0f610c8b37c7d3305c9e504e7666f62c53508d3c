@@ -22,6 +22,30 @@
       },
       "revId": "0f610c8b37c7d3305c9e504e7666f62c53508d3c",
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a7cd9300_0c55bddf",
+        "filename": "src/gn/ninja_rust_binary_target_writer_unittest.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 562,
+      "author": {
+        "id": 1000168
+      },
+      "writtenOn": "2022-03-15T20:29:29Z",
+      "side": 0,
+      "message": "Seems consistent with the pattern I\u0027m observing that inherited public dep edges aren\u0027t included in ninja files (they\u0027re redundant, in this case the stamp file was redundant with obj/bar/libmylib.rlib)",
+      "parentUuid": "6826b20d_1cd00021",
+      "range": {
+        "startLine": 562,
+        "startChar": 9,
+        "endLine": 562,
+        "endChar": 28
+      },
+      "revId": "0f610c8b37c7d3305c9e504e7666f62c53508d3c",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
     }
   ]
 }
