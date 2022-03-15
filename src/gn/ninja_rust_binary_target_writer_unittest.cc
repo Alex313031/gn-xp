@@ -359,7 +359,7 @@ TEST_F(NinjaRustBinaryTargetWriterTest, DylibDeps) {
   dylib.sources().push_back(SourceFile("//bar/mylib.rs"));
   dylib.sources().push_back(barlib);
   dylib.source_types_used().Set(SourceFile::SOURCE_RS);
-  dylib.rust_values().set_crate_type(RustValues::CRATE_DYLIB);  // TODO
+  dylib.rust_values().set_crate_type(RustValues::CRATE_DYLIB);
   dylib.rust_values().set_crate_root(barlib);
   dylib.rust_values().crate_name() = "mylib";
   dylib.public_deps().push_back(LabelTargetPair(&inside_dylib));
@@ -397,6 +397,19 @@ TEST_F(NinjaRustBinaryTargetWriterTest, DylibDeps) {
     EXPECT_EQ(expected, out_str) << expected << "\n" << out_str;
   }
 
+  Target private_dylib(setup.settings(), Label(SourceDir("//private_dylib/"), "private_dylib"));
+  private_dylib.set_output_type(Target::SHARED_LIBRARY);
+  private_dylib.visibility().SetPublic();
+  SourceFile private_dyliblib("//private_dylib/lib.rs");
+  private_dylib.sources().push_back(SourceFile("//private_dylib/mylib.rs"));
+  private_dylib.sources().push_back(private_dyliblib);
+  private_dylib.source_types_used().Set(SourceFile::SOURCE_RS);
+  private_dylib.rust_values().set_crate_type(RustValues::CRATE_DYLIB);
+  private_dylib.rust_values().set_crate_root(private_dyliblib);
+  private_dylib.rust_values().crate_name() = "private_dylib";
+  private_dylib.SetToolchain(setup.toolchain());
+  ASSERT_TRUE(private_dylib.OnResolved(&err));
+
   Target another_dylib(setup.settings(), Label(SourceDir("//foo/"), "direct"));
   another_dylib.set_output_type(Target::SHARED_LIBRARY);
   another_dylib.visibility().SetPublic();
@@ -409,6 +422,7 @@ TEST_F(NinjaRustBinaryTargetWriterTest, DylibDeps) {
   another_dylib.rust_values().crate_name() = "direct";
   another_dylib.SetToolchain(setup.toolchain());
   another_dylib.public_deps().push_back(LabelTargetPair(&dylib));
+  another_dylib.private_deps().push_back(LabelTargetPair(&private_dylib));
   ASSERT_TRUE(another_dylib.OnResolved(&err));
 
   Target target(setup.settings(), Label(SourceDir("//foo/"), "bar"));
@@ -441,14 +455,15 @@ TEST_F(NinjaRustBinaryTargetWriterTest, DylibDeps) {
         "target_output_name = bar\n"
         "\n"
         "build ./foo_bar: rust_bin ../../foo/main.rs | ../../foo/source.rs "
-        "../../foo/main.rs obj/foo/libdirect.so\n"
+        "../../foo/main.rs obj/foo/libdirect.so obj/bar/libmylib.so\n"
         "  source_file_part = main.rs\n"
         "  source_name_part = main\n"
         "  externs = --extern direct=obj/foo/libdirect.so "
         "--extern mylib=obj/bar/libmylib.so "
         "--extern inside=obj/baz/libinside.rlib\n"
         "  rustdeps = -Ldependency=obj/foo -Ldependency=obj/bar "
-        "-Ldependency=obj/baz -Ldependency=obj/faz\n"
+        "-Ldependency=obj/baz -Ldependency=obj/faz "
+        "-Ldependency=obj/private_dylib\n"
         "  ldflags =\n"
         "  sources = ../../foo/source.rs ../../foo/main.rs\n";
     std::string out_str = out.str();
@@ -538,7 +553,7 @@ TEST_F(NinjaRustBinaryTargetWriterTest, RlibDepsAcrossGroups) {
         "target_output_name = libmylib\n"
         "\n"
         "build obj/bar/libmylib.rlib: rust_rlib ../../bar/lib.rs | "
-        "../../bar/mylib.rs ../../bar/lib.rs obj/bar/libmymacro.so || "
+        "../../bar/mylib.rs ../../bar/lib.rs || "
         "obj/baz/group.stamp\n"
         "  source_file_part = lib.rs\n"
         "  source_name_part = lib\n"
@@ -580,8 +595,7 @@ TEST_F(NinjaRustBinaryTargetWriterTest, RlibDepsAcrossGroups) {
         "target_output_name = bar\n"
         "\n"
         "build ./foo_bar: rust_bin ../../foo/main.rs | "
-        "../../foo/source.rs ../../foo/main.rs obj/bar/libmylib.rlib || "
-        "obj/baz/group.stamp\n"
+        "../../foo/source.rs ../../foo/main.rs obj/bar/libmylib.rlib\n"
         "  source_file_part = main.rs\n"
         "  source_name_part = main\n"
         "  externs = --extern mylib=obj/bar/libmylib.rlib "
@@ -1176,7 +1190,7 @@ TEST_F(NinjaRustBinaryTargetWriterTest, GroupDeps) {
         "target_output_name = bar\n"
         "\n"
         "build ./foo_bar: rust_bin ../../foo/main.rs | ../../foo/source.rs "
-        "../../foo/main.rs obj/bar/libmylib.rlib || obj/baz/group.stamp\n"
+        "../../foo/main.rs || obj/baz/group.stamp\n"
         "  source_file_part = main.rs\n"
         "  source_name_part = main\n"
         "  externs = --extern mylib=obj/bar/libmylib.rlib\n"
