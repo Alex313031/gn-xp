@@ -16,6 +16,24 @@
       "message": "For the record, I just noticed that this change breaks the Fuchsia build in unexpected ways (our prebuilt GN binary is not in sync with upstream yet). I\u0027ll come up soon with a reproducible case to better understand if this is an issue in the Fuchsia build or GN itself. :-(",
       "revId": "46f94b5a7f5527b5d7ef57271d3e9447a65e22ac",
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "19c78bbe_88c696b4",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 16
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1002072
+      },
+      "writtenOn": "2022-03-17T19:44:12Z",
+      "side": 1,
+      "message": "Thanks David, I\u0027ll be very interested to help understand once you narrow it down.\n\nI did find that some things broke in chromium as well from this/related CL, but it was because of incorrect use of deps vs public deps.",
+      "parentUuid": "19589729_26583ef7",
+      "revId": "46f94b5a7f5527b5d7ef57271d3e9447a65e22ac",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
     }
   ]
 }
