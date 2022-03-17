@@ -24,6 +24,30 @@
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "2e3be846_bb310fd8",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 10
+      },
+      "lineNbr": 47,
+      "author": {
+        "id": 1002072
+      },
+      "writtenOn": "2022-03-17T14:49:23Z",
+      "side": 1,
+      "message": "\u003e I\u0027m a little confused what you mean when you say linking. The rustc flags that look like linker flags (-L) are search paths for the frontend to load Rust API metadata for transitive dependencies.\n\nRight, my understanding then is that Rust give to the linker things that are passed with --extern. And this CL is tracking that separately in GN so that if we link without rustc we can do the same thing.\n\nAs you mentioned in chat it looks like this is fixing linking Rust into C targets and I agree. Another way to put it would be that it\u0027s teaching GN to track the same things rustc would so it can make the same choices.\n\nI\u0027ll attempt to say this in the CL description.",
+      "parentUuid": "ae40a7a9_d60cb643",
+      "range": {
+        "startLine": 47,
+        "startChar": 6,
+        "endLine": 47,
+        "endChar": 12
+      },
+      "revId": "c8a5c2ffbc5fc5df2fbd3b4517a57f93c58e02f6",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "d5ce8be4_6d45e2d7",
@@ -37,6 +61,24 @@
       "writtenOn": "2022-03-15T20:29:29Z",
       "side": 1,
       "message": "You\u0027re using test output change (implicit deps) to express related-but-not-semantically-equivalent changes in internal GN state. These particular changes are benign, but it\u0027s misleading to say there are changes in linking semantics. That only gets actually tested in the NinjaCBinaryTargetWriterTest you added.",
+      "revId": "c8a5c2ffbc5fc5df2fbd3b4517a57f93c58e02f6",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "1577d294_26196ed1",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 10
+      },
+      "lineNbr": 53,
+      "author": {
+        "id": 1002072
+      },
+      "writtenOn": "2022-03-17T14:49:23Z",
+      "side": 1,
+      "message": "Ah, because the actual linking decisions could take into account if it\u0027s a proc-macro or not, and exclude it? Okay, then I would say we\u0027re excluding things that wouldn\u0027t need to be linked, rather than \"changing linking\" here?",
+      "parentUuid": "d5ce8be4_6d45e2d7",
       "revId": "c8a5c2ffbc5fc5df2fbd3b4517a57f93c58e02f6",
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
     }

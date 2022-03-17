@@ -46,6 +46,30 @@
       },
       "revId": "0f610c8b37c7d3305c9e504e7666f62c53508d3c",
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "03677ae3_1605ee34",
+        "filename": "src/gn/ninja_rust_binary_target_writer_unittest.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 562,
+      "author": {
+        "id": 1002072
+      },
+      "writtenOn": "2022-03-17T14:49:23Z",
+      "side": 0,
+      "message": "Ack",
+      "parentUuid": "a7cd9300_0c55bddf",
+      "range": {
+        "startLine": 562,
+        "startChar": 9,
+        "endLine": 562,
+        "endChar": 28
+      },
+      "revId": "0f610c8b37c7d3305c9e504e7666f62c53508d3c",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
     }
   ]
 }
