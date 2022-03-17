@@ -368,8 +368,9 @@ std::string SubstitutionWriter::GetSourceSubstitution(
                       SourceDir("//"),
                       settings->build_settings()->root_path_utf8());
   } else if (type == &SubstitutionSourceGenDir) {
+    SourceDir source_dir = source.GetDir();
     to_rebase = DirectoryWithNoLastSlash(GetSubBuildDirAsSourceDir(
-        BuildDirContext(settings), source.GetDir(), BuildDirType::GEN));
+        BuildDirContext(settings), source_dir, BuildDirType::GEN));
   } else if (type == &SubstitutionSourceOutDir) {
     to_rebase = DirectoryWithNoLastSlash(GetSubBuildDirAsSourceDir(
         BuildDirContext(settings), source.GetDir(), BuildDirType::OBJ));
