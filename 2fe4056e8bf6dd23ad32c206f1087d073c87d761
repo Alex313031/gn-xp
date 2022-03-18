@@ -16,6 +16,40 @@
       "message": "tmandry@ hello. Would you be kind enough to take a first look here before we pass onto Petr/Brett?\n\nWe\u0027ve discussed this sort of change in the past.\n\nWe need to provide the correct -D and -I flags to bindgen, built using all the flags accumulated from all the configs throughout the source tree.\n\nThe current way to do that is to declare an extra \"toolchain\", but this toolchain gets fed every .cc file, resulting in thousands of extra build steps when we really just want to run bindgen over a single header file.\n\nWith this relatively small change, we can instead access the -D and -I flags directly from a gn \u0027action\u0027.\n\nIf you approve of the broad concept, then I\u0027ll pass this onto the gn owners for review of the details.",
       "revId": "2fe4056e8bf6dd23ad32c206f1087d073c87d761",
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "5dea0db9_75058d72",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000168
+      },
+      "writtenOn": "2022-03-18T23:05:02Z",
+      "side": 1,
+      "message": "This seems like a sensible solution to a problem I\u0027ve bumped into a number of times before. I\u0027m supportive but this definitely needs Brett to take a look.",
+      "revId": "2fe4056e8bf6dd23ad32c206f1087d073c87d761",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e4a6012e_a12021b2",
+        "filename": "src/gn/functions_target.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 143,
+      "author": {
+        "id": 1000168
+      },
+      "writtenOn": "2022-03-18T23:05:02Z",
+      "side": 1,
+      "message": "Perhaps we should generalize this to variables available to any tool (cflags, rustflags, ...)?\n\nOf course we can start small and expand it later.",
+      "revId": "2fe4056e8bf6dd23ad32c206f1087d073c87d761",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
     }
   ]
 }
