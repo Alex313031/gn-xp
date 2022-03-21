@@ -54,6 +54,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "2ad54611_36d124e9",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2022-03-21T18:11:42Z",
+      "side": 1,
+      "message": "Thanks for taking a look. It\u0027s my intention that this does already work for configs - that is in fact just the bit we need in Chrome - and this is (somewhat) tested by the unit test I added. But I must admit I was a bit hazy on how all the config values are propagated and deduced so I might well have missed something.\n\nI haven\u0027t thought about public_configs so I\u0027ll keep this comment thread open to have a poke around and see if I need to do anything differently.",
+      "parentUuid": "05dcaffc_f3cc9b59",
+      "revId": "2fe4056e8bf6dd23ad32c206f1087d073c87d761",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "e4a6012e_a12021b2",
         "filename": "src/gn/functions_target.cc",
         "patchSetId": 2
@@ -65,6 +83,24 @@
       "writtenOn": "2022-03-18T23:05:02Z",
       "side": 1,
       "message": "Perhaps we should generalize this to variables available to any tool (cflags, rustflags, ...)?\n\nOf course we can start small and expand it later.",
+      "revId": "2fe4056e8bf6dd23ad32c206f1087d073c87d761",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "52b98322_35a07909",
+        "filename": "src/gn/functions_target.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 143,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2022-03-21T18:11:42Z",
+      "side": 1,
+      "message": "You\u0027re absolutely right, I found I already needed cflags! If Brett is supportive I will expand this out to make all the variables available.",
+      "parentUuid": "e4a6012e_a12021b2",
       "revId": "2fe4056e8bf6dd23ad32c206f1087d073c87d761",
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
     }
