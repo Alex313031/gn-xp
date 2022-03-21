@@ -35,6 +35,23 @@
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "05dcaffc_f3cc9b59",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000014
+      },
+      "writtenOn": "2022-03-21T17:42:27Z",
+      "side": 1,
+      "message": "Interesting! I think this could be very useful to integrate other languages and compilers also (e.g. how Go is kind of hacked in). My understanding is you only added the variables you listed to action().\n\nBut I think if we\u0027re going to do this it\u0027s worth being general and I think we should make configs and config values work generally for actions and action_foreach.\n\nI think this means adding \"configs\" and \"public_configs\" support for actions, supporting config variables (defines, etc.) directly on action[_foreach] targets. Hopefully this should be pretty easy to implement since it already exists for other target types.\n\nWhat do you think?",
+      "revId": "2fe4056e8bf6dd23ad32c206f1087d073c87d761",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "e4a6012e_a12021b2",
