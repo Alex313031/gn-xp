@@ -88,6 +88,24 @@
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "a2f12126_b0ebfcd2",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2022-03-21T23:57:04Z",
+      "side": 1,
+      "message": "OK - please take another look. I\u0027ve broadened this out to make all (sensible) variables available to the action target writer, which required me to move a bunch of code from ninja_[c|rust]_binary_target_writer.cc into the superclass ninja_target_writer.c.\n\nApart from that this seemed to go fairly smoothly.\n\nI would be grateful for any attention to whether I did the stuff relating to configs correctly - I added a comment on that bit for you specifically to look at. Cheers!",
+      "parentUuid": "bca0edb6_1ad55949",
+      "revId": "2fe4056e8bf6dd23ad32c206f1087d073c87d761",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "e4a6012e_a12021b2",
@@ -119,6 +137,24 @@
       "side": 1,
       "message": "You\u0027re absolutely right, I found I already needed cflags! If Brett is supportive I will expand this out to make all the variables available.",
       "parentUuid": "e4a6012e_a12021b2",
+      "revId": "2fe4056e8bf6dd23ad32c206f1087d073c87d761",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d65c58e6_6a917e96",
+        "filename": "src/gn/functions_target.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 143,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2022-03-21T23:57:04Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "52b98322_35a07909",
       "revId": "2fe4056e8bf6dd23ad32c206f1087d073c87d761",
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
     }
