@@ -72,6 +72,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "bca0edb6_1ad55949",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000014
+      },
+      "writtenOn": "2022-03-21T21:04:50Z",
+      "side": 1,
+      "message": "Sounds good, I think all you\u0027ll likely need to change is just some conditionals on the target type or perhaps the call to actually read the variable from the action target generator.",
+      "parentUuid": "2ad54611_36d124e9",
+      "revId": "2fe4056e8bf6dd23ad32c206f1087d073c87d761",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "e4a6012e_a12021b2",
         "filename": "src/gn/functions_target.cc",
         "patchSetId": 2
