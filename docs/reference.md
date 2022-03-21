@@ -1312,6 +1312,12 @@
   and stuff like other Python files required to run your script in the "inputs"
   variable.
 
+  A selection of variables are deduced from the configs applicable to this
+  target (rustenv, include_dirs, defines, cflags etc.). These variables are
+  typically only useful for actions which run some code generation tool that
+  depends upon the surrounding Rust or C++ toolchain configuration, e.g. needing
+  to know where to find header files.
+
   The "deps" and "public_deps" for an action will always be
   completed before any part of the action is run so it can depend on
   the output of previous steps. The "data_deps" will be built if the
@@ -1354,8 +1360,11 @@
 #### **Variables**
 
 ```
-  args, data, data_deps, depfile, deps, inputs, metadata, outputs*, pool,
-  response_file_contents, script*, sources
+  args, asmflags, bridge_header, cflags, cflags_c, cflags_cc, cflags_objc,
+  cflags_objcc, configs, data, data_deps, defines, depfile, deps,
+  framework_dirs, include_dirs, inputs, metadata, module_deps, module_name,
+  outputs*, pool, response_file_contents, rustenv, rustflags, script*, sources,
+  swiftflags
   * = required
 ```
 
@@ -1443,9 +1452,11 @@
 #### **Variables**
 
 ```
-  args, data, data_deps, depfile, deps, inputs, metadata, outputs*, pool,
-  response_file_contents, script*, sources*
-  * = required
+  args, asmflags, bridge_header, cflags, cflags_c, cflags_cc, cflags_objc,
+  cflags_objcc, configs, data, data_deps, defines, depfile, deps,
+  framework_dirs, include_dirs, inputs, metadata, module_deps, module_name,
+  outputs*, pool, response_file_contents, rustenv, rustflags, script*, sources,
+  swiftflags
 ```
 
 #### **Example**
