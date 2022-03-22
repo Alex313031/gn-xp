@@ -16,6 +16,40 @@
       "message": "Hi David, could you review as non-owner before I pass it to Brett?",
       "revId": "038a13c8aa15e4017dccf9cbe03b0ecaa0959398",
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "71053e5d_3b927428",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1002072
+      },
+      "writtenOn": "2022-03-22T15:17:25Z",
+      "side": 1,
+      "message": "This is ",
+      "revId": "038a13c8aa15e4017dccf9cbe03b0ecaa0959398",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2acc1f64_eedabb90",
+        "filename": "src/gn/ninja_rust_binary_target_writer_unittest.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 1529,
+      "author": {
+        "id": 1002072
+      },
+      "writtenOn": "2022-03-22T15:17:25Z",
+      "side": 1,
+      "message": "This is the test output when the fix to target.cc is not applied:\n\n```\ncrate_name \u003d exe\ncrate_type \u003d bin\noutput_extension \u003d \noutput_dir \u003d \nrustflags \u003d\nrustenv \u003d\nroot_out_dir \u003d .\ntarget_out_dir \u003d obj/linked\ntarget_output_name \u003d exe\n\nbuild ./exe: rust_bin ../../linked/exe.rs | ../../linked/exe.rs \nobj/sset/bar.input1.o obj/public/libbehind_sourceset_public.rlib \nobj/private/libbehind_sourceset_private.rlib || obj/sset/bar.stamp\n  source_file_part \u003d exe.rs\n  source_name_part \u003d exe\n  externs \u003d --extern \nbehind_sourceset_public\u003dobj/public/libbehind_sourceset_public.rlib\n  rustdeps \u003d -Ldependency\u003dobj/public -Ldependency\u003dobj/private -Lnative\u003dobj/sset -Clink-arg\u003d-Bdynamic -Clink-arg\u003dobj/sset/bar.input1.o\n  ldflags \u003d\n  sources \u003d ../../linked/exe.rs\n```",
+      "revId": "038a13c8aa15e4017dccf9cbe03b0ecaa0959398",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
     }
   ]
 }
