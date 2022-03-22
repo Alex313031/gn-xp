@@ -769,6 +769,7 @@ void Target::PullDependentTargetLibsFrom(const Target* dep, bool is_public) {
 
   if (dep->output_type() == STATIC_LIBRARY ||
       dep->output_type() == SHARED_LIBRARY ||
+      dep->output_type() == SOURCE_SET ||
       dep->output_type() == RUST_LIBRARY || dep->output_type() == GROUP) {
     // Here we have: `this` --[depends-on]--> `dep`
     //
