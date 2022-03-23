@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6dc54d32_03892038",
+        "filename": "src/gn/target.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 815,
+      "author": {
+        "id": 1000067
+      },
+      "writtenOn": "2022-03-23T19:38:09Z",
+      "side": 1,
+      "message": "WYI, there is a *really* *ugly* bug on this line which should use `dep-\u003erust_transitive_inheritable_libs_.GetOrderedAndPublicFlag()` instead of reusing the value for the current target.\n\nThis means that a statement like:\n\n```\n  executable(\"rustbin\") {\n    crate_name \u003d \"...\"\n    deps \u003d [\n      \":some_shared_library\",\n      \":some_rust_library\",\n    ]\n  }\n```\n\nWould pull all source sets that the shared library depends on into the binary itself (because on the second pass, the code above mistakenly thinks that the rust library depends on them too). It took me days to debug this :-( And the fix is only 4 characters long. This fixes some of the Fuchsia build breaks, but not all of them.\n\nEven if I fix that, I still have a problem with the following:\n\n```\nexecutable(\"rustbin\") {\n  crate_name \u003d \"...\"\n  deps \u003d [ \":rustlib\" ]\n}\n\nrust_library(\"rustlib\") {\n  ...\n  deps \u003d [ \":shared_lib\" ]\n}\n\nshared_library(\"shared_lib\") {\n  deps \u003d [ \":source_lib\" ]\n}\n\nsource_set(\"source_lib\") {\n  sources \u003d [ \"lib.cc\" ]\n}\n```\n\nWhen I use this, the object files of the source set are pushed to the link command of the rust binary incorrectly. I don\u0027t understand why, but this is a direct consequence of the current CL (without it, the problem does not occur).",
+      "revId": "757ba8027de844a41f7e93b444a17a8fc232b027",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    }
+  ]
+}
