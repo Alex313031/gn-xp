@@ -1,6 +1,23 @@
 {
   "comments": [
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "599c3e48_bbd101f8",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000168
+      },
+      "writtenOn": "2022-03-24T00:21:28Z",
+      "side": 1,
+      "message": "I really like this, and we can definitely make use of it in Fuchsia! From a quick skim the code looks reasonable.",
+      "revId": "ef43de21afc8f2f66f553f953ec1cdd13d85069c",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "b0aa6495_d8fb1574",
