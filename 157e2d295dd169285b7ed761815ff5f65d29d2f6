@@ -122,6 +122,30 @@
       },
       "revId": "157e2d295dd169285b7ed761815ff5f65d29d2f6",
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c92c6b05_ccf7b5e2",
+        "filename": "src/gn/target.cc",
+        "patchSetId": 12
+      },
+      "lineNbr": 865,
+      "author": {
+        "id": 1002072
+      },
+      "writtenOn": "2022-03-24T18:17:28Z",
+      "side": 1,
+      "message": "I have found further simplification and unification with more understanding. I found that I had two options.\n\nI could stop putting RUST_LIBRARY in inherited_libraries_, as long as I inherited all the deps through the rust_linkable_inherited_libs_ as well. But with further reflection I can now see that rust_linkable_inherited_libs_ can go away instead. Since we no longer have special cases for rust, the inherited_libraries_ is useful for both C and Rust. And no tests change as a result.",
+      "parentUuid": "b92538db_b67ff3e0",
+      "range": {
+        "startLine": 865,
+        "startChar": 65,
+        "endLine": 865,
+        "endChar": 71
+      },
+      "revId": "157e2d295dd169285b7ed761815ff5f65d29d2f6",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
     }
   ]
 }
