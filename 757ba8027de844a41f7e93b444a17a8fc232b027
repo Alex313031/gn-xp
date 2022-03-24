@@ -52,6 +52,24 @@
       "parentUuid": "1979b8dd_ce119b68",
       "revId": "757ba8027de844a41f7e93b444a17a8fc232b027",
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "98211700_1d72a586",
+        "filename": "src/gn/target.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 815,
+      "author": {
+        "id": 1002072
+      },
+      "writtenOn": "2022-03-24T15:15:33Z",
+      "side": 1,
+      "message": "Oh I see this repro for me with this CL applied too.\n```\nsource_set(\"c_inner_set\") {\n  sources \u003d [ \"c_inner_set.c\" ]\n}\n\nshared_library(\"c_so\") {\n  deps \u003d [\n    \":c_inner_set\",\n  ]\n}\n\nrust_library(\"rust_lib\") {\n  crate_root \u003d \"rust_lib.rs\"\n  sources \u003d [ \"rust_lib.rs\" ]\n  deps \u003d [ \":c_so\" ]\n}\n\nexecutable(\"rsexe\") {\n  sources \u003d [ \"exe.rs\" ]\n  deps \u003d [ \":rust_lib\" ]\n}\n```\n```\n[5/5] rustc -Clink-arg\u003d-v --crate-name rsexe ../exe.rs --crate-type bin --emit\u003ddep-info\u003dobj/rsexe.d,link -Z dep-info-omit-d-target  -o obj/rsexe -Ldependency\u003dobj -Lnative\u003dobj -Lnative\u003d. -Clink-arg\u003d-Bdynamic -Clink-arg\u003dobj/c_inner_set.c_inner_set.o -Clink-arg\u003d./libc_so.so -ldl -lpthread -lrt --extern rust_lib\u003dobj/librust_lib.rlib\n```\nI think it _is_ correct to forward rlibs through the source_set(), but it\u0027s poking at another bug. Investigating.",
+      "parentUuid": "72352e87_bfef87fd",
+      "revId": "757ba8027de844a41f7e93b444a17a8fc232b027",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
     }
   ]
 }
