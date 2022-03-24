@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a4c2f54d_78757cec",
+        "filename": "src/gn/ninja_rust_binary_target_writer_unittest.cc",
+        "patchSetId": 14
+      },
+      "lineNbr": 257,
+      "author": {
+        "id": 1002072
+      },
+      "writtenOn": "2022-03-24T17:49:58Z",
+      "side": 1,
+      "message": "These test results changed, because I have corrected my misunderstanding. I thought the things on this line in the Rust ninja writer were what gets linked in explicitly, but that\u0027s wrong. After the | comes \"indirect dependencies\". Transitive deps are still indirect dependencies, and they appear for instance in externs, and should be here too.",
+      "revId": "4c377829cb5e5fc18d1c90630ce3afc85b806413",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    }
+  ]
+}
