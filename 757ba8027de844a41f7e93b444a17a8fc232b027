@@ -34,6 +34,24 @@
       "parentUuid": "6dc54d32_03892038",
       "revId": "757ba8027de844a41f7e93b444a17a8fc232b027",
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "72352e87_bfef87fd",
+        "filename": "src/gn/target.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 815,
+      "author": {
+        "id": 1002072
+      },
+      "writtenOn": "2022-03-24T15:11:41Z",
+      "side": 1,
+      "message": "I\u0027ll take the 2nd one back to the bug.",
+      "parentUuid": "1979b8dd_ce119b68",
+      "revId": "757ba8027de844a41f7e93b444a17a8fc232b027",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
     }
   ]
 }
