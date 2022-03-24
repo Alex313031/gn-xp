@@ -1680,6 +1680,114 @@ TEST_F(NinjaCBinaryTargetWriterTest, RustDepsOverDynamicLinking) {
   EXPECT_EQ(expected, out_str) << expected << "\n" << out_str;
 }
 
+// Verify dependencies of a shared library and a rust library are inherited
+// independently.
+TEST_F(NinjaCBinaryTargetWriterTest, RustLibAfterSharedLib) {
+  Err err;
+  TestWithScope setup;
+
+  Target static1(setup.settings(),
+                Label(SourceDir("//static1/"), "staticlib1"));
+  static1.set_output_type(Target::STATIC_LIBRARY);
+  static1.visibility().SetPublic();
+  static1.sources().push_back(SourceFile("//static1/c.cc"));
+  static1.source_types_used().Set(SourceFile::SOURCE_CPP);
+  static1.SetToolchain(setup.toolchain());
+  ASSERT_TRUE(static1.OnResolved(&err));
+
+  Target static2(setup.settings(),
+                Label(SourceDir("//static2/"), "staticlib2"));
+  static2.set_output_type(Target::STATIC_LIBRARY);
+  static2.visibility().SetPublic();
+  static2.sources().push_back(SourceFile("//static2/c.cc"));
+  static2.source_types_used().Set(SourceFile::SOURCE_CPP);
+  static2.SetToolchain(setup.toolchain());
+  ASSERT_TRUE(static2.OnResolved(&err));
+
+  Target static3(setup.settings(),
+                Label(SourceDir("//static3/"), "staticlib3"));
+  static3.set_output_type(Target::STATIC_LIBRARY);
+  static3.visibility().SetPublic();
+  static3.sources().push_back(SourceFile("//static3/c.cc"));
+  static3.source_types_used().Set(SourceFile::SOURCE_CPP);
+  static3.SetToolchain(setup.toolchain());
+  ASSERT_TRUE(static3.OnResolved(&err));
+
+  Target shared1(setup.settings(),
+                    Label(SourceDir("//shared1"), "mysharedlib1"));
+  shared1.set_output_type(Target::SHARED_LIBRARY);
+  shared1.set_output_name("mysharedlib1");
+  shared1.set_output_prefix_override("");
+  shared1.SetToolchain(setup.toolchain());
+  shared1.visibility().SetPublic();
+  shared1.private_deps().push_back(LabelTargetPair(&static1));
+  ASSERT_TRUE(shared1.OnResolved(&err));
+
+  Target rlib2(setup.settings(), Label(SourceDir("//rlib2/"), "myrlib2"));
+  rlib2.set_output_type(Target::RUST_LIBRARY);
+  rlib2.visibility().SetPublic();
+  SourceFile lib2("//rlib2/lib.rs");
+  rlib2.sources().push_back(lib2);
+  rlib2.source_types_used().Set(SourceFile::SOURCE_RS);
+  rlib2.rust_values().set_crate_root(lib2);
+  rlib2.rust_values().crate_name() = "foo";
+  rlib2.private_deps().push_back(LabelTargetPair(&static2));
+  rlib2.SetToolchain(setup.toolchain());
+  ASSERT_TRUE(rlib2.OnResolved(&err));
+
+  Target shared3(setup.settings(),
+                    Label(SourceDir("//shared3"), "mysharedlib3"));
+  shared3.set_output_type(Target::SHARED_LIBRARY);
+  shared3.set_output_name("mysharedlib3");
+  shared3.set_output_prefix_override("");
+  shared3.SetToolchain(setup.toolchain());
+  shared3.visibility().SetPublic();
+  shared3.private_deps().push_back(LabelTargetPair(&static3));
+  ASSERT_TRUE(shared3.OnResolved(&err));
+
+  Target target(setup.settings(), Label(SourceDir("//exe/"), "binary"));
+  target.set_output_type(Target::EXECUTABLE);
+  target.visibility().SetPublic();
+  target.sources().push_back(SourceFile("//exe/main.cc"));
+  target.source_types_used().Set(SourceFile::SOURCE_CPP);
+  target.private_deps().push_back(LabelTargetPair(&shared1));
+  target.private_deps().push_back(LabelTargetPair(&rlib2));
+  target.private_deps().push_back(LabelTargetPair(&shared3));
+  target.SetToolchain(setup.toolchain());
+  ASSERT_TRUE(target.OnResolved(&err));
+
+  std::ostringstream out;
+  NinjaCBinaryTargetWriter writer(&target, out);
+  writer.Run();
+
+  const char expected[] =
+      "defines =\n"
+      "include_dirs =\n"
+      "cflags =\n"
+      "cflags_cc =\n"
+      "root_out_dir = .\n"
+      "target_out_dir = obj/exe\n"
+      "target_output_name = binary\n"
+      "\n"
+      "build obj/exe/binary.main.o: cxx ../../exe/main.cc\n"
+      "  source_file_part = main.cc\n"
+      "  source_name_part = main\n"
+      "\n"
+      "build ./binary: link obj/exe/binary.main.o "
+      "./mysharedlib1.so ./mysharedlib3.so "
+      "obj/static2/libstaticlib2.a | obj/rlib2/libmyrlib2.rlib\n"
+      "  ldflags =\n"
+      "  libs =\n"
+      "  frameworks =\n"
+      "  swiftmodules =\n"
+      "  output_extension = \n"
+      "  output_dir = \n"
+      "  rlibs = obj/rlib2/libmyrlib2.rlib\n";
+
+  std::string out_str = out.str();
+  EXPECT_EQ(expected, out_str) << expected << "\n" << out_str;
+}
+
 TEST_F(NinjaCBinaryTargetWriterTest, ModuleMapInStaticLibrary) {
   TestWithScope setup;
   Err err;

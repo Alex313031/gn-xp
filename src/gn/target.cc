@@ -811,7 +811,7 @@ void Target::PullDependentTargetLibsFrom(const Target* dep, bool is_public) {
     // Transitive dependencies behind a library (shared or static), that would
     // be consumed by rustc, gets bumped up to this target.
     for (const auto& [inherited, inherited_is_public] :
-         rust_transitive_inheritable_libs_.GetOrderedAndPublicFlag()) {
+         dep->rust_transitive_inheritable_libs_.GetOrderedAndPublicFlag()) {
       if (!RustValues::IsRustLibrary(inherited)) {
         inherited_libraries_.Append(inherited, inherited_is_public);
       }
@@ -850,11 +850,11 @@ void Target::PullDependentTargetLibsFrom(const Target* dep, bool is_public) {
     // They are forwarded here so that targets that depend on complete
     // static libraries can link them in. Conversely, since complete static
     // libraries link in non-final targets they shouldn't be inherited.
-    for (const auto& inherited :
+    for (const auto& [inherited, inherited_is_public] :
          dep->inherited_libraries().GetOrderedAndPublicFlag()) {
-      if (inherited.first->IsFinal()) {
-        inherited_libraries_.Append(inherited.first,
-                                    is_public && inherited.second);
+      if (inherited->IsFinal()) {
+        inherited_libraries_.Append(inherited,
+                                    is_public && inherited_is_public);
       }
     }
   }
