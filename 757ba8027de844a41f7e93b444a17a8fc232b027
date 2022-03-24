@@ -18,6 +18,24 @@
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "a1e90add_ecd7a525",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1002072
+      },
+      "writtenOn": "2022-03-24T16:30:53Z",
+      "side": 1,
+      "message": "Oops, I was thinking of joining the 2 CLs but I changed my mind.",
+      "parentUuid": "0e4ea84a_34765257",
+      "revId": "757ba8027de844a41f7e93b444a17a8fc232b027",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "6dc54d32_03892038",
