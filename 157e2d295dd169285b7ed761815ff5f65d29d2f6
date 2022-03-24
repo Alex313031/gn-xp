@@ -16,6 +16,46 @@
       "message": "Bump :) ",
       "revId": "157e2d295dd169285b7ed761815ff5f65d29d2f6",
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "65ff5d70_d7bab8fb",
+        "filename": "src/gn/target.cc",
+        "patchSetId": 12
+      },
+      "lineNbr": 780,
+      "author": {
+        "id": 1000168
+      },
+      "writtenOn": "2022-03-24T00:47:12Z",
+      "side": 1,
+      "message": "It seems suboptimal that we track non-Rust static libs both here and in inherited_libraries. Am I misunderstanding? This is preexisting in any case, but maybe there should be a TODO or something.",
+      "revId": "157e2d295dd169285b7ed761815ff5f65d29d2f6",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "43f927f5_5a989c17",
+        "filename": "src/gn/target.cc",
+        "patchSetId": 12
+      },
+      "lineNbr": 865,
+      "author": {
+        "id": 1000168
+      },
+      "writtenOn": "2022-03-24T00:47:12Z",
+      "side": 1,
+      "message": "This appears to use \"linked\" in a different way than on line 842. There it means the target is built using a linker. Here I think you\u0027re using it to mean that the target is not passed to the linker of targets that depend on it. (In the former meaning proc macros *are* linked, because they are built as shared libraries.)",
+      "range": {
+        "startLine": 865,
+        "startChar": 65,
+        "endLine": 865,
+        "endChar": 71
+      },
+      "revId": "157e2d295dd169285b7ed761815ff5f65d29d2f6",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
     }
   ]
 }
