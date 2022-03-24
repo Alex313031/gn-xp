@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "da7d3a41_e7386f32",
+        "filename": "src/gn/ninja_rust_binary_target_writer_unittest.cc",
+        "patchSetId": 25
+      },
+      "lineNbr": 1068,
+      "author": {
+        "id": 1000168
+      },
+      "writtenOn": "2022-03-24T22:34:36Z",
+      "side": 1,
+      "message": "Hm, we have a private dep of a C staticlib in our transitive Rust deps. Whether C staticlib or Rust crate_type \u003d \"staticlib\" I don\u0027t think that makes much sense. Both should hide any Rust code that exists in them and only expose C APIs.\n\nI doubt this is *hurting* anything especially since it\u0027s not listed in `--extern`, but it\u0027s worth pointing out and if there\u0027s a painless fix we should do it. If the fix adds much complexity, it may not be worth it.",
+      "revId": "f58760021546ae036f8c243d7266f9558dcdd8fb",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    }
+  ]
+}
