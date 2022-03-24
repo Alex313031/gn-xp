@@ -98,6 +98,30 @@
       },
       "revId": "157e2d295dd169285b7ed761815ff5f65d29d2f6",
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b92538db_b67ff3e0",
+        "filename": "src/gn/target.cc",
+        "patchSetId": 12
+      },
+      "lineNbr": 865,
+      "author": {
+        "id": 1002072
+      },
+      "writtenOn": "2022-03-24T17:55:12Z",
+      "side": 1,
+      "message": "I have also added the test from https://gn-review.googlesource.com/c/gn/+/13300/ since this CL resolves the same issue. By removing the special branch for RUST_LIBRARY, we remove the buggy code which inherited dependencies from targets listed earlier in deps.",
+      "parentUuid": "cce17819_0ff1a93d",
+      "range": {
+        "startLine": 865,
+        "startChar": 65,
+        "endLine": 865,
+        "endChar": 71
+      },
+      "revId": "157e2d295dd169285b7ed761815ff5f65d29d2f6",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
     }
   ]
 }
