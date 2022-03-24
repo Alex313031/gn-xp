@@ -322,12 +322,6 @@ class Target : public Item {
   const InheritedLibraries& rust_transitive_inheritable_libs() const {
     return rust_transitive_inheritable_libs_;
   }
-  // The transitive closure of libraries that are depended on by this target
-  // and are part of the current linking step. Previously-linked libraries are
-  // not included.
-  const InheritedLibraries& rust_linkable_inherited_libs() const {
-    return rust_linkable_inherited_libs_;
-  }
 
   const UniqueVector<SourceDir>& all_lib_dirs() const { return all_lib_dirs_; }
   const UniqueVector<LibFile>& all_libs() const { return all_libs_; }
