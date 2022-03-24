@@ -123,6 +123,24 @@
       "parentUuid": "98211700_1d72a586",
       "revId": "757ba8027de844a41f7e93b444a17a8fc232b027",
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "271a9e9a_46c7d055",
+        "filename": "src/gn/target.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 815,
+      "author": {
+        "id": 1002072
+      },
+      "writtenOn": "2022-03-24T17:52:53Z",
+      "side": 1,
+      "message": "I have applied said fix at https://gn-review.googlesource.com/c/gn/+/13180/12..14 and rebased this CL on top of it. Now I get:\n```\n[5/5] rustc -Clink-arg\u003d-v --crate-name rsexe ../exe.rs --crate-type bin --emit\u003ddep-info\u003dobj/rsexe.d,link -Z dep-info-omit-d-target  -o obj/rsexe -Ldependency\u003dobj -Lnative\u003d. -Clink-arg\u003d-Bdynamic -Clink-arg\u003d./libc_so.so -ldl -lpthread -lrt --extern rust_lib\u003dobj/librust_lib.rlib\n```\n\nc_inner_set.c_inner_set.o no longer appears after this change.",
+      "parentUuid": "48cc680c_f7bdf713",
+      "revId": "757ba8027de844a41f7e93b444a17a8fc232b027",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
     }
   ]
 }
