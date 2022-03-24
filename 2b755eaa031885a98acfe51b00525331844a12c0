@@ -1,6 +1,23 @@
 {
   "comments": [
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "eac4afe8_c9262571",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 23
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1002072
+      },
+      "writtenOn": "2022-03-24T20:19:47Z",
+      "side": 1,
+      "message": "PTAL",
+      "revId": "2b755eaa031885a98acfe51b00525331844a12c0",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "9b8b973f_958d25b8",
@@ -71,6 +88,24 @@
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "c0b09e2d_11cb1307",
+        "filename": "src/gn/ninja_c_binary_target_writer_unittest.cc",
+        "patchSetId": 23
+      },
+      "lineNbr": 1562,
+      "author": {
+        "id": 1002072
+      },
+      "writtenOn": "2022-03-24T20:19:47Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "4ceb2ad3_2708a26f",
+      "revId": "2b755eaa031885a98acfe51b00525331844a12c0",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "7e9d58cf_7cf49d62",
@@ -102,6 +137,24 @@
       "side": 1,
       "message": "I agree. Pub in a proc-macro seems useless. The existing test used a public dep which I have named as such here. But actually being clear that neither pub/private deps get propagated is probably best. I will add comments..\n\nAnd I also agree that in GN proc macros that I\u0027ve seen A depends on B (used by procmacro) and (C the procmacro) rather than getting the dep from C\u0027s public_deps. And I think that\u0027s right.",
       "parentUuid": "7e9d58cf_7cf49d62",
+      "revId": "2b755eaa031885a98acfe51b00525331844a12c0",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "bb7886b0_f927df67",
+        "filename": "src/gn/ninja_c_binary_target_writer_unittest.cc",
+        "patchSetId": 23
+      },
+      "lineNbr": 1619,
+      "author": {
+        "id": 1002072
+      },
+      "writtenOn": "2022-03-24T20:19:47Z",
+      "side": 1,
+      "message": "Commented on the tests.\n\nI see this a lot like build scripts, except for the unfortunate fact that we express a dep on proc-macro as \"deps\", but they should really be in a build_deps.",
+      "parentUuid": "8abb38a8_098216a5",
       "revId": "2b755eaa031885a98acfe51b00525331844a12c0",
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
     },
