@@ -35,6 +35,24 @@
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "8db0f8a8_1c8270c0",
+        "filename": "src/gn/target.cc",
+        "patchSetId": 12
+      },
+      "lineNbr": 780,
+      "author": {
+        "id": 1002072
+      },
+      "writtenOn": "2022-03-24T17:42:21Z",
+      "side": 1,
+      "message": "Yeah, and then we skip them later. https://source.corp.google.com/gn/src/gn/ninja_rust_binary_target_writer.cc;l\u003d188\n\nI will TODO.",
+      "parentUuid": "65ff5d70_d7bab8fb",
+      "revId": "157e2d295dd169285b7ed761815ff5f65d29d2f6",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "43f927f5_5a989c17",
@@ -48,6 +66,30 @@
       "writtenOn": "2022-03-24T00:47:12Z",
       "side": 1,
       "message": "This appears to use \"linked\" in a different way than on line 842. There it means the target is built using a linker. Here I think you\u0027re using it to mean that the target is not passed to the linker of targets that depend on it. (In the former meaning proc macros *are* linked, because they are built as shared libraries.)",
+      "range": {
+        "startLine": 865,
+        "startChar": 65,
+        "endLine": 865,
+        "endChar": 71
+      },
+      "revId": "157e2d295dd169285b7ed761815ff5f65d29d2f6",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "cce17819_0ff1a93d",
+        "filename": "src/gn/target.cc",
+        "patchSetId": 12
+      },
+      "lineNbr": 865,
+      "author": {
+        "id": 1002072
+      },
+      "writtenOn": "2022-03-24T17:42:21Z",
+      "side": 1,
+      "message": "The comment here is wrong and this helps point at that problem.\n\nHere we\u0027re adding things to inherited_libraries_ for linking, and indeed rlibs do need to be linked (at this time).\n\nI\u0027ve improved the comment.\n\n```\n      // Proc macros are not linked into targets that depend on them, so do not\n      // get inherited; they are consumed by the Rust compiler and only need to\n      // be specified in --extern.\n```\n\nAnd I\u0027ve added another test to demonstrate the bug this was introducing and guard it. I added a few tests really.\n\nOn the C linker side, I improved the test with Rlibs inside a library to include:\n- both static and dynamic libraries\n- deps on a source_set inside an rlib.\nThis was all working already but now we exercise it.\n\nOn the Rust linker side, I copied the same test over, and it was broken with this CL, until the latest patchset.\n\nIn particular: the rlibs deps\u0027d in the static_library were not being listed as indirect dependencies of the executable. The new test TransitiveRustDepsThroughSourceSet in https://gn-review.googlesource.com/c/gn/+/13280 was failing with this CL applied, until this problem was fixed.",
+      "parentUuid": "43f927f5_5a989c17",
       "range": {
         "startLine": 865,
         "startChar": 65,
