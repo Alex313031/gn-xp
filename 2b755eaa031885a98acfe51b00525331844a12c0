@@ -18,6 +18,24 @@
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "45046261_8e817213",
+        "filename": "src/gn/ninja_c_binary_target_writer_unittest.cc",
+        "patchSetId": 23
+      },
+      "lineNbr": 1472,
+      "author": {
+        "id": 1002072
+      },
+      "writtenOn": "2022-03-24T20:08:44Z",
+      "side": 1,
+      "message": "Right, will do.",
+      "parentUuid": "9b8b973f_958d25b8",
+      "revId": "2b755eaa031885a98acfe51b00525331844a12c0",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "ac4e02eb_98f9b263",
@@ -37,6 +55,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "4ceb2ad3_2708a26f",
+        "filename": "src/gn/ninja_c_binary_target_writer_unittest.cc",
+        "patchSetId": 23
+      },
+      "lineNbr": 1562,
+      "author": {
+        "id": 1002072
+      },
+      "writtenOn": "2022-03-24T20:08:44Z",
+      "side": 1,
+      "message": "Right, I was thinking of a GN static_library() but I guess that\u0027s rust_library() for Rust. You\u0027re thinking of a rust_library() { crate_type \u003d staticlib } which I agree.\n\nI will change these STATIC_LIBRARY rules to hold C files, as that\u0027s what I was going for.",
+      "parentUuid": "ac4e02eb_98f9b263",
+      "revId": "2b755eaa031885a98acfe51b00525331844a12c0",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "7e9d58cf_7cf49d62",
         "filename": "src/gn/ninja_c_binary_target_writer_unittest.cc",
         "patchSetId": 23
@@ -48,6 +84,24 @@
       "writtenOn": "2022-03-24T19:51:14Z",
       "side": 1,
       "message": "I was imagining a use case where a proc macro depends on supporting library for code it injects to work. That supporting library needs to be depended on by any code that uses this proc macro.\n\nBut it\u0027s not really a great fit because the proc macro *itself* doesn\u0027t depend on that library (which might not even compile for the host platform). So it\u0027s probably correct that we don\u0027t propagate public deps of proc macros, but it\u0027s pretty subtle and perhaps surprising.\n\nOr maybe the answer should be that we do propagate these deps as with other target types, but it\u0027s almost always the wrong thing for a user to do? At least things would be more consistent. Either way, public_deps on proc macros seem mostly useless?\n\nSorry to relitigate this question here. I want to make sure I understand the tradeoffs.",
+      "revId": "2b755eaa031885a98acfe51b00525331844a12c0",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8abb38a8_098216a5",
+        "filename": "src/gn/ninja_c_binary_target_writer_unittest.cc",
+        "patchSetId": 23
+      },
+      "lineNbr": 1619,
+      "author": {
+        "id": 1002072
+      },
+      "writtenOn": "2022-03-24T20:08:44Z",
+      "side": 1,
+      "message": "I agree. Pub in a proc-macro seems useless. The existing test used a public dep which I have named as such here. But actually being clear that neither pub/private deps get propagated is probably best. I will add comments..\n\nAnd I also agree that in GN proc macros that I\u0027ve seen A depends on B (used by procmacro) and (C the procmacro) rather than getting the dep from C\u0027s public_deps. And I think that\u0027s right.",
+      "parentUuid": "7e9d58cf_7cf49d62",
       "revId": "2b755eaa031885a98acfe51b00525331844a12c0",
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
     },
