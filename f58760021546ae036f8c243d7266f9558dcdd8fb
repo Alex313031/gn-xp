@@ -1,6 +1,23 @@
 {
   "comments": [
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "88389923_1c22b730",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 25
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000067
+      },
+      "writtenOn": "2022-03-25T09:44:51Z",
+      "side": 1,
+      "message": "I confirm that this CL and its child help fix the Fuchsia build.",
+      "revId": "f58760021546ae036f8c243d7266f9558dcdd8fb",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "da7d3a41_e7386f32",
