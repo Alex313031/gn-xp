@@ -17,5 +17,36 @@
       "revId": "71372c3b0e7846c6d6c0a858d99b75c2af704898",
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
     }
+  ],
+  "submitRequirementResults": [
+    {
+      "submitRequirement": {
+        "name": "Review-Enforcement",
+        "description": {
+          "value": "Two googlers using a trusted device must approve the change, see http://go/change-management-policy"
+        },
+        "applicabilityExpression": {
+          "value": {
+            "expressionString": "is:review-enforced_gerrit"
+          }
+        },
+        "submittabilityExpression": {
+          "expressionString": "is:review-enforcement-satisfied_gerrit"
+        },
+        "overrideExpression": {},
+        "allowOverrideInChildProjects": false
+      },
+      "applicabilityExpressionResult": {
+        "value": {"expression":{"expressionString":"is:review-enforced_gerrit"},"status":"FAIL","errorMessage":{"value":null},"passingAtoms":[],"failingAtoms":["is:review-enforced_gerrit"]}
+      },
+      "submittabilityExpressionResult": {},
+      "overrideExpressionResult": {},
+      "patchSetCommitId": "71372c3b0e7846c6d6c0a858d99b75c2af704898",
+      "legacy": {
+        "value": false
+      },
+      "forced": {},
+      "hidden": {}
+    }
   ]
 }
