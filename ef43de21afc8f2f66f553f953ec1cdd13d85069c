@@ -18,6 +18,23 @@
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "29565960_75e606b5",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000014
+      },
+      "writtenOn": "2022-03-25T02:42:56Z",
+      "side": 1,
+      "message": "Looks good, I think we need to expand the documentation a bit:",
+      "revId": "ef43de21afc8f2f66f553f953ec1cdd13d85069c",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "b0aa6495_d8fb1574",
@@ -31,6 +48,41 @@
       "writtenOn": "2022-03-21T23:57:04Z",
       "side": 1,
       "message": "Brett - does this look right for config handling?",
+      "revId": "ef43de21afc8f2f66f553f953ec1cdd13d85069c",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "7cb65d91_ec6c9087",
+        "filename": "src/gn/action_target_generator.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 79,
+      "author": {
+        "id": 1000014
+      },
+      "writtenOn": "2022-03-25T02:42:56Z",
+      "side": 1,
+      "message": "Looks like the same thing binary targets do so it should be correct.",
+      "parentUuid": "b0aa6495_d8fb1574",
+      "revId": "ef43de21afc8f2f66f553f953ec1cdd13d85069c",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e1082881_099eef7d",
+        "filename": "src/gn/functions_target.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 142,
+      "author": {
+        "id": 1000014
+      },
+      "writtenOn": "2022-03-25T02:42:56Z",
+      "side": 1,
+      "message": "How about something like this instead (feel free too finesse):\n\n\"\"\"Actions can take the configs and public_configs lists, as well as any of the configs variables (defines, include_dirs, etc.) set directly on the target. These behave exactly as they would on a binary target and can be accessed using substitution patterns in the script args (see \"gn help args\") to implement custom compiler-like tools.\n\"\"\"\n\nAnd then we add something like this to the kArgs_Help in variables.cc after the first paragraph:\n\nArgs can also expand the substitution patterns corresponding to config variables in the same way that compiler tools (see \"gn help tool\") do. These allow actions that run compiler or compiler-like tools to access the results of propagating configs through the build graph. For example:\n\n  args \u003d [ \"{{defines}}\", \"{{include_dirs}}\", \"{{rustenv}}\", \"--input-file\", \"{{source}}\" ]\n\"\"\"",
       "revId": "ef43de21afc8f2f66f553f953ec1cdd13d85069c",
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
     }
