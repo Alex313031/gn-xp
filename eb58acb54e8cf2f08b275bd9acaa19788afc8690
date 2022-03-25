@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5f081982_b405074d",
+        "filename": "src/gn/target.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 962,
+      "author": {
+        "id": 1000633
+      },
+      "writtenOn": "2022-03-25T16:13:36Z",
+      "side": 1,
+      "message": "It is probably worth considering turning this into a switch statement. This implementation should work for the current set of output types, but if new output types are added, it may result in subtle bugs (particularly anything similar to how BUNDLE_DATA and CREATE_BUNDLE work). With a switch, we can ensure this function is considered when new output types are added.\n\nI think it also makes this method a bit easier to reason about.\n\n  if target is guaranteed to have at least one input file:\n    return true;\n  if any deps have real inputs:\n    return true;\n  if any sources have real inputs:\n    return true;",
+      "range": {
+        "startLine": 942,
+        "startChar": 2,
+        "endLine": 962,
+        "endChar": 9
+      },
+      "revId": "eb58acb54e8cf2f08b275bd9acaa19788afc8690",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    }
+  ]
+}
