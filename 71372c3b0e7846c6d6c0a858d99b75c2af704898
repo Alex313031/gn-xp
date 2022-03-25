@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "2fbf2c96_a262ace9",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 9
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000067
+      },
+      "writtenOn": "2022-03-25T09:44:16Z",
+      "side": 1,
+      "message": "Thanks, I confirm that I can build the Fuchsia `core.x64` build configuration with a GN binary that includes this CL and its parent, provided the following Fuchsia CL is applied [1] (it fixes a number of `deps` into `public_deps` when they apply to Rust libraries). I am testing other (larger) build configurations locally, but I am optimistic that this will be enough.\n\n\n[1] https://fuchsia-review.googlesource.com/c/fuchsia/+/660607",
+      "revId": "71372c3b0e7846c6d6c0a858d99b75c2af704898",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    }
+  ]
+}
