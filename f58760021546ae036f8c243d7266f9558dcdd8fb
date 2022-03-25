@@ -33,6 +33,24 @@
       "message": "Hm, we have a private dep of a C staticlib in our transitive Rust deps. Whether C staticlib or Rust crate_type \u003d \"staticlib\" I don\u0027t think that makes much sense. Both should hide any Rust code that exists in them and only expose C APIs.\n\nI doubt this is *hurting* anything especially since it\u0027s not listed in `--extern`, but it\u0027s worth pointing out and if there\u0027s a painless fix we should do it. If the fix adds much complexity, it may not be worth it.",
       "revId": "f58760021546ae036f8c243d7266f9558dcdd8fb",
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "37e8e032_4217a51e",
+        "filename": "src/gn/ninja_rust_binary_target_writer_unittest.cc",
+        "patchSetId": 25
+      },
+      "lineNbr": 1068,
+      "author": {
+        "id": 1002072
+      },
+      "writtenOn": "2022-03-25T13:20:56Z",
+      "side": 1,
+      "message": "My understanding is: In, GN, C static_libs are not \"final\", they are just an archive of the things in that target, they don\u0027t pull in all their deps.\n\nI see in the code that it\u0027s possible to have a \"final\" static lib, some tests set that explicitly, though I don\u0027t know how to make that happen from a GN rule - maybe that\u0027s to support rustc staticlib",
+      "parentUuid": "da7d3a41_e7386f32",
+      "revId": "f58760021546ae036f8c243d7266f9558dcdd8fb",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
     }
   ]
 }
