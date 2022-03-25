@@ -69,6 +69,24 @@
       "parentUuid": "da7d3a41_e7386f32",
       "revId": "f58760021546ae036f8c243d7266f9558dcdd8fb",
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1fa1eb88_dce6da9f",
+        "filename": "src/gn/ninja_rust_binary_target_writer_unittest.cc",
+        "patchSetId": 25
+      },
+      "lineNbr": 1068,
+      "author": {
+        "id": 1000067
+      },
+      "writtenOn": "2022-03-25T19:33:31Z",
+      "side": 1,
+      "message": "Indeed, a `static_library()` target will generate, by default, a library file (e.g. `libfoo.a`) that only contains the object files for its own `sources`, but not its dependencies.\n\nThis can be changed by using `complete_static_lib \u003d true`, in which case `libfoo.a` file contain the object files for all transitive dependencies as well. This is useful if you want to generate something that can be distributed outside or your build system.\n\nLink-wise, a complete static library is considered \"final\" (meaning its dependencies do not appear on the linker command line of its dependents, just like shared libraries).",
+      "parentUuid": "37e8e032_4217a51e",
+      "revId": "f58760021546ae036f8c243d7266f9558dcdd8fb",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
     }
   ]
 }
