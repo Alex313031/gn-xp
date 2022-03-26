@@ -725,6 +725,10 @@ def WriteGNNinja(path, platform, host, options, args_list):
       ]},
   }
 
+  if platform.is_darwin():
+      static_libraries['base']['sources'].append(
+              'src/base/memory/aligned_alloc.cc')
+
   executables = {
       'gn': {'sources': [ 'src/gn/gn_main.cc' ], 'libs': []},
 
@@ -761,6 +765,7 @@ def WriteGNNinja(path, platform, host, options, args_list):
         'src/gn/functions_unittest.cc',
         'src/gn/hash_table_base_unittest.cc',
         'src/gn/header_checker_unittest.cc',
+        'src/gn/immutable_vector_unittest.cc',
         'src/gn/inherited_libraries_unittest.cc',
         'src/gn/input_conversion_unittest.cc',
         'src/gn/json_project_writer_unittest.cc',
