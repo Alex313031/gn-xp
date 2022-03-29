@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a4ea1d0b_10b70d0e",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2022-03-29T02:42:13Z",
+      "side": 1,
+      "message": "Second out of two patches in this area (I hope. Unless I find something else that needs adjusting).",
+      "revId": "5e2fe6880149c8f66b5378d7b5d4397f2c90accf",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    }
+  ]
+}
