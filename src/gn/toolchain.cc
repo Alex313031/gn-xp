@@ -16,8 +16,8 @@
 
 Toolchain::Toolchain(const Settings* settings,
                      const Label& label,
-                     const SourceFileSet& build_dependency_files)
-    : Item(settings, label, build_dependency_files) {
+                     NestedSourceFileSet build_dependency_files)
+    : Item(settings, label, std::move(build_dependency_files)) {
   // Ensure "phony" tool is part of all toolchains by default.
   const char* phony_name = BuiltinTool::kBuiltinToolPhony;
   tools_.emplace(phony_name, std::make_unique<BuiltinTool>(phony_name));

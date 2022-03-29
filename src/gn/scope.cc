@@ -51,16 +51,18 @@ Scope::Scope(Scope* parent)
       mutable_containing_(parent),
       settings_(parent->settings()),
       mode_flags_(0),
-      item_collector_(nullptr),
-      build_dependency_files_(parent->build_dependency_files_) {}
+      item_collector_(nullptr) {
+  build_dependency_files_.AddDep(parent->build_dependency_files_.Build());
+}
 
 Scope::Scope(const Scope* parent)
     : const_containing_(parent),
       mutable_containing_(nullptr),
       settings_(parent->settings()),
       mode_flags_(0),
-      item_collector_(nullptr),
-      build_dependency_files_(parent->build_dependency_files_) {}
+      item_collector_(nullptr) {
+  build_dependency_files_.AddDep(parent->build_dependency_files_.Build());
+}
 
 Scope::~Scope() = default;
 
@@ -417,7 +419,7 @@ bool Scope::NonRecursiveMergeTo(Scope* dest,
   }
 
   // Propagate build dependency files,
-  dest->AddBuildDependencyFiles(build_dependency_files_);
+  dest->AddBuildDependencyFiles(this);
 
   return true;
 }
@@ -509,14 +511,22 @@ const SourceDir& Scope::GetSourceDir() const {
   return source_dir_;
 }
 
+NestedSourceFileSet Scope::build_dependency_files() const {
+  return build_dependency_files_.Build();
+}
+
 void Scope::AddBuildDependencyFile(const SourceFile& build_dependency_file) {
-  build_dependency_files_.insert(build_dependency_file);
+  build_dependency_files_.AddItem(build_dependency_file);
 }
 
 void Scope::AddBuildDependencyFiles(
     const SourceFileSet& build_dependency_files) {
-  build_dependency_files_.insert(build_dependency_files.begin(),
-                                 build_dependency_files.end());
+  for (const auto& file : build_dependency_files)
+    build_dependency_files_.AddItem(file);
+}
+
+void Scope::AddBuildDependencyFiles(const Scope* from) {
+  build_dependency_files_.AddDep(from->build_dependency_files_.Build());
 }
 
 Scope::ItemVector* Scope::GetItemCollector() {
