@@ -24,7 +24,7 @@ class Config : public Item {
   // to Scope for how this is determined.
   Config(const Settings* settings,
          const Label& label,
-         const SourceFileSet& build_dependency_files = {});
+         NestedSourceFileSet build_dependency_files = {});
   ~Config() override;
 
   // Item implementation.

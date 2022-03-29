@@ -10,8 +10,8 @@
 
 Config::Config(const Settings* settings,
                const Label& label,
-               const SourceFileSet& build_dependency_files)
-    : Item(settings, label, build_dependency_files) {}
+               NestedSourceFileSet build_dependency_files)
+    : Item(settings, label, std::move(build_dependency_files)) {}
 
 Config::~Config() = default;
 
