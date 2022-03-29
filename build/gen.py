@@ -772,6 +772,7 @@ def WriteGNNinja(path, platform, host, options, args_list):
         'src/gn/loader_unittest.cc',
         'src/gn/metadata_unittest.cc',
         'src/gn/metadata_walk_unittest.cc',
+        'src/gn/nested_set_unittest.cc',
         'src/gn/ninja_action_target_writer_unittest.cc',
         'src/gn/ninja_binary_target_writer_unittest.cc',
         'src/gn/ninja_build_writer_unittest.cc',
