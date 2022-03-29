@@ -15,6 +15,7 @@
 
 #include "base/memory/ref_counted.h"
 #include "gn/err.h"
+#include "gn/nested_set.h"
 #include "gn/pattern.h"
 #include "gn/source_dir.h"
 #include "gn/source_file.h"
@@ -280,11 +281,13 @@ class Scope {
   // set is constructed conservatively, meaning that every file that can
   // potentially affect this scope is included, but not necessarily every change
   // to these files will affect this scope.
-  const SourceFileSet& build_dependency_files() const {
-    return build_dependency_files_;
-  }
+  NestedSourceFileSet build_dependency_files() const;
+  ;
+
   void AddBuildDependencyFile(const SourceFile& build_dependency_file);
   void AddBuildDependencyFiles(const SourceFileSet& build_dependency_files);
+  void AddBuildDependencyFiles(const Scope* from);
+  ;
 
   // The item collector is where Items (Targets, Configs, etc.) go that have
   // been defined. If a scope can generate items, this non-owning pointer will
@@ -376,7 +379,7 @@ class Scope {
 
   SourceDir source_dir_;
 
-  SourceFileSet build_dependency_files_;
+  NestedSourceFileSet::Builder build_dependency_files_;
 
   Scope(const Scope&) = delete;
   Scope& operator=(const Scope&) = delete;

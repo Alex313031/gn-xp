@@ -66,8 +66,7 @@ Value Template::Invoke(Scope* scope,
 
   // Propagate build dependency files from invoker scope (template scope already
   // propagated via parent scope).
-  template_scope.AddBuildDependencyFiles(
-      invocation_scope->build_dependency_files());
+  template_scope.AddBuildDependencyFiles(invocation_scope.get());
 
   ScopePerFileProvider per_file_provider(&template_scope, true);
 
