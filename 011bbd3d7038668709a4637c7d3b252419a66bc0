@@ -3,6 +3,29 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "486b2596_464a8218",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 17,
+      "author": {
+        "id": 1000168
+      },
+      "writtenOn": "2022-03-29T21:12:17Z",
+      "side": 1,
+      "message": "This is only true of order-only dependencies, which groups in GN use. I didn\u0027t realize that when reviewing your previous CLs. Updating order-only deps does not cause targets that depend on them to rebuild.\n\nIt makes some sense that GN would use order-only deps for groups since they\u0027re often used to \"bundle\" things together in the dependency graph.\n\nhttps://ninja-build.org/manual.html#ref_dependencies",
+      "range": {
+        "startLine": 16,
+        "startChar": 15,
+        "endLine": 17,
+        "endChar": 43
+      },
+      "revId": "011bbd3d7038668709a4637c7d3b252419a66bc0",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "ab9dc3b8_1abbd3c8",
         "filename": "src/gn/ninja_rust_binary_target_writer.cc",
         "patchSetId": 2
@@ -14,6 +37,30 @@
       "writtenOn": "2022-03-29T16:41:42Z",
       "side": 1,
       "message": "I have one doubt about this... re-exports\n\n b/BUILD.gn:\n  deps \u003d [\"//c\"];\n b/b.rs:\n  pub use c;\n  \n a/BUILD.gn:\n  deps \u003d [\"//b\"]\n\nHere //a doesn\u0027t have a public deps view of //c through //b. But //b has given it visibility as b::c.\n\nIf c changes, a could need to recompile since it\u0027s using `b::c::foo`. But without public_deps c would be excluded from a\u0027s dependency set here.\n\nSo, we either include all non-visible crates as well, or we need to ensure somehow that a re-export means it\u0027s listed in public_deps somehow..?",
+      "range": {
+        "startLine": 193,
+        "startChar": 10,
+        "endLine": 193,
+        "endChar": 27
+      },
+      "revId": "011bbd3d7038668709a4637c7d3b252419a66bc0",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ede34055_36fc3fe2",
+        "filename": "src/gn/ninja_rust_binary_target_writer.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 193,
+      "author": {
+        "id": 1000168
+      },
+      "writtenOn": "2022-03-29T21:12:17Z",
+      "side": 1,
+      "message": "My comment above should be enlightening here.. since b is an rlib and not a group target, there will be an implicit dep (not an order-only dep) on it, and another implicit dep from b to c. Everything should work as long as there\u0027s a chain of implicit deps.",
+      "parentUuid": "ab9dc3b8_1abbd3c8",
       "range": {
         "startLine": 193,
         "startChar": 10,
