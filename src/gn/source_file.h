@@ -15,6 +15,7 @@
 #include "base/files/file_path.h"
 #include "base/logging.h"
 
+#include "gn/nested_set.h"
 #include "gn/string_atom.h"
 
 class SourceDir;
@@ -145,7 +146,23 @@ struct hash<SourceFile> {
 // NOTE: In practice, this is much faster than using an std::set<> or
 // std::unordered_set<> container. E.g. for the Fuchsia Zircon build, the
 // overall difference in "gn gen" time is about 10%.
-using SourceFileSet = base::flat_set<SourceFile, SourceFile::PtrCompare>;
+using SourceFileSet = base::flat_set<SourceFile>;
+
+// Represents an immutable set of source files that can
+// be constructed very rapidly, and with small memory footprint,
+// during scope merges; though with slow// lookup capabilities.
+// One can use ToSourceFileSet() to convert to a SourceFileSet that provides
+// O(logN) lookup complexity.
+class NestedSourceFileSet : public NestedSet<SourceFile> {
+ public:
+  NestedSourceFileSet() = default;
+  NestedSourceFileSet(NestedSet<SourceFile> from)
+      : NestedSet<SourceFile>(std::move(from)) {}
+
+  SourceFileSet ToSourceFileSet() const {
+    return SourceFileSet(Flatten(NestedSetOrder::Default));
+  }
+};
 
 // Represents a set of tool types.
 class SourceFileTypeSet {

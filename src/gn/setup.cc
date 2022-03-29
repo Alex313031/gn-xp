@@ -586,7 +586,7 @@ bool Setup::FillArgsFromArgsInputFile(Err* err) {
   arg_scope.GetCurrentScopeValues(&overrides);
   build_settings_.build_args().AddArgOverrides(overrides);
   build_settings_.build_args().set_build_args_dependency_files(
-      arg_scope.build_dependency_files());
+      arg_scope.build_dependency_files().ToSourceFileSet());
   return true;
 }
 
