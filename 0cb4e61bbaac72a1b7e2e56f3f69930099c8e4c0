@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e1a866c4_d3c86841",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000030
+      },
+      "writtenOn": "2022-03-29T01:03:37Z",
+      "side": 1,
+      "message": "Let me use this to check whether https://crbug.com/1309032 works or not.",
+      "revId": "0cb4e61bbaac72a1b7e2e56f3f69930099c8e4c0",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    }
+  ]
+}
