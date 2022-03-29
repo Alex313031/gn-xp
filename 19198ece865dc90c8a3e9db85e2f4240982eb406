@@ -16,6 +16,24 @@
       "message": "Thank you!\n\nCould use a test maybe?",
       "revId": "19198ece865dc90c8a3e9db85e2f4240982eb406",
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b71eb5f6_78fc4c31",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2022-03-29T00:05:38Z",
+      "side": 1,
+      "message": "Yep, I belatedly realized that this rust_project code had a unit test. Test included in latest patchset.",
+      "parentUuid": "36056e8c_39bc68e3",
+      "revId": "19198ece865dc90c8a3e9db85e2f4240982eb406",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
     }
   ]
 }
