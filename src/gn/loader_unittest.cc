@@ -24,8 +24,7 @@ namespace {
 bool ItemContainsBuildDependencyFile(const Item* item,
                                      const SourceFile& source_file) {
   const auto& build_dependency_files = item->build_dependency_files();
-  return build_dependency_files.end() !=
-         build_dependency_files.find(source_file);
+  return build_dependency_files.Contains(source_file);
 }
 
 class MockBuilder {
