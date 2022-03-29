@@ -232,7 +232,7 @@ TEST_F(AnalyzerTest, TargetRefersToInputs) {
 // is completely traversed.
 TEST_F(AnalyzerTest, SubConfigIsModified) {
   std::unique_ptr<Config> ssc = MakeConfig("//dir3", "subsubconfig_name");
-  ssc->build_dependency_files().insert(SourceFile("//dir3/BUILD.gn"));
+  ssc->build_dependency_files().AddForTest(SourceFile("//dir3/BUILD.gn"));
 
   std::unique_ptr<Config> sc = MakeConfig("//dir2", "subconfig_name");
   sc->configs().push_back(LabelConfigPair(ssc->label()));
@@ -342,7 +342,7 @@ TEST_F(AnalyzerTest, TargetRefersToBuildDependencyFiles) {
       R"("test_targets":[])"
       "}");
 
-  t_raw->build_dependency_files().insert(SourceFile("//dir/BUILD.gn"));
+  t_raw->build_dependency_files().AddForTest(SourceFile("//dir/BUILD.gn"));
   RunAnalyzerTest(
       R"({
        "files": [ "//dir/BUILD.gn" ],
@@ -382,7 +382,7 @@ TEST_F(AnalyzerTest, AffectedTargetpropagatesToDependentTargets) {
       R"("test_targets":[])"
       "}");
 
-  t3_raw->build_dependency_files().insert(SourceFile("//dir/BUILD.gn"));
+  t3_raw->build_dependency_files().AddForTest(SourceFile("//dir/BUILD.gn"));
   RunAnalyzerTest(
       R"({
        "files": [ "//dir/BUILD.gn" ],
@@ -417,7 +417,7 @@ TEST_F(AnalyzerTest, AffectedConfigpropagatesToDependentTargets) {
       R"("test_targets":[])"
       "}");
 
-  c_raw->build_dependency_files().insert(SourceFile("//dir/BUILD.gn"));
+  c_raw->build_dependency_files().AddForTest(SourceFile("//dir/BUILD.gn"));
   RunAnalyzerTest(
       R"({
        "files": [ "//dir/BUILD.gn" ],
@@ -459,7 +459,7 @@ TEST_F(AnalyzerTest, AffectedToolchainpropagatesToDependentTargets) {
       R"("test_targets":[])"
       "}");
 
-  toolchain->build_dependency_files().insert(SourceFile("//tc/BUILD.gn"));
+  toolchain->build_dependency_files().AddForTest(SourceFile("//tc/BUILD.gn"));
   RunAnalyzerTest(
       R"({
        "files": [ "//tc/BUILD.gn" ],
@@ -497,7 +497,7 @@ TEST_F(AnalyzerTest, AffectedPoolpropagatesToDependentTargets) {
       R"("test_targets":[])"
       "}");
 
-  p_raw->build_dependency_files().insert(SourceFile("//dir/BUILD.gn"));
+  p_raw->build_dependency_files().AddForTest(SourceFile("//dir/BUILD.gn"));
   RunAnalyzerTest(
       R"({
        "files": [ "//dir/BUILD.gn" ],
@@ -516,7 +516,7 @@ TEST_F(AnalyzerTest, AffectedPoolpropagatesToDependentTargets) {
 TEST_F(AnalyzerTest, CompileTargetsAllWasPruned) {
   std::unique_ptr<Target> t1 = MakeTarget("//dir", "target_name1");
   std::unique_ptr<Target> t2 = MakeTarget("//dir", "target_name2");
-  t2->build_dependency_files().insert(SourceFile("//dir/BUILD.gn"));
+  t2->build_dependency_files().AddForTest(SourceFile("//dir/BUILD.gn"));
   builder_.ItemDefined(std::move(t1));
   builder_.ItemDefined(std::move(t2));
 

@@ -9,10 +9,10 @@
 
 Item::Item(const Settings* settings,
            const Label& label,
-           const SourceFileSet& build_dependency_files)
+           NestedSourceFileSet build_dependency_files)
     : settings_(settings),
       label_(label),
-      build_dependency_files_(build_dependency_files),
+      build_dependency_files_(std::move(build_dependency_files)),
       defined_from_(nullptr) {}
 
 Item::~Item() = default;

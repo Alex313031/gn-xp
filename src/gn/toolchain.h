@@ -46,7 +46,7 @@ class Toolchain : public Item {
   // refer to Scope for how this is determined.
   Toolchain(const Settings* settings,
             const Label& label,
-            const SourceFileSet& build_dependency_files = {});
+            NestedSourceFileSet build_dependency_files = {});
   ~Toolchain() override;
 
   // Item overrides.
