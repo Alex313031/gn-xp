@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ab9dc3b8_1abbd3c8",
+        "filename": "src/gn/ninja_rust_binary_target_writer.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 193,
+      "author": {
+        "id": 1002072
+      },
+      "writtenOn": "2022-03-29T16:41:42Z",
+      "side": 1,
+      "message": "I have one doubt about this... re-exports\n\n b/BUILD.gn:\n  deps \u003d [\"//c\"];\n b/b.rs:\n  pub use c;\n  \n a/BUILD.gn:\n  deps \u003d [\"//b\"]\n\nHere //a doesn\u0027t have a public deps view of //c through //b. But //b has given it visibility as b::c.\n\nIf c changes, a could need to recompile since it\u0027s using `b::c::foo`. But without public_deps c would be excluded from a\u0027s dependency set here.\n\nSo, we either include all non-visible crates as well, or we need to ensure somehow that a re-export means it\u0027s listed in public_deps somehow..?",
+      "range": {
+        "startLine": 193,
+        "startChar": 10,
+        "endLine": 193,
+        "endChar": 27
+      },
+      "revId": "011bbd3d7038668709a4637c7d3b252419a66bc0",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    }
+  ]
+}
