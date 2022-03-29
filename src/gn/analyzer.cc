@@ -411,10 +411,8 @@ void Analyzer::FilterTarget(const Target* target,
 
 bool Analyzer::ItemRefersToFile(const Item* item,
                                 const SourceFile* file) const {
-  for (const auto& cur_file : item->build_dependency_files()) {
-    if (cur_file == *file)
-      return true;
-  }
+  if (item->build_dependency_files().Contains(*file))
+    return true;
 
   if (const Config* config = item->AsConfig()) {
     for (const auto& config_pair: config->configs()) {
@@ -493,10 +491,9 @@ bool Analyzer::WereMainGNFilesModified(
     if (*file == build_config_file_)
       return true;
 
-    for (const auto& build_args_dependency_file :
-         build_args_dependency_files_) {
-      if (*file == build_args_dependency_file)
-        return true;
+    if (build_args_dependency_files_.find(*file) !=
+        build_args_dependency_files_.end()) {
+      return true;
     }
   }
 

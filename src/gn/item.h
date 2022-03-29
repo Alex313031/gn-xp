@@ -26,7 +26,7 @@ class Item {
  public:
   Item(const Settings* settings,
        const Label& label,
-       const SourceFileSet& build_dependency_files = {});
+       NestedSourceFileSet build_dependency_files = {});
   virtual ~Item();
 
   const Settings* settings() const { return settings_; }
@@ -60,11 +60,13 @@ class Item {
 
   // Returns the set of build files that may affect this item, please refer to
   // Scope for how this is determined.
-  const SourceFileSet& build_dependency_files() const {
+  NestedSourceFileSet build_dependency_files() const {
     return build_dependency_files_;
   }
 
-  SourceFileSet& build_dependency_files() { return build_dependency_files_; }
+  NestedSourceFileSet& build_dependency_files() {
+    return build_dependency_files_;
+  }
 
   // Called when this item is resolved, meaning it and all of its dependents
   // have no unresolved deps. Returns true on success. Sets the error and
@@ -76,7 +78,7 @@ class Item {
 
   const Settings* settings_;
   Label label_;
-  SourceFileSet build_dependency_files_;
+  NestedSourceFileSet build_dependency_files_;
   const ParseNode* defined_from_;
 
   bool testonly_ = false;
