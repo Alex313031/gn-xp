@@ -16,6 +16,24 @@
       "message": "I am not sure this is a good idea. For performance comparisons, I have written a script that allows me to rebuild GN in the same way as the recipe (plus a few more options): https://gn-review.googlesource.com/c/gn/+/12800\n\nFor example, I use the following to generate an optimized binary and run its unit test suite (requires a Fuchsia checkout):\n\n  tools/build-gn.sh --fuchsia-dir\u003d/work/fuchsia --build-rpmalloc --lto --install-to\u003d/tmp/gn-master\n\nThe `--fuchsia-dir\u003dDIR` option is a convenience, you can use `--ninja\u003dNINJA --binprefix\u003dPREFIX` instead to point to your Clang/GCC/Ninja paths.\n\nNote that `--build-rpmalloc` will download the rpmalloc sources into a temporary directory, and save the resulting static library under `$HOME/.cache`.\n",
       "revId": "bc9c39d5a47ed7171b7951d621fb040c7886cb6d",
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c1f23d90_7603228e",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 10
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000030
+      },
+      "writtenOn": "2022-03-30T09:54:59Z",
+      "side": 1,
+      "message": "Thanks, but as a developer in chromium PA, I feel it is bit convinient if we don\u0027t need to checkout fuchsia tree.\n\nAnd by using the same recipe pipeline, we don\u0027t need to take care subtle build config differences passed to your script too?\nI can rely on your script if other folks also hesitant to have this though.",
+      "parentUuid": "34ca7465_897575ec",
+      "revId": "bc9c39d5a47ed7171b7951d621fb040c7886cb6d",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
     }
   ]
 }
