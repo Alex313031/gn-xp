@@ -24,6 +24,30 @@
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "98a5ebf6_a49c2d59",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 17,
+      "author": {
+        "id": 1002072
+      },
+      "writtenOn": "2022-03-30T13:55:46Z",
+      "side": 1,
+      "message": "Thank you for the link. You\u0027re right:\n\nFor A -\u003e B -\u003e C, if B is an rlib, changing C will rebuild A.\nFor A -\u003e B -\u003e C, if B is an group, changing C will not rebuild A.\n\nI wonder if we could scope this to only transitively add rlibs behind order-only deps to the set of implicit deps. It would make the requirements more clear in the test expectations but wouldn\u0027t do too much else for us. Maybe it\u0027s overkill.\n\nI will add comment on the test with a group though to ensure it the expectations we care about are clear.",
+      "parentUuid": "486b2596_464a8218",
+      "range": {
+        "startLine": 16,
+        "startChar": 15,
+        "endLine": 17,
+        "endChar": 43
+      },
+      "revId": "011bbd3d7038668709a4637c7d3b252419a66bc0",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "ab9dc3b8_1abbd3c8",
@@ -61,6 +85,30 @@
       "side": 1,
       "message": "My comment above should be enlightening here.. since b is an rlib and not a group target, there will be an implicit dep (not an order-only dep) on it, and another implicit dep from b to c. Everything should work as long as there\u0027s a chain of implicit deps.",
       "parentUuid": "ab9dc3b8_1abbd3c8",
+      "range": {
+        "startLine": 193,
+        "startChar": 10,
+        "endLine": 193,
+        "endChar": 27
+      },
+      "revId": "011bbd3d7038668709a4637c7d3b252419a66bc0",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c16e90f4_56a82c03",
+        "filename": "src/gn/ninja_rust_binary_target_writer.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 193,
+      "author": {
+        "id": 1002072
+      },
+      "writtenOn": "2022-03-30T13:55:46Z",
+      "side": 1,
+      "message": "Yes, thank you.",
+      "parentUuid": "ede34055_36fc3fe2",
       "range": {
         "startLine": 193,
         "startChar": 10,
