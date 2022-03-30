@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b1e5e3dc_28842ce3",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 11
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-03-30T17:06:30Z",
+      "side": 1,
+      "message": "Can we use CAS instead? That\u0027s the strategy we typically use in Fuchsia as well for these use cases.",
+      "revId": "7bbaa6544f466042eb9407fd563405942cd10de4",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    }
+  ]
+}
