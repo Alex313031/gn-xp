@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a7054fd6_e52517fe",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1002107
+      },
+      "writtenOn": "2022-03-30T20:36:22Z",
+      "side": 1,
+      "message": "I don\u0027t seem to have permission to retrigger the commit queue - may need your help here.",
+      "revId": "cd5c6ff1b646bb0130b8774f267c6932ce7f5fee",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    }
+  ]
+}
