@@ -34,6 +34,24 @@
       "parentUuid": "34ca7465_897575ec",
       "revId": "bc9c39d5a47ed7171b7951d621fb040c7886cb6d",
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b12dbb41_8ec5e2ea",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 10
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000067
+      },
+      "writtenOn": "2022-03-30T11:43:19Z",
+      "side": 1,
+      "message": "Not sure what you mean, but you don\u0027t need a Fuchsia checkout at all, and it would be trivial to add `--chromium-dir` to use the Ninja and Clang prebuilts from a Chromium checkout to the script (which can be copied elsewhere if you want, i.e. it doesn\u0027t need to be in your GN source directory).\n\nOne approach doesn\u0027t prevent the other anyway. I just find it a lot easier to rebuild everything locally on every change, instead of relying on a full recipe + CIPD cycle whenever I work on GN. I\u0027ll let others comment on what\u0027s best then.",
+      "parentUuid": "c1f23d90_7603228e",
+      "revId": "bc9c39d5a47ed7171b7951d621fb040c7886cb6d",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
     }
   ]
 }
