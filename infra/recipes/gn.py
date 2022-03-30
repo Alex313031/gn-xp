@@ -260,14 +260,16 @@ def RunSteps(api, repository):
             if target.is_host:
               api.step('test', [src_dir.join('out', 'gn_unittests')])
 
-            if build_input.gerrit_changes:
-              continue
-
             if config['name'] != 'release':
               continue
 
             with api.step.nest('upload'):
               cipd_pkg_name = 'gn/gn/%s' % target.platform
+              if api.buildbucket.builder_id.project != 'infra-internal':
+                # Upload gn binary to experimeental folder if builds run from
+                # public CQ/CI.
+                cipd_pkg_name = 'experimental/' + cipd_pkg_name
+
               gn = 'gn' + ('.exe' if target.is_win else '')
 
               pkg_def = api.cipd.PackageDefinition(
@@ -284,22 +286,21 @@ def RunSteps(api, repository):
                   output_package=cipd_pkg_file,
               )
 
-              if api.buildbucket.builder_id.project == 'infra-internal':
-                cipd_pin = api.cipd.search(cipd_pkg_name,
-                                           'git_revision:' + revision)
-                if cipd_pin:
-                  api.step('Package is up-to-date', cmd=None)
-                  continue
+              cipd_pin = api.cipd.search(cipd_pkg_name,
+                                         'git_revision:' + revision)
+              if cipd_pin:
+                api.step('Package is up-to-date', cmd=None)
+                continue
 
-                api.cipd.register(
-                    package_name=cipd_pkg_name,
-                    package_path=cipd_pkg_file,
-                    refs=['latest'],
-                    tags={
-                        'git_repository': repository,
-                        'git_revision': revision,
-                    },
-                )
+              api.cipd.register(
+                  package_name=cipd_pkg_name,
+                  package_path=cipd_pkg_file,
+                  refs=['latest'],
+                  tags={
+                      'git_repository': repository,
+                      'git_revision': revision,
+                  },
+              )
 
 
 def GenTests(api):
