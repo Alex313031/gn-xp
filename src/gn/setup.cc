@@ -781,12 +781,17 @@ bool Setup::FillPythonPath(const base::CommandLine& cmdline, Err* err) {
     if (!value->VerifyTypeIs(Value::STRING, err)) {
       return false;
     }
-    base::FilePath python_path =
-        ProcessFileExtensions(UTF8ToFilePath(value->string_value()));
-    if (python_path.empty()) {
-      *err = Err(Location(), "Could not find \"" + value->string_value() +
-                                 "\" from dotfile in PATH.");
-      return false;
+    // Note that an empty string value is valid, and means that the scripts
+    // invoked by actions will be run directly.
+    base::FilePath python_path;
+    if (!value->string_value().empty()) {
+      python_path =
+          ProcessFileExtensions(UTF8ToFilePath(value->string_value()));
+      if (python_path.empty()) {
+        *err = Err(Location(), "Could not find \"" + value->string_value() +
+                                   "\" from dotfile in PATH.");
+        return false;
+      }
     }
     build_settings_.set_python_path(python_path);
   } else {
