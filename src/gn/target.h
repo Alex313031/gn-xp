@@ -294,7 +294,7 @@ class Target : public Item {
     return allow_circular_includes_from_;
   }
 
-  const InheritedLibraries& inherited_libraries() const {
+  const ImmutableInheritedLibraries& inherited_libraries() const {
     return inherited_libraries_;
   }
 
@@ -316,10 +316,10 @@ class Target : public Item {
   bool has_rust_values() const { return rust_values_.get(); }
 
   // Transitive closure of libraries that are depended on by this target
-  const InheritedLibraries& rust_transitive_inherited_libs() const {
+  const ImmutableInheritedLibraries& rust_transitive_inherited_libs() const {
     return rust_transitive_inherited_libs_;
   }
-  const InheritedLibraries& rust_transitive_inheritable_libs() const {
+  const ImmutableInheritedLibraries& rust_transitive_inheritable_libs() const {
     return rust_transitive_inheritable_libs_;
   }
 
@@ -436,11 +436,16 @@ class Target : public Item {
  private:
   FRIEND_TEST_ALL_PREFIXES(TargetTest, ResolvePrecompiledHeaders);
 
+  // Used internally during OnResolved()
+  struct OnResolvedBuilders;
+
   // Pulls necessary information from dependencies to this one when all
   // dependencies have been resolved.
   void PullDependentTargetConfigs();
-  void PullDependentTargetLibsFrom(const Target* dep, bool is_public);
-  void PullDependentTargetLibs();
+  void PullDependentTargetLibsFrom(const Target* dep,
+                                   bool is_public,
+                                   OnResolvedBuilders* builders);
+  void PullDependentTargetLibs(OnResolvedBuilders* builders);
   void PullRecursiveHardDeps();
   void PullRecursiveBundleData();
 
@@ -491,7 +496,7 @@ class Target : public Item {
 
   // Static libraries, shared libraries, and source sets from transitive deps
   // that need to be linked.
-  InheritedLibraries inherited_libraries_;
+  ImmutableInheritedLibraries inherited_libraries_;
 
   // These libs and dirs are inherited from statically linked deps and all
   // configs applying to this target.
@@ -528,12 +533,12 @@ class Target : public Item {
   // Lists all transitive libraries, and for each one the public bit says if
   // there is a public chain such that this target can make direct use of the
   // lib. For each library marked public: "I have access to these targets."
-  InheritedLibraries rust_transitive_inherited_libs_;
+  ImmutableInheritedLibraries rust_transitive_inherited_libs_;
   // Lists all transitive libraries, and for each one the public bit says if a
   // target depending on this target would inherit the libraries as public too.
   // For each library marked public: "If you depend on me, you get access to
   // these targets."
-  InheritedLibraries rust_transitive_inheritable_libs_;
+  ImmutableInheritedLibraries rust_transitive_inheritable_libs_;
 
   // User for Swift targets.
   std::unique_ptr<SwiftValues> swift_values_;

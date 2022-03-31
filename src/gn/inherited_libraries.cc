@@ -50,3 +50,55 @@ void InheritedLibraries::AppendPublicSharedLibraries(
     }
   }
 }
+
+std::vector<const Target*> ImmutableInheritedLibraries::GetOrdered() const {
+  std::vector<const Target*> result;
+  result.reserve(this->size());
+  for (const auto& pair : *this) {
+    result.emplace_back(pair.target());
+  }
+  return result;
+}
+
+std::vector<std::pair<const Target*, bool>>
+ImmutableInheritedLibraries::GetOrderedAndPublicFlag() const {
+  std::vector<std::pair<const Target*, bool>> result;
+  result.reserve(this->size());
+  for (const auto& pair : *this) {
+    result.emplace_back(pair.target(), pair.is_public());
+  }
+  return result;
+}
+
+ImmutableInheritedLibraries::Builder&
+ImmutableInheritedLibraries::Builder::Append(TargetPublicFlagPair pair) {
+  auto ret = pairs_.PushBackWithIndex(pair);
+  if (pair.is_public() && !ret.first) {
+    const_cast<TargetPublicFlagPair&>(pairs_[ret.second]).set_is_public(true);
+  }
+  return *this;
+}
+
+ImmutableInheritedLibraries::Builder&
+ImmutableInheritedLibraries::Builder::AppendInherited(
+    const ImmutableInheritedLibraries& other,
+    bool is_public) {
+  for (auto pair : other) {
+    if (!is_public)
+      pair.set_is_public(false);
+    Append(pair);
+  }
+  return *this;
+}
+
+ImmutableInheritedLibraries::Builder&
+ImmutableInheritedLibraries::Builder::AppendPublicSharedLibraries(
+    const ImmutableInheritedLibraries& other,
+    bool is_public) {
+  for (const auto& pair : other) {
+    const Target* target = pair.target();
+    if (target->output_type() == Target::SHARED_LIBRARY && pair.is_public())
+      Append(target, is_public);
+  }
+  return *this;
+}

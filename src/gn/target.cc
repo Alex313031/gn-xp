@@ -195,6 +195,28 @@ bool RecursiveCheckAssertNoDeps(const Target* target,
 
 }  // namespace
 
+// A struct used to build various immutable lists for a
+// target in Target::OnResolved().
+struct Target::OnResolvedBuilders {
+ public:
+  OnResolvedBuilders(Target* target) : target_(target) {}
+
+  void Done() {
+    target_->inherited_libraries_ = inherited_libraries.Build();
+    target_->rust_transitive_inherited_libs_ =
+        rust_transitive_inherited_libs.Build();
+    target_->rust_transitive_inheritable_libs_ =
+        rust_transitive_inheritable_libs.Build();
+  }
+
+  ImmutableInheritedLibraries::Builder inherited_libraries;
+  ImmutableInheritedLibraries::Builder rust_transitive_inherited_libs;
+  ImmutableInheritedLibraries::Builder rust_transitive_inheritable_libs;
+
+ private:
+  Target* target_;
+};
+
 const char kExecution_Help[] =
     R"(Build graph and execution overview
 
@@ -453,6 +475,8 @@ bool Target::OnResolved(Err* err) {
   ScopedTrace trace(TraceItem::TRACE_ON_RESOLVED, label());
   trace.SetToolchain(settings()->toolchain_label());
 
+  OnResolvedBuilders builders(this);
+
   // Copy this target's own dependent and public configs to the list of configs
   // applying to it.
   configs_.Append(all_dependent_configs_.begin(), all_dependent_configs_.end());
@@ -500,7 +524,7 @@ bool Target::OnResolved(Err* err) {
   }
 
   PullRecursiveBundleData();
-  PullDependentTargetLibs();
+  PullDependentTargetLibs(&builders);
   PullRecursiveHardDeps();
   if (!ResolvePrecompiledHeaders(err))
     return false;
@@ -530,6 +554,7 @@ bool Target::OnResolved(Err* err) {
         computed_outputs_[0].AsSourceFile(settings()->build_settings()));
   }
 
+  builders.Done();
   return true;
 }
 
@@ -755,7 +780,9 @@ void Target::PullDependentTargetConfigs() {
   }
 }
 
-void Target::PullDependentTargetLibsFrom(const Target* dep, bool is_public) {
+void Target::PullDependentTargetLibsFrom(const Target* dep,
+                                         bool is_public,
+                                         OnResolvedBuilders* builders) {
   // Direct dependent libraries.
   if (dep->output_type() == STATIC_LIBRARY ||
       dep->output_type() == SHARED_LIBRARY ||
@@ -763,7 +790,7 @@ void Target::PullDependentTargetLibsFrom(const Target* dep, bool is_public) {
       dep->output_type() == SOURCE_SET ||
       (dep->output_type() == CREATE_BUNDLE &&
        dep->bundle_data().is_framework())) {
-    inherited_libraries_.Append(dep, is_public);
+    builders->inherited_libraries.Append(dep, is_public);
   }
 
   // Collect Rust libraries that are accessible from the current target, or
@@ -783,19 +810,19 @@ void Target::PullDependentTargetLibsFrom(const Target* dep, bool is_public) {
     // TODO(danakj): We should only need to track Rust rlibs or dylibs here, as
     // it's used for passing to rustc with --extern. We currently track
     // everything then drop non-Rust libs in ninja_rust_binary_target_writer.cc.
-    rust_transitive_inherited_libs_.Append(dep, true);
-    rust_transitive_inheritable_libs_.Append(dep, is_public);
+    builders->rust_transitive_inherited_libs.Append(dep, true);
+    builders->rust_transitive_inheritable_libs.Append(dep, is_public);
 
-    rust_transitive_inherited_libs_.AppendInherited(
+    builders->rust_transitive_inherited_libs.AppendInherited(
         dep->rust_transitive_inheritable_libs(), true);
-    rust_transitive_inheritable_libs_.AppendInherited(
+    builders->rust_transitive_inheritable_libs.AppendInherited(
         dep->rust_transitive_inheritable_libs(), is_public);
   } else if (dep->output_type() == RUST_PROC_MACRO) {
     // Proc-macros are inherited as a transitive dependency, but the things they
     // depend on can't be used elsewhere, as the proc macro is not linked into
     // the target (as it's only used during compilation).
-    rust_transitive_inherited_libs_.Append(dep, true);
-    rust_transitive_inheritable_libs_.Append(dep, is_public);
+    builders->rust_transitive_inherited_libs.Append(dep, true);
+    builders->rust_transitive_inheritable_libs.Append(dep, is_public);
   }
 
   if (dep->output_type() == SHARED_LIBRARY) {
@@ -819,17 +846,17 @@ void Target::PullDependentTargetLibsFrom(const Target* dep, bool is_public) {
     // library boundaries because they will be linked into the shared
     // library. Rust dylib deps are handled above and transitive deps are
     // resolved by the compiler.
-    inherited_libraries_.AppendPublicSharedLibraries(dep->inherited_libraries(),
-                                                     is_public);
+    builders->inherited_libraries.AppendPublicSharedLibraries(
+        dep->inherited_libraries_, is_public);
   } else {
-    InheritedLibraries transitive;
+    ImmutableInheritedLibraries::Builder transitive;
 
     if (!dep->IsFinal()) {
       // The current target isn't linked, so propagate linked deps and
       // libraries up the dependency tree.
-      for (const auto& [inherited, inherited_is_public] :
-           dep->inherited_libraries().GetOrderedAndPublicFlag()) {
-        transitive.Append(inherited, is_public && inherited_is_public);
+      for (const auto& inherited : dep->inherited_libraries_) {
+        transitive.Append(inherited.target(),
+                          is_public && inherited.is_public());
       }
     } else if (dep->complete_static_lib()) {
       // Inherit only final targets through _complete_ static libraries.
@@ -838,20 +865,21 @@ void Target::PullDependentTargetLibsFrom(const Target* dep, bool is_public) {
       // They are forwarded here so that targets that depend on complete
       // static libraries can link them in. Conversely, since complete static
       // libraries link in non-final targets they shouldn't be inherited.
-      for (const auto& [inherited, inherited_is_public] :
-           dep->inherited_libraries().GetOrderedAndPublicFlag()) {
-        if (inherited->IsFinal()) {
-          transitive.Append(inherited, is_public && inherited_is_public);
+      for (const auto& inherited : dep->inherited_libraries_) {
+        if (inherited.target()->IsFinal()) {
+          transitive.Append(inherited.target(),
+                            is_public && inherited.is_public());
         }
       }
     }
 
-    for (const auto& [target, pub] : transitive.GetOrderedAndPublicFlag()) {
+    for (const auto& pair : transitive.Build()) {
       // Proc macros are not linked into targets that depend on them, so do not
       // get inherited; they are consumed by the Rust compiler and only need to
       // be specified in --extern.
+      const Target* target = pair.target();
       if (target->output_type() != RUST_PROC_MACRO) {
-        inherited_libraries_.Append(target, pub);
+        builders->inherited_libraries.Append(target, pair.is_public());
       }
     }
   }
@@ -867,11 +895,11 @@ void Target::PullDependentTargetLibsFrom(const Target* dep, bool is_public) {
   }
 }
 
-void Target::PullDependentTargetLibs() {
+void Target::PullDependentTargetLibs(OnResolvedBuilders* builders) {
   for (const auto& dep : public_deps_)
-    PullDependentTargetLibsFrom(dep.ptr, true);
+    PullDependentTargetLibsFrom(dep.ptr, true, builders);
   for (const auto& dep : private_deps_)
-    PullDependentTargetLibsFrom(dep.ptr, false);
+    PullDependentTargetLibsFrom(dep.ptr, false, builders);
 }
 
 void Target::PullRecursiveHardDeps() {

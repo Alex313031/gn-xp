@@ -10,9 +10,82 @@
 #include <utility>
 #include <vector>
 
+#include "gn/immutable_vector.h"
+#include "gn/tagged_pointer.h"
 #include "gn/unique_vector.h"
 
 class Target;
+
+// A Compact representation of a read-only (target, is_public) pair.
+class TargetPublicFlagPair {
+ public:
+  TargetPublicFlagPair(const Target* target, bool is_public)
+      : tagged_(target, is_public ? 1 : 0) {}
+
+  const Target* target() const { return tagged_.ptr(); }
+  bool is_public() const { return tagged_.tag() != 0; }
+  void set_is_public(bool value) { tagged_.set_tag(value ? 1 : 0); }
+
+ private:
+  TaggedPointer<const Target, 1u> tagged_;
+};
+
+class ImmutableInheritedLibraries
+    : public ImmutableVector<TargetPublicFlagPair> {
+ public:
+  ImmutableInheritedLibraries() = default;
+
+  // These two methods are only used by unit-tests. TODO: Remove them.
+  std::vector<const Target*> GetOrdered() const;
+  std::vector<std::pair<const Target*, bool>> GetOrderedAndPublicFlag() const;
+
+  class Builder {
+   public:
+    Builder& Append(TargetPublicFlagPair pair);
+
+    Builder& Append(const Target* target, bool is_public) {
+      return Append(TargetPublicFlagPair(target, is_public));
+    }
+
+    Builder& AppendInherited(const ImmutableInheritedLibraries& other,
+                             bool is_public);
+
+    Builder& AppendPublicSharedLibraries(
+        const ImmutableInheritedLibraries& other,
+        bool is_public);
+
+    Builder& Reset() {
+      pairs_.clear();
+      return *this;
+    }
+
+    ImmutableInheritedLibraries Build() const {
+      return ImmutableInheritedLibraries(*this);
+    }
+
+    size_t size() const { return pairs_.size(); }
+
+   private:
+    friend ImmutableInheritedLibraries;
+
+    struct PairHash {
+      size_t operator()(TargetPublicFlagPair pair) const {
+        return std::hash<const Target*>()(pair.target());
+      }
+    };
+    struct PairEqualTo {
+      bool operator()(TargetPublicFlagPair a, TargetPublicFlagPair b) const {
+        return a.target() == b.target();
+      }
+    };
+    UniqueVector<TargetPublicFlagPair, PairHash, PairEqualTo> pairs_;
+  };
+
+ private:
+  // Used by the Builder class only.
+  ImmutableInheritedLibraries(const Builder& builder)
+      : ImmutableVector<TargetPublicFlagPair>(builder.pairs_) {}
+};
 
 // Represents an ordered uniquified set of all shared/static libraries for
 // a given target. These are pushed up the dependency tree.
