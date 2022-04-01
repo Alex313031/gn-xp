@@ -53,7 +53,7 @@ class InheritedLibraries {
                                    bool is_public);
 
  private:
-  UniqueVector<const Target*> targets_;
+  AbslUniqueVector<const Target*> targets_;
   std::vector<bool> public_flags_;
 
   InheritedLibraries(const InheritedLibraries&) = delete;
