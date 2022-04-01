@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7664caab_56ff5460",
+        "filename": "infra/recipes/gn.expected/cq_linux.json",
+        "patchSetId": 17
+      },
+      "lineNbr": 854,
+      "author": {
+        "id": 1001199
+      },
+      "writtenOn": "2022-04-01T08:01:33Z",
+      "side": 1,
+      "message": "is it correct path?",
+      "revId": "cfaff2f95487976f06e8c177e2f532b1d3c68205",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "99a6c498_c24827c8",
+        "filename": "infra/recipes/gn.expected/cq_linux.json",
+        "patchSetId": 17
+      },
+      "lineNbr": 971,
+      "author": {
+        "id": 1001199
+      },
+      "writtenOn": "2022-04-01T08:01:33Z",
+      "side": 1,
+      "message": "is it correct path?",
+      "revId": "cfaff2f95487976f06e8c177e2f532b1d3c68205",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    }
+  ]
+}
