@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "aab2548e_c5a068ed",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000030
+      },
+      "writtenOn": "2022-04-01T00:56:05Z",
+      "side": 1,
+      "message": "PTAL. I fixed recipe to use /dev/null instead of stdin.",
+      "revId": "aa1aecf9b43fe537f44a5839918e533220cbfc22",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    }
+  ]
+}
