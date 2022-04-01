@@ -12,6 +12,8 @@
 #include <functional>
 #include <vector>
 
+#include "absl/container/flat_hash_map.h"
+
 #include "hash_table_base.h"
 
 // A HashTableBase node type used by all UniqueVector<> instantiations.
@@ -215,6 +217,34 @@ class UniqueVector {
 
   Vector vector_;
   UniqueVectorHashSet set_;
+};
+
+template <typename T>
+class AbslUniqueVector {
+ public:
+  using Vector = std::vector<T>;
+
+  const Vector& vector() const { return vector_; }
+  size_t size() const { return vector_.size(); }
+
+  const T& operator[](size_t index) const { return vector_[index]; }
+
+  // Try to add an item to the vector. Return (true, index) in
+  // case of insertion, or (false, index) otherwise. In both cases
+  // |index| will be the item's index in the set and will not be
+  // kIndexNone.
+  std::pair<bool, size_t> PushBackWithIndex(const T& t) {
+    size_t index = vector_.size();
+    auto result = map_.try_emplace(t, index);
+    if (result.second) {
+      vector_.push_back(t);
+    }
+    return {result.second, result.first->second};
+  }
+
+ private:
+  Vector vector_;
+  absl::flat_hash_map<T, size_t> map_;
 };
 
 #endif  // TOOLS_GN_UNIQUE_VECTOR_H_
