@@ -16,6 +16,24 @@
       "message": "Can we use CAS instead? That\u0027s the strategy we typically use in Fuchsia as well for these use cases.",
       "revId": "7bbaa6544f466042eb9407fd563405942cd10de4",
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "8c9e06e6_fcbe3903",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 11
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000030
+      },
+      "writtenOn": "2022-04-01T01:03:58Z",
+      "side": 1,
+      "message": "That sounds good. I changed to use cas as temporal storage.",
+      "parentUuid": "b1e5e3dc_28842ce3",
+      "revId": "7bbaa6544f466042eb9407fd563405942cd10de4",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
     }
   ]
 }
