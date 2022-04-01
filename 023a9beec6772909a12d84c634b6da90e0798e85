@@ -1,0 +1,44 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "bd217ae7_fca6efbd",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000014
+      },
+      "writtenOn": "2022-04-01T00:09:49Z",
+      "side": 1,
+      "message": "Just some clarification before checkin...",
+      "revId": "023a9beec6772909a12d84c634b6da90e0798e85",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0b42ac56_4f2cffe7",
+        "filename": "src/gn/setup.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 785,
+      "author": {
+        "id": 1000014
+      },
+      "writtenOn": "2022-04-01T00:09:49Z",
+      "side": 1,
+      "message": "I don\u0027t actually understand what \"run directly\" means here and also in the existing help. I can only guess that this is what Fuchsia does to use args[0] for the command? Can you clarify the help and this comment to be more specific?",
+      "range": {
+        "startLine": 785,
+        "startChar": 34,
+        "endLine": 785,
+        "endChar": 47
+      },
+      "revId": "023a9beec6772909a12d84c634b6da90e0798e85",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    }
+  ]
+}
