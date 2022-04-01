@@ -365,6 +365,109 @@
     ]
   },
   {
+    "cmd": [],
+    "name": "release.mac-amd64.upload",
+    "~followup_annotations": [
+      "@@@STEP_NEST_LEVEL@2@@@"
+    ]
+  },
+  {
+    "cmd": [],
+    "name": "release.mac-amd64.upload.install infra/tools/luci/cas",
+    "~followup_annotations": [
+      "@@@STEP_NEST_LEVEL@3@@@"
+    ]
+  },
+  {
+    "cmd": [
+      "vpython",
+      "-u",
+      "RECIPE_MODULE[recipe_engine::file]/resources/fileutil.py",
+      "--json-output",
+      "/path/to/tmp/json",
+      "ensure-directory",
+      "--mode",
+      "0777",
+      "[CACHE]/cipd/infra/tools/luci/cas/cas_module_pin"
+    ],
+    "cwd": "[START_DIR]/gn",
+    "env": {
+      "AR": "[START_DIR]/cipd/bin/llvm-ar",
+      "CC": "[START_DIR]/cipd/bin/clang",
+      "CFLAGS": "--target=x86_64-apple-darwin --sysroot=/some/xcode/path -nostdinc++ -cxx-isystem [CACHE]/macos_sdk/XCode.app/include/c++/v1",
+      "CXX": "[START_DIR]/cipd/bin/clang++",
+      "LDFLAGS": "--target=x86_64-apple-darwin --sysroot=/some/xcode/path"
+    },
+    "infra_step": true,
+    "name": "release.mac-amd64.upload.install infra/tools/luci/cas.ensure package directory",
+    "~followup_annotations": [
+      "@@@STEP_NEST_LEVEL@4@@@"
+    ]
+  },
+  {
+    "cmd": [
+      "cipd",
+      "ensure",
+      "-root",
+      "[CACHE]/cipd/infra/tools/luci/cas/cas_module_pin",
+      "-ensure-file",
+      "infra/tools/luci/cas/${platform} cas_module_pin",
+      "-max-threads",
+      "0",
+      "-json-output",
+      "/path/to/tmp/json"
+    ],
+    "cwd": "[START_DIR]/gn",
+    "env": {
+      "AR": "[START_DIR]/cipd/bin/llvm-ar",
+      "CC": "[START_DIR]/cipd/bin/clang",
+      "CFLAGS": "--target=x86_64-apple-darwin --sysroot=/some/xcode/path -nostdinc++ -cxx-isystem [CACHE]/macos_sdk/XCode.app/include/c++/v1",
+      "CXX": "[START_DIR]/cipd/bin/clang++",
+      "LDFLAGS": "--target=x86_64-apple-darwin --sysroot=/some/xcode/path"
+    },
+    "infra_step": true,
+    "name": "release.mac-amd64.upload.install infra/tools/luci/cas.ensure_installed",
+    "~followup_annotations": [
+      "@@@STEP_NEST_LEVEL@4@@@",
+      "@@@STEP_LOG_LINE@json.output@{@@@",
+      "@@@STEP_LOG_LINE@json.output@  \"result\": {@@@",
+      "@@@STEP_LOG_LINE@json.output@    \"\": [@@@",
+      "@@@STEP_LOG_LINE@json.output@      {@@@",
+      "@@@STEP_LOG_LINE@json.output@        \"instance_id\": \"resolved-instance_id-of-cas_module_pin--\", @@@",
+      "@@@STEP_LOG_LINE@json.output@        \"package\": \"infra/tools/luci/cas/resolved-platform\"@@@",
+      "@@@STEP_LOG_LINE@json.output@      }@@@",
+      "@@@STEP_LOG_LINE@json.output@    ]@@@",
+      "@@@STEP_LOG_LINE@json.output@  }@@@",
+      "@@@STEP_LOG_LINE@json.output@}@@@",
+      "@@@STEP_LOG_END@json.output@@@"
+    ]
+  },
+  {
+    "cmd": [
+      "[CACHE]/cipd/infra/tools/luci/cas/cas_module_pin/cas",
+      "archive",
+      "-cas-instance",
+      "projects/example-cas-server/instances/default_instance",
+      "-dump-digest",
+      "/path/to/tmp/",
+      "-paths",
+      "[START_DIR]/gn/out:gn"
+    ],
+    "cwd": "[START_DIR]/gn",
+    "env": {
+      "AR": "[START_DIR]/cipd/bin/llvm-ar",
+      "CC": "[START_DIR]/cipd/bin/clang",
+      "CFLAGS": "--target=x86_64-apple-darwin --sysroot=/some/xcode/path -nostdinc++ -cxx-isystem [CACHE]/macos_sdk/XCode.app/include/c++/v1",
+      "CXX": "[START_DIR]/cipd/bin/clang++",
+      "LDFLAGS": "--target=x86_64-apple-darwin --sysroot=/some/xcode/path"
+    },
+    "infra_step": true,
+    "name": "release.mac-amd64.upload.upload binary to CAS",
+    "~followup_annotations": [
+      "@@@STEP_NEST_LEVEL@3@@@"
+    ]
+  },
+  {
     "cmd": [
       "xcrun",
       "--show-sdk-path"
@@ -439,6 +542,38 @@
     "name": "release.mac-arm64.build",
     "~followup_annotations": [
       "@@@STEP_NEST_LEVEL@2@@@"
+    ]
+  },
+  {
+    "cmd": [],
+    "name": "release.mac-arm64.upload",
+    "~followup_annotations": [
+      "@@@STEP_NEST_LEVEL@2@@@"
+    ]
+  },
+  {
+    "cmd": [
+      "[CACHE]/cipd/infra/tools/luci/cas/cas_module_pin/cas",
+      "archive",
+      "-cas-instance",
+      "projects/example-cas-server/instances/default_instance",
+      "-dump-digest",
+      "/path/to/tmp/",
+      "-paths",
+      "[START_DIR]/gn/out:gn"
+    ],
+    "cwd": "[START_DIR]/gn",
+    "env": {
+      "AR": "[START_DIR]/cipd/bin/llvm-ar",
+      "CC": "[START_DIR]/cipd/bin/clang",
+      "CFLAGS": "--target=arm64-apple-darwin --sysroot=/some/xcode/path -nostdinc++ -cxx-isystem [CACHE]/macos_sdk/XCode.app/include/c++/v1",
+      "CXX": "[START_DIR]/cipd/bin/clang++",
+      "LDFLAGS": "--target=arm64-apple-darwin --sysroot=/some/xcode/path"
+    },
+    "infra_step": true,
+    "name": "release.mac-arm64.upload.upload binary to CAS",
+    "~followup_annotations": [
+      "@@@STEP_NEST_LEVEL@3@@@"
     ]
   },
   {
