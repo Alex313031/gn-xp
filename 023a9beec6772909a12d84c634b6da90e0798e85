@@ -39,6 +39,30 @@
       },
       "revId": "023a9beec6772909a12d84c634b6da90e0798e85",
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "83c7535f_8b7e1a86",
+        "filename": "src/gn/setup.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 785,
+      "author": {
+        "id": 1000067
+      },
+      "writtenOn": "2022-04-01T10:19:28Z",
+      "side": 1,
+      "message": "Yes, that what is meant here. I\u0027ve updated the documentation.\nFor the record, Fuchsia sets this to the empty strings for two reasons:\n\n- To launch our prebuilt Python interpreter with the `-S` option, which prevents it from looking for modules in system-provided paths (better hermeticity).\n\n- To launch a few shell scripts like this one [1], without paying the price of a full Python interpreter startup (this one used to be a Python script).\n\n[1] https://cs.opensource.google/fuchsia/fuchsia/+/main:build/gn_run_binary.sh",
+      "parentUuid": "0b42ac56_4f2cffe7",
+      "range": {
+        "startLine": 785,
+        "startChar": 34,
+        "endLine": 785,
+        "endChar": 47
+      },
+      "revId": "023a9beec6772909a12d84c634b6da90e0798e85",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
     }
   ]
 }
