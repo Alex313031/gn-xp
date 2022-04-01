@@ -380,6 +380,7 @@ def WriteGNNinja(path, platform, host, options, args_list):
   libflags = os.environ.get('LIBFLAGS', '').split()
   include_dirs = [
       os.path.relpath(os.path.join(REPO_ROOT, 'src'), os.path.dirname(path)),
+      os.path.relpath(os.path.join(REPO_ROOT, 'third_party', 'abseil-cpp'), os.path.dirname(path)),
       '.',
   ]
   if platform.is_zos():
@@ -563,6 +564,12 @@ def WriteGNNinja(path, platform, host, options, args_list):
         'src/base/timer/elapsed_timer.cc',
         'src/base/value_iterators.cc',
         'src/base/values.cc',
+
+        # List abseil c++ files used only for absl::flat_hash_map.
+        'third_party/abseil-cpp/absl/container/internal/raw_hash_set.cc',
+        'third_party/abseil-cpp/absl/hash/internal/city.cc',
+        'third_party/abseil-cpp/absl/hash/internal/hash.cc',
+        'third_party/abseil-cpp/absl/hash/internal/low_level_hash.cc',
       ]},
       'gn_lib': {'sources': [
         'src/gn/action_target_generator.cc',
