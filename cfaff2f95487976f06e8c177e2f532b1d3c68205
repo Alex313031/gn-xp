@@ -18,6 +18,24 @@
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "660e5e44_cd95ca21",
+        "filename": "infra/recipes/gn.expected/cq_linux.json",
+        "patchSetId": 17
+      },
+      "lineNbr": 854,
+      "author": {
+        "id": 1000030
+      },
+      "writtenOn": "2022-04-01T08:07:30Z",
+      "side": 1,
+      "message": "Yes. \u0027:\u0027 separator is used to specify root for cas client.",
+      "parentUuid": "7664caab_56ff5460",
+      "revId": "cfaff2f95487976f06e8c177e2f532b1d3c68205",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "99a6c498_c24827c8",
@@ -31,6 +49,24 @@
       "writtenOn": "2022-04-01T08:01:33Z",
       "side": 1,
       "message": "is it correct path?",
+      "revId": "cfaff2f95487976f06e8c177e2f532b1d3c68205",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "519a2cc1_506c8aac",
+        "filename": "infra/recipes/gn.expected/cq_linux.json",
+        "patchSetId": 17
+      },
+      "lineNbr": 971,
+      "author": {
+        "id": 1000030
+      },
+      "writtenOn": "2022-04-01T08:07:30Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "99a6c498_c24827c8",
       "revId": "cfaff2f95487976f06e8c177e2f532b1d3c68205",
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
     }
