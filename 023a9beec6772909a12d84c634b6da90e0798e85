@@ -63,6 +63,30 @@
       },
       "revId": "023a9beec6772909a12d84c634b6da90e0798e85",
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "51d9ff8b_56ec73c8",
+        "filename": "src/gn/setup.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 785,
+      "author": {
+        "id": 1000067
+      },
+      "writtenOn": "2022-04-01T13:07:08Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "83c7535f_8b7e1a86",
+      "range": {
+        "startLine": 785,
+        "startChar": 34,
+        "endLine": 785,
+        "endChar": 47
+      },
+      "revId": "023a9beec6772909a12d84c634b6da90e0798e85",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
     }
   ]
 }
