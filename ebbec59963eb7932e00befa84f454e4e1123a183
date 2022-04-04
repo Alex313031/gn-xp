@@ -16,6 +16,40 @@
       "message": "This is PoC implementation to optimize `gn gen`.\n\nIf this direction is acceptable for gn, I\u0027ll split this CL to\n1. WaitGroup introduction\n2. Parallelize ResolveItem\n\nI\u0027m also wondering how you feel about introducing absl to GN for\nhttps://cs.opensource.google/abseil/abseil-cpp/+/master:absl/base/thread_annotations.h and replace std::mutex with absl::Mutex where appropriate.",
       "revId": "ebbec59963eb7932e00befa84f454e4e1123a183",
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9abfc763_52f5989b",
+        "filename": "src/gn/builder.cc",
+        "patchSetId": 8
+      },
+      "lineNbr": 74,
+      "author": {
+        "id": 1000067
+      },
+      "writtenOn": "2022-04-04T08:30:57Z",
+      "side": 1,
+      "message": "If I understand correctly, any worker thread could fail and overwrite |success_\\ and |err_| here, and only the result of the last one will be considered in Wait().\n\nIn other words, this makes error output non-deterministic when multiple resolved items would fail. From experience, that\u0027s is bound to make debugging some issues a real pain. Is there a way to collect all possible errors and re-order them in a deterministic way after the parallel resolution for consistent error reporting?",
+      "revId": "ebbec59963eb7932e00befa84f454e4e1123a183",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3b070034_70cc9069",
+        "filename": "src/gn/builder.cc",
+        "patchSetId": 8
+      },
+      "lineNbr": 77,
+      "author": {
+        "id": 1000067
+      },
+      "writtenOn": "2022-04-04T08:30:57Z",
+      "side": 1,
+      "message": "nit: I believe it is slightly more efficient to send the notification after unlocking the mutex. See https://stackoverflow.com/questions/55154462/c-condition-variable-notify-one-before-or-after-release-lock\n\nI don\u0027t understand this code, first therre is the use of notify_one() here. It looks like several threads could be waiting on the same condition variables at the same time and would need to be woken up when workers reaches 0, so notify_all() would be needed instead. Am I missing something?\n\nSecond, why not only notify when the count reaches 0? it seems completely unnecessary to wake any waiting thread until this happens.",
+      "revId": "ebbec59963eb7932e00befa84f454e4e1123a183",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
     }
   ]
 }
