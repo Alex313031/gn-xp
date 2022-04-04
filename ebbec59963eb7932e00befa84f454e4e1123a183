@@ -50,6 +50,41 @@
       "message": "nit: I believe it is slightly more efficient to send the notification after unlocking the mutex. See https://stackoverflow.com/questions/55154462/c-condition-variable-notify-one-before-or-after-release-lock\n\nI don\u0027t understand this code, first therre is the use of notify_one() here. It looks like several threads could be waiting on the same condition variables at the same time and would need to be woken up when workers reaches 0, so notify_all() would be needed instead. Am I missing something?\n\nSecond, why not only notify when the count reaches 0? it seems completely unnecessary to wake any waiting thread until this happens.",
       "revId": "ebbec59963eb7932e00befa84f454e4e1123a183",
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a32f39ca_0afbbc21",
+        "filename": "src/gn/builder.cc",
+        "patchSetId": 8
+      },
+      "lineNbr": 77,
+      "author": {
+        "id": 1000067
+      },
+      "writtenOn": "2022-04-04T08:49:16Z",
+      "side": 1,
+      "message": "Oh, I see now that this class does not implement a real \"wait group\" because in practice only a single thread (the main one) calls Wait(), while worker threads can call Add() to launch additional tasks. Maybe name this calss differently then to avoid confusion.",
+      "parentUuid": "3b070034_70cc9069",
+      "revId": "ebbec59963eb7932e00befa84f454e4e1123a183",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "21804f50_e576870e",
+        "filename": "src/gn/builder.cc",
+        "patchSetId": 8
+      },
+      "lineNbr": 531,
+      "author": {
+        "id": 1000067
+      },
+      "writtenOn": "2022-04-04T08:49:16Z",
+      "side": 1,
+      "message": "ResolveDeps() and other functions here end up calling Builder::GetRecord() which access the Builder::records_ map without any kind of lock contention. I am surprised that this works reliably since Builder::ItemDefined() which updates the map can be called from multiple threads now, IIRC.\n\nAll this to say that I find the lack of clear separation of what is accessed from multiple threads, and what is expected to run in the main thread confusing, and a source of problems for future refactors. Also from my own benchmarking, most of the heavy duty that could be parallelized happens in Target::OnResolved() and consists in all the set merges from configs and dependency information.\n\nHow can we make these actions more parallelizable while keeping the code base understandable? One idea that I wished to experiment with was to separate most of the data computed in Target::OnResolved() into a separate class (e.g. ConfiguredTarget or something) that would allow parallel computations, making the original Target graph read-only, and faster to compute in a single thread, but I am open to suggestions.",
+      "revId": "ebbec59963eb7932e00befa84f454e4e1123a183",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
     }
   ]
 }
