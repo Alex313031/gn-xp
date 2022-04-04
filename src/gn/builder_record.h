@@ -6,6 +6,7 @@
 #define TOOLS_GN_BUILDER_RECORD_H_
 
 #include <memory>
+#include <mutex>
 #include <utility>
 
 #include "gn/item.h"
@@ -68,10 +69,19 @@ class BuilderRecord {
   bool should_generate() const { return should_generate_; }
   void set_should_generate(bool sg) { should_generate_ = sg; }
 
-  bool resolved() const { return resolved_; }
-  void set_resolved(bool r) { resolved_ = r; }
+  bool resolved() const {
+    std::lock_guard<std::mutex> lock(lock_);
+    return resolved_;
+  }
+  void set_resolved(bool r) {
+    std::lock_guard<std::mutex> lock(lock_);
+    resolved_ = r;
+  }
 
-  bool can_resolve() const { return item_ && unresolved_count_ == 0; }
+  bool can_resolve() const {
+    std::lock_guard<std::mutex> lock(lock_);
+    return item_ && unresolved_count_ == 0;
+  }
 
   // All records this one is depending on. Note that this includes gen_deps for
   // targets, which can have cycles.
@@ -110,6 +120,7 @@ class BuilderRecord {
   std::unique_ptr<Item> item_;
   const ParseNode* originally_referenced_from_ = nullptr;
 
+  mutable std::mutex lock_;
   size_t unresolved_count_ = 0;
   BuilderRecordSet all_deps_;
   BuilderRecordSet waiting_on_resolution_;

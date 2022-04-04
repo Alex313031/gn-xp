@@ -3,6 +3,7 @@
 // found in the LICENSE file.
 
 #include "gn/builder_record.h"
+#include <mutex>
 
 #include "gn/item.h"
 
@@ -69,6 +70,7 @@ void BuilderRecord::AddGenDep(BuilderRecord* record) {
 }
 
 bool BuilderRecord::OnResolvedDep(const BuilderRecord* dep) {
+  std::lock_guard<std::mutex> lock(lock_);
   DCHECK(all_deps_.contains(const_cast<BuilderRecord*>(dep)));
   DCHECK(unresolved_count_ > 0);
   return --unresolved_count_ == 0;
@@ -87,6 +89,7 @@ std::vector<const BuilderRecord*> BuilderRecord::GetSortedUnresolvedDeps()
 }
 
 void BuilderRecord::AddDep(BuilderRecord* record) {
+  std::lock_guard<std::mutex> lock(lock_);
   if (all_deps_.add(record) && !record->resolved()) {
     unresolved_count_ += 1;
     record->waiting_on_resolution_.add(this);

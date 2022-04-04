@@ -14,11 +14,29 @@
 #include "gn/label.h"
 #include "gn/label_ptr.h"
 #include "gn/unique_vector.h"
+#include "util/worker_pool.h"
+#include "gn/err.h"
 
 class ActionValues;
 class Err;
 class Loader;
 class ParseNode;
+
+class WaitGroup {
+ public:
+  WaitGroup(WorkerPool* worker_pool) : worker_pool_(worker_pool){};
+  void Add(std::function<bool(Err*)> work);
+  bool Wait(Err* err);
+
+ private:
+  WorkerPool* worker_pool_;
+
+  std::mutex lock_;
+  int workers_ = 0;
+  std::condition_variable cv_;
+  bool success_ = true;
+  Err err_;
+};
 
 // The builder assembles the dependency tree. It is not threadsafe and runs on
 // the main thread only. See also BuilderRecord.
@@ -148,6 +166,9 @@ class Builder {
 
   Builder(const Builder&) = delete;
   Builder& operator=(const Builder&) = delete;
+
+  WorkerPool worker_pool_;
+  WaitGroup wait_group_;
 };
 
 #endif  // TOOLS_GN_BUILDER_H_
