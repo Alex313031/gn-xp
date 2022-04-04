@@ -18,6 +18,24 @@
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "38d6e849_22331597",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 8
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000067
+      },
+      "writtenOn": "2022-04-04T08:55:20Z",
+      "side": 1,
+      "message": "A long time ago, I wrote a GN CL [1] to build and link TCMalloc, which depends on ABSL, my experience was that Absl is very hard to properly build without Bazel or CMake. It was so bad that I had to cherry-pick the Absl headers used by TCMalloc instead of trying to pull the whole library, and I had to manually patch a few of them. Also, it is a _very_ large dependency, and depends on GoogleTest itself.\n\nI suggest instead that if you want thread annotations, add them to a new header like $GN/src/base/threads/thread_annotations.h and use that directly.\n\n[1] https://gn-review.googlesource.com/c/gn/+/8020",
+      "parentUuid": "823c2e69_9aeead69",
+      "revId": "ebbec59963eb7932e00befa84f454e4e1123a183",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "9abfc763_52f5989b",
