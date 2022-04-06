@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "9c9bf0d6_2c558d06",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2022-04-06T11:13:36Z",
+      "side": 1,
+      "message": "i have no opinion on this change and didn\u0027t look at the code, but I know that in chromium we have a bot that generates ninja files in 2 distinct build dirs and verifieds they\u0027re identical. so we don\u0027t hit this code path in chromium I guess?",
+      "revId": "d73c2de7b2b95bf4fce45adc5750f15b99d54396",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    }
+  ]
+}
