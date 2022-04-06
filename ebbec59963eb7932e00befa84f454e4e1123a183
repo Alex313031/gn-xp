@@ -229,6 +229,24 @@
       "parentUuid": "159639f5_af12dee8",
       "revId": "ebbec59963eb7932e00befa84f454e4e1123a183",
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "73fd5df2_2cfc59b1",
+        "filename": "src/gn/builder.cc",
+        "patchSetId": 8
+      },
+      "lineNbr": 531,
+      "author": {
+        "id": 1000067
+      },
+      "writtenOn": "2022-04-06T17:16:49Z",
+      "side": 1,
+      "message": "Regarding accesses to the Builder::records_ map, indeed, it seems that each ItemDefined() call will wait until all background tasks it launches have completed before, so the map is technically read-only during the ResolveItem() calls.\n\nThis is very subtle though, what do you think about adding a new argument to Builder::ResolveItem() that is a const-reference to the map, and have the implementation use that directly to query existing records. I think it makes the read-only access much more explicit, instead of relying on a mutable field that happens to be read-only due to the way the code is structured? E.g.:\n\n```\nbool Builder::ResolveItem(BuilderRecord* record, const BuilderRecordMap records, Err* err) {\n  ...\n}\n```",
+      "parentUuid": "64911d06_30486798",
+      "revId": "ebbec59963eb7932e00befa84f454e4e1123a183",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
     }
   ]
 }
