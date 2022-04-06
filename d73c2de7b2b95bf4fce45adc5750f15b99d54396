@@ -51,6 +51,24 @@
       "message": "that sounds like something that should be fixed in pigweed\u0027s gn files then (... whatever pigweed is)?",
       "revId": "d73c2de7b2b95bf4fce45adc5750f15b99d54396",
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "45324bc0_396dfc02",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000067
+      },
+      "writtenOn": "2022-04-06T12:16:40Z",
+      "side": 1,
+      "message": "Pigweed is http://pigweed.dev, another Google open-source project that heavily depends on GN/Ninja for its build system.\n\nI don\u0027t think there is anything to fix there. Generated source files in the build directory are a necessary thing for both Fuchsia and Pigweed, and need to have their own `source_out_dir` or `source_gen_dir` when they are used in source_set() or action() targets, for example.",
+      "parentUuid": "3f2e9212_bdb21908",
+      "revId": "d73c2de7b2b95bf4fce45adc5750f15b99d54396",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
     }
   ]
 }
