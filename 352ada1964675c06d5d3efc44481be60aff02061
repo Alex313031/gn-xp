@@ -1,6 +1,23 @@
 {
   "comments": [
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "c2b22c0b_cf8bc6ba",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 9
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000014
+      },
+      "writtenOn": "2022-04-06T23:35:21Z",
+      "side": 1,
+      "message": "I haven\u0027t thought about all the details but it seems this improves performance by 20%? \n\nMost GN execution is very parallel and it tries to be very clear what\u0027s available on which thread and it\u0027s relatively difficult to mess up. I remember surprisingly few threading bugs for a program that\u0027s this thread-heavy.\n\nEven if the current code is correct, I\u0027m not very enthusiastic about a subtle threading change for a 20% improvement. If it was 3x or something I think it would be worth working very hard to get. But 20%, while always nice to have, won\u0027t actually improve anybody\u0027s workflow. (There are even some existing optimizations that I already think are over the complexity/improvement threshold.) In this case, I would prefer to keep the implementation simpler.",
+      "revId": "352ada1964675c06d5d3efc44481be60aff02061",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "0b5b83fc_4c2d6b1b",
