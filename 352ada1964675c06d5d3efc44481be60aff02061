@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0b5b83fc_4c2d6b1b",
+        "filename": "src/gn/builder.cc",
+        "patchSetId": 9
+      },
+      "lineNbr": 572,
+      "author": {
+        "id": 1000067
+      },
+      "writtenOn": "2022-04-06T12:47:53Z",
+      "side": 1,
+      "message": "What do you think about calling ResolveItem() directly on the current thread for the first dependent (while scheduling extra dependents through a WaitGroup::Add()). Would that help performance by reducing the number of thread context switches to get the same final result?",
+      "revId": "352ada1964675c06d5d3efc44481be60aff02061",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    }
+  ]
+}

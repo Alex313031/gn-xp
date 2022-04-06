@@ -91,6 +91,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "be01db2d_dd564e93",
+        "filename": "src/gn/builder.cc",
+        "patchSetId": 8
+      },
+      "lineNbr": 74,
+      "author": {
+        "id": 1000067
+      },
+      "writtenOn": "2022-04-06T12:47:53Z",
+      "side": 1,
+      "message": "The Err type is not really amenable to comparisons. Here is a simpler idea: add a Label argument to the Add() method that is passed to the PostTask() lambda, which will use it to determine the \"first\" error, e.g.:\n\n```\nvoid WaitGroup::Add(const Label\u0026 label, std::function\u003cbool(Err*)\u003e work) {\n  {\n    std::lock_guard\u003cstd::mutex\u003e lock(lock_);\n    ++workers_;\n  }\n\n  worker_pool_-\u003ePostTask([w \u003d std::move(work), label] {\n    Err error;\n    bool b \u003d w(\u0026error);\n    int workers;\n    {\n      std::lock_guard\u003cstd::mutex\u003e lock(lock_);\n      if (!b) {\n        if (success_) {\n          success_ \u003d false;\n          err_ \u003d error;\n          err_label_ \u003d label;\n        } else if (label \u003c err_label_) {\n          err_ \u003d error;\n          err_label_ \u003d label;\n        }\n      }\n      workers \u003d --workers_;\n    }\n    if (workers \u003d\u003d 0)\n      cv_.notify_all();\n  });\n}\n```",
+      "parentUuid": "a865d670_57d2bef9",
+      "revId": "ebbec59963eb7932e00befa84f454e4e1123a183",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "3b070034_70cc9069",
         "filename": "src/gn/builder.cc",
         "patchSetId": 8
@@ -144,6 +162,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "9fc3df50_5e656ff4",
+        "filename": "src/gn/builder.cc",
+        "patchSetId": 8
+      },
+      "lineNbr": 77,
+      "author": {
+        "id": 1000067
+      },
+      "writtenOn": "2022-04-06T12:47:53Z",
+      "side": 1,
+      "message": "Well, the documentation clearly states that there could be several concurrent waiters, but I think all is needed here is a notify_all() to fix the issue.",
+      "parentUuid": "e6ab3da8_3f5ba146",
+      "revId": "ebbec59963eb7932e00befa84f454e4e1123a183",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "21804f50_e576870e",
         "filename": "src/gn/builder.cc",
         "patchSetId": 8
@@ -173,6 +209,24 @@
       "side": 1,
       "message": "\u003e ResolveDeps() and other functions here end up calling Builder::GetRecord() which access the Builder::records_ map without any kind of lock contention. I am surprised that this works reliably since Builder::ItemDefined() which updates the map can be called from multiple threads now, IIRC.\n\u003e \n\nI think Builder::ItemDefined() is only called from main thread in this implementation and concurrent read/write access to Builder::records_ doesn\u0027t happen?\n\n\u003e All this to say that I find the lack of clear separation of what is accessed from multiple threads, and what is expected to run in the main thread confusing, and a source of problems for future refactors. Also from my own benchmarking, most of the heavy duty that could be parallelized happens in Target::OnResolved() and consists in all the set merges from configs and dependency information.\n\u003e \n\nHmm, yeah. I agree this doesn\u0027t have clear separation. I think we can use DCHECK for thread to clarify which thread is used to run functions.\n\nAlso I\u0027m not sure whether we can parallelize Target::OnResovled() efficiently without parallelizing Builder::ResolveIteam().\n\n\u003e How can we make these actions more parallelizable while keeping the code base understandable? One idea that I wished to experiment with was to separate most of the data computed in Target::OnResolved() into a separate class (e.g. ConfiguredTarget or something) that would allow parallel computations, making the original Target graph read-only, and faster to compute in a single thread, but I am open to suggestions.\n\nI\u0027m not sure what you mean here. How do separate calsses allow parallel computation?",
       "parentUuid": "21804f50_e576870e",
+      "revId": "ebbec59963eb7932e00befa84f454e4e1123a183",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "64911d06_30486798",
+        "filename": "src/gn/builder.cc",
+        "patchSetId": 8
+      },
+      "lineNbr": 531,
+      "author": {
+        "id": 1000067
+      },
+      "writtenOn": "2022-04-06T12:47:53Z",
+      "side": 1,
+      "message": "Separate classes do not \"allow\" parallel computation, technically, but they make it easier to understand what\u0027s going on. Generally speaking, when multiple threads are invovled, it is easier to reason about the code when all shared inputs are read-only, and thread-specific data is mutable-exclusive.\n\nFor example, currently the graph is constructed in the builder on the (single) main thread, but once a Target instance is resolved, it is used as a read-only input for a background task that generates the corresponding Ninja content during a `gn gen` operation (see ItemResolvedAndGeneratedCallback() in src/gn/command_gen.cc).\n\nThis CL makes it very hard to see what parts of the Target class are modified from different threads, and which ones can be considered read-only-shareable, during target resolution. DCHECK() calls are nice but do not make the code easier to understand or evolve other time.\n\nOne way to achieve this would be to define a new class to hold all the resolved data that needs to be initialized in a worker thread, and which takes a const Target pointer as input, e.g.:\n\n```\nclass Target {\n  ...\n  // A structure that contains data for this target computed at\n  // resolution time, and initialized on a background thread.\n  struct ResolvedData {\n    // This constructor requires that all |target| dependencies are\n    // already resolved, i.e. that their |resolved_data_| is fully\n    // initialized and can be accessed read-only from any thread.\n    ResolvedData(const Target* target);\n\n    ...\n  };\n\n  // Data computed at resolution time for this target.\n  // Because the data itself is computed from a background thread,\n  // this field should be updated atomically during target resolution,\n  // and once set should be considered read-only.\n  std::unique_ptr\u003cResolvedData\u003e resolved_data_;\n};\n```\n\nEssentially, Target::ResolvedData would contain all the stuff that is currently computed in Target::OnResolved(), just stored separately.\n\nThe key thing thing to ensure the conditions described in the comments above are always valid and easy to verify when changing GN\u0027s code.\n\nIdeally, this would be doable without changing the Target API used by whatever code runs after target resolution has completed.\n\nWe may want something similar for BuilderRecord, or at least make the mutable fields there much more obvious. What do you think?",
+      "parentUuid": "159639f5_af12dee8",
       "revId": "ebbec59963eb7932e00befa84f454e4e1123a183",
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
     }
