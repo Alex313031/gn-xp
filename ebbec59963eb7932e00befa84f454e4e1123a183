@@ -36,6 +36,24 @@
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "41afc049_d258041d",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 8
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000030
+      },
+      "writtenOn": "2022-04-06T07:05:02Z",
+      "side": 1,
+      "message": "I see, but I think having absl only is not so much difficult compared to introducing tcmalloc. Most of absl component will be usable by having include directory and listing cc files which we want to use in gen.py.",
+      "parentUuid": "38d6e849_22331597",
+      "revId": "ebbec59963eb7932e00befa84f454e4e1123a183",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "9abfc763_52f5989b",
@@ -49,6 +67,24 @@
       "writtenOn": "2022-04-04T08:30:57Z",
       "side": 1,
       "message": "If I understand correctly, any worker thread could fail and overwrite |success_\\ and |err_| here, and only the result of the last one will be considered in Wait().\n\nIn other words, this makes error output non-deterministic when multiple resolved items would fail. From experience, that\u0027s is bound to make debugging some issues a real pain. Is there a way to collect all possible errors and re-order them in a deterministic way after the parallel resolution for consistent error reporting?",
+      "revId": "ebbec59963eb7932e00befa84f454e4e1123a183",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a865d670_57d2bef9",
+        "filename": "src/gn/builder.cc",
+        "patchSetId": 8
+      },
+      "lineNbr": 74,
+      "author": {
+        "id": 1000030
+      },
+      "writtenOn": "2022-04-06T07:05:02Z",
+      "side": 1,
+      "message": "I think we need to implement comparator for Err and store that in vector with sort.",
+      "parentUuid": "9abfc763_52f5989b",
       "revId": "ebbec59963eb7932e00befa84f454e4e1123a183",
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
     },
@@ -90,6 +126,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "e6ab3da8_3f5ba146",
+        "filename": "src/gn/builder.cc",
+        "patchSetId": 8
+      },
+      "lineNbr": 77,
+      "author": {
+        "id": 1000030
+      },
+      "writtenOn": "2022-04-06T07:05:02Z",
+      "side": 1,
+      "message": "Name of this class is somehow inspired by https://pkg.go.dev/sync#WaitGroup.\nBut suggestions are welcome if you have.",
+      "parentUuid": "a32f39ca_0afbbc21",
+      "revId": "ebbec59963eb7932e00befa84f454e4e1123a183",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "21804f50_e576870e",
         "filename": "src/gn/builder.cc",
         "patchSetId": 8
@@ -101,6 +155,24 @@
       "writtenOn": "2022-04-04T08:49:16Z",
       "side": 1,
       "message": "ResolveDeps() and other functions here end up calling Builder::GetRecord() which access the Builder::records_ map without any kind of lock contention. I am surprised that this works reliably since Builder::ItemDefined() which updates the map can be called from multiple threads now, IIRC.\n\nAll this to say that I find the lack of clear separation of what is accessed from multiple threads, and what is expected to run in the main thread confusing, and a source of problems for future refactors. Also from my own benchmarking, most of the heavy duty that could be parallelized happens in Target::OnResolved() and consists in all the set merges from configs and dependency information.\n\nHow can we make these actions more parallelizable while keeping the code base understandable? One idea that I wished to experiment with was to separate most of the data computed in Target::OnResolved() into a separate class (e.g. ConfiguredTarget or something) that would allow parallel computations, making the original Target graph read-only, and faster to compute in a single thread, but I am open to suggestions.",
+      "revId": "ebbec59963eb7932e00befa84f454e4e1123a183",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "159639f5_af12dee8",
+        "filename": "src/gn/builder.cc",
+        "patchSetId": 8
+      },
+      "lineNbr": 531,
+      "author": {
+        "id": 1000030
+      },
+      "writtenOn": "2022-04-06T07:05:02Z",
+      "side": 1,
+      "message": "\u003e ResolveDeps() and other functions here end up calling Builder::GetRecord() which access the Builder::records_ map without any kind of lock contention. I am surprised that this works reliably since Builder::ItemDefined() which updates the map can be called from multiple threads now, IIRC.\n\u003e \n\nI think Builder::ItemDefined() is only called from main thread in this implementation and concurrent read/write access to Builder::records_ doesn\u0027t happen?\n\n\u003e All this to say that I find the lack of clear separation of what is accessed from multiple threads, and what is expected to run in the main thread confusing, and a source of problems for future refactors. Also from my own benchmarking, most of the heavy duty that could be parallelized happens in Target::OnResolved() and consists in all the set merges from configs and dependency information.\n\u003e \n\nHmm, yeah. I agree this doesn\u0027t have clear separation. I think we can use DCHECK for thread to clarify which thread is used to run functions.\n\nAlso I\u0027m not sure whether we can parallelize Target::OnResovled() efficiently without parallelizing Builder::ResolveIteam().\n\n\u003e How can we make these actions more parallelizable while keeping the code base understandable? One idea that I wished to experiment with was to separate most of the data computed in Target::OnResolved() into a separate class (e.g. ConfiguredTarget or something) that would allow parallel computations, making the original Target graph read-only, and faster to compute in a single thread, but I am open to suggestions.\n\nI\u0027m not sure what you mean here. How do separate calsses allow parallel computation?",
+      "parentUuid": "21804f50_e576870e",
       "revId": "ebbec59963eb7932e00befa84f454e4e1123a183",
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
     }
