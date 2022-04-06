@@ -16,6 +16,23 @@
       "message": "I think the reason Chromium does not have this problem, while pigweed do, is that pigweed does use \u0027{{source_root_relative_dir}}\u0027 (or similar) to construct the name of the output, while Chromium uses \u0027{{target_out_dir}}/{{label_name}\u0027 as the output directory.\n\nE.g. in build/toolchain/apple/toolchain.gni:\n\n    # Object files go in this directory. Use label_name instead of\n    # target_output_name since labels will generally have no spaces and will be\n    # unique in the directory.\n    object_subdir \u003d \"{{target_out_dir}}/{{label_name}}\"\n\n    tool(\"cc\") {\n      depfile \u003d \"{{output}}.d\"\n      ...\n      outputs \u003d [ \"$object_subdir/{{source_name_part}}.o\" ]\n    }\n\nSo in retrospect, I agree with Nico. The issue is in pigweed toolchain definition and not in gn. If pigweed wants to use unique paths, then it needs to not use \u0027{{source_root_relative_dir}}\u0027 but instead build unique names like Chromium rules do.\n\nSorry, but I may have given +2 too quickly (I don\u0027t know why, my window didn\u0027t include any odf the discussion, and I only saw it in my email inbox after the fact).",
       "revId": "ab9104586734cb45aa77c70ca5042edbcc9f6aa5",
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "17fb4f43_710f8226",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 7
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000070
+      },
+      "writtenOn": "2022-04-06T13:29:05Z",
+      "side": 1,
+      "message": "For the moment, this will allow gn to roll, but I think a proper fix should go in pigweed, and then maybe this CL rolled back.",
+      "revId": "ab9104586734cb45aa77c70ca5042edbcc9f6aa5",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
     }
   ]
 }
