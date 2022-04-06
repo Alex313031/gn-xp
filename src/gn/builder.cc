@@ -6,6 +6,8 @@
 
 #include <stddef.h>
 #include <algorithm>
+#include <condition_variable>
+#include <mutex>
 #include <utility>
 
 #include "gn/action_values.h"
@@ -18,6 +20,7 @@
 #include "gn/settings.h"
 #include "gn/target.h"
 #include "gn/trace.h"
+#include "util/worker_pool.h"
 
 namespace {
 
@@ -55,7 +58,41 @@ bool RecursiveFindCycle(const BuilderRecord* search_in,
 
 }  // namespace
 
-Builder::Builder(Loader* loader) : loader_(loader) {}
+void WaitGroup::Add(std::function<bool(Err*)> work) {
+  {
+    std::lock_guard<std::mutex> lock(lock_);
+    ++workers_;
+  }
+
+  worker_pool_->PostTask([w = std::move(work), this] {
+    Err error;
+    bool b = w(&error);
+    int workers = 0;
+
+    {
+      std::lock_guard<std::mutex> lock(lock_);
+      if (!b) {
+        success_ = false;
+        err_ = error;
+      }
+      workers = --workers_;
+    }
+
+    if (workers == 0) {
+      cv_.notify_one();
+    }
+  });
+}
+
+bool WaitGroup::Wait(Err* err) {
+  std::unique_lock<std::mutex> lock(lock_);
+  cv_.wait(lock, [this] { return workers_ == 0; });
+  *err = err_;
+  return success_;
+}
+
+Builder::Builder(Loader* loader)
+    : loader_(loader), wait_group_(&worker_pool_) {}
 
 Builder::~Builder() = default;
 
@@ -107,7 +144,10 @@ void Builder::ItemDefined(std::unique_ptr<Item> item) {
   }
 
   if (record->can_resolve()) {
-    if (!ResolveItem(record, &err)) {
+    wait_group_.Add(
+        [this, record](Err* err) -> bool { return ResolveItem(record, err); });
+
+    if (!wait_group_.Wait(&err)) {
       g_scheduler->FailWithError(err);
       return;
     }
@@ -527,8 +567,9 @@ bool Builder::ResolveItem(BuilderRecord* record, Err* err) {
   for (auto it = waiting_deps.begin(); it.valid(); ++it) {
     BuilderRecord* waiting = *it;
     if (waiting->OnResolvedDep(record)) {
-      if (!ResolveItem(waiting, err))
-        return false;
+      wait_group_.Add([this, waiting](Err* err) -> bool {
+        return ResolveItem(waiting, err);
+      });
     }
   }
   record->waiting_on_resolution().clear();
