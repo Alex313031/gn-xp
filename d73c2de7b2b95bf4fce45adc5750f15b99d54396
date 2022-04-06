@@ -16,6 +16,24 @@
       "message": "i have no opinion on this change and didn\u0027t look at the code, but I know that in chromium we have a bot that generates ninja files in 2 distinct build dirs and verifieds they\u0027re identical. so we don\u0027t hit this code path in chromium I guess?",
       "revId": "d73c2de7b2b95bf4fce45adc5750f15b99d54396",
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "8b644e2f_7c4f8adb",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000067
+      },
+      "writtenOn": "2022-04-06T11:22:16Z",
+      "side": 1,
+      "message": "Interesting. So I just ran `/tmp/gn-source_out_dir gen out/Default` in my Chromium checkout, and none of the Ninja files contain either \"BUILD_DIR\" or \"out/Default\", so I guess that confirms that this code path is never hit with the Chromium build system.\n\nOn the other hand, the Pigweed build definitely generates Ninja files where BUILD_DIR appears (but the build directory is always simply named \"out\"  there anyway if I understand correctly).",
+      "parentUuid": "9c9bf0d6_2c558d06",
+      "revId": "d73c2de7b2b95bf4fce45adc5750f15b99d54396",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
     }
   ]
 }
