@@ -33,6 +33,23 @@
       "message": "For the moment, this will allow gn to roll, but I think a proper fix should go in pigweed, and then maybe this CL rolled back.",
       "revId": "ab9104586734cb45aa77c70ca5042edbcc9f6aa5",
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ba302c63_85d91c05",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 7
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000067
+      },
+      "writtenOn": "2022-04-06T16:01:24Z",
+      "side": 1,
+      "message": "I have reverted the CL, but I cannot find a way to make the Fuchsia build not leak the build directory without this CL.\n\nI think the root of the problem is that we have the following concurrent requirements:\n\n- We are generating source files in one toolchain, and need to compile them in another toolchain.\n\n- We also need to compute the path of the generated files _and_ also those of some of their object files at GN parse time (essentially to copy or process them).\n\nWe currently use `{{source_out_dir}}/{{target_output_name}}.{{source_file_part}}.o` for our `outputs` tool() definitions. This works because we can recompute this with get_label_info() use in GN templates.\n\nI have tried using `{{target_out_dir}}/{{source_target_relative}}/{{target_output_name}}.{{source_file_part}}.o` instead, but then it becomes impossible to guess the path of object files using `get_label_info()` as we need to (since the function doesn\u0027t support \"source_target_relative\", understandably).\n\nI have tried using `{{target_out_dir}}/{{target_output_name}}` and I end up with multiple conflicts (e.g. when a source_set() has sources like \u0027src/x64/foo.cc\u0027, \u0027src/arm64/foo.cc\u0027, and we have a large number of these cases).\n\nI have tried using `{{target_out_dir}}/{{label_name}}` and I end up with the same conflicts.\n\nIf you have any recommendation to fix this, I would be happy to see them. I suspect that the CL will be needed after all to cover our use case. Note that GN already does something similar with the ABS_PATH literal which is used to expand target_out_dir and target_gen_dir for sources files with absolute paths.\n\nWhat do you think?",
+      "revId": "ab9104586734cb45aa77c70ca5042edbcc9f6aa5",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
     }
   ]
 }
