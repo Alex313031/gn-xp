@@ -87,6 +87,24 @@
       "parentUuid": "45324bc0_396dfc02",
       "revId": "d73c2de7b2b95bf4fce45adc5750f15b99d54396",
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "8f3c0ae5_dce7cbb6",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000067
+      },
+      "writtenOn": "2022-04-06T12:33:50Z",
+      "side": 1,
+      "message": "Are these generated files used as sources that need their own target_gen_dir/target_out_dir though?\n\nFor example, generated headers do not. But a generated C++ source file will do. E.g. `out/Default/gen/foo/generated.cc`, where `out/Default` is the build directory, will end up compiled for a source_set() //dir:bar into an object file named `out/Default/obj/dir/bar/BUILD_DIR/gen/foo/bar.generated.cc.o`, when this CL is applied, or `out/Default/obj/dir/bar/out/Default/gen/foo/bar.generated.cc.o` otherwise, iirc).\n\nIn the case of Fuchsia, we do generated C++ source files that contain constant tables generated from FIDL files (similar in concept to textproto files).\n\nFor Pigweed, it looks like they generate the source code for test sources (I see paths like `host_clang_asan/obj/BUILD_DIR/host_clang_asan/gen/pw_rpc/ids_test.lib.generated_ids_test.cc.o`).",
+      "parentUuid": "5dbc32a3_e320392b",
+      "revId": "d73c2de7b2b95bf4fce45adc5750f15b99d54396",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
     }
   ]
 }
