@@ -195,7 +195,7 @@ bool RecursiveCheckAssertNoDeps(const Target* target,
 
 }  // namespace
 
-// A struct used to build various immutable lists for a
+// A struct used to build various nested set instances for a
 // target in Target::OnResolved().
 struct Target::OnResolvedBuilders {
  public:
@@ -207,11 +207,21 @@ struct Target::OnResolvedBuilders {
         rust_transitive_inherited_libs.Build();
     target_->rust_transitive_inheritable_libs_ =
         rust_transitive_inheritable_libs.Build();
+    target_->all_lib_dirs_ = all_lib_dirs.Build();
+    target_->all_libs_ = all_libs.Build();
+    target_->all_framework_dirs_ = all_framework_dirs.Build();
+    target_->all_frameworks_ = all_frameworks.Build();
+    target_->all_weak_frameworks_ = all_weak_frameworks.Build();
   }
 
   ImmutableInheritedLibraries::Builder inherited_libraries;
   ImmutableInheritedLibraries::Builder rust_transitive_inherited_libs;
   ImmutableInheritedLibraries::Builder rust_transitive_inheritable_libs;
+  NestedSet<SourceDir>::Builder all_lib_dirs;
+  NestedSet<LibFile>::Builder all_libs;
+  NestedSet<SourceDir>::Builder all_framework_dirs;
+  NestedSet<std::string>::Builder all_frameworks;
+  NestedSet<std::string>::Builder all_weak_frameworks;
 
  private:
   Target* target_;
@@ -468,14 +478,24 @@ const Target* Target::AsTarget() const {
   return this;
 }
 
+std::vector<SourceDir> Target::all_lib_dirs() const {
+  // TODO(digit): Use NestedSetOrder::Link here. It makes more
+  // sense, but will change GN's output, so needs to be carefully
+  // tested with all GN-using projects.
+  return all_lib_dirs_.Flatten(NestedSetOrder::Legacy);
+}
+
+std::vector<LibFile> Target::all_libs() const {
+  // TODO(digit): See comment above.
+  return all_libs_.Flatten(NestedSetOrder::Legacy);
+}
+
 bool Target::OnResolved(Err* err) {
   DCHECK(output_type_ != UNKNOWN);
   DCHECK(toolchain_) << "Toolchain should have been set before resolving.";
 
   ScopedTrace trace(TraceItem::TRACE_ON_RESOLVED, label());
   trace.SetToolchain(settings()->toolchain_label());
-
-  OnResolvedBuilders builders(this);
 
   // Copy this target's own dependent and public configs to the list of configs
   // applying to it.
@@ -486,6 +506,8 @@ bool Target::OnResolved(Err* err) {
   // added, but after public_configs and all_dependent_configs are merged.
   if (!CheckConfigVisibility(err))
     return false;
+
+  OnResolvedBuilders builders(this);
 
   // Copy public configs from all dependencies into the list of configs
   // applying to this target (configs_).
@@ -513,14 +535,12 @@ bool Target::OnResolved(Err* err) {
   // order (local ones first, then the dependency's).
   for (ConfigValuesIterator iter(this); !iter.done(); iter.Next()) {
     const ConfigValues& cur = iter.cur();
-    all_lib_dirs_.Append(cur.lib_dirs().begin(), cur.lib_dirs().end());
-    all_libs_.Append(cur.libs().begin(), cur.libs().end());
+    builders.all_lib_dirs.AddItems(cur.lib_dirs());
+    builders.all_libs.AddItems(cur.libs());
 
-    all_framework_dirs_.Append(cur.framework_dirs().begin(),
-                               cur.framework_dirs().end());
-    all_frameworks_.Append(cur.frameworks().begin(), cur.frameworks().end());
-    all_weak_frameworks_.Append(cur.weak_frameworks().begin(),
-                                cur.weak_frameworks().end());
+    builders.all_framework_dirs.AddItems(cur.framework_dirs());
+    builders.all_frameworks.AddItems(cur.frameworks());
+    builders.all_weak_frameworks.AddItems(cur.weak_frameworks());
   }
 
   PullRecursiveBundleData();
@@ -555,6 +575,7 @@ bool Target::OnResolved(Err* err) {
   }
 
   builders.Done();
+
   return true;
 }
 
@@ -886,16 +907,16 @@ void Target::PullDependentTargetLibsFrom(const Target* dep,
 
   // Library settings are always inherited across static library boundaries.
   if (!dep->IsFinal() || dep->output_type() == STATIC_LIBRARY) {
-    all_lib_dirs_.Append(dep->all_lib_dirs());
-    all_libs_.Append(dep->all_libs());
+    builders->all_lib_dirs.AddDep(dep->all_lib_dirs_);
+    builders->all_libs.AddDep(dep->all_libs_);
 
-    all_framework_dirs_.Append(dep->all_framework_dirs());
-    all_frameworks_.Append(dep->all_frameworks());
-    all_weak_frameworks_.Append(dep->all_weak_frameworks());
+    builders->all_framework_dirs.AddDep(dep->all_framework_dirs_);
+    builders->all_frameworks.AddDep(dep->all_frameworks_);
+    builders->all_weak_frameworks.AddDep(dep->all_weak_frameworks_);
   }
 }
 
-void Target::PullDependentTargetLibs(OnResolvedBuilders* builders) {
+void Target::PullDependentTargetLibs(Target::OnResolvedBuilders* builders) {
   for (const auto& dep : public_deps_)
     PullDependentTargetLibsFrom(dep.ptr, true, builders);
   for (const auto& dep : private_deps_)

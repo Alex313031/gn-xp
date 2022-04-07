@@ -20,6 +20,7 @@
 #include "gn/label_ptr.h"
 #include "gn/lib_file.h"
 #include "gn/metadata.h"
+#include "gn/nested_set.h"
 #include "gn/output_file.h"
 #include "gn/pointer_set.h"
 #include "gn/rust_values.h"
@@ -323,17 +324,17 @@ class Target : public Item {
     return rust_transitive_inheritable_libs_;
   }
 
-  const UniqueVector<SourceDir>& all_lib_dirs() const { return all_lib_dirs_; }
-  const UniqueVector<LibFile>& all_libs() const { return all_libs_; }
+  std::vector<SourceDir> all_lib_dirs() const;
+  std::vector<LibFile> all_libs() const;
 
-  const UniqueVector<SourceDir>& all_framework_dirs() const {
-    return all_framework_dirs_;
+  std::vector<SourceDir> all_framework_dirs() const {
+    return all_framework_dirs_.Flatten(NestedSetOrder::Legacy);
   }
-  const UniqueVector<std::string>& all_frameworks() const {
-    return all_frameworks_;
+  std::vector<std::string> all_frameworks() const {
+    return all_frameworks_.Flatten(NestedSetOrder::Legacy);
   }
-  const UniqueVector<std::string>& all_weak_frameworks() const {
-    return all_weak_frameworks_;
+  std::vector<std::string> all_weak_frameworks() const {
+    return all_weak_frameworks_.Flatten(NestedSetOrder::Legacy);
   }
 
   const TargetSet& recursive_hard_deps() const { return recursive_hard_deps_; }
@@ -436,7 +437,7 @@ class Target : public Item {
  private:
   FRIEND_TEST_ALL_PREFIXES(TargetTest, ResolvePrecompiledHeaders);
 
-  // Used internally during OnResolved()
+  // Used internally during OnTargetResolved().
   struct OnResolvedBuilders;
 
   // Pulls necessary information from dependencies to this one when all
@@ -500,14 +501,14 @@ class Target : public Item {
 
   // These libs and dirs are inherited from statically linked deps and all
   // configs applying to this target.
-  UniqueVector<SourceDir> all_lib_dirs_;
-  UniqueVector<LibFile> all_libs_;
+  NestedSet<SourceDir> all_lib_dirs_;
+  NestedSet<LibFile> all_libs_;
 
   // These frameworks and dirs are inherited from statically linked deps and
   // all configs applying to this target.
-  UniqueVector<SourceDir> all_framework_dirs_;
-  UniqueVector<std::string> all_frameworks_;
-  UniqueVector<std::string> all_weak_frameworks_;
+  NestedSet<SourceDir> all_framework_dirs_;
+  NestedSet<std::string> all_frameworks_;
+  NestedSet<std::string> all_weak_frameworks_;
 
   // All hard deps from this target and all dependencies. Filled in when this
   // target is marked resolved. This will not include the current target.
