@@ -191,6 +191,14 @@ class UniqueVector {
     Append(other.begin(), other.end());
   }
 
+  template <typename C,
+            typename = std::void_t<
+                decltype(static_cast<const T>(*std::declval<C>().begin())),
+                decltype(static_cast<const T>(*std::declval<C>().end()))>>
+  void Append(const C& other) {
+    Append(other.begin(), other.end());
+  }
+
   // Returns true if the item is already in the vector.
   bool Contains(const T& t) const {
     size_t hash;
