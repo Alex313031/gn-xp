@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "95d90bee_e38bd966",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000067
+      },
+      "writtenOn": "2022-04-12T14:21:19Z",
+      "side": 1,
+      "message": "After a lot of experimentation, I could not find a good way to work-around the issue regarding output-directory leaks in our commands in the Fuchsia build. I am thus re-submitting this change for review.",
+      "revId": "f9e78071a4d75e0969584a7350e7cf8172f27796",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    }
+  ]
+}
