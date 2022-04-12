@@ -16,6 +16,23 @@
       "message": "lgtm\n",
       "revId": "882725fcf8d43566e269480097a2275e5ef25b41",
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "99516b07_f6055f53",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000067
+      },
+      "writtenOn": "2022-04-12T16:26:05Z",
+      "side": 1,
+      "message": "Thanks. Trying a submit, but I fear this will need a force-submit since the CQ will be using the previous version of the recipe :-/",
+      "revId": "882725fcf8d43566e269480097a2275e5ef25b41",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
     }
   ]
 }
