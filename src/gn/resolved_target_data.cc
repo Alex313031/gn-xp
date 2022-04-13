@@ -107,11 +107,8 @@ class ResolvedTargetData::Impl {
   }
 
   TargetSet recursive_hard_deps(const Target* target) const {
-    TargetInfo* info = GetInfo(target);
+    const TargetInfo* info = GetRecursiveTargetHardDeps(target);
     DCHECK(info->has_hard_deps);
-    if (!info->has_hard_deps)
-      ComputeHardDeps(info);
-
     return TargetSet(info->hard_deps.begin(), info->hard_deps.end());
   }
 
@@ -243,8 +240,8 @@ class ResolvedTargetData::Impl {
     ComputeInheritedLibsFor(info->deps.private_deps(), false,
                             &inherited_libraries);
 
-    info->has_inherited_libs = true;
     info->inherited_libs = inherited_libraries.Build();
+    info->has_inherited_libs = true;
   }
 
   void ComputeInheritedLibsFor(
@@ -337,9 +334,9 @@ class ResolvedTargetData::Impl {
     ComputeRustLibsFor(info->deps.public_deps(), true, &rust_libs);
     ComputeRustLibsFor(info->deps.private_deps(), false, &rust_libs);
 
-    info->has_rust_libs = true;
     info->rust_inherited_libs = rust_libs.inherited.Build();
     info->rust_inheritable_libs = rust_libs.inheritable.Build();
+    info->has_rust_libs = true;
   }
 
   void ComputeRustLibsFor(base::span<const Target*> deps,
