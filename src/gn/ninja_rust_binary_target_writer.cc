@@ -180,8 +180,9 @@ void NinjaRustBinaryTargetWriter::Run() {
   // on, and the public flag represents if the target has direct access to the
   // dependency through a chain of public_deps.
   std::vector<ExternCrate> transitive_crates;
-  for (const auto& [dep, has_direct_access] :
-       target_->rust_transitive_inherited_libs().GetOrderedAndPublicFlag()) {
+  for (const auto pair : resolved_.rust_transitive_inherited_libs(target_)) {
+    const Target* dep = pair.target();
+    bool has_direct_access = pair.is_public();
     // We will tell rustc to look for crate metadata for any rust crate
     // dependencies except cdylibs, as they have no metadata present.
     if (dep->source_types_used().RustSourceUsed() &&
