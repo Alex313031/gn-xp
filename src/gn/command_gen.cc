@@ -3,6 +3,7 @@
 // found in the LICENSE file.
 
 #include <mutex>
+#include <thread>
 
 #include "base/command_line.h"
 #include "base/strings/string_number_conversions.h"
@@ -18,6 +19,7 @@
 #include "gn/ninja_tools.h"
 #include "gn/ninja_writer.h"
 #include "gn/qt_creator_writer.h"
+#include "gn/resolved_target_data.h"
 #include "gn/runtime_deps.h"
 #include "gn/rust_project_writer.h"
 #include "gn/scheduler.h"
@@ -65,12 +67,25 @@ const char kSwitchExportRustProject[] = "export-rust-project";
 // Collects Ninja rules for each toolchain. The lock protectes the rules.
 struct TargetWriteInfo {
   std::mutex lock;
+  std::unordered_map<std::thread::id, ResolvedTargetData> resolved_map;
   NinjaWriter::PerToolchainRules rules;
 };
 
 // Called on worker thread to write the ninja file.
 void BackgroundDoWrite(TargetWriteInfo* write_info, const Target* target) {
-  std::string rule = NinjaTargetWriter::RunAndWriteFile(target);
+  // Associate a single ResolvedTargetData instance with each background
+  // worker thread, in order to reuse its memoized computations across
+  // several NinjaTargetWriter::RunAndWriteFile() calls. This noticeably
+  // reduces the number of overall computations performed over the target
+  // graph.
+  ResolvedTargetData* resolved;
+  {
+    std::lock_guard<std::mutex> lock(write_info->lock);
+    auto ret = write_info->resolved_map.try_emplace(std::this_thread::get_id());
+    resolved = &ret.first->second;
+  }
+
+  std::string rule = NinjaTargetWriter::RunAndWriteFile(target, resolved);
   DCHECK(!rule.empty());
 
   {
