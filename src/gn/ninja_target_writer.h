@@ -8,6 +8,7 @@
 #include <iosfwd>
 
 #include "gn/path_output.h"
+#include "gn/resolved_target_data.h"
 #include "gn/substitution_type.h"
 
 class OutputFile;
@@ -22,6 +23,11 @@ class NinjaTargetWriter {
   NinjaTargetWriter(const Target* target, std::ostream& out);
   virtual ~NinjaTargetWriter();
 
+  // Change the internal ResolvedTargetData instance used by this writer.
+  // Useful to reuse resolution data from previous queries that have been
+  // memorized in the resolver.
+  void SetResolvedTargetData(ResolvedTargetData* resolved);
+
   // Returns the build line to be written to the toolchain build file.
   //
   // Some targets have their rules written to separate files, and some can have
@@ -30,6 +36,9 @@ class NinjaTargetWriter {
   // the separate ninja file will be written and the return string will be the
   // subninja command to load that file.
   static std::string RunAndWriteFile(const Target* target);
+
+  static std::string RunAndWriteFile(const Target* target,
+                                     ResolvedTargetData* resolved);
 
   virtual void Run() = 0;
 
@@ -77,6 +86,9 @@ class NinjaTargetWriter {
   const Target* target_;      // Non-owning.
   std::ostream& out_;
   PathOutput path_output_;
+
+  ResolvedTargetData resolved_owned_;
+  ResolvedTargetData* resolved_;
 
  private:
   void WriteCopyRules();

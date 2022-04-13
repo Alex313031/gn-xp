@@ -107,11 +107,8 @@ class ResolvedTargetData::Impl {
   }
 
   TargetSet recursive_hard_deps(const Target* target) const {
-    TargetInfo* info = GetInfo(target);
+    const TargetInfo* info = GetRecursiveTargetHardDeps(target);
     DCHECK(info->has_hard_deps);
-    if (!info->has_hard_deps)
-      ComputeHardDeps(info);
-
     return TargetSet(info->hard_deps.begin(), info->hard_deps.end());
   }
 
