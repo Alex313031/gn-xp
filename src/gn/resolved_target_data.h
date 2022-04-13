@@ -32,14 +32,14 @@ class ResolvedTargetData {
 
   // Retrieve information about link-time libraries needed by this target.
   struct LibInfo {
-    ImmutableVectorView<SourceDir> all_lib_dirs;
-    ImmutableVectorView<LibFile> all_libs;
+    ImmutableVector<SourceDir> all_lib_dirs;
+    ImmutableVector<LibFile> all_libs;
   };
   LibInfo GetLibInfo(const Target*) const;
 
-  ImmutableVectorView<SourceDir> all_lib_dirs(const Target* target) const;
+  ImmutableVector<SourceDir> all_lib_dirs(const Target* target) const;
 
-  ImmutableVectorView<LibFile> all_libs(const Target* target) const;
+  ImmutableVector<LibFile> all_libs(const Target* target) const;
 
   // Retrieve information about link-time OS X frameworks needed by this target.
   struct FrameworkInfo {
@@ -49,12 +49,11 @@ class ResolvedTargetData {
   };
   FrameworkInfo GetFrameworkInfo(const Target* target) const;
 
-  ImmutableVectorView<SourceDir> all_framework_dirs(const Target* target) const;
+  ImmutableVector<SourceDir> all_framework_dirs(const Target* target) const;
 
-  ImmutableVectorView<std::string> all_frameworks(const Target* target) const;
+  ImmutableVector<std::string> all_frameworks(const Target* target) const;
 
-  ImmutableVectorView<std::string> all_weak_frameworks(
-      const Target* target) const;
+  ImmutableVector<std::string> all_weak_frameworks(const Target* target) const;
 
   // Retrieve a set of hard dependencies for this target.
   TargetSet recursive_hard_deps(const Target* target) const;
