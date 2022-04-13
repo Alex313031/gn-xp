@@ -5,6 +5,7 @@
 #include "gn/resolved_target_data.h"
 
 #include "gn/config_values_extractors.h"
+#include "gn/nested_set.h"
 #include "gn/resolved_target_deps.h"
 
 using LibInfo = ResolvedTargetData::LibInfo;
@@ -31,16 +32,16 @@ struct TargetInfo {
   bool has_rust_libs = false;
 
   // Only valid if |has_lib_info|.
-  ImmutableVector<SourceDir> lib_dirs;
-  ImmutableVector<LibFile> libs;
+  NestedSet<SourceDir> lib_dirs;
+  NestedSet<LibFile> libs;
 
   // Only valid if |has_framework_info|.
-  ImmutableVector<SourceDir> framework_dirs;
-  ImmutableVector<std::string> frameworks;
-  ImmutableVector<std::string> weak_frameworks;
+  NestedSet<SourceDir> framework_dirs;
+  NestedSet<std::string> frameworks;
+  NestedSet<std::string> weak_frameworks;
 
   // Only valid if |has_hard_deps|.
-  ImmutableVector<const Target*> hard_deps;
+  NestedSet<const Target*> hard_deps;
 
   // Only valid if |has_inherited_libs|.
   ImmutableVector<TargetPublicPair> inherited_libs;
@@ -55,55 +56,62 @@ struct TargetInfo {
 // Implementation class for ResolvedTargetData.
 class ResolvedTargetData::Impl {
  public:
+  struct LibInfoBuilders {
+    NestedSet<SourceDir>::Builder lib_dirs;
+    NestedSet<LibFile>::Builder libs;
+  };
+
+  ImmutableVector<SourceDir> all_lib_dirs(const Target* target) const {
+    const TargetInfo* info = GetRecursiveTargetLibInfo(target);
+    DCHECK(info->has_lib_info);
+    return info->lib_dirs.Flatten(NestedSetOrder::Legacy);
+  }
+
+  ImmutableVector<LibFile> all_libs(const Target* target) const {
+    const TargetInfo* info = GetRecursiveTargetLibInfo(target);
+    DCHECK(info->has_lib_info);
+    return info->libs.Flatten(NestedSetOrder::Legacy);
+  }
+
   LibInfo GetLibInfo(const Target* target) const {
     const TargetInfo* info = GetRecursiveTargetLibInfo(target);
     DCHECK(info->has_lib_info);
     return LibInfo{
-        info->lib_dirs,
-        info->libs,
+        ImmutableVector<SourceDir>(
+            info->lib_dirs.Flatten(NestedSetOrder::Legacy)),
+        ImmutableVector<LibFile>(info->libs.Flatten(NestedSetOrder::Legacy)),
     };
-  }
-
-  ImmutableVectorView<SourceDir> all_lib_dirs(const Target* target) const {
-    const TargetInfo* info = GetRecursiveTargetLibInfo(target);
-    DCHECK(info->has_lib_info);
-    return info->lib_dirs;
-  }
-
-  ImmutableVectorView<LibFile> all_libs(const Target* target) const {
-    const TargetInfo* info = GetRecursiveTargetLibInfo(target);
-    DCHECK(info->has_lib_info);
-    return info->libs;
   }
 
   FrameworkInfo GetFrameworkInfo(const Target* target) const {
     const TargetInfo* info = GetRecursiveTargetFrameworkInfo(target);
     DCHECK(info->has_framework_info);
     return FrameworkInfo{
-        info->framework_dirs,
-        info->frameworks,
-        info->weak_frameworks,
+        ImmutableVector<SourceDir>(
+            info->framework_dirs.Flatten(NestedSetOrder::Legacy)),
+        ImmutableVector<std::string>(
+            info->frameworks.Flatten(NestedSetOrder::Legacy)),
+        ImmutableVector<std::string>(
+            info->weak_frameworks.Flatten(NestedSetOrder::Legacy)),
     };
   }
 
-  ImmutableVectorView<SourceDir> all_framework_dirs(
-      const Target* target) const {
+  ImmutableVector<SourceDir> all_framework_dirs(const Target* target) const {
     const TargetInfo* info = GetRecursiveTargetFrameworkInfo(target);
     DCHECK(info->has_framework_info);
-    return info->framework_dirs;
+    return info->framework_dirs.Flatten(NestedSetOrder::Legacy);
   }
 
-  ImmutableVectorView<std::string> all_frameworks(const Target* target) const {
+  ImmutableVector<std::string> all_frameworks(const Target* target) const {
     const TargetInfo* info = GetRecursiveTargetFrameworkInfo(target);
     DCHECK(info->has_framework_info);
-    return info->frameworks;
+    return info->frameworks.Flatten(NestedSetOrder::Legacy);
   }
 
-  ImmutableVectorView<std::string> all_weak_frameworks(
-      const Target* target) const {
+  ImmutableVector<std::string> all_weak_frameworks(const Target* target) const {
     const TargetInfo* info = GetRecursiveTargetFrameworkInfo(target);
     DCHECK(info->has_framework_info);
-    return info->weak_frameworks;
+    return info->weak_frameworks.Flatten(NestedSetOrder::Legacy);
   }
 
   TargetSet recursive_hard_deps(const Target* target) const {
@@ -112,7 +120,8 @@ class ResolvedTargetData::Impl {
     if (!info->has_hard_deps)
       ComputeHardDeps(info);
 
-    return TargetSet(info->hard_deps.begin(), info->hard_deps.end());
+    auto hard_deps = info->hard_deps.Flatten(NestedSetOrder::Legacy);
+    return TargetSet(hard_deps.begin(), hard_deps.end());
   }
 
   ImmutableVectorView<TargetPublicPair> inherited_libraries(
@@ -138,24 +147,24 @@ class ResolvedTargetData::Impl {
   }
 
   void ComputeLibInfo(TargetInfo* info) const {
-    UniqueVector<SourceDir> all_lib_dirs;
-    UniqueVector<LibFile> all_libs;
+    NestedSet<SourceDir>::Builder all_lib_dirs;
+    NestedSet<LibFile>::Builder all_libs;
 
     for (ConfigValuesIterator iter(info->target); !iter.done(); iter.Next()) {
       const ConfigValues& cur = iter.cur();
-      all_lib_dirs.Append(cur.lib_dirs());
-      all_libs.Append(cur.libs());
+      all_lib_dirs.AddItems(cur.lib_dirs());
+      all_libs.AddItems(cur.libs());
     }
     for (const Target* dep : info->deps.linked_deps()) {
       if (!dep->IsFinal() || dep->output_type() == Target::STATIC_LIBRARY) {
         const TargetInfo* dep_info = GetRecursiveTargetLibInfo(dep);
-        all_lib_dirs.Append(dep_info->lib_dirs);
-        all_libs.Append(dep_info->libs);
+        all_lib_dirs.AddDep(dep_info->lib_dirs);
+        all_libs.AddDep(dep_info->libs);
       }
     }
 
-    info->lib_dirs = ImmutableVector<SourceDir>(all_lib_dirs.release());
-    info->libs = ImmutableVector<LibFile>(all_libs.release());
+    info->lib_dirs = all_lib_dirs.Build();
+    info->libs = all_libs.Build();
     info->has_lib_info = true;
   }
 
@@ -168,28 +177,28 @@ class ResolvedTargetData::Impl {
   }
 
   void ComputeFrameworkInfo(TargetInfo* info) const {
-    UniqueVector<SourceDir> all_framework_dirs;
-    UniqueVector<std::string> all_frameworks;
-    UniqueVector<std::string> all_weak_frameworks;
+    NestedSet<SourceDir>::Builder all_framework_dirs;
+    NestedSet<std::string>::Builder all_frameworks;
+    NestedSet<std::string>::Builder all_weak_frameworks;
 
     for (ConfigValuesIterator iter(info->target); !iter.done(); iter.Next()) {
       const ConfigValues& cur = iter.cur();
-      all_framework_dirs.Append(cur.framework_dirs());
-      all_frameworks.Append(cur.frameworks());
-      all_weak_frameworks.Append(cur.weak_frameworks());
+      all_framework_dirs.AddItems(cur.framework_dirs());
+      all_frameworks.AddItems(cur.frameworks());
+      all_weak_frameworks.AddItems(cur.weak_frameworks());
     }
     for (const Target* dep : info->deps.linked_deps()) {
       if (!dep->IsFinal() || dep->output_type() == Target::STATIC_LIBRARY) {
         const TargetInfo* dep_info = GetRecursiveTargetLibInfo(dep);
-        all_framework_dirs.Append(dep_info->framework_dirs);
-        all_frameworks.Append(dep_info->frameworks);
-        all_weak_frameworks.Append(dep_info->weak_frameworks);
+        all_framework_dirs.AddDep(dep_info->framework_dirs);
+        all_frameworks.AddDep(dep_info->frameworks);
+        all_weak_frameworks.AddDep(dep_info->weak_frameworks);
       }
     }
 
-    info->framework_dirs = ImmutableVector<SourceDir>(all_framework_dirs);
-    info->frameworks = ImmutableVector<std::string>(all_frameworks);
-    info->weak_frameworks = ImmutableVector<std::string>(all_weak_frameworks);
+    info->framework_dirs = all_framework_dirs.Build();
+    info->frameworks = all_frameworks.Build();
+    info->weak_frameworks = all_weak_frameworks.Build();
     info->has_framework_info = true;
   }
 
@@ -201,11 +210,11 @@ class ResolvedTargetData::Impl {
   }
 
   void ComputeHardDeps(TargetInfo* info) const {
-    TargetSet all_hard_deps;
+    NestedSet<const Target*>::Builder all_hard_deps;
     for (const Target* dep : info->deps.linked_deps()) {
       // Direct hard dependencies
       if (info->target->hard_dep() || dep->hard_dep()) {
-        all_hard_deps.insert(dep);
+        all_hard_deps.AddItem(dep);
         continue;
       }
       // If |dep| is binary target and |dep| has no public header,
@@ -220,10 +229,9 @@ class ResolvedTargetData::Impl {
 
       // Recursive hard dependencies of all dependencies.
       const TargetInfo* dep_info = GetRecursiveTargetHardDeps(dep);
-      all_hard_deps.insert(dep_info->hard_deps.begin(),
-                           dep_info->hard_deps.end());
+      all_hard_deps.AddDep(dep_info->hard_deps);
     }
-    info->hard_deps = ImmutableVector<const Target*>(all_hard_deps);
+    info->hard_deps = all_hard_deps.Build();
     info->has_hard_deps = true;
   }
 
@@ -417,12 +425,12 @@ LibInfo ResolvedTargetData::GetLibInfo(const Target* target) const {
   return GetImpl()->GetLibInfo(target);
 }
 
-ImmutableVectorView<SourceDir> ResolvedTargetData::all_lib_dirs(
+ImmutableVector<SourceDir> ResolvedTargetData::all_lib_dirs(
     const Target* target) const {
   return GetImpl()->all_lib_dirs(target);
 }
 
-ImmutableVectorView<LibFile> ResolvedTargetData::all_libs(
+ImmutableVector<LibFile> ResolvedTargetData::all_libs(
     const Target* target) const {
   return GetImpl()->all_libs(target);
 }
@@ -431,17 +439,17 @@ FrameworkInfo ResolvedTargetData::GetFrameworkInfo(const Target* target) const {
   return GetImpl()->GetFrameworkInfo(target);
 }
 
-ImmutableVectorView<SourceDir> ResolvedTargetData::all_framework_dirs(
+ImmutableVector<SourceDir> ResolvedTargetData::all_framework_dirs(
     const Target* target) const {
   return GetImpl()->all_framework_dirs(target);
 }
 
-ImmutableVectorView<std::string> ResolvedTargetData::all_frameworks(
+ImmutableVector<std::string> ResolvedTargetData::all_frameworks(
     const Target* target) const {
   return GetImpl()->all_frameworks(target);
 }
 
-ImmutableVectorView<std::string> ResolvedTargetData::all_weak_frameworks(
+ImmutableVector<std::string> ResolvedTargetData::all_weak_frameworks(
     const Target* target) const {
   return GetImpl()->all_weak_frameworks(target);
 }
