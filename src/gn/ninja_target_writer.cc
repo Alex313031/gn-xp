@@ -38,7 +38,8 @@ NinjaTargetWriter::NinjaTargetWriter(const Target* target, std::ostream& out)
       out_(out),
       path_output_(settings_->build_settings()->build_dir(),
                    settings_->build_settings()->root_path_utf8(),
-                   ESCAPE_NINJA) {}
+                   ESCAPE_NINJA),
+      resolved_() {}
 
 NinjaTargetWriter::~NinjaTargetWriter() = default;
 
@@ -407,7 +408,7 @@ std::vector<OutputFile> NinjaTargetWriter::WriteInputDepsStampAndGetDep(
 
   // Hard dependencies that are direct or indirect dependencies.
   // These are large (up to 100s), hence why we check other
-  const TargetSet& hard_deps(target_->recursive_hard_deps());
+  const auto& hard_deps = resolved_.GetHardDeps(target_);
   for (const Target* target : hard_deps) {
     // BUNDLE_DATA should normally be treated as a data-only dependency
     // (see Target::IsDataOnly()). Only the CREATE_BUNDLE target, that actually
@@ -419,9 +420,12 @@ std::vector<OutputFile> NinjaTargetWriter::WriteInputDepsStampAndGetDep(
 
   // Additional hard dependencies passed in. These are usually empty or small,
   // and we don't want to duplicate the explicit hard deps of the target.
-  for (const Target* target : additional_hard_deps) {
-    if (!hard_deps.contains(target))
-      input_deps_targets.push_back(target);
+  if (!additional_hard_deps.empty()) {
+    TargetSet hard_deps_set(hard_deps.begin(), hard_deps.end());
+    for (const Target* target : additional_hard_deps) {
+      if (!hard_deps_set.contains(target))
+        input_deps_targets.push_back(target);
+    }
   }
 
   // Toolchain dependencies. These must be resolved before doing anything.

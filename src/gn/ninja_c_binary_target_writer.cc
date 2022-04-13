@@ -639,7 +639,7 @@ void NinjaCBinaryTargetWriter::WriteLinkerStuff(
   }
 
   // Libraries specified by paths.
-  for (const auto& lib : target_->all_libs()) {
+  for (const auto& lib : resolved_.GetLinkedLibraries(target_)) {
     if (lib.is_source_file()) {
       implicit_deps.push_back(
           OutputFile(settings_->build_settings(), lib.source_file()));
@@ -665,7 +665,8 @@ void NinjaCBinaryTargetWriter::WriteLinkerStuff(
   // rlibs only depended on inside a shared library dependency).
   std::vector<OutputFile> transitive_rustlibs;
   if (target_->IsFinal()) {
-    for (const auto* dep : target_->inherited_libraries().GetOrdered()) {
+    for (const auto inherited : resolved_.GetInheritedLibraries(target_)) {
+      const Target* dep = inherited.target();
       if (dep->output_type() == Target::RUST_LIBRARY) {
         transitive_rustlibs.push_back(dep->dependency_output_file());
         implicit_deps.push_back(dep->dependency_output_file());
