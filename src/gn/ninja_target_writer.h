@@ -8,6 +8,7 @@
 #include <iosfwd>
 
 #include "gn/path_output.h"
+#include "gn/resolved_target_data.h"
 #include "gn/substitution_type.h"
 
 class OutputFile;
@@ -77,6 +78,8 @@ class NinjaTargetWriter {
   const Target* target_;      // Non-owning.
   std::ostream& out_;
   PathOutput path_output_;
+
+  ResolvedTargetData resolved_;
 
  private:
   void WriteCopyRules();
