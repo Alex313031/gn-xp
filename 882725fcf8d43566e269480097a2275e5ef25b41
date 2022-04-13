@@ -50,6 +50,24 @@
       "message": "Yep. Looks like it need a force commit. Want me to do it?",
       "revId": "882725fcf8d43566e269480097a2275e5ef25b41",
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "4bc75084_11f13b30",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000067
+      },
+      "writtenOn": "2022-04-13T10:23:24Z",
+      "side": 1,
+      "message": "Yes, please, this is blocking CQ for all other CLs on Gerrit :-/",
+      "parentUuid": "b177a68f_93462698",
+      "revId": "882725fcf8d43566e269480097a2275e5ef25b41",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
     }
   ]
 }
