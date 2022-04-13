@@ -42,8 +42,24 @@ NinjaTargetWriter::NinjaTargetWriter(const Target* target, std::ostream& out)
 
 NinjaTargetWriter::~NinjaTargetWriter() = default;
 
+void NinjaTargetWriter::SetResolvedTargetData(ResolvedTargetData* resolved) {
+  if (resolved) {
+    resolved_owned_.reset();
+    resolved_ptr_ = resolved;
+  }
+}
+
+const ResolvedTargetData& NinjaTargetWriter::resolved() const {
+  if (!resolved_ptr_) {
+    resolved_owned_ = std::make_unique<ResolvedTargetData>();
+    resolved_ptr_ = resolved_owned_.get();
+  }
+  return *resolved_ptr_;
+}
+
 // static
-std::string NinjaTargetWriter::RunAndWriteFile(const Target* target) {
+std::string NinjaTargetWriter::RunAndWriteFile(const Target* target,
+                                               ResolvedTargetData* resolved) {
   const Settings* settings = target->settings();
 
   ScopedTrace trace(TraceItem::TRACE_FILE_WRITE,
@@ -76,26 +92,33 @@ std::string NinjaTargetWriter::RunAndWriteFile(const Target* target) {
   bool needs_file_write = false;
   if (target->output_type() == Target::BUNDLE_DATA) {
     NinjaBundleDataTargetWriter writer(target, rules);
+    writer.SetResolvedTargetData(resolved);
     writer.Run();
   } else if (target->output_type() == Target::CREATE_BUNDLE) {
     NinjaCreateBundleTargetWriter writer(target, rules);
+    writer.SetResolvedTargetData(resolved);
     writer.Run();
   } else if (target->output_type() == Target::COPY_FILES) {
     NinjaCopyTargetWriter writer(target, rules);
+    writer.SetResolvedTargetData(resolved);
     writer.Run();
   } else if (target->output_type() == Target::ACTION ||
              target->output_type() == Target::ACTION_FOREACH) {
     NinjaActionTargetWriter writer(target, rules);
+    writer.SetResolvedTargetData(resolved);
     writer.Run();
   } else if (target->output_type() == Target::GROUP) {
     NinjaGroupTargetWriter writer(target, rules);
+    writer.SetResolvedTargetData(resolved);
     writer.Run();
   } else if (target->output_type() == Target::GENERATED_FILE) {
     NinjaGeneratedFileTargetWriter writer(target, rules);
+    writer.SetResolvedTargetData(resolved);
     writer.Run();
   } else if (target->IsBinary()) {
     needs_file_write = true;
     NinjaBinaryTargetWriter writer(target, rules);
+    writer.SetResolvedTargetData(resolved);
     writer.Run();
   } else {
     CHECK(0) << "Output type of target not handled.";
@@ -407,7 +430,7 @@ std::vector<OutputFile> NinjaTargetWriter::WriteInputDepsStampAndGetDep(
 
   // Hard dependencies that are direct or indirect dependencies.
   // These are large (up to 100s), hence why we check other
-  const TargetSet& hard_deps(target_->recursive_hard_deps());
+  const auto& hard_deps = resolved().GetHardDeps(target_);
   for (const Target* target : hard_deps) {
     // BUNDLE_DATA should normally be treated as a data-only dependency
     // (see Target::IsDataOnly()). Only the CREATE_BUNDLE target, that actually
@@ -419,9 +442,12 @@ std::vector<OutputFile> NinjaTargetWriter::WriteInputDepsStampAndGetDep(
 
   // Additional hard dependencies passed in. These are usually empty or small,
   // and we don't want to duplicate the explicit hard deps of the target.
-  for (const Target* target : additional_hard_deps) {
-    if (!hard_deps.contains(target))
-      input_deps_targets.push_back(target);
+  if (!additional_hard_deps.empty()) {
+    TargetSet hard_deps_set(hard_deps.begin(), hard_deps.end());
+    for (const Target* target : additional_hard_deps) {
+      if (!hard_deps_set.contains(target))
+        input_deps_targets.push_back(target);
+    }
   }
 
   // Toolchain dependencies. These must be resolved before doing anything.
