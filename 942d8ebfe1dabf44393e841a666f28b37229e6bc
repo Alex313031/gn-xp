@@ -51,6 +51,24 @@
       "message": "As discussed offline, those order dependencies are okay.",
       "revId": "942d8ebfe1dabf44393e841a666f28b37229e6bc",
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "0f27bdf5_40551247",
+        "filename": "src/gn/ninja_c_binary_target_writer_unittest.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 2383,
+      "author": {
+        "id": 1000067
+      },
+      "writtenOn": "2022-04-13T16:06:31Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "b24fa6f9_1222ed4f",
+      "revId": "942d8ebfe1dabf44393e841a666f28b37229e6bc",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
     }
   ]
 }
