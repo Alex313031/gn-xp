@@ -132,8 +132,8 @@ NinjaBinaryTargetWriter::GetClassifiedDeps() const {
   }
 
   // Inherited libraries.
-  for (auto* inherited_target : target_->inherited_libraries().GetOrdered()) {
-    ClassifyDependency(inherited_target, &classified_deps);
+  for (auto inherited : resolved_->inherited_libraries(target_)) {
+    ClassifyDependency(inherited.target(), &classified_deps);
   }
 
   // Data deps.
@@ -322,7 +322,7 @@ void NinjaBinaryTargetWriter::WriteLibrarySearchPath(
     const Tool* tool) {
   // Write library search paths that have been recursively pushed
   // through the dependency tree.
-  const UniqueVector<SourceDir>& all_lib_dirs = target_->all_lib_dirs();
+  const auto& all_lib_dirs = resolved_->all_lib_dirs(target_);
   if (!all_lib_dirs.empty()) {
     // Since we're passing these on the command line to the linker and not
     // to Ninja, we need to do shell escaping.
@@ -336,7 +336,7 @@ void NinjaBinaryTargetWriter::WriteLibrarySearchPath(
     }
   }
 
-  const auto& all_framework_dirs = target_->all_framework_dirs();
+  const auto& all_framework_dirs = resolved_->all_framework_dirs(target_);
   if (!all_framework_dirs.empty()) {
     // Since we're passing these on the command line to the linker and not
     // to Ninja, we need to do shell escaping.
@@ -375,7 +375,7 @@ void NinjaBinaryTargetWriter::WriteLibs(std::ostream& out, const Tool* tool) {
       ESCAPE_NINJA_COMMAND);
   EscapeOptions lib_escape_opts;
   lib_escape_opts.mode = ESCAPE_NINJA_COMMAND;
-  const UniqueVector<LibFile>& all_libs = target_->all_libs();
+  const auto& all_libs = resolved_->all_libs(target_);
   for (size_t i = 0; i < all_libs.size(); i++) {
     const LibFile& lib_file = all_libs[i];
     const std::string& lib_value = lib_file.value();
@@ -393,13 +393,13 @@ void NinjaBinaryTargetWriter::WriteFrameworks(std::ostream& out,
                                               const Tool* tool) {
   // Frameworks that have been recursively pushed through the dependency tree.
   FrameworksWriter writer(tool->framework_switch());
-  const auto& all_frameworks = target_->all_frameworks();
+  const auto& all_frameworks = resolved_->all_frameworks(target_);
   for (size_t i = 0; i < all_frameworks.size(); i++) {
     writer(all_frameworks[i], out);
   }
 
   FrameworksWriter weak_writer(tool->weak_framework_switch());
-  const auto& all_weak_frameworks = target_->all_weak_frameworks();
+  const auto& all_weak_frameworks = resolved_->all_weak_frameworks(target_);
   for (size_t i = 0; i < all_weak_frameworks.size(); i++) {
     weak_writer(all_weak_frameworks[i], out);
   }
