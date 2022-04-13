@@ -52,20 +52,20 @@ class ResolvedTargetData {
 
   // Retrieve information about link-time libraries needed by this target.
   struct LibInfo {
-    ImmutableVectorView<SourceDir> all_lib_dirs;
-    ImmutableVectorView<LibFile> all_libs;
+    ImmutableVector<SourceDir> all_lib_dirs;
+    ImmutableVector<LibFile> all_libs;
   };
   LibInfo GetLibInfo(const Target*) const;
 
   // The list of all library directory search path to add to the final link
   // command of linkable binary. For example, if this returns ['dir1', 'dir2']
   // a command for a C++ linker would typically use `-Ldir1 -Ldir2`
-  ImmutableVectorView<SourceDir> all_lib_dirs(const Target* target) const;
+  ImmutableVector<SourceDir> all_lib_dirs(const Target* target) const;
 
   // The list of all library files to add to the final link command of linkable
   // binaries. For example, if this returns ['foo', '/path/to/bar'], the command
   // for a C++ linker would typically use `-lfoo /path/to/bar`.
-  ImmutableVectorView<LibFile> all_libs(const Target* target) const;
+  ImmutableVector<LibFile> all_libs(const Target* target) const;
 
   // Retrieve information about link-time OS X frameworks needed by this target.
   struct FrameworkInfo {
@@ -77,16 +77,15 @@ class ResolvedTargetData {
 
   // The list of framework directories search paths to use at link time
   // when generating MacOS or iOS linkable binaries.
-  ImmutableVectorView<SourceDir> all_framework_dirs(const Target* target) const;
+  ImmutableVector<SourceDir> all_framework_dirs(const Target* target) const;
 
   // The list of framework names to use at link time when generating MacOS or
   // iOS linkable binaries.
-  ImmutableVectorView<std::string> all_frameworks(const Target* target) const;
+  ImmutableVector<std::string> all_frameworks(const Target* target) const;
 
   // The list of weak framework names to use at link time when generating MacOS
   // or iOS linkable binaries.
-  ImmutableVectorView<std::string> all_weak_frameworks(
-      const Target* target) const;
+  ImmutableVector<std::string> all_weak_frameworks(const Target* target) const;
 
   // Retrieve a set of hard dependencies for this target.
   // These dependencies require the generation of a Ninja in-order input,
