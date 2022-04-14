@@ -1048,6 +1048,9 @@ bool Target::FillOutputFiles(Err* err) {
           OutputFile(settings()->build_settings(), out));
   }
 
+  // check that computed_outputs_ contains no duplicates
+  DCHECK_EQ(std::set<OutputFile>(computed_outputs_.begin(), computed_outputs_.end()).size(), computed_outputs_.size()) << " in " << label().GetUserVisibleName(true);
+
   return true;
 }
 

@@ -130,8 +130,11 @@ bool BundleData::GetOutputFiles(const Settings* settings,
   SourceFiles outputs_as_sources;
   if (!GetOutputsAsSourceFiles(settings, target, &outputs_as_sources, err))
     return false;
+  std::set<OutputFile> outputs_set;
   for (const SourceFile& source_file : outputs_as_sources)
-    outputs->push_back(OutputFile(settings->build_settings(), source_file));
+    outputs_set.insert(OutputFile(settings->build_settings(), source_file));
+  for (const OutputFile& output : outputs_set)
+    outputs->push_back(output);
   return true;
 }
 
