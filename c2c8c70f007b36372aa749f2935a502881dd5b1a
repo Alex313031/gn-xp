@@ -16,6 +16,23 @@
       "message": "I\u0027m fairly sure this is the wrong fix, but I ran into a DCHECK when doing some moderately funky stuff with the mac_framework_bundle target while trying to get resource allowlist generation to work on macOS. Specifically: \n\n$ ~/work/gn/out/gn gen ../out/testing\n[0x10cbbf600:0413/105600.162336:FATAL:ninja_build_writer.cc(156)] Check failed: matches.size() \u003e\u003d 2.\n\nzsh: abort      ~/work/gn/out/gn gen ../out/testing\n\nand with a release build, this failure:\n\nERROR at //build/config/mac/rules.gni:310:3: Duplicate output file.\n  create_bundle(_framework_target) {\n  ^---------------------------------\nTwo or more targets generate the same output:\n  Chromium Framework.framework/Versions/102.0.4971.0/Libraries/libEGL.dylib\n\nThis is can often be fixed by changing one of the target names, or by\nsetting an output_name on one of them.\n\nCollisions:\n  //chrome:chrome_framework(//build/toolchain/mac:clang_x64)\n\nwhich is weird because the target is colliding with itself!\n\nThis change seems to improve matters, but it feels wrong... maybe one of you can help me find the right change?",
       "revId": "c2c8c70f007b36372aa749f2935a502881dd5b1a",
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "90856f07_7a0bfa2c",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1002152
+      },
+      "writtenOn": "2022-04-14T22:13:53Z",
+      "side": 1,
+      "message": "forgot to add reviewers 😅",
+      "revId": "c2c8c70f007b36372aa749f2935a502881dd5b1a",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
     }
   ]
 }
