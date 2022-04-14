@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b1287a02_b0dfaa5c",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000067
+      },
+      "writtenOn": "2022-04-14T13:11:10Z",
+      "side": 1,
+      "message": "This is the first in a series of 10+ CLs that improve GN performance and reduce its RAM usage by using better data structures and smarter algorithms to compute the exact same thing (i.e. no change in `gn gen` output for both the Chromium and Fuchsia builds). See the final CL in the series [1] for final benchmarks (short version: \u0027gn gen\u0027 becomes x1.35 faster and consumes 25% less memory)\n\n[1] https://gn-review.googlesource.com/c/gn/+/13627",
+      "revId": "58bf1772d02f43dc03f188a9542578fd60bf25b8",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    }
+  ]
+}
