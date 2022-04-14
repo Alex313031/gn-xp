@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "be5718ce_e8866f8f",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000067
+      },
+      "writtenOn": "2022-04-14T13:13:25Z",
+      "side": 1,
+      "message": "Note that Target::PullRecursiveBundleData() was not re-implemented due to the fact that some of the data is stored in the BundleData structure directly. I plan to untangle these later when the current stack of patches is submitted.",
+      "revId": "85673c08ab98c53d6cca4c334b3036523c7cd47b",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    }
+  ]
+}
