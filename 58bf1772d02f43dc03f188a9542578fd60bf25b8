@@ -18,6 +18,23 @@
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "a1b38a1e_43cf7638",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000070
+      },
+      "writtenOn": "2022-04-15T09:27:08Z",
+      "side": 1,
+      "message": "I\u0027ve tested and std::aligned_alloc() is available on macOS. As far as I know, it is part of the libc++ when building with c++17 which is the case for gn (see line 441 of //build/gen.py).\n\nSo why can\u0027t we just use that? Is it because of the additional requirement that the allocated size must be an integral multiple of the alignment?",
+      "revId": "58bf1772d02f43dc03f188a9542578fd60bf25b8",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "cc224f3f_5032f8d2",
@@ -48,6 +65,29 @@
       "writtenOn": "2022-04-15T05:43:53Z",
       "side": 1,
       "message": "this is redundant include",
+      "revId": "58bf1772d02f43dc03f188a9542578fd60bf25b8",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "78fd60cd_d7f78822",
+        "filename": "src/util/aligned_alloc.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 40,
+      "author": {
+        "id": 1000070
+      },
+      "writtenOn": "2022-04-15T09:27:08Z",
+      "side": 1,
+      "message": "which -\u003e while",
+      "range": {
+        "startLine": 40,
+        "startChar": 29,
+        "endLine": 40,
+        "endChar": 34
+      },
       "revId": "58bf1772d02f43dc03f188a9542578fd60bf25b8",
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
     }
