@@ -16,6 +16,40 @@
       "message": "This is the first in a series of 10+ CLs that improve GN performance and reduce its RAM usage by using better data structures and smarter algorithms to compute the exact same thing (i.e. no change in `gn gen` output for both the Chromium and Fuchsia builds). See the final CL in the series [1] for final benchmarks (short version: \u0027gn gen\u0027 becomes x1.35 faster and consumes 25% less memory)\n\n[1] https://gn-review.googlesource.com/c/gn/+/13627",
       "revId": "58bf1772d02f43dc03f188a9542578fd60bf25b8",
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "cc224f3f_5032f8d2",
+        "filename": "src/util/aligned_alloc.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 18,
+      "author": {
+        "id": 1000030
+      },
+      "writtenOn": "2022-04-15T05:43:53Z",
+      "side": 1,
+      "message": "In my macOS, I can use std::aligned_alloc with clang version 13.\nWhy do we need to have this?",
+      "revId": "58bf1772d02f43dc03f188a9542578fd60bf25b8",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "df7d11e9_a315d831",
+        "filename": "src/util/aligned_alloc.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 30,
+      "author": {
+        "id": 1000030
+      },
+      "writtenOn": "2022-04-15T05:43:53Z",
+      "side": 1,
+      "message": "this is redundant include",
+      "revId": "58bf1772d02f43dc03f188a9542578fd60bf25b8",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
     }
   ]
 }
