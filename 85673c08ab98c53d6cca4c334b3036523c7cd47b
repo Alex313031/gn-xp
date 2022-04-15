@@ -33,6 +33,24 @@
       "message": "Follow https://google.github.io/styleguide/cppguide.html#Names_and_Order_of_Includes ?\n\nYour some other CLs also don\u0027t follow the order.",
       "revId": "85673c08ab98c53d6cca4c334b3036523c7cd47b",
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c2c56bee_42d8bacf",
+        "filename": "src/gn/resolved_target_data.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 13,
+      "author": {
+        "id": 1000067
+      },
+      "writtenOn": "2022-04-15T12:09:21Z",
+      "side": 1,
+      "message": "Thanks, I\u0027ve fixed that. I tend to trust clang-format to fix these, but it doesn\u0027t seem to handle this as I expected.",
+      "parentUuid": "789f9ad3_74a98b1c",
+      "revId": "85673c08ab98c53d6cca4c334b3036523c7cd47b",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
     }
   ]
 }
