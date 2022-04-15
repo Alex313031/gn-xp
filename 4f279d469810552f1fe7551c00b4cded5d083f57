@@ -18,6 +18,24 @@
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "3e6adce8_7f421581",
+        "filename": "src/gn/resolved_target_data.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 59,
+      "author": {
+        "id": 1000067
+      },
+      "writtenOn": "2022-04-15T14:28:38Z",
+      "side": 1,
+      "message": "Good idea. Done.",
+      "parentUuid": "3ed131b6_cbd8abbd",
+      "revId": "4f279d469810552f1fe7551c00b4cded5d083f57",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "e2153feb_de81a121",
@@ -31,6 +49,24 @@
       "writtenOn": "2022-04-15T14:07:07Z",
       "side": 1,
       "message": "ditto here and below.",
+      "revId": "4f279d469810552f1fe7551c00b4cded5d083f57",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "aeef68fc_e07beba9",
+        "filename": "src/gn/resolved_target_data.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 67,
+      "author": {
+        "id": 1000067
+      },
+      "writtenOn": "2022-04-15T14:28:38Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "e2153feb_de81a121",
       "revId": "4f279d469810552f1fe7551c00b4cded5d083f57",
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
     },
@@ -95,6 +131,30 @@
       "writtenOn": "2022-04-15T14:07:07Z",
       "side": 1,
       "message": "Why is this `const_cast\u003c\u003e` needed? Is this because UniqueVector::operator[] only returns a const reference?",
+      "range": {
+        "startLine": 81,
+        "startChar": 19,
+        "endLine": 81,
+        "endChar": 29
+      },
+      "revId": "4f279d469810552f1fe7551c00b4cded5d083f57",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "7d23f4bb_483eb990",
+        "filename": "src/gn/target_public_pair.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 81,
+      "author": {
+        "id": 1000067
+      },
+      "writtenOn": "2022-04-15T14:28:38Z",
+      "side": 1,
+      "message": "Yes exactly. The comment above tries to explain that but may not be clear enough. We cannot modify the target() part because UniqueVector uses it as a lookup key in its set-like data structure. But the is_public() value is ignored by it due to the use of TargetHash and TargetEqualTo, so we can safely modify it here. I\u0027ve updated the comment.",
+      "parentUuid": "17026115_61be2a7a",
       "range": {
         "startLine": 81,
         "startChar": 19,
