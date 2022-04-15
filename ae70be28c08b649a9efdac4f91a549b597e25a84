@@ -1,0 +1,61 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "97a39941_7c056f2b",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000070
+      },
+      "writtenOn": "2022-04-15T13:57:41Z",
+      "side": 1,
+      "message": "lgtm",
+      "revId": "ae70be28c08b649a9efdac4f91a549b597e25a84",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "cf5a8777_103dbeaf",
+        "filename": "src/gn/tagged_pointer.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 1000070
+      },
+      "writtenOn": "2022-04-15T13:57:41Z",
+      "side": 1,
+      "message": "TaggedPointer\u003cT. N\u003e -\u003e TaggedPointer\u003cT, N\u003e",
+      "range": {
+        "startLine": 10,
+        "startChar": 5,
+        "endLine": 10,
+        "endChar": 24
+      },
+      "revId": "ae70be28c08b649a9efdac4f91a549b597e25a84",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d0d1c723_b98d52b5",
+        "filename": "src/gn/tagged_pointer.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 13,
+      "author": {
+        "id": 1000070
+      },
+      "writtenOn": "2022-04-15T13:57:41Z",
+      "side": 1,
+      "message": "Should we static_assert that BITS is smaller than some constant?",
+      "revId": "ae70be28c08b649a9efdac4f91a549b597e25a84",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    }
+  ]
+}
