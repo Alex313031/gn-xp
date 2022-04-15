@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "8afb4164_b414335e",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000014
+      },
+      "writtenOn": "2022-04-15T23:31:05Z",
+      "side": 1,
+      "message": "What is the reason for needing this capability?",
+      "revId": "a331a36c92c01ae459158660a4d1bf4c913f0335",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    }
+  ]
+}
