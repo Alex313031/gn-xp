@@ -16,6 +16,23 @@
       "message": "The code itself looks okay.\n\nIt looks like `aligned_alloc` was added to macOS 10.15 (according to the error message in [1]) but gn targets 10.9 (see `-mmacosx-version-min\u003d10.9` in build/gen.py), so we may not have `aligned_alloc` available at runtime even if it is present in the SDK.\n\nSo I guess until this minimum version is bumped, we need to have a custom implementation on macOS. Can you add a comment saying that this should be removed when the minimum supported version of macOS is 10.15 or higher?\n\n[1]: \n\n  $ clang++ --std\u003dc++17 -target x86_64-apple-macos10.14 foo.cc\n  foo.cc:5:15: warning: \u0027aligned_alloc\u0027 is only available on macOS 10.15 or newer [-Wunguarded-availability-new]\n    void* foo \u003d std::aligned_alloc(1024, 1024 * 4);\n                ^~~~~~~~~~~~~~~~~~\n",
       "revId": "d400bc40e4516685c44d827bfa96871d4309763c",
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9b1aee70_27df9509",
+        "filename": "src/util/aligned_alloc.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 19,
+      "author": {
+        "id": 1000070
+      },
+      "writtenOn": "2022-04-15T13:36:33Z",
+      "side": 1,
+      "message": "You can probably check __MAC_OS_X_VERSION_MIN_REQUIRED here to test which is the minimum version targeted by the app (the value of `-mmacosx-version-min`).\n\nSomething like:\n\n  #if __MAC_OS_X_VERSION_MIN_REQUIRED\n  #  if __MAC_OS_X_VERSION_MIN_REQUIRED \u003e\u003d 1015\n  #    define IMPL_ALIGNED_ALLOC IMPL_ALIGNED_ALLOC_CXX17\n  #  endif\n  #endif\n  #if !defined(IMPL_ALIGNED_ALLOC)\n  #  define IMPL_ALIGNED_ALLOC IMPL_ALIGNED_ALLOC_MALLOC\n  #endif",
+      "revId": "d400bc40e4516685c44d827bfa96871d4309763c",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
     }
   ]
 }
