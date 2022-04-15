@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "aa1821cf_16dc51ff",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 6
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000014
+      },
+      "writtenOn": "2022-04-15T23:33:12Z",
+      "side": 1,
+      "message": "I thought this was one of the things that I was going to look at next week and I\u0027m surprised such a large patch for such a fundamental change was landed without waiting for me, especially after having the chat conversation yesterday where we talked about how I would look at your patches next week.\n\nI\u0027d like to step back because I don\u0027t understand the big picture about the direction you\u0027re going. I\u0027ll send an email to the mailing list to discuss.",
+      "revId": "1cdd270be9803dbfcdd0343f6104ad4dc30c38ce",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    }
+  ]
+}
