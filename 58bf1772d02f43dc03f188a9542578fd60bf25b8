@@ -52,6 +52,24 @@
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "9f7b02a7_a0c4c5d0",
+        "filename": "src/util/aligned_alloc.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 18,
+      "author": {
+        "id": 1000067
+      },
+      "writtenOn": "2022-04-15T10:25:50Z",
+      "side": 1,
+      "message": "My understanding (which dates from a few years) is that aligned_alloc() is not available at runtime (i.e. from the system\u0027s C library) even on relatively recent OS X releases (see [1] for example). So this is a way to ensure that the generated binary is portable enough to run everywhere.\n\nThere may be a way to use a macro to check the minimum deployement version being used when compiling this code, and not use malloc() if it is over some minimal value, but I don\u0027t have an OS X machine, nor do I know exactly since when OS X started supporting it (I suspect it is 10.15).\n\nIf you have more information about this, I would be happy to adjust the code or remove this special code path.\n\n[1] https://github.com/Homebrew/homebrew-core/issues/46393\n\nIn the meantime, I\u0027ve added a comment here.",
+      "parentUuid": "cc224f3f_5032f8d2",
+      "revId": "58bf1772d02f43dc03f188a9542578fd60bf25b8",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "df7d11e9_a315d831",
@@ -69,6 +87,24 @@
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "c6d37db2_0a54418b",
+        "filename": "src/util/aligned_alloc.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 30,
+      "author": {
+        "id": 1000067
+      },
+      "writtenOn": "2022-04-15T10:25:50Z",
+      "side": 1,
+      "message": "Removed. Thanks.",
+      "parentUuid": "df7d11e9_a315d831",
+      "revId": "58bf1772d02f43dc03f188a9542578fd60bf25b8",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "78fd60cd_d7f78822",
@@ -82,6 +118,30 @@
       "writtenOn": "2022-04-15T09:27:08Z",
       "side": 1,
       "message": "which -\u003e while",
+      "range": {
+        "startLine": 40,
+        "startChar": 29,
+        "endLine": 40,
+        "endChar": 34
+      },
+      "revId": "58bf1772d02f43dc03f188a9542578fd60bf25b8",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a9a602bd_ee9e47c8",
+        "filename": "src/util/aligned_alloc.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 40,
+      "author": {
+        "id": 1000067
+      },
+      "writtenOn": "2022-04-15T10:25:50Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "78fd60cd_d7f78822",
       "range": {
         "startLine": 40,
         "startChar": 29,
