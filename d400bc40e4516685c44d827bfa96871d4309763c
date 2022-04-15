@@ -33,6 +33,24 @@
       "message": "You can probably check __MAC_OS_X_VERSION_MIN_REQUIRED here to test which is the minimum version targeted by the app (the value of `-mmacosx-version-min`).\n\nSomething like:\n\n  #if __MAC_OS_X_VERSION_MIN_REQUIRED\n  #  if __MAC_OS_X_VERSION_MIN_REQUIRED \u003e\u003d 1015\n  #    define IMPL_ALIGNED_ALLOC IMPL_ALIGNED_ALLOC_CXX17\n  #  endif\n  #endif\n  #if !defined(IMPL_ALIGNED_ALLOC)\n  #  define IMPL_ALIGNED_ALLOC IMPL_ALIGNED_ALLOC_MALLOC\n  #endif",
       "revId": "d400bc40e4516685c44d827bfa96871d4309763c",
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "51ada441_a77424c4",
+        "filename": "src/util/aligned_alloc.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 19,
+      "author": {
+        "id": 1000067
+      },
+      "writtenOn": "2022-04-15T14:07:16Z",
+      "side": 1,
+      "message": "Thanks. Done. Let\u0027s use CQ to see if this builds.",
+      "parentUuid": "9b1aee70_27df9509",
+      "revId": "d400bc40e4516685c44d827bfa96871d4309763c",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
     }
   ]
 }
