@@ -41,6 +41,30 @@
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "f28c5234_edbbb346",
+        "filename": "src/gn/tagged_pointer.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 1000067
+      },
+      "writtenOn": "2022-04-15T14:35:47Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "cf5a8777_103dbeaf",
+      "range": {
+        "startLine": 10,
+        "startChar": 5,
+        "endLine": 10,
+        "endChar": 24
+      },
+      "revId": "ae70be28c08b649a9efdac4f91a549b597e25a84",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "d0d1c723_b98d52b5",
@@ -54,6 +78,24 @@
       "writtenOn": "2022-04-15T13:57:41Z",
       "side": 1,
       "message": "Should we static_assert that BITS is smaller than some constant?",
+      "revId": "ae70be28c08b649a9efdac4f91a549b597e25a84",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "50ecc472_e0215fc2",
+        "filename": "src/gn/tagged_pointer.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 13,
+      "author": {
+        "id": 1000067
+      },
+      "writtenOn": "2022-04-15T14:35:47Z",
+      "side": 1,
+      "message": "Not necessarily, someone could imagine using AlignedAlloc\u003c\u003e with a high alignment value (e.g. 64 or 256) to allow for a larger BITS value, which would be a valid use case. I think checking at runtime in debug builds should be enough.",
+      "parentUuid": "d0d1c723_b98d52b5",
       "revId": "ae70be28c08b649a9efdac4f91a549b597e25a84",
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
     }
