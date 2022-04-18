@@ -33,6 +33,23 @@
       "message": "forgot to add reviewers 😅",
       "revId": "c2c8c70f007b36372aa749f2935a502881dd5b1a",
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f9d4eb83_088d3b9a",
+        "filename": "src/gn/target.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 1051,
+      "author": {
+        "id": 1000014
+      },
+      "writtenOn": "2022-04-18T19:16:48Z",
+      "side": 1,
+      "message": "Instead of this assertion, is it possible to express the condition that caused this in a unit test? If you just need to add a specific dependency or something you may be able to find an existing unit test to piggyback onto.",
+      "revId": "c2c8c70f007b36372aa749f2935a502881dd5b1a",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
     }
   ]
 }
