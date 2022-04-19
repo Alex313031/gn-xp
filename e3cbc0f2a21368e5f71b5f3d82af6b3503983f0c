@@ -1,6 +1,7 @@
 {
   "comments": [
     {
+      "unresolved": false,
       "key": {
         "uuid": "952adab9_abe628fb",
         "filename": "/PATCHSET_LEVEL",
@@ -14,10 +15,10 @@
       "side": 1,
       "message": "This is my first real LUCI recipe, and I\u0027m not sure how to properly test this. Any help welcomed :-)",
       "revId": "e3cbc0f2a21368e5f71b5f3d82af6b3503983f0c",
-      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
-      "unresolved": false
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
     },
     {
+      "unresolved": false,
       "key": {
         "uuid": "3afe883f_b1332047",
         "filename": "/PATCHSET_LEVEL",
@@ -31,10 +32,10 @@
       "side": 1,
       "message": "We should perhaps first have a discussion on which of the alternative allocators we want to choose. I\u0027ve been experimenting with various allocators recently after a similar discussion in Clang and these are the numbers I measured for GN:\n\nout: 11342ms\njemalloc: 9074ms\nmimalloc: 9488ms\nrpmalloc: 8705ms\nscudo: 11520ms\nsnmalloc: 9334ms\ntcmalloc: 9245ms\n\nThis is a mean of 10 runs in Fuchsia on Linux host (Z840). tcmalloc never came out on top, the fastest allocator is consistently rpmalloc followed by jemalloc which matches results we\u0027ve seen in Clang.",
       "revId": "e3cbc0f2a21368e5f71b5f3d82af6b3503983f0c",
-      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
-      "unresolved": false
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
     },
     {
+      "unresolved": false,
       "key": {
         "uuid": "50b7aeca_6690cef0",
         "filename": "/PATCHSET_LEVEL",
@@ -49,10 +50,10 @@
       "message": "\u003e We should perhaps first have a discussion on which of the alternative allocators we want to choose. I\u0027ve been experimenting with various allocators recently after a similar discussion in Clang and these are the numbers I measured for GN:\n\u003e \n\u003e out: 11342ms\n\nThis is the default system (glibc) allocator.\n\n\u003e jemalloc: 9074ms\n\u003e mimalloc: 9488ms\n\u003e rpmalloc: 8705ms\n\u003e scudo: 11520ms\n\u003e snmalloc: 9334ms\n\u003e tcmalloc: 9245ms\n\u003e \n\u003e This is a mean of 10 runs in Fuchsia on Linux host (Z840). tcmalloc never came out on top, the fastest allocator is consistently rpmalloc followed by jemalloc which matches results we\u0027ve seen in Clang.",
       "parentUuid": "3afe883f_b1332047",
       "revId": "e3cbc0f2a21368e5f71b5f3d82af6b3503983f0c",
-      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
-      "unresolved": false
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
     },
     {
+      "unresolved": false,
       "key": {
         "uuid": "9e1e53c2_3a79e846",
         "filename": "/PATCHSET_LEVEL",
@@ -67,8 +68,38 @@
       "message": "I also wanted to include the new TCMalloc, but I couldn\u0027t get it to work. Bazel cannot produce static libraries so it\u0027s really infeasible to use the output of the Bazel build with GN.\n\n\u003e \u003e We should perhaps first have a discussion on which of the alternative allocators we want to choose. I\u0027ve been experimenting with various allocators recently after a similar discussion in Clang and these are the numbers I measured for GN:\n\u003e \u003e \n\u003e \u003e out: 11342ms\n\u003e \n\u003e This is the default system (glibc) allocator.\n\u003e \n\u003e \u003e jemalloc: 9074ms\n\u003e \u003e mimalloc: 9488ms\n\u003e \u003e rpmalloc: 8705ms\n\u003e \u003e scudo: 11520ms\n\u003e \u003e snmalloc: 9334ms\n\u003e \u003e tcmalloc: 9245ms\n\u003e \u003e \n\u003e \u003e This is a mean of 10 runs in Fuchsia on Linux host (Z840). tcmalloc never came out on top, the fastest allocator is consistently rpmalloc followed by jemalloc which matches results we\u0027ve seen in Clang.\n\nI meant median, not mean.",
       "parentUuid": "50b7aeca_6690cef0",
       "revId": "e3cbc0f2a21368e5f71b5f3d82af6b3503983f0c",
-      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac",
-      "unresolved": false
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    }
+  ],
+  "submitRequirementResults": [
+    {
+      "submitRequirement": {
+        "name": "Review-Enforcement",
+        "description": {
+          "value": "Two Google employees must approve the change. Uploading the change or voting positively on Code-Review count as approval."
+        },
+        "applicabilityExpression": {
+          "value": {
+            "expressionString": "is:review-enforced_gerrit"
+          }
+        },
+        "submittabilityExpression": {
+          "expressionString": "is:review-enforcement-satisfied_gerrit"
+        },
+        "overrideExpression": {},
+        "allowOverrideInChildProjects": false
+      },
+      "applicabilityExpressionResult": {
+        "value": {"expression":{"expressionString":"is:review-enforced_gerrit"},"status":"FAIL","errorMessage":{"value":null},"passingAtoms":[],"failingAtoms":["is:review-enforced_gerrit"]}
+      },
+      "submittabilityExpressionResult": {},
+      "overrideExpressionResult": {},
+      "patchSetCommitId": "e3cbc0f2a21368e5f71b5f3d82af6b3503983f0c",
+      "legacy": {
+        "value": false
+      },
+      "forced": {},
+      "hidden": {}
     }
   ]
 }
