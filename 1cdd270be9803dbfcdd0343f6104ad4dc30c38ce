@@ -16,6 +16,24 @@
       "message": "I thought this was one of the things that I was going to look at next week and I\u0027m surprised such a large patch for such a fundamental change was landed without waiting for me, especially after having the chat conversation yesterday where we talked about how I would look at your patches next week.\n\nI\u0027d like to step back because I don\u0027t understand the big picture about the direction you\u0027re going. I\u0027ll send an email to the mailing list to discuss.",
       "revId": "1cdd270be9803dbfcdd0343f6104ad4dc30c38ce",
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "6275acf1_0384889e",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 6
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000067
+      },
+      "writtenOn": "2022-04-19T14:33:32Z",
+      "side": 1,
+      "message": "I have posted an RFC to gn-dev [1] that explains the big picture. I hope it will help understand the ideas behind these changes.\n\nNote that so far only support classes have been added in the previous submits. There is no GN change at runtime so far, they all happen in the CLs above this one.\n\n[1] https://groups.google.com/a/chromium.org/g/gn-dev/c/GIDBLOOd9as/m/p4UHiLk5AgAJ",
+      "parentUuid": "aa1821cf_16dc51ff",
+      "revId": "1cdd270be9803dbfcdd0343f6104ad4dc30c38ce",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
     }
   ]
 }
