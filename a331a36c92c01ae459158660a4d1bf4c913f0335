@@ -18,6 +18,24 @@
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "97983026_aeb67fd7",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000067
+      },
+      "writtenOn": "2022-04-19T14:04:46Z",
+      "side": 1,
+      "message": "It will be used by a future data structure in https://gn-review.googlesource.com/c/gn/+/13563 used to speed up recursive set merges during target resolution.",
+      "parentUuid": "8afb4164_b414335e",
+      "revId": "a331a36c92c01ae459158660a4d1bf4c913f0335",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "4820a0a1_d6e7db95",
@@ -31,6 +49,30 @@
       "writtenOn": "2022-04-18T20:26:49Z",
       "side": 1,
       "message": "Is this intended for use on Chrome, or for other purposes?\n\nThere is no supported way to build Chrome on a Mac running an OS earlier than macOS 12. At best you could hack some things to build it on macOS 11, but we should put zero engineering effort into toolchain improvements for building Chrome on anything as ancient and unsupported as macOS 10.14.\n\nIf this is not intended for use on Chrome, we should talk, as 10.14 is four years old and no toolset from Apple has supported it for development since January 2020.",
+      "range": {
+        "startLine": 23,
+        "startChar": 0,
+        "endLine": 26,
+        "endChar": 0
+      },
+      "revId": "a331a36c92c01ae459158660a4d1bf4c913f0335",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d11413f3_06567545",
+        "filename": "src/util/aligned_alloc.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 26,
+      "author": {
+        "id": 1000067
+      },
+      "writtenOn": "2022-04-19T14:04:46Z",
+      "side": 1,
+      "message": "Hi Avi. This is clearly not intended for use on Chrome. GN is used by other projects like Fuchsia or Pigweed, as well as other ones outside of Google. Our LUCI recipe, which builds this for all platforms, is using a 10.12 SDK as far as I know, hence the special case here. And I don\u0027t know how to update it anyway.\n\nhttps://gn.googlesource.com/gn/+/refs/heads/main/infra/recipe_modules/macos_sdk/__init__.py#39\n\nNote: Someone suggested we use posix_memalign() instead, which seems to be supported in older releases of OSX. That might work as well as an alternative.",
+      "parentUuid": "4820a0a1_d6e7db95",
       "range": {
         "startLine": 23,
         "startChar": 0,
