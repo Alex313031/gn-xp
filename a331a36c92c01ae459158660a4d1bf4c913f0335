@@ -38,6 +38,23 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "b9d0cdb1_fa08d846",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000030
+      },
+      "writtenOn": "2022-04-20T08:16:59Z",
+      "side": 1,
+      "message": "How much performance or memory usage difference do we see if we use malloc/free instead?",
+      "revId": "a331a36c92c01ae459158660a4d1bf4c913f0335",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "4820a0a1_d6e7db95",
         "filename": "src/util/aligned_alloc.h",
         "patchSetId": 5
