@@ -463,7 +463,7 @@ def WriteGNNinja(path, platform, host, options, args_list):
         # This is needed by libc++.
         libs.append('-ldl')
     elif platform.is_darwin():
-      min_mac_version_flag = '-mmacosx-version-min=10.9'
+      min_mac_version_flag = '-mmacosx-version-min=10.15'
       cflags.append(min_mac_version_flag)
       ldflags.append(min_mac_version_flag)
     elif platform.is_aix():
