@@ -34,6 +34,80 @@
       "parentUuid": "aa1821cf_16dc51ff",
       "revId": "1cdd270be9803dbfcdd0343f6104ad4dc30c38ce",
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4cbb67a2_f142d097",
+        "filename": "src/gn/resolved_target_data.cc",
+        "patchSetId": 6
+      },
+      "lineNbr": 113,
+      "author": {
+        "id": 1000030
+      },
+      "writtenOn": "2022-04-20T08:15:26Z",
+      "side": 1,
+      "message": "If this is necessary, DCHECK needs to be removed?",
+      "range": {
+        "startLine": 112,
+        "startChar": 1,
+        "endLine": 113,
+        "endChar": 28
+      },
+      "revId": "1cdd270be9803dbfcdd0343f6104ad4dc30c38ce",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "893878af_8f3fbcce",
+        "filename": "src/gn/resolved_target_data.cc",
+        "patchSetId": 6
+      },
+      "lineNbr": 246,
+      "author": {
+        "id": 1000030
+      },
+      "writtenOn": "2022-04-20T08:15:26Z",
+      "side": 1,
+      "message": "better to move this to the last line of this function for consistency?",
+      "revId": "1cdd270be9803dbfcdd0343f6104ad4dc30c38ce",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "858f1448_3fd7aa70",
+        "filename": "src/gn/resolved_target_data.cc",
+        "patchSetId": 6
+      },
+      "lineNbr": 340,
+      "author": {
+        "id": 1000030
+      },
+      "writtenOn": "2022-04-20T08:15:26Z",
+      "side": 1,
+      "message": "ditto",
+      "revId": "1cdd270be9803dbfcdd0343f6104ad4dc30c38ce",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9a34f588_f999b5d8",
+        "filename": "src/gn/resolved_target_deps.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 11,
+      "author": {
+        "id": 1000030
+      },
+      "writtenOn": "2022-04-20T08:15:26Z",
+      "side": 1,
+      "message": "fix include order?",
+      "revId": "1cdd270be9803dbfcdd0343f6104ad4dc30c38ce",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
     }
   ]
 }
