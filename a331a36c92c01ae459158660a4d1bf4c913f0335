@@ -53,6 +53,24 @@
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "65908371_578f10cc",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000067
+      },
+      "writtenOn": "2022-04-20T09:40:04Z",
+      "side": 1,
+      "message": "It is not about performance, it is to allocate a heap block with the appropriate alignment requirement to store items of different types. See https://gn-review.googlesource.com/c/gn/+/13563 where this is used by the NestedSet\u003cT\u003e template.",
+      "parentUuid": "b9d0cdb1_fa08d846",
+      "revId": "a331a36c92c01ae459158660a4d1bf4c913f0335",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "4820a0a1_d6e7db95",
