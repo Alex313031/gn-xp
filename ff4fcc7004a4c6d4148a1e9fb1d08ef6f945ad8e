@@ -51,6 +51,24 @@
       "message": "I feel it is bit clear if we use bool like macro instead of enum now.\ne.g.\n```\n#ifdef _WIN32\n#define USE_STD_ALIGNED_ALLOC 1\n#else\n#define USE_STD_ALIGNED_ALLOC 0\n#endif\n\n#if USE_STD_ALIGNED_ALLOC\n  std::aligned_malloc(...);\n#else\n  _aligned_malloc(...);\n#endif\n```",
       "revId": "ff4fcc7004a4c6d4148a1e9fb1d08ef6f945ad8e",
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f749f8bd_634584ab",
+        "filename": "src/util/aligned_alloc.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 1000070
+      },
+      "writtenOn": "2022-04-20T12:03:04Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "4eb54abd_3564b33e",
+      "revId": "ff4fcc7004a4c6d4148a1e9fb1d08ef6f945ad8e",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
     }
   ]
 }
