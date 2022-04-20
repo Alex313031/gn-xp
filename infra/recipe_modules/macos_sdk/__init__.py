@@ -36,11 +36,11 @@ PROPERTIES = {
             ),
             default={
                 'sdk_version':
-                    '12B5025f',
+                    '13E113',
                 'tool_package':
                     'infra/tools/mac_toolchain/${platform}',
                 'tool_version':
-                    'git_revision:e9b1fe29fe21a1cd36428c43ea2aba244bd31280',
+                    'git_revision:c042d3d12d116c86eefce7df7cc3b1c8cf10aa82',
             },
         )
 }
