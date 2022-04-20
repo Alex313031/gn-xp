@@ -20,6 +20,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "bda6de5c_127aa92e",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 6
+      },
+      "lineNbr": 13,
+      "author": {
+        "id": 1000067
+      },
+      "writtenOn": "2022-04-20T09:58:54Z",
+      "side": 1,
+      "message": "The overall numbers for the cumulative changes are already at https://gn-review.googlesource.com/c/gn/+/13565\n\nIt is hard to give an individual improvement for this single class because it is used with other data structure changes to optimize the overall memory usage, for example, in this specific case:\n\nStoring lists of inherited libraries (for inherited_libs_, rust_inherited_libs_ and rust_inheritable_libs_) as simple ImmutableVectors of TargetPublicPair, instead of an InheritedLibraries instance. Crude approximations:\n\n```\nBefore:\n  - One vector of target points\n  - One vector of booleans\n  - One hash map implemented as a vector of 8-byte nodes\n    with a 75% max load.\n            \n    So about N * (8 + 1 + 8 / 0.75) \u003d N * 19,6 bytes per list\n    assuming std::vector\u003cbool\u003e uses individual bytes for storage,\n    or N * (8 + 1/8 + 8/0.75) \u003d N * 11.6 bytes assuming it uses\n    a bitmap.\n\n    Not accounting for vector over-allocations which probably\n    make this even larger (with exponential doubling, as \n    implemented by libc++, worse case would be N * 39 bytes\n    or N * 24 bytes, respectively).\n    \n    Parsing the list requires specialized iterator that scans\n    two parallel vectors at the same time, plus more complicated\n    code paths if std::vector\u003cbool\u003e uses a bitmap.\n\nAfter:\n  - One ImmutableVector of 8 byte items, so N * 8 bytes per list.\n  Parsing means scanning a single array in memory, hence smaller\n  code.\n```",
+      "parentUuid": "24a330d8_7821a32e",
+      "revId": "9e3df46b88e7f832389abf47c18ba4f122e864c1",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "865d3cfa_1d6c343f",
         "filename": "src/gn/tagged_pointer_unittest.cc",
         "patchSetId": 6
