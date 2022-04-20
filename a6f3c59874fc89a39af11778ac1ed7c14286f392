@@ -16,6 +16,24 @@
       "message": "What about minimum requirements for other projects that use GN?\n\nAs far as I know, Pigweed currently supports Mojave (10.14): https://pigweed.dev/docs/faq.html#what-development-hosts-are-supported\n\nFor Fuchsia, I can´t find our minimum requirements on fuchsia.dev, but Peter might now.\n\nI don\u0027t know what a project like V8, which provides its own GN-based build system to build outside of Chromium mandates as well, but their documentation states that the generated binaries should run on 10.12, so I guess they may want to support older systems for building too?\n\nSince this has the potential of breaking the GN binary for some users outside of Chromium, I recommend sending an announcement to gn-dev before submitting this.",
       "revId": "a6f3c59874fc89a39af11778ac1ed7c14286f392",
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "30b53a41_8d3e35ad",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-04-20T17:34:41Z",
+      "side": 1,
+      "message": "For Fuchsia, we check for 10.15 in `ffx preflight`: https://cs.opensource.google/fuchsia/fuchsia/+/main:src/developer/ffx/plugins/platform/preflight/src/check/build_prereqs.rs;l\u003d15",
+      "parentUuid": "831214b4_bfc1fc95",
+      "revId": "a6f3c59874fc89a39af11778ac1ed7c14286f392",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
     }
   ]
 }
