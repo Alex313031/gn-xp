@@ -1,0 +1,44 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ea420b48_0ebd1016",
+        "filename": "src/gn/immutable_vector.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 23,
+      "author": {
+        "id": 1000030
+      },
+      "writtenOn": "2022-04-20T11:51:29Z",
+      "side": 1,
+      "message": "double space?",
+      "range": {
+        "startLine": 23,
+        "startChar": 63,
+        "endLine": 23,
+        "endChar": 65
+      },
+      "revId": "e2345a893fbb902761a40e4ec4b30f26c84480ff",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "de7412f7_ef58b7dc",
+        "filename": "src/gn/immutable_vector_unittest.cc",
+        "patchSetId": 6
+      },
+      "lineNbr": 6,
+      "author": {
+        "id": 1000030
+      },
+      "writtenOn": "2022-04-20T11:51:29Z",
+      "side": 1,
+      "message": "This doesn\u0027t follow\nhttps://google.github.io/styleguide/cppguide.html#Names_and_Order_of_Includes",
+      "revId": "e2345a893fbb902761a40e4ec4b30f26c84480ff",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    }
+  ]
+}
