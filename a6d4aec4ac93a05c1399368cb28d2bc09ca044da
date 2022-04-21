@@ -56,6 +56,30 @@
       },
       "revId": "a6d4aec4ac93a05c1399368cb28d2bc09ca044da",
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1df9158c_1503b688",
+        "filename": "infra/recipe_modules/macos_sdk/__init__.py",
+        "patchSetId": 3
+      },
+      "lineNbr": 43,
+      "author": {
+        "id": 1000030
+      },
+      "writtenOn": "2022-04-21T09:05:33Z",
+      "side": 1,
+      "message": "I don\u0027t know much about this, but maybe when there are some change in\nhttps://source.chromium.org/chromium/infra/infra/+/main:go/src/infra/cmd/mac_toolchain/\n\nI also wonder why we have our own recipe module for this instead of using\nhttps://chromium.googlesource.com/chromium/tools/depot_tools.git/+/refs/heads/main/recipes/recipe_modules/osx_sdk",
+      "parentUuid": "63c65ef7_8f86f550",
+      "range": {
+        "startLine": 43,
+        "startChar": 21,
+        "endLine": 43,
+        "endChar": 74
+      },
+      "revId": "a6d4aec4ac93a05c1399368cb28d2bc09ca044da",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
     }
   ],
   "submitRequirementResults": [
