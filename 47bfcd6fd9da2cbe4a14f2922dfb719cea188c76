@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "67dd8f59_3646da0a",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000070
+      },
+      "writtenOn": "2022-04-21T11:47:31Z",
+      "side": 1,
+      "message": "Manually submitted since the bots are broken and CQ will not read the updated config from this CL.",
+      "revId": "47bfcd6fd9da2cbe4a14f2922dfb719cea188c76",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    }
+  ]
+}
