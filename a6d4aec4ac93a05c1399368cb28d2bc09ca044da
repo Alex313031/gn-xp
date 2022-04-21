@@ -16,6 +16,46 @@
       "message": "Please take a look.",
       "revId": "a6d4aec4ac93a05c1399368cb28d2bc09ca044da",
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "4e21d433_b3f5d5f3",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000070
+      },
+      "writtenOn": "2022-04-21T08:39:37Z",
+      "side": 1,
+      "message": "Thank you for the review.",
+      "revId": "a6d4aec4ac93a05c1399368cb28d2bc09ca044da",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "63c65ef7_8f86f550",
+        "filename": "infra/recipe_modules/macos_sdk/__init__.py",
+        "patchSetId": 3
+      },
+      "lineNbr": 43,
+      "author": {
+        "id": 1000070
+      },
+      "writtenOn": "2022-04-21T08:39:37Z",
+      "side": 1,
+      "message": "tikuta: This package is over 2 years old. Do you know when/how/who takes care of updating this package?",
+      "range": {
+        "startLine": 43,
+        "startChar": 21,
+        "endLine": 43,
+        "endChar": 74
+      },
+      "revId": "a6d4aec4ac93a05c1399368cb28d2bc09ca044da",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
     }
   ],
   "submitRequirementResults": [
