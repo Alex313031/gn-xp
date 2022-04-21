@@ -51,6 +51,24 @@
       "message": "Let\u0027s use `posix_memalign` in this class instead on MacOS which seems to be supported by all releases. This leaves the problem of updating the recipe to another CL. I\u0027ll prepare something.",
       "revId": "a6f3c59874fc89a39af11778ac1ed7c14286f392",
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "39f31981_588ee4ae",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000067
+      },
+      "writtenOn": "2022-04-21T10:02:17Z",
+      "side": 1,
+      "message": "Done, see https://gn-review.googlesource.com/c/gn/+/13720",
+      "parentUuid": "9d018651_c029835c",
+      "revId": "a6f3c59874fc89a39af11778ac1ed7c14286f392",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
     }
   ]
 }
