@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8108e275_e737d621",
+        "filename": "src/gn/scope.h",
+        "patchSetId": 8
+      },
+      "lineNbr": 285,
+      "author": {
+        "id": 1000030
+      },
+      "writtenOn": "2022-04-21T04:43:22Z",
+      "side": 1,
+      "message": "unnecessary semicolon?",
+      "range": {
+        "startLine": 285,
+        "startChar": 1,
+        "endLine": 285,
+        "endChar": 3
+      },
+      "revId": "9ca4dd151cccfe3474becfba5204ffff889845b3",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9e3f521c_9a855a3a",
+        "filename": "src/gn/scope.h",
+        "patchSetId": 8
+      },
+      "lineNbr": 290,
+      "author": {
+        "id": 1000030
+      },
+      "writtenOn": "2022-04-21T04:43:22Z",
+      "side": 1,
+      "message": "ditto",
+      "range": {
+        "startLine": 290,
+        "startChar": 2,
+        "endLine": 290,
+        "endChar": 3
+      },
+      "revId": "9ca4dd151cccfe3474becfba5204ffff889845b3",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    }
+  ]
+}
