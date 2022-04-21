@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2a6c414b_3e9df345",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000030
+      },
+      "writtenOn": "2022-04-21T11:31:22Z",
+      "side": 1,
+      "message": "We need to update our macOS bot first?\nhttps://ci.chromium.org/ui/p/gn/builders/try/mac/b8816281632041242465/overview",
+      "revId": "0d6d1310d005cb9bace909cb8352e83113c6fc51",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    }
+  ]
+}
