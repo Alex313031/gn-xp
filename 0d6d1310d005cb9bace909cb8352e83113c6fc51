@@ -16,6 +16,24 @@
       "message": "We need to update our macOS bot first?\nhttps://ci.chromium.org/ui/p/gn/builders/try/mac/b8816281632041242465/overview",
       "revId": "0d6d1310d005cb9bace909cb8352e83113c6fc51",
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "0d322b07_ebe06d5f",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000070
+      },
+      "writtenOn": "2022-04-21T11:38:42Z",
+      "side": 1,
+      "message": "Yep. Revert: https://gn-review.googlesource.com/c/gn/+/13721",
+      "parentUuid": "2a6c414b_3e9df345",
+      "revId": "0d6d1310d005cb9bace909cb8352e83113c6fc51",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
     }
   ]
 }
