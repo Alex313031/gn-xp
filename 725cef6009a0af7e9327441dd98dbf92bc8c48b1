@@ -33,6 +33,24 @@
       "message": "Sylvain, will you work for updating macOS builder?\n\nCurrently, pool for GN\u0027s CQ has following mac bots.\nhttps://chromium-swarm.appspot.com/botlist?c\u003did\u0026c\u003dtask\u0026c\u003dos\u0026c\u003dstatus\u0026d\u003dasc\u0026f\u003dcpu%3Ax86-64\u0026f\u003dpool%3Aluci.flex.try\u0026f\u003dos%3AMac\u0026k\u003dos\u0026s\u003dos\nAnd pool for GN\u0027s CI has following mac bots.\nhttps://chromium-swarm.appspot.com/botlist?c\u003did\u0026c\u003dtask\u0026c\u003dos\u0026c\u003dstatus\u0026d\u003dasc\u0026f\u003dcpu%3Ax86-64\u0026f\u003dos%3AMac\u0026f\u003dpool%3Aluci.flex.ci\u0026k\u003dpool\u0026s\u003dos\n\nAnd internal pool for builder uploading GN to CIPD has following mac bots.\nhttp://shortn/_LXxSihkuTQ\n\nSo we can switch to 11.6 by configuration change in\nhttps://gn.googlesource.com/gn/+/refs/heads/main/infra/config/main.star\nbut need to ask labs if we want to use 12.0.\n",
       "revId": "725cef6009a0af7e9327441dd98dbf92bc8c48b1",
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "1a74c545_8e322398",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000070
+      },
+      "writtenOn": "2022-04-21T12:12:54Z",
+      "side": 1,
+      "message": "No. I think I\u0027m going to abandon my changes. I\u0027ve already spent too much effort when the initial motivation was to not spend too much time working around the absence of std::aligned_alloc() on macOS.",
+      "parentUuid": "9e48a434_9e37e6a0",
+      "revId": "725cef6009a0af7e9327441dd98dbf92bc8c48b1",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
     }
   ],
   "submitRequirementResults": [
