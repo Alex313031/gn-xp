@@ -16,6 +16,24 @@
       "message": "DCHECK is still used?",
       "revId": "1cdd270be9803dbfcdd0343f6104ad4dc30c38ce",
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e2146a92_19ecc712",
+        "filename": "src/util/aligned_alloc.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 37,
+      "author": {
+        "id": 1000067
+      },
+      "writtenOn": "2022-04-21T19:11:41Z",
+      "side": 0,
+      "message": "Indeed, and CHECK() is actually a better choice here. Thanks for spotting this. Fixed.",
+      "parentUuid": "20567677_6f86db98",
+      "revId": "1cdd270be9803dbfcdd0343f6104ad4dc30c38ce",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
     }
   ]
 }
