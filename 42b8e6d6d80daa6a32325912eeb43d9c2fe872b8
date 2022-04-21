@@ -22,6 +22,30 @@
       },
       "revId": "42b8e6d6d80daa6a32325912eeb43d9c2fe872b8",
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "2fa5ebe0_1b05d7a4",
+        "filename": "src/util/aligned_alloc.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 61,
+      "author": {
+        "id": 1000067
+      },
+      "writtenOn": "2022-04-21T19:14:13Z",
+      "side": 1,
+      "message": "Aargh thanks, we\u0027re just lucky that ::free() and std::free() can be used with the same pointers here, but there is no actual guarantee from the standard that these should work though. Fixed.",
+      "parentUuid": "874574bd_9852f171",
+      "range": {
+        "startLine": 61,
+        "startChar": 28,
+        "endLine": 61,
+        "endChar": 51
+      },
+      "revId": "42b8e6d6d80daa6a32325912eeb43d9c2fe872b8",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
     }
   ]
 }
