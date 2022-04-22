@@ -16,6 +16,24 @@
       "message": "Is it better to use try_emplace without find check?",
       "revId": "e19e968dfba3ef63ccc8216902d8f5fe05849215",
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d4a5b5f8_a4be96f0",
+        "filename": "src/gn/command_gen.cc",
+        "patchSetId": 7
+      },
+      "lineNbr": 89,
+      "author": {
+        "id": 1000067
+      },
+      "writtenOn": "2022-04-22T07:14:31Z",
+      "side": 1,
+      "message": "That\u0027s the first thing I tried, but couldn\u0027t make it work because the value type is default initialized, i.e. when I tried:\n\n```\n  auto ret \u003d write_info-\u003eresolved_map.try_emplace(key, {});\n```\n\nThe compiler would complain that the type of `{}` is ambiguous. And if I specify the type as in:\n\n```\n  auto ret \u003d write_info-\u003eresolved_map.try_emplace(key, ResolvedTargetData{});\n```\n\nThen the compiled code still generates a temporary ResolvedTargetData value even if there is no insertion (I\u0027ve checked the disassembly because I was suspicious).\n\nIn the code above, at least the first find() will be enough for all calls except the first one in a given background thread, so this is less bad. But if you have a better solution let me know, I would also prefer to use `try_emplace()` if possible.\n\nAnother solution I could thing of is to use a non-explicit constructor in ResolvedTargetData that accepts a typed value that would be ignored, e.g. `ResolvedTargetData(std;:nullptr_t) \u003d default` to make `try_emplace(key, nullptr)` work, but that sounds, well, really inelegant.",
+      "parentUuid": "d77a3940_a6daec39",
+      "revId": "e19e968dfba3ef63ccc8216902d8f5fe05849215",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
     }
   ]
 }
