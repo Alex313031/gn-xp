@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "7515dcf3_64c4adac",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 7
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000067
+      },
+      "writtenOn": "2022-04-22T07:28:40Z",
+      "side": 1,
+      "message": "Note that rpmalloc uses `-Weverything` in its configure script, and this has been the source of several issues with recent Clang upstream rolls that broke the GN and Ninja LUCI recipes (which now build and link rpmalloc into the binaries for better performance). See [1] and [2] for examples.\n\nI fear this is going to carry the same set of problems in the long run, where a new Clang introduces a new warning and breaks the GN recipes.appropriate, because the definition of `-Weverything` is not fixed, and even includes warnings that are not relevant to the current version of `-std\u003dXXXX` being used :-(\n\nCan we add a new `-Wsomething` to take care of the original issue (misnamed macros?)\n\n[1] https://gn-review.googlesource.com/c/gn/+/13140\n[2] https://gn-review.googlesource.com/c/gn/+/13581",
+      "revId": "52ec06093d4eded7f600f6f4ee11c177e9b0e414",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    }
+  ]
+}
