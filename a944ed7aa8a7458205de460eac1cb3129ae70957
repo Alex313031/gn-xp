@@ -18,6 +18,24 @@
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "00710991_8d047d38",
+        "filename": "src/base/compiler_specific.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 23,
+      "author": {
+        "id": 1000030
+      },
+      "writtenOn": "2022-04-25T11:44:56Z",
+      "side": 1,
+      "message": "made https://gn-review.googlesource.com/c/gn/+/13783",
+      "parentUuid": "ceda976f_2dae6ef5",
+      "revId": "a944ed7aa8a7458205de460eac1cb3129ae70957",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "d1318376_0908b23f",
@@ -31,6 +49,24 @@
       "writtenOn": "2022-04-25T10:34:01Z",
       "side": 1,
       "message": "aaragh, I\u0027m sorry, but this is not equivalent. Using -DCHECK_IS_CONFIGURABLE\u003d0 on the command line will not result in the same pre-processed output, this should be instead replaced with:\n\n```\n#if defined(DCHECK_IS_CONFIGURABLE) \u0026\u0026 DCHECK_IS_CONFIGURABLE\n```",
+      "revId": "a944ed7aa8a7458205de460eac1cb3129ae70957",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "32c3c7b4_cea06d3d",
+        "filename": "src/base/logging.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 610,
+      "author": {
+        "id": 1000030
+      },
+      "writtenOn": "2022-04-25T11:44:56Z",
+      "side": 1,
+      "message": "made https://gn-review.googlesource.com/c/gn/+/13783",
+      "parentUuid": "d1318376_0908b23f",
       "revId": "a944ed7aa8a7458205de460eac1cb3129ae70957",
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
     }
