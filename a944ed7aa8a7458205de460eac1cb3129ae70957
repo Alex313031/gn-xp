@@ -1,6 +1,23 @@
 {
   "comments": [
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "17330cd1_5d4bf28a",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000397
+      },
+      "writtenOn": "2022-04-25T19:55:26Z",
+      "side": 1,
+      "message": "This is breaking compilation on Mac, with:\n```\n4.478s [38(+18)/291(+236)] CXX src/gn/analyzer.o\nFAILED: src/gn/analyzer.o \nclang++ -MMD -MF src/gn/analyzer.o.d -I../src -I. -DNDEBUG -O3 -fdata-sections -ffunction-sections -D_FILE_OFFSET_BITS\u003d64 -D__STDC_CONSTANT_MACROS -D__STDC_FORMAT_MACROS -pthread -pipe -fno-exceptions -fno-rtti -fdiagnostics-color -Werror -Wall -Wextra -Wno-unused-parameter -Wundef -std\u003dc++17 -mmacosx-version-min\u003d10.9 -c ../src/gn/analyzer.cc -o src/gn/analyzer.o\n../src/gn/analyzer.cc:186:20: error: loop variable \u0027kv\u0027 is always a copy because the range of type \u0027base::Value::const_dict_iterator_proxy\u0027 (aka \u0027base::detail::const_dict_iterator_proxy\u0027) does not return a reference [-Werror,-Wrange-loop-analysis]\n  for (const auto\u0026 kv : dict-\u003eDictItems()) {\n                   ^\n../src/gn/analyzer.cc:186:8: note: use non-reference type \u0027std::__1::pair\u003cconst std::__1::basic_string\u003cchar\u003e \u0026, const base::Value \u0026\u003e\u0027\n  for (const auto\u0026 kv : dict-\u003eDictItems()) {\n       ^~~~~~~~~~~~~~~~\n1 error generated.\n```",
+      "revId": "a944ed7aa8a7458205de460eac1cb3129ae70957",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "ceda976f_2dae6ef5",
