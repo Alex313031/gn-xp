@@ -18,6 +18,24 @@
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "d6110830_db0e83ea",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000067
+      },
+      "writtenOn": "2022-04-25T20:18:30Z",
+      "side": 1,
+      "message": "I wonder how this passed CQ? Which version of Clang are you using? I believe the LUCI recipe uses a pretty recent version similar to the one used by Fuchsia prebuilts. Are you using an older Clang toolchain? Otherwise, it looks like `-Wno-range-loop-analysis` should be added, or the source code should be fixed.",
+      "parentUuid": "17330cd1_5d4bf28a",
+      "revId": "a944ed7aa8a7458205de460eac1cb3129ae70957",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "ceda976f_2dae6ef5",
