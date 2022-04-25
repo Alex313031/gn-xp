@@ -1,6 +1,23 @@
 {
   "comments": [
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "2a13680b_9804737f",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000067
+      },
+      "writtenOn": "2022-04-25T12:48:30Z",
+      "side": 1,
+      "message": "non-owner LGTM, granted the sorting nit is addressed.",
+      "revId": "494dddfad8342f172b418c2a8befcb8538d07d80",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "52998a64_5a71ae27",
