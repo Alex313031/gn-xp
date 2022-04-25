@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "fa42702e_8e2cc001",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 1000030
+      },
+      "writtenOn": "2022-04-25T07:36:10Z",
+      "side": 1,
+      "message": "add link to bug \u0027Bug: chromium:xxx\u0027",
+      "revId": "ff27dcf642d809552b478f9a69b75273f8141411",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    }
+  ]
+}
