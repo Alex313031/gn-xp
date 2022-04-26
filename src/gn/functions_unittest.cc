@@ -457,3 +457,35 @@ TEST(Functions, NotNeeded) {
   ASSERT_FALSE(err.has_error())
       << err.message() << err.location().Describe(true);
 }
+
+TEST(Template, TemplatesPrintStackTrace) {
+  TestWithScope setup;
+  TestParseInput input(
+      "template(\"foo\") {\n"
+      "  print(target_name)"
+      "  print(invoker.foo_value)"
+      "  print_stack_trace()\n"
+      "}\n"
+      "template(\"baz\") {\n"
+      "  foo(\"${target_name}.foo\") {\n"
+      "    foo_value = invoker.bar\n"
+      "  }\n"
+      "}\n"
+      "baz(\"lala\") {\n"
+      "  bar = 42\n"
+      "}");
+  ASSERT_FALSE(input.has_error());
+
+  Err err;
+  input.parsed()->Execute(setup.scope(), &err);
+  ASSERT_FALSE(err.has_error()) << err.message();
+
+  EXPECT_EQ(
+    "lala.foo\n"
+    "42\n"
+    "print_stack_trace() initiated at:  //test:2\n"
+    "  baz(\"lala\")  //test:9\n"
+    "  foo(\"lala.foo\")  //test:5\n"
+    "  print_stack_trace()  //test:2\n",
+    setup.print_output());
+}

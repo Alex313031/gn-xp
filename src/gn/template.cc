@@ -92,6 +92,12 @@ Value Template::Invoke(Scope* scope,
   template_scope.SetValue(
       target_name, Value(invocation, args[0].string_value()), invocation);
 
+  // Add the template invocation "call stack" details to its Scope.
+  for (auto& entry : *scope->GetTemplateInvocationEntries()){
+    template_scope.AddTemplateInvocationEntry(entry);
+  }
+  template_scope.AddTemplateInvocationEntry( Scope::TemplateInvocationEntry(template_name, args[0].string_value(), invocation->GetRange().begin()));
+
   // Actually run the template code.
   Value result = definition_->block()->Execute(&template_scope, err);
   if (err->has_error()) {

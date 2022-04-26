@@ -21,6 +21,7 @@
 #include "gn/value.h"
 
 class Item;
+class Location;
 class ParseNode;
 class Settings;
 class Template;
@@ -92,6 +93,18 @@ class Scope {
 
     // When set, those variables are not merged.
     std::set<std::string> excluded_values;
+  };
+
+  // Details about a Scope's creation as a template invocation
+  struct TemplateInvocationEntry {
+    TemplateInvocationEntry(std::string template_name, std::string target_name, Location location);
+    ~TemplateInvocationEntry();
+
+    std::string Describe() const;
+
+    std::string template_name;
+    std::string target_name;
+    Location location;
   };
 
   // Creates an empty toplevel scope.
@@ -319,6 +332,10 @@ class Scope {
   void SetProperty(const void* key, void* value);
   void* GetProperty(const void* key, const Scope** found_on_scope) const;
 
+  // Track template invocation details on template invocation scopes
+  void AddTemplateInvocationEntry(const TemplateInvocationEntry& entry);
+  const std::vector<TemplateInvocationEntry>* GetTemplateInvocationEntries() const;
+
  private:
   friend class ProgrammaticProvider;
 
@@ -355,6 +372,8 @@ class Scope {
   unsigned mode_flags_;
 
   RecordMap values_;
+
+  std::vector<TemplateInvocationEntry> template_invocation_entries_;
 
   // Note that this can't use string pieces since the names are constructed from
   // Values which might be deallocated before this goes out of scope.

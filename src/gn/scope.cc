@@ -39,6 +39,20 @@ Scope::ProgrammaticProvider::~ProgrammaticProvider() {
   scope_->RemoveProvider(this);
 }
 
+Scope::TemplateInvocationEntry::TemplateInvocationEntry(std::string template_name, std::string target_name, Location location)
+  : template_name(template_name),
+    target_name(target_name),
+    location(location) {}
+
+Scope::TemplateInvocationEntry::~TemplateInvocationEntry() = default;
+
+std::string Scope::TemplateInvocationEntry::Describe() const {
+  std::string ret = template_name;
+  ret += "(\"" + target_name + "\")  ";
+  ret += location.Describe(false);
+  return ret;
+}
+
 Scope::Scope(const Settings* settings)
     : const_containing_(nullptr),
       mutable_containing_(nullptr),
@@ -555,6 +569,14 @@ void Scope::AddProvider(ProgrammaticProvider* p) {
 void Scope::RemoveProvider(ProgrammaticProvider* p) {
   DCHECK(programmatic_providers_.find(p) != programmatic_providers_.end());
   programmatic_providers_.erase(p);
+}
+
+void Scope::AddTemplateInvocationEntry(const TemplateInvocationEntry& entry) {
+  template_invocation_entries_.push_back(entry);
+}
+
+const std::vector<Scope::TemplateInvocationEntry>* Scope::GetTemplateInvocationEntries() const {
+  return &template_invocation_entries_;
 }
 
 // static
