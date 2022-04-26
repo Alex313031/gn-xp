@@ -18,6 +18,24 @@
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "b94d670e_b5ea35d3",
+        "filename": "src/gn/functions.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 1011,
+      "author": {
+        "id": 1000397
+      },
+      "writtenOn": "2022-04-26T19:06:29Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ae7391e5_ef52c204",
+      "revId": "d2a160eaa9c990913017e2970adb2ec16bc5978f",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "570aea0e_f7a44e28",
@@ -31,6 +49,24 @@
       "writtenOn": "2022-04-26T14:59:37Z",
       "side": 1,
       "message": "nit: Drop the constructor and destructor here since they do not add any value. A custom destructor means your class disables implicit move operations (and forces string copies when they are not needed).\n\nYou can then create an initialization value with `TemplateInvocationEntry{ name, target_name, location }` or even just `{ name, target_name, location }` if the compiler has enough context to determine the type of this expression.",
+      "revId": "d2a160eaa9c990913017e2970adb2ec16bc5978f",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b415d864_64362043",
+        "filename": "src/gn/scope.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 101,
+      "author": {
+        "id": 1000397
+      },
+      "writtenOn": "2022-04-26T19:06:29Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "570aea0e_f7a44e28",
       "revId": "d2a160eaa9c990913017e2970adb2ec16bc5978f",
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
     },
@@ -52,6 +88,24 @@
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "19a5a141_fcd88c2f",
+        "filename": "src/gn/scope.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 336,
+      "author": {
+        "id": 1000397
+      },
+      "writtenOn": "2022-04-26T19:06:29Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "f404b5dd_ac3aa5d9",
+      "revId": "d2a160eaa9c990913017e2970adb2ec16bc5978f",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "590a6eb7_472fb7dc",
@@ -65,6 +119,24 @@
       "writtenOn": "2022-04-26T14:59:37Z",
       "side": 1,
       "message": "nit: returning a const reference instead would be preferred here. But generally speaking, create a function that returns a new vector that grabs all values from the scope and its parents as well, which will prevent making multiple string copies of the same values in template.cc, e.g.:\n\n```\nprivate:\nvoid Scope::AppendTemplateInvocationEntries(\n    std::vector\u003cTemplateInvocationEntry\u003e* out) const {\n  const Scope* parent \u003d mutable_containing_ ? mutable_containing_ : const_containing_;\n  // Append parent entries before current ones.\n  if (parent)\n    parent-\u003eAppendTemplateInvocationEntries(out);\n  out-\u003einsert(out-\u003eend(), template_invocation_entries_.begin(),\n              template_invocation_entries_.end());\n}\n\npublic:\n// Return a vector describing the current call stack from this scope.\nstd::vector\u003cTemplateInvocationEntry\u003e GetTemplateInvocationEntries() const {\n  std::vector\u003cTemplateInvocationEntry\u003e result;\n  AppendTemplateInvocationEntries(\u0026result);\n  // Eventually reverse the result if needed?\n  return result;\n}\n```",
+      "revId": "d2a160eaa9c990913017e2970adb2ec16bc5978f",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0e7c045d_d0ce407e",
+        "filename": "src/gn/scope.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 337,
+      "author": {
+        "id": 1000397
+      },
+      "writtenOn": "2022-04-26T19:06:29Z",
+      "side": 1,
+      "message": "The previous invocations aren\u0027t in either of the containing scopes, as the containing scope is the closure made from the scope where the template was defined.\n\nInstead, the previous invocations are in the `invocation_scope`, which is the `scope` argument passed into `Template::Invoke()`.  Which is moved into (pseudo-coded):  `template_scope[\u0027invoker\u0027]`\n\nI couldn\u0027t figure out (for way too long) why no matter what I did, none of the containing scopes carried the previous invocation entries, until I realized that the the invocation wasn\u0027t the containing scope, but passed through the `invoker` `Value` of the template_scope.\n\nI\u0027ve switched to the model you proposed, but it requires walking both \"invoker\" Values and \u0027containing()\u0027 scopes (to handle if{}, for_each(){}, etc.).  I\u0027ve added more tests to catch that.  It feels like it\u0027s fragile, but it appears to be unconcerned with the order of walking both invoker and containing, but both are required.\n\nI\u0027d like another look at the implementation there.",
+      "parentUuid": "590a6eb7_472fb7dc",
       "revId": "d2a160eaa9c990913017e2970adb2ec16bc5978f",
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
     }
