@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "82f28a4f_d1a07b74",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 4
+      },
+      "lineNbr": 11,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-04-26T06:09:39Z",
+      "side": 1,
+      "message": "Can the ICU update be done separately?",
+      "revId": "c815f8b23bcc4b1f67b84ee0afed51bc6cbf50d6",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    }
+  ]
+}
