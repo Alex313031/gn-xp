@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f86e9e0e_b2d121b3",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 6
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000842
+      },
+      "writtenOn": "2022-04-26T17:25:08Z",
+      "side": 1,
+      "message": "Hello,\n\nSeems like `-Wrange-loop-analysis` is not recognized by gcc, is it possible to use only with clang?",
+      "revId": "ced9fbfe6943854e65ada4ac1849d1fa4cb19348",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    }
+  ]
+}
