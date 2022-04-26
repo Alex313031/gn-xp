@@ -61,6 +61,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "0b2011b7_9d29b72d",
+        "filename": "src/gn/resolved_target_data.cc",
+        "patchSetId": 6
+      },
+      "lineNbr": 113,
+      "author": {
+        "id": 1000067
+      },
+      "writtenOn": "2022-04-26T14:14:07Z",
+      "side": 1,
+      "message": "Indeed, fixed in patchset 6 of https://gn-review.googlesource.com/c/gn/+/13625",
+      "parentUuid": "4cbb67a2_f142d097",
+      "range": {
+        "startLine": 112,
+        "startChar": 1,
+        "endLine": 113,
+        "endChar": 28
+      },
+      "revId": "1cdd270be9803dbfcdd0343f6104ad4dc30c38ce",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "893878af_8f3fbcce",
         "filename": "src/gn/resolved_target_data.cc",
         "patchSetId": 6
@@ -72,6 +96,24 @@
       "writtenOn": "2022-04-20T08:15:26Z",
       "side": 1,
       "message": "better to move this to the last line of this function for consistency?",
+      "revId": "1cdd270be9803dbfcdd0343f6104ad4dc30c38ce",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c775df08_93cf7a30",
+        "filename": "src/gn/resolved_target_data.cc",
+        "patchSetId": 6
+      },
+      "lineNbr": 246,
+      "author": {
+        "id": 1000067
+      },
+      "writtenOn": "2022-04-26T14:14:07Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "893878af_8f3fbcce",
       "revId": "1cdd270be9803dbfcdd0343f6104ad4dc30c38ce",
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
     },
@@ -123,6 +165,24 @@
       "writtenOn": "2022-04-26T07:05:56Z",
       "side": 1,
       "message": "strange format/indent?",
+      "revId": "1cdd270be9803dbfcdd0343f6104ad4dc30c38ce",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "db37b12a_1b868fb9",
+        "filename": "src/gn/resolved_target_deps.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 82,
+      "author": {
+        "id": 1000067
+      },
+      "writtenOn": "2022-04-26T14:14:07Z",
+      "side": 1,
+      "message": "Indeed, that\u0027s what `clang-format` does on my machine, I\u0027ve stopped fighting against the tool and just live with this. The alternative is to add an ugly `// clang-format off`.",
+      "parentUuid": "0e262021_ddffb7f2",
       "revId": "1cdd270be9803dbfcdd0343f6104ad4dc30c38ce",
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
     }
