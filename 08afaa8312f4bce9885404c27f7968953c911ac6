@@ -16,6 +16,57 @@
       "message": "Thanks!",
       "revId": "08afaa8312f4bce9885404c27f7968953c911ac6",
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "1a8b9929_9adb5781",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000070
+      },
+      "writtenOn": "2022-04-26T09:05:04Z",
+      "side": 1,
+      "message": "I don\u0027t think this change is necessary.\n\n`DCHECK_IS_CONFIGURABLE` is never passed on the command-line when building `gn`, and `COMPILER_GCC`/`COMPILER_MSVC` are defined in build/build_config.h, so the check as they are before the CL is correct.",
+      "revId": "08afaa8312f4bce9885404c27f7968953c911ac6",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "35dc8849_3cbbd528",
+        "filename": "src/base/compiler_specific.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 21,
+      "author": {
+        "id": 1000070
+      },
+      "writtenOn": "2022-04-26T09:05:04Z",
+      "side": 1,
+      "message": "I know that digit@ suggested those changes saying that the previous CL introduced a semantic changes if the define were passed on the command-line (i.e. invoking the compiler with `-DCOMPILER_GCC\u003d0`).\n\nHowever, I think making the change here is inconsistent with both Chromium (where this file was taken from) and the rest of the file.\n\n`COMPILER_GCC` is not supposed to be defined on the command-line, it is defined in //build/build_config.h, and either is not defined, or is defined to `1`. Additionally, just in the current file, there are three other occurrences of `#if defined(COMPILER_GCC)` without checking the value, and I don\u0027t think we should just change that one occurence.",
+      "revId": "08afaa8312f4bce9885404c27f7968953c911ac6",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "40e73fc5_ddd1d599",
+        "filename": "src/base/logging.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 610,
+      "author": {
+        "id": 1000070
+      },
+      "writtenOn": "2022-04-26T09:05:04Z",
+      "side": 1,
+      "message": "ditto, this is inconsistent with Chromium.\n\nIt is also inconsistent with the check for the same macro in src/base/logging.cc. I think both file should use the same check (and my preference would be to perform the same check as Chromium, i.e. `#if defined(DCHECK_IS_CONFIGURABLE)`).",
+      "revId": "08afaa8312f4bce9885404c27f7968953c911ac6",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
     }
   ]
 }
