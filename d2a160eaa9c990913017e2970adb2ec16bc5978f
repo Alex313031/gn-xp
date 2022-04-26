@@ -1,0 +1,72 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ae7391e5_ef52c204",
+        "filename": "src/gn/functions.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 1011,
+      "author": {
+        "id": 1000067
+      },
+      "writtenOn": "2022-04-26T14:59:37Z",
+      "side": 1,
+      "message": "nit: should probably be `const auto\u0026` here.",
+      "revId": "d2a160eaa9c990913017e2970adb2ec16bc5978f",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "570aea0e_f7a44e28",
+        "filename": "src/gn/scope.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 101,
+      "author": {
+        "id": 1000067
+      },
+      "writtenOn": "2022-04-26T14:59:37Z",
+      "side": 1,
+      "message": "nit: Drop the constructor and destructor here since they do not add any value. A custom destructor means your class disables implicit move operations (and forces string copies when they are not needed).\n\nYou can then create an initialization value with `TemplateInvocationEntry{ name, target_name, location }` or even just `{ name, target_name, location }` if the compiler has enough context to determine the type of this expression.",
+      "revId": "d2a160eaa9c990913017e2970adb2ec16bc5978f",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f404b5dd_ac3aa5d9",
+        "filename": "src/gn/scope.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 336,
+      "author": {
+        "id": 1000067
+      },
+      "writtenOn": "2022-04-26T14:59:37Z",
+      "side": 1,
+      "message": "nit: to avoid needless string copies, do not use a const reference, e.g.:\n\n```\nvoid AddTemplateInvocationEntry(TemplateInvocationEntry entry) {\n  template_invocation_entries_.push_back(std::move(entry));\n}\n```\n\nWill ensure that a call like this will work:\n\n```\nscope-\u003eAddTemplateInvocationEntry({template_name, target_name, location});\n```\n\nAlternatively, consider using:\n\n```\nvoid AddTemplateInvocationEntry(std::string template_name,\n                                std::string target_name,\n                                Location location) {\n  template_invocation_entries_.emplace_back(std::move(template_name),\n                                            std::move(target_name),\n                                            std::move(location));\n}\n```\n\nWhich has the same effect, if you find the API simpler to use.",
+      "revId": "d2a160eaa9c990913017e2970adb2ec16bc5978f",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "590a6eb7_472fb7dc",
+        "filename": "src/gn/scope.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 337,
+      "author": {
+        "id": 1000067
+      },
+      "writtenOn": "2022-04-26T14:59:37Z",
+      "side": 1,
+      "message": "nit: returning a const reference instead would be preferred here. But generally speaking, create a function that returns a new vector that grabs all values from the scope and its parents as well, which will prevent making multiple string copies of the same values in template.cc, e.g.:\n\n```\nprivate:\nvoid Scope::AppendTemplateInvocationEntries(\n    std::vector\u003cTemplateInvocationEntry\u003e* out) const {\n  const Scope* parent \u003d mutable_containing_ ? mutable_containing_ : const_containing_;\n  // Append parent entries before current ones.\n  if (parent)\n    parent-\u003eAppendTemplateInvocationEntries(out);\n  out-\u003einsert(out-\u003eend(), template_invocation_entries_.begin(),\n              template_invocation_entries_.end());\n}\n\npublic:\n// Return a vector describing the current call stack from this scope.\nstd::vector\u003cTemplateInvocationEntry\u003e GetTemplateInvocationEntries() const {\n  std::vector\u003cTemplateInvocationEntry\u003e result;\n  AppendTemplateInvocationEntries(\u0026result);\n  // Eventually reverse the result if needed?\n  return result;\n}\n```",
+      "revId": "d2a160eaa9c990913017e2970adb2ec16bc5978f",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    }
+  ]
+}
