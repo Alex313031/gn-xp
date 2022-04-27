@@ -177,6 +177,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "30ea9b07_ae8f7dd1",
+        "filename": "src/gn/resolved_target_data.cc",
+        "patchSetId": 6
+      },
+      "lineNbr": 420,
+      "author": {
+        "id": 1002072
+      },
+      "writtenOn": "2022-04-27T19:33:32Z",
+      "side": 1,
+      "message": "The difference is in how the caller wants to use it, IIUC. C++ references do not behave like objects themselves. Copying a ImmutableVector\u0026 makes a copy of the whole vector. Assigning to an ImmutableVector\u0026 assigns to the vector itself. \n\nWhereas moving, copying, assigning an ImmutableVectorView will only act on the view.\n\nI would say that a \"View\" is a pretty common name for a non-owning type fwiw. I don\u0027t have any skin in this game here, but I can definitely imagine uses for a non-owning smart pointer (which is what this is more or less) which currently C++ lacks, unless you use a nullable type.",
+      "parentUuid": "999052e3_b7fc9b7a",
+      "range": {
+        "startLine": 420,
+        "startChar": 0,
+        "endLine": 420,
+        "endChar": 30
+      },
+      "revId": "1cdd270be9803dbfcdd0343f6104ad4dc30c38ce",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "9a34f588_f999b5d8",
         "filename": "src/gn/resolved_target_deps.h",
         "patchSetId": 6
