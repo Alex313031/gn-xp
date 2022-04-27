@@ -185,6 +185,24 @@
       "parentUuid": "0e262021_ddffb7f2",
       "revId": "1cdd270be9803dbfcdd0343f6104ad4dc30c38ce",
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "04d2e8f1_dbb31e83",
+        "filename": "src/gn/resolved_target_deps.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 82,
+      "author": {
+        "id": 1000030
+      },
+      "writtenOn": "2022-04-27T06:37:19Z",
+      "side": 1,
+      "message": "Oh, I see. Filed https://crbug.com/1320172",
+      "parentUuid": "db37b12a_1b868fb9",
+      "revId": "1cdd270be9803dbfcdd0343f6104ad4dc30c38ce",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
     }
   ]
 }
