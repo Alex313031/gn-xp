@@ -259,6 +259,24 @@
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "dcbab17d_1964c068",
+        "filename": "src/gn/scope.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 1000397
+      },
+      "writtenOn": "2022-04-27T02:51:31Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "fd180961_324448f8",
+      "revId": "244603ee0a25d979e32b3ced0edec3db61477501",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "b81c8bc4_7217906f",
@@ -320,6 +338,30 @@
       "side": 1,
       "message": "Yes. It is better to not rely on indirect include.",
       "parentUuid": "2ea5d019_31dd8503",
+      "range": {
+        "startLine": 108,
+        "startChar": 9,
+        "endLine": 108,
+        "endChar": 15
+      },
+      "revId": "244603ee0a25d979e32b3ced0edec3db61477501",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "224f1932_b6a5a900",
+        "filename": "src/gn/scope.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 108,
+      "author": {
+        "id": 1000397
+      },
+      "writtenOn": "2022-04-27T02:51:31Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "92667e3a_b5eaeb71",
       "range": {
         "startLine": 108,
         "startChar": 9,
