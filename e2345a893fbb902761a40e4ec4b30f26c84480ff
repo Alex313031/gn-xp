@@ -26,6 +26,52 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "99116b03_0593807c",
+        "filename": "src/gn/immutable_vector.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 30,
+      "author": {
+        "id": 1000014
+      },
+      "writtenOn": "2022-04-27T00:13:41Z",
+      "side": 1,
+      "message": "Do we really need this class? I only see it used briefly in the patch stack you posted.\n\nThe view classes like std::string_view can be nice but also very prone to error. The two main use-cases for string_view (at least in my opinion) are for allowing zero-copy substrings or allowing either std::string or char* input to a function. But it looks like neither of these cases will work for your class since it requires a full ImmutableVector class.\n\nSince this view class is transparently copyable, I think it\u0027s easier to make the mistake where you think you\u0027re making a copy but actually the memory is owned by something that you\u0027re not in control of.\n\nFor the use-cases you have, I think a const ImmutableVector\u0026 would do the same task and make the memory management more obvious. If I had a std::string member, my getter wouldn\u0027t return a string_view, but would always return a const std::string\u0026 reference and I feel like the same thing applies here. Unless maybe I\u0027m misunderstanding the use?\n\nThen we can make this one class which I think will also make it a little easier to follow. It also means we can have a size member and an array pointer with no extra overhead which is more clear than the \"allocate the array after the struct\" trick which I think is difficult to follow.",
+      "range": {
+        "startLine": 30,
+        "startChar": 6,
+        "endLine": 30,
+        "endChar": 25
+      },
+      "revId": "e2345a893fbb902761a40e4ec4b30f26c84480ff",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "53f8c0db_2b108b83",
+        "filename": "src/gn/immutable_vector.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 227,
+      "author": {
+        "id": 1000014
+      },
+      "writtenOn": "2022-04-27T00:13:41Z",
+      "side": 1,
+      "message": "With the above suggestion, we can just have a normal size_ member and this can be simplified to data_ \u003d Allocator::Alloc(count * sizeof(T));",
+      "range": {
+        "startLine": 227,
+        "startChar": 25,
+        "endLine": 227,
+        "endChar": 66
+      },
+      "revId": "e2345a893fbb902761a40e4ec4b30f26c84480ff",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "de7412f7_ef58b7dc",
         "filename": "src/gn/immutable_vector_unittest.cc",
         "patchSetId": 6
