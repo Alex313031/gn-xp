@@ -34,6 +34,69 @@
       "parentUuid": "df7e20ce_3fe85c5e",
       "revId": "91d09609d9aa44d7f0c0d631a654c27a35671d39",
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "fb67f8cc_618dc364",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 6
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000014
+      },
+      "writtenOn": "2022-04-27T20:07:16Z",
+      "side": 1,
+      "message": "Thanks! I just had some trivial style nits you can fix before checkin.",
+      "revId": "91d09609d9aa44d7f0c0d631a654c27a35671d39",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ef0b2c32_d6332956",
+        "filename": "src/gn/scope.cc",
+        "patchSetId": 6
+      },
+      "lineNbr": 575,
+      "author": {
+        "id": 1000014
+      },
+      "writtenOn": "2022-04-27T20:07:16Z",
+      "side": 1,
+      "message": "Don\u0027t add this private annotation.",
+      "range": {
+        "startLine": 575,
+        "startChar": 0,
+        "endLine": 575,
+        "endChar": 10
+      },
+      "revId": "91d09609d9aa44d7f0c0d631a654c27a35671d39",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "73309dd2_3496aac7",
+        "filename": "src/gn/scope.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 340,
+      "author": {
+        "id": 1000014
+      },
+      "writtenOn": "2022-04-27T20:07:16Z",
+      "side": 1,
+      "message": "Can you call this \"Set...\" instead? \"Add\" to me implies it supports more than one.",
+      "range": {
+        "startLine": 340,
+        "startChar": 0,
+        "endLine": 340,
+        "endChar": 10
+      },
+      "revId": "91d09609d9aa44d7f0c0d631a654c27a35671d39",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
     }
   ]
 }
