@@ -36,6 +36,23 @@
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "173c1af9_69ea226e",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 6
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000014
+      },
+      "writtenOn": "2022-04-27T19:27:58Z",
+      "side": 1,
+      "message": "In the other patch I said I think the ",
+      "revId": "1cdd270be9803dbfcdd0343f6104ad4dc30c38ce",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "4cbb67a2_f142d097",
@@ -137,6 +154,29 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "999052e3_b7fc9b7a",
+        "filename": "src/gn/resolved_target_data.cc",
+        "patchSetId": 6
+      },
+      "lineNbr": 420,
+      "author": {
+        "id": 1000014
+      },
+      "writtenOn": "2022-04-27T19:27:58Z",
+      "side": 1,
+      "message": "As I mentioned in the other patch, I don\u0027t see an advantage in returning the \"View\" rather than just returning a const reference. I think the reference makes the memory ownership a little clearer.",
+      "range": {
+        "startLine": 420,
+        "startChar": 0,
+        "endLine": 420,
+        "endChar": 30
+      },
+      "revId": "1cdd270be9803dbfcdd0343f6104ad4dc30c38ce",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "9a34f588_f999b5d8",
         "filename": "src/gn/resolved_target_deps.h",
         "patchSetId": 6
@@ -201,6 +241,29 @@
       "side": 1,
       "message": "Oh, I see. Filed https://crbug.com/1320172",
       "parentUuid": "db37b12a_1b868fb9",
+      "revId": "1cdd270be9803dbfcdd0343f6104ad4dc30c38ce",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "360f9a10_e6bd1d9f",
+        "filename": "src/gn/target_public_pair.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 57,
+      "author": {
+        "id": 1000014
+      },
+      "writtenOn": "2022-04-27T19:27:58Z",
+      "side": 1,
+      "message": "As I mentioned in the other patch that I think TaggedPointer isn\u0027t worth the confusion. Can you just make this \"const Target*\" and \"bool\" members?",
+      "range": {
+        "startLine": 57,
+        "startChar": 2,
+        "endLine": 57,
+        "endChar": 39
+      },
       "revId": "1cdd270be9803dbfcdd0343f6104ad4dc30c38ce",
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
     }
