@@ -4,6 +4,7 @@
 
 #include "gn/rust_project_writer.h"
 
+#include <algorithm>
 #include <fstream>
 #include <optional>
 #include <sstream>
@@ -19,6 +20,7 @@
 #include "gn/source_file.h"
 #include "gn/string_output_buffer.h"
 #include "gn/tool.h"
+#include "loader.h"
 
 #if defined(OS_WINDOWS)
 #define NEWLINE "\r\n"
@@ -73,39 +75,45 @@ bool RustProjectWriter::RunAndWriteFiles(const BuildSettings* build_settings,
   StringOutputBuffer out_buffer;
   std::ostream out(&out_buffer);
 
-  RenderJSON(build_settings, all_targets, out);
+  RenderJSON(build_settings, builder.loader()->GetDefaultToolchain(),
+             all_targets, out);
   return out_buffer.WriteToFileIfChanged(output_path, err);
 }
 
-// Map of Targets to their index in the crates list (for linking dependencies to
-// their indexes).
-using TargetIndexMap = std::unordered_map<const Target*, uint32_t>;
-
-// A collection of Targets.
-using TargetsVector = UniqueVector<const Target*>;
+// Set of dependency crates, represented by their root module path.
+using DependencySet = UniqueVector<SourceFile>;
 
 // Get the Rust deps for a target, recursively expanding OutputType::GROUPS
 // that are present in the GN structure.  This will return a flattened list of
 // deps from the groups, but will not expand a Rust lib dependency to find any
 // transitive Rust dependencies.
-void GetRustDeps(const Target* target, TargetsVector* rust_deps) {
+void GetRustDeps(const Target* target, DependencySet* rust_deps) {
   for (const auto& pair : target->GetDeps(Target::DEPS_LINKED)) {
     const Target* dep = pair.ptr;
 
     if (dep->source_types_used().RustSourceUsed()) {
       // Include any Rust dep.
-      rust_deps->push_back(dep);
+      rust_deps->push_back(dep->rust_values().crate_root());
     } else if (dep->output_type() == Target::OutputType::GROUP) {
       // Inspect (recursively) any group to see if it contains Rust deps.
       GetRustDeps(dep, rust_deps);
     }
   }
 }
-TargetsVector GetRustDeps(const Target* target) {
-  TargetsVector deps;
-  GetRustDeps(target, &deps);
-  return deps;
-}
+
+// Per-crate bookkeeping needed while constructing the crate list.
+struct CrateInfo {
+  // First, we record all targets that build the crate.
+  TargetsVector targets;
+  // Then, we do a depth-first traversal to process crates in dependency order,
+  // and use the seen flag to avoid processing a crate twice.
+  bool seen = false;
+  // Finally, we append a new Crate to the crate list and save its index.
+  std::optional<CrateIndex> index;
+};
+
+// Map from each crate (root module path) to info.
+using CrateInfoMap = std::unordered_map<SourceFile, CrateInfo>;
 
 std::vector<std::string> ExtractCompilerArgs(const Target* target) {
   std::vector<std::string> args;
@@ -163,16 +171,11 @@ std::vector<std::string> FindAllArgValuesAfterPrefix(
 
 // TODO(bwb) Parse sysroot structure from toml files. This is fragile and
 // might break if upstream changes the dependency structure.
-const std::string_view sysroot_crates[] = {"std",
-                                           "core",
-                                           "alloc",
-                                           "panic_unwind",
-                                           "proc_macro",
-                                           "test",
-                                           "panic_abort",
-                                           "unwind"};
+const std::string_view sysroot_crates[] = {
+    "std",        "core", "alloc",       "panic_unwind",
+    "proc_macro", "test", "panic_abort", "unwind"};
 
-// Multiple sysroot crates have dependenices on each other.  This provides a
+// Multiple sysroot crates have dependencies on each other.  This provides a
 // mechanism for specifying that in an extendible manner.
 const std::unordered_map<std::string_view, std::vector<std::string_view>>
     sysroot_deps_map = {{"alloc", {"core"}},
@@ -200,7 +203,7 @@ void AddSysrootCrate(const BuildSettings* build_settings,
   }
 
   size_t crate_index = crate_list.size();
-  sysroot_crate_lookup.insert(std::make_pair(crate, crate_index));
+  sysroot_crate_lookup.emplace(crate, crate_index);
 
   base::FilePath rebased_out_dir =
       build_settings->GetFullPath(build_settings->build_dir());
@@ -208,8 +211,10 @@ void AddSysrootCrate(const BuildSettings* build_settings,
       FilePathToUTF8(rebased_out_dir) + std::string(current_sysroot) +
       "/lib/rustlib/src/rust/library/" + std::string(crate) + "/src/lib.rs";
 
-  Crate sysroot_crate = Crate(SourceFile(crate_path), std::nullopt, crate_index,
-                              std::string(crate), "2018");
+  crate_list.emplace_back(SourceFile(crate_path), TargetsVector(), std::nullopt,
+                          crate_index, std::string(crate), std::string(crate),
+                          "2018");
+  auto& sysroot_crate = crate_list.back();
 
   sysroot_crate.AddConfigItem("debug_assertions");
 
@@ -220,8 +225,6 @@ void AddSysrootCrate(const BuildSettings* build_settings,
       sysroot_crate.AddDependency(idx, std::string(dep));
     }
   }
-
-  crate_list.push_back(sysroot_crate);
 }
 
 // Add the given sysroot to the project, if it hasn't already been added.
@@ -250,43 +253,101 @@ void AddSysrootDependencyToCrate(Crate* crate,
   }
 }
 
-void AddTarget(const BuildSettings* build_settings,
-               const Target* target,
-               TargetIndexMap& lookup,
-               SysrootIndexMap& sysroot_lookup,
-               CrateList& crate_list) {
-  if (lookup.find(target) != lookup.end()) {
-    // If target is already in the lookup, we don't add it again.
+// Given the list of targets for a crate, returns the preferred one to use for
+// editor support, favoring (1) the default toolchain and (2) non-testonly.
+const Target* PreferredTarget(const Label& default_toolchain,
+                              const TargetsVector& targets) {
+  assert(!targets.empty());
+  auto score = [&](const Target* target) {
+    int n = 0;
+    if (target->toolchain()->label() == default_toolchain)
+      n += 2;
+    if (!target->testonly())
+      n += 1;
+    return n;
+  };
+  auto r = *std::max_element(
+      targets.begin(), targets.end(),
+      [&](auto lhs, auto rhs) { return score(lhs) < score(rhs); });
+  if (targets.front()->label().GetUserVisibleName(false).find(
+          "//src/lib/fidl/rust/fidl") != std::string::npos) {
+    printf("mkember: %zu targets, and they are:\n", targets.size());
+    for (auto& t : targets) {
+      printf("mkember: %s ---> %d\n",
+             t->label().GetUserVisibleName(true).c_str(), score(t));
+    }
+    printf("mkember: ..... chose %s ---> %d\n",
+           r->label().GetUserVisibleName(true).c_str(), score(r));
+  }
+  return r;
+}
+
+void AddCrate(const BuildSettings* build_settings,
+              const Label& default_toolchain,
+              SourceFile crate_root,
+              CrateInfo& crate_info,
+              CrateInfoMap& lookup,
+              SysrootIndexMap& sysroot_lookup,
+              CrateList& crate_list) {
+  if (crate_info.seen) {
+    // If the crate was already seen, we don't add it again.
     return;
   }
+  crate_info.seen = true;
 
-  auto compiler_args = ExtractCompilerArgs(target);
+  auto& all_targets = crate_info.targets;
+  const Target* main_target = PreferredTarget(default_toolchain, all_targets);
+  if (crate_root.value().find("//src/lib/fidl/rust/fidl/src") !=
+      std::string::npos) {
+    printf("mkember: main target: %s\n",
+           main_target->label().GetUserVisibleName(true).c_str());
+  }
+
+  auto compiler_args = ExtractCompilerArgs(main_target);
   auto compiler_target = FindArgValue("--target", compiler_args);
 
   // Check what sysroot this target needs.  Add it to the crate list if it
   // hasn't already been added.
   auto rust_tool =
-      target->toolchain()->GetToolForTargetFinalOutputAsRust(target);
+      main_target->toolchain()->GetToolForTargetFinalOutputAsRust(main_target);
   auto current_sysroot = rust_tool->GetSysroot();
   if (current_sysroot != "" && sysroot_lookup.count(current_sysroot) == 0) {
     AddSysroot(build_settings, current_sysroot, sysroot_lookup, crate_list);
   }
 
-  auto crate_deps = GetRustDeps(target);
-
-  // Add all dependencies of this crate, before this crate.
-  for (const auto& dep : crate_deps) {
-    AddTarget(build_settings, dep, lookup, sysroot_lookup, crate_list);
+  // Gather dependencies from targets in the same toolchain as the main target.
+  // Typically this is the main target plus a test target, which ensures that we
+  // record test-only dependencies (e.g. crates like assert_matches).
+  DependencySet crate_deps;
+  for (const auto* target : all_targets) {
+    if (crate_root.value().find("//src/lib/fidl/rust/fidl/src") !=
+        std::string::npos) {
+      if (target->toolchain()->label() == main_target->toolchain()->label()) {
+        printf("mkember: same toolchain: %s: %s\n", crate_root.value().c_str(),
+               main_target->toolchain()
+                   ->label()
+                   .GetUserVisibleName(false)
+                   .c_str());
+      } else {
+        printf(
+            "mkember: diff toolchain: %s: %s --- vs --- %s\n",
+            crate_root.value().c_str(),
+            main_target->toolchain()->label().GetUserVisibleName(false).c_str(),
+            target->toolchain()->label().GetUserVisibleName(false).c_str());
+      }
+    }
+    if (target->toolchain()->label() != main_target->toolchain()->label())
+      continue;
+    GetRustDeps(target, &crate_deps);
   }
 
-  // The index of a crate is its position (0-based) in the list of crates.
-  size_t crate_id = crate_list.size();
-
-  // Add the target to the crate lookup.
-  lookup.insert(std::make_pair(target, crate_id));
-
-  SourceFile crate_root = target->rust_values().crate_root();
-  std::string crate_label = target->label().GetUserVisibleName(false);
+  // Recursively add dependency crates so that they get assigned IDs first.
+  for (const auto& dep : crate_deps) {
+    if (dep == crate_root)
+      continue;
+    AddCrate(build_settings, default_toolchain, dep, lookup.at(dep), lookup,
+             sysroot_lookup, crate_list);
+  }
 
   auto edition =
       FindArgValueAfterPrefix(std::string("--edition="), compiler_args);
@@ -294,23 +355,38 @@ void AddTarget(const BuildSettings* build_settings,
     edition = FindArgValue("--edition", compiler_args);
   }
 
-  auto gen_dir = GetBuildDirForTargetAsOutputFile(target, BuildDirType::GEN);
+  auto gen_dir =
+      GetBuildDirForTargetAsOutputFile(main_target, BuildDirType::GEN);
 
-  Crate crate = Crate(crate_root, gen_dir, crate_id, crate_label,
-                      edition.value_or("2015"));
+  // Assign the next index in the crate list to this crate.
+  CrateIndex crate_index = crate_list.size();
+  crate_info.index = crate_index;
+  crate_list.emplace_back(crate_root, std::move(all_targets), gen_dir,
+                          crate_index, main_target->rust_values().crate_name(),
+                          main_target->label().GetUserVisibleName(false),
+                          edition.value_or("2015"));
+  Crate& crate = crate_list.back();
 
   crate.SetCompilerArgs(compiler_args);
   if (compiler_target.has_value())
     crate.SetCompilerTarget(compiler_target.value());
 
-  ConfigList cfgs =
-      FindAllArgValuesAfterPrefix(std::string("--cfg="), compiler_args);
-
   crate.AddConfigItem("test");
   crate.AddConfigItem("debug_assertions");
 
-  for (auto& cfg : cfgs) {
+  // Add configs from the main target.
+  for (auto& cfg :
+       FindAllArgValuesAfterPrefix(std::string("--cfg="), compiler_args)) {
     crate.AddConfigItem(cfg);
+  }
+  // Also add configs from other targets in the same toolchain.
+  for (const auto* target : all_targets) {
+    if (target->toolchain()->label() != main_target->toolchain()->label())
+      continue;
+    for (auto& cfg : FindAllArgValuesAfterPrefix(std::string("--cfg="),
+                                                 ExtractCompilerArgs(target))) {
+      crate.AddConfigItem(cfg);
+    }
   }
 
   // Add the sysroot dependencies, if there is one.
@@ -330,7 +406,7 @@ void AddTarget(const BuildSettings* build_settings,
   // If it's a proc macro, record its output location so IDEs can invoke it.
   if (std::string_view(rust_tool->name()) ==
       std::string_view(RustTool::kRsToolMacro)) {
-    auto outputs = target->computed_outputs();
+    auto outputs = main_target->computed_outputs();
     if (outputs.size() > 0) {
       crate.SetIsProcMacro(outputs[0]);
     }
@@ -339,7 +415,7 @@ void AddTarget(const BuildSettings* build_settings,
   // Note any environment variables. These may be used by proc macros
   // invoked by the current crate (so we want to record these for all crates,
   // not just proc macro crates)
-  for (const auto& env_var : target->config_values().rustenv()) {
+  for (const auto& env_var : main_target->config_values().rustenv()) {
     std::vector<std::string> parts = base::SplitString(
         env_var, "=", base::TRIM_WHITESPACE, base::SPLIT_WANT_ALL);
     if (parts.size() >= 2) {
@@ -349,11 +425,18 @@ void AddTarget(const BuildSettings* build_settings,
 
   // Add the rest of the crate dependencies.
   for (const auto& dep : crate_deps) {
-    auto idx = lookup[dep];
-    crate.AddDependency(idx, dep->rust_values().crate_name());
+    if (dep == crate_root)
+      continue;
+    auto& info = lookup[dep];
+    assert(info.seen);
+    if (!info.index.has_value()) {
+      printf("mkember: %s -> %s\n", crate_root.value().c_str(),
+             dep.value().c_str());
+    } else {
+      crate.AddDependency(info.index.value(),
+                          crate_list[info.index.value()].name());
+    }
   }
-
-  crate_list.push_back(crate);
 }
 
 void WriteCrates(const BuildSettings* build_settings,
@@ -485,19 +568,27 @@ void WriteCrates(const BuildSettings* build_settings,
 }
 
 void RustProjectWriter::RenderJSON(const BuildSettings* build_settings,
+                                   const Label& default_toolchain,
                                    std::vector<const Target*>& all_targets,
                                    std::ostream& rust_project) {
-  TargetIndexMap lookup;
-  SysrootIndexMap sysroot_lookup;
-  CrateList crate_list;
-
-  // All the crates defined in the project.
+  // Collect all Rust targets in the project and group them by crate.
+  CrateInfoMap lookup;
   for (const auto* target : all_targets) {
     if (!target->IsBinary() || !target->source_types_used().RustSourceUsed())
       continue;
 
-    AddTarget(build_settings, target, lookup, sysroot_lookup, crate_list);
+    auto crate_root = target->rust_values().crate_root();
+    lookup[crate_root].targets.push_back(target);
   }
 
+  // Generate the crate list.
+  SysrootIndexMap sysroot_lookup;
+  CrateList crate_list;
+  for (auto& [crate_root, info] : lookup) {
+    AddCrate(build_settings, default_toolchain, crate_root, info, lookup,
+             sysroot_lookup, crate_list);
+  }
+
+  // Write rust-project.json.
   WriteCrates(build_settings, crate_list, rust_project);
 }

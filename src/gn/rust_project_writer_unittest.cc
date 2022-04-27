@@ -3,8 +3,8 @@
 // found in the LICENSE file.
 
 #include "gn/rust_project_writer.h"
-#include "base/strings/string_util.h"
 #include "base/files/file_path.h"
+#include "base/strings/string_util.h"
 #include "gn/filesystem_utils.h"
 #include "gn/substitution_list.h"
 #include "gn/target.h"
@@ -13,9 +13,9 @@
 #include "util/build_config.h"
 #include "util/test/test.h"
 
-
-static void ExpectEqOrShowDiff(const char* expected, const std::string& actual) {
-  if(expected != actual) {
+static void ExpectEqOrShowDiff(const char* expected,
+                               const std::string& actual) {
+  if (expected != actual) {
     printf("\nExpected: >>>\n%s<<<\n", expected);
     printf("  Actual: >>>\n%s<<<\n", actual.c_str());
   }
@@ -42,9 +42,9 @@ TEST_F(RustProjectJSONWriter, OneRustTarget) {
   ASSERT_TRUE(target.OnResolved(&err));
 
   std::ostringstream stream;
-  std::vector<const Target*> targets;
-  targets.push_back(&target);
-  RustProjectWriter::RenderJSON(setup.build_settings(), targets, stream);
+  std::vector<const Target*> targets{&target};
+  RustProjectWriter::RenderJSON(setup.build_settings(),
+                                setup.toolchain()->label(), targets, stream);
   std::string out = stream.str();
 #if defined(OS_WIN)
   base::ReplaceSubstringsAfterOffset(&out, 0, "\r\n", "\n");
@@ -107,9 +107,9 @@ TEST_F(RustProjectJSONWriter, RustTargetDep) {
   ASSERT_TRUE(target.OnResolved(&err));
 
   std::ostringstream stream;
-  std::vector<const Target*> targets;
-  targets.push_back(&target);
-  RustProjectWriter::RenderJSON(setup.build_settings(), targets, stream);
+  std::vector<const Target*> targets{&target, &dep};
+  RustProjectWriter::RenderJSON(setup.build_settings(),
+                                setup.toolchain()->label(), targets, stream);
   std::string out = stream.str();
 #if defined(OS_WIN)
   base::ReplaceSubstringsAfterOffset(&out, 0, "\r\n", "\n");
@@ -205,9 +205,9 @@ TEST_F(RustProjectJSONWriter, RustTargetDepTwo) {
   ASSERT_TRUE(target.OnResolved(&err));
 
   std::ostringstream stream;
-  std::vector<const Target*> targets;
-  targets.push_back(&target);
-  RustProjectWriter::RenderJSON(setup.build_settings(), targets, stream);
+  std::vector<const Target*> targets{&target, &dep, &dep2};
+  RustProjectWriter::RenderJSON(setup.build_settings(),
+                                setup.toolchain()->label(), targets, stream);
   std::string out = stream.str();
 #if defined(OS_WIN)
   base::ReplaceSubstringsAfterOffset(&out, 0, "\r\n", "\n");
@@ -217,12 +217,12 @@ TEST_F(RustProjectJSONWriter, RustTargetDepTwo) {
       "  \"crates\": [\n"
       "    {\n"
       "      \"crate_id\": 0,\n"
-      "      \"root_module\": \"tortoise/lib.rs\",\n"
-      "      \"label\": \"//tortoise:bar\",\n"
+      "      \"root_module\": \"achilles/lib.rs\",\n"
+      "      \"label\": \"//achilles:bar\",\n"
       "      \"source\": {\n"
       "          \"include_dirs\": [\n"
-      "               \"tortoise/\",\n"
-      "               \"out/Debug/gen/tortoise/\"\n"
+      "               \"achilles/\",\n"
+      "               \"out/Debug/gen/achilles/\"\n"
       "          ],\n"
       "          \"exclude_dirs\": []\n"
       "      },\n"
@@ -236,12 +236,12 @@ TEST_F(RustProjectJSONWriter, RustTargetDepTwo) {
       "    },\n"
       "    {\n"
       "      \"crate_id\": 1,\n"
-      "      \"root_module\": \"achilles/lib.rs\",\n"
-      "      \"label\": \"//achilles:bar\",\n"
+      "      \"root_module\": \"tortoise/lib.rs\",\n"
+      "      \"label\": \"//tortoise:bar\",\n"
       "      \"source\": {\n"
       "          \"include_dirs\": [\n"
-      "               \"achilles/\",\n"
-      "               \"out/Debug/gen/achilles/\"\n"
+      "               \"tortoise/\",\n"
+      "               \"out/Debug/gen/tortoise/\"\n"
       "          ],\n"
       "          \"exclude_dirs\": []\n"
       "      },\n"
@@ -266,11 +266,11 @@ TEST_F(RustProjectJSONWriter, RustTargetDepTwo) {
       "      },\n"
       "      \"deps\": [\n"
       "        {\n"
-      "          \"crate\": 0,\n"
+      "          \"crate\": 1,\n"
       "          \"name\": \"tortoise\"\n"
       "        },\n"
       "        {\n"
-      "          \"crate\": 1,\n"
+      "          \"crate\": 0,\n"
       "          \"name\": \"achilles\"\n"
       "        }\n"
       "      ],\n"
@@ -342,9 +342,9 @@ TEST_F(RustProjectJSONWriter, RustTargetGetDepRustOnly) {
   ASSERT_TRUE(target.OnResolved(&err));
 
   std::ostringstream stream;
-  std::vector<const Target*> targets;
-  targets.push_back(&target);
-  RustProjectWriter::RenderJSON(setup.build_settings(), targets, stream);
+  std::vector<const Target*> targets{&target, &dep, &dep2, &dep3, &dep4};
+  RustProjectWriter::RenderJSON(setup.build_settings(),
+                                setup.toolchain()->label(), targets, stream);
   std::string out = stream.str();
 #if defined(OS_WIN)
   base::ReplaceSubstringsAfterOffset(&out, 0, "\r\n", "\n");
@@ -354,25 +354,6 @@ TEST_F(RustProjectJSONWriter, RustTargetGetDepRustOnly) {
       "  \"crates\": [\n"
       "    {\n"
       "      \"crate_id\": 0,\n"
-      "      \"root_module\": \"tortoise/lib.rs\",\n"
-      "      \"label\": \"//tortoise:bar\",\n"
-      "      \"source\": {\n"
-      "          \"include_dirs\": [\n"
-      "               \"tortoise/\",\n"
-      "               \"out/Debug/gen/tortoise/\"\n"
-      "          ],\n"
-      "          \"exclude_dirs\": []\n"
-      "      },\n"
-      "      \"deps\": [\n"
-      "      ],\n"
-      "      \"edition\": \"2015\",\n"
-      "      \"cfg\": [\n"
-      "        \"test\",\n"
-      "        \"debug_assertions\"\n"
-      "      ]\n"
-      "    },\n"
-      "    {\n"
-      "      \"crate_id\": 1,\n"
       "      \"root_module\": \"tortoise/macro/lib.rs\",\n"
       "      \"label\": \"//tortoise:macro\",\n"
       "      \"source\": {\n"
@@ -394,6 +375,25 @@ TEST_F(RustProjectJSONWriter, RustTargetGetDepRustOnly) {
       "      ]\n"
       "    },\n"
       "    {\n"
+      "      \"crate_id\": 1,\n"
+      "      \"root_module\": \"tortoise/lib.rs\",\n"
+      "      \"label\": \"//tortoise:bar\",\n"
+      "      \"source\": {\n"
+      "          \"include_dirs\": [\n"
+      "               \"tortoise/\",\n"
+      "               \"out/Debug/gen/tortoise/\"\n"
+      "          ],\n"
+      "          \"exclude_dirs\": []\n"
+      "      },\n"
+      "      \"deps\": [\n"
+      "      ],\n"
+      "      \"edition\": \"2015\",\n"
+      "      \"cfg\": [\n"
+      "        \"test\",\n"
+      "        \"debug_assertions\"\n"
+      "      ]\n"
+      "    },\n"
+      "    {\n"
       "      \"crate_id\": 2,\n"
       "      \"root_module\": \"hare/lib.rs\",\n"
       "      \"label\": \"//hare:bar\",\n"
@@ -406,11 +406,11 @@ TEST_F(RustProjectJSONWriter, RustTargetGetDepRustOnly) {
       "      },\n"
       "      \"deps\": [\n"
       "        {\n"
-      "          \"crate\": 0,\n"
+      "          \"crate\": 1,\n"
       "          \"name\": \"tortoise\"\n"
       "        },\n"
       "        {\n"
-      "          \"crate\": 1,\n"
+      "          \"crate\": 0,\n"
       "          \"name\": \"tortoise_macro\"\n"
       "        }\n"
       "      ],\n"
@@ -445,9 +445,9 @@ TEST_F(RustProjectJSONWriter, OneRustTargetWithRustcTargetSet) {
   ASSERT_TRUE(target.OnResolved(&err));
 
   std::ostringstream stream;
-  std::vector<const Target*> targets;
-  targets.push_back(&target);
-  RustProjectWriter::RenderJSON(setup.build_settings(), targets, stream);
+  std::vector<const Target*> targets{&target};
+  RustProjectWriter::RenderJSON(setup.build_settings(),
+                                setup.toolchain()->label(), targets, stream);
   std::string out = stream.str();
 #if defined(OS_WIN)
   base::ReplaceSubstringsAfterOffset(&out, 0, "\r\n", "\n");
@@ -500,9 +500,9 @@ TEST_F(RustProjectJSONWriter, OneRustTargetWithEditionSet) {
   ASSERT_TRUE(target.OnResolved(&err));
 
   std::ostringstream stream;
-  std::vector<const Target*> targets;
-  targets.push_back(&target);
-  RustProjectWriter::RenderJSON(setup.build_settings(), targets, stream);
+  std::vector<const Target*> targets{&target};
+  RustProjectWriter::RenderJSON(setup.build_settings(),
+                                setup.toolchain()->label(), targets, stream);
   std::string out = stream.str();
 #if defined(OS_WIN)
   base::ReplaceSubstringsAfterOffset(&out, 0, "\r\n", "\n");
@@ -555,9 +555,9 @@ TEST_F(RustProjectJSONWriter, OneRustTargetWithEditionSetAlternate) {
   ASSERT_TRUE(target.OnResolved(&err));
 
   std::ostringstream stream;
-  std::vector<const Target*> targets;
-  targets.push_back(&target);
-  RustProjectWriter::RenderJSON(setup.build_settings(), targets, stream);
+  std::vector<const Target*> targets{&target};
+  RustProjectWriter::RenderJSON(setup.build_settings(),
+                                setup.toolchain()->label(), targets, stream);
   std::string out = stream.str();
 #if defined(OS_WIN)
   base::ReplaceSubstringsAfterOffset(&out, 0, "\r\n", "\n");
@@ -611,9 +611,9 @@ TEST_F(RustProjectJSONWriter, OneRustProcMacroTarget) {
   ASSERT_TRUE(target.OnResolved(&err));
 
   std::ostringstream stream;
-  std::vector<const Target*> targets;
-  targets.push_back(&target);
-  RustProjectWriter::RenderJSON(setup.build_settings(), targets, stream);
+  std::vector<const Target*> targets{&target};
+  RustProjectWriter::RenderJSON(setup.build_settings(),
+                                setup.toolchain()->label(), targets, stream);
   std::string out = stream.str();
 #if defined(OS_WIN)
   base::ReplaceSubstringsAfterOffset(&out, 0, "\r\n", "\n");
