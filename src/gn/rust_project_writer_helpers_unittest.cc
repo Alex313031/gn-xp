@@ -27,10 +27,10 @@ TEST_F(RustProjectWriterHelper, WriteCrates) {
   TestWithScope setup;
 
   CrateList crates;
-  Crate dep = Crate(SourceFile("/root/tortoise/lib.rs"), std::nullopt, 0,
-                    "//tortoise:bar", "2015");
-  Crate target = Crate(SourceFile("/root/hare/lib.rs"),
-                       OutputFile("gendir/hare/"), 1, "//hare:bar", "2015");
+  Crate dep(SourceFile("/root/tortoise/lib.rs"), {}, std::nullopt, 0,
+            "tortoise", "//tortoise:bar", "2015");
+  Crate target(SourceFile("/root/hare/lib.rs"), {}, OutputFile("gendir/hare/"),
+               1, "hare", "//hare:bar", "2015");
   target.AddDependency(0, "tortoise");
   target.AddConfigItem("unix");
   target.AddConfigItem("feature=\"test\"");

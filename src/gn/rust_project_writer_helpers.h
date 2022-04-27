@@ -25,7 +25,11 @@
 // Crate Index in the generated file
 using CrateIndex = size_t;
 
-using ConfigList = std::vector<std::string>;
+// List of targets for a crate. There is usually more than one since the same
+// crate can be built under multiple toolchains, test and non-test, etc.
+using TargetsVector = std::vector<const Target*>;
+
+using ConfigList = UniqueVector<std::string>;
 using Dependency = std::pair<CrateIndex, std::string>;
 using DependencyList = std::vector<Dependency>;
 
@@ -35,15 +39,19 @@ using DependencyList = std::vector<Dependency>;
 class Crate {
  public:
   Crate(SourceFile root,
+        TargetsVector targets,
         std::optional<OutputFile> gen_dir,
         CrateIndex index,
+        std::string name,
         std::string label,
         std::string edition)
       : root_(root),
-        gen_dir_(gen_dir),
+        targets_(std::move(targets)),
+        gen_dir_(std::move(gen_dir)),
         index_(index),
-        label_(label),
-        edition_(edition) {}
+        name_(std::move(name)),
+        label_(std::move(label)),
+        edition_(std::move(edition)) {}
 
   ~Crate() = default;
 
@@ -80,6 +88,9 @@ class Crate {
   // Returns the crate index.
   CrateIndex index() { return index_; };
 
+  // Returns the crate name.
+  const std::string& name() { return name_; }
+
   // Returns the displayable crate label.
   const std::string& label() { return label_; }
 
@@ -111,8 +122,10 @@ class Crate {
 
  private:
   SourceFile root_;
+  TargetsVector targets_;
   std::optional<OutputFile> gen_dir_;
   CrateIndex index_;
+  std::string name_;
   std::string label_;
   std::string edition_;
   ConfigList configs_;
@@ -125,7 +138,7 @@ class Crate {
 
 using CrateList = std::vector<Crate>;
 
-// Mapping of a sysroot crate (path) to it's index in the crates list.
+// Mapping of a sysroot crate (path) to its index in the crates list.
 using SysrootCrateIndexMap = std::unordered_map<std::string_view, CrateIndex>;
 
 // Mapping of a sysroot (path) to the mapping of each of the sysroot crates to
@@ -167,6 +180,5 @@ std::optional<std::string> FindArgValueAfterPrefix(
 std::vector<std::string> FindAllArgValuesAfterPrefix(
     const std::string& prefix,
     const std::vector<std::string>& args);
-
 
 #endif  // TOOLS_GN_RUST_PROJECT_WRITER_HELPERS_H_

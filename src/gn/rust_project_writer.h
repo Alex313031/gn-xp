@@ -26,6 +26,7 @@ class RustProjectWriter {
                                bool quiet,
                                Err* err);
   static void RenderJSON(const BuildSettings* build_settings,
+                         const Label& default_toolchain,
                          std::vector<const Target*>& all_targets,
                          std::ostream& rust_project);
 
