@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b8d8d847_e59ace73",
+        "filename": "src/gn/parse_tree.cc",
+        "patchSetId": 7
+      },
+      "lineNbr": 338,
+      "author": {
+        "id": 1000014
+      },
+      "writtenOn": "2022-04-27T20:16:16Z",
+      "side": 1,
+      "message": "spelling: \"warning\"",
+      "range": {
+        "startLine": 338,
+        "startChar": 50,
+        "endLine": 338,
+        "endChar": 56
+      },
+      "revId": "d64d49287a4496b34331c6dbb2931431be7f747d",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    }
+  ]
+}
