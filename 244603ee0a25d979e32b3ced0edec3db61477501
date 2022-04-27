@@ -16,6 +16,138 @@
       "message": "David, I\u0027d appreciate another review when you get a chance.",
       "revId": "244603ee0a25d979e32b3ced0edec3db61477501",
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7ffef569_5e0acd8a",
+        "filename": "src/gn/functions.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 974,
+      "author": {
+        "id": 1000030
+      },
+      "writtenOn": "2022-04-27T00:55:33Z",
+      "side": 1,
+      "message": "period?",
+      "range": {
+        "startLine": 974,
+        "startChar": 81,
+        "endLine": 974,
+        "endChar": 82
+      },
+      "revId": "244603ee0a25d979e32b3ced0edec3db61477501",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "48a1bf03_9aefbffa",
+        "filename": "src/gn/functions.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 976,
+      "author": {
+        "id": 1000030
+      },
+      "writtenOn": "2022-04-27T00:55:33Z",
+      "side": 1,
+      "message": "period?",
+      "range": {
+        "startLine": 976,
+        "startChar": 45,
+        "endLine": 976,
+        "endChar": 46
+      },
+      "revId": "244603ee0a25d979e32b3ced0edec3db61477501",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "41730e01_3a0e93e6",
+        "filename": "src/gn/functions.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 997,
+      "author": {
+        "id": 1000030
+      },
+      "writtenOn": "2022-04-27T00:55:33Z",
+      "side": 1,
+      "message": "quotation?",
+      "range": {
+        "startLine": 997,
+        "startChar": 6,
+        "endLine": 997,
+        "endChar": 10
+      },
+      "revId": "244603ee0a25d979e32b3ced0edec3db61477501",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "61b00217_609125a6",
+        "filename": "src/gn/functions.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 1014,
+      "author": {
+        "id": 1000030
+      },
+      "writtenOn": "2022-04-27T00:55:33Z",
+      "side": 1,
+      "message": "space around operator?",
+      "range": {
+        "startLine": 1014,
+        "startChar": 40,
+        "endLine": 1014,
+        "endChar": 43
+      },
+      "revId": "244603ee0a25d979e32b3ced0edec3db61477501",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "780e89fb_1ef421fd",
+        "filename": "src/gn/scope.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 1000030
+      },
+      "writtenOn": "2022-04-27T00:55:33Z",
+      "side": 1,
+      "message": "I think TemplateInvocationEntry needs to have full declaration of Location instead of forward declaration?",
+      "revId": "244603ee0a25d979e32b3ced0edec3db61477501",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b81c8bc4_7217906f",
+        "filename": "src/gn/scope.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 108,
+      "author": {
+        "id": 1000030
+      },
+      "writtenOn": "2022-04-27T00:55:33Z",
+      "side": 1,
+      "message": "include \u003cstring\u003e?",
+      "range": {
+        "startLine": 108,
+        "startChar": 9,
+        "endLine": 108,
+        "endChar": 15
+      },
+      "revId": "244603ee0a25d979e32b3ced0edec3db61477501",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
     }
   ]
 }
