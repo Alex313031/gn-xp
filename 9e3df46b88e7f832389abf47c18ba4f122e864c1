@@ -54,6 +54,23 @@
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "f528753a_43e899ea",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 6
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000014
+      },
+      "writtenOn": "2022-04-27T02:30:43Z",
+      "side": 1,
+      "message": "I spent some time thinking about this and I don\u0027t think we should do it.\n\nI think the implementation is subtle and \"clever\" (in a bad way). It makes it impossible (in a practical way) to look at pointers in a debugger. I think the amounts of speedups we\u0027re talking about don\u0027t justify going down to bit tricks on pointers in this application. It might make sense in some optimized data structure in an OS kernel, but for GN I think it\u0027s important that we maintain simple and easy to debug code.\n\nCan you please revert this change?",
+      "revId": "9e3df46b88e7f832389abf47c18ba4f122e864c1",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "865d3cfa_1d6c343f",
