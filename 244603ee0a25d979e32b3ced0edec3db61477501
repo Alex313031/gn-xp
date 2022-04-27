@@ -243,6 +243,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "fd180961_324448f8",
+        "filename": "src/gn/scope.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 1000030
+      },
+      "writtenOn": "2022-04-27T02:34:38Z",
+      "side": 1,
+      "message": "This is for style. \n\nI think this can be compiled because header for location is included indirectly, and removing this forward declaration doesn\u0027t break build too.",
+      "parentUuid": "2025b5ef_de37565c",
+      "revId": "244603ee0a25d979e32b3ced0edec3db61477501",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "b81c8bc4_7217906f",
         "filename": "src/gn/scope.h",
         "patchSetId": 2
@@ -278,6 +296,30 @@
       "side": 1,
       "message": "for style/convention? (this file is already using `std::string` without including \u003cstring\u003e (pulling it in via `string_view`?).",
       "parentUuid": "b81c8bc4_7217906f",
+      "range": {
+        "startLine": 108,
+        "startChar": 9,
+        "endLine": 108,
+        "endChar": 15
+      },
+      "revId": "244603ee0a25d979e32b3ced0edec3db61477501",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "92667e3a_b5eaeb71",
+        "filename": "src/gn/scope.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 108,
+      "author": {
+        "id": 1000030
+      },
+      "writtenOn": "2022-04-27T02:34:38Z",
+      "side": 1,
+      "message": "Yes. It is better to not rely on indirect include.",
+      "parentUuid": "2ea5d019_31dd8503",
       "range": {
         "startLine": 108,
         "startChar": 9,
