@@ -16,6 +16,23 @@
       "message": "It is simpler to revert all commits since they didn\u0027t change GN\u0027s behavior, and there are dependencies between some of the CLs. I\u0027ll try to find some time to rework the changes in a more acceptable form eventually.",
       "revId": "40ee56c446298443781fd16a3b0915e330daefd0",
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "fa7142ae_61515d9a",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000014
+      },
+      "writtenOn": "2022-04-27T22:52:09Z",
+      "side": 1,
+      "message": "Thanks!",
+      "revId": "40ee56c446298443781fd16a3b0915e330daefd0",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
     }
   ]
 }
