@@ -33,6 +33,24 @@
       "message": "g++ is also used on MinGW and msys, so maybe change this to\n\n  if not (platform.is_aix() or platform.is_msys() or platform.is_mingw()):",
       "revId": "1706163efd8bb3e051b627437c64a946e769da60",
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d549dd90_872a259c",
+        "filename": "build/gen.py",
+        "patchSetId": 4
+      },
+      "lineNbr": 447,
+      "author": {
+        "id": 1000067
+      },
+      "writtenOn": "2022-04-27T10:13:24Z",
+      "side": 1,
+      "message": "Independently from this CL, I suggest a new `--toolset \u003cname\u003e` argument that defines the type of compiler being used, with a default value determined by the value of `platform`, this would make most of the code here clearer, and will get rid of the confusing `--host \u003cname\u003e` argument.\n\nWhat do you think? I can prep a CL to do that.",
+      "parentUuid": "1da8b570_c442def4",
+      "revId": "1706163efd8bb3e051b627437c64a946e769da60",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
     }
   ]
 }
