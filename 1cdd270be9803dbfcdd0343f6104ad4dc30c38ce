@@ -201,6 +201,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "fc8fb6c1_6f64ee25",
+        "filename": "src/gn/resolved_target_data.cc",
+        "patchSetId": 6
+      },
+      "lineNbr": 420,
+      "author": {
+        "id": 1000014
+      },
+      "writtenOn": "2022-04-27T19:55:54Z",
+      "side": 1,
+      "message": "In this case it\u0027s just acting as getters as far as I can see. And you wouldn\u0027t normally have a std::string member and have the getter return a std::string_view.\n\nIn the patch that added it https://gn-review.googlesource.com/c/gn/+/13621\nI commented that the implementation doesn\u0027t have the two main properties I would use a std::string_view for: referring to substrings with no copies, and allowing different types of inputs with no copies.\n\nThe view classes always make me nervous because it\u0027s so easy to mess up the memory management. As such, I would normally only use them either as an input parameter to a function or in some well-scoped code refer to sub views. But as mentioned above, neither of these cases are supported by this implementation. Without those benefits, I feel like we get mostly the downsides of the view class. With a reference, at least you can tell more explicitly in the type name that you don\u0027t own it.\n\nI also felt like the implementation of ImmutableVector would be more clear without having to support the current view implementation.",
+      "parentUuid": "30ea9b07_ae8f7dd1",
+      "range": {
+        "startLine": 420,
+        "startChar": 0,
+        "endLine": 420,
+        "endChar": 30
+      },
+      "revId": "1cdd270be9803dbfcdd0343f6104ad4dc30c38ce",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "9a34f588_f999b5d8",
         "filename": "src/gn/resolved_target_deps.h",
         "patchSetId": 6
@@ -265,6 +289,23 @@
       "side": 1,
       "message": "Oh, I see. Filed https://crbug.com/1320172",
       "parentUuid": "db37b12a_1b868fb9",
+      "revId": "1cdd270be9803dbfcdd0343f6104ad4dc30c38ce",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "fe40dd7e_d544831a",
+        "filename": "src/gn/resolved_target_deps.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 85,
+      "author": {
+        "id": 1000014
+      },
+      "writtenOn": "2022-04-27T19:55:54Z",
+      "side": 1,
+      "message": "Can you add a comment above here on the format of this? (public, followed by private, followed by data).",
       "revId": "1cdd270be9803dbfcdd0343f6104ad4dc30c38ce",
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
     },
