@@ -225,6 +225,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "c1540b29_4251b429",
+        "filename": "src/gn/resolved_target_data.cc",
+        "patchSetId": 6
+      },
+      "lineNbr": 420,
+      "author": {
+        "id": 1002072
+      },
+      "writtenOn": "2022-04-27T20:03:37Z",
+      "side": 1,
+      "message": "Thanks for writing this out, it makes sense. I hadn\u0027t properly formulated a collection of view purposes and risks like this. I would add a third use as an assignable non-null pointer, but these other two are important as well.\n\nI\u0027d certainly like to understand what specific code this will enable that a reference to the container would not.",
+      "parentUuid": "fc8fb6c1_6f64ee25",
+      "range": {
+        "startLine": 420,
+        "startChar": 0,
+        "endLine": 420,
+        "endChar": 30
+      },
+      "revId": "1cdd270be9803dbfcdd0343f6104ad4dc30c38ce",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "9a34f588_f999b5d8",
         "filename": "src/gn/resolved_target_deps.h",
         "patchSetId": 6
