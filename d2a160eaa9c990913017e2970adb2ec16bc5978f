@@ -139,6 +139,24 @@
       "parentUuid": "590a6eb7_472fb7dc",
       "revId": "d2a160eaa9c990913017e2970adb2ec16bc5978f",
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a0816d49_aef0f09d",
+        "filename": "src/gn/scope.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 337,
+      "author": {
+        "id": 1000397
+      },
+      "writtenOn": "2022-04-28T01:29:57Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "0e7c045d_d0ce407e",
+      "revId": "d2a160eaa9c990913017e2970adb2ec16bc5978f",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
     }
   ]
 }
