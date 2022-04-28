@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "6100f666_3d296037",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 10
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1002177
+      },
+      "writtenOn": "2022-04-28T14:11:58Z",
+      "side": 1,
+      "message": "With this change, build is failing on ubuntu 18.04. \n\nUnknown argument -Wextra-semi-stmt\n\n\nI used apt to install clang",
+      "revId": "260a79d746e8b3eecf15b8808db5ea0da59ad088",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    }
+  ]
+}
