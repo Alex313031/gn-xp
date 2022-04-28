@@ -35,6 +35,23 @@
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "32096bdd_748ce358",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1002152
+      },
+      "writtenOn": "2022-04-28T21:59:51Z",
+      "side": 1,
+      "message": "so I finally tracked down what I was doing wrong, and theoretically this error message was justified. I had transitively included one bundle in another bundle, so that some bundle_data rules were somehow in the dependency tree twice. Removing the extraneous dependency fixed the issue.\n\nHowever, the error message was really confusing and it took a lot of printf() statements and building GN from source to figure that out!",
+      "revId": "c2c8c70f007b36372aa749f2935a502881dd5b1a",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "f9d4eb83_088d3b9a",
