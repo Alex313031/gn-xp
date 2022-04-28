@@ -76,6 +76,30 @@
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "fcd7481a_2ca806b7",
+        "filename": "src/gn/scope.cc",
+        "patchSetId": 6
+      },
+      "lineNbr": 575,
+      "author": {
+        "id": 1000397
+      },
+      "writtenOn": "2022-04-28T01:27:53Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ef0b2c32_d6332956",
+      "range": {
+        "startLine": 575,
+        "startChar": 0,
+        "endLine": 575,
+        "endChar": 10
+      },
+      "revId": "91d09609d9aa44d7f0c0d631a654c27a35671d39",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "73309dd2_3496aac7",
@@ -89,6 +113,30 @@
       "writtenOn": "2022-04-27T20:07:16Z",
       "side": 1,
       "message": "Can you call this \"Set...\" instead? \"Add\" to me implies it supports more than one.",
+      "range": {
+        "startLine": 340,
+        "startChar": 0,
+        "endLine": 340,
+        "endChar": 10
+      },
+      "revId": "91d09609d9aa44d7f0c0d631a654c27a35671d39",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d1cf1e2b_3e8ff45d",
+        "filename": "src/gn/scope.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 340,
+      "author": {
+        "id": 1000397
+      },
+      "writtenOn": "2022-04-28T01:27:53Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "73309dd2_3496aac7",
       "range": {
         "startLine": 340,
         "startChar": 0,
