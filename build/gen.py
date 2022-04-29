@@ -447,7 +447,7 @@ def WriteGNNinja(path, platform, host, options, args_list):
     ])
 
     # flag not supported by gcc/g++.
-    if not (platform.is_aix() or platform.is_msys() or platform.is_mingw()):
+    if cxx == 'clang++':
       cflags.extend(['-Wrange-loop-analysis', '-Wextra-semi-stmt'])
 
     if platform.is_linux() or platform.is_mingw() or platform.is_msys():
