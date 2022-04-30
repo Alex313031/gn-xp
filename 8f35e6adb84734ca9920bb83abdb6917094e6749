@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "737f2601_21f82822",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000014
+      },
+      "writtenOn": "2022-04-30T03:02:32Z",
+      "side": 1,
+      "message": "I\u0027m fine with this but I\u0027m confused by the CL comment. You say that it\u0027s not recognized by older versions of Clang, but the code just checks for \"clang++\". Is there a version check that needs to be in there, or are those older versions of Clang not called \"clang++\"?",
+      "revId": "8f35e6adb84734ca9920bb83abdb6917094e6749",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    }
+  ]
+}
