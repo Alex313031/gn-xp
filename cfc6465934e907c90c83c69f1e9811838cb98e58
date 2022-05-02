@@ -38,6 +38,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "18589e1a_04a455e5",
+        "filename": "src/gn/rust_project_writer.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 263,
+      "author": {
+        "id": 1000397
+      },
+      "writtenOn": "2022-05-02T21:43:56Z",
+      "side": 1,
+      "message": "Given that `src/lib.rs` and `src/main.rs` are hardcoded \"special cases\" in Cargo:\nhttps://doc.rust-lang.org/cargo/reference/cargo-targets.html#configuring-a-target\n\nWe could factor those in for identifying the crates (or rather, the package of crates that a Cargo.toml file describes).\n\nCould you list the non-preferred targets\u0027 info in a sub-field in rust-project.json?  and see what we find in it (no need to make this \"real\" tests, I mostly just want to look at what we end up with, and compare them).\n- path to file (lib.rs, main.rs, foo.rs)\n- crate type\n- features",
+      "parentUuid": "ca6314af_a2205186",
+      "revId": "cfc6465934e907c90c83c69f1e9811838cb98e58",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "576ce40a_563705d5",
         "filename": "src/gn/rust_project_writer.cc",
         "patchSetId": 2
@@ -114,6 +132,24 @@
       "side": 1,
       "message": "At this point we have all the Rust targets in the map (binaries and libraries, since IsBinary returns true for both). So it\u0027s just the sysroots that are added on the fly.\n\nI\u0027m doing it in two passes like this so that we can select the preferred target from `info.targets`. One pass would not work because given a single target, we don\u0027t know if that will end up being the preferred target or in the same toolchain as the preferred target.",
       "parentUuid": "b1cdfe3b_ff01319e",
+      "revId": "cfc6465934e907c90c83c69f1e9811838cb98e58",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7ec5db27_51f2e8b4",
+        "filename": "src/gn/rust_project_writer.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 588,
+      "author": {
+        "id": 1000397
+      },
+      "writtenOn": "2022-05-02T21:43:56Z",
+      "side": 1,
+      "message": "ahhh, right.  I even validated that last week.\n\nHmm. So why do we end up needing the \"seen\" field?  If our direct dependencies are all visible by src_root, we don\u0027t need to recurse at all, and can just add the sysroots and then create the crate entries?",
+      "parentUuid": "5584ca28_f0f029b1",
       "revId": "cfc6465934e907c90c83c69f1e9811838cb98e58",
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
     },
