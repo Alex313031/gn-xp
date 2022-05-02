@@ -1,0 +1,84 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "23fd5534_76679566",
+        "filename": "src/gn/rust_project_writer.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 263,
+      "author": {
+        "id": 1000397
+      },
+      "writtenOn": "2022-05-02T19:18:09Z",
+      "side": 1,
+      "message": "We might want to favor libs over binaries, too (although I don\u0027t think that will change much, if anything, for RA).  We might be able to just merge those directly since Cargo-style projects can include a lib and (one, non-test) binary as part of the same crate, but other associated binaries need to be separately called out.\n\nhttps://doc.rust-lang.org/cargo/guide/project-layout.html#package-layout",
+      "revId": "cfc6465934e907c90c83c69f1e9811838cb98e58",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "576ce40a_563705d5",
+        "filename": "src/gn/rust_project_writer.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 581,
+      "author": {
+        "id": 1000397
+      },
+      "writtenOn": "2022-05-02T19:18:09Z",
+      "side": 1,
+      "message": "Does this automatically create a default entry if `crate_root` isn\u0027t found in the map?",
+      "range": {
+        "startLine": 581,
+        "startChar": 4,
+        "endLine": 581,
+        "endChar": 22
+      },
+      "revId": "cfc6465934e907c90c83c69f1e9811838cb98e58",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b1cdfe3b_ff01319e",
+        "filename": "src/gn/rust_project_writer.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 588,
+      "author": {
+        "id": 1000397
+      },
+      "writtenOn": "2022-05-02T19:18:09Z",
+      "side": 1,
+      "message": "At this point, we only have the binaries in the map, and we\u0027re going to walk their deps to find and create the rlibs and sysroot entries?",
+      "revId": "cfc6465934e907c90c83c69f1e9811838cb98e58",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "05d0ab25_025e3854",
+        "filename": "src/gn/rust_project_writer_unittest.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 220,
+      "author": {
+        "id": 1000397
+      },
+      "writtenOn": "2022-05-02T19:18:09Z",
+      "side": 1,
+      "message": "Did these end up changing to being sorted by `source_root` order, and not traversal order, due to the map?",
+      "range": {
+        "startLine": 220,
+        "startChar": 0,
+        "endLine": 220,
+        "endChar": 53
+      },
+      "revId": "cfc6465934e907c90c83c69f1e9811838cb98e58",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    }
+  ]
+}
