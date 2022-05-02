@@ -20,6 +20,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "ca6314af_a2205186",
+        "filename": "src/gn/rust_project_writer.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 263,
+      "author": {
+        "id": 1002192
+      },
+      "writtenOn": "2022-05-02T20:26:11Z",
+      "side": 1,
+      "message": "Ok so option 1 is:\n\n1. Prefer default toolchain\n2. Prefer non-testonly\n3. Prefer RustValues::CrateType::CRATE_RLIB (or penalize CRATE_BIN?)\n\nOption 2 is to merge them -- by treating */main.rs as if it was */lib.rs? Or is there a way of doing it without hardcoding \"main.rs\" and \"lib.rs\"?",
+      "parentUuid": "23fd5534_76679566",
+      "revId": "cfc6465934e907c90c83c69f1e9811838cb98e58",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "576ce40a_563705d5",
         "filename": "src/gn/rust_project_writer.cc",
         "patchSetId": 2
@@ -31,6 +49,30 @@
       "writtenOn": "2022-05-02T19:18:09Z",
       "side": 1,
       "message": "Does this automatically create a default entry if `crate_root` isn\u0027t found in the map?",
+      "range": {
+        "startLine": 581,
+        "startChar": 4,
+        "endLine": 581,
+        "endChar": 22
+      },
+      "revId": "cfc6465934e907c90c83c69f1e9811838cb98e58",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b19d0997_49a4a781",
+        "filename": "src/gn/rust_project_writer.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 581,
+      "author": {
+        "id": 1002192
+      },
+      "writtenOn": "2022-05-02T20:26:11Z",
+      "side": 1,
+      "message": "Yup, that\u0027s the C++ map behavior.",
+      "parentUuid": "576ce40a_563705d5",
       "range": {
         "startLine": 581,
         "startChar": 4,
@@ -60,6 +102,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "5584ca28_f0f029b1",
+        "filename": "src/gn/rust_project_writer.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 588,
+      "author": {
+        "id": 1002192
+      },
+      "writtenOn": "2022-05-02T20:26:11Z",
+      "side": 1,
+      "message": "At this point we have all the Rust targets in the map (binaries and libraries, since IsBinary returns true for both). So it\u0027s just the sysroots that are added on the fly.\n\nI\u0027m doing it in two passes like this so that we can select the preferred target from `info.targets`. One pass would not work because given a single target, we don\u0027t know if that will end up being the preferred target or in the same toolchain as the preferred target.",
+      "parentUuid": "b1cdfe3b_ff01319e",
+      "revId": "cfc6465934e907c90c83c69f1e9811838cb98e58",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "05d0ab25_025e3854",
         "filename": "src/gn/rust_project_writer_unittest.cc",
         "patchSetId": 2
@@ -71,6 +131,30 @@
       "writtenOn": "2022-05-02T19:18:09Z",
       "side": 1,
       "message": "Did these end up changing to being sorted by `source_root` order, and not traversal order, due to the map?",
+      "range": {
+        "startLine": 220,
+        "startChar": 0,
+        "endLine": 220,
+        "endChar": 53
+      },
+      "revId": "cfc6465934e907c90c83c69f1e9811838cb98e58",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4645071d_eee8bc63",
+        "filename": "src/gn/rust_project_writer_unittest.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 220,
+      "author": {
+        "id": 1002192
+      },
+      "writtenOn": "2022-05-02T20:26:11Z",
+      "side": 1,
+      "message": "It\u0027s still sorted by traversal/dependency order. Here we have\n\n    target (hare) -\u003e dep (tortoise)\n    target (hare) -\u003e dep2 (achilles)\n\nSo both old (tortoise, achilles, hare) and new (achilles, tortoise, hare) respect dependency order. Previously it was secondarily sorted by the vector order of `builder.GetAllResolvedTargets()`, now it\u0027s secondarily sorted by `source_root`.",
+      "parentUuid": "05d0ab25_025e3854",
       "range": {
         "startLine": 220,
         "startChar": 0,
