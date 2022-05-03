@@ -56,6 +56,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "ca32fbf2_524136ba",
+        "filename": "src/gn/rust_project_writer.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 263,
+      "author": {
+        "id": 1000427
+      },
+      "writtenOn": "2022-05-03T23:12:03Z",
+      "side": 1,
+      "message": "The behavior here is also going to depend on the use-cases we want to support, right? I think we still need to agree on what folder structures we plan to support and which we don\u0027t.\n\nMy biggest concern with deciding on this is how this will affect the other projects since fuchsia isn\u0027t the only one using these gn rules.\n\nWe can also publish some best practices on organizing code for the best IDE support. E.g. documenting that we don\u0027t support multiple binaries in the same dir, and encouraging moving common code into a lib that both/multiple binaries support rather than using features to toggle some modules on/off. This would keep RA happier and also allow people to configure their code how they please it they don\u0027t care about using RA.",
+      "parentUuid": "18589e1a_04a455e5",
+      "revId": "cfc6465934e907c90c83c69f1e9811838cb98e58",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "576ce40a_563705d5",
         "filename": "src/gn/rust_project_writer.cc",
         "patchSetId": 2
