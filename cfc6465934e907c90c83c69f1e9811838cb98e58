@@ -74,6 +74,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "c3db107f_3ffd2fcd",
+        "filename": "src/gn/rust_project_writer.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 263,
+      "author": {
+        "id": 1002192
+      },
+      "writtenOn": "2022-05-04T00:53:43Z",
+      "side": 1,
+      "message": "Currently (patchset 2) this CL groups everything by crate_root. One way to merge main.rs would be to group by crate_root.replace(/\\/main\\.rs$/, \"/lib.rs\"). However, I\u0027m inclined to just group by dirname(crate_root). I think this makes most sense since rust-analyzer infers which crate a file belongs to by directory. So even if you had multiple binaries src/{a,b}.rs in the same directory:\n\n1) If we don\u0027t merge them, then rust-analyzer will pick the wrong crate for one of them. E.g. if a.rs comes first in rust-project.json, it will assume b.rs belongs to that crate as well, and fail to find deps listed only for b.rs. I\u0027ve verified this.\n\n2) If we merge them, the only downside is you can\u0027t specify different configs for them, or different deps (e.g. in the strange case where both import a crate named \"foo\" but the two foos are different). The same tradeoff is made with merging unit tests (whose crate_root, not just dirname(crate_root), is the same). I don\u0027t think it\u0027s much of a downside because in (1) you can\u0027t rely on rust-analyzer to pick the right crate entry anyway.",
+      "parentUuid": "ca32fbf2_524136ba",
+      "revId": "cfc6465934e907c90c83c69f1e9811838cb98e58",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "576ce40a_563705d5",
         "filename": "src/gn/rust_project_writer.cc",
         "patchSetId": 2
@@ -168,6 +186,24 @@
       "side": 1,
       "message": "ahhh, right.  I even validated that last week.\n\nHmm. So why do we end up needing the \"seen\" field?  If our direct dependencies are all visible by src_root, we don\u0027t need to recurse at all, and can just add the sysroots and then create the crate entries?",
       "parentUuid": "5584ca28_f0f029b1",
+      "revId": "cfc6465934e907c90c83c69f1e9811838cb98e58",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9eacd4e5_96c7806f",
+        "filename": "src/gn/rust_project_writer.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 588,
+      "author": {
+        "id": 1002192
+      },
+      "writtenOn": "2022-05-04T00:53:43Z",
+      "side": 1,
+      "message": "The recursion is so that crates get their info.index allocated first, so we can retrieve it for `crate.AddDependency` at the end of `AddCrate`.\n\nWe could instead allocate all indices in the first pass. Then the final rust-project.json order would be determined by `builder.GetAllResolvedTargets()` rather than dependency order, and sysroots would be at the end. Or it could be sorted by source_root if we allocated indices in a loop on the map. But then we\u0027d also need to detect cycles, which the recursion currently does for us.",
+      "parentUuid": "7ec5db27_51f2e8b4",
       "revId": "cfc6465934e907c90c83c69f1e9811838cb98e58",
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
     },
