@@ -16,6 +16,24 @@
       "message": "With this change, build is failing on ubuntu 18.04. \n\nUnknown argument -Wextra-semi-stmt\n\n\nI used apt to install clang",
       "revId": "260a79d746e8b3eecf15b8808db5ea0da59ad088",
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e6848896_4c7c7fc7",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 10
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000030
+      },
+      "writtenOn": "2022-05-06T07:25:38Z",
+      "side": 1,
+      "message": "What happen if you pass -Wno-unknown-warning-option via CFLAGS envvar when you run gen.py?\n\nOr do you want me to add option to ignore unknown warnings in gen.py?",
+      "parentUuid": "6100f666_3d296037",
+      "revId": "260a79d746e8b3eecf15b8808db5ea0da59ad088",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
     }
   ]
 }
