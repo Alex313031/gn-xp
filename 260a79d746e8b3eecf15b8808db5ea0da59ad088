@@ -34,6 +34,24 @@
       "parentUuid": "6100f666_3d296037",
       "revId": "260a79d746e8b3eecf15b8808db5ea0da59ad088",
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ba70c155_68ef9991",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 10
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1002177
+      },
+      "writtenOn": "2022-05-06T15:39:43Z",
+      "side": 1,
+      "message": "I suggest the later. Everyone follows the office document for building and installing gn in their system. Either update the document about possible unknown warning and give a work around or fixed it as part of existing build step itself.",
+      "parentUuid": "e6848896_4c7c7fc7",
+      "revId": "260a79d746e8b3eecf15b8808db5ea0da59ad088",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
     }
   ]
 }
