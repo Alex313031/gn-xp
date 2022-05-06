@@ -3,6 +3,23 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "c3d50e27_dbccd6f1",
+        "filename": "src/gn/rust_project_writer.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 217,
+      "author": {
+        "id": 1000030
+      },
+      "writtenOn": "2022-05-06T07:33:40Z",
+      "side": 1,
+      "message": "why not use returned value of emplace_back?",
+      "revId": "cfc6465934e907c90c83c69f1e9811838cb98e58",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "23fd5534_76679566",
         "filename": "src/gn/rust_project_writer.cc",
         "patchSetId": 2
