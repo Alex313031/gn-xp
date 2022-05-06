@@ -440,7 +440,6 @@ def WriteGNNinja(path, platform, host, options, args_list):
         '-Wextra',
         '-Wno-unused-parameter',
 
-        '-Wextra-semi',
         '-Wundef',
 
         '-std=c++17'
@@ -448,7 +447,7 @@ def WriteGNNinja(path, platform, host, options, args_list):
 
     # flags not supported by gcc/g++.
     if cxx == 'clang++':
-      cflags.extend(['-Wrange-loop-analysis', '-Wextra-semi-stmt'])
+      cflags.extend(['-Wrange-loop-analysis'])
 
     if platform.is_linux() or platform.is_mingw() or platform.is_msys():
       ldflags.append('-Wl,--as-needed')

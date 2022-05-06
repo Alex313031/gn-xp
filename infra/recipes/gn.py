@@ -69,7 +69,12 @@ def _get_compilation_environment(api, target, cipd_dir):
         'CC': cipd_dir.join('bin', 'clang'),
         'CXX': cipd_dir.join('bin', 'clang++'),
         'AR': cipd_dir.join('bin', 'llvm-ar'),
-        'CFLAGS': '%s %s' % (triple, sysroot),
+        'CFLAGS': ' '.join([
+          triple,
+          sysroot,
+          '-Wextra-semi',
+          '-Wextra-semi-stmt',
+        ]),
         'LDFLAGS': '%s %s -static-libstdc++' % (triple, sysroot),
     }
   elif target.is_mac:

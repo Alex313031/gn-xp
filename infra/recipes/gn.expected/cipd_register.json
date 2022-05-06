@@ -318,7 +318,7 @@
     "env": {
       "AR": "[START_DIR]/cipd/bin/llvm-ar",
       "CC": "[START_DIR]/cipd/bin/clang",
-      "CFLAGS": "--target=x86_64-linux-gnu --sysroot=[START_DIR]/cipd/sysroot",
+      "CFLAGS": "--target=x86_64-linux-gnu --sysroot=[START_DIR]/cipd/sysroot -Wextra-semi -Wextra-semi-stmt",
       "CXX": "[START_DIR]/cipd/bin/clang++",
       "LDFLAGS": "--target=x86_64-linux-gnu --sysroot=[START_DIR]/cipd/sysroot -static-libstdc++"
     },
@@ -348,7 +348,7 @@
     "env": {
       "AR": "[START_DIR]/cipd/bin/llvm-ar",
       "CC": "[START_DIR]/cipd/bin/clang",
-      "CFLAGS": "--target=x86_64-linux-gnu --sysroot=[START_DIR]/cipd/sysroot",
+      "CFLAGS": "--target=x86_64-linux-gnu --sysroot=[START_DIR]/cipd/sysroot -Wextra-semi -Wextra-semi-stmt",
       "CXX": "[START_DIR]/cipd/bin/clang++",
       "LDFLAGS": "--target=x86_64-linux-gnu --sysroot=[START_DIR]/cipd/sysroot -static-libstdc++"
     },
@@ -391,7 +391,7 @@
     "env": {
       "AR": "[START_DIR]/cipd/bin/llvm-ar",
       "CC": "[START_DIR]/cipd/bin/clang",
-      "CFLAGS": "--target=aarch64-linux-gnu --sysroot=[START_DIR]/cipd/sysroot",
+      "CFLAGS": "--target=aarch64-linux-gnu --sysroot=[START_DIR]/cipd/sysroot -Wextra-semi -Wextra-semi-stmt",
       "CXX": "[START_DIR]/cipd/bin/clang++",
       "LDFLAGS": "--target=aarch64-linux-gnu --sysroot=[START_DIR]/cipd/sysroot -static-libstdc++"
     },
@@ -421,7 +421,7 @@
     "env": {
       "AR": "[START_DIR]/cipd/bin/llvm-ar",
       "CC": "[START_DIR]/cipd/bin/clang",
-      "CFLAGS": "--target=aarch64-linux-gnu --sysroot=[START_DIR]/cipd/sysroot",
+      "CFLAGS": "--target=aarch64-linux-gnu --sysroot=[START_DIR]/cipd/sysroot -Wextra-semi -Wextra-semi-stmt",
       "CXX": "[START_DIR]/cipd/bin/clang++",
       "LDFLAGS": "--target=aarch64-linux-gnu --sysroot=[START_DIR]/cipd/sysroot -static-libstdc++"
     },
@@ -464,7 +464,7 @@
     "env": {
       "AR": "[START_DIR]/cipd/bin/llvm-ar",
       "CC": "[START_DIR]/cipd/bin/clang",
-      "CFLAGS": "--target=x86_64-linux-gnu --sysroot=[START_DIR]/cipd/sysroot",
+      "CFLAGS": "--target=x86_64-linux-gnu --sysroot=[START_DIR]/cipd/sysroot -Wextra-semi -Wextra-semi-stmt",
       "CXX": "[START_DIR]/cipd/bin/clang++",
       "LDFLAGS": "--target=x86_64-linux-gnu --sysroot=[START_DIR]/cipd/sysroot -static-libstdc++"
     },
@@ -495,7 +495,7 @@
     "env": {
       "AR": "[START_DIR]/cipd/bin/llvm-ar",
       "CC": "[START_DIR]/cipd/bin/clang",
-      "CFLAGS": "--target=x86_64-linux-gnu --sysroot=[START_DIR]/cipd/sysroot",
+      "CFLAGS": "--target=x86_64-linux-gnu --sysroot=[START_DIR]/cipd/sysroot -Wextra-semi -Wextra-semi-stmt",
       "CXX": "[START_DIR]/cipd/bin/clang++",
       "LDFLAGS": "--target=x86_64-linux-gnu --sysroot=[START_DIR]/cipd/sysroot -static-libstdc++"
     },
@@ -524,7 +524,7 @@
     "env": {
       "AR": "[START_DIR]/cipd/bin/llvm-ar",
       "CC": "[START_DIR]/cipd/bin/clang",
-      "CFLAGS": "--target=x86_64-linux-gnu --sysroot=[START_DIR]/cipd/sysroot",
+      "CFLAGS": "--target=x86_64-linux-gnu --sysroot=[START_DIR]/cipd/sysroot -Wextra-semi -Wextra-semi-stmt",
       "CXX": "[START_DIR]/cipd/bin/clang++",
       "LDFLAGS": "--target=x86_64-linux-gnu --sysroot=[START_DIR]/cipd/sysroot -static-libstdc++"
     },
@@ -569,7 +569,7 @@
     "env": {
       "AR": "[START_DIR]/cipd/bin/llvm-ar",
       "CC": "[START_DIR]/cipd/bin/clang",
-      "CFLAGS": "--target=x86_64-linux-gnu --sysroot=[START_DIR]/cipd/sysroot",
+      "CFLAGS": "--target=x86_64-linux-gnu --sysroot=[START_DIR]/cipd/sysroot -Wextra-semi -Wextra-semi-stmt",
       "CXX": "[START_DIR]/cipd/bin/clang++",
       "LDFLAGS": "--target=x86_64-linux-gnu --sysroot=[START_DIR]/cipd/sysroot -static-libstdc++"
     },
@@ -600,7 +600,7 @@
     "env": {
       "AR": "[START_DIR]/cipd/bin/llvm-ar",
       "CC": "[START_DIR]/cipd/bin/clang",
-      "CFLAGS": "--target=x86_64-linux-gnu --sysroot=[START_DIR]/cipd/sysroot",
+      "CFLAGS": "--target=x86_64-linux-gnu --sysroot=[START_DIR]/cipd/sysroot -Wextra-semi -Wextra-semi-stmt",
       "CXX": "[START_DIR]/cipd/bin/clang++",
       "LDFLAGS": "--target=x86_64-linux-gnu --sysroot=[START_DIR]/cipd/sysroot -static-libstdc++"
     },
@@ -629,7 +629,7 @@
     "env": {
       "AR": "[START_DIR]/cipd/bin/llvm-ar",
       "CC": "[START_DIR]/cipd/bin/clang",
-      "CFLAGS": "--target=x86_64-linux-gnu --sysroot=[START_DIR]/cipd/sysroot",
+      "CFLAGS": "--target=x86_64-linux-gnu --sysroot=[START_DIR]/cipd/sysroot -Wextra-semi -Wextra-semi-stmt",
       "CXX": "[START_DIR]/cipd/bin/clang++",
       "LDFLAGS": "--target=x86_64-linux-gnu --sysroot=[START_DIR]/cipd/sysroot -static-libstdc++"
     },
@@ -674,7 +674,7 @@
     "env": {
       "AR": "[START_DIR]/cipd/bin/llvm-ar",
       "CC": "[START_DIR]/cipd/bin/clang",
-      "CFLAGS": "--target=x86_64-linux-gnu --sysroot=[START_DIR]/cipd/sysroot",
+      "CFLAGS": "--target=x86_64-linux-gnu --sysroot=[START_DIR]/cipd/sysroot -Wextra-semi -Wextra-semi-stmt",
       "CXX": "[START_DIR]/cipd/bin/clang++",
       "LDFLAGS": "--target=x86_64-linux-gnu --sysroot=[START_DIR]/cipd/sysroot -static-libstdc++"
     },
@@ -716,7 +716,7 @@
     "env": {
       "AR": "[START_DIR]/cipd/bin/llvm-ar",
       "CC": "[START_DIR]/cipd/bin/clang",
-      "CFLAGS": "--target=x86_64-linux-gnu --sysroot=[START_DIR]/cipd/sysroot",
+      "CFLAGS": "--target=x86_64-linux-gnu --sysroot=[START_DIR]/cipd/sysroot -Wextra-semi -Wextra-semi-stmt",
       "CXX": "[START_DIR]/cipd/bin/clang++",
       "LDFLAGS": "--target=x86_64-linux-gnu --sysroot=[START_DIR]/cipd/sysroot -static-libstdc++"
     },
@@ -759,7 +759,7 @@
     "env": {
       "AR": "[START_DIR]/cipd/bin/llvm-ar",
       "CC": "[START_DIR]/cipd/bin/clang",
-      "CFLAGS": "--target=x86_64-linux-gnu --sysroot=[START_DIR]/cipd/sysroot",
+      "CFLAGS": "--target=x86_64-linux-gnu --sysroot=[START_DIR]/cipd/sysroot -Wextra-semi -Wextra-semi-stmt",
       "CXX": "[START_DIR]/cipd/bin/clang++",
       "LDFLAGS": "--target=x86_64-linux-gnu --sysroot=[START_DIR]/cipd/sysroot -static-libstdc++"
     },
@@ -808,7 +808,7 @@
     "env": {
       "AR": "[START_DIR]/cipd/bin/llvm-ar",
       "CC": "[START_DIR]/cipd/bin/clang",
-      "CFLAGS": "--target=aarch64-linux-gnu --sysroot=[START_DIR]/cipd/sysroot",
+      "CFLAGS": "--target=aarch64-linux-gnu --sysroot=[START_DIR]/cipd/sysroot -Wextra-semi -Wextra-semi-stmt",
       "CXX": "[START_DIR]/cipd/bin/clang++",
       "LDFLAGS": "--target=aarch64-linux-gnu --sysroot=[START_DIR]/cipd/sysroot -static-libstdc++"
     },
@@ -839,7 +839,7 @@
     "env": {
       "AR": "[START_DIR]/cipd/bin/llvm-ar",
       "CC": "[START_DIR]/cipd/bin/clang",
-      "CFLAGS": "--target=aarch64-linux-gnu --sysroot=[START_DIR]/cipd/sysroot",
+      "CFLAGS": "--target=aarch64-linux-gnu --sysroot=[START_DIR]/cipd/sysroot -Wextra-semi -Wextra-semi-stmt",
       "CXX": "[START_DIR]/cipd/bin/clang++",
       "LDFLAGS": "--target=aarch64-linux-gnu --sysroot=[START_DIR]/cipd/sysroot -static-libstdc++"
     },
@@ -884,7 +884,7 @@
     "env": {
       "AR": "[START_DIR]/cipd/bin/llvm-ar",
       "CC": "[START_DIR]/cipd/bin/clang",
-      "CFLAGS": "--target=aarch64-linux-gnu --sysroot=[START_DIR]/cipd/sysroot",
+      "CFLAGS": "--target=aarch64-linux-gnu --sysroot=[START_DIR]/cipd/sysroot -Wextra-semi -Wextra-semi-stmt",
       "CXX": "[START_DIR]/cipd/bin/clang++",
       "LDFLAGS": "--target=aarch64-linux-gnu --sysroot=[START_DIR]/cipd/sysroot -static-libstdc++"
     },
@@ -926,7 +926,7 @@
     "env": {
       "AR": "[START_DIR]/cipd/bin/llvm-ar",
       "CC": "[START_DIR]/cipd/bin/clang",
-      "CFLAGS": "--target=aarch64-linux-gnu --sysroot=[START_DIR]/cipd/sysroot",
+      "CFLAGS": "--target=aarch64-linux-gnu --sysroot=[START_DIR]/cipd/sysroot -Wextra-semi -Wextra-semi-stmt",
       "CXX": "[START_DIR]/cipd/bin/clang++",
       "LDFLAGS": "--target=aarch64-linux-gnu --sysroot=[START_DIR]/cipd/sysroot -static-libstdc++"
     },
