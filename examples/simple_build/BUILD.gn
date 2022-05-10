@@ -26,3 +26,7 @@ static_library("hello_static") {
     "hello_static.h",
   ]
 }
+
+group("concat") {
+  deps = [ "concat" ]
+}

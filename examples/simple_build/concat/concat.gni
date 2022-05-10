@@ -1,0 +1,18 @@
+template("concat") {
+  action(target_name) {
+    forward_variables_from(invoker,
+                           [
+                             "testonly",
+                             "visibility",
+                           ])
+    outputs = [ invoker.output ]
+    script = "//concat/concat.py"
+    depfile = "$target_out_dir/$target_name.d"
+    args = rebase_path([
+                         invoker.glob,
+                         invoker.output,
+                         depfile,
+                       ],
+                       root_build_dir)
+  }
+}

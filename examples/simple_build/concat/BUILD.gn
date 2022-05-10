@@ -1,0 +1,6 @@
+import("concat.gni")
+
+concat("concat") {
+  output = "$target_out_dir/concat.txt"
+  glob = "*.txt"
+}
