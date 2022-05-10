@@ -1,0 +1,6 @@
+action("concat") {
+  script = "concat.py"
+  outputs = [ "$target_out_dir/concat.txt" ]
+  depfile = "$target_out_dir/concat.d"
+  args = rebase_path([ "*.txt" ] + outputs + [ depfile ], root_build_dir)
+}
