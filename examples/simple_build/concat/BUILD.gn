@@ -1,0 +1,10 @@
+import("concat.gni")
+
+group("concat") {
+  deps = [ ":concat.txt" ]
+}
+
+concat("concat.txt") {
+  output = "$target_out_dir/concat.txt"
+  glob = "*.txt"
+}
