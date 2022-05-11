@@ -16,6 +16,24 @@
       "message": "Will you reland CLs necessary for https://gn-review.googlesource.com/c/gn/+/13625 ?\nI guess we can see some improvement even if we don\u0027t have some custom template classes?",
       "revId": "bf4e17dc67b2a2007475415e3f9e1d1cf32f6e35",
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "9c38605d_18d7963b",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000067
+      },
+      "writtenOn": "2022-05-11T17:34:24Z",
+      "side": 1,
+      "message": "I will try to but am a little busy right now with other important stuff, so don\u0027t expect anything from me in the next two weeks :-/ Feel free to reimplement this yourself if you want, I wouldn\u0027t want to block anyone on this.",
+      "parentUuid": "3b64f4f9_ff1030f4",
+      "revId": "bf4e17dc67b2a2007475415e3f9e1d1cf32f6e35",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
     }
   ]
 }
