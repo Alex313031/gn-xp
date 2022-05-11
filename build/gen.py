@@ -183,6 +183,8 @@ def main(argv):
                           'library, or \'-l<name>\' on POSIX systems. Can be ' +
                           'used multiple times. Useful to link custom malloc ' +
                           'or cpu profiling libraries.'))
+  args_list.add('--warnings-as-errors', action='store_true', default=True,
+                    help='Make build warning error.')
   if sys.platform == 'zos':
     args_list.add('--zoslib-dir',
                       action='store',
@@ -427,6 +429,9 @@ def WriteGNNinja(path, platform, host, options, args_list):
         cflags.extend(['-flto', '-fwhole-program-vtables'])
         ldflags.extend(['-flto', '-fwhole-program-vtables'])
 
+    if options.warnings_as_errors:
+      cflags.append('-Werror')
+
     cflags.extend([
         '-D_FILE_OFFSET_BITS=64',
         '-D__STDC_CONSTANT_MACROS', '-D__STDC_FORMAT_MACROS',
@@ -435,12 +440,10 @@ def WriteGNNinja(path, platform, host, options, args_list):
         '-fno-exceptions',
         '-fno-rtti',
         '-fdiagnostics-color',
-        '-Werror',
         '-Wall',
         '-Wextra',
         '-Wno-unused-parameter',
 
-        '-Wextra-semi',
         '-Wundef',
 
         '-std=c++17'
@@ -448,7 +451,7 @@ def WriteGNNinja(path, platform, host, options, args_list):
 
     # flags not supported by gcc/g++.
     if cxx == 'clang++':
-      cflags.extend(['-Wrange-loop-analysis', '-Wextra-semi-stmt'])
+      cflags.extend(['-Wrange-loop-analysis'])
 
     if platform.is_linux() or platform.is_mingw() or platform.is_msys():
       ldflags.append('-Wl,--as-needed')
@@ -513,6 +516,9 @@ def WriteGNNinja(path, platform, host, options, args_list):
         libflags.extend(['/LTCG'])
         ldflags.extend(['/LTCG'])
 
+    if options.warnings_as_errors:
+      cflags.append('/WX')
+
     cflags.extend([
         '/DNOMINMAX',
         '/DUNICODE',
@@ -524,7 +530,6 @@ def WriteGNNinja(path, platform, host, options, args_list):
         '/D_WIN32_WINNT=0x0A00',
         '/FS',
         '/W4',
-        '/WX',
         '/Zi',
         '/wd4099',
         '/wd4100',
