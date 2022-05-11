@@ -52,6 +52,24 @@
       "parentUuid": "e6848896_4c7c7fc7",
       "revId": "260a79d746e8b3eecf15b8808db5ea0da59ad088",
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "9a4fda2b_4722ec95",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 10
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000030
+      },
+      "writtenOn": "2022-05-11T05:45:00Z",
+      "side": 1,
+      "message": "OK, I made https://gn-review.googlesource.com/c/gn/+/13940 for that.",
+      "parentUuid": "ba70c155_68ef9991",
+      "revId": "260a79d746e8b3eecf15b8808db5ea0da59ad088",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
     }
   ]
 }
