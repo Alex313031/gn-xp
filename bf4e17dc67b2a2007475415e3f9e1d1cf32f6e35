@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "3b64f4f9_ff1030f4",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000030
+      },
+      "writtenOn": "2022-05-11T05:25:05Z",
+      "side": 1,
+      "message": "Will you reland CLs necessary for https://gn-review.googlesource.com/c/gn/+/13625 ?\nI guess we can see some improvement even if we don\u0027t have some custom template classes?",
+      "revId": "bf4e17dc67b2a2007475415e3f9e1d1cf32f6e35",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    }
+  ]
+}
