@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "aa735ba4_656a5824",
+        "filename": "build/gen.py",
+        "patchSetId": 7
+      },
+      "lineNbr": 187,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-05-11T06:26:51Z",
+      "side": 1,
+      "message": "I don\u0027t think this name and description is entirely accurate. This doesn\u0027t ignore compiler warnings, they\u0027ll still be reported",
+      "range": {
+        "startLine": 186,
+        "startChar": 0,
+        "endLine": 187,
+        "endChar": 52
+      },
+      "revId": "1fb142b31417d9426244f42ce6c7e00277b865d6",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    }
+  ]
+}

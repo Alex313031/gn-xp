@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "90c099c6_16e1fd26",
+        "filename": "build/gen.py",
+        "patchSetId": 7
+      },
+      "lineNbr": 443,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-05-11T06:26:51Z",
+      "side": 0,
+      "message": "Was this removed intentionally?",
+      "range": {
+        "startLine": 443,
+        "startChar": 0,
+        "endLine": 443,
+        "endChar": 23
+      },
+      "revId": "bf4e17dc67b2a2007475415e3f9e1d1cf32f6e35",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "63c2af2f_f8853b5b",
+        "filename": "build/gen.py",
+        "patchSetId": 7
+      },
+      "lineNbr": 451,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-05-11T06:26:51Z",
+      "side": 0,
+      "message": "The same here.",
+      "range": {
+        "startLine": 451,
+        "startChar": 46,
+        "endLine": 451,
+        "endChar": 65
+      },
+      "revId": "bf4e17dc67b2a2007475415e3f9e1d1cf32f6e35",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    }
+  ]
+}
