@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ba7571d1_8726269b",
+        "filename": "build/gen.py",
+        "patchSetId": 9
+      },
+      "lineNbr": 187,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-05-11T06:40:28Z",
+      "side": 1,
+      "message": "Nit, this should be `compiler warnings`, I\u0027d perhaps rephrase this as `Allow compiler warnings, don\u0027t treat them as errors.`",
+      "range": {
+        "startLine": 187,
+        "startChar": 33,
+        "endLine": 187,
+        "endChar": 49
+      },
+      "revId": "60847dda71884dbc0bac673fd884dc35ca17cfd7",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    }
+  ]
+}
