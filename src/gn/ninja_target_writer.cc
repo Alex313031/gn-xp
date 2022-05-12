@@ -31,6 +31,7 @@
 #include "gn/substitution_writer.h"
 #include "gn/target.h"
 #include "gn/trace.h"
+#include "rust_tool.h"
 
 NinjaTargetWriter::NinjaTargetWriter(const Target* target, std::ostream& out)
     : settings_(target->settings()),
@@ -361,6 +362,129 @@ void NinjaTargetWriter::WriteRustCompilerVars(const SubstitutionBits& bits,
                  &ConfigValues::rustenv, opts, path_output_, out_, true,
                  indent);
   }
+
+  if (bits.used.count(&kRustSubstitutionRustDeps) || always_write) {
+    WriteRustExternsAndDeps();
+  }
+}
+
+void NinjaTargetWriter::WriteRustExternsAndDeps() {
+  const RustTool* tool_ =
+      target_->toolchain()->GetToolForTargetFinalOutputAsRust(target_);
+
+  // Classify our dependencies.
+  ClassifiedDeps classified_deps = GetClassifiedDeps();
+
+  // The input dependencies will be an order-only dependency. This will cause
+  // Ninja to make sure the inputs are up to date before compiling this
+  // source, but changes in the inputs deps won't cause the file to be
+  // recompiled. See the comment on NinjaCBinaryTargetWriter::Run for more
+  // detailed explanation.
+  std::vector<OutputFile> order_only_deps = WriteInputDepsStampAndGetDep(
+      std::vector<const Target*>(), num_stamp_uses);
+  std::copy(input_deps.begin(), input_deps.end(),
+            std::back_inserter(order_only_deps));
+
+  // Build lists which will go into different bits of the rustc command line.
+  // Public rust_library deps go in a --extern rlibs, public non-rust deps go
+  // in -Ldependency. Also assemble a list of extra (i.e. implicit) deps for
+  // ninja dependency tracking.
+  UniqueVector<OutputFile> implicit_deps;
+  AppendSourcesAndInputsToImplicitDeps(&implicit_deps);
+  implicit_deps.Append(classified_deps.extra_object_files.begin(),
+                       classified_deps.extra_object_files.end());
+
+  std::vector<OutputFile> rustdeps;
+  std::vector<OutputFile> nonrustdeps;
+  nonrustdeps.insert(nonrustdeps.end(),
+                     classified_deps.extra_object_files.begin(),
+                     classified_deps.extra_object_files.end());
+  for (const auto* framework_dep : classified_deps.framework_deps) {
+    order_only_deps.push_back(framework_dep->dependency_output_file());
+  }
+  for (const auto* non_linkable_dep : classified_deps.non_linkable_deps) {
+    if (non_linkable_dep->source_types_used().RustSourceUsed() &&
+        non_linkable_dep->output_type() != Target::SOURCE_SET) {
+      rustdeps.push_back(non_linkable_dep->dependency_output_file());
+    }
+    order_only_deps.push_back(non_linkable_dep->dependency_output_file());
+  }
+  for (const auto* linkable_dep : classified_deps.linkable_deps) {
+    // Rust cdylibs are treated as non-Rust dependencies for linking purposes.
+    if (linkable_dep->source_types_used().RustSourceUsed() &&
+        linkable_dep->rust_values().crate_type() != RustValues::CRATE_CDYLIB) {
+      rustdeps.push_back(linkable_dep->link_output_file());
+    } else {
+      nonrustdeps.push_back(linkable_dep->link_output_file());
+    }
+    implicit_deps.push_back(linkable_dep->dependency_output_file());
+  }
+
+  // Rust libraries specified by paths.
+  for (ConfigValuesIterator iter(target_); !iter.done(); iter.Next()) {
+    const ConfigValues& cur = iter.cur();
+    for (const auto& e : cur.externs()) {
+      if (e.second.is_source_file()) {
+        implicit_deps.push_back(
+            OutputFile(settings_->build_settings(), e.second.source_file()));
+      }
+    }
+  }
+
+  // Collect the full transitive set of rust libraries that this target
+  // depends on, and the public flag represents if the target has direct
+  // access to the dependency through a chain of public_deps.
+  std::vector<ExternCrate> transitive_crates;
+  for (const auto& [dep, has_direct_access] :
+       target_->rust_transitive_inherited_libs().GetOrderedAndPublicFlag()) {
+    // We will tell rustc to look for crate metadata for any rust crate
+    // dependencies except cdylibs, as they have no metadata present.
+    if (dep->source_types_used().RustSourceUsed() &&
+        RustValues::IsRustLibrary(dep)) {
+      transitive_crates.push_back({dep, has_direct_access});
+      // If the current crate can directly acccess the `dep` crate, then the
+      // current crate needs an implicit dependency on `dep` so it will be
+      // rebuilt if `dep` changes.
+      if (has_direct_access) {
+        implicit_deps.push_back(dep->dependency_output_file());
+      }
+    }
+  }
+
+  std::vector<OutputFile> tool_outputs;
+  SubstitutionWriter::ApplyListToLinkerAsOutputFile(
+      target_, tool_, tool_->outputs(), &tool_outputs);
+  WriteCompilerBuildLine({target_->rust_values().crate_root()},
+                         implicit_deps.vector(), order_only_deps, tool_->name(),
+                         tool_outputs);
+
+  std::vector<const Target*> extern_deps(
+      classified_deps.linkable_deps.vector());
+  std::copy(classified_deps.non_linkable_deps.begin(),
+            classified_deps.non_linkable_deps.end(),
+            std::back_inserter(extern_deps));
+  WriteExternsAndDeps(tool_, extern_deps, transitive_crates, rustdeps,
+                      nonrustdeps);
+}
+
+NinjaTargetWriter::ClassifiedDeps NinjaTargetWriter::GetClassifiedDeps() const {
+  ClassifiedDeps classified_deps;
+
+  // Normal public/private deps.
+  for (const auto& pair : target_->GetDeps(Target::DEPS_LINKED)) {
+    ClassifyDependency(pair.ptr, &classified_deps);
+  }
+
+  // Inherited libraries.
+  for (auto* inherited_target : target_->inherited_libraries().GetOrdered()) {
+    ClassifyDependency(inherited_target, &classified_deps);
+  }
+
+  // Data deps.
+  for (const auto& data_dep_pair : target_->data_deps())
+    classified_deps.non_linkable_deps.push_back(data_dep_pair.ptr);
+
+  return classified_deps;
 }
 
 std::vector<OutputFile> NinjaTargetWriter::WriteInputDepsStampAndGetDep(
@@ -514,4 +638,187 @@ void NinjaTargetWriter::WriteStampForTarget(
     path_output_.WriteFiles(out_, order_only_deps);
   }
   out_ << std::endl;
+}
+
+void NinjaTargetWriter::WriteExternsAndDeps(
+    const RustTool* tool_,
+    const std::vector<const Target*>& deps,
+    const std::vector<ExternCrate>& transitive_rust_deps,
+    const std::vector<OutputFile>& rustdeps,
+    const std::vector<OutputFile>& nonrustdeps) {
+  // Writes a external LibFile which comes from user-specified externs, and may
+  // be either a string or a SourceFile.
+  auto write_extern_lib_file = [this](std::string_view crate_name,
+                                      LibFile lib_file) {
+    out_ << " --extern ";
+    out_ << crate_name;
+    out_ << "=";
+    if (lib_file.is_source_file()) {
+      path_output_.WriteFile(out_, lib_file.source_file());
+    } else {
+      EscapeOptions escape_opts_command;
+      escape_opts_command.mode = ESCAPE_NINJA_COMMAND;
+      EscapeStringToStream(out_, lib_file.value(), escape_opts_command);
+    }
+  };
+  // Writes an external OutputFile which comes from a dependency of the current
+  // target.
+  auto write_extern_target = [this](const Target& dep) {
+    std::string_view crate_name;
+    const auto& aliased_deps = target_->rust_values().aliased_deps();
+    if (auto it = aliased_deps.find(dep.label()); it != aliased_deps.end()) {
+      crate_name = it->second;
+    } else {
+      crate_name = dep.rust_values().crate_name();
+    }
+
+    out_ << " --extern ";
+    out_ << crate_name;
+    out_ << "=";
+    path_output_.WriteFile(out_, dep.dependency_output_file());
+  };
+
+  // Write accessible crates with `--extern` to add them to the extern prelude.
+  out_ << "  externs =";
+
+  // Tracking to avoid emitted the same lib twice. We track it instead of
+  // pre-emptively constructing a UniqueVector since we would have to also store
+  // the crate name, and in the future the public-ness.
+  std::unordered_set<OutputFile> emitted_rust_libs;
+  // TODO: We defer private dependencies to -Ldependency until --extern priv is
+  // stabilized.
+  UniqueVector<SourceDir> private_extern_dirs;
+
+  // Walk the transitive closure of all rust dependencies.
+  //
+  // For dependencies that are meant to be accessible we pass them to --extern
+  // in order to add them to the crate's extern prelude.
+  //
+  // For all transitive dependencies, we add them to `private_extern_dirs` in
+  // order to generate a -Ldependency switch that points to them. This ensures
+  // that rustc can find them if they are used by other dependencies. For
+  // example:
+  //
+  //   A -> C --public--> D
+  //     -> B --private-> D
+  //
+  // Here A has direct access to D, but B and C also make use of D, and they
+  // will only search the paths specified to -Ldependency, thus D needs to
+  // appear as both a --extern (for A) and -Ldependency (for B and C).
+  for (const auto& crate : transitive_rust_deps) {
+    const OutputFile& rust_lib = crate.target->dependency_output_file();
+    if (emitted_rust_libs.count(rust_lib) == 0) {
+      if (crate.has_direct_access) {
+        write_extern_target(*crate.target);
+      }
+      emitted_rust_libs.insert(rust_lib);
+    }
+    private_extern_dirs.push_back(
+        rust_lib.AsSourceFile(settings_->build_settings()).GetDir());
+  }
+
+  // Add explicitly specified externs from the GN target.
+  for (ConfigValuesIterator iter(target_); !iter.done(); iter.Next()) {
+    const ConfigValues& cur = iter.cur();
+    for (const auto& [crate_name, lib_file] : cur.externs()) {
+      write_extern_lib_file(crate_name, lib_file);
+    }
+  }
+
+  out_ << std::endl;
+  out_ << "  rustdeps =";
+
+  for (const SourceDir& dir : private_extern_dirs) {
+    // TODO: switch to using `--extern priv:name` after stabilization.
+    out_ << " -Ldependency=";
+    path_output_.WriteDir(out_, dir, PathOutput::DIR_NO_LAST_SLASH);
+  }
+
+  // Non-Rust native dependencies.
+  UniqueVector<SourceDir> nonrustdep_dirs;
+  for (const auto& nonrustdep : nonrustdeps) {
+    nonrustdep_dirs.push_back(
+        nonrustdep.AsSourceFile(settings_->build_settings()).GetDir());
+  }
+  // First -Lnative to specify the search directories.
+  // This is necessary for #[link(...)] directives to work properly.
+  for (const auto& nonrustdep_dir : nonrustdep_dirs) {
+    out_ << " -Lnative=";
+    path_output_.WriteDir(out_, nonrustdep_dir, PathOutput::DIR_NO_LAST_SLASH);
+  }
+  // Before outputting any libraries to link, ensure the linker is in a mode
+  // that allows dynamic linking, as rustc may have previously put it into
+  // static-only mode.
+  if (nonrustdeps.size() > 0) {
+    out_ << " -Clink-arg=-Bdynamic";
+  }
+  for (const auto& nonrustdep : nonrustdeps) {
+    out_ << " -Clink-arg=";
+    path_output_.WriteFile(out_, nonrustdep);
+  }
+  WriteLibrarySearchPath(out_, tool_);
+  WriteLibs(out_, tool_);
+  out_ << std::endl;
+  out_ << "  ldflags =";
+  WriteCustomLinkerFlags(out_, tool_);
+  out_ << std::endl;
+}
+
+void NinjaTargetWriter::ClassifyDependency(
+    const Target* dep,
+    ClassifiedDeps* classified_deps) const {
+  // Only the following types of outputs have libraries linked into them:
+  //  EXECUTABLE
+  //  SHARED_LIBRARY
+  //  _complete_ STATIC_LIBRARY
+  //
+  // Child deps of intermediate static libraries get pushed up the
+  // dependency tree until one of these is reached, and source sets
+  // don't link at all.
+  bool can_link_libs = target_->IsFinal();
+
+  if (can_link_libs && dep->builds_swift_module())
+    classified_deps->swiftmodule_deps.push_back(dep);
+
+  if (target_->source_types_used().RustSourceUsed() &&
+      (target_->output_type() == Target::RUST_LIBRARY ||
+       target_->output_type() == Target::STATIC_LIBRARY) &&
+      dep->IsLinkable()) {
+    // Rust libraries and static libraries aren't final, but need to have the
+    // link lines of all transitive deps specified.
+    classified_deps->linkable_deps.push_back(dep);
+  } else if (dep->output_type() == Target::SOURCE_SET ||
+             // If a complete static library depends on an incomplete static
+             // library, manually link in the object files of the dependent
+             // library as if it were a source set. This avoids problems with
+             // braindead tools such as ar which don't properly link dependent
+             // static libraries.
+             (target_->complete_static_lib() &&
+              (dep->output_type() == Target::STATIC_LIBRARY &&
+               !dep->complete_static_lib()))) {
+    // Source sets have their object files linked into final targets
+    // (shared libraries, executables, loadable modules, and complete static
+    // libraries). Intermediate static libraries and other source sets
+    // just forward the dependency, otherwise the files in the source
+    // set can easily get linked more than once which will cause
+    // multiple definition errors.
+    if (can_link_libs)
+      AddSourceSetFiles(dep, &classified_deps->extra_object_files);
+
+    // Add the source set itself as a non-linkable dependency on the current
+    // target. This will make sure that anything the source set's stamp file
+    // depends on (like data deps) are also built before the current target
+    // can be complete. Otherwise, these will be skipped since this target
+    // will depend only on the source set's object files.
+    classified_deps->non_linkable_deps.push_back(dep);
+  } else if (target_->complete_static_lib() && dep->IsFinal()) {
+    classified_deps->non_linkable_deps.push_back(dep);
+  } else if (can_link_libs && dep->IsLinkable()) {
+    classified_deps->linkable_deps.push_back(dep);
+  } else if (dep->output_type() == Target::CREATE_BUNDLE &&
+             dep->bundle_data().is_framework()) {
+    classified_deps->framework_deps.push_back(dep);
+  } else {
+    classified_deps->non_linkable_deps.push_back(dep);
+  }
 }

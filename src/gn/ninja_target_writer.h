@@ -56,6 +56,30 @@ class NinjaTargetWriter {
                              bool indent,
                              bool always_write);
 
+  // Helper called by WriteRustCompilerVars and NinjaRustBinaryTargetWriter::Run
+  // to write --extern and -Ldependency substitution values for rust targets
+  void WriteRustExternsAndDeps();
+
+  // Structure used to return the classified deps from |GetDeps| method.
+  struct ClassifiedDeps {
+    UniqueVector<OutputFile> extra_object_files;
+    UniqueVector<const Target*> linkable_deps;
+    UniqueVector<const Target*> non_linkable_deps;
+    UniqueVector<const Target*> framework_deps;
+    UniqueVector<const Target*> swiftmodule_deps;
+  };
+
+  // Gets all target dependencies and classifies them, as well as accumulates
+  // object files from source sets we need to link.
+  ClassifiedDeps GetClassifiedDeps() const;
+
+  // Classifies the dependency as linkable or nonlinkable with the current
+  // target, adding it to the appropriate vector of |classified_deps|. If the
+  // dependency is a source set we should link in, the source set's object
+  // files will be appended to |classified_deps.extra_object_files|.
+  void ClassifyDependency(const Target* dep,
+                          ClassifiedDeps* classified_deps) const;
+
   // Writes to the output stream a stamp rule for input dependencies, and
   // returns the file to be appended to source rules that encodes the
   // order-only dependencies for the current target.
@@ -81,6 +105,19 @@ class NinjaTargetWriter {
  private:
   void WriteCopyRules();
   void WriteEscapedSubstitution(const Substitution* type);
+
+  struct ExternCrate {
+    const Target* target;
+    bool has_direct_access;
+  };
+  void FillExternsAndDeps(std::vector<const Target*>& deps,
+                          std::vector<ExternCrate>& transitive_rust_deps,
+                          std::vector<OutputFile>& rustdeps,
+                          std::vector<OutputFile>& nonrustdeps);
+  void WriteExternsAndDeps(const std::vector<const Target*>& deps,
+                           const std::vector<ExternCrate>& transitive_rust_deps,
+                           const std::vector<OutputFile>& rustdeps,
+                           const std::vector<OutputFile>& nonrustdeps);
 
   NinjaTargetWriter(const NinjaTargetWriter&) = delete;
   NinjaTargetWriter& operator=(const NinjaTargetWriter&) = delete;

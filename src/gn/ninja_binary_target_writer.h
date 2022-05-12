@@ -23,15 +23,6 @@ class NinjaBinaryTargetWriter : public NinjaTargetWriter {
   void Run() override;
 
  protected:
-  // Structure used to return the classified deps from |GetDeps| method.
-  struct ClassifiedDeps {
-    UniqueVector<OutputFile> extra_object_files;
-    UniqueVector<const Target*> linkable_deps;
-    UniqueVector<const Target*> non_linkable_deps;
-    UniqueVector<const Target*> framework_deps;
-    UniqueVector<const Target*> swiftmodule_deps;
-  };
-
   // Writes to the output stream a stamp rule for inputs, and
   // returns the file to be appended to source rules that encodes the
   // implicit dependencies for the current target.
@@ -44,17 +35,6 @@ class NinjaBinaryTargetWriter : public NinjaTargetWriter {
 
   // Writes the stamp line for a source set. These are not linked.
   void WriteSourceSetStamp(const std::vector<OutputFile>& object_files);
-
-  // Gets all target dependencies and classifies them, as well as accumulates
-  // object files from source sets we need to link.
-  ClassifiedDeps GetClassifiedDeps() const;
-
-  // Classifies the dependency as linkable or nonlinkable with the current
-  // target, adding it to the appropriate vector of |classified_deps|. If the
-  // dependency is a source set we should link in, the source set's object
-  // files will be appended to |classified_deps.extra_object_files|.
-  void ClassifyDependency(const Target* dep,
-                          ClassifiedDeps* classified_deps) const;
 
   OutputFile WriteStampAndGetDep(const UniqueVector<const SourceFile*>& files,
                                  const std::string& stamp_ext) const;
