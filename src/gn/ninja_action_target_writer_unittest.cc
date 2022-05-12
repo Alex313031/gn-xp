@@ -503,6 +503,8 @@ TEST(NinjaActionTargetWriter, SeesConfig) {
 
   Config cfgdep(setup.settings(), Label(SourceDir("//foo/"), "cfgdep"));
   cfgdep.own_values().rustenv().push_back("my_rustenv");
+  cfgdep.own_values().rustflags().push_back("my_rustflag");
+  cfgdep.own_values().rustdeps().push_back("my_rustdep");
   cfgdep.own_values().include_dirs().push_back(SourceDir("//my_inc_dir/"));
   cfgdep.own_values().defines().push_back("MY_DEFINE");
   cfgdep.visibility().SetPublic();
@@ -515,7 +517,8 @@ TEST(NinjaActionTargetWriter, SeesConfig) {
   foo.sources().push_back(SourceFile("//foo/input1.txt"));
   foo.action_values().set_script(SourceFile("//foo/script.py"));
   foo.action_values().args() = SubstitutionList::MakeForTest(
-      "{{rustenv}}", "{{include_dirs}}", "{{defines}}", "{{cflags}}");
+      "{{rustenv}} {{rustflags}} {{rustdeps}}", "{{include_dirs}}",
+      "{{defines}}", "{{cflags}}");
   foo.configs().push_back(LabelConfigPair(&cfgdep));
   foo.SetToolchain(setup.toolchain());
   foo.action_values().outputs() =
@@ -530,13 +533,14 @@ TEST(NinjaActionTargetWriter, SeesConfig) {
     const char expected[] =
         "rule __foo_foo___rule\n"
         // These come from the args.
-        "  command = /usr/bin/python ../../foo/script.py ${rustenv} "
-        "${include_dirs} ${defines} ${cflags}\n"
+        "  command = /usr/bin/python ../../foo/script.py ${rustenv}\\$ "
+        "${rustflags}\\$ ${rustdeps} ${include_dirs} ${defines} ${cflags}\n"
         "  description = ACTION //foo:foo()\n"
         "  restat = 1\n"
         "\n"
         "build foo.out: __foo_foo___rule | ../../foo/script.py"
         " ../../foo/input1.txt\n"
+        "  rustflags = my_rustflag\n"
         "  rustenv = my_rustenv\n"
         "  defines = -DMY_DEFINE -DMY_DEFINE2\n"
         "  include_dirs = -I../../my_inc_dir\n"

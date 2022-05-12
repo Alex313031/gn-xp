@@ -506,6 +506,7 @@ Possibilities for <what to show>
   defines [--blame]
   depfile
   deps [--all] [--tree] (see below)
+  externs
   framework_dirs
   frameworks
   include_dirs [--blame]
@@ -519,6 +520,9 @@ Possibilities for <what to show>
   public_configs
   public
   rebase
+  rustdeps
+  rustenv
+  rustflags
   script
   sources
   testonly

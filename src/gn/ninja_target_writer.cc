@@ -361,6 +361,13 @@ void NinjaTargetWriter::WriteRustCompilerVars(const SubstitutionBits& bits,
                  &ConfigValues::rustenv, opts, path_output_, out_, true,
                  indent);
   }
+
+  if (bits.used.count(&kRustSubstitutionRustDeps) || always_write) {
+    WriteOneFlag(kRecursiveWriterKeepDuplicates, target_,
+                 &kRustSubstitutionRustDeps, false, Tool::kToolNone,
+                 &ConfigValues::rustdeps, opts, path_output_, out_, true,
+                 indent);
+  }
 }
 
 std::vector<OutputFile> NinjaTargetWriter::WriteInputDepsStampAndGetDep(
