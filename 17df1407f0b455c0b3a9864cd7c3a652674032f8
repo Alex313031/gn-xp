@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "256267f8_19d43985",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000070
+      },
+      "writtenOn": "2022-05-18T09:23:27Z",
+      "side": 1,
+      "message": "I don\u0027t really understand how the infra works for gn. Could you maybe ask someone else to review?",
+      "revId": "17df1407f0b455c0b3a9864cd7c3a652674032f8",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    }
+  ]
+}
