@@ -87,6 +87,23 @@
       "message": "rs lgtm",
       "revId": "17df1407f0b455c0b3a9864cd7c3a652674032f8",
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ea0a2813_4510d18a",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1002217
+      },
+      "writtenOn": "2022-05-18T16:39:45Z",
+      "side": 1,
+      "message": "Thanks, can someone CQ+2 this?",
+      "revId": "17df1407f0b455c0b3a9864cd7c3a652674032f8",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
     }
   ]
 }
