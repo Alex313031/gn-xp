@@ -16,6 +16,23 @@
       "message": "I\u0027m cleaning up and it seems like I lost track this. Are you still wanting to land this sequence of patches?",
       "revId": "2184e7ec1593313f09250e0265cbe83979d58b09",
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e5bf621b_1159ca1b",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-05-18T21:14:50Z",
+      "side": 1,
+      "message": "Now that Ninja 1.11 was released, we could consider gating the use of phony rules on that version rather than using the `no_stamp_files` option.",
+      "revId": "2184e7ec1593313f09250e0265cbe83979d58b09",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
     }
   ]
 }
