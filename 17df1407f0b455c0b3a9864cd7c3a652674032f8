@@ -52,6 +52,24 @@
       "parentUuid": "2ed6a9ac_add29cbf",
       "revId": "17df1407f0b455c0b3a9864cd7c3a652674032f8",
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "cf20cb47_c7f1694e",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000030
+      },
+      "writtenOn": "2022-05-18T13:13:22Z",
+      "side": 1,
+      "message": "\u003e I understand what the CL does. I don\u0027t know how the bot pools are configured. When I made a change recently to try to use more recent version of the compiler on macOS, I discovered that the pools used by gn (at least for macOS bots) were completely separate from those used by Chromium and there were no available bot with the correct version of macOS required by the compiler.\n\u003e \n\nPool used by CI linux builder is\nhttps://chromium-swarm.appspot.com/botlist?c\u003did\u0026c\u003dtask\u0026c\u003dos\u0026c\u003dstatus\u0026d\u003dasc\u0026f\u003dcpu%3Ax86-64\u0026f\u003dpool%3Aluci.flex.ci\u0026k\u003dos\u0026s\u003did\nand there are many bionic bots now.\n\n\u003e As I don\u0027t understand how the pools are configured, I feel I\u0027m not the correct person to review this change. I\u0027m not saying the change is incorrect. I\u0027m saying that I have no idea whether landing it will work or not (CQ is not useful as the bot will use the old configuration when running the CL).\n\nYes, this change is not tested in CQ. But I meant to say that I don\u0027t think this will break CI as we see green build in gn\u0027s CQ builder which is already running on bionic bots.",
+      "parentUuid": "d36129ff_c688696e",
+      "revId": "17df1407f0b455c0b3a9864cd7c3a652674032f8",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
     }
   ]
 }
