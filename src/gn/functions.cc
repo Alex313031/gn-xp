@@ -21,7 +21,6 @@
 #include "gn/pool.h"
 #include "gn/scheduler.h"
 #include "gn/scope.h"
-#include "gn/settings.h"
 #include "gn/template.h"
 #include "gn/token.h"
 #include "gn/value.h"
@@ -1007,7 +1006,10 @@ Value RunPrintStackTrace(Scope* scope,
                          const std::vector<Value>& args,
                          Err* err) {
   std::string location_str = function->GetRange().begin().Describe(false);
-  std::string output = "print_stack_trace() initiated at:  " + location_str;
+  std::string toolchain =
+      scope->settings()->toolchain_label().GetUserVisibleName(false);
+  std::string output =
+      "print_stack_trace() initiated at:  " + location_str + "  using: " + toolchain;
   output.push_back('\n');
 
   for (const auto& entry : scope->GetTemplateInvocationEntries()) {
