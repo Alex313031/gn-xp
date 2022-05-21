@@ -12,6 +12,7 @@
 #include "gn/parse_tree.h"
 #include "gn/scope.h"
 #include "gn/scope_per_file_provider.h"
+#include "gn/settings.h"
 #include "gn/value.h"
 #include "gn/variables.h"
 
