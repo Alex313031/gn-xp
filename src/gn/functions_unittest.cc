@@ -478,7 +478,7 @@ TEST(Template, PrintStackTraceWithOneTemplate) {
   EXPECT_EQ(
     "lala\n"
     "42\n"
-    "print_stack_trace() initiated at:  //test:4\n"
+    "print_stack_trace() initiated at:  //test:4  using: //toolchain:default\n"
     "  foo(\"lala\")  //test:6\n"
     "  print_stack_trace()  //test:4\n",
     setup.print_output());
@@ -494,7 +494,7 @@ TEST(Template, PrintStackTraceWithNoTemplates) {
   ASSERT_FALSE(err.has_error()) << err.message();
 
   EXPECT_EQ(
-    "print_stack_trace() initiated at:  //test:1\n"
+    "print_stack_trace() initiated at:  //test:1  using: //toolchain:default\n"
     "  print_stack_trace()  //test:1\n",
     setup.print_output());
 }
@@ -525,7 +525,7 @@ TEST(Template, PrintStackTraceWithNestedTemplates) {
   EXPECT_EQ(
     "lala.foo\n"
     "42\n"
-    "print_stack_trace() initiated at:  //test:4\n"
+    "print_stack_trace() initiated at:  //test:4  using: //toolchain:default\n"
     "  baz(\"lala\")  //test:11\n"
     "  foo(\"lala.foo\")  //test:7\n"
     "  print_stack_trace()  //test:4\n",
@@ -559,7 +559,7 @@ TEST(Template, PrintStackTraceWithNonTemplateScopes) {
   EXPECT_EQ(
     "lala.foo\n"
     "42\n"
-    "print_stack_trace() initiated at:  //test:5\n"
+    "print_stack_trace() initiated at:  //test:5  using: //toolchain:default\n"
     "  baz(\"lala\")  //test:13\n"
     "  foo(\"lala.foo\")  //test:9\n"
     "  print_stack_trace()  //test:5\n",
@@ -595,7 +595,7 @@ TEST(Template, PrintStackTraceWithNonTemplateScopesBetweenTemplateInvocations) {
   EXPECT_EQ(
     "lala.foo\n"
     "42\n"
-    "print_stack_trace() initiated at:  //test:5\n"
+    "print_stack_trace() initiated at:  //test:5  using: //toolchain:default\n"
     "  baz(\"lala\")  //test:15\n"
     "  foo(\"lala.foo\")  //test:10\n"
     "  print_stack_trace()  //test:5\n",
