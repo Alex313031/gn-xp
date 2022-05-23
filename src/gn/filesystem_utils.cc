@@ -337,6 +337,9 @@ bool IsPathAbsolute(std::string_view path) {
   if (path.empty())
     return false;
 
+  if (path[0] == '=' && IsPathAbsolute(path.substr(1)))
+    return true;
+
   if (!IsSlash(path[0])) {
 #if defined(OS_WIN)
     // Check for Windows system paths like "C:\foo".

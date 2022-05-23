@@ -507,10 +507,16 @@ TEST_F(NinjaCBinaryTargetWriterTest, LibsAndLibDirs) {
   // A shared library w/ libs and lib_dirs.
   Target target(setup.settings(), Label(SourceDir("//foo/"), "shlib"));
   target.set_output_type(Target::SHARED_LIBRARY);
+  target.config_values().include_dirs().push_back(SourceDir("//my_inc_dir/"));
+  target.config_values().include_dirs().push_back(SourceDir("/my_abs_dir"));
+  target.config_values().include_dirs().push_back(SourceDir("=/my_sysroot_rel_dir"));
   target.config_values().libs().push_back(LibFile(SourceFile("//foo/lib1.a")));
+  target.config_values().libs().push_back(LibFile(SourceFile("/abs/lib.a")));
   target.config_values().libs().push_back(LibFile(SourceFile("//sysroot/DIA SDK/diaguids.lib")));
   target.config_values().libs().push_back(LibFile("foo"));
   target.config_values().lib_dirs().push_back(SourceDir("//foo/bar/"));
+  target.config_values().lib_dirs().push_back(SourceDir("/abs_libdir"));
+  target.config_values().lib_dirs().push_back(SourceDir("=/sysroot_rel_libdir"));
   target.SetToolchain(setup.toolchain());
   ASSERT_TRUE(target.OnResolved(&err));
 
@@ -520,18 +526,18 @@ TEST_F(NinjaCBinaryTargetWriterTest, LibsAndLibDirs) {
 
   const char expected[] =
       "defines =\n"
-      "include_dirs =\n"
+      "include_dirs = -I../../my_inc_dir -I/my_abs_dir -I=/my_sysroot_rel_dir\n"
       "root_out_dir = .\n"
       "target_out_dir = obj/foo\n"
       "target_output_name = libshlib\n"
       "\n"
       "\n"
-      "build ./libshlib.so: solink | ../../foo/lib1.a ../../sysroot/DIA$ SDK/diaguids.lib\n"
-      "  ldflags = -L../../foo/bar\n"
+      "build ./libshlib.so: solink | ../../foo/lib1.a ../../../abs/lib.a ../../sysroot/DIA$ SDK/diaguids.lib\n"
+      "  ldflags = -L../../foo/bar -L/abs_libdir -L=/sysroot_rel_libdir\n"
 #ifdef _WIN32
-      "  libs = ../../foo/lib1.a \"../../sysroot/DIA$ SDK/diaguids.lib\" -lfoo\n"
+      "  libs = ../../foo/lib1.a /abs/lib.a \"../../sysroot/DIA$ SDK/diaguids.lib\" -lfoo\n"
 #else
-      "  libs = ../../foo/lib1.a ../../sysroot/DIA\\$ SDK/diaguids.lib -lfoo\n"
+      "  libs = ../../foo/lib1.a /abs/lib.a ../../sysroot/DIA\\$ SDK/diaguids.lib -lfoo\n"
 #endif
       "  frameworks =\n"
       "  swiftmodules =\n"

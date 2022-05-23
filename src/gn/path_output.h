@@ -69,11 +69,11 @@ class PathOutput {
                 const OutputFile& file,
                 DirSlashEnding slash_ending) const;
 
+ private:
   // Backend for WriteFile and WriteDir. This appends the given file or
   // directory string to the file.
   void WritePathStr(std::ostream& out, std::string_view str) const;
 
- private:
   // Takes the given string and writes it out, appending to the inverse
   // current dir. This assumes leading slashes have been trimmed.
   void WriteSourceRelativeString(std::ostream& out, std::string_view str) const;

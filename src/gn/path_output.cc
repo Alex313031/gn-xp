@@ -151,7 +151,7 @@ void PathOutput::WriteSourceRelativeString(std::ostream& out,
 }
 
 void PathOutput::WritePathStr(std::ostream& out, std::string_view str) const {
-  DCHECK(str.size() > 0 && str[0] == '/');
+  DCHECK(str.size() > 0 && (str[0] == '/' || str[0] == '='));
 
   if (str.substr(0, current_dir_.value().size()) ==
       std::string_view(current_dir_.value())) {
@@ -159,7 +159,7 @@ void PathOutput::WritePathStr(std::ostream& out, std::string_view str) const {
     // prefix and write out the result.
     EscapeStringToStream(out, str.substr(current_dir_.value().size()),
                          options_);
-  } else if (str.size() >= 2 && str[1] == '/') {
+  } else if (IsPathSourceAbsolute(str)) {
     WriteSourceRelativeString(out, str.substr(2));
   } else {
 // Input begins with one slash, don't write the current directory since
