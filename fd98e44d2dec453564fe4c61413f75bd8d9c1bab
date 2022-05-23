@@ -18,6 +18,24 @@
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "7fc7eb5c_4bc352bd",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 4
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 1000397
+      },
+      "writtenOn": "2022-05-23T18:42:26Z",
+      "side": 1,
+      "message": "It took a bit to sort out why, but this was caused by the template being defined (imported) in another template.  I verified the new test case failed without the rest of the patch.",
+      "parentUuid": "9d02f1c8_42da8499",
+      "revId": "fd98e44d2dec453564fe4c61413f75bd8d9c1bab",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "dce56979_3cf24015",
@@ -41,6 +59,30 @@
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "d12f0c4a_9d4ad1f0",
+        "filename": "src/gn/scope.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 579,
+      "author": {
+        "id": 1000397
+      },
+      "writtenOn": "2022-05-23T18:42:26Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "dce56979_3cf24015",
+      "range": {
+        "startLine": 578,
+        "startChar": 7,
+        "endLine": 579,
+        "endChar": 55
+      },
+      "revId": "fd98e44d2dec453564fe4c61413f75bd8d9c1bab",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "79279872_93589dcb",
@@ -54,6 +96,30 @@
       "writtenOn": "2022-05-23T02:20:24Z",
       "side": 1,
       "message": "\u0027else\u0027 is not necessary here?",
+      "range": {
+        "startLine": 578,
+        "startChar": 0,
+        "endLine": 580,
+        "endChar": 6
+      },
+      "revId": "fd98e44d2dec453564fe4c61413f75bd8d9c1bab",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c0f16725_ed9a01e8",
+        "filename": "src/gn/scope.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 580,
+      "author": {
+        "id": 1000397
+      },
+      "writtenOn": "2022-05-23T18:42:26Z",
+      "side": 1,
+      "message": "Just a bare return nullptr?  (my c++ styleguide skills are Rusty these days).",
+      "parentUuid": "79279872_93589dcb",
       "range": {
         "startLine": 578,
         "startChar": 0,
