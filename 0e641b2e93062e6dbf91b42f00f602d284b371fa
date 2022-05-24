@@ -22,6 +22,30 @@
       },
       "revId": "0e641b2e93062e6dbf91b42f00f602d284b371fa",
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "8705196e_5da12b3f",
+        "filename": "src/gn/scope.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 578,
+      "author": {
+        "id": 1000397
+      },
+      "writtenOn": "2022-05-24T14:52:10Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "1612baae_dfa0896a",
+      "range": {
+        "startLine": 578,
+        "startChar": 2,
+        "endLine": 578,
+        "endChar": 6
+      },
+      "revId": "0e641b2e93062e6dbf91b42f00f602d284b371fa",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
     }
   ]
 }
