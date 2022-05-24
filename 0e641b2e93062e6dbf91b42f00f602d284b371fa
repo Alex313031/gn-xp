@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1612baae_dfa0896a",
+        "filename": "src/gn/scope.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 578,
+      "author": {
+        "id": 1000030
+      },
+      "writtenOn": "2022-05-24T06:18:12Z",
+      "side": 1,
+      "message": "We don\u0027t need to have this `else` too.\nhttp://shortn/_19SL8H773T",
+      "range": {
+        "startLine": 578,
+        "startChar": 2,
+        "endLine": 578,
+        "endChar": 6
+      },
+      "revId": "0e641b2e93062e6dbf91b42f00f602d284b371fa",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    }
+  ]
+}
