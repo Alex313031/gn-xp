@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a7032c3c_9c003c49",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1002222
+      },
+      "writtenOn": "2022-05-24T21:26:56Z",
+      "side": 1,
+      "message": "Mostly straightforward change to pass gn_unittests built with `CXXFLAGS\u003d-Wp,-D_GLIBCXX_ASSERTIONS`. Please feel free to suggest tweaks or implement a different fix if needed. :)",
+      "revId": "ae18505ef46a8315a7ce848a0bccd4ddb8c167ad",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    }
+  ]
+}
