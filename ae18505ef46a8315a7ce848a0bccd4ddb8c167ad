@@ -33,6 +33,46 @@
       "message": "thanks, LGTM",
       "revId": "ae18505ef46a8315a7ce848a0bccd4ddb8c167ad",
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b8bad6ce_bcdc05dd",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000070
+      },
+      "writtenOn": "2022-05-25T13:36:06Z",
+      "side": 1,
+      "message": "lgtm",
+      "revId": "ae18505ef46a8315a7ce848a0bccd4ddb8c167ad",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6223e024_12e8b5a5",
+        "filename": "src/gn/filesystem_utils.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 1039,
+      "author": {
+        "id": 1000070
+      },
+      "writtenOn": "2022-05-25T13:36:06Z",
+      "side": 1,
+      "message": "Please use braces around the if body\n\n  if (source_dir_path.size() \u003e build_dir.size()) {\n    ...\n  }",
+      "range": {
+        "startLine": 1039,
+        "startChar": 8,
+        "endLine": 1039,
+        "endChar": 9
+      },
+      "revId": "ae18505ef46a8315a7ce848a0bccd4ddb8c167ad",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
     }
   ]
 }
