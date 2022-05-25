@@ -73,6 +73,30 @@
       },
       "revId": "ae18505ef46a8315a7ce848a0bccd4ddb8c167ad",
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e8095c8c_e61b8c39",
+        "filename": "src/gn/filesystem_utils.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 1039,
+      "author": {
+        "id": 1002222
+      },
+      "writtenOn": "2022-05-25T14:15:58Z",
+      "side": 1,
+      "message": "Added the missing braces, thanks for the review. :)",
+      "parentUuid": "6223e024_12e8b5a5",
+      "range": {
+        "startLine": 1039,
+        "startChar": 8,
+        "endLine": 1039,
+        "endChar": 9
+      },
+      "revId": "ae18505ef46a8315a7ce848a0bccd4ddb8c167ad",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
     }
   ]
 }
