@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "222f45ec_c4982123",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000070
+      },
+      "writtenOn": "2022-06-07T12:34:52Z",
+      "side": 1,
+      "message": "lgtm\n\nIs there any documentation on how we can inform Xcode that the script needs to be re-run or not (i.e. how to inform Xcode on how to see the \"freshness\" of the build)?",
+      "revId": "b87f8624c66f3880299826f639aebccbbfa71847",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    }
+  ]
+}
