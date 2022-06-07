@@ -34,6 +34,24 @@
       "parentUuid": "222f45ec_c4982123",
       "revId": "b87f8624c66f3880299826f639aebccbbfa71847",
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d3ce2d9b_e02e7c9c",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000070
+      },
+      "writtenOn": "2022-06-07T14:20:53Z",
+      "side": 1,
+      "message": "If there existed a way for Xcode to get the list of inputs from ninja and to have it correctly detect whether ninja will perform a no-op or not, then we could use that to avoid invoking ninja. This could be faster (as Xcode could be observing the file system to detect file changes thus could perform the check faster).\n\nBut I don\u0027t think this is the case, so it would probably end up slower. So I don\u0027t think there is need to spend more than a few minutes investigating.",
+      "parentUuid": "3a599399_146b9be2",
+      "revId": "b87f8624c66f3880299826f639aebccbbfa71847",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
     }
   ],
   "submitRequirementResults": [
