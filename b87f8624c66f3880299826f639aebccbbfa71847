@@ -16,6 +16,24 @@
       "message": "lgtm\n\nIs there any documentation on how we can inform Xcode that the script needs to be re-run or not (i.e. how to inform Xcode on how to see the \"freshness\" of the build)?",
       "revId": "b87f8624c66f3880299826f639aebccbbfa71847",
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "3a599399_146b9be2",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1001297
+      },
+      "writtenOn": "2022-06-07T14:09:25Z",
+      "side": 1,
+      "message": "No idea, but that\u0027s worth investigating.  I assume for gn xcode builds we want to Xcode to always run PBXShellScriptBuildPhase to shell out to ninja.  In what scenario would we not want to do that?",
+      "parentUuid": "222f45ec_c4982123",
+      "revId": "b87f8624c66f3880299826f639aebccbbfa71847",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
     }
   ],
   "submitRequirementResults": [
