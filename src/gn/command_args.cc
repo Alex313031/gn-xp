@@ -286,7 +286,7 @@ bool RunEditor(const base::FilePath& file_to_edit) {
   SHELLEXECUTEINFO info;
   memset(&info, 0, sizeof(info));
   info.cbSize = sizeof(info);
-  info.fMask = SEE_MASK_NOCLOSEPROCESS | SEE_MASK_CLASSNAME;
+  info.fMask = SEE_MASK_CLASSNAME | SEE_MASK_NO_CONSOLE;
   info.lpFile = reinterpret_cast<LPCWSTR>(file_to_edit.value().c_str());
   info.nShow = SW_SHOW;
   info.lpClass = L".txt";
@@ -297,17 +297,10 @@ bool RunEditor(const base::FilePath& file_to_edit) {
     return false;
   }
 
-  if (!info.hProcess) {
-    // Windows re-used an existing process.
-    OutputString("\"" + FilePathToUTF8(file_to_edit) +
-                 "\" opened in editor, save it and press <Enter> when done.\n");
-    getchar();
-  } else {
-    OutputString("Waiting for editor on \"" + FilePathToUTF8(file_to_edit) +
-                 "\"...\n");
-    ::WaitForSingleObject(info.hProcess, INFINITE);
-    ::CloseHandle(info.hProcess);
-  }
+  // Windows re-used an existing process.
+  OutputString("\"" + FilePathToUTF8(file_to_edit) +
+                "\" opened in editor, save it and press <Enter> when done.\n");
+  getchar();
   return true;
 }
 
