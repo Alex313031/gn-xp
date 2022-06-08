@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b13cd3d0_381b1fa0",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1002222
+      },
+      "writtenOn": "2022-06-08T13:17:15Z",
+      "side": 1,
+      "message": "Sorry for not coming up with this simpler code in the first place. Hope it\u0027s okay to include this as a fixup commit.",
+      "revId": "b1a7fae6055e515346193d115715d56359a96b45",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    }
+  ]
+}
