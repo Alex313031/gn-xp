@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "5b5189b1_1fc88a98",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000014
+      },
+      "writtenOn": "2022-06-13T22:13:30Z",
+      "side": 1,
+      "message": "LGTM with one clarification.",
+      "revId": "dcba2687997b9410627e55b6cf4c80413c1b9dcf",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e51eea11_6098bb37",
+        "filename": "src/gn/xcode_object.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 300,
+      "author": {
+        "id": 1000014
+      },
+      "writtenOn": "2022-06-13T22:13:30Z",
+      "side": 1,
+      "message": "Can you clarify this, either with a comment, or better, a more description function name? It\u0027s not clear looking at this what the last thing it\u0027s referring to, i.e. the the last \"what\"?",
+      "revId": "dcba2687997b9410627e55b6cf4c80413c1b9dcf",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    }
+  ]
+}
