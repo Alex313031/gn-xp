@@ -15,6 +15,10 @@ if (current_os == "") {
   current_os = target_os
 }
 
+declare_args() {
+  target_environment = "simulator"
+}
+
 # All binary targets will get this list of configs by default.
 _shared_binary_target_configs = [ "//build:compiler" ]
 
