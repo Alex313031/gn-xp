@@ -144,7 +144,7 @@ class PBXTarget : public PBXObject {
  public:
   PBXTarget(const std::string& name,
             const std::string& shell_script,
-            const std::string& config_name,
+            const std::vector<std::string>& configs,
             const PBXAttributes& attributes);
   ~PBXTarget() override;
 
@@ -174,7 +174,7 @@ class PBXAggregateTarget : public PBXTarget {
  public:
   PBXAggregateTarget(const std::string& name,
                      const std::string& shell_script,
-                     const std::string& config_name,
+                     const std::vector<std::string>& configs,
                      const PBXAttributes& attributes);
   ~PBXAggregateTarget() override;
 
@@ -337,7 +337,7 @@ class PBXNativeTarget : public PBXTarget {
  public:
   PBXNativeTarget(const std::string& name,
                   const std::string& shell_script,
-                  const std::string& config_name,
+                  const std::vector<std::string>& configs,
                   const PBXAttributes& attributes,
                   const std::string& product_type,
                   const std::string& product_name,
@@ -366,7 +366,7 @@ class PBXNativeTarget : public PBXTarget {
 class PBXProject : public PBXObject {
  public:
   PBXProject(const std::string& name,
-             const std::string& config_name,
+             std::vector<std::string> configs,
              const std::string& source_path,
              const PBXAttributes& attributes);
   ~PBXProject() override;
@@ -377,6 +377,7 @@ class PBXProject : public PBXObject {
                      const std::string& source_path,
                      PBXNativeTarget* target);
   void AddAggregateTarget(const std::string& name,
+                          const std::string& output_dir,
                           const std::string& shell_script);
   void AddIndexingTarget();
   PBXNativeTarget* AddNativeTarget(
@@ -408,7 +409,7 @@ class PBXProject : public PBXObject {
   std::string project_root_;
   std::vector<std::unique_ptr<PBXTarget>> targets_;
   std::string name_;
-  std::string config_name_;
+  std::vector<std::string> configs_;
 
   PBXGroup* products_ = nullptr;
   PBXNativeTarget* target_for_indexing_ = nullptr;
@@ -520,7 +521,7 @@ class XCBuildConfiguration : public PBXObject {
 
 class XCConfigurationList : public PBXObject {
  public:
-  XCConfigurationList(const std::string& name,
+  XCConfigurationList(const std::vector<std::string>& configs,
                       const PBXAttributes& attributes,
                       const PBXObject* owner_reference);
   ~XCConfigurationList() override;

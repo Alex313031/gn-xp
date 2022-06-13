@@ -56,6 +56,8 @@ const char kSwitchXcodeProject[] = "xcode-project";
 const char kSwitchXcodeBuildSystem[] = "xcode-build-system";
 const char kSwitchXcodeBuildsystemValueLegacy[] = "legacy";
 const char kSwitchXcodeBuildsystemValueNew[] = "new";
+const char kSwitchXcodeConfigurations[] = "xcode-configs";
+const char kSwitchXcodeConfigurationBuildPath[] = "xcode-config-build-dir";
 const char kSwitchJsonFileName[] = "json-file-name";
 const char kSwitchJsonIdeScript[] = "json-ide-script";
 const char kSwitchJsonIdeScriptArgs[] = "json-ide-script-args";
@@ -257,6 +259,8 @@ bool RunIdeWriter(const std::string& ide,
         command_line->GetSwitchValueASCII(kSwitchIdeRootTarget),
         command_line->GetSwitchValueASCII(kSwitchNinjaExecutable),
         command_line->GetSwitchValueASCII(kSwitchFilters),
+        command_line->GetSwitchValueASCII(kSwitchXcodeConfigurations),
+        command_line->GetSwitchValueASCII(kSwitchXcodeConfigurationBuildPath),
         XcodeBuildSystem::kLegacy,
     };
 
