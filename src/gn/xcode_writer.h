@@ -42,6 +42,18 @@ class XcodeWriter {
     // files for those target will still be listed in the generated project).
     std::string dir_filters_string;
 
+    // If specified, should be a semicolon-separated list of configuration
+    // names. It will be used to generate all the configuration variations
+    // in the project. If empty, the project is assumed to only use a single
+    // configuration "Release".
+    std::string configurations;
+
+    // If specified, should be the path for the configuration's build
+    // directory. It can use Xcode variables such as ${CONFIGURATION} or
+    // ${EFFECTIVE_PLATFORM_NAME}. If empty, it is assumed to be the same
+    // as the project directory.
+    std::string configuration_build_dir;
+
     // Control which version of the build system should be used for the
     // generated Xcode project.
     XcodeBuildSystem build_system = XcodeBuildSystem::kLegacy;
