@@ -33,6 +33,24 @@
       "message": "pass by value?",
       "revId": "a94a332d0aac54019b49495b08382d058a8651c1",
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d28b6a24_bcb6007b",
+        "filename": "src/gn/xcode_object.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 812,
+      "author": {
+        "id": 1000070
+      },
+      "writtenOn": "2022-06-14T14:03:55Z",
+      "side": 1,
+      "message": "I\u0027ll do it as followup when I\u0027m done with adding the features required to have the project work correctly with Xcode 14.",
+      "parentUuid": "792d775c_aa4ce15b",
+      "revId": "a94a332d0aac54019b49495b08382d058a8651c1",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
     }
   ]
 }
