@@ -58,6 +58,8 @@ const char kSwitchXcodeBuildsystemValueLegacy[] = "legacy";
 const char kSwitchXcodeBuildsystemValueNew[] = "new";
 const char kSwitchXcodeConfigurations[] = "xcode-configs";
 const char kSwitchXcodeConfigurationBuildPath[] = "xcode-config-build-dir";
+const char kSwitchXcodeAdditionalFilesPatterns[] =
+    "xcode-additional-files-patterns";
 const char kSwitchJsonFileName[] = "json-file-name";
 const char kSwitchJsonIdeScript[] = "json-ide-script";
 const char kSwitchJsonIdeScriptArgs[] = "json-ide-script-args";
@@ -261,6 +263,7 @@ bool RunIdeWriter(const std::string& ide,
         command_line->GetSwitchValueASCII(kSwitchFilters),
         command_line->GetSwitchValueASCII(kSwitchXcodeConfigurations),
         command_line->GetSwitchValuePath(kSwitchXcodeConfigurationBuildPath),
+        command_line->GetSwitchValueASCII(kSwitchXcodeAdditionalFilesPatterns),
         XcodeBuildSystem::kLegacy,
     };
 
@@ -536,6 +539,12 @@ Xcode Flags
 
       One useful value is to use Xcode variables such as '${CONFIGURATION}'
       or '${EFFECTIVE_PLATFORM}'.
+
+  --xcode-additional-files-patterns=<string>
+      If present, must be a list of semicolor-separated file patterns. It
+      will be used to add all files matching the pattern located in the
+      source tree to the project. It can be used to add, e.g. documentation
+      files to the project to allow easily edit them.
 
   --ninja-executable=<string>
       Can be used to specify the ninja executable to use when building.
