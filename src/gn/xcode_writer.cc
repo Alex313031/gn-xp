@@ -15,6 +15,7 @@
 #include <utility>
 
 #include "base/environment.h"
+#include "base/files/file_enumerator.h"
 #include "base/logging.h"
 #include "base/sha1.h"
 #include "base/stl_util.h"
@@ -634,17 +635,38 @@ bool XcodeProject::AddSourcesFromBuilder(const Builder& builder, Err* err) {
     }
   }
 
+  const size_t root_path_utf8_size = build_settings_->root_path_utf8().size();
+
   // Add other files read by gn (the main dotfile, exec_script scripts, ...).
   for (const auto& path : g_scheduler->GetGenDependencies()) {
     if (!build_settings_->root_path().IsParent(path))
       continue;
 
     const std::string as8bit = path.As8Bit();
-    const SourceFile source(
-        "//" + as8bit.substr(build_settings_->root_path().value().size() + 1));
+    const SourceFile source("//" + as8bit.substr(root_path_utf8_size + 1));
 
     if (ShouldIncludeFileInProject(source))
       sources.insert(source);
+  }
+
+  // Add any files from --xcode-additional-files-patterns.
+  const std::vector<std::string_view> patterns =
+      base::SplitStringPiece(options_.additional_files_patterns, ";",
+                             base::TRIM_WHITESPACE, base::SPLIT_WANT_ALL);
+
+  for (std::string_view pattern : patterns) {
+    base::FileEnumerator it(build_settings_->root_path(),
+                            /*recursive*/ true, base::FileEnumerator::FILES,
+                            UTF8ToFilePath(pattern).value(),
+                            base::FileEnumerator::FolderSearchPolicy::ALL);
+
+    for (base::FilePath path = it.Next(); !path.empty(); path = it.Next()) {
+      const std::string as8bit = path.As8Bit();
+      const SourceFile source("//" + as8bit.substr(root_path_utf8_size + 1));
+
+      if (ShouldIncludeFileInProject(source))
+        sources.insert(source);
+    }
   }
 
   // Sort files to ensure deterministic generation of the project file (and
