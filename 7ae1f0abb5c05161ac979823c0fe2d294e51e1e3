@@ -22,6 +22,30 @@
       },
       "revId": "7ae1f0abb5c05161ac979823c0fe2d294e51e1e3",
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "7906ec8c_682c586c",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 4
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 1000070
+      },
+      "writtenOn": "2022-06-15T10:39:12Z",
+      "side": 1,
+      "message": "Sorry, this is the French way to spell \"Mb\". Fixed.",
+      "parentUuid": "4ee4bffb_f4237471",
+      "range": {
+        "startLine": 10,
+        "startChar": 48,
+        "endLine": 10,
+        "endChar": 50
+      },
+      "revId": "7ae1f0abb5c05161ac979823c0fe2d294e51e1e3",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
     }
   ]
 }

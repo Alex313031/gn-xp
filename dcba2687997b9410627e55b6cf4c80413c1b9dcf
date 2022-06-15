@@ -41,6 +41,30 @@
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "7bc56a52_4317d88f",
+        "filename": "src/gn/xcode_object.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 695,
+      "author": {
+        "id": 1000070
+      },
+      "writtenOn": "2022-06-15T10:39:12Z",
+      "side": 1,
+      "message": "I should probably change xcode_object.{h,cc} to pass string by value most of the time. I don\u0027t think it is worth doing amidst other changes. I\u0027ll do it as a followup when I\u0027ve done the other behavior changes I have in queue to support Xcode 14.",
+      "parentUuid": "b15b97b7_35225200",
+      "range": {
+        "startLine": 695,
+        "startChar": 46,
+        "endLine": 695,
+        "endChar": 57
+      },
+      "revId": "dcba2687997b9410627e55b6cf4c80413c1b9dcf",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "e51eea11_6098bb37",
@@ -54,6 +78,24 @@
       "writtenOn": "2022-06-13T22:13:30Z",
       "side": 1,
       "message": "Can you clarify this, either with a comment, or better, a more description function name? It\u0027s not clear looking at this what the last thing it\u0027s referring to, i.e. the the last \"what\"?",
+      "revId": "dcba2687997b9410627e55b6cf4c80413c1b9dcf",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "367b4b5d_6bdea4b8",
+        "filename": "src/gn/xcode_object.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 300,
+      "author": {
+        "id": 1000070
+      },
+      "writtenOn": "2022-06-15T10:39:12Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "e51eea11_6098bb37",
       "revId": "dcba2687997b9410627e55b6cf4c80413c1b9dcf",
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
     }
