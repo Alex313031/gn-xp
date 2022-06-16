@@ -35,6 +35,24 @@
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "b2edb19d_4289b525",
+        "filename": "src/gn/xcode_writer.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 230,
+      "author": {
+        "id": 1000070
+      },
+      "writtenOn": "2022-06-16T12:29:37Z",
+      "side": 1,
+      "message": "Good call. I originally wrote this code using base::FilePath::StringViewType (and const references were not useful then).\n\nFixed. Thank you.",
+      "parentUuid": "1ce47fef_c21c9306",
+      "revId": "0186b0c030c908f7ab77840011c931a46947c928",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "dffc4dc5_435e42e1",
@@ -58,6 +76,30 @@
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "77251704_5756ea0e",
+        "filename": "src/gn/xcode_writer.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 699,
+      "author": {
+        "id": 1000070
+      },
+      "writtenOn": "2022-06-16T12:29:37Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "dffc4dc5_435e42e1",
+      "range": {
+        "startLine": 699,
+        "startChar": 24,
+        "endLine": 699,
+        "endChar": 28
+      },
+      "revId": "0186b0c030c908f7ab77840011c931a46947c928",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "236e6317_086cd603",
@@ -71,6 +113,30 @@
       "writtenOn": "2022-06-16T04:42:58Z",
       "side": 1,
       "message": "ditto",
+      "range": {
+        "startLine": 700,
+        "startChar": 38,
+        "endLine": 700,
+        "endChar": 45
+      },
+      "revId": "0186b0c030c908f7ab77840011c931a46947c928",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c11dceee_cc218004",
+        "filename": "src/gn/xcode_writer.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 700,
+      "author": {
+        "id": 1000070
+      },
+      "writtenOn": "2022-06-16T12:29:37Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "236e6317_086cd603",
       "range": {
         "startLine": 700,
         "startChar": 38,
