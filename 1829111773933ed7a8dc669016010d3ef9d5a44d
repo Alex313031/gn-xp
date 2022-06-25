@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "3d8e949e_74ea2908",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1001498
+      },
+      "writtenOn": "2022-06-25T06:31:34Z",
+      "side": 1,
+      "message": "Brett, I\u0027m OOO next week so it\u0027s a good opportunity to get early feedback on this while I\u0027m out. Feel free to forward to other reviewers as appropriate. This is largely done, but I want to test it in situ a bit more than I had a chance to today. The commit message has one REVIEW TODO scenario that may require a change in NinjaBuildWriter. Also need to make a pass to check if there\u0027s any other new unit tests warranted.",
+      "revId": "1829111773933ed7a8dc669016010d3ef9d5a44d",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    }
+  ]
+}
