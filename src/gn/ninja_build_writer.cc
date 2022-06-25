@@ -13,6 +13,7 @@
 
 #include "base/command_line.h"
 #include "base/files/file_util.h"
+#include "base/strings/string_split.h"
 #include "base/strings/string_util.h"
 #include "base/strings/utf_string_conversions.h"
 #include "gn/build_settings.h"
@@ -20,8 +21,10 @@
 #include "gn/err.h"
 #include "gn/escape.h"
 #include "gn/filesystem_utils.h"
+#include "gn/general_tool.h"
 #include "gn/input_file_manager.h"
 #include "gn/loader.h"
+#include "gn/ninja_tool_rule_writer.h"
 #include "gn/ninja_utils.h"
 #include "gn/pool.h"
 #include "gn/scheduler.h"
@@ -118,7 +121,8 @@ base::CommandLine GetSelfInvocationCommandLine(
   // the regeneration is invoked by ninja, the gen command is aware that it is a
   // regeneration invocation and not an user invocation. This allows the gen
   // command to elide ninja post processing steps that ninja will perform
-  // itself.
+  // itself. It also changes the output file to "build.ninja.tmp", which will be
+  // copied to "build.ninja" by a separate build step.
   if (!cmdline.HasSwitch(switches::kRegeneration)) {
     cmdline.AppendSwitch(switches::kRegeneration);
   }
@@ -197,6 +201,7 @@ NinjaBuildWriter::NinjaBuildWriter(
         used_toolchains,
     const std::vector<const Target*>& all_targets,
     const Toolchain* default_toolchain,
+    const Settings* default_toolchain_settings,
     const std::vector<const Target*>& default_toolchain_targets,
     std::ostream& out,
     std::ostream& dep_out)
@@ -204,6 +209,7 @@ NinjaBuildWriter::NinjaBuildWriter(
       used_toolchains_(used_toolchains),
       all_targets_(all_targets),
       default_toolchain_(default_toolchain),
+      default_toolchain_settings_(default_toolchain_settings),
       default_toolchain_targets_(default_toolchain_targets),
       out_(out),
       dep_out_(dep_out),
@@ -222,8 +228,9 @@ bool NinjaBuildWriter::Run(Err* err) {
 // static
 bool NinjaBuildWriter::RunAndWriteFile(const BuildSettings* build_settings,
                                        const Builder& builder,
+                                       bool is_regeneration,
                                        Err* err) {
-  ScopedTrace trace(TraceItem::TRACE_FILE_WRITE, "build.ninja");
+  ScopedTrace trace(TraceItem::TRACE_FILE_WRITE, "build.ninja.tmp");
 
   std::vector<const Target*> all_targets = builder.GetAllResolvedTargets();
   std::unordered_map<const Settings*, const Toolchain*> used_toolchains;
@@ -256,17 +263,17 @@ bool NinjaBuildWriter::RunAndWriteFile(const BuildSettings* build_settings,
   std::stringstream file;
   std::stringstream depfile;
   NinjaBuildWriter gen(build_settings, used_toolchains, all_targets,
-                       default_toolchain, default_toolchain_targets, file,
-                       depfile);
+                       default_toolchain, default_toolchain_settings,
+                       default_toolchain_targets, file, depfile);
   if (!gen.Run(err))
     return false;
 
-  // Unconditionally write the build.ninja. Ninja's build-out-of-date checking
-  // will re-run GN when any build input is newer than build.ninja, so any time
-  // the build is updated, build.ninja's timestamp needs to updated also, even
-  // if the contents haven't been changed.
+  // Unconditionally write the build.ninja.tmp. Ninja's build-out-of-date
+  // checking will re-run GN when any build input is newer than build.ninja, so
+  // any time the build is updated, build.ninja's timestamp needs to updated
+  // also, even if the contents haven't been changed.
   base::FilePath ninja_file_name(build_settings->GetFullPath(
-      SourceFile(build_settings->build_dir().value() + "build.ninja")));
+      SourceFile(build_settings->build_dir().value() + "build.ninja.tmp")));
   base::CreateDirectory(ninja_file_name.DirName());
   std::string ninja_contents = file.str();
   if (base::WriteFile(ninja_file_name, ninja_contents.data(),
@@ -283,7 +290,38 @@ bool NinjaBuildWriter::RunAndWriteFile(const BuildSettings* build_settings,
       static_cast<int>(dep_contents.size()))
     return false;
 
+  // During regeneration, ninja will perform the copy from "build.ninja.tmp" to
+  // "build.ninja", but the initial gen needs to create it directly.
+  if (!is_regeneration) {
+    base::FilePath ninja_file_name(build_settings->GetFullPath(
+        SourceFile(build_settings->build_dir().value() + "build.ninja")));
+    if (base::WriteFile(ninja_file_name, ninja_contents.data(),
+                        static_cast<int>(ninja_contents.size())) !=
+        static_cast<int>(ninja_contents.size()))
+      return false;
+  }
+
   return true;
+}
+
+// static
+std::string NinjaBuildWriter::ExtractRegenerationCommands(
+    const std::string& build_ninja_in) {
+  std::vector<std::string_view> lines = base::SplitStringPiece(
+      build_ninja_in, "\n", base::KEEP_WHITESPACE, base::SPLIT_WANT_ALL);
+
+  std::ostringstream out;
+  int num_blank_lines = 0;
+  for (const auto& line : lines) {
+    out << line << '\n';
+    if (line.empty())
+      ++num_blank_lines;
+    // Warning: Significant magic number. Represents the number of blank lines
+    // in the ninja rules written by NinjaBuildWriter::WriteNinjaRules below.
+    if (num_blank_lines == 5)
+      return out.str();
+  }
+  return std::string{};
 }
 
 void NinjaBuildWriter::WriteNinjaRules() {
@@ -295,16 +333,32 @@ void NinjaBuildWriter::WriteNinjaRules() {
   out_ << "  pool = console\n";
   out_ << "  description = Regenerating ninja files\n\n";
 
-  // This rule will regenerate the ninja files when any input file has changed.
-  out_ << "build build.ninja: gn\n"
-       << "  generator = 1\n"
-       << "  depfile = build.ninja.d\n";
+  // Write default toolchain's copy rule for use in second step below.
+  const Tool* copy_tool =
+      default_toolchain_->GetTool(GeneralTool::kGeneralToolCopy);
+  if (!copy_tool) {
+    g_scheduler->FailWithError(
+        Err(nullptr, "Copy tool not defined",
+            "The default toolchain doesn't define a \"copy\" tool."));
+    return;
+  }
+  NinjaToolRuleWriter::WriteToolRuleWithName(
+      "copy-default", default_toolchain_settings_, copy_tool, out_);
+  out_ << "\n";
 
-  // Input build files. These go in the ".d" file. If we write them as
-  // dependencies in the .ninja file itself, ninja will expect the files to
-  // exist and will error if they don't. When files are listed in a depfile,
-  // missing files are ignored.
-  dep_out_ << "build.ninja:";
+  // The first statement will regenerate the ninja files when any input file
+  // (captured in the depfile) has changed, and the second copies it into place.
+  out_ << "build build.ninja.tmp: gn\n"
+       << "  depfile = build.ninja.d\n"
+       << "\n"
+       << "build build.ninja: copy-default build.ninja.tmp\n"
+       << "  generator = 1\n";
+
+  // Input build files. These go in the ".d" file. If we write them
+  // as dependencies in the .ninja file itself, ninja will expect
+  // the files to exist and will error if they don't. When files are
+  // listed in a depfile, missing files are ignored.
+  dep_out_ << "build.ninja.tmp:";
 
   // Other files read by the build.
   std::vector<base::FilePath> other_files = g_scheduler->GetGenDependencies();

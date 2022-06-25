@@ -139,14 +139,18 @@ TEST_F(NinjaBuildWriterTest, TwoTargets) {
   std::ostringstream depfile_out;
 
   NinjaBuildWriter writer(setup.build_settings(), used_toolchains, targets,
-                          setup.toolchain(), targets, ninja_out, depfile_out);
+                          setup.toolchain(), setup.settings(), targets,
+                          ninja_out, depfile_out);
   ASSERT_TRUE(writer.Run(&err));
 
   const char expected_rule_gn[] = "rule gn\n";
-  const char expected_build_ninja[] =
-      "build build.ninja: gn\n"
-      "  generator = 1\n"
+  const char expected_rule_copy[] = "rule copy-default\n";
+  const char expected_build_ninja_tmp[] =
+      "build build.ninja.tmp: gn\n"
       "  depfile = build.ninja.d\n";
+  const char expected_build_ninja[] =
+      "build build.ninja: copy-default build.ninja.tmp\n"
+      "  generator = 1\n";
   const char expected_other_pool[] =
       "pool other_toolchain_another_depth_pool\n"
       "  depth = 7\n"
@@ -172,6 +176,8 @@ TEST_F(NinjaBuildWriterTest, TwoTargets) {
       << "Expected to find: " << expected << "\n"      \
       << "Within: " << out_str
   EXPECT_SNIPPET(expected_rule_gn);
+  EXPECT_SNIPPET(expected_rule_copy);
+  EXPECT_SNIPPET(expected_build_ninja_tmp);
   EXPECT_SNIPPET(expected_build_ninja);
   EXPECT_SNIPPET(expected_other_pool);
   EXPECT_SNIPPET(expected_toolchain);
@@ -182,6 +188,76 @@ TEST_F(NinjaBuildWriterTest, TwoTargets) {
 
   // A pool definition for ninja's built-in console pool must not be written.
   EXPECT_EQ(std::string::npos, out_str.find("pool console"));
+}
+
+TEST_F(NinjaBuildWriterTest, ExtractRegenerationCommands) {
+  TestWithScope setup;
+  Err err;
+
+  Target target_foo(setup.settings(), Label(SourceDir("//foo/"), "bar"));
+  target_foo.set_output_type(Target::ACTION);
+  target_foo.action_values().set_script(SourceFile("//foo/script.py"));
+  target_foo.action_values().outputs() = SubstitutionList::MakeForTest(
+      "//out/Debug/out1.out", "//out/Debug/out2.out");
+  target_foo.SetToolchain(setup.toolchain());
+  ASSERT_TRUE(target_foo.OnResolved(&err));
+
+  // The console pool must be in the default toolchain.
+  Pool console_pool(setup.settings(), Label(SourceDir("//"), "console",
+                                            setup.toolchain()->label().dir(),
+                                            setup.toolchain()->label().name()));
+  console_pool.set_depth(1);
+
+  std::unordered_map<const Settings*, const Toolchain*> used_toolchains;
+  used_toolchains[setup.settings()] = setup.toolchain();
+
+  std::vector<const Target*> targets = {&target_foo};
+
+  std::ostringstream ninja_out;
+  std::ostringstream depfile_out;
+
+  NinjaBuildWriter writer(setup.build_settings(), used_toolchains, targets,
+                          setup.toolchain(), setup.settings(), targets,
+                          ninja_out, depfile_out);
+  ASSERT_TRUE(writer.Run(&err));
+
+  const char expected_rule_gn[] = "rule gn\n";
+  const char expected_rule_copy[] = "rule copy-default\n";
+  const char expected_build_ninja_tmp[] = "build build.ninja.tmp: gn\n";
+  const char expected_build_ninja[] =
+      "build build.ninja: copy-default build.ninja.tmp\n";
+  const char expected_target[] = "build bar:";
+  const char expected_root_target[] = "build all: phony $\n";
+  const char expected_default[] = "default all\n";
+  std::string full_ninja_str = ninja_out.str();
+#define EXPECT_SNIPPET(str, expected)              \
+  EXPECT_NE(std::string::npos, str.find(expected)) \
+      << "Expected to find: " << expected << "\n"  \
+      << "Within: " << str
+#define EXPECT_NO_SNIPPET(str, unexpected)           \
+  EXPECT_EQ(std::string::npos, str.find(unexpected)) \
+      << "Found unexpected: " << unexpected << "\n"  \
+      << "Within: " << str
+  EXPECT_SNIPPET(full_ninja_str, expected_rule_gn);
+  EXPECT_SNIPPET(full_ninja_str, expected_rule_copy);
+  EXPECT_SNIPPET(full_ninja_str, expected_build_ninja_tmp);
+  EXPECT_SNIPPET(full_ninja_str, expected_build_ninja);
+  EXPECT_SNIPPET(full_ninja_str, expected_target);
+  EXPECT_SNIPPET(full_ninja_str, expected_root_target);
+  EXPECT_SNIPPET(full_ninja_str, expected_default);
+
+  std::string commands =
+      NinjaBuildWriter::ExtractRegenerationCommands(full_ninja_str);
+  EXPECT_SNIPPET(commands, expected_rule_gn);
+  EXPECT_SNIPPET(commands, expected_rule_copy);
+  EXPECT_SNIPPET(commands, expected_build_ninja_tmp);
+  EXPECT_SNIPPET(commands, expected_build_ninja);
+  EXPECT_NO_SNIPPET(commands, expected_target);
+  EXPECT_NO_SNIPPET(commands, expected_root_target);
+  EXPECT_NO_SNIPPET(commands, expected_default);
+
+#undef EXPECT_SNIPPET
+#undef EXPECT_NO_SNIPPET
 }
 
 TEST_F(NinjaBuildWriterTest, SpaceInDepfile) {
@@ -204,11 +280,12 @@ TEST_F(NinjaBuildWriterTest, SpaceInDepfile) {
   std::ostringstream ninja_out;
   std::ostringstream depfile_out;
   NinjaBuildWriter writer(setup.build_settings(), used_toolchains, targets,
-                          setup.toolchain(), targets, ninja_out, depfile_out);
+                          setup.toolchain(), setup.settings(), targets,
+                          ninja_out, depfile_out);
   ASSERT_TRUE(writer.Run(&err));
 
   EXPECT_EQ(depfile_out.str(),
-            "build.ninja: ../../path\\ with\\ space/BUILD.gn");
+            "build.ninja.tmp: ../../path\\ with\\ space/BUILD.gn");
 }
 
 TEST_F(NinjaBuildWriterTest, DuplicateOutputs) {
@@ -237,7 +314,8 @@ TEST_F(NinjaBuildWriterTest, DuplicateOutputs) {
   std::ostringstream ninja_out;
   std::ostringstream depfile_out;
   NinjaBuildWriter writer(setup.build_settings(), used_toolchains, targets,
-                          setup.toolchain(), targets, ninja_out, depfile_out);
+                          setup.toolchain(), setup.settings(), targets,
+                          ninja_out, depfile_out);
   ASSERT_FALSE(writer.Run(&err));
 
   const char expected_help_test[] =

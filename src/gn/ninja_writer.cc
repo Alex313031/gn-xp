@@ -20,19 +20,21 @@ NinjaWriter::~NinjaWriter() = default;
 bool NinjaWriter::RunAndWriteFiles(const BuildSettings* build_settings,
                                    const Builder& builder,
                                    const PerToolchainRules& per_toolchain_rules,
+                                   bool is_regeneration,
                                    Err* err) {
   NinjaWriter writer(builder);
 
   if (!writer.WriteToolchains(per_toolchain_rules, err))
     return false;
-  return NinjaBuildWriter::RunAndWriteFile(build_settings, builder, err);
+  return NinjaBuildWriter::RunAndWriteFile(build_settings, builder,
+                                           is_regeneration, err);
 }
 
 bool NinjaWriter::WriteToolchains(const PerToolchainRules& per_toolchain_rules,
                                   Err* err) {
   if (per_toolchain_rules.empty()) {
     *err = Err(Location(), "No targets.",
-        "I could not find any targets to write, so I'm doing nothing.");
+               "I could not find any targets to write, so I'm doing nothing.");
     return false;
   }
 
