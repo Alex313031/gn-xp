@@ -16,6 +16,24 @@
       "message": "Can you build `gn` with this change, and run it locally to regenerate the documentation and include the changes in the current CL?\n\n  $ ninja -C out\n  $ out/gn help all --markdown \u003e docs/reference.md\n  $ git add docs/reference.md\n\n ",
       "revId": "dd83aaf00c88cbdb5ce24b11f353a0efbe6bb0d0",
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "36ea3562_ff5ee4b3",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1002287
+      },
+      "writtenOn": "2022-07-01T11:02:04Z",
+      "side": 1,
+      "message": "Done.",
+      "parentUuid": "a27f46d0_1e78e85a",
+      "revId": "dd83aaf00c88cbdb5ce24b11f353a0efbe6bb0d0",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
     }
   ]
 }
