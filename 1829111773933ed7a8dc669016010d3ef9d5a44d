@@ -33,6 +33,23 @@
       "message": "I was thinking GN would always write the new build in the .tmp file and then as a last step would remove the old build.ninja file and move the new one in place.\n\nI think this will be a lot simpler. The delete + rename should be fast enough that there will be almost no opportunity to get partial state in practice.",
       "revId": "1829111773933ed7a8dc669016010d3ef9d5a44d",
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "fbae0ea2_35f6eb4c",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000014
+      },
+      "writtenOn": "2022-07-07T20:23:59Z",
+      "side": 1,
+      "message": "Thanks for looking at this, BTW!",
+      "revId": "1829111773933ed7a8dc669016010d3ef9d5a44d",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
     }
   ]
 }
