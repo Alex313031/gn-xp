@@ -50,6 +50,24 @@
       "message": "Thanks for looking at this, BTW!",
       "revId": "1829111773933ed7a8dc669016010d3ef9d5a44d",
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "85123e38_d366d288",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1001498
+      },
+      "writtenOn": "2022-07-07T23:37:21Z",
+      "side": 1,
+      "message": "I\u0027m not sure I understand what change you\u0027re suggesting. The key to this fix is splitting the ninja steps in two, so that ninja won\u0027t delete the build.ninja if interrupted (only the .tmp) while still having the build.ninja.d depfile in build.ninja\u0027s dependency tree (now through the .tmp step). That means the .tmp needs to still exist once regeneration is done, it can\u0027t be renamed to build.ninja.\n\nAm I missing your suggestion here?",
+      "parentUuid": "6dd870bc_a7de343c",
+      "revId": "1829111773933ed7a8dc669016010d3ef9d5a44d",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
     }
   ]
 }
