@@ -108,6 +108,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "31fad7b0_a280e78e",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1001498
+      },
+      "writtenOn": "2022-07-08T19:19:36Z",
+      "side": 1,
+      "message": "\u003e It\u0027s possible there is some other arrangement of ninja build statements that would also resolve this bug without the need for the build.ninja.tmp -\u003e build.ninja copy, but none has occurred to me yet. I\u0027ll think about it some more.\n\nThinking out loud...\n\nOne limitation here are the tools that we have available from the toolchain, which for basic file operations are copy and stamp. We don\u0027t *really* need ninja to copy build.ninja.tmp -\u003e build.ninja because (as I noted in the REVIEW TODO in my commit message) \"gn gen\" needs to write build.ninja unconditionally anyway.\n\nTwo possible ideas:\n\n1. The new \"build build.ninja\" statement could use a no-op rule instead, if there\u0027s a way to write a cross-platform no-op rule (without relying on the toolchain). I wonder if the phony rule would work here...I\u0027ll try it.\n\n2. If that first idea works, we don\u0027t actually need to write the real contents to build.ninja.tmp at all because it\u0027ll never be used.\n\nMaybe something like this will work? The trick here is that \"gn gen\" is managing overwriting build.ninja - first with just the regeneration commands, then the full contents - without ninja being aware, i.e. even though these ninja rules might make you think it\u0027s doing no such thing in the \"regenerate\" edge. I\u0027ll try it out.\n\n```\n  build regenerate: gn\n    depfile \u003d build.ninja.d\n\n  build build.ninja: phony regenerate\n    generator \u003d 1\n```",
+      "parentUuid": "71ff8200_a1e40e27",
+      "revId": "1829111773933ed7a8dc669016010d3ef9d5a44d",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "7b2aa2b6_fb01913d",
         "filename": "src/gn/ninja_build_writer.cc",
         "patchSetId": 1
