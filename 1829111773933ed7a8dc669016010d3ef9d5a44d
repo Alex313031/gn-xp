@@ -68,6 +68,47 @@
       "parentUuid": "6dd870bc_a7de343c",
       "revId": "1829111773933ed7a8dc669016010d3ef9d5a44d",
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8546f24f_1a309f57",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000014
+      },
+      "writtenOn": "2022-07-08T18:04:32Z",
+      "side": 1,
+      "message": "My suggestion is to do this unconditionally within one run of GN:\n\n  1. Step one of any \"gn gen\" run would be to write a new build.ninja with just a rule to re-run gn. This would be the current regeneration rule (you shouldn\u0027t need to write a new copy rule as I describe below).\n\n  2. Then the entire build would be generated, writing the new root build.ninja to the side like you do.\n\n  3. Then GN would delete the old build.ninja and move the new one into place.\n\nI don\u0027t think you need to worry about whether the run is a regeneration or not: all of these steps can be performed unconditionally. You can make a new build with `gn gen --args\u003d\"foo\u003dbar\"` and interrupt that, and it will generate an unusable build just like it would in the interrupted regeneration case.\n\nYou don\u0027t need to express the copy in terms of Ninja. GN can itself delete the old file and move the new one over it. The move should be much more atomic (the file is large so copying will leave plenty of chance for interruption). It should also simplify your code since you don\u0027t need to write the new copy rule.\n\nI also don\u0027t think you need to read the .ninja file explicitly for \"gn gen\". With the existing code, it just writes the current process\u0027 command line arguments which should be propagated through the reinvocation command from Ninja and I think this should continue to work.\n\nThere an argument for what it should do when you explicitly run \"gn gen\" on an existing directory. Currently, it will clobber your command-line options but keep your args.gn. Sometimes you might want to use the old command-line arguments even though you didn\u0027t specify them on this gen run. But you can also specify new ones! I think there\u0027s an inherent conflict here and I concluded the answer is \"don\u0027t do that\" (I think few people even know about this so it\u0027s fine).\n\nHowever, preserving the old command line args in the \"gn clean\" case like you do is a nice addition and there is no opportunity for conflict, so I think we should keep that for sure.",
+      "parentUuid": "85123e38_d366d288",
+      "revId": "1829111773933ed7a8dc669016010d3ef9d5a44d",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7b2aa2b6_fb01913d",
+        "filename": "src/gn/ninja_build_writer.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 296,
+      "author": {
+        "id": 1000014
+      },
+      "writtenOn": "2022-07-08T18:04:32Z",
+      "side": 1,
+      "message": "This shadows the path for the .tmp file with a different value. Probably these should have different names that describe what they are.",
+      "range": {
+        "startLine": 296,
+        "startChar": 19,
+        "endLine": 296,
+        "endChar": 34
+      },
+      "revId": "1829111773933ed7a8dc669016010d3ef9d5a44d",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
     }
   ]
 }
