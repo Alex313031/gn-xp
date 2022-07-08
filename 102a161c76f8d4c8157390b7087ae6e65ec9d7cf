@@ -16,6 +16,24 @@
       "message": "lgtm",
       "revId": "102a161c76f8d4c8157390b7087ae6e65ec9d7cf",
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "96d49805_f2d8db10",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1002222
+      },
+      "writtenOn": "2022-07-08T15:52:25Z",
+      "side": 1,
+      "message": "Thanks for the review. Please go ahead and land this if possible (I lack commit queue privileges). I have also confirmed that the Arch Linux gn package has become reproducible after this change.",
+      "parentUuid": "6f384be9_85dae35f",
+      "revId": "102a161c76f8d4c8157390b7087ae6e65ec9d7cf",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
     }
   ]
 }
