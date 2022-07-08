@@ -90,6 +90,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "71ff8200_a1e40e27",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1001498
+      },
+      "writtenOn": "2022-07-08T18:48:49Z",
+      "side": 1,
+      "message": "I think there\u0027s some confusion about what I\u0027m trying to fix with this change.\n\n\u003e My suggestion is to do this unconditionally within one run of GN:\n\nThat flow would not resolve the bug that I\u0027m fixing here. The goal here is to ensure that ninja does not delete build.ninja when regeneration is interrupted. Today, that deletion happens because the \"build build.ninja\" statement directly uses a depfile (build.ninja.d). Since the deletion is performed by ninja, changes to GN without any modification of the generated ninja rules cannot prevent that deletion.\n\nCould you read your comments from the bug again, perhaps? Specifically:\n\n\"The best solution-without-changing ninja that I came up with is to have the build regen be responsible for building build.ninja.tmp that uses the depfile, and a second edge that just copies build.ninja.tmp to build.ninja (but doesn\u0027t use a depfile).\"\n\nSplitting the ninja rules in this way, as you\u0027d suggested back in 2018 on the bug, is the only way I can think of to get around ninja\u0027s \"delete all outputs during cleanup if a depfile is used, even if they weren\u0027t modified\" logic.\n\n\u003e You can make a new build with  gn gen --args\u003d\"foo\u003dbar\"  and interrupt that, and it will generate an unusable build just like it would in the interrupted regeneration case.\n\nInterrupting a fresh \"gn gen\" is most likely to result in no build.ninja being written at all, because that and the depfile are written last. This is not the same scenario as what I\u0027m trying to fix. The problem that I\u0027m trying to fix is *ninja* deleting the build.ninja file, whether it was modified or not, simply because that build edge uses a depfile. The end result looks similar - no build.ninja - but the cause is not the same.\n\n\u003e You don\u0027t need to express the copy in terms of Ninja. GN can itself delete the old file and move the new one over it.\n\nAs I mentioned above, the two separate ninja build statements are the key to fixing this bug. It\u0027s possible there is some other arrangement of ninja build statements that would also resolve this bug without the need for the build.ninja.tmp -\u003e build.ninja copy, but none has occurred to me yet. I\u0027ll think about it some more.\n\n\u003e I also don\u0027t think you need to read the .ninja file explicitly for \"gn gen\".\n\nThis was from me reusing the logic from \"gn clean\", but I guess there\u0027s no benefit to doing so when we have the flags available on the command line. I\u0027ll replace this and then this step doesn\u0027t need to be dependent on regeneration.\n\n\u003e I don\u0027t think you need to worry about whether the run is a regeneration or not\n\nAgreed, if I stop borrowing the logic from \"clean\" I no longer need to.\n\n\u003e However, preserving the old command line args in the \"gn clean\" case like you do is a nice addition\n\nThat wasn\u0027t an addition; \"gn clean\" already does that. Reading the .ninja file and stripping out the regeneration commands was me borrowing the logic from \"clean\" to reuse for \"gen\" (and cleaning it up a bit, since it relied on a magic number with no tests behind it).",
+      "parentUuid": "8546f24f_1a309f57",
+      "revId": "1829111773933ed7a8dc669016010d3ef9d5a44d",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "7b2aa2b6_fb01913d",
         "filename": "src/gn/ninja_build_writer.cc",
         "patchSetId": 1
@@ -101,6 +119,30 @@
       "writtenOn": "2022-07-08T18:04:32Z",
       "side": 1,
       "message": "This shadows the path for the .tmp file with a different value. Probably these should have different names that describe what they are.",
+      "range": {
+        "startLine": 296,
+        "startChar": 19,
+        "endLine": 296,
+        "endChar": 34
+      },
+      "revId": "1829111773933ed7a8dc669016010d3ef9d5a44d",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "63397246_c79b5e00",
+        "filename": "src/gn/ninja_build_writer.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 296,
+      "author": {
+        "id": 1001498
+      },
+      "writtenOn": "2022-07-08T18:48:49Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "7b2aa2b6_fb01913d",
       "range": {
         "startLine": 296,
         "startChar": 19,
