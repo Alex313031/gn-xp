@@ -124,6 +124,23 @@
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "25cb21d7_f3aacc5d",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000014
+      },
+      "writtenOn": "2022-07-11T20:55:32Z",
+      "side": 1,
+      "message": "Bryan reminded me offline that I had forgotten the details from the bug where there is a complex interaction with Ninja\u0027s handling of the depfile that makes this impossible to implement entirely withing GN.",
+      "revId": "1829111773933ed7a8dc669016010d3ef9d5a44d",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "7b2aa2b6_fb01913d",
