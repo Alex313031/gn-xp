@@ -51,6 +51,24 @@
       "message": "I see that you signed the Google CLA but haven\u0027t contributed to GN before. Can you also add yourself to the AUTHORS file in this change?\n",
       "revId": "102a161c76f8d4c8157390b7087ae6e65ec9d7cf",
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c4127205_924dc3e5",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1002222
+      },
+      "writtenOn": "2022-07-11T14:33:07Z",
+      "side": 1,
+      "message": "Done, thanks.",
+      "parentUuid": "97c795d9_cfa3274b",
+      "revId": "102a161c76f8d4c8157390b7087ae6e65ec9d7cf",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
     }
   ]
 }
