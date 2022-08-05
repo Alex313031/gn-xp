@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "847762c3_1c3425d9",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1001498
+      },
+      "writtenOn": "2022-08-05T00:39:45Z",
+      "side": 1,
+      "message": "Brett, could you please take another look at this? It\u0027s changed significantly to address the remaining REVIEW TODO I\u0027d noted and to remove the copy in ninja. Not sure why Gerrit preserved the CR+2.",
+      "revId": "6b6bd7a89c04e554693dca11ce1ba068b4ee7b7d",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    }
+  ]
+}
