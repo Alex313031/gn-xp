@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "96c664b8_32fd56e4",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1001498
+      },
+      "writtenOn": "2022-08-05T00:41:16Z",
+      "side": 1,
+      "message": "I was tempted to squash this into the previous change, but it\u0027s separable enough and is a nice but unrelated improvement to \u0027gn clean\u0027 in addition to \u0027gen\u0027.",
+      "revId": "4959e0608023ff177979ead5fa048dcf1c3be359",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    }
+  ]
+}
