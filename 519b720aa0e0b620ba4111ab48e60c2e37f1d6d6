@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "8463e0db_c9c00c21",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1001498
+      },
+      "writtenOn": "2022-08-06T03:07:39Z",
+      "side": 1,
+      "message": "No idea why CQ submitted this without running any builds or tests. Fixes started in https://gn-review.googlesource.com/c/gn/+/14340.",
+      "revId": "519b720aa0e0b620ba4111ab48e60c2e37f1d6d6",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    }
+  ]
+}
