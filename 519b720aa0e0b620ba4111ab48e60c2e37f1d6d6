@@ -16,6 +16,24 @@
       "message": "No idea why CQ submitted this without running any builds or tests. Fixes started in https://gn-review.googlesource.com/c/gn/+/14340.",
       "revId": "519b720aa0e0b620ba4111ab48e60c2e37f1d6d6",
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c15cefab_09ccf3a6",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000014
+      },
+      "writtenOn": "2022-08-06T14:51:12Z",
+      "side": 1,
+      "message": "I messed up when I submitted it. I wanted to submit all the patches at once but apparently that bypasses the CQ.",
+      "parentUuid": "8463e0db_c9c00c21",
+      "revId": "519b720aa0e0b620ba4111ab48e60c2e37f1d6d6",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
     }
   ]
 }
