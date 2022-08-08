@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "6b9f8a21_fc6c5351",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1001498
+      },
+      "writtenOn": "2022-08-08T17:44:44Z",
+      "side": 1,
+      "message": "This fixes two other build errors. Can you CQ+2 again?",
+      "revId": "d099f0a1d10b143ed2fd1c5eab7fa7012943797a",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    }
+  ]
+}
