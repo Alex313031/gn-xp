@@ -16,6 +16,23 @@
       "message": "This fixes two other build errors. Can you CQ+2 again?",
       "revId": "d099f0a1d10b143ed2fd1c5eab7fa7012943797a",
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "7453a8ec_68fe80c7",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1001498
+      },
+      "writtenOn": "2022-08-08T17:57:06Z",
+      "side": 1,
+      "message": "*sigh* I suppose I should build locally before uploading first, at least...\n\nThis should resolve the unused function error.",
+      "revId": "d099f0a1d10b143ed2fd1c5eab7fa7012943797a",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
     }
   ]
 }
