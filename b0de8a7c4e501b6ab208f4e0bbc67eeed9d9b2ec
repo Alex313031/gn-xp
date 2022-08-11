@@ -16,6 +16,24 @@
       "message": "Does the Fuchsia tree already meet this requirement?",
       "revId": "b0de8a7c4e501b6ab208f4e0bbc67eeed9d9b2ec",
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "cbb8925b_ce0e2461",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 1000397
+      },
+      "writtenOn": "2022-08-11T01:31:07Z",
+      "side": 1,
+      "message": "Yes.  I confirmed this before making the change.",
+      "parentUuid": "e6eb51de_25e8ff26",
+      "revId": "b0de8a7c4e501b6ab208f4e0bbc67eeed9d9b2ec",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
     }
   ]
 }
