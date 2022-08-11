@@ -16,6 +16,46 @@
       "message": "Can you run the try bots for me? This passes local tests - unit tests, with the new test added, and it fixes the listed bug.",
       "revId": "2494d70b8022735887f89550dd7d001f4cc62442",
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "07f89e2e_a510ca23",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000070
+      },
+      "writtenOn": "2022-08-11T13:00:32Z",
+      "side": 1,
+      "message": "lgtm",
+      "revId": "2494d70b8022735887f89550dd7d001f4cc62442",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d11747f0_ed19f1b6",
+        "filename": "src/gn/commands.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 525,
+      "author": {
+        "id": 1000070
+      },
+      "writtenOn": "2022-08-11T13:00:32Z",
+      "side": 1,
+      "message": "Extracting `build_commands` to a separate helper function would also have ensured that the file was closed before we attempted to write to it.",
+      "range": {
+        "startLine": 507,
+        "startChar": 0,
+        "endLine": 525,
+        "endChar": 0
+      },
+      "revId": "2494d70b8022735887f89550dd7d001f4cc62442",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
     }
   ]
 }
