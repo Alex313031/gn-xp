@@ -16,6 +16,24 @@
       "message": "I could extract that code into a separate function if you\u0027d like.\n\nI updated the test to make it less misleading. If it looks good can you land the change? I don\u0027t have permissions to do that.",
       "revId": "b077331672ab2ba22994eb4a7f025ef85638276c",
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "6eb8f9a5_c340b865",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000070
+      },
+      "writtenOn": "2022-08-11T16:28:55Z",
+      "side": 1,
+      "message": "I don\u0027t feel strongly about using a separate function.",
+      "parentUuid": "8ebf0d57_d3ebbb53",
+      "revId": "b077331672ab2ba22994eb4a7f025ef85638276c",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
     }
   ]
 }
