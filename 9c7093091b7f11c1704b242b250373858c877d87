@@ -1,0 +1,44 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b728b4ed_fcc6efb4",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000907
+      },
+      "writtenOn": "2022-08-12T14:00:35Z",
+      "side": 1,
+      "message": "Also, please rebase the branch on top of main branch to resolve the merge conflict",
+      "revId": "9c7093091b7f11c1704b242b250373858c877d87",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3b65dd9c_ea5fe0d1",
+        "filename": "src/util/exe_path.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 13,
+      "author": {
+        "id": 1000907
+      },
+      "writtenOn": "2022-08-12T14:00:35Z",
+      "side": 1,
+      "message": "please give the global variable a descriptive name, such as \"absolutePathBuf\" or similar",
+      "range": {
+        "startLine": 13,
+        "startChar": 5,
+        "endLine": 13,
+        "endChar": 8
+      },
+      "revId": "9c7093091b7f11c1704b242b250373858c877d87",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    }
+  ]
+}
