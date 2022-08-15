@@ -39,6 +39,30 @@
       },
       "revId": "9c7093091b7f11c1704b242b250373858c877d87",
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "dc8afc1b_2de8ae87",
+        "filename": "src/util/exe_path.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 13,
+      "author": {
+        "id": 1000842
+      },
+      "writtenOn": "2022-08-15T20:24:32Z",
+      "side": 1,
+      "message": "Thank you, a few notes\n\n1- Merge conflict needs to be fixed, make CL on the main branch.\n\n2- Please use IBM email as your account email, not gmail.\n\n3- Why do we need a global buffer here compared to other archs like freebsd with a similar local buffer?\n\nIf needed then can it be defined in the local scope with `{ ... static char buf[PATH_MAX] \u003d {0}; ... }` ?",
+      "parentUuid": "3b65dd9c_ea5fe0d1",
+      "range": {
+        "startLine": 13,
+        "startChar": 5,
+        "endLine": 13,
+        "endChar": 8
+      },
+      "revId": "9c7093091b7f11c1704b242b250373858c877d87",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
     }
   ]
 }
