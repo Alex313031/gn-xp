@@ -95,6 +95,10 @@ std::string GetDependencyChainPublicError(const HeaderChecker::Chain& chain) {
       ret.append("\n");
     }
   }
+  ret +=
+      "\ngn header check has a known deficiency where it does not correctly \n"
+      "process headers that depend on preprocessor conditions. If this is \n"
+      "the case, the warning can be suppressed by appending //nogncheck.\n";
   return ret;
 }
 
