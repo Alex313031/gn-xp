@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "2a84f7fc_4e5d3a5e",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000014
+      },
+      "writtenOn": "2022-09-01T17:13:29Z",
+      "side": 1,
+      "message": "The context is Fuchsia requires the compilation database so we want to configure it globally. Currently our tooling tries to set the command-line flag but this is easily lost.",
+      "revId": "2aac449cfb4d1ce23edc979074d07962a66810bb",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    }
+  ]
+}
