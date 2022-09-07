@@ -33,6 +33,24 @@
       "message": "Ping?",
       "revId": "2aac449cfb4d1ce23edc979074d07962a66810bb",
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "8ada053d_642aedef",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000030
+      },
+      "writtenOn": "2022-09-07T02:15:12Z",
+      "side": 1,
+      "message": "Sorry, I was ooo. Will take a look.",
+      "parentUuid": "1fb3d045_21ca7ff3",
+      "revId": "2aac449cfb4d1ce23edc979074d07962a66810bb",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
     }
   ]
 }
