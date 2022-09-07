@@ -76,6 +76,30 @@
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "f483a24e_a5c2976b",
+        "filename": "src/gn/compile_commands_writer.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 350,
+      "author": {
+        "id": 1000014
+      },
+      "writtenOn": "2022-09-07T15:16:35Z",
+      "side": 1,
+      "message": "Whoops, you\u0027re right!",
+      "parentUuid": "00c3e750_882819f7",
+      "range": {
+        "startLine": 350,
+        "startChar": 38,
+        "endLine": 350,
+        "endChar": 43
+      },
+      "revId": "2aac449cfb4d1ce23edc979074d07962a66810bb",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "f9d50362_d7cec38d",
@@ -89,6 +113,24 @@
       "writtenOn": "2022-09-07T07:24:43Z",
       "side": 1,
       "message": "why not use queue?",
+      "revId": "2aac449cfb4d1ce23edc979074d07962a66810bb",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "fffcee5d_ccfe8b7e",
+        "filename": "src/gn/compile_commands_writer.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 352,
+      "author": {
+        "id": 1000014
+      },
+      "writtenOn": "2022-09-07T15:16:35Z",
+      "side": 1,
+      "message": "When vector works, I prefer to use it. I think std::deque is almost always wrong. See https://source.chromium.org/chromium/chromium/src/+/main:base/containers/README.md\nGN has a copy of circular_deque from Chromium, but there\u0027s no advantage in using it here (since they\u0027re both just contiguous buffers and I don\u0027t need to remove from the beginning).",
+      "parentUuid": "f9d50362_d7cec38d",
       "revId": "2aac449cfb4d1ce23edc979074d07962a66810bb",
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
     },
@@ -116,6 +158,30 @@
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "6cc689ed_76f4ca40",
+        "filename": "src/gn/compile_commands_writer.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 19,
+      "author": {
+        "id": 1000014
+      },
+      "writtenOn": "2022-09-07T15:16:35Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "a5d8aa75_c7d04a76",
+      "range": {
+        "startLine": 19,
+        "startChar": 26,
+        "endLine": 19,
+        "endChar": 35
+      },
+      "revId": "2aac449cfb4d1ce23edc979074d07962a66810bb",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "d5dd6b0f_246451bb",
@@ -129,6 +195,30 @@
       "writtenOn": "2022-09-07T07:24:43Z",
       "side": 1,
       "message": "nit: I prefer \u0027TODO:\u0027.",
+      "range": {
+        "startLine": 33,
+        "startChar": 5,
+        "endLine": 33,
+        "endChar": 9
+      },
+      "revId": "2aac449cfb4d1ce23edc979074d07962a66810bb",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f3ff353c_b73327b1",
+        "filename": "src/gn/compile_commands_writer.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 33,
+      "author": {
+        "id": 1000014
+      },
+      "writtenOn": "2022-09-07T15:16:35Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "d5dd6b0f_246451bb",
       "range": {
         "startLine": 33,
         "startChar": 5,
