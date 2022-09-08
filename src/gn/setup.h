@@ -113,6 +113,9 @@ class Setup {
     return no_check_patterns_.get();
   }
 
+  std::vector<LabelPattern>& export_compile_commands() {
+    return export_compile_commands_;
+  }
   const std::vector<LabelPattern>& export_compile_commands() const {
     return export_compile_commands_;
   }
