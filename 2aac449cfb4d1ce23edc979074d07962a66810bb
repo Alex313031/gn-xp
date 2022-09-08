@@ -135,6 +135,24 @@
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "018f5e61_ca43bdad",
+        "filename": "src/gn/compile_commands_writer.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 352,
+      "author": {
+        "id": 1000030
+      },
+      "writtenOn": "2022-09-08T01:22:04Z",
+      "side": 1,
+      "message": "I see. Thank you for the reference.",
+      "parentUuid": "fffcee5d_ccfe8b7e",
+      "revId": "2aac449cfb4d1ce23edc979074d07962a66810bb",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "a5d8aa75_c7d04a76",
