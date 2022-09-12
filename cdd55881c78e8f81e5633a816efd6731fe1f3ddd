@@ -59,6 +59,30 @@
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "259a3d5a_4704f86e",
+        "filename": "src/gn/command_gen.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 68,
+      "author": {
+        "id": 1000014
+      },
+      "writtenOn": "2022-09-12T17:04:21Z",
+      "side": 1,
+      "message": "Whoops, I didn\u0027t mean to change this value.",
+      "parentUuid": "1e12b46f_7ad247b7",
+      "range": {
+        "startLine": 68,
+        "startChar": 18,
+        "endLine": 68,
+        "endChar": 39
+      },
+      "revId": "cdd55881c78e8f81e5633a816efd6731fe1f3ddd",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "4d2e10bf_78064589",
@@ -72,6 +96,24 @@
       "writtenOn": "2022-09-12T05:10:00Z",
       "side": 1,
       "message": "better to have link to this issue in bug label of description too?",
+      "revId": "cdd55881c78e8f81e5633a816efd6731fe1f3ddd",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d1526f21_172671f5",
+        "filename": "src/gn/command_gen.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 646,
+      "author": {
+        "id": 1000014
+      },
+      "writtenOn": "2022-09-12T17:04:21Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "4d2e10bf_78064589",
       "revId": "cdd55881c78e8f81e5633a816efd6731fe1f3ddd",
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
     },
