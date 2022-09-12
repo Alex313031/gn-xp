@@ -18,6 +18,24 @@
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "2682ff1f_40df1c0a",
+        "filename": "src/base/command_line.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 337,
+      "author": {
+        "id": 1000014
+      },
+      "writtenOn": "2022-09-12T16:52:07Z",
+      "side": 1,
+      "message": "https://en.cppreference.com/w/cpp/container/multimap says\n\"The order of the key-value pairs whose keys compare equivalent is the order of insertion and does not change. (since C++11)\"",
+      "parentUuid": "bc56e46e_985bedba",
+      "revId": "cdd55881c78e8f81e5633a816efd6731fe1f3ddd",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "1e12b46f_7ad247b7",
@@ -81,6 +99,30 @@
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "f02211c9_28e9b8de",
+        "filename": "src/gn/compile_commands_writer.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 32,
+      "author": {
+        "id": 1000014
+      },
+      "writtenOn": "2022-09-12T16:52:07Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ab4a1720_b2fd2f6c",
+      "range": {
+        "startLine": 32,
+        "startChar": 61,
+        "endLine": 32,
+        "endChar": 62
+      },
+      "revId": "cdd55881c78e8f81e5633a816efd6731fe1f3ddd",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "699f6905_1fb48ff0",
@@ -94,6 +136,30 @@
       "writtenOn": "2022-09-12T05:10:00Z",
       "side": 1,
       "message": "Pass by value and sort them?",
+      "range": {
+        "startLine": 38,
+        "startChar": 20,
+        "endLine": 39,
+        "endChar": 55
+      },
+      "revId": "cdd55881c78e8f81e5633a816efd6731fe1f3ddd",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b8613ee4_c8a3e1aa",
+        "filename": "src/gn/compile_commands_writer_unittest.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 39,
+      "author": {
+        "id": 1000014
+      },
+      "writtenOn": "2022-09-12T16:52:07Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "699f6905_1fb48ff0",
       "range": {
         "startLine": 38,
         "startChar": 20,
