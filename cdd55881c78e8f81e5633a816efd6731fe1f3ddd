@@ -1,0 +1,107 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "bc56e46e_985bedba",
+        "filename": "src/base/command_line.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 337,
+      "author": {
+        "id": 1000030
+      },
+      "writtenOn": "2022-09-12T05:10:00Z",
+      "side": 1,
+      "message": "I think multimap doesn\u0027t have any guarantees for ordering of values with the same key?",
+      "revId": "cdd55881c78e8f81e5633a816efd6731fe1f3ddd",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1e12b46f_7ad247b7",
+        "filename": "src/gn/command_gen.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 68,
+      "author": {
+        "id": 1000030
+      },
+      "writtenOn": "2022-09-12T05:10:00Z",
+      "side": 1,
+      "message": "update variable name?",
+      "range": {
+        "startLine": 68,
+        "startChar": 18,
+        "endLine": 68,
+        "endChar": 39
+      },
+      "revId": "cdd55881c78e8f81e5633a816efd6731fe1f3ddd",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4d2e10bf_78064589",
+        "filename": "src/gn/command_gen.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 646,
+      "author": {
+        "id": 1000030
+      },
+      "writtenOn": "2022-09-12T05:10:00Z",
+      "side": 1,
+      "message": "better to have link to this issue in bug label of description too?",
+      "revId": "cdd55881c78e8f81e5633a816efd6731fe1f3ddd",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ab4a1720_b2fd2f6c",
+        "filename": "src/gn/compile_commands_writer.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 32,
+      "author": {
+        "id": 1000030
+      },
+      "writtenOn": "2022-09-12T05:10:00Z",
+      "side": 1,
+      "message": "nit: I prefer to have \u0027:\u0027 here.",
+      "range": {
+        "startLine": 32,
+        "startChar": 61,
+        "endLine": 32,
+        "endChar": 62
+      },
+      "revId": "cdd55881c78e8f81e5633a816efd6731fe1f3ddd",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "699f6905_1fb48ff0",
+        "filename": "src/gn/compile_commands_writer_unittest.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 39,
+      "author": {
+        "id": 1000030
+      },
+      "writtenOn": "2022-09-12T05:10:00Z",
+      "side": 1,
+      "message": "Pass by value and sort them?",
+      "range": {
+        "startLine": 38,
+        "startChar": 20,
+        "endLine": 39,
+        "endChar": 55
+      },
+      "revId": "cdd55881c78e8f81e5633a816efd6731fe1f3ddd",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    }
+  ]
+}
