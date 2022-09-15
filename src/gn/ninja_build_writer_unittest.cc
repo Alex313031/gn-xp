@@ -134,13 +134,14 @@ TEST_F(NinjaBuildWriterTest, TwoTargets) {
   used_toolchains[setup.settings()] = setup.toolchain();
   used_toolchains[&other_settings] = &other_toolchain;
 
-  std::vector<const Target*> targets = {&target_foo, &target_bar, &target_baz};
+  std::vector<const Target*> target_list = {&target_foo, &target_bar, &target_baz};
+  PointerSet<const Target> target_set(target_list.begin(), target_list.end());
 
   std::ostringstream ninja_out;
   std::ostringstream depfile_out;
 
-  NinjaBuildWriter writer(setup.build_settings(), used_toolchains, targets,
-                          setup.toolchain(), targets, ninja_out, depfile_out);
+  NinjaBuildWriter writer(setup.build_settings(), used_toolchains, target_set,
+                          setup.toolchain(), target_list, ninja_out, depfile_out);
   ASSERT_TRUE(writer.Run(&err));
 
   const char expected_rule_gn[] = "rule gn\n";
@@ -210,13 +211,14 @@ TEST_F(NinjaBuildWriterTest, ExtractRegenerationCommands) {
   std::unordered_map<const Settings*, const Toolchain*> used_toolchains;
   used_toolchains[setup.settings()] = setup.toolchain();
 
-  std::vector<const Target*> targets = {&target_foo};
+  std::vector<const Target*> target_list = {&target_foo};
+  PointerSet<const Target> target_set(target_list.begin(), target_list.end());
 
   std::stringstream ninja_out;
   std::ostringstream depfile_out;
 
-  NinjaBuildWriter writer(setup.build_settings(), used_toolchains, targets,
-                          setup.toolchain(), targets, ninja_out, depfile_out);
+  NinjaBuildWriter writer(setup.build_settings(), used_toolchains, target_set,
+                          setup.toolchain(), target_list, ninja_out, depfile_out);
   ASSERT_TRUE(writer.Run(&err));
 
   const char expected_rule_gn[] = "rule gn\n";
@@ -287,11 +289,10 @@ TEST_F(NinjaBuildWriterTest, SpaceInDepfile) {
 
   std::unordered_map<const Settings*, const Toolchain*> used_toolchains;
   used_toolchains[setup.settings()] = setup.toolchain();
-  std::vector<const Target*> targets;
   std::ostringstream ninja_out;
   std::ostringstream depfile_out;
-  NinjaBuildWriter writer(setup.build_settings(), used_toolchains, targets,
-                          setup.toolchain(), targets, ninja_out, depfile_out);
+  NinjaBuildWriter writer(setup.build_settings(), used_toolchains, {},
+                          setup.toolchain(), {}, ninja_out, depfile_out);
   ASSERT_TRUE(writer.Run(&err));
 
   EXPECT_EQ(depfile_out.str(),
@@ -320,11 +321,13 @@ TEST_F(NinjaBuildWriterTest, DuplicateOutputs) {
 
   std::unordered_map<const Settings*, const Toolchain*> used_toolchains;
   used_toolchains[setup.settings()] = setup.toolchain();
-  std::vector<const Target*> targets = {&target_foo, &target_bar};
+
+  std::vector<const Target*> target_list = {&target_foo, &target_bar};
+  PointerSet<const Target> target_set(target_list.begin(), target_list.end());
   std::ostringstream ninja_out;
   std::ostringstream depfile_out;
-  NinjaBuildWriter writer(setup.build_settings(), used_toolchains, targets,
-                          setup.toolchain(), targets, ninja_out, depfile_out);
+  NinjaBuildWriter writer(setup.build_settings(), used_toolchains, target_set,
+                          setup.toolchain(), target_list, ninja_out, depfile_out);
   ASSERT_FALSE(writer.Run(&err));
 
   const char expected_help_test[] =
