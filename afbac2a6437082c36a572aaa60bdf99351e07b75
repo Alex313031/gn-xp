@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0f9f44cb_7e199864",
+        "filename": "tools/update_reference.sh",
+        "patchSetId": 2
+      },
+      "lineNbr": 3,
+      "author": {
+        "id": 1000030
+      },
+      "writtenOn": "2022-09-15T00:43:59Z",
+      "side": 1,
+      "message": "Can we cd to root based on path of this script?",
+      "revId": "afbac2a6437082c36a572aaa60bdf99351e07b75",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    }
+  ]
+}
