@@ -45,6 +45,11 @@ class VectorSetSorter {
     sorted_ = false;
   }
 
+  void Add(const T* item) {
+    ptrs_.push_back(item);
+    sorted_ = false;
+  }
+
   // Add one range of items to the sorter.
   void Add(typename std::vector<T>::const_iterator begin,
            typename std::vector<T>::const_iterator end) {
