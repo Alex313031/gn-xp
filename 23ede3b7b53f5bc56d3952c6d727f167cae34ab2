@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "3f89ca91_bcf95b9d",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 18
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2022-09-15T21:08:06Z",
+      "side": 1,
+      "message": "this makes Chromium\u0027s build sad: https://logs.chromium.org/logs/chromium/buildbucket/cr-buildbucket/8802927431142180449/+/u/compile__with_patch_/stdout?format\u003draw\n\nlooks like this has a revert already -- thanks for reverting quickly.",
+      "revId": "23ede3b7b53f5bc56d3952c6d727f167cae34ab2",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    }
+  ]
+}
