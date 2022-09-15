@@ -317,8 +317,6 @@ std::string NinjaBuildWriter::ExtractRegenerationCommands(
 }
 
 void NinjaBuildWriter::WriteNinjaRules() {
-  out_ << "ninja_required_version = "
-       << build_settings_->ninja_required_version().Describe() << "\n\n";
   out_ << "rule gn\n";
   out_ << "  command = " << GetSelfInvocationCommand(build_settings_) << "\n";
   // Putting gn rule to console pool for colorful output on regeneration
@@ -332,7 +330,24 @@ void NinjaBuildWriter::WriteNinjaRules() {
        << "# build.ninja edge is separate to prevent ninja from deleting it\n"
        << "# (due to depfile usage) if interrupted. gn uses atomic writes to\n"
        << "# ensure that build.ninja is always valid even if interrupted.\n"
-       << "build build.ninja.stamp: gn\n"
+       << "build build.ninja.stamp";
+
+  // Record all generated files as outputs of `gn` as well.
+  EscapeOptions depfile_escape;
+  depfile_escape.mode = ESCAPE_DEPFILE;
+  std::vector<OutputFile> generated_files = g_scheduler->GetGeneratedFiles();
+  VectorSetSorter<OutputFile> generated_file_sorter(generated_files.size());
+  generated_file_sorter.Add(generated_files.begin(), generated_files.end());
+  generated_file_sorter.IterateOver(
+      [this, &depfile_escape](const OutputFile& output_file) {
+        const base::FilePath file(output_file.value());
+        out_ << " "; 
+        EscapeStringToStream(out_,
+                         FilePathToUTF8(file.NormalizePathSeparatorsTo('/')),
+                         depfile_escape);
+      });
+
+  out_ << ": gn\n"
        << "  generator = 1\n"
        << "  depfile = build.ninja.d\n"
        << "\n"
@@ -359,9 +374,6 @@ void NinjaBuildWriter::WriteNinjaRules() {
 
   const base::FilePath build_path =
       build_settings_->build_dir().Resolve(build_settings_->root_path());
-
-  EscapeOptions depfile_escape;
-  depfile_escape.mode = ESCAPE_DEPFILE;
   auto item_callback = [this, &depfile_escape,
                         &build_path](const base::FilePath& input_file) {
     const base::FilePath file =
