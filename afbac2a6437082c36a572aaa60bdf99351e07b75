@@ -16,6 +16,24 @@
       "message": "Can we cd to root based on path of this script?",
       "revId": "afbac2a6437082c36a572aaa60bdf99351e07b75",
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "4823ba61_ef67f23b",
+        "filename": "tools/update_reference.sh",
+        "patchSetId": 2
+      },
+      "lineNbr": 3,
+      "author": {
+        "id": 1000014
+      },
+      "writtenOn": "2022-09-15T17:02:52Z",
+      "side": 1,
+      "message": "Yes, I started by trying to compute all the paths relative to this script but I\u0027m really bad at shell scripting. I did some web searches to get the current path to the script but the answers seemed kind of complicated. Then I thought about writing it in Python but that would require more code that didn\u0027t seem worth it for this trivial use-case. So I just did the simplest possible thing.",
+      "parentUuid": "0f9f44cb_7e199864",
+      "revId": "afbac2a6437082c36a572aaa60bdf99351e07b75",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
     }
   ]
 }
