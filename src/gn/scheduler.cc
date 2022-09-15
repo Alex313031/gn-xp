@@ -78,6 +78,8 @@ std::vector<base::FilePath> Scheduler::GetGenDependencies() const {
   return gen_dependencies_;
 }
 
+
+
 void Scheduler::AddWrittenFile(const SourceFile& file) {
   std::lock_guard<std::mutex> lock(lock_);
   written_files_.push_back(file);
@@ -119,6 +121,15 @@ void Scheduler::AddGeneratedFile(const SourceFile& entry) {
 bool Scheduler::IsFileGeneratedByTarget(const SourceFile& file) const {
   std::lock_guard<std::mutex> lock(lock_);
   return generated_files_.find(file) != generated_files_.end();
+}
+
+std::vector<SourceFile> Scheduler::GetGeneratedFiles() const {
+  std::lock_guard<std::mutex> lock(lock_);
+  std::vector<SourceFile> generated_files;
+  for (auto it = generated_files_.begin(); it != generated_files_.end(); ++it) {
+    generated_files.push_back(it->first);
+  }
+  return generated_files;
 }
 
 std::multimap<SourceFile, const Target*> Scheduler::GetUnknownGeneratedInputs()

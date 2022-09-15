@@ -332,7 +332,17 @@ void NinjaBuildWriter::WriteNinjaRules() {
        << "# build.ninja edge is separate to prevent ninja from deleting it\n"
        << "# (due to depfile usage) if interrupted. gn uses atomic writes to\n"
        << "# ensure that build.ninja is always valid even if interrupted.\n"
-       << "build build.ninja.stamp: gn\n"
+       << "build build.ninja.stamp";
+
+  // Record all generated files as outputs of `gn` as well.
+  std::vector<SourceFile> generated_files = g_scheduler->GetGeneratedFiles();
+  VectorSetSorter<SourceFile> generated_file_sorter(generated_files.size());
+  generated_file_sorter.Add(generated_files.begin(), generated_files.end());
+  generated_file_sorter.IterateOver([this](const SourceFile& source_file) {
+    out_ << " " << source_file.Resolve(build_settings_->root_path()).value();
+  });
+
+  out_ << ": gn\n"
        << "  generator = 1\n"
        << "  depfile = build.ninja.d\n"
        << "\n"
