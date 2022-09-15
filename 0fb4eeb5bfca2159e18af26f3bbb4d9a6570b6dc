@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "aec966da_d1889c1a",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 16
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000014
+      },
+      "writtenOn": "2022-09-15T17:46:10Z",
+      "side": 1,
+      "message": "Sorry I didn\u0027t notice before: we probably need to get a unit test for this. Hopefully it\u0027s obvious how to write this by copy-pasting an existing ninja_build_writer_unittest case for the setup.",
+      "revId": "0fb4eeb5bfca2159e18af26f3bbb4d9a6570b6dc",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    }
+  ]
+}
