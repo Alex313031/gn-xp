@@ -16,6 +16,29 @@
       "message": "Thanks! This would have made debugging https://bugs.fuchsia.dev/p/fuchsia/issues/detail?id\u003d110496 much easier.",
       "revId": "7c2470bd251c6cd60a9c32dedd664436bab88cae",
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a7d7d065_0091e74b",
+        "filename": "src/gn/visibility.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 95,
+      "author": {
+        "id": 1000014
+      },
+      "writtenOn": "2022-09-29T22:37:17Z",
+      "side": 1,
+      "message": "I try to keep toolchains out of the output in the common cases because most people don\u0027t understand them. In this case, I think it be good to include the toolchain only if the toolchains of the two items are different (other places also work this way).",
+      "range": {
+        "startLine": 95,
+        "startChar": 16,
+        "endLine": 95,
+        "endChar": 24
+      },
+      "revId": "7c2470bd251c6cd60a9c32dedd664436bab88cae",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
     }
   ]
 }
