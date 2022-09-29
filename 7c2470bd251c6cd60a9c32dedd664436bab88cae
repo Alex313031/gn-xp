@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "4a16485a_2018c152",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1002407
+      },
+      "writtenOn": "2022-09-29T22:21:22Z",
+      "side": 1,
+      "message": "Thanks! This would have made debugging https://bugs.fuchsia.dev/p/fuchsia/issues/detail?id\u003d110496 much easier.",
+      "revId": "7c2470bd251c6cd60a9c32dedd664436bab88cae",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    }
+  ]
+}
