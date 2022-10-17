@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "43bd007e_4418c5cc",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000014
+      },
+      "writtenOn": "2022-10-17T21:25:07Z",
+      "side": 1,
+      "message": "The way this function did the `result` seems pretty strange and I don\u0027t know why it\u0027s like that. Thanks for tracking this down.",
+      "revId": "d0738099a21073d0d0d1d2a90e1508cc49b66f49",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    }
+  ]
+}
