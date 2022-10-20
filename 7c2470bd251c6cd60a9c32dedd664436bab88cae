@@ -39,6 +39,30 @@
       },
       "revId": "7c2470bd251c6cd60a9c32dedd664436bab88cae",
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2e981bda_c62af09c",
+        "filename": "src/gn/visibility.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 95,
+      "author": {
+        "id": 1000397
+      },
+      "writtenOn": "2022-10-20T18:31:55Z",
+      "side": 1,
+      "message": "How about if they are different, or both are not the default toolchain?  Because once you have different toolchains in the mix, this gets hard to debug without that extra information (especially since in fuchsia we have so many templates that create groups with `target_name` that dep on `target_name(other_toolchain)`, and it\u0027s just very unclear what\u0027s going on once you walk away from the default.\n\n(especially be the unstated toolchain is ambiguous depending on the context):\n- current?\n- default?\n- any?",
+      "parentUuid": "a7d7d065_0091e74b",
+      "range": {
+        "startLine": 95,
+        "startChar": 16,
+        "endLine": 95,
+        "endChar": 24
+      },
+      "revId": "7c2470bd251c6cd60a9c32dedd664436bab88cae",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
     }
   ]
 }
