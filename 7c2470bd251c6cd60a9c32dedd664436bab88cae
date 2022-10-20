@@ -87,6 +87,30 @@
       },
       "revId": "7c2470bd251c6cd60a9c32dedd664436bab88cae",
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "28449857_61b23552",
+        "filename": "src/gn/visibility.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 95,
+      "author": {
+        "id": 1000014
+      },
+      "writtenOn": "2022-10-20T19:17:03Z",
+      "side": 1,
+      "message": "actually, different or non-default just means \"at least one of them is not default\".",
+      "parentUuid": "01a627db_6f11d751",
+      "range": {
+        "startLine": 95,
+        "startChar": 16,
+        "endLine": 95,
+        "endChar": 24
+      },
+      "revId": "7c2470bd251c6cd60a9c32dedd664436bab88cae",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
     }
   ]
 }
