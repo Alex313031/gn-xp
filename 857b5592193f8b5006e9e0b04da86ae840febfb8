@@ -16,6 +16,24 @@
       "message": "I noticed that this particular class has a different style (lower_snake_case) instead of the CamelCase that\u0027s used elsewhere in GN.\n\nIs the convention to follow the rest of the file, or to start to switch over to CamelCase?",
       "revId": "857b5592193f8b5006e9e0b04da86ae840febfb8",
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "7af377f9_e9229fcc",
+        "filename": "src/gn/settings.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 92,
+      "author": {
+        "id": 1000014
+      },
+      "writtenOn": "2022-10-20T21:34:52Z",
+      "side": 1,
+      "message": "According to Google style, simple inlined getters and setters use snake_case, while other functions use CamelCase. See https://google.github.io/styleguide/cppguide.html#Function_Names\n(GN interprets \"may be named like variables\" to be \"should...\" for consistency; the Google style guide has changed over time).",
+      "parentUuid": "c55a550c_daafeb13",
+      "revId": "857b5592193f8b5006e9e0b04da86ae840febfb8",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
     }
   ]
 }
