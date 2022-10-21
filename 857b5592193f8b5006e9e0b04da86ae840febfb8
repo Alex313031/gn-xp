@@ -88,6 +88,24 @@
       "parentUuid": "8400da99_6129a6b7",
       "revId": "857b5592193f8b5006e9e0b04da86ae840febfb8",
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "fd0fb302_749c12ba",
+        "filename": "src/gn/settings.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 92,
+      "author": {
+        "id": 1000397
+      },
+      "writtenOn": "2022-10-21T22:43:36Z",
+      "side": 1,
+      "message": "std::initializer_list can\u0027t be a list of refs:\n\n```\n error: \u0027__begin_\u0027 declared as a pointer to a reference of type \u0027const Label \u0026\u0027\n    const _Ep* __begin_;\n             ^\n../src/gn/settings.cc:32:41: note: in instantiation of template class \u0027std::initializer_list\u003cconst Label \u0026\u003e\u0027 requested here\n    std::initializer_list\u003cconst Label\u0026\u003e labels) const {\n```\n\nI guess we could say the case as rare enough to use a copy-constructor?, and use `std::initializer_list\u003cconst Label\u003e`?",
+      "parentUuid": "98bdda66_6ab5cb1b",
+      "revId": "857b5592193f8b5006e9e0b04da86ae840febfb8",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
     }
   ]
 }
