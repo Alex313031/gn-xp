@@ -124,6 +124,24 @@
       "parentUuid": "fd0fb302_749c12ba",
       "revId": "857b5592193f8b5006e9e0b04da86ae840febfb8",
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "92abffe0_6e57d3e5",
+        "filename": "src/gn/settings.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 92,
+      "author": {
+        "id": 1000397
+      },
+      "writtenOn": "2022-10-21T23:08:29Z",
+      "side": 1,
+      "message": "ack.",
+      "parentUuid": "758ae951_e33ea106",
+      "revId": "857b5592193f8b5006e9e0b04da86ae840febfb8",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
     }
   ]
 }
