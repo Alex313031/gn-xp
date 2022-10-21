@@ -52,6 +52,24 @@
       "parentUuid": "7af377f9_e9229fcc",
       "revId": "857b5592193f8b5006e9e0b04da86ae840febfb8",
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "8400da99_6129a6b7",
+        "filename": "src/gn/settings.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 92,
+      "author": {
+        "id": 1000014
+      },
+      "writtenOn": "2022-10-21T17:37:32Z",
+      "side": 1,
+      "message": "Can this take `const Label\u0026` as the initializer list type? I notice where you use this you need `\u0026` all over the place which I think should be unnecessary.",
+      "parentUuid": "2ccbf094_820ad94f",
+      "revId": "857b5592193f8b5006e9e0b04da86ae840febfb8",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
     }
   ]
 }
