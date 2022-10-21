@@ -16,6 +16,23 @@
       "message": "This is probably both too many toolchain prints in some places, and not enough in others.",
       "revId": "4c90f5f844798f86cf1115dece32d584a9143c0c",
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b6903120_d38fd3f3",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000014
+      },
+      "writtenOn": "2022-10-21T19:45:44Z",
+      "side": 1,
+      "message": "LGTM but I think the labels shouldn\u0027t need the `\u0026` which I commented on in the previous patch.",
+      "revId": "4c90f5f844798f86cf1115dece32d584a9143c0c",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
     }
   ]
 }
