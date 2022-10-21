@@ -70,6 +70,24 @@
       "parentUuid": "2ccbf094_820ad94f",
       "revId": "857b5592193f8b5006e9e0b04da86ae840febfb8",
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "98bdda66_6ab5cb1b",
+        "filename": "src/gn/settings.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 92,
+      "author": {
+        "id": 1000014
+      },
+      "writtenOn": "2022-10-21T19:43:17Z",
+      "side": 1,
+      "message": "(reopening)",
+      "parentUuid": "8400da99_6129a6b7",
+      "revId": "857b5592193f8b5006e9e0b04da86ae840febfb8",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
     }
   ]
 }
