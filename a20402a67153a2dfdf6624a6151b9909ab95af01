@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b95c9285_e4eb4a5b",
+        "filename": "src/gn/ninja_c_binary_target_writer_unittest.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 2754,
+      "author": {
+        "id": 1000030
+      },
+      "writtenOn": "2022-10-24T03:52:08Z",
+      "side": 1,
+      "message": "Applying pool for compile in addition to link is intentional?",
+      "revId": "a20402a67153a2dfdf6624a6151b9909ab95af01",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    }
+  ]
+}
