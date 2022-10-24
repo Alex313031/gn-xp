@@ -16,6 +16,24 @@
       "message": "Applying pool for compile in addition to link is intentional?",
       "revId": "a20402a67153a2dfdf6624a6151b9909ab95af01",
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "369d5a97_53817bf7",
+        "filename": "src/gn/ninja_c_binary_target_writer_unittest.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 2754,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-10-24T05:25:13Z",
+      "side": 1,
+      "message": "I considered only applying it to link actions but then I realized that there would be no way to apply it to compile actions if needed, whereas if we apply it to both, users can always split the target into a `source_set` and a link target and only set the pool on the latter. I\u0027m open to other suggestions though, I don\u0027t have a strong preference either way.",
+      "parentUuid": "b95c9285_e4eb4a5b",
+      "revId": "a20402a67153a2dfdf6624a6151b9909ab95af01",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
     }
   ]
 }
