@@ -33,6 +33,23 @@
       "message": "This seems like a custom file extension that a random team made up. A quick Google search seems to indicate that this particular file may literally be the only file in the world that uses this naming pattern. That\u0027s fine, but it doesn\u0027t strike me that it means we should be hardcoding all such extensions in the build as that doesn\u0027t seem to be a long-term sustainable solution. Is there a reference that this naming pattern is actually recommended?\n\nYou don\u0027t *have* to list the headers in the BUILD.gn files. Just removing the reference should unblock your rollers.\n\nWhat having headers listed in the BUILD.gn files will affect is the ability of \"gn check\" to catch downstream misuses of that header. If you want that, I would recommend making a file \"spiriv_cpp11.h\" or something that just includes this weird one. Then your code and downstream users use your wrapper header which will have correct dependency tracking in GN.",
       "revId": "651be854a2aafb681cb553b3fe378b14f7283550",
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "874fc7ea_daf0b5ad",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000014
+      },
+      "writtenOn": "2022-11-04T16:57:35Z",
+      "side": 1,
+      "message": "You should be able to unblock yourself by removing the reference for now. I\u0027m adding Takuto for an opinion which I will defer to in case I\u0027m being too grumpy.",
+      "revId": "651be854a2aafb681cb553b3fe378b14f7283550",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
     }
   ]
 }
