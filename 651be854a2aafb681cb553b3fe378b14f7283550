@@ -16,6 +16,23 @@
       "message": "Thanks David for fixing this. Just to mention that this is blocking our autorollers, so @Brett, would appreciate expedited review.\n\nThat said, a follow up gn developers could do is to accept `.hpp*` as `SOURCE_H`, so we won\u0027t have this problem in the future for `hpp17`, `hpp20` etc (if ever). Also, I\u0027m not sure if it\u0027s too late for it now, but the whole issue could be avoided if gn didn\u0027t conflate \"files to build\" and \"files needed for build\" in the same list (`sources`). If I could provide headers in a separate list, you probably wouldn\u0027t need to even care what the extensions are.",
       "revId": "651be854a2aafb681cb553b3fe378b14f7283550",
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "7663d51b_d3b994a7",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000014
+      },
+      "writtenOn": "2022-11-04T16:49:34Z",
+      "side": 1,
+      "message": "This seems like a custom file extension that a random team made up. A quick Google search seems to indicate that this particular file may literally be the only file in the world that uses this naming pattern. That\u0027s fine, but it doesn\u0027t strike me that it means we should be hardcoding all such extensions in the build as that doesn\u0027t seem to be a long-term sustainable solution. Is there a reference that this naming pattern is actually recommended?\n\nYou don\u0027t *have* to list the headers in the BUILD.gn files. Just removing the reference should unblock your rollers.\n\nWhat having headers listed in the BUILD.gn files will affect is the ability of \"gn check\" to catch downstream misuses of that header. If you want that, I would recommend making a file \"spiriv_cpp11.h\" or something that just includes this weird one. Then your code and downstream users use your wrapper header which will have correct dependency tracking in GN.",
+      "revId": "651be854a2aafb681cb553b3fe378b14f7283550",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
     }
   ]
 }
