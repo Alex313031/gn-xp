@@ -68,6 +68,24 @@
       "parentUuid": "7663d51b_d3b994a7",
       "revId": "651be854a2aafb681cb553b3fe378b14f7283550",
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "9c8abc09_205b6826",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000014
+      },
+      "writtenOn": "2022-11-04T19:17:13Z",
+      "side": 1,
+      "message": "No, \"gn check\" ignores any include not declared in a BUILD.gn file.",
+      "parentUuid": "8b272c74_f9cfc229",
+      "revId": "651be854a2aafb681cb553b3fe378b14f7283550",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
     }
   ]
 }
