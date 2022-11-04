@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "6fd4afd8_4324a411",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1002472
+      },
+      "writtenOn": "2022-11-04T14:41:38Z",
+      "side": 1,
+      "message": "Thanks David for fixing this. Just to mention that this is blocking our autorollers, so @Brett, would appreciate expedited review.\n\nThat said, a follow up gn developers could do is to accept `.hpp*` as `SOURCE_H`, so we won\u0027t have this problem in the future for `hpp17`, `hpp20` etc (if ever). Also, I\u0027m not sure if it\u0027s too late for it now, but the whole issue could be avoided if gn didn\u0027t conflate \"files to build\" and \"files needed for build\" in the same list (`sources`). If I could provide headers in a separate list, you probably wouldn\u0027t need to even care what the extensions are.",
+      "revId": "651be854a2aafb681cb553b3fe378b14f7283550",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    }
+  ]
+}
