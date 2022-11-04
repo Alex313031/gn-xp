@@ -122,6 +122,23 @@
       "parentUuid": "835df1ab_c3addbc1",
       "revId": "651be854a2aafb681cb553b3fe378b14f7283550",
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "1726eb83_c624c5c9",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1001842
+      },
+      "writtenOn": "2022-11-04T20:31:15Z",
+      "side": 1,
+      "message": "I believe I\u0027m unblocked:\n- I am able to build after locally removing the .hpp11 files from the source list in SPIRV-Headers\u0027 BUILD.gn file.\n- The SPIRV-Tools source file source/latest_version_spirv_headers.h directly includes the .hpp11 file from the SPIRV-Headers sibling project.\n\nThat *works* but feels weird because now there is an undeclared header being used. But that does pass gn check and gn gen.",
+      "revId": "651be854a2aafb681cb553b3fe378b14f7283550",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
     }
   ]
 }
