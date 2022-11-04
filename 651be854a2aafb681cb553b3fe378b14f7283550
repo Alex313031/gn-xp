@@ -50,6 +50,24 @@
       "message": "You should be able to unblock yourself by removing the reference for now. I\u0027m adding Takuto for an opinion which I will defer to in case I\u0027m being too grumpy.",
       "revId": "651be854a2aafb681cb553b3fe378b14f7283550",
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "8b272c74_f9cfc229",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1002472
+      },
+      "writtenOn": "2022-11-04T18:27:16Z",
+      "side": 1,
+      "message": "\u003e the ability of \"gn check\" to catch downstream misuses of that header\n\nThat is part of the issue, we do fail the bots when `gn check` fails.\n\n\u003e I would recommend making a file \"spiriv_cpp11.h\" or something that just includes this weird one\n\nWouldn\u0027t `gn check` still complain about the `hpp11` file being included in _that_ file?",
+      "parentUuid": "7663d51b_d3b994a7",
+      "revId": "651be854a2aafb681cb553b3fe378b14f7283550",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
     }
   ]
 }
