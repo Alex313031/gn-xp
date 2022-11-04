@@ -86,6 +86,24 @@
       "parentUuid": "8b272c74_f9cfc229",
       "revId": "651be854a2aafb681cb553b3fe378b14f7283550",
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "835df1ab_c3addbc1",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1001842
+      },
+      "writtenOn": "2022-11-04T19:55:11Z",
+      "side": 1,
+      "message": "I see it still erroring out.\n\nFor this experiment I directly #included spirv.hpp11 from the third_party/vulkan-deps/spirv-tools/source/latest_version_spirv_header.h\n\nThen I get this output, for either \"check\" or \"gen\":\n\n$ gn.original check out\nERROR at //third_party/vulkan-deps/spirv-headers/src/BUILD.gn:35:5: Only source, header, and object files belong in the sources of a source_set. //third_party/vulkan-deps/spirv-headers/src/include/spirv/1.2/spirv.hpp11 is not one of the valid types.\n    \"include/spirv/1.2/spirv.hpp11\",\n    ^------------------------------\nSee //third_party/vulkan-deps/spirv-tools/src/BUILD.gn:479:6: which caused the file to be included.\n     \"${spirv_headers}:spv_headers\",\n     ^-----------------------------\n     \n     \n     \nThe .hpp11 file comes from SPIR-V headers which is part of the Vulkan ecosystem (Khronos Group), and has a publishing history back to 2015.\nChanging the structure of that header set entails standards body meetings with GPU makers.  (Trying to not sound too grumpy either.)",
+      "parentUuid": "8b272c74_f9cfc229",
+      "revId": "651be854a2aafb681cb553b3fe378b14f7283550",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
     }
   ]
 }
