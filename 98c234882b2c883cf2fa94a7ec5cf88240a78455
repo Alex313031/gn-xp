@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "19268675_f366a7e0",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000070
+      },
+      "writtenOn": "2022-11-10T13:04:06Z",
+      "side": 1,
+      "message": "Could you take a look?\n\nThis blocks iOS developer since the roll of perfetto in Chrome (as \"chrome\" now refers to either \"//ios/chrome/app:chrome\" or to a target in perfetto that is not even used on iOS).",
+      "revId": "98c234882b2c883cf2fa94a7ec5cf88240a78455",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    }
+  ]
+}
