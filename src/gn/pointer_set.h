@@ -187,6 +187,16 @@ class PointerSet : public HashTableBase<PointerSetNode> {
     return true;
   }
 
+  // Convert this to a vector, more convenient and slightly faster than using
+  // std::vector<T*>(set.begin(), set.end()).
+  std::vector<T*> ToVector() const {
+    std::vector<T*> result(this->size());
+    auto it_result = result.begin();
+    for (auto it = this->begin(); it.valid(); ++it)
+      *it_result++ = *it;
+    return result;
+  }
+
  private:
   // Lookup node matching a given pointer. If result->valid() is true
   // then the pointer was found, otherwise, this is the location of
