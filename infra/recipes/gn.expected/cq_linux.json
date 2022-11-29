@@ -287,7 +287,7 @@
   },
   {
     "cmd": [
-      "vpython",
+      "vpython3",
       "-u",
       "RECIPE_MODULE[recipe_engine::file]/resources/fileutil.py",
       "--json-output",
@@ -318,7 +318,7 @@
   },
   {
     "cmd": [
-      "vpython",
+      "vpython3",
       "-u",
       "RECIPE_MODULE[recipe_engine::file]/resources/fileutil.py",
       "--json-output",
@@ -356,8 +356,7 @@
   },
   {
     "cmd": [
-      "python",
-      "-u",
+      "python3",
       "[START_DIR]/rpmalloc/configure.py",
       "-c",
       "release",
@@ -429,8 +428,7 @@
   },
   {
     "cmd": [
-      "python",
-      "-u",
+      "python3",
       "[START_DIR]/rpmalloc/configure.py",
       "-c",
       "release",
@@ -506,8 +504,7 @@
   },
   {
     "cmd": [
-      "python",
-      "-u",
+      "python3",
       "[START_DIR]/gn/build/gen.py",
       "-d"
     ],
@@ -609,8 +606,7 @@
   },
   {
     "cmd": [
-      "python",
-      "-u",
+      "python3",
       "[START_DIR]/gn/build/gen.py",
       "--use-lto",
       "--use-icf",
@@ -710,7 +706,7 @@
   },
   {
     "cmd": [
-      "vpython",
+      "vpython3",
       "-u",
       "RECIPE_MODULE[recipe_engine::file]/resources/fileutil.py",
       "--json-output",
@@ -756,7 +752,7 @@
   },
   {
     "cmd": [
-      "vpython",
+      "vpython3",
       "-u",
       "RECIPE_MODULE[recipe_engine::file]/resources/fileutil.py",
       "--json-output",
@@ -889,8 +885,7 @@
   },
   {
     "cmd": [
-      "python",
-      "-u",
+      "python3",
       "[START_DIR]/gn/build/gen.py",
       "--use-lto",
       "--use-icf",

@@ -239,9 +239,9 @@
   },
   {
     "cmd": [
-      "python",
+      "python3",
       "-u",
-      "\nimport shutil\nimport sys\nshutil.copy(sys.argv[1], sys.argv[2])\n",
+      "RECIPE_MODULE[recipe_engine::json]\\resources\\read.py",
       "[CACHE]\\windows_sdk\\win_sdk\\bin\\SetEnv.x64.json",
       "/path/to/tmp/json"
     ],
@@ -294,8 +294,7 @@
   },
   {
     "cmd": [
-      "python",
-      "-u",
+      "python3",
       "[START_DIR]\\gn\\build\\gen.py",
       "-d"
     ],
@@ -400,8 +399,7 @@
   },
   {
     "cmd": [
-      "python",
-      "-u",
+      "python3",
       "[START_DIR]\\gn\\build\\gen.py",
       "--use-lto",
       "--use-icf"
@@ -503,7 +501,7 @@
   },
   {
     "cmd": [
-      "vpython",
+      "vpython3",
       "-u",
       "RECIPE_MODULE[recipe_engine::file]\\resources\\fileutil.py",
       "--json-output",
@@ -550,7 +548,7 @@
   },
   {
     "cmd": [
-      "vpython",
+      "vpython3",
       "-u",
       "RECIPE_MODULE[recipe_engine::file]\\resources\\fileutil.py",
       "--json-output",
