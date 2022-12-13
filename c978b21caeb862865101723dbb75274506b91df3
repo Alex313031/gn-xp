@@ -1,0 +1,73 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "dc2dc08e_52ac2c81",
+        "filename": "src/gn/resolved_target_data.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 64,
+      "author": {
+        "id": 1000014
+      },
+      "writtenOn": "2022-12-13T00:17:30Z",
+      "side": 1,
+      "message": "I see you copied the naming from `Target`, but the existing naming is following the Google style of snake_case for inline getters (i.e. \"named like a variable\" -\u003e \"as cheap to access as a variable\"). The getters here do sometimes very complex work so I think the CamelCase `GetAllLibDirs()` style would be more appropriate.",
+      "range": {
+        "startLine": 64,
+        "startChar": 30,
+        "endLine": 64,
+        "endChar": 42
+      },
+      "revId": "c978b21caeb862865101723dbb75274506b91df3",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "98158473_54817c3d",
+        "filename": "src/gn/resolved_target_data.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 81,
+      "author": {
+        "id": 1000014
+      },
+      "writtenOn": "2022-12-13T00:17:30Z",
+      "side": 1,
+      "message": "Is there an advantage to using `span` here over just `const std::vector\u003c...\u003e\u0026`? Span can be nice but I\u0027ve normally seen it as an input argument so the caller can provide different implementations of a sequential structure.\n\nOr are you planning on replacing the vector storage later? I see some references to using a builder pattern in your design proposal, but I\u0027m not sure how concretely that applies to this usage and whether you will continue to use a vector as a the underlying storage.",
+      "range": {
+        "startLine": 81,
+        "startChar": 2,
+        "endLine": 81,
+        "endChar": 29
+      },
+      "revId": "c978b21caeb862865101723dbb75274506b91df3",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "eadffe70_9cbd9f05",
+        "filename": "src/gn/resolved_target_data.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 110,
+      "author": {
+        "id": 1000014
+      },
+      "writtenOn": "2022-12-13T00:17:30Z",
+      "side": 1,
+      "message": "Can you clarify what this indirection gets us rather than just having everything in this class? I prefer just having everything in one place if it\u0027s practical.",
+      "range": {
+        "startLine": 110,
+        "startChar": 10,
+        "endLine": 110,
+        "endChar": 31
+      },
+      "revId": "c978b21caeb862865101723dbb75274506b91df3",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    }
+  ]
+}
