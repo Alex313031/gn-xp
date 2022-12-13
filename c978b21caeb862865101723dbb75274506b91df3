@@ -26,6 +26,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "c74eea79_0d08e26b",
+        "filename": "src/gn/resolved_target_data.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 64,
+      "author": {
+        "id": 1000067
+      },
+      "writtenOn": "2022-12-13T09:28:05Z",
+      "side": 1,
+      "message": "I indeed used the same name to make it easier to compare this with the Target methods of the same name, but I\u0027ll update this to use the CamelCase style instead.",
+      "parentUuid": "dc2dc08e_52ac2c81",
+      "range": {
+        "startLine": 64,
+        "startChar": 30,
+        "endLine": 64,
+        "endChar": 42
+      },
+      "revId": "c978b21caeb862865101723dbb75274506b91df3",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "98158473_54817c3d",
         "filename": "src/gn/resolved_target_data.h",
         "patchSetId": 4
@@ -49,6 +73,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "fab71271_8ac592cc",
+        "filename": "src/gn/resolved_target_data.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 81,
+      "author": {
+        "id": 1000067
+      },
+      "writtenOn": "2022-12-13T09:28:05Z",
+      "side": 1,
+      "message": "I don\u0027t plan to change the vector storage for now. The span is a quick replacement for the ImmutableVectorView from the previous CLs, which made refactoring this code easier. I\u0027ll change it to return a const reference to an std::vector.\n\nFor the reference, the use of the builder pattern was to generate an ImmutableVector\u003c\u003e instance, which has the benefit of not over-allocating memory exponentially like std::vector\u003c\u003e does.",
+      "parentUuid": "98158473_54817c3d",
+      "range": {
+        "startLine": 81,
+        "startChar": 2,
+        "endLine": 81,
+        "endChar": 29
+      },
+      "revId": "c978b21caeb862865101723dbb75274506b91df3",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "eadffe70_9cbd9f05",
         "filename": "src/gn/resolved_target_data.h",
         "patchSetId": 4
@@ -60,6 +108,30 @@
       "writtenOn": "2022-12-13T00:17:30Z",
       "side": 1,
       "message": "Can you clarify what this indirection gets us rather than just having everything in this class? I prefer just having everything in one place if it\u0027s practical.",
+      "range": {
+        "startLine": 110,
+        "startChar": 10,
+        "endLine": 110,
+        "endChar": 31
+      },
+      "revId": "c978b21caeb862865101723dbb75274506b91df3",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5927d17e_c6b827c0",
+        "filename": "src/gn/resolved_target_data.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 110,
+      "author": {
+        "id": 1000067
+      },
+      "writtenOn": "2022-12-13T09:28:05Z",
+      "side": 1,
+      "message": "I just like to use the \u0027PImpl\u0027 pattern to hide the implementation of a class when it is really complex (and also reduces header includes / dependencies). I\u0027ll change the code to use direct members instead.",
+      "parentUuid": "eadffe70_9cbd9f05",
       "range": {
         "startLine": 110,
         "startChar": 10,
