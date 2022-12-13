@@ -48,6 +48,30 @@
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "e1c4044f_b6b0faec",
+        "filename": "src/gn/resolved_target_data.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 64,
+      "author": {
+        "id": 1000067
+      },
+      "writtenOn": "2022-12-13T14:26:05Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "c74eea79_0d08e26b",
+      "range": {
+        "startLine": 64,
+        "startChar": 30,
+        "endLine": 64,
+        "endChar": 42
+      },
+      "revId": "c978b21caeb862865101723dbb75274506b91df3",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "98158473_54817c3d",
@@ -95,6 +119,30 @@
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "2480da29_b9ff37b8",
+        "filename": "src/gn/resolved_target_data.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 81,
+      "author": {
+        "id": 1000067
+      },
+      "writtenOn": "2022-12-13T14:26:05Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "fab71271_8ac592cc",
+      "range": {
+        "startLine": 81,
+        "startChar": 2,
+        "endLine": 81,
+        "endChar": 29
+      },
+      "revId": "c978b21caeb862865101723dbb75274506b91df3",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "eadffe70_9cbd9f05",
@@ -132,6 +180,30 @@
       "side": 1,
       "message": "I just like to use the \u0027PImpl\u0027 pattern to hide the implementation of a class when it is really complex (and also reduces header includes / dependencies). I\u0027ll change the code to use direct members instead.",
       "parentUuid": "eadffe70_9cbd9f05",
+      "range": {
+        "startLine": 110,
+        "startChar": 10,
+        "endLine": 110,
+        "endChar": 31
+      },
+      "revId": "c978b21caeb862865101723dbb75274506b91df3",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "4c188dd6_fc467d1a",
+        "filename": "src/gn/resolved_target_data.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 110,
+      "author": {
+        "id": 1000067
+      },
+      "writtenOn": "2022-12-13T14:26:05Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "5927d17e_c6b827c0",
       "range": {
         "startLine": 110,
         "startChar": 10,
