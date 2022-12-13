@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b6850d81_d5437e75",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000014
+      },
+      "writtenOn": "2022-12-13T23:47:09Z",
+      "side": 1,
+      "message": "LGTM. I didn\u0027t check the actual resolution logic which I\u0027m assuming is copy-pasted from Target.",
+      "revId": "23067bf2594113cc122b43f63cd1be3b99dacc3a",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    }
+  ]
+}

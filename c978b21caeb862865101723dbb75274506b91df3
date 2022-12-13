@@ -212,6 +212,30 @@
       },
       "revId": "c978b21caeb862865101723dbb75274506b91df3",
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d8e125bf_3ada5616",
+        "filename": "src/gn/resolved_target_data.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 110,
+      "author": {
+        "id": 1000014
+      },
+      "writtenOn": "2022-12-13T23:47:09Z",
+      "side": 1,
+      "message": "Thanks. I think this is a good pattern for central things in very large projects, but I don\u0027t think GN is large enough to benefit from additional abstraction.",
+      "parentUuid": "4c188dd6_fc467d1a",
+      "range": {
+        "startLine": 110,
+        "startChar": 10,
+        "endLine": 110,
+        "endChar": 31
+      },
+      "revId": "c978b21caeb862865101723dbb75274506b91df3",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
     }
   ]
 }
