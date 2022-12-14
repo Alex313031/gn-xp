@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d5aa35c9_8ba57e5c",
+        "filename": "src/gn/ninja_target_writer.h",
+        "patchSetId": 13
+      },
+      "lineNbr": 82,
+      "author": {
+        "id": 1000014
+      },
+      "writtenOn": "2022-12-14T20:21:53Z",
+      "side": 1,
+      "message": "This creates a new ResolvedTargetData structure for ever target written, right? Is it correct that this would recompute all data for all transitive dependencies for every write?\n\nIf so, I\u0027m surprised this is faster than the current approach. I was imagining one of these per thread so we never do more than \"# threads\" of duplicated computation. What do the timings look like for this?",
+      "revId": "08e24d0a5534db69a46e9f2d00b661ebcb094233",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    }
+  ]
+}
