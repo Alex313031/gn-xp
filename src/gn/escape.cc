@@ -243,15 +243,20 @@ size_t EscapeStringToString_PosixNinjaFork(std::string_view str,
 size_t EscapeStringToString(std::string_view str,
                             const EscapeOptions& options,
                             char* dest,
-                            bool* needed_quoting) {
+                            bool* needed_quoting) {  
+  auto vol = str.find(":/");
+  if (vol != std::string::npos) {
+    str = str.substr(vol - 1, str.size() - vol + 1);
+  }
+
   switch (options.mode) {
     case ESCAPE_NONE:
       strncpy(dest, str.data(), str.size());
       return str.size();
     case ESCAPE_SPACE:
       return EscapeStringToString_Space(str, options, dest, needed_quoting);
-    case ESCAPE_NINJA:
-      return EscapeStringToString_Ninja(str, options, dest, needed_quoting);
+    case ESCAPE_NINJA:  
+      return EscapeStringToString_Ninja(str, options, dest, needed_quoting); 
     case ESCAPE_DEPFILE:
       return EscapeStringToString_Depfile(str, options, dest, needed_quoting);
     case ESCAPE_COMPILATION_DATABASE:
