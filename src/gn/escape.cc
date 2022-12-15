@@ -244,6 +244,12 @@ size_t EscapeStringToString(std::string_view str,
                             const EscapeOptions& options,
                             char* dest,
                             bool* needed_quoting) {
+  // On Windows, there might be invalid path like ../../../../C:/
+  auto vol = str.find(":/");
+  if (vol != std::string::npos) {
+    str = str.substr(vol - 1, str.size() - vol + 1);
+  }
+
   switch (options.mode) {
     case ESCAPE_NONE:
       strncpy(dest, str.data(), str.size());
