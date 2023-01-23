@@ -16,6 +16,24 @@
       "message": "I found through extensive testing a regression in the generation of framework related data. I have thus uploaded the fix here.\n\nHowever, I agree that this CL is rather opaque. I propose to split it up in several ones to make the changes much more easy to understand (i.e. by gradually moving the Target methods that returns resolved values to ResolvedTargetData). What do you think?",
       "revId": "8e59d2376e79e4b6ee49f08dacf9edd2a1597f10",
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d922498e_1f1ab67a",
+        "filename": "src/gn/resolved_target_data.cc",
+        "patchSetId": 6
+      },
+      "lineNbr": 46,
+      "author": {
+        "id": 1000014
+      },
+      "writtenOn": "2023-01-23T22:09:36Z",
+      "side": 1,
+      "message": "Now that Takuto is back from vacation, I\u0027ll defer to him.",
+      "parentUuid": "2a329eef_e12bf3b6",
+      "revId": "8e59d2376e79e4b6ee49f08dacf9edd2a1597f10",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
     }
   ]
 }
