@@ -16,6 +16,24 @@
       "message": "This creates a new ResolvedTargetData structure for ever target written, right? Is it correct that this would recompute all data for all transitive dependencies for every write?\n\nIf so, I\u0027m surprised this is faster than the current approach. I was imagining one of these per thread so we never do more than \"# threads\" of duplicated computation. What do the timings look like for this?",
       "revId": "08e24d0a5534db69a46e9f2d00b661ebcb094233",
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "af7de2b4_2d1dda2b",
+        "filename": "src/gn/ninja_target_writer.h",
+        "patchSetId": 13
+      },
+      "lineNbr": 82,
+      "author": {
+        "id": 1000067
+      },
+      "writtenOn": "2023-01-23T18:17:18Z",
+      "side": 1,
+      "message": "This is correct. I believe this is faster than the current approach because:\n\n1) The computations happen in parallel background threads, instead of being all done in the single thread that calls Target::OnResolved().\n\n2) A significant portion of the computations that were performed unconditionally are never used (see https://gn-review.git.corp.google.com/c/gn/+/12703 which was proposed a long time ago to deal with this differently, and has some numbers).\n\nThere is clearly some amount of duplication of computations with the proposed CL, but it seems that the improvement balances them noticeably.\n\nAnd surprisingly, if I add a thread-local ResolvedTargetData cache in command_gen.cc:BackgroundDoWrite(), performance does not improve (but peak RAM does), for Fuchsia builds, and only very moderately for Chromium ones.",
+      "parentUuid": "d5aa35c9_8ba57e5c",
+      "revId": "08e24d0a5534db69a46e9f2d00b661ebcb094233",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
     }
   ]
 }
