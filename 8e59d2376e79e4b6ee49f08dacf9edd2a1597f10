@@ -3,6 +3,23 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "37d8c0e9_57e14ffc",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 6
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000030
+      },
+      "writtenOn": "2023-01-24T04:01:01Z",
+      "side": 1,
+      "message": "We need to fix linux builder?",
+      "revId": "8e59d2376e79e4b6ee49f08dacf9edd2a1597f10",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "2a329eef_e12bf3b6",
         "filename": "src/gn/resolved_target_data.cc",
         "patchSetId": 6
@@ -32,6 +49,24 @@
       "side": 1,
       "message": "Now that Takuto is back from vacation, I\u0027ll defer to him.",
       "parentUuid": "2a329eef_e12bf3b6",
+      "revId": "8e59d2376e79e4b6ee49f08dacf9edd2a1597f10",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "98e806aa_93e8c2b9",
+        "filename": "src/gn/resolved_target_data.cc",
+        "patchSetId": 6
+      },
+      "lineNbr": 46,
+      "author": {
+        "id": 1000030
+      },
+      "writtenOn": "2023-01-24T04:01:01Z",
+      "side": 1,
+      "message": "\u003e by gradually moving the Target methods that returns resolved values to ResolvedTargetData\n\nIf you can do this, it would be helpful for me to review.",
+      "parentUuid": "d922498e_1f1ab67a",
       "revId": "8e59d2376e79e4b6ee49f08dacf9edd2a1597f10",
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
     }
