@@ -33,6 +33,23 @@
       "message": "Failure is due to the fact that the builder uses the previous version of the recipe to build the newest GN sources. As previously, we will need to force-submit this (see https://gn-review.git.corp.google.com/c/gn/+/13581 which had the exact same problem).",
       "revId": "76d03a32247edd3a57b14731ae429e0a69aee598",
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "33f58eba_2b0d21e2",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000067
+      },
+      "writtenOn": "2023-01-30T22:55:47Z",
+      "side": 1,
+      "message": "I don\u0027t think I can submit this due to the reported failure. Petr, can you have a look when you have time and do a force-submit for this? Thanks in advance.",
+      "revId": "76d03a32247edd3a57b14731ae429e0a69aee598",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
     }
   ]
 }
