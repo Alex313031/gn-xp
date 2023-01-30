@@ -50,6 +50,23 @@
       "message": "+David: do you know why the Linux bot is failing with rpmalloc errors? I didn\u0027t even see this file in my local GN checkout.",
       "revId": "4501ff8e820d432deafe7b79083be4445c854118",
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "fa7f5392_c8676ac0",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000067
+      },
+      "writtenOn": "2023-01-30T21:40:48Z",
+      "side": 1,
+      "message": "Thank you, the recipe failure is unrelated to this CL, I\u0027ll try to fix it separately today. Please be patient. Thanks!",
+      "revId": "4501ff8e820d432deafe7b79083be4445c854118",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
     }
   ]
 }
