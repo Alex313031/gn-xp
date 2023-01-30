@@ -67,6 +67,24 @@
       "message": "Thank you, the recipe failure is unrelated to this CL, I\u0027ll try to fix it separately today. Please be patient. Thanks!",
       "revId": "4501ff8e820d432deafe7b79083be4445c854118",
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a54b4368_7a1073f7",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000067
+      },
+      "writtenOn": "2023-01-30T22:40:49Z",
+      "side": 1,
+      "message": "Yes, Clang has been updated to version 16 and has a new warning that is triggered by the rpmalloc sources (-Wunsafe-buffer-usage).\n\nI have uploaded a fix that updates rpmalloc to a more recent revision (which contains fixes for clang-15), and patch the configure.py to add -Wno-unsafe-buffer-usage. https://gn-review.git.corp.google.com/c/gn/+/15021\n\nThe root of the problem is that for Clang, the rpmalloc build/ninja/clang.py adds `-Weverything` then a bunch of explicit `-Wno-xxxx` flags, and this is very fragile and breaks whenever a new clang version comes out with new warnings. We had something similar when we updated to Clang-15.\n\nI\u0027ll try to submit a fix upstream, but -Wno-unsafe-buffer-usage does not exist in clang-15 and before :-/",
+      "parentUuid": "8b33db3a_2ea3fee1",
+      "revId": "4501ff8e820d432deafe7b79083be4445c854118",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
     }
   ]
 }
