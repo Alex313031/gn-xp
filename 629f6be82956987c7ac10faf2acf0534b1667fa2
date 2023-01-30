@@ -16,6 +16,24 @@
       "message": "Looks like I can force submit.",
       "revId": "629f6be82956987c7ac10faf2acf0534b1667fa2",
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "dddd2bee_08d6734c",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000067
+      },
+      "writtenOn": "2023-01-30T22:57:48Z",
+      "side": 1,
+      "message": "Thanks!",
+      "parentUuid": "ac4360ef_09fc77ba",
+      "revId": "629f6be82956987c7ac10faf2acf0534b1667fa2",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
     }
   ]
 }
