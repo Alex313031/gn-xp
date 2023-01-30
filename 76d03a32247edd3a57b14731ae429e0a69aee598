@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f83cba2d_11b57e97",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000067
+      },
+      "writtenOn": "2023-01-30T22:37:24Z",
+      "side": 1,
+      "message": "This will fail because the infra builder uses the previous version of the recipe to build the newest version of the GN sources IIRC, but this has been tested locally (with cd infra \u0026\u0026 ./recipes.py run gn).",
+      "revId": "76d03a32247edd3a57b14731ae429e0a69aee598",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    }
+  ]
+}
