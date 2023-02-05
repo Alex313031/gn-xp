@@ -1,0 +1,72 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "63bc9b50_d9d652bb",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 1000842
+      },
+      "writtenOn": "2023-02-05T12:35:10Z",
+      "side": 1,
+      "message": "Only a bug number goes here, it can be removed if no number is available.",
+      "revId": "2205c3fa79e0e40e4232fe8f4f0e1d6b53227701",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "eac420ee_f2a6c71f",
+        "filename": "build/gen.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 485,
+      "author": {
+        "id": 1000842
+      },
+      "writtenOn": "2023-02-05T12:35:10Z",
+      "side": 1,
+      "message": "Please add to the CL description why this change is added.",
+      "revId": "2205c3fa79e0e40e4232fe8f4f0e1d6b53227701",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6d3ea816_2f2278c6",
+        "filename": "src/util/exe_path.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 29,
+      "author": {
+        "id": 1000842
+      },
+      "writtenOn": "2023-02-05T12:35:10Z",
+      "side": 1,
+      "message": "What is this needed for?",
+      "revId": "2205c3fa79e0e40e4232fe8f4f0e1d6b53227701",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1609e005_2cd151ca",
+        "filename": "src/util/exe_path.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 123,
+      "author": {
+        "id": 1000842
+      },
+      "writtenOn": "2023-02-05T12:35:10Z",
+      "side": 1,
+      "message": "How often is `GetExePath` called? if it\u0027s just once we may not need this optimization and could just remove the global `absolutePathBuf` buffer and run realpath every time.",
+      "revId": "2205c3fa79e0e40e4232fe8f4f0e1d6b53227701",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    }
+  ]
+}
