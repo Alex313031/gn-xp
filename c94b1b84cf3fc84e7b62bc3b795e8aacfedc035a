@@ -122,6 +122,29 @@
       "parentUuid": "c604ab86_c400deda",
       "revId": "c94b1b84cf3fc84e7b62bc3b795e8aacfedc035a",
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "302b8578_c35cb73e",
+        "filename": "src/gn/function_toolchain.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 600,
+      "author": {
+        "id": 1000030
+      },
+      "writtenOn": "2023-02-07T01:22:10Z",
+      "side": 1,
+      "message": "\u0027-Clink-arg\u003d-Bdynamic\u0027 is proper example?",
+      "range": {
+        "startLine": 600,
+        "startChar": 29,
+        "endLine": 600,
+        "endChar": 38
+      },
+      "revId": "c94b1b84cf3fc84e7b62bc3b795e8aacfedc035a",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
     }
   ]
 }
