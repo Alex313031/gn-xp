@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "fd20adf6_36254762",
+        "filename": "src/gn/template.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 110,
+      "author": {
+        "id": 1000397
+      },
+      "writtenOn": "2023-02-07T06:36:25Z",
+      "side": 1,
+      "message": "If this comment is meant to refer to lines 118-125, then it\u0027s not catching the case it describes, but the check on line 128 _does_.  \n\nConsider:\n```\ntemplate(\"A\") {\n  forward_variables_from(invoker, \"*\")\n  print(\"hello\")\n}\ntemplate(\"B\") {\n  A(target_name) {\n    forward_variables_from(invoker, \"*\")\n  }\n}\ntemplate(\"C\") {\n  B(target_name) {\n    forward_variables_from(invoker, \"*\")\n  }\n}\nC(\"foo\"){\n  this_is_an_error \u003d true\n}\n```\nThe additional \"whence it was called\" that lists the invocation of `A()` is the one on line 128).",
+      "range": {
+        "startLine": 108,
+        "startChar": 0,
+        "endLine": 110,
+        "endChar": 14
+      },
+      "revId": "4179ffb3572236f7793babac86e4d3b21d2723fd",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    }
+  ]
+}
