@@ -52,6 +52,24 @@
       "parentUuid": "5ba0ad9c_016a229f",
       "revId": "d58e1c30b28f32a646113cfa4bf35b2384ad8177",
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "74d7dc89_c9b1517d",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000170
+      },
+      "writtenOn": "2023-02-08T16:59:06Z",
+      "side": 1,
+      "message": "For the Rust-related tools in your toolchain, you\u0027ll need to add:\n\ndynamic_link_switch\u003d\"-Clink-arg\u003d-Bdynamic\"\n\nto match current behavior.",
+      "parentUuid": "23d1269c_dfa55b9a",
+      "revId": "d58e1c30b28f32a646113cfa4bf35b2384ad8177",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
     }
   ]
 }
