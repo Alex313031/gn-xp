@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "37357324_5714963f",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000170
+      },
+      "writtenOn": "2023-02-08T09:15:54Z",
+      "side": 1,
+      "message": "Ikuta-san, how should we land this? This will be a breaking change for Fuchsia because they\u0027ll need to specify this new dynamic_link_switch\u003d\"-Clink-arg\u003d-Bdynamic\" at the same time as absorbing this new gn revision. We will need to do the same in Chromium but as Rust is not yet used in production, we can accept brief breakage and we don\u0027t need to co-ordinate timings carefully.",
+      "revId": "d58e1c30b28f32a646113cfa4bf35b2384ad8177",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    }
+  ]
+}

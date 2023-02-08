@@ -142,6 +142,24 @@
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "624cca19_e038edfd",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000170
+      },
+      "writtenOn": "2023-02-08T09:15:54Z",
+      "side": 1,
+      "message": "Thanks, I expanded on the description to explain all this.",
+      "parentUuid": "c68a1673_0ebdc434",
+      "revId": "c94b1b84cf3fc84e7b62bc3b795e8aacfedc035a",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "302b8578_c35cb73e",
