@@ -482,7 +482,7 @@ def WriteGNNinja(path, platform, host, options, args_list):
       ldflags.append(min_mac_version_flag)
     elif platform.is_aix():
       cflags.append('-maix64')
-      ldflags.append('-maix64')
+      ldflags.append('-maix64 -Wl,-bbigtoc')
     elif platform.is_haiku():
       cflags.append('-fPIC')
       cflags.extend(['-D_BSD_SOURCE'])
