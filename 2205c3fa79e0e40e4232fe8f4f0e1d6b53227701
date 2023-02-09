@@ -38,6 +38,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "da277954_5f063af6",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 1000842
+      },
+      "writtenOn": "2023-02-09T18:59:21Z",
+      "side": 1,
+      "message": "The bug number here must be a # from V8\u0027s issue tracker, not our internal issue tracker. If there is no number on V8\u0027s tracker then no need to add this line at all.",
+      "parentUuid": "503ef9a2_9a9cc0b5",
+      "revId": "2205c3fa79e0e40e4232fe8f4f0e1d6b53227701",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "eac420ee_f2a6c71f",
         "filename": "build/gen.py",
         "patchSetId": 1
@@ -67,6 +85,24 @@
       "side": 1,
       "message": "I had added the need for the change in the Cl description.",
       "parentUuid": "eac420ee_f2a6c71f",
+      "revId": "2205c3fa79e0e40e4232fe8f4f0e1d6b53227701",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e3735bb7_503636a6",
+        "filename": "build/gen.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 485,
+      "author": {
+        "id": 1000842
+      },
+      "writtenOn": "2023-02-09T18:59:21Z",
+      "side": 1,
+      "message": "Can\u0027t see it, did you save?",
+      "parentUuid": "f89f7dc9_aeef41a5",
       "revId": "2205c3fa79e0e40e4232fe8f4f0e1d6b53227701",
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
     },
@@ -137,6 +173,24 @@
       "side": 1,
       "message": "GetExecPath( ) varies based on the OS type whenever the source code is compiled, and since AIX hasn\u0027t been specifically defined, we end up with the default one. \n\n\nWhen running the FormatTest.XXX tests, I noticed that even backup tests fail because the realpath function is unable to locate the directory because the test internally switches the directory.\nI must therefore create a global variable because the execution path is constant and does not need to be obtained for each test (FormatTest.XXX).",
       "parentUuid": "1609e005_2cd151ca",
+      "revId": "2205c3fa79e0e40e4232fe8f4f0e1d6b53227701",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "bb9ca7d1_51c6cf97",
+        "filename": "src/util/exe_path.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 123,
+      "author": {
+        "id": 1000842
+      },
+      "writtenOn": "2023-02-09T18:59:21Z",
+      "side": 1,
+      "message": "My question is what happens if it is changed to this:\n```\n#elif defined(OS_AIX)\nbase::FilePath GetExePath() {\n  char absolutePathBuf[PATH_MAX] \u003d {0};\n  char *exec_name \u003d getenv(\"_\");\n  realpath(exec_name,absolutePathBuf);\n  if (absolutePathBuf \u003d\u003d NULL) {\n    return base::FilePath();\n  }\n  return base::FilePath(absolutePathBuf);\n}\n```",
+      "parentUuid": "6aaf0612_b8799ebe",
       "revId": "2205c3fa79e0e40e4232fe8f4f0e1d6b53227701",
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
     }
