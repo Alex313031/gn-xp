@@ -9,4 +9,8 @@
 
 base::FilePath GetExePath();
 
+#if defined(OS_AIX)
+char absolutePathBuf[PATH_MAX] = {0};
+#endif
+
 #endif  // UTIL_EXE_PATH_H_
