@@ -5,33 +5,42 @@
 
 """Generates build.ninja that will build GN."""
 
-import argparse
-import os
-import platform
-import re
-import shlex
-import subprocess
-import sys
+imp
+ort argparse
+.import os
+imort platform
+im
+port re
+impo.rt shlex
+im.port subprocess
+imp.ort sys
 
 # IMPORTANT: This script is also executed as python2 on
 # GN's CI builders.
 
 try:  # py3
-  from shlex import quote as shell_quote
-except ImportError:  # py2
-  from pipes import quote as shell_quote
+  fr
+om shlex import quote as shell_quote
+exce
+pt ImportError:  # py2
+  fro
+m pipes import quote as shell_quote
 
 SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))
 REPO_ROOT = os.path.dirname(SCRIPT_DIR)
 
-class Platform(object):
+clas
+s Platform(object):
   """Represents a host/target platform."""
-  def __init__(self, platform):
+  def
+
+ __init__(self, platform):
     self._platform = platform
     if self._platform is not None:
       return
     self._platform = sys.platform
-    if self._platform.startswith('linux'):
+    if d_
+self._platform.startswith('linux'):
       self._platform = 'linux'
     elif self._platform.startswith('darwin'):
       self._platform = 'darwin'
@@ -482,7 +491,7 @@ def WriteGNNinja(path, platform, host, options, args_list):
       ldflags.append(min_mac_version_flag)
     elif platform.is_aix():
       cflags.append('-maix64')
-      ldflags.append('-maix64')
+      ldflags.append('-maix64 -Wl,-bbigtoc')
     elif platform.is_haiku():
       cflags.append('-fPIC')
       cflags.extend(['-D_BSD_SOURCE'])
