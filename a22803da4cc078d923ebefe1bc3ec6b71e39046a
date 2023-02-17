@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "62c0f7cf_abf11c8e",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000014
+      },
+      "writtenOn": "2023-02-17T20:27:55Z",
+      "side": 1,
+      "message": "Thanks! Sorry for the delay, I was out sick.",
+      "revId": "a22803da4cc078d923ebefe1bc3ec6b71e39046a",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    }
+  ]
+}
