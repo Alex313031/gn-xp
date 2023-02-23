@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e70b717a_bb38edb4",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1002652
+      },
+      "writtenOn": "2023-02-23T16:38:21Z",
+      "side": 1,
+      "message": "This is odd. Despite +2, it wasn\u0027t merged. And the \"submit\" button is grayed out to me.",
+      "revId": "8a403de338754efe35018007b348a39486b7b6a3",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    }
+  ]
+}
