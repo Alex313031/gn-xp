@@ -16,6 +16,24 @@
       "message": "This is odd. Despite +2, it wasn\u0027t merged. And the \"submit\" button is grayed out to me.",
       "revId": "8a403de338754efe35018007b348a39486b7b6a3",
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "945e9cda_fe9c2d57",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000030
+      },
+      "writtenOn": "2023-02-24T04:16:56Z",
+      "side": 1,
+      "message": "I think that is because you are not committer of GN.\nLet me submit this instead.",
+      "parentUuid": "e70b717a_bb38edb4",
+      "revId": "8a403de338754efe35018007b348a39486b7b6a3",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
     }
   ]
 }
