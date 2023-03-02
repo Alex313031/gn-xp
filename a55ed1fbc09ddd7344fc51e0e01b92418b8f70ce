@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "078a2228_149b2636",
+        "filename": "src/util/exe_path.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 120,
+      "author": {
+        "id": 1000842
+      },
+      "writtenOn": "2023-03-02T13:30:35Z",
+      "side": 1,
+      "message": "maybe rename `absolutePathBuf` to `path` to match other platforms?",
+      "revId": "a55ed1fbc09ddd7344fc51e0e01b92418b8f70ce",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    }
+  ]
+}
