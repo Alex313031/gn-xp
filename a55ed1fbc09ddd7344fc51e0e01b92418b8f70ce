@@ -16,6 +16,75 @@
       "message": "maybe rename `absolutePathBuf` to `path` to match other platforms?",
       "revId": "a55ed1fbc09ddd7344fc51e0e01b92418b8f70ce",
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "447bdbc8_045a97fa",
+        "filename": "src/util/exe_path.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 120,
+      "author": {
+        "id": 1000030
+      },
+      "writtenOn": "2023-03-06T07:29:20Z",
+      "side": 1,
+      "message": "This 0 is not necessary?",
+      "range": {
+        "startLine": 120,
+        "startChar": 36,
+        "endLine": 120,
+        "endChar": 37
+      },
+      "revId": "a55ed1fbc09ddd7344fc51e0e01b92418b8f70ce",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6b8e3a39_9971ede5",
+        "filename": "src/util/exe_path.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 122,
+      "author": {
+        "id": 1000030
+      },
+      "writtenOn": "2023-03-06T07:29:20Z",
+      "side": 1,
+      "message": "Space after \u0027,\u0027?",
+      "range": {
+        "startLine": 122,
+        "startChar": 20,
+        "endLine": 122,
+        "endChar": 21
+      },
+      "revId": "a55ed1fbc09ddd7344fc51e0e01b92418b8f70ce",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b1e8bd10_6ce52bd7",
+        "filename": "src/util/exe_path.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 123,
+      "author": {
+        "id": 1000030
+      },
+      "writtenOn": "2023-03-06T07:29:20Z",
+      "side": 1,
+      "message": "absolutePathBuf shouldn\u0027t be true? Check returned value from realpath instead?",
+      "range": {
+        "startLine": 123,
+        "startChar": 2,
+        "endLine": 123,
+        "endChar": 32
+      },
+      "revId": "a55ed1fbc09ddd7344fc51e0e01b92418b8f70ce",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
     }
   ]
 }
