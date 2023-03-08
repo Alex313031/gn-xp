@@ -16,6 +16,57 @@
       "message": "Hi Brett, would you please also help with reviewing this CL, thank you.",
       "revId": "522aa97f423adde0a506b5b731fa9c3a6d87c71f",
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6946ce12_fa2aaa50",
+        "filename": "src/util/exe_path.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 27,
+      "author": {
+        "id": 1000014
+      },
+      "writtenOn": "2023-03-08T18:49:31Z",
+      "side": 1,
+      "message": "I don\u0027t think this does anything: I assume you added something here and then removed it.",
+      "revId": "522aa97f423adde0a506b5b731fa9c3a6d87c71f",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "163dfcf3_624bf824",
+        "filename": "src/util/exe_path.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 122,
+      "author": {
+        "id": 1000014
+      },
+      "writtenOn": "2023-03-08T18:49:31Z",
+      "side": 1,
+      "message": "The realpath man page says on failure, the return value is null and the contents of the \"resolved_path\" are undefined. So you\u0027ll need to check the return value.",
+      "revId": "522aa97f423adde0a506b5b731fa9c3a6d87c71f",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8cdb0d4d_8f28ff91",
+        "filename": "src/util/exe_path.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 123,
+      "author": {
+        "id": 1000014
+      },
+      "writtenOn": "2023-03-08T18:49:31Z",
+      "side": 1,
+      "message": "This should be fixed by the above suggestion, but I wanted to note here that this comparison is checking the path _pointer_ which will always be non-null (it points to the stack buffer you made above). If you wanted to check the string for empty, you\u0027d need to check `path[0]`, but as I mentioned in the previous comment, that\u0027s not what realpath does on error.",
+      "revId": "522aa97f423adde0a506b5b731fa9c3a6d87c71f",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
     }
   ]
 }
