@@ -61,6 +61,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "f6930996_4ef5d47b",
+        "filename": "src/util/exe_path.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 120,
+      "author": {
+        "id": 1002587
+      },
+      "writtenOn": "2023-03-12T17:18:57Z",
+      "side": 1,
+      "message": "okay.",
+      "parentUuid": "447bdbc8_045a97fa",
+      "range": {
+        "startLine": 120,
+        "startChar": 36,
+        "endLine": 120,
+        "endChar": 37
+      },
+      "revId": "a55ed1fbc09ddd7344fc51e0e01b92418b8f70ce",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "6b8e3a39_9971ede5",
         "filename": "src/util/exe_path.cc",
         "patchSetId": 1
@@ -84,6 +108,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "4dbd2f8a_6823aa92",
+        "filename": "src/util/exe_path.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 122,
+      "author": {
+        "id": 1002587
+      },
+      "writtenOn": "2023-03-12T17:18:57Z",
+      "side": 1,
+      "message": "okay.",
+      "parentUuid": "6b8e3a39_9971ede5",
+      "range": {
+        "startLine": 122,
+        "startChar": 20,
+        "endLine": 122,
+        "endChar": 21
+      },
+      "revId": "a55ed1fbc09ddd7344fc51e0e01b92418b8f70ce",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "b1e8bd10_6ce52bd7",
         "filename": "src/util/exe_path.cc",
         "patchSetId": 1
@@ -95,6 +143,30 @@
       "writtenOn": "2023-03-06T07:29:20Z",
       "side": 1,
       "message": "absolutePathBuf shouldn\u0027t be true? Check returned value from realpath instead?",
+      "range": {
+        "startLine": 123,
+        "startChar": 2,
+        "endLine": 123,
+        "endChar": 32
+      },
+      "revId": "a55ed1fbc09ddd7344fc51e0e01b92418b8f70ce",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "016abb76_11e2d0f9",
+        "filename": "src/util/exe_path.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 123,
+      "author": {
+        "id": 1002587
+      },
+      "writtenOn": "2023-03-12T17:18:57Z",
+      "side": 1,
+      "message": "I will do that.",
+      "parentUuid": "b1e8bd10_6ce52bd7",
       "range": {
         "startLine": 123,
         "startChar": 2,
