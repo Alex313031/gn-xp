@@ -24,6 +24,7 @@
 #include <image.h>
 #elif defined(OS_SOLARIS)
 #include <stdlib.h>
+#elif defined(OS_AIX)
 #endif
 
 #if defined(OS_MACOSX)
@@ -112,6 +113,15 @@ base::FilePath GetExePath() {
     return base::FilePath();
   }
   return base::FilePath(path);
+}
+
+#elif defined(OS_AIX)
+base::FilePath GetExePath() {
+  char *exec_name = getenv("_");
+  if (exec_name == NULL) {
+    return base::FilePath();
+  }
+  return base::FilePath(exec_name);
 }
 
 #else
