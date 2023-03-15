@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "86edad3d_a5787192",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000014
+      },
+      "writtenOn": "2023-03-15T19:59:18Z",
+      "side": 1,
+      "message": "I copied the file formats from the Chromium .gitattributes file that we have in the GN repo.",
+      "revId": "3f985c9033334ae9c41bfdf8731563802910b7dd",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    }
+  ]
+}
