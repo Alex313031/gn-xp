@@ -73,6 +73,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "20f9cee6_7ed7d7fe",
+        "filename": "src/util/exe_path.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 27,
+      "author": {
+        "id": 1002587
+      },
+      "writtenOn": "2023-03-15T04:42:08Z",
+      "side": 1,
+      "message": "Okay, I will do that.",
+      "parentUuid": "27071fb3_5c5e8981",
+      "revId": "522aa97f423adde0a506b5b731fa9c3a6d87c71f",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "163dfcf3_624bf824",
         "filename": "src/util/exe_path.cc",
         "patchSetId": 2
