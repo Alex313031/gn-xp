@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "abdd264c_1aea3e80",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000067
+      },
+      "writtenOn": "2023-03-17T12:41:02Z",
+      "side": 1,
+      "message": "Note that I\u0027m open to an alternative fix if one of you has a better idea.",
+      "revId": "c5e72c259e94683d3ce137829be8493d04a24d58",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    }
+  ]
+}
