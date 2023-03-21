@@ -16,6 +16,23 @@
       "message": "I don\u0027t feel confident reviewing this change. Brett, can you take a look?",
       "revId": "84da1b5e82d2052d325f9adf3d7f0a22d1b63b83",
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "58c7b176_f9f6287a",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000014
+      },
+      "writtenOn": "2023-03-21T19:11:46Z",
+      "side": 1,
+      "message": "Have you looked at the \"JSON\" IDE output for the \"gn gen\" command? That would be the recommended way to get the entire build graph into a tool. I could see a better way to expose this command might be beneficial.",
+      "revId": "84da1b5e82d2052d325f9adf3d7f0a22d1b63b83",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
     }
   ]
 }
