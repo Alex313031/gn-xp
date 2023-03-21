@@ -602,7 +602,7 @@ bool ResolveFromCommandLineInput(
     // For each target in the current matches vector, recursively
     // add the target's dependencies to the matches vector.
     for (const Target* target : *target_matches)
-      MatchTargetDependencies(target, target_matches);  
+      MatchTargetDependencies(target, target_matches);
   }
   return true;
 }
