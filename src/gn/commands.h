@@ -152,6 +152,9 @@ class CommandSwitches {
   // For --blame used by `desc`.
   bool has_blame() const { return has_blame_; }
 
+  // For --with-deps used by `desc`.
+  bool has_with_deps() const { return has_with_deps_; }
+
   // For --tree used by `desc` and `refs`.
   bool has_tree() const { return has_tree_; }
 
@@ -227,6 +230,7 @@ class CommandSwitches {
   bool has_check_system_ = false;
   bool has_public_ = false;
   bool has_with_data_ = false;
+  bool has_with_deps_ = false;
 
   TargetPrintMode target_print_mode_ = TARGET_PRINT_LABEL;
   Target::OutputType target_type_ = Target::UNKNOWN;
@@ -270,6 +274,7 @@ bool ResolveFromCommandLineInput(
     Setup* setup,
     const std::vector<std::string>& input,
     bool default_toolchain_only,
+    bool with_target_deps,
     UniqueVector<const Target*>* target_matches,
     UniqueVector<const Config*>* config_matches,
     UniqueVector<const Toolchain*>* toolchain_matches,
@@ -351,6 +356,9 @@ void FilterAndPrintTargets(std::vector<const Target*>* targets,
 
 void FilterAndPrintTargetSet(bool indent, const TargetSet& targets);
 void FilterAndPrintTargetSet(const TargetSet& targets, base::ListValue* out);
+
+// Recursively add the supplied target's dependencies to the matches vector.
+void MatchTargetDependencies(const Target* target, UniqueVector<const Target*>* matches);
 
 // Computes which targets reference the given file and also stores how the
 // target references the file.
