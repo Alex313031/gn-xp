@@ -87,9 +87,9 @@ int RunOutputs(const std::vector<std::string>& args) {
   UniqueVector<const Config*> config_matches;
   UniqueVector<const Toolchain*> toolchain_matches;
   UniqueVector<SourceFile> file_matches;
-  if (!ResolveFromCommandLineInput(setup, inputs, false, &target_matches,
-                                   &config_matches, &toolchain_matches,
-                                   &file_matches))
+  if (!ResolveFromCommandLineInput(setup, inputs, false, false,
+                                   &target_matches, &config_matches,
+                                   &toolchain_matches, &file_matches))
     return 1;
 
   // We only care about targets and files.

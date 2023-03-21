@@ -16,6 +16,7 @@
 #include "base/values.h"
 #include "gn/builder.h"
 #include "gn/config_values_extractors.h"
+#include "gn/deps_iterator.h"
 #include "gn/filesystem_utils.h"
 #include "gn/item.h"
 #include "gn/label.h"
@@ -416,6 +417,7 @@ bool CommandSwitches::InitFrom(const base::CommandLine& cmdline) {
   result.has_check_system_ = cmdline.HasSwitch("check-system");
   result.has_public_ = cmdline.HasSwitch("public");
   result.has_with_data_ = cmdline.HasSwitch("with-data");
+  result.has_with_deps_ = cmdline.HasSwitch("with-deps");
 
   std::string_view target_print_switch = "as";
   if (cmdline.HasSwitch(target_print_switch)) {
@@ -576,6 +578,7 @@ bool ResolveFromCommandLineInput(
     Setup* setup,
     const std::vector<std::string>& input,
     bool default_toolchain_only,
+    bool with_target_deps,
     UniqueVector<const Target*>* target_matches,
     UniqueVector<const Config*>* config_matches,
     UniqueVector<const Toolchain*>* toolchain_matches,
@@ -593,6 +596,13 @@ bool ResolveFromCommandLineInput(
             setup, cur_dir, cur, default_toolchain_only, target_matches,
             config_matches, toolchain_matches, file_matches))
       return false;
+  }
+
+  if (with_target_deps) {
+    // For each target in the current matches vector, recursively
+    // add the target's dependencies to the matches vector.
+    for (const Target* target : *target_matches)
+      MatchTargetDependencies(target, target_matches);  
   }
   return true;
 }
@@ -709,6 +719,17 @@ void FilterAndPrintTargetSet(bool indent, const TargetSet& targets) {
 void FilterAndPrintTargetSet(const TargetSet& targets, base::ListValue* out) {
   std::vector<const Target*> target_vector(targets.begin(), targets.end());
   FilterAndPrintTargets(&target_vector, out);
+}
+
+void MatchTargetDependencies(const Target* target, UniqueVector<const Target*>* matches) {
+  for (const auto& dep_pair : target->GetDeps(Target::DEPS_ALL)) {
+    const Target* target_dep = dep_pair.ptr;
+    if (!matches->push_back(target_dep)) {
+      continue;
+    }
+    // Recursively add child deps.
+    MatchTargetDependencies(target_dep, matches);
+  }
 }
 
 void GetTargetsContainingFile(Setup* setup,
