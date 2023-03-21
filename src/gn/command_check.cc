@@ -210,7 +210,7 @@ int RunCheck(const std::vector<std::string>& args) {
     UniqueVector<const Toolchain*> toolchain_matches;
     UniqueVector<SourceFile> file_matches;
     if (!ResolveFromCommandLineInput(setup, inputs, default_toolchain_only,
-                                     &target_matches, &config_matches,
+                                     false, &target_matches, &config_matches,
                                      &toolchain_matches, &file_matches))
       return 1;
 

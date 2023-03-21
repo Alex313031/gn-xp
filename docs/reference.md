@@ -512,7 +512,7 @@
 
 ```
   gn desc <out_dir> <label or pattern> [<what to show>] [--blame]
-          [--format=json]
+          [--format=json] [--with-deps]
 
   Displays information about a given target or config. The build parameters
   will be taken for the build in the given <out_dir>.
@@ -655,6 +655,13 @@
           source_set|static_library)
       Restrict outputs to targets matching the given type. If
       unspecified, no filtering will be performed.
+
+  --with-deps
+    For every matched target, recursively add the targets direct dependencies
+    to the final list of matched targets.
+
+    All of the above arguments and flags will still apply to any targets added
+    by this flag.
 ```
 
 #### **Note**
