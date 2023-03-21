@@ -32,6 +32,7 @@ namespace {
 const char kBlame[] = "blame";
 const char kTree[] = "tree";
 const char kAll[] = "all";
+const char kWithDeps[] = "with-deps";
 
 void PrintDictValue(const base::Value* value,
                     int indentLevel,
@@ -480,7 +481,7 @@ const char kDesc_Help[] =
     R"(gn desc
 
   gn desc <out_dir> <label or pattern> [<what to show>] [--blame]
-          [--format=json]
+          [--format=json] [--with-deps]
 
   Displays information about a given target or config. The build parameters
   will be taken for the build in the given <out_dir>.
@@ -598,6 +599,13 @@ Printing deps
     TARGET_TYPE_FILTER_COMMAND_LINE_HELP
 
     R"(
+  --with-deps
+    For every matched target, recursively add the targets direct dependencies
+    to the final list of matched targets.
+    
+    All of the above arguments and flags will still apply to any targets added
+    by this flag.
+ 
 Note
 
   This command will show the full name of directories and source files, but
@@ -646,7 +654,8 @@ int RunDesc(const std::vector<std::string>& args) {
 
   if (!ResolveFromCommandLineInput(
           setup, target_list, cmdline->HasSwitch(switches::kDefaultToolchain),
-          &target_matches, &config_matches, &toolchain_matches, &file_matches))
+          cmdline->HasSwitch(kWithDeps), &target_matches, &config_matches,
+          &toolchain_matches, &file_matches))
     return 1;
 
   std::string what_to_print;
