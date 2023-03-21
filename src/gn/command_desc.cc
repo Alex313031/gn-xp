@@ -32,6 +32,7 @@ namespace {
 const char kBlame[] = "blame";
 const char kTree[] = "tree";
 const char kAll[] = "all";
+const char kWithDeps[] = "with-deps";
 
 void PrintDictValue(const base::Value* value,
                     int indentLevel,
@@ -646,7 +647,8 @@ int RunDesc(const std::vector<std::string>& args) {
 
   if (!ResolveFromCommandLineInput(
           setup, target_list, cmdline->HasSwitch(switches::kDefaultToolchain),
-          &target_matches, &config_matches, &toolchain_matches, &file_matches))
+          cmdline->HasSwitch(kWithDeps), &target_matches, &config_matches,
+          &toolchain_matches, &file_matches))
     return 1;
 
   std::string what_to_print;
