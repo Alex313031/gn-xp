@@ -33,6 +33,24 @@
       "message": "Does this work for invocations other than from bash?\nhttps://tldp.org/LDP/Bash-Beginners-Guide/html/sect_03_02.html#:~:text\u003dor%20shell%20script.-,%24_,-The%20underscore%20variable",
       "revId": "17571406b81ec2cad64a04181495ef2b2e2ef554",
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5fb08ae8_dd29d789",
+        "filename": "src/util/exe_path.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 119,
+      "author": {
+        "id": 1002587
+      },
+      "writtenOn": "2023-03-23T09:41:05Z",
+      "side": 1,
+      "message": "Yes, It is working fine in ksh shell also.",
+      "parentUuid": "3a8ad66b_a6e07baa",
+      "revId": "17571406b81ec2cad64a04181495ef2b2e2ef554",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
     }
   ]
 }
