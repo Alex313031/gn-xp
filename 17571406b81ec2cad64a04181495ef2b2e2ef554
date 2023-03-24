@@ -20,6 +20,23 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "69ccd439_94861b01",
+        "filename": "src/util/exe_path.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 118,
+      "author": {
+        "id": 1000030
+      },
+      "writtenOn": "2023-03-24T01:54:31Z",
+      "side": 1,
+      "message": "Insert empty line above?",
+      "revId": "17571406b81ec2cad64a04181495ef2b2e2ef554",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "3a8ad66b_a6e07baa",
         "filename": "src/util/exe_path.cc",
         "patchSetId": 4
@@ -49,6 +66,24 @@
       "side": 1,
       "message": "Yes, It is working fine in ksh shell also.",
       "parentUuid": "3a8ad66b_a6e07baa",
+      "revId": "17571406b81ec2cad64a04181495ef2b2e2ef554",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f047099d_b60d7c04",
+        "filename": "src/util/exe_path.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 119,
+      "author": {
+        "id": 1000030
+      },
+      "writtenOn": "2023-03-24T01:54:31Z",
+      "side": 1,
+      "message": "But how did you ensure that for other shells?",
+      "parentUuid": "5fb08ae8_dd29d789",
       "revId": "17571406b81ec2cad64a04181495ef2b2e2ef554",
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
     }
