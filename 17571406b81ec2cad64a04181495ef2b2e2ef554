@@ -122,6 +122,24 @@
       "parentUuid": "f047099d_b60d7c04",
       "revId": "17571406b81ec2cad64a04181495ef2b2e2ef554",
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f2fb61ba_9cd206ee",
+        "filename": "src/util/exe_path.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 119,
+      "author": {
+        "id": 1000030
+      },
+      "writtenOn": "2023-03-24T08:05:36Z",
+      "side": 1,
+      "message": "I think it is strange if GN for AIX only supports bash and ksh. Why not use appropriate system call for this?",
+      "parentUuid": "8f79dfd3_0d47458b",
+      "revId": "17571406b81ec2cad64a04181495ef2b2e2ef554",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
     }
   ]
 }
