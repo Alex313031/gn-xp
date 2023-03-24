@@ -37,6 +37,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "ea2fdf30_8621b2c7",
+        "filename": "src/util/exe_path.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 118,
+      "author": {
+        "id": 1002587
+      },
+      "writtenOn": "2023-03-24T07:12:56Z",
+      "side": 1,
+      "message": "okay.",
+      "parentUuid": "69ccd439_94861b01",
+      "revId": "17571406b81ec2cad64a04181495ef2b2e2ef554",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "3a8ad66b_a6e07baa",
         "filename": "src/util/exe_path.cc",
         "patchSetId": 4
@@ -84,6 +102,24 @@
       "side": 1,
       "message": "But how did you ensure that for other shells?",
       "parentUuid": "5fb08ae8_dd29d789",
+      "revId": "17571406b81ec2cad64a04181495ef2b2e2ef554",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8f79dfd3_0d47458b",
+        "filename": "src/util/exe_path.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 119,
+      "author": {
+        "id": 1002587
+      },
+      "writtenOn": "2023-03-24T07:12:56Z",
+      "side": 1,
+      "message": "In AIX the by default shell is ksh So I had tested it in both ksh \u0026 bash shell, and it is wokring fine.",
+      "parentUuid": "f047099d_b60d7c04",
       "revId": "17571406b81ec2cad64a04181495ef2b2e2ef554",
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
     }
