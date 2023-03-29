@@ -140,6 +140,24 @@
       "parentUuid": "8f79dfd3_0d47458b",
       "revId": "17571406b81ec2cad64a04181495ef2b2e2ef554",
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0b09bee0_d8e08bf5",
+        "filename": "src/util/exe_path.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 119,
+      "author": {
+        "id": 1002587
+      },
+      "writtenOn": "2023-03-29T09:00:18Z",
+      "side": 1,
+      "message": "Actually the code is not depended to any kind of shell, It will work fine \nregardless of any shell.",
+      "parentUuid": "f2fb61ba_9cd206ee",
+      "revId": "17571406b81ec2cad64a04181495ef2b2e2ef554",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
     }
   ]
 }
