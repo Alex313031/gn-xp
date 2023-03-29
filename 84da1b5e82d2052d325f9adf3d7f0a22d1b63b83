@@ -33,6 +33,24 @@
       "message": "Have you looked at the \"JSON\" IDE output for the \"gn gen\" command? That would be the recommended way to get the entire build graph into a tool. I could see a better way to expose this command might be beneficial.",
       "revId": "84da1b5e82d2052d325f9adf3d7f0a22d1b63b83",
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ee7b3c7a_9db8f34c",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1002697
+      },
+      "writtenOn": "2023-03-29T00:50:09Z",
+      "side": 1,
+      "message": "This was a good flag and seemed to solve my problem. https://chromium-review.googlesource.com/c/chromium/src/+/4354747\n\nThanks",
+      "parentUuid": "58c7b176_f9f6287a",
+      "revId": "84da1b5e82d2052d325f9adf3d7f0a22d1b63b83",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
     }
   ]
 }
