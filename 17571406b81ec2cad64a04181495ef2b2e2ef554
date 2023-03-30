@@ -158,6 +158,24 @@
       "parentUuid": "f2fb61ba_9cd206ee",
       "revId": "17571406b81ec2cad64a04181495ef2b2e2ef554",
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c81e85b8_313c9367",
+        "filename": "src/util/exe_path.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 119,
+      "author": {
+        "id": 1000030
+      },
+      "writtenOn": "2023-03-30T06:13:40Z",
+      "side": 1,
+      "message": "I stll don\u0027t think that is guaranteed.\ne.g. Although most of popular shell may support this, someone can create their own shell which doesn\u0027t have this feature.",
+      "parentUuid": "0b09bee0_d8e08bf5",
+      "revId": "17571406b81ec2cad64a04181495ef2b2e2ef554",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
     }
   ]
 }
