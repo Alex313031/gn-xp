@@ -176,6 +176,24 @@
       "parentUuid": "0b09bee0_d8e08bf5",
       "revId": "17571406b81ec2cad64a04181495ef2b2e2ef554",
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "54c32aae_62b9daab",
+        "filename": "src/util/exe_path.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 119,
+      "author": {
+        "id": 1002587
+      },
+      "writtenOn": "2023-03-30T18:55:15Z",
+      "side": 1,
+      "message": "I had added this part of code snippet to pass gn unittests on AIX,and it does not have any shell dependency. Like other operating system I just added the function specific to AIX.",
+      "parentUuid": "c81e85b8_313c9367",
+      "revId": "17571406b81ec2cad64a04181495ef2b2e2ef554",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
     }
   ]
 }
