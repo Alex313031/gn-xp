@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "225dff11_e00845be",
+        "filename": "src/gn/functions_unittest.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 120,
+      "author": {
+        "id": 1000030
+      },
+      "writtenOn": "2023-04-04T03:01:20Z",
+      "side": 1,
+      "message": "This is not closed?",
+      "range": {
+        "startLine": 120,
+        "startChar": 5,
+        "endLine": 120,
+        "endChar": 6
+      },
+      "revId": "14bddf8b52ec616dfd901cd20825f1fa96f65895",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    }
+  ]
+}
