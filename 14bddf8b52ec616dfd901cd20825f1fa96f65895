@@ -1,6 +1,23 @@
 {
   "comments": [
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "33a2717f_29bdcc5a",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000067
+      },
+      "writtenOn": "2023-04-04T06:10:11Z",
+      "side": 1,
+      "message": "NOTE: Preparing a new patch that also updates the documentation.",
+      "revId": "14bddf8b52ec616dfd901cd20825f1fa96f65895",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "225dff11_e00845be",
@@ -14,6 +31,30 @@
       "writtenOn": "2023-04-04T03:01:20Z",
       "side": 1,
       "message": "This is not closed?",
+      "range": {
+        "startLine": 120,
+        "startChar": 5,
+        "endLine": 120,
+        "endChar": 6
+      },
+      "revId": "14bddf8b52ec616dfd901cd20825f1fa96f65895",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "395f7fd8_4bcd5cca",
+        "filename": "src/gn/functions_unittest.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 120,
+      "author": {
+        "id": 1000067
+      },
+      "writtenOn": "2023-04-04T06:10:11Z",
+      "side": 1,
+      "message": "I do not understand. Can you clarify your question?",
+      "parentUuid": "225dff11_e00845be",
       "range": {
         "startLine": 120,
         "startChar": 5,
