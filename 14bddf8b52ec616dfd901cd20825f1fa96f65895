@@ -87,6 +87,30 @@
       },
       "revId": "14bddf8b52ec616dfd901cd20825f1fa96f65895",
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b69c7262_558d9064",
+        "filename": "src/gn/functions_unittest.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 120,
+      "author": {
+        "id": 1000067
+      },
+      "writtenOn": "2023-04-04T06:35:22Z",
+      "side": 1,
+      "message": "Oh sorry, I thought you were referring to the bug not being closed or a specific issue not being addressed. Fixed!",
+      "parentUuid": "886292cd_753bc357",
+      "range": {
+        "startLine": 120,
+        "startChar": 5,
+        "endLine": 120,
+        "endChar": 6
+      },
+      "revId": "14bddf8b52ec616dfd901cd20825f1fa96f65895",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
     }
   ]
 }
