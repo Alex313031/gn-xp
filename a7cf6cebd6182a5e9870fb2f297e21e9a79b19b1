@@ -16,6 +16,23 @@
       "message": "This seems like a good idea for an addition. Unless there\u0027s a question for me, I\u0027ll defer to Takuto for the actual code review.",
       "revId": "a7cf6cebd6182a5e9870fb2f297e21e9a79b19b1",
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "7aa25a38_426d3b3f",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000067
+      },
+      "writtenOn": "2023-04-05T09:13:36Z",
+      "side": 1,
+      "message": "Adding sylvain to get code owner approval, since takuto approved it and brett delegated to him (see comments)",
+      "revId": "a7cf6cebd6182a5e9870fb2f297e21e9a79b19b1",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
     }
   ]
 }
