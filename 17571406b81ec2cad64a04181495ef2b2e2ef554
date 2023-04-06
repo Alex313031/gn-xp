@@ -194,6 +194,24 @@
       "parentUuid": "c81e85b8_313c9367",
       "revId": "17571406b81ec2cad64a04181495ef2b2e2ef554",
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2e905936_27642c00",
+        "filename": "src/util/exe_path.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 119,
+      "author": {
+        "id": 1000030
+      },
+      "writtenOn": "2023-04-06T02:51:36Z",
+      "side": 1,
+      "message": "I still think AIX has system call to get executable path like other OSs. Could you find and use that here?",
+      "parentUuid": "54c32aae_62b9daab",
+      "revId": "17571406b81ec2cad64a04181495ef2b2e2ef554",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
     }
   ]
 }
