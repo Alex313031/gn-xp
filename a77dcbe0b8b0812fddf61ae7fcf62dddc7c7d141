@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "71739fa3_e1525bda",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1001967
+      },
+      "writtenOn": "2023-04-19T09:17:13Z",
+      "side": 1,
+      "message": "I don\u0027t have access to dry run and can\u0027t submit the CL.",
+      "revId": "a77dcbe0b8b0812fddf61ae7fcf62dddc7c7d141",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    }
+  ]
+}
