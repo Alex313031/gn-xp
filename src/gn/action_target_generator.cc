@@ -4,6 +4,8 @@
 
 #include "gn/action_target_generator.h"
 
+#include <cctype>
+
 #include "base/stl_util.h"
 #include "gn/build_settings.h"
 #include "gn/config_values_generator.h"
@@ -56,6 +58,9 @@ void ActionTargetGenerator::DoRun() {
     return;
 
   if (!FillDepfile())
+    return;
+
+  if (!FillMnemonic())
     return;
 
   if (!FillPool())
@@ -165,6 +170,26 @@ bool ActionTargetGenerator::FillDepfile() {
     return false;
 
   target_->action_values().set_depfile(depfile);
+  return true;
+}
+
+bool ActionTargetGenerator::FillMnemonic() {
+  const Value* value = scope_->GetValue(variables::kMnemonic, true);
+  if (!value)
+    return true;
+
+  if (!value->VerifyTypeIs(Value::STRING, err_))
+    return false;
+
+  auto s = value->string_value();
+  for (char c : s) {
+    if (std::isspace(c)) {
+      *err_ = Err(value->origin(), "Mnemonics can't contain whitespace");
+      return false;
+    }
+  }
+
+  target_->action_values().mnemonic() = std::move(s);
   return true;
 }
 
