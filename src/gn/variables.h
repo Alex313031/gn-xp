@@ -358,6 +358,10 @@ extern const char kGenDeps[];
 extern const char kGenDeps_HelpShort[];
 extern const char kGenDeps_Help[];
 
+extern const char kDescription[];
+extern const char kDescription_HelpShort[];
+extern const char kDescription_Help[];
+
 // -----------------------------------------------------------------------------
 
 struct VariableInfo {

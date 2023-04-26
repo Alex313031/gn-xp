@@ -5,6 +5,7 @@
 #ifndef TOOLS_GN_ACTION_VALUES_H_
 #define TOOLS_GN_ACTION_VALUES_H_
 
+#include <optional>
 #include <string>
 #include <vector>
 
@@ -44,6 +45,10 @@ class ActionValues {
   bool has_depfile() const { return !depfile_.ranges().empty(); }
   void set_depfile(const SubstitutionPattern& depfile) { depfile_ = depfile; }
 
+  // Ninja output description for this action.
+  const std::optional<std::string_view> description() const { return description_; }
+  void set_description(std::string_view s) { description_ = s; }
+
   // Response file contents. Empty means no response file.
   SubstitutionList& rsp_file_contents() { return rsp_file_contents_; }
   const SubstitutionList& rsp_file_contents() const {
@@ -57,6 +62,7 @@ class ActionValues {
   SubstitutionList outputs_;
   SubstitutionPattern depfile_;
   SubstitutionList rsp_file_contents_;
+  std::optional<std::string> description_;
 
   ActionValues(const ActionValues&) = delete;
   ActionValues& operator=(const ActionValues&) = delete;
