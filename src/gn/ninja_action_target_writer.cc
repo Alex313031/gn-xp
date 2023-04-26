@@ -156,7 +156,9 @@ std::string NinjaActionTargetWriter::WriteRuleDefinition() {
     SubstitutionWriter::WriteWithNinjaVariables(arg, args_escape_options, out_);
   }
   out_ << std::endl;
-  out_ << "  description = ACTION " << target_label << std::endl;
+  auto desc_override = target_->action_values().description();
+  auto desc = desc_override ? *desc_override : "ACTION";
+  out_ << "  description = " << desc << " " << target_label << std::endl;
   out_ << "  restat = 1" << std::endl;
   const Tool* tool =
       target_->toolchain()->GetTool(GeneralTool::kGeneralToolAction);

@@ -572,6 +572,18 @@ const char kArgs_Help[] =
   See also "gn help action" and "gn help action_foreach".
 )";
 
+const char kDescription[] = "description";
+const char kDescription_HelpShort[] =
+    "description: Text shown when ninja runs this action.";
+const char kDescription_Help[] =
+    R"(description: Text shown when ninja runs this action
+
+  GN sets the ninja "description" for based on their rule type such as RUST,
+  CXX, or LINK. By default all actions will output "ACTION {label}". This
+  variable will override the description for an action with another string,
+  but the label will still be unconditionally printed.
+)";
+
 const char kAssertNoDeps[] = "assert_no_deps";
 const char kAssertNoDeps_HelpShort[] =
     "assert_no_deps: [label pattern list] Ensure no deps on these targets.";
@@ -2330,6 +2342,7 @@ const VariableInfoMap& GetTargetVariables() {
     INSERT_VARIABLE(Defines)
     INSERT_VARIABLE(Depfile)
     INSERT_VARIABLE(Deps)
+    INSERT_VARIABLE(Description)
     INSERT_VARIABLE(Externs)
     INSERT_VARIABLE(Friend)
     INSERT_VARIABLE(FrameworkDirs)
