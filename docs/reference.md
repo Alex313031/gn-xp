@@ -1416,9 +1416,9 @@
            output_extension, output_name, public, sources, testonly,
            visibility
   Action variables: args, bridge_header, configs, data, depfile,
-                    framework_dirs, inputs, module_deps, module_name,
-                    outputs*, pool, response_file_contents, script*,
-                    sources
+                    framework_dirs, inputs, mnemonic, module_deps,
+                    module_name, outputs*, pool, response_file_contents,
+                    script*, sources
   * = required
 ```
 
@@ -1517,9 +1517,9 @@
            output_extension, output_name, public, sources, testonly,
            visibility
   Action variables: args, bridge_header, configs, data, depfile,
-                    framework_dirs, inputs, module_deps, module_name,
-                    outputs*, pool, response_file_contents, script*,
-                    sources
+                    framework_dirs, inputs, mnemonic, module_deps,
+                    module_name, outputs*, pool, response_file_contents,
+                    script*, sources
   * = required
 ```
 
@@ -1531,6 +1531,7 @@
   action_foreach("my_idl") {
     script = "idl_processor.py"
     sources = [ "foo.idl", "bar.idl" ]
+    mnemonic = "IDL"
 
     # Our script reads this file each time, so we need to list it as a
     # dependency so we can rebuild if it changes.
