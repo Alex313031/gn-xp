@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "649902f1_92928156",
+        "filename": "src/gn/action_target_generator.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 181,
+      "author": {
+        "id": 1001942
+      },
+      "writtenOn": "2023-04-26T23:32:54Z",
+      "side": 1,
+      "message": "TODO: nmulcahey@ mentioned that some code in infra that parses ninja output with regex relies on this field having no spaces. We should probably check for that here and add the restriction to the docs.",
+      "revId": "31c2ea807db2942ea4d12f30d42ba57c3aa46493",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    }
+  ]
+}
