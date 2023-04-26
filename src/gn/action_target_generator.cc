@@ -58,6 +58,9 @@ void ActionTargetGenerator::DoRun() {
   if (!FillDepfile())
     return;
 
+  if (!FillDescription())
+    return;
+
   if (!FillPool())
     return;
 
@@ -165,6 +168,18 @@ bool ActionTargetGenerator::FillDepfile() {
     return false;
 
   target_->action_values().set_depfile(depfile);
+  return true;
+}
+
+bool ActionTargetGenerator::FillDescription() {
+  const Value* value = scope_->GetValue(variables::kDescription, true);
+  if (!value)
+    return true;
+
+  if (!value->VerifyTypeIs(Value::STRING, err_))
+    return false;
+
+  target_->action_values().set_description(std::move(value->string_value()));
   return true;
 }
 

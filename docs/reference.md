@@ -1415,7 +1415,7 @@
   General: check_includes, configs, data, friend, inputs, metadata,
            output_extension, output_name, public, sources, testonly,
            visibility
-  Action variables: args, bridge_header, configs, data, depfile,
+  Action variables: args, bridge_header, configs, data, depfile, description,
                     framework_dirs, inputs, module_deps, module_name,
                     outputs*, pool, response_file_contents, script*,
                     sources
@@ -1516,7 +1516,7 @@
   General: check_includes, configs, data, friend, inputs, metadata,
            output_extension, output_name, public, sources, testonly,
            visibility
-  Action variables: args, bridge_header, configs, data, depfile,
+  Action variables: args, bridge_header, configs, data, depfile, description,
                     framework_dirs, inputs, module_deps, module_name,
                     outputs*, pool, response_file_contents, script*,
                     sources
@@ -1531,6 +1531,7 @@
   action_foreach("my_idl") {
     script = "idl_processor.py"
     sources = [ "foo.idl", "bar.idl" ]
+    description = "IDL"
 
     # Our script reads this file each time, so we need to list it as a
     # dependency so we can rebuild if it changes.
