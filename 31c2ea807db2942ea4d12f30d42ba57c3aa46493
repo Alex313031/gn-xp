@@ -1,6 +1,23 @@
 {
   "comments": [
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "c7f4c3ad_7340707f",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000067
+      },
+      "writtenOn": "2023-04-27T04:41:39Z",
+      "side": 1,
+      "message": "Note: this needs matching unit tests as well.",
+      "revId": "31c2ea807db2942ea4d12f30d42ba57c3aa46493",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "649902f1_92928156",
@@ -14,6 +31,40 @@
       "writtenOn": "2023-04-26T23:32:54Z",
       "side": 1,
       "message": "TODO: nmulcahey@ mentioned that some code in infra that parses ninja output with regex relies on this field having no spaces. We should probably check for that here and add the restriction to the docs.",
+      "revId": "31c2ea807db2942ea4d12f30d42ba57c3aa46493",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6660a96b_91d6e48b",
+        "filename": "src/gn/action_values.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 65,
+      "author": {
+        "id": 1000067
+      },
+      "writtenOn": "2023-04-27T04:41:39Z",
+      "side": 1,
+      "message": "nit: Make it a simple std::string, with an empty value (the default) meaning that it is not set.",
+      "revId": "31c2ea807db2942ea4d12f30d42ba57c3aa46493",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ee1d5665_5c0afb4d",
+        "filename": "src/gn/variables.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 585,
+      "author": {
+        "id": 1000067
+      },
+      "writtenOn": "2023-04-27T04:41:39Z",
+      "side": 1,
+      "message": "nit: Call this \"mnemonic\" like Bazel instead of \"description\" to emphasize the fact that is should be a small word, and add a check in the code that will error if it contains a whitespace / is not an identifier (do we want to allow dots and other characters in there?).",
       "revId": "31c2ea807db2942ea4d12f30d42ba57c3aa46493",
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
     }
