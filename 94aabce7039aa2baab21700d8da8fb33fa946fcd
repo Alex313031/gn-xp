@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "817d4fd4_f7933ebd",
+        "filename": "src/gn/action_target_generator.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1000067
+      },
+      "writtenOn": "2023-05-01T18:12:45Z",
+      "side": 1,
+      "message": "nit: it\u0027s probably a bad idea to rely on cctype since its functions are local-dependent, which will result in surprising differences in behavior based on the machine\u0027s locale setting.\n\nConsider using IsAsciiWhitespace() or IsUnicodeWhitespace() which are defined in \"base/strings/string_util.h\" instead.",
+      "revId": "94aabce7039aa2baab21700d8da8fb33fa946fcd",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "421717cc_b88b7b7e",
+        "filename": "src/gn/action_target_generator.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 185,
+      "author": {
+        "id": 1000067
+      },
+      "writtenOn": "2023-05-01T18:12:45Z",
+      "side": 1,
+      "message": "nit: It might be simpler to enforce that the mnemonic is ASCII only (using IsStringASCII()) and has no space (using IsAsciiWhitespace()). Otherwise, please deal with UTF-8 inputs correctly (e.g. use IsStringUTF8() then UTF8ToUTF16() to call IsUnicodeWhitespace() in the result), though this may be too much complexity for such a feature.",
+      "revId": "94aabce7039aa2baab21700d8da8fb33fa946fcd",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2f470807_bea36d92",
+        "filename": "src/gn/variables.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 585,
+      "author": {
+        "id": 1000067
+      },
+      "writtenOn": "2023-05-01T18:12:45Z",
+      "side": 1,
+      "message": "nit: please document that whitespace is not allowed in mnemonic values :)",
+      "revId": "94aabce7039aa2baab21700d8da8fb33fa946fcd",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    }
+  ]
+}
