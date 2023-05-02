@@ -16,6 +16,92 @@
       "message": "thank you!",
       "revId": "5497229624538f1b72b17ef5b9e9a656f183bfae",
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1860570d_4f900be9",
+        "filename": "docs/reference.md",
+        "patchSetId": 7
+      },
+      "lineNbr": 1534,
+      "author": {
+        "id": 1000030
+      },
+      "writtenOn": "2023-05-02T04:52:38Z",
+      "side": 1,
+      "message": "Could you add comment for this?\nAlso this file is not generated properly from `gn help --markdown all` in this patchset?",
+      "revId": "5497229624538f1b72b17ef5b9e9a656f183bfae",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "77215692_31d15b34",
+        "filename": "src/gn/variables.cc",
+        "patchSetId": 7
+      },
+      "lineNbr": 579,
+      "author": {
+        "id": 1000030
+      },
+      "writtenOn": "2023-05-02T04:52:38Z",
+      "side": 1,
+      "message": "append period?",
+      "range": {
+        "startLine": 579,
+        "startChar": 55,
+        "endLine": 579,
+        "endChar": 61
+      },
+      "revId": "5497229624538f1b72b17ef5b9e9a656f183bfae",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a6f6ca2e_14bccdf2",
+        "filename": "src/gn/variables.cc",
+        "patchSetId": 7
+      },
+      "lineNbr": 582,
+      "author": {
+        "id": 1000030
+      },
+      "writtenOn": "2023-05-02T04:52:38Z",
+      "side": 1,
+      "message": "CXX might be more common for GN users?",
+      "range": {
+        "startLine": 582,
+        "startChar": 61,
+        "endLine": 582,
+        "endChar": 65
+      },
+      "revId": "5497229624538f1b72b17ef5b9e9a656f183bfae",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b8dc87dd_d8984db4",
+        "filename": "src/gn/variables.cc",
+        "patchSetId": 7
+      },
+      "lineNbr": 583,
+      "author": {
+        "id": 1000030
+      },
+      "writtenOn": "2023-05-02T04:52:38Z",
+      "side": 1,
+      "message": "add \u0027,\u0027?",
+      "range": {
+        "startLine": 583,
+        "startChar": 29,
+        "endLine": 583,
+        "endChar": 30
+      },
+      "revId": "5497229624538f1b72b17ef5b9e9a656f183bfae",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
     }
   ]
 }
