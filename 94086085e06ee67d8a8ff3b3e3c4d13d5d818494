@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "46f7754d_04009af1",
+        "filename": "docs/reference.md",
+        "patchSetId": 9
+      },
+      "lineNbr": 1537,
+      "author": {
+        "id": 1000030
+      },
+      "writtenOn": "2023-05-08T03:14:13Z",
+      "side": 1,
+      "message": "append period?",
+      "range": {
+        "startLine": 1537,
+        "startChar": 42,
+        "endLine": 1537,
+        "endChar": 48
+      },
+      "revId": "94086085e06ee67d8a8ff3b3e3c4d13d5d818494",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    }
+  ]
+}
