@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "85f86e90_f2153b84",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000067
+      },
+      "writtenOn": "2023-05-09T18:09:23Z",
+      "side": 1,
+      "message": "I am reviving my stack of patches to move target resolution to multiple background worker threads, since our GN build is yet again getting very slow (we are also looking at ways to reduce our build graph).\n\nAs previously, the core idea is twofold:\n\n1) Move target resolution to happen after the build graph is completed, only when it is necessary (and thus remove significant un-necessary work, see https://gn-review.git.corp.google.com/c/gn/+/12703 for a related CL).\n\n2) Allow target resolution to happen concurrently from multiple threads, by treating the build graph as immutable, and storing the resolution results separately (i.e. in the ResolvedTargetData class).",
+      "revId": "170f67724d7592703a8533930651450cce5a2a46",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    }
+  ]
+}
