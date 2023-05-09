@@ -108,6 +108,29 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "ef1600e2_f45fc00d",
+        "filename": "src/gn/target.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 786,
+      "author": {
+        "id": 1000397
+      },
+      "writtenOn": "2023-05-09T20:50:10Z",
+      "side": 1,
+      "message": "would it make more sense to implement this in `Target` (like it was before), but using `binary_data().configs_` and `binary_data().all_dependent_configs_` ?\n\nThat way you don\u0027t pass the target to the binary data that it owns, and the ownership / flow is a bit more clear?",
+      "range": {
+        "startLine": 774,
+        "startChar": 0,
+        "endLine": 786,
+        "endChar": 1
+      },
+      "revId": "3745977f932901cfd85b31e5e2f0413a89e2a20c",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "7c863347_0197e63d",
         "filename": "src/gn/target.h",
         "patchSetId": 2
