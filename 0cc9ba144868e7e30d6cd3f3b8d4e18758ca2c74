@@ -16,6 +16,29 @@
       "message": "Nice!",
       "revId": "0cc9ba144868e7e30d6cd3f3b8d4e18758ca2c74",
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "17b6fc18_f678a97c",
+        "filename": "src/gn/ninja_target_writer.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 49,
+      "author": {
+        "id": 1000397
+      },
+      "writtenOn": "2023-05-09T22:42:08Z",
+      "side": 1,
+      "message": "This currently makes a slice in the trace for generated files that\u0027s a duplicate of the one in `ninja_generated_file_target_writer.cc`.  It\u0027s not a problem, just wasn\u0027t quite my intention.",
+      "range": {
+        "startLine": 49,
+        "startChar": 2,
+        "endLine": 49,
+        "endChar": 54
+      },
+      "revId": "0cc9ba144868e7e30d6cd3f3b8d4e18758ca2c74",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
     }
   ]
 }
