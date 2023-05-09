@@ -108,6 +108,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "54658a44_83508295",
+        "filename": "src/gn/target.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 539,
+      "author": {
+        "id": 1000067
+      },
+      "writtenOn": "2023-05-09T20:54:38Z",
+      "side": 1,
+      "message": "abandoning this CL so marking this as resolved. Thanks.",
+      "parentUuid": "df151606_38aa06dc",
+      "revId": "3745977f932901cfd85b31e5e2f0413a89e2a20c",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "ef1600e2_f45fc00d",
         "filename": "src/gn/target.cc",
         "patchSetId": 2
@@ -119,6 +137,30 @@
       "writtenOn": "2023-05-09T20:50:10Z",
       "side": 1,
       "message": "would it make more sense to implement this in `Target` (like it was before), but using `binary_data().configs_` and `binary_data().all_dependent_configs_` ?\n\nThat way you don\u0027t pass the target to the binary data that it owns, and the ownership / flow is a bit more clear?",
+      "range": {
+        "startLine": 774,
+        "startChar": 0,
+        "endLine": 786,
+        "endChar": 1
+      },
+      "revId": "3745977f932901cfd85b31e5e2f0413a89e2a20c",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "32bfb006_ba4071b2",
+        "filename": "src/gn/target.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 786,
+      "author": {
+        "id": 1000067
+      },
+      "writtenOn": "2023-05-09T20:54:38Z",
+      "side": 1,
+      "message": "abandoning this CL so marking this as resolved. Thanks.",
+      "parentUuid": "ef1600e2_f45fc00d",
       "range": {
         "startLine": 774,
         "startChar": 0,
@@ -166,6 +208,30 @@
       "side": 1,
       "message": "This should also mention the fact that this can be created for non-binary targets to avoid my confusion from the previous round.",
       "parentUuid": "7c863347_0197e63d",
+      "range": {
+        "startLine": 575,
+        "startChar": 2,
+        "endLine": 575,
+        "endChar": 43
+      },
+      "revId": "3745977f932901cfd85b31e5e2f0413a89e2a20c",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "fcca65e7_4f733d15",
+        "filename": "src/gn/target.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 575,
+      "author": {
+        "id": 1000067
+      },
+      "writtenOn": "2023-05-09T20:54:38Z",
+      "side": 1,
+      "message": "abandoning this CL so marking this as resolved. Thanks.",
+      "parentUuid": "6cd72cc8_4479eaf2",
       "range": {
         "startLine": 575,
         "startChar": 2,
