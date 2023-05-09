@@ -2462,7 +2462,11 @@
 
   You can also check a named scope using a subscript string expression:
     defined(foo[bar + "_name"])
+<<<<<<< PATCH SET (f06d1b replace 'Which' with 'which')
+  which will return true or false depending on whether the subscript
+=======
   Which will return true or false depending on whether the subscript
+>>>>>>> BASE      (ad1e5c Add optional 'mnemonic' var to actions)
   expression expands to the name of a member of the scope foo. It will
   throw an error if foo is not defined or is not a scope, or if the
   expression does not expand to a string, or if it is an empty string.
