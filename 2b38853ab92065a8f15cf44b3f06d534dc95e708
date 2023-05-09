@@ -47,6 +47,30 @@
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "ceff15c0_27bce83f",
+        "filename": "src/gn/nested_set.h",
+        "patchSetId": 9
+      },
+      "lineNbr": 49,
+      "author": {
+        "id": 1000067
+      },
+      "writtenOn": "2023-05-09T18:27:16Z",
+      "side": 1,
+      "message": "Yes, the plan is to use Include and Link order to handle ConfigValues in a future CL, but I never had the time to implement this. I am abandoning this CL for now, may reimplement it later slightly differently in the future if I have the time.",
+      "parentUuid": "c0cc3212_37a6eb7b",
+      "range": {
+        "startLine": 48,
+        "startChar": 0,
+        "endLine": 49,
+        "endChar": 7
+      },
+      "revId": "2b38853ab92065a8f15cf44b3f06d534dc95e708",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "dc2fdebf_df71e0b9",
@@ -60,6 +84,30 @@
       "writtenOn": "2022-04-26T07:55:52Z",
       "side": 1,
       "message": "DCHECK_EQ?",
+      "range": {
+        "startLine": 97,
+        "startChar": 6,
+        "endLine": 97,
+        "endChar": 12
+      },
+      "revId": "2b38853ab92065a8f15cf44b3f06d534dc95e708",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "275b8ecf_c5539157",
+        "filename": "src/gn/nested_set.h",
+        "patchSetId": 9
+      },
+      "lineNbr": 97,
+      "author": {
+        "id": 1000067
+      },
+      "writtenOn": "2023-05-09T18:27:16Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "dc2fdebf_df71e0b9",
       "range": {
         "startLine": 97,
         "startChar": 6,
@@ -93,6 +141,30 @@
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "15338a99_54acd7ca",
+        "filename": "src/gn/nested_set.h",
+        "patchSetId": 9
+      },
+      "lineNbr": 98,
+      "author": {
+        "id": 1000067
+      },
+      "writtenOn": "2023-05-09T18:27:16Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "29270e93_a9333866",
+      "range": {
+        "startLine": 98,
+        "startChar": 6,
+        "endLine": 98,
+        "endChar": 12
+      },
+      "revId": "2b38853ab92065a8f15cf44b3f06d534dc95e708",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "6317aa51_f37711a6",
@@ -110,6 +182,24 @@
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "04908c32_09d607d0",
+        "filename": "src/gn/nested_set.h",
+        "patchSetId": 9
+      },
+      "lineNbr": 422,
+      "author": {
+        "id": 1000067
+      },
+      "writtenOn": "2023-05-09T18:27:16Z",
+      "side": 1,
+      "message": "A UniqueVector\u003c\u003e is significantly faster than an std::set or std::unordered_set in practice (based on multiple benchmarks I have performed during optimization work). It also uses far less memory.\n\nAnother benefit is that UniqueVector\u003c\u003e::push_back() returns a boolean that indicates whether a new item was added to the set, which simplifies the code a litte compared to using `std::set\u003c\u003e::insert().second`",
+      "parentUuid": "6317aa51_f37711a6",
+      "revId": "2b38853ab92065a8f15cf44b3f06d534dc95e708",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "4e6ef301_28b5800d",
@@ -123,6 +213,24 @@
       "writtenOn": "2022-04-26T07:55:52Z",
       "side": 1,
       "message": "Why not \u0027C E D A B\u0027?\n\nI thought {C, E} is the last element pushed to stack and iteration of items started from that nested set?",
+      "revId": "2b38853ab92065a8f15cf44b3f06d534dc95e708",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "6c2544d4_a19459a6",
+        "filename": "src/gn/nested_set.h",
+        "patchSetId": 9
+      },
+      "lineNbr": 429,
+      "author": {
+        "id": 1000067
+      },
+      "writtenOn": "2023-05-09T18:27:16Z",
+      "side": 1,
+      "message": "I believe it is just a typo on my part, and that should be `{A, B, {C, {D}}, {C, {E}}}` instead, but it has been a long time :)",
+      "parentUuid": "4e6ef301_28b5800d",
       "revId": "2b38853ab92065a8f15cf44b3f06d534dc95e708",
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
     },
