@@ -1,0 +1,90 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "aa052fa4_eed59b4a",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 17,
+      "author": {
+        "id": 1000030
+      },
+      "writtenOn": "2023-05-10T05:35:13Z",
+      "side": 1,
+      "message": "Could you have a tracking bug for this series of change and write summary there?\nAlso is this different from\nhttps://groups.google.com/a/chromium.org/g/gn-dev/c/GIDBLOOd9as\n?",
+      "revId": "6662a4c63fb63b52b0ee8f85ccd9afa0a7f55256",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9050174c_15c549fb",
+        "filename": "src/gn/resolved_target_data.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 11,
+      "author": {
+        "id": 1000030
+      },
+      "writtenOn": "2023-05-10T05:35:13Z",
+      "side": 1,
+      "message": "Can we use emplace_back here?",
+      "range": {
+        "startLine": 11,
+        "startChar": 11,
+        "endLine": 11,
+        "endChar": 20
+      },
+      "revId": "6662a4c63fb63b52b0ee8f85ccd9afa0a7f55256",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0dcb30db_382a683e",
+        "filename": "src/gn/resolved_target_data.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 1000030
+      },
+      "writtenOn": "2023-05-10T05:35:13Z",
+      "side": 1,
+      "message": "2023?",
+      "range": {
+        "startLine": 1,
+        "startChar": 13,
+        "endLine": 1,
+        "endChar": 17
+      },
+      "revId": "6662a4c63fb63b52b0ee8f85ccd9afa0a7f55256",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ddb1576d_0242569c",
+        "filename": "src/gn/resolved_target_data_unittest.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 1000030
+      },
+      "writtenOn": "2023-05-10T05:35:13Z",
+      "side": 1,
+      "message": "It is 2023 now.",
+      "range": {
+        "startLine": 1,
+        "startChar": 13,
+        "endLine": 1,
+        "endChar": 17
+      },
+      "revId": "6662a4c63fb63b52b0ee8f85ccd9afa0a7f55256",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    }
+  ]
+}
