@@ -22,6 +22,30 @@
       },
       "revId": "9ecfaf3527418152c9b80278f1ee5d4b1ac17cca",
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4b59e696_27061021",
+        "filename": "src/gn/ninja_generated_file_target_writer.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 55,
+      "author": {
+        "id": 1000397
+      },
+      "writtenOn": "2023-05-10T17:23:28Z",
+      "side": 1,
+      "message": "I just moved this from line 75, but I can change it to improve code quality in general.",
+      "parentUuid": "c3d580cd_eaf7282f",
+      "range": {
+        "startLine": 55,
+        "startChar": 2,
+        "endLine": 55,
+        "endChar": 7
+      },
+      "revId": "9ecfaf3527418152c9b80278f1ee5d4b1ac17cca",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
     }
   ]
 }
