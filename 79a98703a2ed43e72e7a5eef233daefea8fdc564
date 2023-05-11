@@ -18,6 +18,24 @@
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "2372bbdd_f1540755",
+        "filename": "src/gn/ninja_target_writer.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 32,
+      "author": {
+        "id": 1000067
+      },
+      "writtenOn": "2023-05-11T10:28:08Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "7289a02b_94e747ab",
+      "revId": "79a98703a2ed43e72e7a5eef233daefea8fdc564",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "c4851217_09336cba",
@@ -31,6 +49,30 @@
       "writtenOn": "2023-05-10T05:41:53Z",
       "side": 1,
       "message": "Returns?",
+      "range": {
+        "startLine": 50,
+        "startChar": 5,
+        "endLine": 50,
+        "endChar": 11
+      },
+      "revId": "79a98703a2ed43e72e7a5eef233daefea8fdc564",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "8f5277e7_e8625d50",
+        "filename": "src/gn/ninja_target_writer.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 50,
+      "author": {
+        "id": 1000067
+      },
+      "writtenOn": "2023-05-11T10:28:08Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "c4851217_09336cba",
       "range": {
         "startLine": 50,
         "startChar": 5,
