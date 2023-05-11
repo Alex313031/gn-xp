@@ -18,6 +18,24 @@
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "085a8082_5b41c365",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 17,
+      "author": {
+        "id": 1000067
+      },
+      "writtenOn": "2023-05-11T10:27:59Z",
+      "side": 1,
+      "message": "Done, see https://bugs.chromium.org/p/gn/issues/detail?id\u003d331\n\nThis is the same type of changes. More precisely the current stack is a refactoring of a previous one, where the ResolvedTargetData class is being augmented incrementally here, by adding new GetXXX() methods in successive CLs, that each move a specific type of computation from the Target class to ResolvedTargetData.\n\nI believe this makes it much easier to review than the previous corresponding change at https://gn-review.googlesource.com/c/gn/+/14883",
+      "parentUuid": "aa052fa4_eed59b4a",
+      "revId": "6662a4c63fb63b52b0ee8f85ccd9afa0a7f55256",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "9050174c_15c549fb",
@@ -31,6 +49,30 @@
       "writtenOn": "2023-05-10T05:35:13Z",
       "side": 1,
       "message": "Can we use emplace_back here?",
+      "range": {
+        "startLine": 11,
+        "startChar": 11,
+        "endLine": 11,
+        "endChar": 20
+      },
+      "revId": "6662a4c63fb63b52b0ee8f85ccd9afa0a7f55256",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "09bba1e3_8e589dc0",
+        "filename": "src/gn/resolved_target_data.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 11,
+      "author": {
+        "id": 1000067
+      },
+      "writtenOn": "2023-05-11T10:27:59Z",
+      "side": 1,
+      "message": "Are you talking about using:\n\n```\ninfos_.emplace_back(new TargetInfo(target));\n```\n\nI believe this would generate the same machine code after optimization, but that it is a little confusing regarding ownership of the new object.\n\nApart from that `std::vector\u003cT\u003e::push_back(T\u0026\u0026)` and `std::vector\u003cT\u003e::emplace_back(T\u0026\u0026)` are strictly equivalent. See https://stackoverflow.com/questions/29089227/push-back-or-emplace-back-with-stdmake-unique for example.\n\nemplace_back() has the benefit of returning a reference to the new items, so we could change the code as:\n\n```\nauto ret \u003d targets_.PushBackWithIndex(target)\nif (ret.first) {\n  return infos_.emplace_back(std::make_unique\u003cTargetInfo\u003e(target)).get();\n} else {\n  return infos_[ret.second].get();\n}\n```\n\nIs this what you were suggesting?",
+      "parentUuid": "9050174c_15c549fb",
       "range": {
         "startLine": 11,
         "startChar": 11,
@@ -64,6 +106,30 @@
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "5458fdab_006bf67c",
+        "filename": "src/gn/resolved_target_data.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 1000067
+      },
+      "writtenOn": "2023-05-11T10:27:59Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "0dcb30db_382a683e",
+      "range": {
+        "startLine": 1,
+        "startChar": 13,
+        "endLine": 1,
+        "endChar": 17
+      },
+      "revId": "6662a4c63fb63b52b0ee8f85ccd9afa0a7f55256",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "ddb1576d_0242569c",
@@ -77,6 +143,30 @@
       "writtenOn": "2023-05-10T05:35:13Z",
       "side": 1,
       "message": "It is 2023 now.",
+      "range": {
+        "startLine": 1,
+        "startChar": 13,
+        "endLine": 1,
+        "endChar": 17
+      },
+      "revId": "6662a4c63fb63b52b0ee8f85ccd9afa0a7f55256",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ebd63843_af68b6b1",
+        "filename": "src/gn/resolved_target_data_unittest.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 1000067
+      },
+      "writtenOn": "2023-05-11T10:27:59Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ddb1576d_0242569c",
       "range": {
         "startLine": 1,
         "startChar": 13,
