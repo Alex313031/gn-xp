@@ -69,6 +69,24 @@
       "parentUuid": "d922498e_1f1ab67a",
       "revId": "8e59d2376e79e4b6ee49f08dacf9edd2a1597f10",
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d1386366_c3b9a24c",
+        "filename": "src/gn/resolved_target_data.cc",
+        "patchSetId": 6
+      },
+      "lineNbr": 46,
+      "author": {
+        "id": 1000067
+      },
+      "writtenOn": "2023-05-11T10:14:27Z",
+      "side": 1,
+      "message": "This has now been implemented as a new stack of CLs at https://gn-review.git.corp.google.com/c/gn/+/15320\n\nAs a consequence, I am going to abandon this change soon. Thanks for your patience, sorry if it took a long time.",
+      "parentUuid": "98e806aa_93e8c2b9",
+      "revId": "8e59d2376e79e4b6ee49f08dacf9edd2a1597f10",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
     }
   ]
 }
