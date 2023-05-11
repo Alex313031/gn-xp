@@ -3,6 +3,23 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "a141155d_26246f3e",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 1000030
+      },
+      "writtenOn": "2023-05-11T03:59:21Z",
+      "side": 1,
+      "message": "Could you share link to trace in https://perfetto.dev/ with and without this CL so that we can see difference easily?",
+      "revId": "9ecfaf3527418152c9b80278f1ee5d4b1ac17cca",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "c3d580cd_eaf7282f",
         "filename": "src/gn/ninja_generated_file_target_writer.cc",
         "patchSetId": 2
@@ -38,6 +55,30 @@
       "side": 1,
       "message": "I just moved this from line 75, but I can change it to improve code quality in general.",
       "parentUuid": "c3d580cd_eaf7282f",
+      "range": {
+        "startLine": 55,
+        "startChar": 2,
+        "endLine": 55,
+        "endChar": 7
+      },
+      "revId": "9ecfaf3527418152c9b80278f1ee5d4b1ac17cca",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "91ce6188_a6ee6e0e",
+        "filename": "src/gn/ninja_generated_file_target_writer.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 55,
+      "author": {
+        "id": 1000030
+      },
+      "writtenOn": "2023-05-11T03:59:21Z",
+      "side": 1,
+      "message": "Ah, I see.",
+      "parentUuid": "4b59e696_27061021",
       "range": {
         "startLine": 55,
         "startChar": 2,
