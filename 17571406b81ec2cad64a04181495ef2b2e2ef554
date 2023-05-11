@@ -212,6 +212,24 @@
       "parentUuid": "54c32aae_62b9daab",
       "revId": "17571406b81ec2cad64a04181495ef2b2e2ef554",
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6ddba7e0_99e2eb8b",
+        "filename": "src/util/exe_path.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 119,
+      "author": {
+        "id": 1002587
+      },
+      "writtenOn": "2023-05-11T09:31:54Z",
+      "side": 1,
+      "message": "Hey Takuto Ikuta,\n\nI had checked but we don\u0027t have any system call in AIX to get executable path like other OSs. So, as a temporary solution I\u0027ve added this code snippet.Can you please review it and update me if any changes require.\n\nThank you.",
+      "parentUuid": "2e905936_27642c00",
+      "revId": "17571406b81ec2cad64a04181495ef2b2e2ef554",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
     }
   ]
 }
