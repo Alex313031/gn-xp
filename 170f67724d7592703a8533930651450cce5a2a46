@@ -20,6 +20,24 @@
     {
       "unresolved": false,
       "key": {
+        "uuid": "0df8ca57_8a194f3a",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 18,
+      "author": {
+        "id": 1000067
+      },
+      "writtenOn": "2023-05-12T10:13:54Z",
+      "side": 1,
+      "message": "Indeed, thanks for spotting this.",
+      "parentUuid": "73d37617_808b6dab",
+      "revId": "170f67724d7592703a8533930651450cce5a2a46",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
+      "unresolved": false,
+      "key": {
         "uuid": "85f86e90_f2153b84",
         "filename": "/PATCHSET_LEVEL",
         "patchSetId": 2
