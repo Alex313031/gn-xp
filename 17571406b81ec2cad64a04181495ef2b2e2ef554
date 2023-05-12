@@ -230,6 +230,24 @@
       "parentUuid": "2e905936_27642c00",
       "revId": "17571406b81ec2cad64a04181495ef2b2e2ef554",
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "55a0817f_06e54e84",
+        "filename": "src/util/exe_path.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 119,
+      "author": {
+        "id": 1000030
+      },
+      "writtenOn": "2023-05-12T06:57:01Z",
+      "side": 1,
+      "message": "I see. Could you do like\nhttps://github.com/llvm/llvm-project/blob/0833a9a7962892584a3c2728a710300a3a2c7169/llvm/lib/Support/Unix/Path.inc#L238\nthen?",
+      "parentUuid": "6ddba7e0_99e2eb8b",
+      "revId": "17571406b81ec2cad64a04181495ef2b2e2ef554",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
     }
   ]
 }
