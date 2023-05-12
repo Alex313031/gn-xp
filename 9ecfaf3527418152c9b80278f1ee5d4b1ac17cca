@@ -38,6 +38,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "8e0ea806_3dee147f",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 1000030
+      },
+      "writtenOn": "2023-05-12T03:06:08Z",
+      "side": 1,
+      "message": "Oh, I see.\nIs it possible to upload trace from example project in gn then?",
+      "parentUuid": "04f7e5c6_939b7b67",
+      "revId": "9ecfaf3527418152c9b80278f1ee5d4b1ac17cca",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "c3d580cd_eaf7282f",
         "filename": "src/gn/ninja_generated_file_target_writer.cc",
         "patchSetId": 2
