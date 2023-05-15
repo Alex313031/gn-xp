@@ -24,6 +24,30 @@
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "8947e1af_bfc40656",
+        "filename": "src/gn/resolved_target_data.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 177,
+      "author": {
+        "id": 1000067
+      },
+      "writtenOn": "2023-05-15T09:11:10Z",
+      "side": 1,
+      "message": "Thanks. Removed.",
+      "parentUuid": "1c86feff_e2699c03",
+      "range": {
+        "startLine": 174,
+        "startChar": 0,
+        "endLine": 177,
+        "endChar": 2
+      },
+      "revId": "80a8cf6a59007942fdbd062898220dedbba075b0",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "a22be15e_878fb91b",
@@ -47,6 +71,30 @@
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "b91db0a9_72ce7c41",
+        "filename": "src/gn/resolved_target_data.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 113,
+      "author": {
+        "id": 1000067
+      },
+      "writtenOn": "2023-05-15T09:11:10Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "a22be15e_878fb91b",
+      "range": {
+        "startLine": 113,
+        "startChar": 5,
+        "endLine": 113,
+        "endChar": 13
+      },
+      "revId": "80a8cf6a59007942fdbd062898220dedbba075b0",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "fc4b8845_8e81a538",
@@ -60,6 +108,30 @@
       "writtenOn": "2023-05-15T08:59:43Z",
       "side": 1,
       "message": "is true?",
+      "range": {
+        "startLine": 155,
+        "startChar": 35,
+        "endLine": 155,
+        "endChar": 37
+      },
+      "revId": "80a8cf6a59007942fdbd062898220dedbba075b0",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a4fd59d0_a44f15c7",
+        "filename": "src/gn/resolved_target_data.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 155,
+      "author": {
+        "id": 1000067
+      },
+      "writtenOn": "2023-05-15T09:11:10Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "fc4b8845_8e81a538",
       "range": {
         "startLine": 155,
         "startChar": 35,
