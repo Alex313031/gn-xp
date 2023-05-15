@@ -22,6 +22,30 @@
       },
       "revId": "20391a8b97d213c6b020680be8a6556431f2a83e",
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c2d03611_5a2f72d1",
+        "filename": "src/gn/command_gen.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 81,
+      "author": {
+        "id": 1000067
+      },
+      "writtenOn": "2023-05-15T09:27:42Z",
+      "side": 1,
+      "message": "Added a comment at call site. GN already leaks the build graph to avoid the expensive time to deallocate its large data structure, this does the same for the resolved data.\n\nAlso note that the same data was leaked before when it was computed in Target::OnResolved().",
+      "parentUuid": "6270c4d0_64e0f463",
+      "range": {
+        "startLine": 81,
+        "startChar": 7,
+        "endLine": 81,
+        "endChar": 20
+      },
+      "revId": "20391a8b97d213c6b020680be8a6556431f2a83e",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
     }
   ]
 }
