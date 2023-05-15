@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "66642b7a_ec169dc3",
+        "filename": "src/gn/resolved_target_data.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 79,
+      "author": {
+        "id": 1000030
+      },
+      "writtenOn": "2023-05-15T08:50:36Z",
+      "side": 1,
+      "message": "nit: macOS?\nHere and belows.",
+      "range": {
+        "startLine": 79,
+        "startChar": 21,
+        "endLine": 79,
+        "endChar": 26
+      },
+      "revId": "b50a22d373bc57707d9c44271ad1e7114840a38b",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "be781d9a_42c7e5be",
+        "filename": "src/gn/resolved_target_data.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 120,
+      "author": {
+        "id": 1000030
+      },
+      "writtenOn": "2023-05-15T08:50:36Z",
+      "side": 1,
+      "message": "is true?",
+      "range": {
+        "startLine": 120,
+        "startChar": 40,
+        "endLine": 120,
+        "endChar": 42
+      },
+      "revId": "b50a22d373bc57707d9c44271ad1e7114840a38b",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    }
+  ]
+}
