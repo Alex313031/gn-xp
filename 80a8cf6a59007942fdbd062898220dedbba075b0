@@ -1,0 +1,73 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1c86feff_e2699c03",
+        "filename": "src/gn/resolved_target_data.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 177,
+      "author": {
+        "id": 1000030
+      },
+      "writtenOn": "2023-05-15T08:59:43Z",
+      "side": 1,
+      "message": "This is defined in header too?",
+      "range": {
+        "startLine": 174,
+        "startChar": 0,
+        "endLine": 177,
+        "endChar": 2
+      },
+      "revId": "80a8cf6a59007942fdbd062898220dedbba075b0",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a22be15e_878fb91b",
+        "filename": "src/gn/resolved_target_data.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 113,
+      "author": {
+        "id": 1000030
+      },
+      "writtenOn": "2023-05-15T08:59:43Z",
+      "side": 1,
+      "message": "Retrieves?",
+      "range": {
+        "startLine": 113,
+        "startChar": 5,
+        "endLine": 113,
+        "endChar": 13
+      },
+      "revId": "80a8cf6a59007942fdbd062898220dedbba075b0",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "fc4b8845_8e81a538",
+        "filename": "src/gn/resolved_target_data.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 155,
+      "author": {
+        "id": 1000030
+      },
+      "writtenOn": "2023-05-15T08:59:43Z",
+      "side": 1,
+      "message": "is true?",
+      "range": {
+        "startLine": 155,
+        "startChar": 35,
+        "endLine": 155,
+        "endChar": 37
+      },
+      "revId": "80a8cf6a59007942fdbd062898220dedbba075b0",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    }
+  ]
+}
