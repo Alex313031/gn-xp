@@ -24,6 +24,30 @@
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "3e698332_a6045291",
+        "filename": "src/gn/resolved_target_data.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 6,
+      "author": {
+        "id": 1000067
+      },
+      "writtenOn": "2023-05-15T09:10:42Z",
+      "side": 1,
+      "message": "This is actually sorted, the header for the corresponding .cc file should always appear first. And this is enforced by clang-format.",
+      "parentUuid": "6f5a88e5_a3616e41",
+      "range": {
+        "startLine": 5,
+        "startChar": 0,
+        "endLine": 6,
+        "endChar": 40
+      },
+      "revId": "d1fbc940c6bf1a7fd763ae7fc63113f209dd330b",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "56f5145a_c079f502",
@@ -47,6 +71,30 @@
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "6211435e_6eb4e3b9",
+        "filename": "src/gn/resolved_target_data.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 72,
+      "author": {
+        "id": 1000067
+      },
+      "writtenOn": "2023-05-15T09:10:42Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "56f5145a_c079f502",
+      "range": {
+        "startLine": 72,
+        "startChar": 36,
+        "endLine": 72,
+        "endChar": 44
+      },
+      "revId": "d1fbc940c6bf1a7fd763ae7fc63113f209dd330b",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "169fc565_d865214e",
@@ -60,6 +108,30 @@
       "writtenOn": "2023-05-15T08:45:59Z",
       "side": 1,
       "message": "is true?",
+      "range": {
+        "startLine": 94,
+        "startChar": 34,
+        "endLine": 94,
+        "endChar": 36
+      },
+      "revId": "d1fbc940c6bf1a7fd763ae7fc63113f209dd330b",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "30fa812b_014a71f3",
+        "filename": "src/gn/resolved_target_data.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 94,
+      "author": {
+        "id": 1000067
+      },
+      "writtenOn": "2023-05-15T09:10:42Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "169fc565_d865214e",
       "range": {
         "startLine": 94,
         "startChar": 34,
