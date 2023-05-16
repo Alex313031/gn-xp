@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "88e7b085_d185d9e3",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000067
+      },
+      "writtenOn": "2023-05-16T15:55:42Z",
+      "side": 1,
+      "message": "NOTE: I just updated these patches but they are still not ready for review. Will ping you later when this is the case.",
+      "revId": "26ffc05c776665f2b9e5d84c84f8d270554adf81",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    }
+  ]
+}
