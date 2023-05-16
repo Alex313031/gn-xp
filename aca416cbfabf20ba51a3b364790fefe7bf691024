@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "33d498c1_2b49ec44",
+        "filename": "src/gn/resolved_target_data.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 179,
+      "author": {
+        "id": 1000030
+      },
+      "writtenOn": "2023-05-16T05:56:13Z",
+      "side": 1,
+      "message": "This can be removed?",
+      "range": {
+        "startLine": 179,
+        "startChar": 44,
+        "endLine": 179,
+        "endChar": 46
+      },
+      "revId": "aca416cbfabf20ba51a3b364790fefe7bf691024",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "21bd48b0_282011d9",
+        "filename": "src/gn/resolved_target_data.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 180,
+      "author": {
+        "id": 1000030
+      },
+      "writtenOn": "2023-05-16T05:56:13Z",
+      "side": 1,
+      "message": "ditto",
+      "range": {
+        "startLine": 180,
+        "startChar": 44,
+        "endLine": 180,
+        "endChar": 46
+      },
+      "revId": "aca416cbfabf20ba51a3b364790fefe7bf691024",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    }
+  ]
+}
