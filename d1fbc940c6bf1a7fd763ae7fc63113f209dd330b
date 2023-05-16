@@ -72,6 +72,30 @@
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "5a55c72c_d5687b00",
+        "filename": "src/gn/resolved_target_data.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 6,
+      "author": {
+        "id": 1000067
+      },
+      "writtenOn": "2023-05-16T07:03:55Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "0313c944_4e75632c",
+      "range": {
+        "startLine": 5,
+        "startChar": 0,
+        "endLine": 6,
+        "endChar": 40
+      },
+      "revId": "d1fbc940c6bf1a7fd763ae7fc63113f209dd330b",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "56f5145a_c079f502",
