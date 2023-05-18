@@ -2,7 +2,10 @@
 # Use of this source code is governed by a BSD-style license that can be
 # found in the LICENSE file.
 
-toolchain("gcc") {
+template("gcc_toolchain") {
+not_needed(invoker, "*")
+
+toolchain(target_name) {
   tool("cc") {
     depfile = "{{output}}.d"
     command = "gcc -MMD -MF $depfile {{defines}} {{include_dirs}} {{cflags}} {{cflags_c}} -c {{source}} -o {{output}}"
@@ -43,7 +46,8 @@ toolchain("gcc") {
       rspfile_content = "-Wl,--whole-archive {{inputs}} {{solibs}} -Wl,--no-whole-archive {{libs}}"
     }
 
-    command = "g++ -shared {{ldflags}} -o $sofile $os_specific_option @$rspfile"
+    command =
+        "g++ -shared {{ldflags}} -o $sofile $os_specific_option @$rspfile"
 
     description = "SOLINK $soname"
 
@@ -85,4 +89,11 @@ toolchain("gcc") {
     command = "cp -af {{source}} {{output}}"
     description = "COPY {{source}} {{output}}"
   }
+}
+}
+
+gcc_toolchain("gcc") {
+}
+
+gcc_toolchain("gcc2") {
 }
