@@ -679,6 +679,125 @@
     ]
   },
   {
+    "cmd": [],
+    "name": "release.windows-arm64",
+    "~followup_annotations": [
+      "@@@STEP_NEST_LEVEL@1@@@"
+    ]
+  },
+  {
+    "cmd": [
+      "python3",
+      "-u",
+      "[START_DIR]\\gn\\build\\gen.py",
+      "--use-lto",
+      "--use-icf"
+    ],
+    "cwd": "[START_DIR]\\gn",
+    "env": {
+      "VSINSTALLDIR": "[CACHE]\\windows_sdk"
+    },
+    "env_prefixes": {
+      "PATH": [
+        "[CACHE]\\windows_sdk\\win_sdk\\bin\\x64"
+      ]
+    },
+    "luci_context": {
+      "realm": {
+        "name": "gn:try"
+      },
+      "resultdb": {
+        "current_invocation": {
+          "name": "invocations/build:8945511751514863184",
+          "update_token": "token"
+        },
+        "hostname": "rdbhost"
+      }
+    },
+    "name": "release.windows-arm64.generate",
+    "~followup_annotations": [
+      "@@@STEP_NEST_LEVEL@2@@@"
+    ]
+  },
+  {
+    "cmd": [
+      "[START_DIR]\\cipd\\ninja",
+      "-C",
+      "[START_DIR]\\gn\\out"
+    ],
+    "cwd": "[START_DIR]\\gn",
+    "env": {
+      "VSINSTALLDIR": "[CACHE]\\windows_sdk"
+    },
+    "env_prefixes": {
+      "PATH": [
+        "[CACHE]\\windows_sdk\\win_sdk\\bin\\x64"
+      ]
+    },
+    "luci_context": {
+      "realm": {
+        "name": "gn:try"
+      },
+      "resultdb": {
+        "current_invocation": {
+          "name": "invocations/build:8945511751514863184",
+          "update_token": "token"
+        },
+        "hostname": "rdbhost"
+      }
+    },
+    "name": "release.windows-arm64.build",
+    "~followup_annotations": [
+      "@@@STEP_NEST_LEVEL@2@@@"
+    ]
+  },
+  {
+    "cmd": [],
+    "name": "release.windows-arm64.upload",
+    "~followup_annotations": [
+      "@@@STEP_NEST_LEVEL@2@@@"
+    ]
+  },
+  {
+    "cmd": [
+      "[START_DIR]\\cipd_tool\\infra\\tools\\luci\\cas\\git_revision%3Amock_infra_git_revision\\cas",
+      "archive",
+      "-cas-instance",
+      "projects/example-cas-server/instances/default_instance",
+      "-dump-digest",
+      "/path/to/tmp/",
+      "-paths",
+      "[START_DIR]\\gn\\out:gn.exe"
+    ],
+    "cwd": "[START_DIR]\\gn",
+    "env": {
+      "VSINSTALLDIR": "[CACHE]\\windows_sdk"
+    },
+    "env_prefixes": {
+      "PATH": [
+        "[CACHE]\\windows_sdk\\win_sdk\\bin\\x64"
+      ]
+    },
+    "infra_step": true,
+    "luci_context": {
+      "realm": {
+        "name": "gn:try"
+      },
+      "resultdb": {
+        "current_invocation": {
+          "name": "invocations/build:8945511751514863184",
+          "update_token": "token"
+        },
+        "hostname": "rdbhost"
+      }
+    },
+    "name": "release.windows-arm64.upload.upload binary to CAS",
+    "~followup_annotations": [
+      "@@@STEP_NEST_LEVEL@3@@@",
+      "@@@STEP_LINK@CAS UI@https://cas-viewer.appspot.com/projects/example-cas-server/instances/default_instance/blobs/e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855/0/tree@@@"
+    ]
+  },
+  {
     "cmd": [
       "taskkill.exe",
       "/f",

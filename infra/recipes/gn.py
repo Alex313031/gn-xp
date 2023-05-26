@@ -149,7 +149,7 @@ def RunSteps(api, repository):
     elif api.platform.is_mac:
       return [api.target('mac-amd64'), api.target('mac-arm64')]
     else:
-      return [api.target.host]
+      return [api.target('windows-amd64'), api.target('windows-arm64')]
 
   # The order is important since release build will get uploaded to CIPD.
   configs = [
