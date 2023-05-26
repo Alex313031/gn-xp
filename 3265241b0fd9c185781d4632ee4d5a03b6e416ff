@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "1ed84a77_5615f48d",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 6
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000168
+      },
+      "writtenOn": "2023-05-26T22:02:06Z",
+      "side": 1,
+      "message": "LGTM since this defaults to the old behavior, so we (Fuchsia) won\u0027t have to update our build atomically with GN.",
+      "revId": "3265241b0fd9c185781d4632ee4d5a03b6e416ff",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    }
+  ]
+}
