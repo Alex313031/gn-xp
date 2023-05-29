@@ -248,6 +248,24 @@
       "parentUuid": "6ddba7e0_99e2eb8b",
       "revId": "17571406b81ec2cad64a04181495ef2b2e2ef554",
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5bc3ad26_1d435f92",
+        "filename": "src/util/exe_path.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 119,
+      "author": {
+        "id": 1002587
+      },
+      "writtenOn": "2023-05-29T07:05:42Z",
+      "side": 1,
+      "message": "Hello Takuto Ikuta ,\n\nI had checked and \"https://github.com/llvm/llvm-project/blob/0833a9a7962892584a3c2728a710300a3a2c7169/llvm/lib/Support/Unix/Path.inc#L238\" - this is not a suitable approach which we can use on Aix.\n\nMeanwhile I was running format testcases, some of the testcases are failing and while analyzing got to know that the tests internally switches the directory and due to which the path of the directory is unknown.\n\n\nSo Tried with another solution -\n\nexe_path.h\u2028\n#if defined(OS_AIX)\nchar absolutePathBuf[PATH_MAX] \u003d {0};\n#endif\u2028\u2028\u2028\u2028\u2028\u2028\n\n\nexe_path.cc\u2028\u2028\n#elif defined(OS_AIX)\nbase::FilePath GetExePath() {\n  char *exec_name;\n  if(!*absolutePathBuf){\n    exec_name \u003d getenv(\"_\");\n    realpath(exec_name,absolutePathBuf);\n    if (absolutePathBuf \u003d\u003d NULL) {\n      return base::FilePath();\n    }\n  }\n  return base::FilePath(absolutePathBuf);\n}\n\n - Here using a global variable as the execution path remains the same and is not necessary to be fetched on every test(FormatTest.XXX).\n\n - The above solution is able to pass all the testcases failing on AIX.",
+      "parentUuid": "55a0817f_06e54e84",
+      "revId": "17571406b81ec2cad64a04181495ef2b2e2ef554",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
     }
   ]
 }
