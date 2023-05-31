@@ -633,6 +633,20 @@ int RunDesc(const std::vector<std::string>& args) {
   Setup* setup = new Setup;
   if (!setup->DoSetup(args[0], false))
     return 1;
+
+  bool json = cmdline->GetSwitchValueString("format") == "json";
+
+  if (json) {
+    // If json output is enabled, redirect lines printed during the running of
+    // GN to stderr instead of stdout, as the json output is printed to stdout
+    // and sending the output of `print()` statements to stdout will create
+    // invalid json.
+    setup->build_settings().set_print_callback([](const std::string& str) {
+      fprintf(stderr, "%s", str.c_str());
+      fflush(stderr);
+    });
+  }
+
   if (!setup->Run())
     return 1;
 
@@ -653,8 +667,6 @@ int RunDesc(const std::vector<std::string>& args) {
   std::string what_to_print;
   if (args.size() == 3)
     what_to_print = args[2];
-
-  bool json = cmdline->GetSwitchValueString("format") == "json";
 
   if (target_matches.empty() && config_matches.empty()) {
     OutputString(
