@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c94bd12f_5b075c99",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000397
+      },
+      "writtenOn": "2023-05-31T23:51:20Z",
+      "side": 1,
+      "message": "I\u0027m not sure if people could be relying on `print()` statements going to stdout when running `gn desc ... --format\u003djson`, but it seems exceptionally unlikely.\n\nAnd this allows for warning statements that are printed to not break the ability to use `gn desc ... --format\u003djson` with other tools.",
+      "revId": "b841fcb7d42d39c042c07ec630e04230d2cfdf06",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    }
+  ]
+}
