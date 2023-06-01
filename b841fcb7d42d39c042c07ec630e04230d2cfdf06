@@ -51,6 +51,24 @@
       "parentUuid": "ea34671b_df75f50e",
       "revId": "b841fcb7d42d39c042c07ec630e04230d2cfdf06",
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ab0f15d2_cb231f2f",
+        "filename": "src/gn/command_desc.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 647,
+      "author": {
+        "id": 1000067
+      },
+      "writtenOn": "2023-06-01T14:53:44Z",
+      "side": 1,
+      "message": "Or restores it to whatever was the previous value (e.g. with a new method like BuildSettings::swap_print_callback()).\n\nI agree that print() during `desc` (or any other type of query like `path` or `refs`) is highly undesirable, and I would be happy to see them go. I am curious about Brett\u0027s opinion on the subject :-)",
+      "parentUuid": "258e99db_6d76b60d",
+      "revId": "b841fcb7d42d39c042c07ec630e04230d2cfdf06",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
     }
   ]
 }
