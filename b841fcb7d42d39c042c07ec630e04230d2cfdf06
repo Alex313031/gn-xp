@@ -16,6 +16,23 @@
       "message": "I\u0027m not sure if people could be relying on `print()` statements going to stdout when running `gn desc ... --format\u003djson`, but it seems exceptionally unlikely.\n\nAnd this allows for warning statements that are printed to not break the ability to use `gn desc ... --format\u003djson` with other tools.",
       "revId": "b841fcb7d42d39c042c07ec630e04230d2cfdf06",
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ea34671b_df75f50e",
+        "filename": "src/gn/command_desc.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 647,
+      "author": {
+        "id": 1000067
+      },
+      "writtenOn": "2023-06-01T05:56:33Z",
+      "side": 1,
+      "message": "Can you use a dedicated C++ class (here or in the BuildSetting implementation) to ensure that the print callback is restored to its previous value on scope exit? In particular because I still maintain my own \"query persistent server\" mode where you can run multiple GN commands from the same in-memory graph.\n\nAlso what do you think about _not_ printing anything in this case instead?\n\nThis type of change would probably need to be clearly documented too.",
+      "revId": "b841fcb7d42d39c042c07ec630e04230d2cfdf06",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
     }
   ]
 }
