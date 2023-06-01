@@ -33,6 +33,24 @@
       "message": "Can you use a dedicated C++ class (here or in the BuildSetting implementation) to ensure that the print callback is restored to its previous value on scope exit? In particular because I still maintain my own \"query persistent server\" mode where you can run multiple GN commands from the same in-memory graph.\n\nAlso what do you think about _not_ printing anything in this case instead?\n\nThis type of change would probably need to be clearly documented too.",
       "revId": "b841fcb7d42d39c042c07ec630e04230d2cfdf06",
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "258e99db_6d76b60d",
+        "filename": "src/gn/command_desc.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 647,
+      "author": {
+        "id": 1000397
+      },
+      "writtenOn": "2023-06-01T14:44:18Z",
+      "side": 1,
+      "message": "A class that removes the callback on destruction?\n\nAnd not printing is possibly a better option, I\u0027ve always found it confusing that GN output print() statements during `desc`.",
+      "parentUuid": "ea34671b_df75f50e",
+      "revId": "b841fcb7d42d39c042c07ec630e04230d2cfdf06",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
     }
   ]
 }
