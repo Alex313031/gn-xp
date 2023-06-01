@@ -69,6 +69,24 @@
       "parentUuid": "258e99db_6d76b60d",
       "revId": "b841fcb7d42d39c042c07ec630e04230d2cfdf06",
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9b3f7501_42b39ed4",
+        "filename": "src/gn/command_desc.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 647,
+      "author": {
+        "id": 1000014
+      },
+      "writtenOn": "2023-06-01T16:20:08Z",
+      "side": 1,
+      "message": "I agree it\u0027s better to not print during `desc`",
+      "parentUuid": "ab0f15d2_cb231f2f",
+      "revId": "b841fcb7d42d39c042c07ec630e04230d2cfdf06",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
     }
   ]
 }
