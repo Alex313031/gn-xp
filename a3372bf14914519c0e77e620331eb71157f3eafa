@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "5339b8c7_97dce54b",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000070
+      },
+      "writtenOn": "2023-06-06T23:41:40Z",
+      "side": 1,
+      "message": "Please take a look.\n\nSee https://gn-review.git.corp.google.com/c/gn/+/15461 for usage example.",
+      "revId": "a3372bf14914519c0e77e620331eb71157f3eafa",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    }
+  ]
+}
