@@ -1,0 +1,1 @@
+build.ninja: build/gen.py build/build_mac.ninja.template build/build_aix.ninja.template build/build_haiku.ninja.template build/build_linux.ninja.template build/build_mac.ninja.template build/build_openbsd.ninja.template build/build_win.ninja.template build/build_zos.ninja.template

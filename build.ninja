@@ -1,0 +1,8 @@
+
+rule regen
+  command = ./build/gen.py --out-path=.
+  description = Regenerating ninja files
+
+build build.ninja phony: regen
+  generator = 1
+  depfile = build.ninja.d
