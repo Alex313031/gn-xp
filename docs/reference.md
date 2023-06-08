@@ -155,7 +155,7 @@
     *   [sources: [file list] Source files for a target.](#var_sources)
     *   [swiftflags: [string list] Flags passed to the swift compiler.](#var_swiftflags)
     *   [testonly: [boolean] Declares a target must only be used for testing.](#var_testonly)
-    *   [transparent: [bool] True if the bundle is transparent](#var_transparent)
+    *   [transparent: [bool] True if the bundle is transparent.](#var_transparent)
     *   [visibility: [label list] A list of labels that can depend on a target.](#var_visibility)
     *   [walk_keys: [string list] Key(s) for managing the metadata collection walk.](#var_walk_keys)
     *   [weak_frameworks: [name list] Name of frameworks that must be weak linked.](#var_weak_frameworks)
