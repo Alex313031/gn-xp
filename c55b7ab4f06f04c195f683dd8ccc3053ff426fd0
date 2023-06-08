@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "07a122e8_c0a906b1",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000014
+      },
+      "writtenOn": "2023-06-08T16:49:24Z",
+      "side": 1,
+      "message": "This is clever but I see two potential problems:\n\n - It looks like this puts the build output files in the root directory of the checkout. We wouldn\u0027t want that.\n \n - I believe this means every time you do a build, the build.ninja file will be marked as dirty and you will have to manually revert it prior to uploading any changes. This is not desirable and I don\u0027t see an obvious way to fix this.",
+      "revId": "c55b7ab4f06f04c195f683dd8ccc3053ff426fd0",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    }
+  ]
+}
