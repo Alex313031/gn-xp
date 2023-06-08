@@ -1,6 +1,29 @@
 {
   "comments": [
     {
+      "unresolved": true,
+      "key": {
+        "uuid": "df026c54_09da7089",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 1000030
+      },
+      "writtenOn": "2023-06-08T05:45:07Z",
+      "side": 1,
+      "message": "allows?",
+      "range": {
+        "startLine": 9,
+        "startChar": 47,
+        "endLine": 9,
+        "endChar": 52
+      },
+      "revId": "a3372bf14914519c0e77e620331eb71157f3eafa",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
       "unresolved": false,
       "key": {
         "uuid": "5339b8c7_97dce54b",
@@ -31,6 +54,69 @@
       "writtenOn": "2023-06-07T15:58:17Z",
       "side": 1,
       "message": "-\u003e Takuto",
+      "revId": "a3372bf14914519c0e77e620331eb71157f3eafa",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5bbb63e9_555b5a7b",
+        "filename": "src/gn/bundle_data.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 76,
+      "author": {
+        "id": 1000030
+      },
+      "writtenOn": "2023-06-08T05:45:07Z",
+      "side": 1,
+      "message": "can we do early return here?",
+      "revId": "a3372bf14914519c0e77e620331eb71157f3eafa",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "87dba7b1_c3bd80be",
+        "filename": "src/gn/target.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 760,
+      "author": {
+        "id": 1000030
+      },
+      "writtenOn": "2023-06-08T05:45:07Z",
+      "side": 1,
+      "message": "This can be `const auto*`?",
+      "range": {
+        "startLine": 760,
+        "startChar": 11,
+        "endLine": 760,
+        "endChar": 15
+      },
+      "revId": "a3372bf14914519c0e77e620331eb71157f3eafa",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5c215cd7_6245ec85",
+        "filename": "src/gn/variables.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 763,
+      "author": {
+        "id": 1000030
+      },
+      "writtenOn": "2023-06-08T05:45:07Z",
+      "side": 1,
+      "message": "append period?",
+      "range": {
+        "startLine": 763,
+        "startChar": 57,
+        "endLine": 763,
+        "endChar": 58
+      },
       "revId": "a3372bf14914519c0e77e620331eb71157f3eafa",
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
     }
