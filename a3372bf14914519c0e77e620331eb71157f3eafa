@@ -26,6 +26,30 @@
     {
       "unresolved": false,
       "key": {
+        "uuid": "4e36bb59_979f826c",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 1000070
+      },
+      "writtenOn": "2023-06-08T14:01:01Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "df026c54_09da7089",
+      "range": {
+        "startLine": 9,
+        "startChar": 47,
+        "endLine": 9,
+        "endChar": 52
+      },
+      "revId": "a3372bf14914519c0e77e620331eb71157f3eafa",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
+      "unresolved": false,
+      "key": {
         "uuid": "5339b8c7_97dce54b",
         "filename": "/PATCHSET_LEVEL",
         "patchSetId": 2
@@ -75,6 +99,24 @@
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "b291f6d6_22117851",
+        "filename": "src/gn/bundle_data.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 76,
+      "author": {
+        "id": 1000070
+      },
+      "writtenOn": "2023-06-08T14:01:01Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "5bbb63e9_555b5a7b",
+      "revId": "a3372bf14914519c0e77e620331eb71157f3eafa",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "87dba7b1_c3bd80be",
@@ -98,6 +140,30 @@
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "0e2c7fdb_dc631278",
+        "filename": "src/gn/target.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 760,
+      "author": {
+        "id": 1000070
+      },
+      "writtenOn": "2023-06-08T14:01:01Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "87dba7b1_c3bd80be",
+      "range": {
+        "startLine": 760,
+        "startChar": 11,
+        "endLine": 760,
+        "endChar": 15
+      },
+      "revId": "a3372bf14914519c0e77e620331eb71157f3eafa",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "5c215cd7_6245ec85",
@@ -111,6 +177,30 @@
       "writtenOn": "2023-06-08T05:45:07Z",
       "side": 1,
       "message": "append period?",
+      "range": {
+        "startLine": 763,
+        "startChar": 57,
+        "endLine": 763,
+        "endChar": 58
+      },
+      "revId": "a3372bf14914519c0e77e620331eb71157f3eafa",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "40bb023c_02dca382",
+        "filename": "src/gn/variables.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 763,
+      "author": {
+        "id": 1000070
+      },
+      "writtenOn": "2023-06-08T14:01:01Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "5c215cd7_6245ec85",
       "range": {
         "startLine": 763,
         "startChar": 57,
