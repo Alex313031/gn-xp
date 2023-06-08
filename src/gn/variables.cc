@@ -760,7 +760,7 @@ const char kXcassetCompilerFlags_Help[] =
 
 const char kTransparent[] = "transparent";
 const char kTransparent_HelpShort[] =
-    "transparent: [bool] True if the bundle is transparent";
+    "transparent: [bool] True if the bundle is transparent.";
 const char kTransparent_Help[] =
     R"(transparent: [bool] True if the bundle is transparent.
 

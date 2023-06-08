@@ -757,7 +757,7 @@ void Target::PullRecursiveBundleData() {
 
     // Recursive bundle_data informations from all dependencies.
     if (pair.ptr->has_bundle_data()) {
-      for (auto* target : pair.ptr->bundle_data().forwarded_bundle_deps())
+      for (const auto* target : pair.ptr->bundle_data().forwarded_bundle_deps())
         bundle_data().AddBundleData(target, is_create_bundle);
     }
   }

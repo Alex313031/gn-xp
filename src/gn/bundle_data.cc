@@ -74,12 +74,13 @@ void BundleData::AddBundleData(const Target* target, bool is_create_bundle) {
     } else {
       forwarded_bundle_deps_.push_back(target);
     }
-  } else {
-    if (is_create_bundle) {
-      bundle_deps_.push_back(target);
-    }
-    forwarded_bundle_deps_.push_back(target);
+    return;
   }
+
+  if (is_create_bundle) {
+    bundle_deps_.push_back(target);
+  }
+  forwarded_bundle_deps_.push_back(target);
 }
 
 void BundleData::OnTargetResolved(Target* owning_target) {
