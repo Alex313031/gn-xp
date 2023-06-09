@@ -16,6 +16,23 @@
       "message": "First to stamp wins!",
       "revId": "67256a10ee7402d09c584d1db4f0442ae823f711",
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "54558a6b_7561ca6d",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000070
+      },
+      "writtenOn": "2023-06-09T14:58:46Z",
+      "side": 1,
+      "message": "lgtm",
+      "revId": "67256a10ee7402d09c584d1db4f0442ae823f711",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
     }
   ]
 }
