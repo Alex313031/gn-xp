@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "5cdf88ab_1ad8db72",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 7
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1002072
+      },
+      "writtenOn": "2023-06-15T19:23:14Z",
+      "side": 1,
+      "message": "This has landed in Chromium, yet I still find -Bdynamic in the rsp file for executables when I am building on Linux and targeting Windows.",
+      "revId": "e3978de3e8dafb50a2b11efa784e08699a43faf8",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    }
+  ]
+}
