@@ -16,6 +16,24 @@
       "message": "This has landed in Chromium, yet I still find -Bdynamic in the rsp file for executables when I am building on Linux and targeting Windows.",
       "revId": "e3978de3e8dafb50a2b11efa784e08699a43faf8",
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d6c47bd7_7e5f5342",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 7
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1002072
+      },
+      "writtenOn": "2023-06-15T19:26:44Z",
+      "side": 1,
+      "message": "it looks like\n```\n        dynamic_link_switch \u003d \"\"\n```\nin the rust_bin rule does fix this though, I presume it\u0027s intended to have to specify that from reading the CL.",
+      "parentUuid": "5cdf88ab_1ad8db72",
+      "revId": "e3978de3e8dafb50a2b11efa784e08699a43faf8",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
     }
   ]
 }
