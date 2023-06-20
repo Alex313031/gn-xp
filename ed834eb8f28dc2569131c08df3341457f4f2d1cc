@@ -33,6 +33,23 @@
       "message": "Could you fix Windows build?",
       "revId": "ed834eb8f28dc2569131c08df3341457f4f2d1cc",
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b7bfa3c4_b7b0fea4",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1002807
+      },
+      "writtenOn": "2023-06-20T10:22:44Z",
+      "side": 1,
+      "message": "I get the same error on Linux with GCC 11.3, so it\u0027s not Windows-specific.",
+      "revId": "ed834eb8f28dc2569131c08df3341457f4f2d1cc",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
     }
   ]
 }
