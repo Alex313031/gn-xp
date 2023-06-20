@@ -231,7 +231,7 @@ void NinjaTargetWriter::WriteCCompilerVars(const SubstitutionBits& bits,
                                                DefineWriter(), out_);
     out_ << std::endl;
   }
-
+f;df;ld
   // Framework search path.
   if (bits.used.count(&CSubstitutionFrameworkDirs)) {
     const Tool* tool = target_->toolchain()->GetTool(CTool::kCToolLink);
