@@ -50,6 +50,24 @@
       "message": "I get the same error on Linux with GCC 11.3, so it\u0027s not Windows-specific.",
       "revId": "ed834eb8f28dc2569131c08df3341457f4f2d1cc",
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "17ba023c_0bd9b9bb",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1002552
+      },
+      "writtenOn": "2023-06-21T06:07:39Z",
+      "side": 1,
+      "message": "I will abandon this and instead pass `-Wno-error\u003dredundant-move` to gcc-13 and move on. NRVO is voodoo magic already and here we throw mix of different compiler versions at it.",
+      "parentUuid": "b7bfa3c4_b7b0fea4",
+      "revId": "ed834eb8f28dc2569131c08df3341457f4f2d1cc",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
     }
   ]
 }
