@@ -284,6 +284,24 @@
       "parentUuid": "5bc3ad26_1d435f92",
       "revId": "17571406b81ec2cad64a04181495ef2b2e2ef554",
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "672e2c61_6044a361",
+        "filename": "src/util/exe_path.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 119,
+      "author": {
+        "id": 1002587
+      },
+      "writtenOn": "2023-06-22T10:16:47Z",
+      "side": 1,
+      "message": "I had checked it and quite not sure how it is working on llvm code.\nWe can not check it also as it won\u0027t support our environment. As of now I\u0027m providing a temporary solution until we have some specific system call for that.\nPlease do check patchset4 and otherwise it will create some other issues related to gn build on AIX.\n\n\nexe_path.h\u2028\n\n#if defined(OS_AIX)\nchar absolutePathBuf[PATH_MAX] \u003d {0};\n\n#endif\u2028\u2028\u2028\u2028\u2028\u2028\n\nexe_path.cc\u2028\u2028\n\n#elif defined(OS_AIX)\nbase::FilePath GetExePath() {\nchar exec_name;\nif(!absolutePathBuf){\nexec_name \u003d getenv(\"_\");\nrealpath(exec_name,absolutePathBuf);\nif (absolutePathBuf \u003d\u003d NULL) {\nreturn base::FilePath();\n}\n}\nreturn base::FilePath(absolutePathBuf);\n}\n\n     \nHere using a global variable as the execution path remains the same and is not necessary to be fetched on every test(FormatTest.XXX).\n\nThe above solution is able to pass all the testcases failing on AIX.",
+      "parentUuid": "d099d3e8_13e6c12e",
+      "revId": "17571406b81ec2cad64a04181495ef2b2e2ef554",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
     }
   ]
 }
