@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "76238cae_c4db7976",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 6
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1002587
+      },
+      "writtenOn": "2023-06-28T09:07:19Z",
+      "side": 1,
+      "message": "I had checked and \"https://github.com/llvm/llvm-project/blob/0833a9a7962892584a3c2728a710300a3a2c7169/llvm/lib/Support/Unix/Path.inc#L238\" - this is not a suitable approach which we can use on Aix and quite not sure how it is working on llvm code.\nWe can not check it also as it won\u0027t support our environment. As of now I\u0027m providing a temporary solution until we have some specific system call for that.\notherwise it will create issues related to gn build on AIX.\u2028\nMeanwhile I was running format testcases, some of the testcases are failing and while analyzing got to know that the tests internally switches the directory and due to which the path of the directory is unknown.\n* Here using a global variable as the execution path remains the same and is not necessary to be fetched on every test(FormatTest.XXX).\n* This solution is able to pass all the testcases failing on AIX.",
+      "revId": "5086855e04502b67886e165bf67ec537b21af0a6",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    }
+  ]
+}
