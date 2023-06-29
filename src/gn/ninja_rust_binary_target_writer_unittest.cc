@@ -896,8 +896,7 @@ TEST_F(NinjaRustBinaryTargetWriterTest, NonRustDeps) {
         "  source_file_part = lib.rs\n"
         "  source_name_part = lib\n"
         "  externs =\n"
-        "  rustdeps = -Lnative=obj/foo -Clink-arg=-Balternative-dynamic "
-        "-Clink-arg=obj/foo/libstatic.a\n"
+        "  rustdeps =\n"
         "  ldflags =\n"
         "  sources = ../../baz/lib.rs\n";
     std::string out_str = out.str();
@@ -1154,8 +1153,11 @@ TEST_F(NinjaRustBinaryTargetWriterTest, LibsAndLibDirs) {
   target.sources().push_back(main);
   target.source_types_used().Set(SourceFile::SOURCE_RS);
   target.set_output_dir(SourceDir("//out/Debug/foo/"));
+  target.config_values().libs().push_back(
+      LibFile(SourceFile("//dir1/ar.a")));
   target.config_values().libs().push_back(LibFile("quux"));
   target.config_values().lib_dirs().push_back(SourceDir("//baz/"));
+  target.config_values().framework_dirs().push_back(SourceDir("//fwdir/"));
   target.rust_values().set_crate_root(main);
   target.rust_values().crate_name() = "foo_bar";
   target.SetToolchain(setup.toolchain());
@@ -1182,9 +1184,85 @@ TEST_F(NinjaRustBinaryTargetWriterTest, LibsAndLibDirs) {
         "  source_file_part = main.rs\n"
         "  source_name_part = main\n"
         "  externs =\n"
-        "  rustdeps = -Lnative=../../baz -lquux\n"
+        "  rustdeps = -Lnative=../../baz -Lframework=../../fwdir "
+        "-Clink-arg=../../dir1/ar.a -lquux\n"
         "  ldflags =\n"
         "  sources = ../../foo/input.rs ../../foo/main.rs\n";
+    std::string out_str = out.str();
+    EXPECT_EQ(expected, out_str) << expected << "\n" << out_str;
+  }
+}
+
+TEST_F(NinjaRustBinaryTargetWriterTest, RlibWithLibDeps) {
+  Err err;
+  TestWithScope setup;
+
+  Target public_rlib(setup.settings(), Label(SourceDir("//bar/"), "publiclib"));
+  public_rlib.set_output_type(Target::RUST_LIBRARY);
+  public_rlib.visibility().SetPublic();
+  SourceFile barlib("//bar/lib.rs");
+  public_rlib.sources().push_back(SourceFile("//bar/publiclib.rs"));
+  public_rlib.sources().push_back(barlib);
+  public_rlib.source_types_used().Set(SourceFile::SOURCE_RS);
+  public_rlib.rust_values().set_crate_root(barlib);
+  public_rlib.rust_values().crate_name() = "publiccrate";
+  public_rlib.SetToolchain(setup.toolchain());
+  ASSERT_TRUE(public_rlib.OnResolved(&err));
+
+  Target rlib(setup.settings(), Label(SourceDir("//foo/"), "rlibcrate"));
+  rlib.set_output_type(Target::RUST_LIBRARY);
+  rlib.visibility().SetPublic();
+  SourceFile lib("//foo/input.rs");
+  rlib.sources().push_back(lib);
+  rlib.source_types_used().Set(SourceFile::SOURCE_RS);
+  rlib.rust_values().set_crate_root(lib);
+  rlib.rust_values().crate_name() = "rlibcrate";
+  rlib.SetToolchain(setup.toolchain());
+  rlib.public_deps().push_back(LabelTargetPair(&public_rlib));
+
+  // This adds dependencies on static libraries, which are not consumed by an
+  // rlib since it does not get linked. None of these should appear in
+  // `rustdeps` for a `rust_rlib`, though they would for a `rust_bin` (as tested
+  // for above).
+  //
+  // 1. A dependency on an archive file directly as happens with a `deps` rule
+  //    pointing to a `static_library` target.
+  rlib.config_values().libs().push_back(
+      LibFile(SourceFile("//dir1/ar.a")));
+  // 2. A dependency on a library name as happens with a `libs` rule.
+  rlib.config_values().libs().push_back(LibFile("quux"));
+  // 3. A dependency on a library path which will be used for linking, which is
+  //    separate from the dependency paths for finding Rust crates.
+  rlib.config_values().lib_dirs().push_back(SourceDir("//baz/"));
+  // 4. A framework search directory will be used for linking frameworks, which
+  //    is also separate from finding Rust crates.
+  rlib.config_values().framework_dirs().push_back(SourceDir("//fwdir/"));
+
+  ASSERT_TRUE(rlib.OnResolved(&err));
+
+  {
+    std::ostringstream out;
+    NinjaRustBinaryTargetWriter writer(&rlib, out);
+    writer.Run();
+
+    const char expected[] =
+        "crate_name = rlibcrate\n"
+        "crate_type = rlib\n"
+        "output_extension = .rlib\n"
+        "output_dir = \n"
+        "rustflags =\n"
+        "rustenv =\n"
+        "root_out_dir = .\n"
+        "target_out_dir = obj/foo\n"
+        "target_output_name = librlibcrate\n"
+        "\n"
+        "build obj/foo/librlibcrate.rlib: rust_rlib ../../foo/input.rs | ../../foo/input.rs obj/bar/libpubliclib.rlib\n"
+        "  source_file_part = input.rs\n"
+        "  source_name_part = input\n"
+        "  externs = --extern publiccrate=obj/bar/libpubliclib.rlib\n"
+        "  rustdeps = -Ldependency=obj/bar\n"
+        "  ldflags =\n"
+        "  sources = ../../foo/input.rs\n";
     std::string out_str = out.str();
     EXPECT_EQ(expected, out_str) << expected << "\n" << out_str;
   }
