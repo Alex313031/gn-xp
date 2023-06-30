@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "589528a3_a43071c9",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1002822
+      },
+      "writtenOn": "2023-06-30T11:04:17Z",
+      "side": 1,
+      "message": "Hi Takuto-san, can you PTAL? 😊",
+      "revId": "3141198b57306f8dd6cc37c19e7c9ceffc3d975b",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    }
+  ]
+}
