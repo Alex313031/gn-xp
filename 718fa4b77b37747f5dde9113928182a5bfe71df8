@@ -35,6 +35,24 @@
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "74e58d14_1be534b5",
+        "filename": "src/gn/ninja_rust_binary_target_writer.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 1002072
+      },
+      "writtenOn": "2023-06-30T22:22:25Z",
+      "side": 1,
+      "message": "Oops, removed, that was for debugging. Good thing it was there.",
+      "parentUuid": "1a40c651_ccb12470",
+      "revId": "718fa4b77b37747f5dde9113928182a5bfe71df8",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "a9d1cfa5_8e538309",
@@ -48,6 +66,30 @@
       "writtenOn": "2023-06-30T22:16:21Z",
       "side": 1,
       "message": "Is there anything testing this for transitive targets? In other words, if this rlib were then depended on by a rust_bin, do we test that that binary would have the flags for these native libs?",
+      "range": {
+        "startLine": 1225,
+        "startChar": 71,
+        "endLine": 1226,
+        "endChar": 14
+      },
+      "revId": "718fa4b77b37747f5dde9113928182a5bfe71df8",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a5c607d9_b868fb2b",
+        "filename": "src/gn/ninja_rust_binary_target_writer_unittest.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 1226,
+      "author": {
+        "id": 1002072
+      },
+      "writtenOn": "2023-06-30T22:22:25Z",
+      "side": 1,
+      "message": "The test above now does this, thanks!",
+      "parentUuid": "a9d1cfa5_8e538309",
       "range": {
         "startLine": 1225,
         "startChar": 71,
