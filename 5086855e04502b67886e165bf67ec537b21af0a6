@@ -34,6 +34,24 @@
       "parentUuid": "76238cae_c4db7976",
       "revId": "5086855e04502b67886e165bf67ec537b21af0a6",
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ca7d5d92_c2632e0a",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 6
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1002587
+      },
+      "writtenOn": "2023-06-30T06:28:35Z",
+      "side": 1,
+      "message": "There is no such location `/proc/curproc/file` in AIX and `/proc` is the proc filesystem, which only contains the process id and cannot be used to obtain the path.\n\n\nbash-5.1# ls /proc/curproc/file \nls: cannot access \u0027/proc/curproc/file\u0027: No such file or directory\n\n\nbash-5.1# ls /proc\n0         11600550  1311606   14680676  16319182  17826354  19464850  20972308  24052474  3932710  5571438  7144110  8651516\n1         11600884  131596    14680990  16319232  17826646  19465144  2097768   2425474   3933008  5636686  7144408  8651574\n10027598  11666090  13173262  14746216  16384720  17891896  19530392  2098078   2425642   393748   5636976  7209648  8717054\n10027912  11666422  13173566  14746528  16384770  17892186  19530682  21037806  2425642   394042   5702208  7209948  8717114\n10093136  11731630  131890",
+      "parentUuid": "bf26d298_35d97e7b",
+      "revId": "5086855e04502b67886e165bf67ec537b21af0a6",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
     }
   ]
 }
