@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d5a417cf_277e7066",
+        "filename": "src/gn/ninja_rust_binary_target_writer_unittest.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 1253,
+      "author": {
+        "id": 1000030
+      },
+      "writtenOn": "2023-07-03T00:56:03Z",
+      "side": 1,
+      "message": "separated?",
+      "range": {
+        "startLine": 1253,
+        "startChar": 8,
+        "endLine": 1253,
+        "endChar": 16
+      },
+      "revId": "55d0ee7d2444cac10fc31fab021b0eed5375bf0c",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6bb933eb_48604574",
+        "filename": "src/gn/ninja_rust_binary_target_writer_unittest.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 1256,
+      "author": {
+        "id": 1000030
+      },
+      "writtenOn": "2023-07-03T00:56:03Z",
+      "side": 1,
+      "message": "ditto",
+      "range": {
+        "startLine": 1256,
+        "startChar": 16,
+        "endLine": 1256,
+        "endChar": 24
+      },
+      "revId": "55d0ee7d2444cac10fc31fab021b0eed5375bf0c",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    }
+  ]
+}
