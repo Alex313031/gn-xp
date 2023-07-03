@@ -16,6 +16,23 @@
       "message": "Hi Takuto-san, can you PTAL? 😊",
       "revId": "3141198b57306f8dd6cc37c19e7c9ceffc3d975b",
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9c78c738_54682168",
+        "filename": "docs/reference.md",
+        "patchSetId": 1
+      },
+      "lineNbr": 3,
+      "author": {
+        "id": 1000030
+      },
+      "writtenOn": "2023-07-03T01:01:36Z",
+      "side": 1,
+      "message": "Is this generated from this command?",
+      "revId": "3141198b57306f8dd6cc37c19e7c9ceffc3d975b",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
     }
   ]
 }
