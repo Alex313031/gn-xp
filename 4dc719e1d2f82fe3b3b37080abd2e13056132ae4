@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "717acdac_bef59ea1",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1002072
+      },
+      "writtenOn": "2023-07-04T19:08:54Z",
+      "side": 1,
+      "message": "This seems to work. I generated a vs2017 solution and I can right click an rlib and it runs ninja to build it.",
+      "revId": "4dc719e1d2f82fe3b3b37080abd2e13056132ae4",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    }
+  ]
+}
