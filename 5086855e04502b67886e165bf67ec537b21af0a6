@@ -72,6 +72,24 @@
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "fa4d1164_9ae46166",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 6
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1002587
+      },
+      "writtenOn": "2023-07-04T09:51:50Z",
+      "side": 1,
+      "message": "Okay.",
+      "parentUuid": "295eb320_b5a9316d",
+      "revId": "5086855e04502b67886e165bf67ec537b21af0a6",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "27e41ed8_f868ca7b",
@@ -97,6 +115,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "3d7f32be_d36cbfaf",
+        "filename": "src/util/exe_path.cc",
+        "patchSetId": 6
+      },
+      "lineNbr": 123,
+      "author": {
+        "id": 1002587
+      },
+      "writtenOn": "2023-07-04T09:51:50Z",
+      "side": 1,
+      "message": "This is error handling. If in case there is issue with the realpath we can error out or return the base::FilePath().And If there is no error we can return the absolutepathbuf.",
+      "parentUuid": "27e41ed8_f868ca7b",
+      "range": {
+        "startLine": 123,
+        "startChar": 8,
+        "endLine": 123,
+        "endChar": 31
+      },
+      "revId": "5086855e04502b67886e165bf67ec537b21af0a6",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "d08851f0_4d70936b",
         "filename": "src/util/exe_path.h",
         "patchSetId": 6
@@ -108,6 +150,24 @@
       "writtenOn": "2023-06-30T08:08:58Z",
       "side": 1,
       "message": "This is not necessary to declare in header file?",
+      "revId": "5086855e04502b67886e165bf67ec537b21af0a6",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1be8e25b_ebfbd529",
+        "filename": "src/util/exe_path.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 13,
+      "author": {
+        "id": 1002587
+      },
+      "writtenOn": "2023-07-04T09:51:50Z",
+      "side": 1,
+      "message": "AbsolutepathBuf is a variable specific to AIX and hence it is necessary in the header.",
+      "parentUuid": "d08851f0_4d70936b",
       "revId": "5086855e04502b67886e165bf67ec537b21af0a6",
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
     }
