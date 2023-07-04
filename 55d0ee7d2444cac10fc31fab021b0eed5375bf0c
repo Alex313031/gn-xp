@@ -59,6 +59,30 @@
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "772a9548_15f3d5aa",
+        "filename": "src/gn/ninja_rust_binary_target_writer_unittest.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 1253,
+      "author": {
+        "id": 1002072
+      },
+      "writtenOn": "2023-07-04T14:59:52Z",
+      "side": 1,
+      "message": "separate would be correct here, as in to say they are independent, not defined in the same way and do not produce the same linker args.",
+      "parentUuid": "d5a417cf_277e7066",
+      "range": {
+        "startLine": 1253,
+        "startChar": 8,
+        "endLine": 1253,
+        "endChar": 16
+      },
+      "revId": "55d0ee7d2444cac10fc31fab021b0eed5375bf0c",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "6bb933eb_48604574",
@@ -72,6 +96,30 @@
       "writtenOn": "2023-07-03T00:56:03Z",
       "side": 1,
       "message": "ditto",
+      "range": {
+        "startLine": 1256,
+        "startChar": 16,
+        "endLine": 1256,
+        "endChar": 24
+      },
+      "revId": "55d0ee7d2444cac10fc31fab021b0eed5375bf0c",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "71180860_263ecda9",
+        "filename": "src/gn/ninja_rust_binary_target_writer_unittest.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 1256,
+      "author": {
+        "id": 1002072
+      },
+      "writtenOn": "2023-07-04T14:59:52Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "6bb933eb_48604574",
       "range": {
         "startLine": 1256,
         "startChar": 16,
