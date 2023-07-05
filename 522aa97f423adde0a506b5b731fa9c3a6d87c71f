@@ -89,6 +89,24 @@
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "fd8bc3ca_fe774a39",
+        "filename": "src/util/exe_path.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 27,
+      "author": {
+        "id": 1002587
+      },
+      "writtenOn": "2023-07-05T11:41:24Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "20f9cee6_7ed7d7fe",
+      "revId": "522aa97f423adde0a506b5b731fa9c3a6d87c71f",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "163dfcf3_624bf824",
@@ -124,6 +142,24 @@
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "bfc8ca0f_aa29718a",
+        "filename": "src/util/exe_path.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 122,
+      "author": {
+        "id": 1002587
+      },
+      "writtenOn": "2023-07-05T11:41:24Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "e45155c8_59816d05",
+      "revId": "522aa97f423adde0a506b5b731fa9c3a6d87c71f",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "8cdb0d4d_8f28ff91",
@@ -155,6 +191,24 @@
       "side": 1,
       "message": "okay.",
       "parentUuid": "8cdb0d4d_8f28ff91",
+      "revId": "522aa97f423adde0a506b5b731fa9c3a6d87c71f",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b42e7825_5fe595b0",
+        "filename": "src/util/exe_path.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 123,
+      "author": {
+        "id": 1002587
+      },
+      "writtenOn": "2023-07-05T11:41:24Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "be1e9960_edeb7b4c",
       "revId": "522aa97f423adde0a506b5b731fa9c3a6d87c71f",
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
     }

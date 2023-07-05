@@ -83,6 +83,48 @@
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "b045e94b_d2361c27",
+        "filename": "src/util/exe_path.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 120,
+      "author": {
+        "id": 1002587
+      },
+      "writtenOn": "2023-07-05T11:41:24Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "b83cd8c3_458bd7e2",
+      "revId": "a55ed1fbc09ddd7344fc51e0e01b92418b8f70ce",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e28ae3ff_19edbbed",
+        "filename": "src/util/exe_path.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 120,
+      "author": {
+        "id": 1002587
+      },
+      "writtenOn": "2023-07-05T11:41:24Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "f6930996_4ef5d47b",
+      "range": {
+        "startLine": 120,
+        "startChar": 36,
+        "endLine": 120,
+        "endChar": 37
+      },
+      "revId": "a55ed1fbc09ddd7344fc51e0e01b92418b8f70ce",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "6b8e3a39_9971ede5",
@@ -130,6 +172,30 @@
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "40e340b8_51ef134e",
+        "filename": "src/util/exe_path.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 122,
+      "author": {
+        "id": 1002587
+      },
+      "writtenOn": "2023-07-05T11:41:24Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "4dbd2f8a_6823aa92",
+      "range": {
+        "startLine": 122,
+        "startChar": 20,
+        "endLine": 122,
+        "endChar": 21
+      },
+      "revId": "a55ed1fbc09ddd7344fc51e0e01b92418b8f70ce",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "b1e8bd10_6ce52bd7",
@@ -167,6 +233,30 @@
       "side": 1,
       "message": "I will do that.",
       "parentUuid": "b1e8bd10_6ce52bd7",
+      "range": {
+        "startLine": 123,
+        "startChar": 2,
+        "endLine": 123,
+        "endChar": 32
+      },
+      "revId": "a55ed1fbc09ddd7344fc51e0e01b92418b8f70ce",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "2633f26f_8141f003",
+        "filename": "src/util/exe_path.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 123,
+      "author": {
+        "id": 1002587
+      },
+      "writtenOn": "2023-07-05T11:41:24Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "016abb76_11e2d0f9",
       "range": {
         "startLine": 123,
         "startChar": 2,

@@ -163,6 +163,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "c8d1b645_f69df1f1",
+        "filename": "src/util/exe_path.cc",
+        "patchSetId": 6
+      },
+      "lineNbr": 123,
+      "author": {
+        "id": 1002587
+      },
+      "writtenOn": "2023-07-05T11:41:24Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "95463c22_e0fb4291",
+      "range": {
+        "startLine": 123,
+        "startChar": 8,
+        "endLine": 123,
+        "endChar": 31
+      },
+      "revId": "5086855e04502b67886e165bf67ec537b21af0a6",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "d08851f0_4d70936b",
         "filename": "src/util/exe_path.h",
         "patchSetId": 6
@@ -210,6 +234,24 @@
       "side": 1,
       "message": "I meant to ask why we cannot have this in cc file?",
       "parentUuid": "1be8e25b_ebfbd529",
+      "revId": "5086855e04502b67886e165bf67ec537b21af0a6",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7278ee95_6b9215fa",
+        "filename": "src/util/exe_path.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 13,
+      "author": {
+        "id": 1002587
+      },
+      "writtenOn": "2023-07-05T11:41:24Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "822a06e6_c9e1d86f",
       "revId": "5086855e04502b67886e165bf67ec537b21af0a6",
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
     }
