@@ -349,15 +349,16 @@ void NinjaRustBinaryTargetWriter::WriteExternsAndDeps(
     path_output_.WriteDir(out_, dir, PathOutput::DIR_NO_LAST_SLASH);
   }
 
+  // Non-Rust native dependencies.
   if (target_is_final) {
-    // Non-Rust native dependencies.
     UniqueVector<SourceDir> nonrustdep_dirs;
     for (const auto& nonrustdep : nonrustdeps) {
       nonrustdep_dirs.push_back(
           nonrustdep.AsSourceFile(settings_->build_settings()).GetDir());
     }
-    // First -Lnative to specify the search directories.
-    // This is necessary for #[link(...)] directives to work properly.
+    // First -Lnative to specify the search directories of the nonrust libraries
+    // specified to be linked in GN.
+    //
     for (const auto& nonrustdep_dir : nonrustdep_dirs) {
       out_ << " -Lnative=";
       path_output_.WriteDir(out_, nonrustdep_dir,
@@ -373,7 +374,12 @@ void NinjaRustBinaryTargetWriter::WriteExternsAndDeps(
       out_ << " -Clink-arg=";
       path_output_.WriteFile(out_, nonrustdep);
     }
-    WriteLibrarySearchPath(out_, tool_);
+  }
+  // Library search paths are requires to find libraries named in #[link]
+  // directives. When compiling, the #[link] directives are resolved to the
+  // absolute path of the library based on these search paths.
+  WriteLibrarySearchPath(out_, tool_);
+  if (target_is_final) {
     WriteLibs(out_, tool_);
   }
   out_ << std::endl;

@@ -1250,10 +1250,14 @@ TEST_F(NinjaRustBinaryTargetWriterTest, RlibWithLibDeps) {
   // 2. A dependency on a library name as happens with a `libs` rule.
   rlib.config_values().libs().push_back(LibFile("quux"));
   // 3. A dependency on a library path which will be used for linking, which is
-  //    separate from the dependency paths for finding Rust crates.
+  //    separate from the dependency paths for finding Rust crates. But it may
+  //    be needed to resolve the path to a native library in a #[link]
+  //    directive.
   rlib.config_values().lib_dirs().push_back(SourceDir("//baz/"));
   // 4. A framework search directory will be used for linking frameworks, which
-  //    is also separate from finding Rust crates.
+  //    is also separate from finding Rust crates. Again a #[link] directive can
+  //    point to a framework, so these paths need to be present during
+  //    compilation
   rlib.config_values().framework_dirs().push_back(SourceDir("//fwdir/"));
 
   ASSERT_TRUE(rlib.OnResolved(&err));
@@ -1278,7 +1282,7 @@ TEST_F(NinjaRustBinaryTargetWriterTest, RlibWithLibDeps) {
         "  source_file_part = input.rs\n"
         "  source_name_part = input\n"
         "  externs = --extern publiccrate=obj/bar/libpubliclib.rlib\n"
-        "  rustdeps = -Ldependency=obj/bar\n"
+        "  rustdeps = -Ldependency=obj/bar -Lnative=../../baz -Lframework=../../fwdir\n"
         "  ldflags =\n"
         "  sources = ../../foo/input.rs\n";
     std::string out_str = out.str();
