@@ -141,6 +141,24 @@
       "parentUuid": "7a322f8a_f5f87814",
       "revId": "da5fe01bce4ae84b2619caca7a3aa7ec7d3eb8a7",
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ffde746e_0b6fedd7",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000067
+      },
+      "writtenOn": "2023-07-06T14:32:33Z",
+      "side": 1,
+      "message": "Let me hack the ninja file manually to verify the minimal requirements ...",
+      "parentUuid": "443492e4_fdf36cac",
+      "revId": "da5fe01bce4ae84b2619caca7a3aa7ec7d3eb8a7",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
     }
   ]
 }
