@@ -140,6 +140,24 @@
       "parentUuid": "a37f581f_2500f526",
       "revId": "7d11a5da9f6e255b3d7c0a70c96d6d8e58f98698",
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b7195043_769060b4",
+        "filename": "src/gn/ninja_rust_binary_target_writer.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 381,
+      "author": {
+        "id": 1000067
+      },
+      "writtenOn": "2023-07-06T15:46:41Z",
+      "side": 1,
+      "message": "Indeed, if I apply the following patch on top of yours, the corresponding GN binary fixes the issue by only passing the missing -Lnative\u003d\u003cdir\u003e flags:\n\n```\ndiff --git a/src/gn/ninja_rust_binary_target_writer.cc b/src/gn/ninja_rust_binary_target_writer.cc\nindex 41d2136b..e45f5ebb 100644\n--- a/src/gn/ninja_rust_binary_target_writer.cc\n+++ b/src/gn/ninja_rust_binary_target_writer.cc\n@@ -350,20 +350,22 @@ void NinjaRustBinaryTargetWriter::WriteExternsAndDeps(\n   }\n \n   // Non-Rust native dependencies.\n+\n+  // First -Lnative to specify the search directories of the nonrust libraries\n+  // specified to be linked in GN. Building an rlib with a\n+  // [link(name \u003d \"foo\", ...)] directive requires them, even if no real\n+  // linking operation occurs.\n+  UniqueVector\u003cSourceDir\u003e nonrustdep_dirs;\n+  for (const auto\u0026 nonrustdep : nonrustdeps) {\n+    nonrustdep_dirs.push_back(\n+        nonrustdep.AsSourceFile(settings_-\u003ebuild_settings()).GetDir());\n+  }\n+  for (const auto\u0026 nonrustdep_dir : nonrustdep_dirs) {\n+    out_ \u003c\u003c \" -Lnative\u003d\";\n+    path_output_.WriteDir(out_, nonrustdep_dir,\n+                          PathOutput::DIR_NO_LAST_SLASH);\n+  }\n   if (target_is_final) {\n-    UniqueVector\u003cSourceDir\u003e nonrustdep_dirs;\n-    for (const auto\u0026 nonrustdep : nonrustdeps) {\n-      nonrustdep_dirs.push_back(\n-          nonrustdep.AsSourceFile(settings_-\u003ebuild_settings()).GetDir());\n-    }\n-    // First -Lnative to specify the search directories of the nonrust libraries\n-    // specified to be linked in GN.\n-    //\n-    for (const auto\u0026 nonrustdep_dir : nonrustdep_dirs) {\n-      out_ \u003c\u003c \" -Lnative\u003d\";\n-      path_output_.WriteDir(out_, nonrustdep_dir,\n-                            PathOutput::DIR_NO_LAST_SLASH);\n-    }\n     // Before outputting any libraries to link, ensure the linker is in a mode\n     // that allows dynamic linking, as rustc may have previously put it into\n     // static-only mode.\n```",
+      "parentUuid": "a37f581f_2500f526",
+      "revId": "7d11a5da9f6e255b3d7c0a70c96d6d8e58f98698",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
     }
   ]
 }
