@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d609dba9_55bee005",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000067
+      },
+      "writtenOn": "2023-07-06T07:44:08Z",
+      "side": 1,
+      "message": "FWIW, this CL breaks the Fuchsia build, the error message looking like:\n\n```\n[14303/82221](114) RUST host_arm64-asan-ubsan/obj/src/developer/ffx/lib/buildid/libbuildid.rlib\nFAILED: host_arm64-asan-ubsan/obj/src/developer/ffx/lib/buildid/libbuildid.rlib\n../../build/tracer/output_cacher_local_wrapper.sh ../../prebuilt/third_party/python3/linux-x64/bin/python3.8 -S ../../build/tracer/restat_cacher.py --outputs host_arm64-asan-ubsan/obj/src/developer/ffx/lib/buildid/libbuildid.rlib host_arm64-asan-ubsan/obj/src/developer/ffx/lib/buildid/libbuildid.rlib.d -- ../../prebuilt/third_party/python3/linux-x64/bin/python3.8 -S ../../build/rbe/rustc_remote...\nerror: could not find native static library `buildid`, perhaps an -L flag is missing?\n\nerror: aborting due to previous error\n```\n\nI am currently investigating to determine the root cause of this... :-(",
+      "revId": "da5fe01bce4ae84b2619caca7a3aa7ec7d3eb8a7",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    }
+  ]
+}
