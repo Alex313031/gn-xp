@@ -159,6 +159,24 @@
       "parentUuid": "443492e4_fdf36cac",
       "revId": "da5fe01bce4ae84b2619caca7a3aa7ec7d3eb8a7",
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "6d01965c_d74d234a",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1002072
+      },
+      "writtenOn": "2023-07-06T14:33:23Z",
+      "side": 1,
+      "message": "Thanks!\n\nI can\u0027t see why the .a file would also be needed, and the error doesn\u0027t suggest that to me anyway. The #[link] directive is not referring to libraries listed on the command line, it is equivalent to adding another library onto the final linker command line.\n\nThe rlib needs the search paths for the library name in the in #[link] but other objects should not be related to the #[link] nor the compilation.\n\nhttps://gn-review.googlesource.com/c/gn/+/15640 should fix this, if you can try that.",
+      "parentUuid": "443492e4_fdf36cac",
+      "revId": "da5fe01bce4ae84b2619caca7a3aa7ec7d3eb8a7",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
     }
   ]
 }
