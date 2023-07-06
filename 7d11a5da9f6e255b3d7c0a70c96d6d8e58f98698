@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "efd8ae52_ba91e572",
+        "filename": "src/gn/ninja_rust_binary_target_writer.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 366,
+      "author": {
+        "id": 1000067
+      },
+      "writtenOn": "2023-07-06T14:46:49Z",
+      "side": 1,
+      "message": "This should also be done for non-final targets, see comment below.",
+      "revId": "7d11a5da9f6e255b3d7c0a70c96d6d8e58f98698",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "18c3c076_ab6c3dbb",
+        "filename": "src/gn/ninja_rust_binary_target_writer.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 378,
+      "author": {
+        "id": 1000067
+      },
+      "writtenOn": "2023-07-06T14:46:49Z",
+      "side": 1,
+      "message": "nit: s/requires/required/ :-)",
+      "revId": "7d11a5da9f6e255b3d7c0a70c96d6d8e58f98698",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f1fd6f08_f2270d5f",
+        "filename": "src/gn/ninja_rust_binary_target_writer.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 381,
+      "author": {
+        "id": 1000067
+      },
+      "writtenOn": "2023-07-06T14:46:49Z",
+      "side": 1,
+      "message": "This only pushes the lib_dirs value of the dependencies to the rlib command.\nThis is not enough to fix the bug because when depending directly on a static_library() target, the `path/to/foo.a` value will be in `nonrustdeps`, and must generate an `-Lnative\u003dpath/to` as well.",
+      "revId": "7d11a5da9f6e255b3d7c0a70c96d6d8e58f98698",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    }
+  ]
+}
