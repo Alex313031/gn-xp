@@ -68,6 +68,24 @@
       "parentUuid": "f1fd6f08_f2270d5f",
       "revId": "7d11a5da9f6e255b3d7c0a70c96d6d8e58f98698",
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ee68288c_a863f838",
+        "filename": "src/gn/ninja_rust_binary_target_writer.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 381,
+      "author": {
+        "id": 1000067
+      },
+      "writtenOn": "2023-07-06T15:18:25Z",
+      "side": 1,
+      "message": "In this case because the lib.rs for the crate has `#[link(name \u003d \"foo\", kind \u003d \"static\")] ` directive.\n\nThe example I am referring to is [1] for the crate and [2] for the static_library(). Note that `rustc_library()` is a Fuchsia-specific GN template, but you can treat it as a `rust_library()` for simplicity.\n\n[1] https://cs.opensource.google/fuchsia/fuchsia/+/main:src/developer/ffx/lib/buildid/BUILD.gn;l\u003d7\n[2] https://cs.opensource.google/fuchsia/fuchsia/+/main:src/developer/ffx/lib/buildid/cpp/BUILD.gn;l\u003d5",
+      "parentUuid": "b69552f6_721beeac",
+      "revId": "7d11a5da9f6e255b3d7c0a70c96d6d8e58f98698",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
     }
   ]
 }
