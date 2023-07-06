@@ -33,6 +33,24 @@
       "message": "Well, it looks like this patch does not deal correctly with an rlib that depends on a C++ static library using `#[link(name \u003d \"foo\", kind \u003d \"static\")]` in its `lib.rs` source.\n\nMy very naive understanding of Rust linking semantics make me believe that this CL should simply be reverted, but I would appreciate your feedback on the issue.\n\nMore details at https://bugs.fuchsia.dev/p/fuchsia/issues/detail?id\u003d130206",
       "revId": "da5fe01bce4ae84b2619caca7a3aa7ec7d3eb8a7",
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "37c76087_214718c3",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1002072
+      },
+      "writtenOn": "2023-07-06T14:01:45Z",
+      "side": 1,
+      "message": "Ah does it need lib paths to verify the library exists? The #[link] directive does not actually get consumed until link time, but its path could get fully resolved at compile time. I can fix this with another test pretty shortly.",
+      "parentUuid": "c57c7985_edf69962",
+      "revId": "da5fe01bce4ae84b2619caca7a3aa7ec7d3eb8a7",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
     }
   ]
 }
