@@ -51,6 +51,24 @@
       "parentUuid": "c57c7985_edf69962",
       "revId": "da5fe01bce4ae84b2619caca7a3aa7ec7d3eb8a7",
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d9a7f16c_e063ebde",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000067
+      },
+      "writtenOn": "2023-07-06T14:25:42Z",
+      "side": 1,
+      "message": "From the linked bug, the `rustdeps` line in the .ninja file needs these extra arguments: ` -Lnative\u003dhost_x64/obj/src/developer/ffx/lib/buildid/cpp -Clink-arg\u003d-Bdynamic -Clink-arg\u003dhost_x64/obj/src/developer/ffx/lib/buildid/cpp/libbuildid.a` in the action that generates the rlib itself.\n\nWithout this, building the rlib fails completely with: `error: could not find native static library `buildid`, perhaps an -L flag is missing?`.\n\nThe exact logs are not available publicly, but I just want to confirm that the .rlib creation itself fails, not the link of the final binaries that depend on it.",
+      "parentUuid": "37c76087_214718c3",
+      "revId": "da5fe01bce4ae84b2619caca7a3aa7ec7d3eb8a7",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
     }
   ]
 }
