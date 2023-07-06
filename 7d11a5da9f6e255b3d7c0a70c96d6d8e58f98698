@@ -86,6 +86,24 @@
       "parentUuid": "b69552f6_721beeac",
       "revId": "7d11a5da9f6e255b3d7c0a70c96d6d8e58f98698",
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4d4fb7c3_9c5afc35",
+        "filename": "src/gn/ninja_rust_binary_target_writer.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 381,
+      "author": {
+        "id": 1000067
+      },
+      "writtenOn": "2023-07-06T15:22:32Z",
+      "side": 1,
+      "message": "Also, we cannot guess the value of lib_dirs in the target definition for a dependency label, because the exact value will depend on the toolchain() definition used to build it (but the information is available after everything is resolved, i.e. in the ninja_rust_binary_target_writer.cc).",
+      "parentUuid": "ee68288c_a863f838",
+      "revId": "7d11a5da9f6e255b3d7c0a70c96d6d8e58f98698",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
     }
   ]
 }
