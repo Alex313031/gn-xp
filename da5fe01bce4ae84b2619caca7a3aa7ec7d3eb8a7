@@ -123,6 +123,24 @@
       "parentUuid": "7a322f8a_f5f87814",
       "revId": "da5fe01bce4ae84b2619caca7a3aa7ec7d3eb8a7",
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "443492e4_fdf36cac",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000067
+      },
+      "writtenOn": "2023-07-06T14:31:13Z",
+      "side": 1,
+      "message": "I assume the compiler would verify / require foo.a to be available and embed some sort of path reference in the generated .rlib file, even if the real linking operation appears later.\n\nEven in this case, it needs the corresponding -Lnative and -Clink-arg arguments to locate the library and resolve the final path.",
+      "parentUuid": "7a322f8a_f5f87814",
+      "revId": "da5fe01bce4ae84b2619caca7a3aa7ec7d3eb8a7",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
     }
   ]
 }
