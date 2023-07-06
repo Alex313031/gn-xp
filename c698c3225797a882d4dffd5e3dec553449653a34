@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "5c2bbbaf_2d1b62b4",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000067
+      },
+      "writtenOn": "2023-07-06T16:03:54Z",
+      "side": 1,
+      "message": "Thanks, I confirm that Patchset 2 fixes the issue properly!",
+      "revId": "c698c3225797a882d4dffd5e3dec553449653a34",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    }
+  ]
+}
