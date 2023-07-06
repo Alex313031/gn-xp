@@ -122,6 +122,24 @@
       "parentUuid": "4d4fb7c3_9c5afc35",
       "revId": "7d11a5da9f6e255b3d7c0a70c96d6d8e58f98698",
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ba35ded7_8eb2f413",
+        "filename": "src/gn/ninja_rust_binary_target_writer.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 381,
+      "author": {
+        "id": 1002072
+      },
+      "writtenOn": "2023-07-06T15:46:14Z",
+      "side": 1,
+      "message": "Added another test case for deps on a C lib and ensuring it\u0027s path is included, does that look right? I will update the documentation too.",
+      "parentUuid": "a37f581f_2500f526",
+      "revId": "7d11a5da9f6e255b3d7c0a70c96d6d8e58f98698",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
     }
   ]
 }
