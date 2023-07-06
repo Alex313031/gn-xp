@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "9a8dc218_d7c1dfd9",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1002072
+      },
+      "writtenOn": "2023-07-06T18:08:33Z",
+      "side": 1,
+      "message": "Bump for CQ? This is affecting our windows devs",
+      "revId": "115f070cef3bceb979ce828cee0dfad331c42724",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    }
+  ]
+}
