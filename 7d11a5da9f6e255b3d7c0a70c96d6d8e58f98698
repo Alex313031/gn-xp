@@ -158,6 +158,24 @@
       "parentUuid": "a37f581f_2500f526",
       "revId": "7d11a5da9f6e255b3d7c0a70c96d6d8e58f98698",
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3027e5f4_12325220",
+        "filename": "src/gn/ninja_rust_binary_target_writer.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 381,
+      "author": {
+        "id": 1000067
+      },
+      "writtenOn": "2023-07-06T15:47:25Z",
+      "side": 1,
+      "message": "Oh I see you did the same thing in patchset 2, let me reproduce this locally.",
+      "parentUuid": "b7195043_769060b4",
+      "revId": "7d11a5da9f6e255b3d7c0a70c96d6d8e58f98698",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
     }
   ]
 }
