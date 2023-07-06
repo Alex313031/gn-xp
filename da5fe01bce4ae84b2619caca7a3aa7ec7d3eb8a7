@@ -69,6 +69,24 @@
       "parentUuid": "37c76087_214718c3",
       "revId": "da5fe01bce4ae84b2619caca7a3aa7ec7d3eb8a7",
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "0f7ce868_60b915af",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000067
+      },
+      "writtenOn": "2023-07-06T14:27:34Z",
+      "side": 1,
+      "message": "In other words, it looks like `#[link(name \u003d \"foo\", kind \u003d \"static\")]` forces the rust compiler to perform a linking operation when creating an .rlib file.\n\nThus the initial assumption that nonrustdeps are not needed for non-final targets is not true in general.",
+      "parentUuid": "d9a7f16c_e063ebde",
+      "revId": "da5fe01bce4ae84b2619caca7a3aa7ec7d3eb8a7",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
     }
   ]
 }
