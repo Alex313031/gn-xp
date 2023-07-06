@@ -50,6 +50,24 @@
       "message": "This only pushes the lib_dirs value of the dependencies to the rlib command.\nThis is not enough to fix the bug because when depending directly on a static_library() target, the `path/to/foo.a` value will be in `nonrustdeps`, and must generate an `-Lnative\u003dpath/to` as well.",
       "revId": "7d11a5da9f6e255b3d7c0a70c96d6d8e58f98698",
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b69552f6_721beeac",
+        "filename": "src/gn/ninja_rust_binary_target_writer.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 381,
+      "author": {
+        "id": 1002072
+      },
+      "writtenOn": "2023-07-06T15:07:06Z",
+      "side": 1,
+      "message": "Could you help me understand why a GN deps on foo.a (which has no bearing on rust code) means that rustc needs the path to it when compiling a crate?",
+      "parentUuid": "f1fd6f08_f2270d5f",
+      "revId": "7d11a5da9f6e255b3d7c0a70c96d6d8e58f98698",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
     }
   ]
 }
