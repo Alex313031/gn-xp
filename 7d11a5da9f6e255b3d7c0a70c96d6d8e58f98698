@@ -104,6 +104,24 @@
       "parentUuid": "ee68288c_a863f838",
       "revId": "7d11a5da9f6e255b3d7c0a70c96d6d8e58f98698",
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a37f581f_2500f526",
+        "filename": "src/gn/ninja_rust_binary_target_writer.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 381,
+      "author": {
+        "id": 1002072
+      },
+      "writtenOn": "2023-07-06T15:30:59Z",
+      "side": 1,
+      "message": "In the case of a #[link] directive it\u0027s up to the tool to provides search paths through `-Lnative\u003d` or `-Lframework\u003d`\n\nBut I think you\u0027re saying that a GN deps\u003d[] rule should imply a `-Lnative\u003d` for rustc, so that you do not have to specify `ldflags` to the dependency. That could make sense, we should document this. The current documentation does not say this:\n\n```\n  Source sets, shared libraries, and non-complete static libraries will be\n  propagated up the dependency tree across groups, non-complete static\n  libraries and source sets.\n\n  Executables, shared libraries, and complete static libraries will link all\n  propagated targets and stop propagation. Actions and copy steps also stop\n  propagation, allowing them to take a library as an input but not force\n  dependents to link to it.\n\n  Propagation of all_dependent_configs and public_configs happens independently\n  of target type. all_dependent_configs are always propagated across all types\n  of targets, and public_configs are always propagated across public deps of\n  all types of targets.\n```\n\nWe don\u0027t need an -Clink-arg\u003d lines, as those are only passed through to the linker, which is not run.",
+      "parentUuid": "4d4fb7c3_9c5afc35",
+      "revId": "7d11a5da9f6e255b3d7c0a70c96d6d8e58f98698",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
     }
   ]
 }
