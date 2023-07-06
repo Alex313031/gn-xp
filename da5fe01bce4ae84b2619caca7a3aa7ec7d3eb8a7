@@ -177,6 +177,24 @@
       "parentUuid": "443492e4_fdf36cac",
       "revId": "da5fe01bce4ae84b2619caca7a3aa7ec7d3eb8a7",
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "da55a717_d076cb54",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000067
+      },
+      "writtenOn": "2023-07-06T14:37:56Z",
+      "side": 1,
+      "message": "I confirm that manual testing shows that only the `-Lnative\u003d` parts are needed to build the rlib. I am currently rebuilding the dependents (which takes a little time). I will try your patch too, thanks for looking into this.",
+      "parentUuid": "6d01965c_d74d234a",
+      "revId": "da5fe01bce4ae84b2619caca7a3aa7ec7d3eb8a7",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
     }
   ]
 }
