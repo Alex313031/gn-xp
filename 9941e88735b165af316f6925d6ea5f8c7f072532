@@ -16,6 +16,23 @@
       "message": "Seems alright to me, given the very low complexity.\n\nBut I sometimes hack on SerenityOS and might be biased, so +brettw for a second opinion too 😊",
       "revId": "9941e88735b165af316f6925d6ea5f8c7f072532",
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "463ecacc_cdff9720",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2023-07-10T17:33:13Z",
+      "side": 1,
+      "message": "Adding to the already long lists of existing defines is fine for random small platforms. I get concerned when we\u0027re adding new ifdefs in new places.",
+      "revId": "9941e88735b165af316f6925d6ea5f8c7f072532",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
     }
   ]
 }
