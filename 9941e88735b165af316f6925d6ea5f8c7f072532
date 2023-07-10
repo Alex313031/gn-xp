@@ -33,6 +33,23 @@
       "message": "Adding to the already long lists of existing defines is fine for random small platforms. I get concerned when we\u0027re adding new ifdefs in new places.",
       "revId": "9941e88735b165af316f6925d6ea5f8c7f072532",
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "124aea8c_e6cbf396",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2023-07-10T22:56:13Z",
+      "side": 1,
+      "message": "Can you either +2 with your @chromium or make your @google OWNER?",
+      "revId": "9941e88735b165af316f6925d6ea5f8c7f072532",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
     }
   ]
 }
