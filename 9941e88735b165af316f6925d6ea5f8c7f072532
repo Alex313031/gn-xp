@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a68c8d9f_64574841",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2023-07-10T11:55:08Z",
+      "side": 1,
+      "message": "Seems alright to me, given the very low complexity.\n\nBut I sometimes hack on SerenityOS and might be biased, so +brettw for a second opinion too 😊",
+      "revId": "9941e88735b165af316f6925d6ea5f8c7f072532",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    }
+  ]
+}
