@@ -211,6 +211,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "acba576c_2705172c",
+        "filename": "src/util/exe_path.cc",
+        "patchSetId": 6
+      },
+      "lineNbr": 123,
+      "author": {
+        "id": 1002587
+      },
+      "writtenOn": "2023-07-12T07:34:11Z",
+      "side": 1,
+      "message": "Let me check the return value of realpath.",
+      "parentUuid": "a5a05194_644b3f53",
+      "range": {
+        "startLine": 123,
+        "startChar": 8,
+        "endLine": 123,
+        "endChar": 31
+      },
+      "revId": "5086855e04502b67886e165bf67ec537b21af0a6",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "d08851f0_4d70936b",
         "filename": "src/util/exe_path.h",
         "patchSetId": 6
@@ -294,6 +318,24 @@
       "side": 1,
       "message": "What is done?",
       "parentUuid": "7278ee95_6b9215fa",
+      "revId": "5086855e04502b67886e165bf67ec537b21af0a6",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2bc4e31f_f01825e1",
+        "filename": "src/util/exe_path.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 13,
+      "author": {
+        "id": 1002587
+      },
+      "writtenOn": "2023-07-12T07:34:11Z",
+      "side": 1,
+      "message": "I had resolved the resolved comments but I think it is showing for all in that loop as done.\n\nAs we used global variable here, so declaring it in the header file that is exe_path.h.",
+      "parentUuid": "fb127cda_4475b05e",
       "revId": "5086855e04502b67886e165bf67ec537b21af0a6",
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
     }
