@@ -338,6 +338,24 @@
       "parentUuid": "fb127cda_4475b05e",
       "revId": "5086855e04502b67886e165bf67ec537b21af0a6",
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c17e6f1f_53bb1711",
+        "filename": "src/util/exe_path.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 13,
+      "author": {
+        "id": 1000030
+      },
+      "writtenOn": "2023-07-12T07:50:32Z",
+      "side": 1,
+      "message": "But global variable can be defined in cc file too?",
+      "parentUuid": "2bc4e31f_f01825e1",
+      "revId": "5086855e04502b67886e165bf67ec537b21af0a6",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
     }
   ]
 }
