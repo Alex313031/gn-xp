@@ -229,15 +229,16 @@ TEST(NinjaActionTargetWriter, ForEach) {
       "../../foo/included.txt obj/foo/dep.stamp\n"
       "\n"
       "build input1.out: __foo_bar___rule ../../foo/input1.txt | "
-      "obj/foo/bar.inputdeps.stamp\n"
+      "obj/foo/bar.inputdeps.stamp || obj/foo/bundle_data_dep.stamp "
+      "obj/foo/datadep.stamp\n"
       "  source_name_part = input1\n"
       "build input2.out: __foo_bar___rule ../../foo/input2.txt | "
-      "obj/foo/bar.inputdeps.stamp\n"
+      "obj/foo/bar.inputdeps.stamp || obj/foo/bundle_data_dep.stamp "
+      "obj/foo/datadep.stamp\n"
       "  source_name_part = input2\n"
       "\n"
       "build obj/foo/bar.stamp: "
-      "stamp input1.out input2.out || obj/foo/bundle_data_dep.stamp "
-      "obj/foo/datadep.stamp\n";
+      "stamp input1.out input2.out\n";
 
   std::string out_str = out.str();
 #if defined(OS_WIN)
