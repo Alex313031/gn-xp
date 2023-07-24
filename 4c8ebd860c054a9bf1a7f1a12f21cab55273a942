@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "28e24460_4ecd96db",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000014
+      },
+      "writtenOn": "2023-07-24T22:50:28Z",
+      "side": 1,
+      "message": "I\u0027ll let Takuto handle this review. I don\u0027t recall enough specifics on this to be of much use without re-learning how it works.",
+      "revId": "4c8ebd860c054a9bf1a7f1a12f21cab55273a942",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    }
+  ]
+}
