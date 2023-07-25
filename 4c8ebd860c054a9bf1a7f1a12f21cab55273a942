@@ -35,6 +35,24 @@
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "5e3a9f3b_e28d7277",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000397
+      },
+      "writtenOn": "2023-07-25T18:07:15Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "108f4378_5838d006",
+      "revId": "4c8ebd860c054a9bf1a7f1a12f21cab55273a942",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "0d30a439_2f86ad6c",
@@ -48,6 +66,30 @@
       "writtenOn": "2023-07-25T08:27:11Z",
       "side": 1,
       "message": "is run?",
+      "range": {
+        "startLine": 50,
+        "startChar": 55,
+        "endLine": 50,
+        "endChar": 57
+      },
+      "revId": "4c8ebd860c054a9bf1a7f1a12f21cab55273a942",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "864a0d9e_e83b513c",
+        "filename": "src/gn/ninja_action_target_writer.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 50,
+      "author": {
+        "id": 1000397
+      },
+      "writtenOn": "2023-07-25T18:07:15Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "0d30a439_2f86ad6c",
       "range": {
         "startLine": 50,
         "startChar": 55,
