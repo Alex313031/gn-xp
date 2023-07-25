@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0772760b_b99dc16c",
+        "filename": "docs/reference.md",
+        "patchSetId": 1
+      },
+      "lineNbr": 5656,
+      "author": {
+        "id": 1000067
+      },
+      "writtenOn": "2023-07-25T17:48:51Z",
+      "side": 0,
+      "message": "note: this was removed automatically by running the tools/update_reference.sh script, should this be restored? (probably by changing some source file).",
+      "revId": "fae280eabe5d31accc53100137459ece19a7a295",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    }
+  ]
+}
