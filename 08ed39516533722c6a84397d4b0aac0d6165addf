@@ -16,6 +16,24 @@
       "message": "\u0027\\\\\u0027 is not included in |expected|?",
       "revId": "08ed39516533722c6a84397d4b0aac0d6165addf",
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "fdab21ac_abab0dde",
+        "filename": "src/gn/ninja_action_target_writer_unittest.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 219,
+      "author": {
+        "id": 1000397
+      },
+      "writtenOn": "2023-07-25T19:28:29Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "bc6b8410_dafe6940",
+      "revId": "08ed39516533722c6a84397d4b0aac0d6165addf",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
     }
   ]
 }
