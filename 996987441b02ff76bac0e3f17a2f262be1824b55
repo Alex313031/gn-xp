@@ -63,6 +63,30 @@
       },
       "revId": "996987441b02ff76bac0e3f17a2f262be1824b55",
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "81b7e9fe_2feaf1f4",
+        "filename": "src/gn/ninja_rust_binary_target_writer_unittest.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 895,
+      "author": {
+        "id": 1002072
+      },
+      "writtenOn": "2023-07-25T15:10:47Z",
+      "side": 1,
+      "message": "Sounds good.\n\nI wonder if we\u0027ll end up needing it too, though it seems Rust is working in Siso in Chromium now.",
+      "parentUuid": "6e049ae8_875fde6a",
+      "range": {
+        "startLine": 895,
+        "startChar": 17,
+        "endLine": 895,
+        "endChar": 26
+      },
+      "revId": "996987441b02ff76bac0e3f17a2f262be1824b55",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
     }
   ]
 }
