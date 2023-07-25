@@ -34,6 +34,24 @@
       "parentUuid": "0772760b_b99dc16c",
       "revId": "fae280eabe5d31accc53100137459ece19a7a295",
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "211839fd_d35ef699",
+        "filename": "docs/reference.md",
+        "patchSetId": 1
+      },
+      "lineNbr": 5656,
+      "author": {
+        "id": 1000067
+      },
+      "writtenOn": "2023-07-25T18:03:27Z",
+      "side": 0,
+      "message": "No worries, I have uploaded a new patchset with the corresponding change in variables.cc then",
+      "parentUuid": "6dea51ee_4cb4ea5e",
+      "revId": "fae280eabe5d31accc53100137459ece19a7a295",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
     }
   ]
 }
