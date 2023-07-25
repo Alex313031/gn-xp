@@ -87,6 +87,30 @@
       },
       "revId": "996987441b02ff76bac0e3f17a2f262be1824b55",
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e684c943_1d9e4046",
+        "filename": "src/gn/ninja_rust_binary_target_writer_unittest.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 895,
+      "author": {
+        "id": 1000067
+      },
+      "writtenOn": "2023-07-25T15:28:57Z",
+      "side": 1,
+      "message": "Siso has access to the full Ninja build plan, so I suspect they won\u0027t need that. I\u0027ll add takuto as a reviewer though, his feedback might be interesting.",
+      "parentUuid": "81b7e9fe_2feaf1f4",
+      "range": {
+        "startLine": 895,
+        "startChar": 17,
+        "endLine": 895,
+        "endChar": 26
+      },
+      "revId": "996987441b02ff76bac0e3f17a2f262be1824b55",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
     }
   ]
 }
