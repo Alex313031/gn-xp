@@ -1,0 +1,44 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "8d30b31c_8e5bebee",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1002072
+      },
+      "writtenOn": "2023-07-25T14:58:53Z",
+      "side": 1,
+      "message": "LGTM",
+      "revId": "996987441b02ff76bac0e3f17a2f262be1824b55",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9460db57_b97ad2ad",
+        "filename": "src/gn/ninja_rust_binary_target_writer_unittest.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 895,
+      "author": {
+        "id": 1002072
+      },
+      "writtenOn": "2023-07-25T14:58:53Z",
+      "side": 1,
+      "message": "Just noting that this information is already present in the .ninja files here, it doesn\u0027t need to be in the command line to find them. Adding this as an option is fine though anyway.",
+      "range": {
+        "startLine": 895,
+        "startChar": 17,
+        "endLine": 895,
+        "endChar": 26
+      },
+      "revId": "996987441b02ff76bac0e3f17a2f262be1824b55",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    }
+  ]
+}
