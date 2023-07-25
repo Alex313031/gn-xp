@@ -39,6 +39,30 @@
       },
       "revId": "996987441b02ff76bac0e3f17a2f262be1824b55",
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "6e049ae8_875fde6a",
+        "filename": "src/gn/ninja_rust_binary_target_writer_unittest.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 895,
+      "author": {
+        "id": 1000067
+      },
+      "writtenOn": "2023-07-25T15:09:41Z",
+      "side": 1,
+      "message": "Yes, I am aware of that, but our build system uses a wrapper script (setup by our toolchain definition) and has only access to the command string, not any other variables set in the Ninja build plan.\n\nIn other words, the final command generated for the Ninja build statement looks like:\n\n```\nwrapper_script \u003csome_wrapper_specific_args\u003e -- \u003crustc invocation\u003e\n```\n\nSo it is important that `\u003crustc invocation\u003e` contains references to all input files (the wrapper understands -Lnative\u003d\u003cdir\u003e and -Clink-arg\u003dlibfoo.a though).",
+      "parentUuid": "9460db57_b97ad2ad",
+      "range": {
+        "startLine": 895,
+        "startChar": 17,
+        "endLine": 895,
+        "endChar": 26
+      },
+      "revId": "996987441b02ff76bac0e3f17a2f262be1824b55",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
     }
   ]
 }
