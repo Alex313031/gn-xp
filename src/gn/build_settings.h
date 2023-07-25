@@ -70,6 +70,14 @@ class BuildSettings {
     no_stamp_files_ = no_stamp_files;
   }
 
+  // The 'add_rlib_link_libraries' boolean flag can be set to ensure that
+  // all linked libraries necessary to generate a Rust rlib artifact appear
+  // on the Ninja action command used to generate it.
+  bool add_rlib_link_libraries() const { return add_rlib_link_libraries_; }
+  void set_add_rlib_link_libraries(bool add_rlib_link_libraries) {
+    add_rlib_link_libraries_ = add_rlib_link_libraries;
+  }
+
   const SourceFile& build_config_file() const { return build_config_file_; }
   void set_build_config_file(const SourceFile& f) { build_config_file_ = f; }
 
@@ -144,6 +152,7 @@ class BuildSettings {
   // See 40045b9 for the reason behind using 1.7.2 as the default version.
   Version ninja_required_version_{1, 7, 2};
   bool no_stamp_files_ = false;
+  bool add_rlib_link_libraries_ = true;
 
   SourceFile build_config_file_;
   SourceFile arg_file_template_path_;

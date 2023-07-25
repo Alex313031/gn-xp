@@ -209,7 +209,11 @@ void NinjaRustBinaryTargetWriter::Run() {
   std::copy(classified_deps.non_linkable_deps.begin(),
             classified_deps.non_linkable_deps.end(),
             std::back_inserter(extern_deps));
-  WriteExternsAndDeps(target_->IsFinal(), extern_deps, transitive_crates,
+
+  bool write_linked_libraries =
+      target_->IsFinal() ||
+      target_->settings()->build_settings()->add_rlib_link_libraries();
+  WriteExternsAndDeps(write_linked_libraries, extern_deps, transitive_crates,
                       rustdeps, nonrustdeps);
   WriteSourcesAndInputs();
   WritePool(out_);
@@ -256,7 +260,7 @@ void NinjaRustBinaryTargetWriter::WriteSourcesAndInputs() {
 }
 
 void NinjaRustBinaryTargetWriter::WriteExternsAndDeps(
-    bool target_is_final,
+    bool write_linked_libraries,
     const std::vector<const Target*>& deps,
     const std::vector<ExternCrate>& transitive_rust_deps,
     const std::vector<OutputFile>& rustdeps,
@@ -365,7 +369,7 @@ void NinjaRustBinaryTargetWriter::WriteExternsAndDeps(
 
   // If rustc will invoke a linker, then pass linker arguments to include those
   // non-Rust native dependencies in the linking step.
-  if (target_is_final) {
+  if (write_linked_libraries) {
     // Before outputting any libraries to link, ensure the linker is in a mode
     // that allows dynamic linking, as rustc may have previously put it into
     // static-only mode.
@@ -383,14 +387,14 @@ void NinjaRustBinaryTargetWriter::WriteExternsAndDeps(
   WriteLibrarySearchPath(out_, tool_);
   // If rustc will invoke a linker, all libraries need the passed through to the
   // linker.
-  if (target_is_final) {
+  if (write_linked_libraries) {
     WriteLibs(out_, tool_);
   }
   out_ << std::endl;
   out_ << "  ldflags =";
   // If rustc will invoke a linker, linker flags need to be forwarded through to
   // the linker.
-  if (target_is_final) {
+  if (write_linked_libraries) {
     WriteCustomLinkerFlags(out_, tool_);
   }
   out_ << std::endl;

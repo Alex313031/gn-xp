@@ -7102,6 +7102,13 @@
       When set specifies the minimum required version of Ninja. The default
       required version is 1.7.2. Specifying a higher version might enable the
       use of some of newer features that can make the build more efficient.
+
+
+  add_rlib_link_libraries [optional]
+      A boolean flag, which if set, allows GN to add all linked libraries
+      required to build a Rust rlib artifact to the Ninja action command used
+      to generate it. This is required by build systems that need to process
+      the command to find all its input files. Defaults to true.
 ```
 
 #### **Example .gn file contents**

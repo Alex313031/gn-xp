@@ -896,7 +896,8 @@ TEST_F(NinjaRustBinaryTargetWriterTest, NonRustDeps) {
         "  source_file_part = lib.rs\n"
         "  source_name_part = lib\n"
         "  externs =\n"
-        "  rustdeps = -Lnative=obj/foo\n"
+        "  rustdeps = -Lnative=obj/foo -Clink-arg=-Balternative-dynamic "
+        "-Clink-arg=obj/foo/libstatic.a\n"
         "  ldflags =\n"
         "  sources = ../../baz/lib.rs\n";
     std::string out_str = out.str();
@@ -1214,6 +1215,107 @@ TEST_F(NinjaRustBinaryTargetWriterTest, LibsAndLibDirs) {
 TEST_F(NinjaRustBinaryTargetWriterTest, RlibWithLibDeps) {
   Err err;
   TestWithScope setup;
+
+  Target public_rlib(setup.settings(), Label(SourceDir("//bar/"), "publiclib"));
+  public_rlib.set_output_type(Target::RUST_LIBRARY);
+  public_rlib.visibility().SetPublic();
+  SourceFile barlib("//bar/lib.rs");
+  public_rlib.sources().push_back(SourceFile("//bar/publiclib.rs"));
+  public_rlib.sources().push_back(barlib);
+  public_rlib.source_types_used().Set(SourceFile::SOURCE_RS);
+  public_rlib.rust_values().set_crate_root(barlib);
+  public_rlib.rust_values().crate_name() = "publiccrate";
+  public_rlib.SetToolchain(setup.toolchain());
+  ASSERT_TRUE(public_rlib.OnResolved(&err));
+
+  Target staticlib(setup.settings(), Label(SourceDir("//clib/"), "static"));
+  staticlib.set_output_type(Target::STATIC_LIBRARY);
+  staticlib.visibility().SetPublic();
+  staticlib.sources().push_back(SourceFile("//foo/clib.cpp"));
+  staticlib.source_types_used().Set(SourceFile::SOURCE_CPP);
+  staticlib.SetToolchain(setup.toolchain());
+  ASSERT_TRUE(staticlib.OnResolved(&err));
+
+  Target rlib(setup.settings(), Label(SourceDir("//foo/"), "rlibcrate"));
+  rlib.set_output_type(Target::RUST_LIBRARY);
+  rlib.visibility().SetPublic();
+  SourceFile lib("//foo/input.rs");
+  rlib.sources().push_back(lib);
+  rlib.source_types_used().Set(SourceFile::SOURCE_RS);
+  rlib.rust_values().set_crate_root(lib);
+  rlib.rust_values().crate_name() = "rlibcrate";
+  rlib.SetToolchain(setup.toolchain());
+  rlib.public_deps().push_back(LabelTargetPair(&public_rlib));
+
+  // This adds dependencies on static libraries, which are not consumed by an
+  // rlib since it does not get linked. None of these should appear in
+  // `rustdeps` for a `rust_rlib`, though they would for a `rust_bin` (as tested
+  // for above).
+  //
+  // 1. A dependency on an archive file directly as happens with a `libs` rule,
+  //    requesting a system library. The path to that library must be specified
+  //    separately with `-L` in ldflags, the library does not appear in the
+  //    rustc compilation of an rlib.
+  rlib.config_values().libs().push_back(LibFile(SourceFile("//dir1/ar.a")));
+  // 2. A dependency on a library name as happens with a `libs` rule. Libraries
+  //    need only be named when linking, they do not need to appear in an rlib
+  //    compilation.
+  rlib.config_values().libs().push_back(LibFile("quux"));
+  // 3. A dependency on a library path which will be used for linking, which is
+  //    separate from the dependency paths for finding Rust crates. But it may
+  //    be needed to resolve the path to a native library in a #[link]
+  //    directive.
+  rlib.config_values().lib_dirs().push_back(SourceDir("//baz/"));
+  // 4. A framework search directory will be used for linking frameworks, which
+  //    is also separate from finding Rust crates. Again a #[link] directive can
+  //    point to a framework, so these paths need to be present during
+  //    compilation
+  rlib.config_values().framework_dirs().push_back(SourceDir("//fwdir/"));
+  // 5. A dependency on a C library through a `deps` rule, which points to a
+  //    `static_library` target. GN guarantees that Rust can refer to that
+  //    library through #[link] without having to specify the path in ldflags
+  //    as well.
+  rlib.private_deps().push_back(LabelTargetPair(&staticlib));
+
+  ASSERT_TRUE(rlib.OnResolved(&err));
+
+  {
+    std::ostringstream out;
+    NinjaRustBinaryTargetWriter writer(&rlib, out);
+    writer.Run();
+
+    const char expected[] =
+        "crate_name = rlibcrate\n"
+        "crate_type = rlib\n"
+        "output_extension = .rlib\n"
+        "output_dir = \n"
+        "rustflags =\n"
+        "rustenv =\n"
+        "root_out_dir = .\n"
+        "target_out_dir = obj/foo\n"
+        "target_output_name = librlibcrate\n"
+        "\n"
+        "build obj/foo/librlibcrate.rlib: rust_rlib ../../foo/input.rs | "
+        "../../foo/input.rs obj/bar/libpubliclib.rlib obj/clib/libstatic.a\n"
+        "  source_file_part = input.rs\n"
+        "  source_name_part = input\n"
+        "  externs = --extern publiccrate=obj/bar/libpubliclib.rlib\n"
+        "  rustdeps = -Ldependency=obj/bar -Lnative=obj/clib "
+        "-Clink-arg=-Bdynamic -Clink-arg=obj/clib/libstatic.a "
+        "-Lnative=../../baz -Lframework=../../fwdir -Clink-arg=../../dir1/ar.a "
+        "-lquux\n"
+        "  ldflags =\n"
+        "  sources = ../../foo/input.rs\n";
+    std::string out_str = out.str();
+    EXPECT_EQ(expected, out_str) << expected << "\n" << out_str;
+  }
+}
+
+TEST_F(NinjaRustBinaryTargetWriterTest, RlibWithLibDepsWithoutLinkedLibraries) {
+  Err err;
+  TestWithScope setup;
+
+  setup.build_settings()->set_add_rlib_link_libraries(false);
 
   Target public_rlib(setup.settings(), Label(SourceDir("//bar/"), "publiclib"));
   public_rlib.set_output_type(Target::RUST_LIBRARY);
