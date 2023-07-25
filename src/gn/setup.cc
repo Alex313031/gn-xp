@@ -191,6 +191,13 @@ Variables
       required version is 1.7.2. Specifying a higher version might enable the
       use of some of newer features that can make the build more efficient.
 
+
+  add_rlib_link_libraries [optional]
+      A boolean flag, which if set, allows GN to add all linked libraries
+      required to build a Rust rlib artifact to the Ninja action command used
+      to generate it. This is required by build systems that need to process
+      the command to find all its input files. Defaults to true.
+
 Example .gn file contents
 
   buildconfig = "//build/config/BUILDCONFIG.gn"
@@ -1070,6 +1077,17 @@ bool Setup::FillOtherConfig(const base::CommandLine& cmdline, Err* err) {
     build_settings_.set_no_stamp_files(no_stamp_files_value->boolean_value());
     CHECK(!build_settings_.no_stamp_files())
         << "no_stamp_files does not work yet!";
+  }
+
+  // No rlib link deps.
+  const Value* add_rlib_link_libraries_value =
+      dotfile_scope_.GetValue("add_rlib_link_libraries", true);
+  if (add_rlib_link_libraries_value) {
+    if (!add_rlib_link_libraries_value->VerifyTypeIs(Value::BOOLEAN, err)) {
+      return false;
+    }
+    build_settings_.set_add_rlib_link_libraries(
+        add_rlib_link_libraries_value->boolean_value());
   }
 
   // Export compile commands.

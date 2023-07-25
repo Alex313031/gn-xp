@@ -5650,10 +5650,6 @@
   of targets, and public_configs are always propagated across public deps of
   all types of targets.
 
-  For Rust targets, deps ensures that Rust code can refer to the dependency
-  target. If the dependency is a C/C++ target, the path to that target will
-  be made available to Rust for `#[link]` directives.
-
   Data dependencies are propagated differently. See "gn help data_deps" and
   "gn help runtime_deps".
 
@@ -7102,6 +7098,13 @@
       When set specifies the minimum required version of Ninja. The default
       required version is 1.7.2. Specifying a higher version might enable the
       use of some of newer features that can make the build more efficient.
+
+
+  add_rlib_link_libraries [optional]
+      A boolean flag, which if set, allows GN to add all linked libraries
+      required to build a Rust rlib artifact to the Ninja action command used
+      to generate it. This is required by build systems that need to process
+      the command to find all its input files. Defaults to true.
 ```
 
 #### **Example .gn file contents**
