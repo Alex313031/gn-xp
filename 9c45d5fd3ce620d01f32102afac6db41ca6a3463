@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4ae8c8bc_3891df3b",
+        "filename": "src/gn/ninja_action_target_writer_unittest.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 217,
+      "author": {
+        "id": 1000030
+      },
+      "writtenOn": "2023-07-26T03:21:26Z",
+      "side": 1,
+      "message": "This temporal variable is not necessary now?",
+      "range": {
+        "startLine": 217,
+        "startChar": 14,
+        "endLine": 217,
+        "endChar": 21
+      },
+      "revId": "9c45d5fd3ce620d01f32102afac6db41ca6a3463",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    }
+  ]
+}
