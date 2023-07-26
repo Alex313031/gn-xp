@@ -22,6 +22,30 @@
       },
       "revId": "9c45d5fd3ce620d01f32102afac6db41ca6a3463",
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "8461d5b9_a0ed37eb",
+        "filename": "src/gn/ninja_action_target_writer_unittest.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 217,
+      "author": {
+        "id": 1000397
+      },
+      "writtenOn": "2023-07-26T17:39:43Z",
+      "side": 1,
+      "message": "It\u0027s probably not I\u0027ll remove it in the next CL (since I think gn-review is configured to remove the +2 on a new patch upload).",
+      "parentUuid": "4ae8c8bc_3891df3b",
+      "range": {
+        "startLine": 217,
+        "startChar": 14,
+        "endLine": 217,
+        "endChar": 21
+      },
+      "revId": "9c45d5fd3ce620d01f32102afac6db41ca6a3463",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
     }
   ]
 }
