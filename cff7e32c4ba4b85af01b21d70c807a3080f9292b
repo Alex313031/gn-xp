@@ -18,6 +18,24 @@
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "a9716cd6_0ea69656",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 1000067
+      },
+      "writtenOn": "2023-07-26T09:35:03Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "da03eb61_13ea8a56",
+      "revId": "cff7e32c4ba4b85af01b21d70c807a3080f9292b",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "20e55fc2_d73f4f2c",
@@ -31,6 +49,30 @@
       "writtenOn": "2023-07-26T05:30:40Z",
       "side": 1,
       "message": "No reference to this?",
+      "range": {
+        "startLine": 15,
+        "startChar": 18,
+        "endLine": 15,
+        "endChar": 23
+      },
+      "revId": "cff7e32c4ba4b85af01b21d70c807a3080f9292b",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a3075145_5dafd704",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 15,
+      "author": {
+        "id": 1000067
+      },
+      "writtenOn": "2023-07-26T09:35:03Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "20e55fc2_d73f4f2c",
       "range": {
         "startLine": 15,
         "startChar": 18,
@@ -71,6 +113,30 @@
       "writtenOn": "2023-07-26T05:30:40Z",
       "side": 1,
       "message": "Could you leave TODO comment with tracking issue if you\u0027ll change this in a future CL?",
+      "range": {
+        "startLine": 155,
+        "startChar": 34,
+        "endLine": 155,
+        "endChar": 38
+      },
+      "revId": "cff7e32c4ba4b85af01b21d70c807a3080f9292b",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "8a65b48b_5535a953",
+        "filename": "src/gn/build_settings.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 155,
+      "author": {
+        "id": 1000067
+      },
+      "writtenOn": "2023-07-26T09:35:03Z",
+      "side": 1,
+      "message": "Based on discussion on gn-dev@, I have uploaded another patchset that does not introduce a new configuration variable and simply restores all linker arguments into the Ninja command, so this multi-step plan is no longer necessary, i.e. submitting this CL should unblock the Fuchsia build.",
+      "parentUuid": "8d08a3a0_dfcdde26",
       "range": {
         "startLine": 155,
         "startChar": 34,
