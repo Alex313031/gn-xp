@@ -100,6 +100,11 @@ class NinjaTargetWriter {
   mutable ResolvedTargetData* resolved_ptr_ = nullptr;
   mutable std::unique_ptr<ResolvedTargetData> resolved_owned_;
 
+  // Helper that takes a set of OutputFiles (such as inputs or outputs of this
+  // target), and creates a sorted list to ensure a consistent order is created
+  // for the files, without any duplicates.
+  std::vector<OutputFile> SortOutputFileSet(const std::set<OutputFile>& items);
+
  private:
   void WriteCopyRules();
   void WriteEscapedSubstitution(const Substitution* type);

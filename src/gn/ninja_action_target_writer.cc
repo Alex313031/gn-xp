@@ -29,22 +29,36 @@ NinjaActionTargetWriter::~NinjaActionTargetWriter() = default;
 void NinjaActionTargetWriter::Run() {
   std::string custom_rule_name = WriteRuleDefinition();
 
+  // Collects the deps that will be written to the ninja rules themselves.
+  OutputFileSet input_deps;
+  OutputFileSet order_only_deps;
+
   // Collect our deps to pass as additional "hard dependencies" for input deps.
   // This will force all of the action's dependencies to be completed before
   // the action is run. Usually, if an action has a dependency, it will be
   // operating on the result of that previous step, so we need to be sure to
   // serialize these.
   std::vector<const Target*> additional_hard_deps;
-  std::vector<OutputFile> order_only_deps;
   const auto& target_deps = resolved().GetTargetDeps(target_);
 
   for (const Target* dep : target_deps.linked_deps()) {
     if (dep->IsDataOnly()) {
-      order_only_deps.push_back(dep->dependency_output_file());
+      order_only_deps.insert(dep->dependency_output_file());
     } else {
       additional_hard_deps.push_back(dep);
     }
   }
+
+  // For ACTIONs, the input deps appear only once in the generated ninja
+  // file, so WriteInputDepsStampAndGetDep() won't create a stamp file
+  // and the action will just depend on all the input deps directly.
+  size_t num_stamp_uses =
+      target_->output_type() == Target::ACTION ? 1u : target_->sources().size();
+
+  input_deps.InsertAll(
+      WriteInputDepsStampAndGetDep(additional_hard_deps, num_stamp_uses));
+
+  out_ << std::endl;
 
   // Add all data-deps to the order-only-deps for the action.  The data_deps
   // field is used to implement different use-cases, including:
@@ -60,25 +74,21 @@ void NinjaActionTargetWriter::Run() {
   //    and on an incremental build, if the now-implicit dependencies are
   //    'dirty', this action will be considered 'dirty' as well.
   //
-  for (const Target* data_dep : target_deps.data_deps())
-    order_only_deps.push_back(data_dep->dependency_output_file());
-
-  // For ACTIONs, the input deps appear only once in the generated ninja
-  // file, so WriteInputDepsStampAndGetDep() won't create a stamp file
-  // and the action will just depend on all the input deps directly.
-  size_t num_stamp_uses =
-      target_->output_type() == Target::ACTION ? 1u : target_->sources().size();
-  std::vector<OutputFile> input_deps =
-      WriteInputDepsStampAndGetDep(additional_hard_deps, num_stamp_uses);
-  out_ << std::endl;
+  for (const Target* data_dep : target_deps.data_deps()) {
+    // Only add data dependencies that are not not also input_dependencies.
+    auto dependency_output_file = data_dep->dependency_output_file();
+    if (!input_deps.contains(dependency_output_file)) {
+      order_only_deps.insert(dependency_output_file);
+    }
+  }
 
   // Collects all output files for writing below.
   std::vector<OutputFile> output_files;
 
   if (target_->output_type() == Target::ACTION_FOREACH) {
     // Write separate build lines for each input source file.
-    WriteSourceRules(custom_rule_name, input_deps, order_only_deps,
-                     &output_files);
+    WriteSourceRules(custom_rule_name, input_deps.AsSortedVector(),
+                     order_only_deps.AsSortedVector(), &output_files);
   } else {
     DCHECK(target_->output_type() == Target::ACTION);
 
@@ -94,13 +104,13 @@ void NinjaActionTargetWriter::Run() {
       // As in WriteSourceRules, we want to force this target to rebuild any
       // time any of its dependencies change.
       out_ << " |";
-      path_output_.WriteFiles(out_, input_deps);
+      path_output_.WriteFiles(out_, input_deps.AsSortedVector());
     }
     if (!order_only_deps.empty()) {
       // Write any order-only deps out for actions just like they are for
       // binaries.
       out_ << " ||";
-      path_output_.WriteFiles(out_, order_only_deps);
+      path_output_.WriteFiles(out_, order_only_deps.AsSortedVector());
     }
 
     out_ << std::endl;

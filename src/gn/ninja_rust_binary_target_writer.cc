@@ -113,8 +113,8 @@ void NinjaRustBinaryTargetWriter::Run() {
 
   size_t num_stamp_uses = target_->sources().size();
 
-  std::vector<OutputFile> input_deps =
-      WriteInputsStampAndGetDep(num_stamp_uses);
+  // The order-only dependenciess use a set to perform deduplication.
+  OutputFileSet order_only_deps;
 
   WriteCompilerVars();
 
@@ -125,10 +125,9 @@ void NinjaRustBinaryTargetWriter::Run() {
   // Ninja to make sure the inputs are up to date before compiling this source,
   // but changes in the inputs deps won't cause the file to be recompiled. See
   // the comment on NinjaCBinaryTargetWriter::Run for more detailed explanation.
-  std::vector<OutputFile> order_only_deps = WriteInputDepsStampAndGetDep(
-      std::vector<const Target*>(), num_stamp_uses);
-  std::copy(input_deps.begin(), input_deps.end(),
-            std::back_inserter(order_only_deps));
+  order_only_deps.InsertAll(WriteInputsStampAndGetDep(num_stamp_uses));
+  order_only_deps.InsertAll(WriteInputDepsStampAndGetDep(
+      std::vector<const Target*>(), num_stamp_uses));
 
   // Build lists which will go into different bits of the rustc command line.
   // Public rust_library deps go in a --extern rlibs, public non-rust deps go in
@@ -145,14 +144,14 @@ void NinjaRustBinaryTargetWriter::Run() {
                      classified_deps.extra_object_files.begin(),
                      classified_deps.extra_object_files.end());
   for (const auto* framework_dep : classified_deps.framework_deps) {
-    order_only_deps.push_back(framework_dep->dependency_output_file());
+    order_only_deps.insert(framework_dep->dependency_output_file());
   }
   for (const auto* non_linkable_dep : classified_deps.non_linkable_deps) {
     if (non_linkable_dep->source_types_used().RustSourceUsed() &&
         non_linkable_dep->output_type() != Target::SOURCE_SET) {
       rustdeps.push_back(non_linkable_dep->dependency_output_file());
     }
-    order_only_deps.push_back(non_linkable_dep->dependency_output_file());
+    order_only_deps.insert(non_linkable_dep->dependency_output_file());
   }
   for (const auto* linkable_dep : classified_deps.linkable_deps) {
     // Rust cdylibs are treated as non-Rust dependencies for linking purposes.
@@ -200,9 +199,10 @@ void NinjaRustBinaryTargetWriter::Run() {
   std::vector<OutputFile> tool_outputs;
   SubstitutionWriter::ApplyListToLinkerAsOutputFile(
       target_, tool_, tool_->outputs(), &tool_outputs);
-  WriteCompilerBuildLine({target_->rust_values().crate_root()},
-                         implicit_deps.vector(), order_only_deps, tool_->name(),
-                         tool_outputs);
+  WriteCompilerBuildLine(
+      {target_->rust_values().crate_root()}, implicit_deps.vector(),
+      order_only_deps.AsSortedVector(),
+      tool_->name(), tool_outputs);
 
   std::vector<const Target*> extern_deps(
       classified_deps.linkable_deps.vector());

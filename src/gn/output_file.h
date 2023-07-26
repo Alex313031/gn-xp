@@ -7,7 +7,9 @@
 
 #include <stddef.h>
 
+#include <set>
 #include <string>
+#include <vector>
 
 class BuildSettings;
 class SourceDir;
@@ -46,6 +48,27 @@ class OutputFile {
 
  private:
   std::string value_;
+};
+
+// A helper around std::set<> for OutputFile that can be easily created from a
+// vector or converted into a vector of sorted items.
+class OutputFileSet : public std::set<OutputFile> {
+  public:
+  OutputFileSet() = default;
+
+  // Creates a new OutputFileSet initialized with the contents of the passed-in
+  // vector.
+  explicit OutputFileSet(const std::vector<OutputFile>& v);
+
+  // Adds all items from the passed-in vector to this OutputFileSet.
+  void InsertAll(const std::vector<OutputFile>& v);
+
+  // Returns true if this set contains the given file.
+  bool contains(const OutputFile& v);
+
+  // Returns a vector containing all the OutputFiles in this set, in sorted
+  // order.
+  std::vector<OutputFile> AsSortedVector();
 };
 
 namespace std {

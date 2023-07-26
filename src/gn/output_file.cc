@@ -37,3 +37,23 @@ SourceDir OutputFile::AsSourceDir(const BuildSettings* build_settings) const {
   NormalizePath(&path);
   return SourceDir(std::move(path));
 }
+
+OutputFileSet::OutputFileSet(const std::vector<OutputFile>& v) {
+  InsertAll(v);
+}
+
+void OutputFileSet::InsertAll(const std::vector<OutputFile>& v) {
+  for (auto item : v) {
+    insert(item);
+  }
+}
+
+bool OutputFileSet::contains(const OutputFile& v) {
+  return find(v) != end();
+}
+
+std::vector<OutputFile> OutputFileSet::AsSortedVector() {
+  std::vector<OutputFile> output(begin(), end());
+  std::sort(output.begin(), output.end());
+  return output;
+}
