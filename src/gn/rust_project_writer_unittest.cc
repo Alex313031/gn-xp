@@ -653,3 +653,161 @@ TEST_F(RustProjectJSONWriter, OneRustProcMacroTarget) {
 
   ExpectEqOrShowDiff(expected_json, out);
 }
+
+TEST_F(RustProjectJSONWriter, RustTargetDepsUnionForSameRootModule) {
+  Err err;
+  TestWithScope setup;
+
+  Target dep(setup.settings(), Label(SourceDir("//tortoise/"), "bar"));
+  dep.set_output_type(Target::RUST_LIBRARY);
+  dep.visibility().SetPublic();
+  SourceFile tlib("//tortoise/lib.rs");
+  dep.sources().push_back(tlib);
+  dep.source_types_used().Set(SourceFile::SOURCE_RS);
+  dep.rust_values().set_crate_root(tlib);
+  dep.rust_values().crate_name() = "tortoise";
+  dep.SetToolchain(setup.toolchain());
+  ASSERT_TRUE(dep.OnResolved(&err));
+
+  Target dep2(setup.settings(), Label(SourceDir("//achilles/"), "bar"));
+  dep2.set_output_type(Target::RUST_LIBRARY);
+  dep2.visibility().SetPublic();
+  SourceFile alib("//achilles/lib.rs");
+  dep2.sources().push_back(alib);
+  dep2.source_types_used().Set(SourceFile::SOURCE_RS);
+  dep2.rust_values().set_crate_root(alib);
+  dep2.rust_values().crate_name() = "achilles";
+  dep2.SetToolchain(setup.toolchain());
+  ASSERT_TRUE(dep2.OnResolved(&err));
+
+  Target target(setup.settings(), Label(SourceDir("//hare/"), "bar"));
+  target.set_output_type(Target::RUST_LIBRARY);
+  target.visibility().SetPublic();
+  SourceFile harelib("//hare/lib.rs");
+  target.sources().push_back(harelib);
+  target.source_types_used().Set(SourceFile::SOURCE_RS);
+  target.rust_values().set_crate_root(harelib);
+  target.rust_values().crate_name() = "hare";
+  target.public_deps().push_back(LabelTargetPair(&dep));
+  target.SetToolchain(setup.toolchain());
+  ASSERT_TRUE(target.OnResolved(&err));
+
+  Target alternate_target(setup.settings(),
+                          Label(SourceDir("//hare/"), "not_bar"));
+  alternate_target.set_output_type(Target::RUST_LIBRARY);
+  alternate_target.visibility().SetPublic();
+  alternate_target.sources().push_back(harelib);
+  alternate_target.source_types_used().Set(SourceFile::SOURCE_RS);
+  alternate_target.rust_values().set_crate_root(harelib);
+  alternate_target.rust_values().crate_name() = "not_hare";
+  alternate_target.public_deps().push_back(LabelTargetPair(&dep2));
+  alternate_target.SetToolchain(setup.toolchain());
+  ASSERT_TRUE(alternate_target.OnResolved(&err));
+
+  std::ostringstream stream;
+  std::vector<const Target*> targets;
+  targets.push_back(&target);
+  targets.push_back(&alternate_target);
+  RustProjectWriter::RenderJSON(setup.build_settings(), targets, stream);
+  std::string out = stream.str();
+#if defined(OS_WIN)
+  base::ReplaceSubstringsAfterOffset(&out, 0, "\r\n", "\n");
+#endif
+
+  const char expected_json[] =
+      R"({
+  "crates": [
+    {
+      "crate_id": 0,
+      "root_module": "tortoise/lib.rs",
+      "label": "//tortoise:bar",
+      "source": {
+          "include_dirs": [
+               "tortoise/",
+               "out/Debug/gen/tortoise/"
+          ],
+          "exclude_dirs": []
+      },
+      "deps": [
+      ],
+      "edition": "2015",
+      "cfg": [
+        "test",
+        "debug_assertions"
+      ]
+    },
+    {
+      "crate_id": 1,
+      "root_module": "hare/lib.rs",
+      "label": "//hare:bar",
+      "source": {
+          "include_dirs": [
+               "hare/",
+               "out/Debug/gen/hare/"
+          ],
+          "exclude_dirs": []
+      },
+      "deps": [
+        {
+          "crate": 0,
+          "name": "tortoise"
+        },
+        {
+          "crate": 2,
+          "name": "achilles"
+        }
+      ],
+      "edition": "2015",
+      "cfg": [
+        "test",
+        "debug_assertions"
+      ]
+    },
+    {
+      "crate_id": 2,
+      "root_module": "achilles/lib.rs",
+      "label": "//achilles:bar",
+      "source": {
+          "include_dirs": [
+               "achilles/",
+               "out/Debug/gen/achilles/"
+          ],
+          "exclude_dirs": []
+      },
+      "deps": [
+      ],
+      "edition": "2015",
+      "cfg": [
+        "test",
+        "debug_assertions"
+      ]
+    },
+    {
+      "crate_id": 3,
+      "root_module": "hare/lib.rs",
+      "label": "//hare:not_bar",
+      "source": {
+          "include_dirs": [
+               "hare/",
+               "out/Debug/gen/hare/"
+          ],
+          "exclude_dirs": []
+      },
+      "deps": [
+        {
+          "crate": 2,
+          "name": "achilles"
+        }
+      ],
+      "edition": "2015",
+      "cfg": [
+        "test",
+        "debug_assertions"
+      ]
+    }
+  ]
+}
+)";
+
+  ExpectEqOrShowDiff(expected_json, out);
+}
