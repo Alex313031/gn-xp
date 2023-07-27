@@ -70,6 +70,30 @@
       },
       "revId": "9c45d5fd3ce620d01f32102afac6db41ca6a3463",
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "7096dc93_711573e3",
+        "filename": "src/gn/ninja_action_target_writer_unittest.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 217,
+      "author": {
+        "id": 1000397
+      },
+      "writtenOn": "2023-07-27T02:37:18Z",
+      "side": 1,
+      "message": "Ok, I thought GN\u0027s config removed them.  I\u0027ve done this in the next cl, however.",
+      "parentUuid": "3888710b_9b7c3400",
+      "range": {
+        "startLine": 217,
+        "startChar": 14,
+        "endLine": 217,
+        "endChar": 21
+      },
+      "revId": "9c45d5fd3ce620d01f32102afac6db41ca6a3463",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
     }
   ],
   "submitRequirementResults": [
