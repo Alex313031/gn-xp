@@ -46,6 +46,30 @@
       },
       "revId": "9c45d5fd3ce620d01f32102afac6db41ca6a3463",
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "3888710b_9b7c3400",
+        "filename": "src/gn/ninja_action_target_writer_unittest.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 217,
+      "author": {
+        "id": 1000030
+      },
+      "writtenOn": "2023-07-27T02:24:04Z",
+      "side": 1,
+      "message": "CR+2 is sticky for such change.",
+      "parentUuid": "8461d5b9_a0ed37eb",
+      "range": {
+        "startLine": 217,
+        "startChar": 14,
+        "endLine": 217,
+        "endChar": 21
+      },
+      "revId": "9c45d5fd3ce620d01f32102afac6db41ca6a3463",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
     }
   ],
   "submitRequirementResults": [
