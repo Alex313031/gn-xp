@@ -1,6 +1,6 @@
 // Copyright 2020 The Chromium Authors. All rights reserved.
 // Use of this source code is governed by a BSD-style license that can be
-// found in the LICENSE file.
+// found in the LICENSE file..
 
 #include "gn/rust_project_writer.h"
 
@@ -392,6 +392,7 @@ void RustProjectWriter::RenderJSON(const BuildSettings* build_settings,
   TargetIndexMap lookup;
   CrateList crate_list;
   std::optional<std::string> rust_sysroot;
+  std::multimap<std::string, Dependency> aggregated_deps;
 
   // All the crates defined in the project.
   for (const auto* target : all_targets) {
@@ -407,6 +408,30 @@ void RustProjectWriter::RenderJSON(const BuildSettings* build_settings,
       auto sysroot = rust_tool->GetSysroot();
       if (sysroot != "")
         rust_sysroot = sysroot;
+    }
+  }
+
+  // In order to help rust-analyzer find all the relevant deps for a given
+  // file, we want to aggregate together all the dependencies for a given
+  // root module (multiple crates could have the same root module).
+  for (auto& crate : crate_list) {
+    for (auto& dependency : crate.dependencies()) {
+      aggregated_deps.insert({crate.root().value(), dependency});
+    }
+  }
+
+  // Then, the first crate with a given root module should be emitted as
+  // having the union of all the dependencies of crates with the same root
+  // module. This will allow rust-analyzer to grok cfg-specific dependencies.
+  for (auto& crate : crate_list) {
+    if (aggregated_deps.count(crate.root().value()) > 0) {
+      auto& deps = crate.dependencies();
+      deps.clear();
+      auto range = aggregated_deps.equal_range(crate.root().value());
+      for (auto it = range.first; it != range.second; it++) {
+        deps.push_back(it->second);
+      }
+      aggregated_deps.erase(crate.root().value());
     }
   }
 
