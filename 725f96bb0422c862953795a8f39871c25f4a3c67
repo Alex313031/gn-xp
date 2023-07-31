@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b869a290_abcc4e56",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2023-07-31T15:34:59Z",
+      "side": 1,
+      "message": "Also, do you know how I can make gn\u0027s gerrit instance realize that my @chromium account is a google account, so that I don\u0027t need two LGs?",
+      "revId": "725f96bb0422c862953795a8f39871c25f4a3c67",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    }
+  ]
+}
