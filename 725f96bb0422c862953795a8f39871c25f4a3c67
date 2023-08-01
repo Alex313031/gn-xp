@@ -16,6 +16,24 @@
       "message": "Also, do you know how I can make gn\u0027s gerrit instance realize that my @chromium account is a google account, so that I don\u0027t need two LGs?",
       "revId": "725f96bb0422c862953795a8f39871c25f4a3c67",
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "cc9d5ca7_1d6c93ed",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000030
+      },
+      "writtenOn": "2023-08-01T02:52:52Z",
+      "side": 1,
+      "message": "I think go/gob-cheat#linking-user-accounts is the way to do that.\nLet me know if you don\u0027t have permission to run the command.",
+      "parentUuid": "b869a290_abcc4e56",
+      "revId": "725f96bb0422c862953795a8f39871c25f4a3c67",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
     }
   ]
 }
