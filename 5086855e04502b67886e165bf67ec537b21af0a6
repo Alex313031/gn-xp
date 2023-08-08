@@ -374,6 +374,24 @@
       "parentUuid": "c17e6f1f_53bb1711",
       "revId": "5086855e04502b67886e165bf67ec537b21af0a6",
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8820e5d2_2e5bbd42",
+        "filename": "src/util/exe_path.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 13,
+      "author": {
+        "id": 1000030
+      },
+      "writtenOn": "2023-08-08T09:19:12Z",
+      "side": 1,
+      "message": "Then could you do that?",
+      "parentUuid": "8e17629f_041f1be9",
+      "revId": "5086855e04502b67886e165bf67ec537b21af0a6",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
     }
   ]
 }
