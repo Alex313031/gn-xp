@@ -392,6 +392,24 @@
       "parentUuid": "8e17629f_041f1be9",
       "revId": "5086855e04502b67886e165bf67ec537b21af0a6",
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "33d3ac21_1835e356",
+        "filename": "src/util/exe_path.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 13,
+      "author": {
+        "id": 1002587
+      },
+      "writtenOn": "2023-08-08T09:27:03Z",
+      "side": 1,
+      "message": "Sure.Currently I\u0027m checking with the returned value of realpath once that is done I\u0027ll update.",
+      "parentUuid": "8820e5d2_2e5bbd42",
+      "revId": "5086855e04502b67886e165bf67ec537b21af0a6",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
     }
   ]
 }
