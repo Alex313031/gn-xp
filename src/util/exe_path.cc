@@ -114,6 +114,20 @@ base::FilePath GetExePath() {
   return base::FilePath(path);
 }
 
+#elif defined(OS_AIX)
+char absolutePathBuf[PATH_MAX] = {0};
+base::FilePath GetExePath() {
+  char *exec_name;
+  if(!*absolutePathBuf){
+    exec_name = getenv("_");
+    char *res = realpath(exec_name,absolutePathBuf);
+    if (res != NULL) {
+      return base::FilePath();
+    }
+  }
+  return base::FilePath(absolutePathBuf);
+}
+
 #else
 
 base::FilePath GetExePath() {
