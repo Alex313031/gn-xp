@@ -22,6 +22,30 @@
       },
       "revId": "452fb3db7d5932df1e02fc3a948ec4b837d4836f",
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f8bf8931_7202703c",
+        "filename": "infra/recipes/gn.py",
+        "patchSetId": 2
+      },
+      "lineNbr": 29,
+      "author": {
+        "id": 1000067
+      },
+      "writtenOn": "2023-08-10T07:17:03Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "d315ef99_714ae56e",
+      "range": {
+        "startLine": 29,
+        "startChar": 83,
+        "endLine": 29,
+        "endChar": 88
+      },
+      "revId": "452fb3db7d5932df1e02fc3a948ec4b837d4836f",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
     }
   ]
 }
