@@ -16,6 +16,24 @@
       "message": "This looks sensible to me but I have very little context. We should find owners to try to get this in",
       "revId": "b859d1a78290565914ebde665f08415dfb92b36d",
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "9e55ce1f_3a5494bb",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1002897
+      },
+      "writtenOn": "2023-08-11T00:38:40Z",
+      "side": 1,
+      "message": "Sounds good. Added a unit test showing that the first crate with a given root module now gets the union of the dependencies across crates with the same root module.",
+      "parentUuid": "1e12c3d4_b0ff0c80",
+      "revId": "b859d1a78290565914ebde665f08415dfb92b36d",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
     }
   ]
 }

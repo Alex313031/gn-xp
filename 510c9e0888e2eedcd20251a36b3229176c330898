@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "bea9f18a_4e821b09",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1002897
+      },
+      "writtenOn": "2023-08-11T00:38:40Z",
+      "side": 1,
+      "message": "Forgive my amateur C++. From testing locally this has made rust-analyzer a lot more helpful in cases where the same set of Rust source files is built by multiple GN targets that may themselves depend on different crates. (I think the universal `\"cfg\": [\"test\"]` that we already emit for each crate in rust-project.json is an attempt to address this, but it only works for getting rust-analyzer to understand test-only code _in the current crate_ -- it still won\u0027t let rust-analyzer understand test_deps if the test version of the crate wasn\u0027t first in rust-project.json.)",
+      "revId": "510c9e0888e2eedcd20251a36b3229176c330898",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    }
+  ]
+}
