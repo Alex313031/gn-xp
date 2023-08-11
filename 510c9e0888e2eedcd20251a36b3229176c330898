@@ -16,6 +16,46 @@
       "message": "Forgive my amateur C++. From testing locally this has made rust-analyzer a lot more helpful in cases where the same set of Rust source files is built by multiple GN targets that may themselves depend on different crates. (I think the universal `\"cfg\": [\"test\"]` that we already emit for each crate in rust-project.json is an attempt to address this, but it only works for getting rust-analyzer to understand test-only code _in the current crate_ -- it still won\u0027t let rust-analyzer understand test_deps if the test version of the crate wasn\u0027t first in rust-project.json.)",
       "revId": "510c9e0888e2eedcd20251a36b3229176c330898",
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e0ad127f_c5f68da1",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000397
+      },
+      "writtenOn": "2023-08-11T00:47:20Z",
+      "side": 1,
+      "message": "a couple general comments:\n\nThis doesn\u0027t do anything about the duplicate roots that are still in the rust_project.json file.  However, that may be ok because the notion of being able to switch configurations turns up pretty regularly on the RA discussion forum.\n\nThis doesn\u0027t merge configs.  We manually insert `test` (or RA does), which covers the major use-case.  But merging configs in this manner may not be as safe to do.",
+      "revId": "510c9e0888e2eedcd20251a36b3229176c330898",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b77b65d8_a078a6eb",
+        "filename": "src/gn/rust_project_writer.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 395,
+      "author": {
+        "id": 1000397
+      },
+      "writtenOn": "2023-08-11T00:47:20Z",
+      "side": 1,
+      "message": "Instead of a multimap, what about a `std::map\u003cstd::string, std::set\u003cDependency\u003e\u003e`?  (since maintaining insertion order doesn\u0027t really matter here).",
+      "range": {
+        "startLine": 395,
+        "startChar": 7,
+        "endLine": 395,
+        "endChar": 15
+      },
+      "revId": "510c9e0888e2eedcd20251a36b3229176c330898",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
     }
   ]
 }
