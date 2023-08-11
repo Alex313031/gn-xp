@@ -56,6 +56,29 @@
       },
       "revId": "510c9e0888e2eedcd20251a36b3229176c330898",
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "109a7f80_bb695ff7",
+        "filename": "src/gn/rust_project_writer_unittest.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 765,
+      "author": {
+        "id": 1000397
+      },
+      "writtenOn": "2023-08-11T00:50:03Z",
+      "side": 1,
+      "message": "And RA was able to deal with the deps being crates that were \"later\" in the file?  It\u0027s all stuffed into an arena, so I don\u0027t _think_ it actually depends on the order, just presence, but it\u0027s a potential issue to worry about (and one of the aspects of this file that made my attempts to solve this much more complicated than this nice and tidy solution).",
+      "range": {
+        "startLine": 739,
+        "startChar": 0,
+        "endLine": 765,
+        "endChar": 6
+      },
+      "revId": "510c9e0888e2eedcd20251a36b3229176c330898",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
     }
   ]
 }
