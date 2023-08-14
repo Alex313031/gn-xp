@@ -82,8 +82,8 @@ void ResolvedTargetData::ComputeHardDeps(TargetInfo* info) const {
     }
 
     // Recursive hard dependencies of all dependencies.
-    const TargetInfo* dep_info = GetTargetHardDeps(dep);
-    all_hard_deps.insert(dep_info->hard_deps);
+    //const TargetInfo* dep_info = GetTargetHardDeps(dep);
+    //all_hard_deps.insert(dep_info->hard_deps);
   }
   info->hard_deps = std::move(all_hard_deps);
   info->has_hard_deps = true;

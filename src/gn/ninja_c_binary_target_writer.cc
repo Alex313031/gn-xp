@@ -710,7 +710,7 @@ void NinjaCBinaryTargetWriter::WriteLinkerStuff(
   // the sources, there is already an implicit order-only dependency. However,
   // it's extra work to separate these out and there's no disadvantage to
   // listing them again.
-  WriteOrderOnlyDependencies(classified_deps.non_linkable_deps);
+  //WriteOrderOnlyDependencies(classified_deps.non_linkable_deps);
 
   // End of the link "build" line.
   out_ << std::endl;

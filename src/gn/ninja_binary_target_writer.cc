@@ -122,7 +122,8 @@ void NinjaBinaryTargetWriter::WriteSourceSetStamp(
   for (auto* dep : classified_deps.non_linkable_deps)
     order_only_deps.push_back(dep->dependency_output_file());
 
-  WriteStampForTarget(object_files, order_only_deps);
+  //WriteStampForTarget(object_files, order_only_deps);
+  WriteStampForTarget(object_files, {});
 }
 
 NinjaBinaryTargetWriter::ClassifiedDeps
