@@ -36,6 +36,24 @@
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "f4a92118_2d866745",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 9
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1002587
+      },
+      "writtenOn": "2023-08-16T08:03:06Z",
+      "side": 1,
+      "message": "Sure.",
+      "parentUuid": "a0f9a0f8_7778e2ae",
+      "revId": "e6291f83055dfc27bf69ddc9f52465ceb7268348",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "00f1a785_b5f52b48",
@@ -49,6 +67,24 @@
       "writtenOn": "2023-08-16T07:12:08Z",
       "side": 1,
       "message": "Include this for getenv in OS_AIX too?",
+      "revId": "e6291f83055dfc27bf69ddc9f52465ceb7268348",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "eae4535c_8a1c84a8",
+        "filename": "src/util/exe_path.cc",
+        "patchSetId": 9
+      },
+      "lineNbr": 26,
+      "author": {
+        "id": 1002587
+      },
+      "writtenOn": "2023-08-16T08:03:06Z",
+      "side": 1,
+      "message": "Why we need to include stdlib for OS_AIX separetely when it is already there?",
+      "parentUuid": "00f1a785_b5f52b48",
       "revId": "e6291f83055dfc27bf69ddc9f52465ceb7268348",
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
     },
@@ -70,6 +106,24 @@
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "4d80e91a_56969997",
+        "filename": "src/util/exe_path.cc",
+        "patchSetId": 9
+      },
+      "lineNbr": 121,
+      "author": {
+        "id": 1002587
+      },
+      "writtenOn": "2023-08-16T08:03:06Z",
+      "side": 1,
+      "message": "While executing the FormatTest.XXX tests, I notice that even alternate tests fail since the test internally switches the directory, preventing the realpath procedure from finding the directory. As a result, I need to establish a global variable because the execution path remains constant and does not need to be obtained on every test (FormatTest.XXX).",
+      "parentUuid": "afaa4e95_5a7bbc13",
+      "revId": "e6291f83055dfc27bf69ddc9f52465ceb7268348",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "6224454d_4040d5d9",
@@ -83,6 +137,30 @@
       "writtenOn": "2023-08-16T07:09:56Z",
       "side": 1,
       "message": "Check whether this is not nullptr.",
+      "range": {
+        "startLine": 122,
+        "startChar": 4,
+        "endLine": 122,
+        "endChar": 13
+      },
+      "revId": "e6291f83055dfc27bf69ddc9f52465ceb7268348",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d7458202_55d05e05",
+        "filename": "src/util/exe_path.cc",
+        "patchSetId": 9
+      },
+      "lineNbr": 122,
+      "author": {
+        "id": 1002587
+      },
+      "writtenOn": "2023-08-16T08:03:06Z",
+      "side": 1,
+      "message": "Why we need to have a check for nullptr here?",
+      "parentUuid": "6224454d_4040d5d9",
       "range": {
         "startLine": 122,
         "startChar": 4,
@@ -116,6 +194,30 @@
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "1841a40b_f38ca462",
+        "filename": "src/util/exe_path.cc",
+        "patchSetId": 9
+      },
+      "lineNbr": 123,
+      "author": {
+        "id": 1002587
+      },
+      "writtenOn": "2023-08-16T08:03:06Z",
+      "side": 1,
+      "message": "okay.",
+      "parentUuid": "2c8b7d8f_96fe8ff3",
+      "range": {
+        "startLine": 123,
+        "startChar": 34,
+        "endLine": 123,
+        "endChar": 35
+      },
+      "revId": "e6291f83055dfc27bf69ddc9f52465ceb7268348",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "86fbfd3d_d579efd7",
@@ -129,6 +231,30 @@
       "writtenOn": "2023-08-16T07:09:56Z",
       "side": 1,
       "message": "nullptr?",
+      "range": {
+        "startLine": 124,
+        "startChar": 15,
+        "endLine": 124,
+        "endChar": 19
+      },
+      "revId": "e6291f83055dfc27bf69ddc9f52465ceb7268348",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a4606358_dc21dfcf",
+        "filename": "src/util/exe_path.cc",
+        "patchSetId": 9
+      },
+      "lineNbr": 124,
+      "author": {
+        "id": 1002587
+      },
+      "writtenOn": "2023-08-16T08:03:06Z",
+      "side": 1,
+      "message": "Sorry didn\u0027t understand this.",
+      "parentUuid": "86fbfd3d_d579efd7",
       "range": {
         "startLine": 124,
         "startChar": 15,
