@@ -107,6 +107,24 @@
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "619e3560_5321ce52",
+        "filename": "src/util/exe_path.cc",
+        "patchSetId": 9
+      },
+      "lineNbr": 26,
+      "author": {
+        "id": 1002587
+      },
+      "writtenOn": "2023-08-17T09:49:32Z",
+      "side": 1,
+      "message": "Okay.",
+      "parentUuid": "fb8d10a9_2f6a0856",
+      "revId": "e6291f83055dfc27bf69ddc9f52465ceb7268348",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "afaa4e95_5a7bbc13",
@@ -156,6 +174,24 @@
       "side": 1,
       "message": "Why changing directory in the test requires to keep result of this function?",
       "parentUuid": "4d80e91a_56969997",
+      "revId": "e6291f83055dfc27bf69ddc9f52465ceb7268348",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "02ce3b7e_e27e1945",
+        "filename": "src/util/exe_path.cc",
+        "patchSetId": 9
+      },
+      "lineNbr": 121,
+      "author": {
+        "id": 1002587
+      },
+      "writtenOn": "2023-08-17T09:49:32Z",
+      "side": 1,
+      "message": "When I was trying to declare that variable locally it is giving multiple tests failure.",
+      "parentUuid": "31949f7a_af6f0ac7",
       "revId": "e6291f83055dfc27bf69ddc9f52465ceb7268348",
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
     },
