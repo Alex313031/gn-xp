@@ -198,6 +198,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "7e9efafc_7774d05e",
+        "filename": "src/util/exe_path.cc",
+        "patchSetId": 9
+      },
+      "lineNbr": 121,
+      "author": {
+        "id": 1000030
+      },
+      "writtenOn": "2023-08-18T05:51:24Z",
+      "side": 1,
+      "message": "I didn\u0027t ask what happened, but asked about why it failed instead.",
+      "parentUuid": "02ce3b7e_e27e1945",
+      "revId": "e6291f83055dfc27bf69ddc9f52465ceb7268348",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "6224454d_4040d5d9",
         "filename": "src/util/exe_path.cc",
         "patchSetId": 9
