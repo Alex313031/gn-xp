@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "580e5a3f_2e3289bc",
+        "filename": "src/gn/gen.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 606,
+      "author": {
+        "id": 1002137
+      },
+      "writtenOn": "2023-08-29T07:08:28Z",
+      "side": 1,
+      "message": "nit: trailing whitespace 😄",
+      "range": {
+        "startLine": 606,
+        "startChar": 11,
+        "endLine": 606,
+        "endChar": 13
+      },
+      "revId": "a62515e15b5d894401b61d14800a4b0702325dc4",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    }
+  ]
+}
