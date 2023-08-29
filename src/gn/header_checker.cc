@@ -16,6 +16,7 @@
 #include "gn/config_values_extractors.h"
 #include "gn/err.h"
 #include "gn/filesystem_utils.h"
+#include "gn/input_alternate_loader.h"
 #include "gn/scheduler.h"
 #include "gn/target.h"
 #include "gn/trace.h"
@@ -40,11 +41,11 @@ struct PublicGeneratedPair {
 LocationRange CreatePersistentRange(const InputFile& input_file,
                                     const LocationRange& range) {
   InputFile* clone_input_file;
-  std::vector<Token>* tokens;              // Don't care about this.
-  std::unique_ptr<ParseNode>* parse_root;  // Don't care about this.
+  std::vector<Token>* tokens;                // Don't care about this.
+  std::unique_ptr<InputLoadResult>* result;  // Don't care about this.
 
   g_scheduler->input_file_manager()->AddDynamicInput(
-      input_file.name(), &clone_input_file, &tokens, &parse_root);
+      input_file.name(), &clone_input_file, &tokens, &result);
   clone_input_file->SetContents(input_file.contents());
 
   return LocationRange(Location(clone_input_file, range.begin().line_number(),

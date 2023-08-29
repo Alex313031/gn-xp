@@ -14,6 +14,7 @@
 
 #include "base/files/file_path.h"
 #include "base/memory/ref_counted.h"
+#include "gn/input_alternate_loader.h"
 #include "gn/input_file.h"
 #include "gn/parse_tree.h"
 #include "gn/settings.h"
@@ -38,7 +39,7 @@ class InputFileManager : public base::RefCountedThreadSafe<InputFileManager> {
  public:
   // Callback issued when a file is loaded. On auccess, the parse node will
   // refer to the root block of the file. On failure, this will be NULL.
-  using FileLoadCallback = std::function<void(const ParseNode*)>;
+  using FileLoadCallback = std::function<void(const InputLoadResult*)>;
 
   // Callback to emulate SyncLoadFile in tests.
   using SyncLoadFileCallback =
@@ -63,7 +64,7 @@ class InputFileManager : public base::RefCountedThreadSafe<InputFileManager> {
   // Loads and parses the given file synchronously, returning the root block
   // corresponding to the parsed result. On error, return NULL and the given
   // Err is set.
-  const ParseNode* SyncLoadFile(const LocationRange& origin,
+  const InputLoadResult* SyncLoadFile(const LocationRange& origin,
                                 const BuildSettings* build_settings,
                                 const SourceFile& file_name,
                                 Err* err);
@@ -86,7 +87,7 @@ class InputFileManager : public base::RefCountedThreadSafe<InputFileManager> {
   void AddDynamicInput(const SourceFile& name,
                        InputFile** file,
                        std::vector<Token>** tokens,
-                       std::unique_ptr<ParseNode>** parse_root);
+                       std::unique_ptr<InputLoadResult>** load_result);
 
   // Does not count dynamic input.
   int GetInputFileCount() const;
@@ -132,7 +133,7 @@ class InputFileManager : public base::RefCountedThreadSafe<InputFileManager> {
     std::vector<Token> tokens;
 
     // Null before the file is loaded or if loading failed.
-    std::unique_ptr<ParseNode> parsed_root;
+    std::unique_ptr<InputLoadResult> load_result;
     Err parse_error;
   };
 
