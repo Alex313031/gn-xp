@@ -195,6 +195,8 @@ def main(argv):
   args_list.add('--allow-warnings', action='store_true', default=False,
                     help=('Allow compiler warnings, don\'t treat them as '
                           'errors.'))
+  args_list.add('--experimental-stargn', action='store_true', default=False,
+                    help=('Generate experimental stargn target.'))
   if sys.platform == 'zos':
     args_list.add('--zoslib-dir',
                       action='store',
@@ -256,7 +258,7 @@ def GenerateLastCommitPosition(host, header):
       f.write(contents)
 
 
-def WriteGenericNinja(path, static_libraries, executables,
+def WriteGenericNinja(path, static_libraries, executables, cgo_executables,
                       cxx, ar, ld, platform, host, options,
                       args_list, cflags=[], ldflags=[],
                       libflags=[], include_dirs=[], solibs=[]):
@@ -272,6 +274,13 @@ def WriteGenericNinja(path, static_libraries, executables,
     'rule regen',
     '  command = %s ../build/gen.py%s' % (sys.executable, args),
     '  description = Regenerating ninja files',
+    '',
+    # TODO: this is unix only, won't work on windows.
+    'rule cgo',
+    ('  command = CGO_CXXFLAGS="$cflags" CGO_LDFLAGS="$ldflags"'
+     ' go build -C $module_dir'
+     ' %s-o $out_from_module_dir' % ('-gcflags="all=-N -l" ' if options.debug else '')),
+    '  description = CGO $out',
     '',
     'build build.ninja: regen',
     '  generator = 1',
@@ -353,6 +362,37 @@ def WriteGenericNinja(path, static_libraries, executables,
       '  solibs = %s' % ' '.join(solibs),
       '  libs = %s' % ' '.join(
           [library_to_a(library) for library in settings['libs']]),
+    ])
+
+
+  for cgo_executable, settings in cgo_executables.items():
+    libraries = set()
+    library_paths = set()
+    for lib in settings['libs']:
+      if not lib.startswith('lib'):
+        raise ValueError('cgo_executable libs must have `lib` preifx')
+      libraries.add(lib.removeprefix('lib'))
+      library_paths.add(os.path.dirname(os.path.relpath(path, settings['module_dir'])))
+
+    out_name = '%s%s' % (cgo_executable, executable_ext)
+    module_relative_to_out = os.path.relpath(settings['module_dir'], os.path.dirname(path))
+    out_relative_to_module = os.path.relpath(os.path.dirname(path), settings['module_dir'])
+    ninja_lines.extend([
+      'build %s: cgo | %s %s %s' % (
+          out_name,
+          escape_path_ninja(os.path.relpath(os.path.join(REPO_ROOT, os.path.join(settings['module_dir'], 'go.mod')), os.path.dirname(path))),
+          ' '.join([escape_path_ninja(os.path.relpath(os.path.join(REPO_ROOT, src_file), os.path.dirname(path))) for src_file in settings['sources']]),
+          ' '.join([library_to_a(library) for library in settings['libs']])),
+      '  module_dir = %s' % escape_path_ninja(module_relative_to_out),
+      '  out_from_module_dir = %s' % escape_path_ninja(os.path.join(out_relative_to_module, out_name)),
+      '  cflags = %s %s %s' % (
+          '-I' + escape_path_ninja(out_relative_to_module),
+          ' '.join(
+            ['-I' + escape_path_ninja(os.path.relpath(dirname, module_relative_to_out)) for dirname in include_dirs]),
+          ' '.join(cflags)),
+      '  ldflags = %s %s' % (
+          ' '.join(['-L%s' % lib_path for lib_path in library_paths]),
+          ' '.join(['-l%s' % lib for lib in libraries])),
     ])
 
   ninja_lines.append('')  # Make sure the file ends with a newline.
@@ -567,7 +607,7 @@ def WriteGNNinja(path, platform, host, options, args_list):
     ldflags.extend(['/DEBUG', '/MACHINE:x64'])
 
   static_libraries = {
-      'base': {'sources': [
+      'libbase': {'sources': [
         'src/base/command_line.cc',
         'src/base/environment.cc',
         'src/base/files/file.cc',
@@ -597,7 +637,7 @@ def WriteGNNinja(path, platform, host, options, args_list):
         'src/base/value_iterators.cc',
         'src/base/values.cc',
       ]},
-      'gn_lib': {'sources': [
+      'libgn': {'sources': [
         'src/gn/action_target_generator.cc',
         'src/gn/action_values.cc',
         'src/gn/analyzer.cc',
@@ -662,6 +702,7 @@ def WriteGNNinja(path, platform, host, options, args_list):
         'src/gn/function_write_file.cc',
         'src/gn/functions.cc',
         'src/gn/functions_target.cc',
+        'src/gn/gen.cc',
         'src/gn/general_tool.cc',
         'src/gn/generated_file_target_generator.cc',
         'src/gn/group_target_generator.cc',
@@ -858,7 +899,7 @@ def WriteGNNinja(path, platform, host, options, args_list):
   }
 
   if platform.is_posix() or platform.is_zos():
-    static_libraries['base']['sources'].extend([
+    static_libraries['libbase']['sources'].extend([
         'src/base/files/file_enumerator_posix.cc',
         'src/base/files/file_posix.cc',
         'src/base/files/file_util_posix.cc',
@@ -870,7 +911,7 @@ def WriteGNNinja(path, platform, host, options, args_list):
     libs.extend([ options.zoslib_dir + '/install/lib/libzoslib.a' ])
 
   if platform.is_windows():
-    static_libraries['base']['sources'].extend([
+    static_libraries['libbase']['sources'].extend([
         'src/base/files/file_enumerator_win.cc',
         'src/base/files/file_util_win.cc',
         'src/base/files/file_win.cc',
@@ -915,7 +956,22 @@ def WriteGNNinja(path, platform, host, options, args_list):
   executables['gn']['libs'].extend(static_libraries.keys())
   executables['gn_unittests']['libs'].extend(static_libraries.keys())
 
-  WriteGenericNinja(path, static_libraries, executables, cxx, ar, ld,
+  if options.experimental_stargn:
+    cgo_executables = {
+        'stargn': {'sources': [
+            'src/starlark/stargn_main.cc',
+            'src/starlark/stargn_main.go',
+            'src/starlark/stargn_main.h',
+            'src/starlark/starlark_glue.cc',
+            'src/starlark/starlark_glue.go',
+            'src/starlark/starlark_glue.h',
+        ], 'module_dir': 'src/starlark', 'libs': static_libraries.keys()},
+    }
+  else:
+    cgo_executables = {}
+
+  WriteGenericNinja(path, static_libraries, executables, cgo_executables,
+                    cxx, ar, ld,
                     platform, host, options, args_list,
                     cflags, ldflags, libflags, include_dirs, libs)
 

@@ -41,9 +41,9 @@ Value ParseValueOrScope(const Settings* settings,
   // so the origin parse nodes for the values will be preserved.
   InputFile* input_file;
   std::vector<Token>* tokens;
-  std::unique_ptr<ParseNode>* parse_root_ptr;
+  std::unique_ptr<InputLoadResult>* load_result_ptr;
   g_scheduler->input_file_manager()->AddDynamicInput(SourceFile(), &input_file,
-                                                     &tokens, &parse_root_ptr);
+                                                     &tokens, &load_result_ptr);
 
   input_file->SetContents(input);
   if (origin) {
@@ -64,20 +64,20 @@ Value ParseValueOrScope(const Settings* settings,
 
   // Parse the file according to what we're looking for.
   if (what == PARSE_VALUE)
-    *parse_root_ptr = Parser::ParseValue(*tokens, err);
+    *load_result_ptr = Parser::ParseValue(*tokens, err);
   else
-    *parse_root_ptr = Parser::Parse(*tokens, err);  // Will return a Block.
+    *load_result_ptr = Parser::Parse(*tokens, err);  // Will return a Block.
   if (err->has_error())
     return Value();
-  ParseNode* parse_root = parse_root_ptr->get();  // For nicer syntax below.
+  InputLoadResult* load_result = load_result_ptr->get();  // For nicer syntax below.
 
   // It's valid for the result to be a null pointer, this just means that the
   // script returned nothing.
-  if (!parse_root)
+  if (!load_result)
     return Value();
 
   std::unique_ptr<Scope> scope = std::make_unique<Scope>(settings);
-  Value result = parse_root->Execute(scope.get(), err);
+  Value result = load_result->Execute(scope.get(), err);
   if (err->has_error())
     return Value();
 
@@ -178,9 +178,9 @@ Value ParseJSON(const Settings* settings,
                 Err* err) {
   InputFile* input_file;
   std::vector<Token>* tokens;
-  std::unique_ptr<ParseNode>* parse_root_ptr;
+  std::unique_ptr<InputLoadResult>* load_result_ptr;
   g_scheduler->input_file_manager()->AddDynamicInput(SourceFile(), &input_file,
-                                                     &tokens, &parse_root_ptr);
+                                                     &tokens, &load_result_ptr);
   input_file->SetContents(input);
 
   int error_code_out;
