@@ -16,6 +16,24 @@
       "message": "Still WIP because I need to address the comments in this CL and the one before it.\n\nFWIW, our Ninja build plan goes from 940 MiB to 913 MiB with this feature enabled.\n\nThe Fuchsia build is broken when enabling this feature though, it seems that this is because we have many actions whose script write depfiles before any outputs and assume their parent directory already exists. Resulting in \"No such file or directory: path/to/dep/file.d\" errors at build time. I am still investigating.",
       "revId": "73042f35b16ddd1b8b80b9fe11af7136ec0089b9",
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "75412fbf_34238184",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000633
+      },
+      "writtenOn": "2023-09-01T18:12:06Z",
+      "side": 1,
+      "message": "This sounds really familiar. Looks like I tried to fix that in ninja, but it never got merged [1]. I think we put some other workaround in place for the Fuchsia build, but I can\u0027t recall what it was.\n\n[1]https://github.com/ninja-build/ninja/pull/1849",
+      "parentUuid": "0d5023b1_38b3cb22",
+      "revId": "73042f35b16ddd1b8b80b9fe11af7136ec0089b9",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
     }
   ]
 }
