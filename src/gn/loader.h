@@ -11,6 +11,7 @@
 #include <set>
 
 #include "base/memory/ref_counted.h"
+#include "gn/input_alternate_loader.h"
 #include "gn/label.h"
 #include "gn/scope.h"
 #include "util/msg_loop.h"
@@ -75,7 +76,7 @@ class LoaderImpl : public Loader {
       std::function<bool(const LocationRange&,
                          const BuildSettings*,
                          const SourceFile&,
-                         std::function<void(const ParseNode*)>,
+                         std::function<void(const InputLoadResult*)>,
                          Err*)>;
 
   explicit LoaderImpl(const BuildSettings* build_settings);
@@ -134,10 +135,10 @@ class LoaderImpl : public Loader {
   void BackgroundLoadFile(const Settings* settings,
                           const SourceFile& file_name,
                           const LocationRange& origin,
-                          const ParseNode* root);
+                          const InputLoadResult* result);
   void BackgroundLoadBuildConfig(Settings* settings,
                                  const Scope::KeyValueMap& toolchain_overrides,
-                                 const ParseNode* root);
+                                 const InputLoadResult* root);
 
   // Posted to the main thread when any file other than a build config file
   // file has completed running.
@@ -159,7 +160,7 @@ class LoaderImpl : public Loader {
   bool AsyncLoadFile(const LocationRange& origin,
                      const BuildSettings* build_settings,
                      const SourceFile& file_name,
-                     std::function<void(const ParseNode*)> callback,
+                     std::function<void(const InputLoadResult*)> callback,
                      Err* err);
 
   MsgLoop* task_runner_;
