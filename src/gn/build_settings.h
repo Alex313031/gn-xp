@@ -13,6 +13,7 @@
 
 #include "base/files/file_path.h"
 #include "gn/args.h"
+#include "gn/input_alternate_loader.h"
 #include "gn/label.h"
 #include "gn/scope.h"
 #include "gn/source_dir.h"
@@ -133,6 +134,14 @@ class BuildSettings {
     exec_script_whitelist_ = std::move(list);
   }
 
+  // Right now you can only set one fallback loader.
+  const InputAlternateLoader* alternate_loader() const {
+    return alternate_loader_.get();
+  }
+  void set_alternate_loader(std::unique_ptr<InputAlternateLoader> loader) {
+    alternate_loader_ = std::move(loader);
+  }
+
  private:
   Label root_target_label_;
   base::FilePath dotfile_name_;
@@ -154,6 +163,7 @@ class BuildSettings {
   PrintCallback print_callback_;
 
   std::unique_ptr<SourceFileSet> exec_script_whitelist_;
+  std::unique_ptr<InputAlternateLoader> alternate_loader_;
 
   BuildSettings& operator=(const BuildSettings&) = delete;
 };

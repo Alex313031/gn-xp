@@ -13,6 +13,7 @@
 #include <vector>
 
 #include "base/values.h"
+#include "gn/input_alternate_loader.h"
 #include "gn/err.h"
 #include "gn/token.h"
 #include "gn/value.h"
@@ -75,7 +76,7 @@ class Comments {
 // ParseNode -------------------------------------------------------------------
 
 // A node in the AST.
-class ParseNode {
+class ParseNode : public InputLoadResult {
  public:
   ParseNode();
   virtual ~ParseNode();
