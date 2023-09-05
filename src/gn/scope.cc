@@ -291,6 +291,11 @@ void Scope::GetCurrentScopeValues(KeyValueMap* output) const {
     (*output)[pair.first] = pair.second.value;
 }
 
+void Scope::GetCurrentScopeTemplateNames(std::vector<std::string_view>* output) const {
+  for (const auto& pair : templates_)
+    output->push_back(pair.first);
+}
+
 bool Scope::CheckCurrentScopeValuesEqual(const Scope* other) const {
   // If there are containing scopes, equality shouldn't work.
   if (containing()) {
