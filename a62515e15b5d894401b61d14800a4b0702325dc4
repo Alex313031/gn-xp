@@ -22,6 +22,30 @@
       },
       "revId": "a62515e15b5d894401b61d14800a4b0702325dc4",
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "93385306_10ddbac9",
+        "filename": "src/gn/gen.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 606,
+      "author": {
+        "id": 1002172
+      },
+      "writtenOn": "2023-09-05T08:52:16Z",
+      "side": 1,
+      "message": "done 🙂",
+      "parentUuid": "580e5a3f_2e3289bc",
+      "range": {
+        "startLine": 606,
+        "startChar": 11,
+        "endLine": 606,
+        "endChar": 13
+      },
+      "revId": "a62515e15b5d894401b61d14800a4b0702325dc4",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
     }
   ]
 }
