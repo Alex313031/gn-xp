@@ -17,6 +17,7 @@
 #include "base/strings/string_util.h"
 #include "gn/commands.h"
 #include "gn/filesystem_utils.h"
+#include "gn/gen.h"
 #include "gn/input_file.h"
 #include "gn/parse_tree.h"
 #include "gn/setup.h"
@@ -399,7 +400,7 @@ int EditArgsFile(const std::string& build_dir) {
   OutputString("Generating files...\n");
   std::vector<std::string> gen_commands;
   gen_commands.push_back(build_dir);
-  return RunGen(gen_commands);
+  return Gen::Run(gen_commands);
 }
 
 }  // namespace

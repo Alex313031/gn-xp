@@ -7,6 +7,7 @@
 #include <memory>
 
 #include "gn/err.h"
+#include "gn/input_alternate_loader.h"
 #include "gn/parse_tree.h"
 #include "gn/scheduler.h"
 #include "gn/scope_per_file_provider.h"
@@ -23,9 +24,9 @@ std::unique_ptr<Scope> UncachedImport(const Settings* settings,
   ScopedTrace load_trace(TraceItem::TRACE_IMPORT_LOAD, file.value());
   load_trace.SetToolchain(settings->toolchain_label());
 
-  const ParseNode* node = g_scheduler->input_file_manager()->SyncLoadFile(
+  const InputLoadResult* result = g_scheduler->input_file_manager()->SyncLoadFile(
       node_for_err->GetRange(), settings->build_settings(), file, err);
-  if (!node)
+  if (!result)
     return nullptr;
 
   std::unique_ptr<Scope> scope =
@@ -38,7 +39,7 @@ std::unique_ptr<Scope> UncachedImport(const Settings* settings,
   ScopePerFileProvider per_file_provider(scope.get(), false);
 
   scope->SetProcessingImport();
-  node->Execute(scope.get(), err);
+  result->Execute(scope.get(), err);
   if (err->has_error()) {
     // If there was an error, append the caller location so the error message
     // displays a why the file was imported (esp. useful for failed asserts).
