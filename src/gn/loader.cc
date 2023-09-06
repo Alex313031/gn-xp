@@ -209,8 +209,8 @@ void LoaderImpl::ScheduleLoadFile(const Settings* settings,
   pending_loads_++;
   if (!AsyncLoadFile(
           origin, settings->build_settings(), file,
-          [this, settings, file, origin](const ParseNode* parse_node) {
-            BackgroundLoadFile(settings, file, origin, parse_node);
+          [this, settings, file, origin](const InputLoadResult* result) {
+            BackgroundLoadFile(settings, file, origin, result);
           },
           &err)) {
     g_scheduler->FailWithError(err);
@@ -226,8 +226,8 @@ void LoaderImpl::ScheduleLoadBuildConfig(
   if (!AsyncLoadFile(
           LocationRange(), settings->build_settings(),
           settings->build_settings()->build_config_file(),
-          [this, settings, toolchain_overrides](const ParseNode* root) {
-            BackgroundLoadBuildConfig(settings, toolchain_overrides, root);
+          [this, settings, toolchain_overrides](const InputLoadResult* result) {
+            BackgroundLoadBuildConfig(settings, toolchain_overrides, result);
           },
           &err)) {
     g_scheduler->FailWithError(err);
@@ -238,8 +238,8 @@ void LoaderImpl::ScheduleLoadBuildConfig(
 void LoaderImpl::BackgroundLoadFile(const Settings* settings,
                                     const SourceFile& file_name,
                                     const LocationRange& origin,
-                                    const ParseNode* root) {
-  if (!root) {
+                                    const InputLoadResult* result) {
+  if (!result) {
     task_runner_->PostTask([this]() { DecrementPendingLoads(); });
     return;
   }
@@ -263,7 +263,8 @@ void LoaderImpl::BackgroundLoadFile(const Settings* settings,
   trace.SetToolchain(settings->toolchain_label());
 
   Err err;
-  root->Execute(&our_scope, &err);
+  result->Execute(&our_scope, &err);
+
   if (!err.has_error())
     our_scope.CheckForUnusedVars(&err);
 
@@ -289,8 +290,8 @@ void LoaderImpl::BackgroundLoadFile(const Settings* settings,
 void LoaderImpl::BackgroundLoadBuildConfig(
     Settings* settings,
     const Scope::KeyValueMap& toolchain_overrides,
-    const ParseNode* root) {
-  if (!root) {
+    const InputLoadResult* result) {
+  if (!result) {
     task_runner_->PostTask([this]() { DecrementPendingLoads(); });
     return;
   }
@@ -320,7 +321,7 @@ void LoaderImpl::BackgroundLoadBuildConfig(
       settings->build_settings()->build_config_file().GetDir());
 
   Err err;
-  root->Execute(base_config, &err);
+  result->Execute(base_config, &err);
 
   // Put back the root as the default source dir. This probably isn't necessary
   // as other scopes will set their directories to their own path, but it's a
@@ -437,7 +438,7 @@ void LoaderImpl::DecrementPendingLoads() {
 bool LoaderImpl::AsyncLoadFile(const LocationRange& origin,
                                const BuildSettings* build_settings,
                                const SourceFile& file_name,
-                               std::function<void(const ParseNode*)> callback,
+                               std::function<void(const InputLoadResult*)> callback,
                                Err* err) {
   if (async_load_file_) {
     return async_load_file_(origin, build_settings, file_name,
