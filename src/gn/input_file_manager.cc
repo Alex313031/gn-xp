@@ -30,8 +30,8 @@ struct ScopedUnlock {
 };
 
 void InvokeFileLoadCallback(const InputFileManager::FileLoadCallback& cb,
-                            const ParseNode* node) {
-  cb(node);
+                            const InputLoadResult* result) {
+  cb(result);
 }
 
 bool DoLoadFile(const LocationRange& origin,
@@ -40,7 +40,7 @@ bool DoLoadFile(const LocationRange& origin,
                 InputFileManager::SyncLoadFileCallback load_file_callback,
                 InputFile* file,
                 std::vector<Token>* tokens,
-                std::unique_ptr<ParseNode>* root,
+                std::unique_ptr<InputLoadResult>* result,
                 Err* err) {
   // Do all of this stuff outside the lock. We should not give out file
   // pointers until the read is complete.
@@ -61,7 +61,21 @@ bool DoLoadFile(const LocationRange& origin,
       return false;
     }
   } else if (!file->Load(primary_path)) {
-    if (!build_settings->secondary_source_path().empty()) {
+    // TODO: support secondary source tree.
+    if (build_settings->alternate_loader()) {
+      *result = build_settings->alternate_loader()->TryLoadAlternateFor(name, file);
+      if (err->has_error()) {
+        *err = Err(origin, "Can't load input file.",
+                   "Unable to load:\n  " + FilePathToUTF8(primary_path) +
+                       "\n"
+                       "I also tried the registered alternate loader.");
+        return false;
+      }
+      // Finish loading early.
+      // TODO: do we need exec_trace?
+      load_trace.Done();
+      return true;
+    } else if (!build_settings->secondary_source_path().empty()) {
       // Fall back to secondary source tree.
       base::FilePath secondary_path =
           build_settings->GetFullPathSecondary(name);
@@ -89,7 +103,7 @@ bool DoLoadFile(const LocationRange& origin,
     return false;
 
   // Parse.
-  *root = Parser::Parse(*tokens, err);
+  *result = Parser::Parse(*tokens, err);
   if (err->has_error())
     return false;
 
@@ -154,8 +168,8 @@ bool InputFileManager::AsyncLoadFile(const LocationRange& origin,
 
       if (data->loaded) {
         // Can just directly issue the callback on the background thread.
-        schedule_this = [callback, root = data->parsed_root.get()]() {
-          InvokeFileLoadCallback(callback, root);
+        schedule_this = [callback, load_result = data->load_result.get()]() {
+          InvokeFileLoadCallback(callback, load_result);
         };
       } else {
         // Load is pending on this file, schedule the invoke.
@@ -168,7 +182,7 @@ bool InputFileManager::AsyncLoadFile(const LocationRange& origin,
   return true;
 }
 
-const ParseNode* InputFileManager::SyncLoadFile(
+const InputLoadResult* InputFileManager::SyncLoadFile(
     const LocationRange& origin,
     const BuildSettings* build_settings,
     const SourceFile& file_name,
@@ -239,20 +253,20 @@ const ParseNode* InputFileManager::SyncLoadFile(
   // will be reported to the scheduler before the other thread's (and the first
   // error reported "wins"). Forward the parse error from the other load for
   // this thread so that the error message is useful.
-  if (!data->parsed_root)
+  if (!data->load_result)
     *err = data->parse_error;
-  return data->parsed_root.get();
+  return data->load_result.get();
 }
 
 void InputFileManager::AddDynamicInput(
     const SourceFile& name,
     InputFile** file,
     std::vector<Token>** tokens,
-    std::unique_ptr<ParseNode>** parse_root) {
+    std::unique_ptr<InputLoadResult>** load_result) {
   std::unique_ptr<InputFileData> data = std::make_unique<InputFileData>(name);
   *file = &data->file;
   *tokens = &data->tokens;
-  *parse_root = &data->parsed_root;
+  *load_result = &data->load_result;
   {
     std::lock_guard<std::mutex> lock(lock_);
     dynamic_inputs_.push_back(std::move(data));
@@ -289,15 +303,15 @@ bool InputFileManager::LoadFile(const LocationRange& origin,
                                 InputFile* file,
                                 Err* err) {
   std::vector<Token> tokens;
-  std::unique_ptr<ParseNode> root;
+  std::unique_ptr<InputLoadResult> result;
   bool success =
-      DoLoadFile(origin, build_settings, name, load_file_callback_, file, &tokens, &root, err);
+      DoLoadFile(origin, build_settings, name, load_file_callback_, file, &tokens, &result, err);
   // Can't return early. We have to ensure that the completion event is
   // signaled in all cases because another thread could be blocked on this one.
 
   // Save this pointer for running the callbacks below, which happens after the
   // scoped ptr ownership is taken away inside the lock.
-  ParseNode* unowned_root = root.get();
+  InputLoadResult* unowned_result = result.get();
 
   std::vector<FileLoadCallback> callbacks;
   {
@@ -308,7 +322,7 @@ bool InputFileManager::LoadFile(const LocationRange& origin,
     data->loaded = true;
     if (success) {
       data->tokens = std::move(tokens);
-      data->parsed_root = std::move(root);
+      data->load_result = std::move(result);
     } else {
       data->parse_error = *err;
     }
@@ -335,7 +349,7 @@ bool InputFileManager::LoadFile(const LocationRange& origin,
   // item in the list, so that's extra overhead and complexity for no gain.
   if (success) {
     for (const auto& cb : callbacks)
-      cb(unowned_root);
+      cb(unowned_result);
   }
   return success;
 }

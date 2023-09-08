@@ -234,6 +234,10 @@ class Scope {
   // scopes.
   void GetCurrentScopeValues(KeyValueMap* output) const;
 
+  // Returns names of all templates set in the current scope, without going to
+  // the parent scopes.
+  void GetCurrentScopeTemplateNames(std::vector<std::string_view>* output) const;
+
   // Returns true if the values in the current scope are the same as all
   // values in the given scope, without going to the parent scopes. Returns
   // false if not.
