@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7217d5a8_e932cde9",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 43,
+      "author": {
+        "id": 1003078
+      },
+      "writtenOn": "2023-09-11T23:31:26Z",
+      "side": 1,
+      "message": "This seemed to be the case but I wasn\u0027t totally sure if it\u0027s true.  I could potentially add a test case like that, if it would be accepted?",
+      "range": {
+        "startLine": 42,
+        "startChar": 22,
+        "endLine": 43,
+        "endChar": 13
+      },
+      "revId": "58ac1e55f1a5a4e0f1bb1f7faf63988829eb557d",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    }
+  ]
+}
