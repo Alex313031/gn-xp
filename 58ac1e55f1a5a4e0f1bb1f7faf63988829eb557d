@@ -46,6 +46,23 @@
       },
       "revId": "58ac1e55f1a5a4e0f1bb1f7faf63988829eb557d",
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "4e1b706e_e1990e3b",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1003078
+      },
+      "writtenOn": "2023-09-12T18:24:45Z",
+      "side": 1,
+      "message": "Thanks for the review, Petr.  Can you CQ+2 this for me, please?  I don\u0027t have the permissions for doing that in the GN project.",
+      "revId": "58ac1e55f1a5a4e0f1bb1f7faf63988829eb557d",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
     }
   ]
 }
