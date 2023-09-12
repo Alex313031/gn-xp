@@ -346,7 +346,7 @@ class Target : public Item {
   // action or a copy step, and the output library or executable file(s) from
   // binary targets.
   //
-  // It will NOT include phony targets or object files.
+  // It will NOT include stamp files, phony aliases or object files.
   const std::vector<OutputFile>& computed_outputs() const {
     return computed_outputs_;
   }
@@ -354,13 +354,30 @@ class Target : public Item {
   // Returns outputs from this target. The link output file is the one that
   // other targets link to when they depend on this target. This will only be
   // valid for libraries and will be empty for all other target types.
+  const OutputFile& link_output_file() const { return link_output_file_; }
+
+  // In Ninja, a "target" is a file path that appears as an output or input
+  // in the Ninja build plan. A Ninja "phony target" is an output path
+  // generated using the special "phony" build rule, which instructs Ninja
+  // to _not_ generate any real file at build time, but can still be used to
+  // create dependency chains between different Ninja targets.
   //
-  // The dependency output file is the file that should be used to express
-  // a dependency on this one. It could be the same as the link output file
-  // (this will be the case for static libraries). For shared libraries it
-  // could be the same or different than the link output file, depending on the
-  // system.
+  // Since these are nothing like GN target, the term "phony alias" is
+  // preferred in the GN source code to designate these Ninja-specific paths.
   //
+  // Note that Ninja treats phony aliases without any inputs (e.g. with a
+  // definition such as `build <phony_alias>: phony`) as always dirty, so
+  // nothing else in the build plan should use them as input.
+  //
+  // The dependency output is the Ninja file path that should be used to
+  // express a dependency on this GN target. It could be the same as the link
+  // output file (this will be the case for static libraries). For shared
+  // libraries it could be the same or different than the link output file,
+  // depending on the system.
+  //
+  // The dependency output path can correspond to a stamp file or a phony
+  // alias. An alias is only used when the GN target does not have an output
+  // file.
   // The dependency output alias is only set when the target does not have an
   // output file and is using a Ninja phony target to represent it. The
   // exception to this is for phony targets without any real inputs. Ninja
@@ -374,8 +391,6 @@ class Target : public Item {
   // These are only known once the target is resolved and will be empty before
   // that. This is a cache of the files to prevent every target that depends on
   // a given library from recomputing the same pattern.
-  const OutputFile& link_output_file() const { return link_output_file_; }
-
   // Returns true if there is an output dependency file or phony alias.
   bool has_dependency_output() const {
     return has_dependency_output_file() || has_dependency_output_alias();
