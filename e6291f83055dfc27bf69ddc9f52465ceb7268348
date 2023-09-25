@@ -214,6 +214,24 @@
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "05a5afa0_9aac6311",
+        "filename": "src/util/exe_path.cc",
+        "patchSetId": 9
+      },
+      "lineNbr": 121,
+      "author": {
+        "id": 1002587
+      },
+      "writtenOn": "2023-09-25T18:16:25Z",
+      "side": 1,
+      "message": "While executing the FormatTest.XXX tests, the alternate tests fail. So, I introduce a static variable here [instead of the global variable] so that the execution path remains constant throughout and does not need to be obtained on every test (FormatTest.XXX).",
+      "parentUuid": "7e9efafc_7774d05e",
+      "revId": "e6291f83055dfc27bf69ddc9f52465ceb7268348",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "6224454d_4040d5d9",
