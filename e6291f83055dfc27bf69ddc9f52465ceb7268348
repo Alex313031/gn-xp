@@ -270,6 +270,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "ebd78e7e_b51cb89a",
+        "filename": "src/util/exe_path.cc",
+        "patchSetId": 9
+      },
+      "lineNbr": 121,
+      "author": {
+        "id": 1000014
+      },
+      "writtenOn": "2023-09-27T15:55:40Z",
+      "side": 1,
+      "message": "I don\u0027t think you should use a static here. None of the other platforms cache the result of this computation. Your comment about the test changing the directory doesn\u0027t make any sense because this function is returning the current executable name.\n\nSince the executable file isn\u0027t being moved during the test, if you\u0027re seeing something change during execution in a way that woudl be affected by a static, something else is wrong and you should start thinking about why and understand the issue: either the value of the \"_\" isn\u0027t the right way to get the current executable path on AIX or there\u0027s another bug going on.\n\nI initially suspected the \"_\" isn\u0027t correct for AIX but now I see there\u0027s a bug in your new code below that explains the behavior you\u0027re seeing and why you need the static. I feel like I should let you figure this out rather than just telling you the answer so you\u0027re better prepared for the next time this kind of thing happens.\n\nAlso: we don\u0027t use camelCase for variables, this should be `absolute_path_buf`",
+      "parentUuid": "2103f48f_64f7f50e",
+      "revId": "e6291f83055dfc27bf69ddc9f52465ceb7268348",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "6224454d_4040d5d9",
         "filename": "src/util/exe_path.cc",
         "patchSetId": 9
