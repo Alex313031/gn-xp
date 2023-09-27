@@ -250,6 +250,24 @@
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "2103f48f_64f7f50e",
+        "filename": "src/util/exe_path.cc",
+        "patchSetId": 9
+      },
+      "lineNbr": 121,
+      "author": {
+        "id": 1002587
+      },
+      "writtenOn": "2023-09-27T05:34:07Z",
+      "side": 1,
+      "message": "This is how the gn unittest cases are designed and it keeps on changing the directory so to keep a track of the absolute path I\u0027m introducing a static variable.",
+      "parentUuid": "e8b036d4_97075ea9",
+      "revId": "e6291f83055dfc27bf69ddc9f52465ceb7268348",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "6224454d_4040d5d9",
