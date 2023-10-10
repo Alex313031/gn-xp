@@ -33,6 +33,24 @@
       "message": "Clang and GCC on my system both output red. Is there any specific problem with red? It seems like the normal color for error to me.",
       "revId": "d84c91211f62c2438de3ab08e86ec49dcbc4b8da",
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f864c80e_9e96a53b",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1001597
+      },
+      "writtenOn": "2023-10-10T23:04:19Z",
+      "side": 1,
+      "message": "You get red for just warnings? I get pink for warnings and red for errors, at least with clang on my linux machine. I wanted to differentiate between the colors for errors and warnings, but if other tools aren\u0027t consistent in that respect then we don\u0027t have to try to be consistent with them",
+      "parentUuid": "31b4a23c_4b23dcd9",
+      "revId": "d84c91211f62c2438de3ab08e86ec49dcbc4b8da",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
     }
   ]
 }
