@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "5b30b3fa_8c326c8e",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1001597
+      },
+      "writtenOn": "2023-10-10T22:47:21Z",
+      "side": 1,
+      "message": "This matches the colors for compilers",
+      "revId": "d84c91211f62c2438de3ab08e86ec49dcbc4b8da",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    }
+  ]
+}
