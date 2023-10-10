@@ -51,6 +51,24 @@
       "parentUuid": "31b4a23c_4b23dcd9",
       "revId": "d84c91211f62c2438de3ab08e86ec49dcbc4b8da",
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "2deb7db1_02a16f18",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000014
+      },
+      "writtenOn": "2023-10-10T23:28:42Z",
+      "side": 1,
+      "message": "Ohh, I get it, for some reason I thought you were changing the error color but this is the warning color. LGTM",
+      "parentUuid": "f864c80e_9e96a53b",
+      "revId": "d84c91211f62c2438de3ab08e86ec49dcbc4b8da",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
     }
   ]
 }
