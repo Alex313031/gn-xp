@@ -99,6 +99,12 @@ LoaderImpl::~LoaderImpl() = default;
 void LoaderImpl::Load(const SourceFile& file,
                       const LocationRange& origin,
                       const Label& in_toolchain_name) {
+  LoadImpl(file, origin, in_toolchain_name, false);
+}
+void LoaderImpl::LoadImpl(const SourceFile& file,
+                          const LocationRange& origin,
+                          const Label& in_toolchain_name,
+                          const bool is_toolchain) {
   const Label& toolchain_name = in_toolchain_name.is_null()
                                     ? default_toolchain_label_
                                     : in_toolchain_name;
@@ -145,11 +151,12 @@ void LoaderImpl::Load(const SourceFile& file,
     toolchain_records_[toolchain_name] = std::move(new_record);
 
     // Schedule a load of the toolchain using the default one.
-    Load(BuildFileForLabel(toolchain_name), origin, default_toolchain_label_);
+    LoadImpl(BuildFileForLabel(toolchain_name), origin,
+             default_toolchain_label_, true);
   }
 
   if (record->is_config_loaded)
-    ScheduleLoadFile(&record->settings, origin, file);
+    ScheduleLoadFile(&record->settings, origin, file, is_toolchain);
   else
     record->waiting_on_me.push_back(SourceFileAndOrigin(file, origin));
 }
@@ -198,17 +205,18 @@ const Settings* LoaderImpl::GetToolchainSettings(const Label& label) const {
 }
 
 SourceFile LoaderImpl::BuildFileForLabel(const Label& label) const {
-  return SourceFile(
-      label.dir().value() + "BUILD" + build_file_extension_ + ".gn");
+  return SourceFile(label.dir().value() + "BUILD" + build_file_extension_ +
+                    ".gn");
 }
 
 void LoaderImpl::ScheduleLoadFile(const Settings* settings,
                                   const LocationRange& origin,
-                                  const SourceFile& file) {
+                                  const SourceFile& file,
+                                  const bool at_front_of_queue) {
   Err err;
   pending_loads_++;
   if (!AsyncLoadFile(
-          origin, settings->build_settings(), file,
+          origin, settings->build_settings(), file, at_front_of_queue,
           [this, settings, file, origin](const ParseNode* parse_node) {
             BackgroundLoadFile(settings, file, origin, parse_node);
           },
@@ -225,7 +233,7 @@ void LoaderImpl::ScheduleLoadBuildConfig(
   pending_loads_++;
   if (!AsyncLoadFile(
           LocationRange(), settings->build_settings(),
-          settings->build_settings()->build_config_file(),
+          settings->build_settings()->build_config_file(), true,
           [this, settings, toolchain_overrides](const ParseNode* root) {
             BackgroundLoadBuildConfig(settings, toolchain_overrides, root);
           },
@@ -421,7 +429,7 @@ void LoaderImpl::DidLoadBuildConfig(const Label& label) {
 
   // Schedule all waiting file loads.
   for (const auto& waiting : record->waiting_on_me)
-    ScheduleLoadFile(&record->settings, waiting.origin, waiting.file);
+    ScheduleLoadFile(&record->settings, waiting.origin, waiting.file, false);
   record->waiting_on_me.clear();
 
   DecrementPendingLoads();
@@ -437,6 +445,7 @@ void LoaderImpl::DecrementPendingLoads() {
 bool LoaderImpl::AsyncLoadFile(const LocationRange& origin,
                                const BuildSettings* build_settings,
                                const SourceFile& file_name,
+                               const bool at_front_of_queue,
                                std::function<void(const ParseNode*)> callback,
                                Err* err) {
   if (async_load_file_) {
@@ -444,5 +453,6 @@ bool LoaderImpl::AsyncLoadFile(const LocationRange& origin,
                             std::move(callback), err);
   }
   return g_scheduler->input_file_manager()->AsyncLoadFile(
-      origin, build_settings, file_name, std::move(callback), err);
+      origin, build_settings, file_name, at_front_of_queue, std::move(callback),
+      err);
 }

@@ -57,6 +57,7 @@ class InputFileManager : public base::RefCountedThreadSafe<InputFileManager> {
   bool AsyncLoadFile(const LocationRange& origin,
                      const BuildSettings* build_settings,
                      const SourceFile& file_name,
+                     const bool at_front_of_queue,
                      const FileLoadCallback& callback,
                      Err* err);
 

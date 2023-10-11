@@ -55,17 +55,19 @@ void Scheduler::FailWithError(const Err& err) {
   task_runner()->PostTask([this, err]() { FailWithErrorOnMainThread(err); });
 }
 
-void Scheduler::ScheduleWork(std::function<void()> work) {
+void Scheduler::ScheduleWork(std::function<void()> work, bool at_front) {
   IncrementWorkCount();
   pool_work_count_.Increment();
-  worker_pool_.PostTask([this, work = std::move(work)]() {
-    work();
-    DecrementWorkCount();
-    if (!pool_work_count_.Decrement()) {
-      std::unique_lock<std::mutex> auto_lock(pool_work_count_lock_);
-      pool_work_count_cv_.notify_one();
-    }
-  });
+  worker_pool_.PostTask(
+      [this, work = std::move(work)]() {
+        work();
+        DecrementWorkCount();
+        if (!pool_work_count_.Decrement()) {
+          std::unique_lock<std::mutex> auto_lock(pool_work_count_lock_);
+          pool_work_count_cv_.notify_one();
+        }
+      },
+      at_front);
 }
 
 void Scheduler::AddGenDependency(const base::FilePath& file) {

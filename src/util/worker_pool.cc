@@ -117,11 +117,16 @@ WorkerPool::~WorkerPool() {
   }
 }
 
-void WorkerPool::PostTask(std::function<void()> work) {
+void WorkerPool::PostTask(std::function<void()> work, bool at_front) {
   {
     std::unique_lock<std::mutex> queue_lock(queue_mutex_);
     CHECK(!should_stop_processing_);
-    task_queue_.emplace(std::move(work));
+    if (at_front) {
+      task_queue_.emplace_front(std::move(work));
+
+    } else {
+      task_queue_.emplace_back(std::move(work));
+    }
   }
 
   pool_notifier_.notify_one();
@@ -142,7 +147,7 @@ void WorkerPool::Worker() {
         return;
 
       task = std::move(task_queue_.front());
-      task_queue_.pop();
+      task_queue_.pop_front();
     }
 
     task();

@@ -122,10 +122,17 @@ class LoaderImpl : public Loader {
 
   ~LoaderImpl() override;
 
+  // Internal Loader implementation.
+  void LoadImpl(const SourceFile& file,
+                const LocationRange& origin,
+                const Label& toolchain_name,
+                const bool is_toolchain);
+
   // Schedules the input file manager to load the given file.
   void ScheduleLoadFile(const Settings* settings,
                         const LocationRange& origin,
-                        const SourceFile& file);
+                        const SourceFile& file,
+                        const bool at_front_of_queue);
   void ScheduleLoadBuildConfig(Settings* settings,
                                const Scope::KeyValueMap& toolchain_overrides);
 
@@ -159,6 +166,7 @@ class LoaderImpl : public Loader {
   bool AsyncLoadFile(const LocationRange& origin,
                      const BuildSettings* build_settings,
                      const SourceFile& file_name,
+                     const bool at_front_of_queue,
                      std::function<void(const ParseNode*)> callback,
                      Err* err);
 

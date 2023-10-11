@@ -8,7 +8,7 @@
 #include <condition_variable>
 #include <functional>
 #include <mutex>
-#include <queue>
+#include <deque>
 #include <thread>
 
 #include "base/logging.h"
@@ -19,13 +19,13 @@ class WorkerPool {
   WorkerPool(size_t thread_count);
   ~WorkerPool();
 
-  void PostTask(std::function<void()> work);
+  void PostTask(std::function<void()> work, bool at_front = false);
 
  private:
   void Worker();
 
   std::vector<std::thread> threads_;
-  std::queue<std::function<void()>> task_queue_;
+  std::deque<std::function<void()>> task_queue_;
   std::mutex queue_mutex_;
   std::condition_variable_any pool_notifier_;
   bool should_stop_processing_;

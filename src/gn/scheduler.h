@@ -45,7 +45,7 @@ class Scheduler {
   void Log(const std::string& verb, const std::string& msg);
   void FailWithError(const Err& err);
 
-  void ScheduleWork(std::function<void()> work);
+  void ScheduleWork(std::function<void()> work, bool at_front = false);
 
   void Shutdown();
 

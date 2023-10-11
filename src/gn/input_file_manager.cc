@@ -113,6 +113,7 @@ InputFileManager::~InputFileManager() {
 bool InputFileManager::AsyncLoadFile(const LocationRange& origin,
                                      const BuildSettings* build_settings,
                                      const SourceFile& file_name,
+                                     const bool at_front_of_queue,
                                      const FileLoadCallback& callback,
                                      Err* err) {
   // Try not to schedule callbacks while holding the lock. All cases that don't
@@ -164,7 +165,7 @@ bool InputFileManager::AsyncLoadFile(const LocationRange& origin,
       }
     }
   }
-  g_scheduler->ScheduleWork(std::move(schedule_this));
+  g_scheduler->ScheduleWork(std::move(schedule_this), at_front_of_queue);
   return true;
 }
 
@@ -290,8 +291,8 @@ bool InputFileManager::LoadFile(const LocationRange& origin,
                                 Err* err) {
   std::vector<Token> tokens;
   std::unique_ptr<ParseNode> root;
-  bool success =
-      DoLoadFile(origin, build_settings, name, load_file_callback_, file, &tokens, &root, err);
+  bool success = DoLoadFile(origin, build_settings, name, load_file_callback_,
+                            file, &tokens, &root, err);
   // Can't return early. We have to ensure that the completion event is
   // signaled in all cases because another thread could be blocked on this one.
 
