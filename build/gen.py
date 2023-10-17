@@ -697,6 +697,7 @@ def WriteGNNinja(path, platform, host, options, args_list):
         'src/gn/ninja_tools.cc',
         'src/gn/ninja_utils.cc',
         'src/gn/ninja_writer.cc',
+        'src/gn/ninja_outputs_writer.cc',
         'src/gn/operators.cc',
         'src/gn/output_conversion.cc',
         'src/gn/output_file.cc',
