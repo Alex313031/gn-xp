@@ -54,6 +54,13 @@ void NinjaGeneratedFileTargetWriter::GenerateFile() {
                                                    &outputs_as_sources);
   CHECK(outputs_as_sources.size() == 1);
 
+  // As a special case, add this to the list of Ninja output file paths
+  // even if it does not appear as a real output of any build statement.
+  if (ninja_outputs_) {
+    ninja_outputs_->push_back(
+        OutputFile(settings_->build_settings(), outputs_as_sources[0]));
+  }
+
   base::FilePath output =
       settings_->build_settings()->GetFullPath(outputs_as_sources[0]);
   ScopedTrace trace(TraceItem::TRACE_FILE_WRITE_GENERATED, outputs_as_sources[0].value());
