@@ -17,6 +17,7 @@
 #include "gn/filesystem_utils.h"
 #include "gn/json_project_writer.h"
 #include "gn/label_pattern.h"
+#include "gn/ninja_outputs_writer.h"
 #include "gn/ninja_target_writer.h"
 #include "gn/ninja_tools.h"
 #include "gn/ninja_writer.h"
@@ -50,6 +51,7 @@ const char kSwitchIdeValueVs2022[] = "vs2022";
 const char kSwitchIdeValueWinSdk[] = "winsdk";
 const char kSwitchIdeValueXcode[] = "xcode";
 const char kSwitchIdeValueJson[] = "json";
+const char kSwitchIdeValueNinjaOutputs[] = "ninja_outputs";
 const char kSwitchIdeRootTarget[] = "ide-root-target";
 const char kSwitchNinjaExecutable[] = "ninja-executable";
 const char kSwitchNinjaExtraArgs[] = "ninja-extra-args";
@@ -67,6 +69,7 @@ const char kSwitchXcodeAdditionalFilesRoots[] = "xcode-additional-files-roots";
 const char kSwitchJsonFileName[] = "json-file-name";
 const char kSwitchJsonIdeScript[] = "json-ide-script";
 const char kSwitchJsonIdeScriptArgs[] = "json-ide-script-args";
+const char kSwitchNinjaOutputsFileName[] = "ninja-outputs-file-name";
 const char kSwitchExportCompileCommands[] = "export-compile-commands";
 const char kSwitchExportRustProject[] = "export-rust-project";
 
@@ -341,6 +344,21 @@ bool RunIdeWriter(const std::string& ide,
                    "ms\n");
     }
     return res;
+  } else if (ide == kSwitchIdeValueNinjaOutputs) {
+    std::string file_name =
+        command_line->GetSwitchValueString(kSwitchNinjaOutputsFileName);
+    if (file_name.empty())
+      file_name = "ninja_outputs.txt";
+
+    std::string filters = command_line->GetSwitchValueString(kSwitchFilters);
+    bool res = NinjaOutputsWriter::RunAndWriteFiles(
+        build_settings, builder, file_name, filters, quiet, err);
+    if (res && !quiet) {
+      OutputString("Generating Ninja outputs projects took " +
+                   base::Int64ToString(timer.Elapsed().InMilliseconds()) +
+                   "ms\n");
+    }
+    return res;
   }
 
   *err = Err(Location(), "Unknown IDE: " + ide);
@@ -519,6 +537,7 @@ IDE options
       "xcode" - Xcode workspace/solution files.
       "qtcreator" - QtCreator project files.
       "json" - JSON file containing target information
+      "ninja_outputs" - File containing a map from GN labels to Ninja outputs.
 
   --filters=<path_prefixes>
       Semicolon-separated list of label patterns used to limit the set of
@@ -635,6 +654,25 @@ Generic JSON Output
 
   --json-ide-script-args=<argument>
       Optional second argument that will passed to executed script.
+
+Ninja Outputs
+
+  Dumps a text file that maps GN labels to their Ninja output paths.
+  This can be later processed to build an index to convert between Ninja
+  targets and GN ones before or after the build itself.
+
+  The file format is a series of newline-delimited lines, where each
+  line contains a GN label followed by ninja target paths, separated by
+  tab characters, e.g.:
+
+     //src/lib:foo<tab>obj/src/lib/foo.cc.o<tab>obj/src/lib/libfoo.a<newline>
+
+  Only three escape sequences can be used in target paths:
+  "\\" for single backslash, "\n" for a newline, and "\t" for tabs.
+  Note that spaces and double quotes appear verbatim in the output.
+
+  --outputs-file-name=<outputs_file_name>
+      Overrides default file name (outputs.txt) of generated file.
 
 Compilation Database
 
