@@ -17,6 +17,7 @@
 #include "gn/filesystem_utils.h"
 #include "gn/json_project_writer.h"
 #include "gn/label_pattern.h"
+#include "gn/ninja_outputs_writer.h"
 #include "gn/ninja_target_writer.h"
 #include "gn/ninja_tools.h"
 #include "gn/ninja_writer.h"
@@ -53,6 +54,7 @@ const char kSwitchIdeValueJson[] = "json";
 const char kSwitchIdeRootTarget[] = "ide-root-target";
 const char kSwitchNinjaExecutable[] = "ninja-executable";
 const char kSwitchNinjaExtraArgs[] = "ninja-extra-args";
+const char kSwitchNinjaOutputsFile[] = "ninja-outputs-file";
 const char kSwitchNoDeps[] = "no-deps";
 const char kSwitchSln[] = "sln";
 const char kSwitchXcodeProject[] = "xcode-project";
@@ -70,10 +72,18 @@ const char kSwitchJsonIdeScriptArgs[] = "json-ide-script-args";
 const char kSwitchExportCompileCommands[] = "export-compile-commands";
 const char kSwitchExportRustProject[] = "export-rust-project";
 
-// Collects Ninja rules for each toolchain. The lock protectes the rules.
+// A map type used to implement --ide=ninja_outputs
+using NinjaOutputsMap = NinjaOutputsWriter::MapType;
+
+// Collects Ninja rules for each toolchain. The lock protects the rules
 struct TargetWriteInfo {
+  // Set this to true to populate |ninja_outputs_map| below.
+  bool want_ninja_outputs = false;
+
   std::mutex lock;
   NinjaWriter::PerToolchainRules rules;
+
+  NinjaOutputsMap ninja_outputs_map;
 
   using ResolvedMap = std::unordered_map<std::thread::id, ResolvedTargetData>;
   std::unique_ptr<ResolvedMap> resolved_map = std::make_unique<ResolvedMap>();
@@ -86,17 +96,28 @@ struct TargetWriteInfo {
 // Called on worker thread to write the ninja file.
 void BackgroundDoWrite(TargetWriteInfo* write_info, const Target* target) {
   ResolvedTargetData* resolved;
+  std::vector<OutputFile> target_ninja_outputs;
+  std::vector<OutputFile>* ninja_outputs =
+      write_info->want_ninja_outputs ? &target_ninja_outputs : nullptr;
+
   {
     std::lock_guard<std::mutex> lock(write_info->lock);
     resolved = &((*write_info->resolved_map)[std::this_thread::get_id()]);
   }
-  std::string rule = NinjaTargetWriter::RunAndWriteFile(target, resolved);
+  std::string rule =
+      NinjaTargetWriter::RunAndWriteFile(target, resolved, ninja_outputs);
+
   DCHECK(!rule.empty());
 
   {
     std::lock_guard<std::mutex> lock(write_info->lock);
     write_info->rules[target->toolchain()].emplace_back(target,
                                                         std::move(rule));
+
+    if (write_info->want_ninja_outputs) {
+      write_info->ninja_outputs_map.emplace(target,
+                                            std::move(target_ninja_outputs));
+    }
   }
 }
 
@@ -215,6 +236,7 @@ bool CheckForInvalidGeneratedInputs(Setup* setup) {
 bool RunIdeWriter(const std::string& ide,
                   const BuildSettings* build_settings,
                   const Builder& builder,
+                  const NinjaOutputsMap& ninja_outputs_map,
                   Err* err) {
   const base::CommandLine* command_line =
       base::CommandLine::ForCurrentProcess();
@@ -494,6 +516,11 @@ General options
       executable will also be used as part of the gen process for triggering a
       restat on generated ninja files and for use with --clean-stale.
 
+  --ninja-outputs-file=<path>
+      Generate a text file mapping GN target labels to list of Ninja output
+      paths as they appear in the generated Ninja build plan. See below for
+      details.
+
   --clean-stale
       This option will cause no longer needed output files to be removed from
       the build directory, and their records pruned from the ninja build log and
@@ -636,6 +663,22 @@ Generic JSON Output
   --json-ide-script-args=<argument>
       Optional second argument that will passed to executed script.
 
+Ninja Outputs
+
+  Tje --ninja-outputs-file=<FILE> option dumps a text file that maps GN labels
+  to their Ninja output paths. This can be later processed to build an index
+  to convert between Ninja targets and GN ones before or after the build itself.
+
+  The file format is a series of newline-delimited lines, where each
+  line contains a GN label followed by ninja target paths, separated by
+  tab characters, e.g.:
+
+    <gn_label><tab><path1><tab><path2><newline>
+
+  Only three escape sequences can be used in paths:
+  "\\" for single backslash, "\n" for a newline, and "\t" for tabs.
+  Note that spaces and double quotes appear verbatim in the output.
+
 Compilation Database
 
   --export-rust-project
@@ -717,6 +760,9 @@ int RunGen(const std::vector<std::string>& args) {
 
   // Cause the load to also generate the ninja files for each target.
   TargetWriteInfo write_info;
+  write_info.want_ninja_outputs =
+      command_line->HasSwitch(kSwitchNinjaOutputsFile);
+
   setup->builder().set_resolved_and_generated_callback(
       [&write_info](const BuilderRecord* record) {
         ItemResolvedAndGeneratedCallback(&write_info, record);
@@ -758,6 +804,30 @@ int RunGen(const std::vector<std::string>& args) {
     return 1;
   }
 
+  if (write_info.want_ninja_outputs) {
+    ElapsedTimer timer;
+    std::string file_name =
+        command_line->GetSwitchValueString(kSwitchNinjaOutputsFile);
+    if (file_name.empty()) {
+      Err(Location(), "The --ninja-outputs-file argument cannot be empty!")
+          .PrintToStdout();
+      return 1;
+    }
+
+    bool res = NinjaOutputsWriter::RunAndWriteFiles(
+        write_info.ninja_outputs_map, &setup->build_settings(), file_name,
+        &err);
+    if (!res) {
+      err.PrintToStdout();
+      return 1;
+    }
+    if (!command_line->HasSwitch(switches::kQuiet)) {
+      OutputString("Generating Ninja outputs file took " +
+                   base::Int64ToString(timer.Elapsed().InMilliseconds()) +
+                   "ms\n");
+    }
+  }
+
   if (!WriteRuntimeDepsFilesIfNecessary(&setup->build_settings(),
                                         setup->builder(), &err)) {
     err.PrintToStdout();
@@ -769,7 +839,8 @@ int RunGen(const std::vector<std::string>& args) {
 
   if (command_line->HasSwitch(kSwitchIde) &&
       !RunIdeWriter(command_line->GetSwitchValueString(kSwitchIde),
-                    &setup->build_settings(), setup->builder(), &err)) {
+                    &setup->build_settings(), setup->builder(),
+                    write_info.ninja_outputs_map, &err)) {
     err.PrintToStdout();
     return 1;
   }
