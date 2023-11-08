@@ -37,9 +37,8 @@ class BuildSettings {
   void SetRootTargetLabel(const Label& r);
 
   // Root target label patterns.
-  const std::vector<LabelPattern>& root_patterns() const {
-    return root_patterns_;
-  }
+  const std::vector<LabelPattern>& root_patterns() const;
+  void EnsureEmptyRootPatterns() { ensure_empty_root_patterns_ = true; }
   void SetRootPatterns(std::vector<LabelPattern>&& root_patterns);
 
   // Absolute path of the source root on the local system. Everything is
@@ -142,7 +141,8 @@ class BuildSettings {
 
  private:
   Label root_target_label_;
-  std::vector<LabelPattern> root_patterns_;
+  mutable std::vector<LabelPattern> root_patterns_;
+  bool ensure_empty_root_patterns_ = false;
   base::FilePath dotfile_name_;
   base::FilePath root_path_;
   std::string root_path_utf8_;

@@ -76,6 +76,7 @@ class BuilderTest : public TestWithScheduler {
         settings_(&build_settings_, std::string()),
         scope_(&settings_) {
     build_settings_.SetBuildDir(SourceDir("//out/"));
+    build_settings_.EnsureEmptyRootPatterns();
     settings_.set_toolchain_label(Label(SourceDir("//tc/"), "default"));
     settings_.set_default_toolchain_label(settings_.toolchain_label());
   }

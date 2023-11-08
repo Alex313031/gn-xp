@@ -50,6 +50,7 @@ class AnalyzerTest : public testing::Test {
         builder_(loader_.get()),
         settings_(&build_settings_, std::string()),
         other_settings_(&build_settings_, std::string()) {
+    build_settings_.EnsureEmptyRootPatterns();
     build_settings_.SetBuildDir(SourceDir("//out/"));
 
     settings_.set_toolchain_label(Label(SourceDir("//tc/"), "default"));

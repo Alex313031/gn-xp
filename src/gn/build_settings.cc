@@ -27,6 +27,17 @@ void BuildSettings::SetRootTargetLabel(const Label& r) {
   root_target_label_ = r;
 }
 
+const std::vector<LabelPattern>& BuildSettings::root_patterns() const {
+  if (!ensure_empty_root_patterns_ && root_patterns_.empty()) {
+    Value pattern_value(nullptr, "//:*");
+    Err err;
+    root_patterns_.push_back(
+        LabelPattern::GetPattern(SourceDirForCurrentDirectory(root_path()),
+                                 root_path_utf8(), pattern_value, &err));
+  }
+  return root_patterns_;
+}
+
 void BuildSettings::SetRootPatterns(std::vector<LabelPattern>&& patterns) {
   root_patterns_ = std::move(patterns);
 }
