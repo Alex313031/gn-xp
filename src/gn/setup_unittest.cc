@@ -263,16 +263,8 @@ root_patterns = [ "//:foo" ]
   // Run setup and check that the .gn file is in the scheduler's gen deps.
   Setup setup;
   Err err;
-  bool ret = setup.DoSetupWithErr(FilePathToUTF8(build_temp_dir.GetPath()),
-                                  true, cmdline, &err);
-  if (!ret) {
-    fprintf(stderr, "\n\nERROR [%s: %s]\n", err.message().c_str(),
-            err.help_text().c_str());
-    ASSERT_FALSE(ret);
-  }
-
-  // EXPECT_TRUE(setup.DoSetupWithErr(FilePathToUTF8(build_temp_dir.GetPath()),
-  //                                  true, cmdline, &err));
+  EXPECT_TRUE(setup.DoSetupWithErr(FilePathToUTF8(build_temp_dir.GetPath()),
+                                   true, cmdline, &err));
 
   const std::vector<LabelPattern>& root_patterns =
       setup.build_settings().root_patterns();

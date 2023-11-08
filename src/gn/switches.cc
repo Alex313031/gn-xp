@@ -205,7 +205,7 @@ const char kRootPattern_Help[] =
   The argument must be a GN label pattern, and each --root-pattern=<pattern>
   on the command-line will append a pattern to the list.
 
-Example:
+Example
 
   gn gen //out/Default --root-pattern="//:*"
 )";

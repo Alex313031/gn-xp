@@ -549,9 +549,8 @@ bool Target::ShouldGenerate() const {
   if (root_patterns.empty()) {
     // By default, generate all targets that belong to the default toolchain.
     return settings()->is_default();
-  } else {
-    return LabelPattern::VectorMatches(root_patterns, label());
   }
+  return LabelPattern::VectorMatches(root_patterns, label());
 }
 
 DepsIteratorRange Target::GetDeps(DepsIterationType type) const {
