@@ -39,6 +39,29 @@
       },
       "revId": "86546c16c90331814904cd5a8e9df2e9deaaf298",
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "99b4f699_2dd0d3dc",
+        "filename": "src/gn/commands.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 224,
+      "author": {
+        "id": 1000030
+      },
+      "writtenOn": "2023-11-10T06:26:29Z",
+      "side": 1,
+      "message": "Can we show item name in this case?",
+      "range": {
+        "startLine": 224,
+        "startChar": 48,
+        "endLine": 224,
+        "endChar": 52
+      },
+      "revId": "86546c16c90331814904cd5a8e9df2e9deaaf298",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
     }
   ]
 }
