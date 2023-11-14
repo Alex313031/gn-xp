@@ -16,6 +16,23 @@
       "message": "lgtm",
       "revId": "acd5c496c319d6f4bbd5668a2ab7ada813cad0f6",
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b06c9f9c_b3bb2c07",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000030
+      },
+      "writtenOn": "2023-11-14T02:28:02Z",
+      "side": 1,
+      "message": "Hmm, current Windows toolchain doesn\u0027t allow this.",
+      "revId": "acd5c496c319d6f4bbd5668a2ab7ada813cad0f6",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
     }
   ]
 }
