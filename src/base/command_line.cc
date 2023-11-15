@@ -279,6 +279,7 @@ CommandLine CommandLine::FromString(const std::u16string& command_line) {
 
 void CommandLine::InitFromArgv(int argc,
                                const CommandLine::CharType* const* argv) {
+  LOG(INFO) << "CommandLine::InitFromArgv";
   StringVector new_argv;
   for (int i = 0; i < argc; ++i)
     new_argv.push_back(argv[i]);
