@@ -33,6 +33,24 @@
       "message": "Hmm, current Windows toolchain doesn\u0027t allow this.",
       "revId": "acd5c496c319d6f4bbd5668a2ab7ada813cad0f6",
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c0546878_88dcad58",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1001227
+      },
+      "writtenOn": "2023-11-15T15:29:50Z",
+      "side": 1,
+      "message": "Lets ignore the warning then. btw it also fails with old gcc versions :S",
+      "parentUuid": "b06c9f9c_b3bb2c07",
+      "revId": "acd5c496c319d6f4bbd5668a2ab7ada813cad0f6",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
     }
   ]
 }
