@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5980513c_94f7a23c",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1003392
+      },
+      "writtenOn": "2023-11-21T00:55:50Z",
+      "side": 1,
+      "message": "Not sure if this makes sense, but the repeated docs have confused me for quite a while.",
+      "revId": "6670f1dd54d6697d084ff4b0a83c9d7a5b1a8b0d",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    }
+  ]
+}
