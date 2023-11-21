@@ -16,6 +16,23 @@
       "message": "Not sure if this makes sense, but the repeated docs have confused me for quite a while.",
       "revId": "6670f1dd54d6697d084ff4b0a83c9d7a5b1a8b0d",
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e35e4aef_2c4c9b14",
+        "filename": "docs/reference.md",
+        "patchSetId": 1
+      },
+      "lineNbr": 3,
+      "author": {
+        "id": 1000030
+      },
+      "writtenOn": "2023-11-21T02:58:37Z",
+      "side": 1,
+      "message": "Could you update source of truth instead?",
+      "revId": "6670f1dd54d6697d084ff4b0a83c9d7a5b1a8b0d",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
     }
   ]
 }
