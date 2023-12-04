@@ -134,7 +134,7 @@ def RunSteps(api, repository):
 
   def release_targets():
     if api.platform.is_linux:
-      return [api.target('linux-amd64'), api.target('linux-arm64')]
+      return [api.target('linux-amd64'), api.target('linux-arm64'), api.target('linux-riscv64')]
     elif api.platform.is_mac:
       return [api.target('mac-amd64'), api.target('mac-arm64')]
     else:
