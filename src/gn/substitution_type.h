@@ -17,6 +17,8 @@ class ParseNode;
 struct Substitution {
   const char* name;
   const char* ninja_name;
+  Substitution(const char* name, const char* ninja_name)
+      : name(name), ninja_name(ninja_name) {}
   Substitution(const Substitution&) = delete;
   Substitution& operator=(const Substitution&) = delete;
 };
