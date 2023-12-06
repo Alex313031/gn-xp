@@ -2,10 +2,21 @@
 # Use of this source code is governed by a BSD-style license that can be
 # found in the LICENSE file.
 
+ps_dir = getenv("SCE_ROOT_DIR")
+ver = "4.000"
+ps_path = ps_dir + "/Prospero SDKs/" + ver
+prefix = "$ps_path/host_tools/bin"
+cc = "$prefix/prospero-clang.exe"
+cxx = cc
+ld = "$prefix/prospero-lld.exe"
+ar = "$prefix/prospero-llvm-ar.exe"
+executable_extension = ".elf"
+shlib_extension = ".sprx"
+
 toolchain("gcc") {
   tool("cc") {
     depfile = "{{output}}.d"
-    command = "gcc -MMD -MF $depfile {{defines}} {{include_dirs}} {{cflags}} {{cflags_c}} -c {{source}} -o {{output}}"
+    command = "\"$cc\" -MMD -MF $depfile {{defines}} {{include_dirs}} {{cflags}} {{cflags_c}} -c {{source}} -o {{output}}"
     depsformat = "gcc"
     description = "CC {{output}}"
     outputs =
@@ -14,7 +25,7 @@ toolchain("gcc") {
 
   tool("cxx") {
     depfile = "{{output}}.d"
-    command = "g++ -MMD -MF $depfile {{defines}} {{include_dirs}} {{cflags}} {{cflags_cc}} -c {{source}} -o {{output}}"
+    command = "\"$cxx\" -MMD -MF $depfile {{defines}} {{include_dirs}} {{cflags}} {{cflags_cc}} -c {{source}} -o {{output}}"
     depsformat = "gcc"
     description = "CXX {{output}}"
     outputs =
@@ -22,7 +33,8 @@ toolchain("gcc") {
   }
 
   tool("alink") {
-    command = "rm -f {{output}} && ar rcs {{output}} {{inputs}}"
+    # command = "rm -f {{output}} && \"$ar\" rcs {{output}} {{inputs}}"
+    command = "\"$ar\" {{arflags}} rcs {{output}} {{inputs}}"
     description = "AR {{target_output_name}}{{output_extension}}"
 
     outputs =
@@ -39,18 +51,18 @@ toolchain("gcc") {
       os_specific_option = "-install_name @executable_path/$sofile"
       rspfile_content = "{{inputs}} {{solibs}} {{libs}}"
     } else {
-      os_specific_option = "-Wl,-soname=$soname"
-      rspfile_content = "-Wl,--whole-archive {{inputs}} {{solibs}} -Wl,--no-whole-archive {{libs}}"
+      os_specific_option = "-soname=$soname"
+      rspfile_content = "--whole-archive {{inputs}} {{solibs}} --no-whole-archive {{libs}}"
     }
 
-    command = "g++ -shared {{ldflags}} -o $sofile $os_specific_option @$rspfile"
+    command = "\"$ld\" -shared {{ldflags}} -o $sofile $os_specific_option @$rspfile"
 
     description = "SOLINK $soname"
 
     # Use this for {{output_extension}} expansions unless a target manually
     # overrides it (in which case {{output_extension}} will be what the target
     # specifies).
-    default_output_extension = ".so"
+    default_output_extension = shlib_extension
 
     # Use this for {{output_dir}} expansions unless a target manually overrides
     # it (in which case {{output_dir}} will be what the target specifies).
@@ -68,12 +80,13 @@ toolchain("gcc") {
     if (is_mac) {
       command = "g++ {{ldflags}} -o $outfile @$rspfile {{solibs}} {{libs}}"
     } else {
-      command = "g++ {{ldflags}} -o $outfile -Wl,--start-group @$rspfile {{solibs}} -Wl,--end-group {{libs}}"
+      command = "\"$ld\" {{ldflags}} -o $outfile -Wl,--start-group @$rspfile {{solibs}} -Wl,--end-group {{libs}}"
     }
     description = "LINK $outfile"
     default_output_dir = "{{root_out_dir}}"
     rspfile_content = "{{inputs}}"
     outputs = [ outfile ]
+    default_output_extension = executable_extension
   }
 
   tool("stamp") {
