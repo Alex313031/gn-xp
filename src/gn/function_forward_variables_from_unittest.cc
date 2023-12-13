@@ -39,16 +39,15 @@ TEST_F(FunctionForwardVariablesFromTest, List) {
   {
     TestWithScope setup;
 
-    // Test that the same input but forwarding a variable with the name of
-    // something in the given scope throws an error rather than clobbering it.
-    // This uses the same known-good program as before, but adds another
-    // variable in the scope before it.
-    TestParseInput clobber("x = 1\n" + program);
+    // Test that a predefined variable is clobbered.
+    TestParseInput clobber("x = 3\nprint(x)\n" + program);
     ASSERT_FALSE(clobber.has_error());
 
     clobber.parsed()->Execute(setup.scope(), &err);
-    ASSERT_TRUE(err.has_error());  // Should thow a clobber error.
-    EXPECT_EQ("Clobbering existing value.", err.message());
+    ASSERT_FALSE(err.has_error()) << err.message();
+
+    EXPECT_EQ("3\ntarget, 1, 2\n", setup.print_output());
+    setup.print_output().clear();
   }
 }
 
