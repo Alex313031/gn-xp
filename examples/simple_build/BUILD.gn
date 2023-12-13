@@ -2,6 +2,13 @@
 # Use of this source code is governed by a BSD-style license that can be
 # found in the LICENSE file.
 
+template("foo_test") {
+  config(target_name) {
+    example_flag = "-foo"
+    forward_variables_from(invoker, [ "example_flag" ])
+  }
+}
+
 executable("hello") {
   sources = [ "hello.cc" ]
 
