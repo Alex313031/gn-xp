@@ -2727,11 +2727,11 @@
   set directly on the from_scope, not enclosing ones. Otherwise it would
   duplicate all global variables.
 
-  When an explicit list of variables is supplied, if the variable exists in the
-  current (destination) scope already, an error will be thrown. If "*" is
-  specified, variables in the current scope will be clobbered (the latter is
-  important because most targets have an implicit configs list, which means it
-  wouldn't work at all if it didn't clobber).
+  forward_variables_from will always clobber variables in the current
+  (destination) scope, if they exist. This makes it functionally very similar
+  to mirroring the variable in the current scope if the variable is defined
+  in the given scope (see the first example below), with the notable exception
+  that with a variable_list value of "*" does not copy from enclosing scopes.
 
   If variables_to_not_forward_list is non-empty, then it must contains a list
   of variable names that will not be forwarded. This is mostly useful when
@@ -2743,7 +2743,6 @@
 ```
   # forward_variables_from(invoker, ["foo"])
   # is equivalent to:
-  assert(!defined(foo))
   if (defined(invoker.foo)) {
     foo = invoker.foo
   }
