@@ -55,20 +55,6 @@ void ForwardValuesFromList(Scope* source,
         return;
       }
 
-      // Don't allow clobbering existing values.
-      const Value* existing_value = dest->GetValue(storage_key);
-      if (existing_value) {
-        *err = Err(
-            cur, "Clobbering existing value.",
-            "The current scope already defines a value \"" +
-                cur.string_value() +
-                "\".\nforward_variables_from() won't clobber "
-                "existing values. If you want to\nmerge lists, you'll need to "
-                "do this explicitly.");
-        err->AppendSubErr(Err(*existing_value, "value being clobbered."));
-        return;
-      }
-
       // Keep the origin information from the original value. The normal
       // usage is for this to be used in a template, and if there's an error,
       // the user expects to see the line where they set the variable
@@ -102,11 +88,11 @@ const char kForwardVariablesFrom_Help[] =
   set directly on the from_scope, not enclosing ones. Otherwise it would
   duplicate all global variables.
 
-  When an explicit list of variables is supplied, if the variable exists in the
-  current (destination) scope already, an error will be thrown. If "*" is
-  specified, variables in the current scope will be clobbered (the latter is
-  important because most targets have an implicit configs list, which means it
-  wouldn't work at all if it didn't clobber).
+  forward_variables_from will always clobber variables in the current
+  (destination) scope, if they exist. This makes it functionally very similar
+  to mirroring the variable in the current scope if the variable is defined
+  in the given scope (see the first example below), with the notable exception
+  that with a variable_list value of "*" does not copy from enclosing scopes.
 
   If variables_to_not_forward_list is non-empty, then it must contains a list
   of variable names that will not be forwarded. This is mostly useful when
@@ -116,7 +102,6 @@ Examples
 
   # forward_variables_from(invoker, ["foo"])
   # is equivalent to:
-  assert(!defined(foo))
   if (defined(invoker.foo)) {
     foo = invoker.foo
   }
