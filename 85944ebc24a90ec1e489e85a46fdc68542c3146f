@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "fa76a6d3_c48ee028",
+        "filename": "docs/reference.md",
+        "patchSetId": 4
+      },
+      "lineNbr": 2642,
+      "author": {
+        "id": 1000016
+      },
+      "writtenOn": "2023-12-14T18:44:14Z",
+      "side": 0,
+      "message": "The text about `\"*\"` needs to be retained, and IMHO should be expanded to be explicit about the clobbering-nonempty-aggregates behavior, which exists nowhere else in GN.\n\nAside from `\"*\"`, IMHO it would be helpful to be more explicit about the behavior. One way that would work for me is to describe it as being precisely equivalent to a sequence of `if (defined(invoker.foo)) { foo \u003d invoker.foo }` statements, perhaps with a brief aside about the usual can\u0027t-clobber-nonempty-aggregates constraint that assignments have.",
+      "range": {
+        "startLine": 2638,
+        "startChar": 64,
+        "endLine": 2642,
+        "endChar": 0
+      },
+      "revId": "85944ebc24a90ec1e489e85a46fdc68542c3146f",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    }
+  ]
+}
