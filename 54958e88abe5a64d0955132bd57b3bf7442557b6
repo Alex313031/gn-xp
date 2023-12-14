@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "daac2e5c_9a8f6e83",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000016
+      },
+      "writtenOn": "2023-12-14T17:44:43Z",
+      "side": 1,
+      "message": "This needs an update to the `gn help forward_variables_from` text.",
+      "revId": "54958e88abe5a64d0955132bd57b3bf7442557b6",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    }
+  ]
+}
