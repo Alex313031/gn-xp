@@ -16,6 +16,24 @@
       "message": "This needs an update to the `gn help forward_variables_from` text.",
       "revId": "54958e88abe5a64d0955132bd57b3bf7442557b6",
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "960da7d7_404cf4f1",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1001597
+      },
+      "writtenOn": "2023-12-14T18:37:01Z",
+      "side": 1,
+      "message": "Done—I just removed the text about erroring out, but I can explicitly add a section saying it will clobber variables if that\u0027s preferable.",
+      "parentUuid": "daac2e5c_9a8f6e83",
+      "revId": "54958e88abe5a64d0955132bd57b3bf7442557b6",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
     }
   ]
 }
