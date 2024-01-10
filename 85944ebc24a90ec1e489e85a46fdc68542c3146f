@@ -22,6 +22,30 @@
       },
       "revId": "85944ebc24a90ec1e489e85a46fdc68542c3146f",
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "56fcce88_99178a73",
+        "filename": "docs/reference.md",
+        "patchSetId": 4
+      },
+      "lineNbr": 2642,
+      "author": {
+        "id": 1001597
+      },
+      "writtenOn": "2024-01-10T21:40:35Z",
+      "side": 0,
+      "message": "I added more information on it, but didn\u0027t the include the same exact text as it didn\u0027t seem helpful—if you would like me to include it, please tell me how you\u0027d like it worded.",
+      "parentUuid": "fa76a6d3_c48ee028",
+      "range": {
+        "startLine": 2638,
+        "startChar": 64,
+        "endLine": 2642,
+        "endChar": 0
+      },
+      "revId": "85944ebc24a90ec1e489e85a46fdc68542c3146f",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
     }
   ]
 }
