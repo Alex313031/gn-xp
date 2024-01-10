@@ -2,22 +2,28 @@
 # Use of this source code is governed by a BSD-style license that can be
 # found in the LICENSE file.
 
+# group("gn_all") {
+#   deps = [ ":hello_shared_test($secondary_toolchain)" ]
+# }
+
 executable("hello") {
   sources = [ "hello.cc" ]
 
   deps = [
-    ":hello_shared",
+    ":hello_shared($secondary_toolchain)",
     ":hello_static",
   ]
 }
 
-shared_library("hello_shared") {
-  sources = [
-    "hello_shared.cc",
-    "hello_shared.h",
-  ]
+if (current_toolchain == secondary_toolchain) {
+  shared_library("hello_shared") {
+    sources = [
+      "hello_shared.cc",
+      "hello_shared.h",
+    ]
 
-  defines = [ "HELLO_SHARED_IMPLEMENTATION" ]
+    defines = [ "HELLO_SHARED_IMPLEMENTATION" ]
+  }
 }
 
 static_library("hello_static") {

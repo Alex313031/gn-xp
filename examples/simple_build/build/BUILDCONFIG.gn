@@ -39,3 +39,18 @@ set_defaults("source_set") {
 }
 
 set_default_toolchain("//build/toolchain:gcc")
+
+# If this is set as `secondary_toolchain = "//build/toolchain:gcc"` GN finds
+# //:hello_shared_test without an issue.
+secondary_toolchain = "//build/toolchain:gcc2"
+
+template("shared_library") {
+  shared_library(target_name) {
+    forward_variables_from(invoker, "*")
+  }
+  if (current_toolchain == secondary_toolchain) {
+    executable(target_name + "_test") {
+      sources = [ "//test.cc" ]
+    }
+  }
+}
