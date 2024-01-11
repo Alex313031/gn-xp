@@ -79,7 +79,7 @@ class WindowsSDKApi(recipe_api.RecipeApi):
     filename = 'SetEnv.%s.json' % {32: 'x86', 64: 'x64'}[self.m.platform.bits]
     step_result = self.m.json.read(
         'read %s' % filename,
-        sdk_dir.join('win_sdk', 'bin', filename),
+        sdk_dir.join('Windows Kits', '10', 'bin', filename),
         step_test_data=lambda: self.m.json.test_api.output({
             'env': {
                 'PATH': [['..', '..', 'win_sdk', 'bin', 'x64']],
