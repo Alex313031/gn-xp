@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "4e9c235c_a69fbd45",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2024-01-12T21:38:00Z",
+      "side": 1,
+      "message": "This seems OK in principle, I\u0027ll let Takuto review the details.",
+      "revId": "4d98b5fa78b56997e82224c9cbf89d3c5171430a",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    }
+  ]
+}
