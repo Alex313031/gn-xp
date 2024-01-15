@@ -16,6 +16,23 @@
       "message": "I think this is bug in GCC.\nhttps://gcc.gnu.org/bugzilla/show_bug.cgi?id\u003d105329\n\nBetter to disable resrict warning in gcc instead?",
       "revId": "095e42d3c5d272b1b05bc40281c06f294cbf80e9",
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "3e5a1ba7_80f11d21",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000067
+      },
+      "writtenOn": "2024-01-15T09:27:15Z",
+      "side": 1,
+      "message": "There is something weird here because the source code you modified seems correct, even for C++20. Also please do not add hundreds of compiler warnings in a commit message, it\u0027s just noise that is painful to read for everyone.\n\nMeanwhile, the warning that says `accessing 9223372036854775810 or more bytes at offsets -4611686018427387902 and [-4611686018427387903, 4611686018427387904] may overlap up to 9223372036854775813 bytes at offset -3` is non-sensical given the code base.\n\nAre you sure there is not something terribly wrong with your compiler? Can you give more information about the issue?",
+      "revId": "095e42d3c5d272b1b05bc40281c06f294cbf80e9",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
     }
   ]
 }
