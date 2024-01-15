@@ -87,6 +87,60 @@
       "parentUuid": "01e636ac_c06a8c36",
       "revId": "095e42d3c5d272b1b05bc40281c06f294cbf80e9",
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4f0798ea_074d9ec3",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000030
+      },
+      "writtenOn": "2024-01-15T10:22:35Z",
+      "side": 1,
+      "message": "Hmm, I feel this CL is bit more mysterious and larger than the linked patch. So not so happy to have this if you can have workaround in your project.",
+      "parentUuid": "a4626002_b3b0b4fa",
+      "revId": "095e42d3c5d272b1b05bc40281c06f294cbf80e9",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "00f69a95_2509b9c9",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000030
+      },
+      "writtenOn": "2024-01-15T10:22:35Z",
+      "side": 1,
+      "message": "https://github.com/google/googletest/issues/4108#issuecomment-1371369422",
+      "parentUuid": "a4626002_b3b0b4fa",
+      "revId": "095e42d3c5d272b1b05bc40281c06f294cbf80e9",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "0308c852_dd5452db",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000030
+      },
+      "writtenOn": "2024-01-15T10:22:35Z",
+      "side": 1,
+      "message": "+1 to @digit@google.com as it seems fixed in trunk according to\nhttps://github.com/google/googletest/issues/4108#issuecomment-1371369422",
+      "parentUuid": "a96f8317_3c793d4e",
+      "revId": "095e42d3c5d272b1b05bc40281c06f294cbf80e9",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
     }
   ]
 }
