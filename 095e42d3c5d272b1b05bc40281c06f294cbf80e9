@@ -69,6 +69,24 @@
       "parentUuid": "9ebb1bcd_1c55253d",
       "revId": "095e42d3c5d272b1b05bc40281c06f294cbf80e9",
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a96f8317_3c793d4e",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000067
+      },
+      "writtenOn": "2024-01-15T10:04:35Z",
+      "side": 1,
+      "message": "Please add a path to your Debian source package then. If there is something terribly wrong with the compiler Debian is using, this should be addressed with a Debian-specific patch instead (maybe just disabling the restrict warning should be enough). Moreover, it gives you an incentive to fix your compiler once and for all :-)\n\nGenerally speaking, accepting your patch as-is into GN (or any other project) means that there is a high chance that someones (or something) cleans up / fixes / simplifies the code in the future without realizing that it would break compilation with a broken compiler.",
+      "parentUuid": "01e636ac_c06a8c36",
+      "revId": "095e42d3c5d272b1b05bc40281c06f294cbf80e9",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
     }
   ]
 }
