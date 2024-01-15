@@ -100,6 +100,30 @@
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "aa0134c4_e3540003",
+        "filename": "src/gn/setup_unittest.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 270,
+      "author": {
+        "id": 1000030
+      },
+      "writtenOn": "2024-01-15T09:33:15Z",
+      "side": 1,
+      "message": "Using GoogleTest instead of our own test library sounds good to me if it is easy to setup.",
+      "parentUuid": "d4b125c2_3b1b9244",
+      "range": {
+        "startLine": 269,
+        "startChar": 4,
+        "endLine": 270,
+        "endChar": 37
+      },
+      "revId": "4d98b5fa78b56997e82224c9cbf89d3c5171430a",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "eff195fb_187f315a",
