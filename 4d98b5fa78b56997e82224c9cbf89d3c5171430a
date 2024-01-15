@@ -35,6 +35,24 @@
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "bc684416_35d25636",
+        "filename": "src/gn/setup.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 151,
+      "author": {
+        "id": 1000067
+      },
+      "writtenOn": "2024-01-15T08:47:29Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "1f42dc1a_1054eefa",
+      "revId": "4d98b5fa78b56997e82224c9cbf89d3c5171430a",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "cb538a81_b43a4be5",
@@ -48,6 +66,30 @@
       "writtenOn": "2024-01-15T05:45:55Z",
       "side": 1,
       "message": "Use `ASSERT_FALSE(ret) \u003c\u003c ...`?",
+      "range": {
+        "startLine": 269,
+        "startChar": 4,
+        "endLine": 270,
+        "endChar": 37
+      },
+      "revId": "4d98b5fa78b56997e82224c9cbf89d3c5171430a",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d4b125c2_3b1b9244",
+        "filename": "src/gn/setup_unittest.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 270,
+      "author": {
+        "id": 1000067
+      },
+      "writtenOn": "2024-01-15T08:47:29Z",
+      "side": 1,
+      "message": "Ah, sorry, that\u0027s a left over from debugging session.\n\nGN doesn\u0027t use GTest, but a custom implementation of ASSERT_XXX and EXPECT_XXX macros that does not support streaming, so `ASSERT_FALSE(ret) \u003c\u003c` does not compile at all, which is why I added this code here and commented the original test on lines 274-275 below.\n\nI have restored the original code since it works correctly now.\n\nBy the way, the fact that unit test failures do not print anything useful is one of the most annoying things when developing GN. Would you be ok with adding GoogleTest as a third-party dependency (git submodule)? Or alternatively improve the test macros to print useful things (e.g. the content of the left and right side of operands during comparisons).",
+      "parentUuid": "cb538a81_b43a4be5",
       "range": {
         "startLine": 269,
         "startChar": 4,
@@ -81,6 +123,30 @@
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "67b8145a_35c0998f",
+        "filename": "src/gn/switches.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 208,
+      "author": {
+        "id": 1000067
+      },
+      "writtenOn": "2024-01-15T08:47:29Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "eff195fb_187f315a",
+      "range": {
+        "startLine": 208,
+        "startChar": 0,
+        "endLine": 208,
+        "endChar": 8
+      },
+      "revId": "4d98b5fa78b56997e82224c9cbf89d3c5171430a",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "f96bccc8_e5776c8b",
@@ -94,6 +160,30 @@
       "writtenOn": "2024-01-15T05:45:55Z",
       "side": 1,
       "message": "This can be removed?\nhttps://testing.googleblog.com/2017/06/code-health-reduce-nesting-reduce.html",
+      "range": {
+        "startLine": 552,
+        "startChar": 4,
+        "endLine": 552,
+        "endChar": 10
+      },
+      "revId": "4d98b5fa78b56997e82224c9cbf89d3c5171430a",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "09e5c330_539bc6ca",
+        "filename": "src/gn/target.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 552,
+      "author": {
+        "id": 1000067
+      },
+      "writtenOn": "2024-01-15T08:47:29Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "f96bccc8_e5776c8b",
       "range": {
         "startLine": 552,
         "startChar": 4,
