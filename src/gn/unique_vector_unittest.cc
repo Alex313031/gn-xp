@@ -38,7 +38,7 @@ TEST(UniqueVector, PushBackMove) {
   EXPECT_TRUE(vect.push_back(std::move(a)));
   EXPECT_EQ("", a);
 
-  a = "a";
+  a = std::string("a");
   EXPECT_FALSE(vect.push_back(std::move(a)));
   EXPECT_EQ("a", a);
 
@@ -87,7 +87,7 @@ TEST(UniqueVector, PushBackMoveWithIndex) {
   EXPECT_EQ(MakePair(true, 0), vect.PushBackWithIndex(std::move(a)));
   EXPECT_EQ("", a);
 
-  a = "a";
+  a = std::string("a");
   EXPECT_EQ(MakePair(false, 0), vect.PushBackWithIndex(std::move(a)));
   EXPECT_EQ("a", a);
 

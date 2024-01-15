@@ -56,7 +56,7 @@ TEST(FilesystemUtils, RemoveFilename) {
   RemoveFilename(&s);
   EXPECT_STREQ("", s.c_str());
 
-  s = "/";
+  s = std::string("/");
   RemoveFilename(&s);
   EXPECT_STREQ("/", s.c_str());
 
@@ -72,7 +72,7 @@ TEST(FilesystemUtils, RemoveFilename) {
 TEST(FilesystemUtils, FindDir) {
   std::string input;
   EXPECT_EQ("", FindDir(&input));
-  input = "/";
+  input = std::string("/");
   EXPECT_EQ("/", FindDir(&input));
   input = "foo/";
   EXPECT_EQ("foo/", FindDir(&input));

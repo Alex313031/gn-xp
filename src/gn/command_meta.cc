@@ -128,7 +128,7 @@ int RunMeta(const std::vector<std::string>& args) {
 
   OutputString("Metadata values\n", DECORATION_DIM);
   for (const auto& value : result)
-    OutputString("\n" + value.ToString(false) + "\n");
+    OutputString(std::string("\n") + value.ToString(false) + std::string("\n"));
 
   // TODO(juliehockett): We should have better dep tracing and error support for
   // this. Also possibly data about where different values came from.

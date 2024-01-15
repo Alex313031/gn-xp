@@ -195,14 +195,13 @@ void ValueDestination::MakeUndefinedIdentifierForModifyError(Err* err) {
 // Computes an error message for overwriting a nonempty list/scope with another.
 Err MakeOverwriteError(const BinaryOpNode* op_node, const Value& old_value) {
   std::string type_name;
-  std::string empty_def;
+  std::string empty_def = "{}";
 
   if (old_value.type() == Value::LIST) {
     type_name = "list";
     empty_def = "[]";
   } else if (old_value.type() == Value::SCOPE) {
     type_name = "scope";
-    empty_def = "{}";
   } else {
     NOTREACHED();
   }
