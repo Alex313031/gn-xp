@@ -33,6 +33,42 @@
       "message": "There is something weird here because the source code you modified seems correct, even for C++20. Also please do not add hundreds of compiler warnings in a commit message, it\u0027s just noise that is painful to read for everyone.\n\nMeanwhile, the warning that says `accessing 9223372036854775810 or more bytes at offsets -4611686018427387902 and [-4611686018427387903, 4611686018427387904] may overlap up to 9223372036854775813 bytes at offset -3` is non-sensical given the code base.\n\nAre you sure there is not something terribly wrong with your compiler? Can you give more information about the issue?",
       "revId": "095e42d3c5d272b1b05bc40281c06f294cbf80e9",
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "01e636ac_c06a8c36",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1001227
+      },
+      "writtenOn": "2024-01-15T09:49:20Z",
+      "side": 1,
+      "message": "I maintain the gn package in Debian [1], and when I tried to uprev it to the last version it failed to build with the attached errors.\n\nI was not sure if you could easily repro the error, so this is why I attached the errors to the commit message. Sorry about that.\n\nIs there something terrible wrong with the compiler? probably yes :), but it is the compiler used in the Debian builders... The workarounds do not seem very terrible.\n\nI can land them as debian/patches, but then every other distro will handle this error differently.\n\n[1] https://tracker.debian.org/pkg/generate-ninja",
+      "parentUuid": "3e5a1ba7_80f11d21",
+      "revId": "095e42d3c5d272b1b05bc40281c06f294cbf80e9",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a4626002_b3b0b4fa",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1001227
+      },
+      "writtenOn": "2024-01-15T09:49:20Z",
+      "side": 1,
+      "message": "Seems like other trees are adding the workarounds.. so this is why I went this way: https://github.com/chromium/subspace/commit/ecded91d1accaa6718628f5bd8eee07ea027c2f8",
+      "parentUuid": "9ebb1bcd_1c55253d",
+      "revId": "095e42d3c5d272b1b05bc40281c06f294cbf80e9",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
     }
   ]
 }
