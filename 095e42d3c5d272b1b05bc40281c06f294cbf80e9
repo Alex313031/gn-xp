@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9ebb1bcd_1c55253d",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000030
+      },
+      "writtenOn": "2024-01-15T09:19:06Z",
+      "side": 1,
+      "message": "I think this is bug in GCC.\nhttps://gcc.gnu.org/bugzilla/show_bug.cgi?id\u003d105329\n\nBetter to disable resrict warning in gcc instead?",
+      "revId": "095e42d3c5d272b1b05bc40281c06f294cbf80e9",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    }
+  ]
+}
