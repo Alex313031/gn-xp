@@ -87,6 +87,24 @@
       "parentUuid": "6d75c5f8_7986aeb0",
       "revId": "d0f4b74f2528b3f09d6990b8f0acacfe9cc1ac60",
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "972c4dd9_59bec4da",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000012
+      },
+      "writtenOn": "2024-01-16T18:25:00Z",
+      "side": 1,
+      "message": "Yeah, the scripts are pulled in via gclient hooks in the DEPS file.\n\nAssuming we don\u0027t actually want to move to using DEPS in GN, we could write a simple script to fetch things the same way.\n\nKeeping the revisions updated is a problem either way, though.",
+      "parentUuid": "6d75c5f8_7986aeb0",
+      "revId": "d0f4b74f2528b3f09d6990b8f0acacfe9cc1ac60",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
     }
   ]
 }
