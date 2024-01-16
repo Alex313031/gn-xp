@@ -105,6 +105,24 @@
       "parentUuid": "6d75c5f8_7986aeb0",
       "revId": "d0f4b74f2528b3f09d6990b8f0acacfe9cc1ac60",
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "dc74ffb3_5bb33dd8",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2024-01-16T18:29:17Z",
+      "side": 1,
+      "message": "We currently use Fuchsia\u0027s Clang toolchain in GN recipes, see https://gn.googlesource.com/gn/+/refs/heads/main/infra/recipes/gn.py#131, so my preference would be to use `clang-format` from Fuchsia\u0027s Clang toolchain for consistency (unless we want to switch to using Chromium\u0027s Clang for everything).",
+      "parentUuid": "972c4dd9_59bec4da",
+      "revId": "d0f4b74f2528b3f09d6990b8f0acacfe9cc1ac60",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
     }
   ]
 }
