@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b1d757e4_b2fa7ae8",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000067
+      },
+      "writtenOn": "2024-01-16T12:20:27Z",
+      "side": 1,
+      "message": "I have significantly different results when applying these generation instructions locally. I assume that the output really depends on the version of clang-format installed with a specific version of depot_tools.\n\nCan we find a way to pin the version of clang-format used by GN formatting to avoid this?",
+      "revId": "d0f4b74f2528b3f09d6990b8f0acacfe9cc1ac60",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    }
+  ]
+}
