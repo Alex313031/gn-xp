@@ -69,6 +69,24 @@
       "parentUuid": "d4924224_75ff434e",
       "revId": "d0f4b74f2528b3f09d6990b8f0acacfe9cc1ac60",
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "3386ffdf_c24fb1ac",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000067
+      },
+      "writtenOn": "2024-01-16T18:23:44Z",
+      "side": 1,
+      "message": "I found out that I can do `fetch crashpad` which completes under 2 minutes on my machine, then run (with depot_tools in my path):\n\n```\nfor i in $(git ls-files | egrep \u0027\\.(cc|h)$\u0027 | fgrep -v \u0027third_party\u0027); do\n  CHROMIUM_BUILDTOOLS_PATH\u003d/work2/chromium-crashpad/buildtools \\\n  clang-format -i $i;\ndone\n```\n\nThis works, but the result is yet again different (more so than using the Fuchsia clang-format binary directly).\n\nTurns out that https://chromium.googlesource.com/chromium/buildtools/+/refs/heads/main references the clang-format binaries by sha1 only, and that `gclient sync` uses this information to retrieve the real binary from cloud storage. The `chromium` and `crashpad` fetch configurations obviously point at different commits of `buildtoos.git` which explains the difference.\n\nI\u0027ll find a way to get the right binaries locally so we can all use the same stuff without downloading gigabytes of stuff from Chromium or Fuchsia, but let\u0027s leave that for another CL. Thanks everyone :)",
+      "parentUuid": "6d75c5f8_7986aeb0",
+      "revId": "d0f4b74f2528b3f09d6990b8f0acacfe9cc1ac60",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
     }
   ]
 }
