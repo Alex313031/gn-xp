@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "df38b608_b4f0901b",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 6
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2024-01-16T17:52:04Z",
+      "side": 1,
+      "message": "Historical note without an opinion:\n\ngoogletest was removed in https://gn-review.googlesource.com/c/gn/+/1340 because it seemed at the time unnecessarily large and complicated for this small project.",
+      "revId": "b8562a4abd9528372f274b1155aec65c57ca84fa",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    }
+  ]
+}
