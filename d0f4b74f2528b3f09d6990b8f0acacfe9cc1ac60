@@ -51,6 +51,24 @@
       "parentUuid": "016345af_44b74fd0",
       "revId": "d0f4b74f2528b3f09d6990b8f0acacfe9cc1ac60",
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "6d75c5f8_7986aeb0",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2024-01-16T18:11:41Z",
+      "side": 1,
+      "message": "No, I don\u0027t know how this stuff is managed by the Chrome build. On my system it ends up in //buildtools/linux64/clang-format based on something \"gclient sync\" does.",
+      "parentUuid": "d4924224_75ff434e",
+      "revId": "d0f4b74f2528b3f09d6990b8f0acacfe9cc1ac60",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
     }
   ]
 }
