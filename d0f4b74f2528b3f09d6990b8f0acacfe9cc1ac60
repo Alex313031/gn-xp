@@ -33,6 +33,24 @@
       "message": "I got the same thing as Takuto. Is your depot tools old? Pinning a toolchain to GN sounds like a lot of work that isn\u0027t strictly necessary.\n\nI tried the Fuchsia one and I got a couple of trivial differences in some preprocessor macros, but it doesn\u0027t seem like a big deal.",
       "revId": "d0f4b74f2528b3f09d6990b8f0acacfe9cc1ac60",
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d4924224_75ff434e",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000067
+      },
+      "writtenOn": "2024-01-16T18:02:42Z",
+      "side": 1,
+      "message": "So after experimentation it seems that, today:\n\n1) Using the system-provided clang-format produces _vastly_ different results.\n2) Using the Fuchsia one generates slightly different results, that look acceptable.\n3) I have a local depot_tools install, that if freshly updated, but no Chromium checkout, and it refuses to run `clang-format` without `CHROMIUM_BUILDTOOLS_PATH` being defined.\n\nSince I didn\u0027t have a recent Chromium checkout, I tried to get a new one following the official instructions, and adding `--no-history` to minimize downloads. Unfortunately, this fails badly with:\n\n```\nError: Command \u0027git -c core.deltaBaseCacheLimit\u003d2g fetch origin 7706800568c8f76b887431461d3988dfdfecb0f3 --no-tags --depth\u003d1\u0027 returned non-zero │\nexit status 128 in /work2/chromium/src/third_party/dawn \n```\n\nAfter 3 minutes, so I had to do a full fetch instead, which has been going for about an hour, and still listing \"Receiving objects 64%\" as I write this.\n\nDo you know of a way to get the clang-format binaries without downloading the full of Chromium? If so we could probably add instructions to the README.md.\n\nI\u0027ll approve the change and rely on the Fuchsia binary in the meantime. Thanks.",
+      "parentUuid": "016345af_44b74fd0",
+      "revId": "d0f4b74f2528b3f09d6990b8f0acacfe9cc1ac60",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
     }
   ]
 }
