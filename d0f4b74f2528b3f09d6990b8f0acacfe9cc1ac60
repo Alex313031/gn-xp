@@ -123,6 +123,24 @@
       "parentUuid": "972c4dd9_59bec4da",
       "revId": "d0f4b74f2528b3f09d6990b8f0acacfe9cc1ac60",
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "5d030f50_eebbda12",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000030
+      },
+      "writtenOn": "2024-01-17T08:36:29Z",
+      "side": 1,
+      "message": "I added a script fetching clang-format and applying that for entire sources.",
+      "parentUuid": "dc74ffb3_5bb33dd8",
+      "revId": "d0f4b74f2528b3f09d6990b8f0acacfe9cc1ac60",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
     }
   ]
 }
