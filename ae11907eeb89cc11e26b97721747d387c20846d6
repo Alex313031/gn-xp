@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a69a6aae_f021f72d",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000067
+      },
+      "writtenOn": "2024-01-22T08:52:54Z",
+      "side": 1,
+      "message": "LGTM but please fix the Win32 build.",
+      "revId": "ae11907eeb89cc11e26b97721747d387c20846d6",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7e343b66_689e4fc1",
+        "filename": "src/base/strings/string_util.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 530,
+      "author": {
+        "id": 1000067
+      },
+      "writtenOn": "2024-01-22T08:52:54Z",
+      "side": 1,
+      "message": "nit: It might be more convenient, and consistent with the StartsWithXXX() functions, to use `char_type` as the template parameter type here.",
+      "revId": "ae11907eeb89cc11e26b97721747d387c20846d6",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    }
+  ]
+}
