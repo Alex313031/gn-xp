@@ -9,6 +9,8 @@
 #include "gn/filesystem_utils.h"
 
 #if defined(OS_WIN)
+#include <algorithm>
+#include <string>
 #include <windows.h>
 #include "base/strings/utf_string_conversions.h"
 #else
@@ -30,9 +32,23 @@ bool FileWriter::Create(const base::FilePath& file_path) {
   // replacing the entire contents of the file) which lets us continue even if
   // another program has the file open for reading. See
   // http://crbug.com/468437
-  file_path_ = base::UTF16ToUTF8(file_path.value());
-  file_ = base::win::ScopedHandle(::CreateFile(
-      reinterpret_cast<LPCWSTR>(file_path.value().c_str()), GENERIC_WRITE,
+
+  // When working with Chromium, some rust related path are too long when
+  // generating vs project using --ide=vs even enabled long path support on
+  // Windows.
+  auto extended_file_path = file_path.value();
+
+  // So we manually use extended format if the file_path is too long
+  if (file_path.value().size() >= MAX_PATH) {
+    extended_file_path = std::u16string(uR"(\\?\)") + extended_file_path;
+    // We also need to manually replace / with \ because the API no longer
+    // resolve it for us.
+    std::replace(extended_file_path.begin(), extended_file_path.end(), u'/', u'\\');
+  }
+
+  file_path_ = base::UTF16ToUTF8(extended_file_path);
+  file_ = base::win::ScopedHandle(::CreateFileW(
+      reinterpret_cast<LPCWSTR>(extended_file_path.c_str()), GENERIC_WRITE,
       FILE_SHARE_READ, NULL, CREATE_ALWAYS, 0, NULL));
 
   valid_ = file_.IsValid();
