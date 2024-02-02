@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "6361247c_95d6bf7d",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1002532
+      },
+      "writtenOn": "2024-02-02T14:20:08Z",
+      "side": 1,
+      "message": "This fixes relative path issue on Windows which exists for a long time. Can anyone review it?",
+      "revId": "a8d7f7178266b2e1f5f799abb61d29ce0f9992f6",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    }
+  ]
+}
