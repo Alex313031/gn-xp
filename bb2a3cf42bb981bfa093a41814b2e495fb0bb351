@@ -1,0 +1,44 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d4fceecd_c0965164",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 6
+      },
+      "lineNbr": 11,
+      "author": {
+        "id": 1000030
+      },
+      "writtenOn": "2024-02-02T04:44:08Z",
+      "side": 1,
+      "message": "I don\u0027t think escape is correct place to remove leading ../.",
+      "revId": "bb2a3cf42bb981bfa093a41814b2e495fb0bb351",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "15e16c02_7a2a565f",
+        "filename": "src/gn/escape.cc",
+        "patchSetId": 6
+      },
+      "lineNbr": 246,
+      "author": {
+        "id": 1000030
+      },
+      "writtenOn": "2024-02-02T04:44:08Z",
+      "side": 1,
+      "message": "Remove trailing spaces here and belows?",
+      "range": {
+        "startLine": 246,
+        "startChar": 51,
+        "endLine": 246,
+        "endChar": 53
+      },
+      "revId": "bb2a3cf42bb981bfa093a41814b2e495fb0bb351",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    }
+  ]
+}
