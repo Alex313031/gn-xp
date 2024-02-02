@@ -18,6 +18,24 @@
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "923b2762_61b74cce",
+        "filename": "src/gn/file_writer.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 12,
+      "author": {
+        "id": 1002532
+      },
+      "writtenOn": "2024-02-02T05:23:33Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "d4e3d4e3_7a48e82b",
+      "revId": "7885e7f4527494dc09b607fdbeb7dcd9f5eed385",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "edc21f25_fba1722d",
@@ -31,6 +49,30 @@
       "writtenOn": "2024-02-02T05:10:53Z",
       "side": 1,
       "message": "include \u003cstring\u003e for this?",
+      "range": {
+        "startLine": 42,
+        "startChar": 30,
+        "endLine": 42,
+        "endChar": 39
+      },
+      "revId": "7885e7f4527494dc09b607fdbeb7dcd9f5eed385",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e7e17a1b_8cc9806a",
+        "filename": "src/gn/file_writer.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 42,
+      "author": {
+        "id": 1002532
+      },
+      "writtenOn": "2024-02-02T05:23:33Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "edc21f25_fba1722d",
       "range": {
         "startLine": 42,
         "startChar": 30,

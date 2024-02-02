@@ -54,6 +54,24 @@
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
     },
     {
+      "unresolved": true,
+      "key": {
+        "uuid": "f82816a4_9335c6ba",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1002532
+      },
+      "writtenOn": "2024-02-02T05:23:33Z",
+      "side": 1,
+      "message": "Take chromium as an example, when generating --ide\u003dvs (branch \u003e\u003d 6167), this will occur:\n\n[41868:0126/235114.766:ERROR:file_writer.cc(40)] CreateFile failed for path E:/CEF/cef/chromium/src/out/Debug_GN_x64/win_clang_x64_for_rust_host_build_tools/obj/build/rust/tests/test_rlib_crate/test_rlib_crate_associated_bin_test_rlib_crate_associated_bin_vunknown_build_script__rlib_win_clang_x64_for_rust_host_build_tools.vcxproj.filters: 系统找不到指定的路径。 (0x3)\n\nWhich is ERROR_PATH_NOT_FOUND in https://learn.microsoft.com/en-us/windows/win32/debug/system-error-codes--0-499-",
+      "parentUuid": "e828b96f_cbe9c132",
+      "revId": "ef1e59f252c9cd8d0696c399adc120aa78812460",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
       "unresolved": false,
       "key": {
         "uuid": "99bcc777_393dc619",
