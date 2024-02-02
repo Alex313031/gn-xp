@@ -1,0 +1,44 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d4e3d4e3_7a48e82b",
+        "filename": "src/gn/file_writer.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 12,
+      "author": {
+        "id": 1000030
+      },
+      "writtenOn": "2024-02-02T05:10:53Z",
+      "side": 1,
+      "message": "Could you follow\nhttps://google.github.io/styleguide/cppguide.html#Names_and_Order_of_Includes\n?",
+      "revId": "7885e7f4527494dc09b607fdbeb7dcd9f5eed385",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "edc21f25_fba1722d",
+        "filename": "src/gn/file_writer.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 42,
+      "author": {
+        "id": 1000030
+      },
+      "writtenOn": "2024-02-02T05:10:53Z",
+      "side": 1,
+      "message": "include \u003cstring\u003e for this?",
+      "range": {
+        "startLine": 42,
+        "startChar": 30,
+        "endLine": 42,
+        "endChar": 39
+      },
+      "revId": "7885e7f4527494dc09b607fdbeb7dcd9f5eed385",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    }
+  ]
+}
