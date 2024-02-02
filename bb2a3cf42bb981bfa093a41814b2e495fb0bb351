@@ -38,6 +38,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "c87cd1d7_9179ec06",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 6
+      },
+      "lineNbr": 11,
+      "author": {
+        "id": 1000030
+      },
+      "writtenOn": "2024-02-02T05:03:33Z",
+      "side": 1,
+      "message": "Sorry I don\u0027t have time to investigate where such path is come from for the bug. But I can review if you found the place and send CL to fix that.",
+      "parentUuid": "1a950e74_f4641a8c",
+      "revId": "bb2a3cf42bb981bfa093a41814b2e495fb0bb351",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "15e16c02_7a2a565f",
         "filename": "src/gn/escape.cc",
         "patchSetId": 6
