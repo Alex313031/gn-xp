@@ -20,6 +20,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "1a950e74_f4641a8c",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 6
+      },
+      "lineNbr": 11,
+      "author": {
+        "id": 1002532
+      },
+      "writtenOn": "2024-02-02T05:00:12Z",
+      "side": 1,
+      "message": "Is there any place that can handle and santinize all path that have a ../../../../../C:/ like things? Escape could be renamed to Santinize if there\u0027s no better choice. \nI will also look into where the path is originally generated.",
+      "parentUuid": "d4fceecd_c0965164",
+      "revId": "bb2a3cf42bb981bfa093a41814b2e495fb0bb351",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "15e16c02_7a2a565f",
         "filename": "src/gn/escape.cc",
         "patchSetId": 6
@@ -31,6 +49,30 @@
       "writtenOn": "2024-02-02T04:44:08Z",
       "side": 1,
       "message": "Remove trailing spaces here and belows?",
+      "range": {
+        "startLine": 246,
+        "startChar": 51,
+        "endLine": 246,
+        "endChar": 53
+      },
+      "revId": "bb2a3cf42bb981bfa093a41814b2e495fb0bb351",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "aa9dcad9_44387547",
+        "filename": "src/gn/escape.cc",
+        "patchSetId": 6
+      },
+      "lineNbr": 246,
+      "author": {
+        "id": 1002532
+      },
+      "writtenOn": "2024-02-02T05:00:12Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "15e16c02_7a2a565f",
       "range": {
         "startLine": 246,
         "startChar": 51,
