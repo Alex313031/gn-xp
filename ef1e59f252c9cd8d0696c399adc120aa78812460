@@ -18,6 +18,24 @@
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
     },
     {
+      "unresolved": true,
+      "key": {
+        "uuid": "1cdca236_ed67f6bd",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1002532
+      },
+      "writtenOn": "2024-02-02T04:59:06Z",
+      "side": 1,
+      "message": "Yes, it doesn\u0027t fix the issue. I tried all methods in that article.",
+      "parentUuid": "7936001f_cf9e732a",
+      "revId": "ef1e59f252c9cd8d0696c399adc120aa78812460",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
       "unresolved": false,
       "key": {
         "uuid": "99bcc777_393dc619",
@@ -48,6 +66,30 @@
       "writtenOn": "2024-02-02T04:48:43Z",
       "side": 1,
       "message": "Remove trailing space here and belows.\n```suggestion\n  // Windows.\n```",
+      "range": {
+        "startLine": 37,
+        "startChar": 13,
+        "endLine": 37,
+        "endChar": 14
+      },
+      "revId": "ef1e59f252c9cd8d0696c399adc120aa78812460",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d3977d07_d556d025",
+        "filename": "src/gn/file_writer.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 37,
+      "author": {
+        "id": 1002532
+      },
+      "writtenOn": "2024-02-02T04:59:06Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "dd0b3eb8_e4c944d9",
       "range": {
         "startLine": 37,
         "startChar": 13,
