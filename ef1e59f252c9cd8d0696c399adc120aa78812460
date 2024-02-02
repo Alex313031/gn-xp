@@ -1,6 +1,23 @@
 {
   "comments": [
     {
+      "unresolved": true,
+      "key": {
+        "uuid": "7936001f_cf9e732a",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1000030
+      },
+      "writtenOn": "2024-02-02T04:48:43Z",
+      "side": 1,
+      "message": "https://learn.microsoft.com/en-us/windows/win32/fileio/maximum-file-path-limitation?tabs\u003dregistry#enable-long-paths-in-windows-10-version-1607-and-later\ndoesn\u0027t fix the issue?",
+      "revId": "ef1e59f252c9cd8d0696c399adc120aa78812460",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
       "unresolved": false,
       "key": {
         "uuid": "99bcc777_393dc619",
@@ -14,6 +31,29 @@
       "writtenOn": "2024-02-01T19:56:58Z",
       "side": 1,
       "message": "Anybody can review this code?",
+      "revId": "ef1e59f252c9cd8d0696c399adc120aa78812460",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "dd0b3eb8_e4c944d9",
+        "filename": "src/gn/file_writer.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 37,
+      "author": {
+        "id": 1000030
+      },
+      "writtenOn": "2024-02-02T04:48:43Z",
+      "side": 1,
+      "message": "Remove trailing space here and belows.\n```suggestion\n  // Windows.\n```",
+      "range": {
+        "startLine": 37,
+        "startChar": 13,
+        "endLine": 37,
+        "endChar": 14
+      },
       "revId": "ef1e59f252c9cd8d0696c399adc120aa78812460",
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
     }
