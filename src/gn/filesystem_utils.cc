@@ -642,30 +642,40 @@ void ConvertPathToSystem(std::string* path) {
 std::string MakeRelativePath(const std::string& input,
                              const std::string& dest) {
 #if defined(OS_WIN)
-  // Make sure that absolute |input| path starts with a slash if |dest| path
-  // does. Otherwise skipping common prefixes won't work properly. Ensure the
-  // same for |dest| path too.
-  if (IsPathAbsolute(input) && !IsSlash(input[0]) && IsSlash(dest[0])) {
-    std::string corrected_input(1, dest[0]);
-    corrected_input.append(input);
-    return MakeRelativePath(corrected_input, dest);
+  // Instead of appending slash to paths, we remove it for both of them.
+  // On Windows, absolute path should start with drive letter
+  if (IsPathAbsolute(input) && IsSlash(input[0])) {
+    return MakeRelativePath(input.substr(1), dest);
   }
-  if (IsPathAbsolute(dest) && !IsSlash(dest[0]) && IsSlash(input[0])) {
-    std::string corrected_dest(1, input[0]);
-    corrected_dest.append(dest);
-    return MakeRelativePath(input, corrected_dest);
+  if (IsPathAbsolute(dest) && IsSlash(dest[0])) {
+    return MakeRelativePath(input, dest.substr(1));
   }
 
-  // Make sure that both absolute paths use the same drive letter case.
+  // Make sure both absolute paths use the same drive letter case.
   if (IsPathAbsolute(input) && IsPathAbsolute(dest) && input.size() > 1 &&
       dest.size() > 1) {
-    int letter_pos = base::IsAsciiAlpha(input[0]) ? 0 : 1;
-    if (input[letter_pos] != dest[letter_pos] &&
-        base::ToUpperASCII(input[letter_pos]) ==
-            base::ToUpperASCII(dest[letter_pos])) {
+    if (input[0] != dest[0] &&
+        base::ToUpperASCII(input[0]) == base::ToUpperASCII(dest[0])) {
       std::string corrected_input = input;
-      corrected_input[letter_pos] = dest[letter_pos];
+      corrected_input[0] = dest[0];
       return MakeRelativePath(corrected_input, dest);
+    }
+  }
+
+  // On Windows, it is invalid to make a relative path across different
+  // drive letters. A relative path cannot span over different drives.
+  // For example:
+  //    Input:  D:/Path/Any/Where
+  //    Dest:   C:/Path/In/Another/Drive
+  //    Result: ../../../../C:/Path/In/Another/Drive
+  // It will at least make ninja fail.
+  // See: https://bugs.chromium.org/p/gn/issues/detail?id=317
+  if (IsPathAbsolute(input) && IsPathAbsolute(dest) && input.size() > 1 &&
+      dest.size() > 1) {
+    if (base::ToUpperASCII(input[0]) != base::ToUpperASCII(dest[0])) {
+      // If the drive letters are differnet, we have no choice but use
+      // the absolute path of input for correctness.
+      return input;
     }
   }
 #endif
