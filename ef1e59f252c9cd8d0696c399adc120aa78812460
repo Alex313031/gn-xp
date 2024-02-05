@@ -90,6 +90,24 @@
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
     },
     {
+      "unresolved": true,
+      "key": {
+        "uuid": "a42d1e40_0c95bb04",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1002532
+      },
+      "writtenOn": "2024-02-05T05:23:41Z",
+      "side": 1,
+      "message": "Yes, I\u0027m pretty sure.\nIn fact, the document said: \"To enable the new long path behavior, both of the following conditions must be met\"\n\n1. LongPathsEnabled \u003d 1\n2. [*] The application manifest must also include the longPathAware element.\n\nI think the second requirement is not present for gn, so the limitation is still there.",
+      "parentUuid": "d83983bc_94f2c9dd",
+      "revId": "ef1e59f252c9cd8d0696c399adc120aa78812460",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
       "unresolved": false,
       "key": {
         "uuid": "99bcc777_393dc619",
