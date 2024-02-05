@@ -16,6 +16,75 @@
       "message": "Python also doesn\u0027t consider relative span across different drives valid.\n\n\u003e\u003e\u003e import os\n\u003e\u003e\u003e os.path.relpath(\u0027C:/a/b/c\u0027, \u0027C:/a/b/c/d/e\u0027)\n\u0027..\\\\..\u0027\n\u003e\u003e\u003e os.path.relpath(\u0027C:/a/b/c\u0027, \u0027C:/a/b/c/v/e\u0027) \n\u0027..\\\\..\u0027\n\u003e\u003e\u003e os.path.relpath(\u0027C:/a/b/c\u0027, \u0027C:/a/e/c/v/e\u0027) \n\u0027..\\\\..\\\\..\\\\..\\\\b\\\\c\u0027\n\u003e\u003e\u003e os.path.relpath(\u0027C:/a/b/c\u0027, \u0027D:/a/e/c/v/e\u0027) \nTraceback (most recent call last):\n  File \"\u003cstdin\u003e\", line 1, in \u003cmodule\u003e\n  File \"\u003cfrozen ntpath\u003e\", line 754, in relpath\nValueError: path is on mount \u0027C:\u0027, start on mount \u0027D:\u0027",
       "revId": "c1e835b83b1d9336ac4c7486a19f3efa7d569117",
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "14ac59f5_bdcc0317",
+        "filename": "src/gn/filesystem_utils.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 645,
+      "author": {
+        "id": 1000030
+      },
+      "writtenOn": "2024-02-05T12:44:59Z",
+      "side": 1,
+      "message": "period?",
+      "range": {
+        "startLine": 645,
+        "startChar": 70,
+        "endLine": 645,
+        "endChar": 74
+      },
+      "revId": "c1e835b83b1d9336ac4c7486a19f3efa7d569117",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "96cfd591_ea207bac",
+        "filename": "src/gn/filesystem_utils.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 646,
+      "author": {
+        "id": 1000030
+      },
+      "writtenOn": "2024-02-05T12:44:59Z",
+      "side": 1,
+      "message": "period?",
+      "range": {
+        "startLine": 646,
+        "startChar": 54,
+        "endLine": 646,
+        "endChar": 60
+      },
+      "revId": "c1e835b83b1d9336ac4c7486a19f3efa7d569117",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4140f0e9_df5e3f26",
+        "filename": "src/gn/filesystem_utils.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 646,
+      "author": {
+        "id": 1000030
+      },
+      "writtenOn": "2024-02-05T12:44:59Z",
+      "side": 1,
+      "message": "`Windows,`?\n```suggestion\n  // On Windows, absolute path should start with drive letter\n```",
+      "range": {
+        "startLine": 646,
+        "startChar": 8,
+        "endLine": 646,
+        "endChar": 15
+      },
+      "revId": "c1e835b83b1d9336ac4c7486a19f3efa7d569117",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
     }
   ]
 }
