@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "6f8e1ed2_eca20621",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1002532
+      },
+      "writtenOn": "2024-02-05T03:49:31Z",
+      "side": 1,
+      "message": "Hi, Takuto\nCould you spare some time to review this again? Maybe you can assign a reviewer?\nThank you!",
+      "revId": "7196ad9c16e4d1cb6315fd4cdc69186f1e09e869",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    }
+  ]
+}
