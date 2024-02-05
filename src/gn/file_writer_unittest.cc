@@ -9,12 +9,13 @@
 #include "gn/filesystem_utils.h"
 
 #include "util/test/test.h"
+#include "util/build_config.h"
 
 TEST(FileWriter, SingleWrite) {
   base::ScopedTempDir temp_dir;
   ASSERT_TRUE(temp_dir.CreateUniqueTempDir());
 
-  std::string data = "foo";
+  const std::string data = "foo";
 
   base::FilePath file_path = temp_dir.GetPath().AppendASCII("foo.txt");
 
@@ -30,7 +31,7 @@ TEST(FileWriter, MultipleWrites) {
   base::ScopedTempDir temp_dir;
   ASSERT_TRUE(temp_dir.CreateUniqueTempDir());
 
-  std::string data = "Hello World!";
+  const std::string data = "Hello World!";
 
   base::FilePath file_path = temp_dir.GetPath().AppendASCII("foo.txt");
 
@@ -42,3 +43,23 @@ TEST(FileWriter, MultipleWrites) {
 
   EXPECT_TRUE(ContentsEqual(file_path, data));
 }
+
+#if defined(OS_WIN)
+TEST(FileWriter, LongPathWrite) {
+  base::ScopedTempDir temp_dir;
+  ASSERT_TRUE(temp_dir.CreateUniqueTempDir());
+
+  const std::string data = "Hello World!";
+
+  base::FilePath file_path = temp_dir.GetPath().AppendASCII(std::string(255, 'A'));
+
+  EXPECT_TRUE(file_path.value().size() >= MAX_PATH);
+
+  FileWriter writer;
+  EXPECT_TRUE(writer.Create(file_path));
+  EXPECT_TRUE(writer.Write(data));
+  EXPECT_TRUE(writer.Close());
+
+  EXPECT_TRUE(ContentsEqual(file_path, data));
+}
+#endif
