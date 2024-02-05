@@ -42,3 +42,22 @@ TEST(FileWriter, MultipleWrites) {
 
   EXPECT_TRUE(ContentsEqual(file_path, data));
 }
+
+TEST(FileWriter, LongPathWrites) {
+  base::ScopedTempDir temp_dir;
+  ASSERT_TRUE(temp_dir.CreateUniqueTempDir());
+
+  std::string data = "Hello World!";
+
+  base::FilePath file_path = temp_dir.GetPath().AppendASCII(std::string(255, 'A'));
+
+  EXPECT_TRUE(file_path.value().size() >= 260);
+
+  FileWriter writer;
+  EXPECT_TRUE(writer.Create(file_path));
+  EXPECT_TRUE(writer.Write("Hello "));
+  EXPECT_TRUE(writer.Write("World!"));
+  EXPECT_TRUE(writer.Close());
+
+  EXPECT_TRUE(ContentsEqual(file_path, data));
+}
