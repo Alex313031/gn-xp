@@ -14,7 +14,25 @@
 
 #if defined(OS_WIN)
 #include <windows.h>
+#include "base/win/registry.h"
 #endif
+
+bool IsLongPathSupported() { 
+#if defined(OS_WIN)
+  std::u16string key_name = uR"(SYSTEM\CurrentControlSet\Control\FileSystem)";
+  std::u16string value_name = u"LongPathsEnabled";
+ 
+  base::win::RegKey key(HKEY_LOCAL_MACHINE, key_name.c_str(), KEY_READ);
+  DWORD value;
+  if (key.ReadValueDW(value_name.c_str(), &value) == ERROR_SUCCESS) {
+    return value == 1;
+  } 
+
+  return false;
+#else
+  return true;
+#endif
+}
 
 std::string OperatingSystemArchitecture() {
 #if defined(OS_POSIX)
