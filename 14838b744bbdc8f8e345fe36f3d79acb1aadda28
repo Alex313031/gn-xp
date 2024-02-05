@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "835a72c4_df200748",
+        "filename": "build/gen.py",
+        "patchSetId": 7
+      },
+      "lineNbr": 569,
+      "author": {
+        "id": 1000030
+      },
+      "writtenOn": "2024-02-05T09:24:17Z",
+      "side": 1,
+      "message": "Can we use relative path for this instead?",
+      "range": {
+        "startLine": 569,
+        "startChar": 27,
+        "endLine": 569,
+        "endChar": 34
+      },
+      "revId": "14838b744bbdc8f8e345fe36f3d79acb1aadda28",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    }
+  ]
+}
