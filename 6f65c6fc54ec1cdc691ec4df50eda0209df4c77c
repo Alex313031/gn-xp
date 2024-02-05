@@ -67,6 +67,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "2478b801_8b1c0b2e",
+        "filename": "src/gn/file_writer_unittest.cc",
+        "patchSetId": 8
+      },
+      "lineNbr": 52,
+      "author": {
+        "id": 1002532
+      },
+      "writtenOn": "2024-02-05T13:23:24Z",
+      "side": 1,
+      "message": "Please rerun the CI, the relative path of manifest used to have a bug, now fixed.",
+      "parentUuid": "e853b959_952e777a",
+      "range": {
+        "startLine": 52,
+        "startChar": 72,
+        "endLine": 52,
+        "endChar": 75
+      },
+      "revId": "6f65c6fc54ec1cdc691ec4df50eda0209df4c77c",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "67bf40ae_6322d649",
         "filename": "src/gn/file_writer_unittest.cc",
         "patchSetId": 8
