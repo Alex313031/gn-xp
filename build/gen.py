@@ -148,7 +148,7 @@ class ArgumentsList:
           result.append('%s=%s' % (long_option, item))
       else:
         assert action is None, "Unsupported action " + action
-    return ' '.join(shell_quote(item) for item in result)
+    return ' '.join(shell_quote(item).replace('\\', '/') for item in result)
 
 
 def main(argv):
@@ -175,7 +175,8 @@ def main(argv):
                     help='Enable the use of UndefinedBehaviorSanitizer')
   args_list.add('--no-last-commit-position', action='store_true',
                     help='Do not generate last_commit_position.h.')
-  args_list.add('--out-path',
+  args_list.add('--out-path', type=str,
+                    default=os.path.join(REPO_ROOT, 'out'),
                     help='The path to generate the build files in.')
   args_list.add('--no-strip', action='store_true',
                     help='Don\'t strip release build. Useful for profiling.')
@@ -214,7 +215,7 @@ def main(argv):
   else:
     host = platform
 
-  out_dir = options.out_path or os.path.join(REPO_ROOT, 'out')
+  out_dir = options.out_path
   if not os.path.isdir(out_dir):
     os.makedirs(out_dir)
   if not options.no_last_commit_position:
@@ -566,7 +567,10 @@ def WriteGNNinja(path, platform, host, options, args_list):
         '/D_HAS_EXCEPTIONS=0',
     ])
 
-    ldflags.extend(['/DEBUG', '/MACHINE:x64'])
+    win_manifest = os.path.relpath(
+      os.path.join(REPO_ROOT, "build/windows.manifest.xml"), options.out_path)
+    ldflags.extend(['/DEBUG', '/MACHINE:x64', '/MANIFEST:EMBED',
+                    f'/MANIFESTINPUT:{win_manifest}'])
 
   static_libraries = {
       'base': {'sources': [
