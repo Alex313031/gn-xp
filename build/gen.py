@@ -566,7 +566,9 @@ def WriteGNNinja(path, platform, host, options, args_list):
         '/D_HAS_EXCEPTIONS=0',
     ])
 
-    ldflags.extend(['/DEBUG', '/MACHINE:x64'])
+    win_manitest = os.path.abspath(os.path.join(REPO_ROOT, "build/windows.manifest.xml"))
+    ldflags.extend(['/DEBUG', '/MACHINE:x64', '/MANIFEST:EMBED',
+                    f'/MANIFESTINPUT:{win_manitest}'])
 
   static_libraries = {
       'base': {'sources': [
