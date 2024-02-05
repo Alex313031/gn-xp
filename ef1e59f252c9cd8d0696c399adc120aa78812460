@@ -108,6 +108,24 @@
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
     },
     {
+      "unresolved": true,
+      "key": {
+        "uuid": "83720a87_6ae769da",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1000030
+      },
+      "writtenOn": "2024-02-05T08:33:53Z",
+      "side": 1,
+      "message": "Ah, I see.\nThen could you change this to use application manifests with manifest embedding in windows build?\nhttps://learn.microsoft.com/en-us/cpp/build/reference/manifestinput-specify-manifest-input?view\u003dmsvc-170\n\nhttps://github.com/rust-lang/cargo/pull/13131/files\nmight be good example for application manifest file.",
+      "parentUuid": "a42d1e40_0c95bb04",
+      "revId": "ef1e59f252c9cd8d0696c399adc120aa78812460",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
       "unresolved": false,
       "key": {
         "uuid": "99bcc777_393dc619",
