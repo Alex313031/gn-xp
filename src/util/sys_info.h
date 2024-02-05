@@ -9,5 +9,6 @@
 
 std::string OperatingSystemArchitecture();
 int NumberOfProcessors();
+bool IsLongPathSupported();
 
 #endif  // UTIL_SYS_INFO_H_

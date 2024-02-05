@@ -7,6 +7,7 @@
 #include "base/files/file_path.h"
 #include "base/logging.h"
 #include "gn/filesystem_utils.h"
+#include "util/sys_info.h"
 
 #if defined(OS_WIN)
 #include <windows.h>
@@ -30,9 +31,21 @@ bool FileWriter::Create(const base::FilePath& file_path) {
   // replacing the entire contents of the file) which lets us continue even if
   // another program has the file open for reading. See
   // http://crbug.com/468437
-  file_path_ = base::UTF16ToUTF8(file_path.value());
+  const std::u16string& path = file_path.value();
+
+  // Determine whether the path need long path support
+  if (path.size() >= MAX_PATH && !IsLongPathSupported()) {
+    PLOG(ERROR) << "CreateFile failed for path " << file_path_;
+    PLOG(ERROR) << "You might need to enable Long Path Support on Windows."
+      << "https://learn.microsoft.com/en-us/windows/win32/fileio/"
+      "maximum-file-path-limitation?tabs=registry#enable-long-paths"
+      "-in-windows-10-version-1607-and-later";
+    return false;
+  }
+
+  file_path_ = base::UTF16ToUTF8(path);
   file_ = base::win::ScopedHandle(::CreateFile(
-      reinterpret_cast<LPCWSTR>(file_path.value().c_str()), GENERIC_WRITE,
+      reinterpret_cast<LPCWSTR>(path.c_str()), GENERIC_WRITE,
       FILE_SHARE_READ, NULL, CREATE_ALWAYS, 0, NULL));
 
   valid_ = file_.IsValid();
