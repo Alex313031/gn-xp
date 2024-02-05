@@ -164,6 +164,24 @@
     {
       "unresolved": false,
       "key": {
+        "uuid": "fc763c95_7dde3f35",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1000030
+      },
+      "writtenOn": "2024-02-05T09:22:43Z",
+      "side": 1,
+      "message": "Current location looks good to me, thanks.",
+      "parentUuid": "1bb709d3_9731a787",
+      "revId": "ef1e59f252c9cd8d0696c399adc120aa78812460",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
+      "unresolved": false,
+      "key": {
         "uuid": "99bcc777_393dc619",
         "filename": "/PATCHSET_LEVEL",
         "patchSetId": 1

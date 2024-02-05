@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8d878f55_0a7b3103",
+        "filename": "build/windows.manifest.xml",
+        "patchSetId": 6
+      },
+      "lineNbr": 8,
+      "author": {
+        "id": 1000030
+      },
+      "writtenOn": "2024-02-05T09:22:43Z",
+      "side": 1,
+      "message": "We don\u0027t need to have this for long path support?",
+      "revId": "ab1b4aa455c6f87e9a6cd3886d35daec4473d4e0",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b4c84d57_704b8e00",
+        "filename": "build/windows.manifest.xml",
+        "patchSetId": 6
+      },
+      "lineNbr": 17,
+      "author": {
+        "id": 1000030
+      },
+      "writtenOn": "2024-02-05T09:22:43Z",
+      "side": 1,
+      "message": "This is also not related to long path support?",
+      "revId": "ab1b4aa455c6f87e9a6cd3886d35daec4473d4e0",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    }
+  ]
+}
