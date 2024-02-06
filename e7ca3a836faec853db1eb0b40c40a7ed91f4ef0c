@@ -3,6 +3,46 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "765514ce_cdfbd9c7",
+        "filename": "build/gen.py",
+        "patchSetId": 9
+      },
+      "lineNbr": 568,
+      "author": {
+        "id": 1000030
+      },
+      "writtenOn": "2024-02-06T07:23:35Z",
+      "side": 1,
+      "message": "remove trailing spaces?",
+      "revId": "e7ca3a836faec853db1eb0b40c40a7ed91f4ef0c",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f4f87b90_0e60452f",
+        "filename": "build/gen.py",
+        "patchSetId": 9
+      },
+      "lineNbr": 569,
+      "author": {
+        "id": 1000030
+      },
+      "writtenOn": "2024-02-06T07:23:35Z",
+      "side": 1,
+      "message": "Can we set default value for this flag instead?",
+      "range": {
+        "startLine": 569,
+        "startChar": 22,
+        "endLine": 569,
+        "endChar": 30
+      },
+      "revId": "e7ca3a836faec853db1eb0b40c40a7ed91f4ef0c",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "5ecd229b_ac61837a",
         "filename": "src/gn/file_writer_unittest.cc",
         "patchSetId": 9
