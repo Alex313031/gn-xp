@@ -18,6 +18,24 @@
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "33f82029_6f9b703a",
+        "filename": "build/gen.py",
+        "patchSetId": 9
+      },
+      "lineNbr": 568,
+      "author": {
+        "id": 1002532
+      },
+      "writtenOn": "2024-02-06T07:37:24Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "765514ce_cdfbd9c7",
+      "revId": "e7ca3a836faec853db1eb0b40c40a7ed91f4ef0c",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "f4f87b90_0e60452f",
@@ -31,6 +49,30 @@
       "writtenOn": "2024-02-06T07:23:35Z",
       "side": 1,
       "message": "Can we set default value for this flag instead?",
+      "range": {
+        "startLine": 569,
+        "startChar": 22,
+        "endLine": 569,
+        "endChar": 30
+      },
+      "revId": "e7ca3a836faec853db1eb0b40c40a7ed91f4ef0c",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "32f27f31_8ab994b2",
+        "filename": "build/gen.py",
+        "patchSetId": 9
+      },
+      "lineNbr": 569,
+      "author": {
+        "id": 1002532
+      },
+      "writtenOn": "2024-02-06T07:37:24Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "f4f87b90_0e60452f",
       "range": {
         "startLine": 569,
         "startChar": 22,
@@ -64,6 +106,30 @@
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "0efb21dd_8a915b04",
+        "filename": "src/gn/file_writer_unittest.cc",
+        "patchSetId": 9
+      },
+      "lineNbr": 13,
+      "author": {
+        "id": 1002532
+      },
+      "writtenOn": "2024-02-06T07:37:24Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "5ecd229b_ac61837a",
+      "range": {
+        "startLine": 13,
+        "startChar": 12,
+        "endLine": 13,
+        "endChar": 18
+      },
+      "revId": "e7ca3a836faec853db1eb0b40c40a7ed91f4ef0c",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "06a1de94_5f741cb8",
@@ -77,6 +143,30 @@
       "writtenOn": "2024-02-06T07:22:35Z",
       "side": 1,
       "message": "Can we use const std::string_view for this?\n```suggestion\n  const std::string_view data \u003d \"Hello World!\";\n```",
+      "range": {
+        "startLine": 55,
+        "startChar": 7,
+        "endLine": 55,
+        "endChar": 13
+      },
+      "revId": "e7ca3a836faec853db1eb0b40c40a7ed91f4ef0c",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f9ececc1_20fe5c4c",
+        "filename": "src/gn/file_writer_unittest.cc",
+        "patchSetId": 9
+      },
+      "lineNbr": 55,
+      "author": {
+        "id": 1002532
+      },
+      "writtenOn": "2024-02-06T07:37:24Z",
+      "side": 1,
+      "message": "error C2664: \u0027bool ContentsEqual(const base::FilePath \u0026,const std::string \u0026)\u0027: cannot convert argument 2 from \u0027const std::string_view\u0027 to \u0027const std::string \u0026\u0027",
+      "parentUuid": "06a1de94_5f741cb8",
       "range": {
         "startLine": 55,
         "startChar": 7,
