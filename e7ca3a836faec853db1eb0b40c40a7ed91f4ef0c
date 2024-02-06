@@ -175,6 +175,30 @@
       },
       "revId": "e7ca3a836faec853db1eb0b40c40a7ed91f4ef0c",
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "32b36d4a_aaa274cc",
+        "filename": "src/gn/file_writer_unittest.cc",
+        "patchSetId": 9
+      },
+      "lineNbr": 55,
+      "author": {
+        "id": 1002532
+      },
+      "writtenOn": "2024-02-06T07:39:33Z",
+      "side": 1,
+      "message": "If you want to change the definition of ContentsEqual, I\u0027m ok with it.",
+      "parentUuid": "f9ececc1_20fe5c4c",
+      "range": {
+        "startLine": 55,
+        "startChar": 7,
+        "endLine": 55,
+        "endChar": 13
+      },
+      "revId": "e7ca3a836faec853db1eb0b40c40a7ed91f4ef0c",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
     }
   ]
 }
