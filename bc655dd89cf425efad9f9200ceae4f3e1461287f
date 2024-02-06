@@ -16,6 +16,47 @@
       "message": "Oh, the CI failed for windows could because the CI\u0027s enviroment didn\u0027t enable LongPathEnabled \u003d 1",
       "revId": "bc655dd89cf425efad9f9200ceae4f3e1461287f",
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5191653d_fff9d1cb",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 11
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000030
+      },
+      "writtenOn": "2024-02-06T08:47:46Z",
+      "side": 1,
+      "message": "Hmm, could you check registry key in test with\nhttps://learn.microsoft.com/en-us/windows/win32/api/winreg/nf-winreg-reggetvaluea\nand return if LongPathsEnabled is not set?",
+      "parentUuid": "39d251bb_7b8ac0bd",
+      "revId": "bc655dd89cf425efad9f9200ceae4f3e1461287f",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4a830a79_626ed860",
+        "filename": "src/gn/file_writer_unittest.cc",
+        "patchSetId": 11
+      },
+      "lineNbr": 12,
+      "author": {
+        "id": 1000030
+      },
+      "writtenOn": "2024-02-06T08:47:46Z",
+      "side": 1,
+      "message": "sort?",
+      "range": {
+        "startLine": 11,
+        "startChar": 0,
+        "endLine": 12,
+        "endChar": 30
+      },
+      "revId": "bc655dd89cf425efad9f9200ceae4f3e1461287f",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
     }
   ]
 }
