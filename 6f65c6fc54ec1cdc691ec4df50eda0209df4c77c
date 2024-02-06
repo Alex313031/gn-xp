@@ -89,6 +89,30 @@
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "fda2f8a8_21069840",
+        "filename": "src/gn/file_writer_unittest.cc",
+        "patchSetId": 8
+      },
+      "lineNbr": 52,
+      "author": {
+        "id": 1000030
+      },
+      "writtenOn": "2024-02-06T07:22:35Z",
+      "side": 1,
+      "message": "Ah, I see.",
+      "parentUuid": "2478b801_8b1c0b2e",
+      "range": {
+        "startLine": 52,
+        "startChar": 72,
+        "endLine": 52,
+        "endChar": 75
+      },
+      "revId": "6f65c6fc54ec1cdc691ec4df50eda0209df4c77c",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "67bf40ae_6322d649",

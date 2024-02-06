@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5ecd229b_ac61837a",
+        "filename": "src/gn/file_writer_unittest.cc",
+        "patchSetId": 9
+      },
+      "lineNbr": 13,
+      "author": {
+        "id": 1000030
+      },
+      "writtenOn": "2024-02-06T07:22:35Z",
+      "side": 1,
+      "message": "Could you include util/build_config.h for this?",
+      "range": {
+        "startLine": 13,
+        "startChar": 12,
+        "endLine": 13,
+        "endChar": 18
+      },
+      "revId": "e7ca3a836faec853db1eb0b40c40a7ed91f4ef0c",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "06a1de94_5f741cb8",
+        "filename": "src/gn/file_writer_unittest.cc",
+        "patchSetId": 9
+      },
+      "lineNbr": 55,
+      "author": {
+        "id": 1000030
+      },
+      "writtenOn": "2024-02-06T07:22:35Z",
+      "side": 1,
+      "message": "Can we use const std::string_view for this?\n```suggestion\n  const std::string_view data \u003d \"Hello World!\";\n```",
+      "range": {
+        "startLine": 55,
+        "startChar": 7,
+        "endLine": 55,
+        "endChar": 13
+      },
+      "revId": "e7ca3a836faec853db1eb0b40c40a7ed91f4ef0c",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    }
+  ]
+}
