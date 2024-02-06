@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "39d251bb_7b8ac0bd",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 11
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1002532
+      },
+      "writtenOn": "2024-02-06T07:41:11Z",
+      "side": 1,
+      "message": "Oh, the CI failed for windows could because the CI\u0027s enviroment didn\u0027t enable LongPathEnabled \u003d 1",
+      "revId": "bc655dd89cf425efad9f9200ceae4f3e1461287f",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    }
+  ]
+}
