@@ -54,6 +54,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "91e65f0c_af92dff3",
+        "filename": "src/gn/filesystem_utils.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 646,
+      "author": {
+        "id": 1002532
+      },
+      "writtenOn": "2024-02-07T15:22:09Z",
+      "side": 1,
+      "message": "I\u0027m not sure, is it proper to use Process Working Directory\u0027s drive letter?",
+      "parentUuid": "37e06562_da028a42",
+      "revId": "cb9565822647a534f676740b1abec78bd2414ed7",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "d29ea934_a1176e69",
         "filename": "src/gn/filesystem_utils.cc",
         "patchSetId": 5
@@ -65,6 +83,24 @@
       "writtenOn": "2024-02-07T12:56:14Z",
       "side": 1,
       "message": "nit: for clarity, rename the above as `Invalid Result` and provide the expected/correct one (e.g. `\"Correct Result: D:/Path/Any/Where\"`)",
+      "revId": "cb9565822647a534f676740b1abec78bd2414ed7",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b60934f5_25b53ad6",
+        "filename": "src/gn/filesystem_utils.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 670,
+      "author": {
+        "id": 1002532
+      },
+      "writtenOn": "2024-02-07T15:22:09Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "d29ea934_a1176e69",
       "revId": "cb9565822647a534f676740b1abec78bd2414ed7",
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
     }
