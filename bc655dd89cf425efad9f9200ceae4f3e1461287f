@@ -110,6 +110,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "e1345484_bd614835",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 11
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1002532
+      },
+      "writtenOn": "2024-02-07T03:13:46Z",
+      "side": 1,
+      "message": "OK, I thought you want to also do something when the user is actually using the code. I still think the error is not clear if user didn\u0027t set the registry, it is meaningless to say (System cannot find the specific path (0x3)) and it is not clear for guiding user set that registry, maybe we need to print some other hint about this?",
+      "parentUuid": "3e1f73df_0ac77b1d",
+      "revId": "bc655dd89cf425efad9f9200ceae4f3e1461287f",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "4a830a79_626ed860",
         "filename": "src/gn/file_writer_unittest.cc",
         "patchSetId": 11
