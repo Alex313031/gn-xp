@@ -72,6 +72,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "ee4fa5e1_e13c874b",
+        "filename": "src/gn/filesystem_utils.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 646,
+      "author": {
+        "id": 1000067
+      },
+      "writtenOn": "2024-02-07T15:36:12Z",
+      "side": 1,
+      "message": "As far as I understand, that\u0027s what Windows will use when passing an absolute path like `\\src\\foo`. Maybe other Windows experts might chime in?",
+      "parentUuid": "91e65f0c_af92dff3",
+      "revId": "cb9565822647a534f676740b1abec78bd2414ed7",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "d29ea934_a1176e69",
         "filename": "src/gn/filesystem_utils.cc",
         "patchSetId": 5
