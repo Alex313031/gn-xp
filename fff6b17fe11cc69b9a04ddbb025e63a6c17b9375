@@ -122,6 +122,53 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "400ce664_08102fcb",
+        "filename": "build/gen.py",
+        "patchSetId": 17
+      },
+      "lineNbr": 179,
+      "author": {
+        "id": 1000030
+      },
+      "writtenOn": "2024-02-07T08:33:55Z",
+      "side": 1,
+      "message": "Hmm, then I think this is a bug around\nhttps://source.chromium.org/gn/gn/+/master:build/gen.py;l\u003d123;drc\u003d5fd939de8a66c915778c14a2788a857be858ef6c\n\nIs it possible to fix this separately?",
+      "parentUuid": "09c0adcf_86c0756f",
+      "range": {
+        "startLine": 179,
+        "startChar": 58,
+        "endLine": 179,
+        "endChar": 77
+      },
+      "revId": "fff6b17fe11cc69b9a04ddbb025e63a6c17b9375",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e347bb57_ad28d8c8",
+        "filename": "build/gen.py",
+        "patchSetId": 17
+      },
+      "lineNbr": 570,
+      "author": {
+        "id": 1000030
+      },
+      "writtenOn": "2024-02-07T08:33:55Z",
+      "side": 1,
+      "message": "f?",
+      "range": {
+        "startLine": 570,
+        "startChar": 12,
+        "endLine": 570,
+        "endChar": 13
+      },
+      "revId": "fff6b17fe11cc69b9a04ddbb025e63a6c17b9375",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "a66ecb91_9f6faaa7",
         "filename": "src/gn/file_writer.cc",
         "patchSetId": 17
