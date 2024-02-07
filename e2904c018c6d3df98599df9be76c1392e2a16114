@@ -46,6 +46,30 @@
       },
       "revId": "e2904c018c6d3df98599df9be76c1392e2a16114",
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "93621210_ce0cce37",
+        "filename": "build/gen.py",
+        "patchSetId": 21
+      },
+      "lineNbr": 151,
+      "author": {
+        "id": 1000030
+      },
+      "writtenOn": "2024-02-07T11:29:22Z",
+      "side": 1,
+      "message": "Sorry, Windows doesn\u0027t use single quote for quoting passed to CreateProcess API. It should use double quote there.\nhttps://learn.microsoft.com/en-us/cpp/c-language/parsing-c-command-line-arguments?view\u003dmsvc-170\nSo I think not using shell_quote for Windows still works.\n\nshell_quote doesn\u0027t work for Windows if it has space too.",
+      "parentUuid": "b2861b32_0d4325a9",
+      "range": {
+        "startLine": 151,
+        "startChar": 46,
+        "endLine": 151,
+        "endChar": 48
+      },
+      "revId": "e2904c018c6d3df98599df9be76c1392e2a16114",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
     }
   ]
 }
