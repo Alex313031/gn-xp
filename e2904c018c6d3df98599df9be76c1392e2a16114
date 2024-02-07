@@ -94,6 +94,30 @@
       },
       "revId": "e2904c018c6d3df98599df9be76c1392e2a16114",
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7efa0c3a_fd46e08d",
+        "filename": "build/gen.py",
+        "patchSetId": 21
+      },
+      "lineNbr": 151,
+      "author": {
+        "id": 1000030
+      },
+      "writtenOn": "2024-02-07T12:15:51Z",
+      "side": 1,
+      "message": "Yes, but I\u0027d like to keep this simple as far as possible.\nSo I prefer to just remove shell_quote on Windows and defer double quote support until when there are users who use paths with spaces.\nPaths with spaces are already broken on Windows and removing quote isn\u0027t regression.",
+      "parentUuid": "e529dade_7c714f63",
+      "range": {
+        "startLine": 151,
+        "startChar": 46,
+        "endLine": 151,
+        "endChar": 48
+      },
+      "revId": "e2904c018c6d3df98599df9be76c1392e2a16114",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
     }
   ]
 }
