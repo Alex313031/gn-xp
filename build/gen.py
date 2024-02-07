@@ -16,11 +16,6 @@ import sys
 # IMPORTANT: This script is also executed as python2 on
 # GN's CI builders.
 
-try:  # py3
-  from shlex import quote as shell_quote
-except ImportError:  # py2
-  from pipes import quote as shell_quote
-
 SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))
 REPO_ROOT = os.path.dirname(SCRIPT_DIR)
 
@@ -101,7 +96,7 @@ class Platform(object):
     return self._platform == 'zos'
 
   def is_serenity(self):
-    return self_.platform == 'serenity'
+    return self._platform == 'serenity'
 
 class ArgumentsList:
   """Helper class to accumulate ArgumentParser argument definitions
@@ -120,7 +115,7 @@ class ArgumentsList:
     for args, kwargs in self._arguments:
       parser.add_argument(*args, **kwargs)
 
-  def gen_command_line_args(self, parser_arguments):
+  def gen_command_line_args(self, parser_arguments, host):
     """Generate a gen.py argument list to be embedded in a Ninja file."""
     result = []
     for args, kwargs in self._arguments:
@@ -148,7 +143,25 @@ class ArgumentsList:
           result.append('%s=%s' % (long_option, item))
       else:
         assert action is None, "Unsupported action " + action
-    return ' '.join(shell_quote(item.replace('\\', '/')) for item in result)
+
+    find_unsafe = re.compile(r'[^\w@%+=:,./-]', re.ASCII).search
+    def shell_quote(s: str):
+        if find_unsafe(s) is None:
+            return s
+
+        # Use double quote for Windows only.
+        # mingw is also a linux shell, so msvc only.
+        if host.is_msvc():
+          if not s:
+              return '""'
+          return '"' + s.replace('"', '\\"') + '"'
+
+        else:
+          if not s:
+              return "''"
+          return "'" + s.replace("'", "'\"'\"'") + "'"
+
+    return ' '.join(shell_quote(item) for item in result)
 
 
 def main(argv):
@@ -261,7 +274,7 @@ def WriteGenericNinja(path, static_libraries, executables,
                       cxx, ar, ld, platform, host, options,
                       args_list, cflags=[], ldflags=[],
                       libflags=[], include_dirs=[], solibs=[]):
-  args = args_list.gen_command_line_args(options)
+  args = args_list.gen_command_line_args(options, host)
   if args:
     args = " " + args
 
