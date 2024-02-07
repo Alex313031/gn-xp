@@ -70,6 +70,30 @@
       },
       "revId": "e2904c018c6d3df98599df9be76c1392e2a16114",
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e529dade_7c714f63",
+        "filename": "build/gen.py",
+        "patchSetId": 21
+      },
+      "lineNbr": 151,
+      "author": {
+        "id": 1002532
+      },
+      "writtenOn": "2024-02-07T11:46:51Z",
+      "side": 1,
+      "message": "So can we use double quotes? I can implement it",
+      "parentUuid": "93621210_ce0cce37",
+      "range": {
+        "startLine": 151,
+        "startChar": 46,
+        "endLine": 151,
+        "endChar": 48
+      },
+      "revId": "e2904c018c6d3df98599df9be76c1392e2a16114",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
     }
   ]
 }
