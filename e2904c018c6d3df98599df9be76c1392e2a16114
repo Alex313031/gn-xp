@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8c2e9c78_d52c21f8",
+        "filename": "build/gen.py",
+        "patchSetId": 21
+      },
+      "lineNbr": 151,
+      "author": {
+        "id": 1000030
+      },
+      "writtenOn": "2024-02-07T10:21:26Z",
+      "side": 1,
+      "message": "Hmm, what happen if don\u0027t apply shell_quote on Windows instead?",
+      "range": {
+        "startLine": 151,
+        "startChar": 46,
+        "endLine": 151,
+        "endChar": 48
+      },
+      "revId": "e2904c018c6d3df98599df9be76c1392e2a16114",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    }
+  ]
+}
