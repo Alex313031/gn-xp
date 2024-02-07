@@ -164,6 +164,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "146f31f1_f573d3b8",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 11
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000030
+      },
+      "writtenOn": "2024-02-07T06:19:24Z",
+      "side": 1,
+      "message": "Ah, I found that we alreayd have\nhttps://source.chromium.org/gn/gn/+/main:src/base/win/registry.h\nand use that like\nhttps://source.chromium.org/gn/gn/+/master:src/gn/visual_studio_writer.cc;l\u003d113;drc\u003dd6085ac6a95b47b73b533047c739851ea0353789\n\nCan we use that?",
+      "parentUuid": "ec866cc2_cdf9f2f6",
+      "revId": "bc655dd89cf425efad9f9200ceae4f3e1461287f",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "4a830a79_626ed860",
         "filename": "src/gn/file_writer_unittest.cc",
         "patchSetId": 11
