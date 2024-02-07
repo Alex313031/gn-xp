@@ -1,0 +1,234 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "08a66de1_323b0706",
+        "filename": "src/gn/file_writer.cc",
+        "patchSetId": 13
+      },
+      "lineNbr": 36,
+      "author": {
+        "id": 1000030
+      },
+      "writtenOn": "2024-02-07T07:04:41Z",
+      "side": 1,
+      "message": "period?",
+      "range": {
+        "startLine": 36,
+        "startChar": 47,
+        "endLine": 36,
+        "endChar": 54
+      },
+      "revId": "59a3fbc0adccb81b9265d51325321c6a7db4ca20",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "92d79b7e_9917a4ff",
+        "filename": "src/gn/file_writer.cc",
+        "patchSetId": 13
+      },
+      "lineNbr": 38,
+      "author": {
+        "id": 1000030
+      },
+      "writtenOn": "2024-02-07T07:04:41Z",
+      "side": 1,
+      "message": "path or file_path?",
+      "range": {
+        "startLine": 38,
+        "startChar": 52,
+        "endLine": 38,
+        "endChar": 62
+      },
+      "revId": "59a3fbc0adccb81b9265d51325321c6a7db4ca20",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "146a71f5_f27306cb",
+        "filename": "src/gn/file_writer.cc",
+        "patchSetId": 13
+      },
+      "lineNbr": 38,
+      "author": {
+        "id": 1000030
+      },
+      "writtenOn": "2024-02-07T07:04:41Z",
+      "side": 1,
+      "message": "Why not use LOG?",
+      "range": {
+        "startLine": 38,
+        "startChar": 4,
+        "endLine": 38,
+        "endChar": 8
+      },
+      "revId": "59a3fbc0adccb81b9265d51325321c6a7db4ca20",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2de37274_92e0b618",
+        "filename": "src/gn/file_writer.cc",
+        "patchSetId": 13
+      },
+      "lineNbr": 38,
+      "author": {
+        "id": 1000030
+      },
+      "writtenOn": "2024-02-07T07:04:41Z",
+      "side": 1,
+      "message": "This error is actually shown before failure of CreateFile?",
+      "range": {
+        "startLine": 38,
+        "startChar": 31,
+        "endLine": 38,
+        "endChar": 37
+      },
+      "revId": "59a3fbc0adccb81b9265d51325321c6a7db4ca20",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "029e5857_ba5ae5bc",
+        "filename": "src/gn/file_writer.cc",
+        "patchSetId": 13
+      },
+      "lineNbr": 39,
+      "author": {
+        "id": 1000030
+      },
+      "writtenOn": "2024-02-07T07:04:41Z",
+      "side": 1,
+      "message": "space after this?",
+      "range": {
+        "startLine": 39,
+        "startChar": 73,
+        "endLine": 39,
+        "endChar": 74
+      },
+      "revId": "59a3fbc0adccb81b9265d51325321c6a7db4ca20",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ca10a7b9_61dbe02b",
+        "filename": "src/util/sys_info.cc",
+        "patchSetId": 13
+      },
+      "lineNbr": 20,
+      "author": {
+        "id": 1000030
+      },
+      "writtenOn": "2024-02-07T07:04:41Z",
+      "side": 1,
+      "message": "I think it is better to read registry value only once with\nhttps://en.cppreference.com/w/cpp/thread/call_once",
+      "range": {
+        "startLine": 20,
+        "startChar": 5,
+        "endLine": 20,
+        "endChar": 24
+      },
+      "revId": "59a3fbc0adccb81b9265d51325321c6a7db4ca20",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "61fdc36c_ff4b92f9",
+        "filename": "src/util/sys_info.cc",
+        "patchSetId": 13
+      },
+      "lineNbr": 20,
+      "author": {
+        "id": 1000030
+      },
+      "writtenOn": "2024-02-07T07:04:41Z",
+      "side": 1,
+      "message": "Remove trailing spaces?",
+      "range": {
+        "startLine": 20,
+        "startChar": 28,
+        "endLine": 20,
+        "endChar": 29
+      },
+      "revId": "59a3fbc0adccb81b9265d51325321c6a7db4ca20",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "40c6965b_b55294ac",
+        "filename": "src/util/sys_info.cc",
+        "patchSetId": 13
+      },
+      "lineNbr": 22,
+      "author": {
+        "id": 1000030
+      },
+      "writtenOn": "2024-02-07T07:04:41Z",
+      "side": 1,
+      "message": "I prefer use array of char16_t for this to avoid memory allocation.",
+      "range": {
+        "startLine": 22,
+        "startChar": 7,
+        "endLine": 22,
+        "endChar": 16
+      },
+      "revId": "59a3fbc0adccb81b9265d51325321c6a7db4ca20",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9940b908_14109f33",
+        "filename": "src/util/sys_info.cc",
+        "patchSetId": 13
+      },
+      "lineNbr": 23,
+      "author": {
+        "id": 1000030
+      },
+      "writtenOn": "2024-02-07T07:04:41Z",
+      "side": 1,
+      "message": "I prefer use array of char16_t for this to avoid memory allocation.",
+      "range": {
+        "startLine": 23,
+        "startChar": 7,
+        "endLine": 23,
+        "endChar": 16
+      },
+      "revId": "59a3fbc0adccb81b9265d51325321c6a7db4ca20",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "48fd76dc_35211cc0",
+        "filename": "src/util/sys_info.h",
+        "patchSetId": 13
+      },
+      "lineNbr": 12,
+      "author": {
+        "id": 1000030
+      },
+      "writtenOn": "2024-02-07T07:04:41Z",
+      "side": 1,
+      "message": "It is better to align with order of definition in cc file.",
+      "range": {
+        "startLine": 12,
+        "startChar": 5,
+        "endLine": 12,
+        "endChar": 24
+      },
+      "revId": "59a3fbc0adccb81b9265d51325321c6a7db4ca20",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    }
+  ]
+}
