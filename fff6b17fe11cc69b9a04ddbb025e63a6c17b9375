@@ -50,6 +50,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "1fdf5f00_8953ee13",
+        "filename": "build/gen.py",
+        "patchSetId": 17
+      },
+      "lineNbr": 179,
+      "author": {
+        "id": 1000030
+      },
+      "writtenOn": "2024-02-07T08:05:59Z",
+      "side": 1,
+      "message": "But replace was not there in L217?\nWhat kind of error did you see without this replace?",
+      "parentUuid": "4d3b8fe0_f23c54bc",
+      "range": {
+        "startLine": 179,
+        "startChar": 58,
+        "endLine": 179,
+        "endChar": 77
+      },
+      "revId": "fff6b17fe11cc69b9a04ddbb025e63a6c17b9375",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "a66ecb91_9f6faaa7",
         "filename": "src/gn/file_writer.cc",
         "patchSetId": 17
@@ -120,6 +144,30 @@
       "side": 1,
       "message": "no, the MAX_PATH includes \u0027\\0\u0027 which path.size() doesn\u0027t count. So a 260-len path is actually 261 characters. So, it is a \u003e\u003d situation.",
       "parentUuid": "cae53af5_45bf848b",
+      "range": {
+        "startLine": 46,
+        "startChar": 20,
+        "endLine": 46,
+        "endChar": 22
+      },
+      "revId": "fff6b17fe11cc69b9a04ddbb025e63a6c17b9375",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "035c161e_f7ca8b16",
+        "filename": "src/gn/file_writer.cc",
+        "patchSetId": 17
+      },
+      "lineNbr": 46,
+      "author": {
+        "id": 1000030
+      },
+      "writtenOn": "2024-02-07T08:05:59Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "1102f524_6864097c",
       "range": {
         "startLine": 46,
         "startChar": 20,
