@@ -22,6 +22,30 @@
       },
       "revId": "e2904c018c6d3df98599df9be76c1392e2a16114",
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b2861b32_0d4325a9",
+        "filename": "build/gen.py",
+        "patchSetId": 21
+      },
+      "lineNbr": 151,
+      "author": {
+        "id": 1002532
+      },
+      "writtenOn": "2024-02-07T10:58:36Z",
+      "side": 1,
+      "message": "My first glace is it detects white space and back slash, if present, add a single quote. But windows cmd doesn\u0027t work well with single quote. If don\u0027t apply there might be issues if path has spaces",
+      "parentUuid": "8c2e9c78_d52c21f8",
+      "range": {
+        "startLine": 151,
+        "startChar": 46,
+        "endLine": 151,
+        "endChar": 48
+      },
+      "revId": "e2904c018c6d3df98599df9be76c1392e2a16114",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
     }
   ]
 }
