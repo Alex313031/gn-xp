@@ -146,6 +146,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "ec866cc2_cdf9f2f6",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 11
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1002532
+      },
+      "writtenOn": "2024-02-07T06:07:38Z",
+      "side": 1,
+      "message": "How about write a helper function in util/sys_info.c",
+      "parentUuid": "4ee210cf_dfda2ecf",
+      "revId": "bc655dd89cf425efad9f9200ceae4f3e1461287f",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "4a830a79_626ed860",
         "filename": "src/gn/file_writer_unittest.cc",
         "patchSetId": 11
