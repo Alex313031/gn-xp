@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "fef822a6_66866211",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 6
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1002532
+      },
+      "writtenOn": "2024-02-07T16:12:40Z",
+      "side": 1,
+      "message": "Hopes you like this design?",
+      "revId": "ddc3d47b6427ccce75d79220ca7de9cbb7e65c7c",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    }
+  ]
+}
