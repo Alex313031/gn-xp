@@ -33,6 +33,40 @@
       "message": "Thanks, it seems working.",
       "revId": "cb9565822647a534f676740b1abec78bd2414ed7",
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "37e06562_da028a42",
+        "filename": "src/gn/filesystem_utils.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 646,
+      "author": {
+        "id": 1000067
+      },
+      "writtenOn": "2024-02-07T12:56:14Z",
+      "side": 1,
+      "message": "Absolute path can definitely start with a single `/` or `\\` on Windows too (in which case they match the current drive). So `/foo` and `C:/foo` may or may not point to the same file depending on the value returned by `_getdrive()` or similar functions.\n\nThe logic below doesn\u0027t seem to support this. I suggest you detect these and prepend the appropriate driver letter prefix before doing the rest of the comparison after that.",
+      "revId": "cb9565822647a534f676740b1abec78bd2414ed7",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d29ea934_a1176e69",
+        "filename": "src/gn/filesystem_utils.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 670,
+      "author": {
+        "id": 1000067
+      },
+      "writtenOn": "2024-02-07T12:56:14Z",
+      "side": 1,
+      "message": "nit: for clarity, rename the above as `Invalid Result` and provide the expected/correct one (e.g. `\"Correct Result: D:/Path/Any/Where\"`)",
+      "revId": "cb9565822647a534f676740b1abec78bd2414ed7",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
     }
   ]
 }
