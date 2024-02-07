@@ -74,6 +74,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "09c0adcf_86c0756f",
+        "filename": "build/gen.py",
+        "patchSetId": 17
+      },
+      "lineNbr": 179,
+      "author": {
+        "id": 1002532
+      },
+      "writtenOn": "2024-02-07T08:26:40Z",
+      "side": 1,
+      "message": "(base) PS D:\\CEF\\gn\u003e ninja -C out\nninja: Entering directory `out\u0027\n[1/1] Regenerating ninja files\nFAILED: build.ninja\nC:\\Users\\zhongwei.wang\\AppData\\Local\\miniconda3\\python.exe ../build/gen.py \u0027--out-path\u003dD:\\CEF\\gn\\out\u0027\nusage: gen.py [-h] [-d]\n              [--platform {linux,darwin,mingw,msys,msvc,aix,fuchsia,freebsd,netbsd,openbsd,haiku,solaris,zos,serenity}]\n              [--host {linux,darwin,mingw,msys,msvc,aix,fuchsia,freebsd,netbsd,openbsd,haiku,solaris,zos,serenity}]\n              [--use-lto] [--use-icf] [--use-asan] [--use-ubsan]\n              [--no-last-commit-position] [--out-pninja: error: rebuilding \u0027build.ninja\u0027: subcommand failed\nath OUT_PATH] [--no-strip]\n              [--no-static-libstdc++] [--link-lib LINK_LIB] [--allow-warnings]\ngen.py: error: unrecognized arguments: \u0027--out-path\u003dD:\\CEF\\gn\\out\u0027",
+      "parentUuid": "1fdf5f00_8953ee13",
+      "range": {
+        "startLine": 179,
+        "startChar": 58,
+        "endLine": 179,
+        "endChar": 77
+      },
+      "revId": "fff6b17fe11cc69b9a04ddbb025e63a6c17b9375",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "a66ecb91_9f6faaa7",
         "filename": "src/gn/file_writer.cc",
         "patchSetId": 17
