@@ -26,6 +26,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "4d3b8fe0_f23c54bc",
+        "filename": "build/gen.py",
+        "patchSetId": 17
+      },
+      "lineNbr": 179,
+      "author": {
+        "id": 1002532
+      },
+      "writtenOn": "2024-02-07T07:59:05Z",
+      "side": 1,
+      "message": "It is, the \\ is not escaped in later procedure, and run command will fail",
+      "parentUuid": "ca9a9274_17e427ce",
+      "range": {
+        "startLine": 179,
+        "startChar": 58,
+        "endLine": 179,
+        "endChar": 77
+      },
+      "revId": "fff6b17fe11cc69b9a04ddbb025e63a6c17b9375",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "a66ecb91_9f6faaa7",
         "filename": "src/gn/file_writer.cc",
         "patchSetId": 17
@@ -37,6 +61,24 @@
       "writtenOn": "2024-02-07T07:35:11Z",
       "side": 1,
       "message": "Include this only in Windows build?",
+      "revId": "fff6b17fe11cc69b9a04ddbb025e63a6c17b9375",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e47d39e4_e3f0b14b",
+        "filename": "src/gn/file_writer.cc",
+        "patchSetId": 17
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 1002532
+      },
+      "writtenOn": "2024-02-07T07:59:05Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "a66ecb91_9f6faaa7",
       "revId": "fff6b17fe11cc69b9a04ddbb025e63a6c17b9375",
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
     },
@@ -54,6 +96,30 @@
       "writtenOn": "2024-02-07T07:35:11Z",
       "side": 1,
       "message": "\u0027\u003e\u0027?\n```suggestion\n    if (path.size() \u003e MAX_PATH \u0026\u0026 !IsLongPathSupported()) {\n```",
+      "range": {
+        "startLine": 46,
+        "startChar": 20,
+        "endLine": 46,
+        "endChar": 22
+      },
+      "revId": "fff6b17fe11cc69b9a04ddbb025e63a6c17b9375",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1102f524_6864097c",
+        "filename": "src/gn/file_writer.cc",
+        "patchSetId": 17
+      },
+      "lineNbr": 46,
+      "author": {
+        "id": 1002532
+      },
+      "writtenOn": "2024-02-07T07:59:05Z",
+      "side": 1,
+      "message": "no, the MAX_PATH includes \u0027\\0\u0027 which path.size() doesn\u0027t count. So a 260-len path is actually 261 characters. So, it is a \u003e\u003d situation.",
+      "parentUuid": "cae53af5_45bf848b",
       "range": {
         "startLine": 46,
         "startChar": 20,
@@ -87,6 +153,30 @@
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "7df03b34_098a9a73",
+        "filename": "src/util/sys_info.cc",
+        "patchSetId": 17
+      },
+      "lineNbr": 32,
+      "author": {
+        "id": 1002532
+      },
+      "writtenOn": "2024-02-07T07:59:05Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "b20ed829_89987750",
+      "range": {
+        "startLine": 32,
+        "startChar": 29,
+        "endLine": 32,
+        "endChar": 30
+      },
+      "revId": "fff6b17fe11cc69b9a04ddbb025e63a6c17b9375",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "67fe55f6_f3aee199",
@@ -100,6 +190,24 @@
       "writtenOn": "2024-02-07T07:35:11Z",
       "side": 1,
       "message": "This statement is not necessary?",
+      "revId": "fff6b17fe11cc69b9a04ddbb025e63a6c17b9375",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "0428226c_925525f1",
+        "filename": "src/util/sys_info.cc",
+        "patchSetId": 17
+      },
+      "lineNbr": 34,
+      "author": {
+        "id": 1002532
+      },
+      "writtenOn": "2024-02-07T07:59:05Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "67fe55f6_f3aee199",
       "revId": "fff6b17fe11cc69b9a04ddbb025e63a6c17b9375",
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
     }

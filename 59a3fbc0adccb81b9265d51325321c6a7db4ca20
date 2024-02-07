@@ -260,6 +260,30 @@
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "2b38b0c9_ea08870a",
+        "filename": "src/gn/file_writer.cc",
+        "patchSetId": 13
+      },
+      "lineNbr": 39,
+      "author": {
+        "id": 1002532
+      },
+      "writtenOn": "2024-02-07T07:59:05Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "2e6c1c72_bcc1d78c",
+      "range": {
+        "startLine": 39,
+        "startChar": 73,
+        "endLine": 39,
+        "endChar": 74
+      },
+      "revId": "59a3fbc0adccb81b9265d51325321c6a7db4ca20",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "ca10a7b9_61dbe02b",
