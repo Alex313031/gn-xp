@@ -238,6 +238,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "2e6c1c72_bcc1d78c",
+        "filename": "src/gn/file_writer.cc",
+        "patchSetId": 13
+      },
+      "lineNbr": 39,
+      "author": {
+        "id": 1000030
+      },
+      "writtenOn": "2024-02-07T07:35:11Z",
+      "side": 1,
+      "message": "This is not fixed?",
+      "parentUuid": "7c06ea7c_0232ef19",
+      "range": {
+        "startLine": 39,
+        "startChar": 73,
+        "endLine": 39,
+        "endChar": 74
+      },
+      "revId": "59a3fbc0adccb81b9265d51325321c6a7db4ca20",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "ca10a7b9_61dbe02b",
         "filename": "src/util/sys_info.cc",
         "patchSetId": 13

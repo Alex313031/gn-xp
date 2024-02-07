@@ -1,0 +1,107 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ca9a9274_17e427ce",
+        "filename": "build/gen.py",
+        "patchSetId": 17
+      },
+      "lineNbr": 179,
+      "author": {
+        "id": 1000030
+      },
+      "writtenOn": "2024-02-07T07:35:11Z",
+      "side": 1,
+      "message": "I think this is not necessary?",
+      "range": {
+        "startLine": 179,
+        "startChar": 58,
+        "endLine": 179,
+        "endChar": 77
+      },
+      "revId": "fff6b17fe11cc69b9a04ddbb025e63a6c17b9375",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a66ecb91_9f6faaa7",
+        "filename": "src/gn/file_writer.cc",
+        "patchSetId": 17
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 1000030
+      },
+      "writtenOn": "2024-02-07T07:35:11Z",
+      "side": 1,
+      "message": "Include this only in Windows build?",
+      "revId": "fff6b17fe11cc69b9a04ddbb025e63a6c17b9375",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "cae53af5_45bf848b",
+        "filename": "src/gn/file_writer.cc",
+        "patchSetId": 17
+      },
+      "lineNbr": 46,
+      "author": {
+        "id": 1000030
+      },
+      "writtenOn": "2024-02-07T07:35:11Z",
+      "side": 1,
+      "message": "\u0027\u003e\u0027?\n```suggestion\n    if (path.size() \u003e MAX_PATH \u0026\u0026 !IsLongPathSupported()) {\n```",
+      "range": {
+        "startLine": 46,
+        "startChar": 20,
+        "endLine": 46,
+        "endChar": 22
+      },
+      "revId": "fff6b17fe11cc69b9a04ddbb025e63a6c17b9375",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b20ed829_89987750",
+        "filename": "src/util/sys_info.cc",
+        "patchSetId": 17
+      },
+      "lineNbr": 32,
+      "author": {
+        "id": 1000030
+      },
+      "writtenOn": "2024-02-07T07:35:11Z",
+      "side": 1,
+      "message": "This paren is redundant.",
+      "range": {
+        "startLine": 32,
+        "startChar": 29,
+        "endLine": 32,
+        "endChar": 30
+      },
+      "revId": "fff6b17fe11cc69b9a04ddbb025e63a6c17b9375",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "67fe55f6_f3aee199",
+        "filename": "src/util/sys_info.cc",
+        "patchSetId": 17
+      },
+      "lineNbr": 34,
+      "author": {
+        "id": 1000030
+      },
+      "writtenOn": "2024-02-07T07:35:11Z",
+      "side": 1,
+      "message": "This statement is not necessary?",
+      "revId": "fff6b17fe11cc69b9a04ddbb025e63a6c17b9375",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    }
+  ]
+}
