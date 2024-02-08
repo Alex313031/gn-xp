@@ -24,6 +24,30 @@
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "4a5fdf32_b2aa28b2",
+        "filename": "src/gn/filesystem_utils.cc",
+        "patchSetId": 7
+      },
+      "lineNbr": 643,
+      "author": {
+        "id": 1002532
+      },
+      "writtenOn": "2024-02-08T08:00:13Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "8d783d82_39f97055",
+      "range": {
+        "startLine": 643,
+        "startChar": 46,
+        "endLine": 643,
+        "endChar": 52
+      },
+      "revId": "38488d0d1811b6c046d0ec85e5ccf42477f7a84b",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "701413b1_cb6fec50",
@@ -37,6 +61,30 @@
       "writtenOn": "2024-02-08T05:44:07Z",
       "side": 1,
       "message": "Why not use\nhttps://learn.microsoft.com/en-us/cpp/c-runtime-library/reference/getdrive?view\u003dmsvc-170\n?",
+      "range": {
+        "startLine": 648,
+        "startChar": 2,
+        "endLine": 648,
+        "endChar": 21
+      },
+      "revId": "38488d0d1811b6c046d0ec85e5ccf42477f7a84b",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d97929f8_b663333f",
+        "filename": "src/gn/filesystem_utils.cc",
+        "patchSetId": 7
+      },
+      "lineNbr": 648,
+      "author": {
+        "id": 1002532
+      },
+      "writtenOn": "2024-02-08T08:00:13Z",
+      "side": 1,
+      "message": "Worried if you think that too \"native\" or \"bare\" 😊",
+      "parentUuid": "701413b1_cb6fec50",
       "range": {
         "startLine": 648,
         "startChar": 2,
@@ -70,6 +118,30 @@
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "eff5b4b5_3819499c",
+        "filename": "src/gn/filesystem_utils.cc",
+        "patchSetId": 7
+      },
+      "lineNbr": 660,
+      "author": {
+        "id": 1002532
+      },
+      "writtenOn": "2024-02-08T08:00:13Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "a1321b9c_2fbb4a0c",
+      "range": {
+        "startLine": 660,
+        "startChar": 46,
+        "endLine": 660,
+        "endChar": 52
+      },
+      "revId": "38488d0d1811b6c046d0ec85e5ccf42477f7a84b",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "61a90f65_3f1888bc",
@@ -93,6 +165,30 @@
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "a5ecaea2_65698612",
+        "filename": "src/gn/filesystem_utils.cc",
+        "patchSetId": 7
+      },
+      "lineNbr": 679,
+      "author": {
+        "id": 1002532
+      },
+      "writtenOn": "2024-02-08T08:00:13Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "61a90f65_3f1888bc",
+      "range": {
+        "startLine": 679,
+        "startChar": 18,
+        "endLine": 679,
+        "endChar": 23
+      },
+      "revId": "38488d0d1811b6c046d0ec85e5ccf42477f7a84b",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "9b07d07a_9af2d5c3",
@@ -106,6 +202,30 @@
       "writtenOn": "2024-02-08T05:44:07Z",
       "side": 1,
       "message": "This copy is not necessary now?",
+      "range": {
+        "startLine": 688,
+        "startChar": 18,
+        "endLine": 688,
+        "endChar": 33
+      },
+      "revId": "38488d0d1811b6c046d0ec85e5ccf42477f7a84b",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "6221ff83_d10c6b25",
+        "filename": "src/gn/filesystem_utils.cc",
+        "patchSetId": 7
+      },
+      "lineNbr": 688,
+      "author": {
+        "id": 1002532
+      },
+      "writtenOn": "2024-02-08T08:00:13Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "9b07d07a_9af2d5c3",
       "range": {
         "startLine": 688,
         "startChar": 18,
