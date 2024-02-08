@@ -16,6 +16,24 @@
       "message": "Could you follow\nhttps://google.github.io/styleguide/cppguide.html#Names_and_Order_of_Includes\n?",
       "revId": "7e1d170b81071d8aa7951316addf4e36b691a768",
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "24d1bd6b_a0432725",
+        "filename": "src/util/sys_info.cc",
+        "patchSetId": 24
+      },
+      "lineNbr": 16,
+      "author": {
+        "id": 1002532
+      },
+      "writtenOn": "2024-02-08T08:06:08Z",
+      "side": 1,
+      "message": "OK, I thought platform specific header is alphabet sorted only",
+      "parentUuid": "05c24be2_741636ba",
+      "revId": "7e1d170b81071d8aa7951316addf4e36b691a768",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
     }
   ]
 }
