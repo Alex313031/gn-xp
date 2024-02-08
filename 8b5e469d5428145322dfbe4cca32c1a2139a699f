@@ -1,0 +1,72 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4417b6a0_47ca255a",
+        "filename": "build/gen.py",
+        "patchSetId": 25
+      },
+      "lineNbr": 152,
+      "author": {
+        "id": 1000067
+      },
+      "writtenOn": "2024-02-08T11:44:42Z",
+      "side": 1,
+      "message": "You probably want to handle Cygwin and MSys2 here as well which may return different values. See https://github.com/git-for-windows/msys2-runtime/blob/main/winsup/cygwin/uname.cc\n\nOr maybe consider os.name which might be more predictable.",
+      "revId": "8b5e469d5428145322dfbe4cca32c1a2139a699f",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "82d5af82_46736392",
+        "filename": "build/gen.py",
+        "patchSetId": 25
+      },
+      "lineNbr": 533,
+      "author": {
+        "id": 1000067
+      },
+      "writtenOn": "2024-02-08T11:44:42Z",
+      "side": 1,
+      "message": "Please add corresponding link commands for mingw and msys if possible (also see comment below about runtime detection).",
+      "revId": "8b5e469d5428145322dfbe4cca32c1a2139a699f",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "68dca2ff_726dcc31",
+        "filename": "src/util/sys_info.cc",
+        "patchSetId": 25
+      },
+      "lineNbr": 21,
+      "author": {
+        "id": 1000067
+      },
+      "writtenOn": "2024-02-08T11:44:42Z",
+      "side": 1,
+      "message": "nit: Can you rename this to `AreLongPathsSupported()` or `IsLongPathSupportEnabled()` instead?",
+      "revId": "8b5e469d5428145322dfbe4cca32c1a2139a699f",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5152d77e_3658edfe",
+        "filename": "src/util/sys_info.cc",
+        "patchSetId": 25
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 1000067
+      },
+      "writtenOn": "2024-02-08T11:44:42Z",
+      "side": 1,
+      "message": "static local variable are already protected against multi-thread access. Using std::once_flag and std::call_once only makes sense for truly global variables.\n\nI recommand using a static local class instance instead to achieve the same result, as in:\n\n```\nstatic bool AreLongPathsSupported() {\n  struct LongPathSupport {\n    LongPathSupport() {\n      ...\n      if (...)\n        supported \u003d true;\n    }\n\n    bool supported \u003d false;\n  };\n\n  static LongPathSupport s_long_paths;  // constructed lazily\n  return s_long_paths.supported;\n}\n```\n\nAnother issue here is that checking the registry does not tell you if the _current_ process supports long paths (it will not it the manifest is not linked properly, as if building with mingw or msys with the current CL). Unfortunately, the only reliable way to do that is to call the RtlAreLongPathsEnabled() function from ntdll.dll.\n\nFor example, Ninja uses the following code:\n\n```\nbool AreWin32LongPathsEnabled() {\n  // Probe ntdll.dll for RtlAreLongPathsEnabled, and call it if it exists.\n  bool result \u003d false;\n  HINSTANCE ntdll_lib \u003d ::GetModuleHandleW(L\"ntdll\");\n  if (ntdll_lib) {\n    typedef BOOLEAN(WINAPI FunctionType)();\n    auto* func_ptr \u003d reinterpret_cast\u003cFunctionType*\u003e(\n        ::GetProcAddress(ntdll_lib, \"RtlAreLongPathsEnabled\"));\n    if (func_ptr) {\n      result \u003d (*func_ptr)();\n    }\n  }\n  return result;\n}\n```",
+      "revId": "8b5e469d5428145322dfbe4cca32c1a2139a699f",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    }
+  ]
+}
