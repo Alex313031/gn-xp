@@ -1,0 +1,119 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8d783d82_39f97055",
+        "filename": "src/gn/filesystem_utils.cc",
+        "patchSetId": 7
+      },
+      "lineNbr": 643,
+      "author": {
+        "id": 1000030
+      },
+      "writtenOn": "2024-02-08T05:44:07Z",
+      "side": 1,
+      "message": "Better to accept string_view?",
+      "range": {
+        "startLine": 643,
+        "startChar": 46,
+        "endLine": 643,
+        "endChar": 52
+      },
+      "revId": "38488d0d1811b6c046d0ec85e5ccf42477f7a84b",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "701413b1_cb6fec50",
+        "filename": "src/gn/filesystem_utils.cc",
+        "patchSetId": 7
+      },
+      "lineNbr": 648,
+      "author": {
+        "id": 1000030
+      },
+      "writtenOn": "2024-02-08T05:44:07Z",
+      "side": 1,
+      "message": "Why not use\nhttps://learn.microsoft.com/en-us/cpp/c-runtime-library/reference/getdrive?view\u003dmsvc-170\n?",
+      "range": {
+        "startLine": 648,
+        "startChar": 2,
+        "endLine": 648,
+        "endChar": 21
+      },
+      "revId": "38488d0d1811b6c046d0ec85e5ccf42477f7a84b",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a1321b9c_2fbb4a0c",
+        "filename": "src/gn/filesystem_utils.cc",
+        "patchSetId": 7
+      },
+      "lineNbr": 660,
+      "author": {
+        "id": 1000030
+      },
+      "writtenOn": "2024-02-08T05:44:07Z",
+      "side": 1,
+      "message": "Better to accept string_view?",
+      "range": {
+        "startLine": 660,
+        "startChar": 46,
+        "endLine": 660,
+        "endChar": 52
+      },
+      "revId": "38488d0d1811b6c046d0ec85e5ccf42477f7a84b",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "61a90f65_3f1888bc",
+        "filename": "src/gn/filesystem_utils.cc",
+        "patchSetId": 7
+      },
+      "lineNbr": 679,
+      "author": {
+        "id": 1000030
+      },
+      "writtenOn": "2024-02-08T05:44:07Z",
+      "side": 1,
+      "message": "period?",
+      "range": {
+        "startLine": 679,
+        "startChar": 18,
+        "endLine": 679,
+        "endChar": 23
+      },
+      "revId": "38488d0d1811b6c046d0ec85e5ccf42477f7a84b",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9b07d07a_9af2d5c3",
+        "filename": "src/gn/filesystem_utils.cc",
+        "patchSetId": 7
+      },
+      "lineNbr": 688,
+      "author": {
+        "id": 1000030
+      },
+      "writtenOn": "2024-02-08T05:44:07Z",
+      "side": 1,
+      "message": "This copy is not necessary now?",
+      "range": {
+        "startLine": 688,
+        "startChar": 18,
+        "endLine": 688,
+        "endChar": 33
+      },
+      "revId": "38488d0d1811b6c046d0ec85e5ccf42477f7a84b",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    }
+  ]
+}
