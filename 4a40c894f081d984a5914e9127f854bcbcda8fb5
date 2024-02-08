@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d65b26fa_f213d303",
+        "filename": "src/util/sys_info.cc",
+        "patchSetId": 23
+      },
+      "lineNbr": 23,
+      "author": {
+        "id": 1000030
+      },
+      "writtenOn": "2024-02-08T07:39:08Z",
+      "side": 1,
+      "message": "include mutex for this?",
+      "range": {
+        "startLine": 23,
+        "startChar": 14,
+        "endLine": 23,
+        "endChar": 23
+      },
+      "revId": "4a40c894f081d984a5914e9127f854bcbcda8fb5",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    }
+  ]
+}
