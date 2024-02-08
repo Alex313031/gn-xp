@@ -1,0 +1,73 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e516b595_7a1bad13",
+        "filename": "src/gn/filesystem_utils.cc",
+        "patchSetId": 9
+      },
+      "lineNbr": 644,
+      "author": {
+        "id": 1000030
+      },
+      "writtenOn": "2024-02-08T08:14:58Z",
+      "side": 1,
+      "message": "Follow\nhttps://abseil.io/tips/1#:~:text\u003dUnlike%20other%20string%20types%2C%20you%20should%20pass%20string_view%20by%20value%20just%20like%20you%20would%20pass%20an%20int%20or%20a%20double%20because%20string_view%20is%20a%20small%20value.\n?",
+      "range": {
+        "startLine": 644,
+        "startChar": 57,
+        "endLine": 644,
+        "endChar": 58
+      },
+      "revId": "e224a90f1b34e55a297364b6ed3e5f8305908dee",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "cae740c5_80f7ba79",
+        "filename": "src/gn/filesystem_utils.cc",
+        "patchSetId": 9
+      },
+      "lineNbr": 659,
+      "author": {
+        "id": 1000030
+      },
+      "writtenOn": "2024-02-08T08:14:58Z",
+      "side": 1,
+      "message": "Better to make drive letter capital in this function too and remove ToUpperASCII usage from MakeRelativePath?",
+      "range": {
+        "startLine": 659,
+        "startChar": 12,
+        "endLine": 659,
+        "endChar": 34
+      },
+      "revId": "e224a90f1b34e55a297364b6ed3e5f8305908dee",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "893fa055_55430bac",
+        "filename": "src/gn/filesystem_utils.cc",
+        "patchSetId": 9
+      },
+      "lineNbr": 659,
+      "author": {
+        "id": 1000030
+      },
+      "writtenOn": "2024-02-08T08:14:58Z",
+      "side": 1,
+      "message": "Follow\nhttps://abseil.io/tips/1#:~:text\u003dUnlike%20other%20string%20types%2C%20you%20should%20pass%20string_view%20by%20value%20just%20like%20you%20would%20pass%20an%20int%20or%20a%20double%20because%20string_view%20is%20a%20small%20value.\n?",
+      "range": {
+        "startLine": 659,
+        "startChar": 57,
+        "endLine": 659,
+        "endChar": 58
+      },
+      "revId": "e224a90f1b34e55a297364b6ed3e5f8305908dee",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    }
+  ]
+}
