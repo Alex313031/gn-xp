@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "05c24be2_741636ba",
+        "filename": "src/util/sys_info.cc",
+        "patchSetId": 24
+      },
+      "lineNbr": 16,
+      "author": {
+        "id": 1000030
+      },
+      "writtenOn": "2024-02-08T08:02:45Z",
+      "side": 1,
+      "message": "Could you follow\nhttps://google.github.io/styleguide/cppguide.html#Names_and_Order_of_Includes\n?",
+      "revId": "7e1d170b81071d8aa7951316addf4e36b691a768",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    }
+  ]
+}
