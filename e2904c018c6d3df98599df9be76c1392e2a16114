@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5f352e81_96b9761b",
+        "filename": "build/gen.py",
+        "patchSetId": 2
+      },
+      "lineNbr": 151,
+      "author": {
+        "id": 1000030
+      },
+      "writtenOn": "2024-02-08T05:18:25Z",
+      "side": 0,
+      "message": "I think having and maintain correct quoting is difficult for cross platform and that is not necessary for this script until when we hit the issue.\nSo I still want to just skip shell_quote on Windows.",
+      "range": {
+        "startLine": 151,
+        "startChar": 20,
+        "endLine": 151,
+        "endChar": 31
+      },
+      "revId": "e2904c018c6d3df98599df9be76c1392e2a16114",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    }
+  ]
+}
