@@ -36,6 +36,24 @@
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "c20857c7_7a568104",
+        "filename": "build/gen.py",
+        "patchSetId": 25
+      },
+      "lineNbr": 152,
+      "author": {
+        "id": 1002532
+      },
+      "writtenOn": "2024-02-10T04:37:20Z",
+      "side": 1,
+      "message": "I think use shlex.quote is not a good idea because single quote is not supported in windows, and I have no idea why, python don\u0027t double quote in all platforms as all shells supports double quotes. I\u0027m not gonna change this, probably someone should fix this in another CL later.",
+      "parentUuid": "06eb6c39_f5b183c2",
+      "revId": "8b5e469d5428145322dfbe4cca32c1a2139a699f",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "82d5af82_46736392",
@@ -71,6 +89,24 @@
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "9b5f94a1_04ff1b42",
+        "filename": "build/gen.py",
+        "patchSetId": 25
+      },
+      "lineNbr": 533,
+      "author": {
+        "id": 1002532
+      },
+      "writtenOn": "2024-02-10T04:37:20Z",
+      "side": 1,
+      "message": "I don\u0027t think we need to handle mingw/msys because they are intended to use a linux style shell or compiler, and these flags can only be handled msvc. In fact there\u0027re something above to handle msys/mingw. I don\u0027t know any way to detect whether user will use msvc under msys/mingw. And I don\u0027t think a manifest is needed to use in msys/mingw. In fact, WSL2 supports long path by default, so this job might needed to be done in the shell side.",
+      "parentUuid": "c52a2ee5_41cdc8dc",
+      "revId": "8b5e469d5428145322dfbe4cca32c1a2139a699f",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "f6d3baef_5557f969",
@@ -84,6 +120,42 @@
       "writtenOn": "2024-02-08T14:25:23Z",
       "side": 1,
       "message": "nit: Use EXPECT_GT() here to print the value of file_path.value().size() in case of expectation failure.",
+      "revId": "8b5e469d5428145322dfbe4cca32c1a2139a699f",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "75095ee8_55689480",
+        "filename": "src/gn/file_writer_unittest.cc",
+        "patchSetId": 25
+      },
+      "lineNbr": 60,
+      "author": {
+        "id": 1002532
+      },
+      "writtenOn": "2024-02-10T04:37:20Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "f6d3baef_5557f969",
+      "revId": "8b5e469d5428145322dfbe4cca32c1a2139a699f",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "52a57be5_5506b652",
+        "filename": "src/gn/file_writer_unittest.cc",
+        "patchSetId": 25
+      },
+      "lineNbr": 60,
+      "author": {
+        "id": 1002532
+      },
+      "writtenOn": "2024-02-10T04:37:20Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "f6d3baef_5557f969",
       "revId": "8b5e469d5428145322dfbe4cca32c1a2139a699f",
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
     },
@@ -123,6 +195,24 @@
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "a776036c_ccc46854",
+        "filename": "src/util/sys_info.cc",
+        "patchSetId": 25
+      },
+      "lineNbr": 21,
+      "author": {
+        "id": 1002532
+      },
+      "writtenOn": "2024-02-10T04:37:20Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "8e9abc16_b139452b",
+      "revId": "8b5e469d5428145322dfbe4cca32c1a2139a699f",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "5152d77e_3658edfe",
@@ -154,6 +244,42 @@
       "side": 1,
       "message": "Acknowledged",
       "parentUuid": "5152d77e_3658edfe",
+      "revId": "8b5e469d5428145322dfbe4cca32c1a2139a699f",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "219c1ce5_62cead10",
+        "filename": "src/util/sys_info.cc",
+        "patchSetId": 25
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 1002532
+      },
+      "writtenOn": "2024-02-10T04:37:20Z",
+      "side": 1,
+      "message": "Like I said, msys/mingw long path support should be opt-in by shell.",
+      "parentUuid": "f84a0938_43cf6c86",
+      "revId": "8b5e469d5428145322dfbe4cca32c1a2139a699f",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "94831ebd_c1fd6f61",
+        "filename": "src/util/sys_info.cc",
+        "patchSetId": 25
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 1002532
+      },
+      "writtenOn": "2024-02-10T04:37:20Z",
+      "side": 1,
+      "message": "reito@Reito MINGW64 /d/test/testtest\n$ mkdir testtesttesttest\n\nreito@Reito MINGW64 /d/test/testtest\n$ cd testtesttesttest/\n\nreito@Reito MINGW64 /d/test/testtest/testtesttesttest\n$ touch 123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456890123456789012345678901\n\nreito@Reito MINGW64 /d/test/testtest/testtesttesttest\n$ ls\n123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456890123456789012345678901\n\nLike I said, msys/mingw\u0027s long path support should be opt-in by the shell itself, just like WSL2.",
+      "parentUuid": "f84a0938_43cf6c86",
       "revId": "8b5e469d5428145322dfbe4cca32c1a2139a699f",
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
     }
