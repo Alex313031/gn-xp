@@ -18,6 +18,24 @@
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "93a6fb1c_6900cdc6",
+        "filename": "src/gn/filesystem_utils.cc",
+        "patchSetId": 15
+      },
+      "lineNbr": 652,
+      "author": {
+        "id": 1000067
+      },
+      "writtenOn": "2024-02-13T14:38:59Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "b9d24579_ef905f95",
+      "revId": "8ae29274e9efb74e5ce28f56ba121436a34405ae",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "da1a815a_df687920",
@@ -35,6 +53,24 @@
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "b0b73970_78e2bd5a",
+        "filename": "src/gn/filesystem_utils.cc",
+        "patchSetId": 15
+      },
+      "lineNbr": 673,
+      "author": {
+        "id": 1000067
+      },
+      "writtenOn": "2024-02-13T14:38:59Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "da1a815a_df687920",
+      "revId": "8ae29274e9efb74e5ce28f56ba121436a34405ae",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "ad13816f_b0dd5ba1",
@@ -48,6 +84,24 @@
       "writtenOn": "2024-02-13T11:57:32Z",
       "side": 1,
       "message": "nit: Simplify that by caching the result of `IsPathAbsolute(path)` and using a single std::string(path) call, as in:\n\n```\nCHECK(!path.empty());\nbool is_start_slash \u003d IsSlash(path[0]);\n// 1. ...\nif (path.size() \u003e 3 \u0026\u0026 is_start_slash \u0026\u0026\n    base::IsAsciiAlpha(path[1]) \u0026\u0026 path[2] \u003d\u003d \u0027:\u0027) {\n  return RegulatePathIfAbsolute(path.substr(1));\n}\n\nbool is_absolute \u003d IsPathAbsolute(path);\n\n// 2. ...\nif (is_absolute \u0026\u0026 is_start_slash) {\n  return GetPathWitDriverLetter(path);\n}\n\n// 3. ...\nstd::string ret(path);\nif (is_absolute \u0026\u0026 !is_start_slash) {\n  ret[0] \u003d base::ToUpperASCII(ret[0]);\n}\nreturn ret;\n```",
+      "revId": "8ae29274e9efb74e5ce28f56ba121436a34405ae",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e93b52f6_f92d39b2",
+        "filename": "src/gn/filesystem_utils.cc",
+        "patchSetId": 15
+      },
+      "lineNbr": 678,
+      "author": {
+        "id": 1000067
+      },
+      "writtenOn": "2024-02-13T14:38:59Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ad13816f_b0dd5ba1",
       "revId": "8ae29274e9efb74e5ce28f56ba121436a34405ae",
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
     }
