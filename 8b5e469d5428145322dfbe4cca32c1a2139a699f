@@ -163,6 +163,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "40fba665_f34c3293",
+        "filename": "build/gen.py",
+        "patchSetId": 25
+      },
+      "lineNbr": 533,
+      "author": {
+        "id": 1002532
+      },
+      "writtenOn": "2024-02-13T14:25:15Z",
+      "side": 1,
+      "message": "mingw/cygwin/msys doesn\u0027t use MSVC and thus gcc/clang cannot (easily) link the windows manifest file. \nAnyway, it is not a degration for mingw/cygwin to not supporting long path by this patch, and no one is using a mingw compiled gn.exe anyway, what\u0027s the point if so? Why not directly compile and use in a pure windows environment?\nI think we can leave it to anyone who is being blocked by it in the future.",
+      "parentUuid": "161f4469_24094dea",
+      "revId": "8b5e469d5428145322dfbe4cca32c1a2139a699f",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "f6d3baef_5557f969",
         "filename": "src/gn/file_writer_unittest.cc",
         "patchSetId": 25
