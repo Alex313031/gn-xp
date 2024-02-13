@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b2dc3829_5d672c0b",
+        "filename": "src/gn/filesystem_utils.cc",
+        "patchSetId": 12
+      },
+      "lineNbr": 708,
+      "author": {
+        "id": 1000030
+      },
+      "writtenOn": "2024-02-13T06:43:18Z",
+      "side": 1,
+      "message": "It is better to avoid unnecessary memory allocation for these.",
+      "range": {
+        "startLine": 707,
+        "startChar": 0,
+        "endLine": 708,
+        "endChar": 43
+      },
+      "revId": "9938a7992a3e0cc489f50332856d90897e523640",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    }
+  ]
+}
