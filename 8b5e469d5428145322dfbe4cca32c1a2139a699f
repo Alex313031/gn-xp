@@ -108,6 +108,24 @@
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "488246e1_4e959ba5",
+        "filename": "build/gen.py",
+        "patchSetId": 25
+      },
+      "lineNbr": 152,
+      "author": {
+        "id": 1000067
+      },
+      "writtenOn": "2024-02-13T15:33:53Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "323a7316_bca11785",
+      "revId": "8b5e469d5428145322dfbe4cca32c1a2139a699f",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "82d5af82_46736392",
@@ -265,6 +283,24 @@
       "side": 1,
       "message": "Damn. Yes, I think we should either fix it or simply remove support for this combination in a separate CL then.",
       "parentUuid": "9ee3ace2_daea17b7",
+      "revId": "8b5e469d5428145322dfbe4cca32c1a2139a699f",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f8685ba5_55e9a51c",
+        "filename": "build/gen.py",
+        "patchSetId": 25
+      },
+      "lineNbr": 533,
+      "author": {
+        "id": 1000067
+      },
+      "writtenOn": "2024-02-13T15:33:53Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "2f8de9cc_85046b33",
       "revId": "8b5e469d5428145322dfbe4cca32c1a2139a699f",
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
     },
