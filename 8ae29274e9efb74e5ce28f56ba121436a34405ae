@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b9d24579_ef905f95",
+        "filename": "src/gn/filesystem_utils.cc",
+        "patchSetId": 15
+      },
+      "lineNbr": 652,
+      "author": {
+        "id": 1000067
+      },
+      "writtenOn": "2024-02-13T11:57:32Z",
+      "side": 1,
+      "message": "nit: Can you do:\n\n```\nstd::string ret;\nret.reserve(2 + path.size());\nret.push_back(\u0027A\u0027 + drive - 1);\nret.push_back(\u0027:\u0027);\nret.append(path.c_str(), path.size());\nreturn ret;\n```\n\nTo avoid one needless two temporary string allocations + one move construction on line 651.",
+      "revId": "8ae29274e9efb74e5ce28f56ba121436a34405ae",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "da1a815a_df687920",
+        "filename": "src/gn/filesystem_utils.cc",
+        "patchSetId": 15
+      },
+      "lineNbr": 673,
+      "author": {
+        "id": 1000067
+      },
+      "writtenOn": "2024-02-13T11:57:32Z",
+      "side": 1,
+      "message": "nit: replace this with:\n\n```\nstd::string ret(path);\n```",
+      "revId": "8ae29274e9efb74e5ce28f56ba121436a34405ae",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ad13816f_b0dd5ba1",
+        "filename": "src/gn/filesystem_utils.cc",
+        "patchSetId": 15
+      },
+      "lineNbr": 678,
+      "author": {
+        "id": 1000067
+      },
+      "writtenOn": "2024-02-13T11:57:32Z",
+      "side": 1,
+      "message": "nit: Simplify that by caching the result of `IsPathAbsolute(path)` and using a single std::string(path) call, as in:\n\n```\nCHECK(!path.empty());\nbool is_start_slash \u003d IsSlash(path[0]);\n// 1. ...\nif (path.size() \u003e 3 \u0026\u0026 is_start_slash \u0026\u0026\n    base::IsAsciiAlpha(path[1]) \u0026\u0026 path[2] \u003d\u003d \u0027:\u0027) {\n  return RegulatePathIfAbsolute(path.substr(1));\n}\n\nbool is_absolute \u003d IsPathAbsolute(path);\n\n// 2. ...\nif (is_absolute \u0026\u0026 is_start_slash) {\n  return GetPathWitDriverLetter(path);\n}\n\n// 3. ...\nstd::string ret(path);\nif (is_absolute \u0026\u0026 !is_start_slash) {\n  ret[0] \u003d base::ToUpperASCII(ret[0]);\n}\nreturn ret;\n```",
+      "revId": "8ae29274e9efb74e5ce28f56ba121436a34405ae",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    }
+  ]
+}
