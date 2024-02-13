@@ -74,6 +74,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "92799863_3e0977ba",
+        "filename": "build/gen.py",
+        "patchSetId": 25
+      },
+      "lineNbr": 152,
+      "author": {
+        "id": 1002532
+      },
+      "writtenOn": "2024-02-13T10:33:38Z",
+      "side": 1,
+      "message": "If the user runs `python build/gen.py` in cmd/pwsh, they probably use same shell to ninja and generates a exe as output. So if the user is in mingw/msys2 to generate the ninja files, they probably are building in a linux shell and want a linux binary.\nSo I think it is correct here to use `platform.system` and only make change for \"Windows\"?",
+      "parentUuid": "c2462f63_ab49fa6c",
+      "revId": "8b5e469d5428145322dfbe4cca32c1a2139a699f",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "82d5af82_46736392",
         "filename": "build/gen.py",
         "patchSetId": 25
