@@ -56,6 +56,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "c2462f63_ab49fa6c",
+        "filename": "build/gen.py",
+        "patchSetId": 25
+      },
+      "lineNbr": 152,
+      "author": {
+        "id": 1000030
+      },
+      "writtenOn": "2024-02-13T06:40:09Z",
+      "side": 1,
+      "message": "\u003e I intended to ignore mingw \u0026 msys because they eventually use a unix shell\n\nI think ninja binary for Windows doesn\u0027t use unix shell to run the command returned from this function.",
+      "parentUuid": "c20857c7_7a568104",
+      "revId": "8b5e469d5428145322dfbe4cca32c1a2139a699f",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "82d5af82_46736392",
         "filename": "build/gen.py",
         "patchSetId": 25

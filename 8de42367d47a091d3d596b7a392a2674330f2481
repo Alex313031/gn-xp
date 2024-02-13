@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d37e6646_5b774dbf",
+        "filename": "src/util/sys_info.cc",
+        "patchSetId": 26
+      },
+      "lineNbr": 27,
+      "author": {
+        "id": 1000030
+      },
+      "writtenOn": "2024-02-13T06:40:09Z",
+      "side": 1,
+      "message": "Could you use `using`?",
+      "range": {
+        "startLine": 27,
+        "startChar": 8,
+        "endLine": 27,
+        "endChar": 15
+      },
+      "revId": "8de42367d47a091d3d596b7a392a2674330f2481",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    }
+  ]
+}
