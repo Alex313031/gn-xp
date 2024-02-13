@@ -181,6 +181,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "83ae9500_8e369eab",
+        "filename": "build/gen.py",
+        "patchSetId": 25
+      },
+      "lineNbr": 533,
+      "author": {
+        "id": 1000067
+      },
+      "writtenOn": "2024-02-13T14:31:50Z",
+      "side": 1,
+      "message": "My understanding is that MSys provides a Posix-like shell, but the mingw toolchain still generates pure Win32 binaries that can work anywhere.\n\nUnlike Cygwin whose toolchain generates binaries that require the Cygwin DLL available (and are super slow to properly emulate all of Posix, or nearly all of it). It is also possible to use mingw from Cygwin, but this is probably not something to support here.",
+      "parentUuid": "40fba665_f34c3293",
+      "revId": "8b5e469d5428145322dfbe4cca32c1a2139a699f",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "f6d3baef_5557f969",
         "filename": "src/gn/file_writer_unittest.cc",
         "patchSetId": 25
