@@ -92,6 +92,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "323a7316_bca11785",
+        "filename": "build/gen.py",
+        "patchSetId": 25
+      },
+      "lineNbr": 152,
+      "author": {
+        "id": 1002532
+      },
+      "writtenOn": "2024-02-13T14:50:24Z",
+      "side": 1,
+      "message": "I think I\u0027m right, this function is for generating a regenerating ninja files shell command, and if we run python in mingw/msys, the user would have no reason to use a different shell, so the ninja will run the command in a unix shell, which supports single quote. The only situation need to fix is we run this python and ninja in cmd/pwsh.",
+      "parentUuid": "92799863_3e0977ba",
+      "revId": "8b5e469d5428145322dfbe4cca32c1a2139a699f",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "82d5af82_46736392",
         "filename": "build/gen.py",
         "patchSetId": 25
@@ -193,6 +211,24 @@
       "side": 1,
       "message": "My understanding is that MSys provides a Posix-like shell, but the mingw toolchain still generates pure Win32 binaries that can work anywhere.\n\nUnlike Cygwin whose toolchain generates binaries that require the Cygwin DLL available (and are super slow to properly emulate all of Posix, or nearly all of it). It is also possible to use mingw from Cygwin, but this is probably not something to support here.",
       "parentUuid": "40fba665_f34c3293",
+      "revId": "8b5e469d5428145322dfbe4cca32c1a2139a699f",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "becc71a0_7700cbeb",
+        "filename": "build/gen.py",
+        "patchSetId": 25
+      },
+      "lineNbr": 533,
+      "author": {
+        "id": 1002532
+      },
+      "writtenOn": "2024-02-13T14:50:24Z",
+      "side": 1,
+      "message": "I understand what you mean, but I really don\u0027t think anyone would compile gn.exe in mingw/msys while we can natively compile with MSVC. \nAt my first glance we need to add a resource file to link the manifest,rc,exe together, to opt-in longpath to a mingw windows executable.",
+      "parentUuid": "83ae9500_8e369eab",
       "revId": "8b5e469d5428145322dfbe4cca32c1a2139a699f",
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
     },
