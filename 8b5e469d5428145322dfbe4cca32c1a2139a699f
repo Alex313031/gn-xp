@@ -235,6 +235,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "9ee3ace2_daea17b7",
+        "filename": "build/gen.py",
+        "patchSetId": 25
+      },
+      "lineNbr": 533,
+      "author": {
+        "id": 1002532
+      },
+      "writtenOn": "2024-02-13T15:09:09Z",
+      "side": 1,
+      "message": "gen.py does not even works on my msys2 mingw64:\n\n```\n*** MINGW64 /d/cef/gn-mingw\n$ python\nPython 3.11.4 (main, Jul 13 2023, 20:17:04) [GCC 11.3.0] on cygwin\nType \"help\", \"copyright\", \"credits\" or \"license\" for more information.\n\u003e\u003e\u003e import platform\n\u003e\u003e\u003e platform.system()\n\u0027MINGW64_NT-10.0-22631\u0027\n\u003e\u003e\u003e import sys\n\u003e\u003e\u003e sys.platform\n\u0027cygwin\u0027\n\n```\n\nCan we implement this later and in a separate CL?",
+      "parentUuid": "becc71a0_7700cbeb",
+      "revId": "8b5e469d5428145322dfbe4cca32c1a2139a699f",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "f6d3baef_5557f969",
         "filename": "src/gn/file_writer_unittest.cc",
         "patchSetId": 25
