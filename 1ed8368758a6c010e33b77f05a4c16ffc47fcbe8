@@ -16,6 +16,24 @@
       "message": "```suggestion\n  ret +\u003d path;\n```",
       "revId": "1ed8368758a6c010e33b77f05a4c16ffc47fcbe8",
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "97cbca62_fca0f8b1",
+        "filename": "src/gn/filesystem_utils.cc",
+        "patchSetId": 16
+      },
+      "lineNbr": 655,
+      "author": {
+        "id": 1002532
+      },
+      "writtenOn": "2024-02-14T06:20:34Z",
+      "side": 1,
+      "message": "Fix applied.",
+      "parentUuid": "3662c4ba_c9303f01",
+      "revId": "1ed8368758a6c010e33b77f05a4c16ffc47fcbe8",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
     }
   ]
 }
