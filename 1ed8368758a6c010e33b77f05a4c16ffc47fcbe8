@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3662c4ba_c9303f01",
+        "filename": "src/gn/filesystem_utils.cc",
+        "patchSetId": 16
+      },
+      "lineNbr": 655,
+      "author": {
+        "id": 1000030
+      },
+      "writtenOn": "2024-02-14T06:17:53Z",
+      "side": 1,
+      "message": "```suggestion\n  ret +\u003d path;\n```",
+      "revId": "1ed8368758a6c010e33b77f05a4c16ffc47fcbe8",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    }
+  ]
+}
