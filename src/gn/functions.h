@@ -162,6 +162,14 @@ Value RunFilterInclude(Scope* scope,
                        const std::vector<Value>& args,
                        Err* err);
 
+extern const char kFilterLabels[];
+extern const char kFilterLabels_HelpShort[];
+extern const char kFilterLabels_Help[];
+Value RunFilterLabels(Scope* scope,
+                      const FunctionCallNode* function,
+                      const std::vector<Value>& args,
+                      Err* err);
+
 extern const char kForEach[];
 extern const char kForEach_HelpShort[];
 extern const char kForEach_Help[];
@@ -235,6 +243,14 @@ Value RunImport(Scope* scope,
                 const FunctionCallNode* function,
                 const std::vector<Value>& args,
                 Err* err);
+
+extern const char kLabelMatches[];
+extern const char kLabelMatches_HelpShort[];
+extern const char kLabelMatches_Help[];
+Value RunLabelMatches(Scope* scope,
+                      const FunctionCallNode* function,
+                      const std::vector<Value>& args,
+                      Err* err);
 
 extern const char kLoadableModule[];
 extern const char kLoadableModule_HelpShort[];
