@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "393e088e_f031f2cd",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 28
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1002532
+      },
+      "writtenOn": "2024-02-14T08:48:23Z",
+      "side": 1,
+      "message": "Fixed a very funny bug",
+      "revId": "0259216dcddfcf05c600f8d0843d7d3bcd3a5ef1",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    }
+  ]
+}
