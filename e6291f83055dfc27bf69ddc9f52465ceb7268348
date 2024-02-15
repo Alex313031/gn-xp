@@ -306,6 +306,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "1231a722_d6800fad",
+        "filename": "src/util/exe_path.cc",
+        "patchSetId": 9
+      },
+      "lineNbr": 121,
+      "author": {
+        "id": 1002587
+      },
+      "writtenOn": "2024-02-15T16:00:46Z",
+      "side": 1,
+      "message": "@brett, It\u0027s been a while and there was lots of discussions going on and we finally thought of coming up with an API that we will directly call in GN and that might resolve the issue. We are done with the development and testing is going on once that is up, I will raise one PR wrt the above issue.\nHope that is fine.",
+      "parentUuid": "1dd02bfd_e5344529",
+      "revId": "e6291f83055dfc27bf69ddc9f52465ceb7268348",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "6224454d_4040d5d9",
         "filename": "src/util/exe_path.cc",
         "patchSetId": 9
