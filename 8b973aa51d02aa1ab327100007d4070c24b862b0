@@ -34,6 +34,24 @@
       "parentUuid": "683a5255_9d75b826",
       "revId": "8b973aa51d02aa1ab327100007d4070c24b862b0",
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b3b968e2_5a61991a",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 18
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000067
+      },
+      "writtenOn": "2024-02-15T17:04:44Z",
+      "side": 1,
+      "message": "Ok, I cannot reproduce this locally yet. Are you sure that this is the correct CL that breaks your build? It doesn\u0027t change anything when not targetting Windows, as far as I understand.",
+      "parentUuid": "4a3289cc_9d6027bb",
+      "revId": "8b973aa51d02aa1ab327100007d4070c24b862b0",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
     }
   ]
 }
