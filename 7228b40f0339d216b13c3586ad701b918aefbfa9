@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "52496df2_0dd8f87f",
+        "filename": "src/gn/filesystem_utils.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 712,
+      "author": {
+        "id": 1002842
+      },
+      "writtenOn": "2024-02-15T18:20:07Z",
+      "side": 1,
+      "message": "no move, moving from a const ref just copies\n\nif we want a no-op then input should be a `const string\u0026`",
+      "range": {
+        "startLine": 712,
+        "startChar": 28,
+        "endLine": 712,
+        "endChar": 48
+      },
+      "revId": "7228b40f0339d216b13c3586ad701b918aefbfa9",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    }
+  ]
+}
