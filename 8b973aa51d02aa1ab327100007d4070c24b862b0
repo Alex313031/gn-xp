@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "683a5255_9d75b826",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 18
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1002187
+      },
+      "writtenOn": "2024-02-15T16:46:14Z",
+      "side": 1,
+      "message": "This change causes VisualStudioWriterTest.ResolveSolutionFolders to crash when compiled with GCC and with glibc assertions enabled, as observed in Fedora Linux. Details in https://bugs.chromium.org/p/gn/issues/detail?id\u003d358.",
+      "revId": "8b973aa51d02aa1ab327100007d4070c24b862b0",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    }
+  ]
+}
