@@ -684,8 +684,8 @@ std::string RegulatePathIfAbsolute(std::string_view path) {
 }
 #endif
 
-std::string MakeRelativePath(std::string_view input,
-                             std::string_view dest) {
+std::string MakeRelativePath(const std::string& input,
+                             const std::string& dest) {
 #if defined(OS_WIN)
   // Regulate the paths.
   std::string input_regulated = RegulatePathIfAbsolute(input);
