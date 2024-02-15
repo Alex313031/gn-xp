@@ -70,6 +70,24 @@
       "parentUuid": "4a3289cc_9d6027bb",
       "revId": "8b973aa51d02aa1ab327100007d4070c24b862b0",
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2e5cf429_370195b6",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 18
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1002187
+      },
+      "writtenOn": "2024-02-15T17:13:03Z",
+      "side": 1,
+      "message": "It’s a good question, but I’m sure: I observed the regression while updating Fedora Rawhide from 2144 / a3dcd7a7ad861a9c1b9930a654f2feaeb03b4c0c, which is the parent commit, so this change is the only difference between passing and failing builds.",
+      "parentUuid": "32a4c192_2691525b",
+      "revId": "8b973aa51d02aa1ab327100007d4070c24b862b0",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
     }
   ]
 }
