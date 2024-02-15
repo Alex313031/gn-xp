@@ -684,15 +684,12 @@ std::string RegulatePathIfAbsolute(std::string_view path) {
 }
 #endif
 
-std::string MakeRelativePath(std::string_view input,
-                             std::string_view dest) {
+std::string MakeRelativePath(const std::string& input_raw,
+                             const std::string& dest_raw) {
 #if defined(OS_WIN)
   // Regulate the paths.
-  std::string input_regulated = RegulatePathIfAbsolute(input);
-  std::string dest_regulated = RegulatePathIfAbsolute(dest);
-
-  input = input_regulated;
-  dest = dest_regulated;
+  const std::string input = RegulatePathIfAbsolute(input_raw);
+  const std::string dest = RegulatePathIfAbsolute(dest_raw);
 
   // On Windows, it is invalid to make a relative path across different
   // drive letters. A relative path cannot span over different drives.
@@ -708,9 +705,12 @@ std::string MakeRelativePath(std::string_view input,
     if (input[0] != dest[0]) {
       // If the drive letters are differnet, we have no choice but use
       // the absolute path of input for correctness.
-      return input_regulated;
+      return input;
     }
   }
+#else
+  const std::string& input = input_raw;
+  const std::string& dest = dest_raw;
 #endif
 
   DCHECK(EndsWithSlash(dest));
