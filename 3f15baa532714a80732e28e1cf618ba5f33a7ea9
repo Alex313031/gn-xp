@@ -1,6 +1,23 @@
 {
   "comments": [
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "017940fd_00af1e28",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 6
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1002532
+      },
+      "writtenOn": "2024-02-16T05:50:58Z",
+      "side": 1,
+      "message": "Check this out.",
+      "revId": "3f15baa532714a80732e28e1cf618ba5f33a7ea9",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "f5ecd805_3e634f49",
@@ -110,6 +127,30 @@
       "side": 1,
       "message": "It is doable, let me think about it closely..",
       "parentUuid": "635a3170_9d953cb8",
+      "range": {
+        "startLine": 725,
+        "startChar": 30,
+        "endLine": 725,
+        "endChar": 46
+      },
+      "revId": "3f15baa532714a80732e28e1cf618ba5f33a7ea9",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "dfa97379_ccb165cd",
+        "filename": "src/gn/filesystem_utils.cc",
+        "patchSetId": 6
+      },
+      "lineNbr": 725,
+      "author": {
+        "id": 1002532
+      },
+      "writtenOn": "2024-02-16T05:50:58Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "42769395_7ab8db8f",
       "range": {
         "startLine": 725,
         "startChar": 30,
