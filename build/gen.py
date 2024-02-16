@@ -408,6 +408,9 @@ def WriteGNNinja(path, platform, host, options, args_list):
   if not platform.is_msvc():
     if options.debug:
       cflags.extend(['-O0', '-g'])
+      # Enable libc++ or libstdc++ assertions in debug mode.
+      # Just set both macros to avoid detecting the C++ runtime being used.
+      cflags.extend(['-D_LIBCPP_DEBUG=1', '-D_GLIBCXX_DEBUG=1'])
     else:
       cflags.append('-DNDEBUG')
       cflags.append('-O3')
