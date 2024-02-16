@@ -22,6 +22,30 @@
       },
       "revId": "3f15baa532714a80732e28e1cf618ba5f33a7ea9",
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "18053f4d_dce3b0c9",
+        "filename": "src/gn/filesystem_utils.cc",
+        "patchSetId": 6
+      },
+      "lineNbr": 725,
+      "author": {
+        "id": 1002532
+      },
+      "writtenOn": "2024-02-16T05:02:28Z",
+      "side": 1,
+      "message": "Is it even valid to access the null-terminator of an std::string?",
+      "parentUuid": "f5ecd805_3e634f49",
+      "range": {
+        "startLine": 725,
+        "startChar": 30,
+        "endLine": 725,
+        "endChar": 46
+      },
+      "revId": "3f15baa532714a80732e28e1cf618ba5f33a7ea9",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
     }
   ]
 }
