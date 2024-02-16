@@ -3,6 +3,23 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "b8865c99_97efc719",
+        "filename": "src/gn/function_label_matches.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 20,
+      "author": {
+        "id": 1000067
+      },
+      "writtenOn": "2024-02-16T10:02:11Z",
+      "side": 1,
+      "message": "nit: update comment to be relevant to `label_matches` instead :-)\n```suggestion\n    \"label_matches: Returns true if the label matches one of a set of patterns.\";\n```",
+      "revId": "c320a8e0d18b66029cfe012cb7024d37bc90bd43",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "48974543_6efa23a3",
         "filename": "src/gn/function_label_matches.cc",
         "patchSetId": 2
@@ -26,6 +43,91 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "af36e488_3b7a32ef",
+        "filename": "src/gn/function_label_matches.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 51,
+      "author": {
+        "id": 1000067
+      },
+      "writtenOn": "2024-02-16T10:02:11Z",
+      "side": 1,
+      "message": "suggestion: use `patterns.reserve()` here.",
+      "revId": "c320a8e0d18b66029cfe012cb7024d37bc90bd43",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "bb647f6b_a6e13bfd",
+        "filename": "src/gn/function_label_matches.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 54,
+      "author": {
+        "id": 1000067
+      },
+      "writtenOn": "2024-02-16T10:02:11Z",
+      "side": 1,
+      "message": "I believe you should be able to use `value` as the first argument here to better locate the error.",
+      "revId": "c320a8e0d18b66029cfe012cb7024d37bc90bd43",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0abc8922_f8909b48",
+        "filename": "src/gn/function_label_matches.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 63,
+      "author": {
+        "id": 1000067
+      },
+      "writtenOn": "2024-02-16T10:02:11Z",
+      "side": 1,
+      "message": "nit: Use `std::move()` to avoid a copy.\n```suggestion\n    patterns.push_back(std::move(pattern));\n```",
+      "revId": "c320a8e0d18b66029cfe012cb7024d37bc90bd43",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "038d4d92_d3675980",
+        "filename": "src/gn/function_label_matches.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 66,
+      "author": {
+        "id": 1000067
+      },
+      "writtenOn": "2024-02-16T10:02:11Z",
+      "side": 1,
+      "message": "nit: move definition after label check to remove an un-necessary destructor call lon line 72. See also next comment.",
+      "revId": "c320a8e0d18b66029cfe012cb7024d37bc90bd43",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "82f8f3b0_d791da1b",
+        "filename": "src/gn/function_label_matches.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 78,
+      "author": {
+        "id": 1000067
+      },
+      "writtenOn": "2024-02-16T10:02:11Z",
+      "side": 1,
+      "message": "Can this be just `return Value(function, LabelPattern::VectorMatches(...));` instead?",
+      "revId": "c320a8e0d18b66029cfe012cb7024d37bc90bd43",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "8f57b97c_b03e027a",
         "filename": "src/gn/function_label_matches.cc",
         "patchSetId": 2
@@ -43,6 +145,23 @@
         "endLine": 111,
         "endChar": 20
       },
+      "revId": "c320a8e0d18b66029cfe012cb7024d37bc90bd43",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b6572919_fc69b7ee",
+        "filename": "src/gn/function_label_matches.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 130,
+      "author": {
+        "id": 1000067
+      },
+      "writtenOn": "2024-02-16T10:02:11Z",
+      "side": 1,
+      "message": "nit: Use `std::move()` to avoid a copy.\n```suggestion\n    patterns.push_back(std::move(pattern));\n```",
       "revId": "c320a8e0d18b66029cfe012cb7024d37bc90bd43",
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
     }
