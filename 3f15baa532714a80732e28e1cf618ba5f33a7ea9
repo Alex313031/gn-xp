@@ -70,6 +70,30 @@
       },
       "revId": "3f15baa532714a80732e28e1cf618ba5f33a7ea9",
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "635a3170_9d953cb8",
+        "filename": "src/gn/filesystem_utils.cc",
+        "patchSetId": 6
+      },
+      "lineNbr": 725,
+      "author": {
+        "id": 1000030
+      },
+      "writtenOn": "2024-02-16T05:16:14Z",
+      "side": 1,
+      "message": "I meant to check size of |input| instead of accessing its element for string_view.",
+      "parentUuid": "0d7f9232_a0205de3",
+      "range": {
+        "startLine": 725,
+        "startChar": 30,
+        "endLine": 725,
+        "endChar": 46
+      },
+      "revId": "3f15baa532714a80732e28e1cf618ba5f33a7ea9",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
     }
   ]
 }
