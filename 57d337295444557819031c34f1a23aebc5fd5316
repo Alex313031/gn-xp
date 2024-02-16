@@ -24,6 +24,30 @@
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "56cd8f3e_10c48d2f",
+        "filename": "src/gn/filesystem_utils.cc",
+        "patchSetId": 7
+      },
+      "lineNbr": 727,
+      "author": {
+        "id": 1002532
+      },
+      "writtenOn": "2024-02-16T06:11:48Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "701e1f36_de295cf0",
+      "range": {
+        "startLine": 727,
+        "startChar": 4,
+        "endLine": 727,
+        "endChar": 8
+      },
+      "revId": "57d337295444557819031c34f1a23aebc5fd5316",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "7c1582a7_1de091f5",
@@ -37,6 +61,30 @@
       "writtenOn": "2024-02-16T06:01:49Z",
       "side": 1,
       "message": "This access is not checked correctly?",
+      "range": {
+        "startLine": 729,
+        "startChar": 19,
+        "endLine": 729,
+        "endChar": 20
+      },
+      "revId": "57d337295444557819031c34f1a23aebc5fd5316",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "8c6ff7fc_53392343",
+        "filename": "src/gn/filesystem_utils.cc",
+        "patchSetId": 7
+      },
+      "lineNbr": 729,
+      "author": {
+        "id": 1002532
+      },
+      "writtenOn": "2024-02-16T06:11:48Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "7c1582a7_1de091f5",
       "range": {
         "startLine": 729,
         "startChar": 19,
