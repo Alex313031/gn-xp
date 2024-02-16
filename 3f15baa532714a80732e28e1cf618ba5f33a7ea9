@@ -46,6 +46,30 @@
       },
       "revId": "3f15baa532714a80732e28e1cf618ba5f33a7ea9",
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0d7f9232_a0205de3",
+        "filename": "src/gn/filesystem_utils.cc",
+        "patchSetId": 6
+      },
+      "lineNbr": 725,
+      "author": {
+        "id": 1002532
+      },
+      "writtenOn": "2024-02-16T05:10:59Z",
+      "side": 1,
+      "message": "I think although std::string copies \u0027\\0\u0027 for use of c_str, it is not a right thing to access str[str.size()]...",
+      "parentUuid": "18053f4d_dce3b0c9",
+      "range": {
+        "startLine": 725,
+        "startChar": 30,
+        "endLine": 725,
+        "endChar": 46
+      },
+      "revId": "3f15baa532714a80732e28e1cf618ba5f33a7ea9",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
     }
   ]
 }
