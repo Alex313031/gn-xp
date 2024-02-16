@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "701e1f36_de295cf0",
+        "filename": "src/gn/filesystem_utils.cc",
+        "patchSetId": 7
+      },
+      "lineNbr": 727,
+      "author": {
+        "id": 1000030
+      },
+      "writtenOn": "2024-02-16T06:01:49Z",
+      "side": 1,
+      "message": "This else is not necessary.",
+      "range": {
+        "startLine": 727,
+        "startChar": 4,
+        "endLine": 727,
+        "endChar": 8
+      },
+      "revId": "57d337295444557819031c34f1a23aebc5fd5316",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7c1582a7_1de091f5",
+        "filename": "src/gn/filesystem_utils.cc",
+        "patchSetId": 7
+      },
+      "lineNbr": 729,
+      "author": {
+        "id": 1000030
+      },
+      "writtenOn": "2024-02-16T06:01:49Z",
+      "side": 1,
+      "message": "This access is not checked correctly?",
+      "range": {
+        "startLine": 729,
+        "startChar": 19,
+        "endLine": 729,
+        "endChar": 20
+      },
+      "revId": "57d337295444557819031c34f1a23aebc5fd5316",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    }
+  ]
+}
