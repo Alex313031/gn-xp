@@ -183,6 +183,30 @@
       },
       "revId": "3f15baa532714a80732e28e1cf618ba5f33a7ea9",
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "54b45468_d9fcec95",
+        "filename": "src/gn/filesystem_utils.cc",
+        "patchSetId": 6
+      },
+      "lineNbr": 725,
+      "author": {
+        "id": 1000030
+      },
+      "writtenOn": "2024-02-19T04:37:20Z",
+      "side": 1,
+      "message": "Yes, but I prefer to keep using string_view to avoid unnecesasry allocation.",
+      "parentUuid": "3eabd1b2_91b942c5",
+      "range": {
+        "startLine": 725,
+        "startChar": 30,
+        "endLine": 725,
+        "endChar": 46
+      },
+      "revId": "3f15baa532714a80732e28e1cf618ba5f33a7ea9",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
     }
   ]
 }
