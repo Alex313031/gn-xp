@@ -68,6 +68,23 @@
       "message": "Ah, I think we need two reviews on this now. Brett, can you stamp this?",
       "revId": "ab5965c1d1faabee0d01472c7b4c6d2df418b0e6",
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "09bb9ae4_2e540acc",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000012
+      },
+      "writtenOn": "2024-02-20T20:45:04Z",
+      "side": 1,
+      "message": "Hi @Tikuta! Can you review this so we can get a second set of eyes?",
+      "revId": "ab5965c1d1faabee0d01472c7b4c6d2df418b0e6",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
     }
   ]
 }
