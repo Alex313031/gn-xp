@@ -207,6 +207,30 @@
       },
       "revId": "3f15baa532714a80732e28e1cf618ba5f33a7ea9",
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "89a80adf_3a676321",
+        "filename": "src/gn/filesystem_utils.cc",
+        "patchSetId": 6
+      },
+      "lineNbr": 725,
+      "author": {
+        "id": 1002842
+      },
+      "writtenOn": "2024-02-20T19:03:21Z",
+      "side": 1,
+      "message": "I agree with that motivation 😊",
+      "parentUuid": "54b45468_d9fcec95",
+      "range": {
+        "startLine": 725,
+        "startChar": 30,
+        "endLine": 725,
+        "endChar": 46
+      },
+      "revId": "3f15baa532714a80732e28e1cf618ba5f33a7ea9",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
     }
   ]
 }
