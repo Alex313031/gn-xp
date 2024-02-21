@@ -1,0 +1,113 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f63b1b50_e8c7349e",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 25,
+      "author": {
+        "id": 1000030
+      },
+      "writtenOn": "2024-02-21T06:13:55Z",
+      "side": 1,
+      "message": "are?",
+      "range": {
+        "startLine": 25,
+        "startChar": 36,
+        "endLine": 25,
+        "endChar": 39
+      },
+      "revId": "678ec5dd0fb1eaa9c30416f9ab8900f8ed98fd71",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ce5a5d1f_4356b1f7",
+        "filename": "src/gn/ninja_outputs_writer.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 14,
+      "author": {
+        "id": 1000030
+      },
+      "writtenOn": "2024-02-21T06:13:55Z",
+      "side": 1,
+      "message": "Include these in the 1st block.",
+      "range": {
+        "startLine": 13,
+        "startChar": 0,
+        "endLine": 14,
+        "endChar": 17
+      },
+      "revId": "678ec5dd0fb1eaa9c30416f9ab8900f8ed98fd71",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "687e4620_0fbe169c",
+        "filename": "src/gn/ninja_outputs_writer.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 33,
+      "author": {
+        "id": 1000030
+      },
+      "writtenOn": "2024-02-21T06:13:55Z",
+      "side": 1,
+      "message": "Include \u003cstring\u003e?",
+      "range": {
+        "startLine": 33,
+        "startChar": 42,
+        "endLine": 33,
+        "endChar": 48
+      },
+      "revId": "678ec5dd0fb1eaa9c30416f9ab8900f8ed98fd71",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5cf68ffe_0ddd7365",
+        "filename": "src/gn/ninja_outputs_writer_unittest.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 11,
+      "author": {
+        "id": 1000030
+      },
+      "writtenOn": "2024-02-21T06:13:55Z",
+      "side": 1,
+      "message": "Remove this empty line?",
+      "revId": "678ec5dd0fb1eaa9c30416f9ab8900f8ed98fd71",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f05f9c92_d143c949",
+        "filename": "src/gn/ninja_target_writer.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 117,
+      "author": {
+        "id": 1000030
+      },
+      "writtenOn": "2024-02-21T06:13:55Z",
+      "side": 1,
+      "message": "```suggestion\n  // this target. Used to implement the --ide\u003dninja_outputs `gn gen`  flag.\n```",
+      "range": {
+        "startLine": 117,
+        "startChar": 61,
+        "endLine": 117,
+        "endChar": 67
+      },
+      "revId": "678ec5dd0fb1eaa9c30416f9ab8900f8ed98fd71",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    }
+  ]
+}
