@@ -24,6 +24,30 @@
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "7efdb20e_968af647",
+        "filename": "src/gn/invoke_python.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 1000067
+      },
+      "writtenOn": "2024-02-21T09:10:24Z",
+      "side": 1,
+      "message": "Good idea, done.",
+      "parentUuid": "b10ecaa0_d1bad14e",
+      "range": {
+        "startLine": 8,
+        "startChar": 0,
+        "endLine": 10,
+        "endChar": 19
+      },
+      "revId": "dd17a4f5e99e679a5ae1b8ad7a2e5d17e299730e",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "b4fc80c9_1b155811",
@@ -37,6 +61,30 @@
       "writtenOn": "2024-02-21T05:54:07Z",
       "side": 1,
       "message": "Include \u003cstring\u003e?",
+      "range": {
+        "startLine": 18,
+        "startChar": 29,
+        "endLine": 18,
+        "endChar": 35
+      },
+      "revId": "dd17a4f5e99e679a5ae1b8ad7a2e5d17e299730e",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "1a3f83e5_c312e0fe",
+        "filename": "src/gn/invoke_python.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 18,
+      "author": {
+        "id": 1000067
+      },
+      "writtenOn": "2024-02-21T09:10:24Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "b4fc80c9_1b155811",
       "range": {
         "startLine": 18,
         "startChar": 29,
