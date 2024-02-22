@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0bf841ab_7acd28e5",
+        "filename": "src/gn/command_gen.cc",
+        "patchSetId": 10
+      },
+      "lineNbr": 840,
+      "author": {
+        "id": 1000030
+      },
+      "writtenOn": "2024-02-22T06:10:18Z",
+      "side": 1,
+      "message": "Is it better to use StringPrintf?\n```suggestion\n      OutputString(base::StringPrintf(\n          \"Generating Ninja outputs file took %dms\\n\",\n          static_cast\u003cint\u003e(outputs_timer.Elapsed().InMilliseconds())));\n    }\n```",
+      "range": {
+        "startLine": 838,
+        "startChar": 10,
+        "endLine": 840,
+        "endChar": 16
+      },
+      "revId": "4b631836196b8efd9895bb97b0156c215ac74c55",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    }
+  ]
+}
