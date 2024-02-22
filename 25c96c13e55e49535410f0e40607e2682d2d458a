@@ -1,0 +1,73 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0094e3cd_34905cf7",
+        "filename": "src/gn/ninja_outputs_writer_unittest.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 27,
+      "author": {
+        "id": 1000030
+      },
+      "writtenOn": "2024-02-22T06:03:10Z",
+      "side": 1,
+      "message": "period?",
+      "range": {
+        "startLine": 27,
+        "startChar": 66,
+        "endLine": 27,
+        "endChar": 71
+      },
+      "revId": "25c96c13e55e49535410f0e40607e2682d2d458a",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7017297e_4c8d48de",
+        "filename": "src/gn/ninja_outputs_writer_unittest.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 29,
+      "author": {
+        "id": 1000030
+      },
+      "writtenOn": "2024-02-22T06:03:10Z",
+      "side": 1,
+      "message": "Which variable?",
+      "range": {
+        "startLine": 29,
+        "startChar": 9,
+        "endLine": 29,
+        "endChar": 13
+      },
+      "revId": "25c96c13e55e49535410f0e40607e2682d2d458a",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a003c6cf_65b482f6",
+        "filename": "src/gn/ninja_target_writer.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 93,
+      "author": {
+        "id": 1000030
+      },
+      "writtenOn": "2024-02-22T06:03:10Z",
+      "side": 1,
+      "message": "Is it better to use make_move_iterator?\n```suggestion\n    ninja_outputs_-\u003einsert(ninja_outputs_-\u003eend(),\n                           std::make_move_iterator(outputs.begin()),\n                           std::make_move_iterator(outputs.end()));\n```",
+      "range": {
+        "startLine": 92,
+        "startChar": 0,
+        "endLine": 93,
+        "endChar": 51
+      },
+      "revId": "25c96c13e55e49535410f0e40607e2682d2d458a",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    }
+  ]
+}
