@@ -1,6 +1,40 @@
 {
   "comments": [
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "cfdf3269_5b82f53c",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000012
+      },
+      "writtenOn": "2024-02-22T21:49:48Z",
+      "side": 1,
+      "message": "lgtm w/ one comment to be addressed.",
+      "revId": "25c96c13e55e49535410f0e40607e2682d2d458a",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "50f55163_0ae6722f",
+        "filename": "src/gn/ninja_outputs_writer.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 27,
+      "author": {
+        "id": 1000012
+      },
+      "writtenOn": "2024-02-22T21:49:48Z",
+      "side": 1,
+      "message": "This isn\u0027t being used, is it? I would imagine we only want to support JSON and let callers worry about converting to other representations.",
+      "revId": "25c96c13e55e49535410f0e40607e2682d2d458a",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "0094e3cd_34905cf7",
