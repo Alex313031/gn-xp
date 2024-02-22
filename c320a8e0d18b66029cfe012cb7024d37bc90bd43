@@ -36,6 +36,24 @@
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "c2000c9f_1619ed0d",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000012
+      },
+      "writtenOn": "2024-02-22T23:06:44Z",
+      "side": 1,
+      "message": "I have no strong preference either but if I had to vote I\u0027d probably pick the former.",
+      "parentUuid": "4ba6c62e_fbb48598",
+      "revId": "c320a8e0d18b66029cfe012cb7024d37bc90bd43",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "b8865c99_97efc719",
