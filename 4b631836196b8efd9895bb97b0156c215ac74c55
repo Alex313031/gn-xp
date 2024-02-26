@@ -18,6 +18,24 @@
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "21b844dd_db102a53",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 10
+      },
+      "lineNbr": 20,
+      "author": {
+        "id": 1000067
+      },
+      "writtenOn": "2024-02-26T15:27:06Z",
+      "side": 1,
+      "message": "Thanks. Fixed.\n\nNote that I don\u0027t need this processing feature myself, but I thought it might be useful for other people, since it is already implemented for the JSON IDE writer as well. I\u0027ll gladly remove it if you prefer.",
+      "parentUuid": "fe81e638_38121e0c",
+      "revId": "4b631836196b8efd9895bb97b0156c215ac74c55",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "0bf841ab_7acd28e5",
@@ -54,6 +72,48 @@
       "writtenOn": "2024-02-22T21:57:13Z",
       "side": 1,
       "message": "Do you really need this line? I wouldn\u0027t think this would be interesting in any but debug scenarios and for that we should be able to insert something into the trace log (which you don\u0027t seem to be doing but I think you should add), or at least only print something when `--time` is passed.",
+      "revId": "4b631836196b8efd9895bb97b0156c215ac74c55",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "55609966_192d6846",
+        "filename": "src/gn/command_gen.cc",
+        "patchSetId": 10
+      },
+      "lineNbr": 840,
+      "author": {
+        "id": 1000067
+      },
+      "writtenOn": "2024-02-26T15:27:06Z",
+      "side": 1,
+      "message": "Indeed, that\u0027s better thanks. I had just copied similar code from similar lines above in the same source file.",
+      "parentUuid": "0bf841ab_7acd28e5",
+      "range": {
+        "startLine": 838,
+        "startChar": 10,
+        "endLine": 840,
+        "endChar": 16
+      },
+      "revId": "4b631836196b8efd9895bb97b0156c215ac74c55",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "5bd6901a_4df1fde5",
+        "filename": "src/gn/command_gen.cc",
+        "patchSetId": 10
+      },
+      "lineNbr": 840,
+      "author": {
+        "id": 1000067
+      },
+      "writtenOn": "2024-02-26T15:27:06Z",
+      "side": 1,
+      "message": "All the other generators in this same source file dump this information unconditionally, so I thought it would be consistent to do the same here.\n\nMaking these conditional to `--time` or moving this to the trace log is an interesting idea, but let\u0027s address that in a different CL then.",
+      "parentUuid": "300cb698_2d19210f",
       "revId": "4b631836196b8efd9895bb97b0156c215ac74c55",
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
     }
