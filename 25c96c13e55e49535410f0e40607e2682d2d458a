@@ -35,6 +35,24 @@
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "c1943147_4b39b2e7",
+        "filename": "src/gn/ninja_outputs_writer.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 27,
+      "author": {
+        "id": 1000067
+      },
+      "writtenOn": "2024-02-26T11:39:44Z",
+      "side": 1,
+      "message": "Indeed, this comes from a previous prototype that could either output JSON or a tabular text file. The latter is no longer needed though. Thanks for spotting this, removed.",
+      "parentUuid": "50f55163_0ae6722f",
+      "revId": "25c96c13e55e49535410f0e40607e2682d2d458a",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "0094e3cd_34905cf7",
@@ -48,6 +66,30 @@
       "writtenOn": "2024-02-22T06:03:10Z",
       "side": 1,
       "message": "period?",
+      "range": {
+        "startLine": 27,
+        "startChar": 66,
+        "endLine": 27,
+        "endChar": 71
+      },
+      "revId": "25c96c13e55e49535410f0e40607e2682d2d458a",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ff1f838d_e413dd13",
+        "filename": "src/gn/ninja_outputs_writer_unittest.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 27,
+      "author": {
+        "id": 1000067
+      },
+      "writtenOn": "2024-02-26T11:39:44Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "0094e3cd_34905cf7",
       "range": {
         "startLine": 27,
         "startChar": 66,
@@ -81,6 +123,30 @@
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "5d04b3e7_787a7e5c",
+        "filename": "src/gn/ninja_outputs_writer_unittest.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 29,
+      "author": {
+        "id": 1000067
+      },
+      "writtenOn": "2024-02-26T11:39:44Z",
+      "side": 1,
+      "message": "This comment was obsolete and has been removed. Similarly, the one on line 27 has been updated.",
+      "parentUuid": "7017297e_4c8d48de",
+      "range": {
+        "startLine": 29,
+        "startChar": 9,
+        "endLine": 29,
+        "endChar": 13
+      },
+      "revId": "25c96c13e55e49535410f0e40607e2682d2d458a",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "a003c6cf_65b482f6",
@@ -94,6 +160,30 @@
       "writtenOn": "2024-02-22T06:03:10Z",
       "side": 1,
       "message": "Is it better to use make_move_iterator?\n```suggestion\n    ninja_outputs_-\u003einsert(ninja_outputs_-\u003eend(),\n                           std::make_move_iterator(outputs.begin()),\n                           std::make_move_iterator(outputs.end()));\n```",
+      "range": {
+        "startLine": 92,
+        "startChar": 0,
+        "endLine": 93,
+        "endChar": 51
+      },
+      "revId": "25c96c13e55e49535410f0e40607e2682d2d458a",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "2ac817b1_8b25dcf5",
+        "filename": "src/gn/ninja_target_writer.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 93,
+      "author": {
+        "id": 1000067
+      },
+      "writtenOn": "2024-02-26T11:39:44Z",
+      "side": 1,
+      "message": "In this specific case, I think the original code is smaller / simpler / easier to understand, and generates the same code, so I prefer to keep it as is.",
+      "parentUuid": "a003c6cf_65b482f6",
       "range": {
         "startLine": 92,
         "startChar": 0,
