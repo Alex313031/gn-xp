@@ -36,6 +36,24 @@
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "00d19d6b_5254f01e",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 10
+      },
+      "lineNbr": 20,
+      "author": {
+        "id": 1000012
+      },
+      "writtenOn": "2024-02-26T21:38:32Z",
+      "side": 1,
+      "message": "I think it\u0027s a good idea to offer this hook for any case where we\u0027re generating an additional file as part of `gn gen`; without it, it\u0027s hard to keep things up to date when Ninja wants to re-run gn gen.",
+      "parentUuid": "21b844dd_db102a53",
+      "revId": "4b631836196b8efd9895bb97b0156c215ac74c55",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "0bf841ab_7acd28e5",
@@ -114,6 +132,24 @@
       "side": 1,
       "message": "All the other generators in this same source file dump this information unconditionally, so I thought it would be consistent to do the same here.\n\nMaking these conditional to `--time` or moving this to the trace log is an interesting idea, but let\u0027s address that in a different CL then.",
       "parentUuid": "300cb698_2d19210f",
+      "revId": "4b631836196b8efd9895bb97b0156c215ac74c55",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a8ed0e64_b3f8fc63",
+        "filename": "src/gn/command_gen.cc",
+        "patchSetId": 10
+      },
+      "lineNbr": 840,
+      "author": {
+        "id": 1000012
+      },
+      "writtenOn": "2024-02-26T21:38:32Z",
+      "side": 1,
+      "message": "Ah, I thought I spot-checked that and it wasn\u0027t the case, but I\u0027ll take your word for it.",
+      "parentUuid": "5bd6901a_4df1fde5",
       "revId": "4b631836196b8efd9895bb97b0156c215ac74c55",
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
     }
