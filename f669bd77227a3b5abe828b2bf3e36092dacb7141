@@ -159,6 +159,24 @@
       "parentUuid": "e308f7d1_2e61084f",
       "revId": "f669bd77227a3b5abe828b2bf3e36092dacb7141",
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "66c4836a_f707a1e5",
+        "filename": "src/gn/function_label_matches.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 84,
+      "author": {
+        "id": 1000012
+      },
+      "writtenOn": "2024-02-27T23:41:48Z",
+      "side": 1,
+      "message": "Oh, sorry. I\u0027m not being helpful here. Put the two filter_labels* functions in function_filter_labels.{cc,h} and leave label_matches() in function_label_matches.{cc,h} and we can get on with things :).",
+      "parentUuid": "ae8ff3bc_8a795bf4",
+      "revId": "f669bd77227a3b5abe828b2bf3e36092dacb7141",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
     }
   ]
 }
