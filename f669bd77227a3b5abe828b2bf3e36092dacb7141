@@ -123,6 +123,24 @@
       "parentUuid": "2aa82702_43344073",
       "revId": "f669bd77227a3b5abe828b2bf3e36092dacb7141",
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e308f7d1_2e61084f",
+        "filename": "src/gn/function_label_matches.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 84,
+      "author": {
+        "id": 1000012
+      },
+      "writtenOn": "2024-02-27T22:56:32Z",
+      "side": 1,
+      "message": "Sorry, I should\u0027ve specified that. I was thinking you\u0027d leave label_matches() in function_label_matches.cc, and put the other two into the new file. That does have the downside that three fairly similar functions are not grouped together, so I\u0027m not sure if that\u0027s really better or worse.",
+      "parentUuid": "9f172821_99bf04ab",
+      "revId": "f669bd77227a3b5abe828b2bf3e36092dacb7141",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
     }
   ]
 }
