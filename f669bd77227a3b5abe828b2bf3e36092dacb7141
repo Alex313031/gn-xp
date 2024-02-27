@@ -69,6 +69,24 @@
       "parentUuid": "cbefdfa9_86ab268a",
       "revId": "f669bd77227a3b5abe828b2bf3e36092dacb7141",
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8b88d881_5db234e4",
+        "filename": "src/gn/function_label_matches.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 84,
+      "author": {
+        "id": 1000397
+      },
+      "writtenOn": "2024-02-27T20:19:50Z",
+      "side": 1,
+      "message": "I put them in here because they\u0027re special cases of the label_matches() function.  Although it could be viewed the other way around as well, so ::shrug::\n\nAnd I didn\u0027t use fuction_filter.cc because they are about filtering files...\n\nOTOH, it\u0027s not a big deal to move everything there (and not copy/paste the FilterSelection enum).\n\nI have no strong feelings on this.  If you want it moved, I\u0027ll move it.",
+      "parentUuid": "8fee66aa_eebb2a38",
+      "revId": "f669bd77227a3b5abe828b2bf3e36092dacb7141",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
     }
   ]
 }
