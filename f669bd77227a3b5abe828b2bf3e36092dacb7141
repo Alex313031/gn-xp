@@ -105,6 +105,24 @@
       "parentUuid": "8b88d881_5db234e4",
       "revId": "f669bd77227a3b5abe828b2bf3e36092dacb7141",
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9f172821_99bf04ab",
+        "filename": "src/gn/function_label_matches.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 84,
+      "author": {
+        "id": 1000397
+      },
+      "writtenOn": "2024-02-27T20:26:22Z",
+      "side": 1,
+      "message": "And split them out? or move `label_matches()` into it as well (just renaming `function_label_matches.{cc,h}`)",
+      "parentUuid": "2aa82702_43344073",
+      "revId": "f669bd77227a3b5abe828b2bf3e36092dacb7141",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
     }
   ]
 }
