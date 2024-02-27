@@ -51,6 +51,24 @@
       "message": "This is maybe my fault for suggesting the names, but I wonder if it\u0027s too confusing that filter* functions are in this file and not function_filter.cc ?",
       "revId": "f669bd77227a3b5abe828b2bf3e36092dacb7141",
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8fee66aa_eebb2a38",
+        "filename": "src/gn/function_label_matches.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 84,
+      "author": {
+        "id": 1000012
+      },
+      "writtenOn": "2024-02-27T01:32:19Z",
+      "side": 1,
+      "message": "(otherwise the code looks fine).",
+      "parentUuid": "cbefdfa9_86ab268a",
+      "revId": "f669bd77227a3b5abe828b2bf3e36092dacb7141",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
     }
   ]
 }
