@@ -50,6 +50,24 @@
       "message": "nit: can you move this variable definition out of the loop?",
       "revId": "61b67e62b232015e49b20a8fbfaab1d4166a4e74",
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f2bc7851_55ab8fd0",
+        "filename": "src/gn/swift_values.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 49,
+      "author": {
+        "id": 1000070
+      },
+      "writtenOn": "2024-02-27T15:54:33Z",
+      "side": 1,
+      "message": "Done.\n\nThough this line should only be reached once (as the function early return with an error if outputs contains more than one `.swiftmodule` file).",
+      "parentUuid": "f6fea3cf_bd0998d4",
+      "revId": "61b67e62b232015e49b20a8fbfaab1d4166a4e74",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
     }
   ]
 }
