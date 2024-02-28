@@ -16,6 +16,23 @@
       "message": "Hello, would you please take a look when you have a chance, thanks.",
       "revId": "207fc48ffc9d2e39c9de0de1b0bcf325861aa9bd",
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "17ad90a1_e52eda60",
+        "filename": "build/gen.py",
+        "patchSetId": 2
+      },
+      "lineNbr": 489,
+      "author": {
+        "id": 1000067
+      },
+      "writtenOn": "2024-02-28T16:38:16Z",
+      "side": 1,
+      "message": "This breaks the Clang Linux build, because that compiler does not support `-Wno-restrict`.\n\nThe `cxx \u003d\u003d \u0027clang++\u0027` is probably wrong anyway. It\u0027s probably better to define an `is_clang` boolean variable that would be set by probing the compiler (for example by invoking `$cxx --version` and looking for \u0027clang\u0027 on the first stdout line).\n\nAlternatively invoke `$cxx -dM -E -` with /dev/null for stdin, and grep for `__clang__` in the output.\n\nYou might also check the GCC version with  `__GNUC__` and `__GNUC_MINOR__`, which would gate the hack to the buggy GCC versions only.",
+      "revId": "207fc48ffc9d2e39c9de0de1b0bcf325861aa9bd",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
     }
   ]
 }
