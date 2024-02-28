@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "30036a8c_18bb8086",
+        "filename": "build/gen.py",
+        "patchSetId": 5
+      },
+      "lineNbr": 234,
+      "author": {
+        "id": 1000067
+      },
+      "writtenOn": "2024-02-28T18:41:27Z",
+      "side": 1,
+      "message": "- The value of `cxx` could be a space-separated string. Use f\u0027{cxx} --version\u0027 instead.\n\n- Do not use check_output() which will throw an exception if the default C++ compiler doesn\u0027t support `--version` for some reason.\n\n- This will not work, on my Linux machine the first line looks like `Debian clang version 16.0.6 (19)`. Use something like:\n\n```\ndef is_clang(cxx):\n    \"\"\"Return True iff the compiler at `cxx` is Clang based.\"\"\"\n    ret \u003d subprocess.run(f\u0027{cxx} --version\u0027, text\u003dTrue, capture_output\u003dTrue)\n    if ret.returncode !\u003d 0:\n        return False\n\n    return \"clang\" in ret.stdout\n```\n\nHowever, you are trying to address a GCC specific bug, it would be better to write an is_gcc(cxx) function instead, with proper logic.",
+      "revId": "3097f9f9b779d9b7fd3097ad5a99e675e5f9cda9",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    }
+  ]
+}
