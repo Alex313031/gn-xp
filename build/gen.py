@@ -229,6 +229,15 @@ def main(argv):
   return 0
 
 
+def is_gcc(cxx):
+  """Return True iff the compiler at `cxx` is GCC based."""
+  ret = subprocess.run(
+      f'{cxx} --version', shell=True, text=True, capture_output=True)
+  if ret.returncode != 0:
+    return False
+
+  return "GCC" in ret.stdout and "clang" not in ret.stdout
+
 def GenerateLastCommitPosition(host, header):
   ROOT_TAG = 'initial-commit'
   describe_output = subprocess.check_output(
@@ -480,11 +489,13 @@ def WriteGNNinja(path, platform, host, options, args_list):
         '-std=c++20'
     ])
 
-    # flags not supported by gcc/g++.
-    if cxx == 'clang++':
-      cflags.extend(['-Wrange-loop-analysis', '-Wextra-semi-stmt'])
-    else:
+    if is_gcc(cxx):
       cflags.append('-Wno-redundant-move')
+      # https://gcc.gnu.org/bugzilla/show_bug.cgi?id=104336
+      cflags.append('-Wno-restrict')
+    # flags not supported by gcc/g++.
+    else:
+      cflags.extend(['-Wrange-loop-analysis', '-Wextra-semi-stmt'])
 
     if platform.is_linux() or platform.is_mingw() or platform.is_msys():
       ldflags.append('-Wl,--as-needed')
