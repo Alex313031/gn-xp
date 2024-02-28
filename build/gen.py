@@ -485,6 +485,8 @@ def WriteGNNinja(path, platform, host, options, args_list):
       cflags.extend(['-Wrange-loop-analysis', '-Wextra-semi-stmt'])
     else:
       cflags.append('-Wno-redundant-move')
+      # https://gcc.gnu.org/bugzilla/show_bug.cgi?id=104336
+      cflags.append('-Wno-restrict')
 
     if platform.is_linux() or platform.is_mingw() or platform.is_msys():
       ldflags.append('-Wl,--as-needed')
