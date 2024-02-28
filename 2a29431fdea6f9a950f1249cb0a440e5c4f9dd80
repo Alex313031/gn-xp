@@ -34,6 +34,24 @@
       "parentUuid": "9f96cdb0_570a764c",
       "revId": "2a29431fdea6f9a950f1249cb0a440e5c4f9dd80",
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "440069b1_6e9a1945",
+        "filename": "build/gen.py",
+        "patchSetId": 4
+      },
+      "lineNbr": 108,
+      "author": {
+        "id": 1000842
+      },
+      "writtenOn": "2024-02-28T18:41:25Z",
+      "side": 1,
+      "message": "strange, I don\u0027t see this error on my environment with clang++",
+      "parentUuid": "1b5af85c_98ddc481",
+      "revId": "2a29431fdea6f9a950f1249cb0a440e5c4f9dd80",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
     }
   ]
 }
