@@ -229,6 +229,10 @@ def main(argv):
   return 0
 
 
+def is_clang(cxx):
+  compiler = subprocess.check_output([cxx] + ['--version'])
+  return compiler.startswith(b'clang')
+
 def GenerateLastCommitPosition(host, header):
   ROOT_TAG = 'initial-commit'
   describe_output = subprocess.check_output(
@@ -481,10 +485,12 @@ def WriteGNNinja(path, platform, host, options, args_list):
     ])
 
     # flags not supported by gcc/g++.
-    if cxx == 'clang++':
+    if is_clang(cxx):
       cflags.extend(['-Wrange-loop-analysis', '-Wextra-semi-stmt'])
     else:
       cflags.append('-Wno-redundant-move')
+      # https://gcc.gnu.org/bugzilla/show_bug.cgi?id=104336
+      cflags.append('-Wno-restrict')
 
     if platform.is_linux() or platform.is_mingw() or platform.is_msys():
       ldflags.append('-Wl,--as-needed')
