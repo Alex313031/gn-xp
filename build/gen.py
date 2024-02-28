@@ -103,6 +103,10 @@ class Platform(object):
   def is_serenity(self):
     return self_.platform == 'serenity'
 
+  def is_clang(self):
+    current_cpu = platform.processor()
+    return not self.is_linux() or (current_cpu != 'ppc64le' and current_cpu != 's390x')
+
 class ArgumentsList:
   """Helper class to accumulate ArgumentParser argument definitions
   and be able to regenerate a corresponding command-line to be
@@ -481,10 +485,12 @@ def WriteGNNinja(path, platform, host, options, args_list):
     ])
 
     # flags not supported by gcc/g++.
-    if cxx == 'clang++':
+    if platform.is_clang():
       cflags.extend(['-Wrange-loop-analysis', '-Wextra-semi-stmt'])
     else:
       cflags.append('-Wno-redundant-move')
+      # https://gcc.gnu.org/bugzilla/show_bug.cgi?id=104336
+      cflags.append('-Wno-restrict')
 
     if platform.is_linux() or platform.is_mingw() or platform.is_msys():
       ldflags.append('-Wl,--as-needed')
