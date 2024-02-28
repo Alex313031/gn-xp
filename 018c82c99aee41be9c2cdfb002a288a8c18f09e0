@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "42abf2b5_67948cf6",
+        "filename": "build/gen.py",
+        "patchSetId": 6
+      },
+      "lineNbr": 239,
+      "author": {
+        "id": 1000067
+      },
+      "writtenOn": "2024-02-28T23:27:12Z",
+      "side": 1,
+      "message": "This does not work, on my Debian machine:\n\n```\n$ c++ --version\nc++ (Debian 13.2.0-5) 13.2.0\nCopyright (C) 2023 Free Software Foundation, Inc.\nThis is free software; see the source for copying conditions.  There is NO\nwarranty; not even for MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.\n```\n\n```\n$ g++ --version\ng++ (Debian 13.2.0-5) 13.2.0\nCopyright (C) 2023 Free Software Foundation, Inc.\nThis is free software; see the source for copying conditions.  There is NO\nwarranty; not even for MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.\n```\n\nThe only reliable way is to look at the `echo | ${cxx} -dM -E -`  output, and look for `#define __GNUC__` without a `#define __clang__` (because Clang defines __GNUC__ as well for compatibility reasons, but with a fixed major/minor version number).\n\nI.e. do something like:\n\n```\nret \u003d subprocess.run(f\u0027{cxx} -dM -E -\u0027, shell\u003dTrue, stdin\u003dsubprocess.DEVNULL, text\u003dTrue, capture_output\u003dTrue)\n\nreturn ret.returncode \u003d\u003d 0 and \"#define __GNUC__\" in ret.stdout and not \"#define __clang__\" in ret.stdout\n```",
+      "revId": "018c82c99aee41be9c2cdfb002a288a8c18f09e0",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    }
+  ]
+}
