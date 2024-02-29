@@ -34,6 +34,24 @@
       "parentUuid": "3a242c69_667db4ec",
       "revId": "f982adf6e42f0f714adde84cd811e014f6a18658",
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "3bae979a_410f4699",
+        "filename": "build/gen.py",
+        "patchSetId": 7
+      },
+      "lineNbr": 497,
+      "author": {
+        "id": 1000067
+      },
+      "writtenOn": "2024-02-29T15:01:13Z",
+      "side": 1,
+      "message": "oh sorry, I misread your latest patch. LGTM",
+      "parentUuid": "ac0a6852_93f260fe",
+      "revId": "f982adf6e42f0f714adde84cd811e014f6a18658",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
     }
   ]
 }
