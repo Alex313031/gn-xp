@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3a242c69_667db4ec",
+        "filename": "build/gen.py",
+        "patchSetId": 7
+      },
+      "lineNbr": 497,
+      "author": {
+        "id": 1000067
+      },
+      "writtenOn": "2024-02-29T09:04:08Z",
+      "side": 1,
+      "message": "now please update this line to use the `is_gcc()` function.\n\n```suggestion\n      if is_gcc(cxx):\n        cflags.append(\u0027-Wno-restrict\u0027)\n```",
+      "revId": "f982adf6e42f0f714adde84cd811e014f6a18658",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    }
+  ]
+}
