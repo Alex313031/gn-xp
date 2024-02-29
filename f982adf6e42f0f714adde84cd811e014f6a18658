@@ -16,6 +16,24 @@
       "message": "now please update this line to use the `is_gcc()` function.\n\n```suggestion\n      if is_gcc(cxx):\n        cflags.append(\u0027-Wno-restrict\u0027)\n```",
       "revId": "f982adf6e42f0f714adde84cd811e014f6a18658",
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ac0a6852_93f260fe",
+        "filename": "build/gen.py",
+        "patchSetId": 7
+      },
+      "lineNbr": 497,
+      "author": {
+        "id": 1000842
+      },
+      "writtenOn": "2024-02-29T12:23:27Z",
+      "side": 1,
+      "message": "isn\u0027t `is_gcc(cxx):` on line 494 already covering it?",
+      "parentUuid": "3a242c69_667db4ec",
+      "revId": "f982adf6e42f0f714adde84cd811e014f6a18658",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
     }
   ]
 }
