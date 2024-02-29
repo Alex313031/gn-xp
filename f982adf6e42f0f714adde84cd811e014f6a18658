@@ -52,6 +52,24 @@
       "parentUuid": "ac0a6852_93f260fe",
       "revId": "f982adf6e42f0f714adde84cd811e014f6a18658",
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "739ed0f1_4e917db3",
+        "filename": "build/gen.py",
+        "patchSetId": 7
+      },
+      "lineNbr": 497,
+      "author": {
+        "id": 1000842
+      },
+      "writtenOn": "2024-02-29T15:08:35Z",
+      "side": 1,
+      "message": "Thanks for reviewing, would you mind landing it as well, I don\u0027t have commit privileges in this repo.",
+      "parentUuid": "3bae979a_410f4699",
+      "revId": "f982adf6e42f0f714adde84cd811e014f6a18658",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
     }
   ]
 }
