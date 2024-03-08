@@ -50,6 +50,41 @@
       "message": "Hmm, why it failed on mac bot?",
       "revId": "627afe7b96e3704b81561e647e2f36740923a6aa",
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "dd5f55d5_a7b3fb1c",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000070
+      },
+      "writtenOn": "2024-03-08T10:00:33Z",
+      "side": 1,
+      "message": "```\n../src/gn/swift_values.cc:70:27: error: no member named \u0027ranges\u0027 in namespace \u0027std\u0027\n   70 |   const auto range \u003d std::ranges::remove_if(\n      |                      ~~~~~^\n```\n\nI think this is because the compiler used on mac may be an older version than on my machine and may not support all of c++20. I\u0027ve removed the use of `std::ranges::remove_if(...)` (and replaced it with `std::remove_if(...)` with explicit begin/end).",
+      "parentUuid": "fd9d4bda_e1167d35",
+      "revId": "627afe7b96e3704b81561e647e2f36740923a6aa",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a41eb99c_03443571",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000070
+      },
+      "writtenOn": "2024-03-08T10:00:33Z",
+      "side": 1,
+      "message": "Please take another look.",
+      "revId": "627afe7b96e3704b81561e647e2f36740923a6aa",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
     }
   ]
 }
