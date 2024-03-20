@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c8b26776_f7730db2",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000067
+      },
+      "writtenOn": "2024-03-20T17:25:02Z",
+      "side": 1,
+      "message": "Please add some unit tests and I\u0027ll +2 the change.\n\nYou may also need to update the manual since you are changing GN\u0027s behavior.",
+      "revId": "53c318d836b6895c7db2980a890aff1c314476f1",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "63db8858_797500aa",
+        "filename": "src/gn/bundle_data.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 48,
+      "author": {
+        "id": 1000067
+      },
+      "writtenOn": "2024-03-20T17:25:02Z",
+      "side": 1,
+      "message": "You don\u0027t hav eto use std::optional\u003c\u003e here. A default constructed SourceFile is empty, and its is_null() will return true.",
+      "revId": "53c318d836b6895c7db2980a890aff1c314476f1",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    }
+  ]
+}
