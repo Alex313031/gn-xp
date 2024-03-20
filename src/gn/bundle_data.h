@@ -6,6 +6,7 @@
 #define TOOLS_GN_BUNDLE_DATA_H_
 
 #include <map>
+#include <optional>
 #include <string>
 #include <vector>
 
@@ -31,6 +32,21 @@ class BundleData {
 
   BundleData();
   ~BundleData();
+
+  // Return the assets catalog directory path from `source` as a SourceFile,
+  // if present, or a null instance (in case assets catalog are nested, this
+  // returns the outer most path).
+  //
+  // Example:
+  //  "//my/bundle/foo.xcassets/my/file"
+  //    -> "//my/bundle/foo.xcassets"
+  //  "//my/bundle/foo.xcassets/nested/bar.xcassets/my/file"
+  //    -> "//my/bundle/foo.xcassets"
+  //  "//my/bundle/my/file"
+  //    -> null
+  //
+  static std::optional<SourceFile> GetAssetsCatalogDirectory(
+      const SourceFile& source);
 
   // Adds a bundle_data target to the recursive collection of all bundle_data
   // that the target depends on.

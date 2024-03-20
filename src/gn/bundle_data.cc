@@ -13,48 +13,28 @@
 #include "gn/substitution_writer.h"
 #include "gn/target.h"
 
-namespace {
-
-// Return directory of |path| without the trailing directory separator.
-std::string_view FindDirNoTrailingSeparator(std::string_view path) {
-  std::string_view::size_type pos = path.find_last_of("/\\");
-  if (pos == std::string_view::npos)
-    return std::string_view();
-  return std::string_view(path.data(), pos);
-}
-
-bool IsSourceFileFromAssetsCatalog(std::string_view source,
-                                   SourceFile* asset_catalog) {
-  // Check whether |source| matches one of the following pattern:
-  //    .*\.xcassets/Contents.json
-  //    .*\.xcassets/[^/]*\.appiconset/[^/]*
-  //    .*\.xcassets/[^/]*\.colorset/[^/]*
-  //    .*\.xcassets/[^/]*\.dataset/[^/]*
-  //    .*\.xcassets/[^/]*\.imageset/[^/]*
-  //    .*\.xcassets/[^/]*\.launchimage/[^/]*
-  //    .*\.xcassets/[^/]*\.symbolset/[^/]*
-  bool is_file_from_asset_catalog = false;
-  std::string_view dir = FindDirNoTrailingSeparator(source);
-  if (source.ends_with("/Contents.json") && dir.ends_with(".xcassets")) {
-    is_file_from_asset_catalog = true;
-  } else if (dir.ends_with(".appiconset") || dir.ends_with(".colorset") ||
-             dir.ends_with(".dataset") || dir.ends_with(".imageset") ||
-             dir.ends_with(".launchimage") || dir.ends_with(".symbolset")) {
-    dir = FindDirNoTrailingSeparator(dir);
-    is_file_from_asset_catalog = dir.ends_with(".xcassets");
-  }
-  if (is_file_from_asset_catalog && asset_catalog) {
-    std::string asset_catalog_path(dir);
-    *asset_catalog = SourceFile(std::move(asset_catalog_path));
-  }
-  return is_file_from_asset_catalog;
-}
-
-}  // namespace
-
 BundleData::BundleData() = default;
 
 BundleData::~BundleData() = default;
+
+std::optional<SourceFile> BundleData::GetAssetsCatalogDirectory(
+    const SourceFile& source) {
+  std::optional<SourceFile> assets_catalog;
+  std::string_view path = source.value();
+  while (!path.empty()) {
+    if (path.ends_with(".xcassets")) {
+      assets_catalog = SourceFile(path);
+    }
+
+    const auto sep = path.find_last_of("/\\");
+    if (sep == std::string_view::npos) {
+      break;
+    }
+
+    path = path.substr(0, sep);
+  }
+  return assets_catalog;
+}
 
 void BundleData::AddBundleData(const Target* target, bool is_create_bundle) {
   DCHECK_EQ(target->output_type(), Target::BUNDLE_DATA);
@@ -89,9 +69,10 @@ void BundleData::OnTargetResolved(Target* owning_target) {
   for (const Target* target : bundle_deps_) {
     SourceFiles file_rule_sources;
     for (const SourceFile& source_file : target->sources()) {
-      SourceFile assets_catalog;
-      if (IsSourceFileFromAssetsCatalog(source_file.value(), &assets_catalog)) {
-        assets_catalog_sources.push_back(assets_catalog);
+      std::optional<SourceFile> assets_catalog =
+          GetAssetsCatalogDirectory(source_file);
+      if (assets_catalog.has_value()) {
+        assets_catalog_sources.push_back(assets_catalog.value());
         assets_catalog_deps.push_back(target);
       } else {
         file_rule_sources.push_back(source_file);
