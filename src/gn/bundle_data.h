@@ -6,6 +6,7 @@
 #define TOOLS_GN_BUNDLE_DATA_H_
 
 #include <map>
+#include <optional>
 #include <string>
 #include <vector>
 
@@ -20,6 +21,10 @@ class LabelPattern;
 class OutputFile;
 class Settings;
 class Target;
+
+// Returns the asset catalog containing `source` or `std::nullopt` if the
+// file is not part of an asset catalog.
+std::optional<SourceFile> ContainingAssetCatalog(const SourceFile& source);
 
 // BundleData holds the information required by "create_bundle" target.
 class BundleData {
