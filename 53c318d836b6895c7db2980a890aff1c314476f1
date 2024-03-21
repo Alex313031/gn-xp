@@ -35,6 +35,42 @@
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "00e46b65_c107d7ab",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000070
+      },
+      "writtenOn": "2024-03-21T10:17:10Z",
+      "side": 1,
+      "message": "Ooops. I forgot to `git add src/gn/bundle_data_unittest.cc`. Fixed.",
+      "parentUuid": "991f54fb_05db1e30",
+      "revId": "53c318d836b6895c7db2980a890aff1c314476f1",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b4570c0e_1b86c26b",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000070
+      },
+      "writtenOn": "2024-03-21T10:17:10Z",
+      "side": 1,
+      "message": "I forgot to `git add src/gn/bundle_data_unittest.cc`. I\u0027ve also updated other tests that listed assets catalog to add more file that didn\u0027t match the old pattern but match the new one.\n\nI\u0027ve updated the documentation of `bundle_data` and `compile_xcassets` to explain how the files are found (the behaviour was not explicited before).",
+      "parentUuid": "c8b26776_f7730db2",
+      "revId": "53c318d836b6895c7db2980a890aff1c314476f1",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "63db8858_797500aa",
@@ -48,6 +84,24 @@
       "writtenOn": "2024-03-20T17:25:02Z",
       "side": 1,
       "message": "You don\u0027t hav eto use std::optional\u003c\u003e here. A default constructed SourceFile is empty, and its is_null() will return true.",
+      "revId": "53c318d836b6895c7db2980a890aff1c314476f1",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ca54936f_2a8e7186",
+        "filename": "src/gn/bundle_data.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 48,
+      "author": {
+        "id": 1000070
+      },
+      "writtenOn": "2024-03-21T10:17:10Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "63db8858_797500aa",
       "revId": "53c318d836b6895c7db2980a890aff1c314476f1",
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
     }
