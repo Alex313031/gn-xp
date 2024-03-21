@@ -81,7 +81,7 @@ TEST(NinjaCreateBundleTargetWriter, Run) {
       "../../foo/input1.txt || obj/baz/bar.inputdeps.stamp\n"
       "build bar.bundle/Contents/Resources/input2.txt: copy_bundle_data "
       "../../foo/input2.txt || obj/baz/bar.inputdeps.stamp\n"
-      "build obj/baz/bar.stamp: stamp "
+      "build obj/baz/bar.stamp: phony "
       "bar.bundle/Contents/Resources/input1.txt "
       "bar.bundle/Contents/Resources/input2.txt"
       " || obj/baz/bar.inputdeps.stamp\n"
@@ -130,7 +130,7 @@ TEST(NinjaCreateBundleTargetWriter, InSubDirectory) {
       "../../foo/input1.txt || obj/baz/bar.inputdeps.stamp\n"
       "build gen/bar.bundle/Contents/Resources/input2.txt: copy_bundle_data "
       "../../foo/input2.txt || obj/baz/bar.inputdeps.stamp\n"
-      "build obj/baz/bar.stamp: stamp "
+      "build obj/baz/bar.stamp: phony "
       "gen/bar.bundle/Contents/Resources/input1.txt "
       "gen/bar.bundle/Contents/Resources/input2.txt || "
       "obj/baz/bar.inputdeps.stamp\n"
@@ -166,7 +166,7 @@ TEST(NinjaCreateBundleTargetWriter, JustPartialInfoPlist) {
 
   const char expected[] =
       "build baz/bar/bar_partial_info.plist: stamp || obj/foo/bar.stamp\n"
-      "build obj/baz/bar.stamp: stamp "
+      "build obj/baz/bar.stamp: phony "
       "baz/bar/bar_partial_info.plist || obj/foo/bar.stamp\n"
       "build bar.bundle: phony obj/baz/bar.stamp\n";
   std::string out_str = out.str();
@@ -236,7 +236,7 @@ TEST(NinjaCreateBundleTargetWriter, AssetCatalog) {
       "obj/baz/bar.inputdeps.stamp\n"
       "  product_type = com.apple.product-type\n"
       "  xcasset_compiler_flags = --app-icon foo\n"
-      "build obj/baz/bar.stamp: stamp "
+      "build obj/baz/bar.stamp: phony "
       "bar.bundle/Contents/Resources/Assets.car || "
       "obj/baz/bar.inputdeps.stamp\n"
       "build bar.bundle: phony obj/baz/bar.stamp\n";
@@ -264,7 +264,7 @@ TEST(NinjaCreateBundleTargetWriter, PhonyTarget) {
   writer.Run();
 
   const char expected[] =
-      "build obj/baz/bar.stamp: stamp\n"
+      "build obj/baz/bar.stamp: phony\n"
       "build bar.bundle: phony obj/baz/bar.stamp\n";
   std::string out_str = out.str();
   EXPECT_EQ(expected, out_str);
@@ -403,7 +403,7 @@ TEST(NinjaCreateBundleTargetWriter, Complex) {
       "obj/baz/bar.inputdeps.stamp\n"
       "  product_type = com.apple.product-type\n"
       "  partial_info_plist = baz/bar/bar_partial_info.plist\n"
-      "build obj/baz/bar.stamp: stamp "
+      "build obj/baz/bar.stamp: phony "
       "bar.bundle/Contents/Info.plist "
       "bar.bundle/Contents/Resources/input1.txt "
       "bar.bundle/Contents/Resources/input2.txt "
@@ -486,7 +486,7 @@ TEST(NinjaCreateBundleTargetWriter, CodeSigning) {
       "build bar.bundle/Contents/quz bar.bundle/_CodeSignature/CodeResources: "
       "__baz_bar___toolchain_default__code_signing_rule "
       "| obj/baz/bar.codesigning.inputdeps.stamp\n"
-      "build obj/baz/bar.stamp: stamp "
+      "build obj/baz/bar.stamp: phony "
       "bar.bundle/Contents/quz "
       "bar.bundle/_CodeSignature/CodeResources || obj/baz/bar.inputdeps.stamp\n"
       "build bar.bundle: phony obj/baz/bar.stamp\n";

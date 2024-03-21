@@ -49,7 +49,7 @@ TEST_F(NinjaBinaryTargetWriterTest, CSources) {
       "  source_file_part = input2.cc\n"
       "  source_name_part = input2\n"
       "\n"
-      "build obj/foo/bar.stamp: stamp obj/foo/bar.input1.o "
+      "build obj/foo/bar.stamp: phony obj/foo/bar.input1.o "
       "obj/foo/bar.input2.o ../../foo/input3.o ../../foo/input4.obj\n";
   std::string out_str = out.str();
   EXPECT_EQ(expected, out_str);
@@ -78,7 +78,7 @@ TEST_F(NinjaBinaryTargetWriterTest, NoSourcesSourceSet) {
       "target_output_name = bar\n"
       "\n"
       "\n"
-      "build obj/foo/bar.stamp: stamp\n";
+      "build obj/foo/bar.stamp: phony\n";
   std::string out_str = out.str();
   EXPECT_EQ(expected, out_str);
 }
@@ -148,7 +148,7 @@ TEST_F(NinjaBinaryTargetWriterTest, Inputs) {
         "  source_file_part = source1.cc\n"
         "  source_name_part = source1\n"
         "\n"
-        "build obj/foo/bar.stamp: stamp obj/foo/bar.source1.o\n";
+        "build obj/foo/bar.stamp: phony obj/foo/bar.source1.o\n";
     std::string out_str = out.str();
     EXPECT_EQ(expected, out_str) << expected << "\n" << out_str;
   }
@@ -190,7 +190,7 @@ TEST_F(NinjaBinaryTargetWriterTest, Inputs) {
         "  source_file_part = source2.cc\n"
         "  source_name_part = source2\n"
         "\n"
-        "build obj/foo/bar.stamp: stamp obj/foo/bar.source1.o "
+        "build obj/foo/bar.stamp: phony obj/foo/bar.source1.o "
         "obj/foo/bar.source2.o\n";
     std::string out_str = out.str();
     EXPECT_EQ(expected, out_str) << expected << "\n" << out_str;

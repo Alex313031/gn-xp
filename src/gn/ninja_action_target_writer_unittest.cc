@@ -68,7 +68,7 @@ TEST(NinjaActionTargetWriter, ActionNoSources) {
 
 build foo.out: __foo___bar___rule | ../../foo++/script.py ../../foo++/included.txt
 
-build obj/foo++/bar.stamp: stamp foo.out
+build obj/foo++/bar.stamp: phony foo.out
 )";
   EXPECT_EQ(expected, out.str()) << expected << "--" << out.str();
 }
@@ -113,7 +113,7 @@ TEST(NinjaActionTargetWriter, ActionNoSourcesConsole) {
 build foo.out: __foo_bar___rule | ../../foo/script.py ../../foo/included.txt
   pool = console
 
-build obj/foo/bar.stamp: stamp foo.out
+build obj/foo/bar.stamp: phony foo.out
 )";
   EXPECT_EQ(expected, out.str());
 }
@@ -154,7 +154,7 @@ TEST(NinjaActionTargetWriter, ActionWithSources) {
       "build foo.out: __foo_bar___rule | ../../foo/script.py "
       "../../foo/included.txt ../../foo/source.txt\n"
       "\n"
-      "build obj/foo/bar.stamp: stamp foo.out\n";
+      "build obj/foo/bar.stamp: phony foo.out\n";
   EXPECT_EQ(expected_linux, out.str());
 }
 
@@ -212,7 +212,7 @@ TEST(NinjaActionTargetWriter, ActionWithOrderOnlyDeps) {
       "../../foo/included.txt ../../foo/source.txt obj/foo/dep.stamp || "
       "obj/foo/datadep.stamp\n"
       "\n"
-      "build obj/foo/bar.stamp: stamp foo.out\n";
+      "build obj/foo/bar.stamp: phony foo.out\n";
 
   EXPECT_EQ(expected, out.str());
 }
@@ -297,7 +297,7 @@ TEST(NinjaActionTargetWriter, ForEach) {
       "  source_name_part = input2\n"
       "\n"
       "build obj/foo/bar.stamp: "
-      "stamp input1.out input2.out\n";
+      "phony input1.out input2.out\n";
 
   std::string out_str = out.str();
 #if defined(OS_WIN)
@@ -365,7 +365,7 @@ TEST(NinjaActionTargetWriter, ForEachWithDepfile) {
       "  depfile = gen/input2.d\n"
       "  deps = gcc\n"
       "\n"
-      "build obj/foo/bar.stamp: stamp input1.out input2.out\n";
+      "build obj/foo/bar.stamp: phony input1.out input2.out\n";
   EXPECT_EQ(expected_linux, out.str());
 }
 
@@ -419,7 +419,7 @@ TEST(NinjaActionTargetWriter, ForEachWithResponseFile) {
       // Substitution for the rspfile contents.
       "  source_name_part = input1\n"
       "\n"
-      "build obj/foo/bar.stamp: stamp input1.out\n";
+      "build obj/foo/bar.stamp: phony input1.out\n";
   EXPECT_EQ(expected_linux, out.str());
 }
 
@@ -470,7 +470,7 @@ TEST(NinjaActionTargetWriter, ForEachWithPool) {
       "  source_file_part = input1.txt\n"
       "  pool = foo_pool\n"
       "\n"
-      "build obj/foo/bar.stamp: stamp input1.out\n";
+      "build obj/foo/bar.stamp: phony input1.out\n";
   EXPECT_EQ(expected_linux, out.str());
 }
 
@@ -513,7 +513,7 @@ TEST(NinjaActionTargetWriter, NoTransitiveHardDeps) {
         "build foo.out: __foo_foo___rule | ../../foo/script.py"
         " ../../foo/input1.txt obj/foo/dep.stamp\n"
         "\n"
-        "build obj/foo/foo.stamp: stamp foo.out\n";
+        "build obj/foo/foo.stamp: phony foo.out\n";
     EXPECT_EQ(expected_linux, out.str());
   }
 
@@ -543,7 +543,7 @@ TEST(NinjaActionTargetWriter, NoTransitiveHardDeps) {
         "build bar.out: __bar_bar___rule | ../../bar/script.py"
         " ../../bar/input1.txt obj/foo/foo.stamp\n"
         "\n"
-        "build obj/bar/bar.stamp: stamp bar.out\n";
+        "build obj/bar/bar.stamp: phony bar.out\n";
     EXPECT_EQ(expected_linux, out.str());
   }
 }
@@ -602,7 +602,7 @@ TEST(NinjaActionTargetWriter, SeesConfig) {
         "  include_dirs = -I../../my_inc_dir\n"
         "  cflags = -isysroot=baz\n"
         "\n"
-        "build obj/foo/foo.stamp: stamp foo.out\n";
+        "build obj/foo/foo.stamp: phony foo.out\n";
     std::string out_str = out.str();
     EXPECT_EQ(expected, out_str) << expected << "\n" << out_str;
   }
@@ -649,7 +649,7 @@ TEST(NinjaActionTargetWriter, ActionWithSpaces) {
 
 build foo.out: __foo_bar___rule | ../../foo/my$ script.py ../../foo/input$ file.txt
 
-build obj/foo/bar.stamp: stamp foo.out
+build obj/foo/bar.stamp: phony foo.out
 )";
   EXPECT_EQ(expected, out.str()) << expected << "--" << out.str();
 }
