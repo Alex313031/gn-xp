@@ -49,7 +49,7 @@ bool EnsureToolAvailable(const Target* target, const char* tool) {
 bool EnsureAllToolsAvailable(const Target* target) {
   const char* kRequiredTools[] = {
       GeneralTool::kGeneralToolCopyBundleData,
-      GeneralTool::kGeneralToolStamp,  // For WriteInputDepsStampAndGetDep.
+      GeneralTool::kGeneralToolStamp,  // To create empty partial Info.plist.
   };
 
   for (const char* tool : kRequiredTools) {
@@ -215,7 +215,8 @@ void NinjaCreateBundleTargetWriter::WriteCompileAssetsCatalogStep(
 
     out_ << "build ";
     WriteOutput(partial_info_plist);
-    out_ << ": " << BuiltinTool::kBuiltinToolPhony;
+    out_ << ": " << GetNinjaRulePrefixForToolchain(settings_)
+         << GeneralTool::kGeneralToolStamp;
     if (!order_only_deps.empty()) {
       out_ << " ||";
       path_output_.WriteFiles(out_, order_only_deps);

@@ -8,6 +8,7 @@
 
 #include "base/files/file_util.h"
 #include "base/strings/string_util.h"
+#include "gn/builtin_tool.h"
 #include "gn/c_substitution_type.h"
 #include "gn/config_values_extractors.h"
 #include "gn/err.h"
@@ -574,8 +575,7 @@ void NinjaTargetWriter::WriteStampForTarget(
   out_ << "build ";
   WriteOutput(std::move(stamp_file));
 
-  out_ << ": " << GetNinjaRulePrefixForToolchain(settings_)
-       << GeneralTool::kGeneralToolStamp;
+  out_ << ": " << BuiltinTool::kBuiltinToolPhony;
   path_output_.WriteFiles(out_, files);
 
   if (!order_only_deps.empty()) {

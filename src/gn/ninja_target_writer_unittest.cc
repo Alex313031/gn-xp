@@ -149,7 +149,7 @@ TEST(NinjaTargetWriter, WriteInputDepsStampAndGetDep) {
         "build: __foo_action___rule | ../../foo/script.py"
         " ../../foo/action_source.txt ./target\n"
         "\n"
-        "build obj/foo/action.stamp: stamp\n",
+        "build obj/foo/action.stamp: phony\n",
         stream.str());
   }
 
