@@ -16,6 +16,40 @@
       "message": "Please take another look.",
       "revId": "cce96f61685f4219570309387b642b7994a13543",
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a89340a1_cf301209",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000067
+      },
+      "writtenOn": "2024-03-21T10:20:58Z",
+      "side": 1,
+      "message": "Thanks, very nice!",
+      "revId": "cce96f61685f4219570309387b642b7994a13543",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8919516a_2fe14b89",
+        "filename": "src/gn/bundle_data.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 1000067
+      },
+      "writtenOn": "2024-03-21T10:20:58Z",
+      "side": 1,
+      "message": "nit: no longer needed :)",
+      "revId": "cce96f61685f4219570309387b642b7994a13543",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
     }
   ]
 }
