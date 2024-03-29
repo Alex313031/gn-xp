@@ -385,21 +385,27 @@ const char kCreateBundle_Help[] =
   placed in the bundle. A create_bundle can declare its own explicit data and
   data_deps, however.
 
-Code signing
+Post-processing
 
-  Some bundle needs to be code signed as part of the build (on iOS all
-  application needs to be code signed to run on a device). The code signature
-  can be configured via the code_signing_script variable.
+  Some bundle needs to be post-processed as part of the build (e.g. on iOS all
+  application needs to be code signed to run on a device). The post processing
+  step can be configured via the post_processing_script variable.
 
-  If set, code_signing_script is the path of a script that invoked after all
-  files have been moved into the bundle. The script must not change any file in
-  the bundle, but may add new files.
+  If set, `post_processing_script` is the path of a script that invoked after
+  all files have been moved into the bundle. The script must not change any file
+  in the bundle, but may add new files.
 
-  If code_signing_script is defined, then code_signing_outputs must also be
-  defined and non-empty to inform when the script needs to be re-run. The
-  code_signing_args will be passed as is to the script (so path have to be
-  rebased) and additional inputs may be listed with the variable
-  code_signing_sources.
+  If `post_processing_script` is defined, then `post_processing_outputs` must
+  be defined and non-empty to inform when the script needs to be re-run. The
+  `post_processing_args` will be passed as is to the script (so path have to be
+  rebased) and additional inputs may be listed via `post_processing_sources`.
+
+Migration
+
+  The post-processing step used to be limited to code-signing. The variables
+  used to be named `code_signing_$var` instead of `post_processing_$var`. The
+  old names are still accepted as alias to facilitate migration but a warning
+  will be emitted and the alias eventually be removed.
 
 Variables
 
@@ -407,8 +413,8 @@ Variables
 
     R"(  Bundle vars: bundle_root_dir, bundle_contents_dir, bundle_resources_dir,
                bundle_executable_dir, bundle_deps_filter, product_type,
-               code_signing_args, code_signing_script, code_signing_sources,
-               code_signing_outputs, xcode_extra_attributes,
+               post_processing_args, post_processing_script, post_processing_sources,
+               post_processing_outputs, xcode_extra_attributes,
                xcode_test_application_name, partial_info_plist
 
 Example
@@ -448,10 +454,10 @@ Example
             rebase_path("$gen_path/$app_name", root_build_dir)
       }
 
-      code_signing =
-          defined(invoker.code_signing) && invoker.code_signing
+      post_processing =
+          defined(invoker.post_processing) && invoker.post_processing
 
-      if (!is_ios || !code_signing) {
+      if (!is_ios || !post_processing) {
         bundle_data("${app_name}_bundle_executable") {
           public_deps = [ ":${app_name}_generate_executable" ]
           sources = [ "$gen_path/$app_name" ]
@@ -479,21 +485,21 @@ Example
           bundle_executable_dir = "$bundle_contents_dir/MacOS"
         }
         deps = [ ":${app_name}_bundle_info_plist" ]
-        if (is_ios && code_signing) {
+        if (is_ios && post_processing) {
           deps += [ ":${app_name}_generate_executable" ]
-          code_signing_script = "//build/config/ios/codesign.py"
-          code_signing_sources = [
+          post_processing_script = "//build/config/ios/codesign.py"
+          post_processing_sources = [
             invoker.entitlements_path,
             "$target_gen_dir/$app_name",
           ]
-          code_signing_outputs = [
+          post_processing_outputs = [
             "$bundle_root_dir/$app_name",
             "$bundle_root_dir/_CodeSignature/CodeResources",
             "$bundle_root_dir/embedded.mobileprovision",
             "$target_gen_dir/$app_name.xcent",
           ]
-          code_signing_args = [
-            "-i=" + ios_code_signing_identity,
+          post_processing_args = [
+            "-i=" + ios_post_processing_identity,
             "-b=" + rebase_path(
                 "$target_gen_dir/$app_name", root_build_dir),
             "-e=" + rebase_path(
