@@ -158,21 +158,21 @@ extern const char kCheckIncludes[];
 extern const char kCheckIncludes_HelpShort[];
 extern const char kCheckIncludes_Help[];
 
-extern const char kCodeSigningArgs[];
-extern const char kCodeSigningArgs_HelpShort[];
-extern const char kCodeSigningArgs_Help[];
+extern const char kPostProcessingArgs[];
+extern const char kPostProcessingArgs_HelpShort[];
+extern const char kPostProcessingArgs_Help[];
 
-extern const char kCodeSigningScript[];
-extern const char kCodeSigningScript_HelpShort[];
-extern const char kCodeSigningScript_Help[];
+extern const char kPostProcessingScript[];
+extern const char kPostProcessingScript_HelpShort[];
+extern const char kPostProcessingScript_Help[];
 
-extern const char kCodeSigningSources[];
-extern const char kCodeSigningSources_HelpShort[];
-extern const char kCodeSigningSources_Help[];
+extern const char kPostProcessingSources[];
+extern const char kPostProcessingSources_HelpShort[];
+extern const char kPostProcessingSources_Help[];
 
-extern const char kCodeSigningOutputs[];
-extern const char kCodeSigningOutputs_HelpShort[];
-extern const char kCodeSigningOutputs_Help[];
+extern const char kPostProcessingOutputs[];
+extern const char kPostProcessingOutputs_HelpShort[];
+extern const char kPostProcessingOutputs_Help[];
 
 extern const char kCompleteStaticLib[];
 extern const char kCompleteStaticLib_HelpShort[];
