@@ -34,6 +34,24 @@
       "parentUuid": "47484289_ee468bc0",
       "revId": "ce0c2be55452b9f105c4e377d590c7b910ca9ae0",
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "1077e3db_e494f02a",
+        "filename": "src/gn/create_bundle_target_generator.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 38,
+      "author": {
+        "id": 1000067
+      },
+      "writtenOn": "2024-04-02T12:21:53Z",
+      "side": 1,
+      "message": "Oh sorry. Can you still mention the old deprecated names in the documentation then, and explain that using them will print a warning, but that they will be removed in a future release. That will makes things clear for everyone.\n\nThanks.",
+      "parentUuid": "c1b1df93_345b8108",
+      "revId": "ce0c2be55452b9f105c4e377d590c7b910ca9ae0",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
     }
   ]
 }
