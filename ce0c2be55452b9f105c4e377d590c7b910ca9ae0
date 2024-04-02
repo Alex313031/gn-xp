@@ -3,6 +3,23 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "32b4ecbc_c2b075e7",
+        "filename": "docs/reference.md",
+        "patchSetId": 5
+      },
+      "lineNbr": 1771,
+      "author": {
+        "id": 1000070
+      },
+      "writtenOn": "2024-04-02T12:23:43Z",
+      "side": 1,
+      "message": "@digit@google.com\n\nThis mention the old names, and that a warning is emitted.\n\nDo you want me to spell the old names in full instead of using `code_signing_$var`?",
+      "revId": "ce0c2be55452b9f105c4e377d590c7b910ca9ae0",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "47484289_ee468bc0",
         "filename": "src/gn/create_bundle_target_generator.cc",
         "patchSetId": 5
