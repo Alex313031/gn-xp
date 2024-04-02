@@ -16,6 +16,23 @@
       "message": "Please take another look.",
       "revId": "2468c041ad153c33356c4b71d0c3c8733f768ba2",
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "446120ec_f7e9451a",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 6
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000067
+      },
+      "writtenOn": "2024-04-02T13:02:11Z",
+      "side": 1,
+      "message": "Thank you for the changes. Waiting for Brett or Takuto to review this CL, just in case there is something I overlooked.",
+      "revId": "2468c041ad153c33356c4b71d0c3c8733f768ba2",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
     }
   ]
 }
