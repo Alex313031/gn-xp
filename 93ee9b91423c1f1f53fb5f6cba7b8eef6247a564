@@ -16,6 +16,24 @@
       "message": "I meant mentioning here that these are deprecated, etc..",
       "revId": "93ee9b91423c1f1f53fb5f6cba7b8eef6247a564",
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b490589c_576a7788",
+        "filename": "docs/reference.md",
+        "patchSetId": 5
+      },
+      "lineNbr": 114,
+      "author": {
+        "id": 1000070
+      },
+      "writtenOn": "2024-04-02T12:55:38Z",
+      "side": 0,
+      "message": "Thank you for the suggestion. Done.",
+      "parentUuid": "053ee351_bfeee743",
+      "revId": "93ee9b91423c1f1f53fb5f6cba7b8eef6247a564",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
     }
   ]
 }
