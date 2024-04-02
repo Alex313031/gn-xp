@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "47484289_ee468bc0",
+        "filename": "src/gn/create_bundle_target_generator.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 38,
+      "author": {
+        "id": 1000067
+      },
+      "writtenOn": "2024-04-02T12:17:00Z",
+      "side": 1,
+      "message": "I think it would be drastically better if you could just print a warning and use the old name for now, with the intent to deprecate the feature in a future release. Otherwise, this _is_ going to break workflows for other projects in surprising ways.",
+      "revId": "ce0c2be55452b9f105c4e377d590c7b910ca9ae0",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    }
+  ]
+}
