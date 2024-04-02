@@ -16,6 +16,24 @@
       "message": "I think it would be drastically better if you could just print a warning and use the old name for now, with the intent to deprecate the feature in a future release. Otherwise, this _is_ going to break workflows for other projects in surprising ways.",
       "revId": "ce0c2be55452b9f105c4e377d590c7b910ca9ae0",
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c1b1df93_345b8108",
+        "filename": "src/gn/create_bundle_target_generator.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 38,
+      "author": {
+        "id": 1000070
+      },
+      "writtenOn": "2024-04-02T12:20:17Z",
+      "side": 1,
+      "message": "This is printing a warning and using the old name.\n\nI do `err.PrintNonfatalToStdout()` which prints a warning, and then return the value found under the old name. I also said so in the CL description:\n\n\u003e Change the code loading the properties for the target to still look them under the old name to avoid breaking Chromium when this roll changes.",
+      "parentUuid": "47484289_ee468bc0",
+      "revId": "ce0c2be55452b9f105c4e377d590c7b910ca9ae0",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
     }
   ]
 }
