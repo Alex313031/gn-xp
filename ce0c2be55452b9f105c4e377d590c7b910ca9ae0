@@ -18,6 +18,24 @@
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "e02c66e3_c5664b18",
+        "filename": "docs/reference.md",
+        "patchSetId": 5
+      },
+      "lineNbr": 1771,
+      "author": {
+        "id": 1000070
+      },
+      "writtenOn": "2024-04-02T12:55:50Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "32b4ecbc_c2b075e7",
+      "revId": "ce0c2be55452b9f105c4e377d590c7b910ca9ae0",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "47484289_ee468bc0",
