@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "81bd0ad5_3ba6053c",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1002327
+      },
+      "writtenOn": "2024-04-03T19:14:00Z",
+      "side": 1,
+      "message": "I\u0027ve fixed the merge conflicts locally but I\u0027m hitting security issues (remote-sso\u0027 is not a git command. See \u0027git --help) while uploading the updated change. I\u0027ve filed a bug for help. No hurry.",
+      "revId": "cff14fc8cea6d8aa52ef8d48256bf92f6da8edc3",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    }
+  ]
+}
