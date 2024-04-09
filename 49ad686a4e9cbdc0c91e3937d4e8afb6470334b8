@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "6f043b32_d6a82219",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1002327
+      },
+      "writtenOn": "2024-04-09T21:45:39Z",
+      "side": 1,
+      "message": "I hit some messiness when fixing the merge conflicts in this revert and whenever I upload the CL it goes to cl 17020 instead of 17000. I don\u0027t know why and I can\u0027t change it (locally it\u0027s listed as 17000 already so \"git cl issue 17000\" does nothing) so I\u0027d like to land this change. It\u0027s a clean revert with a comment added to warn future readers about trying the same thing again.\n\nPTAL.\n\nNote that I don\u0027t have permissions to do dry runs or land changes in this repo.",
+      "revId": "49ad686a4e9cbdc0c91e3937d4e8afb6470334b8",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    }
+  ]
+}
