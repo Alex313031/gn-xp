@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "271048c2_a2de52d8",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 7
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000070
+      },
+      "writtenOn": "2024-04-09T14:12:13Z",
+      "side": 1,
+      "message": "D\u0027oh. I wanted to send to CQ+2 but instead I did Code-Review+2.\n\nFixing this and sending to CQ+2 for real this time.",
+      "revId": "68b05bea0cc18f13f1d416a9dce12dbaaf677470",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    }
+  ]
+}
