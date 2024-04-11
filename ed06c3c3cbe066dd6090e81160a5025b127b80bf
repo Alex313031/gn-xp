@@ -105,6 +105,24 @@
       "parentUuid": "a6048e63_a6b7e0d1",
       "revId": "ed06c3c3cbe066dd6090e81160a5025b127b80bf",
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "bab77d2a_5c9cde76",
+        "filename": "infra/recipes.py",
+        "patchSetId": 4
+      },
+      "lineNbr": 22,
+      "author": {
+        "id": 1000067
+      },
+      "writtenOn": "2024-04-11T13:56:23Z",
+      "side": 1,
+      "message": "I don\u0027t know exactly how this file is updated / used on infra exactly, so cannot comment on it. Adding a few other owners on cc to get their feedback on this.\n\nThe question is: should we update the GN infra/recipes.py, which seems to be a _dated_ copy of a Chromium infra/recipes.py file, or update it to a newer version, or just do not touch anything?\n\nNote: this is not about `infra/recipes/gn.py`, but the `infra/recipes.py` script that will invoke it.",
+      "parentUuid": "eaab5056_b95b4538",
+      "revId": "ed06c3c3cbe066dd6090e81160a5025b127b80bf",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
     }
   ]
 }
