@@ -16,6 +16,24 @@
       "message": "nit: sorry, this `tuple` and others below too would need the same :-)",
       "revId": "a92f8d25d8c6d49ea31f894766ab510aca76f4b3",
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f2301326_92d50c31",
+        "filename": "infra/recipes.py",
+        "patchSetId": 2
+      },
+      "lineNbr": 170,
+      "author": {
+        "id": 1002582
+      },
+      "writtenOn": "2024-04-11T12:20:18Z",
+      "side": 1,
+      "message": "Okay, I\u0027ll make the changes now",
+      "parentUuid": "a9bdb2e9_07e4f814",
+      "revId": "a92f8d25d8c6d49ea31f894766ab510aca76f4b3",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
     }
   ]
 }
