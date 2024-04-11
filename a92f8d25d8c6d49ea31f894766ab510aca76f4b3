@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a9bdb2e9_07e4f814",
+        "filename": "infra/recipes.py",
+        "patchSetId": 2
+      },
+      "lineNbr": 170,
+      "author": {
+        "id": 1000067
+      },
+      "writtenOn": "2024-04-11T12:18:13Z",
+      "side": 1,
+      "message": "nit: sorry, this `tuple` and others below too would need the same :-)",
+      "revId": "a92f8d25d8c6d49ea31f894766ab510aca76f4b3",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    }
+  ]
+}
