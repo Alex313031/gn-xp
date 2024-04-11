@@ -18,6 +18,24 @@
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "cda765ab_64c2b139",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000067
+      },
+      "writtenOn": "2024-04-11T13:46:32Z",
+      "side": 1,
+      "message": "I am sorry, but adding type hints that only works on Windows has very little value.\n\nPlease add a trailing `# type: ignore # SIGBREAK is windows-only` command to line 271 to fix this.",
+      "parentUuid": "8c406417_47c61880",
+      "revId": "ed06c3c3cbe066dd6090e81160a5025b127b80bf",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "612b99c0_ac4b267d",
