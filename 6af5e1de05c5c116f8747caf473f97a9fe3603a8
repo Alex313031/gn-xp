@@ -35,6 +35,24 @@
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "2f6ffbf5_f3aaf5a8",
+        "filename": "infra/recipes.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 60,
+      "author": {
+        "id": 1002582
+      },
+      "writtenOn": "2024-04-11T12:39:24Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "29b19e74_1974142a",
+      "revId": "6af5e1de05c5c116f8747caf473f97a9fe3603a8",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "a2bb1bc2_8ecf9530",
@@ -66,6 +84,24 @@
       "side": 1,
       "message": "I have modified the code, please review again.\n\nAt the same time, I have another request: can you help me obtain CQ+1 permission?",
       "parentUuid": "a2bb1bc2_8ecf9530",
+      "revId": "6af5e1de05c5c116f8747caf473f97a9fe3603a8",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "614d4942_ced81bb0",
+        "filename": "infra/recipes.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 132,
+      "author": {
+        "id": 1002582
+      },
+      "writtenOn": "2024-04-11T12:39:24Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "f9bd42c5_47cf98f0",
       "revId": "6af5e1de05c5c116f8747caf473f97a9fe3603a8",
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
     }
