@@ -1,6 +1,23 @@
 {
   "comments": [
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "6ad4413e_1902cfbc",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000067
+      },
+      "writtenOn": "2024-04-11T12:24:35Z",
+      "side": 1,
+      "message": "Unfortunately, I think only admins and Chromium/Google email accounts have CQ permission.\n\nProbably because we do experience a non trivial amount of spam CLs arriving on Gerrit, and it is already supported on an ad-hoc basis.",
+      "revId": "a92f8d25d8c6d49ea31f894766ab510aca76f4b3",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "a9bdb2e9_07e4f814",
