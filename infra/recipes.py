@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/usr/bin/env python3
 # Copyright 2019 The LUCI Authors. All rights reserved.
 # Use of this source code is governed under the Apache License, Version 2.0
 # that can be found in the LICENSE file.
@@ -29,6 +29,7 @@ import errno
 import json
 import logging
 import os
+import shutil
 import subprocess
 import sys
 
@@ -51,28 +52,28 @@ EngineDep = namedtuple('EngineDep', 'url revision branch')
 
 class MalformedRecipesCfg(Exception):
 
-  def __init__(self, msg, path):
+  def __init__(self, msg: str, path: str):
     full_message = 'malformed recipes.cfg: %s: %r' % (msg, path)
     super(MalformedRecipesCfg, self).__init__(full_message)
 
 
-def parse(repo_root, recipes_cfg_path):
+def parse(repo_root: str, recipes_cfg_path: str) -> tuple:
   """Parse is a lightweight a recipes.cfg file parser.
 
-  Args:
-    repo_root (str) - native path to the root of the repo we're trying to run
-      recipes for.
-    recipes_cfg_path (str) - native path to the recipes.cfg file to process.
+    Args:
+      repo_root (str) - native path to the root of the repo we're trying to run
+        recipes for.
+      recipes_cfg_path (str) - native path to the recipes.cfg file to process.
 
-  Returns (as tuple):
-    engine_dep (EngineDep|None): The recipe_engine dependency, or None, if the
-      current repo IS the recipe_engine.
-    recipes_path (str) - native path to where the recipes live inside of the
-      current repo (i.e. the folder containing `recipes/` and/or
-      `recipe_modules`)
-    py3_only (bool) - True if this repo has been marked as ONLY supporting
-      python3.
-  """
+    Returns (as tuple):
+      engine_dep (EngineDep|None): The recipe_engine dependency, or None, if the
+        current repo IS the recipe_engine.
+      recipes_path (str) - native path to where the recipes live inside of the
+        current repo (i.e. the folder containing `recipes/` and/or
+        `recipe_modules`)
+      py3_only (bool) - True if this repo has been marked as ONLY supporting
+        python3.
+    """
   with open(recipes_cfg_path, 'r') as fh:
     pb = json.load(fh)
   py3_only = pb.get('py3_only', False)
@@ -120,42 +121,37 @@ CIPD = 'cipd' + _BAT
 REQUIRED_BINARIES = {GIT, CIPD}
 
 
-def _is_executable(path):
+def _is_executable(path: str) -> bool:
   return os.path.isfile(path) and os.access(path, os.X_OK)
 
 
-# TODO: Use shutil.which once we switch to Python3.
-def _is_on_path(basename):
-  for path in os.environ['PATH'].split(os.pathsep):
-    full_path = os.path.join(path, basename)
-    if _is_executable(full_path):
-      return True
-  return False
+def _is_on_path(basename: str) -> bool:
+  return shutil.which(basename) is not None
 
 
-def _subprocess_call(argv, **kwargs):
+def _subprocess_call(argv: list, **kwargs) -> int:
   logging.info('Running %r', argv)
   return subprocess.call(argv, **kwargs)
 
 
-def _git_check_call(argv, **kwargs):
+def _git_check_call(argv: list, **kwargs) -> None:
   argv = [GIT] + argv
   logging.info('Running %r', argv)
   subprocess.check_call(argv, **kwargs)
 
 
-def _git_output(argv, **kwargs):
+def _git_output(argv: list, **kwargs) -> bytes:
   argv = [GIT] + argv
   logging.info('Running %r', argv)
   return subprocess.check_output(argv, **kwargs)
 
 
-def parse_args(argv):
+def parse_args(argv: list) -> tuple:
   """This extracts a subset of the arguments that this bootstrap script cares
-  about. Currently this consists of:
-    * an override for the recipe engine in the form of `-O recipe_engine=/path`
-    * the --package option.
-  """
+    about. Currently this consists of:
+      * an override for the recipe engine in the form of `-O recipe_engine=/path`
+      * the --package option.
+    """
   PREFIX = 'recipe_engine='
 
   p = argparse.ArgumentParser(add_help=False)
@@ -168,11 +164,12 @@ def parse_args(argv):
   return None, args.package
 
 
-def checkout_engine(engine_path, repo_root, recipes_cfg_path):
+def checkout_engine(engine_path: str, repo_root: str,
+                    recipes_cfg_path: str) -> tuple:
   """Checks out the recipe_engine repo pinned in recipes.cfg.
 
-  Returns the path to the recipe engine repo and the py3_only boolean.
-  """
+    Returns the path to the recipe engine repo and the py3_only boolean.
+    """
   dep, recipes_path, py3_only = parse(repo_root, recipes_cfg_path)
   if dep is None:
     # we're running from the engine repo already!
@@ -224,7 +221,7 @@ def checkout_engine(engine_path, repo_root, recipes_cfg_path):
   return engine_path, py3_only
 
 
-def main():
+def main() -> int:
   for required_binary in REQUIRED_BINARIES:
     if not _is_on_path(required_binary):
       return 'Required binary is not found on PATH: %s' % required_binary
@@ -247,7 +244,8 @@ def main():
     repo_root = os.path.abspath(repo_root).decode()
     recipes_cfg_path = os.path.join(repo_root, 'infra', 'config', 'recipes.cfg')
     args = ['--package', recipes_cfg_path] + args
-  engine_path, py3_only = checkout_engine(engine_override, repo_root, recipes_cfg_path)
+  engine_path, py3_only = checkout_engine(engine_override, repo_root,
+                                          recipes_cfg_path)
 
   using_py3 = py3_only or os.getenv('RECIPES_USE_PY3') == 'true'
   vpython = ('vpython' + ('3' if using_py3 else '') + _BAT)
@@ -255,7 +253,9 @@ def main():
     return 'Required binary is not found on PATH: %s' % vpython
 
   argv = ([
-    vpython, '-u', os.path.join(engine_path, 'recipe_engine', 'main.py'),
+      vpython,
+      '-u',
+      os.path.join(engine_path, 'recipe_engine', 'main.py'),
   ] + args)
 
   if IS_WIN:
