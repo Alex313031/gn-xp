@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "8c406417_47c61880",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1002582
+      },
+      "writtenOn": "2024-04-11T13:39:27Z",
+      "side": 1,
+      "message": "David, I have modified the code and checked it using mypy before uploading, and no errors were found in the current code.\n\nAs for SIGBREAK, it is expected that it reports an error under non-Windows systems.",
+      "revId": "ed06c3c3cbe066dd6090e81160a5025b127b80bf",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    }
+  ]
+}
