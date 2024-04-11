@@ -16,6 +16,40 @@
       "message": "PTAL THANK YOU",
       "revId": "6af5e1de05c5c116f8747caf473f97a9fe3603a8",
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "29b19e74_1974142a",
+        "filename": "infra/recipes.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 60,
+      "author": {
+        "id": 1000067
+      },
+      "writtenOn": "2024-04-11T11:32:04Z",
+      "side": 1,
+      "message": "nit: Can you import `Tuple` and `Union` from typing then change this to `-\u003e Tuple[Union[EngineDep, None],str,bool]`?",
+      "revId": "6af5e1de05c5c116f8747caf473f97a9fe3603a8",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a2bb1bc2_8ecf9530",
+        "filename": "infra/recipes.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 132,
+      "author": {
+        "id": 1000067
+      },
+      "writtenOn": "2024-04-11T11:32:04Z",
+      "side": 1,
+      "message": "nit: Similarly, use `List[str]` here and below.",
+      "revId": "6af5e1de05c5c116f8747caf473f97a9fe3603a8",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
     }
   ]
 }
