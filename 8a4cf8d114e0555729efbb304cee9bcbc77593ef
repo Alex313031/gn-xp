@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "3b2185ce_57d6be38",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000067
+      },
+      "writtenOn": "2024-04-11T12:43:00Z",
+      "side": 1,
+      "message": "Thank you, trying to run `mypy` locally, I get the following error:\n\n```sh\n$ mypy infra/recipes.py\nnfra/recipes.py:43: error: Cannot find implementation or library stub for module named \"urlparse\"  [import-not-found]\ninfra/recipes.py:43: note: See https://mypy.readthedocs.io/en/stable/running_mypy.html#missing-imports\ninfra/recipes.py:43: error: Name \"urlparse\" already defined (by an import)  [no-redef]\ninfra/recipes.py:229: error: Incompatible return value type (got \"str\", expected \"int\")  [return-value]\ninfra/recipes.py:244: error: Incompatible types in assignment (expression has type \"bytes\", variable has type \"str\")  [assignment]\ninfra/recipes.py:246: error: \"str\" has no attribute \"decode\"; maybe \"encode\"?  [attr-defined]\ninfra/recipes.py:249: error: Argument 1 to \"checkout_engine\" has incompatible type \"str | None\"; expected \"str\"  [arg-type]\ninfra/recipes.py:255: error: Incompatible return value type (got \"str\", expected \"int\")  [return-value]\ninfra/recipes.py:267: error: Module has no attribute \"SIGBREAK\"  [attr-defined]\n```\n\nI think removing lines 42-43 and the `try` statement on line 40 should be enough to get rid of that since the script no longer runs with Python2.",
+      "revId": "8a4cf8d114e0555729efbb304cee9bcbc77593ef",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    }
+  ]
+}
