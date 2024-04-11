@@ -33,6 +33,24 @@
       "message": "Oh, it seems like I shouldn\u0027t make changes here",
       "revId": "ed06c3c3cbe066dd6090e81160a5025b127b80bf",
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "56b130e1_8d65c261",
+        "filename": "infra/recipes.py",
+        "patchSetId": 4
+      },
+      "lineNbr": 22,
+      "author": {
+        "id": 1002582
+      },
+      "writtenOn": "2024-04-11T13:43:51Z",
+      "side": 1,
+      "message": "But it seems that the contents of the files on both sides are not consistent.",
+      "parentUuid": "612b99c0_ac4b267d",
+      "revId": "ed06c3c3cbe066dd6090e81160a5025b127b80bf",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
     }
   ]
 }
