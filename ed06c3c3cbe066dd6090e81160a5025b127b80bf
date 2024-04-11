@@ -69,6 +69,24 @@
       "parentUuid": "612b99c0_ac4b267d",
       "revId": "ed06c3c3cbe066dd6090e81160a5025b127b80bf",
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a6048e63_a6b7e0d1",
+        "filename": "infra/recipes.py",
+        "patchSetId": 4
+      },
+      "lineNbr": 22,
+      "author": {
+        "id": 1000067
+      },
+      "writtenOn": "2024-04-11T13:51:25Z",
+      "side": 1,
+      "message": "Ah yes, sorry, indeed it\u0027s probably better not to change this file. Sorry for the lost time.\n\nThe relevant file that can be change is `infra/recipes/gn.py` but I don\u0027t think this requires type hints. This is run through a complicated framework that does code coverage and other verifications anyway.",
+      "parentUuid": "56b130e1_8d65c261",
+      "revId": "ed06c3c3cbe066dd6090e81160a5025b127b80bf",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
     }
   ]
 }
