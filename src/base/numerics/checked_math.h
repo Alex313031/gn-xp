@@ -166,14 +166,12 @@ class CheckedNumeric {
       const U rhs) const {
     using R = typename UnderlyingType<U>::type;
     using result_type = typename MathWrapper<CheckedMaxOp, T, U>::type;
-    // TODO(jschuh): This can be converted to the MathOp version and remain
-    // constexpr once we have C++14 support.
-    return CheckedNumeric<result_type>(
-        static_cast<result_type>(
-            IsGreater<T, R>::Test(state_.value(), Wrapper<U>::value(rhs))
-                ? state_.value()
-                : Wrapper<U>::value(rhs)),
-        state_.is_valid() && Wrapper<U>::is_valid(rhs));
+    constexpr result_type lhs_value = state_.value();
+    constexpr result_type rhs_value = Wrapper<U>::value(rhs);
+    constexpr bool is_greater = MathOp<CheckedMaxOp, T, U>::IsGreater(lhs_value, rhs_value);
+    constexpr result_type max_value = is_greater ? lhs_value : rhs_value;
+    constexpr bool is_valid = state_.is_valid() && Wrapper<U>::is_valid(rhs);
+    return CheckedNumeric<result_type>(max_value, is_valid);
   }
 
   template <typename U>
@@ -181,14 +179,12 @@ class CheckedNumeric {
       const U rhs) const {
     using R = typename UnderlyingType<U>::type;
     using result_type = typename MathWrapper<CheckedMinOp, T, U>::type;
-    // TODO(jschuh): This can be converted to the MathOp version and remain
-    // constexpr once we have C++14 support.
-    return CheckedNumeric<result_type>(
-        static_cast<result_type>(
-            IsLess<T, R>::Test(state_.value(), Wrapper<U>::value(rhs))
-                ? state_.value()
-                : Wrapper<U>::value(rhs)),
-        state_.is_valid() && Wrapper<U>::is_valid(rhs));
+    constexpr result_type lhs_value = state_.value();
+    constexpr result_type rhs_value = Wrapper<U>::value(rhs);
+    constexpr bool is_less = MathOp<CheckedMinOp, T, U>::IsLess(lhs_value, rhs_value);
+    constexpr result_type min_value = is_less ? lhs_value : rhs_value;
+    constexpr bool is_valid = state_.is_valid() && Wrapper<U>::is_valid(rhs);
+    return CheckedNumeric<result_type>(min_value, is_valid);
   }
 
   // This function is available only for integral types. It returns an unsigned
