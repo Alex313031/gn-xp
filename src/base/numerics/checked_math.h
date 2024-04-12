@@ -7,6 +7,7 @@
 
 #include <stddef.h>
 
+#include <algorithm>
 #include <limits>
 #include <type_traits>
 
@@ -166,14 +167,12 @@ class CheckedNumeric {
       const U rhs) const {
     using R = typename UnderlyingType<U>::type;
     using result_type = typename MathWrapper<CheckedMaxOp, T, U>::type;
-    // TODO(jschuh): This can be converted to the MathOp version and remain
-    // constexpr once we have C++14 support.
-    return CheckedNumeric<result_type>(
-        static_cast<result_type>(
-            IsGreater<T, R>::Test(state_.value(), Wrapper<U>::value(rhs))
-                ? state_.value()
-                : Wrapper<U>::value(rhs)),
-        state_.is_valid() && Wrapper<U>::is_valid(rhs));
+    constexpr result_type max_value = std::conditional_t<
+        IsGreater<T, R>::value,
+        result_type,
+        typename Wrapper<U>::type
+    >(state_.value(), Wrapper<U>::value(rhs));
+    return CheckedNumeric<result_type>(max_value, state_.is_valid() && Wrapper<U>::is_valid(rhs));
   }
 
   template <typename U>
@@ -181,14 +180,12 @@ class CheckedNumeric {
       const U rhs) const {
     using R = typename UnderlyingType<U>::type;
     using result_type = typename MathWrapper<CheckedMinOp, T, U>::type;
-    // TODO(jschuh): This can be converted to the MathOp version and remain
-    // constexpr once we have C++14 support.
-    return CheckedNumeric<result_type>(
-        static_cast<result_type>(
-            IsLess<T, R>::Test(state_.value(), Wrapper<U>::value(rhs))
-                ? state_.value()
-                : Wrapper<U>::value(rhs)),
-        state_.is_valid() && Wrapper<U>::is_valid(rhs));
+    constexpr result_type min_value = std::conditional_t<
+        IsLess<T, R>::value,
+        result_type,
+        typename Wrapper<U>::type
+    >(state_.value(), Wrapper<U>::value(rhs));
+    return CheckedNumeric<result_type>(min_value, state_.is_valid() && Wrapper<U>::is_valid(rhs));
   }
 
   // This function is available only for integral types. It returns an unsigned
