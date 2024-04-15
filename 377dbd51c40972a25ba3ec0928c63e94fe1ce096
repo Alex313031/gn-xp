@@ -33,6 +33,24 @@
       "message": "Can you clarify the purpose of this change?\n\nThis header comes originally from Chromium, and it probably make more sense to update it to a more recent upstream [1] than doing what appears as a random stylistic change.\n\n[1] https://source.chromium.org/chromium/chromium/src/+/main:base/numerics/checked_math.h)",
       "revId": "377dbd51c40972a25ba3ec0928c63e94fe1ce096",
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "36916a7b_ca2a750b",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1002582
+      },
+      "writtenOn": "2024-04-15T08:44:37Z",
+      "side": 1,
+      "message": "This CL attempts to implement two TODO comments. And I want GN to compile more smoothly on newer standards than C++14.\n\nDo we need to update them to the upstream version now?",
+      "parentUuid": "a9fff5c9_8628eb9e",
+      "revId": "377dbd51c40972a25ba3ec0928c63e94fe1ce096",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
     }
   ]
 }
