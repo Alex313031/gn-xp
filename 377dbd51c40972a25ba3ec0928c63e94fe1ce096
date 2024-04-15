@@ -68,6 +68,23 @@
       "message": "I think there is no need to refresh from upstream right now. This seems rather harmless so let\u0027s see if it builds on CQ properly first. I\u0027m adding a few other reviewers for their feedback.",
       "revId": "377dbd51c40972a25ba3ec0928c63e94fe1ce096",
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "23ee7e9f_8bba7baf",
+        "filename": "src/base/numerics/checked_math.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 171,
+      "author": {
+        "id": 1000067
+      },
+      "writtenOn": "2024-04-15T18:25:12Z",
+      "side": 1,
+      "message": "FYI: This is failing to compile because MathOp is defined as a templated function on lines 230.",
+      "revId": "377dbd51c40972a25ba3ec0928c63e94fe1ce096",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
     }
   ]
 }
