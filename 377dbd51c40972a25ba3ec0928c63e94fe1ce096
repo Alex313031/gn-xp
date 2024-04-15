@@ -51,6 +51,23 @@
       "parentUuid": "a9fff5c9_8628eb9e",
       "revId": "377dbd51c40972a25ba3ec0928c63e94fe1ce096",
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "aa1d7fa8_f6add41c",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000067
+      },
+      "writtenOn": "2024-04-15T15:13:47Z",
+      "side": 1,
+      "message": "I think there is no need to refresh from upstream right now. This seems rather harmless so let\u0027s see if it builds on CQ properly first. I\u0027m adding a few other reviewers for their feedback.",
+      "revId": "377dbd51c40972a25ba3ec0928c63e94fe1ce096",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
     }
   ]
 }
