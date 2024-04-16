@@ -16,6 +16,24 @@
       "message": "What is this for?",
       "revId": "86d6597776aa8a77d4a4a2991e0724e821c63536",
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f85b9bd1_db9a0ea3",
+        "filename": "src/base/numerics/checked_math.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 1002582
+      },
+      "writtenOn": "2024-04-16T05:05:27Z",
+      "side": 1,
+      "message": "has been deleted",
+      "parentUuid": "38d0c326_9759affb",
+      "revId": "86d6597776aa8a77d4a4a2991e0724e821c63536",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
     }
   ]
 }
