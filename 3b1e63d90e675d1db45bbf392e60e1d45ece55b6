@@ -88,6 +88,24 @@
       "parentUuid": "ab566a07_5538867a",
       "revId": "3b1e63d90e675d1db45bbf392e60e1d45ece55b6",
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b4c44bb8_9a098b83",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 6
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1000067
+      },
+      "writtenOn": "2024-04-16T11:19:02Z",
+      "side": 1,
+      "message": "Thanks for confirming, that indeed contains the same recipes.py file :)",
+      "parentUuid": "7f9a58bd_f4a4a84d",
+      "revId": "3b1e63d90e675d1db45bbf392e60e1d45ece55b6",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
     }
   ]
 }
