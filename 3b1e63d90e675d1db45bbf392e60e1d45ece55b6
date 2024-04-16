@@ -34,6 +34,24 @@
       "parentUuid": "0854c6e2_1546f3b5",
       "revId": "3b1e63d90e675d1db45bbf392e60e1d45ece55b6",
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b8e634ec_6892d10f",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 6
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1000067
+      },
+      "writtenOn": "2024-04-16T10:39:28Z",
+      "side": 1,
+      "message": "Wait, there is no commit 7f9335a1dbbb95a859bf47d5404df49ea76e2a6b on https://chromium.googlesource.com/infra/luci/recipes-py.git !?!\n\nI have verified manually that this matches the ToT though. Where did you get that hash?",
+      "parentUuid": "c27b8ec8_55cafc1c",
+      "revId": "3b1e63d90e675d1db45bbf392e60e1d45ece55b6",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
     }
   ]
 }
