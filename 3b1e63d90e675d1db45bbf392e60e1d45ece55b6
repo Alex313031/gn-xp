@@ -16,6 +16,24 @@
       "message": "Can you add to this message the upstream commit that was used here.\nIt looks like to be the current top-of-tree, i.e. f99f9d564981c342f664cc643f1d9ce9fc269a23",
       "revId": "3b1e63d90e675d1db45bbf392e60e1d45ece55b6",
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c27b8ec8_55cafc1c",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 6
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1002582
+      },
+      "writtenOn": "2024-04-16T10:03:08Z",
+      "side": 1,
+      "message": "To avoid the title being too long, I added it to the description below",
+      "parentUuid": "0854c6e2_1546f3b5",
+      "revId": "3b1e63d90e675d1db45bbf392e60e1d45ece55b6",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
     }
   ]
 }
