@@ -159,6 +159,24 @@
       "parentUuid": "08e64740_d2ec37ba",
       "revId": "ed06c3c3cbe066dd6090e81160a5025b127b80bf",
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "94d1c2f7_fd59e084",
+        "filename": "infra/recipes.py",
+        "patchSetId": 4
+      },
+      "lineNbr": 22,
+      "author": {
+        "id": 1000030
+      },
+      "writtenOn": "2024-04-16T05:34:31Z",
+      "side": 1,
+      "message": "Thanks.",
+      "parentUuid": "901c4b33_cc53e28f",
+      "revId": "ed06c3c3cbe066dd6090e81160a5025b127b80bf",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
     }
   ]
 }
