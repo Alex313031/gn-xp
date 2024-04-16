@@ -52,6 +52,24 @@
       "parentUuid": "c27b8ec8_55cafc1c",
       "revId": "3b1e63d90e675d1db45bbf392e60e1d45ece55b6",
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ab566a07_5538867a",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 6
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1002582
+      },
+      "writtenOn": "2024-04-16T10:44:49Z",
+      "side": 1,
+      "message": "oops, I copied the wrong hash, but the file is actually the latest",
+      "parentUuid": "b8e634ec_6892d10f",
+      "revId": "3b1e63d90e675d1db45bbf392e60e1d45ece55b6",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
     }
   ]
 }
