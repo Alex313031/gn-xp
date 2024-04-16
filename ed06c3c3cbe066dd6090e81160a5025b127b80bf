@@ -123,6 +123,24 @@
       "parentUuid": "eaab5056_b95b4538",
       "revId": "ed06c3c3cbe066dd6090e81160a5025b127b80bf",
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "08e64740_d2ec37ba",
+        "filename": "infra/recipes.py",
+        "patchSetId": 4
+      },
+      "lineNbr": 22,
+      "author": {
+        "id": 1000030
+      },
+      "writtenOn": "2024-04-16T04:35:19Z",
+      "side": 1,
+      "message": "I think we should have copy of\nhttps://chromium.googlesource.com/infra/luci/recipes-py/+/main/recipes.py from some revision instead of modifying this file in this repository.",
+      "parentUuid": "bab77d2a_5c9cde76",
+      "revId": "ed06c3c3cbe066dd6090e81160a5025b127b80bf",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
     }
   ]
 }
