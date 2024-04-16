@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "702dd0aa_e6b34424",
+        "filename": "src/base/numerics/checked_math.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 173,
+      "author": {
+        "id": 1000067
+      },
+      "writtenOn": "2024-04-16T10:12:25Z",
+      "side": 1,
+      "message": "I am sorry, but I do not understand this code. `IsGreater\u003cT, R\u003e::value` is a compile-time constant here, so where is the max comparison performed at runtime now?\n\nAt least the previous version called a function `IsGreater\u003cT,R\u003e::Test()` which doesn\u0027t seem the case now.\n\nThis is very subtle code, and we don\u0027t have proper unit-tests for it, so I\u0027d rather leave it as-is, or update to upstream instead of trying to modify it.\n\nI am putting a preventive -2 here until this is sorted out.",
+      "revId": "c7d04f0f041a7e753f573a1389dcc38c0d673c96",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    }
+  ]
+}
