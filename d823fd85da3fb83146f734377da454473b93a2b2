@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b531017f_485e1d7f",
+        "filename": "build/build_linux.ninja.template",
+        "patchSetId": 1
+      },
+      "lineNbr": 8,
+      "author": {
+        "id": 1000030
+      },
+      "writtenOn": "2024-04-17T08:45:50Z",
+      "side": 0,
+      "message": "Why do you remove this?",
+      "range": {
+        "startLine": 8,
+        "startChar": 12,
+        "endLine": 8,
+        "endChar": 26
+      },
+      "revId": "d823fd85da3fb83146f734377da454473b93a2b2",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    }
+  ]
+}
