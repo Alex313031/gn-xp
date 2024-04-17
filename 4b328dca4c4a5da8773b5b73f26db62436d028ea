@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "48d92c3c_24ad6af4",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 3390802
+      },
+      "writtenOn": "2024-04-17T08:23:32Z",
+      "side": 1,
+      "message": "I take beautiful thing to gn. I love gn. please review quickly. I hope many people love this bug fix. thank you!",
+      "revId": "4b328dca4c4a5da8773b5b73f26db62436d028ea",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    }
+  ]
+}
