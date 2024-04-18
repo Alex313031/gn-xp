@@ -70,6 +70,30 @@
       },
       "revId": "d823fd85da3fb83146f734377da454473b93a2b2",
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0513a3fe_8738592b",
+        "filename": "build/build_linux.ninja.template",
+        "patchSetId": 1
+      },
+      "lineNbr": 8,
+      "author": {
+        "id": 3390802
+      },
+      "writtenOn": "2024-04-18T07:31:28Z",
+      "side": 0,
+      "message": "*.a files in the $out. those can not removed. From the view of gn, `gn clean` is only standard way to clean up every thing about output.",
+      "parentUuid": "5536904a_5124d615",
+      "range": {
+        "startLine": 8,
+        "startChar": 12,
+        "endLine": 8,
+        "endChar": 26
+      },
+      "revId": "d823fd85da3fb83146f734377da454473b93a2b2",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
     }
   ]
 }

@@ -106,6 +106,30 @@
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "0fbd52e1_4dde9e6e",
+        "filename": "build/gen.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 320,
+      "author": {
+        "id": 3390802
+      },
+      "writtenOn": "2024-04-18T07:31:28Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "76600477_90f4bb0e",
+      "range": {
+        "startLine": 320,
+        "startChar": 0,
+        "endLine": 320,
+        "endChar": 4
+      },
+      "revId": "4b328dca4c4a5da8773b5b73f26db62436d028ea",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "352b2c82_031f0366",
@@ -238,6 +262,30 @@
       "side": 1,
       "message": "I think this is just an informative copy of\nhttps://gn.googlesource.com/gn/+/refs/heads/main/README.md#examples\n?\nWhich part is specific to mingw? I think I can get similar result on Linux too.",
       "parentUuid": "91f68b92_df2e26e9",
+      "range": {
+        "startLine": 26,
+        "startChar": 0,
+        "endLine": 45,
+        "endChar": 3
+      },
+      "revId": "4b328dca4c4a5da8773b5b73f26db62436d028ea",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "42abca1e_c4c617bc",
+        "filename": "docs/mingw.md",
+        "patchSetId": 1
+      },
+      "lineNbr": 45,
+      "author": {
+        "id": 3390802
+      },
+      "writtenOn": "2024-04-18T07:31:28Z",
+      "side": 1,
+      "message": "Line 26 to 45, those are not specific to mingw, do you want me to remove those?\n\nothers are specific to mingw.",
+      "parentUuid": "ff6b3c23_e1e9fa7c",
       "range": {
         "startLine": 26,
         "startChar": 0,
