@@ -46,6 +46,30 @@
       },
       "revId": "d823fd85da3fb83146f734377da454473b93a2b2",
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5536904a_5124d615",
+        "filename": "build/build_linux.ninja.template",
+        "patchSetId": 1
+      },
+      "lineNbr": 8,
+      "author": {
+        "id": 1000030
+      },
+      "writtenOn": "2024-04-18T06:25:46Z",
+      "side": 0,
+      "message": "Could you elaborate more? What issue do we see if we preserve this on mingw?",
+      "parentUuid": "3d3d9651_b7ca17bc",
+      "range": {
+        "startLine": 8,
+        "startChar": 12,
+        "endLine": 8,
+        "endChar": 26
+      },
+      "revId": "d823fd85da3fb83146f734377da454473b93a2b2",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
     }
   ]
 }

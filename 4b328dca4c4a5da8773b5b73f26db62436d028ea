@@ -84,6 +84,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "76600477_90f4bb0e",
+        "filename": "build/gen.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 320,
+      "author": {
+        "id": 1000030
+      },
+      "writtenOn": "2024-04-18T06:25:46Z",
+      "side": 1,
+      "message": "\u003e `git cl presubmit` do not show this space error, how do you know?\n\u003e of course, I can remove those spaces.\n\u003e \n\nTrailing spaces are shown with pink background color in gerrit.\n\n\u003e teacher, this is my first time to use \"gn-review.googlesource.com\", should I remove those on the website or do a new commit on my local desktop and then `git push`?\n\nSee\nhttps://gn.googlesource.com/gn/+/refs/heads/main#sending-patches",
+      "parentUuid": "b95a1438_4f26c41e",
+      "range": {
+        "startLine": 320,
+        "startChar": 0,
+        "endLine": 320,
+        "endChar": 4
+      },
+      "revId": "4b328dca4c4a5da8773b5b73f26db62436d028ea",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "352b2c82_031f0366",
         "filename": "docs/mingw.md",
         "patchSetId": 1
@@ -190,6 +214,30 @@
       "side": 1,
       "message": "This section is specific to mingw, I want to show mingw result. these contents are in the \"docs/mingw.md\".",
       "parentUuid": "5bb80355_99b98e6c",
+      "range": {
+        "startLine": 26,
+        "startChar": 0,
+        "endLine": 45,
+        "endChar": 3
+      },
+      "revId": "4b328dca4c4a5da8773b5b73f26db62436d028ea",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ff6b3c23_e1e9fa7c",
+        "filename": "docs/mingw.md",
+        "patchSetId": 1
+      },
+      "lineNbr": 45,
+      "author": {
+        "id": 1000030
+      },
+      "writtenOn": "2024-04-18T06:25:46Z",
+      "side": 1,
+      "message": "I think this is just an informative copy of\nhttps://gn.googlesource.com/gn/+/refs/heads/main/README.md#examples\n?\nWhich part is specific to mingw? I think I can get similar result on Linux too.",
+      "parentUuid": "91f68b92_df2e26e9",
       "range": {
         "startLine": 26,
         "startChar": 0,
