@@ -16,6 +16,23 @@
       "message": "python 565",
       "revId": "c048f948a174fd670ec0808618a515217e570b48",
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "41cc29c1_d8761a47",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 3395978
+      },
+      "writtenOn": "2024-04-20T01:42:08Z",
+      "side": 1,
+      "message": "nice 👌",
+      "revId": "c048f948a174fd670ec0808618a515217e570b48",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
     }
   ]
 }
