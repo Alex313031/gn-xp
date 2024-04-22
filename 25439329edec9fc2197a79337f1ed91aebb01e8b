@@ -1,0 +1,90 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "01689cf6_3d11c975",
+        "filename": "README.md",
+        "patchSetId": 3
+      },
+      "lineNbr": 110,
+      "author": {
+        "id": 1000030
+      },
+      "writtenOn": "2024-04-22T05:01:08Z",
+      "side": 1,
+      "message": "MSYS and MinGW\n```suggestion\nOn MSYS and MinGW, the default compiler is `g++`, a recent version is\n```",
+      "range": {
+        "startLine": 110,
+        "startChar": 3,
+        "endLine": 110,
+        "endChar": 14
+      },
+      "revId": "25439329edec9fc2197a79337f1ed91aebb01e8b",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "bce9b6aa_65d3490a",
+        "filename": "docs/mingw.md",
+        "patchSetId": 3
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 1000030
+      },
+      "writtenOn": "2024-04-22T05:01:08Z",
+      "side": 1,
+      "message": "MinGW\n```suggestion\n# MinGW\n```",
+      "range": {
+        "startLine": 1,
+        "startChar": 2,
+        "endLine": 1,
+        "endChar": 7
+      },
+      "revId": "25439329edec9fc2197a79337f1ed91aebb01e8b",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6584ffa2_2558ea43",
+        "filename": "docs/mingw.md",
+        "patchSetId": 3
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 1000030
+      },
+      "writtenOn": "2024-04-22T05:01:08Z",
+      "side": 1,
+      "message": "linkify this?",
+      "range": {
+        "startLine": 24,
+        "startChar": 5,
+        "endLine": 24,
+        "endChar": 26
+      },
+      "revId": "25439329edec9fc2197a79337f1ed91aebb01e8b",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5a265cef_75146c03",
+        "filename": "src/base/files/file_enumerator_win.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 11,
+      "author": {
+        "id": 1000030
+      },
+      "writtenOn": "2024-04-22T05:01:08Z",
+      "side": 1,
+      "message": "Could you make separate CL to fix this too?",
+      "revId": "25439329edec9fc2197a79337f1ed91aebb01e8b",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    }
+  ]
+}

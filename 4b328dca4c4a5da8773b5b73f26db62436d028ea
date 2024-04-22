@@ -296,6 +296,30 @@
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "b4a8bb8f_c811865e",
+        "filename": "docs/mingw.md",
+        "patchSetId": 1
+      },
+      "lineNbr": 45,
+      "author": {
+        "id": 1000030
+      },
+      "writtenOn": "2024-04-22T05:01:08Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "42abca1e_c4c617bc",
+      "range": {
+        "startLine": 26,
+        "startChar": 0,
+        "endLine": 45,
+        "endChar": 3
+      },
+      "revId": "4b328dca4c4a5da8773b5b73f26db62436d028ea",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "42e26a97_8c2ef3d3",
