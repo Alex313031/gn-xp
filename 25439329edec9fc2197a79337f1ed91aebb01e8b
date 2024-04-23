@@ -1,6 +1,23 @@
 {
   "comments": [
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "681a0e92_be5405aa",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 3390802
+      },
+      "writtenOn": "2024-04-23T11:34:22Z",
+      "side": 1,
+      "message": "so crazy, I restart to `git push`. This toggle new full history. I also abandon something occasionally. sorry.",
+      "revId": "25439329edec9fc2197a79337f1ed91aebb01e8b",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "01689cf6_3d11c975",
