@@ -18,6 +18,23 @@
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "4e250b82_2b9e38e5",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 3390802
+      },
+      "writtenOn": "2024-04-23T11:33:03Z",
+      "side": 1,
+      "message": "so crazy, I restart to `git push`. This toggle new full history. I also abandon something occasionally. sorry.",
+      "revId": "5bce25c5abe07ac113158b1431d29647822cb100",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "c326c004_9fc514fe",
