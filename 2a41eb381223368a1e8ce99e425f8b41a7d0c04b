@@ -33,6 +33,23 @@
       "message": "hello teacher, this is new CL that you want.",
       "revId": "2a41eb381223368a1e8ce99e425f8b41a7d0c04b",
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d8355e74_132abc75",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 3390802
+      },
+      "writtenOn": "2024-04-23T11:33:49Z",
+      "side": 1,
+      "message": "so crazy, I restart to `git push`. This toggle new full history. I also abandon something occasionally. sorry.",
+      "revId": "2a41eb381223368a1e8ce99e425f8b41a7d0c04b",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
     }
   ]
 }
