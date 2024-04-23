@@ -118,6 +118,30 @@
       },
       "revId": "d823fd85da3fb83146f734377da454473b93a2b2",
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6a6cb3dd_4886741d",
+        "filename": "build/build_linux.ninja.template",
+        "patchSetId": 1
+      },
+      "lineNbr": 8,
+      "author": {
+        "id": 3390802
+      },
+      "writtenOn": "2024-04-23T09:58:28Z",
+      "side": 0,
+      "message": "hello teacher, this is [separate CL](https://gn-review.googlesource.com/c/gn/+/17122) that you want.",
+      "parentUuid": "b81248ed_e6c8a1ce",
+      "range": {
+        "startLine": 8,
+        "startChar": 12,
+        "endLine": 8,
+        "endChar": 26
+      },
+      "revId": "d823fd85da3fb83146f734377da454473b93a2b2",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
     }
   ]
 }
