@@ -317,7 +317,12 @@ def WriteGenericNinja(path, static_libraries, executables,
 
   if platform.is_windows():
     executable_ext = '.exe'
-    library_ext = '.lib'
+
+    if platform.is_msvc():
+      library_ext = '.lib'
+    else:
+      library_ext = '.a'
+
     object_ext = '.obj'
   else:
     executable_ext = ''
@@ -504,6 +509,16 @@ def WriteGNNinja(path, platform, host, options, args_list):
 
       if not options.no_static_libstdcpp:
         ldflags.append('-static-libstdc++')
+
+      cflags.extend([
+        '-Wno-deprecated-copy',
+        '-Wno-implicit-fallthrough',
+        '-Wno-redundant-move',
+        '-Wno-unused-variable',
+        '-Wno-format',             # Use of %llx, which is supported by _UCRT, false positive
+        '-Wno-strict-aliasing',    # Dereferencing punned pointer
+        '-Wno-cast-function-type', # Casting FARPROC to RegDeleteKeyExPtr
+      ])
 
       if platform.is_mingw() or platform.is_msys():
         cflags.remove('-std=c++20')
