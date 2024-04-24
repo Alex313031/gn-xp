@@ -16,6 +16,23 @@
       "message": "Teacher, now these three commit are updated based on your all requirements. please review.\n\nBefore I can not play Gerrit dashboard very well, sorry, those give you much misunderstand.\n\nThese three commit are:\n\n1. https://gn-review.googlesource.com/c/gn/+/17140\n2. https://gn-review.googlesource.com/c/gn/+/17121\n3. https://gn-review.googlesource.com/c/gn/+/17122",
       "revId": "1e1cbd16dd879b9b3e5dff3a24c98de21948baef",
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a1f3d9e1_61df03fd",
+        "filename": "examples/simple_build/build/toolchain/BUILD.gn",
+        "patchSetId": 3
+      },
+      "lineNbr": 25,
+      "author": {
+        "id": 1000030
+      },
+      "writtenOn": "2024-04-24T04:50:39Z",
+      "side": 1,
+      "message": "Why not include this diff in https://gn-review.googlesource.com/c/gn/+/17122?",
+      "revId": "1e1cbd16dd879b9b3e5dff3a24c98de21948baef",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
     }
   ]
 }
