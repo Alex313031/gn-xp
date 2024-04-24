@@ -35,6 +35,23 @@
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "6e56671c_a92acfc5",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 3390802
+      },
+      "writtenOn": "2024-04-24T09:23:43Z",
+      "side": 1,
+      "message": "Ok, I understand you. Can I directly move this diff to https://gn-review.googlesource.com/c/gn/+/17122 in the gerrit?",
+      "revId": "1e1cbd16dd879b9b3e5dff3a24c98de21948baef",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "a1f3d9e1_61df03fd",
