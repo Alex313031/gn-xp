@@ -69,6 +69,23 @@
       "parentUuid": "851b8f7a_1cfed1c7",
       "revId": "ed9003dd1f66e88ed500708e526cffbd801532c9",
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "beebe4e6_aed85e01",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 3390802
+      },
+      "writtenOn": "2024-05-01T06:23:14Z",
+      "side": 1,
+      "message": "I `git rebase` my local repo based on your requiements so that it change commit hash, content, history. now you only need to check these four CL:\n\n1. https://gn-review.googlesource.com/c/gn/+/17160?usp\u003ddashboard\n2. https://gn-review.googlesource.com/c/gn/+/17161?usp\u003ddashboard\n3. https://gn-review.googlesource.com/c/gn/+/17122?usp\u003ddashboard\n4. https://gn-review.googlesource.com/c/gn/+/17121?usp\u003ddashboard",
+      "revId": "ed9003dd1f66e88ed500708e526cffbd801532c9",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
     }
   ]
 }
