@@ -36,6 +36,24 @@
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
     },
     {
+      "unresolved": true,
+      "key": {
+        "uuid": "5e91a351_cdbf89ad",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1000030
+      },
+      "writtenOn": "2024-05-01T06:10:29Z",
+      "side": 1,
+      "message": "I meant to ask adding explanation why you need to update command in this CL.",
+      "parentUuid": "a6793c9b_c7667fef",
+      "revId": "2a41eb381223368a1e8ce99e425f8b41a7d0c04b",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
       "unresolved": false,
       "key": {
         "uuid": "e5e7c58a_b8978a13",
