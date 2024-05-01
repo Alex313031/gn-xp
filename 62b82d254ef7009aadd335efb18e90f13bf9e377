@@ -33,6 +33,24 @@
       "message": "It is the same reason to [old CL](https://gn-review.googlesource.com/c/gn/+/17080/comment/b531017f_485e1d7f/).",
       "revId": "62b82d254ef7009aadd335efb18e90f13bf9e377",
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1e61eb83_ec91754d",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000030
+      },
+      "writtenOn": "2024-05-01T06:52:54Z",
+      "side": 1,
+      "message": "Then, could you add such explanation to this CL\u0027s description?",
+      "parentUuid": "3ac2ccec_1eca8c81",
+      "revId": "62b82d254ef7009aadd335efb18e90f13bf9e377",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
     }
   ]
 }
