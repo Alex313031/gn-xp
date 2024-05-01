@@ -18,6 +18,24 @@
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
     },
     {
+      "unresolved": true,
+      "key": {
+        "uuid": "0db82392_5b5ec32e",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 3390802
+      },
+      "writtenOn": "2024-05-01T06:09:22Z",
+      "side": 1,
+      "message": "\u003e Could you add explanation why you remove this in commit message?\n\nTeacher, I do not remove this. I did move this to [new CL](https://gn-review.googlesource.com/c/gn/+/17121) based on your requirement. you and David teacher has merged it.\n\n```cmd\nmy@DESKTOP CLANG64 /e/workspace/google/gn.googlesource.com/gn\n$ git log -7 --oneline\ned9003dd (HEAD -\u003e anlexN) [mingw] Fix mingw building issues\nf5bdc95f [gn] Fix \"link\" in the //examples/simple_build/build/toolchain/BUILD.gn\n62b82d25 [template] Fix \"rule alink_thin\" in the //build/build_linux.ninja.template\n4584f953 [src] Add \"#include \u003climits\u003e\" in the //src/base/files/file_enumerator_win.cc\nd823fd85 Revert \"Teach gn to handle systems with \u003e 64 processors\"\nf07499ae [apple] Rename the code-signing properties of create_bundle\n415b3b19 Fix a typo in \"gn help refs\" output\n\nmy@DESKTOP CLANG64 /e/workspace/google/gn.googlesource.com/gn\n$ git log -1 -p 4584f953\ncommit 4584f953eb54f23caaa823467f6f6132da51e3bd\nAuthor: anlex N \u003can0291170@gmail.com\u003e\nDate:   Tue Apr 23 17:07:07 2024 +0800\n\n    [src] Add \"#include \u003climits\u003e\" in the //src/base/files/file_enumerator_win.cc\n\n    Change-Id: I2f638122b9a7c1cba03af692bc45deade0690021\n\ndiff --git a/src/base/files/file_enumerator_win.cc b/src/base/files/file_enumerator_win.cc\nindex aa884ea8..0e8f6dce 100644\n--- a/src/base/files/file_enumerator_win.cc\n+++ b/src/base/files/file_enumerator_win.cc\n@@ -8,6 +8,8 @@\n #include \u003cstdint.h\u003e\n #include \u003cstring.h\u003e\n\n+#include \u003climits\u003e\n+\n #include \"base/logging.h\"\n #include \"base/win/win_util.h\"\n\n```\n\ndo you understand me now? pleaes reply me.",
+      "parentUuid": "a6793c9b_c7667fef",
+      "revId": "2a41eb381223368a1e8ce99e425f8b41a7d0c04b",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
       "unresolved": false,
       "key": {
         "uuid": "e5e7c58a_b8978a13",
