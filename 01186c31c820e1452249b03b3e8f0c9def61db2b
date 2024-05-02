@@ -51,6 +51,29 @@
       "parentUuid": "c76a1e91_2ddd3f87",
       "revId": "01186c31c820e1452249b03b3e8f0c9def61db2b",
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d9400baa_7c6c102a",
+        "filename": "build/build_linux.ninja.template",
+        "patchSetId": 5
+      },
+      "lineNbr": 8,
+      "author": {
+        "id": 3408834
+      },
+      "writtenOn": "2024-05-02T12:15:19Z",
+      "side": 1,
+      "message": "command \u003d $ar rcsT $out $in",
+      "range": {
+        "startLine": 8,
+        "startChar": 0,
+        "endLine": 8,
+        "endChar": 29
+      },
+      "revId": "01186c31c820e1452249b03b3e8f0c9def61db2b",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
     }
   ]
 }
