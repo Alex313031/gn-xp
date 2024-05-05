@@ -51,6 +51,23 @@
       "parentUuid": "f0f5ecaf_c331f0f3",
       "revId": "7425cf155e8c1cb52f755fcfd78bf56ecfb66a95",
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a6c57a8c_3d7b39dc",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 6
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 3390802
+      },
+      "writtenOn": "2024-05-05T09:23:40Z",
+      "side": 1,
+      "message": "Teacher, after abandoned, I can not `git push`:\n```shell\n$ git push origin HEAD:refs/for/main\nEnumerating objects: 39, done.\nCounting objects: 100% (39/39), done.\nDelta compression using up to 8 threads\nCompressing objects: 100% (23/23), done.\nWriting objects: 100% (24/24), 3.08 KiB | 394.00 KiB/s, done.\nTotal 24 (delta 18), reused 0 (delta 0), pack-reused 0 (from 0)\nremote: Resolving deltas: 100% (18/18)\nremote: Waiting for private key checker: 6/6 objects left\nremote: Processing changes: refs: 1, done\nTo https://gn.googlesource.com/gn\n ! [remote rejected]   HEAD -\u003e refs/for/main (no new changes)\nerror: failed to push some refs to \u0027https://gn.googlesource.com/gn\u0027\n```\n\nWhat should I do?",
+      "revId": "7425cf155e8c1cb52f755fcfd78bf56ecfb66a95",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
     }
   ],
   "submitRequirementResults": [
