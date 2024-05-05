@@ -68,6 +68,24 @@
       "message": "Teacher, after abandoned, I can not `git push`:\n```shell\n$ git push origin HEAD:refs/for/main\nEnumerating objects: 39, done.\nCounting objects: 100% (39/39), done.\nDelta compression using up to 8 threads\nCompressing objects: 100% (23/23), done.\nWriting objects: 100% (24/24), 3.08 KiB | 394.00 KiB/s, done.\nTotal 24 (delta 18), reused 0 (delta 0), pack-reused 0 (from 0)\nremote: Resolving deltas: 100% (18/18)\nremote: Waiting for private key checker: 6/6 objects left\nremote: Processing changes: refs: 1, done\nTo https://gn.googlesource.com/gn\n ! [remote rejected]   HEAD -\u003e refs/for/main (no new changes)\nerror: failed to push some refs to \u0027https://gn.googlesource.com/gn\u0027\n```\n\nWhat should I do?",
       "revId": "7425cf155e8c1cb52f755fcfd78bf56ecfb66a95",
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b67caef0_8e7a34d0",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 6
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000067
+      },
+      "writtenOn": "2024-05-05T13:15:55Z",
+      "side": 1,
+      "message": "There is no need to push after the abandon, this CL is no longer active :-)\n\nIf you want to create a new CL from an existing local commit in your tree, that used to reference this CL, remove the `Change-Id:` line from the commit message, then do `git commit --amend --no-edit` to regenerate a new unique Change-Id value, then push to Gerrit.\n\nOtherwise, don\u0027t do anything, this should be enough.",
+      "parentUuid": "a6c57a8c_3d7b39dc",
+      "revId": "7425cf155e8c1cb52f755fcfd78bf56ecfb66a95",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
     }
   ],
   "submitRequirementResults": [
