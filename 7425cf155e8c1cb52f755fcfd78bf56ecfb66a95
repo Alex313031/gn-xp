@@ -33,6 +33,24 @@
       "message": "@David, Teacher, This CL have 6 patches including file changes and commit messages changes. If I abandon it, would they be not all gone?",
       "revId": "7425cf155e8c1cb52f755fcfd78bf56ecfb66a95",
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "3001f010_06a3b923",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 6
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000067
+      },
+      "writtenOn": "2024-05-05T09:10:29Z",
+      "side": 1,
+      "message": "Patchset 6 has no files at all on my Gerrit view. Only a commit message. There is nothing else to review.\n\nNote that Gerrit CLs do not work like Github PRs, every time you upload a new CL to Gerrit, it replaces the commit in Gerrit with a new one.\n\nIn other words:\n\nA Gerrit CL with 6 patchsets means there are 6 different versions of the commit to upload. And only the latest can be submitted.",
+      "parentUuid": "f0f5ecaf_c331f0f3",
+      "revId": "7425cf155e8c1cb52f755fcfd78bf56ecfb66a95",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
     }
   ]
 }
