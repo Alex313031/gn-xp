@@ -192,6 +192,24 @@
       "parentUuid": "092c105e_c040de05",
       "revId": "7425cf155e8c1cb52f755fcfd78bf56ecfb66a95",
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "3f17c1c9_41089771",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 6
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 3390802
+      },
+      "writtenOn": "2024-05-06T14:35:13Z",
+      "side": 1,
+      "message": "\u003e So now, I have abandoned this CL, I also can not `git push`.\n\u003e \n\u003e Have you seen file changes and commit messages changes on your Gerrit view, teacher?\n\nplease answer me. I just want to confirm. I have no issues. Based on your requirement, I have abandoned this CL and other 2 CL, do you receive all file changes and commit messages changes?",
+      "parentUuid": "a05a2d37_9034db7d",
+      "revId": "7425cf155e8c1cb52f755fcfd78bf56ecfb66a95",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
     }
   ],
   "submitRequirementResults": [
