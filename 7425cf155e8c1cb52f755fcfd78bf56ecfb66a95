@@ -104,6 +104,42 @@
       "tag": "mailMessageId\u003d\u003cCAD7oa\u003drwdJ90289fzs_GmgUmtCh1HHsRHTe1XFJ+9b9CYRkzPA@mail.gmail.com\u003e",
       "revId": "7425cf155e8c1cb52f755fcfd78bf56ecfb66a95",
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "8f820aa8_daa8489d",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 6
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 3390802
+      },
+      "writtenOn": "2024-05-06T02:20:46Z",
+      "side": 1,
+      "message": "are your sure that your two git commands have no syntax problems, teacher?",
+      "parentUuid": "1ae77462_b0a193c4",
+      "revId": "7425cf155e8c1cb52f755fcfd78bf56ecfb66a95",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a05a2d37_9034db7d",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 6
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 3390802
+      },
+      "writtenOn": "2024-05-06T02:20:46Z",
+      "side": 1,
+      "message": "So now, I have abandoned this CL, I also can not `git push`.\n\nHave you seen file changes and commit messages changes on your Gerrit view, teacher?",
+      "parentUuid": "b67caef0_8e7a34d0",
+      "revId": "7425cf155e8c1cb52f755fcfd78bf56ecfb66a95",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
     }
   ],
   "submitRequirementResults": [
