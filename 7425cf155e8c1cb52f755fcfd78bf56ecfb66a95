@@ -157,6 +157,23 @@
       "message": "Teachers, please reply me, I value your feedbacks.",
       "revId": "7425cf155e8c1cb52f755fcfd78bf56ecfb66a95",
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "092c105e_c040de05",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 6
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 3390802
+      },
+      "writtenOn": "2024-05-06T13:15:20Z",
+      "side": 1,
+      "message": "I have abandoned 3 CL:\n\n1. https://gn-review.googlesource.com/c/gn/+/17160\n2. https://gn-review.googlesource.com/c/gn/+/17161\n3. https://gn-review.googlesource.com/c/gn/+/17122\n\nAre they ok? I don\u0027t need to do anything else?",
+      "revId": "7425cf155e8c1cb52f755fcfd78bf56ecfb66a95",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
     }
   ],
   "submitRequirementResults": [
