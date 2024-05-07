@@ -263,6 +263,23 @@
       "parentUuid": "6ff4e345_e68261c9",
       "revId": "7425cf155e8c1cb52f755fcfd78bf56ecfb66a95",
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "57da5a32_a49934ef",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 6
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 3390802
+      },
+      "writtenOn": "2024-05-07T06:10:03Z",
+      "side": 1,
+      "message": "I think we have a very big misunderstand for Gerrit.\n\nI do not ask whether have issues.\n\nLet me change another way to ask:\n1. Have David reviewd all 6 patchsets in this [CL](https://gn-review.googlesource.com/c/gn/+/17122)?\n2. are these 6 patchsets exist in David\u0027s Gerrit dashboard?\n\nSorry, everyone, I am freshman for Gerrit. Gerrit make me very crazy and confused.\n\nplease answer me **YES** or **NO** directly for these 2 questions.",
+      "revId": "7425cf155e8c1cb52f755fcfd78bf56ecfb66a95",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
     }
   ],
   "submitRequirementResults": [
