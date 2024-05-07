@@ -245,6 +245,24 @@
       "message": "1. I have no \"google.com\" account so that I can not login your link.\n2. This CL have 6 patchsets, and I have abandoned this CL like you say. so now do you receive all 6 patchsets in this CL?",
       "revId": "7425cf155e8c1cb52f755fcfd78bf56ecfb66a95",
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a4bd9570_667092d2",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 6
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000030
+      },
+      "writtenOn": "2024-05-07T03:43:37Z",
+      "side": 1,
+      "message": "I think you can see https://gn-review.googlesource.com/c/gn/+/17122/comments/092c105e_c040de05 instead.",
+      "parentUuid": "6ff4e345_e68261c9",
+      "revId": "7425cf155e8c1cb52f755fcfd78bf56ecfb66a95",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
     }
   ],
   "submitRequirementResults": [
