@@ -298,6 +298,23 @@
       "parentUuid": "57da5a32_a49934ef",
       "revId": "7425cf155e8c1cb52f755fcfd78bf56ecfb66a95",
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "6d3014c7_bb8da3c1",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 6
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 3390802
+      },
+      "writtenOn": "2024-05-07T08:39:12Z",
+      "side": 1,
+      "message": "Ok, these are 3 new CL that are convenience for David to review.\n\n1. https://gn-review.googlesource.com/c/gn/+/17180?usp\u003ddashboard\n2. https://gn-review.googlesource.com/c/gn/+/17181?usp\u003ddashboard\n3. https://gn-review.googlesource.com/c/gn/+/17182?usp\u003ddashboard\n\nPlease review, I wait for you.",
+      "revId": "7425cf155e8c1cb52f755fcfd78bf56ecfb66a95",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
     }
   ],
   "submitRequirementResults": [
