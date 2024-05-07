@@ -280,6 +280,24 @@
       "message": "I think we have a very big misunderstand for Gerrit.\n\nI do not ask whether have issues.\n\nLet me change another way to ask:\n1. Have David reviewd all 6 patchsets in this [CL](https://gn-review.googlesource.com/c/gn/+/17122)?\n2. are these 6 patchsets exist in David\u0027s Gerrit dashboard?\n\nSorry, everyone, I am freshman for Gerrit. Gerrit make me very crazy and confused.\n\nplease answer me **YES** or **NO** directly for these 2 questions.",
       "revId": "7425cf155e8c1cb52f755fcfd78bf56ecfb66a95",
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "4fda18c9_90366ecf",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 6
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000030
+      },
+      "writtenOn": "2024-05-07T07:12:17Z",
+      "side": 1,
+      "message": "\u003e I think we have a very big misunderstand for Gerrit.\n\u003e \n\u003e I do not ask whether have issues.\n\u003e \n\u003e Let me change another way to ask:\n\u003e 1. Have David reviewd all 6 patchsets in this [CL](https://gn-review.googlesource.com/c/gn/+/17122)?\n\nI don\u0027t think so, we usually review the latest patchset at that time.\n\n\u003e 2. are these 6 patchsets exist in David\u0027s Gerrit dashboard?\n\u003e \n\nYes.\n\n\u003e Sorry, everyone, I am freshman for Gerrit. Gerrit make me very crazy and confused.\n\u003e \n\u003e please answer me **YES** or **NO** directly for these 2 questions.",
+      "parentUuid": "57da5a32_a49934ef",
+      "revId": "7425cf155e8c1cb52f755fcfd78bf56ecfb66a95",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
     }
   ],
   "submitRequirementResults": [
