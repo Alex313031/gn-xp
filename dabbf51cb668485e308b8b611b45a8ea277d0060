@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "761a1aa8_7cef2634",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000532
+      },
+      "writtenOn": "2024-05-08T14:31:35Z",
+      "side": 1,
+      "message": "This is now \"Ready to submit\" but I \"don\u0027t have permission to submit change\". It looks like someone else will need to use the submit button (or give me permission to use it) in order to land this.",
+      "revId": "dabbf51cb668485e308b8b611b45a8ea277d0060",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    }
+  ]
+}
