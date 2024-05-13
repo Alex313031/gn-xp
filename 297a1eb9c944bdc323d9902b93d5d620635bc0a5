@@ -18,6 +18,23 @@
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "8406a15a_369370a5",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 3390802
+      },
+      "writtenOn": "2024-05-13T08:51:53Z",
+      "side": 1,
+      "message": "```shell\nmy@DESKTOP MINGW64 /e/software/msys2\n$ ls\nInstallationLog.txt  clang32.ini   clangarm64/      dev/                 mingw32/      mingw64.exe*  msys2.ini        ucrt64/        uninstall.exe*\nautorebase.bat       clang64/      clangarm64.exe*  etc/                 mingw32.exe*  mingw64.ico   msys2_shell.cmd  ucrt64.exe*    uninstall.ini\nclang32/             clang64.exe*  clangarm64.ico   home/                mingw32.ico   mingw64.ini   network.xml      ucrt64.ico     usr/\nclang32.exe*         clang64.ico   clangarm64.ini   installer.dat        mingw32.ini   msys2.exe*    opt/             ucrt64.ini     var/\nclang32.ico          clang64.ini   components.xml   installerResources/  mingw64/      msys2.ico     tmp/             uninstall.dat\n```\n\nThese are terminal for specific MinGW [environment](https://www.msys2.org/docs/environments/) in the `msys2` installation folder.\n\nI just take some examples.",
+      "revId": "297a1eb9c944bdc323d9902b93d5d620635bc0a5",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "a4d36305_8875738d",
