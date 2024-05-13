@@ -16,6 +16,29 @@
       "message": "please do not forget this CL to review. It is exist for long time.",
       "revId": "297a1eb9c944bdc323d9902b93d5d620635bc0a5",
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a4d36305_8875738d",
+        "filename": "docs/mingw.md",
+        "patchSetId": 1
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 1000030
+      },
+      "writtenOn": "2024-05-13T08:39:02Z",
+      "side": 1,
+      "message": "Why do you mean by `open` here?",
+      "range": {
+        "startLine": 9,
+        "startChar": 0,
+        "endLine": 10,
+        "endChar": 24
+      },
+      "revId": "297a1eb9c944bdc323d9902b93d5d620635bc0a5",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
     }
   ]
 }
