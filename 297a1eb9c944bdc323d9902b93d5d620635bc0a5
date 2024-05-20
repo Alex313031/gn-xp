@@ -69,6 +69,23 @@
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "aa24399e_9ea785c4",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 3390802
+      },
+      "writtenOn": "2024-05-20T15:21:59Z",
+      "side": 1,
+      "message": "```\n2. open clang64.exe terminal in the msys2 installation folder\n   ucrt64.exe is ok too.\n```\n\nwhat do you think of this update?",
+      "revId": "297a1eb9c944bdc323d9902b93d5d620635bc0a5",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "a4d36305_8875738d",
