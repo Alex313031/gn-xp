@@ -86,6 +86,23 @@
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "b3a15e69_bd55d65e",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 3390802
+      },
+      "writtenOn": "2024-05-20T15:33:59Z",
+      "side": 1,
+      "message": "```\n2. In the msys2 installation folder, `clang32.exe`, `clang64.exe`, `clangarm64.exe`,`mingw32.exe`, `mingw64.exe`, `ucrt64.exe` are terminal for MinGW environment. I take `clang64.exe` for example, please open `clang64.exe` terminal.\n   \n3. `pacman -S mingw-w64-clang-x86_64-toolchain mingw-w64-clang-x86_64-ninja git`\n```\n\nHow about this update?",
+      "revId": "297a1eb9c944bdc323d9902b93d5d620635bc0a5",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "a4d36305_8875738d",
