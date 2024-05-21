@@ -255,6 +255,53 @@
       },
       "revId": "297a1eb9c944bdc323d9902b93d5d620635bc0a5",
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b8a012be_3c2bec17",
+        "filename": "docs/mingw.md",
+        "patchSetId": 1
+      },
+      "lineNbr": 12,
+      "author": {
+        "id": 1000030
+      },
+      "writtenOn": "2024-05-21T09:01:37Z",
+      "side": 1,
+      "message": "Looks good.",
+      "parentUuid": "821becbb_e1087675",
+      "range": {
+        "startLine": 12,
+        "startChar": 31,
+        "endLine": 12,
+        "endChar": 37
+      },
+      "revId": "297a1eb9c944bdc323d9902b93d5d620635bc0a5",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8b57cb29_4d5f6e6c",
+        "filename": "docs/mingw.md",
+        "patchSetId": 1
+      },
+      "lineNbr": 20,
+      "author": {
+        "id": 1000030
+      },
+      "writtenOn": "2024-05-21T09:01:37Z",
+      "side": 1,
+      "message": "Could you follow \nhttps://google.github.io/styleguide/docguide/style.html#use-lazy-numbering-for-long-lists\n?",
+      "range": {
+        "startLine": 20,
+        "startChar": 0,
+        "endLine": 20,
+        "endChar": 1
+      },
+      "revId": "297a1eb9c944bdc323d9902b93d5d620635bc0a5",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
     }
   ]
 }
