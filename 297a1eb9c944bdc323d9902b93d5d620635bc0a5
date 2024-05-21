@@ -121,6 +121,24 @@
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "cad50be8_b5e69209",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 3390802
+      },
+      "writtenOn": "2024-05-21T08:03:24Z",
+      "side": 1,
+      "message": "ok",
+      "parentUuid": "412fb841_ae7a613f",
+      "revId": "297a1eb9c944bdc323d9902b93d5d620635bc0a5",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "a4d36305_8875738d",
@@ -205,6 +223,30 @@
       "writtenOn": "2024-05-21T07:51:18Z",
       "side": 1,
       "message": "should run?",
+      "range": {
+        "startLine": 12,
+        "startChar": 31,
+        "endLine": 12,
+        "endChar": 37
+      },
+      "revId": "297a1eb9c944bdc323d9902b93d5d620635bc0a5",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "821becbb_e1087675",
+        "filename": "docs/mingw.md",
+        "patchSetId": 1
+      },
+      "lineNbr": 12,
+      "author": {
+        "id": 3390802
+      },
+      "writtenOn": "2024-05-21T08:03:24Z",
+      "side": 1,
+      "message": "```\n2. In the msys2 installation folder, `clang32.exe`, `clang64.exe`, `clangarm64.exe`,`mingw32.exe`, `mingw64.exe`, `ucrt64.exe` are terminal for MinGW environment. I take `clang64.exe` for example, please open `clang64.exe` terminal.\n\n3. run command: `pacman -S mingw-w64-clang-x86_64-toolchain mingw-w64-clang-x86_64-ninja git`\n```\n\nHow about this update in the final? If you are ok, I create a new CL from this CL.",
+      "parentUuid": "165235c0_6aa7a7e5",
       "range": {
         "startLine": 12,
         "startChar": 31,
