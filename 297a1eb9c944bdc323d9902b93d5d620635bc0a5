@@ -518,6 +518,30 @@
       },
       "revId": "297a1eb9c944bdc323d9902b93d5d620635bc0a5",
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "dbcb6126_bfe70783",
+        "filename": "docs/mingw.md",
+        "patchSetId": 1
+      },
+      "lineNbr": 20,
+      "author": {
+        "id": 3390802
+      },
+      "writtenOn": "2024-05-23T06:08:27Z",
+      "side": 1,
+      "message": "I create a [new CL](https://gn-review.googlesource.com/c/gn/+/17220) to replace this. please review.\n\nBy the way, Can individual like me not be allowed to `OWNERS` file? right?",
+      "parentUuid": "c7718b1d_b08e2561",
+      "range": {
+        "startLine": 20,
+        "startChar": 0,
+        "endLine": 20,
+        "endChar": 1
+      },
+      "revId": "297a1eb9c944bdc323d9902b93d5d620635bc0a5",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
     }
   ]
 }
