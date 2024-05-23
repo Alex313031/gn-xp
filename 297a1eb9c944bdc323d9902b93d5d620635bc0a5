@@ -566,6 +566,30 @@
       },
       "revId": "297a1eb9c944bdc323d9902b93d5d620635bc0a5",
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7ef9b05f_66065544",
+        "filename": "docs/mingw.md",
+        "patchSetId": 1
+      },
+      "lineNbr": 20,
+      "author": {
+        "id": 3390802
+      },
+      "writtenOn": "2024-05-23T06:19:23Z",
+      "side": 1,
+      "message": "This [new CL](https://gn-review.googlesource.com/c/gn/+/17220) is a full new patchset. do you not receive this review request?",
+      "parentUuid": "e8548d02_a87100e7",
+      "range": {
+        "startLine": 20,
+        "startChar": 0,
+        "endLine": 20,
+        "endChar": 1
+      },
+      "revId": "297a1eb9c944bdc323d9902b93d5d620635bc0a5",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
     }
   ],
   "submitRequirementResults": [
