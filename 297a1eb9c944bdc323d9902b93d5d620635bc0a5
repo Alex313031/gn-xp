@@ -662,6 +662,30 @@
       },
       "revId": "297a1eb9c944bdc323d9902b93d5d620635bc0a5",
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "21675bb6_0b4dcfad",
+        "filename": "docs/mingw.md",
+        "patchSetId": 1
+      },
+      "lineNbr": 20,
+      "author": {
+        "id": 3390802
+      },
+      "writtenOn": "2024-05-23T06:41:00Z",
+      "side": 1,
+      "message": "push Patch Set\n```shell\n  // fetch and checkout the change\n  // (checkout command copied from change screen)\n  $ git fetch https://gerrithost/myProject refs/changes/74/67374/2 \u0026\u0026 git checkout FETCH_HEAD\n\n  // rework the change\n  $ git add \u003cpath-of-reworked-file\u003e\n  ...\n\n  // amend commit\n  $ git commit --amend\n\n  // push patch set\n  $ git push origin HEAD:refs/for/master\n```\n\nThese shell is from https://gerrit-review.googlesource.com/Documentation/intro-user.html#upload-patch-set\n\nCan `git fetch https://gerrithost/myProject refs/changes/74/67374/2 \u0026\u0026 git checkout FETCH_HEAD` be replaced by `git pull` directly?",
+      "parentUuid": "63ecfd4e_4a593d9a",
+      "range": {
+        "startLine": 20,
+        "startChar": 0,
+        "endLine": 20,
+        "endChar": 1
+      },
+      "revId": "297a1eb9c944bdc323d9902b93d5d620635bc0a5",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
     }
   ],
   "submitRequirementResults": [
