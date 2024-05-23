@@ -542,6 +542,30 @@
       },
       "revId": "297a1eb9c944bdc323d9902b93d5d620635bc0a5",
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e8548d02_a87100e7",
+        "filename": "docs/mingw.md",
+        "patchSetId": 1
+      },
+      "lineNbr": 20,
+      "author": {
+        "id": 1000030
+      },
+      "writtenOn": "2024-05-23T06:13:33Z",
+      "side": 1,
+      "message": "\u003e I create a [new CL](https://gn-review.googlesource.com/c/gn/+/17220) to replace this. please review.\n\u003e \n\nCould you upload new patchset to this CL instead?\nhttps://gerrit-review.googlesource.com/Documentation/intro-user.html#upload-patch-set\n\n\n\u003e By the way, Can individual like me not be allowed to `OWNERS` file? right?\n\nYes, owners need to understand GN and its codebase very much.",
+      "parentUuid": "dbcb6126_bfe70783",
+      "range": {
+        "startLine": 20,
+        "startChar": 0,
+        "endLine": 20,
+        "endChar": 1
+      },
+      "revId": "297a1eb9c944bdc323d9902b93d5d620635bc0a5",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
     }
   ],
   "submitRequirementResults": [
