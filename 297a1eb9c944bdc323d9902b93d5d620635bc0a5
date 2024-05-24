@@ -782,6 +782,30 @@
       },
       "revId": "297a1eb9c944bdc323d9902b93d5d620635bc0a5",
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0ab8821a_c746c087",
+        "filename": "docs/mingw.md",
+        "patchSetId": 1
+      },
+      "lineNbr": 20,
+      "author": {
+        "id": 1000030
+      },
+      "writtenOn": "2024-05-24T05:00:01Z",
+      "side": 1,
+      "message": "I got that via\nhttps://gerrit-review.googlesource.com/Documentation/user-review-ui.html#download",
+      "parentUuid": "67f1d407_2d0e326b",
+      "range": {
+        "startLine": 20,
+        "startChar": 0,
+        "endLine": 20,
+        "endChar": 1
+      },
+      "revId": "297a1eb9c944bdc323d9902b93d5d620635bc0a5",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
     }
   ],
   "submitRequirementResults": [
