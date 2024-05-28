@@ -3,6 +3,148 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "c048a7ea_fcdfd9c1",
+        "filename": "docs/mingw.md",
+        "patchSetId": 2
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 1000067
+      },
+      "writtenOn": "2024-05-28T11:20:27Z",
+      "side": 1,
+      "message": "Nit: Rename with `# Building and using `gn` with Mingw on Windows`.",
+      "revId": "2b9957d8c734c311964b79165fc3fde113238524",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "28043e71_e0d0e684",
+        "filename": "docs/mingw.md",
+        "patchSetId": 2
+      },
+      "lineNbr": 6,
+      "author": {
+        "id": 1000067
+      },
+      "writtenOn": "2024-05-28T11:20:27Z",
+      "side": 1,
+      "message": "Avoid question marks and ambiguous section titles. Just call this `## Requirements`",
+      "fixSuggestions": [
+        {
+          "fixId": "d990d9bd_7f55ce2e",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "docs/mingw.md",
+              "range": {
+                "startLine": 6,
+                "startChar": 0,
+                "endLine": 7,
+                "endChar": 0
+              },
+              "replacement": "## Requirements\n"
+            }
+          ]
+        }
+      ],
+      "revId": "2b9957d8c734c311964b79165fc3fde113238524",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9ef12648_003b0eef",
+        "filename": "docs/mingw.md",
+        "patchSetId": 2
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 1000067
+      },
+      "writtenOn": "2024-05-28T11:20:27Z",
+      "side": 1,
+      "message": "Separate these in two sections, the first one named `## Requirements` and explains that the mingw clang toolchain and Ninja must be in the PATH environment variable, and the GN source code cloned from `https://gn.googlesource.com/gb`, then a single block, such as:\n\n```\n# Download clang toolchain, Ninja and git\npacman -S mingw-w64-clang-x86_64-toolchain mingw-w64-clang-x86_64-ninja git\n\n# Clong GN source code.\ngit clone https://gn.googlesource.com/gn gn\n```\n\nThe second section will be named \"## Build configuration` and explain the various options to configure the build, such as:\n\n```\ncd gn/\n\n# Default configuration for mingw build under msys2.\n# This generates a static executable that can be run anywhere.\n# Use --help for more configuration options.\nbuild/gen.py --platform mingw\n```\n\nThen add `## Building and Testing` with:\n\n```\n# Build GN and its unit-test suite.\nninja -C out\n\n# Run the GN unit-test suite to verify that everything works correctly.\nout/gn_unittests\n\n# Run the new GN executable to verify its version.\n# Copy it somewhere else\nout/gn --version\n```",
+      "fixSuggestions": [
+        {
+          "fixId": "1a503ded_979f28ed",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "docs/mingw.md",
+              "range": {
+                "startLine": 8,
+                "startChar": 0,
+                "endLine": 9,
+                "endChar": 0
+              },
+              "replacement": "### Requirements\n\n1.  Install [msys2](https://www.msys2.org/)\n"
+            },
+            {
+              "path": "docs/mingw.md",
+              "range": {
+                "startLine": 10,
+                "startChar": 0,
+                "endLine": 14,
+                "endChar": 0
+              },
+              "replacement": "1.  Run command: `pacman -S mingw-w64-clang-x86_64-toolchain mingw-w64-clang-x86_64-ninja git`\n1.  Run command: `git clone https://gn.googlesource.com/gn`\n1.  Run command: `cd gn`\n\n### Build `gn`\n\n1.  Run command: `build/gen.py --platform mingw --no-static-libstdc++`\n"
+            },
+            {
+              "path": "docs/mingw.md",
+              "range": {
+                "startLine": 16,
+                "startChar": 0,
+                "endLine": 19,
+                "endChar": 0
+              },
+              "replacement": "1.  Run command: `ninja -C out`\n1.  Run command: `out/gn --version`\n1.  Run command: `out/gn_unittests`\n"
+            }
+          ]
+        }
+      ],
+      "revId": "2b9957d8c734c311964b79165fc3fde113238524",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2724c26b_5ccc9434",
+        "filename": "docs/mingw.md",
+        "patchSetId": 2
+      },
+      "lineNbr": 20,
+      "author": {
+        "id": 1000067
+      },
+      "writtenOn": "2024-05-28T11:20:27Z",
+      "side": 1,
+      "message": "This whole `Notes` section is confusingly written, can you simplify it?. Also avoid the use of `you` or `we` as they are often confusing or ambiguous. Something like:\n\n\"\"\"While `gn` can be built in the `clang64` environment (which symlinks `g++` to `clang++`), the build rules in the [`examples/simple_build/`](../examples/simple_build/) directory use GCC-specific compiler options, and will not work there.\"\"\"",
+      "fixSuggestions": [
+        {
+          "fixId": "86f9a87d_915bd4eb",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "docs/mingw.md",
+              "range": {
+                "startLine": 20,
+                "startChar": 0,
+                "endLine": 23,
+                "endChar": 0
+              },
+              "replacement": "\u003e Notes:\n\u003e\n\u003e For \"mingw-w64-clang-x86_64-toolchain\" in the clang64 environment, g++ is a\n\u003e copy of clang++. The toolchain that builds `gn` does not use vendor lock-in\n\u003e compiler command flags, so you can build `gn` with these clang++, g++. But\n\u003e [examples/simple_build](../examples/simple_build/) in the `gn` repo, toolchain\n\u003e use vendor (GCC) lock-in compiler command flags, so you must use\n\u003e `mingw-w64-ucrt-x86_64-toolchain` in the ucrt64 environment, this g++ is not\n\u003e copy of clang++.\n"
+            }
+          ]
+        }
+      ],
+      "revId": "2b9957d8c734c311964b79165fc3fde113238524",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "0dfe9fbe_5b8156f6",
         "filename": "docs/mingw.md",
         "patchSetId": 2
