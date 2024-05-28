@@ -1,0 +1,45 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0dfe9fbe_5b8156f6",
+        "filename": "docs/mingw.md",
+        "patchSetId": 2
+      },
+      "lineNbr": 21,
+      "author": {
+        "id": 1000030
+      },
+      "writtenOn": "2024-05-28T05:54:49Z",
+      "side": 1,
+      "message": "`mingw-w64-clang-x86_64-toolchain`?",
+      "range": {
+        "startLine": 21,
+        "startChar": 6,
+        "endLine": 21,
+        "endChar": 40
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "691eaa0c_94fff02a",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "docs/mingw.md",
+              "range": {
+                "startLine": 21,
+                "startChar": 0,
+                "endLine": 22,
+                "endChar": 0
+              },
+              "replacement": "\u003e For `mingw-w64-clang-x86_64-toolchain` in the clang64 environment, g++ is copy of clang++. toolchain that build `gn` do not use vendor lock-in compiler command flags, so you can build `gn` with these clang++, g++.\n"
+            }
+          ]
+        }
+      ],
+      "revId": "2b9957d8c734c311964b79165fc3fde113238524",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    }
+  ]
+}
