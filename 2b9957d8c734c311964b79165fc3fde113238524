@@ -199,6 +199,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "9811bef3_f6ccc002",
+        "filename": "docs/mingw.md",
+        "patchSetId": 2
+      },
+      "lineNbr": 20,
+      "author": {
+        "id": 1000067
+      },
+      "writtenOn": "2024-05-28T13:53:39Z",
+      "side": 1,
+      "message": "Your new patchset 3 has the same content as patchset 2, and thus contains no change at all.\n\nAlso, as a form or respect, I ask you to not call me \"teacher\", use proper naming (David, not divid), and read the Gerrit walktrhough very carefully before uploading anything new.\n\nReviewers receive an email when a new patchset is uploaded, there is no need to add a comment for this, as it creates useless noise for us.",
+      "parentUuid": "c7909e96_edcf8cc9",
+      "revId": "2b9957d8c734c311964b79165fc3fde113238524",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "0dfe9fbe_5b8156f6",
         "filename": "docs/mingw.md",
         "patchSetId": 2
