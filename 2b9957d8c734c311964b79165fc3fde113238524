@@ -181,6 +181,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "c7909e96_edcf8cc9",
+        "filename": "docs/mingw.md",
+        "patchSetId": 2
+      },
+      "lineNbr": 20,
+      "author": {
+        "id": 3390802
+      },
+      "writtenOn": "2024-05-28T13:36:32Z",
+      "side": 1,
+      "message": "Hello divid teacher, are you satisfy this new Patchset 3?\n\nThis Patchset 3 include `build/gen.py`, `docs/mingw.md`, `README.md`.\n\nDo you see them all?\n\nI value your feedback.",
+      "parentUuid": "26a9d42a_6ff9d8ff",
+      "revId": "2b9957d8c734c311964b79165fc3fde113238524",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "0dfe9fbe_5b8156f6",
         "filename": "docs/mingw.md",
         "patchSetId": 2
