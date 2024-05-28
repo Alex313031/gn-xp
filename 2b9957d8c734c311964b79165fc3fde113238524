@@ -163,6 +163,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "26a9d42a_6ff9d8ff",
+        "filename": "docs/mingw.md",
+        "patchSetId": 2
+      },
+      "lineNbr": 20,
+      "author": {
+        "id": 1000067
+      },
+      "writtenOn": "2024-05-28T12:07:22Z",
+      "side": 1,
+      "message": "Create a new patchset for this CL, have you read the Gerrit walkthrough at https://gerrit-review.googlesource.com/Documentation/intro-gerrit-walkthrough.html ?",
+      "parentUuid": "2b304939_71014e5c",
+      "revId": "2b9957d8c734c311964b79165fc3fde113238524",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "0dfe9fbe_5b8156f6",
         "filename": "docs/mingw.md",
         "patchSetId": 2
