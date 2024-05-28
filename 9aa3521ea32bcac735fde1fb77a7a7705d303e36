@@ -1,0 +1,223 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "bb9c7b3c_0f4a87d4",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 4
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 1000067
+      },
+      "writtenOn": "2024-05-28T14:55:08Z",
+      "side": 1,
+      "message": "nit: Split into two distinct lines.",
+      "revId": "9aa3521ea32bcac735fde1fb77a7a7705d303e36",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "602d4988_b2f07d50",
+        "filename": "docs/mingw.md",
+        "patchSetId": 4
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 1000067
+      },
+      "writtenOn": "2024-05-28T14:55:08Z",
+      "side": 1,
+      "message": "Please use proper English and remove un-necessary phrasing, i.e. replace with: `Start a Terminal windows for MSYS2 development by opening one of `clang32.exe`, `clang64.exe`, `mingw32.exe`, `mingw64.exe` or `ucrt64.exe`, from the MSYS2 installation directory.`",
+      "fixSuggestions": [
+        {
+          "fixId": "b008972b_6853b22a",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "docs/mingw.md",
+              "range": {
+                "startLine": 7,
+                "startChar": 0,
+                "endLine": 8,
+                "endChar": 0
+              },
+              "replacement": ""
+            },
+            {
+              "path": "docs/mingw.md",
+              "range": {
+                "startLine": 9,
+                "startChar": 0,
+                "endLine": 10,
+                "endChar": 0
+              },
+              "replacement": "1.  Start a Terminal windows for MSYS2 development by opening one of `clang32.exe`, `clang64.exe`, `mingw32.exe`, `mingw64.e\n"
+            }
+          ]
+        }
+      ],
+      "revId": "9aa3521ea32bcac735fde1fb77a7a7705d303e36",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "641c727c_3966ee57",
+        "filename": "docs/mingw.md",
+        "patchSetId": 4
+      },
+      "lineNbr": 11,
+      "author": {
+        "id": 1000067
+      },
+      "writtenOn": "2024-05-28T14:55:08Z",
+      "side": 1,
+      "message": "Proper English please: \"To download the clang toolchain, Ninja and git programs, run comman: ....`",
+      "revId": "9aa3521ea32bcac735fde1fb77a7a7705d303e36",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4da5f9f2_cdeafc32",
+        "filename": "docs/mingw.md",
+        "patchSetId": 4
+      },
+      "lineNbr": 16,
+      "author": {
+        "id": 1000067
+      },
+      "writtenOn": "2024-05-28T14:55:08Z",
+      "side": 1,
+      "message": "`To clone \"gn\" source code, run command: ....`",
+      "fixSuggestions": [
+        {
+          "fixId": "e4ec8363_4236a0da",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "docs/mingw.md",
+              "range": {
+                "startLine": 15,
+                "startChar": 0,
+                "endLine": 17,
+                "endChar": 0
+              },
+              "replacement": "1.  To clone `gn` source code, run command: `git clone https://gn.googlesource.com/gn`\n"
+            }
+          ]
+        }
+      ],
+      "revId": "9aa3521ea32bcac735fde1fb77a7a7705d303e36",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5c2ba84e_38ccd0ca",
+        "filename": "docs/mingw.md",
+        "patchSetId": 4
+      },
+      "lineNbr": 19,
+      "author": {
+        "id": 1000067
+      },
+      "writtenOn": "2024-05-28T14:55:08Z",
+      "side": 1,
+      "message": "\"This configuration generates a static executable that does not depend on MSYS2, and can be run in any development environment.\"",
+      "fixSuggestions": [
+        {
+          "fixId": "b593a508_07fbc75b",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "docs/mingw.md",
+              "range": {
+                "startLine": 19,
+                "startChar": 0,
+                "endLine": 20,
+                "endChar": 0
+              },
+              "replacement": "    This configuration generates a static executable that can be run in any\n    development environment, and does not depend on MSYS2.  \n"
+            }
+          ]
+        }
+      ],
+      "revId": "9aa3521ea32bcac735fde1fb77a7a7705d303e36",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "46c31979_d12467fb",
+        "filename": "docs/mingw.md",
+        "patchSetId": 4
+      },
+      "lineNbr": 23,
+      "author": {
+        "id": 1000067
+      },
+      "writtenOn": "2024-05-28T14:55:08Z",
+      "side": 1,
+      "message": "Remove this phrase, it provides no useful information to developers.",
+      "fixSuggestions": [
+        {
+          "fixId": "5bf3d278_c1542ef4",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "docs/mingw.md",
+              "range": {
+                "startLine": 23,
+                "startChar": 0,
+                "endLine": 24,
+                "endChar": 0
+              },
+              "replacement": "    Use `--no-static-libstdc++` flag.\n"
+            }
+          ]
+        }
+      ],
+      "revId": "9aa3521ea32bcac735fde1fb77a7a7705d303e36",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "431c76a3_62a4e432",
+        "filename": "docs/mingw.md",
+        "patchSetId": 4
+      },
+      "lineNbr": 40,
+      "author": {
+        "id": 1000067
+      },
+      "writtenOn": "2024-05-28T14:55:08Z",
+      "side": 1,
+      "message": "Replace with: \"\"\"Note that the build rules  in [examples/simple_build](../examples/simple_build/) require GCC-specific compiler macros, and thus only work in the `ucrt64` MSYS2 development environment.\"\"\"",
+      "fixSuggestions": [
+        {
+          "fixId": "724f5ea6_a76e9176",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "docs/mingw.md",
+              "range": {
+                "startLine": 37,
+                "startChar": 0,
+                "endLine": 41,
+                "endChar": 0
+              },
+              "replacement": "\u003e Note that the build rules in [examples/simple_build](../examples/simple_build/) require GCC-specific compiler macros, and thus only work in the `ucrt64` MSYS2 development environment.\n"
+            }
+          ]
+        }
+      ],
+      "revId": "9aa3521ea32bcac735fde1fb77a7a7705d303e36",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    }
+  ]
+}
