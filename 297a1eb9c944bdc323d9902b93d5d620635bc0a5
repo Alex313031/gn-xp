@@ -305,6 +305,30 @@
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "a9b9b716_e3d0280a",
+        "filename": "docs/mingw.md",
+        "patchSetId": 1
+      },
+      "lineNbr": 12,
+      "author": {
+        "id": 3390802
+      },
+      "writtenOn": "2024-05-28T06:06:56Z",
+      "side": 1,
+      "message": "1. Were you in holiday for the last 2 days?\n2. What else do you need me to do?",
+      "parentUuid": "018d5843_dfd3dfce",
+      "range": {
+        "startLine": 12,
+        "startChar": 31,
+        "endLine": 12,
+        "endChar": 37
+      },
+      "revId": "297a1eb9c944bdc323d9902b93d5d620635bc0a5",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "8b57cb29_4d5f6e6c",
