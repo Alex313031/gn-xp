@@ -141,6 +141,24 @@
       "parentUuid": "397df36a_358a34ab",
       "revId": "b841fcb7d42d39c042c07ec630e04230d2cfdf06",
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "97b7b5c9_489e665e",
+        "filename": "src/gn/command_desc.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 647,
+      "author": {
+        "id": 1000397
+      },
+      "writtenOn": "2024-05-29T21:05:29Z",
+      "side": 1,
+      "message": "Looking at that CL, the code that I\u0027m adding here would need to be in the wrapper function you added at line 707 in https://gn-review.googlesource.com/c/gn/+/12882/7/src/gn/command_desc.cc",
+      "parentUuid": "c31d6320_65b27578",
+      "revId": "b841fcb7d42d39c042c07ec630e04230d2cfdf06",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
     }
   ]
 }
