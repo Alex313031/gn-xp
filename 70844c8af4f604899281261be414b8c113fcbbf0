@@ -16,6 +16,24 @@
       "message": "Hello everyone, Can you invite me to join [Chromium slack](https://chromium.slack.com/)? I have no `*.google.com` email to join. So I need you to invite me. Chromium docs say you can send me invited link.\n\nI am reviewing `Chromium` source code for more than 3 months. It is very, very, very big. I am very, very, very painful to understand its all source code. So I need much talking.\n\nThank you for your patient guide. `GN` and `Gerrit` give me a interesting and meaningful travel.",
       "revId": "70844c8af4f604899281261be414b8c113fcbbf0",
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "1b9e6b47_d32379c4",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 7
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000067
+      },
+      "writtenOn": "2024-05-29T11:55:04Z",
+      "side": 1,
+      "message": "Sorry but no, this is reserved for Chromium contributors, i.e. people very actively working on the project (this requires significant contributions first, and a good understanding of its structure and source code).\n\nTry to use the chromium-discuss mailing list instead if you have questions about the project.",
+      "parentUuid": "d6e7b996_af6d0214",
+      "revId": "70844c8af4f604899281261be414b8c113fcbbf0",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
     }
   ]
 }
