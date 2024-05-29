@@ -18,6 +18,24 @@
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "d6cab402_41dd16ef",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 4
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 1000067
+      },
+      "writtenOn": "2024-05-29T08:02:58Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "bb9c7b3c_0f4a87d4",
+      "revId": "9aa3521ea32bcac735fde1fb77a7a7705d303e36",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "602d4988_b2f07d50",
@@ -80,6 +98,24 @@
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "e74c822f_54fdc2f3",
+        "filename": "docs/mingw.md",
+        "patchSetId": 4
+      },
+      "lineNbr": 11,
+      "author": {
+        "id": 1000067
+      },
+      "writtenOn": "2024-05-29T08:02:58Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "641c727c_3966ee57",
+      "revId": "9aa3521ea32bcac735fde1fb77a7a7705d303e36",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "4da5f9f2_cdeafc32",
@@ -111,6 +147,24 @@
           ]
         }
       ],
+      "revId": "9aa3521ea32bcac735fde1fb77a7a7705d303e36",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d2886280_90e6eea8",
+        "filename": "docs/mingw.md",
+        "patchSetId": 4
+      },
+      "lineNbr": 16,
+      "author": {
+        "id": 1000067
+      },
+      "writtenOn": "2024-05-29T08:02:58Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "4da5f9f2_cdeafc32",
       "revId": "9aa3521ea32bcac735fde1fb77a7a7705d303e36",
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
     },
@@ -185,6 +239,24 @@
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "08b53a94_a8d020ce",
+        "filename": "docs/mingw.md",
+        "patchSetId": 4
+      },
+      "lineNbr": 23,
+      "author": {
+        "id": 1000067
+      },
+      "writtenOn": "2024-05-29T08:02:58Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "46c31979_d12467fb",
+      "revId": "9aa3521ea32bcac735fde1fb77a7a7705d303e36",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "431c76a3_62a4e432",
@@ -216,6 +288,24 @@
           ]
         }
       ],
+      "revId": "9aa3521ea32bcac735fde1fb77a7a7705d303e36",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "24ee0e2a_fd57d227",
+        "filename": "docs/mingw.md",
+        "patchSetId": 4
+      },
+      "lineNbr": 40,
+      "author": {
+        "id": 1000067
+      },
+      "writtenOn": "2024-05-29T08:02:58Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "431c76a3_62a4e432",
       "revId": "9aa3521ea32bcac735fde1fb77a7a7705d303e36",
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
     }
