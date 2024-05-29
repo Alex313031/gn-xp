@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "9283f88f_5bacf15a",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1002217
+      },
+      "writtenOn": "2024-05-29T16:23:35Z",
+      "side": 1,
+      "message": "Needs a 2nd stamp. Could someone also CQ this for me? Seems I don\u0027t have the ACLs to vote on the CQ labels",
+      "revId": "5a914ac9362ad843c38977f5b04a4cb1b2a10418",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    }
+  ]
+}
