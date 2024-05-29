@@ -159,6 +159,24 @@
       "parentUuid": "c31d6320_65b27578",
       "revId": "b841fcb7d42d39c042c07ec630e04230d2cfdf06",
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "bfd029ac_73c65491",
+        "filename": "src/gn/command_desc.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 647,
+      "author": {
+        "id": 1000067
+      },
+      "writtenOn": "2024-05-29T21:15:16Z",
+      "side": 1,
+      "message": "Thanks for looking into it. Do as you please, I\u0027ll be happy to rebase my CLs around your change after you submit it anyway :-)",
+      "parentUuid": "97b7b5c9_489e665e",
+      "revId": "b841fcb7d42d39c042c07ec630e04230d2cfdf06",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
     }
   ]
 }
