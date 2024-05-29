@@ -105,6 +105,24 @@
       "parentUuid": "9b3f7501_42b39ed4",
       "revId": "b841fcb7d42d39c042c07ec630e04230d2cfdf06",
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "397df36a_358a34ab",
+        "filename": "src/gn/command_desc.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 647,
+      "author": {
+        "id": 1000397
+      },
+      "writtenOn": "2024-05-29T19:49:34Z",
+      "side": 1,
+      "message": "I have this drafted up, but how does the query persistent server mode work with the `desc` command which is creating it\u0027s own (disposable) `Setup` object (line 633)?",
+      "parentUuid": "8f3f8f25_d4b2159a",
+      "revId": "b841fcb7d42d39c042c07ec630e04230d2cfdf06",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
     }
   ]
 }
