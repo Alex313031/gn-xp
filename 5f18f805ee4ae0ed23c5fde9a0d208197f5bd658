@@ -33,6 +33,42 @@
       "message": "Can we submit this next week instead of today (friday)? This will make it much easier for us to work on our own fixes (technically, this will just prevent our GN roller to use the newest GN binary).",
       "revId": "5f18f805ee4ae0ed23c5fde9a0d208197f5bd658",
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "0f73d621_b5a25fbc",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1002072
+      },
+      "writtenOn": "2024-05-31T14:40:37Z",
+      "side": 1,
+      "message": "Thanks for working on it!",
+      "parentUuid": "5e6714f1_f0a7451d",
+      "revId": "5f18f805ee4ae0ed23c5fde9a0d208197f5bd658",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "6b7093d0_4c67840d",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1002072
+      },
+      "writtenOn": "2024-05-31T14:40:37Z",
+      "side": 1,
+      "message": "Yep that\u0027s fine with me",
+      "parentUuid": "2c49310f_e0832d5c",
+      "revId": "5f18f805ee4ae0ed23c5fde9a0d208197f5bd658",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
     }
   ]
 }
