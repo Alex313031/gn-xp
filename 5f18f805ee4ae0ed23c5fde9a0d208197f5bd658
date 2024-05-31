@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "5e6714f1_f0a7451d",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000067
+      },
+      "writtenOn": "2024-05-31T14:19:34Z",
+      "side": 1,
+      "message": "Regretably, this breaks the Fuchsia build in a couple of places. Example error message:\n\n```\n[13883/50332](1279) RUST host_x64/obj/src/lib/usb_bulk/rust/lib.actual/libusb_bulk.rlib host_x64/obj/src/lib/usb_bulk/rust/lib.actual/libusb_bulk.rmeta\nFAILED: host_x64/obj/src/lib/usb_bulk/rust/lib.actual/libusb_bulk.rlib host_x64/obj/src/lib/usb_bulk/rust/lib.actual/libusb_bulk.rmeta \n.... very long command elided ...\nerror: could not find native static library `usb_bulk`, perhaps an -L flag is missing?\n\nerror: aborting due to 1 previous error\n```\n\nI have filed https://fxbug.dev/343927812 to track this on the Fuchsia side.",
+      "revId": "5f18f805ee4ae0ed23c5fde9a0d208197f5bd658",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    }
+  ]
+}
