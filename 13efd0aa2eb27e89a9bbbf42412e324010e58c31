@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d4d10119_c77280ed",
+        "filename": "src/gn/ninja_rust_binary_target_writer_unittest.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 2029,
+      "author": {
+        "id": 1000030
+      },
+      "writtenOn": "2024-05-31T04:14:54Z",
+      "side": 1,
+      "message": "const?",
+      "range": {
+        "startLine": 2029,
+        "startChar": 2,
+        "endLine": 2029,
+        "endChar": 5
+      },
+      "revId": "13efd0aa2eb27e89a9bbbf42412e324010e58c31",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    }
+  ]
+}
