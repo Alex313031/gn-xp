@@ -16,6 +16,24 @@
       "message": "Hello,\n\nThis CL is causing a failure on `NinjaRustBinaryTargetWriterTest.SwiftModule` due to a difference output. It\u0027s expecting to see `-Lnative\u003dobj/foo` on the `rustdeps` output which is missing, tried on x64, ppc and s390x linux with clang and gcc. Do I need to add any new arguments when running tests?",
       "revId": "0fc01ef5fab9fe86d47ee73524c297b6768b59fc",
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "10d14456_2096202c",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 6
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1002072
+      },
+      "writtenOn": "2024-06-05T16:59:00Z",
+      "side": 1,
+      "message": "It should not be there, so the actual is correct. I don\u0027t know why that didn\u0027t occur on the bots..",
+      "parentUuid": "d9290725_191b5210",
+      "revId": "0fc01ef5fab9fe86d47ee73524c297b6768b59fc",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
     }
   ]
 }
