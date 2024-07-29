@@ -1,0 +1,39 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "cdc47355_c6a98384",
+        "filename": "src/gn/rust_tool.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 74,
+      "author": {
+        "id": 1000067
+      },
+      "writtenOn": "2024-07-29T22:01:22Z",
+      "side": 1,
+      "message": "note: this method is copied from tool.h, but neither methods are actually used and could probably be removed.",
+      "fixSuggestions": [
+        {
+          "fixId": "dc6d202f_0446d467",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "src/gn/rust_tool.h",
+              "range": {
+                "startLine": 72,
+                "startChar": 0,
+                "endLine": 72,
+                "endChar": 0
+              },
+              "replacement": "  //\n  // Note: this method is copied from tool.h, but we can\u0027t inherit it because\n  // it\u0027s a pure virtual function.\n"
+            }
+          ]
+        }
+      ],
+      "revId": "8047bc5a5755ca888f14c7b7961e36c8e5ccb5ca",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    }
+  ]
+}
