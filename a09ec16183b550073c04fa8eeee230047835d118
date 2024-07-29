@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "594dacaf_19359e02",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 12
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 3555079
+      },
+      "writtenOn": "2024-07-29T10:04:30Z",
+      "side": 1,
+      "message": "México, sin estudios, bai",
+      "revId": "a09ec16183b550073c04fa8eeee230047835d118",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    }
+  ]
+}
