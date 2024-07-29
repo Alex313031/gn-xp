@@ -117,6 +117,38 @@ TEST_F(FunctionToolchain, Rust) {
   }
 }
 
+TEST_F(FunctionToolchain, RustRuntimeOutputs) {
+  TestWithScope setup;
+
+  // These runtime outputs are a subset of the outputs so are OK.
+  {
+    TestParseInput input(
+        R"(toolchain("rust") {
+          tool("rust_dylib") {
+            command = "foo
+            runtime_outputs = [ "foo" ]
+          }
+        })");
+    ASSERT_FALSE(input.has_error());
+
+    Err err;
+    input.parsed()->Execute(setup.scope(), &err);
+    ASSERT_FALSE(err.has_error()) << err.message();
+
+    // It should have generated a toolchain.
+    ASSERT_EQ(1u, setup.items().size());
+    const Toolchain* toolchain = setup.items()[0]->AsToolchain();
+    ASSERT_TRUE(toolchain);
+
+    const Tool* rust = toolchain->GetTool(RustTool::kRsToolBin);
+    ASSERT_TRUE(rust);
+    ASSERT_EQ(rust->command().AsString(),
+              "{{rustenv}} rustc --crate-name {{crate_name}} --crate-type bin "
+              "{{rustflags}} -o {{output}} {{externs}} {{source}}");
+    ASSERT_EQ(rust->description().AsString(), "RUST {{output}}");
+  }
+}
+
 TEST_F(FunctionToolchain, Command) {
   TestWithScope setup;
 
