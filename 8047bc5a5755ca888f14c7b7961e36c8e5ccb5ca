@@ -3,6 +3,52 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "fe808950_dbd7aed9",
+        "filename": "src/gn/rust_tool.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 75,
+      "author": {
+        "id": 1000030
+      },
+      "writtenOn": "2024-07-30T04:39:16Z",
+      "side": 1,
+      "message": "Unnecessary spaces?",
+      "range": {
+        "startLine": 75,
+        "startChar": 71,
+        "endLine": 75,
+        "endChar": 73
+      },
+      "revId": "8047bc5a5755ca888f14c7b7961e36c8e5ccb5ca",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "bd7cd9db_ee9d3bdd",
+        "filename": "src/gn/rust_tool.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 199,
+      "author": {
+        "id": 1000030
+      },
+      "writtenOn": "2024-07-30T04:39:16Z",
+      "side": 1,
+      "message": "This can be `link_output().empty() !\u003d depend_output().empty()`?",
+      "range": {
+        "startLine": 198,
+        "startChar": 11,
+        "endLine": 199,
+        "endChar": 61
+      },
+      "revId": "8047bc5a5755ca888f14c7b7961e36c8e5ccb5ca",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "cdc47355_c6a98384",
         "filename": "src/gn/rust_tool.h",
         "patchSetId": 3
@@ -32,6 +78,29 @@
           ]
         }
       ],
+      "revId": "8047bc5a5755ca888f14c7b7961e36c8e5ccb5ca",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a1ad2646_48b81c3b",
+        "filename": "src/gn/rust_tool.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 95,
+      "author": {
+        "id": 1000030
+      },
+      "writtenOn": "2024-07-30T04:39:16Z",
+      "side": 1,
+      "message": "This can be 2 lines comment?",
+      "range": {
+        "startLine": 93,
+        "startChar": 0,
+        "endLine": 95,
+        "endChar": 14
+      },
       "revId": "8047bc5a5755ca888f14c7b7961e36c8e5ccb5ca",
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
     }
