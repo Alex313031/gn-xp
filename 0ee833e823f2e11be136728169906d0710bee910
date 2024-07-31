@@ -1,0 +1,39 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8516f121_5d4d242e",
+        "filename": "src/gn/rust_tool.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 65,
+      "author": {
+        "id": 1000012
+      },
+      "writtenOn": "2024-07-31T17:45:50Z",
+      "side": 1,
+      "message": "I think this check is breaking the Chromium build, where we specify runtime_outputs for rust_bin and rust_macro as well. I don\u0027t know anything about the rust toolchain integration, so I don\u0027t know if our toolchain usage is incorrect or this change is too restrictive.\n\nSee https://ci.chromium.org/ui/p/chromium/builders/try/win-arm64-compile-dbg/121823/overview\n\nThis appears to only break on our debug builds, which are component builds, so maybe it\u0027s the rust_macro part that\u0027s the problem?",
+      "fixSuggestions": [
+        {
+          "fixId": "64860940_fed6692e",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "src/gn/rust_tool.cc",
+              "range": {
+                "startLine": 65,
+                "startChar": 0,
+                "endLine": 66,
+                "endChar": 0
+              },
+              "replacement": "  if (name_ !\u003d kRsToolDylib \u0026\u0026 name_ !\u003d kRsToolCDylib \u0026\u0026\n      name_ !\u003d kRsToolMacro) {\n"
+            }
+          ]
+        }
+      ],
+      "revId": "0ee833e823f2e11be136728169906d0710bee910",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    }
+  ]
+}
