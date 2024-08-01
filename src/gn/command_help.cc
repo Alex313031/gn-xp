@@ -131,7 +131,7 @@ void PrintAllHelp() {
   bool is_markdown = cmdline->HasSwitch(switches::kMarkdown);
 
   if (is_markdown) {
-    OutputString("# GN Reference\n\n");
+    OutputString("# <a name=\"title\"></a>GN Reference\n\n", DECORATION_NONE, NO_ESCAPING);
     OutputString(
         "*This page is automatically generated from* "
         "`gn help --markdown all`.\n\n");
