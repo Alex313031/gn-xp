@@ -124,6 +124,24 @@
       "parentUuid": "ab923ef5_9f26ec08",
       "revId": "5305c099959d0d6a656a378fba97488f93c73773",
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "aaea797b_405e728d",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 13,
+      "author": {
+        "id": 3552054
+      },
+      "writtenOn": "2024-08-02T06:31:19Z",
+      "side": 1,
+      "message": "Sorry, I misunderstood your meaning. In the latest patchset 4, the docs/reference.md has been updated.",
+      "parentUuid": "98d651ef_2b276718",
+      "revId": "5305c099959d0d6a656a378fba97488f93c73773",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
     }
   ]
 }
