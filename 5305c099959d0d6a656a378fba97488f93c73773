@@ -52,6 +52,24 @@
       "parentUuid": "f550f0a8_4d263075",
       "revId": "5305c099959d0d6a656a378fba97488f93c73773",
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "74723242_17c81b0f",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 13,
+      "author": {
+        "id": 3552054
+      },
+      "writtenOn": "2024-08-02T03:50:24Z",
+      "side": 1,
+      "message": "Sure, you can view it here at https://github.com/ZhaoSongGOO/MyDocument/blob/main/gn_reference_.md#title. I have also updated it in the commit.",
+      "parentUuid": "614fdc06_8143c85e",
+      "revId": "5305c099959d0d6a656a378fba97488f93c73773",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
     }
   ]
 }
