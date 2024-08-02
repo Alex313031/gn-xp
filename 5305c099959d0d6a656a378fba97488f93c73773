@@ -70,6 +70,24 @@
       "parentUuid": "614fdc06_8143c85e",
       "revId": "5305c099959d0d6a656a378fba97488f93c73773",
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "cd05a245_0eb2346a",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 13,
+      "author": {
+        "id": 1000030
+      },
+      "writtenOn": "2024-08-02T03:55:39Z",
+      "side": 1,
+      "message": "Commit seems not updated?",
+      "parentUuid": "74723242_17c81b0f",
+      "revId": "5305c099959d0d6a656a378fba97488f93c73773",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
     }
   ]
 }
