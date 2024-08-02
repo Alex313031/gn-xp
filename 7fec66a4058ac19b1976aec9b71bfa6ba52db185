@@ -46,6 +46,30 @@
       },
       "revId": "7fec66a4058ac19b1976aec9b71bfa6ba52db185",
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "931c65f3_e59fe2b1",
+        "filename": "docs/reference.md",
+        "patchSetId": 5
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 3552054
+      },
+      "writtenOn": "2024-08-02T07:48:18Z",
+      "side": 1,
+      "message": "I understand now. I lack knowledge about Markdown. Thank you",
+      "parentUuid": "adf412ab_7f260462",
+      "range": {
+        "startLine": 1,
+        "startChar": 0,
+        "endLine": 1,
+        "endChar": 29
+      },
+      "revId": "7fec66a4058ac19b1976aec9b71bfa6ba52db185",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
     }
   ]
 }
