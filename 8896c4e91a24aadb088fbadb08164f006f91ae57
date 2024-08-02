@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b6f1f75d_e593da6d",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 3568856
+      },
+      "writtenOn": "2024-08-02T22:24:00Z",
+      "side": 1,
+      "message": "Dirk PTAL.",
+      "revId": "8896c4e91a24aadb088fbadb08164f006f91ae57",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    }
+  ]
+}
