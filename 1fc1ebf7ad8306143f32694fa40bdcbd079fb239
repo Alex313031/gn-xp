@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7b053818_5b5d7330",
+        "filename": "docs/reference.md",
+        "patchSetId": 4
+      },
+      "lineNbr": 194,
+      "author": {
+        "id": 1000030
+      },
+      "writtenOn": "2024-08-02T06:47:17Z",
+      "side": 1,
+      "message": "It is fine to use `#gn-reference` here?",
+      "range": {
+        "startLine": 194,
+        "startChar": 120,
+        "endLine": 194,
+        "endChar": 125
+      },
+      "revId": "1fc1ebf7ad8306143f32694fa40bdcbd079fb239",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    }
+  ]
+}
