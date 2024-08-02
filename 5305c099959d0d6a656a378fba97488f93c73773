@@ -16,6 +16,24 @@
       "message": "Could you regenerate this with `gn help --markdown all`.",
       "revId": "5305c099959d0d6a656a378fba97488f93c73773",
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f550f0a8_4d263075",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 13,
+      "author": {
+        "id": 3552054
+      },
+      "writtenOn": "2024-08-02T03:05:55Z",
+      "side": 1,
+      "message": "Yes, I have tried it and it can generate. In comparison to before, it will add a \u0027Back To Top\u0027 link after each first heading。",
+      "parentUuid": "e4d45c79_aed6c16c",
+      "revId": "5305c099959d0d6a656a378fba97488f93c73773",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
     }
   ]
 }
