@@ -22,6 +22,30 @@
       },
       "revId": "1fc1ebf7ad8306143f32694fa40bdcbd079fb239",
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b4ee0957_49eb17d7",
+        "filename": "docs/reference.md",
+        "patchSetId": 4
+      },
+      "lineNbr": 194,
+      "author": {
+        "id": 3552054
+      },
+      "writtenOn": "2024-08-02T07:02:31Z",
+      "side": 1,
+      "message": "I think this idea is good, it has been updated in patch set 5, thank you",
+      "parentUuid": "7b053818_5b5d7330",
+      "range": {
+        "startLine": 194,
+        "startChar": 120,
+        "endLine": 194,
+        "endChar": 125
+      },
+      "revId": "1fc1ebf7ad8306143f32694fa40bdcbd079fb239",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
     }
   ]
 }
