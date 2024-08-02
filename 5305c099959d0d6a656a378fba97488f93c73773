@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e4d45c79_aed6c16c",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 13,
+      "author": {
+        "id": 1000030
+      },
+      "writtenOn": "2024-08-02T02:39:31Z",
+      "side": 1,
+      "message": "Could you regenerate this with `gn help --markdown all`.",
+      "revId": "5305c099959d0d6a656a378fba97488f93c73773",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    }
+  ]
+}
