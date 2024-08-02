@@ -88,6 +88,24 @@
       "parentUuid": "74723242_17c81b0f",
       "revId": "5305c099959d0d6a656a378fba97488f93c73773",
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ab923ef5_9f26ec08",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 13,
+      "author": {
+        "id": 3552054
+      },
+      "writtenOn": "2024-08-02T06:06:53Z",
+      "side": 1,
+      "message": "Sorry, I didn\u0027t describe it clearly. The update is in patchset 3",
+      "parentUuid": "cd05a245_0eb2346a",
+      "revId": "5305c099959d0d6a656a378fba97488f93c73773",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
     }
   ]
 }
