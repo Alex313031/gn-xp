@@ -70,6 +70,30 @@
       },
       "revId": "7fec66a4058ac19b1976aec9b71bfa6ba52db185",
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "371c825c_6b179b82",
+        "filename": "docs/reference.md",
+        "patchSetId": 5
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 3552054
+      },
+      "writtenOn": "2024-08-02T07:54:06Z",
+      "side": 1,
+      "message": "Thank you, I have deleted the corresponding content and updated it in patch set 6",
+      "parentUuid": "931c65f3_e59fe2b1",
+      "range": {
+        "startLine": 1,
+        "startChar": 0,
+        "endLine": 1,
+        "endChar": 29
+      },
+      "revId": "7fec66a4058ac19b1976aec9b71bfa6ba52db185",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
     }
   ]
 }
