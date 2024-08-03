@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "05f77b48_d6736afe",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 7
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 3552054
+      },
+      "writtenOn": "2024-08-03T08:05:42Z",
+      "side": 1,
+      "message": "\nTakuto Ikuta, PTAL. In patch set 7, I formatted my changes using clang-format.",
+      "revId": "be8816e3d3c5e60fd70587b8635b626e457157b6",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    }
+  ]
+}
