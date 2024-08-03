@@ -653,7 +653,7 @@ Err HeaderChecker::MakeUnreachableError(const InputFile& source_file,
           targets_with_matching_toolchains.size() >
       1)
     msg += "at least one of ";
-  msg += "which should somehow be reachable.";
+  msg += "which should somehow be reachable.\n";
   msg += "This might be a false alarm if you are using conditional include. "
          "See \"gn help nogncheck\".";
 
