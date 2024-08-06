@@ -86,6 +86,24 @@
       "parentUuid": "8516f121_5d4d242e",
       "revId": "0ee833e823f2e11be136728169906d0710bee910",
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "63e7fe2f_03b20739",
+        "filename": "src/gn/rust_tool.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 65,
+      "author": {
+        "id": 1000030
+      },
+      "writtenOn": "2024-08-06T02:28:10Z",
+      "side": 1,
+      "message": "digit is ooo this week. Is it better to revert this?",
+      "parentUuid": "a778f8ec_35c99eda",
+      "revId": "0ee833e823f2e11be136728169906d0710bee910",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
     }
   ]
 }
