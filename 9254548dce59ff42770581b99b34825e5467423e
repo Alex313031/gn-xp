@@ -50,6 +50,23 @@
       "message": "Not sure whether you can self approve, so here is approval by another owner 😊",
       "revId": "9254548dce59ff42770581b99b34825e5467423e",
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "5b7fa811_c96e7384",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2024-08-06T16:31:14Z",
+      "side": 1,
+      "message": "Thanks!",
+      "revId": "9254548dce59ff42770581b99b34825e5467423e",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
     }
   ]
 }
