@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ae9908b9_e2572d89",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000012
+      },
+      "writtenOn": "2024-08-08T18:45:54Z",
+      "side": 1,
+      "message": "I don\u0027t think I understand why this change is necessary. Is this something we would\u0027ve seen as an issue with ninja?\n\nThere\u0027s a part of me that thinks I understand this; it would ensure that the action is complete before creating (or updating) the stamp. But I can\u0027t quite convince myself that this is actually needed, and I\u0027d like to understand what we\u0027re seeing happen now that this would fix.",
+      "revId": "9ca3d769281af5ef0af62e8ff38b832275320bf5",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    }
+  ]
+}
