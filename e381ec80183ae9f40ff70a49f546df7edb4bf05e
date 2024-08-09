@@ -1,0 +1,84 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "58180a9e_4c415c80",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 5
+      },
+      "lineNbr": 22,
+      "author": {
+        "id": 1000012
+      },
+      "writtenOn": "2024-08-09T21:17:52Z",
+      "side": 1,
+      "message": "typo: generated_file",
+      "range": {
+        "startLine": 22,
+        "startChar": 30,
+        "endLine": 22,
+        "endChar": 44
+      },
+      "revId": "e381ec80183ae9f40ff70a49f546df7edb4bf05e",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "723f143d_4ec97541",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 5
+      },
+      "lineNbr": 25,
+      "author": {
+        "id": 1000012
+      },
+      "writtenOn": "2024-08-09T21:17:52Z",
+      "side": 1,
+      "message": "I don\u0027t understand what \"generated_file needs to have deps to generated_file\" means. Maybe you mean that the generated_file target needs to have a dependency on the actual generated_file output?",
+      "range": {
+        "startLine": 24,
+        "startChar": 25,
+        "endLine": 25,
+        "endChar": 14
+      },
+      "revId": "e381ec80183ae9f40ff70a49f546df7edb4bf05e",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "df3491f7_4e1e8c19",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000012
+      },
+      "writtenOn": "2024-08-09T21:17:52Z",
+      "side": 1,
+      "message": "Okay, I think I follow this now.",
+      "revId": "e381ec80183ae9f40ff70a49f546df7edb4bf05e",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8f8904b6_99a0e06e",
+        "filename": "src/gn/ninja_generated_file_target_writer.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 31,
+      "author": {
+        "id": 1000012
+      },
+      "writtenOn": "2024-08-09T21:17:52Z",
+      "side": 1,
+      "message": "You need to update this comment; it\u0027s no longer correct.",
+      "revId": "e381ec80183ae9f40ff70a49f546df7edb4bf05e",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    }
+  ]
+}
