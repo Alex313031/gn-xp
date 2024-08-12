@@ -50,6 +50,23 @@
       "message": "Hello, David Turner, PTAL~",
       "revId": "be8816e3d3c5e60fd70587b8635b626e457157b6",
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "1224a6da_dea1db42",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 7
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000067
+      },
+      "writtenOn": "2024-08-12T09:02:16Z",
+      "side": 1,
+      "message": "(Back from vacation). Thanks",
+      "revId": "be8816e3d3c5e60fd70587b8635b626e457157b6",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
     }
   ]
 }
