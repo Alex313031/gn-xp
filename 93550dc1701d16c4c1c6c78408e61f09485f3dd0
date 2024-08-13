@@ -16,6 +16,24 @@
       "message": "Unfortunately, we do rely on the fact that generated_file() outputs are unknown to Ninja in the Fuchsia build (this is crucial for our GN to Bazel migration to avoid many unnecessary rebuilds).\n\nCan this feature be controlled with a `.gn` flag instead?",
       "revId": "93550dc1701d16c4c1c6c78408e61f09485f3dd0",
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "425d76e0_48f8a780",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 9
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000030
+      },
+      "writtenOn": "2024-08-13T09:17:18Z",
+      "side": 1,
+      "message": "I can introduce `.gn` flag for this, but why does this cause many unnecessary rebuilds in Bazel build?",
+      "parentUuid": "5de5212d_57c3ec8f",
+      "revId": "93550dc1701d16c4c1c6c78408e61f09485f3dd0",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
     }
   ]
 }
