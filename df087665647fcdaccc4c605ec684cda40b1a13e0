@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "272a4b00_0a561d35",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000067
+      },
+      "writtenOn": "2024-08-13T14:00:32Z",
+      "side": 1,
+      "message": "Note: it looks like the original contributor no longer exists as a Gerrit user.",
+      "revId": "df087665647fcdaccc4c605ec684cda40b1a13e0",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    }
+  ]
+}
