@@ -16,6 +16,24 @@
       "message": "Is it possible to make revert of\nhttps://gn-review.googlesource.com/c/gn/+/17480\nas a reland CL and apply new diff on top of the first patchset?",
       "revId": "be694834ceb00d2d2bf94bab567f947a3269fc61",
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "7a137991_cfa193ee",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 13,
+      "author": {
+        "id": 1000067
+      },
+      "writtenOn": "2024-08-13T08:40:40Z",
+      "side": 1,
+      "message": "Done, Patchset 2 is the \"reapply\" (i.e. revert-revert) and Patchset 3 is the final fix (same a Patchset 1), so you can diff easily between them. Please take a look.",
+      "parentUuid": "f267af92_7ec7bd68",
+      "revId": "be694834ceb00d2d2bf94bab567f947a3269fc61",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
     }
   ]
 }
