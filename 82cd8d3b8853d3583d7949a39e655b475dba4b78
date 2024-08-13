@@ -16,6 +16,24 @@
       "message": "Is it better to use\nhttps://source.chromium.org/gn/gn/+/main:src/base/strings/string_util.h;l\u003d329;drc\u003df99e015ac35f689cfdbf46e4eb174e5d2da78d8e\n?",
       "revId": "82cd8d3b8853d3583d7949a39e655b475dba4b78",
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "995d874d_e5f41d02",
+        "filename": "src/gn/function_toolchain_unittest.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 39,
+      "author": {
+        "id": 1000067
+      },
+      "writtenOn": "2024-08-13T08:36:09Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "f6bed3a4_fe38ae50",
+      "revId": "82cd8d3b8853d3583d7949a39e655b475dba4b78",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
     }
   ]
 }
