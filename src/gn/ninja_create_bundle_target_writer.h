@@ -45,9 +45,9 @@ class NinjaCreateBundleTargetWriter : public NinjaTargetWriter {
       const std::vector<OutputFile>& order_only_deps,
       std::vector<OutputFile>* output_files);
 
-  // Writes the stamp file for the assets catalog compilation input
+  // Writes the phony target for the assets catalog compilation input
   // dependencies.
-  OutputFile WriteCompileAssetsCatalogInputDepsStamp(
+  OutputFile WriteCompileAssetsCatalogInputDepsStampOrPhony(
       const std::vector<const Target*>& dependencies);
 
   // Writes the post-processing step (if a script is defined).
