@@ -133,7 +133,7 @@ TEST(NinjaTargetWriter, WriteInputDepsStampOrPhonyAndGetDep) {
     // Since there is only one dependency, a stamp file will be returned
     // directly without writing any additional rules.
     ASSERT_EQ(1u, dep.size());
-    EXPECT_EQ("obj/foo/base.stamp", dep[0].value());
+    EXPECT_EQ("phony/foo/base", dep[0].value());
   }
 
   {
@@ -149,7 +149,7 @@ TEST(NinjaTargetWriter, WriteInputDepsStampOrPhonyAndGetDep) {
         "build: __foo_action___rule | ../../foo/script.py"
         " ../../foo/action_source.txt ./target\n"
         "\n"
-        "build obj/foo/action.stamp: stamp\n",
+        "build phony/foo/action: phony\n",
         stream.str());
   }
 
@@ -162,9 +162,9 @@ TEST(NinjaTargetWriter, WriteInputDepsStampOrPhonyAndGetDep) {
         std::vector<const Target*>(), 10u);
 
     ASSERT_EQ(1u, dep.size());
-    EXPECT_EQ("obj/foo/action.inputdeps.stamp", dep[0].value());
+    EXPECT_EQ("phony/foo/action.inputdeps", dep[0].value());
     EXPECT_EQ(
-        "build obj/foo/action.inputdeps.stamp: stamp ../../foo/script.py "
+        "build phony/foo/action.inputdeps: phony ../../foo/script.py "
         "../../foo/action_source.txt ./target\n",
         stream.str());
   }
@@ -200,6 +200,6 @@ TEST(NinjaTargetWriter, WriteInputDepsStampOrPhonyAndGetDepWithToolchainDeps) {
   // Since there is more than one dependency, a stamp file will be returned
   // and the rule for the stamp file will be written to the stream.
   ASSERT_EQ(1u, dep.size());
-  EXPECT_EQ("obj/foo/setup.stamp", dep[0].value());
+  EXPECT_EQ("phony/foo/setup", dep[0].value());
   EXPECT_EQ("", stream.str());
 }
