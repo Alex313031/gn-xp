@@ -16,6 +16,23 @@
       "message": "David, I set no_stamp_files by default in this CL to see the change by using phony rule more.\nCould you take a look this and let me know if this looks good?",
       "revId": "08bf22b0880778ed37812c8b73a0c23a9efea5fa",
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a06ae409_1bbf771d",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 8
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000030
+      },
+      "writtenOn": "2024-08-23T08:50:06Z",
+      "side": 1,
+      "message": "digit@, ptal?\n\nOr is it better to merge chained CLs first?",
+      "revId": "08bf22b0880778ed37812c8b73a0c23a9efea5fa",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
     }
   ]
 }
