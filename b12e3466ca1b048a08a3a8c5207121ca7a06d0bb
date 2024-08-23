@@ -16,6 +16,23 @@
       "message": "I noticed this when I was looking at your previous patch.",
       "revId": "b12e3466ca1b048a08a3a8c5207121ca7a06d0bb",
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e045d008_56abf4c7",
+        "filename": "src/gn/functions_target.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 974,
+      "author": {
+        "id": 1000030
+      },
+      "writtenOn": "2024-08-23T01:19:45Z",
+      "side": 1,
+      "message": "Need to regenerate markdown too?",
+      "revId": "b12e3466ca1b048a08a3a8c5207121ca7a06d0bb",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
     }
   ]
 }
