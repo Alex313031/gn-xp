@@ -33,6 +33,24 @@
       "message": "Need to regenerate markdown too?",
       "revId": "b12e3466ca1b048a08a3a8c5207121ca7a06d0bb",
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ffcc38e3_4faa8584",
+        "filename": "src/gn/functions_target.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 974,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2024-08-23T17:45:36Z",
+      "side": 1,
+      "message": "Thanks, I almost always forget that!",
+      "parentUuid": "e045d008_56abf4c7",
+      "revId": "b12e3466ca1b048a08a3a8c5207121ca7a06d0bb",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
     }
   ]
 }
