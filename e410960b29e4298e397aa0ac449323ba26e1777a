@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c9e48e2a_5a22860e",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 13
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000030
+      },
+      "writtenOn": "2024-08-27T06:28:43Z",
+      "side": 1,
+      "message": "@digit@google.com I think this and https://gn-review.googlesource.com/c/gn/+/12866 works for chromium now. Can we submit them?",
+      "revId": "e410960b29e4298e397aa0ac449323ba26e1777a",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    }
+  ]
+}
