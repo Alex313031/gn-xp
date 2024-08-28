@@ -258,8 +258,16 @@ void WriteCrates(const BuildSettings* build_settings,
   if (sysroot.has_value()) {
     base::FilePath rebased_out_dir =
         build_settings->GetFullPath(build_settings->build_dir());
-    auto sysroot_path = FilePathToUTF8(rebased_out_dir) + sysroot.value();
-    rust_project << "  \"sysroot\": \"" << sysroot_path << "\"," NEWLINE;
+    auto sysroot_path = rebased_out_dir.Append(sysroot.value());
+    auto sysroot_src_path = sysroot_path.Append("lib")
+                                .Append("rustlib")
+                                .Append("src")
+                                .Append("rust")
+                                .Append("library");
+    auto sysroot_dir = FilePathToUTF8(sysroot_path);
+    auto sysroot_src_dir = FilePathToUTF8(sysroot_src_path);
+    rust_project << "  \"sysroot\": \"" << sysroot_dir << "\"," NEWLINE;
+    rust_project << "  \"sysroot_src\": \"" << sysroot_src_dir << "\"," NEWLINE;
   }
 
   rust_project << "  \"crates\": [";
