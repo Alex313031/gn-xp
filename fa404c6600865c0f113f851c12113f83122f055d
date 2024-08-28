@@ -16,6 +16,29 @@
       "message": "Please fix/add appropriate unit-tests for this feature.",
       "revId": "fa404c6600865c0f113f851c12113f83122f055d",
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9d61492b_7f7ef0e5",
+        "filename": "src/gn/rust_project_writer_helpers_unittest.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 118,
+      "author": {
+        "id": 1000397
+      },
+      "writtenOn": "2024-08-28T20:50:50Z",
+      "side": 1,
+      "message": "You\u0027ll need to change this test as well.",
+      "range": {
+        "startLine": 111,
+        "startChar": 0,
+        "endLine": 118,
+        "endChar": 41
+      },
+      "revId": "fa404c6600865c0f113f851c12113f83122f055d",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
     }
   ]
 }
