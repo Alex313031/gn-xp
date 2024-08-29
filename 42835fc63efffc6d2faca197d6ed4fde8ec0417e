@@ -1,0 +1,39 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "acf9730c_ad62592e",
+        "filename": "src/gn/rust_project_writer.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 261,
+      "author": {
+        "id": 1000067
+      },
+      "writtenOn": "2024-08-29T10:01:57Z",
+      "side": 1,
+      "message": "I recommend getting rid of the `auto` here, they are confusing since you are changing the type of variables.\u003d, and mixing base::FilePath and std::string types.\n\nthis needs to convert sysroot.value() to a base::FilePath value using UTF8ToFilePath(), also use AppendASCII(), as in:\n\n```\nbase::FilePath sysroot_path \u003d rebased_out_dir.Append(UTF8ToFilePath(sysroot.value());\nbsae::FilePath sysroot_src_path \u003d sysroot_path.AppendASCII(\"lib\")\n                                              .AppendASCII(\"rustlib\")\n                                              .AppendASCII(\"src\")\n                                              .AppendASCII(\"rust\")\n                                              .AppendASCII(\"library\");\nstd::string sysroot_dir \u003d FilePathToUTF8(sysroot_path);\nstd::string sysroot_src_dir \u003d FilePathToUTF8(sysroot_src_path);\n```",
+      "fixSuggestions": [
+        {
+          "fixId": "6f11abfe_e8e6d4c5",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "src/gn/rust_project_writer.cc",
+              "range": {
+                "startLine": 261,
+                "startChar": 0,
+                "endLine": 269,
+                "endChar": 0
+              },
+              "replacement": "    base::FilePath sysroot_path \u003d rebased_out_dir.Append(sysroot.value());\n    base::FilePath sysroot_src_path \u003d\n        sysroot_path.Append(UTF8ToFilePath(\"lib\"))\n            .Append(UTF8ToFilePath(\"rustlib\"))\n            .Append(UTF8ToFilePath(\"src\"))\n            .Append(UTF8ToFilePath(\"rust\"))\n            .Append(UTF8ToFilePath(\"library\"));\n    std::string sysroot_dir \u003d FilePathToUTF8(sysroot_path);\n    std::string sysroot_src_dir \u003d FilePathToUTF8(sysroot_src_path);\n"
+            }
+          ]
+        }
+      ],
+      "revId": "42835fc63efffc6d2faca197d6ed4fde8ec0417e",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    }
+  ]
+}
