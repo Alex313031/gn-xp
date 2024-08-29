@@ -34,6 +34,24 @@
       ],
       "revId": "42835fc63efffc6d2faca197d6ed4fde8ec0417e",
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "8fdb2a88_0f657dc7",
+        "filename": "src/gn/rust_project_writer.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 261,
+      "author": {
+        "id": 1000168
+      },
+      "writtenOn": "2024-08-29T16:41:54Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "acf9730c_ad62592e",
+      "revId": "42835fc63efffc6d2faca197d6ed4fde8ec0417e",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
     }
   ]
 }
