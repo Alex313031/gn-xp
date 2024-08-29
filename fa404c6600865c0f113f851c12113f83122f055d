@@ -18,6 +18,24 @@
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "c923af17_24230039",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000168
+      },
+      "writtenOn": "2024-08-29T00:16:08Z",
+      "side": 1,
+      "message": "Done.",
+      "parentUuid": "5ab892ec_d1c30da0",
+      "revId": "fa404c6600865c0f113f851c12113f83122f055d",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "9d61492b_7f7ef0e5",
@@ -31,6 +49,30 @@
       "writtenOn": "2024-08-28T20:50:50Z",
       "side": 1,
       "message": "You\u0027ll need to change this test as well.",
+      "range": {
+        "startLine": 111,
+        "startChar": 0,
+        "endLine": 118,
+        "endChar": 41
+      },
+      "revId": "fa404c6600865c0f113f851c12113f83122f055d",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "bf54a5ce_cb5f075c",
+        "filename": "src/gn/rust_project_writer_helpers_unittest.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 118,
+      "author": {
+        "id": 1000168
+      },
+      "writtenOn": "2024-08-29T00:16:08Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "9d61492b_7f7ef0e5",
       "range": {
         "startLine": 111,
         "startChar": 0,
