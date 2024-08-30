@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e5321e58_aad6e9ae",
+        "filename": "src/gn/rust_project_writer.cc",
+        "patchSetId": 7
+      },
+      "lineNbr": 263,
+      "author": {
+        "id": 1000030
+      },
+      "writtenOn": "2024-08-30T04:54:34Z",
+      "side": 1,
+      "message": "Why not use AppendASCII here?",
+      "range": {
+        "startLine": 263,
+        "startChar": 51,
+        "endLine": 263,
+        "endChar": 57
+      },
+      "revId": "eb27b928e0b8541a2c65c495373429ead3b914e4",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    }
+  ]
+}
