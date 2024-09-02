@@ -1,0 +1,39 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0d6681a2_1e534310",
+        "filename": "src/gn/rust_project_writer.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 263,
+      "author": {
+        "id": 1000067
+      },
+      "writtenOn": "2024-09-02T08:42:19Z",
+      "side": 1,
+      "message": "nit: This could be AppendASCII() as well.",
+      "fixSuggestions": [
+        {
+          "fixId": "33002cfb_af03fe9f",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "src/gn/rust_project_writer.cc",
+              "range": {
+                "startLine": 263,
+                "startChar": 0,
+                "endLine": 264,
+                "endChar": 0
+              },
+              "replacement": "    base::FilePath sysroot_src_path \u003d sysroot_path.AppendASCII(\"lib\")\n"
+            }
+          ]
+        }
+      ],
+      "revId": "24bdec8dd4f86943500d458d94baf37f9d8fc296",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    }
+  ]
+}
