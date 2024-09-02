@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "49fa6ad9_150843e7",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 9
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000067
+      },
+      "writtenOn": "2024-09-02T10:03:03Z",
+      "side": 1,
+      "message": "Thanks, this look good to me. This breaks the Fuchsia build, but I have uploaded https://fuchsia-review.googlesource.com/c/fuchsia/+/1111713 to set `no_stamp_files \u003d false` in our `.gn` files and this seems to work around this for now. We\u0027ll have time to cleanup our actions to create depfile parent directories later.\n\nCan I ask you to add one specific unit-test that verifies the Ninja output when `no_stamp_files \u003d false` though? This may help catch regressions in the future.",
+      "revId": "517e86f8b9b00b7e1ced36a44ea8a0f445b4e204",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    }
+  ]
+}
