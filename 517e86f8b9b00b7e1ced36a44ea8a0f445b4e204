@@ -34,6 +34,24 @@
       "parentUuid": "49fa6ad9_150843e7",
       "revId": "517e86f8b9b00b7e1ced36a44ea8a0f445b4e204",
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a647dfb3_d64faf78",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 9
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000067
+      },
+      "writtenOn": "2024-09-03T08:52:33Z",
+      "side": 1,
+      "message": "Thank you!\n\nNo ETA yet, but I hope to convince upstream Ninja to revive https://github.com/ninja-build/ninja/pull/1849 since this will get rid of our issues.\n\nOtherwise, cleanup up our build may take some time, as the failures are flaky.\nThe reason for this is that we have many sets of actions that write to the same `target_out_dir`, and breakage happens depending on which command is run first by Ninja (even in clean builds), so problematic actions could go unnoticed for a very long time.",
+      "parentUuid": "621373ef_26f6601d",
+      "revId": "517e86f8b9b00b7e1ced36a44ea8a0f445b4e204",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
     }
   ]
 }
