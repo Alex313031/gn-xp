@@ -16,6 +16,24 @@
       "message": "Thanks, this look good to me. This breaks the Fuchsia build, but I have uploaded https://fuchsia-review.googlesource.com/c/fuchsia/+/1111713 to set `no_stamp_files \u003d false` in our `.gn` files and this seems to work around this for now. We\u0027ll have time to cleanup our actions to create depfile parent directories later.\n\nCan I ask you to add one specific unit-test that verifies the Ninja output when `no_stamp_files \u003d false` though? This may help catch regressions in the future.",
       "revId": "517e86f8b9b00b7e1ced36a44ea8a0f445b4e204",
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "621373ef_26f6601d",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 9
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000030
+      },
+      "writtenOn": "2024-09-03T08:40:01Z",
+      "side": 1,
+      "message": "I added one unittests in src/gn/ninja_target_writer_unittest.cc. \n\nDo you have any ETA to remove `no_stamp_files \u003d false` in fuchsia build? I\u0027d like to remove the variable and conditional code when it seems stable on chromium.",
+      "parentUuid": "49fa6ad9_150843e7",
+      "revId": "517e86f8b9b00b7e1ced36a44ea8a0f445b4e204",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
     }
   ]
 }
