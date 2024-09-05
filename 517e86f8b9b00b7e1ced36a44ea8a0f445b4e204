@@ -70,6 +70,24 @@
       "parentUuid": "a647dfb3_d64faf78",
       "revId": "517e86f8b9b00b7e1ced36a44ea8a0f445b4e204",
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "515cee29_212313ab",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 9
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000067
+      },
+      "writtenOn": "2024-09-05T09:53:30Z",
+      "side": 1,
+      "message": "It is true, but we are adamant to keep close to upstream Ninja as much as possible (i.e. we only add extra features, we rebase our patches frequently over upstream).\n\nThis can be fixed in our fork, but then it becomes impossible to use upstream Ninja with our build system (which I do frequently to verify correctness / performance differences).\n\nAlso note that other GN-based builds might be impacted by the exact same issue if this is not fixed in upstream Ninja.\n\nThe upstream PR is now at https://github.com/ninja-build/ninja/pull/2492, it is similar to the old https://github.com/ninja-build/ninja/pull/1849, with an additionnal regression test. Hopefully this will be accepted soon, and we will have that in our fork.\n\nNote that I suspect it will take time for the new upstream Ninja release to happen, which means you may want to wait for that to happen to completely remove stamp file support from GN (or use a Ninja minimum version in the generated build.ninja file that reflects the minimal requirements).",
+      "parentUuid": "7534d8f7_7de40fcc",
+      "revId": "517e86f8b9b00b7e1ced36a44ea8a0f445b4e204",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
     }
   ]
 }
