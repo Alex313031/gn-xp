@@ -52,6 +52,24 @@
       "parentUuid": "621373ef_26f6601d",
       "revId": "517e86f8b9b00b7e1ced36a44ea8a0f445b4e204",
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "7534d8f7_7de40fcc",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 9
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000030
+      },
+      "writtenOn": "2024-09-05T05:39:10Z",
+      "side": 1,
+      "message": "Oh, I thought fuchsia forked ninja for their own usage. But it is not true now?\n\nAnyway, if the PR helps to remove no_stamp_files config, I\u0027ll ask Nico to merge the PR.",
+      "parentUuid": "a647dfb3_d64faf78",
+      "revId": "517e86f8b9b00b7e1ced36a44ea8a0f445b4e204",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
     }
   ]
 }
