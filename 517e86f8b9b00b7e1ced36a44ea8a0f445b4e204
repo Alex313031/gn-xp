@@ -88,6 +88,24 @@
       "parentUuid": "7534d8f7_7de40fcc",
       "revId": "517e86f8b9b00b7e1ced36a44ea8a0f445b4e204",
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "8b60bada_cc41d847",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 9
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000030
+      },
+      "writtenOn": "2024-09-06T03:44:37Z",
+      "side": 1,
+      "message": "I see. Anyway, thank you for creating new PR.",
+      "parentUuid": "515cee29_212313ab",
+      "revId": "517e86f8b9b00b7e1ced36a44ea8a0f445b4e204",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
     }
   ]
 }
