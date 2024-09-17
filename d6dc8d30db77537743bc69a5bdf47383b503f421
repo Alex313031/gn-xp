@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "9c492689_62e4afbc",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1002917
+      },
+      "writtenOn": "2024-09-17T15:07:06Z",
+      "side": 1,
+      "message": "reverse ping (saw a reference to this CL in a rustc wrapper)",
+      "revId": "d6dc8d30db77537743bc69a5bdf47383b503f421",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    }
+  ]
+}
