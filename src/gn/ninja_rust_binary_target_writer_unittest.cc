@@ -1,6 +1,6 @@
 // Copyright 2019 The Chromium Authors. All rights reserved.
 // Use of this source code is governed by a BSD-style license that can be
-// found in the LICENSE file.
+// found in the LICENSE file..
 
 #include "gn/ninja_rust_binary_target_writer.h"
 
@@ -12,6 +12,7 @@
 #include "gn/target.h"
 #include "gn/test_with_scheduler.h"
 #include "gn/test_with_scope.h"
+#include "tool.h"
 #include "util/build_config.h"
 #include "util/test/test.h"
 
@@ -1325,6 +1326,62 @@ TEST_F(NinjaRustBinaryTargetWriterTest, RlibWithLibDeps) {
         "-lquux\n"
         "  ldflags =\n"
         "  sources = ../../foo/input.rs\n";
+    std::string out_str = out.str();
+    EXPECT_EQ(expected, out_str) << expected << "\n" << out_str;
+  }
+}
+
+TEST_F(NinjaRustBinaryTargetWriterTest, LibsOverrideFlag) {
+  Err err;
+  TestWithScope setup;
+
+  Target target(setup.settings(), Label(SourceDir("//foo/"), "bar"));
+  target.set_output_type(Target::EXECUTABLE);
+  target.visibility().SetPublic();
+  SourceFile main("//foo/main.rs");
+  target.sources().push_back(SourceFile("//foo/input.rs"));
+  target.sources().push_back(main);
+  target.source_types_used().Set(SourceFile::SOURCE_RS);
+  target.set_output_dir(SourceDir("//out/Debug/foo/"));
+  target.config_values().libs().push_back(LibFile("quux"));
+  target.config_values().lib_dirs().push_back(SourceDir("//baz/"));
+  target.rust_values().set_crate_root(main);
+  target.rust_values().crate_name() = "foo_bar";
+  Toolchain toolchain_overriding_flags(
+      setup.settings(),
+      Label(SourceDir("//toolchain_overriding_flags/"), "overriding_flags"));
+  std::unique_ptr<Tool> rustc = Tool::CreateTool(RustTool::kRsToolBin);
+  RustTool* rustc_tool = rustc->AsRust();
+  TestWithScope::SetCommandForTool("rustc {{output}} {{source}}", rustc_tool);
+  rustc_tool->set_lib_switch("-lmodified-flag=");
+  rustc_tool->set_lib_dir_switch("-Lmodified-native=");
+  rustc_tool->set_outputs(SubstitutionList::MakeForTest(
+      "{{target_output_name}}"));
+  toolchain_overriding_flags.SetTool(std::move(rustc));
+  toolchain_overriding_flags.ToolchainSetupComplete();
+  target.SetToolchain(&toolchain_overriding_flags);
+  ASSERT_TRUE(target.OnResolved(&err));
+
+  {
+    std::ostringstream out;
+    NinjaRustBinaryTargetWriter writer(&target, out);
+    writer.Run();
+
+    const char expected[] =
+        "crate_name = foo_bar\n"
+        "crate_type = bin\n"
+        "output_extension = \n"
+        "output_dir = foo\n"
+        "target_output_name = bar\n"
+        "\n"
+        "build bar: rust_bin ../../foo/main.rs | ../../foo/input.rs "
+        "../../foo/main.rs\n"
+        "  source_file_part = main.rs\n"
+        "  source_name_part = main\n"
+        "  externs =\n"
+        "  rustdeps = -Lmodified-native=../../baz -lmodified-flag=quux\n"
+        "  ldflags =\n"
+        "  sources = ../../foo/input.rs ../../foo/main.rs\n";
     std::string out_str = out.str();
     EXPECT_EQ(expected, out_str) << expected << "\n" << out_str;
   }
