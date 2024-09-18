@@ -207,6 +207,14 @@ bool RustTool::InitTool(Scope* scope, Toolchain* toolchain, Err* err) {
     return false;
   }
 
+  if (MayLink()) {
+    if (!ReadString(scope, "dynamic_link_switch", &dynamic_link_switch_, err) ||
+        !ReadString(scope, "lib_switch", &lib_switch_, err) ||
+        !ReadString(scope, "lib_dir_switch", &lib_dir_switch_, err)) {
+      return false;
+    }
+  }
+
   return true;
 }
 
