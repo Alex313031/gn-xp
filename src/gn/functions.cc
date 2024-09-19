@@ -376,7 +376,7 @@ Value RunConfig(const FunctionCallNode* function,
 
   // Fill the flags and such.
   const SourceDir& input_dir = scope->GetSourceDir();
-  ConfigValuesGenerator gen(&config->own_values(), scope, input_dir, err);
+  ConfigValuesGenerator gen(&config->own_values(), &config->exclude_values(), scope, input_dir, err);
   gen.Run();
   if (err->has_error())
     return Value();

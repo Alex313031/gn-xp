@@ -37,6 +37,9 @@ class Config : public Item {
   ConfigValues& own_values() { return own_values_; }
   const ConfigValues& own_values() const { return own_values_; }
 
+  ConfigValues& exclude_values() { return exclude_values_; }
+  const ConfigValues& exclude_values() const { return exclude_values_; }
+
   // The values that represent this config and all sub-configs combined into
   // one. This is only valid after the config is resolved (when we know the
   // contents of the sub-configs).
@@ -53,6 +56,8 @@ class Config : public Item {
 
  private:
   ConfigValues own_values_;
+
+  ConfigValues exclude_values_;
 
   // Contains the own_values combined with sub-configs. Most configs don't have
   // sub-configs. So as an optimization, this is not populated if there are no

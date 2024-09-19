@@ -7,6 +7,7 @@
 #include "gn/err.h"
 #include "gn/input_file_manager.h"
 #include "gn/scheduler.h"
+#include "gn/value_extractors.h"
 
 Config::Config(const Settings* settings,
                const Label& label,
@@ -45,6 +46,7 @@ bool Config::OnResolved(Err* err) {
     composite_values_ = own_values_;
     for (const auto& pair : configs_)
       composite_values_.AppendValues(pair.ptr->resolved_values());
+    composite_values_.ExcludeValues(exclude_values_);
   }
   return true;
 }
