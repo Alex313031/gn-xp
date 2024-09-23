@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "502ef9a6_ee634301",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000067
+      },
+      "writtenOn": "2024-09-23T09:10:52Z",
+      "side": 1,
+      "message": "LGTM for the Fuchsia build ,but adding Chrome reviewers to be certain this doesn\u0027t affect them.",
+      "revId": "b4fe4700365e1266321ee40b53488a44e7592f2a",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    }
+  ]
+}
