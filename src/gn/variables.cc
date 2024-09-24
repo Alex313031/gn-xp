@@ -2011,6 +2011,30 @@ Avoiding applying public configs to this target
 
 )" COMMON_ORDERING_HELP;
 
+const char kFlattenDeps[] = "flatten_deps";
+const char kFlattenDeps_HelpShort[] =
+    "flatten_deps: [label list] Declare flatten dependencies.";
+const char kFlattenDeps_Help[] =
+    R"(flatten_deps: Declare flatten dependencies.)
+
+  flatten dependencies differs from other dependencies in that it will flatten
+  all the configurations of the dependent targets into the current target.
+
+Example
+
+  # This target can inlcude ":super_secret_implementation_details" deps,
+  # ":c" public_deps and "":demo_config" configs form ":b".
+  source_set("a") {
+    flatten_deps = [ ":b" ]
+  }
+
+  source_set("b") {
+    deps = [ ":super_secret_implementation_details" ]
+    public_deps = [ ":c" ]
+    configs = [":demo_config"]
+  }
+)";
+
 const char kPublicDeps[] = "public_deps";
 const char kPublicDeps_HelpShort[] =
     "public_deps: [label list] Declare public dependencies.";
@@ -2479,6 +2503,7 @@ const VariableInfoMap& GetTargetVariables() {
     INSERT_VARIABLE(Public)
     INSERT_VARIABLE(PublicConfigs)
     INSERT_VARIABLE(PublicDeps)
+    INSERT_VARIABLE(FlattenDeps)
     INSERT_VARIABLE(Rebase)
     INSERT_VARIABLE(ResponseFileContents)
     INSERT_VARIABLE(Script)

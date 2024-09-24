@@ -1064,6 +1064,13 @@ bool Target::CheckSourceSetLanguages(Err* err) const {
   return true;
 }
 
+bool Target::ShouldFormatFlattenDeps() const {
+  return should_format_flatten_deps_;
+}
+void Target::MarkFormatedFlattenDeps(bool formated_flatten_deps) {
+  should_format_flatten_deps_ = !formated_flatten_deps;
+}
+
 bool Target::CheckTestonly(Err* err) const {
   // If the current target is marked testonly, it can include both testonly
   // and non-testonly targets, so there's nothing to check.
