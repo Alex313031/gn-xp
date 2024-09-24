@@ -138,6 +138,10 @@ class Target : public Item {
 
   const FileList& sources() const { return sources_; }
   FileList& sources() { return sources_; }
+  const FileList& exclude_sources() const { return exclude_sources_; }
+  FileList& exclude_sources() { return exclude_sources_; }
+
+  
 
   const SourceFileTypeSet& source_types_used() const {
     return source_types_used_;
@@ -153,6 +157,8 @@ class Target : public Item {
   // could be empty which would mean no headers are public.
   const FileList& public_headers() const { return public_headers_; }
   FileList& public_headers() { return public_headers_; }
+  const FileList& exclude_public_headers() const { return exclude_public_headers_; }
+  FileList& exclude_public_headers() { return exclude_public_headers_; }
 
   // Whether this target's includes should be checked by "gn check".
   bool check_includes() const { return check_includes_; }
@@ -227,6 +233,10 @@ class Target : public Item {
   // runtime dependencies to external test systems as necessary.
   const std::vector<std::string>& data() const { return data_; }
   std::vector<std::string>& data() { return data_; }
+  const std::vector<std::string>& exclude_data() const { return exclude_data_; }
+  std::vector<std::string>& exclude_data() { return exclude_data_; }
+
+  
 
   // Information about the bundle. Only valid for CREATE_BUNDLE target after
   // they have been resolved.
@@ -251,6 +261,10 @@ class Target : public Item {
   // Linked private dependencies.
   const LabelTargetVector& private_deps() const { return private_deps_; }
   LabelTargetVector& private_deps() { return private_deps_; }
+  const LabelTargetVector& exclude_private_deps() const { return exclude_private_deps_; }
+  LabelTargetVector& exclude_private_deps() { return exclude_private_deps_; }
+
+  
 
   // Linked flatten dependencies.
   const LabelTargetVector& flatten_deps() const { return flatten_deps_; }
@@ -259,20 +273,29 @@ class Target : public Item {
   // Linked public dependencies.
   const LabelTargetVector& public_deps() const { return public_deps_; }
   LabelTargetVector& public_deps() { return public_deps_; }
+  const LabelTargetVector& exclude_public_deps() const { return exclude_public_deps_; }
+  LabelTargetVector& exclude_public_deps() { return exclude_public_deps_; }
 
   // Non-linked dependencies.
   const LabelTargetVector& data_deps() const { return data_deps_; }
   LabelTargetVector& data_deps() { return data_deps_; }
+  const LabelTargetVector& exclude_data_deps() const { return exclude_data_deps_; }
+  LabelTargetVector& exclude_data_deps() { return exclude_data_deps_; }
 
   // gen_deps only propagate the "should_generate" flag. These dependencies can
   // have cycles so care should be taken if iterating over them recursively.
   const LabelTargetVector& gen_deps() const { return gen_deps_; }
   LabelTargetVector& gen_deps() { return gen_deps_; }
+  const LabelTargetVector& exclude_gen_deps() const { return gen_deps_; }
+  LabelTargetVector& exclude_gen_deps() { return gen_deps_; }
 
   // List of configs that this class inherits settings from. Once a target is
   // resolved, this will also list all-dependent and public configs.
   const UniqueVector<LabelConfigPair>& configs() const { return configs_; }
   UniqueVector<LabelConfigPair>& configs() { return configs_; }
+
+  const UniqueVector<LabelConfigPair>& exclude_configs() const { return exclude_configs_; }
+  UniqueVector<LabelConfigPair>& exclude_configs() { return exclude_configs_; }
 
   // List of configs that all dependencies (direct and indirect) of this
   // target get. These configs are not added to this target. Note that due
@@ -283,6 +306,12 @@ class Target : public Item {
   UniqueVector<LabelConfigPair>& all_dependent_configs() {
     return all_dependent_configs_;
   }
+  const UniqueVector<LabelConfigPair>& exclude_all_dependent_configs() const {
+    return exclude_all_dependent_configs_;
+  }
+  UniqueVector<LabelConfigPair>& exclude_all_dependent_configs() {
+    return exclude_all_dependent_configs_;
+  }
 
   // List of configs that targets depending directly on this one get. These
   // configs are also added to this target.
@@ -290,6 +319,10 @@ class Target : public Item {
     return public_configs_;
   }
   UniqueVector<LabelConfigPair>& public_configs() { return public_configs_; }
+  const UniqueVector<LabelConfigPair>& exclude_public_configs() const {
+    return exclude_public_configs_;
+  }
+  UniqueVector<LabelConfigPair>& exclude_public_configs() { return exclude_public_configs_; }
 
   // Dependencies that can include files from this target.
   const std::set<Label>& allow_circular_includes_from() const {
@@ -306,6 +339,9 @@ class Target : public Item {
   // This config represents the configuration set directly on this target.
   ConfigValues& config_values();
   const ConfigValues& config_values() const;
+  ConfigValues& exclude_config_values();
+  const ConfigValues& exclude_config_values() const;
+
   bool has_config_values() const { return config_values_.get(); }
 
   ActionValues& action_values();
@@ -327,10 +363,16 @@ class Target : public Item {
 
   std::vector<LabelPattern>& friends() { return friends_; }
   const std::vector<LabelPattern>& friends() const { return friends_; }
+  std::vector<LabelPattern>& exclude_friends() { return exclude_friends_; }
+  const std::vector<LabelPattern>& exclude_friends() const { return exclude_friends_; }
 
   std::vector<LabelPattern>& assert_no_deps() { return assert_no_deps_; }
   const std::vector<LabelPattern>& assert_no_deps() const {
     return assert_no_deps_;
+  }
+  std::vector<LabelPattern>& exclude_assert_no_deps() { return exclude_assert_no_deps_; }
+  const std::vector<LabelPattern>& exclude_assert_no_deps() const {
+    return exclude_assert_no_deps_;
   }
 
   // The toolchain is only known once this target is resolved (all if its
@@ -507,12 +549,15 @@ class Target : public Item {
   bool output_extension_set_ = false;
 
   FileList sources_;
+  FileList exclude_sources_;
   SourceFileTypeSet source_types_used_;
   bool all_headers_public_ = true;
   FileList public_headers_;
+  FileList exclude_public_headers_;
   bool check_includes_ = true;
   bool complete_static_lib_ = false;
   std::vector<std::string> data_;
+  std::vector<std::string> exclude_data_;
   std::unique_ptr<BundleData> bundle_data_;
   OutputFile write_runtime_deps_output_;
 
@@ -521,23 +566,35 @@ class Target : public Item {
   LabelTargetVector public_deps_;
   LabelTargetVector data_deps_;
   LabelTargetVector gen_deps_;
+  LabelTargetVector exclude_private_deps_;
+  LabelTargetVector exclude_public_deps_;
+  LabelTargetVector exclude_data_deps_;
+  LabelTargetVector exclude_gen_deps_;
+
+  
 
   // See getters for more info.
   UniqueVector<LabelConfigPair> configs_;
   UniqueVector<LabelConfigPair> all_dependent_configs_;
   UniqueVector<LabelConfigPair> public_configs_;
+  UniqueVector<LabelConfigPair> exclude_configs_;
+  UniqueVector<LabelConfigPair> exclude_all_dependent_configs_;
+  UniqueVector<LabelConfigPair> exclude_public_configs_;
 
   std::set<Label> allow_circular_includes_from_;
 
   LabelPtrPair<Pool> pool_;
 
   std::vector<LabelPattern> friends_;
+  std::vector<LabelPattern> exclude_friends_;
   std::vector<LabelPattern> assert_no_deps_;
+  std::vector<LabelPattern> exclude_assert_no_deps_;
 
   // Used for all binary targets, and for inputs in regular targets. The
   // precompiled header values in this struct will be resolved to the ones to
   // use for this target, if precompiled headers are used.
   std::unique_ptr<ConfigValues> config_values_;
+  std::unique_ptr<ConfigValues> exclude_config_values_;
 
   // Used for action[_foreach] targets.
   std::unique_ptr<ActionValues> action_values_;

@@ -75,10 +75,22 @@ void GetFrameworksList(Scope* scope,
 }  // namespace
 
 ConfigValuesGenerator::ConfigValuesGenerator(ConfigValues* dest_values,
+                                             ConfigValues* dest_exclude_values,
                                              Scope* scope,
                                              const SourceDir& input_dir,
                                              Err* err)
     : config_values_(dest_values),
+      exclude_config_values_(dest_exclude_values),
+      scope_(scope),
+      input_dir_(input_dir),
+      err_(err) {}
+
+ConfigValuesGenerator::ConfigValuesGenerator(ConfigValues* dest_values,
+                                             Scope* scope,
+                                             const SourceDir& input_dir,
+                                             Err* err)
+    : config_values_(dest_values),
+      exclude_config_values_(nullptr),
       scope_(scope),
       input_dir_(input_dir),
       err_(err) {}
@@ -86,11 +98,21 @@ ConfigValuesGenerator::ConfigValuesGenerator(ConfigValues* dest_values,
 ConfigValuesGenerator::~ConfigValuesGenerator() = default;
 
 void ConfigValuesGenerator::Run() {
+
+#define STRING(name) STRING2(exclude_##name)
+#define STRING2(name) #name
+
 #define FILL_STRING_CONFIG_VALUE(name) \
-  GetStringList(scope_, #name, config_values_, &ConfigValues::name, err_);
+  GetStringList(scope_, #name, config_values_, &ConfigValues::name, err_); \
+  if (exclude_config_values_) {  \
+    GetStringList(scope_, STRING(name), exclude_config_values_, &ConfigValues::name, err_); \
+  }
+
 #define FILL_DIR_CONFIG_VALUE(name)                                          \
-  GetDirList(scope_, #name, config_values_, input_dir_, &ConfigValues::name, \
-             err_);
+  GetDirList(scope_, #name, config_values_, input_dir_, &ConfigValues::name, err_); \
+  if (exclude_config_values_) {  \
+    GetDirList(scope_, STRING(name), exclude_config_values_, input_dir_, &ConfigValues::name, err_);  \
+  }
 
   FILL_STRING_CONFIG_VALUE(arflags)
   FILL_STRING_CONFIG_VALUE(asmflags)
@@ -108,6 +130,9 @@ void ConfigValuesGenerator::Run() {
   FILL_STRING_CONFIG_VALUE(rustenv)
   FILL_STRING_CONFIG_VALUE(swiftflags)
 
+#undef STRING
+#undef STRING2
+
 #undef FILL_STRING_CONFIG_VALUE
 #undef FILL_DIR_CONFIG_VALUE
 
@@ -121,16 +146,26 @@ void ConfigValuesGenerator::Run() {
 
   // Libs
   const Value* libs_value = scope_->GetValue(variables::kLibs, true);
+  const Value* exclude_libs_value = scope_->GetValue(variables::kExcludeLibs, true);
   if (libs_value) {
     ExtractListOfLibs(scope_->settings()->build_settings(), *libs_value,
                       input_dir_, &config_values_->libs(), err_);
   }
+  if (exclude_libs_value) {
+    ExtractListOfLibs(scope_->settings()->build_settings(), *exclude_libs_value,
+                      input_dir_, &exclude_config_values_->libs(), err_);
+  }
 
   // Externs
   const Value* externs_value = scope_->GetValue(variables::kExterns, true);
+  const Value* exclude_externs_value = scope_->GetValue(variables::kExcludeExterns, true);
   if (externs_value) {
     ExtractListOfExterns(scope_->settings()->build_settings(), *externs_value,
                          input_dir_, &config_values_->externs(), err_);
+  }
+  if (exclude_externs_value) {
+    ExtractListOfExterns(scope_->settings()->build_settings(), *exclude_externs_value,
+                         input_dir_, &exclude_config_values_->externs(), err_);
   }
 
   // Frameworks

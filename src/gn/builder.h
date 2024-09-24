@@ -126,6 +126,8 @@ class Builder {
   // current item.
   bool ResolveFlattenDeps(Target* target, Err* err);
 
+  bool ResolveExclude(Target* target, Err* err);
+
   // Fills in the pointers in the given vector based on the labels. We assume
   // that everything should be resolved by this point, so will return an error
   // if anything isn't found or if the type doesn't match.

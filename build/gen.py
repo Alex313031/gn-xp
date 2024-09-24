@@ -768,6 +768,7 @@ def WriteGNNinja(path, platform, host, options, args_list):
         'src/gn/target.cc',
         'src/gn/target_generator.cc',
         'src/gn/target_flattener.cc',
+        'src/gn/target_excluder.cc',
         'src/gn/template.cc',
         'src/gn/token.cc',
         'src/gn/tokenizer.cc',

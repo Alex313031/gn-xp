@@ -423,6 +423,7 @@ Example
   "     recursively.\n"
 
 const char kAllDependentConfigs[] = "all_dependent_configs";
+const char kExcludeAllDependentConfigs[] = "exclude_all_dependent_configs";
 const char kAllDependentConfigs_HelpShort[] =
     "all_dependent_configs: [label list] Configs to be forced on dependents.";
 const char kAllDependentConfigs_Help[] =
@@ -528,6 +529,7 @@ Example
 )";
 
 const char kGenDeps[] = "gen_deps";
+const char kExcludeGenDeps[] = "exclude_gen_deps";
 const char kGenDeps_HelpShort[] =
     "gen_deps: [label list] "
     "Declares targets that should generate when this one does.";
@@ -600,6 +602,7 @@ const char kMnemonic_Help[] =
 )";
 
 const char kAssertNoDeps[] = "assert_no_deps";
+const char kExcludeAssertNoDeps[] = "exclude_assert_no_deps";
 const char kAssertNoDeps_HelpShort[] =
     "assert_no_deps: [label pattern list] Ensure no deps on these targets.";
 const char kAssertNoDeps_Help[] =
@@ -976,6 +979,7 @@ Example
 )";
 
 const char kConfigs[] = "configs";
+const char kExcludeConfigs[] = "exclude_configs";
 const char kConfigs_HelpShort[] =
     "configs: [label list] Configs applying to this target or config.";
 const char kConfigs_Help[] =
@@ -1050,6 +1054,7 @@ Example
 )";
 
 const char kData[] = "data";
+const char kExcludeData[] = "exclude_data";
 const char kData_HelpShort[] =
     "data: [file list] Runtime data file dependencies.";
 const char kData_Help[] =
@@ -1083,6 +1088,7 @@ const char kData_Help[] =
 )";
 
 const char kDataDeps[] = "data_deps";
+const char kExcludeDataDeps[] = "exclude_data_deps";
 const char kDataDeps_HelpShort[] =
     "data_deps: [label list] Non-linked dependencies.";
 const char kDataDeps_Help[] =
@@ -1182,6 +1188,7 @@ Example
 )";
 
 const char kDeps[] = "deps";
+const char kExcludeDeps[] = "exclude_deps";
 const char kDeps_HelpShort[] =
     "deps: [label list] Private linked dependencies.";
 const char kDeps_Help[] =
@@ -1221,6 +1228,7 @@ Details of dependency propagation
 )";
 
 const char kExterns[] = "externs";
+const char kExcludeExterns[] = "exclude_externs";
 const char kExterns_HelpShort[] =
     "externs: [scope] Set of Rust crate-dependency pairs.";
 const char kExterns_Help[] =
@@ -1247,6 +1255,7 @@ Examples
 )";
 
 const char kFriend[] = "friend";
+const char kExecludeFriend[] = "exclude_friend";
 const char kFriend_HelpShort[] =
     "friend: [label pattern list] Allow targets to include private headers.";
 const char kFriend_Help[] =
@@ -1477,6 +1486,7 @@ Example
 )";
 
 const char kLibs[] = "libs";
+const char kExcludeLibs[] = "exclude_libs";
 const char kLibs_HelpShort[] =
     "libs: [string list] Additional libraries to link.";
 const char kLibs_Help[] =
@@ -1883,6 +1893,7 @@ const char kProductType_Help[] =
 )";
 
 const char kPublic[] = "public";
+const char kExcludePublic[] = "exclude_public";
 const char kPublic_HelpShort[] =
     "public: [file list] Declare public header files for a target.";
 const char kPublic_Help[] =
@@ -1938,6 +1949,7 @@ Examples
 )";
 
 const char kPublicConfigs[] = "public_configs";
+const char kExcludePublicConfigs[] = "exclude_public_configs";
 const char kPublicConfigs_HelpShort[] =
     "public_configs: [label list] Configs applied to dependents.";
 const char kPublicConfigs_Help[] =
@@ -2036,6 +2048,7 @@ Example
 )";
 
 const char kPublicDeps[] = "public_deps";
+const char kExcludePublicDeps[] = "exclude_public_deps";
 const char kPublicDeps_HelpShort[] =
     "public_deps: [label list] Declare public dependencies.";
 const char kPublicDeps_Help[] =
@@ -2157,6 +2170,7 @@ const char kScript_Help[] =
 )";
 
 const char kSources[] = "sources";
+const char kExcludeSources[] = "exclude_sources";
 const char kSources_HelpShort[] =
     "sources: [file list] Source files for a target.";
 const char kSources_Help[] =

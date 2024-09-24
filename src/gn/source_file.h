@@ -160,6 +160,13 @@ class SourceFileTypeSet {
     return flags_[static_cast<int>(type)];
   }
 
+  void reset() {
+    for(size_t i = 0; i < static_cast<int>(SourceFile::SOURCE_NUMTYPES); i++) {
+      flags_[i] = false;
+    }
+    empty_ = true;
+  }
+
   bool empty() const { return empty_; }
 
   bool CSourceUsed() const;

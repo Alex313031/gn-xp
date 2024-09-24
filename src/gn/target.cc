@@ -347,6 +347,16 @@ ConfigValues& Target::config_values() {
   return *config_values_;
 }
 
+const ConfigValues& Target::exclude_config_values() const {
+  return exclude_config_values_ ? *exclude_config_values_ : kEmptyConfigValues;
+}
+
+ConfigValues& Target::exclude_config_values() {
+  if (!exclude_config_values_)
+    exclude_config_values_ = std::make_unique<ConfigValues>();
+  return *exclude_config_values_;
+}
+
 static const ActionValues kEmptyActionValues;
 
 const ActionValues& Target::action_values() const {

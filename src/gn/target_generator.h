@@ -67,6 +67,7 @@ class TargetGenerator {
  private:
   bool FillDependentConfigs();  // Includes all types of dependent configs.
   bool FillData();
+  bool FillDataBase(const char* variable, std::vector<std::string>& output_list);
   bool FillDependencies();  // Includes data dependencies.
   bool FillMetadata();
   bool FillTestonly();

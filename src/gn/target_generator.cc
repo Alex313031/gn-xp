@@ -183,6 +183,15 @@ bool TargetGenerator::FillSources() {
                                   scope_->GetSourceDir(), &dest_sources, err_))
     return false;
   target_->sources() = std::move(dest_sources);
+
+  const Value* exclude_value = scope_->GetValue(variables::kExcludeSources, true);
+  if (!exclude_value)
+    return true;
+  Target::FileList dest_exclude_sources;
+  if (!ExtractListOfRelativeFiles(scope_->settings()->build_settings(), *exclude_value,
+                                  scope_->GetSourceDir(), &dest_exclude_sources, err_))
+    return false;
+  target_->exclude_sources() = std::move(dest_exclude_sources);
   return true;
 }
 
@@ -199,11 +208,25 @@ bool TargetGenerator::FillPublic() {
                                   scope_->GetSourceDir(), &dest_public, err_))
     return false;
   target_->public_headers() = std::move(dest_public);
+
+  const Value* exclude_value = scope_->GetValue(variables::kExcludePublic, true);
+  if (!exclude_value)
+    return true;
+  Target::FileList dest_exclude_public;
+  if (!ExtractListOfRelativeFiles(scope_->settings()->build_settings(), *exclude_value,
+                                  scope_->GetSourceDir(), &dest_exclude_public, err_))
+    return false;
+  target_->exclude_public_headers() = std::move(dest_exclude_public);
   return true;
 }
 
 bool TargetGenerator::FillConfigs() {
-  return FillGenericConfigs(variables::kConfigs, &target_->configs());
+  if (!FillGenericConfigs(variables::kConfigs, &target_->configs()))
+    return false;
+  if (!FillGenericConfigs(variables::kExcludeConfigs, &target_->exclude_configs()))
+    return false;
+
+  return true;
 }
 
 bool TargetGenerator::FillDependentConfigs() {
@@ -215,18 +238,31 @@ bool TargetGenerator::FillDependentConfigs() {
                           &target_->public_configs()))
     return false;
 
+  if (!FillGenericConfigs(variables::kExcludeAllDependentConfigs, &target_->exclude_all_dependent_configs()))
+    return false;
+
+  if (!FillGenericConfigs(variables::kExcludePublicConfigs, &target_->exclude_public_configs()))
+    return false;
+
   return true;
 }
 
 bool TargetGenerator::FillData() {
-  const Value* value = scope_->GetValue(variables::kData, true);
+  if (!FillDataBase(variables::kData, target_->data()))
+    return false;
+  if (!FillDataBase(variables::kExcludeData, target_->exclude_data()))
+    return false;
+  return true;
+}
+
+bool TargetGenerator::FillDataBase(const char* variable, std::vector<std::string>& output_list) {
+  const Value* value = scope_->GetValue(variable, true);
   if (!value)
     return true;
   if (!value->VerifyTypeIs(Value::LIST, err_))
     return false;
 
   const std::vector<Value>& input_list = value->list_value();
-  std::vector<std::string>& output_list = target_->data();
   output_list.reserve(input_list.size());
 
   const SourceDir& dir = scope_->GetSourceDir();
@@ -271,6 +307,15 @@ bool TargetGenerator::FillDependencies() {
     if (!FillGenericDeps("datadeps", &target_->data_deps()))
       return false;
   }
+
+  if (!FillGenericDeps(variables::kExcludeDeps, &target_->exclude_private_deps()))
+    return false;
+  if (!FillGenericDeps(variables::kExcludePublicDeps, &target_->exclude_public_deps()))
+    return false;
+  if (!FillGenericDeps(variables::kExcludeDataDeps, &target_->exclude_data_deps()))
+    return false;
+  if (!FillGenericDeps(variables::kExcludeGenDeps, &target_->exclude_gen_deps()))
+    return false;
 
   return true;
 }
@@ -318,9 +363,17 @@ bool TargetGenerator::FillTestonly() {
 bool TargetGenerator::FillAssertNoDeps() {
   const Value* value = scope_->GetValue(variables::kAssertNoDeps, true);
   if (value) {
-    return ExtractListOfLabelPatterns(scope_->settings()->build_settings(),
+    if (!ExtractListOfLabelPatterns(scope_->settings()->build_settings(),
                                       *value, scope_->GetSourceDir(),
-                                      &target_->assert_no_deps(), err_);
+                                      &target_->assert_no_deps(), err_))
+      return false;
+  }
+  const Value* exclude_value = scope_->GetValue(variables::kExcludeAssertNoDeps, true);
+  if (exclude_value) {
+    if (!ExtractListOfLabelPatterns(scope_->settings()->build_settings(),
+                                      *exclude_value, scope_->GetSourceDir(),
+                                      &target_->exclude_assert_no_deps(), err_))
+      return false;
   }
   return true;
 }

@@ -18,6 +18,11 @@ class Scope;
 class ConfigValuesGenerator {
  public:
   ConfigValuesGenerator(ConfigValues* dest_values,
+                        ConfigValues* dest_exclude_values,
+                        Scope* scope,
+                        const SourceDir& input_dir,
+                        Err* err);
+  ConfigValuesGenerator(ConfigValues* dest_values,
                         Scope* scope,
                         const SourceDir& input_dir,
                         Err* err);
@@ -28,6 +33,7 @@ class ConfigValuesGenerator {
 
  private:
   ConfigValues* config_values_;
+  ConfigValues* exclude_config_values_;
   Scope* scope_;
   const SourceDir input_dir_;
   Err* err_;

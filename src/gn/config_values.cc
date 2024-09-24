@@ -3,6 +3,7 @@
 // found in the LICENSE file.
 
 #include "gn/config_values.h"
+#include "gn/value_extractors.h"
 
 namespace {
 
@@ -49,4 +50,26 @@ void ConfigValues::AppendValues(const ConfigValues& append) {
     precompiled_header_ = append.precompiled_header_;
   if (!append.precompiled_source_.is_null() && !precompiled_source_.is_null())
     precompiled_source_ = append.precompiled_source_;
+}
+
+void ConfigValues::ExcludeValues(const ConfigValues& exclude) {
+  VectorExclude(&asmflags_, exclude.asmflags_);
+  VectorExclude(&arflags_, exclude.arflags_);
+  VectorExclude(&cflags_, exclude.cflags_);
+  VectorExclude(&cflags_c_, exclude.cflags_c_);
+  VectorExclude(&cflags_cc_, exclude.cflags_cc_);
+  VectorExclude(&cflags_objc_, exclude.cflags_objc_);
+  VectorExclude(&cflags_objcc_, exclude.cflags_objcc_);
+  VectorExclude(&defines_, exclude.defines_);
+  VectorExclude(&frameworks_, exclude.frameworks_);
+  VectorExclude(&weak_frameworks_, exclude.weak_frameworks_);
+  VectorExclude(&framework_dirs_, exclude.framework_dirs_);
+  VectorExclude(&include_dirs_, exclude.include_dirs_);
+  VectorExclude(&inputs_, exclude.inputs_);
+  VectorExclude(&ldflags_, exclude.ldflags_);
+  VectorExclude(&lib_dirs_, exclude.lib_dirs_);
+  VectorExclude(&libs_, exclude.libs_);
+  VectorExclude(&rustflags_, exclude.rustflags_);
+  VectorExclude(&rustenv_, exclude.rustenv_);
+  VectorExclude(&swiftflags_, exclude.swiftflags_);
 }

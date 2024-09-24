@@ -17,6 +17,7 @@
 #include "gn/scheduler.h"
 #include "gn/settings.h"
 #include "gn/target.h"
+#include "gn/target_excluder.h"
 #include "gn/target_flattener.h"
 #include "gn/trace.h"
 
@@ -499,6 +500,12 @@ bool Builder::ResolveFlattenDeps(Target* target, Err* err) {
   return true;
 }
 
+bool Builder::ResolveExclude(Target* target, Err* err) {
+  TargetExcluder::ExcluderTarget(target, err);
+  return true;
+}
+
+
 bool Builder::ResolveItem(BuilderRecord* record, Err* err) {
   DCHECK(record->can_resolve() && !record->resolved());
 
@@ -514,6 +521,8 @@ bool Builder::ResolveItem(BuilderRecord* record, Err* err) {
         !ResolvePool(target, err) || !ResolveToolchain(target, err))
       return false;
     if (!ResolveFlattenDeps(target, err))
+      return false;
+    if (!ResolveExclude(target, err))
       return false;
   } else if (record->type() == BuilderRecord::ITEM_CONFIG) {
     Config* config = record->item()->AsConfig();

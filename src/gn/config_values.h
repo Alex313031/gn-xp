@@ -22,6 +22,8 @@ class ConfigValues {
   // Appends the values from the given config to this one.
   void AppendValues(const ConfigValues& append);
 
+  void ExcludeValues(const ConfigValues& exclude);
+
 #define STRING_VALUES_ACCESSOR(name)                               \
   const std::vector<std::string>& name() const { return name##_; } \
   std::vector<std::string>& name() { return name##_; }

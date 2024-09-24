@@ -83,6 +83,7 @@ extern const char kTargetOutDir_Help[];
 // Target vars -----------------------------------------------------------------
 
 extern const char kAllDependentConfigs[];
+extern const char kExcludeAllDependentConfigs[];
 extern const char kAllDependentConfigs_HelpShort[];
 extern const char kAllDependentConfigs_Help[];
 
@@ -103,6 +104,7 @@ extern const char kAsmflags_HelpShort[];
 extern const char* kAsmflags_Help;
 
 extern const char kAssertNoDeps[];
+extern const char kExcludeAssertNoDeps[];
 extern const char kAssertNoDeps_HelpShort[];
 extern const char kAssertNoDeps_Help[];
 
@@ -179,14 +181,17 @@ extern const char kCompleteStaticLib_HelpShort[];
 extern const char kCompleteStaticLib_Help[];
 
 extern const char kConfigs[];
+extern const char kExcludeConfigs[];
 extern const char kConfigs_HelpShort[];
 extern const char kConfigs_Help[];
 
 extern const char kData[];
+extern const char kExcludeData[];
 extern const char kData_HelpShort[];
 extern const char kData_Help[];
 
 extern const char kDataDeps[];
+extern const char kExcludeDataDeps[];
 extern const char kDataDeps_HelpShort[];
 extern const char kDataDeps_Help[];
 
@@ -203,14 +208,17 @@ extern const char kDepfile_HelpShort[];
 extern const char kDepfile_Help[];
 
 extern const char kDeps[];
+extern const char kExcludeDeps[];
 extern const char kDeps_HelpShort[];
 extern const char kDeps_Help[];
 
 extern const char kExterns[];
+extern const char kExcludeExterns[];
 extern const char kExterns_HelpShort[];
 extern const char kExterns_Help[];
 
 extern const char kFriend[];
+extern const char kExecludeFriend[];
 extern const char kFriend_HelpShort[];
 extern const char kFriend_Help[];
 
@@ -239,6 +247,7 @@ extern const char kLibDirs_HelpShort[];
 extern const char kLibDirs_Help[];
 
 extern const char kLibs[];
+extern const char kExcludeLibs[];
 extern const char kLibs_HelpShort[];
 extern const char kLibs_Help[];
 
@@ -307,10 +316,12 @@ extern const char kProductType_HelpShort[];
 extern const char kProductType_Help[];
 
 extern const char kPublic[];
+extern const char kExcludePublic[];
 extern const char kPublic_HelpShort[];
 extern const char kPublic_Help[];
 
 extern const char kPublicConfigs[];
+extern const char kExcludePublicConfigs[];
 extern const char kPublicConfigs_HelpShort[];
 extern const char kPublicConfigs_Help[];
 
@@ -319,6 +330,7 @@ extern const char kFlattenDeps_HelpShort[];
 extern const char kFlattenDeps_Help[];
 
 extern const char kPublicDeps[];
+extern const char kExcludePublicDeps[];
 extern const char kPublicDeps_HelpShort[];
 extern const char kPublicDeps_Help[];
 
@@ -335,6 +347,7 @@ extern const char kScript_HelpShort[];
 extern const char kScript_Help[];
 
 extern const char kSources[];
+extern const char kExcludeSources[];
 extern const char kSources_HelpShort[];
 extern const char kSources_Help[];
 
@@ -379,6 +392,7 @@ extern const char kXcodeExtraAttributes_HelpShort[];
 extern const char kXcodeExtraAttributes_Help[];
 
 extern const char kGenDeps[];
+extern const char kExcludeGenDeps[];
 extern const char kGenDeps_HelpShort[];
 extern const char kGenDeps_Help[];
 

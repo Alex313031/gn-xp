@@ -209,6 +209,33 @@ struct LabelPatternResolver {
 
 }  // namespace
 
+// string
+bool IsEqual(const std::string& lhs, const std::string& rhs){
+  return lhs == rhs;
+}
+// SourceDir or SourceFile or LibFile
+bool IsEqual(const SourceDir& lhs, const SourceDir& rhs){
+  return lhs.value() == rhs.value();
+}
+bool IsEqual(const SourceFile& lhs, const SourceFile& rhs){
+  return lhs.value() == rhs.value();
+}
+bool IsEqual(const LibFile& lhs, const LibFile& rhs) {
+  return lhs.value() == rhs.value();
+}
+// LabelPattern
+bool IsEqual(const LabelPattern& lhs, const LabelPattern& rhs){
+  return lhs.name() == rhs.name();
+}
+
+// LabelPtrPair or LabelTargetPair
+bool IsEqual(const LabelConfigPair& lhs, const LabelConfigPair& rhs){
+  return lhs.label.name() == rhs.label.name();
+}
+bool IsEqual(const LabelTargetPair& lhs, const LabelTargetPair& rhs){
+  return lhs.label.name() == rhs.label.name();
+}
+
 bool ExtractListOfStringValues(const Value& value,
                                std::vector<std::string>* dest,
                                Err* err) {
