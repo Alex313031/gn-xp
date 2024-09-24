@@ -252,6 +252,9 @@ class Target : public Item {
   const LabelTargetVector& private_deps() const { return private_deps_; }
   LabelTargetVector& private_deps() { return private_deps_; }
 
+  const LabelTargetVector& flatten_deps() const { return flatten_deps_; }
+  LabelTargetVector& flatten_deps() { return flatten_deps_; }
+
   // Linked public dependencies.
   const LabelTargetVector& public_deps() const { return public_deps_; }
   LabelTargetVector& public_deps() { return public_deps_; }
@@ -458,6 +461,9 @@ class Target : public Item {
                                const char** computed_tool_type,
                                std::vector<OutputFile>* outputs) const;
 
+  bool ShouldFormatFlattenDeps() const;
+  void MarkFormatedFlattenDeps(bool formated_flatten_deps = false);
+
  private:
   FRIEND_TEST_ALL_PREFIXES(TargetTest, ResolvePrecompiledHeaders);
   FRIEND_TEST_ALL_PREFIXES(TargetTest, HasRealInputs);
@@ -509,6 +515,7 @@ class Target : public Item {
   OutputFile write_runtime_deps_output_;
 
   LabelTargetVector private_deps_;
+  LabelTargetVector flatten_deps_;
   LabelTargetVector public_deps_;
   LabelTargetVector data_deps_;
   LabelTargetVector gen_deps_;
@@ -553,6 +560,8 @@ class Target : public Item {
 
   // GeneratedFile as metadata collection values.
   std::unique_ptr<GeneratedFile> generated_file_;
+
+  bool should_format_flatten_deps_{true};
 
   Target(const Target&) = delete;
   Target& operator=(const Target&) = delete;

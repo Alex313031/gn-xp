@@ -2,27 +2,87 @@
 # Use of this source code is governed by a BSD-style license that can be
 # found in the LICENSE file.
 
-executable("hello") {
-  sources = [ "hello.cc" ]
+# executable("hello") {
+#   # sources = [ "hello.cc" ]
+#   deps = [":hello_sources"]
 
-  deps = [
-    ":hello_shared",
-    ":hello_static",
-  ]
-}
+#   deps += [
+#     ":hello_shared",
+#     ":hello_static",
+#   ]
+# }
 
-shared_library("hello_shared") {
+# shared_library("hello_shared") {
+#   sources = [
+#     "hello_shared.cc",
+#     "hello_shared.h",
+#   ]
+#   # flatten_deps = [":hello_sources"]
+
+#   defines = [ "HELLO_SHARED_IMPLEMENTATION" ]
+# }
+
+# static_library("hello_static") {
+#   sources = [
+#     "hello_static.cc",
+#     "hello_static.h",
+#   ]
+#   # flatten_deps = [":hello_sources"]
+# }
+
+source_set("test_tyj") {
+  flatten_deps = [":hello_sources"]
   sources = [
     "hello_shared.cc",
     "hello_shared.h",
   ]
-
-  defines = [ "HELLO_SHARED_IMPLEMENTATION" ]
+  metadata = {
+    ghy= ["ghy_value"]
+  }
+  cflags = ["-no-warining-rawning"]
 }
 
-static_library("hello_static") {
+# source_set("DEPS_TEST") {
+#   sources = [
+#     "hello.cc",
+#   ]
+#   deps = [
+#       ":hello_sources",
+#   ]
+# }
+
+source_set("hello_sources") {
+  sources = [
+    "hello.cc",
+  ]
+  deps = [
+    ":hello_sources_2",
+  ]
+  defines = [ "HELLO_IMPLEMENTATION" ]
+  public_configs = [":hello_config"]
+  metadata = {
+    tyj = ["tyj_value"]
+    tyj2 = [
+      ["a_value"],
+      ["b_value"]
+    ]
+  }
+  configs += [":hello_config2"]
+}
+source_set("hello_sources_2") {
   sources = [
     "hello_static.cc",
     "hello_static.h",
   ]
+  defines = [ "HELLO_IMPLEMENTATION_2" ]
+  # configs += [":hello_config2"]
+}
+
+config("hello_config") {
+  defines = [ "HELLO_CONFIG_IMPLEMENTATION" ]
+}
+
+config("hello_config2") {
+  defines = [ "HELLO_CONFIG_IMPLEMENTATION_2" ]
+  cflags = [ "-no-warining" ]
 }

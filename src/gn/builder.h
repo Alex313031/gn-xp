@@ -122,6 +122,8 @@ class Builder {
   // target's Label*Vectors with the resolved pointers.
   bool ResolveItem(BuilderRecord* record, Err* err);
 
+  bool ResolveFlattens(Target* target, Err* err);
+
   // Fills in the pointers in the given vector based on the labels. We assume
   // that everything should be resolved by this point, so will return an error
   // if anything isn't found or if the type doesn't match.

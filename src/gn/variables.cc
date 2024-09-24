@@ -2011,6 +2011,13 @@ Avoiding applying public configs to this target
 
 )" COMMON_ORDERING_HELP;
 
+const char kFlattenDeps[] = "flatten_deps";
+const char kFlattenDeps_HelpShort[] =
+    "flatten_deps: [label list] Declare flatten dependencies.";
+const char kFlattenDeps_Help[] =
+    R"(flatten_deps: Declare flatten dependencies.)";
+
+
 const char kPublicDeps[] = "public_deps";
 const char kPublicDeps_HelpShort[] =
     "public_deps: [label list] Declare public dependencies.";
