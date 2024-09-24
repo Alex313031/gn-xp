@@ -314,6 +314,10 @@ extern const char kPublicConfigs[];
 extern const char kPublicConfigs_HelpShort[];
 extern const char kPublicConfigs_Help[];
 
+extern const char kFlattenDeps[];
+extern const char kFlattenDeps_HelpShort[];
+extern const char kFlattenDeps_Help[];
+
 extern const char kPublicDeps[];
 extern const char kPublicDeps_HelpShort[];
 extern const char kPublicDeps_Help[];

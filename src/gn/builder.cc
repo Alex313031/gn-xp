@@ -17,6 +17,7 @@
 #include "gn/scheduler.h"
 #include "gn/settings.h"
 #include "gn/target.h"
+#include "gn/target_flattener.h"
 #include "gn/trace.h"
 
 namespace {
@@ -251,6 +252,7 @@ bool Builder::TargetDefined(BuilderRecord* record, Err* err) {
   Target* target = record->item()->AsTarget();
 
   if (!AddDeps(record, target->public_deps(), err) ||
+      !AddDeps(record, target->flatten_deps(), err) ||
       !AddDeps(record, target->private_deps(), err) ||
       !AddDeps(record, target->data_deps(), err) ||
       !AddDeps(record, target->configs().vector(), err) ||
@@ -492,6 +494,11 @@ void Builder::ScheduleItemLoadIfNecessary(BuilderRecord* record) {
   loader_->Load(record->label(), origin ? origin->GetRange() : LocationRange());
 }
 
+bool Builder::ResolveFlattenDeps(Target* target, Err* err) {
+  TargetFlattener::FlattenTarget(target, err);
+  return true;
+}
+
 bool Builder::ResolveItem(BuilderRecord* record, Err* err) {
   DCHECK(record->can_resolve() && !record->resolved());
 
@@ -500,10 +507,13 @@ bool Builder::ResolveItem(BuilderRecord* record, Err* err) {
     if (!ResolveDeps(&target->public_deps(), err) ||
         !ResolveDeps(&target->private_deps(), err) ||
         !ResolveDeps(&target->data_deps(), err) ||
+        !ResolveDeps(&target->flatten_deps(), err) ||
         !ResolveConfigs(&target->configs(), err) ||
         !ResolveConfigs(&target->all_dependent_configs(), err) ||
         !ResolveConfigs(&target->public_configs(), err) ||
         !ResolvePool(target, err) || !ResolveToolchain(target, err))
+      return false;
+    if (!ResolveFlattenDeps(target, err))
       return false;
   } else if (record->type() == BuilderRecord::ITEM_CONFIG) {
     Config* config = record->item()->AsConfig();
