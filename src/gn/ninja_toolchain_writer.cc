@@ -127,7 +127,7 @@ void NinjaToolchainWriter::WriteRulePattern(const char* name,
   if (pattern.empty())
     return;
   out_ << kIndent << name << " = ";
-  SubstitutionWriter::WriteWithNinjaVariables(pattern, options, out_);
+  SubstitutionWriter::WriteWithNinjaVariables(pattern, options, out_, "");
   out_ << std::endl;
 }
 
@@ -140,6 +140,6 @@ void NinjaToolchainWriter::WriteCommandRulePattern(
   out_ << kIndent << name << " = ";
   if (!launcher.empty())
     out_ << launcher << " ";
-  SubstitutionWriter::WriteWithNinjaVariables(command, options, out_);
+  SubstitutionWriter::WriteWithNinjaVariables(command, options, out_, "");
   out_ << std::endl;
 }

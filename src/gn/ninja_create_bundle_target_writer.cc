@@ -137,7 +137,7 @@ std::string NinjaCreateBundleTargetWriter::WritePostProcessingRuleDefinition() {
 
   for (const auto& arg : args.list()) {
     out_ << " ";
-    SubstitutionWriter::WriteWithNinjaVariables(arg, args_escape_options, out_);
+    SubstitutionWriter::WriteWithNinjaVariables(arg, args_escape_options, out_, "");
   }
   out_ << std::endl;
   out_ << "  description = POST PROCESSING " << target_label << std::endl;
@@ -281,7 +281,7 @@ void NinjaCreateBundleTargetWriter::WriteCompileAssetsCatalogStep(
     for (const auto& flag : flags) {
       out_ << " ";
       SubstitutionWriter::WriteWithNinjaVariables(flag, args_escape_options,
-                                                  out_);
+                                                  out_, "");
     }
     out_ << std::endl;
   }
