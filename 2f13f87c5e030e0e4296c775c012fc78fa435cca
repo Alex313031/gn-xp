@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ac4462ce_525c7aab",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 4
+      },
+      "lineNbr": 15,
+      "author": {
+        "id": 1000012
+      },
+      "writtenOn": "2024-10-14T22:40:50Z",
+      "side": 1,
+      "message": "nit: typo \"CollectBuilde\"",
+      "revId": "2f13f87c5e030e0e4296c775c012fc78fa435cca",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    }
+  ]
+}
