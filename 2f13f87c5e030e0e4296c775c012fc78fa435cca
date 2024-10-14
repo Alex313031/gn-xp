@@ -16,6 +16,24 @@
       "message": "nit: typo \"CollectBuilde\"",
       "revId": "2f13f87c5e030e0e4296c775c012fc78fa435cca",
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "daed116c_40731a67",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 4
+      },
+      "lineNbr": 15,
+      "author": {
+        "id": 1000067
+      },
+      "writtenOn": "2024-10-14T22:55:07Z",
+      "side": 1,
+      "message": "Thanks. Fixed.",
+      "parentUuid": "ac4462ce_525c7aab",
+      "revId": "2f13f87c5e030e0e4296c775c012fc78fa435cca",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
     }
   ]
 }
