@@ -16,6 +16,23 @@
       "message": "Moving brettw@ to cc and adding tikuta@ for a seconed reviewer.",
       "revId": "ea411c9566a3c14b1c98b1182c33972380094121",
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "68ec07d6_969c833c",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1001227
+      },
+      "writtenOn": "2024-11-19T07:27:57Z",
+      "side": 1,
+      "message": "I do not have cq rights. Could someone merge this?\n\nThanks!",
+      "revId": "ea411c9566a3c14b1c98b1182c33972380094121",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
     }
   ]
 }
