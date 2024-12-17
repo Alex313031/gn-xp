@@ -33,6 +33,23 @@
       "message": "@tikuta - can you take a look at this as well?",
       "revId": "d2ff175484a1de20510165012c47e33b3cd97f4d",
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ad58e493_b8780c04",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000012
+      },
+      "writtenOn": "2024-12-17T18:26:26Z",
+      "side": 1,
+      "message": "Whoops, tikuta is out. @digit - can you take a look at this?",
+      "revId": "d2ff175484a1de20510165012c47e33b3cd97f4d",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
     }
   ]
 }
