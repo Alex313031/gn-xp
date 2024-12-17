@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c7462f1c_92165175",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 3792874
+      },
+      "writtenOn": "2024-12-17T12:07:59Z",
+      "side": 1,
+      "message": "hi @dpranke@google.com. whereas https://gn-review.googlesource.com/c/gn/+/18000 should turn these failures from crashes into errors, this CL here should turn them into successes. ptal, and send to the CQ if you approve. thanks for your help.",
+      "revId": "cdb5118c68e6d735f3210ebb63a4206a4d130fa3",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    }
+  ]
+}
