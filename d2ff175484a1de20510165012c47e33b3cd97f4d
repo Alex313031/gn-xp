@@ -16,6 +16,23 @@
       "message": "@dpranke@google.com: i finally invested the time to figure out why gn sometimes crashes when regenerating build files. i\u0027m fairly sure it\u0027s due to a/v interfering with the call to `ReplaceFile` in `WriteFileAtomically`. i\u0027ll fix that in a separate CL. this here just fixes the crash shortly after since an `Err` wasn\u0027t being set in this case. with this change, the error i\u0027m hitting is reported as `ERROR Failed to write build.ninja.` rather than a crash. please send to the CQ if you approve (i don\u0027t have perms to commit in this repo). thank you!",
       "revId": "d2ff175484a1de20510165012c47e33b3cd97f4d",
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "3fa82aac_1473867f",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000012
+      },
+      "writtenOn": "2024-12-17T18:25:34Z",
+      "side": 1,
+      "message": "@tikuta - can you take a look at this as well?",
+      "revId": "d2ff175484a1de20510165012c47e33b3cd97f4d",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
     }
   ]
 }
