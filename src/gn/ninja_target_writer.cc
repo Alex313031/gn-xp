@@ -4,10 +4,12 @@
 
 #include "gn/ninja_target_writer.h"
 
+#include <iostream>
 #include <sstream>
 
 #include "base/files/file_util.h"
 #include "base/strings/string_util.h"
+#include "gn/bazel_writer.h"
 #include "gn/builtin_tool.h"
 #include "gn/c_substitution_type.h"
 #include "gn/config_values_extractors.h"
@@ -99,7 +101,8 @@ void NinjaTargetWriter::WriteOutputs(std::vector<OutputFile>&& outputs) const {
 std::string NinjaTargetWriter::RunAndWriteFile(
     const Target* target,
     ResolvedTargetData* resolved,
-    std::vector<OutputFile>* ninja_outputs) {
+    std::vector<OutputFile>* ninja_outputs,
+    BazelWriter* bazel_writer) {
   const Settings* settings = target->settings();
 
   ScopedTrace trace(TraceItem::TRACE_FILE_WRITE_NINJA,
@@ -130,6 +133,9 @@ std::string NinjaTargetWriter::RunAndWriteFile(
   // or write variables scoped under each build line. As a result, they don't
   // need the separate files.
   bool needs_file_write = false;
+  if (bazel_writer) {
+    bazel_writer->insert(*resolved, *target);
+  }
   if (target->output_type() == Target::BUNDLE_DATA) {
     NinjaBundleDataTargetWriter writer(target, rules);
     writer.SetResolvedTargetData(resolved);

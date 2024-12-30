@@ -7,6 +7,7 @@
 
 #include <iosfwd>
 
+#include "gn/bazel_writer.h"
 #include "gn/path_output.h"
 #include "gn/resolved_target_data.h"
 #include "gn/substitution_type.h"
@@ -52,7 +53,8 @@ class NinjaTargetWriter {
   static std::string RunAndWriteFile(
       const Target* target,
       ResolvedTargetData* resolved = nullptr,
-      std::vector<OutputFile>* ninja_outputs = nullptr);
+      std::vector<OutputFile>* ninja_outputs = nullptr,
+      BazelWriter* bazel_writer = nullptr);
 
   virtual void Run() = 0;
 

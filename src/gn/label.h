@@ -42,6 +42,14 @@ class Label {
                        const Value& input,
                        Err* err);
 
+  std::string RelativeLabel(const SourceDir& current_dir) const {
+    if (current_dir == dir_) {
+      return ":" + name_.str();
+    } else {
+      return GetUserVisibleName(false);
+    }
+  }
+
   bool is_null() const { return dir_.is_null(); }
 
   const SourceDir& dir() const { return dir_; }
