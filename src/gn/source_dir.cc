@@ -141,3 +141,12 @@ SourceDir SourceDir::ResolveRelativeDir(const Value& v,
 base::FilePath SourceDir::Resolve(const base::FilePath& source_root) const {
   return ResolvePath(value_.str(), false, source_root);
 }
+
+SourceDir SourceDir::Parent() const {
+  const std::string_view sv = value_;
+  std::size_t found = sv.rfind("/");
+  if (found <= 0) {
+    return SourceDir();
+  }
+  return SourceDir(sv.substr(0, found - 1));
+}

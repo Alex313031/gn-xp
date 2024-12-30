@@ -5,6 +5,7 @@
 #ifndef TOOLS_GN_LABEL_H_
 #define TOOLS_GN_LABEL_H_
 
+#include <format>
 #include <string_view>
 #include <tuple>
 
@@ -41,6 +42,19 @@ class Label {
                        const Label& current_toolchain,
                        const Value& input,
                        Err* err);
+
+  std::string RelativeLabel(const SourceDir& current_dir) const {
+    if (current_dir == dir_) {
+      return ":" + name_.str();
+    } else {
+      return GetUserVisibleName(false);
+    }
+  }
+
+  Label WithSuffix(const std::string& suffix) const {
+      return Label{dir_, std::format("{}_{}", name(), suffix)};
+  }
+
 
   bool is_null() const { return dir_.is_null(); }
 

@@ -65,3 +65,8 @@ Thumbs.db
 /_out
 # VSChromium configuration file
 vs-chromium-project.txt
+BUILD.bazel
+bazel-*
+.bazel_updated
+.gn_modified
+.gn_bazel_daemon_pid

@@ -72,6 +72,8 @@ class SourceDir {
       std::string_view input_value,
       Err* err,
       std::string_view source_root = std::string_view()) const;
+  
+  SourceDir Parent() const;
 
   // Wrapper for ResolveRelativeDir where input_value equals to
   // v.string_value().

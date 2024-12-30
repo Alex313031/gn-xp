@@ -87,6 +87,8 @@ struct TargetWriteInfo {
   std::mutex lock;
   NinjaWriter::PerToolchainRules rules;
 
+  BazelWriter bazel_writer;
+
   NinjaOutputsMap ninja_outputs_map;
 
   using ResolvedMap = std::unordered_map<std::thread::id, ResolvedTargetData>;
@@ -107,7 +109,7 @@ void BackgroundDoWrite(TargetWriteInfo* write_info, const Target* target) {
     resolved = &((*write_info->resolved_map)[std::this_thread::get_id()]);
   }
   std::string rule =
-      NinjaTargetWriter::RunAndWriteFile(target, resolved, ninja_outputs);
+      NinjaTargetWriter::RunAndWriteFile(target, resolved, ninja_outputs, &write_info->bazel_writer);
 
   DCHECK(!rule.empty());
 
@@ -886,6 +888,9 @@ int RunGen(const std::vector<std::string>& args) {
         "ms\n";
     OutputString(stats);
   }
+
+  write_info.bazel_writer.PostProcess();
+  write_info.bazel_writer.Write(setup->build_settings().root_path());
 
   // Just like the build graph, leak the resolved data to avoid expensive
   // process teardown here too.
