@@ -2,6 +2,10 @@
 # Use of this source code is governed by a BSD-style license that can be
 # found in the LICENSE file.
 
+config("buildflags") {
+  defines = [ "FOO" ]
+}
+
 executable("hello") {
   sources = [ "hello.cc" ]
 
@@ -9,6 +13,7 @@ executable("hello") {
     ":hello_shared",
     ":hello_static",
   ]
+  configs += [":buildflags"]
 }
 
 shared_library("hello_shared") {
@@ -16,6 +21,7 @@ shared_library("hello_shared") {
     "hello_shared.cc",
     "hello_shared.h",
   ]
+  configs += [":buildflags"]
 
   defines = [ "HELLO_SHARED_IMPLEMENTATION" ]
 }
@@ -25,4 +31,5 @@ static_library("hello_static") {
     "hello_static.cc",
     "hello_static.h",
   ]
+  configs += [":buildflags"]
 }
