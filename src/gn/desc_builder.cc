@@ -113,6 +113,20 @@ void RecursiveCollectChildDeps(const Target* target, TargetSet* result) {
     RecursiveCollectDeps(pair.ptr, result);
 }
 
+void RecursiveCollectChildPublicDeps(const Target* target, TargetSet* result);
+
+void RecursiveCollectPublicDeps(const Target* target, TargetSet* result) {
+  if (!result->add(target))
+    return;  // Already did this target.
+
+  RecursiveCollectChildPublicDeps(target, result);
+}
+
+void RecursiveCollectChildPublicDeps(const Target* target, TargetSet* result) {
+  for (const auto& pair : target->GetDeps(Target::DEPS_PUBLIC))
+    RecursiveCollectPublicDeps(pair.ptr, result);
+}
+
 // Common functionality for target and config description builder
 class BaseDescBuilder {
  public:
@@ -572,6 +586,9 @@ class TargetDescBuilder : public BaseDescBuilder {
     if (what(variables::kDeps))
       res->SetWithoutPathExpansion(variables::kDeps, RenderDeps());
 
+    if (what("public_deps"))
+      res->SetWithoutPathExpansion("public_deps", RenderPublicDeps());
+
     if (what(variables::kGenDeps) && !target_->gen_deps().empty())
       res->SetWithoutPathExpansion(variables::kGenDeps, RenderGenDeps());
 
@@ -685,6 +702,47 @@ class TargetDescBuilder : public BaseDescBuilder {
     }
   }
 
+  // Prints public dependencies of the given target (not the target itself). If the
+  // set is non-null, new targets encountered will be added to the set, and if
+  // a dependency is in the set already, it will not be recused into. When the
+  // set is null, all dependencies will be printed.
+  void RecursivePrintPublicDeps(base::ListValue* out,
+                          const Target* target,
+                          TargetSet* seen_targets,
+                          int indent_level) {
+    // Combine all deps into one sorted list.
+    std::vector<LabelTargetPair> sorted_deps;
+    for (const auto& pair : target->GetDeps(Target::DEPS_PUBLIC))
+      sorted_deps.push_back(pair);
+    std::sort(sorted_deps.begin(), sorted_deps.end());
+
+    std::string indent(indent_level * 2, ' ');
+
+    for (const auto& pair : sorted_deps) {
+      const Target* cur_dep = pair.ptr;
+      std::string str =
+          indent + cur_dep->label().GetUserVisibleName(GetToolchainLabel());
+
+      bool print_children = true;
+      if (seen_targets) {
+        if (!seen_targets->add(cur_dep)) {
+          // Already seen.
+          print_children = false;
+          // Only print "..." if something is actually elided, which means that
+          // the current target has children.
+          if (!cur_dep->public_deps().empty() ||
+              !cur_dep->private_deps().empty() || !cur_dep->data_deps().empty())
+            str += "...";
+        }
+      }
+
+      out->AppendString(str);
+
+      if (print_children)
+        RecursivePrintPublicDeps(out, cur_dep, seen_targets, indent_level + 1);
+    }
+  }
+
   ValuePtr RenderDeps() {
     auto res = std::make_unique<base::ListValue>();
 
@@ -710,6 +768,40 @@ class TargetDescBuilder : public BaseDescBuilder {
         // Show direct dependencies only.
         std::vector<const Target*> deps;
         for (const auto& pair : target_->GetDeps(Target::DEPS_ALL))
+          deps.push_back(pair.ptr);
+        std::sort(deps.begin(), deps.end());
+        commands::FilterAndPrintTargets(&deps, res.get());
+      }
+    }
+
+    return res;
+  }
+
+  ValuePtr RenderPublicDeps() {
+    auto res = std::make_unique<base::ListValue>();
+
+    // Tree mode is separate.
+    if (tree_) {
+      if (all_) {
+        // Show all tree deps with no eliding.
+        RecursivePrintPublicDeps(res.get(), target_, nullptr, 0);
+      } else {
+        // Don't recurse into duplicates.
+        TargetSet seen_targets;
+        RecursivePrintPublicDeps(res.get(), target_, &seen_targets, 0);
+      }
+    } else {  // not tree
+
+      // Collect the deps to display.
+      if (all_) {
+        // Show all dependencies.
+        TargetSet all_deps;
+        RecursiveCollectChildPublicDeps(target_, &all_deps);
+        commands::FilterAndPrintTargetSet(all_deps, res.get());
+      } else {
+        // Show direct dependencies only.
+        std::vector<const Target*> deps;
+        for (const auto& pair : target_->GetDeps(Target::DEPS_PUBLIC))
           deps.push_back(pair.ptr);
         std::sort(deps.begin(), deps.end());
         commands::FilterAndPrintTargets(&deps, res.get());

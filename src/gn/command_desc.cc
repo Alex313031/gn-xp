@@ -230,6 +230,25 @@ void DepsHandler(const std::string& name,
   }
 }
 
+void PublicDepsHandler(const std::string& name,
+                 const base::Value* value,
+                 bool value_only) {
+  bool tree = base::CommandLine::ForCurrentProcess()->HasSwitch(kTree);
+  bool all = base::CommandLine::ForCurrentProcess()->HasSwitch(kTree);
+  if (tree) {
+    DefaultHandler("Public dependency tree", value, value_only);
+  } else {
+    if (!all) {
+      DefaultHandler(
+          "Public dependencies "
+          "(try also \"--all\", \"--tree\", or even \"--all --tree\")",
+          value, value_only);
+    } else {
+      DefaultHandler("Public recursive dependencies", value, value_only);
+    }
+  }
+}
+
 // Outputs need special processing when output patterns are present.
 void ProcessOutputs(base::DictionaryValue* target, bool files_only) {
   base::ListValue* patterns = nullptr;
@@ -296,6 +315,7 @@ std::map<std::string, DescHandlerFunc> GetHandlers() {
           {variables::kPrecompiledHeader, DefaultHandler},
           {variables::kPrecompiledSource, DefaultHandler},
           {variables::kDeps, DepsHandler},
+          {"public_deps", PublicDepsHandler},
           {variables::kGenDeps, DefaultHandler},
           {variables::kLibs, DefaultHandler},
           {variables::kLibDirs, DefaultHandler},
@@ -396,6 +416,7 @@ bool PrintTarget(const Target* target,
   HandleProperty(variables::kPrecompiledHeader, handler_map, v, dict);
   HandleProperty(variables::kPrecompiledSource, handler_map, v, dict);
   HandleProperty(variables::kDeps, handler_map, v, dict);
+  HandleProperty("public_deps", handler_map, v, dict);
   HandleProperty(variables::kLibs, handler_map, v, dict);
   HandleProperty(variables::kLibDirs, handler_map, v, dict);
   HandleProperty(variables::kDataKeys, handler_map, v, dict);

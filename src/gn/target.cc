@@ -560,6 +560,9 @@ DepsIteratorRange Target::GetDeps(DepsIterationType type) const {
   if (type == DEPS_LINKED) {
     return DepsIteratorRange(
         DepsIterator(&public_deps_, &private_deps_, nullptr));
+  } else if (type == DEPS_PUBLIC) {
+    return DepsIteratorRange(
+        DepsIterator(&public_deps_, nullptr, nullptr));
   }
   // All deps.
   return DepsIteratorRange(
