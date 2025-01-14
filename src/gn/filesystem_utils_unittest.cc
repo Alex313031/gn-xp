@@ -5,6 +5,7 @@
 #include "gn/filesystem_utils.h"
 
 #include <thread>
+#include <iostream>
 
 #include "base/files/file_path.h"
 #include "base/files/file_util.h"
@@ -243,6 +244,18 @@ TEST(FilesystemUtils, NormalizePath) {
   input = "foo//bar";
   NormalizePath(&input);
   EXPECT_EQ("foo/bar", input);
+
+  input = "//foo/bar/.";
+  NormalizePath(&input);
+  EXPECT_EQ("//foo/bar/", input);
+
+  input = "foo/bar/.";
+  NormalizePath(&input);
+  EXPECT_EQ("foo/bar/", input);
+
+  input = "/foo/bar";
+  NormalizePath(&input);
+  EXPECT_EQ("/foo/bar", input);
 
   input = "//foo";
   NormalizePath(&input);
