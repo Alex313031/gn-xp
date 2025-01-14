@@ -244,6 +244,18 @@ TEST(FilesystemUtils, NormalizePath) {
   NormalizePath(&input);
   EXPECT_EQ("foo/bar", input);
 
+  input = "//foo/bar/.";
+  NormalizePath(&input);
+  EXPECT_EQ("//foo/bar/", input);
+
+  input = "foo/bar/.";
+  NormalizePath(&input);
+  EXPECT_EQ("foo/bar/", input);
+
+  input = "/foo/bar";
+  NormalizePath(&input);
+  EXPECT_EQ("/foo/bar", input);
+
   input = "//foo";
   NormalizePath(&input);
   EXPECT_EQ("//foo", input);
