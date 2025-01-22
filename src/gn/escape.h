@@ -1,3 +1,4 @@
+
 // Copyright (c) 2013 The Chromium Authors. All rights reserved.
 // Use of this source code is governed by a BSD-style license that can be
 // found in the LICENSE file.
@@ -5,9 +6,10 @@
 #ifndef TOOLS_GN_ESCAPE_H_
 #define TOOLS_GN_ESCAPE_H_
 
-#include <iosfwd>
 #include <string_view>
 #include <string>
+
+class OutputStream;
 
 enum EscapingMode {
   // No escaping.
@@ -78,13 +80,13 @@ std::string EscapeString(std::string_view str,
 
 // Same as EscapeString but writes the results to the given stream, saving a
 // copy.
-void EscapeStringToStream(std::ostream& out,
+void EscapeStringToStream(OutputStream& out,
                           std::string_view str,
                           const EscapeOptions& options);
 
 // Same as EscapeString but escape JSON string and writes the results to the
 // given stream, saving a copy.
-void EscapeJSONStringToStream(std::ostream& out,
+void EscapeJSONStringToStream(OutputStream& out,
                               std::string_view str,
                               const EscapeOptions& options);
 

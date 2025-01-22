@@ -732,6 +732,7 @@ def WriteGNNinja(path, platform, host, options, args_list):
         'src/gn/operators.cc',
         'src/gn/output_conversion.cc',
         'src/gn/output_file.cc',
+        'src/gn/output_stream.cc',
         'src/gn/parse_node_value_adapter.cc',
         'src/gn/parse_tree.cc',
         'src/gn/parser.cc',
