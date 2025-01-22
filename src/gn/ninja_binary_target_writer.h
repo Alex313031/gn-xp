@@ -17,7 +17,7 @@ struct EscapeOptions;
 // library, or a static library).
 class NinjaBinaryTargetWriter : public NinjaTargetWriter {
  public:
-  NinjaBinaryTargetWriter(const Target* target, std::ostream& out);
+  NinjaBinaryTargetWriter(const Target* target, OutputStream& out);
   ~NinjaBinaryTargetWriter() override;
 
   void Run() override;
@@ -61,17 +61,17 @@ class NinjaBinaryTargetWriter : public NinjaTargetWriter {
                               bool can_write_source_info = true,
                               bool restat_output_allowed = false);
 
-  void WriteLinkerFlags(std::ostream& out,
+  void WriteLinkerFlags(OutputStream& out,
                         const Tool* tool,
                         const SourceFile* optional_def_file);
-  void WriteCustomLinkerFlags(std::ostream& out, const Tool* tool);
-  void WriteLibrarySearchPath(std::ostream& out, const Tool* tool);
-  void WriteLibs(std::ostream& out, const Tool* tool);
-  void WriteFrameworks(std::ostream& out, const Tool* tool);
-  void WriteSwiftModules(std::ostream& out,
+  void WriteCustomLinkerFlags(OutputStream& out, const Tool* tool);
+  void WriteLibrarySearchPath(OutputStream& out, const Tool* tool);
+  void WriteLibs(OutputStream& out, const Tool* tool);
+  void WriteFrameworks(OutputStream& out, const Tool* tool);
+  void WriteSwiftModules(OutputStream& out,
                          const Tool* tool,
                          const std::vector<OutputFile>& swiftmodules);
-  void WritePool(std::ostream& out);
+  void WritePool(OutputStream& out);
 
   void AddSourceSetFiles(const Target* source_set,
                          UniqueVector<OutputFile>* obj_files) const;
