@@ -14,6 +14,7 @@
 
 class Builder;
 class BuildSettings;
+class OutputStream;
 
 class CompileCommandsWriter {
  public:
