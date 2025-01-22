@@ -12,6 +12,7 @@
 #include "util/ticks.h"
 
 class Label;
+class OutputStream;
 
 namespace base {
 class CommandLine;
