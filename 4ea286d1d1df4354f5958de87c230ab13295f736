@@ -1,0 +1,178 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "195da6a0_47b0571c",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 7
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000012
+      },
+      "writtenOn": "2025-01-23T19:08:23Z",
+      "side": 1,
+      "message": "I\u0027m tempted to say that we should be using something like a `inline constexpr kEndl \u003d \"\\n\";` in output_stream.h instead of using \"\\n\" literals to replace std::endl, but I can\u0027t actually convince myself that that\u0027d be an improvement ...",
+      "revId": "4ea286d1d1df4354f5958de87c230ab13295f736",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4d18f006_8021f1a7",
+        "filename": "src/gn/compile_commands_writer.h",
+        "patchSetId": 7
+      },
+      "lineNbr": 17,
+      "author": {
+        "id": 1000012
+      },
+      "writtenOn": "2025-01-23T19:08:23Z",
+      "side": 1,
+      "message": "Is this needed?",
+      "fixSuggestions": [
+        {
+          "fixId": "3378bbe6_e11cec06",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "src/gn/compile_commands_writer.h",
+              "range": {
+                "startLine": 17,
+                "startChar": 0,
+                "endLine": 18,
+                "endChar": 0
+              },
+              "replacement": ""
+            }
+          ]
+        }
+      ],
+      "revId": "4ea286d1d1df4354f5958de87c230ab13295f736",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1e604eb1_f76211d9",
+        "filename": "src/gn/eclipse_writer.cc",
+        "patchSetId": 7
+      },
+      "lineNbr": 120,
+      "author": {
+        "id": 1000012
+      },
+      "writtenOn": "2025-01-23T19:08:23Z",
+      "side": 1,
+      "message": "Nit: why not combine the two strings?",
+      "fixSuggestions": [
+        {
+          "fixId": "ff04b321_ffcd390c",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "src/gn/eclipse_writer.cc",
+              "range": {
+                "startLine": 120,
+                "startChar": 0,
+                "endLine": 121,
+                "endChar": 0
+              },
+              "replacement": "  out_ \u003c\u003c \"\u003c?xml version\u003d\\\"1.0\\\" encoding\u003d\\\"UTF-8\\\"?\u003e\\n\";\n"
+            }
+          ]
+        }
+      ],
+      "revId": "4ea286d1d1df4354f5958de87c230ab13295f736",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "787e7a2a_1beac658",
+        "filename": "src/gn/escape.h",
+        "patchSetId": 7
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 1000012
+      },
+      "writtenOn": "2025-01-23T19:08:23Z",
+      "side": 1,
+      "message": "Nit: delete empty line?",
+      "fixSuggestions": [
+        {
+          "fixId": "e25d3431_3c851c7c",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "src/gn/escape.h",
+              "range": {
+                "startLine": 1,
+                "startChar": 0,
+                "endLine": 2,
+                "endChar": 0
+              },
+              "replacement": ""
+            }
+          ]
+        }
+      ],
+      "revId": "4ea286d1d1df4354f5958de87c230ab13295f736",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b702751b_2b562264",
+        "filename": "src/gn/output_stream.h",
+        "patchSetId": 7
+      },
+      "lineNbr": 25,
+      "author": {
+        "id": 1000012
+      },
+      "writtenOn": "2025-01-23T19:08:23Z",
+      "side": 1,
+      "message": "Nit: This comment doesn\u0027t seem necessary.",
+      "fixSuggestions": [
+        {
+          "fixId": "f3b77e74_772d1ad3",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "src/gn/output_stream.h",
+              "range": {
+                "startLine": 25,
+                "startChar": 0,
+                "endLine": 26,
+                "endChar": 0
+              },
+              "replacement": ""
+            }
+          ]
+        }
+      ],
+      "revId": "4ea286d1d1df4354f5958de87c230ab13295f736",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "17fce6ef_329145b5",
+        "filename": "src/gn/visual_studio_writer.cc",
+        "patchSetId": 7
+      },
+      "lineNbr": 465,
+      "author": {
+        "id": 1000012
+      },
+      "writtenOn": "2025-01-23T19:08:23Z",
+      "side": 1,
+      "message": "Nit: merge strings, maybe? Fine if you think we shouldn\u0027t",
+      "revId": "4ea286d1d1df4354f5958de87c230ab13295f736",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    }
+  ]
+}
