@@ -16,6 +16,24 @@
       "message": "Need to add gn/output_stream.h?",
       "revId": "ed1abc107815210dc66ec439542bee2f6cbabc00",
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "6f435d3e_0152cbb5",
+        "filename": "src/gn/command_format.cc",
+        "patchSetId": 7
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 1000067
+      },
+      "writtenOn": "2025-01-24T15:32:39Z",
+      "side": 0,
+      "message": "Ubdeed, this compiled because gn/parser.h did include gn/output_stream.h (but didn\u0027t need it). I fixed both. Thanks.",
+      "parentUuid": "3eaa87b7_cc31486f",
+      "revId": "ed1abc107815210dc66ec439542bee2f6cbabc00",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
     }
   ]
 }
