@@ -16,6 +16,23 @@
       "message": "Looks like this breaks the chromium build:\n\nhttps://ci.chromium.org/ui/p/chromium/builders/try/linux-rel-compilator/1374732/overview",
       "revId": "2dd9331a704147be787823a169de51df8d3526bb",
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d8a3fc78_305c7bd0",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 11
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000012
+      },
+      "writtenOn": "2025-01-27T21:25:34Z",
+      "side": 1,
+      "message": "I\u0027ve paused the autoroller for now. Let me see if there\u0027s a straightforward fix or if we should revert this.",
+      "revId": "2dd9331a704147be787823a169de51df8d3526bb",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
     }
   ]
 }
