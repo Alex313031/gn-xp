@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "56bc7e3d_9eb59e7c",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 10
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000067
+      },
+      "writtenOn": "2025-01-27T11:28:48Z",
+      "side": 1,
+      "message": "Sorry about the CQ failures. For some reason the unit-tests ran properly on my machine when building for release mode. I had to build in debug mode to see the failures. I am not to sure why, but the correct fix for LLONG_MIN is in now.",
+      "revId": "f7286ecdddd1a7173a0318bdf66b789ceb476185",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    }
+  ]
+}
