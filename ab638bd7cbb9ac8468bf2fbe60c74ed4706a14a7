@@ -16,6 +16,24 @@
       "message": "Wow, sorry about that. I\u0027ll get a local Chromium checkout to verify the next CL. Do you happen to have more details about the breakage so I can reproduce it?",
       "revId": "ab638bd7cbb9ac8468bf2fbe60c74ed4706a14a7",
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "bb7095c4_440d9ebc",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000012
+      },
+      "writtenOn": "2025-01-28T21:47:28Z",
+      "side": 1,
+      "message": "I only tested the build locally with the CL on a Mac, but there I couldn\u0027t even do a build; Siso complained about missing rules in the ninja files when it loaded the build graph. I don\u0027t think the GN arguments even mattered for that.\n\nApart from that, it looked like most of the compiles on the bots were failing when we tried to invoke GN recursively as part of the build, e.g.:\n\nhttps://ci.chromium.org/ui/p/chromium/builders/try/linux-rel-compilator/1374732/overview",
+      "parentUuid": "4ce364fd_7bd2cb15",
+      "revId": "ab638bd7cbb9ac8468bf2fbe60c74ed4706a14a7",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
     }
   ]
 }
