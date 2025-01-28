@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "4ce364fd_7bd2cb15",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000067
+      },
+      "writtenOn": "2025-01-28T13:35:31Z",
+      "side": 1,
+      "message": "Wow, sorry about that. I\u0027ll get a local Chromium checkout to verify the next CL. Do you happen to have more details about the breakage so I can reproduce it?",
+      "revId": "ab638bd7cbb9ac8468bf2fbe60c74ed4706a14a7",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    }
+  ]
+}
