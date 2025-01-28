@@ -33,6 +33,24 @@
       "message": "I\u0027ve paused the autoroller for now. Let me see if there\u0027s a straightforward fix or if we should revert this.",
       "revId": "2dd9331a704147be787823a169de51df8d3526bb",
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ec9c50ce_3370834d",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 11
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000012
+      },
+      "writtenOn": "2025-01-28T21:47:39Z",
+      "side": 1,
+      "message": "I\u0027m not sure what\u0027s going on, but at the very least, GN is generating incorrect ninja files; I can\u0027t even start a build on the Mac locally with this version, as siso will complain about missing rules.",
+      "parentUuid": "d8a3fc78_305c7bd0",
+      "revId": "2dd9331a704147be787823a169de51df8d3526bb",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
     }
   ]
 }
