@@ -51,6 +51,24 @@
       "parentUuid": "d8a3fc78_305c7bd0",
       "revId": "2dd9331a704147be787823a169de51df8d3526bb",
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b0d41170_3c59931b",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 11
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000067
+      },
+      "writtenOn": "2025-02-12T11:07:49Z",
+      "side": 1,
+      "message": "I can finally reproduce the failure from [1] locally. Why the top-level `gn gen` with the new binary generates the exact same build plan (!), it is a build-time action that invokes `gn` with specific arguments that seg-faults.\n\nUsing a local Chromium checkout, I can reproduce the crash with:\n\n```\n/work2/chromium/src$ /tmp/gn-output-stream gen out/Default\n/work2/chromium/src$ cd out/Default\n/work2/chromium/src/out/Default$ /tmp/gn-output-stream gen --root\u003d/work2/chromium/src ../tmp_out\nSegmentation fault (core dumped)\n```\n\nVery unexpected, but I\u0027ll be looking at the root cause.\n\n[1] https://ci.chromium.org/ui/p/chromium/builders/try/linux-rel-compilator/1374732/overview",
+      "parentUuid": "ec9c50ce_3370834d",
+      "revId": "2dd9331a704147be787823a169de51df8d3526bb",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
     }
   ]
 }
