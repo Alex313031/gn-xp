@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "4a2f2ecc_cc93b7ba",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000012
+      },
+      "writtenOn": "2025-02-24T18:57:53Z",
+      "side": 1,
+      "message": "I feel like historically we resisted adding something like this, but at this\npoint it kind of feels silly not to have it.",
+      "revId": "5fd2ae9cfcae1c6d89c592631d3f176fd48e1475",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    }
+  ]
+}
