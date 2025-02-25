@@ -16,6 +16,23 @@
       "message": "This looks reasonable to me, but I just sent a note about it out to gn-dev@ to see if anyone objects. Let\u0027s wait to see if we get a reaction there.",
       "revId": "a9d15ae3aa04dd8cdc751094ea0e3d9db8307fc6",
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a7f5568a_f0798d8b",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000012
+      },
+      "writtenOn": "2025-02-25T16:53:03Z",
+      "side": 1,
+      "message": "There were no objections on gn-dev@, so, lgtm. tikuta@, can you also take a look?",
+      "revId": "a9d15ae3aa04dd8cdc751094ea0e3d9db8307fc6",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
     }
   ]
 }
