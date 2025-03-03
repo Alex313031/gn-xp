@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "665afb34_a8e3de64",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000012
+      },
+      "writtenOn": "2025-03-03T20:14:38Z",
+      "side": 1,
+      "message": "I have questions ... :).\n\n1) We don\u0027t generate stamp files at all any more?\n\n2) What do you mean that it\u0027s possible for a target to not generate any Ninja rule? Can you given an example?\n\n3) Will GN generate phony rules now (and if so, when)?",
+      "revId": "3d0d3445f67d91be25ffdc9ba9b352b9af9cf07e",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    }
+  ]
+}
