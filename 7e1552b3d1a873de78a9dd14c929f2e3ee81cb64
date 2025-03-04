@@ -16,6 +16,23 @@
       "message": "(Don\u0027t have permission to submit.)",
       "revId": "7e1552b3d1a873de78a9dd14c929f2e3ee81cb64",
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "2b1137a5_51394326",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000012
+      },
+      "writtenOn": "2025-03-04T02:12:48Z",
+      "side": 1,
+      "message": "Huh, I didn\u0027t even realize we built binaries for arm64 and riscv64.",
+      "revId": "7e1552b3d1a873de78a9dd14c929f2e3ee81cb64",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
     }
   ]
 }
