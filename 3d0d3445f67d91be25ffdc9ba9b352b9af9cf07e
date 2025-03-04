@@ -16,6 +16,24 @@
       "message": "I have questions ... :).\n\n1) We don\u0027t generate stamp files at all any more?\n\n2) What do you mean that it\u0027s possible for a target to not generate any Ninja rule? Can you given an example?\n\n3) Will GN generate phony rules now (and if so, when)?",
       "revId": "3d0d3445f67d91be25ffdc9ba9b352b9af9cf07e",
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "2da9990a_9d415d34",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000067
+      },
+      "writtenOn": "2025-03-04T09:32:12Z",
+      "side": 1,
+      "message": "1) We still generate stamp files in a number of cases, but many targets now rely on phony Ninja aliases (e.g. \u0027phony/$target_out_dir/$target_name`) for targets like groups that don\u0027t have real outputs.\n\n2) As explained in the bug, a group with no dependencies (deps or data_deps) will not generate a new rule definition in the toolchain.ninja file, only a single `build phony/xxxx: phony` statement in the corresponding .ninja file.\n\n3) Context for the `no_stamp_files` .gn setting: https://gn.issues.chromium.org/issues/42440077",
+      "parentUuid": "665afb34_a8e3de64",
+      "revId": "3d0d3445f67d91be25ffdc9ba9b352b9af9cf07e",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
     }
   ]
 }
