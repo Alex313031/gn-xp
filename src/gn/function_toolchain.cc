@@ -862,7 +862,7 @@ Tool variables
         libraries in this target. Includes any specified renamed dependencies.
 
     {{rustdeps}}
-        Expands to the list of -Ldependency=<path> strings needed to compile
+        Expands to the list of -Clink-arg=<path> strings needed to compile
         this target.
 
     {{rustenv}}
