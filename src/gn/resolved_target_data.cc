@@ -124,7 +124,7 @@ void ResolvedTargetData::ComputeInheritedLibsFor(
       // that the EXE can use the headers in FINAL_SHLIB so the FINAL_SHLIB
       // will need to appear on EXE's link line.
       //
-      // However, if the dependency is private:
+      // However, for C++ if the dependency is private:
       //   EXE -> INTERMEDIATE_SHLIB --[private]--> FINAL_SHLIB
       // the dependency will not be propagated because INTERMEDIATE_SHLIB is
       // not granting permission to call functions from FINAL_SHLIB. If EXE
@@ -133,12 +133,21 @@ void ResolvedTargetData::ComputeInheritedLibsFor(
       //
       // Static libraries and source sets aren't inherited across shared
       // library boundaries because they will be linked into the shared
-      // library. Rust dylib deps are handled above and transitive deps are
-      // resolved by the compiler.
+      // library.
+      //
+      // For Rust dylibs, which are SHARED_LIBRARY targets, this would be
+      // the same most of the time, as the Rust compiler resolves transitive
+      // dependencies automatically. However, there is the edge case where
+      // a C++ executable() links against a Rust static library that depends
+      // on a dylib libA.so which itself depends on another dylib libB.so.
+      //
+      // In this specific case, the C++ compiler cannot guess the transitive
+      // dependency between libA and libB, and the link operation will fail.
+      // To handle this, always propagate Rust dylib.
       const TargetInfo* dep_info = GetTargetInheritedLibs(dep);
       for (const auto& pair : dep_info->inherited_libs) {
         if (pair.target()->output_type() == Target::SHARED_LIBRARY &&
-            pair.is_public()) {
+            (pair.is_public() || pair.target()->has_rust_values())) {
           inherited_libraries->Append(pair.target(), is_public);
         }
       }
