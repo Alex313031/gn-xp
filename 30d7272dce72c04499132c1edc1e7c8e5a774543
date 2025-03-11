@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "9dc53c9c_73fa510a",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000030
+      },
+      "writtenOn": "2025-03-11T05:00:21Z",
+      "side": 1,
+      "message": "Sorry, I thought we need 2 CR+2 from GN owners. But it seems not.",
+      "revId": "30d7272dce72c04499132c1edc1e7c8e5a774543",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    }
+  ]
+}
