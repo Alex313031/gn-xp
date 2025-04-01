@@ -68,6 +68,24 @@
       "message": "As best I can tell, --runtime-deps-list-file currently works correctly if you pass it an absolute path, and works initially if you pass it a relative path, but then regeneration doesn\u0027t work. The code kinda looks like a src-relative path should work, but if I try it, it doesn\u0027t. And the documentation doesn\u0027t say anything about what should work.\n\nWith your patch, it does look like an absolute path will get converted into a path relative to the build directory correctly, so that\u0027s an improvement.\n\nCan you update the documentation to reflect what we expect to work?\n\nAlso, it would be nice if we could make src-relative paths and relative paths also work while we\u0027re at it. Do you feel like taking a stab at that? If you don\u0027t, I still think this patch is an improvement and probably worth it.",
       "revId": "3251c30afebddf23bfd0d790da390179a41cb884",
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a4a8ab9c_25384061",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000402
+      },
+      "writtenOn": "2025-04-01T07:34:54Z",
+      "side": 1,
+      "message": "Hey, I\u0027m sorry but I never got an email with your message. I\u0027ll try to work on those things. Thanks.",
+      "parentUuid": "ae0dd91e_e21954ec",
+      "revId": "3251c30afebddf23bfd0d790da390179a41cb884",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
     }
   ]
 }
