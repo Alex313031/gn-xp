@@ -490,6 +490,21 @@ bool RunNinjaPostProcessTools(const BuildSettings* build_settings,
   return true;
 }
 
+bool WriteIgnoreFile(Setup& setup, Err* err) {
+  // Write a .gitignore file that causes the build directory to be ignored.
+  SourceFile output_file =
+      setup.build_settings().build_dir().ResolveRelativeFile(
+          Value(nullptr, ".gitignore"), err);
+  if (output_file.is_null())
+    return false;
+  base::FilePath output_path = setup.build_settings().GetFullPath(output_file);
+
+  if (!WriteFile(output_path, "*\n", err))
+    return false;
+
+  return true;
+}
+
 }  // namespace
 
 const char kGen[] = "gen";
@@ -867,6 +882,11 @@ int RunGen(const std::vector<std::string>& args) {
 
   if (command_line->HasSwitch(kSwitchExportRustProject) &&
       !RunRustProjectWriter(&setup->build_settings(), setup->builder(), &err)) {
+    err.PrintToStdout();
+    return 1;
+  }
+
+  if (!WriteIgnoreFile(*setup, &err)) {
     err.PrintToStdout();
     return 1;
   }
