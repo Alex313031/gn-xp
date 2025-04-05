@@ -1,0 +1,56 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "de5a433f_e949c1fe",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000067
+      },
+      "writtenOn": "2025-04-05T13:44:55Z",
+      "side": 1,
+      "message": "Good idea, thanks!",
+      "revId": "17f45cc53ad800e8ce71ff5d4a99f128f4bbc74f",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a0fbdcbd_b038f78e",
+        "filename": "src/gn/command_gen.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 500,
+      "author": {
+        "id": 1000067
+      },
+      "writtenOn": "2025-04-05T13:44:55Z",
+      "side": 1,
+      "message": "nit: It might be slightly easier to use base::FilePath directly, as in:\n\n```\nbase::FilePath output_file \u003d setup.build_settings().GetFullPath(\n    setup.build_settings().build_dir()).Append(FILE_PATH_LITERAL(\".gitignore\"));\n```",
+      "fixSuggestions": [
+        {
+          "fixId": "1752dd83_8798b575",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "src/gn/command_gen.cc",
+              "range": {
+                "startLine": 495,
+                "startChar": 0,
+                "endLine": 501,
+                "endChar": 0
+              },
+              "replacement": "  base::FilePath output_path \u003d\n      setup.build_settings().GetFullPath(setup.build_settings().build_dir())\n          .Append(FILE_PATH_LITERAL(\".gitignore\"));\n"
+            }
+          ]
+        }
+      ],
+      "revId": "17f45cc53ad800e8ce71ff5d4a99f128f4bbc74f",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    }
+  ]
+}
