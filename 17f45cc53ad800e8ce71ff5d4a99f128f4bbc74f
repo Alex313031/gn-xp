@@ -18,6 +18,23 @@
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "40877771_e7d6e0db",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000120
+      },
+      "writtenOn": "2025-04-07T22:07:34Z",
+      "side": 1,
+      "message": "I had proposed to make the same change to CMake in https://gitlab.kitware.com/cmake/cmake/-/merge_requests/10594 and they had two reasonable suggestions:\n- Only write the file if it does not exist.\n- Add a comment that says where the file came from.\n\nI did the same in this change.",
+      "revId": "17f45cc53ad800e8ce71ff5d4a99f128f4bbc74f",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "559a510e_42900098",
@@ -59,6 +76,30 @@
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "47e9a51e_974b478e",
+        "filename": "src/gn/command_gen.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 493,
+      "author": {
+        "id": 1000120
+      },
+      "writtenOn": "2025-04-07T22:07:34Z",
+      "side": 1,
+      "message": "That would require a few more changes elsewhere, not clear if it\u0027s worth it.\n```\n../src/gn/command_gen.cc:496:7: error: \u0027this\u0027 argument to member function \u0027build_settings\u0027 has type \u0027const Setup\u0027, but function is not marked const\n  496 |       setup.build_settings()\n      |       ^~~~~\n../src/gn/setup.h:122:18: note: \u0027build_settings\u0027 declared here\n  122 |   BuildSettings\u0026 build_settings() { return build_settings_; }\n      |                  ^\n```",
+      "parentUuid": "559a510e_42900098",
+      "range": {
+        "startLine": 493,
+        "startChar": 21,
+        "endLine": 493,
+        "endChar": 26
+      },
+      "revId": "17f45cc53ad800e8ce71ff5d4a99f128f4bbc74f",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "a0fbdcbd_b038f78e",
@@ -90,6 +131,24 @@
           ]
         }
       ],
+      "revId": "17f45cc53ad800e8ce71ff5d4a99f128f4bbc74f",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "5e94d13c_8f1a3f25",
+        "filename": "src/gn/command_gen.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 500,
+      "author": {
+        "id": 1000120
+      },
+      "writtenOn": "2025-04-07T22:07:34Z",
+      "side": 1,
+      "message": "Done, I had copy-pasted this part from the code that creates `compile_commands.json`, I guess we could simplify that as well.",
+      "parentUuid": "a0fbdcbd_b038f78e",
       "revId": "17f45cc53ad800e8ce71ff5d4a99f128f4bbc74f",
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
     }
