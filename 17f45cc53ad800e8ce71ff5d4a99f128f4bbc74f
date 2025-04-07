@@ -20,6 +20,47 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "559a510e_42900098",
+        "filename": "src/gn/command_gen.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 493,
+      "author": {
+        "id": 1000030
+      },
+      "writtenOn": "2025-04-07T01:46:47Z",
+      "side": 1,
+      "message": "Can we use const?",
+      "range": {
+        "startLine": 493,
+        "startChar": 21,
+        "endLine": 493,
+        "endChar": 26
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "276bbb79_f7ed9d48",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "src/gn/command_gen.cc",
+              "range": {
+                "startLine": 493,
+                "startChar": 0,
+                "endLine": 494,
+                "endChar": 0
+              },
+              "replacement": "bool WriteIgnoreFile(const Setup\u0026 setup, Err* err) {\n"
+            }
+          ]
+        }
+      ],
+      "revId": "17f45cc53ad800e8ce71ff5d4a99f128f4bbc74f",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "a0fbdcbd_b038f78e",
         "filename": "src/gn/command_gen.cc",
         "patchSetId": 1
