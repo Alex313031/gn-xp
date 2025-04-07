@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "7732f02a_f7d2b1ee",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000012
+      },
+      "writtenOn": "2025-04-07T22:27:52Z",
+      "side": 1,
+      "message": "ping digit@, tikuta@ - please take a look?",
+      "revId": "01afdf31e286099da23af8a549668dbf14a481ea",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    }
+  ]
+}
