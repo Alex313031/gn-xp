@@ -4557,7 +4557,10 @@
 ### <a name="var_gn_version"></a>**gn_version**: [number] The version of gn.&nbsp;[Back to Top](#gn-reference)
 
 ```
-  Corresponds to the number printed by `gn --version`.
+  Corresponds to the number printed by `gn --version`. This variable is
+  only variable available in the dotfile (all the rest are missing
+  because the dotfile has to be parsed before args.gn or anything else
+  is processed).
 ```
 
 #### **Example**
@@ -7170,6 +7173,10 @@
   --dotfile:
 
     gn gen out/Debug --root=/home/build --dotfile=/home/my_gn_file.gn
+
+  The system variable `gn_version` is available in the dotfile, but none of
+  the other variables are, because the dotfile is processed before args.gn
+  or anything else is processed.
 ```
 
 #### **Variables**
