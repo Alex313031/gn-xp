@@ -54,7 +54,6 @@
     *   [import: Import a file into the current scope.](#func_import)
     *   [label_matches: Returns whether a label matches any of a list of patterns.](#func_label_matches)
     *   [not_needed: Mark variables from scope as not needed.](#func_not_needed)
-    *   [path_exists: Returns whether the given path exists.](#func_path_exists)
     *   [pool: Defines a pool object.](#func_pool)
     *   [print: Prints to the console.](#func_print)
     *   [print_stack_trace: Prints a stack trace.](#func_print_stack_trace)
@@ -785,7 +784,7 @@
       Generate files for an IDE. Currently supported values:
       "eclipse" - Eclipse CDT settings file.
       "vs" - Visual Studio project/solution files.
-             (default Visual Studio version: 2022)
+             (default Visual Studio version: 2019)
       "vs2013" - Visual Studio 2013 project/solution files.
       "vs2015" - Visual Studio 2015 project/solution files.
       "vs2017" - Visual Studio 2017 project/solution files.
@@ -3067,18 +3066,6 @@
   not_needed(invoker, "*", [ "config" ])
   not_needed(invoker, [ "data_deps", "deps" ])
 ```
-### <a name="func_path_exists"></a>**path_exists**: Returns whether the given path exists.&nbsp;[Back to Top](#gn-reference)
-
-```
-  path_exists(path)
-```
-
-#### **Examples**:
-```
-  path_exists("//")  # true
-  path_exists("BUILD.gn")  # true
-  path_exists("/abs-non-existent")  # false
-```
 ### <a name="func_pool"></a>**pool**: Defines a pool object.&nbsp;[Back to Top](#gn-reference)
 
 ```
@@ -4257,8 +4244,8 @@
         libraries in this target. Includes any specified renamed dependencies.
 
     {{rustdeps}}
-        Expands to the list of -Ldependency=<path> and -Clink-arg=<path> strings
-        needed to compile this target.
+        Expands to the list of -Ldependency=<path> strings needed to compile
+        this target.
 
     {{rustenv}}
         Expands to the list of environment variables.
