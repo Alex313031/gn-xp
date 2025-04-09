@@ -33,6 +33,24 @@
       "message": "Regenerate markdown too?",
       "revId": "01afdf31e286099da23af8a549668dbf14a481ea",
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "590c2e9c_23a561eb",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000012
+      },
+      "writtenOn": "2025-04-09T01:10:37Z",
+      "side": 1,
+      "message": "Good catch. Done, but now I need a re-stamp. Please take another look?",
+      "parentUuid": "055109f1_b813f4e5",
+      "revId": "01afdf31e286099da23af8a549668dbf14a481ea",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
     }
   ]
 }
