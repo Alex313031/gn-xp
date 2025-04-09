@@ -68,6 +68,24 @@
       "message": "nit: \"a new scope whose only parent if the BUILDCONFIG.gn scope\" might be more accurate.",
       "revId": "01afdf31e286099da23af8a549668dbf14a481ea",
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "0c8bc51c_d1b2b6da",
+        "filename": "src/gn/target.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 237,
+      "author": {
+        "id": 1000012
+      },
+      "writtenOn": "2025-04-09T19:50:44Z",
+      "side": 1,
+      "message": "Fair enough. Addressed in https://gn-review.googlesource.com/c/gn/+/18520.",
+      "parentUuid": "f6bca5b8_9c928acd",
+      "revId": "01afdf31e286099da23af8a549668dbf14a481ea",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
     }
   ]
 }
