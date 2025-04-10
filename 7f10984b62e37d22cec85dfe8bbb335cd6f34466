@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "3e9d86a6_fea88ef0",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2025-04-10T13:16:46Z",
+      "side": 1,
+      "message": "thanks!",
+      "revId": "7f10984b62e37d22cec85dfe8bbb335cd6f34466",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "17eec23e_48644313",
+        "filename": "docs/reference.md",
+        "patchSetId": 4
+      },
+      "lineNbr": 4560,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2025-04-10T13:16:46Z",
+      "side": 1,
+      "message": "missing a `the` at the end of (the) line",
+      "revId": "7f10984b62e37d22cec85dfe8bbb335cd6f34466",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    }
+  ]
+}
