@@ -33,6 +33,24 @@
       "message": "missing a `the` at the end of (the) line",
       "revId": "7f10984b62e37d22cec85dfe8bbb335cd6f34466",
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "be09886f_b81c9a16",
+        "filename": "docs/reference.md",
+        "patchSetId": 4
+      },
+      "lineNbr": 4560,
+      "author": {
+        "id": 1000012
+      },
+      "writtenOn": "2025-04-10T16:34:59Z",
+      "side": 1,
+      "message": "Argh. Will fix in the follow-up CL.",
+      "parentUuid": "17eec23e_48644313",
+      "revId": "7f10984b62e37d22cec85dfe8bbb335cd6f34466",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
     }
   ]
 }
