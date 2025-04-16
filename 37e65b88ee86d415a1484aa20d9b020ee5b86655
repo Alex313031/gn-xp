@@ -50,6 +50,30 @@
     {
       "unresolved": false,
       "key": {
+        "uuid": "69632662_49782a2a",
+        "filename": ".gitignore",
+        "patchSetId": 4
+      },
+      "lineNbr": 48,
+      "author": {
+        "id": 1003017
+      },
+      "writtenOn": "2025-04-16T11:23:11Z",
+      "side": 1,
+      "message": "Ah, I thought compile_commands.json needs to be at the build dir. But it doesn\u0027t. Thanks.",
+      "parentUuid": "416d8bcd_e0c33d8d",
+      "range": {
+        "startLine": 48,
+        "startChar": 0,
+        "endLine": 48,
+        "endChar": 7
+      },
+      "revId": "37e65b88ee86d415a1484aa20d9b020ee5b86655",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
+      "unresolved": false,
+      "key": {
         "uuid": "5170bad2_669dff13",
         "filename": "/PATCHSET_LEVEL",
         "patchSetId": 4
@@ -112,6 +136,30 @@
           ]
         }
       ],
+      "revId": "37e65b88ee86d415a1484aa20d9b020ee5b86655",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "2aa8d071_ea1fe145",
+        "filename": "build/gen.py",
+        "patchSetId": 4
+      },
+      "lineNbr": 212,
+      "author": {
+        "id": 1003017
+      },
+      "writtenOn": "2025-04-16T11:23:11Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "1cfe7dc2_0d4ca10b",
+      "range": {
+        "startLine": 212,
+        "startChar": 28,
+        "endLine": 212,
+        "endChar": 35
+      },
       "revId": "37e65b88ee86d415a1484aa20d9b020ee5b86655",
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
     }
