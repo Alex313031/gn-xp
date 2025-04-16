@@ -22,6 +22,98 @@
       },
       "revId": "37e65b88ee86d415a1484aa20d9b020ee5b86655",
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "416d8bcd_e0c33d8d",
+        "filename": ".gitignore",
+        "patchSetId": 4
+      },
+      "lineNbr": 48,
+      "author": {
+        "id": 1000030
+      },
+      "writtenOn": "2025-04-16T08:03:03Z",
+      "side": 1,
+      "message": "I think it is fine to generates compile_commands to root directory rather than build directory as we already have compile_commands.json in .gitignore.",
+      "parentUuid": "e9368b63_a51d2c9b",
+      "range": {
+        "startLine": 48,
+        "startChar": 0,
+        "endLine": 48,
+        "endChar": 7
+      },
+      "revId": "37e65b88ee86d415a1484aa20d9b020ee5b86655",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "5170bad2_669dff13",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000030
+      },
+      "writtenOn": "2025-04-16T08:03:03Z",
+      "side": 1,
+      "message": "I\u0027m just curious what is your motivation to do this.",
+      "revId": "37e65b88ee86d415a1484aa20d9b020ee5b86655",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1cfe7dc2_0d4ca10b",
+        "filename": "build/gen.py",
+        "patchSetId": 4
+      },
+      "lineNbr": 212,
+      "author": {
+        "id": 1000030
+      },
+      "writtenOn": "2025-04-16T08:03:03Z",
+      "side": 1,
+      "message": "I think \u0027compilation database\u0027 is proper term for compile_commands.json",
+      "range": {
+        "startLine": 212,
+        "startChar": 28,
+        "endLine": 212,
+        "endChar": 35
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "0423d317_b10c2eef",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "build/gen.py",
+              "range": {
+                "startLine": 212,
+                "startChar": 0,
+                "endLine": 213,
+                "endChar": 0
+              },
+              "replacement": "  args_list.add(\u0027--generate_compilation_database\u0027,\n"
+            },
+            {
+              "path": "build/gen.py",
+              "range": {
+                "startLine": 398,
+                "startChar": 0,
+                "endLine": 399,
+                "endChar": 0
+              },
+              "replacement": "    compdb \u003d subprocess.check_output([\u0027ninja\u0027, \u0027-C\u0027, build_dir, \u0027-t\u0027,\n                                      \u0027compdb\u0027], text\u003dTrue)\n"
+            }
+          ]
+        }
+      ],
+      "revId": "37e65b88ee86d415a1484aa20d9b020ee5b86655",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
     }
   ]
 }

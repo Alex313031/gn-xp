@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f1154334_36ed416f",
+        "filename": "build/gen.py",
+        "patchSetId": 3
+      },
+      "lineNbr": 400,
+      "author": {
+        "id": 1000030
+      },
+      "writtenOn": "2025-04-16T08:03:03Z",
+      "side": 1,
+      "message": "Can we write like `subprocess.run(..., stdout\u003df, check\u003dTrue)`?",
+      "range": {
+        "startLine": 398,
+        "startChar": 0,
+        "endLine": 400,
+        "endChar": 21
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "1247a98e_a2225fd2",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "build/gen.py",
+              "range": {
+                "startLine": 398,
+                "startChar": 0,
+                "endLine": 399,
+                "endChar": 0
+              },
+              "replacement": ""
+            },
+            {
+              "path": "build/gen.py",
+              "range": {
+                "startLine": 400,
+                "startChar": 0,
+                "endLine": 401,
+                "endChar": 0
+              },
+              "replacement": "      subprocess.run([\u0027ninja\u0027, \u0027-C\u0027, build_dir, \u0027-t\u0027, \u0027compdb\u0027], stdout\u003df, check\u003dTrue)\n"
+            }
+          ]
+        }
+      ],
+      "revId": "0cdb77e5a38a77f5d7c5a1421f2572d93996bf4a",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    }
+  ]
+}
