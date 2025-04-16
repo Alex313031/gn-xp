@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e9368b63_a51d2c9b",
+        "filename": ".gitignore",
+        "patchSetId": 4
+      },
+      "lineNbr": 48,
+      "author": {
+        "id": 1003017
+      },
+      "writtenOn": "2025-04-16T07:55:07Z",
+      "side": 1,
+      "message": "Should build/gen.py also generates `.clangd` that specifies the location of compile_commands.json?",
+      "range": {
+        "startLine": 48,
+        "startChar": 0,
+        "endLine": 48,
+        "endChar": 7
+      },
+      "revId": "37e65b88ee86d415a1484aa20d9b020ee5b86655",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    }
+  ]
+}
