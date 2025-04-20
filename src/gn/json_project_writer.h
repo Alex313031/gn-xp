@@ -20,6 +20,7 @@ class JSONProjectWriter {
                                const std::string& exec_script,
                                const std::string& exec_script_extra_args,
                                const std::string& dir_filter_string,
+                               bool filter_with_data_deps,
                                bool quiet,
                                Err* err);
 
