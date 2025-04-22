@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a07a08da_f7dccab7",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000067
+      },
+      "writtenOn": "2025-04-22T11:45:24Z",
+      "side": 1,
+      "message": "Thank you, this looks ok, but this needs a proper unit-test in json_project_writer_unittest.cc to verify correct behavior.\n\nNote: it looks like xcode_writer.cc, visual_studio_writer.cc and json_project_writer.cc are all implementing target using different but similar sources. I am not asking for this here, just noting it as it may be useful to move this logic to a shared class in the future.",
+      "revId": "0ed8e251ef3585dde0d1f25a24f1f22a98ac3b89",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    }
+  ]
+}
