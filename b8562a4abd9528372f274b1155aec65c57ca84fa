@@ -33,6 +33,24 @@
       "message": "`gn help --root-pattern` doesn\u0027t seem to work (?) Does the flag have to be added to some index to match? Maybe you need to update GetSwitches() in switches.cc?",
       "revId": "b8562a4abd9528372f274b1155aec65c57ca84fa",
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "2a9d9242_52855798",
+        "filename": "src/gn/setup.cc",
+        "patchSetId": 6
+      },
+      "lineNbr": 161,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2025-04-25T15:36:34Z",
+      "side": 1,
+      "message": "digit made https://gn-review.googlesource.com/c/gn/+/18720",
+      "parentUuid": "bd525b94_faa9adb7",
+      "revId": "b8562a4abd9528372f274b1155aec65c57ca84fa",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
     }
   ]
 }
