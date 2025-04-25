@@ -33,6 +33,7 @@ namespace {
 const char kCommandLinkPrefix[] = "cmd_";
 const char kFunctionLinkPrefix[] = "func_";
 const char kVariableLinkPrefix[] = "var_";
+const char kSwitchLinkPrefix[] = "switch_";
 
 void PrintToplevelHelp() {
   PrintSectionHelp("Commands", "<command>", "commands");
@@ -206,7 +207,12 @@ void PrintAllHelp() {
   PrintLongHelp(kRuntimeDeps_Help, "runtime_deps");
   PrintLongHelp(kSourceExpansion_Help, "source_expansion");
 
-  PrintSwitchHelp();
+  if (is_markdown) {
+    OutputString("## <a name=\"switch_list\"></a>Global switches\n\n",
+                 DECORATION_NONE, NO_ESCAPING);
+  }
+  for (const auto& v : switches::GetSwitches())
+    PrintLongHelp(v.second.long_help, kSwitchLinkPrefix + v.first);
 }
 
 // Prints help on the given switch. There should be no leading hyphens. Returns

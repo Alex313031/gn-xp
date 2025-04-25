@@ -8375,30 +8375,249 @@
     //out/Debug/obj/mydirectory/input2.h
     //out/Debug/obj/mydirectory/input2.cc
 ```
-### <a name="switch_list"></a>**Available global switches**&nbsp;[Back to Top](#gn-reference)
+## <a name="switch_list"></a>Global switches
+
+### <a name="switch_args"></a>**\--args**: Specifies build arguments overrides.&nbsp;[Back to Top](#gn-reference)
 
 ```
-  Do "gn help --the_switch_you_want_help_on" for more. Individual commands may
-  take command-specific switches not listed here. See the help on your specific
-  command for more.
-```
-```
-    *   --args: Specifies build arguments overrides.
-    *   --color: Force colored output.
-    *   --dotfile: Override the name of the ".gn" file.
-    *   --fail-on-unused-args: Treat unused build args as fatal errors.
-    *   --markdown: Write help output in the Markdown format.
-    *   --ninja-executable: Set the Ninja executable.
-    *   --nocolor: Force non-colored output.
-    *   -q: Quiet mode. Don't print output on success.
-    *   --root: Explicitly specify source root.
-    *   --root-target: Override the root target.
-    *   --runtime-deps-list-file: Save runtime dependencies for targets in file.
-    *   --script-executable: Set the executable used to execute scripts.
-    *   --threads: Specify number of worker threads.
-    *   --time: Outputs a summary of how long everything took.
-    *   --tracelog: Writes a Chrome-compatible trace log to the given file.
-    *   -v: Verbose logging.
-    *   --version: Prints the GN version number and exits.
+  See "gn help buildargs" for an overview of how build arguments work.
+
+  Most operations take a build directory. The build arguments are taken from
+  the previous build done in that directory. If a command specifies --args, it
+  will override the previous arguments stored in the build directory, and use
+  the specified ones.
+
+  The args specified will be saved to the build directory for subsequent
+  commands. Specifying --args="" will clear all build arguments.
 ```
 
+#### **Formatting**
+
+```
+  The value of the switch is interpreted in GN syntax. For typical usage of
+  string arguments, you will need to be careful about escaping of quotes.
+```
+
+#### **Examples**
+
+```
+  gn gen out/Default --args="foo=\"bar\""
+
+  gn gen out/Default --args='foo="bar" enable=true blah=7'
+
+  gn check out/Default --args=""
+    Clears existing build args from the directory.
+
+  gn desc out/Default --args="some_list=[1, false, \"foo\"]"
+```
+### <a name="switch_color"></a>**\--[no]color**: Forces colored output on or off.&nbsp;[Back to Top](#gn-reference)
+
+```
+  Normally GN will try to detect whether it is outputting to a terminal
+  and will enable or disable color accordingly. Use of these switches
+  will override the default.
+```
+
+#### **Examples**
+
+```
+  gn gen out/Default --color
+
+  gn gen out/Default --nocolor
+```
+### <a name="switch_dotfile"></a>**\--dotfile**: Override the name of the ".gn" file.&nbsp;[Back to Top](#gn-reference)
+
+```
+  Normally GN loads the ".gn" file from the source root for some basic
+  configuration (see "gn help dotfile"). This flag allows you to
+  use a different file.
+```
+### <a name="switch_fail-on-unused-args"></a>**\--fail-on-unused-args**: Treat unused build args as fatal errors.&nbsp;[Back to Top](#gn-reference)
+
+```
+  If you set a value in a build's "gn args" and never use it in the build (in
+  a declare_args() block), GN will normally print an error but not fail the
+  build.
+
+  In many cases engineers would use build args to enable or disable features
+  that would sometimes get removed. It would by annoying to block work for
+  typically benign problems. In Chrome in particular, flags might be configured
+  for build bots in a separate infrastructure repository, or a declare_args
+  block might be changed in a third party repository. Treating these errors as
+  blocking forced complex multi- way patches to land what would otherwise be
+  simple changes.
+
+  In some cases, such concerns are not as important, and a mismatch in build
+  flags between the invoker of the build and the build files represents a
+  critical mismatch that should be immediately fixed. Such users can set this
+  flag to force GN to fail in that case.
+```
+### <a name="switch_markdown"></a>**\--markdown**: Write help output in the Markdown format.&nbsp;[Back to Top](#gn-reference)
+
+### <a name="switch_ninja-executable"></a>**\--ninja-executable**: Set the Ninja executable.&nbsp;[Back to Top](#gn-reference)
+
+```
+  When set specifies the Ninja executable that will be used to perform some
+  post-processing on the generated files for more consistent builds.
+```
+### <a name="switch_nocolor"></a>**\--[no]color**: Forces colored output on or off.&nbsp;[Back to Top](#gn-reference)
+
+```
+  Normally GN will try to detect whether it is outputting to a terminal
+  and will enable or disable color accordingly. Use of these switches
+  will override the default.
+```
+
+#### **Examples**
+
+```
+  gn gen out/Default --color
+
+  gn gen out/Default --nocolor
+```
+### <a name="switch_q"></a>**-q**: Quiet mode. Don't print output on success.&nbsp;[Back to Top](#gn-reference)
+
+```
+  This is useful when running as a part of another script.
+```
+### <a name="switch_root"></a>**\--root**: Explicitly specify source root.&nbsp;[Back to Top](#gn-reference)
+
+```
+  Normally GN will look up in the directory tree from the current directory to
+  find a ".gn" file. The source root directory specifies the meaning of "//"
+  beginning with paths, and the BUILD.gn file in that directory will be the
+  first thing loaded.
+
+  Specifying --root allows GN to do builds in a specific directory regardless
+  of the current directory.
+```
+
+#### **Examples**
+
+```
+  gn gen //out/Default --root=/home/baracko/src
+
+  gn desc //out/Default --root="C:\Users\BObama\My Documents\foo"
+```
+### <a name="switch_root-target"></a>**\--root-target**: Override the root target.&nbsp;[Back to Top](#gn-reference)
+
+```
+  The root target is the target initially loaded to begin population of the
+  build graph. It defaults to "//:" which normally causes the "//BUILD.gn" file
+  to be loaded. It can be specified in the .gn file via the "root" variable (see
+  "gn help dotfile").
+
+  If specified, the value of this switch will be take precedence over the value
+  in ".gn". The target name (after the colon) is ignored, only the directory
+  name is required. Relative paths will be resolved relative to the current "//"
+  directory.
+
+  Specifying a different initial BUILD.gn file does not change the meaning of
+  the source root (the "//" directory) which can be independently set via the
+  --root switch. It also does not prevent the build file located at "//BUILD.gn"
+  from being loaded if a target in the build references that directory.
+
+  One use-case of this feature is to load a different set of initial targets
+  from project that uses GN without modifying any files.
+```
+
+#### **Examples**
+
+```
+  gn gen //out/Default --root-target="//third_party/icu"
+
+  gn gen //out/Default --root-target="//third_party/grpc"
+```
+### <a name="switch_runtime-deps-list-file"></a>**\--runtime-deps-list-file**: Save runtime dependencies for targets in file.&nbsp;[Back to Top](#gn-reference)
+
+```
+  --runtime-deps-list-file=<filename>
+
+  Where <filename> is a text file consisting of the labels, one per line, of
+  the targets for which runtime dependencies are desired.
+
+  See "gn help runtime_deps" for a description of how runtime dependencies are
+  computed.
+```
+
+#### **Runtime deps output file**
+
+```
+  For each target requested, GN will write a separate runtime dependency file.
+  The runtime dependency file will be in the output directory alongside the
+  output file of the target, with a ".runtime_deps" extension. For example, if
+  the target "//foo:bar" is listed in the input file, and that target produces
+  an output file "bar.so", GN will create a file "bar.so.runtime_deps" in the
+  build directory.
+
+  For targets that don't generate an output file (such as source set, action,
+  copy or group), the runtime deps file will be in the output directory where an
+  output file would have been located. For example, the source_set target
+  "//foo:bar" would result in a runtime dependency file being written to
+  "<output_dir>/obj/foo/bar.runtime_deps". This is probably not useful; the
+  use-case for this feature is generally executable targets.
+
+  The runtime dependency file will list one file per line, with no escaping.
+  The files will be relative to the root_build_dir. The first line of the file
+  will be the main output file of the target itself (in the above example,
+  "bar.so").
+```
+### <a name="switch_script-executable"></a>**\--script-executable**: Set the executable used to execute scripts.&nbsp;[Back to Top](#gn-reference)
+
+```
+  Path to specific Python executable or other interpreter to use in
+  action targets and exec_script calls. By default GN searches the
+  PATH for Python to execute these scripts.
+
+  If set to the empty string, the path of scripts specified in action
+  targets and exec_script calls will be executed directly.
+```
+### <a name="switch_threads"></a>**\--threads**: Specify number of worker threads.&nbsp;[Back to Top](#gn-reference)
+
+```
+  GN runs many threads to load and run build files. This can make debugging
+  challenging. Or you may want to experiment with different values to see how
+  it affects performance.
+
+  The parameter is the number of worker threads. This does not count the main
+  thread (so there are always at least two).
+```
+
+#### **Examples**
+
+```
+  gen gen out/Default --threads=1
+```
+### <a name="switch_time"></a>**\--time**: Outputs a summary of how long everything took.&nbsp;[Back to Top](#gn-reference)
+
+```
+  Hopefully self-explanatory.
+```
+
+#### **Examples**
+
+```
+  gn gen out/Default --time
+```
+### <a name="switch_tracelog"></a>**\--tracelog**: Writes a Chrome-compatible trace log to the given file.&nbsp;[Back to Top](#gn-reference)
+
+```
+  The trace log will show file loads, executions, scripts, and writes. This
+  allows performance analysis of the generation step.
+
+  To view the trace, open Chrome and navigate to "chrome://tracing/", then
+  press "Load" and specify the file you passed to this parameter.
+```
+
+#### **Examples**
+
+```
+  gn gen out/Default --tracelog=mytrace.trace
+```
+### <a name="switch_v"></a>**-v**: Verbose logging.&nbsp;[Back to Top](#gn-reference)
+
+```
+  This will spew logging events to the console for debugging issues.
+
+  Good luck!
+```
