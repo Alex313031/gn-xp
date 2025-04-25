@@ -275,7 +275,7 @@
 
     gn args <out_dir> [--list] [--short] [--args] [--overrides-only]
 
-  See also "gn help buildargs" for a more high-level overview of how
+  See also "[gn help buildargs](#buildargs)" for a more high-level overview of how
   build arguments work.
 ```
 
@@ -369,7 +369,7 @@
 
   The <label_pattern> can take exact labels or patterns that match more than
   one (although not general regular expressions). If specified, only those
-  matching targets will be checked. See "gn help label_pattern" for details.
+  matching targets will be checked. See "[gn help label_pattern](#label_pattern)" for details.
 ```
 
 #### **Command-specific switches**
@@ -401,13 +401,13 @@
 
 ```
   The .gn file may specify a list of targets to be checked in the list
-  check_targets (see "gn help dotfile"). Alternatively, the .gn file may
+  check_targets (see "[gn help dotfile](#dotfile)"). Alternatively, the .gn file may
   specify a list of targets not to be checked in no_check_targets. If a label
   pattern is specified on the command line, neither check_targets or
   no_check_targets is used.
 
   Targets can opt-out from checking with "check_includes = false" (see
-  "gn help check_includes").
+  "[gn help check_includes](#check_includes)").
 
   For targets being checked:
 
@@ -418,7 +418,7 @@
       the --check-generated flag is provided.
 
     - Includes with a "nogncheck" annotation are skipped (see
-      "gn help nogncheck").
+      "[gn help nogncheck](#nogncheck)").
 
     - Includes using "quotes" are always checked.
         If system style checking is enabled, includes using <angle brackets>
@@ -465,12 +465,12 @@
 
   If you have conditional includes, make sure the build conditions and the
   preprocessor conditions match, and annotate the line with "nogncheck" (see
-  "gn help nogncheck" for an example).
+  "[gn help nogncheck](#nogncheck)" for an example).
 
   If two targets are hopelessly intertwined, use the
   "allow_circular_includes_from" annotation. Ideally each should have identical
   dependencies so configs inherited from those dependencies are consistent (see
-  "gn help allow_circular_includes_from").
+  "[gn help allow_circular_includes_from](#allow_circular_includes_from)").
 
   If you have a standalone header file or files that need to be shared between
   a few targets, you can consider making a source_set listing only those
@@ -529,7 +529,7 @@
   will be taken for the build in the given <out_dir>.
 
   The <label or pattern> can be a target label, a config label, or a label
-  pattern (see "gn help label_pattern"). A label pattern will only match
+  pattern (see "[gn help label_pattern](#label_pattern)"). A label pattern will only match
   targets.
 ```
 
@@ -577,7 +577,7 @@
       here.
 
       The output is a list of file names relative to the build directory. See
-      "gn help runtime_deps" for how this is computed. This also works with
+      "[gn help runtime_deps](#runtime_deps)" for how this is computed. This also works with
       "--blame" to see the source of the dependency.
 ```
 
@@ -752,10 +752,10 @@
       out/foo
 
   "gn gen --check" is the same as running "gn check". "gn gen --check=system" is
-  the same as running "gn check --check-system".  See "gn help check" for
+  the same as running "gn check --check-system".  See "[gn help check](#check)" for
   documentation on that mode.
 
-  See "gn help switches" for the common command-line switches.
+  See "[gn help switches](#switches)" for the common command-line switches.
 ```
 
 #### **General options**
@@ -772,7 +772,7 @@
       the build directory, and their records pruned from the ninja build log and
       dependency database after the ninja build graph has been generated. This
       option requires a ninja executable of at least version 1.10.0. It can be
-      provided by the --ninja-executable switch. Also see "gn help clean_stale".
+      provided by the --ninja-executable switch. Also see "[gn help clean_stale](#clean_stale)".
 ```
 
 #### **IDE options**
@@ -797,7 +797,7 @@
 
   --filters=<path_prefixes>
       Semicolon-separated list of label patterns used to limit the set of
-      generated projects (see "gn help label_pattern"). Only matching targets
+      generated projects (see "[gn help label_pattern](#label_pattern)"). Only matching targets
       and their dependencies will be included in the solution. Only used for
       Visual Studio, Xcode and JSON.
 ```
@@ -959,10 +959,10 @@
       This is an unstable format and likely to change without warning.
 
   --add-export-compile-commands=<label_pattern>
-      Adds an additional label pattern (see "gn help label_pattern") of a
+      Adds an additional label pattern (see "[gn help label_pattern](#label_pattern)") of a
       target to add to the compilation database. This pattern is appended to any
       list values specified in the export_compile_commands variable in the
-      .gn file (see "gn help dotfile"). This allows the user to add additional
+      .gn file (see "[gn help dotfile](#dotfile)"). This allows the user to add additional
       targets to the compilation database that the project doesn't add by default.
 
       To add more than one value, specify this switch more than once. Each
@@ -976,10 +976,10 @@
       DEPRECATED https://bugs.chromium.org/p/gn/issues/detail?id=302.
       Please use --add-export-compile-commands for per-user configuration, and
       the "export_compile_commands" value in the project-level .gn file (see
-      "gn help dotfile") for per-project configuration.
+      "[gn help dotfile](#dotfile)") for per-project configuration.
 
       Overrides the value of the export_compile_commands in the .gn file (see
-      "gn help dotfile") as well as the --add-export-compile-commands switch.
+      "[gn help dotfile](#dotfile)") as well as the --add-export-compile-commands switch.
 
       Unlike the .gn setting, this switch takes a legacy format which is a list
       of target names that are matched in any directory. For example, "foo" will
@@ -1021,7 +1021,7 @@
   toolchain is explicitly supplied.
 
   If the label pattern is unspecified, list all targets. The label pattern is
-  not a general regular expression (see "gn help label_pattern"). If you need
+  not a general regular expression (see "[gn help label_pattern](#label_pattern)"). If you need
   more complex expressions, pipe the result through grep.
 ```
 
@@ -1253,7 +1253,7 @@
 
    - Label pattern: The result will be which targets depend on any target
      matching the given pattern. Patterns will not match configs. These are not
-     general regular expressions, see "gn help label_pattern" for details.
+     general regular expressions, see "[gn help label_pattern](#label_pattern)" for details.
 
    - File name: The result will be which targets list the given file in its
      "inputs", "sources", "public", "data", or "outputs". Any input that does
@@ -1371,7 +1371,7 @@
 ```
   This target type allows you to run a script a single time to produce one or
   more output files. If you want to run a script once for each of a set of
-  input files, see "gn help action_foreach".
+  input files, see "[gn help action_foreach](#action_foreach)".
 ```
 
 #### **Inputs**
@@ -1390,7 +1390,7 @@
   depfile"). This is more flexible than "inputs".
 
   If the command line length is very long, you can use response files to pass
-  args to your script. See "gn help response_file_contents".
+  args to your script. See "[gn help response_file_contents](#response_file_contents)".
 
   It is recommended you put inputs to your script in the "sources" variable,
   and stuff like other Python files required to run your script in the "inputs"
@@ -1399,7 +1399,7 @@
   Actions can take the configs and public_configs lists, as well as any of the
   configs variables (defines, include_dirs, etc.) set directly on the target.
   These behave exactly as they would on a binary target and can be accessed
-  using substitution patterns in the script args (see "gn help args") to
+  using substitution patterns in the script args (see "[gn help args](#args)") to
   implement custom compiler-like tools.
 
   The "deps" and "public_deps" for an action will always be
@@ -1418,7 +1418,7 @@
 
   The script will be executed with the given arguments with the current
   directory being that of the root build directory. If you pass files
-  to your script, see "gn help rebase_path" for how to convert
+  to your script, see "[gn help rebase_path](#rebase_path)" for how to convert
   file names to be relative to the build directory (file names in the
   sources, outputs, and inputs will be all treated as relative to the
   current build file and converted as needed automatically).
@@ -1483,7 +1483,7 @@
 ```
   This target type allows you to run a script once-per-file over a set of
   sources. If you want to run a script once that takes many files as input, see
-  "gn help action".
+  "[gn help action](#action)".
 ```
 
 #### **Inputs**
@@ -1491,7 +1491,7 @@
 ```
   The script will be run once per file in the "sources" variable. The "outputs"
   variable should specify one or more files with a source expansion pattern in
-  it (see "gn help source_expansion"). The output file(s) for each script
+  it (see "[gn help source_expansion](#source_expansion)"). The output file(s) for each script
   invocation should be unique. Normally you use "{{source_name_part}}" in each
   output file.
 
@@ -1500,7 +1500,7 @@
   variable. These files are treated as dependencies of each script invocation.
 
   If the command line length is very long, you can use response files to pass
-  args to your script. See "gn help response_file_contents".
+  args to your script. See "[gn help response_file_contents](#response_file_contents)".
 
   You can dynamically write input dependencies (for incremental rebuilds if an
   input file changes) by writing a depfile when the script is run (see "gn help
@@ -1519,7 +1519,7 @@
 ```
   The script will be executed with the given arguments with the current
   directory being that of the root build directory. If you pass files
-  to your script, see "gn help rebase_path" for how to convert
+  to your script, see "[gn help rebase_path](#rebase_path)" for how to convert
   file names to be relative to the build directory (file names in the
   sources, outputs, and inputs will be all treated as relative to the
   current build file and converted as needed automatically).
@@ -1598,7 +1598,7 @@
 ```
   This target type allows one to declare data that is required at runtime. It is
   used to inform "create_bundle" targets of the files to copy into generated
-  bundle, see "gn help create_bundle" for help.
+  bundle, see "[gn help create_bundle](#create_bundle)" for help.
 
   The target must define a list of files as "sources" and a single "outputs".
   If there are multiple files, source expansions must be used to express the
@@ -1613,7 +1613,7 @@
   the final bundle the assets catalog itself will be added to the inputs of the
   assets catalog compilation step. See "compile_xcassets" tool.
 
-  See "gn help create_bundle" for more information.
+  See "[gn help create_bundle](#create_bundle)" for more information.
 ```
 
 #### **Variables**
@@ -1673,7 +1673,7 @@
 
   If there is more than one source file, your output name should specify a
   mapping from each source file to an output file name using source expansion
-  (see "gn help source_expansion"). The placeholders will look like
+  (see "[gn help source_expansion](#source_expansion)"). The placeholders will look like
   "{{source_name_part}}", for example.
 
   If you want to copy the output of a previous build step, the target that
@@ -2332,7 +2332,7 @@
            output_extension, output_name, public, sources, testonly,
            visibility
 
-  Targets will also have variables specific to that type, see "gn help <type>"
+  Targets will also have variables specific to that type, see "[gn help <type>](#<type>)"
   for more.
 ```
 
@@ -2443,7 +2443,7 @@
   values given in the declare_args block will be used. However, these defaults
   will not override command-line values.
 
-  See also "gn help buildargs" for an overview.
+  See also "[gn help buildargs](#buildargs)" for an overview.
 
   The precise behavior of declare args is:
 
@@ -2556,7 +2556,7 @@
 
   The default script interpreter is Python ("python" on POSIX, "python.exe" or
   "python.bat" on Windows). This can be configured by the script_executable
-  variable, see "gn help dotfile".
+  variable, see "[gn help dotfile](#dotfile)".
 ```
 
 #### **Arguments**:
@@ -2605,7 +2605,7 @@
   The argument values must be a list of strings.
 
   The argument exclude_patterns must be a list of file patterns (see
-  "gn help file_pattern"). Any elements in values matching at least one
+  "[gn help file_pattern](#file_pattern)"). Any elements in values matching at least one
   of those patterns will be excluded.
 ```
 
@@ -2623,7 +2623,7 @@
   The argument values must be a list of strings.
 
   The argument include_patterns must be a list of file patterns (see
-  "gn help file_pattern"). Only elements from values matching at least
+  "[gn help file_pattern](#file_pattern)"). Only elements from values matching at least
   one of the pattern will be included.
 ```
 
@@ -2641,7 +2641,7 @@
   The argument labels must be a list of strings.
 
   The argument exclude_patterns must be a list of label patterns (see
-  "gn help label_pattern"). Only elements from labels matching at least
+  "[gn help label_pattern](#label_pattern)"). Only elements from labels matching at least
   one of the patterns will be excluded.
 ```
 
@@ -2659,7 +2659,7 @@
   The argument labels must be a list of strings.
 
   The argument include_patterns must be a list of label patterns (see
-  "gn help label_pattern"). Only elements from labels matching at least
+  "[gn help label_pattern](#label_pattern)"). Only elements from labels matching at least
   one of the patterns will be included.
 ```
 
@@ -2790,7 +2790,7 @@
   target need not have been previously defined in the same file, since none of
   the attributes depend on the actual target definition, only the label itself.
 
-  See also "gn help get_target_outputs".
+  See also "[gn help get_target_outputs](#get_target_outputs)".
 ```
 
 #### **Possible values for the "what" parameter**
@@ -2952,7 +2952,7 @@
   specified in the "outputs" variable of the target.
 
   action_foreach targets: this will return the result of applying the output
-  template to the sources (see "gn help source_expansion"). This will be the
+  template to the sources (see "[gn help source_expansion](#source_expansion)"). This will be the
   same result (though with guaranteed absolute file paths), as
   process_file_template will return for those inputs (see "gn help
   process_file_template").
@@ -3037,7 +3037,7 @@
   label_matches(target_label, patterns)
 
   The argument patterns must be a list of label patterns (see
-  "gn help label_pattern"). If the target_label matches any of the patterns,
+  "[gn help label_pattern](#label_pattern)"). If the target_label matches any of the patterns,
   the function returns the value true.
 ```
 
@@ -3196,7 +3196,7 @@
   strings are generated for each input.
 
   The template should contain source expansions to which each name in the
-  source list is applied. See "gn help source_expansion".
+  source list is applied. See "[gn help source_expansion](#source_expansion)".
 ```
 
 #### **Example**
@@ -3508,7 +3508,7 @@
   template, just use the name of the template like any other target type.
 
   Often you will want to declare your template in a special file that other
-  files will import (see "gn help import") so your template rule can be shared
+  files will import (see "[gn help import](#import)") so your template rule can be shared
   across build files.
 ```
 
@@ -3622,7 +3622,7 @@
       script = "//tools/idl/idl_code_generator.py"
 
       # Tell GN how to expand output names given the sources.
-      # See "gn help source_expansion" for more.
+      # See "[gn help source_expansion](#source_expansion)" for more.
       outputs = [ "$target_gen_dir/{{source_name_part}}.cc",
                   "$target_gen_dir/{{source_name_part}}.h" ]
     }
@@ -3900,7 +3900,7 @@
         Label of the pool to use for the tool. Pools are used to limit the
         number of tasks that can execute concurrently during the build.
 
-        See also "gn help pool".
+        See also "[gn help pool](#pool)".
 
     link_output  [string with substitutions]
     depend_output  [string with substitutions]
@@ -3928,7 +3928,7 @@
 
         Individual targets can opt-out of the output prefix by setting:
           output_prefix_override = true
-        (see "gn help output_prefix_override").
+        (see "[gn help output_prefix_override](#output_prefix_override)").
 
         This is typically used to prepend "lib" to libraries on
         Posix systems:
@@ -3948,7 +3948,7 @@
         resolve to the same file, despite the different formats required for
         each."
 
-        See "gn help precompiled_header" for more.
+        See "[gn help precompiled_header](#precompiled_header)" for more.
 
     restat  [boolean]
         Valid for: all tools (optional, defaults to false)
@@ -3990,7 +3990,7 @@
         Valid for: linker tools
 
         If specified, this list is the subset of the outputs that should be
-        added to runtime deps (see "gn help runtime_deps"). By default (if
+        added to runtime deps (see "[gn help runtime_deps](#runtime_deps)"). By default (if
         runtime_outputs is empty or unspecified), it will be the link_output.
 
     rust_sysroot
@@ -4337,7 +4337,7 @@
 
   When you have a simple build with only one toolchain, the build config file
   is loaded only once at the beginning of the build. It must call
-  set_default_toolchain() (see "gn help set_default_toolchain") to tell GN the
+  set_default_toolchain() (see "[gn help set_default_toolchain](#set_default_toolchain)") to tell GN the
   label of the toolchain definition to use. The "toolchain_args" section of the
   toolchain definition is ignored.
 
@@ -4371,7 +4371,7 @@
 ```
   tool()
     The tool() function call specifies the commands to run for a given step. See
-    "gn help tool".
+    "[gn help tool](#tool)".
 
   toolchain_args [scope]
     Overrides for build arguments to pass to the toolchain when invoking it.
@@ -4390,7 +4390,7 @@
     The toolchain_args will be ignored when the toolchain being defined is the
     default. In this case, it's expected you want the default argument values.
 
-    See also "gn help buildargs" for an overview of these arguments.
+    See also "[gn help buildargs](#buildargs)" for an overview of these arguments.
 
   propagates_configs [boolean, default=false]
     Determines whether public_configs and all_dependent_configs in this
@@ -4488,7 +4488,7 @@
 
   One use for write_file is to write a list of inputs to an script that might
   be too long for the command line. However, it is preferable to use response
-  files for this purpose. See "gn help response_file_contents".
+  files for this purpose. See "[gn help response_file_contents](#response_file_contents)".
 ```
 
 #### **Arguments**
@@ -4509,7 +4509,7 @@
 
 ```
   The build configuration usually sets this value based on the value of
-  "host_cpu" (see "gn help host_cpu") and then threads this through the
+  "host_cpu" (see "[gn help host_cpu](#host_cpu)") and then threads this through the
   toolchain definitions to ensure that it always reflects the appropriate
   value.
 
@@ -4517,13 +4517,13 @@
   empty string ("") by default but is declared so that it can be overridden on
   the command line if so desired.
 
-  See "gn help target_cpu" for a list of common values returned.
+  See "[gn help target_cpu](#target_cpu)" for a list of common values returned.
 ```
 ### <a name="var_current_os"></a>**current_os**: The operating system of the current toolchain.&nbsp;[Back to Top](#gn-reference)
 
 ```
   The build configuration usually sets this value based on the value of
-  "target_os" (see "gn help target_os"), and then threads this through the
+  "target_os" (see "[gn help target_os](#target_os)"), and then threads this through the
   toolchain definitions to ensure that it always reflects the appropriate
   value.
 
@@ -4531,7 +4531,7 @@
   empty string ("") by default but is declared so that it can be overridden on
   the command line if so desired.
 
-  See "gn help target_os" for a list of common values returned.
+  See "[gn help target_os](#target_os)" for a list of common values returned.
 ```
 ### <a name="var_current_toolchain"></a>**current_toolchain**: Label of the current toolchain.&nbsp;[Back to Top](#gn-reference)
 
@@ -4617,7 +4617,7 @@
   This is often used with "defined" to see if a value is set on the invoking
   scope.
 
-  See "gn help template" for more examples.
+  See "[gn help template](#template)" for more examples.
 ```
 
 #### **Example**
@@ -4647,7 +4647,7 @@
   This is the root build output directory which will be the current directory
   when executing all compilers and scripts.
 
-  Most often this is used with rebase_path (see "gn help rebase_path") to
+  Most often this is used with rebase_path (see "[gn help rebase_path](#rebase_path)") to
   convert arguments to be relative to a script's current directory.
 ```
 ### <a name="var_root_gen_dir"></a>**root_gen_dir**: Directory for the toolchain's generated files.&nbsp;[Back to Top](#gn-reference)
@@ -4659,7 +4659,7 @@
 
   This is primarily useful for setting up include paths for generated files. If
   you are passing this to a script, you will want to pass it through
-  rebase_path() (see "gn help rebase_path") to convert it to be relative to the
+  rebase_path() (see "[gn help rebase_path](#rebase_path)") to convert it to be relative to the
   build directory.
 
   See also "target_gen_dir" which is usually a better location for generated
@@ -4737,10 +4737,10 @@
 
   This is primarily useful for setting up include paths for generated files. If
   you are passing this to a script, you will want to pass it through
-  rebase_path() (see "gn help rebase_path") to convert it to be relative to the
+  rebase_path() (see "[gn help rebase_path](#rebase_path)") to convert it to be relative to the
   build directory.
 
-  See also "gn help root_gen_dir".
+  See also "[gn help root_gen_dir](#root_gen_dir)".
 ```
 
 #### **Example**
@@ -4769,7 +4769,7 @@
   invocation in this case, you should save target_name to a temporary variable
   outside of any target definitions.
 
-  See "gn help template" for more examples.
+  See "[gn help template](#template)" for more examples.
 ```
 
 #### **Example**
@@ -4840,10 +4840,10 @@
 
   This is primarily useful for setting up arguments for calling scripts. If you
   are passing this to a script, you will want to pass it through rebase_path()
-  (see "gn help rebase_path") to convert it to be relative to the build
+  (see "[gn help rebase_path](#rebase_path)") to convert it to be relative to the build
   directory.
 
-  See also "gn help root_out_dir".
+  See also "[gn help root_out_dir](#root_out_dir)".
 ```
 
 #### **Example**
@@ -4953,7 +4953,7 @@
 ```
   Normally, for a file in target A to include a file from target B, A must list
   B as a dependency. This invariant is enforced by the "gn check" command (and
-  the --check flag to "gn gen" -- see "gn help check").
+  the --check flag to "gn gen" -- see "[gn help check](#check)").
 
   Sometimes, two targets might be the same unit for linking purposes (two
   source sets or static libraries that would always be linked together in a
@@ -5048,14 +5048,14 @@
   source_expansion") to insert the source file names.
 
   Args can also expand the substitution patterns corresponding to config
-  variables in the same way that compiler tools (see "gn help tool") do. These
+  variables in the same way that compiler tools (see "[gn help tool](#tool)") do. These
   allow actions that run compiler or compiler-like tools to access the results
   of propagating configs through the build graph. For example:
 
   args = [ "{{defines}}", "{{include_dirs}}", "{{rustenv}}", "--input-file",
            "{{source}}" ]
 
-  See also "gn help action" and "gn help action_foreach".
+  See also "[gn help action](#action)" and "[gn help action_foreach](#action_foreach)".
 ```
 ### <a name="var_asmflags"></a>**asmflags**: Flags passed to the assembler.&nbsp;[Back to Top](#gn-reference)
 
@@ -5101,7 +5101,7 @@
   rather than depend on the internal build steps (which may include
   non-distributable code).
 
-  See "gn help label_pattern" for the format of the entries in the list. These
+  See "[gn help label_pattern](#label_pattern)" for the format of the entries in the list. These
   patterns allow blacklisting individual targets or whole directory
   hierarchies.
 
@@ -5141,7 +5141,7 @@
   {{bundle_contents_dir}} of the "bundle_data" target it depends on. This must
   correspond to a path under "bundle_root_dir".
 
-  See "gn help bundle_root_dir" for examples.
+  See "[gn help bundle_root_dir](#bundle_root_dir)" for examples.
 ```
 ### <a name="var_bundle_deps_filter"></a>**bundle_deps_filter**: [label list] A list of labels that are filtered out.&nbsp;[Back to Top](#gn-reference)
 
@@ -5156,7 +5156,7 @@
   application extension has access to runtime resources from the application
   bundle and thus do not require a second copy.
 
-  See "gn help create_bundle" for more information.
+  See "[gn help create_bundle](#create_bundle)" for more information.
 ```
 
 #### **Example**
@@ -5186,7 +5186,7 @@
   {{bundle_executable_dir}} of the "bundle_data" target it depends on. This
   must correspond to a path under "bundle_root_dir".
 
-  See "gn help bundle_root_dir" for examples.
+  See "[gn help bundle_root_dir](#bundle_root_dir)" for examples.
 ```
 ### <a name="var_bundle_resources_dir"></a>**bundle_resources_dir**&nbsp;[Back to Top](#gn-reference)
 
@@ -5200,7 +5200,7 @@
   {{bundle_resources_dir}} of the "bundle_data" target it depends on. This must
   correspond to a path under "bundle_root_dir".
 
-  See "gn help bundle_root_dir" for examples.
+  See "[gn help bundle_root_dir](#bundle_root_dir)" for examples.
 ```
 ### <a name="var_bundle_root_dir"></a>**bundle_root_dir**: Expansion of {{bundle_root_dir}} in create_bundle.&nbsp;[Back to Top](#gn-reference)
 
@@ -5413,7 +5413,7 @@
   can exclude headers individually by annotating them with "nogncheck" (see "gn
   help nogncheck").
 
-  The topic "gn help check" has general information on how checking works and
+  The topic "[gn help check](#check)" has general information on how checking works and
   advice on how to pass a check in problematic cases.
 ```
 
@@ -5431,13 +5431,13 @@
 ```
   For create_bundle targets, post_processing_args is the list of arguments to
   pass to the post-processing script. Typically you would use source expansion
-  (see "gn help source_expansion") to insert the source file names.
+  (see "[gn help source_expansion](#source_expansion)") to insert the source file names.
 
   Deprecated: this is an old name for the "post_processing_args" property of
   the "create_bundle" target. It is still supported to avoid breaking existing
   build rules, but a warning will be emitted when it is used.
 
-  See also "gn help create_bundle" and "gn help post_processing_args".
+  See also "[gn help create_bundle](#create_bundle)" and "[gn help post_processing_args](#post_processing_args)".
 ```
 ### <a name="var_code_signing_outputs"></a>**code_signing_outputs**: [file list] [deprecated] Outputs of the post-processing step.&nbsp;[Back to Top](#gn-reference)
 
@@ -5449,7 +5449,7 @@
   the "create_bundle" target. It is still supported to avoid breaking existing
   build rules, but a warning will be emitted when it is used.
 
-  See also "gn help create_bundle" and "gn help post_processing_args".
+  See also "[gn help create_bundle](#create_bundle)" and "[gn help post_processing_args](#post_processing_args)".
 ```
 ### <a name="var_code_signing_script"></a>**code_signing_script**: [file name] [deprecated] Script for the post-processing step."&nbsp;[Back to Top](#gn-reference)
 
@@ -5461,7 +5461,7 @@
   the "create_bundle" target. It is still supported to avoid breaking existing
   build rules, but a warning will be emitted when it is used.
 
-  See also "gn help create_bundle" and "gn help post_processing_args".
+  See also "[gn help create_bundle](#create_bundle)" and "[gn help post_processing_args](#post_processing_args)".
 ```
 ### <a name="var_code_signing_sources"></a>**code_signing_sources**: [file list] [deprecated] Sources for the post-processing step.&nbsp;[Back to Top](#gn-reference)
 
@@ -5474,7 +5474,7 @@
   the "create_bundle" target. It is still supported to avoid breaking existing
   build rules, but a warning will be emitted when it is used.
 
-  See also "gn help create_bundle" and "gn help post_processing_args".
+  See also "[gn help create_bundle](#create_bundle)" and "[gn help post_processing_args](#post_processing_args)".
 ```
 ### <a name="var_complete_static_lib"></a>**complete_static_lib**: [boolean] Links all deps into a static library.&nbsp;[Back to Top](#gn-reference)
 
@@ -5608,7 +5608,7 @@
 
 ```
   The contents of the file for a generated_file target.
-  See "gn help generated_file".
+  See "[gn help generated_file](#generated_file)".
 ```
 ### <a name="var_crate_name"></a>**crate_name**: [string] The name for the compiled crate.&nbsp;[Back to Top](#gn-reference)
 
@@ -5676,9 +5676,9 @@
   paths are just rebased and passed along when requested.
 
   Note: On iOS and macOS, create_bundle targets will not be recursed into when
-  gathering data. See "gn help create_bundle" for details.
+  gathering data. See "[gn help create_bundle](#create_bundle)" for details.
 
-  See "gn help runtime_deps" for how these are used.
+  See "[gn help runtime_deps](#runtime_deps)" for how these are used.
 ```
 ### <a name="var_data_deps"></a>**data_deps**: Non-linked dependencies.&nbsp;[Back to Top](#gn-reference)
 
@@ -5693,9 +5693,9 @@
   target needs at runtime.
 
   Note: On iOS and macOS, create_bundle targets will not be recursed into when
-  gathering data_deps. See "gn help create_bundle" for details.
+  gathering data_deps. See "[gn help create_bundle](#create_bundle)" for details.
 
-  See also "gn help deps" and "gn help data".
+  See also "[gn help deps](#deps)" and "[gn help data](#data)".
 ```
 
 #### **Example**
@@ -5713,7 +5713,7 @@
   defines this key in its metadata, its value will be appended to the resulting
   collection.
 
-  See "gn help generated_file".
+  See "[gn help generated_file](#generated_file)".
 ```
 ### <a name="var_defines"></a>**defines**: C preprocessor defines.&nbsp;[Back to Top](#gn-reference)
 
@@ -5760,7 +5760,7 @@
 
   The .d file should go in the target output directory. If you have more than
   one source file that the script is being run over, you can use the output
-  file expansions described in "gn help action_foreach" to name the .d file
+  file expansions described in "[gn help action_foreach](#action_foreach)" to name the .d file
   according to the input.
 
   The format is that of a Makefile and all paths must be relative to the root
@@ -5818,8 +5818,8 @@
   target. If the dependency is a C/C++ target, the path to that target will
   be made available to Rust for `#[link]` directives.
 
-  Data dependencies are propagated differently. See "gn help data_deps" and
-  "gn help runtime_deps".
+  Data dependencies are propagated differently. See "[gn help data_deps](#data_deps)" and
+  "[gn help runtime_deps](#runtime_deps)".
 
   See also "public_deps".
 ```
@@ -5914,7 +5914,7 @@
 ### <a name="var_friend"></a>**friend**: Allow targets to include private headers.&nbsp;[Back to Top](#gn-reference)
 
 ```
-  A list of label patterns (see "gn help label_pattern") that allow dependent
+  A list of label patterns (see "[gn help label_pattern](#label_pattern)") that allow dependent
   targets to include private headers. Applies to all binary targets.
 
   Normally if a target lists headers in the "public" list (see "gn help
@@ -5978,7 +5978,7 @@
   A list of target labels.
 
   Not all GN targets that get evaluated are actually turned into ninja targets
-  (see "gn help execution"). If this target is generated, then any targets in
+  (see "[gn help execution](#execution)"). If this target is generated, then any targets in
   the "gen_deps" list will also be generated, regardless of the usual criteria.
 
   Since "gen_deps" are not build time dependencies, there can be cycles between
@@ -6040,7 +6040,7 @@
   sources.
 
   Note that another way to declare input dependencies from an action is to have
-  the action write a depfile (see "gn help depfile"). This allows the script to
+  the action write a depfile (see "[gn help depfile](#depfile)"). This allows the script to
   dynamically write input dependencies, that might not be known until actually
   executing the script. This is more efficient than doing processing while
   running GN to determine the inputs, and is easier to keep in-sync than
@@ -6291,7 +6291,7 @@
   target is only present in one toolchain.
 
   Normally the toolchain specifies the output directory for libraries and
-  executables (see "gn help tool"). You will have to consult that for the
+  executables (see "[gn help tool](#tool)"). You will have to consult that for the
   default location. The default location will be used if output_dir is
   undefined or empty.
 ```
@@ -6317,7 +6317,7 @@
 
   The output_extension will be used to set the "{{output_extension}}" expansion
   which the linker tool will generally use to specify the output file name. See
-  "gn help tool".
+  "[gn help tool](#tool)".
 ```
 
 #### **Example**
@@ -6375,9 +6375,9 @@
   normal example is "libfoo.so" on Linux for a target named "foo".
 
   The output prefix for a given target type is specified on the linker tool
-  (see "gn help tool"). Sometimes this prefix is undesired.
+  (see "[gn help tool](#tool)"). Sometimes this prefix is undesired.
 
-  See also "gn help output_extension".
+  See also "[gn help output_extension](#output_extension)".
 ```
 
 #### **Example**
@@ -6401,17 +6401,17 @@
     Copy targets should have exactly one entry in the outputs list. If there is
     exactly one source, this can be a literal file name or a source expansion.
     If there is more than one source, this must contain a source expansion to
-    map a single input name to a single output name. See "gn help copy".
+    map a single input name to a single output name. See "[gn help copy](#copy)".
 
   action_foreach
     Action_foreach targets must always use source expansions to map input files
     to output files. There can be more than one output, which means that each
     invocation of the script will produce a set of files (presumably based on
-    the name of the input file). See "gn help action_foreach".
+    the name of the input file). See "[gn help action_foreach](#action_foreach)".
 
   action
     Action targets (excluding action_foreach) must list literal output file(s)
-    with no source expansions. See "gn help action".
+    with no source expansions. See "[gn help action](#action)".
 ```
 ### <a name="var_partial_info_plist"></a>**partial_info_plist**: [filename] Path plist from asset catalog compiler.&nbsp;[Back to Top](#gn-reference)
 
@@ -6421,7 +6421,7 @@
   with the application Info.plist (usually done by the post-processing script).
 
   The file will be generated regardless of whether the asset compiler has
-  been invoked or not. See "gn help create_bundle".
+  been invoked or not. See "[gn help create_bundle](#create_bundle)".
 ```
 ### <a name="var_pool"></a>**pool**: Label of the pool used by binary targets actions.&nbsp;[Back to Top](#gn-reference)
 
@@ -6448,9 +6448,9 @@
 ```
   For create_bundle targets, post_processing_args is the list of arguments to
   pass to the post-processing script. Typically you would use source expansion
-  (see "gn help source_expansion") to insert the source file names.
+  (see "[gn help source_expansion](#source_expansion)") to insert the source file names.
 
-  See also "gn help create_bundle".
+  See also "[gn help create_bundle](#create_bundle)".
 ```
 ### <a name="var_post_processing_outputs"></a>**post_processing_outputs**: [file list] Outputs of the post-processing step.&nbsp;[Back to Top](#gn-reference)
 
@@ -6458,7 +6458,7 @@
   Outputs from the post-processing step of a create_bundle target. Must refer to
   files in the build directory.
 
-  See also "gn help create_bundle".
+  See also "[gn help create_bundle](#create_bundle)".
 ```
 ### <a name="var_post_processing_script"></a>**post_processing_script**: [file name] Script for the post-processing step."&nbsp;[Back to Top](#gn-reference)
 
@@ -6466,7 +6466,7 @@
   An absolute or buildfile-relative file name of a Python script to run for a
   create_bundle target to perform the post-processing step.
 
-  See also "gn help create_bundle".
+  See also "[gn help create_bundle](#create_bundle)".
 ```
 ### <a name="var_post_processing_sources"></a>**post_processing_sources**: [file list] Sources for the post-processing step.&nbsp;[Back to Top](#gn-reference)
 
@@ -6475,7 +6475,7 @@
   target. Non-absolute paths will be resolved relative to the current build
   file.
 
-  See also "gn help create_bundle".
+  See also "[gn help create_bundle](#create_bundle)".
 ```
 ### <a name="var_precompiled_header"></a>**precompiled_header**: [string] Header file to precompile.&nbsp;[Back to Top](#gn-reference)
 
@@ -6483,7 +6483,7 @@
   Precompiled headers will be used when a target specifies this value, or a
   config applying to this target specifies this value. In addition, the tool
   corresponding to the source files must also specify precompiled headers (see
-  "gn help tool"). The tool will also specify what type of precompiled headers
+  "[gn help tool](#tool)"). The tool will also specify what type of precompiled headers
   to use, by setting precompiled_header_type to either "gcc" or "msvc".
 
   The precompiled header/source variables can be specified on a target or a
@@ -6548,14 +6548,14 @@
 ### <a name="var_precompiled_header_type"></a>**precompiled_header_type**: [string] "gcc" or "msvc".&nbsp;[Back to Top](#gn-reference)
 
 ```
-  See "gn help precompiled_header".
+  See "[gn help precompiled_header](#precompiled_header)".
 ```
 ### <a name="var_precompiled_source"></a>**precompiled_source**: [file name] Source file to precompile.&nbsp;[Back to Top](#gn-reference)
 
 ```
   The source file that goes along with the precompiled_header when using
   "msvc"-style precompiled headers. It will be implicitly added to the sources
-  of the target. See "gn help precompiled_header".
+  of the target. See "[gn help precompiled_header](#precompiled_header)".
 ```
 ### <a name="var_product_type"></a>**product_type**: [string] Product type for the bundle.&nbsp;[Back to Top](#gn-reference)
 
@@ -6573,7 +6573,7 @@
 
 ```
   A list of files that other targets can include. These permissions are checked
-  via the "check" command (see "gn help check").
+  via the "check" command (see "[gn help check](#check)").
 
   If no public files are declared, other targets (assuming they have visibility
   to depend on this target) can include any file in the sources list. If this
@@ -6598,7 +6598,7 @@
   It is common for test targets to need to include private headers for their
   associated code. In this case, list the test target in the "friend" list of
   the target that owns the private header to allow the inclusion. See
-  "gn help friend" for more.
+  "[gn help friend](#friend)" for more.
 
   When a binary target has no explicit or implicit public headers (a "public"
   list is defined but is empty), GN assumes that the target can not propagate
@@ -6632,7 +6632,7 @@
   Generally, public configs are used to apply defines and include directories
   necessary to compile this target's header files.
 
-  See also "gn help all_dependent_configs".
+  See also "[gn help all_dependent_configs](#all_dependent_configs)".
 ```
 
 #### **Propagation of public configs**
@@ -6716,7 +6716,7 @@
 ### <a name="var_public_deps"></a>**public_deps**: Declare public dependencies.&nbsp;[Back to Top](#gn-reference)
 
 ```
-  Public dependencies are like private dependencies (see "gn help deps") but
+  Public dependencies are like private dependencies (see "[gn help deps](#deps)") but
   additionally express that the current target exposes the listed deps as part
   of its public API.
 
@@ -6732,7 +6732,7 @@
       publicly depends on (directly or indirectly) are propagated up the
       dependency tree to dependents for linking.
 
-  See also "gn help public_configs".
+  See also "[gn help public_configs](#public_configs)".
 ```
 
 #### **Discussion**
@@ -6778,7 +6778,7 @@
   Setting this flag will raise an error if any target's specified metadata is
   not a string value.
 
-  See also "gn help generated_file".
+  See also "[gn help generated_file](#generated_file)".
 ```
 ### <a name="var_response_file_contents"></a>**response_file_contents**: Contents of a response file for actions.&nbsp;[Back to Top](#gn-reference)
 
@@ -6829,7 +6829,7 @@
 
 ```
   An absolute or buildfile-relative file name of a Python script to run for a
-  action and action_foreach targets (see "gn help action" and "gn help
+  action and action_foreach targets (see "[gn help action](#action)" and "gn help
   action_foreach").
 ```
 ### <a name="var_sources"></a>**sources**: Source files for a target&nbsp;[Back to Top](#gn-reference)
@@ -6868,7 +6868,7 @@
     script will run once per file.
 
   action
-    The sources will be treated the same as inputs. See "gn help inputs" for
+    The sources will be treated the same as inputs. See "[gn help inputs](#inputs)" for
     more information and usage advice.
 
   copy
@@ -6936,7 +6936,7 @@
 ```
   A list of labels and label patterns that define which targets can depend on
   the current one. These permissions are checked via the "check" command (see
-  "gn help check").
+  "[gn help check](#check)").
 
   If visibility is not defined, it defaults to public ("*").
 
@@ -6952,7 +6952,7 @@
 #### **Patterns**
 
 ```
-  See "gn help label_pattern" for more details on what types of patterns are
+  See "[gn help label_pattern](#label_pattern)" for more details on what types of patterns are
   supported. If a toolchain is specified, only targets in that toolchain will
   be matched. If a toolchain is not specified on a pattern, targets in all
   toolchains will be matched.
@@ -6998,7 +6998,7 @@
   If no walk_keys are specified for a generated_file target (i.e. "[""]"), the
   walk will touch all deps and data_deps of the specified target recursively.
 
-  See "gn help generated_file".
+  See "[gn help generated_file](#generated_file)".
 ```
 ### <a name="var_weak_frameworks"></a>**weak_frameworks**: [name list] Name of frameworks that must be weak linked.&nbsp;[Back to Top](#gn-reference)
 
@@ -7048,7 +7048,7 @@
 
   Path must be within the output directory.
 
-  See "gn help runtime_deps" for how the runtime dependencies are computed.
+  See "[gn help runtime_deps](#runtime_deps)" for how the runtime dependencies are computed.
 
   The format of this file will list one file per line with no escaping. The
   files will be relative to the root_build_dir. The first line of the file will
@@ -7072,7 +7072,7 @@
   property of the generated Xcode project. They are only meaningful when
   generating with --ide=xcode.
 
-  See "gn help create_bundle" for more information.
+  See "[gn help create_bundle](#create_bundle)" for more information.
 ```
 ### <a name="var_xcode_test_application_name"></a>**xcode_test_application_name**: Name for Xcode test target.&nbsp;[Back to Top](#gn-reference)
 
@@ -7081,7 +7081,7 @@
   value is used to specify the relationship. Only meaningful to Xcode (used as
   part of the Xcode project generation).
 
-  See "gn help create_bundle" for more information.
+  See "[gn help create_bundle](#create_bundle)" for more information.
 ```
 
 #### **Example**
@@ -7115,7 +7115,7 @@
    - target_os
 
   Next, project-specific overrides are applied. These are specified inside
-  the default_args variable of //.gn. See "gn help dotfile" for more. Note
+  the default_args variable of //.gn. See "[gn help dotfile](#dotfile)" for more. Note
   that during processing of the dotfile itself, only `gn_version` is defined.
 
   If specified, arguments from the --args command line flag are used. If that
@@ -7126,7 +7126,7 @@
   overrides are applied. These are specified in the toolchain_args section of a
   toolchain definition. The use-case for this is that a toolchain may be
   building code for a different platform, and that it may want to always
-  specify Posix, for example. See "gn help toolchain" for more.
+  specify Posix, for example. See "[gn help toolchain](#toolchain)" for more.
 
   If you specify an override for a build argument that never appears in a
   "declare_args" call, a nonfatal error will be displayed.
@@ -7248,7 +7248,7 @@
 
   export_compile_commands [optional]
       A list of label patterns for which to generate a Clang compilation
-      database (see "gn help label_pattern" for the string format).
+      database (see "[gn help label_pattern](#label_pattern)" for the string format).
 
       When specified, GN will generate a compile_commands.json file in the root
       of the build directory containing information on how to compile each
@@ -7256,7 +7256,7 @@
       This is used for Clang-based tooling and some editor integration. See
       https://clang.llvm.org/docs/JSONCompilationDatabase.html
 
-      The switch --add-export-compile-commands to "gn gen" (see "gn help gen")
+      The switch --add-export-compile-commands to "gn gen" (see "[gn help gen](#gen)")
       appends to this value which provides a per-user way to customize it.
 
       The deprecated switch --export-compile-commands to "gn gen" (see "gn help
@@ -7287,7 +7287,7 @@
       instead.
 
       The command-line switch --root-pattern will override this value (see
-      "gn help --root-pattern")
+      "[gn help --root-pattern](#--root-pattern)")
 
   script_executable [optional]
       By default, GN runs the scripts used in action targets and exec_script
@@ -7297,7 +7297,7 @@
       If set to the empty string, the scripts will be executed directly.
 
       The command-line switch --script-executable will override this value (see
-      "gn help --script-executable")
+      "[gn help --script-executable](#--script-executable)")
 
   secondary_source [optional]
       Label of an alternate directory tree to find input files. When searching
@@ -7363,7 +7363,7 @@
 #### **Overall build flow**
 
 ```
-  1. Look for ".gn" file (see "gn help dotfile") in the current directory and
+  1. Look for ".gn" file (see "[gn help dotfile](#dotfile)") in the current directory and
      walk up the directory tree until one is found. Set this directory to be
      the "source root" and interpret this file to find the name of the build
      config file.
@@ -7393,12 +7393,12 @@
      is merged into the BUILD.gn file's scope. If there is a conflict
      (both the BUILD.gn file and the imported file define some variable
      or rule with the same name but different values), a runtime error
-     will be thrown. See "gn help import" for more on this.
+     will be thrown. See "[gn help import](#import)" for more on this.
 
   6. Recursively evaluate rules and load BUILD.gn in other directories as
      necessary to resolve dependencies. If a BUILD file isn't found in the
      specified location, GN will look in the corresponding location inside
-     the secondary_source defined in the dotfile (see "gn help dotfile").
+     the secondary_source defined in the dotfile (see "[gn help dotfile](#dotfile)").
      Each BUILD.gn file will again be executed in a new scope whose only
      parent is BUILDCONFIG.gn's scope.
 
@@ -7427,7 +7427,7 @@
 ```
   Build files are loaded in parallel. This means it is impossible to
   interrogate a target from GN code for any information not derivable from its
-  label (see "gn help label"). The exception is the get_target_outputs()
+  label (see "[gn help label](#label)"). The exception is the get_target_outputs()
   function which requires the target being interrogated to have been defined
   previously in the same file.
 
@@ -7438,17 +7438,17 @@
     }
 
   There is also a generic "target" function for programmatically defined types
-  (see "gn help target").
+  (see "[gn help target](#target)").
 
-  You can define new types using templates (see "gn help template"). A template
+  You can define new types using templates (see "[gn help template](#template)"). A template
   defines some custom code that expands to one or more other targets. When a
   template is invoked, it is executed in the scope of the file that defined the
   template (as described above). To access values from the caller's scope, you
-  must use the `invoker` variable (see "gn help template" for more on the
+  must use the `invoker` variable (see "[gn help template](#template)" for more on the
   invoker).
 
   Before executing the code inside the target's { }, the target defaults are
-  applied (see "gn help set_defaults"). It will inject implicit variable
+  applied (see "[gn help set_defaults](#set_defaults)"). It will inject implicit variable
   definitions that can be overridden by the target code as necessary. Typically
   this mechanism is used to inject a default set of configs that define the
   global compiler and linker flags.
@@ -7457,10 +7457,10 @@
 #### **Which targets are built**
 
 ```
-  All targets encountered in the default toolchain (see "gn help toolchain")
+  All targets encountered in the default toolchain (see "[gn help toolchain](#toolchain)")
   will have build rules generated for them, even if no other targets reference
   them. Their dependencies must resolve and they will be added to the implicit
-  "all" rule (see "gn help ninja_rules").
+  "all" rule (see "[gn help ninja_rules](#ninja_rules)").
 
   Targets in non-default toolchains will only be generated when they are
   required (directly or transitively) to build a target in the default
@@ -7473,7 +7473,7 @@
   generated in the same cases the source target has but without a build-time
   dependency and even in non-default toolchains.
 
-  See also "gn help ninja_rules".
+  See also "[gn help ninja_rules](#ninja_rules)".
 ```
 
 #### **Dependencies**
@@ -7968,7 +7968,7 @@
   primary difference between write_file() and this target type is that the
   write_file function does the file write at parse time, while the
   generated_file target type writes at target resolution time. See
-  "gn help generated_file" for more detail.
+  "[gn help generated_file](#generated_file)" for more detail.
 
   When written at target resolution time, generated_file enables GN to
   collect and write aggregated metadata from dependents.
@@ -8099,7 +8099,7 @@
 #### **The "all" and "default" rules**
 
 ```
-  All generated targets (see "gn help execution") will be added to an implicit
+  All generated targets (see "[gn help execution](#execution)") will be added to an implicit
   build rule called "all" so "ninja all" will always compile everything. The
   default rule will be used by Ninja if no specific target is specified (just
   typing "ninja"). If there is a target named "default" in the root build file,
@@ -8180,15 +8180,15 @@
 #### **More information**
 
 ```
-  The topic "gn help check" has general information on how checking works and
+  The topic "[gn help check](#check)" has general information on how checking works and
   advice on fixing problems. Targets can also opt-out of checking, see
-  "gn help check_includes".
+  "[gn help check_includes](#check_includes)".
 ```
 ### <a name="runtime_deps"></a>**Runtime dependencies**&nbsp;[Back to Top](#gn-reference)
 
 ```
   Runtime dependencies of a target are exposed via the "runtime_deps" category
-  of "gn desc" (see "gn help desc") or they can be written at build generation
+  of "gn desc" (see "[gn help desc](#desc)") or they can be written at build generation
   time via write_runtime_deps(), or --runtime-deps-list-file (see "gn help
   --runtime-deps-list-file").
 
@@ -8277,7 +8277,7 @@
   If no placeholders are found, the outputs or args list will be treated as a
   static list of literal file names that do not depend on the sources.
 
-  See "gn help copy" and "gn help action_foreach" for more on how this is
+  See "[gn help copy](#copy)" and "[gn help action_foreach](#action_foreach)" for more on how this is
   applied.
 ```
 
@@ -8285,7 +8285,7 @@
 
 ```
   This section discusses only placeholders for actions. There are other
-  placeholders used in the definition of tools. See "gn help tool" for those.
+  placeholders used in the definition of tools. See "[gn help tool](#tool)" for those.
 
   {{source}}
       The name of the source file including directory (*). This will generally
@@ -8378,7 +8378,7 @@
 ### <a name="switch_list"></a>**Available global switches**&nbsp;[Back to Top](#gn-reference)
 
 ```
-  Do "gn help --the_switch_you_want_help_on" for more. Individual commands may
+  Do "[gn help --the_switch_you_want_help_on](#--the_switch_you_want_help_on)" for more. Individual commands may
   take command-specific switches not listed here. See the help on your specific
   command for more.
 ```
