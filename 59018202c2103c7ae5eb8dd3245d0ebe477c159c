@@ -1,0 +1,84 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "55f548a7_fa43431c",
+        "filename": "src/gn/build_settings.h",
+        "patchSetId": 7
+      },
+      "lineNbr": 166,
+      "author": {
+        "id": 1000030
+      },
+      "writtenOn": "2025-04-25T05:08:53Z",
+      "side": 1,
+      "message": "Initialize with false.",
+      "fixSuggestions": [
+        {
+          "fixId": "d3273829_2a2c4fd0",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "src/gn/build_settings.h",
+              "range": {
+                "startLine": 166,
+                "startChar": 0,
+                "endLine": 167,
+                "endChar": 0
+              },
+              "replacement": "  bool async_non_linkable_deps_ \u003d false;\n"
+            }
+          ]
+        }
+      ],
+      "revId": "59018202c2103c7ae5eb8dd3245d0ebe477c159c",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5b42730f_c5c17859",
+        "filename": "src/gn/ninja_c_binary_target_writer.cc",
+        "patchSetId": 7
+      },
+      "lineNbr": 784,
+      "author": {
+        "id": 1000030
+      },
+      "writtenOn": "2025-04-25T05:08:53Z",
+      "side": 1,
+      "message": "Better to do early return for shallwer nest?",
+      "fixSuggestions": [
+        {
+          "fixId": "8d17a4a9_fe59bdef",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "src/gn/ninja_c_binary_target_writer.cc",
+              "range": {
+                "startLine": 784,
+                "startChar": 0,
+                "endLine": 786,
+                "endChar": 0
+              },
+              "replacement": "  if (non_linkable_deps.empty()) {\n    return;\n  }\n"
+            },
+            {
+              "path": "src/gn/ninja_c_binary_target_writer.cc",
+              "range": {
+                "startLine": 787,
+                "startChar": 0,
+                "endLine": 793,
+                "endChar": 0
+              },
+              "replacement": "  out_ \u003c\u003c \" |@\";\n\n  // Non-linkable targets.\n  for (auto* non_linkable_dep : non_linkable_deps) {\n    if (non_linkable_dep-\u003ehas_dependency_output()) {\n      out_ \u003c\u003c \" \";\n      path_output_.WriteFile(out_, non_linkable_dep-\u003edependency_output());\n"
+            }
+          ]
+        }
+      ],
+      "revId": "59018202c2103c7ae5eb8dd3245d0ebe477c159c",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    }
+  ]
+}
