@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "17fdbc96_a390dc3f",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2025-04-25T15:36:04Z",
+      "side": 1,
+      "message": "Thanks!\n\n(I checked that `rg _HelpShort src/gn/switches.h | wc -l` is 18, which matches the number of lines in this function. So no other switch should be missing help.)",
+      "revId": "f708ddcf15592ba39a5a06a92b21392f48e7d14d",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    }
+  ]
+}
