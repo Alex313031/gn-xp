@@ -16,6 +16,24 @@
       "message": "Could you add tests for this?",
       "revId": "e314d3620d1ad6b0e4de88739fbdf5ede4e46a8b",
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "6005a2c9_c6776854",
+        "filename": "src/gn/ninja_c_binary_target_writer.cc",
+        "patchSetId": 6
+      },
+      "lineNbr": 782,
+      "author": {
+        "id": 1003017
+      },
+      "writtenOn": "2025-04-25T05:04:24Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "9da5137f_1ebb5000",
+      "revId": "e314d3620d1ad6b0e4de88739fbdf5ede4e46a8b",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
     }
   ]
 }
