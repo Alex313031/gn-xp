@@ -36,6 +36,24 @@
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "2c734ddb_e7525142",
+        "filename": "src/gn/build_settings.h",
+        "patchSetId": 7
+      },
+      "lineNbr": 166,
+      "author": {
+        "id": 1003017
+      },
+      "writtenOn": "2025-04-25T05:31:18Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "55f548a7_fa43431c",
+      "revId": "59018202c2103c7ae5eb8dd3245d0ebe477c159c",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "5b42730f_c5c17859",
@@ -77,6 +95,24 @@
           ]
         }
       ],
+      "revId": "59018202c2103c7ae5eb8dd3245d0ebe477c159c",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "2eed1675_ca65869c",
+        "filename": "src/gn/ninja_c_binary_target_writer.cc",
+        "patchSetId": 7
+      },
+      "lineNbr": 784,
+      "author": {
+        "id": 1003017
+      },
+      "writtenOn": "2025-04-25T05:31:18Z",
+      "side": 1,
+      "message": "Ah, yeah. I also updated WriteOrderOnlyDependencies, too.",
+      "parentUuid": "5b42730f_c5c17859",
       "revId": "59018202c2103c7ae5eb8dd3245d0ebe477c159c",
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
     }
