@@ -95,6 +95,28 @@ void OutputMarkdownDec(TextDecoration dec) {
 #endif
 }
 
+std::string TransformForMarkdown(std::string text,
+                                 TextDecoration dec,
+                                 HtmlEscaping escaping) {
+  if (!is_markdown)
+    return text;
+
+  if (dec == DECORATION_YELLOW) {
+    // https://code.google.com/p/gitiles/issues/detail?id=77
+    // Gitiles will replace "--" with an em dash in non-code text.
+    // Figuring out all instances of this might be difficult, but we can
+    // at least escape the instances where this shows up in a heading.
+    base::ReplaceSubstringsAfterOffset(&text, 0, "--", "\\--");
+  }
+  if (!in_body && escaping == DEFAULT_ESCAPING) {
+    // Markdown auto-escapes < and > in code sections (and converts &lt; to
+    // &amp;tl; there), but not elsewhere.
+    base::ReplaceSubstringsAfterOffset(&text, 0, "<", "&lt;");
+    base::ReplaceSubstringsAfterOffset(&text, 0, ">", "&gt;");
+  }
+  return text;
+}
+
 }  // namespace
 
 #if defined(OS_WIN)
@@ -136,20 +158,7 @@ void OutputString(const std::string& output,
     }
   }
 
-  std::string tmpstr = output;
-  if (is_markdown && dec == DECORATION_YELLOW) {
-    // https://code.google.com/p/gitiles/issues/detail?id=77
-    // Gitiles will replace "--" with an em dash in non-code text.
-    // Figuring out all instances of this might be difficult, but we can
-    // at least escape the instances where this shows up in a heading.
-    base::ReplaceSubstringsAfterOffset(&tmpstr, 0, "--", "\\--");
-  }
-  if (is_markdown && !in_body && escaping == DEFAULT_ESCAPING) {
-    // Markdown auto-escapes < and > in code sections (and converts &lt; to
-    // &amp;tl; there), but not elsewhere.
-    base::ReplaceSubstringsAfterOffset(&tmpstr, 0, "<", "&lt;");
-    base::ReplaceSubstringsAfterOffset(&tmpstr, 0, ">", "&gt;");
-  }
+  std::string tmpstr = TransformForMarkdown(output, dec, escaping);
   ::WriteFile(hstdout, tmpstr.c_str(), static_cast<DWORD>(tmpstr.size()),
               &written, nullptr);
 
@@ -193,20 +202,7 @@ void OutputString(const std::string& output,
     }
   }
 
-  std::string tmpstr = output;
-  if (is_markdown && dec == DECORATION_YELLOW) {
-    // https://code.google.com/p/gitiles/issues/detail?id=77
-    // Gitiles will replace "--" with an em dash in non-code text.
-    // Figuring out all instances of this might be difficult, but we can
-    // at least escape the instances where this shows up in a heading.
-    base::ReplaceSubstringsAfterOffset(&tmpstr, 0, "--", "\\--");
-  }
-  if (is_markdown && !in_body && escaping == DEFAULT_ESCAPING) {
-    // Markdown auto-escapes < and > in code sections (and converts &lt; to
-    // &amp;tl; there), but not elsewhere.
-    base::ReplaceSubstringsAfterOffset(&tmpstr, 0, "<", "&lt;");
-    base::ReplaceSubstringsAfterOffset(&tmpstr, 0, ">", "&gt;");
-  }
+  std::string tmpstr = TransformForMarkdown(output, dec, escaping);
   WriteToStdOut(tmpstr.data());
 
   if (is_markdown) {
