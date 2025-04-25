@@ -16,6 +16,23 @@
       "message": "Historical note without an opinion:\n\ngoogletest was removed in https://gn-review.googlesource.com/c/gn/+/1340 because it seemed at the time unnecessarily large and complicated for this small project.",
       "revId": "b8562a4abd9528372f274b1155aec65c57ca84fa",
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "bd525b94_faa9adb7",
+        "filename": "src/gn/setup.cc",
+        "patchSetId": 6
+      },
+      "lineNbr": 161,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2025-04-25T15:08:18Z",
+      "side": 1,
+      "message": "`gn help --root-pattern` doesn\u0027t seem to work (?) Does the flag have to be added to some index to match? Maybe you need to update GetSwitches() in switches.cc?",
+      "revId": "b8562a4abd9528372f274b1155aec65c57ca84fa",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
     }
   ]
 }
