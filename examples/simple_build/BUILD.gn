@@ -2,27 +2,14 @@
 # Use of this source code is governed by a BSD-style license that can be
 # found in the LICENSE file.
 
-executable("hello") {
-  sources = [ "hello.cc" ]
-
-  deps = [
-    ":hello_shared",
-    ":hello_static",
-  ]
+group("foobar") {
+  deps = [":hello(//build/toolchain:gcc2)"]
 }
 
-shared_library("hello_shared") {
-  sources = [
-    "hello_shared.cc",
-    "hello_shared.h",
-  ]
-
-  defines = [ "HELLO_SHARED_IMPLEMENTATION" ]
-}
-
-static_library("hello_static") {
-  sources = [
-    "hello_static.cc",
-    "hello_static.h",
-  ]
+if (current_toolchain != default_toolchain ) {
+  executable("hello") {
+    output_dir = root_build_dir
+    output_name = "foobar"
+    sources = [ "hello.cc" ]
+  }
 }
