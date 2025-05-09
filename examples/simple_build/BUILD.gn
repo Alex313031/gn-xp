@@ -9,7 +9,7 @@ group("foobar") {
 if (current_toolchain != default_toolchain ) {
   executable("hello") {
     output_dir = root_build_dir
-    output_name = "foobar"
+    # output_name = "foobar"
     sources = [ "hello.cc" ]
   }
 }
