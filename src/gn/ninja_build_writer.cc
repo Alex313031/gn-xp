@@ -539,7 +539,7 @@ bool NinjaBuildWriter::WritePhonyAndAllRules(Err* err) {
   // If you change this algorithm, update the help above!
   // ----------------------------------------------------
 
-  for (const Target* target : default_toolchain_targets_) {
+  for (const Target* target : all_targets_) {
     const Label& label = target->label();
     const std::string& short_name = label.name();
 
