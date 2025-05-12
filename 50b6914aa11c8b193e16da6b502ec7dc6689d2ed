@@ -1,0 +1,44 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0722e05d_54fc4066",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 8,
+      "author": {
+        "id": 1000030
+      },
+      "writtenOn": "2025-05-12T04:23:11Z",
+      "side": 1,
+      "message": "What was the issue when we check only for default_toolchain_targets_?",
+      "revId": "50b6914aa11c8b193e16da6b502ec7dc6689d2ed",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4de8bedf_913d6f47",
+        "filename": "src/gn/ninja_build_writer.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 513,
+      "author": {
+        "id": 1000030
+      },
+      "writtenOn": "2025-05-12T04:23:11Z",
+      "side": 1,
+      "message": "No need to update this comment?",
+      "range": {
+        "startLine": 511,
+        "startChar": 0,
+        "endLine": 513,
+        "endChar": 74
+      },
+      "revId": "50b6914aa11c8b193e16da6b502ec7dc6689d2ed",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    }
+  ]
+}
