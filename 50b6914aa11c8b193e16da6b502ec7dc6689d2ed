@@ -20,6 +20,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "ba42c2a2_a3338f6d",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 8,
+      "author": {
+        "id": 1001597
+      },
+      "writtenOn": "2025-05-12T13:52:24Z",
+      "side": 1,
+      "message": "See https://chat.google.com/room/AAAArnFy7VA/Z3OH_mKw2wI/Z3OH_mKw2wI?cls\u003d10 where there\u0027s a full discussion on it. Short answer is that targets in secondary toolchains with outputs that would overlap with these short names are not included, so the ninja rules end up with overlapping outputs and it fails.\n\nI can create a bug for this and add details to it if that would be helpful?",
+      "parentUuid": "0722e05d_54fc4066",
+      "revId": "50b6914aa11c8b193e16da6b502ec7dc6689d2ed",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "4de8bedf_913d6f47",
         "filename": "src/gn/ninja_build_writer.cc",
         "patchSetId": 1
@@ -31,6 +49,30 @@
       "writtenOn": "2025-05-12T04:23:11Z",
       "side": 1,
       "message": "No need to update this comment?",
+      "range": {
+        "startLine": 511,
+        "startChar": 0,
+        "endLine": 513,
+        "endChar": 74
+      },
+      "revId": "50b6914aa11c8b193e16da6b502ec7dc6689d2ed",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "615bd190_3d1bf588",
+        "filename": "src/gn/ninja_build_writer.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 513,
+      "author": {
+        "id": 1001597
+      },
+      "writtenOn": "2025-05-12T13:52:24Z",
+      "side": 1,
+      "message": "Good call out, my change may create phony rules for secondary toolchain targets now. The intention is just to avoid short names that overlapped with outputs of secondary toolchains, so maybe I should go about that another way.\n\nAlternatively, if you don\u0027t see an issue with creating short names for secondary toolchain targets I can update this comment and leave the code as is.",
+      "parentUuid": "4de8bedf_913d6f47",
       "range": {
         "startLine": 511,
         "startChar": 0,
