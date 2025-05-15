@@ -33,6 +33,24 @@
       "message": "Thanks for review! Do you know how it can be integrated? I see \"Insufficient permission to submit change 18560\". I\u0027ve never seen such a message in reviews for Chromium.",
       "revId": "df9be42d20b6914bf5b0f57c3a9f6b95128b10d7",
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "80adcbba_a7a6fc02",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000030
+      },
+      "writtenOn": "2025-05-15T12:28:44Z",
+      "side": 1,
+      "message": "CQ+2 submits this CL. And we give only afew people to have that permission.",
+      "parentUuid": "4606c19a_1deed53b",
+      "revId": "df9be42d20b6914bf5b0f57c3a9f6b95128b10d7",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
     }
   ]
 }
