@@ -16,6 +16,74 @@
       "message": "Hi @sdefresne@chromium.org,\nCould you take a look? `target_platform` was introduced in https://crrev.com/c/6306066 from chromium.",
       "revId": "74a9a89f5bd267c58bbd5abfaed24e9faeb4f99b",
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "197baefa_199cc1f1",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000070
+      },
+      "writtenOn": "2025-05-19T13:06:09Z",
+      "side": 1,
+      "message": "lgtm",
+      "revId": "74a9a89f5bd267c58bbd5abfaed24e9faeb4f99b",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "54472c09_5d347cb4",
+        "filename": "src/gn/xcode_writer.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 431,
+      "author": {
+        "id": 1000070
+      },
+      "writtenOn": "2025-05-19T13:06:09Z",
+      "side": 1,
+      "message": "I would prefer `if (...) { ... } else { ... }` here without a `break`.\n\n```\n        const TargetPlatformType target_platform \u003d\n            GetTargetPlatform(build_settings-\u003ebuild_args());\n        if (target_platform \u003d\u003d WRITER_TARGET_PLATFORM_TVOS) {\n          attributes[\"SDKROOT\"] \u003d \"appletvos\";\n          attributes[\"TARGETED_DEVICE_FAMILY\"] \u003d \"3\";\n        } else {\n          attributes[\"SDKROOT\"] \u003d \"iphoneos\";\n          attributes[\"TARGETED_DEVICE_FAMILY\"] \u003d \"1,2\";\n        }\n```",
+      "range": {
+        "startLine": 424,
+        "startChar": 0,
+        "endLine": 431,
+        "endChar": 0
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "502e73eb_3f70574d",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "src/gn/xcode_writer.cc",
+              "range": {
+                "startLine": 427,
+                "startChar": 0,
+                "endLine": 428,
+                "endChar": 0
+              },
+              "replacement": "        } else {\n          attributes[\"SDKROOT\"] \u003d \"iphoneos\";\n          attributes[\"TARGETED_DEVICE_FAMILY\"] \u003d \"1,2\";\n"
+            },
+            {
+              "path": "src/gn/xcode_writer.cc",
+              "range": {
+                "startLine": 429,
+                "startChar": 0,
+                "endLine": 431,
+                "endChar": 0
+              },
+              "replacement": ""
+            }
+          ]
+        }
+      ],
+      "revId": "74a9a89f5bd267c58bbd5abfaed24e9faeb4f99b",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
     }
   ]
 }
