@@ -220,6 +220,25 @@ Possible values
   - "win"
 )";
 
+const char kTargetPlatform[] = "target_platform";
+const char kTargetPlatform_HelpShort[] =
+    "target_platform: [string] The desired platform for the build.";
+const char kTargetPlatform_Help[] =
+    R"(target_platform: The desired platform for the build.
+
+  This value should be used to indicate the kind of iOS or iOS-based platform
+  that is being the desired platform for the primary object(s) of the build.
+
+  This should be set to the most specific value possible. So, "iphoneos" or
+  "tvos" should be used instead of "ios" where applicable, even though
+  iPhoneOS and tvOS are both iOS variants.
+
+Possible values
+
+  - "iphoneos"
+  - "tvos"
+)";
+
 const char kCurrentCpu[] = "current_cpu";
 const char kCurrentCpu_HelpShort[] =
     "current_cpu: [string] The processor architecture of the current "
