@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e92a905b_389ae0e2",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 4040239
+      },
+      "writtenOn": "2025-05-19T10:11:20Z",
+      "side": 1,
+      "message": "Hi @sdefresne@chromium.org,\nCould you take a look? `target_platform` was introduced in https://crrev.com/c/6306066 from chromium.",
+      "revId": "74a9a89f5bd267c58bbd5abfaed24e9faeb4f99b",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    }
+  ]
+}
