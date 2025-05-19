@@ -72,6 +72,10 @@ extern const char kTargetOs[];
 extern const char kTargetOs_HelpShort[];
 extern const char kTargetOs_Help[];
 
+extern const char kTargetPlatform[];
+extern const char kTargetPlatform_HelpShort[];
+extern const char kTargetPlatform_Help[];
+
 extern const char kTargetGenDir[];
 extern const char kTargetGenDir_HelpShort[];
 extern const char kTargetGenDir_Help[];

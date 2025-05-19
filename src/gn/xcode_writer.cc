@@ -48,6 +48,11 @@ enum TargetOsType {
   WRITER_TARGET_OS_MACOS,
 };
 
+enum TargetPlatformType {
+  WRITER_TARGET_PLATFORM_IPHONEOS,
+  WRITER_TARGET_PLATFORM_TVOS,
+};
+
 const char* kXCTestFileSuffixes[] = {
     "egtest.m",     "egtest.mm", "egtest.swift", "xctest.m",      "xctest.mm",
     "xctest.swift", "UITests.m", "UITests.mm",   "UITests.swift",
@@ -79,6 +84,18 @@ TargetOsType GetTargetOs(const Args& args) {
     }
   }
   return WRITER_TARGET_OS_MACOS;
+}
+
+TargetPlatformType GetTargetPlatform(const Args& args) {
+  const Value* target_platform_value =
+      args.GetArgOverride(variables::kTargetPlatform);
+  if (target_platform_value) {
+    if (target_platform_value->type() == Value::STRING) {
+      if (target_platform_value->string_value() == "tvos")
+        return WRITER_TARGET_PLATFORM_TVOS;
+    }
+  }
+  return WRITER_TARGET_PLATFORM_IPHONEOS;
 }
 
 std::string GetBuildScript(const std::string& target_name,
@@ -401,9 +418,17 @@ PBXAttributes ProjectAttributesFromBuildSettings(
 
   PBXAttributes attributes;
   switch (target_os) {
-    case WRITER_TARGET_OS_IOS:
-      attributes["SDKROOT"] = "iphoneos";
-      attributes["TARGETED_DEVICE_FAMILY"] = "1,2";
+    case WRITER_TARGET_OS_IOS: {
+        const TargetPlatformType target_platform =
+            GetTargetPlatform(build_settings->build_args());
+        if (target_platform == WRITER_TARGET_PLATFORM_TVOS) {
+          attributes["SDKROOT"] = "appletvos";
+          attributes["TARGETED_DEVICE_FAMILY"] = "3";
+        } else {
+          attributes["SDKROOT"] = "iphoneos";
+          attributes["TARGETED_DEVICE_FAMILY"] = "1,2";
+        }
+      }
       break;
     case WRITER_TARGET_OS_MACOS:
       attributes["SDKROOT"] = "macosx";
