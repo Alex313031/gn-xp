@@ -84,6 +84,30 @@
       ],
       "revId": "74a9a89f5bd267c58bbd5abfaed24e9faeb4f99b",
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "77b9f81e_b63fd3c8",
+        "filename": "src/gn/xcode_writer.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 431,
+      "author": {
+        "id": 4040239
+      },
+      "writtenOn": "2025-05-20T04:46:29Z",
+      "side": 1,
+      "message": "Fix applied. PTAL.",
+      "parentUuid": "54472c09_5d347cb4",
+      "range": {
+        "startLine": 424,
+        "startChar": 0,
+        "endLine": 431,
+        "endChar": 0
+      },
+      "revId": "74a9a89f5bd267c58bbd5abfaed24e9faeb4f99b",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
     }
   ]
 }
