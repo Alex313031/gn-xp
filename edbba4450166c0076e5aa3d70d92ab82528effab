@@ -33,6 +33,253 @@
       "message": "sdefresne@,Thanks! @digit@google.com, could you take a look?",
       "revId": "edbba4450166c0076e5aa3d70d92ab82528effab",
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "59875647_114dccc9",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000067
+      },
+      "writtenOn": "2025-05-20T12:10:33Z",
+      "side": 1,
+      "message": "Since you modified the documentation, please run `tools/update_reference.sh` to update the documentation files under `docs/` in the same CL.",
+      "revId": "edbba4450166c0076e5aa3d70d92ab82528effab",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b580bacd_211b1837",
+        "filename": "src/gn/variables.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 234,
+      "author": {
+        "id": 1000067
+      },
+      "writtenOn": "2025-05-20T12:10:33Z",
+      "side": 1,
+      "message": "Can you clarify that the default value of \"iphoneos\" here, the comment above makes it sounds like the default is \"ios\", but that doesn\u0027t match the implementation.",
+      "fixSuggestions": [
+        {
+          "fixId": "ed24b323_52aa2388",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "src/gn/variables.cc",
+              "range": {
+                "startLine": 236,
+                "startChar": 0,
+                "endLine": 236,
+                "endChar": 0
+              },
+              "replacement": "  GN defaults this value to \"iphoneos\" and the configuration files should set\n  it to an appropriate value if it is not set via the command line or in the\n  args.gn file.\n\n"
+            }
+          ]
+        }
+      ],
+      "revId": "edbba4450166c0076e5aa3d70d92ab82528effab",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e72ed268_e5156a40",
+        "filename": "src/gn/variables.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 75,
+      "author": {
+        "id": 1000067
+      },
+      "writtenOn": "2025-05-20T12:10:33Z",
+      "side": 1,
+      "message": "Since this is only related to XCode, can we use a more explicit name (e.g. `target_xcode_platform` instead).",
+      "fixSuggestions": [
+        {
+          "fixId": "6dc4de52_1f0af593",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "src/gn/variables.h",
+              "range": {
+                "startLine": 75,
+                "startChar": 0,
+                "endLine": 78,
+                "endChar": 0
+              },
+              "replacement": "extern const char kTargetXcodePlatform[];\nextern const char kTargetXcodePlatform_HelpShort[];\nextern const char kTargetXcodePlatform_Help[];\n"
+            }
+          ]
+        }
+      ],
+      "revId": "edbba4450166c0076e5aa3d70d92ab82528effab",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "46224ed4_a200f92c",
+        "filename": "src/gn/xcode_writer.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 98,
+      "author": {
+        "id": 1000067
+      },
+      "writtenOn": "2025-05-20T12:10:33Z",
+      "side": 1,
+      "message": "Do you want to check for unnown values here? Otherwise a typo like \"tvOs\" would not be caught, iiuc.",
+      "fixSuggestions": [
+        {
+          "fixId": "f2a81054_5f9a60db",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "src/gn/xcode_writer.cc",
+              "range": {
+                "startLine": 89,
+                "startChar": 0,
+                "endLine": 90,
+                "endChar": 0
+              },
+              "replacement": "std::optional\u003cTargetPlatformType\u003e GetTargetPlatform(const Args\u0026 args,\n                                                    const ParseNode* node,\n                                                    Err* err) {\n"
+            },
+            {
+              "path": "src/gn/xcode_writer.cc",
+              "range": {
+                "startLine": 96,
+                "startChar": 0,
+                "endLine": 96,
+                "endChar": 0
+              },
+              "replacement": "      if (target_platform_value-\u003estring_value() !\u003d \"iphoneos\") {\n        *err \u003d Err(node, \"Unknown target_platform value\",\n                   target_platform_value-\u003estring_value());\n        return std::nullopt;\n      }\n"
+            },
+            {
+              "path": "src/gn/xcode_writer.cc",
+              "range": {
+                "startLine": 416,
+                "startChar": 0,
+                "endLine": 417,
+                "endChar": 0
+              },
+              "replacement": "    const BuildSettings* build_settings,\n    const ParseNode* node,\n    Err* err) {\n"
+            },
+            {
+              "path": "src/gn/xcode_writer.cc",
+              "range": {
+                "startLine": 422,
+                "startChar": 0,
+                "endLine": 425,
+                "endChar": 0
+              },
+              "replacement": "        const std::optional\u003cTargetPlatformType\u003e target_platform \u003d\n            GetTargetPlatform(build_settings-\u003ebuild_args(), node, err);\n        if (!target_platform)\n          return {};\n        if (*target_platform \u003d\u003d WRITER_TARGET_PLATFORM_TVOS) {\n"
+            },
+            {
+              "path": "src/gn/xcode_writer.cc",
+              "range": {
+                "startLine": 705,
+                "startChar": 0,
+                "endLine": 706,
+                "endChar": 0
+              },
+              "replacement": "               ProjectAttributesFromBuildSettings(build_settings,\n                                                  /*node\u003d*/nullptr,\n                                                  /*err\u003d*/nullptr)) {}\n"
+            },
+            {
+              "path": "src/gn/xcode_writer.cc",
+              "range": {
+                "startLine": 1123,
+                "startChar": 0,
+                "endLine": 1124,
+                "endChar": 0
+              },
+              "replacement": "      return false;\n"
+            },
+            {
+              "path": "src/gn/xcode_writer.cc",
+              "range": {
+                "startLine": 1126,
+                "startChar": 0,
+                "endLine": 1127,
+                "endChar": 0
+              },
+              "replacement": "      return false;\n"
+            },
+            {
+              "path": "src/gn/xcode_writer.cc",
+              "range": {
+                "startLine": 1129,
+                "startChar": 0,
+                "endLine": 1130,
+                "endChar": 0
+              },
+              "replacement": "      return false;\n"
+            },
+            {
+              "path": "src/gn/xcode_writer.cc",
+              "range": {
+                "startLine": 1132,
+                "startChar": 0,
+                "endLine": 1133,
+                "endChar": 0
+              },
+              "replacement": "      return false;\n"
+            }
+          ]
+        }
+      ],
+      "revId": "edbba4450166c0076e5aa3d70d92ab82528effab",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6268eb6b_ad3cbf8c",
+        "filename": "src/gn/xcode_writer.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 431,
+      "author": {
+        "id": 1000067
+      },
+      "writtenOn": "2025-05-20T12:10:33Z",
+      "side": 1,
+      "message": "Can you clarify in the document how this variable affects the XCode writer\u0027s output. Do you plan to use this in GN build files for conditional target or toolchain definitions?",
+      "fixSuggestions": [
+        {
+          "fixId": "477e76c0_acb2c3f4",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "src/gn/xcode_writer.cc",
+              "range": {
+                "startLine": 422,
+                "startChar": 0,
+                "endLine": 431,
+                "endChar": 0
+              },
+              "replacement": "      const TargetPlatformType target_platform \u003d\n          GetTargetPlatform(build_settings-\u003ebuild_args());\n      if (target_platform \u003d\u003d WRITER_TARGET_PLATFORM_TVOS) {\n        attributes[\"SDKROOT\"] \u003d \"appletvos\";\n        attributes[\"TARGETED_DEVICE_FAMILY\"] \u003d \"3\";\n      } else {\n        attributes[\"SDKROOT\"] \u003d \"iphoneos\";\n        attributes[\"TARGETED_DEVICE_FAMILY\"] \u003d \"1,2\";\n"
+            },
+            {
+              "path": "src/gn/xcode_writer.cc",
+              "range": {
+                "startLine": 432,
+                "startChar": 0,
+                "endLine": 432,
+                "endChar": 0
+              },
+              "replacement": "    }\n"
+            }
+          ]
+        }
+      ],
+      "revId": "edbba4450166c0076e5aa3d70d92ab82528effab",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
     }
   ]
 }
