@@ -34,6 +34,74 @@
       "parentUuid": "c3875d73_e4368726",
       "revId": "b5e322919c655c21f8edcfb327991ae1b226e51e",
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "88b033ad_dc8015c5",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000070
+      },
+      "writtenOn": "2025-05-21T13:33:00Z",
+      "side": 1,
+      "message": "lgtm, thank you for the cleanup",
+      "revId": "b5e322919c655c21f8edcfb327991ae1b226e51e",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "71ac6dfb_f2d78e7c",
+        "filename": "src/gn/xcode_writer.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 95,
+      "author": {
+        "id": 1000070
+      },
+      "writtenOn": "2025-05-21T13:33:00Z",
+      "side": 1,
+      "message": "followup, optional: maybe we should return an error if `xcode_target_platform` is defined but not a string.",
+      "range": {
+        "startLine": 95,
+        "startChar": 8,
+        "endLine": 95,
+        "endChar": 54
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "51757ec0_5eec0a41",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "src/gn/xcode_writer.cc",
+              "range": {
+                "startLine": 98,
+                "startChar": 0,
+                "endLine": 99,
+                "endChar": 0
+              },
+              "replacement": "      else if (target_platform_value-\u003estring_value() \u003d\u003d \"iphoneos\")\n        return WRITER_TARGET_PLATFORM_IPHONEOS;\n      else {\n"
+            },
+            {
+              "path": "src/gn/xcode_writer.cc",
+              "range": {
+                "startLine": 103,
+                "startChar": 0,
+                "endLine": 103,
+                "endChar": 0
+              },
+              "replacement": "    } else {\n      *err \u003d Err(node, \"target_platform value should be a string\",\n                  target_platform_value-\u003eToString());\n      return std::nullopt;\n"
+            }
+          ]
+        }
+      ],
+      "revId": "b5e322919c655c21f8edcfb327991ae1b226e51e",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
     }
   ]
 }
