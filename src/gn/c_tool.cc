@@ -22,7 +22,7 @@ const char* CTool::kCToolSolinkModule = "solink_module";
 const char* CTool::kCToolLink = "link";
 
 CTool::CTool(const char* n)
-    : Tool(n), depsformat_(DEPS_GCC), precompiled_header_type_(PCH_NONE) {
+    : Tool(n), depsformat_(DEPS_NONE), precompiled_header_type_(PCH_NONE) {
   CHECK(ValidateName(n));
   set_framework_switch("-framework ");
   set_weak_framework_switch("-weak_framework ");
@@ -137,7 +137,8 @@ bool CTool::ReadDepsFormat(Scope* scope, Err* err) {
   } else if (value->string_value() == "msvc") {
     set_depsformat(DEPS_MSVC);
   } else {
-    *err = Err(*value, "Deps format must be \"gcc\" or \"msvc\".");
+    *err = Err(*value, "Invalid depsformat value.",
+               "Must be \"gcc\", or \"msvc\".");
     return false;
   }
   return true;
