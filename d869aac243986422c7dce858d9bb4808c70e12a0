@@ -90,6 +90,24 @@
       "parentUuid": "86f36ca2_dfa15669",
       "revId": "d869aac243986422c7dce858d9bb4808c70e12a0",
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "30efbc8b_c4aca227",
+        "filename": "src/gn/variables.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 2213,
+      "author": {
+        "id": 4040239
+      },
+      "writtenOn": "2025-05-21T12:24:10Z",
+      "side": 1,
+      "message": "Indeed! Thanks for letting me know. Done! PTAL.",
+      "parentUuid": "2add60f5_6bf94925",
+      "revId": "d869aac243986422c7dce858d9bb4808c70e12a0",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
     }
   ]
 }
