@@ -1,0 +1,59 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c7a7b45f_dbc066df",
+        "filename": "src/gn/variables.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 2213,
+      "author": {
+        "id": 1000067
+      },
+      "writtenOn": "2025-05-21T07:34:56Z",
+      "side": 1,
+      "message": "Thanks but change the variable name too here, and adjust documentation accordingly!",
+      "fixSuggestions": [
+        {
+          "fixId": "754e26e5_6b113462",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "src/gn/variables.cc",
+              "range": {
+                "startLine": 2213,
+                "startChar": 0,
+                "endLine": 2214,
+                "endChar": 0
+              },
+              "replacement": "const char kTargetXcodePlatform[] \u003d \"target_xcode_platform\";\n"
+            },
+            {
+              "path": "src/gn/variables.cc",
+              "range": {
+                "startLine": 2215,
+                "startChar": 0,
+                "endLine": 2216,
+                "endChar": 0
+              },
+              "replacement": "    \"target_xcode_platform: [string] The desired platform for the build.\";\n"
+            },
+            {
+              "path": "src/gn/variables.cc",
+              "range": {
+                "startLine": 2217,
+                "startChar": 0,
+                "endLine": 2218,
+                "endChar": 0
+              },
+              "replacement": "    R\"(target_xcode_platform: The desired platform for the build.\n"
+            }
+          ]
+        }
+      ],
+      "revId": "d869aac243986422c7dce858d9bb4808c70e12a0",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    }
+  ]
+}
