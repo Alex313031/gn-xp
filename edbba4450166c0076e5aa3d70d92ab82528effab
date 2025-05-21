@@ -52,6 +52,24 @@
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "2252075c_3de8e9be",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 4040239
+      },
+      "writtenOn": "2025-05-21T01:33:26Z",
+      "side": 1,
+      "message": "Thanks for the comments! Done. PTAL.",
+      "parentUuid": "59875647_114dccc9",
+      "revId": "edbba4450166c0076e5aa3d70d92ab82528effab",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "b580bacd_211b1837",
@@ -87,6 +105,24 @@
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "c1a4b5e2_2fa39164",
+        "filename": "src/gn/variables.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 234,
+      "author": {
+        "id": 4040239
+      },
+      "writtenOn": "2025-05-21T01:33:26Z",
+      "side": 1,
+      "message": "Sure. Done.",
+      "parentUuid": "b580bacd_211b1837",
+      "revId": "edbba4450166c0076e5aa3d70d92ab82528effab",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "e72ed268_e5156a40",
@@ -118,6 +154,24 @@
           ]
         }
       ],
+      "revId": "edbba4450166c0076e5aa3d70d92ab82528effab",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d07c7d29_f607cecc",
+        "filename": "src/gn/variables.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 75,
+      "author": {
+        "id": 4040239
+      },
+      "writtenOn": "2025-05-21T01:33:26Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "e72ed268_e5156a40",
       "revId": "edbba4450166c0076e5aa3d70d92ab82528effab",
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
     },
@@ -237,6 +291,24 @@
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "7c0823ed_bc557847",
+        "filename": "src/gn/xcode_writer.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 98,
+      "author": {
+        "id": 4040239
+      },
+      "writtenOn": "2025-05-21T01:33:26Z",
+      "side": 1,
+      "message": "Indeed. Done.",
+      "parentUuid": "46224ed4_a200f92c",
+      "revId": "edbba4450166c0076e5aa3d70d92ab82528effab",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "6268eb6b_ad3cbf8c",
@@ -278,6 +350,24 @@
           ]
         }
       ],
+      "revId": "edbba4450166c0076e5aa3d70d92ab82528effab",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "1d74e73b_3730b4f3",
+        "filename": "src/gn/xcode_writer.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 431,
+      "author": {
+        "id": 4040239
+      },
+      "writtenOn": "2025-05-21T01:33:26Z",
+      "side": 1,
+      "message": "Sure. Done. It\u0027s used in GN build files for conditional target.",
+      "parentUuid": "6268eb6b_ad3cbf8c",
       "revId": "edbba4450166c0076e5aa3d70d92ab82528effab",
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
     }
