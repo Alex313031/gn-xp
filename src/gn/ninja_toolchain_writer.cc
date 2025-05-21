@@ -94,19 +94,20 @@ void NinjaToolchainWriter::WriteToolRule(Tool* tool,
   WriteRulePattern("rspfile", tool->rspfile(), options);
   WriteRulePattern("rspfile_content", tool->rspfile_content(), options);
 
+  // Always write depfile if specified, regardless of depsformat.
+  // Ninja defaults to 'gcc' format if 'deps' is not specified.
+  if (!tool->depfile().empty()) {
+    WriteRulePattern("depfile", tool->depfile(), options);
+  }
+
   if (CTool* c_tool = tool->AsC()) {
     if (c_tool->depsformat() == CTool::DEPS_GCC) {
-      // GCC-style deps require a depfile.
-      if (!c_tool->depfile().empty()) {
-        WriteRulePattern("depfile", tool->depfile(), options);
-        out_ << kIndent << "deps = gcc" << std::endl;
-      }
+      out_ << kIndent << "deps = gcc" << std::endl;
     } else if (c_tool->depsformat() == CTool::DEPS_MSVC) {
-      // MSVC deps don't have a depfile.
       out_ << kIndent << "deps = msvc" << std::endl;
     }
   } else if (!tool->depfile().empty()) {
-    WriteRulePattern("depfile", tool->depfile(), options);
+    // For non-C tools that specify a depfile, assume gcc format.
     out_ << kIndent << "deps = gcc" << std::endl;
   }
 

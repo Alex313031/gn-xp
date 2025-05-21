@@ -34,7 +34,11 @@ class CTool : public Tool {
   static const char* kCToolSolinkModule;
   static const char* kCToolLink;
 
-  enum DepsFormat { DEPS_GCC = 0, DEPS_MSVC = 1 };
+  enum DepsFormat {
+    DEPS_NONE = 0,  // No deps format specified, Ninja will use its default.
+    DEPS_GCC = 1,
+    DEPS_MSVC = 2,
+  };
 
   enum PrecompiledHeaderType { PCH_NONE = 0, PCH_GCC = 1, PCH_MSVC = 2 };
 
