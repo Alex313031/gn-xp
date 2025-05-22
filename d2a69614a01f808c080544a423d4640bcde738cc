@@ -16,6 +16,51 @@
       "message": "Thanks for the review and comments. PTAL.",
       "revId": "d2a69614a01f808c080544a423d4640bcde738cc",
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "853ef848_4705302f",
+        "filename": "src/gn/xcode_writer.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 109,
+      "author": {
+        "id": 1000067
+      },
+      "writtenOn": "2025-05-22T09:29:25Z",
+      "side": 1,
+      "message": "nit: the nested ifs make this difficult to read. Consider flattening the error exit cases for readability. However, I am marking this as resolved as this is good enough for me :)",
+      "fixSuggestions": [
+        {
+          "fixId": "c29fbc21_eb708bf2",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "src/gn/xcode_writer.cc",
+              "range": {
+                "startLine": 95,
+                "startChar": 0,
+                "endLine": 105,
+                "endChar": 0
+              },
+              "replacement": "  if (!target_xcode_platform_value) {\n    return WRITER_TARGET_XCODE_PLATFORM_IPHONEOS;\n  }\n  if (target_xcode_platform_value-\u003etype() !\u003d Value::STRING) {\n"
+            },
+            {
+              "path": "src/gn/xcode_writer.cc",
+              "range": {
+                "startLine": 109,
+                "startChar": 0,
+                "endLine": 110,
+                "endChar": 0
+              },
+              "replacement": "  if (target_xcode_platform_value-\u003estring_value() \u003d\u003d \"tvos\") {\n    return WRITER_TARGET_XCODE_PLATFORM_TVOS;\n  }\n  if (target_xcode_platform_value-\u003estring_value() \u003d\u003d \"iphoneos\") {\n    return WRITER_TARGET_XCODE_PLATFORM_IPHONEOS;\n  }\n  *err \u003d Err(node, \"Unknown target_xcode_platform value\",\n      target_xcode_platform_value-\u003estring_value());\n  return std::nullopt;\n"
+            }
+          ]
+        }
+      ],
+      "revId": "d2a69614a01f808c080544a423d4640bcde738cc",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
     }
   ]
 }
