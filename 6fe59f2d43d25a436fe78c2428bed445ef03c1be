@@ -16,6 +16,108 @@
       "message": "Hi @digit@google.com and @sdefresne@chromium.org, PTAL.",
       "revId": "6fe59f2d43d25a436fe78c2428bed445ef03c1be",
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "866e4bd2_996ae875",
+        "filename": "src/gn/xcode_writer.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 101,
+      "author": {
+        "id": 1000030
+      },
+      "writtenOn": "2025-05-22T07:29:55Z",
+      "side": 1,
+      "message": "It is fine to remove this else?",
+      "range": {
+        "startLine": 101,
+        "startChar": 6,
+        "endLine": 101,
+        "endChar": 10
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "13305856_1e9d8934",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "src/gn/xcode_writer.cc",
+              "range": {
+                "startLine": 101,
+                "startChar": 0,
+                "endLine": 103,
+                "endChar": 0
+              },
+              "replacement": "      *err \u003d Err(node, \"Unknown target_xcode_platform value\",\n"
+            },
+            {
+              "path": "src/gn/xcode_writer.cc",
+              "range": {
+                "startLine": 104,
+                "startChar": 0,
+                "endLine": 106,
+                "endChar": 0
+              },
+              "replacement": "      return std::nullopt;\n"
+            }
+          ]
+        }
+      ],
+      "revId": "6fe59f2d43d25a436fe78c2428bed445ef03c1be",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e8bdc73f_5cf4050b",
+        "filename": "src/gn/xcode_writer.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 106,
+      "author": {
+        "id": 1000030
+      },
+      "writtenOn": "2025-05-22T07:29:55Z",
+      "side": 1,
+      "message": "I ti s fine to remove this else?",
+      "range": {
+        "startLine": 106,
+        "startChar": 6,
+        "endLine": 106,
+        "endChar": 12
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "c78c4f68_66d0040d",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "src/gn/xcode_writer.cc",
+              "range": {
+                "startLine": 106,
+                "startChar": 0,
+                "endLine": 108,
+                "endChar": 0
+              },
+              "replacement": "    }\n    *err \u003d Err(node, \"target_xcode_platform value should be a string\",\n"
+            },
+            {
+              "path": "src/gn/xcode_writer.cc",
+              "range": {
+                "startLine": 109,
+                "startChar": 0,
+                "endLine": 111,
+                "endChar": 0
+              },
+              "replacement": "    return std::nullopt;\n"
+            }
+          ]
+        }
+      ],
+      "revId": "6fe59f2d43d25a436fe78c2428bed445ef03c1be",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
     }
   ]
 }
