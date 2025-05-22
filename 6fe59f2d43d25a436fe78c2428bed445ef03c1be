@@ -69,6 +69,30 @@
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "a5d94684_8f7e055d",
+        "filename": "src/gn/xcode_writer.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 101,
+      "author": {
+        "id": 4040239
+      },
+      "writtenOn": "2025-05-22T09:27:18Z",
+      "side": 1,
+      "message": "Sure! I tested it on my local env. Done.",
+      "parentUuid": "866e4bd2_996ae875",
+      "range": {
+        "startLine": 101,
+        "startChar": 6,
+        "endLine": 101,
+        "endChar": 10
+      },
+      "revId": "6fe59f2d43d25a436fe78c2428bed445ef03c1be",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "e8bdc73f_5cf4050b",
@@ -116,6 +140,30 @@
           ]
         }
       ],
+      "revId": "6fe59f2d43d25a436fe78c2428bed445ef03c1be",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "040a28a1_0589b014",
+        "filename": "src/gn/xcode_writer.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 106,
+      "author": {
+        "id": 4040239
+      },
+      "writtenOn": "2025-05-22T09:27:18Z",
+      "side": 1,
+      "message": "Sure. Done.",
+      "parentUuid": "e8bdc73f_5cf4050b",
+      "range": {
+        "startLine": 106,
+        "startChar": 6,
+        "endLine": 106,
+        "endChar": 12
+      },
       "revId": "6fe59f2d43d25a436fe78c2428bed445ef03c1be",
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
     }
