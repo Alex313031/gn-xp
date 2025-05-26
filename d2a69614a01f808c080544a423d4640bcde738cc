@@ -37,6 +37,40 @@
     {
       "unresolved": false,
       "key": {
+        "uuid": "9d316d6d_e711ce5c",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000070
+      },
+      "writtenOn": "2025-05-26T13:20:40Z",
+      "side": 1,
+      "message": "lgtm with comment",
+      "revId": "d2a69614a01f808c080544a423d4640bcde738cc",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0806ea5a_23db560e",
+        "filename": "src/gn/xcode_writer.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 95,
+      "author": {
+        "id": 1000070
+      },
+      "writtenOn": "2025-05-26T13:20:40Z",
+      "side": 1,
+      "message": "Can you write it like this?\n\n```\nstd::optional\u003cTargetXcodePlatformType\u003e GetTargetXcodePlatform(\n    const Args\u0026 args,\n    const ParseNode* node,\n    Err* err) {\n  const Value* target_xcode_platform_value \u003d\n      args.GetArgOverride(variables::kTargetXcodePlatform);\n  if (!target_xcode_platform_value) {\n    return WRITER_TARGET_XCODE_PLATFORM_IPHONEOS;\n  }\n  \n  if (target_xcode_platform_value-\u003etype() !\u003d Value::STRING) {\n    *err \u003d Err(node, \"target_xcode_platform value should be a string\",\n        target_xcode_platform_value-\u003eToString(false));\n    return std::nullopt;\n  }\n  \n  const std::string\u0026 target_xcode_platform \u003d\n      target_xcode_platform_value-\u003estring_value();\n\n  if (target_xcode_platform \u003d\u003d \"tvos\") {\n    return WRITER_TARGET_XCODE_PLATFORM_TVOS;\n  }\n\n  if (target_xcode_platform \u003d\u003d \"iphoneos\") {\n    return WRITER_TARGET_XCODE_PLATFORM_IPHONEOS;\n  }\n  \n  *err \u003d Err(node, \"Unknown target_xcode_platform value\",\n      target_xcode_platform);\n  return std::nullopt;\n}\n```\n\nHaving the code less nested makes it easier to understand IMO.",
+      "revId": "d2a69614a01f808c080544a423d4640bcde738cc",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
+      "unresolved": false,
+      "key": {
         "uuid": "853ef848_4705302f",
         "filename": "src/gn/xcode_writer.cc",
         "patchSetId": 3
