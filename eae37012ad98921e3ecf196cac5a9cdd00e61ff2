@@ -16,6 +16,51 @@
       "message": "Hi Sylvain and David,\n\nI\u0027m working on 6606776: [tvos] Set `target_xcode_platform` for generating xcode project | https://chromium-review.googlesource.com/c/chromium/src/+/6606776 at Chromium.\n\nI think I need all arguments list to search for `target_xcode_platform`. Could you take a look?",
       "revId": "eae37012ad98921e3ecf196cac5a9cdd00e61ff2",
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "fd1e5710_e2906d8d",
+        "filename": "src/gn/args.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 143,
+      "author": {
+        "id": 1000067
+      },
+      "writtenOn": "2025-05-30T10:14:04Z",
+      "side": 1,
+      "message": "Looking at the implementation of GetAllArguments(), some performance optimizations come to mind:\n\n- Call GetArgOverride() first, as this will return the override value if it exists directly without extra heap allocations.\n\n- Second, write a dedicated lookup functions to look into all arguments, there is no need to allocate a giant map in the heap to perform a lookup on a tiny portion of it. Something that looks like the following (after moving the code that computes the sorted list of toolchains to its own function):\n\n```\n// Return toolchains in a deterministic way. Always prioritize\n// the default toolchain. Requires the lock being acquired.\nstd::vector\u003cconst Settings*\u003e GetSortedToolchainsLocked() {\n  std::vector\u003cconst Settings*\u003e toolchains;\n  toolchains.reserve(declared_arguments_per_toolchain_.size());\n  for (const auto\u0026 map_pair : declared_arguments_per_toolchain_) {\n    toolchains.push_back(map_pair.first);\n  }\n  std::sort(toolchains.begin(), toolchains.end(),\n            [](const Settings* a, const Settings* b) -\u003e bool {\n              // NOTE: There can be multiple default toolchains in the map!\n              // which happens when declare_args() blocks are found in args.gn\n              // or some of its imports. This uses a Settings instance with\n              // an empty label, where `is_default()` returns true.\n              if (a-\u003eis_default() !\u003d b-\u003eis_default())\n                return a-\u003eis_default();\n              return a-\u003etoolchain_label() \u003c b-\u003etoolchain_label();\n            });\n  return toolchains;\n}\n\nconst Value* Args::GetArgOverride(const char* name) const {\n  // First, look into overrides defined in .gn\n  const Value* override \u003d GetArgOverride(name):\n  if (override)\n    return std::make_optional(*value);\n\n  // Second, look into each toolchain definition, the default one\n  // always appear first here.\n  std::lock_guard\u003cstd::mutex\u003e lock(lock_);\n\n  for (const Setting* toolchain : GetSortedToolchains()) {\n     const auto\u0026 value_map \u003d declared_arguments_per_toolchain_[toolchain];\n     auto it \u003d value_map.find(name);\n     if (it !\u003d value_map.end())\n       return std::make_optional(it-\u003esecond);\n  }\n\n  // No match\n  return std::nullopt;\n}\n```\n\nAlso please add a unit-test for this feature.",
+      "fixSuggestions": [
+        {
+          "fixId": "d8c520ec_1515a6e2",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "src/gn/args.cc",
+              "range": {
+                "startLine": 143,
+                "startChar": 0,
+                "endLine": 143,
+                "endChar": 0
+              },
+              "replacement": "  // Call GetArgOverride() first, as this will return the override value if\n  // it exists directly without extra work.\n  const Value* override_value \u003d GetArgOverride(name);\n  if (override_value)\n    return std::make_optional(*override_value);\n\n"
+            },
+            {
+              "path": "src/gn/args.cc",
+              "range": {
+                "startLine": 147,
+                "startChar": 0,
+                "endLine": 151,
+                "endChar": 0
+              },
+              "replacement": "  return std::make_optional(found-\u003esecond.default_value);\n"
+            }
+          ]
+        }
+      ],
+      "revId": "eae37012ad98921e3ecf196cac5a9cdd00e61ff2",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
     }
   ]
 }
