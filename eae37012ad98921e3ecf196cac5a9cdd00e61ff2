@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "7369a464_e2daeace",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 4040239
+      },
+      "writtenOn": "2025-05-30T05:16:04Z",
+      "side": 1,
+      "message": "Hi Sylvain and David,\n\nI\u0027m working on 6606776: [tvos] Set `target_xcode_platform` for generating xcode project | https://chromium-review.googlesource.com/c/chromium/src/+/6606776 at Chromium.\n\nI think I need all arguments list to search for `target_xcode_platform`. Could you take a look?",
+      "revId": "eae37012ad98921e3ecf196cac5a9cdd00e61ff2",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    }
+  ]
+}
