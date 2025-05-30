@@ -139,6 +139,17 @@ const Value* Args::GetArgOverride(const char* name) const {
   return &found->second;
 }
 
+std::optional<Value> Args::GetArgFromAllArguments(const char* name) const {
+  ValueWithOverrideMap list = GetAllArguments();
+  auto found = list.find(std::string_view(name));
+  if (found == list.end())
+    return std::nullopt;
+  if (found->second.has_override)
+    return std::make_optional(found->second.override_value);
+  else
+    return std::make_optional(found->second.default_value);
+}
+
 void Args::SetupRootScope(Scope* dest,
                           const Scope::KeyValueMap& toolchain_overrides) const {
   std::lock_guard<std::mutex> lock(lock_);

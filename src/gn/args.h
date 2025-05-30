@@ -56,6 +56,10 @@ class Args {
   // argument is set.
   const Value* GetArgOverride(const char* name) const;
 
+  // Similar to above, except it searches for `name` from all arguments. If it
+  // has an override, it returns `override_value`.
+  std::optional<Value> GetArgFromAllArguments(const char* name) const;
+
   // Sets up the root scope for a toolchain. This applies the default system
   // flags and saves the toolchain overrides so they can be applied to
   // declare_args blocks that appear when loading files in that toolchain.
