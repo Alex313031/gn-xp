@@ -117,6 +117,30 @@
       },
       "revId": "50b6914aa11c8b193e16da6b502ec7dc6689d2ed",
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f1f3d606_a9cc9161",
+        "filename": "src/gn/ninja_build_writer.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 513,
+      "author": {
+        "id": 1001597
+      },
+      "writtenOn": "2025-06-02T20:32:56Z",
+      "side": 1,
+      "message": "Added context in the bug, let me know what you want me to do here",
+      "parentUuid": "615bd190_3d1bf588",
+      "range": {
+        "startLine": 511,
+        "startChar": 0,
+        "endLine": 513,
+        "endChar": 74
+      },
+      "revId": "50b6914aa11c8b193e16da6b502ec7dc6689d2ed",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
     }
   ]
 }
