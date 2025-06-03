@@ -4,6 +4,8 @@
 
 #include "gn/string_atom.h"
 
+#include <stdlib.h>
+
 #include <array>
 #include <memory>
 #include <mutex>
@@ -108,16 +110,7 @@ struct KeySet : public HashTableBase<KeyNode> {
 class StringAtomSet {
  public:
   StringAtomSet() {
-    // Ensure kEmptyString is in our set while not being allocated
-    // from a slab. The end result is that find("") should always
-    // return this address.
-    //
-    // This allows the StringAtom() default initializer to use the same
-    // address directly, avoiding a table lookup.
-    //
-    size_t hash = set_.Hash("");
-    auto* node = set_.Lookup(hash, "");
-    set_.Insert(node, hash, &kEmptyString);
+    Init();
   }
 
   // Find the unique constant string pointer for |key|.
@@ -136,6 +129,21 @@ class StringAtomSet {
     std::string* result = slabs_.back()->init(slab_index_++, key);
     set_.Insert(node, hash, result);
     return result;
+  }
+
+  void DestroyAll() {
+    for (size_t i = 0; i + 1 < slabs_.size(); ++i) {
+      slabs_[i]->DestroyAll(kStringsPerSlab);
+    }
+    if (!slabs_.empty()) {
+      slabs_.back()->DestroyAll(slab_index_);
+    }
+    for (Slab* slab : slabs_) {
+      delete slab;
+    }
+    slabs_.clear();
+    set_.Clear();
+    Init();
   }
 
  private:
@@ -168,9 +176,27 @@ class StringAtomSet {
       return result;
     }
 
+    void DestroyAll(size_t max_index) {
+      for (size_t i = 0; i < max_index; ++i) {
+        items_[i].str.~basic_string();
+      }
+    }
+
    private:
     StringStorage items_[kStringsPerSlab];
   };
+
+  void Init() {
+    // Ensure kEmptyString is in our set while not being allocated
+    // from a slab. The end result is that find("") should always
+    // return this address.
+    //
+    // This allows the StringAtom() default initializer to use the same
+    // address directly, avoiding a table lookup.
+    size_t hash = set_.Hash("");
+    auto* node = set_.Lookup(hash, "");
+    set_.Insert(node, hash, &kEmptyString);
+  }
 
   std::mutex mutex_;
   KeySet set_;
@@ -178,8 +204,26 @@ class StringAtomSet {
   unsigned int slab_index_ = kStringsPerSlab;
 };
 
+StringAtomSet& GetStringAtomSet();
+
+#if defined(__has_feature)
+#if __has_feature(address_sanitizer)
+void DestroyAll() {
+  GetStringAtomSet().DestroyAll();
+}
+#endif
+#endif
+
 StringAtomSet& GetStringAtomSet() {
   static StringAtomSet s_string_atom_set;
+#if defined(__has_feature)
+#if __has_feature(address_sanitizer)
+  static auto result = []() {
+    atexit(DestroyAll);
+    return 0;
+  }();
+#endif
+#endif
   return s_string_atom_set;
 }
 
