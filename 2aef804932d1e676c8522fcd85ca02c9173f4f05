@@ -16,6 +16,23 @@
       "message": "It\u0027s been quite a while, but I still think this is a good change to get in if you have a chance to review it",
       "revId": "2aef804932d1e676c8522fcd85ca02c9173f4f05",
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9cb7fdb4_bf4eb695",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 7
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000016
+      },
+      "writtenOn": "2025-06-03T17:58:56Z",
+      "side": 1,
+      "message": "I\u0027m not so sure about \"always clobber\" behavior (like \"*\" forwards have), which seems to be what the doc updates indicate.\n\nLet\u0027s start with \"normal assignment\" behavior, which is what the amended example indicates.  (That is, you\u0027ll still get complaints about clobbering a nonempty list or scope.)",
+      "revId": "2aef804932d1e676c8522fcd85ca02c9173f4f05",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
     }
   ]
 }
