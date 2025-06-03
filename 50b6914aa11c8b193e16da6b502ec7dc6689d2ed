@@ -141,6 +141,30 @@
       },
       "revId": "50b6914aa11c8b193e16da6b502ec7dc6689d2ed",
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "cba74227_39110f2b",
+        "filename": "src/gn/ninja_build_writer.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 513,
+      "author": {
+        "id": 1001597
+      },
+      "writtenOn": "2025-06-03T16:32:05Z",
+      "side": 1,
+      "message": "I think it makes sense to break out L588-599 in the for loop below in its own section, and have only that iterate over all targets (the short name calculation only iterating over default toolchain targets). That way the only thing that happens for non-default toolchain targets is we make sure there isn\u0027t an overlap between outputs and shortnames.",
+      "parentUuid": "f1f3d606_a9cc9161",
+      "range": {
+        "startLine": 511,
+        "startChar": 0,
+        "endLine": 513,
+        "endChar": 74
+      },
+      "revId": "50b6914aa11c8b193e16da6b502ec7dc6689d2ed",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
     }
   ]
 }
