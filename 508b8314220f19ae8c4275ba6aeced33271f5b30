@@ -16,6 +16,98 @@
       "message": "lgtm",
       "revId": "508b8314220f19ae8c4275ba6aeced33271f5b30",
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "74e5a48f_afcbfc53",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000067
+      },
+      "writtenOn": "2025-06-03T14:06:54Z",
+      "side": 1,
+      "message": "Thanks!",
+      "revId": "508b8314220f19ae8c4275ba6aeced33271f5b30",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ae42e519_9ff8d7d4",
+        "filename": "src/gn/args_unittest.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 94,
+      "author": {
+        "id": 1000067
+      },
+      "writtenOn": "2025-06-03T14:06:54Z",
+      "side": 1,
+      "message": "nit: \"Should not find\" instead.",
+      "fixSuggestions": [
+        {
+          "fixId": "97e28098_b5c3fd27",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "src/gn/args_unittest.cc",
+              "range": {
+                "startLine": 94,
+                "startChar": 0,
+                "endLine": 95,
+                "endChar": 0
+              },
+              "replacement": "  // Should not find \"a\" from overrides.\n"
+            },
+            {
+              "path": "src/gn/args_unittest.cc",
+              "range": {
+                "startLine": 97,
+                "startChar": 0,
+                "endLine": 98,
+                "endChar": 0
+              },
+              "replacement": "  // Should find \"a\" from all args as it\u0027s declared.\n"
+            },
+            {
+              "path": "src/gn/args_unittest.cc",
+              "range": {
+                "startLine": 100,
+                "startChar": 0,
+                "endLine": 101,
+                "endChar": 0
+              },
+              "replacement": "  // Should not find \"b\" from all args as it\u0027s not declared.\n"
+            },
+            {
+              "path": "src/gn/args_unittest.cc",
+              "range": {
+                "startLine": 106,
+                "startChar": 0,
+                "endLine": 107,
+                "endChar": 0
+              },
+              "replacement": "  // Should find \"a\" from overrides.\n"
+            },
+            {
+              "path": "src/gn/args_unittest.cc",
+              "range": {
+                "startLine": 111,
+                "startChar": 0,
+                "endLine": 112,
+                "endChar": 0
+              },
+              "replacement": "  // Should find \"a\" from all args since GetArgFromAllArguments() includes\n"
+            }
+          ]
+        }
+      ],
+      "revId": "508b8314220f19ae8c4275ba6aeced33271f5b30",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
     }
   ]
 }
