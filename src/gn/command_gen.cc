@@ -918,7 +918,9 @@ int RunGen(const std::vector<std::string>& args) {
 
   // Just like the build graph, leak the resolved data to avoid expensive
   // process teardown here too.
+#if !__has_feature(address_sanitizer)
   write_info.LeakOnPurpose();
+#endif
 
   return 0;
 }
