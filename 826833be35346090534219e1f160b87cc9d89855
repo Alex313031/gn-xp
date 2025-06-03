@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "5a0dce24_0a8ae954",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000055
+      },
+      "writtenOn": "2025-06-03T19:25:37Z",
+      "side": 1,
+      "message": "Not sure who is best to review... So maybe you could both have a look?",
+      "revId": "826833be35346090534219e1f160b87cc9d89855",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    }
+  ]
+}
