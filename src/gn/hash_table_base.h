@@ -248,6 +248,10 @@ class HashTableBase {
   // Return the number of keys in the set.
   size_t size() const { return count_; }
 
+  void Clear() {
+    NodeClear();
+  }
+
  protected:
   // The following should only be called by derived classes that
   // extend this template class, and are not available to their
