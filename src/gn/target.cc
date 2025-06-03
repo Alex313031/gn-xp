@@ -27,6 +27,11 @@ namespace {
 
 using ConfigSet = std::set<const Config*>;
 
+struct CheckSourceGeneratedCursor {
+  const Target* target;
+  size_t index;
+};
+
 // Merges the public configs from the given target to the given config list.
 void MergePublicConfigsFrom(const Target* from_target,
                             UniqueVector<LabelConfigPair>* dest) {
@@ -64,6 +69,30 @@ Err MakeTestOnlyError(const Item* from, const Item* to) {
           "Either mark it test-only or don't do this dependency.");
 }
 
+bool HasDirectOutput(const Target* target, const OutputFile& file, CheckSourceGeneratedCursor* cursor) {
+  const auto& computed_outputs = target->computed_outputs();
+  size_t start_index = target == cursor->target ? cursor->index : 0;
+
+  for (size_t i = start_index; i < computed_outputs.size(); ++i) {
+    const auto& cur = computed_outputs[i];
+    if (file == cur) {
+      cursor->target = target;
+      cursor->index = i + 1;
+      return true;
+    }
+  }
+  size_t next_limit = std::min(start_index, computed_outputs.size());
+  for (size_t i = 0; i < next_limit; ++i) {
+    const auto& cur = computed_outputs[i];
+    if (file == cur) {
+      cursor->target = target;
+      cursor->index = i + 1;
+      return true;
+    }
+  }
+  return false;
+}
+
 // Set check_private_deps to true for the first invocation since a target
 // can see all of its dependencies. For recursive invocations this will be set
 // to false to follow only public dependency paths.
@@ -80,16 +109,13 @@ bool EnsureFileIsGeneratedByDependency(const Target* target,
                                        bool check_private_deps,
                                        bool consider_object_files,
                                        bool check_data_deps,
-                                       TargetSet* seen_targets) {
+                                       TargetSet* seen_targets,
+                                       CheckSourceGeneratedCursor* cursor) {
   if (!seen_targets->add(target))
     return false;  // Already checked this one and it's not found.
 
-  // Assume that we have relatively few generated inputs so brute-force
-  // searching here is OK. If this becomes a bottleneck, consider storing
-  // computed_outputs as a hash set.
-  for (const OutputFile& cur : target->computed_outputs()) {
-    if (file == cur)
-      return true;
+  if (HasDirectOutput(target, file, cursor)) {
+    return true;
   }
 
   if (file == target->write_runtime_deps_output())
@@ -107,12 +133,30 @@ bool EnsureFileIsGeneratedByDependency(const Target* target,
     }
   }
 
+  // Only check private deps if requested.
+  if (check_private_deps) {
+    for (const auto& pair : target->private_deps()) {
+      if (EnsureFileIsGeneratedByDependency(pair.ptr, file, false,
+                                            consider_object_files,
+                                            check_data_deps, seen_targets, cursor))
+        return true;  // Found a path.
+    }
+    if (target->output_type() == Target::CREATE_BUNDLE) {
+      for (const auto* dep : target->bundle_data().bundle_deps()) {
+        if (EnsureFileIsGeneratedByDependency(dep, file, false,
+                                              consider_object_files,
+                                              check_data_deps, seen_targets, cursor))
+          return true;  // Found a path.
+      }
+    }
+  }
+
   if (check_data_deps) {
     check_data_deps = false;  // Consider only direct data_deps.
     for (const auto& pair : target->data_deps()) {
       if (EnsureFileIsGeneratedByDependency(pair.ptr, file, false,
                                             consider_object_files,
-                                            check_data_deps, seen_targets))
+                                            check_data_deps, seen_targets, cursor))
         return true;  // Found a path.
     }
   }
@@ -122,28 +166,52 @@ bool EnsureFileIsGeneratedByDependency(const Target* target,
   for (const auto& pair : target->public_deps()) {
     if (EnsureFileIsGeneratedByDependency(pair.ptr, file, false,
                                           consider_object_files,
-                                          check_data_deps, seen_targets))
+                                          check_data_deps, seen_targets, cursor))
       return true;  // Found a path.
   }
 
-  // Only check private deps if requested.
-  if (check_private_deps) {
-    for (const auto& pair : target->private_deps()) {
-      if (EnsureFileIsGeneratedByDependency(pair.ptr, file, false,
-                                            consider_object_files,
-                                            check_data_deps, seen_targets))
-        return true;  // Found a path.
-    }
-    if (target->output_type() == Target::CREATE_BUNDLE) {
-      for (const auto* dep : target->bundle_data().bundle_deps()) {
-        if (EnsureFileIsGeneratedByDependency(dep, file, false,
-                                              consider_object_files,
-                                              check_data_deps, seen_targets))
-          return true;  // Found a path.
-      }
-    }
-  }
   return false;
+}
+
+void CheckSourceGenerated(const Target* source_target, const SourceFile& source, CheckSourceGeneratedCursor* cursor) {
+  const auto& build_settings = source_target->settings()->build_settings();
+  if (!IsStringInOutputDir(build_settings->build_dir(), source.value()))
+    return;  // Not in output dir, this is OK.
+
+  // Tell the scheduler about unknown files. This will be noted for later so
+  // the list of files written by the GN build itself (often response files)
+  // can be filtered out of this list.
+  OutputFile out_file(build_settings, source);
+  TargetSet seen_targets;
+  bool check_data_deps = false;
+  bool consider_object_files = false;
+
+  // If this is not the first file, start by looking where the last one was found.
+  if (cursor->target) {
+    bool check_private_deps = cursor->target == source_target;
+    if (EnsureFileIsGeneratedByDependency(cursor->target, out_file, check_private_deps,
+                                           consider_object_files, check_data_deps,
+                                           &seen_targets, cursor))
+      return;
+  }
+
+  bool check_private_deps = true;
+  if (!EnsureFileIsGeneratedByDependency(source_target, out_file, check_private_deps,
+                                         consider_object_files, check_data_deps,
+                                         &seen_targets, cursor)) {
+    seen_targets.clear();
+    // Allow dependency to be through data_deps for files generated by gn.
+    check_data_deps =
+        g_scheduler->IsFileGeneratedByWriteRuntimeDeps(out_file) ||
+        g_scheduler->IsFileGeneratedByTarget(source);
+    // Check object files (much slower and very rare) only if the "normal"
+    // output check failed.
+    consider_object_files = !check_data_deps;
+    if (!EnsureFileIsGeneratedByDependency(source_target, out_file, check_private_deps,
+                                           consider_object_files,
+                                           check_data_deps, &seen_targets, cursor))
+      g_scheduler->AddUnknownGeneratedInput(source_target, source);
+  }
 }
 
 // check_this indicates if the given target should be matched against the
@@ -1157,44 +1225,17 @@ void Target::CheckSourcesGenerated() const {
   // to the build dir.
   //
   // See Scheduler::AddUnknownGeneratedInput's declaration for more.
+  CheckSourceGeneratedCursor cursor = {};
   for (const SourceFile& file : sources_)
-    CheckSourceGenerated(file);
+    CheckSourceGenerated(this, file, &cursor);
+
+  cursor.target = nullptr;
   for (ConfigValuesIterator iter(this); !iter.done(); iter.Next()) {
     for (const SourceFile& file : iter.cur().inputs())
-      CheckSourceGenerated(file);
+      CheckSourceGenerated(this, file, &cursor);
   }
   // TODO(agrieve): Check all_libs_ here as well (those that are source files).
   // http://crbug.com/571731
-}
-
-void Target::CheckSourceGenerated(const SourceFile& source) const {
-  if (!IsStringInOutputDir(settings()->build_settings()->build_dir(),
-                           source.value()))
-    return;  // Not in output dir, this is OK.
-
-  // Tell the scheduler about unknown files. This will be noted for later so
-  // the list of files written by the GN build itself (often response files)
-  // can be filtered out of this list.
-  OutputFile out_file(settings()->build_settings(), source);
-  TargetSet seen_targets;
-  bool check_data_deps = false;
-  bool consider_object_files = false;
-  if (!EnsureFileIsGeneratedByDependency(this, out_file, true,
-                                         consider_object_files, check_data_deps,
-                                         &seen_targets)) {
-    seen_targets.clear();
-    // Allow dependency to be through data_deps for files generated by gn.
-    check_data_deps =
-        g_scheduler->IsFileGeneratedByWriteRuntimeDeps(out_file) ||
-        g_scheduler->IsFileGeneratedByTarget(source);
-    // Check object files (much slower and very rare) only if the "normal"
-    // output check failed.
-    consider_object_files = !check_data_deps;
-    if (!EnsureFileIsGeneratedByDependency(this, out_file, true,
-                                           consider_object_files,
-                                           check_data_deps, &seen_targets))
-      g_scheduler->AddUnknownGeneratedInput(this, source);
-  }
 }
 
 bool Target::GetMetadata(const std::vector<std::string>& keys_to_extract,
