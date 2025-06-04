@@ -16,6 +16,61 @@
       "message": "Thanks both! This went from +50 to +20. Much simpler!\n\nNeeds another review I think.",
       "revId": "5eca5c730fae7057ee08fd4a35f81cd69a177a04",
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "dc77a558_763849bd",
+        "filename": "src/gn/string_atom.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 132,
+      "author": {
+        "id": 1000067
+      },
+      "writtenOn": "2025-06-04T13:36:59Z",
+      "side": 1,
+      "message": "even better! :-)",
+      "fixSuggestions": [
+        {
+          "fixId": "6f9cc639_f0be3b14",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "src/gn/string_atom.cc",
+              "range": {
+                "startLine": 122,
+                "startChar": 0,
+                "endLine": 123,
+                "endChar": 0
+              },
+              "replacement": "#if defined(ASAN_ENABLED)\n"
+            },
+            {
+              "path": "src/gn/string_atom.cc",
+              "range": {
+                "startLine": 221,
+                "startChar": 0,
+                "endLine": 222,
+                "endChar": 0
+              },
+              "replacement": "  KeySet local_set_;  \n"
+            },
+            {
+              "path": "src/gn/string_atom.cc",
+              "range": {
+                "startLine": 238,
+                "startChar": 0,
+                "endLine": 239,
+                "endChar": 0
+              },
+              "replacement": "#if !defined(OS_ZOS)\n"
+            }
+          ]
+        }
+      ],
+      "revId": "5eca5c730fae7057ee08fd4a35f81cd69a177a04",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
     }
   ]
 }
