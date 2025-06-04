@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "6bb517d7_56c65dc3",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000055
+      },
+      "writtenOn": "2025-06-04T13:06:59Z",
+      "side": 1,
+      "message": "I\u0027ll wait a couple days after the previous one to land this one, but I think it\u0027s ready for review.",
+      "revId": "8babb95d63101788cf70749f26bca649982b09a2",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e5b35d4e_6e61e11a",
+        "filename": "src/gn/builder_unittest.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 295,
+      "author": {
+        "id": 1000055
+      },
+      "writtenOn": "2025-06-04T13:06:59Z",
+      "side": 1,
+      "message": "Required now because errors in the async OnResolve report errors via scheduler, which are no longer ignored by this test.",
+      "revId": "8babb95d63101788cf70749f26bca649982b09a2",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    }
+  ]
+}
