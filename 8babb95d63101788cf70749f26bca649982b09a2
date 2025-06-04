@@ -20,6 +20,68 @@
     {
       "unresolved": false,
       "key": {
+        "uuid": "7bedb28f_a5e4030c",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000067
+      },
+      "writtenOn": "2025-06-04T13:33:39Z",
+      "side": 1,
+      "message": "This is a great idea. Can we document that Item::OnResolved() can be called from any thread, but can assume that any dependencies of the current item have been already resolved and can be safely read from multiple-threads then?\n\nI don\u0027t know how to enforce this in the code. A quick scan of Target::OnResolved() doesn\u0027t show any place that would mutate the dependencies in any way (which would introduce races), even though we have mutable accessors like the non-const Target::bundle_data() which lazily allocates a new BundleData instance on the first call.\n\nMaybe we could rename these accessors bundle_data_mutable() to clearly distinguish them from the const version to spot issues in the future, wdyt?",
+      "revId": "8babb95d63101788cf70749f26bca649982b09a2",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f4ad8236_bec544b9",
+        "filename": "src/gn/builder.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 151,
+      "author": {
+        "id": 1000067
+      },
+      "writtenOn": "2025-06-04T13:33:39Z",
+      "side": 1,
+      "message": "nit: Using `PointerSet\u003cBuilderRecord\u003e` from \"pointer_set.h\" should use less memory and have better performance.",
+      "fixSuggestions": [
+        {
+          "fixId": "d07ded0d_751ec6af",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "src/gn/builder.h",
+              "range": {
+                "startLine": 17,
+                "startChar": 0,
+                "endLine": 17,
+                "endChar": 0
+              },
+              "replacement": "#include \"gn/pointer_set.h\"\n"
+            },
+            {
+              "path": "src/gn/builder.h",
+              "range": {
+                "startLine": 151,
+                "startChar": 0,
+                "endLine": 152,
+                "endChar": 0
+              },
+              "replacement": "  PointerSet\u003cBuilderRecord\u003e records_resolving_on_worker_;\n"
+            }
+          ]
+        }
+      ],
+      "revId": "8babb95d63101788cf70749f26bca649982b09a2",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
+      "unresolved": false,
+      "key": {
         "uuid": "e5b35d4e_6e61e11a",
         "filename": "src/gn/builder_unittest.cc",
         "patchSetId": 1
