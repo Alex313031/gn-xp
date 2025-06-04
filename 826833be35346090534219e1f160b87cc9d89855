@@ -139,6 +139,201 @@
       ],
       "revId": "826833be35346090534219e1f160b87cc9d89855",
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9f013530_3e9d97b6",
+        "filename": "src/gn/target.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 72,
+      "author": {
+        "id": 1000067
+      },
+      "writtenOn": "2025-06-04T09:21:35Z",
+      "side": 1,
+      "message": "nit: Comment what this function does, e.g.: \"\"\"Return true if |file| is a direct output of |target|, uses |cursor| to speed up consecutive calls to this function when files are checked in the same order as a target\u0027s real outputs, which happens extremely often.\"\"\"",
+      "fixSuggestions": [
+        {
+          "fixId": "a08e3566_044794b7",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "src/gn/target.cc",
+              "range": {
+                "startLine": 72,
+                "startChar": 0,
+                "endLine": 72,
+                "endChar": 0
+              },
+              "replacement": "// Return true if |file| is a direct output of |target|, uses |cursor| to speed\n// up consecutive calls to this function when files are checked in the same\n// order.\n"
+            }
+          ]
+        }
+      ],
+      "revId": "826833be35346090534219e1f160b87cc9d89855",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e200fe44_b4ffd385",
+        "filename": "src/gn/target.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 73,
+      "author": {
+        "id": 1000067
+      },
+      "writtenOn": "2025-06-04T09:21:35Z",
+      "side": 1,
+      "message": "I suggest simplifying this with a single loop and one conditional move:\n\n```\nsize_t count \u003d computed_outputs.size();\n\nfor (size_t i \u003d 0; i \u003c count; ++i) {\n  size_t pos \u003d start_index + i;\n  if (pos \u003e\u003d count)\n    pos -\u003d count;\n\n  if (file \u003d\u003d computed_outputs[pos]) {\n    cursor-\u003etarget \u003d target;\n    cursor-\u003eindex \u003d pos + 1;\n    return true;\n  }\n}\nreturn false;\n```",
+      "fixSuggestions": [
+        {
+          "fixId": "52d74486_6f970b6c",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "src/gn/target.cc",
+              "range": {
+                "startLine": 74,
+                "startChar": 0,
+                "endLine": 74,
+                "endChar": 0
+              },
+              "replacement": "  size_t count \u003d computed_outputs.size();\n"
+            },
+            {
+              "path": "src/gn/target.cc",
+              "range": {
+                "startLine": 76,
+                "startChar": 0,
+                "endLine": 78,
+                "endChar": 0
+              },
+              "replacement": "  for (size_t i \u003d 0; i \u003c count; ++i) {\n    size_t pos \u003d (start_index + i) % count;\n    const auto\u0026 cur \u003d computed_outputs[pos];\n"
+            },
+            {
+              "path": "src/gn/target.cc",
+              "range": {
+                "startLine": 80,
+                "startChar": 0,
+                "endLine": 90,
+                "endChar": 0
+              },
+              "replacement": "      cursor-\u003eindex \u003d pos + 1;\n"
+            }
+          ]
+        }
+      ],
+      "revId": "826833be35346090534219e1f160b87cc9d89855",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f666bbfa_a0e21f61",
+        "filename": "src/gn/target.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 176,
+      "author": {
+        "id": 1000067
+      },
+      "writtenOn": "2025-06-04T09:21:35Z",
+      "side": 1,
+      "message": "nit: this line looks long, did you do `git clang-format`?",
+      "fixSuggestions": [
+        {
+          "fixId": "8df8bde8_76ee445a",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "src/gn/target.cc",
+              "range": {
+                "startLine": 72,
+                "startChar": 0,
+                "endLine": 73,
+                "endChar": 0
+              },
+              "replacement": "bool HasDirectOutput(const Target* target,\n                     const OutputFile\u0026 file,\n                     CheckSourceGeneratedCursor* cursor) {\n"
+            },
+            {
+              "path": "src/gn/target.cc",
+              "range": {
+                "startLine": 176,
+                "startChar": 0,
+                "endLine": 177,
+                "endChar": 0
+              },
+              "replacement": "void CheckSourceGenerated(const Target* source_target,\n                          const SourceFile\u0026 source,\n                          CheckSourceGeneratedCursor* cursor) {\n"
+            },
+            {
+              "path": "src/gn/target.cc",
+              "range": {
+                "startLine": 190,
+                "startChar": 0,
+                "endLine": 191,
+                "endChar": 0
+              },
+              "replacement": "  if (cursor-\u003etarget !\u003d nullptr) {\n"
+            },
+            {
+              "path": "src/gn/target.cc",
+              "range": {
+                "startLine": 192,
+                "startChar": 0,
+                "endLine": 195,
+                "endChar": 0
+              },
+              "replacement": "    if (EnsureFileIsGeneratedByDependency(cursor-\u003etarget, out_file,\n                                          check_private_deps,\n                                          consider_object_files,\n                                          check_data_deps, \u0026seen_targets, cursor))\n"
+            },
+            {
+              "path": "src/gn/target.cc",
+              "range": {
+                "startLine": 199,
+                "startChar": 0,
+                "endLine": 202,
+                "endChar": 0
+              },
+              "replacement": "  if (!EnsureFileIsGeneratedByDependency(source_target, out_file,\n                                          check_private_deps,\n                                          consider_object_files,\n                                          check_data_deps, \u0026seen_targets, cursor)) {\n"
+            },
+            {
+              "path": "src/gn/target.cc",
+              "range": {
+                "startLine": 210,
+                "startChar": 0,
+                "endLine": 213,
+                "endChar": 0
+              },
+              "replacement": "    if (!EnsureFileIsGeneratedByDependency(source_target, out_file,\n                                          check_private_deps,\n                                          consider_object_files,\n                                          check_data_deps, \u0026seen_targets, cursor))\n"
+            },
+            {
+              "path": "src/gn/target.cc",
+              "range": {
+                "startLine": 1232,
+                "startChar": 0,
+                "endLine": 1233,
+                "endChar": 0
+              },
+              "replacement": "  cursor.target \u003d nullptr;  // Reset cursor for the next loop.\n"
+            },
+            {
+              "path": "src/gn/target.cc",
+              "range": {
+                "startLine": 1237,
+                "startChar": 0,
+                "endLine": 1237,
+                "endChar": 0
+              },
+              "replacement": "\n"
+            }
+          ]
+        }
+      ],
+      "revId": "826833be35346090534219e1f160b87cc9d89855",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
     }
   ]
 }
