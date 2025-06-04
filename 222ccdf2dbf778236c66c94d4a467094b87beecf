@@ -57,6 +57,30 @@
       },
       "revId": "222ccdf2dbf778236c66c94d4a467094b87beecf",
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "8a954ee0_14753a2f",
+        "filename": "examples/simple_build/BUILD.gn",
+        "patchSetId": 3
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1001597
+      },
+      "writtenOn": "2025-06-04T14:37:51Z",
+      "side": 1,
+      "message": "It wasn\u0027t, fixed",
+      "parentUuid": "ba45d50a_7c0ff5c3",
+      "range": {
+        "startLine": 5,
+        "startChar": 0,
+        "endLine": 7,
+        "endChar": 8
+      },
+      "revId": "222ccdf2dbf778236c66c94d4a467094b87beecf",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
     }
   ]
 }
