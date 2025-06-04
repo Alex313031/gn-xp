@@ -53,6 +53,23 @@
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "a13d0c9d_9500d089",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000067
+      },
+      "writtenOn": "2025-06-04T13:54:29Z",
+      "side": 1,
+      "message": "For the record this also speeds Fuchsia `gn gen` time a little:\n\n```\nBenchmark 1: /tmp/gn-0 gen out/default                                                                                                  \n  Time (mean ± σ):      8.671 s ±  0.139 s    [User: 81.605 s, System: 39.006 s]                                         \n  Range (min … max):    8.419 s …  8.885 s    10 runs                                                                                   \n                                                                                                                                        \nBenchmark 2: /tmp/gn-o gen out/default                                                                                                  \n  Time (mean ± σ):      8.283 s ±  0.134 s    [User: 86.817 s, System: 48.780 s]                                                        \n  Range (min … max):    8.078 s …  8.541 s    10 runs                                                                                   \n                                                                                                                                        \nSummary                                                                                                                                 \n  /tmp/gn-o gen out/default ran                                                                                                         \n    1.05 ± 0.02 times faster than /tmp/gn-0 gen out/default \n```\n\nI verified manually that the output is the same.",
+      "revId": "8babb95d63101788cf70749f26bca649982b09a2",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "f4ad8236_bec544b9",
