@@ -20,6 +20,24 @@
     {
       "unresolved": false,
       "key": {
+        "uuid": "6f439643_12ba3ffe",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 15,
+      "author": {
+        "id": 1000055
+      },
+      "writtenOn": "2025-06-04T14:05:31Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "3d406a9f_78b215f1",
+      "revId": "826833be35346090534219e1f160b87cc9d89855",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
+      "unresolved": false,
+      "key": {
         "uuid": "5a0dce24_0a8ae954",
         "filename": "/PATCHSET_LEVEL",
         "patchSetId": 1
@@ -100,6 +118,24 @@
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "c1dcbe38_cb45dfb7",
+        "filename": "src/gn/target.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 30,
+      "author": {
+        "id": 1000055
+      },
+      "writtenOn": "2025-06-04T14:05:31Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "5ed6e733_f27e652f",
+      "revId": "826833be35346090534219e1f160b87cc9d89855",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "c9e2945e_6332e787",
@@ -141,6 +177,30 @@
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "6ed424bb_42241e67",
+        "filename": "src/gn/target.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 32,
+      "author": {
+        "id": 1000055
+      },
+      "writtenOn": "2025-06-04T14:05:31Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "c9e2945e_6332e787",
+      "range": {
+        "startLine": 31,
+        "startChar": 0,
+        "endLine": 32,
+        "endChar": 15
+      },
+      "revId": "826833be35346090534219e1f160b87cc9d89855",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "9f013530_3e9d97b6",
@@ -172,6 +232,24 @@
           ]
         }
       ],
+      "revId": "826833be35346090534219e1f160b87cc9d89855",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "95fa21aa_491cd7b7",
+        "filename": "src/gn/target.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 72,
+      "author": {
+        "id": 1000055
+      },
+      "writtenOn": "2025-06-04T14:05:31Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "9f013530_3e9d97b6",
       "revId": "826833be35346090534219e1f160b87cc9d89855",
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
     },
@@ -227,6 +305,24 @@
           ]
         }
       ],
+      "revId": "826833be35346090534219e1f160b87cc9d89855",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "70abda73_7306050f",
+        "filename": "src/gn/target.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 73,
+      "author": {
+        "id": 1000055
+      },
+      "writtenOn": "2025-06-04T14:05:31Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "e200fe44_b4ffd385",
       "revId": "826833be35346090534219e1f160b87cc9d89855",
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
     },
@@ -332,6 +428,24 @@
           ]
         }
       ],
+      "revId": "826833be35346090534219e1f160b87cc9d89855",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ee30294d_2770421b",
+        "filename": "src/gn/target.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 176,
+      "author": {
+        "id": 1000055
+      },
+      "writtenOn": "2025-06-04T14:05:31Z",
+      "side": 1,
+      "message": "Ah, I was trying to get \"git cl format\" to work, but failed :/. Using \"git clang-format\" does work though. Thanks!",
+      "parentUuid": "f666bbfa_a0e21f61",
       "revId": "826833be35346090534219e1f160b87cc9d89855",
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
     }
