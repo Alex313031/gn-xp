@@ -1,6 +1,23 @@
 {
   "comments": [
     {
+      "unresolved": true,
+      "key": {
+        "uuid": "3d406a9f_78b215f1",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 15,
+      "author": {
+        "id": 1000030
+      },
+      "writtenOn": "2025-06-04T06:28:43Z",
+      "side": 1,
+      "message": "Can we see benchmark difference with hyperfine?",
+      "revId": "826833be35346090534219e1f160b87cc9d89855",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
       "unresolved": false,
       "key": {
         "uuid": "5a0dce24_0a8ae954",
@@ -14,6 +31,112 @@
       "writtenOn": "2025-06-03T19:25:37Z",
       "side": 1,
       "message": "Not sure who is best to review... So maybe you could both have a look?",
+      "revId": "826833be35346090534219e1f160b87cc9d89855",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5ed6e733_f27e652f",
+        "filename": "src/gn/target.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 30,
+      "author": {
+        "id": 1000030
+      },
+      "writtenOn": "2025-06-04T06:28:43Z",
+      "side": 1,
+      "message": "Could you add comment for this struct and member?",
+      "fixSuggestions": [
+        {
+          "fixId": "b8f6fc1f_54c76065",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "src/gn/target.cc",
+              "range": {
+                "startLine": 30,
+                "startChar": 0,
+                "endLine": 30,
+                "endChar": 0
+              },
+              "replacement": "// This struct is used to optimize the search for a target generating a given\n// output file. It keeps track of the last target and index where the file was\n// found, so that the next search can start from there.\n"
+            },
+            {
+              "path": "src/gn/target.cc",
+              "range": {
+                "startLine": 31,
+                "startChar": 0,
+                "endLine": 31,
+                "endChar": 0
+              },
+              "replacement": "  // The last target where the file was found.\n"
+            },
+            {
+              "path": "src/gn/target.cc",
+              "range": {
+                "startLine": 32,
+                "startChar": 0,
+                "endLine": 32,
+                "endChar": 0
+              },
+              "replacement": "  // The index of the last output file where the file was found.\n"
+            },
+            {
+              "path": "src/gn/target.cc",
+              "range": {
+                "startLine": 190,
+                "startChar": 0,
+                "endLine": 191,
+                "endChar": 0
+              },
+              "replacement": "  if (cursor-\u003etarget !\u003d nullptr) {\n"
+            }
+          ]
+        }
+      ],
+      "revId": "826833be35346090534219e1f160b87cc9d89855",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c9e2945e_6332e787",
+        "filename": "src/gn/target.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 32,
+      "author": {
+        "id": 1000030
+      },
+      "writtenOn": "2025-06-04T06:28:43Z",
+      "side": 1,
+      "message": "Can we initialize these values here?",
+      "range": {
+        "startLine": 31,
+        "startChar": 0,
+        "endLine": 32,
+        "endChar": 15
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "4264e215_162fa0b2",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "src/gn/target.cc",
+              "range": {
+                "startLine": 31,
+                "startChar": 0,
+                "endLine": 33,
+                "endChar": 0
+              },
+              "replacement": "  const Target* target \u003d nullptr;\n  size_t index \u003d 0;\n"
+            }
+          ]
+        }
+      ],
       "revId": "826833be35346090534219e1f160b87cc9d89855",
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
     }
