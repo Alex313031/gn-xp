@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "fcbb74e4_563a6dda",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000055
+      },
+      "writtenOn": "2025-06-04T13:32:53Z",
+      "side": 1,
+      "message": "Thanks both! This went from +50 to +20. Much simpler!\n\nNeeds another review I think.",
+      "revId": "5eca5c730fae7057ee08fd4a35f81cd69a177a04",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    }
+  ]
+}

@@ -36,6 +36,24 @@
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "312a4fce_650c16d7",
+        "filename": "src/gn/command_gen.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 922,
+      "author": {
+        "id": 1000055
+      },
+      "writtenOn": "2025-06-04T13:32:53Z",
+      "side": 1,
+      "message": "Added custom one to be sure. Was hard to get a definitive answer as to whether `__SANITIZER_ADDRESS__` is universal.",
+      "parentUuid": "06982533_e3a4f36c",
+      "revId": "37ceac8d7979e46f6e497f49739082702c5241b0",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "03194d42_18f74fbc",
@@ -111,6 +129,24 @@
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "f468bb56_9960a111",
+        "filename": "src/gn/hash_table_base.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 251,
+      "author": {
+        "id": 1000055
+      },
+      "writtenOn": "2025-06-04T13:32:53Z",
+      "side": 1,
+      "message": "Removed. Wasn\u0027t even necessary.",
+      "parentUuid": "03194d42_18f74fbc",
+      "revId": "37ceac8d7979e46f6e497f49739082702c5241b0",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "f35dd3c1_f06e0b5e",
@@ -152,6 +188,24 @@
           ]
         }
       ],
+      "revId": "37ceac8d7979e46f6e497f49739082702c5241b0",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "1c011f1e_49d5d726",
+        "filename": "src/gn/string_atom.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 11,
+      "author": {
+        "id": 1000055
+      },
+      "writtenOn": "2025-06-04T13:32:53Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "f35dd3c1_f06e0b5e",
       "revId": "37ceac8d7979e46f6e497f49739082702c5241b0",
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
     },
@@ -221,6 +275,30 @@
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "efe0f19e_cc295d34",
+        "filename": "src/gn/string_atom.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 134,
+      "author": {
+        "id": 1000055
+      },
+      "writtenOn": "2025-06-04T13:32:53Z",
+      "side": 1,
+      "message": "Great points! Done.",
+      "parentUuid": "98958ae1_8f44ba58",
+      "range": {
+        "startLine": 134,
+        "startChar": 23,
+        "endLine": 134,
+        "endChar": 44
+      },
+      "revId": "37ceac8d7979e46f6e497f49739082702c5241b0",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "6a062553_1370d133",
@@ -272,6 +350,24 @@
           ]
         }
       ],
+      "revId": "37ceac8d7979e46f6e497f49739082702c5241b0",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "812fd0e9_363ea214",
+        "filename": "src/gn/string_atom.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 223,
+      "author": {
+        "id": 1000055
+      },
+      "writtenOn": "2025-06-04T13:32:53Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "6a062553_1370d133",
       "revId": "37ceac8d7979e46f6e497f49739082702c5241b0",
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
     }
