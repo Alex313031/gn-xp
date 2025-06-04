@@ -1,0 +1,90 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f35dd3c1_f06e0b5e",
+        "filename": "src/gn/string_atom.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 11,
+      "author": {
+        "id": 1000030
+      },
+      "writtenOn": "2025-06-04T02:30:26Z",
+      "side": 1,
+      "message": "Move this to C library block?",
+      "fixSuggestions": [
+        {
+          "fixId": "f93e9d89_51c928ed",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "src/gn/string_atom.cc",
+              "range": {
+                "startLine": 7,
+                "startChar": 0,
+                "endLine": 7,
+                "endChar": 0
+              },
+              "replacement": "#include \u003cstdlib.h\u003e\n\n"
+            },
+            {
+              "path": "src/gn/string_atom.cc",
+              "range": {
+                "startLine": 11,
+                "startChar": 0,
+                "endLine": 12,
+                "endChar": 0
+              },
+              "replacement": ""
+            }
+          ]
+        }
+      ],
+      "revId": "37ceac8d7979e46f6e497f49739082702c5241b0",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "98e90253_6eb4fcf4",
+        "filename": "src/gn/string_atom.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 134,
+      "author": {
+        "id": 1000030
+      },
+      "writtenOn": "2025-06-04T02:30:26Z",
+      "side": 1,
+      "message": "This caused underflow?",
+      "range": {
+        "startLine": 134,
+        "startChar": 23,
+        "endLine": 134,
+        "endChar": 44
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "b96890f2_fb71ce22",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "src/gn/string_atom.cc",
+              "range": {
+                "startLine": 134,
+                "startChar": 0,
+                "endLine": 135,
+                "endChar": 0
+              },
+              "replacement": "    for (size_t i \u003d 0; i + 1 \u003c slabs_.size(); ++i) {\n"
+            }
+          ]
+        }
+      ],
+      "revId": "37ceac8d7979e46f6e497f49739082702c5241b0",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    }
+  ]
+}
