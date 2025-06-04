@@ -3,6 +3,116 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "06982533_e3a4f36c",
+        "filename": "src/gn/command_gen.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 922,
+      "author": {
+        "id": 1000067
+      },
+      "writtenOn": "2025-06-04T08:58:07Z",
+      "side": 1,
+      "message": "nit: Consider using `__SANITIZER_ADDRESS__` for compatibility with GCC (it doesn\u0027t  ddefine __SANITIZER_LEAK__ either). Maybe use a common macro for all checks in the sources?",
+      "fixSuggestions": [
+        {
+          "fixId": "1be40646_213268c7",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "src/gn/command_gen.cc",
+              "range": {
+                "startLine": 922,
+                "startChar": 0,
+                "endLine": 923,
+                "endChar": 0
+              },
+              "replacement": "#if !__has_feature(address_sanitizer) \u0026\u0026 !defined(__SANITIZER_ADDRESS__)\n"
+            }
+          ]
+        }
+      ],
+      "revId": "37ceac8d7979e46f6e497f49739082702c5241b0",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "03194d42_18f74fbc",
+        "filename": "src/gn/hash_table_base.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 251,
+      "author": {
+        "id": 1000067
+      },
+      "writtenOn": "2025-06-04T08:58:07Z",
+      "side": 1,
+      "message": "nit: Use `clear()` for consistency.",
+      "fixSuggestions": [
+        {
+          "fixId": "5ce80e5a_1a8ffbcf",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "src/gn/hash_table_base.h",
+              "range": {
+                "startLine": 251,
+                "startChar": 0,
+                "endLine": 252,
+                "endChar": 0
+              },
+              "replacement": "  void clear() {\n"
+            },
+            {
+              "path": "src/gn/hash_table_base.h",
+              "range": {
+                "startLine": 309,
+                "startChar": 0,
+                "endLine": 309,
+                "endChar": 0
+              },
+              "replacement": "  // Note that NodeIterator and NodeIteratorPair are designed to be very\n  // cheap to copy, and should be passed by value.\n"
+            },
+            {
+              "path": "src/gn/hash_table_base.h",
+              "range": {
+                "startLine": 427,
+                "startChar": 0,
+                "endLine": 429,
+                "endChar": 0
+              },
+              "replacement": "    NodeIterator begin_;  // NOLINT(google-explicit-constructor)\n    NodeIterator end_;    // NOLINT(google-explicit-constructor)\n"
+            },
+            {
+              "path": "src/gn/hash_table_base.h",
+              "range": {
+                "startLine": 539,
+                "startChar": 0,
+                "endLine": 539,
+                "endChar": 0
+              },
+              "replacement": "  //\n  // Note that this also makes the class trivially copyable, which is a\n  // nice property.\n"
+            },
+            {
+              "path": "src/gn/hash_table_base.h",
+              "range": {
+                "startLine": 542,
+                "startChar": 0,
+                "endLine": 543,
+                "endChar": 0
+              },
+              "replacement": "  Node buckets0_[1] \u003d {};\n"
+            }
+          ]
+        }
+      ],
+      "revId": "37ceac8d7979e46f6e497f49739082702c5241b0",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "f35dd3c1_f06e0b5e",
         "filename": "src/gn/string_atom.cc",
         "patchSetId": 2
@@ -79,6 +189,85 @@
                 "endChar": 0
               },
               "replacement": "    for (size_t i \u003d 0; i + 1 \u003c slabs_.size(); ++i) {\n"
+            }
+          ]
+        }
+      ],
+      "revId": "37ceac8d7979e46f6e497f49739082702c5241b0",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "98958ae1_8f44ba58",
+        "filename": "src/gn/string_atom.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 134,
+      "author": {
+        "id": 1000067
+      },
+      "writtenOn": "2025-06-04T08:58:07Z",
+      "side": 1,
+      "message": "Indeed, Consider something without indixes too:\n\n```\nif (!slabs_.empty()) {\n    size_t string_count \u003d (slabs_.size() - 1) * kStringsPerSlab + slab_index_;\n    for (Slab\u0026 slab : slabs_) {\n      size_t slab_count \u003d std::min(string_count, kStringsPerSlab);\n      slab.DestroyAll(slab_count);\n      string_count -\u003d slab_count;\n    }\n    slabs_.clear();\n}\n```\n\nAlso I would put this code directly in the destructor (see comment below), and forget about the set_.Clear() and Init() call as they are not relevant. If you keep this as a function, add a `Locked` suffix to specify this assumes the locak was acquired first.",
+      "parentUuid": "98e90253_6eb4fcf4",
+      "range": {
+        "startLine": 134,
+        "startChar": 23,
+        "endLine": 134,
+        "endChar": 44
+      },
+      "revId": "37ceac8d7979e46f6e497f49739082702c5241b0",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6a062553_1370d133",
+        "filename": "src/gn/string_atom.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 223,
+      "author": {
+        "id": 1000067
+      },
+      "writtenOn": "2025-06-04T08:58:07Z",
+      "side": 1,
+      "message": "This seems a wee bit too complex, and adds one load-acquire per call to this function, which is generally bad for performance. I am not even sure an optimizing compiler would remove the variable entirely as it is scoped to the function and unused. What about simply adding the DestroyAll() call to the StringAtomSet destructor instead when the feature is enabled? It would also make the code easier to reason regarding the order ot atexit() / static C++ destructor calls.",
+      "fixSuggestions": [
+        {
+          "fixId": "eb3479e8_30430d70",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "src/gn/string_atom.cc",
+              "range": {
+                "startLine": 206,
+                "startChar": 0,
+                "endLine": 216,
+                "endChar": 0
+              },
+              "replacement": ""
+            },
+            {
+              "path": "src/gn/string_atom.cc",
+              "range": {
+                "startLine": 218,
+                "startChar": 0,
+                "endLine": 226,
+                "endChar": 0
+              },
+              "replacement": ""
+            },
+            {
+              "path": "src/gn/string_atom.cc",
+              "range": {
+                "startLine": 261,
+                "startChar": 0,
+                "endLine": 261,
+                "endChar": 0
+              },
+              "replacement": "#if defined(__has_feature)\n#if __has_feature(address_sanitizer)\nvoid StringAtom::DestroyAllForTesting() {\n  GetStringAtomSet().DestroyAll();\n}\n#endif\n#endif\n\n"
             }
           ]
         }
