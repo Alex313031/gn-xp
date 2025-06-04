@@ -7,6 +7,7 @@
 
 #include <functional>
 #include <memory>
+#include <set>
 #include <unordered_map>
 
 #include "gn/builder_record.h"
@@ -121,6 +122,9 @@ class Builder {
   // This takes a BuilderRecord with resolved dependencies, and fills in the
   // target's Label*Vectors with the resolved pointers.
   bool ResolveItem(BuilderRecord* record, Err* err);
+  void ScheduleTargetOnResolve(BuilderRecord* record);
+  void CompleteAsyncTargetResolution(BuilderRecord* record, const Err& err);
+  bool CompleteItemResolution(BuilderRecord* record, Err* err);
 
   // Fills in the pointers in the given vector based on the labels. We assume
   // that everything should be resolved by this point, so will return an error
@@ -143,6 +147,8 @@ class Builder {
   BuilderRecordMap records_;
 
   ResolvedGeneratedCallback resolved_and_generated_callback_;
+
+  std::set<const BuilderRecord*> records_resolving_on_worker_;
 
   Builder(const Builder&) = delete;
   Builder& operator=(const Builder&) = delete;
