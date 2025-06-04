@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "27b6b5bb_8f73dd3c",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1002207
+      },
+      "writtenOn": "2025-06-04T21:45:32Z",
+      "side": 1,
+      "message": "@agrieve@google.com I don\u0027t have the CQ power. Can you CQ+2 for me?",
+      "revId": "061e646f9c6aac1cd063ceacf6e858e9e576211a",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    }
+  ]
+}
