@@ -108,6 +108,24 @@
       ],
       "revId": "508b8314220f19ae8c4275ba6aeced33271f5b30",
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "9d7b341e_a177751c",
+        "filename": "src/gn/args_unittest.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 94,
+      "author": {
+        "id": 4040239
+      },
+      "writtenOn": "2025-06-04T06:28:55Z",
+      "side": 1,
+      "message": "Fix applied.",
+      "parentUuid": "ae42e519_9ff8d7d4",
+      "revId": "508b8314220f19ae8c4275ba6aeced33271f5b30",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
     }
   ]
 }
