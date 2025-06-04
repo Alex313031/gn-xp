@@ -70,6 +70,42 @@
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "45695f2a_1fcd16b4",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000055
+      },
+      "writtenOn": "2025-06-04T14:16:43Z",
+      "side": 1,
+      "message": "Added a comment to Item::OnResolved()",
+      "parentUuid": "b50bf8f8_2b3f2b0a",
+      "revId": "8babb95d63101788cf70749f26bca649982b09a2",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "0b58f825_b20d4ffd",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000055
+      },
+      "writtenOn": "2025-06-04T14:16:43Z",
+      "side": 1,
+      "message": "That\u0027s great! Thanks for checking! Kind of interesting that the chromium speedup is more dramatic. I do still see some onresolved entries in a trace that are taking 20-30ms, so likely those can be optimized more directly, but I suspect the added concurrency mostly papers over it anyways.",
+      "parentUuid": "a13d0c9d_9500d089",
+      "revId": "8babb95d63101788cf70749f26bca649982b09a2",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "f4ad8236_bec544b9",
@@ -111,6 +147,24 @@
           ]
         }
       ],
+      "revId": "8babb95d63101788cf70749f26bca649982b09a2",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "143322ef_a19188c0",
+        "filename": "src/gn/builder.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 151,
+      "author": {
+        "id": 1000055
+      },
+      "writtenOn": "2025-06-04T14:16:43Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "f4ad8236_bec544b9",
       "revId": "8babb95d63101788cf70749f26bca649982b09a2",
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
     },
