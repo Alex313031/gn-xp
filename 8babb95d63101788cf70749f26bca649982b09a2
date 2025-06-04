@@ -35,6 +35,24 @@
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "b50bf8f8_2b3f2b0a",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000067
+      },
+      "writtenOn": "2025-06-04T13:44:56Z",
+      "side": 1,
+      "message": "Actually I tried renaming to `bundle_data_mutable()` and this will involve a ton of tiny changes. Better leave this to another CL in this case to make things easier to understand.",
+      "parentUuid": "7bedb28f_a5e4030c",
+      "revId": "8babb95d63101788cf70749f26bca649982b09a2",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "f4ad8236_bec544b9",
