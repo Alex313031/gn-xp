@@ -38,6 +38,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "4e3ac744_e24c500e",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 3
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 1000030
+      },
+      "writtenOn": "2025-06-05T08:38:54Z",
+      "side": 1,
+      "message": "Could you join https://groups.google.com/a/chromium.org/g/edit-bug-access to update the bug for now?",
+      "parentUuid": "a59525cf_27cdc45a",
+      "revId": "222ccdf2dbf778236c66c94d4a467094b87beecf",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "ba45d50a_7c0ff5c3",
         "filename": "examples/simple_build/BUILD.gn",
         "patchSetId": 3
