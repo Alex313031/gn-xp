@@ -1,0 +1,56 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "30b6bff7_26383a18",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000070
+      },
+      "writtenOn": "2025-06-05T14:00:20Z",
+      "side": 1,
+      "message": "lgtm but please fix the license blurb changes",
+      "revId": "fb4d8d70fce7b78519b1f017d43a3b71adc7394b",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e91cabc1_7752cf96",
+        "filename": "src/gn/args_unittest.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 3,
+      "author": {
+        "id": 1000070
+      },
+      "writtenOn": "2025-06-05T14:00:20Z",
+      "side": 1,
+      "message": "revert",
+      "fixSuggestions": [
+        {
+          "fixId": "2516ba4c_bb9a7085",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "src/gn/args_unittest.cc",
+              "range": {
+                "startLine": 3,
+                "startChar": 0,
+                "endLine": 4,
+                "endChar": 0
+              },
+              "replacement": "// found in the LICENSE file.\n"
+            }
+          ]
+        }
+      ],
+      "revId": "fb4d8d70fce7b78519b1f017d43a3b71adc7394b",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    }
+  ]
+}
