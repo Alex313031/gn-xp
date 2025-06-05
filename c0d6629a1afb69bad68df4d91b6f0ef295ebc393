@@ -33,6 +33,24 @@
       "message": "Thank you.",
       "revId": "c0d6629a1afb69bad68df4d91b6f0ef295ebc393",
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "207df847_00cf1ce1",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 4040239
+      },
+      "writtenOn": "2025-06-05T15:11:12Z",
+      "side": 1,
+      "message": "Thank you! May I ask your help to run the bot and submit this CL?",
+      "parentUuid": "b1d9e7e1_1e56842d",
+      "revId": "c0d6629a1afb69bad68df4d91b6f0ef295ebc393",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
     }
   ]
 }
