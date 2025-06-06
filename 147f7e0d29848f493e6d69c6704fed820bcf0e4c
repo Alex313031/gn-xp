@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "121abee6_2c83f264",
+        "filename": "docs/reference.md",
+        "patchSetId": 8
+      },
+      "lineNbr": 2732,
+      "author": {
+        "id": 1000016
+      },
+      "writtenOn": "2025-06-06T17:53:14Z",
+      "side": 1,
+      "message": "If this is accurate by a simple reading, then the example below is not representative.  The example *won\u0027t* always overwrite `foo`--it will be an error if `foo` is a non-empty aggregate.  I think the semantics of the example are what we want, and I don\u0027t think that\u0027s what this description says.  Whichever semantics we actually wind up with, I think this description needs to be explicit about the distinction here and say whether it behaves like the example below or like a `\"*\"` case would (the only thing anywhere in GN that clobbers non-empty aggregates except by explicit assign-to-empty).",
+      "revId": "147f7e0d29848f493e6d69c6704fed820bcf0e4c",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    }
+  ]
+}

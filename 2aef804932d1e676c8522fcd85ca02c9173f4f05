@@ -69,6 +69,24 @@
       "parentUuid": "df4a3ebd_7e881bdc",
       "revId": "2aef804932d1e676c8522fcd85ca02c9173f4f05",
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "fb188fd2_1a3b2f94",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 7
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000016
+      },
+      "writtenOn": "2025-06-06T17:53:14Z",
+      "side": 1,
+      "message": "I don\u0027t really understand the existing evaluation implementation enough (not having it read it much) to quickly discern what effect the implementation change has.  If the clarification of the semantic nuances I brought up is made in the docs and there are unit tests clearly distinguishing the fine differences between the cases (nothing to clobber, scalar/empty-aggregate to clobber, non-empty aggregate to not clobber) then I\u0027ll be sanguine about the implementation changes.",
+      "parentUuid": "651d0639_c6be1023",
+      "revId": "2aef804932d1e676c8522fcd85ca02c9173f4f05",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
     }
   ]
 }
