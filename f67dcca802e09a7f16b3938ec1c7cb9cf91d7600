@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ff2ac93f_d9088339",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000055
+      },
+      "writtenOn": "2025-06-11T14:34:40Z",
+      "side": 1,
+      "message": "See PS1-\u003ePS2 for the fix",
+      "revId": "f67dcca802e09a7f16b3938ec1c7cb9cf91d7600",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    }
+  ]
+}
