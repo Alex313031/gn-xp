@@ -25,6 +25,12 @@ Scheduler::~Scheduler() {
 }
 
 bool Scheduler::Run() {
+  // Ensure there is at least one task, or else this will just deadlock.
+  IncrementWorkCount();
+  ScheduleWork([this]() {
+    task_runner()->PostTask([this]() {DecrementWorkCount();});
+  });
+
   main_thread_run_loop_->Run();
   bool local_is_failed;
   {
