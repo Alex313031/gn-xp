@@ -1,0 +1,149 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9c83c6a5_853c8040",
+        "filename": "src/gn/ninja_c_binary_target_writer.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 94,
+      "author": {
+        "id": 1000067
+      },
+      "writtenOn": "2025-06-12T17:30:09Z",
+      "side": 1,
+      "message": "nit: Please use explicit capture references here.",
+      "fixSuggestions": [
+        {
+          "fixId": "b327ad53_35be125b",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "src/gn/ninja_c_binary_target_writer.cc",
+              "range": {
+                "startLine": 111,
+                "startChar": 0,
+                "endLine": 112,
+                "endChar": 0
+              },
+              "replacement": "    if (added_pcms.insert(pcm_file).second) {\n"
+            },
+            {
+              "path": "src/gn/ninja_c_binary_target_writer.cc",
+              "range": {
+                "startLine": 113,
+                "startChar": 0,
+                "endLine": 114,
+                "endChar": 0
+              },
+              "replacement": ""
+            },
+            {
+              "path": "src/gn/ninja_c_binary_target_writer.cc",
+              "range": {
+                "startLine": 127,
+                "startChar": 0,
+                "endLine": 128,
+                "endChar": 0
+              },
+              "replacement": "      if (inherited_pair.is_public() \u0026\u0026\n          inherited_pair.target()-\u003esource_types_used().Get(\n              SourceFile::SOURCE_MODULEMAP)) {\n"
+            },
+            {
+              "path": "src/gn/ninja_c_binary_target_writer.cc",
+              "range": {
+                "startLine": 133,
+                "startChar": 0,
+                "endLine": 135,
+                "endChar": 0
+              },
+              "replacement": "  std::sort(\n      ret.begin(), ret.end(),\n      [](const ModuleDep\u0026 a, const ModuleDep\u0026 b) { return a.pcm \u003c b.pcm; });\n"
+            }
+          ]
+        }
+      ],
+      "revId": "1fed74cf6554fa17e1872329f86cb8100bb1a831",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d2d096ff_e730daa2",
+        "filename": "src/gn/ninja_c_binary_target_writer.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 114,
+      "author": {
+        "id": 1000067
+      },
+      "writtenOn": "2025-06-12T17:30:09Z",
+      "side": 1,
+      "message": "nit: Use insert() to avoid a double lookup, e.g.:\n\n```\nif (added_pcms.insert(pcm_file).second) {\n  ret.emplace_back(modulemap, label, pcm_file, is_self);\n}\n```",
+      "fixSuggestions": [
+        {
+          "fixId": "8edded0b_41d726f3",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "src/gn/ninja_c_binary_target_writer.cc",
+              "range": {
+                "startLine": 111,
+                "startChar": 0,
+                "endLine": 112,
+                "endChar": 0
+              },
+              "replacement": "    if (added_pcms.insert(pcm_file).second) {\n"
+            },
+            {
+              "path": "src/gn/ninja_c_binary_target_writer.cc",
+              "range": {
+                "startLine": 113,
+                "startChar": 0,
+                "endLine": 114,
+                "endChar": 0
+              },
+              "replacement": ""
+            }
+          ]
+        }
+      ],
+      "revId": "1fed74cf6554fa17e1872329f86cb8100bb1a831",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a06bbc26_eb5c0049",
+        "filename": "src/gn/ninja_c_binary_target_writer.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 131,
+      "author": {
+        "id": 1000067
+      },
+      "writtenOn": "2025-06-12T17:30:09Z",
+      "side": 1,
+      "message": "If I understand correctly, this applies this recursive collection to each target in the dependency tree, so if A --\u003e B --\u003e C --\u003e D, then for A, [B C D] are visited, then for B, [C D] are visited again, and for C, [D] is visited again. This is terribly inefficient and will result in very poor O(n^2) performance for deep module dependencies.\n\nConsider instead adding a new method in ResolvedTargetData to compute and cache the same sets of files in a much more efficient way. See the implementation of ResolvedTargetData::GetInheratedLibraries() for an example on how to do it.",
+      "fixSuggestions": [
+        {
+          "fixId": "8aea8072_a33fd0cb",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "src/gn/ninja_c_binary_target_writer.cc",
+              "range": {
+                "startLine": 122,
+                "startChar": 0,
+                "endLine": 122,
+                "endChar": 0
+              },
+              "replacement": "  // TODO(thakis): This visits the same targets multiple times, once for each\n  // target that depends on them. This is not ideal, but it\u0027s not a performance\n  // problem in practice.\n"
+            }
+          ]
+        }
+      ],
+      "revId": "1fed74cf6554fa17e1872329f86cb8100bb1a831",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    }
+  ]
+}
