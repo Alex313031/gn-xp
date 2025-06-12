@@ -1,0 +1,49 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b3fe6765_7c7689af",
+        "filename": "src/gn/scheduler.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 29,
+      "author": {
+        "id": 1000067
+      },
+      "writtenOn": "2025-06-12T14:29:32Z",
+      "side": 1,
+      "message": "should use set the flag to true after the check?",
+      "fixSuggestions": [
+        {
+          "fixId": "50ac85b3_fca5ec08",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "src/gn/scheduler.cc",
+              "range": {
+                "startLine": 30,
+                "startChar": 0,
+                "endLine": 30,
+                "endChar": 0
+              },
+              "replacement": "  is_running_ \u003d true;\n"
+            },
+            {
+              "path": "src/gn/scheduler.cc",
+              "range": {
+                "startLine": 47,
+                "startChar": 0,
+                "endLine": 47,
+                "endChar": 0
+              },
+              "replacement": "  is_running_ \u003d false;\n"
+            }
+          ]
+        }
+      ],
+      "revId": "7b9d04cacc779c489eeed27f4c61eed100bb1b23",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    }
+  ]
+}
