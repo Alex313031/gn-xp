@@ -18,6 +18,23 @@
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "f076e6d7_1e73d3e5",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000055
+      },
+      "writtenOn": "2025-06-12T14:21:14Z",
+      "side": 1,
+      "message": "Verified the analyzer test is the only other one that calls `ItemDefined()`.",
+      "revId": "f67dcca802e09a7f16b3938ec1c7cb9cf91d7600",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "56216efc_9a75f5bc",
@@ -55,6 +72,30 @@
           ]
         }
       ],
+      "revId": "f67dcca802e09a7f16b3938ec1c7cb9cf91d7600",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "18b1516d_ddef9adc",
+        "filename": "src/gn/scheduler.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 33,
+      "author": {
+        "id": 1000055
+      },
+      "writtenOn": "2025-06-12T14:21:14Z",
+      "side": 1,
+      "message": "Fair enough. Switch to an explicit check for no tasks.",
+      "parentUuid": "56216efc_9a75f5bc",
+      "range": {
+        "startLine": 28,
+        "startChar": 0,
+        "endLine": 33,
+        "endChar": 0
+      },
       "revId": "f67dcca802e09a7f16b3938ec1c7cb9cf91d7600",
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
     }
