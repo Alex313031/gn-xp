@@ -16,6 +16,47 @@
       "message": "See PS1-\u003ePS2 for the fix",
       "revId": "f67dcca802e09a7f16b3938ec1c7cb9cf91d7600",
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "56216efc_9a75f5bc",
+        "filename": "src/gn/scheduler.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 33,
+      "author": {
+        "id": 1000030
+      },
+      "writtenOn": "2025-06-12T02:28:46Z",
+      "side": 1,
+      "message": "Why this nop task is necessary to prevent deadlock?\nIs it possible to fix scheduler first? This seems to be a workaround.",
+      "range": {
+        "startLine": 28,
+        "startChar": 0,
+        "endLine": 33,
+        "endChar": 0
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "258fb22a_264e6357",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "src/gn/scheduler.cc",
+              "range": {
+                "startLine": 28,
+                "startChar": 0,
+                "endLine": 29,
+                "endChar": 0
+              },
+              "replacement": "  // Ensure there is at least one task, or else the main loop will exit\n  // immediately, and the call to WaitForPoolTasks() below will deadlock.\n"
+            }
+          ]
+        }
+      ],
+      "revId": "f67dcca802e09a7f16b3938ec1c7cb9cf91d7600",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
     }
   ]
 }
