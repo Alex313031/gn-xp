@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ad5523ba_29b45592",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000030
+      },
+      "writtenOn": "2025-06-13T06:05:41Z",
+      "side": 1,
+      "message": "Does this cause roll gn failure in https://chromium-review.googlesource.com/c/chromium/src/+/6641508 ?",
+      "revId": "0fcc64f7d006474a026d8f78f3a95dac84cd97ea",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    }
+  ]
+}
