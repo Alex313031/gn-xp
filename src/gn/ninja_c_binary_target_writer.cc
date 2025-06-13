@@ -86,11 +86,15 @@ const SourceFile* GetModuleMapFromTargetSources(const Target* target) {
 std::vector<ModuleDep> GetModuleDepsInformation(
     const Target* target,
     const ResolvedTargetData& resolved) {
+  // Sort by pcm path for deterministic output.
   std::vector<ModuleDep> ret;
+  // Use a set to keep track of added PCM files to ensure uniqueness.
+  std::set<OutputFile> added_pcms;
 
-  auto add = [&ret](const Target* t, bool is_self) {
+  auto add_if_new = [&added_pcms, &ret](const Target* t, bool is_self) {
     const SourceFile* modulemap = GetModuleMapFromTargetSources(t);
-    CHECK(modulemap);
+    if (!modulemap)  // Not a module or no .modulemap file.
+      return;
 
     std::string label;
     CHECK(SubstitutionWriter::GetTargetSubstitution(
@@ -102,19 +106,31 @@ std::vector<ModuleDep> GetModuleDepsInformation(
         t->GetOutputFilesForSource(*modulemap, &tool_type, &modulemap_outputs));
     // Must be only one .pcm from .modulemap.
     CHECK(modulemap_outputs.size() == 1u);
-    ret.emplace_back(modulemap, label, modulemap_outputs[0], is_self);
+    const OutputFile& pcm_file = modulemap_outputs[0];
+
+    if (added_pcms.insert(pcm_file).second) {
+      ret.emplace_back(modulemap, label, pcm_file, is_self);
+    }
   };
 
   if (target->source_types_used().Get(SourceFile::SOURCE_MODULEMAP)) {
-    add(target, true);
+    add_if_new(target, true);
   }
 
+  // Process direct dependencies and their publicly inherited modules.
   for (const Target* dep : resolved.GetLinkedDeps(target)) {
-    // Having a .modulemap source means that the dependency is modularized.
     if (dep->source_types_used().Get(SourceFile::SOURCE_MODULEMAP)) {
-      add(dep, false);
+      add_if_new(dep, false);
+    }
+    for (const auto& inherited_pair : resolved.GetInheritedLibraries(dep)) {
+      if (inherited_pair.is_public() && inherited_pair.target()->source_types_used().Get(SourceFile::SOURCE_MODULEMAP)) {
+        add_if_new(inherited_pair.target(), false);
+      }
     }
   }
+
+  std::sort(ret.begin(), ret.end(),
+            [](const ModuleDep& a, const ModuleDep& b) { return a.pcm < b.pcm; });
 
   return ret;
 }
