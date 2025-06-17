@@ -198,6 +198,24 @@
       "parentUuid": "a06bbc26_eb5c0049",
       "revId": "1fed74cf6554fa17e1872329f86cb8100bb1a831",
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "00452faa_1bf63e60",
+        "filename": "src/gn/ninja_c_binary_target_writer.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 131,
+      "author": {
+        "id": 1000067
+      },
+      "writtenOn": "2025-06-17T06:39:25Z",
+      "side": 1,
+      "message": "Sorry for the delay. While the size of collected sets will be O(n^2), the number of visits on each node will be O(n) which is important for performance due to caching. This is why we have ResolvedTargetData::GetXXXX() methods in the first place (for the record, we reduced `gn gen` time by 10% when introducing this class and its methods).\n\nI thus still suggest that you move these recursive computations to a new ResolvedTargetData::GetModuleDepsInformation() method instead, which should not be very difficult iiuc.",
+      "parentUuid": "9c61ee35_49e6ce41",
+      "revId": "1fed74cf6554fa17e1872329f86cb8100bb1a831",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
     }
   ]
 }
