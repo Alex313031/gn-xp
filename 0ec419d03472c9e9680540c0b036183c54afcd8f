@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "0389553b_e37d5543",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000055
+      },
+      "writtenOn": "2025-06-18T02:46:56Z",
+      "side": 1,
+      "message": "Tested with printf()s in my other change that the tracking of tombstone counts is correct, and that this also fixes the infinite loop (although deleting the set worked too)",
+      "revId": "0ec419d03472c9e9680540c0b036183c54afcd8f",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    }
+  ]
+}
