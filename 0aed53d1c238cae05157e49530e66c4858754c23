@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "bfac2cbb_078c4005",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000055
+      },
+      "writtenOn": "2025-06-18T01:34:41Z",
+      "side": 1,
+      "message": "PTAL I was able to figure this out by:\n1) Reproducing locally using the version of clang from CIPD, and noting that it repro\u0027ed 100% of the time, no matter the build flags (debug/release/sanitizers)\n2) Attaching lldb and stepping through the infinite loop it had found itself it. It was looping forever trying to find an available hash table node\n3) Adding asserts to ensure this is all main thread.\n4) Adding printf()s before/after the `set.add()` that logged out the state of the set (and counting null entries with a loop). The hash set had lots of null nodes.\n5) Diffing the disassembly of `ScheduleTargetOnResolve()` from the two clang versions (I can\u0027t see the bug, but they are different)\n6) Asking gemini to spot the bug, which it happily does, but I\u0027m not convinced it\u0027s correct (doesn\u0027t really match what I see). Here\u0027s the [good.txt](https://gist.github.com/agrieve/e9079561b7f3bd56c652511b6fc5441a) vs [bad.txt](https://gist.github.com/agrieve/513af971e3be0775a07d760f4fc90864) for reference.",
+      "revId": "0aed53d1c238cae05157e49530e66c4858754c23",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    }
+  ]
+}
