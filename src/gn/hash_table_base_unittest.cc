@@ -145,8 +145,9 @@ class TestHashTable : public HashTableBase<TestHashNode> {
     if (node->is_valid())
       return false;
 
+    bool was_tombstone = node->is_tombstone();
     node->int_ptr = new Int(x);
-    UpdateAfterInsert();
+    UpdateAfterInsert(was_tombstone);
     return true;
   }
 
