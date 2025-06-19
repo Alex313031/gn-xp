@@ -216,6 +216,24 @@
       "parentUuid": "9c61ee35_49e6ce41",
       "revId": "1fed74cf6554fa17e1872329f86cb8100bb1a831",
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ab93225a_5570a21c",
+        "filename": "src/gn/ninja_c_binary_target_writer.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 131,
+      "author": {
+        "id": 1000030
+      },
+      "writtenOn": "2025-06-19T08:42:50Z",
+      "side": 1,
+      "message": "I see, added those functions for modules deps then.",
+      "parentUuid": "00452faa_1bf63e60",
+      "revId": "1fed74cf6554fa17e1872329f86cb8100bb1a831",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
     }
   ]
 }
