@@ -110,6 +110,13 @@ class ResolvedTargetData {
     return GetTargetInheritedLibs(target)->inherited_libs;
   }
 
+  // Retrieves an ordered list of (target, is_public) pairs for all module
+  // dependencies inherited by this target.
+    const std::vector<TargetPublicPair>& GetModuleDepsInformations(
+      const Target* target) const {
+    return GetTargetModuleDepsInformation(target)->module_deps_informations;
+  }
+
   // Retrieves an ordered list of (target, is_public) paris for all link-time
   // libraries for Rust-specific binary targets.
   const std::vector<TargetPublicPair>& GetRustInheritedLibraries(
@@ -146,6 +153,7 @@ class ResolvedTargetData {
     bool has_framework_info = false;
     bool has_hard_deps = false;
     bool has_inherited_libs = false;
+    bool has_module_deps_informations = false;
     bool has_rust_libs = false;
     bool has_swift_values = false;
 
@@ -163,6 +171,9 @@ class ResolvedTargetData {
 
     // Only valid if |has_inherited_libs| is true.
     std::vector<TargetPublicPair> inherited_libs;
+
+    // Only valid if |has_module_deps_informations| is true.
+    std::vector<TargetPublicPair> module_deps_informations;
 
     // Only valid if |has_rust_libs| is true.
     std::vector<TargetPublicPair> rust_inherited_libs;
@@ -224,6 +235,15 @@ class ResolvedTargetData {
     return info;
   }
 
+  const TargetInfo* GetTargetModuleDepsInformation(const Target* target) const {
+    TargetInfo* info = GetTargetInfo(target);
+    if (!info->has_module_deps_informations) {
+      ComputeModuleDepsInformations(info);
+      DCHECK(info->has_module_deps_informations);
+    }
+    return info;
+  }
+
   const TargetInfo* GetTargetRustLibs(const Target* target) const {
     TargetInfo* info = GetTargetInfo(target);
     if (!info->has_rust_libs) {
@@ -249,6 +269,7 @@ class ResolvedTargetData {
   void ComputeFrameworkInfo(TargetInfo* info) const;
   void ComputeHardDeps(TargetInfo* info) const;
   void ComputeInheritedLibs(TargetInfo* info) const;
+  void ComputeModuleDepsInformations(TargetInfo* info) const;
   void ComputeRustLibs(TargetInfo* info) const;
   void ComputeSwiftValues(TargetInfo* info) const;
 
@@ -257,6 +278,12 @@ class ResolvedTargetData {
       base::span<const Target*> deps,
       bool is_public,
       TargetPublicPairListBuilder* inherited_libraries) const;
+
+  // Helper function used by ComputeModuleDepsInformations().
+  void ComputeModuleDepsInformationsFor(
+      base::span<const Target*> deps,
+      bool is_public,
+      TargetPublicPairListBuilder* module_deps_informations) const;
 
   // Helper data structure and function used by ComputeRustLibs().
   struct RustLibsBuilder {
