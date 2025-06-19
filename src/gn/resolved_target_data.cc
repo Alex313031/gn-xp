@@ -172,6 +172,39 @@ void ResolvedTargetData::ComputeInheritedLibsFor(
   }
 }
 
+void ResolvedTargetData::ComputeModuleDepsInformations(TargetInfo* info) const {
+  TargetPublicPairListBuilder module_deps_informations;
+
+  ComputeModuleDepsInformationsFor(info->deps.public_deps(), true,
+                                   &module_deps_informations);
+  ComputeModuleDepsInformationsFor(info->deps.private_deps(), false,
+                                   &module_deps_informations);
+
+  info->module_deps_informations = module_deps_informations.Build();
+  info->has_module_deps_informations = true;
+}
+
+void ResolvedTargetData::ComputeModuleDepsInformationsFor(
+    base::span<const Target*> deps,
+    bool is_public,
+    TargetPublicPairListBuilder* module_deps_informations) const {
+  for (const Target* dep : deps) {
+    if (dep->output_type() != Target::STATIC_LIBRARY &&
+        dep->output_type() != Target::SHARED_LIBRARY &&
+        dep->output_type() != Target::SOURCE_SET) {
+      continue;
+    }
+
+    module_deps_informations->Append(dep, is_public);
+    const TargetInfo* dep_info = GetTargetModuleDepsInformation(dep);
+    for (const auto& pair : dep_info->module_deps_informations) {
+      if (pair.is_public()) {
+        module_deps_informations->Append(pair.target(), is_public);
+      }
+    }
+  }
+}
+
 void ResolvedTargetData::ComputeRustLibs(TargetInfo* info) const {
   RustLibsBuilder rust_libs;
 
