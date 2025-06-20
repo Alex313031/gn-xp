@@ -1,0 +1,33 @@
+core.workflow(
+    name = "default",
+    origin = git.github_origin(
+      url = "https://github.com/abseil/abseil-cpp.git",
+      ref = "master",
+    ),
+    destination = folder.destination(),
+
+    origin_files = glob(
+        [
+            "absl/**.cc",
+            "absl/**.h",
+            "absl/**.inc",
+            "LICENSE",
+        ],
+        exclude = [
+            "**/testdata/**",
+            "**/testing/**",
+            "**/benchmark/**",
+            "**/*_unittest.*",
+            "**/*_test.*",
+            "**/*_test_*",
+            "**/*benchmark*",
+            # This is part of a test, though it isn't in the filename.
+            "absl/random/internal/chi_square.*",
+        ]
+    ),
+    # Ensure that copybara doesn't delete copy.bara.sky
+    destination_files = glob(["**"], exclude = ["copy.bara.sky"]),
+    authoring = authoring.pass_thru("Default email <default@default.com>"),
+    transformations = [],
+)
+

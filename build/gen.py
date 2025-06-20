@@ -6,6 +6,7 @@
 """Generates build.ninja that will build GN."""
 
 import argparse
+import glob
 import os
 import platform
 import re
@@ -352,7 +353,7 @@ def WriteGenericNinja(path, static_libraries, executables,
                                       os.path.dirname(path)))),
         '  includes = %s' % ' '.join(
             ['-I' + escape_path_ninja(dirname) for dirname in include_dirs]),
-        '  cflags = %s' % ' '.join(cflags),
+        '  cflags = %s' % ' '.join(cflags + settings.get('cflags', [])),
     ])
 
   for library, settings in static_libraries.items():
@@ -399,6 +400,9 @@ def WriteGenericNinja(path, static_libraries, executables,
       subprocess.run(
           ['ninja', '-C', build_dir, '-t', 'compdb'], stdout=f, check=True)
 
+def is_protobuf_source(path: str):
+  return 'test' not in path and 'protobuf/util/python' not in path
+
 def WriteGNNinja(path, platform, host, options, args_list):
   if platform.is_msvc():
     cxx = os.environ.get('CXX', 'cl.exe')
@@ -425,6 +429,8 @@ def WriteGNNinja(path, platform, host, options, args_list):
       os.path.relpath(os.path.join(REPO_ROOT, 'src'), os.path.dirname(path)),
       '.',
   ]
+  include_dirs.append(os.path.join(REPO_ROOT, 'third_party/protobuf/src'))
+  include_dirs.append(os.path.join(REPO_ROOT, 'third_party/absl'))
   if platform.is_zos():
     include_dirs += [ options.zoslib_dir + '/include' ]
 
@@ -490,6 +496,7 @@ def WriteGNNinja(path, platform, host, options, args_list):
 
     cflags.extend([
         '-D_FILE_OFFSET_BITS=64',
+        '-DHAVE_ZLIB=0',
         '-D__STDC_CONSTANT_MACROS', '-D__STDC_FORMAT_MACROS',
         '-pthread',
         '-pipe',
@@ -640,6 +647,37 @@ def WriteGNNinja(path, platform, host, options, args_list):
         'src/base/value_iterators.cc',
         'src/base/values.cc',
       ]},
+      'protobuf': {
+        'sources': filter(is_protobuf_source, glob.glob(
+          'third_party/protobuf/src/google/protobuf/**/*.cc',
+          root_dir=REPO_ROOT,
+          recursive=True,
+        )),
+        'cflags': [
+          '-Wno-extra-semi',
+          '-Wno-extra-semi-stmt',
+          '-Wno-deprecated-declarations',
+          '-Wno-sign-compare',
+          '-Wno-missing-field-initializers',
+          '-I%s' % os.path.join(REPO_ROOT, 'third_party/protobuf/third_party/utf8_range')
+        ],
+      },
+      'utf8_range': {
+        'sources': glob.glob(
+          'third_party/protobuf/third_party/utf8_range/utf8_range.c',
+          root_dir = REPO_ROOT,
+        ),
+        'cflags': ['-x', 'c', '-std=c99'
+        ],
+      },
+      'absl': {
+        'sources': glob.glob(
+          'third_party/absl/absl/**/*.cc',
+          root_dir=REPO_ROOT,
+          recursive=True,
+        ),
+        'cflags': ['-Wno-extra-semi-stmt'],
+      },
       'gn_lib': {'sources': [
         'src/gn/action_target_generator.cc',
         'src/gn/action_values.cc',

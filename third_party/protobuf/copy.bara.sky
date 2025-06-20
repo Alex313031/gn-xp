@@ -1,0 +1,62 @@
+core.workflow(
+    name = "default",
+    origin = git.github_origin(
+      url = "https://github.com/protocolbuffers/protobuf.git",
+      ref = "main",
+    ),
+    destination = folder.destination(),
+
+    # Unfortunately we need all these for protoc.
+    origin_files = glob([
+        "bazel/**",
+        "build_defs/**",
+        "editions/**",
+        "patches/**",
+        "src/**",
+        "third_party/**",
+        "toolchain/**",
+        "upb/**",
+        "upb_generator/**",
+        "*.bazel*",
+        "*.patch*",
+        "*.bzl*",
+        "LICENSE",
+    ], exclude = [
+        "**/benchmarks/**",
+        "**/golden/**",
+        "**/testdata/**",
+        "**/tests/**",
+        "**/*benchmark*.cc",
+        "**/*test*.cc",
+    ]),
+    # Ensure that copybara doesn't delete copy.bara.sky
+    destination_files = glob(["**"], exclude = ["copy.bara.sky"]),
+    authoring = authoring.pass_thru("Default email <default@default.com>"),
+    # Protobuf fails to compile due to -Wextra-semi-stmt. Try and fix it.
+    transformations = [
+        core.replace(
+            before = "${macro}(${content});",
+            after = "${macro}(${content})",
+            regex_groups = {
+                "macro": "|".join([
+                    "GOOGLE_PROTOBUF_PARSER_ASSERT",
+                    "PROTOBUF_PREFETCH_WITH_OFFSET",
+                    "TYPE_CHECK",
+                ]),
+                "content": ".*",
+            }
+        ),
+
+        # Some instances of TYPE_CHECK span multiple lines.
+        # The last line always contains this.
+        # Unfortunately multiline doesn't work because multiline
+        # only replaces the first instance in a file.
+        core.replace(
+            before = "${content};",
+            after = "${content}",
+            regex_groups = {
+                "content": "\"MapValue.*Ref::.*Value\".",
+            }
+        )
+    ],
+)
