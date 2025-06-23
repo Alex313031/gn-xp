@@ -80,6 +80,10 @@ extern const char kTargetOutDir[];
 extern const char kTargetOutDir_HelpShort[];
 extern const char kTargetOutDir_Help[];
 
+extern const char kStrictDeps[];
+extern const char kStrictDeps_HelpShort[];
+extern const char kStrictDeps_Help[];
+
 // Target vars -----------------------------------------------------------------
 
 extern const char kAllDependentConfigs[];

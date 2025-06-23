@@ -28,6 +28,7 @@ How build arguments are set
    - current_os
    - target_cpu
    - target_os
+   - strict_deps
 
   Next, project-specific overrides are applied. These are specified inside
   the default_args variable of //.gn. See "gn help dotfile" for more. Note
@@ -416,6 +417,7 @@ void Args::SetSystemVarsLocked(Scope* dest) const {
   // declared. This is so they can be overridden in a toolchain build args
   // override, and so that they will appear in the "gn args" output.
   Value empty_string(nullptr, std::string());
+  Value false_value(nullptr, false);
 
   Value os_val(nullptr, std::string(os));
   dest->SetValue(variables::kHostOs, os_val, nullptr);
@@ -426,6 +428,7 @@ void Args::SetSystemVarsLocked(Scope* dest) const {
   dest->SetValue(variables::kHostCpu, arch_val, nullptr);
   dest->SetValue(variables::kTargetCpu, empty_string, nullptr);
   dest->SetValue(variables::kCurrentCpu, empty_string, nullptr);
+  dest->SetValue(variables::kStrictDeps, false_value, nullptr);
 
   Scope::KeyValueMap& declared_arguments(
       DeclaredArgumentsForToolchainLocked(dest));
@@ -435,6 +438,7 @@ void Args::SetSystemVarsLocked(Scope* dest) const {
   declared_arguments[variables::kHostCpu] = arch_val;
   declared_arguments[variables::kCurrentCpu] = empty_string;
   declared_arguments[variables::kTargetCpu] = empty_string;
+  declared_arguments[variables::kStrictDeps] = false_value;
 
   // Mark these variables used so the build config file can override them
   // without getting a warning about overwriting an unused variable.
@@ -444,6 +448,7 @@ void Args::SetSystemVarsLocked(Scope* dest) const {
   dest->MarkUsed(variables::kHostOs);
   dest->MarkUsed(variables::kCurrentOs);
   dest->MarkUsed(variables::kTargetOs);
+  dest->MarkUsed(variables::kStrictDeps);
 }
 
 void Args::ApplyOverridesLocked(const Scope::KeyValueMap& values,

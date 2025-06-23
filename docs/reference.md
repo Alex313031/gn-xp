@@ -84,6 +84,7 @@
     *   [root_build_dir: [string] Directory where build commands are run.](#var_root_build_dir)
     *   [root_gen_dir: [string] Directory for the toolchain's generated files.](#var_root_gen_dir)
     *   [root_out_dir: [string] Root directory for toolchain output files.](#var_root_out_dir)
+    *   [strict_deps: [bool] Whether strict dependencies are applied.](#var_strict_deps)
     *   [target_cpu: [string] The desired cpu architecture for the build.](#var_target_cpu)
     *   [target_gen_dir: [string] Directory for a target's generated files.](#var_target_gen_dir)
     *   [target_name: [string] The name of the current target.](#var_target_name)
@@ -4696,6 +4697,20 @@
     args = [ "-o", rebase_path(root_out_dir, root_build_dir) ]
   }
 ```
+### <a name="var_strict_deps"></a>**strict_deps**: [bool] Whether strict dependencies are applied.&nbsp;[Back to Top](#gn-reference)
+
+```
+  If strict_deps is enabled in args.gn, outputs the file `strict_deps.json` to
+  the build root. This file contains a build graph that can be read to
+  determine allowed dependencies.
+
+  With toolchain support, it is possible to implement strict dependencies
+  using this.
+
+  Warning: You *must* read the field "version" first, as that dictates the file
+  format. If you get a version mismatch, it is recommended to simply disable
+  strict dep checking.
+```
 ### <a name="var_target_cpu"></a>**target_cpu**: The desired cpu architecture for the build.&nbsp;[Back to Top](#gn-reference)
 
 ```
@@ -7140,6 +7155,7 @@
    - current_os
    - target_cpu
    - target_os
+   - strict_deps
 
   Next, project-specific overrides are applied. These are specified inside
   the default_args variable of //.gn. See "gn help dotfile" for more. Note

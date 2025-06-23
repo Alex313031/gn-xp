@@ -30,8 +30,10 @@
 #include "gn/scheduler.h"
 #include "gn/setup.h"
 #include "gn/standard_out.h"
+#include "gn/strict_deps.h"
 #include "gn/switches.h"
 #include "gn/target.h"
+#include "gn/variables.h"
 #include "gn/visual_studio_writer.h"
 #include "gn/xcode_writer.h"
 
@@ -62,6 +64,7 @@ const char kSwitchNinjaOutputsScript[] = "ninja-outputs-script";
 const char kSwitchNinjaOutputsScriptArgs[] = "ninja-outputs-script-args";
 const char kSwitchNoDeps[] = "no-deps";
 const char kSwitchSln[] = "sln";
+const char kSwitchStrictDeps[] = "strict-deps";
 const char kSwitchXcodeProject[] = "xcode-project";
 const char kSwitchXcodeBuildSystem[] = "xcode-build-system";
 const char kSwitchXcodeBuildsystemValueLegacy[] = "legacy";
@@ -877,6 +880,20 @@ int RunGen(const std::vector<std::string>& args) {
 
   for (auto&& ide : command_line->GetSwitchValueStrings(kSwitchIde)) {
     if (!RunIdeWriter(ide, &setup->build_settings(), setup->builder(), &err)) {
+      err.PrintToStdout();
+      return 1;
+    }
+  }
+
+  auto strictDepsEnabled = setup->build_settings().build_args().GetArgOverride(
+      variables::kStrictDeps);
+  if (strictDepsEnabled != nullptr) {
+    if (!strictDepsEnabled->VerifyTypeIs(Value::BOOLEAN, &err)) {
+      err.PrintToStdout();
+      return 1;
+    }
+    if (strictDepsEnabled->boolean_value() &&
+        !WriteStrictDeps(&setup->build_settings(), setup->builder(), &err)) {
       err.PrintToStdout();
       return 1;
     }
