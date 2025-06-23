@@ -768,6 +768,7 @@ def WriteGNNinja(path, platform, host, options, args_list):
         'src/gn/source_dir.cc',
         'src/gn/source_file.cc',
         'src/gn/standard_out.cc',
+        'src/gn/strict_deps.cc',
         'src/gn/string_atom.cc',
         'src/gn/string_output_buffer.cc',
         'src/gn/string_utils.cc',

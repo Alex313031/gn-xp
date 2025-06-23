@@ -405,6 +405,25 @@ Example
   }
 )";
 
+const char kStrictDeps[] = "strict_deps";
+const char kStrictDeps_HelpShort[] =
+    "strict_deps: [bool] Whether strict dependencies are applied.";
+const char kStrictDeps_Help[] =
+    R"(strict_deps: [bool] Whether strict dependencies are applied.
+
+  If strict_deps is enabled in args.gn, outputs the file `strict_deps.json` to
+  the build root. This file contains a build graph that can be read to
+  determine allowed dependencies.
+
+  With toolchain support, it is possible to implement strict dependencies
+  using this.
+
+  Warning: You *must* read the field "version" first, as that dictates the file
+  format. If you get a version mismatch, it is recommended to simply disable
+  strict dep checking.
+)";
+
+
 // Target variables ------------------------------------------------------------
 
 #define COMMON_ORDERING_HELP                                                 \
@@ -2436,6 +2455,7 @@ const VariableInfoMap& GetBuiltinVariables() {
     INSERT_VARIABLE(RootBuildDir)
     INSERT_VARIABLE(RootGenDir)
     INSERT_VARIABLE(RootOutDir)
+    INSERT_VARIABLE(StrictDeps)
     INSERT_VARIABLE(TargetCpu)
     INSERT_VARIABLE(TargetGenDir)
     INSERT_VARIABLE(TargetName)
