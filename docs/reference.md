@@ -7140,6 +7140,7 @@
    - current_os
    - target_cpu
    - target_os
+   - strict_deps
 
   Next, project-specific overrides are applied. These are specified inside
   the default_args variable of //.gn. See "gn help dotfile" for more. Note
