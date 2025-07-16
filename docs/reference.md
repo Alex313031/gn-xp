@@ -3288,7 +3288,8 @@
 
       As a special case, if new_base is the empty string (the default), all
       paths will be converted to system-absolute native style paths with system
-      path separators. This is useful for invoking external programs.
+      path separators. This may be useful for invoking external programs, but
+      won't work for build tasks which may be executed on a remote machine.
 
   current_base
       Directory representing the base for relative paths in the input. If this
