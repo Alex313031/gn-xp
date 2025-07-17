@@ -39,6 +39,53 @@
       },
       "revId": "54cda62a8469eb80b19f290eadfe5a7cb24d78fa",
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3ba6022d_864b9152",
+        "filename": "docs/reference.md",
+        "patchSetId": 1
+      },
+      "lineNbr": 3289,
+      "author": {
+        "id": 1000030
+      },
+      "writtenOn": "2025-07-17T07:30:36Z",
+      "side": 1,
+      "message": "Changing default sounds good, but that might cause some breakages as there are many usages of rebase_path in chromium.",
+      "parentUuid": "c5a3f406_311e47b1",
+      "range": {
+        "startLine": 3289,
+        "startChar": 7,
+        "endLine": 3289,
+        "endChar": 71
+      },
+      "revId": "54cda62a8469eb80b19f290eadfe5a7cb24d78fa",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c91f899f_eda9ff76",
+        "filename": "src/gn/function_rebase_path.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 163,
+      "author": {
+        "id": 1000030
+      },
+      "writtenOn": "2025-07-17T07:30:36Z",
+      "side": 1,
+      "message": "I feel this is implementation detail of remote execution system rather than GN\u0027s behavior.",
+      "range": {
+        "startLine": 162,
+        "startChar": 74,
+        "endLine": 163,
+        "endChar": 75
+      },
+      "revId": "54cda62a8469eb80b19f290eadfe5a7cb24d78fa",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
     }
   ]
 }
