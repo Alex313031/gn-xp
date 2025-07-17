@@ -16,6 +16,29 @@
       "message": "@tikuta, can you PTAL?  See the linked bug for additional context.",
       "revId": "54cda62a8469eb80b19f290eadfe5a7cb24d78fa",
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c5a3f406_311e47b1",
+        "filename": "docs/reference.md",
+        "patchSetId": 1
+      },
+      "lineNbr": 3289,
+      "author": {
+        "id": 1003017
+      },
+      "writtenOn": "2025-07-17T01:39:13Z",
+      "side": 1,
+      "message": "I wonder if we should change the default if it\u0027s a special case... :/\nI may have seen a relevant discussion somewhere. \nAbsolute paths should be avoided as much as possible regardless of remote executions.",
+      "range": {
+        "startLine": 3289,
+        "startChar": 7,
+        "endLine": 3289,
+        "endChar": 71
+      },
+      "revId": "54cda62a8469eb80b19f290eadfe5a7cb24d78fa",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
     }
   ]
 }
