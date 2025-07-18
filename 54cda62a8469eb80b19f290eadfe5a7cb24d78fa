@@ -65,6 +65,30 @@
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "7455a2b6_646bf598",
+        "filename": "docs/reference.md",
+        "patchSetId": 1
+      },
+      "lineNbr": 3289,
+      "author": {
+        "id": 1003017
+      },
+      "writtenOn": "2025-07-18T00:43:55Z",
+      "side": 1,
+      "message": "Right. It seems there are lot of usages.\nhttps://source.chromium.org/search?q\u003drebase_path%5C(%5B%5E,%5Cs)%5D%2B%5C)%20%20pcre:yes%20%20-file:%5Eout%20-file:%5Egen%20language:gn%20-f:third_party\u0026sq\u003d",
+      "parentUuid": "3ba6022d_864b9152",
+      "range": {
+        "startLine": 3289,
+        "startChar": 7,
+        "endLine": 3289,
+        "endChar": 71
+      },
+      "revId": "54cda62a8469eb80b19f290eadfe5a7cb24d78fa",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "c91f899f_eda9ff76",
