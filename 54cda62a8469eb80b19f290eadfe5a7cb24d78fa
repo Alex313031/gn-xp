@@ -110,6 +110,30 @@
       },
       "revId": "54cda62a8469eb80b19f290eadfe5a7cb24d78fa",
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d8a204c7_2e868adb",
+        "filename": "src/gn/function_rebase_path.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 163,
+      "author": {
+        "id": 1003017
+      },
+      "writtenOn": "2025-07-18T00:52:39Z",
+      "side": 1,
+      "message": "Technically, it\u0027s possible to make remote execution work if the client decided to map the remote execution root to be same with the host execution root. But, it would be very bad for sharing caching since the local checkout path varies. (often including user name). Thus, it\u0027s highly discouraged.\n\nI would use a bit different wording. e.g.  \"but, may not work with remote execution...\" etc",
+      "parentUuid": "c91f899f_eda9ff76",
+      "range": {
+        "startLine": 162,
+        "startChar": 74,
+        "endLine": 163,
+        "endChar": 75
+      },
+      "revId": "54cda62a8469eb80b19f290eadfe5a7cb24d78fa",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
     }
   ]
 }
