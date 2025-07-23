@@ -1,6 +1,23 @@
 {
   "comments": [
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "4c002b7e_5e146f6a",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 3372478
+      },
+      "writtenOn": "2025-07-23T19:07:04Z",
+      "side": 1,
+      "message": "Looks like the mac bot\u0027s tool chain is quite old. I\u0027ll avoid using std::ranges for now.",
+      "revId": "a379929ac1337379ecc977e0fe74a029c966af81",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "fa92e64c_30254f69",
