@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "fa92e64c_30254f69",
+        "filename": "src/gn/parse_tree.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 1194,
+      "author": {
+        "id": 1000030
+      },
+      "writtenOn": "2025-07-23T02:42:47Z",
+      "side": 1,
+      "message": "It is fine to use local variable for this?",
+      "range": {
+        "startLine": 1194,
+        "startChar": 2,
+        "endLine": 1194,
+        "endChar": 18
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "24bc0fa9_651e87c6",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "src/gn/parse_tree.cc",
+              "range": {
+                "startLine": 1194,
+                "startChar": 0,
+                "endLine": 1195,
+                "endChar": 0
+              },
+              "replacement": "  std::string shortened_value \u003d value_.value().substr(0, new_length);\n"
+            },
+            {
+              "path": "src/gn/parse_tree.cc",
+              "range": {
+                "startLine": 1196,
+                "startChar": 0,
+                "endLine": 1198,
+                "endChar": 0
+              },
+              "replacement": "  shortened_value.push_back(\u0027\"\u0027);\n  value_ \u003d Token(value_.location(), value_.type(), shortened_value);\n"
+            }
+          ]
+        }
+      ],
+      "revId": "a379929ac1337379ecc977e0fe74a029c966af81",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    }
+  ]
+}
