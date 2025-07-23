@@ -67,6 +67,30 @@
       ],
       "revId": "a379929ac1337379ecc977e0fe74a029c966af81",
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f9c67d4f_915e4ed9",
+        "filename": "src/gn/parse_tree.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 1194,
+      "author": {
+        "id": 3372478
+      },
+      "writtenOn": "2025-07-23T19:10:27Z",
+      "side": 1,
+      "message": "No. `value_` only has a std::string_view, so the actual std::string that holds the data needs to be have a longer lifespan. The suggested change will produce a stack-use-after-return error in ASAN builds.",
+      "parentUuid": "fa92e64c_30254f69",
+      "range": {
+        "startLine": 1194,
+        "startChar": 2,
+        "endLine": 1194,
+        "endChar": 18
+      },
+      "revId": "a379929ac1337379ecc977e0fe74a029c966af81",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
     }
   ]
 }
