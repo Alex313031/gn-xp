@@ -18,6 +18,24 @@
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "cb6e5383_16ffd9ce",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000030
+      },
+      "writtenOn": "2025-07-24T05:18:26Z",
+      "side": 1,
+      "message": "I filed http://b/433861937 to update macOS SDK.",
+      "parentUuid": "4c002b7e_5e146f6a",
+      "revId": "a379929ac1337379ecc977e0fe74a029c966af81",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "fa92e64c_30254f69",
