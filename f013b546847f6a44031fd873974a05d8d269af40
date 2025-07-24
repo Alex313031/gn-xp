@@ -18,6 +18,24 @@
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "b8538ca5_feb482f8",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000030
+      },
+      "writtenOn": "2025-07-24T12:12:41Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "33d7e2ab_8497efc8",
+      "revId": "f013b546847f6a44031fd873974a05d8d269af40",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "5220b1ad_05ebb768",
@@ -49,6 +67,24 @@
           ]
         }
       ],
+      "revId": "f013b546847f6a44031fd873974a05d8d269af40",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d64b06c7_04ccdd29",
+        "filename": "src/gn/tokenizer_unittest.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 80,
+      "author": {
+        "id": 1000030
+      },
+      "writtenOn": "2025-07-24T12:12:41Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "5220b1ad_05ebb768",
       "revId": "f013b546847f6a44031fd873974a05d8d269af40",
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
     }
