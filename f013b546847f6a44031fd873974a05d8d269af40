@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "33d7e2ab_8497efc8",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000067
+      },
+      "writtenOn": "2025-07-24T11:39:18Z",
+      "side": 1,
+      "message": "Note that $0x0a can already be used for these.\nCan you update the part of the grammar that describes string literals in this case https://gn.googlesource.com/gn/+/main/docs/reference.md#string-literals?",
+      "revId": "f013b546847f6a44031fd873974a05d8d269af40",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    }
+  ]
+}
