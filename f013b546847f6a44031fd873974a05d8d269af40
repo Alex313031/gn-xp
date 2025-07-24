@@ -16,6 +16,41 @@
       "message": "Note that $0x0a can already be used for these.\nCan you update the part of the grammar that describes string literals in this case https://gn.googlesource.com/gn/+/main/docs/reference.md#string-literals?",
       "revId": "f013b546847f6a44031fd873974a05d8d269af40",
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5220b1ad_05ebb768",
+        "filename": "src/gn/tokenizer_unittest.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 80,
+      "author": {
+        "id": 1000067
+      },
+      "writtenOn": "2025-07-24T11:41:11Z",
+      "side": 1,
+      "message": "I recommend using raw string literals here for clarity, e.g.:\n\n```\nEXPECT_TRUE(CheckTokenizer(\n  R\"##(  \"foo\" \"bar\\\"baz\" \"asdf\\\\\" \"new\nline\" )##\", strings);\n```",
+      "fixSuggestions": [
+        {
+          "fixId": "baa5bf2d_edbf8296",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "src/gn/tokenizer_unittest.cc",
+              "range": {
+                "startLine": 80,
+                "startChar": 0,
+                "endLine": 81,
+                "endChar": 0
+              },
+              "replacement": "      R\"(  \"foo\" \"bar\\\"baz\" \"asdf\\\\\" \"new\\nline\" )\", strings));\n"
+            }
+          ]
+        }
+      ],
+      "revId": "f013b546847f6a44031fd873974a05d8d269af40",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
     }
   ]
 }
