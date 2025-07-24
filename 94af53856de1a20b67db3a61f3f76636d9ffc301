@@ -33,6 +33,24 @@
       "message": "Adding Ted on Cc too because I believe Pigweed also has its own set of MacOS builders too.",
       "revId": "94af53856de1a20b67db3a61f3f76636d9ffc301",
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d0beca73_6ee00b78",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000030
+      },
+      "writtenOn": "2025-07-24T11:55:03Z",
+      "side": 1,
+      "message": "OK, changed to macOS 13 for now.",
+      "parentUuid": "c9da0a17_4ffaf526",
+      "revId": "94af53856de1a20b67db3a61f3f76636d9ffc301",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
     }
   ]
 }
