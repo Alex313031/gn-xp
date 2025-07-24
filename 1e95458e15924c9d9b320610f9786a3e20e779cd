@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "8dde0157_270ee36c",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000070
+      },
+      "writtenOn": "2025-07-24T13:13:48Z",
+      "side": 1,
+      "message": "lgtm",
+      "revId": "1e95458e15924c9d9b320610f9786a3e20e779cd",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e356f6eb_6666f20e",
+        "filename": "infra/recipe_modules/macos_sdk/__init__.py",
+        "patchSetId": 3
+      },
+      "lineNbr": 37,
+      "author": {
+        "id": 1000070
+      },
+      "writtenOn": "2025-07-24T13:13:48Z",
+      "side": 1,
+      "message": "nit: why is this one using an upper case \"F\" when the other files use lower case \"F\"?",
+      "revId": "1e95458e15924c9d9b320610f9786a3e20e779cd",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    }
+  ]
+}
