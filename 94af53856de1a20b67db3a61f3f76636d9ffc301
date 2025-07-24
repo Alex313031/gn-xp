@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c9da0a17_4ffaf526",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000067
+      },
+      "writtenOn": "2025-07-24T11:34:50Z",
+      "side": 1,
+      "message": "The Fuchsia builders are still on MacOS 13, could be lower the number here?",
+      "revId": "94af53856de1a20b67db3a61f3f76636d9ffc301",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    }
+  ]
+}
