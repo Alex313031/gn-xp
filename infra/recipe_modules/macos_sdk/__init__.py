@@ -33,8 +33,10 @@ PROPERTIES = {
                 tool_ver=Single(str),
             ),
             default={
+                # Check macOS version used in CQ/CI and required version of Xcode.
+                # https://xcodereleases.com/
                 'sdk_version':
-                    '12B5025f',
+                    '15C500b',  # Xcode 15.2
                 'tool_package':
                     'infra/tools/mac_toolchain/${platform}',
                 'tool_version':
