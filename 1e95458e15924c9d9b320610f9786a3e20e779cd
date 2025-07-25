@@ -33,6 +33,24 @@
       "message": "nit: why is this one using an upper case \"F\" when the other files use lower case \"F\"?",
       "revId": "1e95458e15924c9d9b320610f9786a3e20e779cd",
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "aab82a30_b7ae3d52",
+        "filename": "infra/recipe_modules/macos_sdk/__init__.py",
+        "patchSetId": 3
+      },
+      "lineNbr": 37,
+      "author": {
+        "id": 1000030
+      },
+      "writtenOn": "2025-07-25T03:32:00Z",
+      "side": 1,
+      "message": "I don\u0027t know, but Xcode has such build version convention per\nhttps://xcodereleases.com/\n?",
+      "parentUuid": "e356f6eb_6666f20e",
+      "revId": "1e95458e15924c9d9b320610f9786a3e20e779cd",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
     }
   ]
 }
