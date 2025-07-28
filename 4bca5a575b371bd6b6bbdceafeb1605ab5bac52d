@@ -16,6 +16,41 @@
       "message": "Seems reasonable. Did you forget to upload the updated reference.md?",
       "revId": "4bca5a575b371bd6b6bbdceafeb1605ab5bac52d",
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f775659c_17aa6d84",
+        "filename": "src/gn/tokenizer_unittest.cc",
+        "patchSetId": 6
+      },
+      "lineNbr": 80,
+      "author": {
+        "id": 1000067
+      },
+      "writtenOn": "2025-07-28T09:29:34Z",
+      "side": 1,
+      "message": "The Windows compiler error is surprising. I can only assume it wants a dchar sequence before the opening parenthesis and after the closing one, as in `R\"#(....)#\"`, even though the spec says this is optional.",
+      "fixSuggestions": [
+        {
+          "fixId": "ed8cf36b_3075d615",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "src/gn/tokenizer_unittest.cc",
+              "range": {
+                "startLine": 79,
+                "startChar": 0,
+                "endLine": 81,
+                "endChar": 0
+              },
+              "replacement": "  EXPECT_TRUE(CheckTokenizer(R\"str(  \"foo\" \"bar\\\"baz\" \"asdf\\\\\" \"new\nline\")str\",\n"
+            }
+          ]
+        }
+      ],
+      "revId": "4bca5a575b371bd6b6bbdceafeb1605ab5bac52d",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
     }
   ]
 }
