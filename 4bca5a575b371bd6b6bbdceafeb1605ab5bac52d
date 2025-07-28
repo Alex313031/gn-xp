@@ -69,6 +69,24 @@
       "parentUuid": "f775659c_17aa6d84",
       "revId": "4bca5a575b371bd6b6bbdceafeb1605ab5bac52d",
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "eafbd74e_9ce82178",
+        "filename": "src/gn/tokenizer_unittest.cc",
+        "patchSetId": 6
+      },
+      "lineNbr": 80,
+      "author": {
+        "id": 1000067
+      },
+      "writtenOn": "2025-07-28T10:28:55Z",
+      "side": 1,
+      "message": "Sure :)",
+      "parentUuid": "7e11896f_e974ed6a",
+      "revId": "4bca5a575b371bd6b6bbdceafeb1605ab5bac52d",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
     }
   ]
 }
