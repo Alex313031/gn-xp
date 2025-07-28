@@ -51,6 +51,24 @@
       ],
       "revId": "4bca5a575b371bd6b6bbdceafeb1605ab5bac52d",
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "7e11896f_e974ed6a",
+        "filename": "src/gn/tokenizer_unittest.cc",
+        "patchSetId": 6
+      },
+      "lineNbr": 80,
+      "author": {
+        "id": 1000030
+      },
+      "writtenOn": "2025-07-28T10:14:11Z",
+      "side": 1,
+      "message": "Hmm, that still doesn\u0027t work. But I couldn\u0027t reproduce this with compiler explorer https://godbolt.org/z/hhPWzz1er\n\nLet me use normal string literal instead.",
+      "parentUuid": "f775659c_17aa6d84",
+      "revId": "4bca5a575b371bd6b6bbdceafeb1605ab5bac52d",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
     }
   ]
 }
