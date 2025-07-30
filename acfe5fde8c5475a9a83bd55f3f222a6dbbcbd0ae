@@ -70,6 +70,24 @@
       "parentUuid": "fb0c8365_1128b68f",
       "revId": "acfe5fde8c5475a9a83bd55f3f222a6dbbcbd0ae",
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "feb460cf_5206b6d5",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 9
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000102
+      },
+      "writtenOn": "2025-07-30T17:10:53Z",
+      "side": 1,
+      "message": "Accidental newline in string literal plus its error:\n\n```\n$ git diff\ndiff --git a/base/BUILD.gn b/base/BUILD.gn\nindex 723b60da9dd9a..44149fddd4db4 100644\n--- a/base/BUILD.gn\n+++ b/base/BUILD.gn\n@@ -178,7 +178,8 @@ component(\"base\") {\n     \"allocator/allocator_check.cc\",\n     \"allocator/allocator_check.h\",\n     \"allocator/dispatcher/configuration.h\",\n-    \"allocator/dispatcher/dispatcher.cc\",\n+    \"allocator/dispatcher/dispatcher.cc\n+\",\n     \"allocator/dispatcher/dispatcher.h\",\n     \"allocator/dispatcher/initializer.h\",\n     \"allocator/dispatcher/internal/dispatch_data.cc\",\n```\n\n```\n$ gn gen out/gn\nERROR at //base/BUILD.gn:181:5: Only source, header, and object files belong in the sources of a shared_library. //base/allocator/dispatcher/dispatcher.cc\n is not one of the valid types.\n```\n\nIf your terminal has just the right width, the newline in the output here is easy to miss.\n\nMissing closing quote:\n\n```\n$ git diff\ndiff --git a/base/BUILD.gn b/base/BUILD.gn\nindex 723b60da9dd9a..51f2bf991d0d8 100644\n--- a/base/BUILD.gn\n+++ b/base/BUILD.gn\n@@ -178,7 +178,7 @@ component(\"base\") {\n     \"allocator/allocator_check.cc\",\n     \"allocator/allocator_check.h\",\n     \"allocator/dispatcher/configuration.h\",\n-    \"allocator/dispatcher/dispatcher.cc\",\n+    \"allocator/dispatcher/dispatcher.cc,\n     \"allocator/dispatcher/dispatcher.h\",\n     \"allocator/dispatcher/initializer.h\",\n     \"allocator/dispatcher/internal/dispatch_data.cc\",\n```\n\n```\n$ gn gen out/gn\nERROR at //base/BUILD.gn:182:15: Invalid token.\n    \"allocator/dispatcher/dispatcher.h\",\n              ^\nI have no idea what this is.\n```\n\nThe diag points at what looks like a correct line in the snippet.\n\nThese seem like real regressions.\n\n\u003e because it makes parsing the language more complicated;\n\nScanning over \\n inside string literals isn\u0027t any harder than not doing it, is it?\n\nFWIW, the almighty statistical model agrees with my intuition: ...huh, apparently you can\u0027t share links to corp gemini chats. Anyways, prompt \"should programming languages support multi-line string literals? if so, should they have a dedicated literal type for that, or should they just support that in their normal string literal?\" Gemini Pro 2.5:\n\n\"\"\"\nModifying Normal Strings: A Flawed Alternative 👎\n\n[...]\n\nDisadvantages of this approach:\n\nAmbiguity: Overloading a single syntax can be confusing. JavaScript\u0027s template literals (`) are used for both multi-line strings and expression interpolation (e.g., ${variable}), mixing two distinct features.\n\nLess Control: Simpler implementations might not offer intelligent handling of indentation, forcing developers to place the text flush against the left margin, which ruins code formatting.\n\nPotential for Errors: If a developer accidentally hits \"Enter\" in a regular string, it could either become an unintentional multi-line string or cause a syntax error, depending on the language\u0027s rules.\n\"\"\"\n\nOf course, you might get the opposite recommendation if you try it ;)",
+      "parentUuid": "d4374a17_e4d02ead",
+      "revId": "acfe5fde8c5475a9a83bd55f3f222a6dbbcbd0ae",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
     }
   ]
 }
