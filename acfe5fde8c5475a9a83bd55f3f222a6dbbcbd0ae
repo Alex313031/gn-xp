@@ -88,6 +88,24 @@
       "parentUuid": "d4374a17_e4d02ead",
       "revId": "acfe5fde8c5475a9a83bd55f3f222a6dbbcbd0ae",
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b10a432d_0be3a0c6",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 9
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000005
+      },
+      "writtenOn": "2025-07-30T18:42:51Z",
+      "side": 1,
+      "message": "I wasn\u0027t claiming you couldn\u0027t get errors with this, nor that there weren\u0027t tradeoffs (there are definitely tradeoffs).\n\nIn the first example, diagnosing the error would be a lot easier if the error message escaped the newline. One can imagine other error handling strategies that would be even better. You could probably fairly easily do something similar for the second example. You could also trivially semantically analyze the value and realize it was an invalid path (though that doesn\u0027t help with the second error). And returning better error messages is almost always a good idea. Even without that, though, I think devs would probably figure out these failure modes pretty quickly.\n\nThat said, doing the work for those improvements probably also makes the whole CL not worth it.\n\nI\u0027m not quite sure what you meant to achieve with the Gemini result; I\u0027m kind of hoping it was a joke :). I did indeed get different results, using public Gemini: Gemini 2.5 Flash gave me something fairly neutral which is pretty close to https://g.co/gemini/share/800fa91f540a. Gemini 2.5 Pro did indeed give me the opposite recommendation (\"Yes, programming languages should definitely support multi-line string literals...\"), though it recommended a separate quote token for multiline strings: https://g.co/gemini/share/eea5e6851160. \n\nRegardless, the machine\u0027s votes don\u0027t really convey any weight for me, one way or another :).",
+      "parentUuid": "feb460cf_5206b6d5",
+      "revId": "acfe5fde8c5475a9a83bd55f3f222a6dbbcbd0ae",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
     }
   ]
 }
