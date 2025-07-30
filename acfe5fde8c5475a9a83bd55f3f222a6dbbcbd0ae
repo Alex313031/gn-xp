@@ -34,6 +34,24 @@
       "parentUuid": "f029b489_c14ec6de",
       "revId": "acfe5fde8c5475a9a83bd55f3f222a6dbbcbd0ae",
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "fb0c8365_1128b68f",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 9
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2025-07-30T12:19:49Z",
+      "side": 1,
+      "message": "It\u0027s still a rare usecase, given we\u0027ve been living with the current state for a long time.\n\n(And in asserts, the formatting of a string with newlines will look weird. Usually you want to do some kind of \"ignore leading indent\" kind of feature to make the formatting nicer, etc.)\n\nAlmost no other language allows newlines in their strings, due to them not deeming the tradeoff worth it. Some have a *separate* form of string literals that allow newlines, so that you don\u0027t use them accidentally.\n\nAlso, the \"fail loudly\" error diagnostic is worse now, right?",
+      "parentUuid": "d13f3bc2_d291813e",
+      "revId": "acfe5fde8c5475a9a83bd55f3f222a6dbbcbd0ae",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
     }
   ]
 }
