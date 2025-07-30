@@ -106,6 +106,24 @@
       "parentUuid": "feb460cf_5206b6d5",
       "revId": "acfe5fde8c5475a9a83bd55f3f222a6dbbcbd0ae",
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "bf7df647_cb7a3429",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 9
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2025-07-30T19:17:16Z",
+      "side": 1,
+      "message": "\u003e That said, doing the work for those improvements probably also makes the whole CL not worth it.\n\nAgreed, and doing it without them imho makes it also not worth it :P\n\nAnyways, I said my piece, and if y\u0027all don\u0027t consider it convincing, then let\u0027s keep things as is. You\u0027re the OWNERS over here after all :)",
+      "parentUuid": "b10a432d_0be3a0c6",
+      "revId": "acfe5fde8c5475a9a83bd55f3f222a6dbbcbd0ae",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
     }
   ]
 }
