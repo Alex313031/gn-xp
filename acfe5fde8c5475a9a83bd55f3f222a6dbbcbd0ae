@@ -52,6 +52,24 @@
       "parentUuid": "d13f3bc2_d291813e",
       "revId": "acfe5fde8c5475a9a83bd55f3f222a6dbbcbd0ae",
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d4374a17_e4d02ead",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 9
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000005
+      },
+      "writtenOn": "2025-07-30T16:37:08Z",
+      "side": 1,
+      "message": "Personally, I think it\u0027s somewhat archaic to not allow newlines in literals, and I\u0027ve never seen someone (apart from Nico, now) make the claim that it\u0027s a tradeoff not worth making due to risk of errors. Instead, I think that languages haven\u0027t historically had them because it makes parsing the language more complicated; at least one example might be the fact that newlines can be different on different platforms (\\r vs \\n vs \\r\\n, etc.) and you might have to decide how to handle that difference. Having multiline literals also makes grepping for strings harder.\n\nCertainly more and more languages have added support for multiline literals over time, but I believe they use new syntax for that for backwards compatibility more than any other reason. \n\nI would be surprised if the concern Nico raises came up much if at all in practice (i.e., I agree with Takuto there), but I do think missing quotes can lead to weird error messages, which is close to what Nico suggests.\n\nThat said, I also don\u0027t think this\u0027d be used very much, and I don\u0027t think multiline literals are that useful unless they also have support for special processing of leading whitespace on a line, which this CL doesn\u0027t introduce, so I don\u0027t think it\u0027s that useful on its own. And unlike many or most languages (perhaps), I think there is limited to no utility for multiline string literals outside of debugging messages in GN.\n\nSo, I still think this is a good change, but I don\u0027t feel like it is so useful it absolutely should be made. A better change would probably include a convention for newline handling and leading whitespace, but that\u0027s probably more work than is really worth it.",
+      "parentUuid": "fb0c8365_1128b68f",
+      "revId": "acfe5fde8c5475a9a83bd55f3f222a6dbbcbd0ae",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
     }
   ]
 }
