@@ -16,6 +16,24 @@
       "message": "I kind of don\u0027t love this. Not allowing newlines in string literals prevented a class of bugs where you accidentally forget a closing quote and things accidentally still parsed, but different than what you wanted. And wanting a newline in a string is rare, and as digit@ points out, it\u0027s already possible to do this in the rare case where it\u0027s needed.\n\nDo we really need this change?",
       "revId": "acfe5fde8c5475a9a83bd55f3f222a6dbbcbd0ae",
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d13f3bc2_d291813e",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 9
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000030
+      },
+      "writtenOn": "2025-07-30T04:33:27Z",
+      "side": 1,
+      "message": "I think forgetting a closing quote can cause a significant parsing error, making it difficult to create a build that works incorrectly in a subtle way. Instead, it would probably fail loudly.\n\nThe main motivation for this change is to let users write more readable statements, especially in asserts, by using newlines easily. The current method for adding a newline is hard to find and less common than typical solutions like `\\n`. I think this difficulty tends to discourage developers from writing longer, more descriptive statements that would be more helpful.",
+      "parentUuid": "f029b489_c14ec6de",
+      "revId": "acfe5fde8c5475a9a83bd55f3f222a6dbbcbd0ae",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
     }
   ]
 }
