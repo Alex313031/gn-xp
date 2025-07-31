@@ -142,6 +142,24 @@
       "parentUuid": "bf7df647_cb7a3429",
       "revId": "acfe5fde8c5475a9a83bd55f3f222a6dbbcbd0ae",
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c712c8d1_35adfc0b",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 9
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000030
+      },
+      "writtenOn": "2025-07-31T05:26:16Z",
+      "side": 1,
+      "message": "I see, I understand your concern and having improved error message is better when we do this. So let me revert this CL.",
+      "parentUuid": "95ddd22f_6e62484f",
+      "revId": "acfe5fde8c5475a9a83bd55f3f222a6dbbcbd0ae",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
     }
   ]
 }
