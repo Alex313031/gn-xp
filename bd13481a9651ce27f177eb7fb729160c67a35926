@@ -42,6 +42,30 @@
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "8d678baf_54fd42c7",
+        "filename": "examples/ios/build/config/ios/scripts/check-manifest.py",
+        "patchSetId": 6
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 1000070
+      },
+      "writtenOn": "2025-08-01T08:40:52Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "de3103aa_7d7c8f7a",
+      "range": {
+        "startLine": 1,
+        "startChar": 12,
+        "endLine": 1,
+        "endChar": 16
+      },
+      "revId": "bd13481a9651ce27f177eb7fb729160c67a35926",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "5a169a14_e029ad23",
@@ -103,6 +127,30 @@
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "81da5f49_f794a65c",
+        "filename": "examples/ios/build/config/ios/scripts/check-manifest.py",
+        "patchSetId": 6
+      },
+      "lineNbr": 14,
+      "author": {
+        "id": 1000070
+      },
+      "writtenOn": "2025-08-01T08:40:52Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "5a169a14_e029ad23",
+      "range": {
+        "startLine": 14,
+        "startChar": 27,
+        "endLine": 14,
+        "endChar": 30
+      },
+      "revId": "bd13481a9651ce27f177eb7fb729160c67a35926",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "c279b748_04eb7502",
@@ -154,6 +202,30 @@
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "8fc9e7ee_7cf4ce72",
+        "filename": "examples/ios/build/config/ios/scripts/check-manifest.py",
+        "patchSetId": 6
+      },
+      "lineNbr": 16,
+      "author": {
+        "id": 1000070
+      },
+      "writtenOn": "2025-08-01T08:40:52Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "c279b748_04eb7502",
+      "range": {
+        "startLine": 16,
+        "startChar": 13,
+        "endLine": 16,
+        "endChar": 17
+      },
+      "revId": "bd13481a9651ce27f177eb7fb729160c67a35926",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "5088ddac_a902aa4e",
@@ -191,6 +263,30 @@
           ]
         }
       ],
+      "revId": "bd13481a9651ce27f177eb7fb729160c67a35926",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "99bdb607_7d55625c",
+        "filename": "examples/ios/build/config/ios/scripts/check-manifest.py",
+        "patchSetId": 6
+      },
+      "lineNbr": 44,
+      "author": {
+        "id": 1000070
+      },
+      "writtenOn": "2025-08-01T08:40:52Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "5088ddac_a902aa4e",
+      "range": {
+        "startLine": 44,
+        "startChar": 29,
+        "endLine": 44,
+        "endChar": 36
+      },
       "revId": "bd13481a9651ce27f177eb7fb729160c67a35926",
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
     },
@@ -256,6 +352,30 @@
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "e3bf9bb7_0e37dc2d",
+        "filename": "examples/ios/build/config/ios/scripts/check-manifest.py",
+        "patchSetId": 6
+      },
+      "lineNbr": 50,
+      "author": {
+        "id": 1000070
+      },
+      "writtenOn": "2025-08-01T08:40:52Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "3a2bb803_b2b0fe21",
+      "range": {
+        "startLine": 50,
+        "startChar": 8,
+        "endLine": 50,
+        "endChar": 24
+      },
+      "revId": "bd13481a9651ce27f177eb7fb729160c67a35926",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "ccc70e65_f1c6cddc",
@@ -293,6 +413,30 @@
           ]
         }
       ],
+      "revId": "bd13481a9651ce27f177eb7fb729160c67a35926",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e49c4c65_aebdf147",
+        "filename": "examples/ios/build/config/ios/scripts/check-manifest.py",
+        "patchSetId": 6
+      },
+      "lineNbr": 56,
+      "author": {
+        "id": 1000070
+      },
+      "writtenOn": "2025-08-01T08:40:52Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ccc70e65_f1c6cddc",
+      "range": {
+        "startLine": 56,
+        "startChar": 4,
+        "endLine": 56,
+        "endChar": 23
+      },
       "revId": "bd13481a9651ce27f177eb7fb729160c67a35926",
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
     }
