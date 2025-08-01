@@ -1,0 +1,300 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "de3103aa_7d7c8f7a",
+        "filename": "examples/ios/build/config/ios/scripts/check-manifest.py",
+        "patchSetId": 6
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 1000030
+      },
+      "writtenOn": "2025-08-01T05:44:31Z",
+      "side": 1,
+      "message": "2025?",
+      "range": {
+        "startLine": 1,
+        "startChar": 12,
+        "endLine": 1,
+        "endChar": 16
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "c9dc3fef_3c6a4b06",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "examples/ios/build/config/ios/scripts/check-manifest.py",
+              "range": {
+                "startLine": 1,
+                "startChar": 0,
+                "endLine": 2,
+                "endChar": 0
+              },
+              "replacement": "# Copyright 2024 The Chromium Authors. All rights reserved.\n"
+            }
+          ]
+        }
+      ],
+      "revId": "bd13481a9651ce27f177eb7fb729160c67a35926",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5a169a14_e029ad23",
+        "filename": "examples/ios/build/config/ios/scripts/check-manifest.py",
+        "patchSetId": 6
+      },
+      "lineNbr": 14,
+      "author": {
+        "id": 1000030
+      },
+      "writtenOn": "2025-08-01T05:44:31Z",
+      "side": 1,
+      "message": "This is redundant?",
+      "range": {
+        "startLine": 14,
+        "startChar": 27,
+        "endLine": 14,
+        "endChar": 30
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "b96d068a_a29bb723",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "examples/ios/build/config/ios/scripts/check-manifest.py",
+              "range": {
+                "startLine": 14,
+                "startChar": 0,
+                "endLine": 15,
+                "endChar": 0
+              },
+              "replacement": "  with open(manifest_path, encoding\u003d\u0027utf-8\u0027) as manifest_file:\n"
+            },
+            {
+              "path": "examples/ios/build/config/ios/scripts/check-manifest.py",
+              "range": {
+                "startLine": 44,
+                "startChar": 0,
+                "endLine": 45,
+                "endChar": 0
+              },
+              "replacement": "      dirnames[:] \u003d list(set(dirnames) - set(dirnames_to_skip))\n"
+            },
+            {
+              "path": "examples/ios/build/config/ios/scripts/check-manifest.py",
+              "range": {
+                "startLine": 56,
+                "startChar": 0,
+                "endLine": 57,
+                "endChar": 0
+              },
+              "replacement": "    pass\n"
+            }
+          ]
+        }
+      ],
+      "revId": "bd13481a9651ce27f177eb7fb729160c67a35926",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c279b748_04eb7502",
+        "filename": "examples/ios/build/config/ios/scripts/check-manifest.py",
+        "patchSetId": 6
+      },
+      "lineNbr": 16,
+      "author": {
+        "id": 1000030
+      },
+      "writtenOn": "2025-08-01T05:44:31Z",
+      "side": 1,
+      "message": "better to use endswith?",
+      "range": {
+        "startLine": 16,
+        "startChar": 13,
+        "endLine": 16,
+        "endChar": 17
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "f555afb9_b219e485",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "examples/ios/build/config/ios/scripts/check-manifest.py",
+              "range": {
+                "startLine": 16,
+                "startChar": 0,
+                "endLine": 17,
+                "endChar": 0
+              },
+              "replacement": "      assert line.endswith(\u0027\\n\u0027)\n"
+            },
+            {
+              "path": "examples/ios/build/config/ios/scripts/check-manifest.py",
+              "range": {
+                "startLine": 44,
+                "startChar": 0,
+                "endLine": 45,
+                "endChar": 0
+              },
+              "replacement": "      dirnames[:] \u003d list(set(dirnames) - set(dirnames_to_skip))\n"
+            }
+          ]
+        }
+      ],
+      "revId": "bd13481a9651ce27f177eb7fb729160c67a35926",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5088ddac_a902aa4e",
+        "filename": "examples/ios/build/config/ios/scripts/check-manifest.py",
+        "patchSetId": 6
+      },
+      "lineNbr": 44,
+      "author": {
+        "id": 1000030
+      },
+      "writtenOn": "2025-08-01T05:44:31Z",
+      "side": 1,
+      "message": "dirnames?",
+      "range": {
+        "startLine": 44,
+        "startChar": 29,
+        "endLine": 44,
+        "endChar": 36
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "69c31571_955bfa3a",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "examples/ios/build/config/ios/scripts/check-manifest.py",
+              "range": {
+                "startLine": 44,
+                "startChar": 0,
+                "endLine": 45,
+                "endChar": 0
+              },
+              "replacement": "      dirnames[:] \u003d list(set(dirnames) - set(dirnames_to_skip))\n"
+            }
+          ]
+        }
+      ],
+      "revId": "bd13481a9651ce27f177eb7fb729160c67a35926",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3a2bb803_b2b0fe21",
+        "filename": "examples/ios/build/config/ios/scripts/check-manifest.py",
+        "patchSetId": 6
+      },
+      "lineNbr": 50,
+      "author": {
+        "id": 1000030
+      },
+      "writtenOn": "2025-08-01T05:44:31Z",
+      "side": 1,
+      "message": "It is fine to use bool if number is not important?",
+      "range": {
+        "startLine": 50,
+        "startChar": 8,
+        "endLine": 50,
+        "endChar": 24
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "e0de580c_4324498f",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "examples/ios/build/config/ios/scripts/check-manifest.py",
+              "range": {
+                "startLine": 35,
+                "startChar": 0,
+                "endLine": 36,
+                "endChar": 0
+              },
+              "replacement": "  has_unexpected_files \u003d False\n"
+            },
+            {
+              "path": "examples/ios/build/config/ios/scripts/check-manifest.py",
+              "range": {
+                "startLine": 50,
+                "startChar": 0,
+                "endLine": 51,
+                "endChar": 0
+              },
+              "replacement": "        has_unexpected_files \u003d True\n"
+            },
+            {
+              "path": "examples/ios/build/config/ios/scripts/check-manifest.py",
+              "range": {
+                "startLine": 52,
+                "startChar": 0,
+                "endLine": 53,
+                "endChar": 0
+              },
+              "replacement": "  if has_unexpected_files:\n"
+            }
+          ]
+        }
+      ],
+      "revId": "bd13481a9651ce27f177eb7fb729160c67a35926",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ccc70e65_f1c6cddc",
+        "filename": "examples/ios/build/config/ios/scripts/check-manifest.py",
+        "patchSetId": 6
+      },
+      "lineNbr": 56,
+      "author": {
+        "id": 1000030
+      },
+      "writtenOn": "2025-08-01T05:44:31Z",
+      "side": 1,
+      "message": "pass is fine?",
+      "range": {
+        "startLine": 56,
+        "startChar": 4,
+        "endLine": 56,
+        "endChar": 23
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "c5f52aa7_4182041a",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "examples/ios/build/config/ios/scripts/check-manifest.py",
+              "range": {
+                "startLine": 56,
+                "startChar": 0,
+                "endLine": 57,
+                "endChar": 0
+              },
+              "replacement": "    pass\n"
+            }
+          ]
+        }
+      ],
+      "revId": "bd13481a9651ce27f177eb7fb729160c67a35926",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    }
+  ]
+}
