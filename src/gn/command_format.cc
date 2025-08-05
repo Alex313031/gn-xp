@@ -541,17 +541,31 @@ void Printer::SortImports(std::vector<std::unique_ptr<PARSENODE>>& statements) {
     int start_line =
         std::max(statements[begin]->GetRange().begin().line_number(),
                  line_after_previous + 1);
+    const ParseNode* original_first = statements[begin].get();
 
     std::sort(statements.begin() + begin, statements.begin() + end,
               CompareByImportFile());
+
+    // If the beginning of the range had before comments, and the first node
+    // moved during the sort, then move its comments to the new head of the
+    // range.
+    if (original_first->comments() &&
+        statements[begin].get() != original_first) {
+      for (const auto& hc : original_first->comments()->before()) {
+        const_cast<ParseNode*>(statements[begin].get())
+            ->comments_mutable()
+            ->append_before(hc);
+      }
+      const_cast<ParseNode*>(original_first)
+          ->comments_mutable()
+          ->clear_before();
+    }
 
     const PARSENODE* prev = nullptr;
     for (size_t i = begin; i < end; ++i) {
       const PARSENODE* node = statements[i].get();
       int line_number =
           prev ? prev->GetRange().end().line_number() + 1 : start_line;
-      if (node->comments() && !node->comments()->before().empty())
-        line_number++;
       const_cast<FunctionCallNode*>(node->AsFunctionCall())
           ->SetNewLocation(line_number);
       prev = node;

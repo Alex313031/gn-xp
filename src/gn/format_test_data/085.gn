@@ -1,0 +1,7 @@
+import("a.gni")
+# newline after the next line should be preserved
+import("b.gni")
+
+if (condition) {
+  import("c.gni")
+}
