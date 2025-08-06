@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "8cb77152_75caa994",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000070
+      },
+      "writtenOn": "2025-08-06T11:10:14Z",
+      "side": 1,
+      "message": "Please take a look.\n\nI ran `gn format` on all .gni and .gn files in chromium repository and then inspected the differences and did not spot any issue.",
+      "revId": "fdc1dd1ca9b77da37b92a7ba67b0eb2e8fdf6a08",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    }
+  ]
+}
