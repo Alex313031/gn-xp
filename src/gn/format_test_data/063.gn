@@ -1,50 +1,66 @@
 source_set("test") {
   a = "a"
   b = "b"
+  c = {
+    d = "d"
+    e = "e"
+  }
+  f = [
+    "f0",
+    "f1",
+    "f2",
+  ]
   deps = [
-    "//a",
-    "//a/a",
-    "//a/b",
-    "//a:a",
-    "//a:b",
-    "//b",
     ":a",
     ":b",
     "a",
+    "a",
+    "a:b",
     "a/a",
     "a/b",
-    "a:a",
-    "a:b",
     "b",
+    "//a",
+    "//a",
+    "//a:b",
+    "//a/a",
+    "//a/b",
+    "//b",
     a,
     b,
+    c.e,
+    c.d,
+    c.d,
+    f[2],
+    f[0],
+    f[0],
+    f[1],
   ]
 
   public_deps = []
   if (condition) {
     public_deps += [
-      "//a",
-      "//a/a",
-      "//a:a",
       ":a",
       "a",
+      "a",
       "a/a",
-      "a:a",
+      "//a",
+      "//a",
+      "//a/a",
       a,
     ]
   }
 
   # Sort lists with "deps" suffix as "deps".
   foo_deps = [
-    "//a",
     ":z",
+    "//a",
   ]
 
   # Likewise for visibility
   visibility = [
-    "//b:*",
-    "//a",
-    "//b/*",
     ":z",
+    "//a",
+    "//b:*",
+    "//b/*",
   ]
 }
