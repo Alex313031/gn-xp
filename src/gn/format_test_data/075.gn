@@ -9,3 +9,7 @@ import("stuff.gni")
 # warning.
 import("//build/config/mac/mac_sdk_overrides.gni")
 import("//build/config/ios/ios_sdk_overrides.gni")
+
+if (condition) {
+  import("more_stuff.gni")
+}
