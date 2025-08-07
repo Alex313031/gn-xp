@@ -36,6 +36,24 @@
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "cbe765d7_596db512",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000070
+      },
+      "writtenOn": "2025-08-07T13:49:34Z",
+      "side": 1,
+      "message": "Sure.\n\nIn order to only show differences introduced by this change, I made this in two CLs:\n- https://crrev.com/c/6827304 reformat everything with gn at HEAD\n- https://crrev.com/c/6827801 reformat everything with gn build with this change\n\nThis should ensure that https://crrev.com/c/6827801 only contains changes related to removing the duplicates and/or fixes in sorting. Most of the changes are mundane. There are a few files that could be worth discussion, I\u0027ve highlighted them with comments.",
+      "parentUuid": "03fc4a97_ad604a1f",
+      "revId": "fdc1dd1ca9b77da37b92a7ba67b0eb2e8fdf6a08",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "9cca5049_e05f0918",
@@ -49,6 +67,30 @@
       "writtenOn": "2025-08-07T03:07:37Z",
       "side": 1,
       "message": "Can we have test for this?",
+      "range": {
+        "startLine": 471,
+        "startChar": 0,
+        "endLine": 472,
+        "endChar": 69
+      },
+      "revId": "fdc1dd1ca9b77da37b92a7ba67b0eb2e8fdf6a08",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "aeedcc1d_c9cfed28",
+        "filename": "src/gn/command_format.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 472,
+      "author": {
+        "id": 1000070
+      },
+      "writtenOn": "2025-08-07T13:49:34Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "9cca5049_e05f0918",
       "range": {
         "startLine": 471,
         "startChar": 0,
@@ -96,6 +138,30 @@
           ]
         }
       ],
+      "revId": "fdc1dd1ca9b77da37b92a7ba67b0eb2e8fdf6a08",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "5516c11e_61926a21",
+        "filename": "src/gn/parse_tree.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 1070,
+      "author": {
+        "id": 1000070
+      },
+      "writtenOn": "2025-08-07T13:49:34Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "2398fdaf_dec4c418",
+      "range": {
+        "startLine": 1070,
+        "startChar": 9,
+        "endLine": 1070,
+        "endChar": 15
+      },
       "revId": "fdc1dd1ca9b77da37b92a7ba67b0eb2e8fdf6a08",
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
     }
