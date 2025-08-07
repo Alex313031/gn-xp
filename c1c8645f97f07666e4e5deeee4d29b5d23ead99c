@@ -16,6 +16,29 @@
       "message": "Thank you for the review.\n\nPlease take another look.",
       "revId": "c1c8645f97f07666e4e5deeee4d29b5d23ead99c",
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f7e0dab1_2ebfc24d",
+        "filename": "src/gn/parse_tree.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 1059,
+      "author": {
+        "id": 1000030
+      },
+      "writtenOn": "2025-08-07T15:40:07Z",
+      "side": 1,
+      "message": "Add test for this case too?",
+      "range": {
+        "startLine": 1058,
+        "startChar": 0,
+        "endLine": 1059,
+        "endChar": 22
+      },
+      "revId": "c1c8645f97f07666e4e5deeee4d29b5d23ead99c",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
     }
   ]
 }
