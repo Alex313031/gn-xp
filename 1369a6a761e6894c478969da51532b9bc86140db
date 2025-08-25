@@ -16,6 +16,23 @@
       "message": "Sorry, I forgot to update infra/config/recipes.cfg. Could you ptal again?",
       "revId": "1369a6a761e6894c478969da51532b9bc86140db",
       "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "598bbd3a_c73a1dff",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000070
+      },
+      "writtenOn": "2025-08-25T12:52:02Z",
+      "side": 1,
+      "message": "lgtm",
+      "revId": "1369a6a761e6894c478969da51532b9bc86140db",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
     }
   ]
 }
