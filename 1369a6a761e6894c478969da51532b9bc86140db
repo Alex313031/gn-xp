@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e1cf9e55_fe79fa5e",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000030
+      },
+      "writtenOn": "2025-08-25T09:24:52Z",
+      "side": 1,
+      "message": "Sorry, I forgot to update infra/config/recipes.cfg. Could you ptal again?",
+      "revId": "1369a6a761e6894c478969da51532b9bc86140db",
+      "serverId": "c360c8e5-7aa8-3905-a7a0-810934766dac"
+    }
+  ]
+}
