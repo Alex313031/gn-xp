@@ -1,6 +1,8 @@
 # GN
 
-GN is a meta-build system that generates build files for
+__NOTE:__ This is a fork with compiler optimizations like -O3 -ffast-math and SSE4, and support for Windows XP/Vista was re-added.
+
+GN ("Generate Ninja") is a meta-build system that generates build files for
 [Ninja](https://ninja-build.org).
 
 Related resources:

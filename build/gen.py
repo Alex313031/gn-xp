@@ -442,6 +442,11 @@ def WriteGNNinja(path, platform, host, options, args_list):
     else:
       cflags.append('-DNDEBUG')
       cflags.append('-O3')
+      cflags.append('-mfpmath=sse')
+      cflags.append('-msse2')
+      cflags.append('-msse3')
+      cflags.append('-ffast-math')
+      cflags.append('-ffp-contract=fast')
       if options.no_strip:
         cflags.append('-g')
       ldflags.append('-O3')
