@@ -78,11 +78,11 @@ build_linux() {
     python3 build/gen.py --host=linux --platform=linux --debug &&
     ninja -C out -v -j$JOB_COUNT && cd out &&
     mv -fv gn gn_debug &&
-    zip "gn_linux_debug.zip" gn_debug
+    zip "gn_linux_debug.zip" gn_debug && mv -fv gn_linux_debug.zip ../
   else
     python3 build/gen.py --host=linux --platform=linux &&
     ninja -C out -v -j$JOB_COUNT && cd out &&
-    zip "gn_linux.zip" gn
+    zip "gn_linux.zip" gn && mv -fv gn_linux.zip ../
   fi
 }
 
@@ -98,12 +98,12 @@ build_windows() {
     python3 build/gen.py --host=linux --platform=mingw --debug &&
     ninja -C out -v -j$JOB_COUNT && cd out &&
     mv -fv gn.exe gn_debug.exe &&
-    zip "gn_win_debug.zip" gn_debug.exe
+    zip "gn_win_debug.zip" gn_debug.exe && mv -fv gn_win_debug.zip ../
   else
     # --use-lto --use-icf can only be used with MSVC/Clang
     python3 build/gen.py --host=linux --platform=mingw &&
     ninja -C out -v -j$JOB_COUNT && cd out &&
-    zip "gn_win.zip" gn.exe
+    zip "gn_win.zip" gn.exe && mv -fv gn_win.zip ../
   fi
 }
 
