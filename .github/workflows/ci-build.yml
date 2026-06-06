@@ -1,4 +1,4 @@
-name: ci-build
+name: GN Multi-Platform Build
 
 on:
   workflow_dispatch:
