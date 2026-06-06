@@ -2,6 +2,8 @@
 
 # Copyright (c) 2026 Alex313031
 
+set -euo pipefail
+
 YEL='\033[1;33m' # Yellow
 CYA='\033[1;96m' # Cyan
 RED='\033[1;31m' # Red
@@ -16,9 +18,13 @@ die()  { yell "${RED}$* ${c0}"; exit 1; }
 try() { "$@" || die "${RED}Failed $*"; }
 
 SCRIPTNAME=$(basename "$0")
-SCRIPTVER="1.0.0"
+SCRIPTVER="2.1.2"
 
 export HERE=$( cd -- "$( dirname -- "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )
+
+# gen.py and the out/ paths are relative, so run from the repo root regardless
+# of where the script was invoked from.
+cd "$HERE" || die "Failed to cd into $HERE"
 
 JOB_COUNT=$(getconf _NPROCESSORS_ONLN)
 
@@ -49,7 +55,7 @@ EOF
 }
 
 show_version() {
-  printf "\n $SCRIPTNAME Version $SCRIPTVER \n\n"
+  printf "\n %s Version %s \n\n" "$SCRIPTNAME" "$SCRIPTVER"
   exit 0
 }
 
@@ -59,13 +65,15 @@ install_deps() {
   fi
   # use sudo only when not already root (e.g. plain CI containers lack sudo)
   local sudo=""
-  [ "$(id -u)" -ne 0 ] && sudo="sudo"
+  if [ "$(id -u)" -ne 0 ]; then
+    sudo="sudo"
+  fi
 
-  printf "${GRE}Installing dependencies for $SCRIPTNAME...${c0}\n"
+  printf "${GRE}Installing dependencies for %s...${c0}\n" "$SCRIPTNAME"
   # build-essential: gcc, g++, make for the Linux build. mingw-w64 provides the
   # x86_64-w64-mingw32-* cross toolchain used by the Windows build.
   $sudo apt-get update || die "apt-get update failed"
-  $sudo apt-get install build-essential ninja-build python3 \
+  $sudo apt-get install build-essential ninja-build python3 zip \
         mingw-w64 mingw-w64-i686-dev mingw-w64-x86-64-dev mingw-w64-tools \
       || die "Failed to install dependencies"
   printf "${GRE}Done installing dependencies!${c0}\n"
@@ -79,18 +87,22 @@ build_linux() {
   export LD=g++
   if [ "$WANT_DEBUG" == "1" ]; then
     printf "${GRE}Building GN for Linux using GCC (Debug)...${c0}\n"
-    python3 build/gen.py --out-path out/linux_debug --host=linux --platform=linux --debug &&
-    ninja -C out/linux_debug $VFLAG -j$JOB_COUNT && cd out/linux_debug &&
-    mv -fv gn gn_debug &&
+    try python3 build/gen.py --out-path out/linux_debug --host=linux --platform=linux --debug
+    try ninja -C out/linux_debug $VFLAG -j"$JOB_COUNT"
+    try cd out/linux_debug
+    try mv -fv gn gn_debug
     printf "${GRE}Zipping up build.${c0}\n"
-    zip "gn_linux_debug.zip" gn_debug && mv -fv gn_linux_debug.zip ../../ &&
+    try zip "gn_linux_debug.zip" gn_debug
+    try mv -fv gn_linux_debug.zip ../../
     printf "${GRE}Done!${c0}\n"
   else
     printf "${GRE}Building GN for Linux using GCC...${c0}\n"
-    python3 build/gen.py --out-path out/linux --host=linux --platform=linux &&
-    ninja -C out/linux $VFLAG -j$JOB_COUNT && cd out/linux &&
+    try python3 build/gen.py --out-path out/linux --host=linux --platform=linux
+    try ninja -C out/linux $VFLAG -j"$JOB_COUNT"
+    try cd out/linux
     printf "${GRE}Zipping up build.${c0}\n"
-    zip "gn_linux.zip" gn && mv -fv gn_linux.zip ../../ &&
+    try zip "gn_linux.zip" gn
+    try mv -fv gn_linux.zip ../../
     printf "${GRE}Done!${c0}\n"
   fi
 }
@@ -105,32 +117,36 @@ build_windows() {
   export LD=x86_64-w64-mingw32-g++
   if [ "$WANT_DEBUG" == "1" ]; then
     printf "${GRE}Building GN for Windows using MinGW (Debug)...${c0}\n"
-    python3 build/gen.py --out-path out/win_debug --host=linux --platform=mingw --debug &&
-    ninja -C out/win_debug $VFLAG -j$JOB_COUNT && cd out/win_debug &&
-    mv -fv gn.exe gn_debug.exe &&
+    try python3 build/gen.py --out-path out/win_debug --host=linux --platform=mingw --debug
+    try ninja -C out/win_debug $VFLAG -j"$JOB_COUNT"
+    try cd out/win_debug
+    try mv -fv gn.exe gn_debug.exe
     printf "${GRE}Zipping up build.${c0}\n"
-    zip "gn_win_debug.zip" gn_debug.exe && mv -fv gn_win_debug.zip ../../ &&
+    try zip "gn_win_debug.zip" gn_debug.exe
+    try mv -fv gn_win_debug.zip ../../
     printf "${GRE}Done!${c0}\n"
   else
     printf "${GRE}Building GN for Windows using MinGW...${c0}\n"
     # --use-lto --use-icf can only be used with MSVC/Clang
-    python3 build/gen.py --out-path out/win --host=linux --platform=mingw &&
-    ninja -C out/win $VFLAG -j$JOB_COUNT && cd out/win &&
+    try python3 build/gen.py --out-path out/win --host=linux --platform=mingw
+    try ninja -C out/win $VFLAG -j"$JOB_COUNT"
+    try cd out/win
     printf "${GRE}Zipping up build.${c0}\n"
-    zip "gn_win.zip" gn.exe && mv -fv gn_win.zip ../../ &&
+    try zip "gn_win.zip" gn.exe
+    try mv -fv gn_win.zip ../../
     printf "${GRE}Done!${c0}\n"
   fi
 }
 
 clean_out() {
   printf "${YEL}Cleaning ${HERE}/out/...${c0}\n"
-  rm -rfv ${HERE}/out/*
+  rm -rfv "${HERE}"/out/*
   printf "${YEL}Cleaning .zips...${c0}\n"
-  rm -rfv ${HERE}/gn_*.zip
+  rm -rfv "${HERE}"/gn_*.zip
 }
 
 while :; do
-  case $1 in
+  case ${1-} in
     -h|--help)
         show_help
         ;;
@@ -152,9 +168,11 @@ while :; do
         VFLAG="-v"
         ;;
     -l|--linux)
+        [ -n "$WANT_TARGET" ] && [ "$WANT_TARGET" != "linux" ] && die "Cannot specify both linux and win"
         WANT_TARGET="linux"
         ;;
     -w|--win)
+        [ -n "$WANT_TARGET" ] && [ "$WANT_TARGET" != "windows" ] && die "Cannot specify both linux and win"
         WANT_TARGET="windows"
         ;;
     --)
@@ -172,12 +190,13 @@ done
 
 case "$WANT_TARGET" in
   linux)
-      build_linux
+      build_linux || die "Linux build failed"
       ;;
   windows)
-      build_windows
+      build_windows || die "Windows build failed"
       ;;
   *)
+      yell "${YEL}No build target specified (use -l/--linux or -w/--win).${c0}"
       show_help
       ;;
 esac
