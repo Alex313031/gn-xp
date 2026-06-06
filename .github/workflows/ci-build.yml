@@ -89,12 +89,12 @@ jobs:
 
       - name: Archive binaries
         run: |
-          (cd out && zip "gn-${{ matrix.slug }}.zip" gn)
+          (cd out && zip "gn_${{ matrix.slug }}.zip" gn)
 
       - name: Upload bin
         uses: actions/upload-artifact@v4
         with:
-          name: gn-${{ matrix.slug }}
+          name: gn_${{ matrix.slug }}
           path: out/gn_${{ matrix.slug }}.zip
 
   windows:
@@ -143,11 +143,11 @@ jobs:
       - name: Make zip
         run: |
           cd out
-          7z a -tzip gn-${{ matrix.slug }}.zip gn.exe
+          7z a -tzip gn_${{ matrix.slug }}.zip gn.exe
 
       - name: Upload bin
         uses: actions/upload-artifact@v4
         with:
-          name: gn-${{ matrix.slug }}
+          name: gn_${{ matrix.slug }}
           path: out/gn_${{ matrix.slug }}.zip
 
