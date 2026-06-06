@@ -100,7 +100,8 @@ build_windows() {
     mv -fv gn.exe gn_debug.exe &&
     zip "gn_win_debug.zip" gn_debug.exe
   else
-    python3 build/gen.py --host=linux --platform=mingw --use-lto --use-icf &&
+    # --use-lto --use-icf can only be used with MSVC/Clang
+    python3 build/gen.py --host=linux --platform=mingw &&
     ninja -C out -v -j$JOB_COUNT && cd out &&
     zip "gn_win.zip" gn.exe
   fi
