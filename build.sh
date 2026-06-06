@@ -62,7 +62,7 @@ install_deps() {
   # build-essential: gcc, g++, make for the Linux build. mingw-w64 provides the
   # x86_64-w64-mingw32-* cross toolchain used by the Windows build.
   $sudo apt-get update || die "apt-get update failed"
-  $sudo apt-get install -y build-essential ninja-build python3 \
+  $sudo apt-get install build-essential ninja-build python3 \
         mingw-w64 mingw-w64-i686-dev mingw-w64-x86-64-dev mingw-w64-tools \
       || die "Failed to install dependencies"
   printf "${GRE}Done installing dependencies!${c0}\n"
@@ -76,10 +76,13 @@ build_linux() {
   export LD=g++
   if [ "$WANT_DEBUG" == "1" ]; then
     python3 build/gen.py --host=linux --platform=linux --debug &&
-    ninja -C out -v -j$JOB_COUNT
+    ninja -C out -v -j$JOB_COUNT && cd out &&
+    mv -fv gn gn_debug &&
+    zip "gn_linux_debug.zip" gn_debug
   else
     python3 build/gen.py --host=linux --platform=linux &&
-    ninja -C out -v -j$JOB_COUNT
+    ninja -C out -v -j$JOB_COUNT && cd out &&
+    zip "gn_linux.zip" gn
   fi
 }
 
@@ -93,10 +96,13 @@ build_windows() {
   export LD=x86_64-w64-mingw32-g++
   if [ "$WANT_DEBUG" == "1" ]; then
     python3 build/gen.py --host=linux --platform=mingw --debug &&
-    ninja -C out -v -j$JOB_COUNT
+    ninja -C out -v -j$JOB_COUNT && cd out &&
+    mv -fv gn.exe gn_debug.exe &&
+    zip "gn_win_debug.zip" gn_debug.exe
   else
     python3 build/gen.py --host=linux --platform=mingw --use-lto --use-icf &&
-    ninja -C out -v -j$JOB_COUNT
+    ninja -C out -v -j$JOB_COUNT && cd out &&
+    zip "gn_win.zip" gn.exe
   fi
 }
 
