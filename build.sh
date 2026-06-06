@@ -62,7 +62,7 @@ install_deps() {
   # build-essential: gcc, g++, make for the Linux build. mingw-w64 provides the
   # x86_64-w64-mingw32-* cross toolchain used by the Windows build.
   $sudo apt-get update || die "apt-get update failed"
-  $sudo apt-get install -y build-essential python3 \
+  $sudo apt-get install -y build-essential ninja-build python3 \
         mingw-w64 mingw-w64-i686-dev mingw-w64-x86-64-dev mingw-w64-tools \
       || die "Failed to install dependencies"
   printf "${GRE}Done installing dependencies!${c0}\n"
