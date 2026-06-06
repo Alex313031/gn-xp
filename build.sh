@@ -30,6 +30,8 @@ show_help() {
 Usage:
   $SCRIPTNAME [options]
 
+A script to build GN on Linux for Linux or Windows.
+
 Options:
   -h, --help  Show this help.
   --version   Show script version.

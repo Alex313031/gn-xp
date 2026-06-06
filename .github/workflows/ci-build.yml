@@ -12,7 +12,7 @@ jobs:
       fail-fast: true
       matrix:
         include:
-          - slug: linux-i386
+          - slug: linux_i386
             cc: gcc
             cxx: g++
             cflags: "-m32"
@@ -22,7 +22,7 @@ jobs:
             install: "g++-multilib"
             ninja_release_name: v1.12.1/ninja-linux.zip
 
-          - slug: linux-amd64
+          - slug: linux_amd64
             cc: gcc
             cxx: g++
             cflags: "-m64"
@@ -31,7 +31,7 @@ jobs:
             os: ubuntu-22.04
             ninja_release_name: v1.12.1/ninja-linux.zip
 
-          - slug: macos-amd64
+          - slug: macos_amd64
             gen_args: "--use-lto --use-icf"
             cc: clang
             cxx: clang++
@@ -105,18 +105,18 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: gn-${{ matrix.slug }}
-          path: out/gn-${{ matrix.slug }}.zip
+          path: out/gn_${{ matrix.slug }}.zip
 
   windows:
     strategy:
       fail-fast: true
       matrix:
         include:
-          - slug: windows-i386
+          - slug: win_i386
             arch: x86
             gen_args: "--use-lto --use-icf"
 
-          - slug: windows-amd64
+          - slug: win_amd64
             arch: x64
             gen_args: "--use-lto --use-icf"
 
@@ -159,5 +159,5 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: gn-${{ matrix.slug }}
-          path: out/gn-${{ matrix.slug }}.zip
+          path: out/gn_${{ matrix.slug }}.zip
 
