@@ -31,16 +31,6 @@ jobs:
             os: ubuntu-22.04
             ninja_release_name: v1.12.1/ninja-linux.zip
 
-          - slug: macos_amd64
-            gen_args: "--use-lto --use-icf"
-            cc: clang
-            cxx: clang++
-            cflags: "-m64"
-            ldflags: "-m64"
-            libflags: "-m64"
-            os: macos-15-intel
-            ninja_release_name: v1.12.1/ninja-mac.zip
-
     runs-on: ${{ matrix.os }}
 
     steps:
