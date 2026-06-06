@@ -24,6 +24,7 @@ JOB_COUNT=$(getconf _NPROCESSORS_ONLN)
 
 WANT_DEBUG=0
 WANT_TARGET=""
+VFLAG=""
 
 show_help() {
   cat <<EOF
@@ -33,12 +34,14 @@ Usage:
 A script to build GN on Linux for Linux or Windows.
 
 Options:
-  -h, --help  Show this help.
-  --version   Show script version.
-  --deps      Install build dependencies
-  -l, --linux Build GN for Linux
-  -w, --win   Build GN for Windows
-  -d, --debug Make a debug build
+  -h, --help    Show this help.
+  --version     Show script version.
+  -c, --clean   Remove build artifacts
+  --deps        Install build dependencies
+  -l, --linux   Build GN for Linux
+  -w, --win     Build GN for Windows
+  -d, --debug   Make a debug build
+  -v, --verbose Verbose build output
 
 EOF
 
@@ -77,16 +80,18 @@ build_linux() {
   if [ "$WANT_DEBUG" == "1" ]; then
     printf "${GRE}Building GN for Linux using GCC (Debug)...${c0}\n"
     python3 build/gen.py --host=linux --platform=linux --debug &&
-    ninja -C out -v -j$JOB_COUNT && cd out &&
-    printf "${GRE}Zipping up build.${c0}\n"
+    ninja -C out $VFLAG -j$JOB_COUNT && cd out &&
     mv -fv gn gn_debug &&
-    zip "gn_linux_debug.zip" gn_debug && mv -fv gn_linux_debug.zip ../
+    printf "${GRE}Zipping up build.${c0}\n"
+    zip "gn_linux_debug.zip" gn_debug && mv -fv gn_linux_debug.zip ../ &&
+    printf "${GRE}Done!${c0}\n"
   else
     printf "${GRE}Building GN for Linux using GCC...${c0}\n"
     python3 build/gen.py --host=linux --platform=linux &&
-    ninja -C out -v -j$JOB_COUNT && cd out &&
+    ninja -C out $VFLAG -j$JOB_COUNT && cd out &&
     printf "${GRE}Zipping up build.${c0}\n"
-    zip "gn_linux.zip" gn && mv -fv gn_linux.zip ../
+    zip "gn_linux.zip" gn && mv -fv gn_linux.zip ../ &&
+    printf "${GRE}Done!${c0}\n"
   fi
 }
 
@@ -101,17 +106,19 @@ build_windows() {
   if [ "$WANT_DEBUG" == "1" ]; then
     printf "${GRE}Building GN for Windows using MinGW (Debug)...${c0}\n"
     python3 build/gen.py --host=linux --platform=mingw --debug &&
-    ninja -C out -v -j$JOB_COUNT && cd out &&
-    printf "${GRE}Zipping up build.${c0}\n"
+    ninja -C out $VFLAG -j$JOB_COUNT && cd out &&
     mv -fv gn.exe gn_debug.exe &&
-    zip "gn_win_debug.zip" gn_debug.exe && mv -fv gn_win_debug.zip ../
+    printf "${GRE}Zipping up build.${c0}\n"
+    zip "gn_win_debug.zip" gn_debug.exe && mv -fv gn_win_debug.zip ../ &&
+    printf "${GRE}Done!${c0}\n"
   else
     printf "${GRE}Building GN for Windows using MinGW...${c0}\n"
     # --use-lto --use-icf can only be used with MSVC/Clang
     python3 build/gen.py --host=linux --platform=mingw &&
-    ninja -C out -v -j$JOB_COUNT && cd out &&
+    ninja -C out $VFLAG -j$JOB_COUNT && cd out &&
     printf "${GRE}Zipping up build.${c0}\n"
-    zip "gn_win.zip" gn.exe && mv -fv gn_win.zip ../
+    zip "gn_win.zip" gn.exe && mv -fv gn_win.zip ../ &&
+    printf "${GRE}Done!${c0}\n"
   fi
 }
 
@@ -138,6 +145,9 @@ while :; do
         ;;
     -d|--debug)
         WANT_DEBUG=1
+        ;;
+    -v|--verbose)
+        VFLAG="-v"
         ;;
     -l|--linux)
         WANT_TARGET="linux"
