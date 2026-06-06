@@ -1,25 +1,7 @@
 name: ci-build
 
 on:
-  pull_request:
-    branches:
-      - master
-      - develop
-      - feature/**
-  push:
-    branches:
-      - master
-      - develop
-      - feature/**
-    tags:
-      - '*'
   workflow_dispatch:
-  release:
-    types: published
-
-concurrency:
-  group: ${{ github.ref }}-${{ github.workflow }}-${{ github.event_name }}
-  cancel-in-progress: true
 
 env:
   NINJA_BASE_URL: https://github.com/ninja-build/ninja/releases/download/
@@ -117,20 +99,13 @@ jobs:
 
       - name: Archive binaries
         run: |
-          tar -C out -czf "out/gn-${{ matrix.slug }}.tar.gz" gn
+          (cd out && zip "gn-${{ matrix.slug }}.zip" gn)
 
       - name: Upload bin
         uses: actions/upload-artifact@v4
         with:
           name: gn-${{ matrix.slug }}
-          path: out/gn
-
-      - name: Release
-        uses: softprops/action-gh-release@v1
-        if: startsWith(github.ref, 'refs/tags/')
-        with:
-          files: |
-            out/gn-${{ matrix.slug }}.tar.gz
+          path: out/gn-${{ matrix.slug }}.zip
 
   windows:
     strategy:
@@ -177,17 +152,12 @@ jobs:
 
       - name: Make zip
         run: |
-          7z a -tzip out\gn-${{ matrix.slug }}.zip out\gn.exe
+          cd out
+          7z a -tzip gn-${{ matrix.slug }}.zip gn.exe
 
       - name: Upload bin
         uses: actions/upload-artifact@v4
         with:
           name: gn-${{ matrix.slug }}
-          path: out/gn.exe
+          path: out/gn-${{ matrix.slug }}.zip
 
-      - name: Release
-        uses: softprops/action-gh-release@v1
-        if: startsWith(github.ref, 'refs/tags/')
-        with:
-          files: |
-            out/gn-${{ matrix.slug }}.zip
