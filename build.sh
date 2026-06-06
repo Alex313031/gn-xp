@@ -75,13 +75,17 @@ build_linux() {
   export AR=ar
   export LD=g++
   if [ "$WANT_DEBUG" == "1" ]; then
+    printf "${GRE}Building GN for Linux using GCC (Debug)...${c0}\n"
     python3 build/gen.py --host=linux --platform=linux --debug &&
     ninja -C out -v -j$JOB_COUNT && cd out &&
+    printf "${GRE}Zipping up build.${c0}\n"
     mv -fv gn gn_debug &&
     zip "gn_linux_debug.zip" gn_debug && mv -fv gn_linux_debug.zip ../
   else
+    printf "${GRE}Building GN for Linux using GCC...${c0}\n"
     python3 build/gen.py --host=linux --platform=linux &&
     ninja -C out -v -j$JOB_COUNT && cd out &&
+    printf "${GRE}Zipping up build.${c0}\n"
     zip "gn_linux.zip" gn && mv -fv gn_linux.zip ../
   fi
 }
@@ -95,16 +99,25 @@ build_windows() {
   export AR=x86_64-w64-mingw32-ar
   export LD=x86_64-w64-mingw32-g++
   if [ "$WANT_DEBUG" == "1" ]; then
+    printf "${GRE}Building GN for Windows using MinGW (Debug)...${c0}\n"
     python3 build/gen.py --host=linux --platform=mingw --debug &&
     ninja -C out -v -j$JOB_COUNT && cd out &&
+    printf "${GRE}Zipping up build.${c0}\n"
     mv -fv gn.exe gn_debug.exe &&
     zip "gn_win_debug.zip" gn_debug.exe && mv -fv gn_win_debug.zip ../
   else
+    printf "${GRE}Building GN for Windows using MinGW...${c0}\n"
     # --use-lto --use-icf can only be used with MSVC/Clang
     python3 build/gen.py --host=linux --platform=mingw &&
     ninja -C out -v -j$JOB_COUNT && cd out &&
+    printf "${GRE}Zipping up build.${c0}\n"
     zip "gn_win.zip" gn.exe && mv -fv gn_win.zip ../
   fi
+}
+
+clean_out() {
+  printf "${YEL}Cleaning ${HERE}/out/...${c0}\n"
+  rm -rfv ${HERE}/out/*
 }
 
 while :; do
@@ -117,6 +130,10 @@ while :; do
         ;;
     --deps)
         install_deps
+        exit 0
+        ;;
+    -c|--clean)
+        clean_out
         exit 0
         ;;
     -d|--debug)
