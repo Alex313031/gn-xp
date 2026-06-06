@@ -79,18 +79,18 @@ build_linux() {
   export LD=g++
   if [ "$WANT_DEBUG" == "1" ]; then
     printf "${GRE}Building GN for Linux using GCC (Debug)...${c0}\n"
-    python3 build/gen.py --host=linux --platform=linux --debug &&
-    ninja -C out $VFLAG -j$JOB_COUNT && cd out &&
+    python3 build/gen.py --out-path out/linux_debug --host=linux --platform=linux --debug &&
+    ninja -C out/linux_debug $VFLAG -j$JOB_COUNT && cd out/linux_debug &&
     mv -fv gn gn_debug &&
     printf "${GRE}Zipping up build.${c0}\n"
-    zip "gn_linux_debug.zip" gn_debug && mv -fv gn_linux_debug.zip ../ &&
+    zip "gn_linux_debug.zip" gn_debug && mv -fv gn_linux_debug.zip ../../ &&
     printf "${GRE}Done!${c0}\n"
   else
     printf "${GRE}Building GN for Linux using GCC...${c0}\n"
-    python3 build/gen.py --host=linux --platform=linux &&
-    ninja -C out $VFLAG -j$JOB_COUNT && cd out &&
+    python3 build/gen.py --out-path out/linux --host=linux --platform=linux &&
+    ninja -C out/linux $VFLAG -j$JOB_COUNT && cd out/linux &&
     printf "${GRE}Zipping up build.${c0}\n"
-    zip "gn_linux.zip" gn && mv -fv gn_linux.zip ../ &&
+    zip "gn_linux.zip" gn && mv -fv gn_linux.zip ../../ &&
     printf "${GRE}Done!${c0}\n"
   fi
 }
@@ -105,19 +105,19 @@ build_windows() {
   export LD=x86_64-w64-mingw32-g++
   if [ "$WANT_DEBUG" == "1" ]; then
     printf "${GRE}Building GN for Windows using MinGW (Debug)...${c0}\n"
-    python3 build/gen.py --host=linux --platform=mingw --debug &&
-    ninja -C out $VFLAG -j$JOB_COUNT && cd out &&
+    python3 build/gen.py --out-path out/win_debug --host=linux --platform=mingw --debug &&
+    ninja -C out/win_debug $VFLAG -j$JOB_COUNT && cd out/win_debug &&
     mv -fv gn.exe gn_debug.exe &&
     printf "${GRE}Zipping up build.${c0}\n"
-    zip "gn_win_debug.zip" gn_debug.exe && mv -fv gn_win_debug.zip ../ &&
+    zip "gn_win_debug.zip" gn_debug.exe && mv -fv gn_win_debug.zip ../../ &&
     printf "${GRE}Done!${c0}\n"
   else
     printf "${GRE}Building GN for Windows using MinGW...${c0}\n"
     # --use-lto --use-icf can only be used with MSVC/Clang
-    python3 build/gen.py --host=linux --platform=mingw &&
-    ninja -C out $VFLAG -j$JOB_COUNT && cd out &&
+    python3 build/gen.py --out-path out/win --host=linux --platform=mingw &&
+    ninja -C out/win $VFLAG -j$JOB_COUNT && cd out/win &&
     printf "${GRE}Zipping up build.${c0}\n"
-    zip "gn_win.zip" gn.exe && mv -fv gn_win.zip ../ &&
+    zip "gn_win.zip" gn.exe && mv -fv gn_win.zip ../../ &&
     printf "${GRE}Done!${c0}\n"
   fi
 }
@@ -125,6 +125,8 @@ build_windows() {
 clean_out() {
   printf "${YEL}Cleaning ${HERE}/out/...${c0}\n"
   rm -rfv ${HERE}/out/*
+  printf "${YEL}Cleaning .zips...${c0}\n"
+  rm -rfv ${HERE}/gn_*.zip
 }
 
 while :; do
