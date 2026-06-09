@@ -1,6 +1,7 @@
-# GN
+# GN XP
 
-__NOTE:__ This is a fork with compiler optimizations like -O3 -ffast-math and SSE4, and support for Windows XP/Vista was re-added.
+__This is a fork with restored support for Windows XP/Vista (Upstream GN only runs on Win7+).__  
+It is used by [gn-legacy](https://github.com/Alex313031/gn-legacy#readme).
 
 GN ("Generate Ninja") is a meta-build system that generates build files for
 [Ninja](https://ninja-build.org).
