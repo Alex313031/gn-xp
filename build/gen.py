@@ -444,12 +444,9 @@ def WriteGNNinja(path, platform, host, options, args_list):
       cflags.append('-O3')
       cflags.append('-mfpmath=sse')
       cflags.append('-msse2')
-      cflags.append('-msse3')
-      cflags.append('-ffast-math')
-      cflags.append('-ffp-contract=fast')
       if options.no_strip:
         cflags.append('-g')
-      ldflags.append('-O3')
+      ldflags.append('-Wl,-O3')
       # Use -fdata-sections and -ffunction-sections to place each function
       # or data item into its own section so --gc-sections can eliminate any
       # unused functions and data items.
@@ -564,10 +561,11 @@ def WriteGNNinja(path, platform, host, options, args_list):
       cflags.extend(['-DUNICODE',
                      '-DNOMINMAX',
                      '-DWIN32_LEAN_AND_MEAN',
-                     '-DWINVER=0x0601',
-                     '-D_WIN32_WINNT=0x0601',
-                     #'-D_USING_V110_SDK71_',
-                     #'-D_ATL_XP_TARGETING',
+                     '-DWINVER=0x0501',
+                     '-D_WIN32_WINNT=0x0501',
+                     '-D_USING_V110_SDK71_',
+                     '-D_ATL_XP_TARGETING',
+                     '-D__USE_MINGW_ANSI_STDIO=1',
                      '-DPSAPI_VERSION=1',
                      '-D_CRT_SECURE_NO_DEPRECATE',
                      '-D_SCL_SECURE_NO_DEPRECATE',
@@ -576,7 +574,7 @@ def WriteGNNinja(path, platform, host, options, args_list):
       ])
   elif platform.is_msvc():
     if not options.debug:
-      cflags.extend(['/O2', '/DNDEBUG', '/Zc:inline'])
+      cflags.extend(['/O2', '/DNDEBUG', '/Zc:inline', '/ARCH:SSE2',])
       ldflags.extend(['/OPT:REF'])
 
       if options.use_icf:
@@ -593,11 +591,13 @@ def WriteGNNinja(path, platform, host, options, args_list):
         '/DNOMINMAX',
         '/DUNICODE',
         '/DWIN32_LEAN_AND_MEAN',
-        '/DWINVER=0x0A00',
+        '/DWINVER=0x0600',
         '/D_CRT_SECURE_NO_DEPRECATE',
         '/D_SCL_SECURE_NO_DEPRECATE',
         '/D_UNICODE',
-        '/D_WIN32_WINNT=0x0A00',
+        '/D_WIN32_WINNT=0x0600',
+        '/DPSAPI_VERSION=1',
+        '/D_ATL_XP_TARGETING',
         '/FS',
         '/W4',
         '/Zi',

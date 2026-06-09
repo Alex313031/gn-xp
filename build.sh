@@ -18,7 +18,7 @@ die()  { yell "${RED}$* ${c0}"; exit 1; }
 try() { "$@" || die "${RED}Failed $*"; }
 
 SCRIPTNAME=$(basename "$0")
-SCRIPTVER="2.1.2"
+SCRIPTVER="2.1.3"
 
 export HERE=$( cd -- "$( dirname -- "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )
 
@@ -29,6 +29,7 @@ cd "$HERE" || die "Failed to cd into $HERE"
 JOB_COUNT=$(getconf _NPROCESSORS_ONLN)
 
 WANT_DEBUG=0
+WANT_I386=0
 WANT_TARGET=""
 VFLAG=""
 
@@ -44,6 +45,7 @@ Options:
   --version     Show script version.
   -c, --clean   Remove build artifacts
   --deps        Install build dependencies
+  --i386        Make a 32 bit build (only applicable to Windows builds)
   -l, --linux   Build GN for Linux
   -w, --win     Build GN for Windows
   -d, --debug   Make a debug build
@@ -85,57 +87,72 @@ build_linux() {
   export CXX=g++
   export AR=ar
   export LD=g++
+  local zipname="gn_linux" outdir="out/linux"
   if [ "$WANT_DEBUG" == "1" ]; then
+    zipname="gn_linux_debug"
+    outdir="out/linux_debug"
     printf "${GRE}Building GN for Linux using GCC (Debug)...${c0}\n"
-    try python3 build/gen.py --out-path out/linux_debug --host=linux --platform=linux --debug
-    try ninja -C out/linux_debug $VFLAG -j"$JOB_COUNT"
-    try cd out/linux_debug
+    try python3 build/gen.py --out-path "$outdir" --host=linux --platform=linux --debug
+    try ninja -C "$outdir" $VFLAG -j"$JOB_COUNT"
+    try cd "$outdir"
     try mv -fv gn gn_debug
-    printf "${GRE}Zipping up build.${c0}\n"
-    try zip "gn_linux_debug.zip" gn_debug
-    try mv -fv gn_linux_debug.zip ../../
-    printf "${GRE}Done!${c0}\n"
+    printf "${GRE}Zipping up gn_debug...${c0}\n"
+    try zip "$zipname.zip" gn_debug
+    try mv -fv "$zipname.zip" ../../
   else
     printf "${GRE}Building GN for Linux using GCC...${c0}\n"
-    try python3 build/gen.py --out-path out/linux --host=linux --platform=linux
-    try ninja -C out/linux $VFLAG -j"$JOB_COUNT"
-    try cd out/linux
-    printf "${GRE}Zipping up build.${c0}\n"
-    try zip "gn_linux.zip" gn
-    try mv -fv gn_linux.zip ../../
-    printf "${GRE}Done!${c0}\n"
+    try python3 build/gen.py --out-path "$outdir" --host=linux --platform=linux
+    try ninja -C "$outdir" $VFLAG -j"$JOB_COUNT"
+    try cd "$outdir"
+    printf "${GRE}Zipping up gn...${c0}\n"
+    try zip "$zipname.zip" gn
+    try mv -fv "$zipname.zip" ../../
   fi
+  printf "${GRE}Done! Zip at ${CYA}${zipname}.zip ${c0}\n"
 }
 
 build_windows() {
+  local arch="" zipname="" outdir=""
   # Cross-compile for Windows using the mingw-w64 toolchain (installed via --deps).
   # gen.py defaults the mingw toolchain to plain g++/ar, which is the host
   # compiler, so we must point it at the cross compiler explicitly.
-  export CC=x86_64-w64-mingw32-gcc
-  export CXX=x86_64-w64-mingw32-g++
-  export AR=x86_64-w64-mingw32-ar
-  export LD=x86_64-w64-mingw32-g++
-  if [ "$WANT_DEBUG" == "1" ]; then
-    printf "${GRE}Building GN for Windows using MinGW (Debug)...${c0}\n"
-    try python3 build/gen.py --out-path out/win_debug --host=linux --platform=mingw --debug
-    try ninja -C out/win_debug $VFLAG -j"$JOB_COUNT"
-    try cd out/win_debug
-    try mv -fv gn.exe gn_debug.exe
-    printf "${GRE}Zipping up build.${c0}\n"
-    try zip "gn_win_debug.zip" gn_debug.exe
-    try mv -fv gn_win_debug.zip ../../
-    printf "${GRE}Done!${c0}\n"
+  if [ "$WANT_I386" == "1" ]; then
+    export CC=i686-w64-mingw32-gcc
+    export CXX=i686-w64-mingw32-g++
+    export AR=i686-w64-mingw32-ar
+    export LD=i686-w64-mingw32-g++
+    arch="win32"
   else
+    export CC=x86_64-w64-mingw32-gcc
+    export CXX=x86_64-w64-mingw32-g++
+    export AR=x86_64-w64-mingw32-ar
+    export LD=x86_64-w64-mingw32-g++
+    arch="win64"
+  fi
+  if [ "$WANT_DEBUG" == "1" ]; then
+    zipname="gn_${arch}_debug"
+    outdir="out/${arch}_debug"
+    printf "${GRE}Building GN for Windows using MinGW (Debug)...${c0}\n"
+    try python3 build/gen.py --out-path "$outdir" --host=linux --platform=mingw --debug
+    try ninja -C "$outdir" $VFLAG -j"$JOB_COUNT"
+    try cd "$outdir"
+    try mv -fv gn.exe gn_debug.exe
+    printf "${GRE}Zipping up gn_debug.exe...${c0}\n"
+    try zip "$zipname.zip" gn_debug.exe
+    try mv -fv "$zipname.zip" ../../
+  else
+    zipname="gn_${arch}"
+    outdir="out/${arch}"
     printf "${GRE}Building GN for Windows using MinGW...${c0}\n"
     # --use-lto --use-icf can only be used with MSVC/Clang
-    try python3 build/gen.py --out-path out/win --host=linux --platform=mingw
-    try ninja -C out/win $VFLAG -j"$JOB_COUNT"
-    try cd out/win
-    printf "${GRE}Zipping up build.${c0}\n"
-    try zip "gn_win.zip" gn.exe
-    try mv -fv gn_win.zip ../../
-    printf "${GRE}Done!${c0}\n"
+    try python3 build/gen.py --out-path "$outdir" --host=linux --platform=mingw
+    try ninja -C "$outdir" $VFLAG -j"$JOB_COUNT"
+    try cd "$outdir"
+    printf "${GRE}Zipping up gn.exe...${c0}\n"
+    try zip "$zipname.zip" gn.exe
+    try mv -fv "$zipname.zip" ../../
   fi
+  printf "${GRE}Done! Zip at ${CYA}${zipname}.zip ${c0}\n"
 }
 
 clean_out() {
@@ -160,6 +177,9 @@ while :; do
     -c|--clean)
         clean_out
         exit 0
+        ;;
+    --i386)
+        WANT_I386=1
         ;;
     -d|--debug)
         WANT_DEBUG=1
@@ -187,6 +207,9 @@ while :; do
   esac
   shift
 done
+
+[ "$WANT_I386" == "1" ] && [ "$WANT_TARGET" == "linux" ] && \
+  die "--i386 only applies to Windows builds (-w/--win)"
 
 case "$WANT_TARGET" in
   linux)

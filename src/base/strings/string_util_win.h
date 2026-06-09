@@ -18,10 +18,12 @@ inline int vsnprintf(char* buffer,
                      size_t size,
                      const char* format,
                      va_list arguments) {
-  int length = vsnprintf_s(buffer, size, size - 1, format, arguments);
-  if (length < 0)
-    return _vscprintf(format, arguments);
-  return length;
+  // Use the C99 vsnprintf, which returns the number of characters that would
+  // have been written (even on truncation) and always null-terminates --
+  // exactly base::vsnprintf's contract. Under MinGW this resolves to the
+  // libmingwex implementation (via -D__USE_MINGW_ANSI_STDIO=1), avoiding the
+  // MSVC "secure" vsnprintf_s/_vscprintf that XP's msvcrt.dll does not export.
+  return ::vsnprintf(buffer, size, format, arguments);
 }
 
 }  // namespace base
