@@ -41,8 +41,8 @@ Usage:
 A script to build GN on Linux for Linux or Windows.
 
 Options:
-  -h, --help    Show this help.
-  --version     Show script version.
+  -h, --help    Show this help
+  --version     Show script version
   -c, --clean   Remove build artifacts
   --deps        Install build dependencies
   --i386        Make a 32 bit build (i386 on Linux, win32 on Windows)
@@ -57,7 +57,7 @@ EOF
 }
 
 show_version() {
-  printf "\n %s Version %s \n\n" "$SCRIPTNAME" "$SCRIPTVER"
+  printf "\n ${bold} %s Version %s \n\n" "$SCRIPTNAME" "$SCRIPTVER"
   exit 0
 }
 
