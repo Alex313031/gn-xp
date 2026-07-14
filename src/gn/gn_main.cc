@@ -50,6 +50,11 @@ int main(int argc, char** argv) {
   } else if (cmdline.HasSwitch(switches::kVersion)) {
     // Make "--version" print the version and exit.
     OutputString(std::string(LAST_COMMIT_POSITION) + "\n");
+    // On Windows, also report the host OS version (empty elsewhere).
+    std::string os_version = OperatingSystemVersion();
+    if (!os_version.empty()) {
+      OutputString("Running on " + os_version + "\n");
+    }
     exit(0);
   } else if (args.empty()) {
     // No command, print error and exit.

@@ -10,5 +10,10 @@
 bool IsLongPathsSupportEnabled();
 std::string OperatingSystemArchitecture();
 int NumberOfProcessors();
+bool IsLegacyWindows();
+
+// Human-readable OS version, e.g. "Windows XP (5.1.2600)". Returns an empty
+// string when the version is unavailable or on non-Windows platforms.
+std::string OperatingSystemVersion();
 
 #endif  // UTIL_SYS_INFO_H_

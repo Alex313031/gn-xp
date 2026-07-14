@@ -35,6 +35,7 @@
 #include "gn/value.h"
 #include "gn/value_extractors.h"
 #include "util/build_config.h"
+#include "util/sys_info.h"
 
 #if defined(OS_WIN)
 #include <windows.h>
@@ -852,9 +853,11 @@ bool Setup::FillPythonPath(const base::CommandLine& cmdline, Err* err) {
     base::FilePath python_path =
         ProcessFileExtensions(base::FilePath(u"python"));
     if (!python_path.IsAbsolute()) {
-      scheduler_.Log("WARNING",
-                     "Could not find python on path, using "
-                     "just \"python.exe\"");
+      if (!IsLegacyWindows()) {
+        scheduler_.Log("WARNING",
+                       "Could not find python on path, using "
+                       "just \"python.exe\"");
+      }
       python_path = base::FilePath(u"python.exe");
     }
     build_settings_.SetPythonPath(std::move(python_path));

@@ -32,17 +32,16 @@
 // (each field is a 16-bit integer: major, minor, patch, build).
 #define GN_VERSION_MAJOR 1
 #define GN_VERSION_MINOR 0
-#define GN_VERSION_PATCH 0
-
 // The build field auto-syncs to the commit position printed by `gn --version`.
 // gn.rc #includes the generated last_commit_position.h before this header, so
 // LAST_COMMIT_POSITION_NUM is defined during the resource compile; standalone
 // includes (e.g. from C++) fall back to 0.
 #ifdef LAST_COMMIT_POSITION_NUM
-#define GN_VERSION_BUILD LAST_COMMIT_POSITION_NUM
+#define GN_VERSION_PATCH LAST_COMMIT_POSITION_NUM
 #else
-#define GN_VERSION_BUILD 0
+#define GN_VERSION_PATCH 0
 #endif
+#define GN_VERSION_BUILD 0
 
 // Human-readable dotted version, e.g. "1.0.0.2359".
 #define GN_VERSION_STRING WIDEN(STRINGIZE(GN_VERSION_MAJOR.GN_VERSION_MINOR.GN_VERSION_PATCH.GN_VERSION_BUILD))
