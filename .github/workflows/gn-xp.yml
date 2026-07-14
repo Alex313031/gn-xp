@@ -15,6 +15,11 @@ concurrency:
 permissions:
   contents: read
 
+# Update Ninja/MinGW version here
+env:
+  NINJA_BASE_URL: https://github.com/Alex313031/ninja-xp/releases/download/v1.13.2xp4
+  MINGW_BASE_URL: https://github.com/Alex313031/mingw-build/releases/download/20260609
+
 jobs:
   build:
     name: Build GN XP x86/x64
@@ -35,7 +40,36 @@ jobs:
           fetch-depth: 0
 
       - name: Install build dependencies
-        run: ./build.sh --deps
+        run: |
+          sudo apt update
+          sudo apt install -y build-essential g++-multilib python3 wget zip unzip
+
+      - name: Download and set up Ninja XP
+        # Use our own Ninja (ninja-build is intentionally not installed via apt):
+        # unzip it into a dedicated dir and prepend that to PATH for subsequent
+        # steps. Writing to $GITHUB_PATH prepends, so this ninja shadows any system copy.
+        run: |
+          wget "${NINJA_BASE_URL}/ninja_linux.zip"
+          mkdir -p "$HOME/ninja-bin"
+          unzip -o ninja_linux.zip -d "$HOME/ninja-bin"
+          chmod +x "$HOME/ninja-bin/ninja"
+          rm -f ninja_linux.zip
+          "$HOME/ninja-bin/ninja" --version   # fail fast if it can't run here
+          echo "$HOME/ninja-bin" >> "$GITHUB_PATH"
+
+      - name: Download MinGW
+        # Use our own MinGW fork for compiling Windows builds
+        run: |
+          wget "${MINGW_BASE_URL}/mingw_gcc_linux_i686.zip"
+          wget "${MINGW_BASE_URL}/mingw_gcc_linux_x64.zip"
+          unzip -o mingw_gcc_linux_i686.zip -d "$HOME"
+          unzip -o mingw_gcc_linux_x64.zip -d "$HOME"
+          rm -f mingw_gcc_linux_i686.zip mingw_gcc_linux_x64.zip
+          # Fail fast if either cross-compiler can't run on this host.
+          "$HOME/i686/bin/i686-w64-mingw32-gcc" --version
+          "$HOME/x64/bin/x86_64-w64-mingw32-gcc" --version
+          echo "$HOME/x64/bin" >> "$GITHUB_PATH"
+          echo "$HOME/i686/bin" >> "$GITHUB_PATH"
 
       - name: Build for Linux/Windows
         # On pull_request the checkout HEAD is an ephemeral merge commit, so take
