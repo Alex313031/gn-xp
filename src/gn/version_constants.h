@@ -20,10 +20,12 @@
  #define WIDEN(in) _WIDEN(in)
 #endif // !defined(_STRINGIZER_)
 
-// Product/version metadata for this GN fork. This header is intentionally
-// nothing but preprocessor macros so it can be #included from both C++ and
-// from the Windows resource script (src/gn/gn.rc), which is run through the
-// C preprocessor by windres/rc before being compiled into gn.exe.
+// Product/version metadata for this GN fork. This header is #included from both
+// C++ and from the Windows resource script (src/gn/gn.rc), which is run through
+// the C preprocessor by windres/rc before being compiled into gn.exe. It is
+// almost entirely preprocessor macros for that reason; any C++ declaration must
+// sit behind #ifndef RC_INVOKED (see kGNProductName below) so the resource
+// compiler never sees it.
 //
 // Edit the values below to taste; gn.rc pulls everything from here so there is
 // a single source of truth for the VERSIONINFO block.
@@ -55,5 +57,11 @@
 #define GN_LEGAL_COPYRIGHT L"\251 2013-2026 The Chromium Authors and Alex313031."
 #define GN_TRADEMARKS L"BSD-3 License"
 #define GN_COMMENTS L"https://github.com/Alex313031/gn-xp"
+
+// Brand name for GN, printed by `gn --version` and at startup. Guarded so the
+// resource compiler (macros only) never sees this C++ declaration.
+#ifndef RC_INVOKED
+extern const char* kGNProductName;
+#endif
 
 #endif  // TOOLS_GN_VERSION_CONSTANTS_H_
