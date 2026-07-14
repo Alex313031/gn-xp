@@ -279,7 +279,8 @@ def GenerateLastCommitPosition(host, header):
 def WriteGenericNinja(path, static_libraries, executables,
                       cxx, ar, ld, platform, host, options,
                       args_list, cflags=[], ldflags=[],
-                      libflags=[], include_dirs=[], solibs=[]):
+                      libflags=[], include_dirs=[], solibs=[],
+                      rc_tool=None):
   args = args_list.gen_command_line_args(options)
   if args:
     args = " " + args
@@ -298,6 +299,22 @@ def WriteGenericNinja(path, static_libraries, executables,
     '  depfile = build.ninja.d',
     '',
   ]
+
+  # On Windows, compile the .rc resource script (VERSIONINFO) with windres
+  # (MinGW) or rc.exe (MSVC) so gn.exe carries version/copyright metadata.
+  if platform.is_windows() and rc_tool:
+    if platform.is_msvc():
+      rc_command = '$rc $rcflags /nologo /fo $out $in'
+    else:
+      rc_command = '$rc $rcflags -O coff -i $in -o $out'
+    ninja_header_lines.extend([
+      'rc = ' + rc_tool,
+      '',
+      'rule rc',
+      '  command = ' + rc_command,
+      '  description = RC $out',
+      '',
+    ])
 
 
   template_filename = os.path.join(SCRIPT_DIR, {
@@ -333,6 +350,10 @@ def WriteGenericNinja(path, static_libraries, executables,
     library_ext = '.a'
     object_ext = '.o'
 
+  # windres emits a COFF object (.obj) linked like any other; rc.exe emits a
+  # .res that link.exe consumes directly.
+  resource_ext = '.res' if platform.is_msvc() else object_ext
+
   def escape_path_ninja(path):
     return path.replace('$ ', '$$ ').replace(' ', '$ ').replace(':', '$:')
 
@@ -341,6 +362,19 @@ def WriteGenericNinja(path, static_libraries, executables,
 
   def library_to_a(library):
     return '%s%s' % (library, library_ext)
+
+  if platform.is_windows():
+    if platform.is_msvc():
+      rcflags = ' '.join('/I' + escape_path_ninja(d) for d in include_dirs)
+      if options.debug:
+        rcflags += ' /d_DEBUG'
+    else:
+      rcflags = ' '.join(
+          '--include-dir ' + escape_path_ninja(d) for d in include_dirs)
+      if options.debug:
+        rcflags += ' -D_DEBUG'
+  else:
+    rcflags = ''
 
   ninja_lines = []
   def build_source(src_file, settings):
@@ -369,10 +403,43 @@ def WriteGenericNinja(path, static_libraries, executables,
     for src_file in settings['sources']:
       build_source(src_file, settings)
 
+    link_inputs = [src_to_obj(src_file) for src_file in settings['sources']]
+
+    # Compile and link an optional Windows resource script (see the rc rule).
+    rc_file = settings.get('rc')
+    if rc_file and platform.is_windows() and rc_tool:
+      rc_obj = escape_path_ninja(
+          os.path.splitext(rc_file)[0] + '_res' + resource_ext)
+      rc_src = os.path.relpath(os.path.join(REPO_ROOT, rc_file),
+                               os.path.dirname(path))
+      # Let quoted #includes in the .rc resolve against its own directory.
+      rc_dir = escape_path_ninja(os.path.dirname(rc_src))
+      inc_flag = '/I' if platform.is_msvc() else '--include-dir '
+      edge_rcflags = (inc_flag + rc_dir + ' ' + rcflags).strip()
+      # The rc rule has no depfile, so name the files gn.rc pulls in that
+      # change on their own -- the version constants, any sibling icons, and
+      # the generated commit-position header (the auto-synced build number) --
+      # as implicit deps, forcing a resource rebuild when any of them changes.
+      rc_dir_abs = os.path.dirname(os.path.join(REPO_ROOT, rc_file))
+      rc_deps = []
+      for name in sorted(os.listdir(rc_dir_abs)):
+        if name == 'version_constants.h' or name.lower().endswith('.ico'):
+          dep_abs = os.path.join(rc_dir_abs, name)
+          rc_deps.append(
+              escape_path_ninja(os.path.relpath(dep_abs, os.path.dirname(path))))
+      if not options.no_last_commit_position:
+        rc_deps.append('last_commit_position.h')
+      implicit = (' | ' + ' '.join(rc_deps)) if rc_deps else ''
+      ninja_lines.extend([
+        'build %s: rc %s%s' % (rc_obj, escape_path_ninja(rc_src), implicit),
+        '  rcflags = %s' % edge_rcflags,
+      ])
+      link_inputs.append(rc_obj)
+
     ninja_lines.extend([
       'build %s%s: link %s | %s' % (
           executable, executable_ext,
-          ' '.join([src_to_obj(src_file) for src_file in settings['sources']]),
+          ' '.join(link_inputs),
           ' '.join([library_to_a(library) for library in settings['libs']])),
       '  ldflags = %s' % ' '.join(ldflags),
       '  solibs = %s' % ' '.join(solibs),
@@ -416,6 +483,12 @@ def WriteGNNinja(path, platform, host, options, args_list):
     cxx = os.environ.get('CXX', 'clang++')
     ld = cxx
     ar = os.environ.get('AR', 'ar')
+
+  rc_tool = None
+  if platform.is_msvc():
+    rc_tool = os.environ.get('RC', 'rc.exe')
+  elif platform.is_mingw() or platform.is_msys():
+    rc_tool = os.environ.get('WINDRES', 'windres')
 
   cflags = os.environ.get('CFLAGS', '').split()
   cflags += os.environ.get('CXXFLAGS', '').split()
@@ -985,9 +1058,14 @@ def WriteGNNinja(path, platform, host, options, args_list):
   executables['gn']['libs'].extend(static_libraries.keys())
   executables['gn_unittests']['libs'].extend(static_libraries.keys())
 
+  # Embed the Windows version resource (VERSIONINFO) into gn.exe.
+  if platform.is_windows():
+    executables['gn']['rc'] = 'src/gn/gn.rc'
+
   WriteGenericNinja(path, static_libraries, executables, cxx, ar, ld,
                     platform, host, options, args_list,
-                    cflags, ldflags, libflags, include_dirs, libs)
+                    cflags, ldflags, libflags, include_dirs, libs,
+                    rc_tool=rc_tool)
 
 if __name__ == '__main__':
   sys.exit(main(sys.argv[1:]))

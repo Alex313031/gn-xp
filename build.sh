@@ -131,12 +131,14 @@ build_windows() {
     export CXX=i686-w64-mingw32-g++
     export AR=i686-w64-mingw32-ar
     export LD=i686-w64-mingw32-g++
+    export WINDRES=i686-w64-mingw32-windres
     arch="win32"
   else
     export CC=x86_64-w64-mingw32-gcc
     export CXX=x86_64-w64-mingw32-g++
     export AR=x86_64-w64-mingw32-ar
     export LD=x86_64-w64-mingw32-g++
+    export WINDRES=x86_64-w64-mingw32-windres
     arch="win64"
   fi
   if [ "$WANT_DEBUG" == "1" ]; then
