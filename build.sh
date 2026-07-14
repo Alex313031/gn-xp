@@ -18,7 +18,7 @@ die()  { yell "${RED}$* ${c0}"; exit 1; }
 try() { "$@" || die "${RED}Failed $*"; }
 
 SCRIPTNAME=$(basename "$0")
-SCRIPTVER="2.1.5"
+SCRIPTVER="2.1.6"
 
 export HERE=$( cd -- "$( dirname -- "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )
 
@@ -30,6 +30,7 @@ JOB_COUNT=$(getconf _NPROCESSORS_ONLN)
 
 WANT_DEBUG=0
 WANT_I386=0
+WANT_ALL=0
 WANT_TARGET=""
 VFLAG=""
 
@@ -48,6 +49,7 @@ Options:
   --i386        Make a 32 bit build (i386 on Linux, win32 on Windows)
   -l, --linux   Build GN for Linux
   -w, --win     Build GN for Windows
+  --all         Build all 4 combos: Linux x64/x86 and Windows x64/x86
   -d, --debug   Make a debug build
   -v, --verbose Verbose build output
 
@@ -170,6 +172,18 @@ build_windows() {
   printf "${GRE}Done! Zip at ${CYA}${zipname}.zip ${c0}\n"
 }
 
+# Build every OS/arch combo in one shot: Linux x64/x86 and Windows x64/x86.
+# Each build runs in a subshell so its per-build env exports (CFLAGS/-m*, the
+# cross CC/CXX, ...) and the functions' cd into out/ cannot leak into the next
+# build. WANT_DEBUG/VFLAG are inherited, so --all --debug makes 4 debug zips.
+build_all() {
+  ( WANT_I386=0; build_linux )   || die "Linux x64 build failed"
+  ( WANT_I386=1; build_linux )   || die "Linux x86 build failed"
+  ( WANT_I386=0; build_windows ) || die "Windows x64 build failed"
+  ( WANT_I386=1; build_windows ) || die "Windows x86 build failed"
+  printf "${GRE}All 4 builds complete!${c0}\n"
+}
+
 clean_out() {
   printf "${YEL}Cleaning ${HERE}/out/...${c0}\n"
   rm -rfv "${HERE}"/out/*
@@ -195,6 +209,9 @@ while :; do
         ;;
     --i386)
         WANT_I386=1
+        ;;
+    --all)
+        WANT_ALL=1
         ;;
     -d|--debug)
         WANT_DEBUG=1
@@ -222,6 +239,12 @@ while :; do
   esac
   shift
 done
+
+# --all overrides individual target/arch selection and builds every combo.
+if [ "$WANT_ALL" == "1" ]; then
+  build_all
+  exit 0
+fi
 
 case "$WANT_TARGET" in
   linux)
