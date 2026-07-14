@@ -1,4 +1,4 @@
-# GN XP
+# GN XP <img src="logo.png" width="38">
 
 __This is a fork with restored support for Windows XP/Vista (Upstream GN only runs on Win7+).__  
 It is used by [gn-legacy](https://github.com/Alex313031/gn-legacy#readme).
