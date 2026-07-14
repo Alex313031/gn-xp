@@ -18,7 +18,7 @@ die()  { yell "${RED}$* ${c0}"; exit 1; }
 try() { "$@" || die "${RED}Failed $*"; }
 
 SCRIPTNAME=$(basename "$0")
-SCRIPTVER="2.1.4"
+SCRIPTVER="2.1.5"
 
 export HERE=$( cd -- "$( dirname -- "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )
 
@@ -91,17 +91,18 @@ build_linux() {
   # 32- vs 64-bit Linux: gen.py reads CFLAGS/CXXFLAGS (compile) and LDFLAGS
   # (link), so the arch flag covers the whole gn build. gn is only built here,
   # never run, so a 64-bit host just needs g++-multilib's 32-bit libs.
-  local arch="" mflag="-m64"
+  local arch="" mflag="-m64" archlabel="x64"
   if [ "$WANT_I386" == "1" ]; then
     arch="_i386"
     mflag="-m32"
+    archlabel="x86"
   fi
   export CFLAGS="$mflag" CXXFLAGS="$mflag" LDFLAGS="$mflag"
   local zipname="gn_linux${arch}" outdir="out/linux${arch}"
   if [ "$WANT_DEBUG" == "1" ]; then
     zipname="gn_linux${arch}_debug"
     outdir="out/linux${arch}_debug"
-    printf "${GRE}Building GN for Linux using GCC (Debug)...${c0}\n"
+    printf "${GRE}Building GN for Linux ${archlabel} using GCC (Debug)...${c0}\n"
     try python3 build/gen.py --out-path "$outdir" --host=linux --platform=linux --debug
     try ninja -C "$outdir" $VFLAG -j"$JOB_COUNT"
     try cd "$outdir"
@@ -110,7 +111,7 @@ build_linux() {
     try zip "$zipname.zip" gn_debug
     try mv -fv "$zipname.zip" ../../
   else
-    printf "${GRE}Building GN for Linux using GCC...${c0}\n"
+    printf "${GRE}Building GN for Linux ${archlabel} using GCC...${c0}\n"
     try python3 build/gen.py --out-path "$outdir" --host=linux --platform=linux
     try ninja -C "$outdir" $VFLAG -j"$JOB_COUNT"
     try cd "$outdir"
@@ -122,7 +123,7 @@ build_linux() {
 }
 
 build_windows() {
-  local arch="" zipname="" outdir=""
+  local arch="" archlabel="" zipname="" outdir=""
   # Cross-compile for Windows using the mingw-w64 toolchain (installed via --deps).
   # gen.py defaults the mingw toolchain to plain g++/ar, which is the host
   # compiler, so we must point it at the cross compiler explicitly.
@@ -133,6 +134,7 @@ build_windows() {
     export LD=i686-w64-mingw32-g++
     export WINDRES=i686-w64-mingw32-windres
     arch="win32"
+    archlabel="x86"
   else
     export CC=x86_64-w64-mingw32-gcc
     export CXX=x86_64-w64-mingw32-g++
@@ -140,11 +142,12 @@ build_windows() {
     export LD=x86_64-w64-mingw32-g++
     export WINDRES=x86_64-w64-mingw32-windres
     arch="win64"
+    archlabel="x64"
   fi
   if [ "$WANT_DEBUG" == "1" ]; then
     zipname="gn_${arch}_debug"
     outdir="out/${arch}_debug"
-    printf "${GRE}Building GN for Windows using MinGW (Debug)...${c0}\n"
+    printf "${GRE}Building GN for Windows ${archlabel} using MinGW (Debug)...${c0}\n"
     try python3 build/gen.py --out-path "$outdir" --host=linux --platform=mingw --debug
     try ninja -C "$outdir" $VFLAG -j"$JOB_COUNT"
     try cd "$outdir"
@@ -155,7 +158,7 @@ build_windows() {
   else
     zipname="gn_${arch}"
     outdir="out/${arch}"
-    printf "${GRE}Building GN for Windows using MinGW...${c0}\n"
+    printf "${GRE}Building GN for Windows ${archlabel} using MinGW...${c0}\n"
     # --use-lto --use-icf can only be used with MSVC/Clang
     try python3 build/gen.py --out-path "$outdir" --host=linux --platform=mingw
     try ninja -C "$outdir" $VFLAG -j"$JOB_COUNT"
