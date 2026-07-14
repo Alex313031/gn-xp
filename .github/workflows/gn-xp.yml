@@ -26,7 +26,13 @@ jobs:
     timeout-minutes: 45
     steps:
       - name: Checkout
+        # Full history + tags: gen.py derives the build number from
+        # `git describe --match initial-commit`, which needs that tag and the
+        # commit history. actions/checkout does a shallow, tag-less clone by
+        # default, which makes git describe fail with exit 128.
         uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
 
       - name: Install build dependencies
         run: ./build.sh --deps
