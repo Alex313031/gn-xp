@@ -18,7 +18,7 @@ permissions:
 # Update Ninja/MinGW version here
 env:
   NINJA_BASE_URL: https://github.com/Alex313031/ninja-xp/releases/download/v1.13.2xp4
-  MINGW_BASE_URL: https://github.com/Alex313031/mingw-build/releases/download/20260715
+  MINGW_BASE_URL: https://github.com/Alex313031/mingw-build/releases/download/20260717
 
 jobs:
   build:
