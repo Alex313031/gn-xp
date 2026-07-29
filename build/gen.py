@@ -520,25 +520,35 @@ def WriteGenericNinja(path, static_libraries, executables,
         **starlark_common_args,
     )
 
-  ninja.Phony(
-      'run_tests',
-      inputs=[
-          ninja.RunBinary(
-              'run_gn_unittests',
-              inputs=['gn_unittests' + platform.exe_suffix],
-              args='--quiet',
-          ),
-          ninja.Phony(
-              'run_integration_tests', inputs=[ninja.IntegrationTest('simple')]
-          ),
-      ] + ([
-          ninja.RunBinary(
-              'run_rust_unittests',
-              inputs=[rust_tests],
-              args='--quiet',
-          )
-      ] if options.starlark else []),
-  )
+  # The run_tests edges execute the freshly built binaries (and, for Windows
+  # targets, wrap commands in cmd.exe), so they only work when the host can
+  # run the target's executables. Skip them when cross-compiling, e.g. a
+  # linux-host mingw build - otherwise a bare `ninja` fails trying to run
+  # gn.exe on the build host.
+  host_can_run_target = (
+      platform.platform() == host.platform() or
+      (platform.is_windows() and host.is_windows()))
+  if host_can_run_target:
+    ninja.Phony(
+        'run_tests',
+        inputs=[
+            ninja.RunBinary(
+                'run_gn_unittests',
+                inputs=['gn_unittests' + platform.exe_suffix],
+                args='--quiet',
+            ),
+            ninja.Phony(
+                'run_integration_tests',
+                inputs=[ninja.IntegrationTest('simple')],
+            ),
+        ] + ([
+            ninja.RunBinary(
+                'run_rust_unittests',
+                inputs=[rust_tests],
+                args='--quiet',
+            )
+        ] if options.starlark else []),
+    )
 
   ninja.Phony(
       'check_all',
