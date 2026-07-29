@@ -1,0 +1,153 @@
+name: GN Multi-Platform Build
+
+on:
+  workflow_dispatch:
+
+env:
+  NINJA_BASE_URL: https://github.com/ninja-build/ninja/releases/download/
+
+jobs:
+  posix:
+    strategy:
+      fail-fast: true
+      matrix:
+        include:
+          - slug: linux_i386
+            cc: gcc
+            cxx: g++
+            cflags: "-m32"
+            ldflags: "-m32"
+            libflags: "-m32"
+            os: ubuntu-22.04
+            install: "g++-multilib"
+            ninja_release_name: v1.12.1/ninja-linux.zip
+
+          - slug: linux_amd64
+            cc: gcc
+            cxx: g++
+            cflags: "-m64"
+            ldflags: "-m64"
+            libflags: "-m64"
+            os: ubuntu-22.04
+            ninja_release_name: v1.12.1/ninja-linux.zip
+
+    runs-on: ${{ matrix.os }}
+
+    steps:
+      - name: Install packages
+        if: matrix.install
+        run: sudo apt update && sudo apt install ${{ matrix.install }}
+
+      - uses: actions/checkout@v4
+        with:
+          # we need all everything for `git describe` to work correctly
+          fetch-depth: 0
+
+      - name: Make dependencies directory
+        run: |
+          DEPS_DIR=$(cd ~; pwd)/deps
+          mkdir -p ${DEPS_DIR}
+          echo "export DEPS_DIR=$DEPS_DIR" >> "${GITHUB_WORKSPACE}/.env"
+
+      - name: Install recent Ninja
+        run: |
+          source .env
+          cd ${DEPS_DIR}
+          wget --no-check-certificate --quiet -O ninja.zip "${NINJA_BASE_URL}${{ matrix.ninja_release_name }}"
+          python -c 'import sys,zipfile;zipfile.ZipFile(sys.argv[1]).extractall()' ninja.zip
+          chmod +x ninja
+
+      - name: Setup compiler environment
+        run: |
+          echo 'export CC="${{ matrix.cc }}"' >> "${GITHUB_WORKSPACE}/.env"
+          echo 'export CXX="${{ matrix.cxx }}"' >> "${GITHUB_WORKSPACE}/.env"
+          echo 'export CFLAGS="${{ matrix.cflags }}"' >> "${GITHUB_WORKSPACE}/.env"
+          echo 'export LDFLAGS="${{ matrix.ldflags }}"' >> "${GITHUB_WORKSPACE}/.env"
+          echo 'export LIBFLAGS="${{ matrix.libflags }}"' >> "${GITHUB_WORKSPACE}/.env"
+
+      - name: Cache libc++ and libc++abi if needed
+        if: "${{ matrix.cc == 'clang' }}"
+        uses: actions/cache@v4
+        with:
+          path: ~/deps/llvm
+          key: ${{ runner.os }}-llvm-${{ matrix.slug }}
+
+      - name: Show final environment
+        run: |
+          cat .env
+
+      - name: Compile
+        run: |
+          source .env
+          build/gen.py ${{ matrix.gen_args }}
+          ${DEPS_DIR}/ninja -C out
+
+      - name: Run tests
+        run: |
+          source .env
+          out/gn_unittests
+
+      - name: Archive binaries
+        run: |
+          (cd out && zip "gn_${{ matrix.slug }}.zip" gn)
+
+      - name: Upload Artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: gn-${{ matrix.slug }}
+          path: out/gn_${{ matrix.slug }}.zip
+
+  windows:
+    strategy:
+      fail-fast: true
+      matrix:
+        include:
+          - slug: win_i386
+            arch: x86
+            gen_args: "--use-lto --use-icf"
+
+          - slug: win_amd64
+            arch: x64
+            gen_args: "--use-lto --use-icf"
+
+    runs-on: windows-2022
+    defaults:
+      run:
+        shell: pwsh
+
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          # we need all everything for `git describe` to work correctly
+          fetch-depth: 0
+
+      - name: Download Ninja
+        run: |
+          Invoke-WebRequest -Uri https://github.com/ninja-build/ninja/releases/download/v1.12.1/ninja-win.zip -OutFile ninja.zip
+          7z x ninja.zip > nul
+          ./ninja --version
+      - name: Set up Visual Studio shell
+        uses: egor-tensin/vs-shell@v2
+        with:
+          arch: ${{ matrix.arch }}
+
+      - name: Build
+        run: |
+          python build/gen.py ${{ matrix.gen_args }}
+          ./ninja -C out
+
+      - name: Run tests
+        run: |
+          out/gn_unittests
+
+      - name: Make zip
+        run: |
+          cd out
+          7z a -tzip gn_${{ matrix.slug }}.zip gn.exe
+
+      - name: Upload Artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: gn-${{ matrix.slug }}
+          path: out/gn_${{ matrix.slug }}.zip
+

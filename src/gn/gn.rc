@@ -1,0 +1,62 @@
+// Copyright 2026 The Chromium Authors and Alex313031. All rights reserved.
+// Use of this source code is governed by a BSD-style license that can be
+// found in the LICENSE file.
+
+// Windows resource script for gn.exe. Compiled by windres (MinGW) or rc.exe
+// (MSVC) and linked into the executable so the shell shows version/copyright
+// info on right-click -> Properties -> Details. All values come from
+// version_constants.h so there is a single source of truth.
+
+#define APSTUDIO_READONLY_SYMBOLS
+
+#define APSTUDIO_HIDDEN_SYMBOLS
+#include <winver.h>
+#undef APSTUDIO_HIDDEN_SYMBOLS
+
+// Generated in the build (out) dir; supplies LAST_COMMIT_POSITION_NUM, which
+// version_constants.h uses as the auto-synced build number. Must precede it.
+#include "last_commit_position.h"
+#include "version_constants.h"
+
+#undef APSTUDIO_READONLY_SYMBOLS
+
+// Embed icon
+101 ICON "gn.ico"
+
+#ifdef _DEBUG
+#define GN_FILEFLAGS VS_FF_DEBUG
+#else
+#define GN_FILEFLAGS 0x0L
+#endif
+
+VS_VERSION_INFO VERSIONINFO
+ FILEVERSION    GN_VERSION_MAJOR, GN_VERSION_MINOR, GN_VERSION_PATCH, GN_VERSION_BUILD
+ PRODUCTVERSION GN_VERSION_MAJOR, GN_VERSION_MINOR, GN_VERSION_PATCH, GN_VERSION_BUILD
+ FILEFLAGSMASK  VS_FFI_FILEFLAGSMASK
+ FILEFLAGS      GN_FILEFLAGS
+ FILEOS         VOS_NT_WINDOWS32
+ FILETYPE       VFT_APP
+ FILESUBTYPE    VFT2_UNKNOWN
+BEGIN
+    BLOCK "StringFileInfo"
+    BEGIN
+        BLOCK "040904B0" // 0x0409 = U.S. English, 0x04B0 = 1200 = Unicode.
+        BEGIN
+            VALUE "CompanyName",      GN_COMPANY_NAME
+            VALUE "FileDescription",  GN_FILE_DESCRIPTION
+            VALUE "FileVersion",      GN_VERSION_STRING
+            VALUE "InternalName",     GN_INTERNAL_NAME
+            VALUE "LegalCopyright",   GN_LEGAL_COPYRIGHT
+            VALUE "LegalTrademarks",  GN_TRADEMARKS
+            VALUE "OriginalFilename", L"gn.exe"
+            VALUE "ProductName",      GN_PRODUCT_NAME
+            VALUE "ProductVersion",   GN_VERSION_STRING
+            VALUE "Comments",         GN_COMMENTS
+        END
+    END
+    BLOCK "VarFileInfo"
+    BEGIN
+        // Must match the language/codepage of the StringFileInfo block above.
+        VALUE "Translation", 0x409, 1200
+    END
+END

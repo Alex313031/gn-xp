@@ -67,3 +67,7 @@ Thumbs.db
 /_out
 # VSChromium configuration file
 vs-chromium-project.txt
+
+/gn
+/gn.exe
+/*.zip

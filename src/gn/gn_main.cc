@@ -3,6 +3,7 @@
 // found in the LICENSE file.
 
 #include <algorithm>
+#include <cstdio>
 #include <string>
 
 #include "base/command_line.h"
@@ -12,10 +13,14 @@
 #include "gn/location.h"
 #include "gn/standard_out.h"
 #include "gn/switches.h"
-#include "last_commit_position.h"
+#include "gn/version_constants.h"
 #include "util/build_config.h"
 #include "util/msg_loop.h"
 #include "util/sys_info.h"
+
+#include "last_commit_position.h"
+
+const char* kGNProductName = "GN XP";
 
 namespace {
 
@@ -48,7 +53,12 @@ int main(int argc, char** argv) {
     command = commands::kHelp;
   } else if (cmdline.HasSwitch(switches::kVersion)) {
     // Make "--version" print the version and exit.
-    OutputString(std::string(LAST_COMMIT_POSITION) + "\n");
+    OutputString(std::string(kGNProductName) + " " + LAST_COMMIT_POSITION + "\n");
+    // On Windows, also report the host OS version (empty elsewhere).
+    std::string os_version = OperatingSystemVersion();
+    if (!os_version.empty()) {
+      OutputString("Running on " + os_version + "\n");
+    }
     exit(0);
   } else if (args.empty()) {
     // No command, print error and exit.
@@ -64,6 +74,10 @@ int main(int argc, char** argv) {
 
   if (!commands::CommandSwitches::Init(cmdline))
     return 1;
+
+  // Hello banner on stderr so it never pollutes command stdout (gn ls/desc/
+  // refs/path/args --json/format all emit machine-readable output there).
+  fprintf(stderr, "%s\n", kGNProductName);
 
   const commands::CommandInfoMap& command_map = commands::GetCommands();
   commands::CommandInfoMap::const_iterator found_command =

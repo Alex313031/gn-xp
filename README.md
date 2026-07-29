@@ -1,6 +1,9 @@
-# GN
+# GN XP <img src="logo.png" width="38">
 
-GN is a meta-build system that generates build files for
+__This is a fork with restored support for Windows XP/Vista (Upstream GN only runs on Win7+).__  
+It is used by [gn-legacy](https://github.com/Alex313031/gn-legacy#readme).
+
+GN ("Generate Ninja") is a meta-build system that generates build files for
 [Ninja](https://ninja-build.org).
 
 Related resources:
@@ -14,6 +17,14 @@ Related resources:
   * An introductory [presentation](https://docs.google.com/presentation/d/15Zwb53JcncHfEwHpnG_PoIbbzQ3GQi_cpujYwbpcbZo/edit?usp=sharing).
   * The [mailing list](https://groups.google.com/a/chromium.org/forum/#!forum/gn-dev).
   * The [bug database](https://gn.issues.chromium.org/issues?q=status:open).
+
+## Changes
+
+This is a fork! It contains changes not wanted/needed by the upstream project:
+
+ - Restored Windows XP/Vista support.
+
+ - Custom description labels for action / action_foreach targets.
 
 ## What GN is for
 
@@ -92,7 +103,7 @@ how this is expected to work).
 
 Alternatively, you can build GN from source with a C++23 compiler:
 
-    git clone https://gn.googlesource.com/gn
+    git clone https://github.com/Alex313031/gn-xp.git
     cd gn
     python build/gen.py # --allow-warning if you want to build with warnings.
     ninja -C out
@@ -139,11 +150,13 @@ For a maximal configuration see the Chromium setup:
   * [Toolchain setup](https://cs.chromium.org/chromium/src/build/toolchain/)
   * [Compiler setup](https://cs.chromium.org/chromium/src/build/config/compiler/BUILD.gn)
 
-and the Fuchsia setup:
+the Fuchsia setup:
   * [.gn](https://fuchsia.googlesource.com/fuchsia/+/refs/heads/main/.gn)
   * [BUILDCONFIG.gn](https://fuchsia.googlesource.com/fuchsia/+/refs/heads/main/build/config/BUILDCONFIG.gn)
   * [Toolchain setup](https://fuchsia.googlesource.com/fuchsia/+/refs/heads/main/build/toolchain/)
   * [Compiler setup](https://fuchsia.googlesource.com/fuchsia/+/refs/heads/main/build/config/BUILD.gn)
+
+and the [standalone version](https://github.com/timniederhausen/gn-build)
 
 ## Reporting bugs
 
