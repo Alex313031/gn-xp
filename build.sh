@@ -18,7 +18,7 @@ die()  { yell "${RED}$* ${c0}"; exit 1; }
 try() { "$@" || die "${RED}Failed $*"; }
 
 SCRIPTNAME=$(basename "$0")
-SCRIPTVER="2.1.6"
+SCRIPTVER="2.1.7"
 
 export HERE=$( cd -- "$( dirname -- "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )
 
@@ -30,6 +30,7 @@ JOB_COUNT=$(getconf _NPROCESSORS_ONLN)
 
 WANT_DEBUG=0
 WANT_I386=0
+WANT_ARM=0
 WANT_ALL=0
 WANT_TARGET=""
 VFLAG=""
@@ -47,6 +48,8 @@ Options:
   -c, --clean   Remove build artifacts
   --deps        Install build dependencies
   --i386        Make a 32 bit build (i386 on Linux, win32 on Windows)
+  --arm         Cross-compile a Linux arm64 build (e.g. for Raspberry Pi);
+                implies --linux, unsupported with --win
   -l, --linux   Build GN for Linux
   -w, --win     Build GN for Windows
   --all         Build all 4 combos: Linux x64/x86 and Windows x64/x86
@@ -74,13 +77,26 @@ install_deps() {
   fi
 
   printf "${GRE}Installing dependencies for %s...${c0}\n" "$SCRIPTNAME"
-  # build-essential: gcc, g++, make for the Linux build; g++-multilib adds the
-  # 32-bit libs needed for --i386 Linux builds. mingw-w64 provides the
-  # *-w64-mingw32-* cross toolchains used by the Windows builds.
+  # build-essential: gcc, g++, make for the Linux build. The unversioned
+  # gcc/g++-multilib metapackages declare Conflicts: with every cross gcc, so
+  # install the versioned multilib package (32-bit libs for --i386), which is
+  # co-installable with g++-aarch64-linux-gnu (the --arm cross toolchain).
+  # mingw-w64 provides the *-w64-mingw32-* cross toolchains for Windows builds.
   $sudo apt-get update || die "apt-get update failed"
-  $sudo apt-get install build-essential g++-multilib ninja-build python3 zip unzip \
+  local gxx_ver
+  gxx_ver=$(apt-cache depends g++ | sed -n 's/.*Depends: g++-\([0-9][0-9]*\)$/\1/p' | head -n1)
+  [ -n "$gxx_ver" ] || die "Could not determine the default g++ major version"
+  $sudo apt-get install build-essential "g++-${gxx_ver}-multilib" ninja-build python3 zip unzip \
         mingw-w64 mingw-w64-i686-dev mingw-w64-x86-64-dev mingw-w64-tools \
+        g++-aarch64-linux-gnu \
       || die "Failed to install dependencies"
+  # gcc-multilib normally ships /usr/include/asm -> x86_64-linux-gnu/asm; the
+  # versioned multilib package does not, and -m32 builds need it to reach the
+  # kernel uapi headers (e.g. asm/errno.h).
+  if [ ! -e /usr/include/asm ] && [ -d /usr/include/x86_64-linux-gnu/asm ]; then
+    $sudo ln -s x86_64-linux-gnu/asm /usr/include/asm \
+      || die "Failed to create /usr/include/asm symlink"
+  fi
   printf "${GRE}Done installing dependencies!${c0}\n"
 }
 
@@ -93,8 +109,26 @@ build_linux() {
   # 32- vs 64-bit Linux: gen.py reads CFLAGS/CXXFLAGS (compile) and LDFLAGS
   # (link), so the arch flag covers the whole gn build. gn is only built here,
   # never run, so a 64-bit host just needs g++-multilib's 32-bit libs.
-  local arch="" mflag="-m64" archlabel="x64"
-  if [ "$WANT_I386" == "1" ]; then
+  local arch="" mflag="-m64" archlabel="x64" ninja_target=""
+  if [ "$WANT_ARM" == "1" ]; then
+    # Cross-compile for arm64 (e.g. to run gn on a Raspberry Pi) using the
+    # aarch64-linux-gnu toolchain (installed via --deps).
+    export CC=aarch64-linux-gnu-gcc
+    export CXX=aarch64-linux-gnu-g++
+    export AR=aarch64-linux-gnu-ar
+    export LD=aarch64-linux-gnu-g++
+    arch="_arm64"
+    mflag="" # -m64/-m32 are x86-only flags
+    archlabel="arm64"
+    # gen.py's release SIMD default (-mfpmath=sse -msse2) is x86-only; use the
+    # NEON baseline instead.
+    export SIMD_FLAGS="-march=armv8-a+simd"
+    # gen.py only skips its run_tests edges when host and target *platform*
+    # differ, so a linux-on-linux cross-arch build looks native to it and a
+    # bare ninja would try to run arm64 gn_unittests on the x86 host. Build
+    # only the gn binary instead.
+    ninja_target="gn"
+  elif [ "$WANT_I386" == "1" ]; then
     arch="_i386"
     mflag="-m32"
     archlabel="x86"
@@ -106,7 +140,7 @@ build_linux() {
     outdir="out/linux${arch}_debug"
     printf "${GRE}Building GN for Linux ${archlabel} using GCC (Debug)...${c0}\n"
     try python3 build/gen.py --out-path "$outdir" --host=linux --platform=linux --debug
-    try ninja -C "$outdir" $VFLAG -j"$JOB_COUNT"
+    try ninja -C "$outdir" $VFLAG -j"$JOB_COUNT" $ninja_target
     try cd "$outdir"
     try mv -fv gn gn_debug
     printf "${GRE}Zipping up gn_debug...${c0}\n"
@@ -115,7 +149,7 @@ build_linux() {
   else
     printf "${GRE}Building GN for Linux ${archlabel} using GCC...${c0}\n"
     try python3 build/gen.py --out-path "$outdir" --host=linux --platform=linux
-    try ninja -C "$outdir" $VFLAG -j"$JOB_COUNT"
+    try ninja -C "$outdir" $VFLAG -j"$JOB_COUNT" $ninja_target
     try cd "$outdir"
     printf "${GRE}Zipping up gn...${c0}\n"
     try zip "$zipname.zip" gn
@@ -210,6 +244,9 @@ while :; do
     --i386)
         WANT_I386=1
         ;;
+    --arm)
+        WANT_ARM=1
+        ;;
     --all)
         WANT_ALL=1
         ;;
@@ -239,6 +276,15 @@ while :; do
   esac
   shift
 done
+
+# --arm is Linux-only (no Windows on ARM support) and implies --linux. Checked
+# after the parse loop so the flag order doesn't matter.
+if [ "$WANT_ARM" == "1" ]; then
+  [ "$WANT_TARGET" == "windows" ] && die "Windows on ARM builds are unsupported"
+  [ "$WANT_I386" == "1" ] && die "Cannot combine --i386 and --arm"
+  [ "$WANT_ALL" == "1" ] && die "Cannot combine --all and --arm; run '$SCRIPTNAME --arm' separately"
+  WANT_TARGET="linux"
+fi
 
 # --all overrides individual target/arch selection and builds every combo.
 if [ "$WANT_ALL" == "1" ]; then

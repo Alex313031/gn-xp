@@ -17,16 +17,16 @@ permissions:
 
 # Update Ninja/MinGW version here
 env:
-  NINJA_BASE_URL: https://github.com/Alex313031/ninja-xp/releases/download/v1.13.2xp4
+  NINJA_BASE_URL: https://github.com/Alex313031/ninja-xp/releases/download/v1.13.2xp5
   MINGW_BASE_URL: https://github.com/Alex313031/mingw-build/releases/download/20260717
 
 jobs:
   build:
-    name: Build GN XP x86/x64
-    # Built on Ubuntu 22.04 (glibc 2.35). The Windows zips are statically linked
-    # PE binaries, independent of the host glibc. The Linux zips, however, are
-    # dynamically linked against the runner's glibc 2.35 and need glibc >= 2.35
-    # at runtime -- rebuild on an older base if you need wider Linux reach.
+    name: Build GN XP x86/x64/arm64
+    # Built on Ubuntu 22.04. All zips are statically linked (gen.py passes
+    # -static -static-libstdc++ for Linux/MinGW), so none of them depend on the
+    # runner's or the target's glibc -- the arm64 zip runs on any Raspberry Pi
+    # OS release.
     runs-on: ubuntu-22.04
     timeout-minutes: 45
     steps:
@@ -40,9 +40,17 @@ jobs:
           fetch-depth: 0
 
       - name: Install build dependencies
+        # The unversioned gcc/g++-multilib metapackages declare Conflicts: with
+        # every cross gcc, so they can never coexist with g++-aarch64-linux-gnu
+        # (the arm64 cross toolchain). The versioned multilib package has no
+        # such conflict; all it lacks is the /usr/include/asm symlink that
+        # gcc-multilib ships, which the -m32 build needs to reach the kernel
+        # uapi headers (e.g. asm/errno.h) -- so create that by hand.
         run: |
           sudo apt update
-          sudo apt install -y build-essential g++-multilib python3 wget zip unzip
+          GXX_VER=$(apt-cache depends g++ | sed -n 's/.*Depends: g++-\([0-9][0-9]*\)$/\1/p' | head -n1)
+          sudo apt install -y build-essential "g++-${GXX_VER}-multilib" g++-aarch64-linux-gnu python3 wget zip unzip
+          [ -e /usr/include/asm ] || sudo ln -s x86_64-linux-gnu/asm /usr/include/asm
 
       - name: Download and set up Ninja XP
         # Use our own Ninja (ninja-build is intentionally not installed via apt):
@@ -72,10 +80,13 @@ jobs:
           echo "$HOME/i686/bin" >> "$GITHUB_PATH"
 
       - name: Build for Linux/Windows
+        # --all covers the four x86/x64 combos; the arm64 cross build is a
+        # separate invocation because it needs its own toolchain env.
         # On pull_request the checkout HEAD is an ephemeral merge commit, so take
         # the PR head SHA from the event; fall back to github.sha for other events.
         run: |
           ./build.sh --all
+          ./build.sh --arm
           SHA=${{ github.event.pull_request.head.sha || github.sha }}
           echo "SHA_SHORT=${SHA:0:6}" >> "$GITHUB_ENV"
 

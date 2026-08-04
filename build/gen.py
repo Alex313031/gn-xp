@@ -651,8 +651,9 @@ def WriteGNNinja(path, platform, host, options, args_list):
     else:
       cflags.append('-DNDEBUG')
       cflags.append('-O3')
-      cflags.append('-mfpmath=sse')
-      cflags.append('-msse2')
+      # SIMD baseline: x86 SSE2 by default. Non-x86 targets must override via
+      # the environment, e.g. SIMD_FLAGS='-march=armv8-a+simd' for arm64.
+      cflags.extend(os.environ.get('SIMD_FLAGS', '-mfpmath=sse -msse2').split())
       if options.no_strip:
         cflags.append('-g')
       ldflags.append('-Wl,-O3')
