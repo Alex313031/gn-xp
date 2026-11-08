@@ -6,19 +6,19 @@
 #define TOOLS_GN_VERSION_CONSTANTS_H_
 
 #if defined(__clang__) && defined(_UNICODE)
- #pragma code_page(65001) // UTF-8
+#pragma code_page(65001)  // UTF-8
 #endif
 
 // Macro to convert to string
 #if !defined(_STRINGIZER_)
- #define _STRINGIZER_
- #define _STRINGIZER(in) #in
- #define STRINGIZE(in) _STRINGIZER(in)
-  // Wide-string variant: L ## "x" -> L"x". Two levels so the argument expands
- // before the L## paste widens the resulting narrow literal.
- #define _WIDEN(in) L ## in
- #define WIDEN(in) _WIDEN(in)
-#endif // !defined(_STRINGIZER_)
+#define _STRINGIZER_
+#define _STRINGIZER(in) #in
+#define STRINGIZE(in) _STRINGIZER(in)
+// Wide-string variant: L ## "x" -> L"x". Two levels so the argument expands
+// before the L## paste widens the resulting narrow literal.
+#define _WIDEN(in) L##in
+#define WIDEN(in) _WIDEN(in)
+#endif  // !defined(_STRINGIZER_)
 
 // Product/version metadata for this GN fork. This header is #included from both
 // C++ and from the Windows resource script (src/gn/gn.rc), which is run through
@@ -46,7 +46,8 @@
 #define GN_VERSION_BUILD 0
 
 // Human-readable dotted version, e.g. "1.0.0.2359".
-#define GN_VERSION_STRING WIDEN(STRINGIZE(GN_VERSION_MAJOR.GN_VERSION_MINOR.GN_VERSION_PATCH.GN_VERSION_BUILD))
+#define GN_VERSION_STRING \
+  WIDEN(STRINGIZE(GN_VERSION_MAJOR.GN_VERSION_MINOR.GN_VERSION_PATCH.GN_VERSION_BUILD))
 
 // String fields shown by the Windows shell (right-click -> Properties ->
 // Details) via the StringFileInfo block in gn.rc.
@@ -54,7 +55,8 @@
 #define GN_INTERNAL_NAME L"gn-xp"
 #define GN_COMPANY_NAME L"Alex313031"
 #define GN_FILE_DESCRIPTION L"GN meta-build system - Windows XP/Vista fork."
-#define GN_LEGAL_COPYRIGHT L"\251 2013-2026 The Chromium Authors and Alex313031."
+#define GN_LEGAL_COPYRIGHT \
+  L"\251 2013-2026 The Chromium Authors and Alex313031."
 #define GN_TRADEMARKS L"BSD-3 License"
 #define GN_COMMENTS L"https://github.com/Alex313031/gn-xp"
 

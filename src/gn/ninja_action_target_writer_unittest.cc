@@ -714,18 +714,16 @@ TEST(NinjaActionTargetWriter, ForEachWithDescription) {
   ASSERT_TRUE(target.OnResolved(&err));
 
   SubstitutionPattern description;
-  ASSERT_TRUE(
-      description.Parse("COMPILE {{source}}", nullptr, &err));
+  ASSERT_TRUE(description.Parse("COMPILE {{source}}", nullptr, &err));
   target.action_values().set_description(description);
 
   // Make sure we get interesting substitutions for both the args and the
   // response file contents.
-  target.action_values().args() = SubstitutionList::MakeForTest(
-      "{{source}}",
-      "{{source_file_part}}");
+  target.action_values().args() =
+      SubstitutionList::MakeForTest("{{source}}", "{{source_file_part}}");
 
-  target.action_values().outputs() = SubstitutionList::MakeForTest(
-      "//out/Debug/{{source_name_part}}.out");
+  target.action_values().outputs() =
+      SubstitutionList::MakeForTest("//out/Debug/{{source_name_part}}.out");
 
   setup.build_settings()->SetPythonPath(
       base::FilePath(FILE_PATH_LITERAL("/usr/bin/python")));
@@ -738,12 +736,12 @@ TEST(NinjaActionTargetWriter, ForEachWithDescription) {
       "rule __foo_bar___rule\n"
       // These come from the args.
       "  command = /usr/bin/python ../../foo/script.py ${in} "
-          "${source_file_part}\n"
+      "${source_file_part}\n"
       "  description = COMPILE ${in}\n"
       "  restat = 1\n"
       "\n"
       "build input1.out: __foo_bar___rule ../../foo/input1.txt"
-          " | ../../foo/script.py\n"
+      " | ../../foo/script.py\n"
       // Substitution for the args.
       "  source_file_part = input1.txt\n"
       "\n"

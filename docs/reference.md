@@ -130,6 +130,7 @@
     *   [defines: [string list] C preprocessor defines.](#var_defines)
     *   [depfile: [string] File name for input dependencies for actions.](#var_depfile)
     *   [deps: [label list] Private linked dependencies.](#var_deps)
+    *   [description: [string] Command description for actions.](#var_description)
     *   [externs: [scope] Set of Rust crate-dependency pairs.](#var_externs)
     *   [framework_dirs: [directory list] Additional framework search directories.](#var_framework_dirs)
     *   [frameworks: [name list] Name of frameworks that must be linked.](#var_frameworks)
@@ -1663,7 +1664,8 @@
   Action variables: args, bridge_header, configs, data, depfile,
                     framework_dirs, inputs, mnemonic, module_deps,
                     module_name, outputs*, pool, public_inputs,
-                    response_file_contents, script*, sources
+                    response_file_contents, script*, sources,
+                    description
   * = required
 ```
 
@@ -1764,7 +1766,8 @@
   Action variables: args, bridge_header, configs, data, depfile,
                     framework_dirs, inputs, mnemonic, module_deps,
                     module_name, outputs*, pool, public_inputs,
-                    response_file_contents, script*, sources
+                    response_file_contents, script*, sources,
+                    description
   * = required
 ```
 
@@ -6155,6 +6158,28 @@
   "gn help runtime_deps".
 
   See also "public_deps".
+```
+### <a name="var_description"></a>**description**: Command description for actions."&nbsp;[Back to Top](#gn-reference)
+
+```
+  A string, possibly containing substitution patterns.
+
+  If nonempty, this string specifies the command description of the
+  current action or action_foreach target (i.e. what is shown when
+  the action's script is executed).
+```
+
+#### **Example**
+
+```
+  action_foreach("myscript_target") {
+    script = "myscript.py"
+    sources = [ ... ]
+
+    description = "Compiling {{source}}"
+
+    args = [ "{{source}}" ]
+  }
 ```
 ### <a name="var_externs"></a>**externs**: [scope] Set of Rust crate-dependency pairs.&nbsp;[Back to Top](#gn-reference)
 

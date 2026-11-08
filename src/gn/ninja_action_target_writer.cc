@@ -197,8 +197,8 @@ std::string NinjaActionTargetWriter::WriteRuleDefinition() {
     escape_options.mode = ESCAPE_NINJA_PREFORMATTED_COMMAND;
 
     out_ << "  description = ";
-      SubstitutionWriter::WriteWithNinjaVariables(
-          target_->action_values().description(), escape_options, out_);
+    SubstitutionWriter::WriteWithNinjaVariables(
+        target_->action_values().description(), escape_options, out_);
     out_ << std::endl;
   } else {
     auto mnemonic = target_->action_values().mnemonic();

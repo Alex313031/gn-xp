@@ -14,11 +14,10 @@
 #include "gn/standard_out.h"
 #include "gn/switches.h"
 #include "gn/version_constants.h"
+#include "last_commit_position.h"
 #include "util/build_config.h"
 #include "util/msg_loop.h"
 #include "util/sys_info.h"
-
-#include "last_commit_position.h"
 
 const char* kGNProductName = "GN XP";
 
@@ -53,7 +52,8 @@ int main(int argc, char** argv) {
     command = commands::kHelp;
   } else if (cmdline.HasSwitch(switches::kVersion)) {
     // Make "--version" print the version and exit.
-    OutputString(std::string(kGNProductName) + " " + LAST_COMMIT_POSITION + "\n");
+    OutputString(std::string(kGNProductName) + " " + LAST_COMMIT_POSITION +
+                 "\n");
     // On Windows, also report the host OS version (empty elsewhere).
     std::string os_version = OperatingSystemVersion();
     if (!os_version.empty()) {
