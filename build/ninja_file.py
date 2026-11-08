@@ -88,6 +88,7 @@ class NinjaFile:
     self.regen_triggers = []
     self.rules = []
     self.actions = []
+    self.defaults = []
 
     self._gn_exe = pathlib.Path('gn' + self.platform.exe_suffix)
 
@@ -153,6 +154,13 @@ class NinjaFile:
         restat='1',
         pool='cargo_pool',
     )
+
+  def Default(self, *targets):
+    # Without a `default` statement ninja builds every edge nothing else
+    # consumes, which drags in the source-check and benchmark edges too. Name
+    # the targets a bare `ninja` should build instead; the rest stay reachable
+    # by asking for them explicitly.
+    self.defaults.extend(targets)
 
   def chain(self, *commands):
     joined = ' && '.join(commands)
@@ -302,6 +310,11 @@ class NinjaFile:
       out.append(f'build {action.output}: {action.rule.name}{inputs}{implicit}')
       for k, v in action.variables.items():
         out.append(f'  {k} = {v}')
+      out.append('')
+
+    if self.defaults:
+      targets = ' '.join([escape_path_ninja(t) for t in self.defaults])
+      out.append(f'default {targets}')
       out.append('')
 
     return '\n'.join(out)

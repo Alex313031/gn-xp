@@ -590,6 +590,29 @@ def WriteGenericNinja(path, static_libraries, executables,
       pathlib.Path(os.path.expandvars(gen_out_dir))
     )
 
+  # Name the default targets explicitly. Ninja's implicit default is every
+  # edge nothing else consumes, which since upstream's "Add pre-upload checks
+  # into ninja targets" includes check_all - and check_formatter fetches
+  # clang-format with depot_tools' `cipd`, so a bare `ninja -C out` fails with
+  # "cipd: command not found" on any machine without depot_tools, ours and the
+  # CI runner included. Those are pre-upload source checks, not part of
+  # building gn (upstream's own recipe builds `gn gn_unittests` by name and
+  # runs the checks as separate steps), so keep them out of the default build;
+  # `ninja -C out check_all` still runs them. Same for the --gen benchmark
+  # edge, which would otherwise shell out to hyperfine on every build.
+  default_targets = [exe + platform.exe_suffix for exe in executables]
+  if host_can_run_target:
+    # run_tests covers gn_unittests, the integration tests and, with
+    # --starlark, the rust tests.
+    default_targets.append('run_tests')
+  elif options.starlark:
+    # Cross builds have no run_tests edge, so name the rust test binary
+    # directly to keep building it.
+    default_targets.append(rust_tests)
+  if options.gen_target:
+    default_targets.append('gen')
+  ninja.Default(*default_targets)
+
   with open(path, 'w') as f:
     f.write('\n'.join(ninja_header_lines))
     f.write(ninja_template)
