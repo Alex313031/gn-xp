@@ -22,11 +22,13 @@ env:
 
 jobs:
   build:
-    name: Build GN XP x86/x64/arm64
+    name: Build GN XP Linux + Windows x86/x64/arm64
     # Built on Ubuntu 22.04. All zips are statically linked (gen.py passes
     # -static -static-libstdc++ for Linux/MinGW), so none of them depend on the
-    # runner's or the target's glibc -- the arm64 zip runs on any Raspberry Pi
-    # OS release.
+    # runner's or the target's glibc -- the Linux arm64 zip runs on any
+    # Raspberry Pi OS release. The Windows targets keep the XP baseline on
+    # x86/x64 (subsystem 5.1/5.2); Windows on ARM has no XP lineage, so that
+    # one targets Windows 10 (subsystem 10.0).
     runs-on: ubuntu-22.04
     timeout-minutes: 45
     steps:
@@ -67,26 +69,32 @@ jobs:
 
       - name: Download MinGW
         # Use our own MinGW fork for compiling Windows builds
+        # Each zip unpacks to a dir named after its target arch (i686/, x64/,
+        # arm64/). The arm64 one is a Linux-x64-hosted toolchain that targets
+        # Windows on ARM; the distro mingw-w64 packages have no ARM64 target at
+        # all, so it can only come from here.
         run: |
-          wget "${MINGW_BASE_URL}/mingw_gcc_linux_i686.zip"
-          wget "${MINGW_BASE_URL}/mingw_gcc_linux_x64.zip"
-          unzip -o mingw_gcc_linux_i686.zip -d "$HOME"
-          unzip -o mingw_gcc_linux_x64.zip -d "$HOME"
-          rm -f mingw_gcc_linux_i686.zip mingw_gcc_linux_x64.zip
-          # Fail fast if either cross-compiler can't run on this host.
+          for arch in i686 x64 arm64; do
+            wget "${MINGW_BASE_URL}/mingw_gcc_linux_${arch}.zip"
+            unzip -o "mingw_gcc_linux_${arch}.zip" -d "$HOME"
+            rm -f "mingw_gcc_linux_${arch}.zip"
+          done
+          # Fail fast if any cross-compiler can't run on this host.
           "$HOME/i686/bin/i686-w64-mingw32-gcc" --version
           "$HOME/x64/bin/x86_64-w64-mingw32-gcc" --version
+          "$HOME/arm64/bin/aarch64-w64-mingw32-gcc" --version
           echo "$HOME/x64/bin" >> "$GITHUB_PATH"
           echo "$HOME/i686/bin" >> "$GITHUB_PATH"
+          echo "$HOME/arm64/bin" >> "$GITHUB_PATH"
 
       - name: Build for Linux/Windows
-        # --all covers the four x86/x64 combos; the arm64 cross build is a
-        # separate invocation because it needs its own toolchain env.
+        # --all now covers all six combos: Linux x64/x86/arm64 and Windows
+        # x64/x86/arm64, each in its own subshell so the per-build toolchain
+        # env cannot leak between them.
         # On pull_request the checkout HEAD is an ephemeral merge commit, so take
         # the PR head SHA from the event; fall back to github.sha for other events.
         run: |
           ./build.sh --all
-          ./build.sh --arm
           SHA=${{ github.event.pull_request.head.sha || github.sha }}
           echo "SHA_SHORT=${SHA:0:6}" >> "$GITHUB_ENV"
 

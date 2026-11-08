@@ -609,6 +609,26 @@ def WriteGenericNinja(path, static_libraries, executables,
       subprocess.run(
           ['ninja', '-C', build_dir, '-t', 'compdb'], stdout=f, check=True)
 
+def mingw_target_arch(cxx):
+  """Return 'x86', 'x64' or 'arm64' for the Windows arch `cxx` targets.
+
+  The mingw-w64 toolchains are per-target (i686-/x86_64-/aarch64-w64-mingw32),
+  and a cross build's host arch says nothing about the target, so ask the
+  compiler itself. Falls back to x86, the most conservative baseline, if the
+  compiler cannot be run.
+  """
+  try:
+    triple = subprocess.check_output([cxx, '-dumpmachine'], text=True,
+                                     stderr=subprocess.DEVNULL).strip()
+  except (OSError, subprocess.CalledProcessError):
+    return 'x86'
+  machine = triple.split('-')[0].lower()
+  if machine in ('aarch64', 'arm64'):
+    return 'arm64'
+  if machine in ('x86_64', 'amd64'):
+    return 'x64'
+  return 'x86'
+
 def WriteGNNinja(path, platform, host, options, args_list):
   if platform.is_msvc():
     cxx = os.environ.get('CXX', 'cl.exe')
@@ -784,15 +804,51 @@ def WriteGNNinja(path, platform, host, options, args_list):
       ldflags.append('-pthread')
 
     if platform.is_mingw() or platform.is_msys():
+      # ---- gn-xp additions ------------------------------------------------
+      # Everything gn-xp changes or adds lives in this block; the upstream
+      # cflags list below is kept verbatim so future rebases only ever
+      # conflict here.
+      #
+      # Windows baseline and PE subsystem version, pinned per target arch
+      # rather than left to the linker's 5.02 default. Upstream hardcodes
+      # 0x0A00 (Windows 10) for every mingw target; gn-xp lowers that to the
+      # XP baseline for x86/x64 -- Win32 XP is 5.1, XP x64 / Server 2003 is
+      # 5.2 -- and keeps Windows 10 for arm64, which has no XP lineage at all
+      # (ARM64 Windows starts at Windows 10).
+      win_target = {
+          'x86': ('0x0501', '5', '1'),
+          'x64': ('0x0502', '5', '2'),
+          'arm64': ('0x0A00', '10', '0'),
+      }
+      target_arch = mingw_target_arch(cxx)
+      winver, subsystem_major, subsystem_minor = win_target[target_arch]
+      cflags.extend([f'-DWINVER={winver}', f'-D_WIN32_WINNT={winver}'])
+      ldflags.extend([f'-Wl,--major-subsystem-version={subsystem_major}',
+                      f'-Wl,--minor-subsystem-version={subsystem_minor}'])
+      if target_arch == 'arm64':
+        # -Wno-attributes: __stdcall/WINAPI does not exist on AArch64 (it has
+        # a single calling convention), so GCC ignores the attribute on the
+        # GetProcAddress function-pointer typedefs in base/win and
+        # util/sys_info.cc and -Werror then rejects the build. The attribute
+        # is correct and required for the x86/x64 targets, so silence the
+        # diagnostic here rather than dropping it from the sources.
+        cflags.append('-Wno-attributes')
+      else:
+        # _USING_V110_SDK71_ / _ATL_XP_TARGETING: opt into the XP-targeting
+        # mode of the Windows 7.1A SDK headers, which is what keeps the
+        # XP-era API surface available instead of erroring out on the
+        # Vista+ minimum the newer SDK headers otherwise assume.
+        cflags.extend(['-D_USING_V110_SDK71_', '-D_ATL_XP_TARGETING'])
+      # __USE_MINGW_ANSI_STDIO=1: use mingw-w64's own C99-conformant
+      # printf/scanf family instead of forwarding to MSVCRT's, whose XP-era
+      # version lacks %lld, %zu and friends.
+      # PSAPI_VERSION=1: bind the Process Status API to psapi.dll rather than
+      # the K32* forwarders in kernel32, which only exist on Vista and newer.
+      cflags.extend(['-D__USE_MINGW_ANSI_STDIO=1', '-DPSAPI_VERSION=1'])
+      # ---- end gn-xp additions; upstream list follows verbatim ------------
       cflags.extend(['-DUNICODE',
                      '-DNOMINMAX',
                      '-DWIN32_LEAN_AND_MEAN',
-                     '-DWINVER=0x0501',
-                     '-D_WIN32_WINNT=0x0501',
-                     '-D_USING_V110_SDK71_',
-                     '-D_ATL_XP_TARGETING',
-                     '-D__USE_MINGW_ANSI_STDIO=1',
-                     '-DPSAPI_VERSION=1',
                      '-D_CRT_SECURE_NO_DEPRECATE',
                      '-D_SCL_SECURE_NO_DEPRECATE',
                      '-D_UNICODE',

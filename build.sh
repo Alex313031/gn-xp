@@ -48,11 +48,13 @@ Options:
   -c, --clean   Remove build artifacts
   --deps        Install build dependencies
   --i386        Make a 32 bit build (i386 on Linux, win32 on Windows)
-  --arm         Cross-compile a Linux arm64 build (e.g. for Raspberry Pi);
-                implies --linux, unsupported with --win
+  --arm         Cross-compile an arm64 build: Linux arm64 (e.g. for a
+                Raspberry Pi) by default, or Windows on ARM with --win.
+                Defaults to --linux if no target is given
   -l, --linux   Build GN for Linux
   -w, --win     Build GN for Windows
-  --all         Build all 4 combos: Linux x64/x86 and Windows x64/x86
+  --all         Build all 6 combos: Linux x64/x86/arm64 and Windows
+                x64/x86/arm64
   -d, --debug   Make a debug build
   -v, --verbose Verbose build output
 
@@ -113,6 +115,8 @@ build_linux() {
   if [ "$WANT_ARM" == "1" ]; then
     # Cross-compile for arm64 (e.g. to run gn on a Raspberry Pi) using the
     # aarch64-linux-gnu toolchain (installed via --deps).
+    command -v aarch64-linux-gnu-g++ >/dev/null || \
+      die "aarch64-linux-gnu-g++ not found. Run '$SCRIPTNAME --deps', or\n       apt install g++-aarch64-linux-gnu"
     export CC=aarch64-linux-gnu-gcc
     export CXX=aarch64-linux-gnu-g++
     export AR=aarch64-linux-gnu-ar
@@ -163,7 +167,26 @@ build_windows() {
   # Cross-compile for Windows using the mingw-w64 toolchain (installed via --deps).
   # gen.py defaults the mingw toolchain to plain g++/ar, which is the host
   # compiler, so we must point it at the cross compiler explicitly.
-  if [ "$WANT_I386" == "1" ]; then
+  if [ "$WANT_ARM" == "1" ]; then
+    # Windows on ARM. Unlike the x86/x64 targets this is not an XP-capable
+    # platform at all - ARM64 Windows starts at Windows 10 - so gen.py detects
+    # the target arch from the compiler and picks the Windows baseline, the PE
+    # subsystem version and -Wno-attributes (no __stdcall on AArch64) to match.
+    # The distro mingw-w64 packages only ship i686/x86_64 targets, so --deps
+    # cannot provide this one; it comes from the mingw-build release zips.
+    command -v aarch64-w64-mingw32-gcc >/dev/null || \
+      die "aarch64-w64-mingw32-gcc not found. Unzip mingw_gcc_linux_arm64.zip from\n       https://github.com/Alex313031/mingw-build/releases and add its bin/ to PATH"
+    export CC=aarch64-w64-mingw32-gcc
+    export CXX=aarch64-w64-mingw32-g++
+    export AR=aarch64-w64-mingw32-ar
+    export LD=aarch64-w64-mingw32-g++
+    export WINDRES=aarch64-w64-mingw32-windres
+    # gen.py's release SIMD default (-mfpmath=sse -msse2) is x86-only; use the
+    # NEON baseline instead.
+    export SIMD_FLAGS="-march=armv8-a+simd"
+    arch="win_arm64"
+    archlabel="arm64"
+  elif [ "$WANT_I386" == "1" ]; then
     export CC=i686-w64-mingw32-gcc
     export CXX=i686-w64-mingw32-g++
     export AR=i686-w64-mingw32-ar
@@ -206,16 +229,19 @@ build_windows() {
   printf "${GRE}Done! Zip at ${CYA}${zipname}.zip ${c0}\n"
 }
 
-# Build every OS/arch combo in one shot: Linux x64/x86 and Windows x64/x86.
-# Each build runs in a subshell so its per-build env exports (CFLAGS/-m*, the
-# cross CC/CXX, ...) and the functions' cd into out/ cannot leak into the next
-# build. WANT_DEBUG/VFLAG are inherited, so --all --debug makes 4 debug zips.
+# Build every OS/arch combo in one shot: Linux x64/x86/arm64 and Windows
+# x64/x86/arm64. Each build runs in a subshell so its per-build env exports
+# (CFLAGS/-m*, SIMD_FLAGS, the cross CC/CXX, ...) and the functions' cd into
+# out/ cannot leak into the next build. WANT_DEBUG/VFLAG are inherited, so
+# --all --debug makes 6 debug zips.
 build_all() {
-  ( WANT_I386=0; build_linux )   || die "Linux x64 build failed"
-  ( WANT_I386=1; build_linux )   || die "Linux x86 build failed"
-  ( WANT_I386=0; build_windows ) || die "Windows x64 build failed"
-  ( WANT_I386=1; build_windows ) || die "Windows x86 build failed"
-  printf "${GRE}All 4 builds complete!${c0}\n"
+  ( WANT_I386=0; WANT_ARM=0; build_linux )   || die "Linux x64 build failed"
+  ( WANT_I386=1; WANT_ARM=0; build_linux )   || die "Linux x86 build failed"
+  ( WANT_I386=0; WANT_ARM=1; build_linux )   || die "Linux arm64 build failed"
+  ( WANT_I386=0; WANT_ARM=0; build_windows ) || die "Windows x64 build failed"
+  ( WANT_I386=1; WANT_ARM=0; build_windows ) || die "Windows x86 build failed"
+  ( WANT_I386=0; WANT_ARM=1; build_windows ) || die "Windows arm64 build failed"
+  printf "${GRE}All 6 builds complete!${c0}\n"
 }
 
 clean_out() {
@@ -277,13 +303,13 @@ while :; do
   shift
 done
 
-# --arm is Linux-only (no Windows on ARM support) and implies --linux. Checked
-# after the parse loop so the flag order doesn't matter.
+# --arm selects the arm64 variant of whichever target was asked for: Linux
+# arm64 by default, or Windows on ARM with --win. Checked after the parse loop
+# so the flag order doesn't matter.
 if [ "$WANT_ARM" == "1" ]; then
-  [ "$WANT_TARGET" == "windows" ] && die "Windows on ARM builds are unsupported"
   [ "$WANT_I386" == "1" ] && die "Cannot combine --i386 and --arm"
-  [ "$WANT_ALL" == "1" ] && die "Cannot combine --all and --arm; run '$SCRIPTNAME --arm' separately"
-  WANT_TARGET="linux"
+  [ "$WANT_ALL" == "1" ] && die "--all already builds both arm64 targets; drop --arm"
+  [ -n "$WANT_TARGET" ] || WANT_TARGET="linux"
 fi
 
 # --all overrides individual target/arch selection and builds every combo.
