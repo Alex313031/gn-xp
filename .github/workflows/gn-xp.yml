@@ -23,13 +23,18 @@ env:
 jobs:
   build:
     name: Build GN XP Linux + Windows x86/x64/arm64
-    # Built on Ubuntu 22.04. All zips are statically linked (gen.py passes
-    # -static -static-libstdc++ for Linux/MinGW), so none of them depend on the
-    # runner's or the target's glibc -- the Linux arm64 zip runs on any
-    # Raspberry Pi OS release. The Windows targets keep the XP baseline on
-    # x86/x64 (subsystem 5.1/5.2); Windows on ARM has no XP lineage, so that
-    # one targets Windows 10 (subsystem 10.0).
-    runs-on: ubuntu-22.04
+    # Built on Ubuntu 24.04, whose default g++ is 13. GN needs a libstdc++ with
+    # <expected> (src/gn/err.h builds Result<T> on std::expected); that landed
+    # in GCC 12, so 22.04's default g++ 11 cannot compile the tree at all --
+    # neither natively nor via its equally old g++-aarch64-linux-gnu.
+    # All zips are statically linked (gen.py passes -static -static-libstdc++
+    # for Linux/MinGW), so none of them depend on the runner's or the target's
+    # glibc -- the Linux arm64 zip runs on any Raspberry Pi OS release, and the
+    # newer runner does not raise the bar for running the binaries we ship.
+    # The Windows targets keep the XP baseline on x86/x64 (subsystem 5.1/5.2);
+    # Windows on ARM has no XP lineage, so that one targets Windows 10
+    # (subsystem 10.0).
+    runs-on: ubuntu-24.04
     timeout-minutes: 45
     steps:
       - name: Checkout
