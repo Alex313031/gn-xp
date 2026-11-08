@@ -550,27 +550,35 @@ def WriteGenericNinja(path, static_libraries, executables,
         ] if options.starlark else []),
     )
 
-  ninja.Phony(
-      'check_all',
-      inputs=[
-          ninja.RunBinary(
-              'check_formatter',
-              inputs=[ninja.source_file('tools/run_formatter.sh')],
-              implicit_inputs=ninja.directory(ninja.source_file('src'), ['target']),
-              args='--diff',
-          ),
-          ninja.RunBinary(
-              'check_reference',
-              inputs=[ninja.source_file('tools/update_reference.sh')],
-              implicit_inputs=[
-                  'gn' + platform.exe_suffix,
-                  ninja.source_file('docs/reference.md'),
-              ],
-              args='--diff',
-              env=f'NOBUILD=1 NINJA_OUT_DIR={os.path.relpath(build_dir, REPO_ROOT)}',
-          ),
-      ],
-  )
+  # check_all has the same host/target constraint as run_tests above: the
+  # RunBinary edges are wrapped in cmd.exe for Windows targets, and
+  # check_reference additionally executes the freshly built gn to regenerate
+  # the reference docs. Both are host-side source checks, so skip them when
+  # cross-compiling - the native build already covers them.
+  if host_can_run_target:
+    ninja.Phony(
+        'check_all',
+        inputs=[
+            ninja.RunBinary(
+                'check_formatter',
+                inputs=[ninja.source_file('tools/run_formatter.sh')],
+                implicit_inputs=ninja.directory(
+                    ninja.source_file('src'), ['target']
+                ),
+                args='--diff',
+            ),
+            ninja.RunBinary(
+                'check_reference',
+                inputs=[ninja.source_file('tools/update_reference.sh')],
+                implicit_inputs=[
+                    'gn' + platform.exe_suffix,
+                    ninja.source_file('docs/reference.md'),
+                ],
+                args='--diff',
+                env=f'NOBUILD=1 NINJA_OUT_DIR={os.path.relpath(build_dir, REPO_ROOT)}',
+            ),
+        ],
+    )
 
   if options.gen_target:
     if '=' not in options.gen_target:
